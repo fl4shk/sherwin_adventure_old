@@ -25,9 +25,8 @@ The author uses a **more up-to-date version** of ARM GCC and Binutils than
 that provided by DevKitARM, though **gbafix** *from DevKitARM* is still
 used by this project.
 
-
-#Optional "Dependencies"
-1.  The **Tiled map editor**.
+#Optional Dependencies
+1.  The [Tiled map editor](https://github.com/bjorn/tiled)
 2.  [The author's Tiled level converter tool](https://github.com/fl4shk/tiled_level_converter)
 3.  **Usenti** (used for graphics creation/editing), run in Wine by the author.
 
