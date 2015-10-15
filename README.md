@@ -22,8 +22,8 @@ This project **won't build** without having ARM GCC and Binutils available
 through the host OS's $PATH variable.
 
 The author uses a **more up-to-date version** of ARM GCC and Binutils than
-that provided by DevKitARM, though **gbafix** *from DevKitARM* is still
-used by this project.
+that provided by DevKitARM, though **gbafix** and **mmutil** *from
+DevKitARM* are still used by this project.
 
 #Optional Dependencies
 1.  The [Tiled map editor](https://github.com/bjorn/tiled)
