@@ -519,20 +519,20 @@ const sublevel< 2010, 64, 32, 15, 5 > test_level
 		{ st_chocolate_muffin, 16, 25, true },
 		{ st_waffle, 42, 26, false },
 		{ st_muffin, 47, 29, true },
+		{ st_warp_block, 1, 30, true, 2, 0, 0, 0 },
 		{ st_muffin, 9, 30, true },
 		{ st_chocolate_muffin, 10, 30, true },
-		{ st_warp_block, 52, 30, true, 2, 0, 0, 0 },
-		{ st_warp_block, 56, 30, true, 3, 0, 0, 0 },
-		{ st_warp_block, 59, 30, true, 4, 0, 0, 0 },
+		{ st_warp_block, 52, 30, true, 3, 0, 0, 0 },
+		{ st_warp_block, 56, 30, true, 4, 0, 0, 0 },
 		{ st_waffle, 62, 30, true },
 	},
 	
 	{
 		{ sle_from_warp_block, vec2_f24p8( {0x3a00}, {0x300} ) },
 		{ sle_from_warp_block, vec2_f24p8( {0x3e00}, {0x700} ) },
+		{ sle_from_warp_block, vec2_f24p8( {0x100}, {0x1e00} ) },
 		{ sle_from_warp_block, vec2_f24p8( {0x3400}, {0x1e00} ) },
 		{ sle_from_warp_block, vec2_f24p8( {0x3800}, {0x1e00} ) },
-		{ sle_from_warp_block, vec2_f24p8( {0x3b00}, {0x1e00} ) },
 	},
 };
 

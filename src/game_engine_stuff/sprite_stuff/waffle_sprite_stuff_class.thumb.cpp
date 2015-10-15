@@ -6,10 +6,6 @@
 #include "sprite_manager_class.hpp"
 
 
-const sprite_type waffle_sprite_stuff::get_sprite_type() const
-{
-	return st_waffle;
-}
 
 void waffle_sprite_stuff::update_part_1( sprite& the_powerup )
 {
@@ -58,34 +54,8 @@ void waffle_sprite_stuff::update_part_1( sprite& the_powerup )
 	block_collision_stuff(the_powerup);
 }
 
-// Graphics stuff
-//void waffle_sprite_stuff::gfx_update( sprite& the_powerup )
-//{
-//	the_powerup.the_oam_entry.set_tile_number 
-//		( get_curr_tile_slot(the_powerup) );
-//	the_powerup.the_oam_entry.set_pal_number 
-//		( get_gfx_category(the_powerup) );
-//}
-
-const sprite_gfx_category waffle_sprite_stuff::get_gfx_category
-	( sprite& the_powerup )
-{
-	return sgc_powerup;
-}
-const u32 waffle_sprite_stuff::get_curr_relative_tile_slot 
-	( sprite& the_powerup )
-{
-	return 0 * num_tiles_in_ss_16x16;
-}
-
 
 // Physics and collision stuff
-void waffle_sprite_stuff::block_collision_stuff( sprite& the_powerup )
-{
-	block_collision_stuff_16x16(the_powerup);
-}
-
-
 void waffle_sprite_stuff::block_coll_response_left_16x16
 	( sprite& the_powerup, const block_coll_result& lt_coll_result,
 	const block_coll_result& lb_coll_result )
