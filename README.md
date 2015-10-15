@@ -15,6 +15,7 @@ The name of this project is supposed to be **Sherwin's Adventure**.
 2.  A more up-to-date version of **arm-none-eabi-** prefixed GCC and
 Binutils.  (This is what the author uses for compilation).
 3.  **gbafix**, which is *part of DevKitARM*.
+4.  **mmutil**, which is *included in DevKitARM*.
 
 #Notes for Building
 This project **won't build** without having ARM GCC and Binutils available

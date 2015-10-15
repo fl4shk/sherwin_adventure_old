@@ -293,14 +293,6 @@ clean_objs_with_no_source :
 
 
 
-# Note that -j8 is used on my laptop because its CPU is quad core with
-# hyperthreading.
-.PHONY : check_build
-check_build :
-	make clean_objs_with_no_source && make -j8
-
-
-
 .PHONY : disassemble
 disassemble :
 	arm-none-eabi-objdump -marm7tdmi -d $(PROJ).elf
