@@ -1,0 +1,195 @@
+#ifndef grass_and_dirt_block_stuff_classes_hpp
+#define grass_and_dirt_block_stuff_classes_hpp
+
+
+class grass_single_block_stuff : public block_base_stuff
+{
+public:		// variables
+	static const u32 metatile_number = 6;
+	static const u32 palette_number = 0;
+	static const u32 metatile_graphics_slot = metatile_number;
+	
+public:		// functions
+	virtual const u32 get_metatile_number() __attribute__((_iwram_code));
+	virtual const u32 get_palette_number() __attribute__((_iwram_code));
+	virtual const u32 get_metatile_graphics_slot()
+		__attribute__((_iwram_code));
+} __attribute__((_align4));
+
+class grass_top_left_block_stuff : public block_base_stuff
+{
+public:		// variables
+	static const u32 metatile_number = 7;
+	static const u32 palette_number = 0;
+	static const u32 metatile_graphics_slot = metatile_number;
+	
+public:		// functions
+	virtual const u32 get_metatile_number() __attribute__((_iwram_code));
+	virtual const u32 get_palette_number() __attribute__((_iwram_code));
+	virtual const u32 get_metatile_graphics_slot()
+		__attribute__((_iwram_code));
+} __attribute__((_align4));
+class grass_top_middle_block_stuff : public block_base_stuff
+{
+public:		// variables
+	static const u32 metatile_number = 8;
+	static const u32 palette_number = 0;
+	static const u32 metatile_graphics_slot = metatile_number;
+	
+public:		// functions
+	virtual const u32 get_metatile_number() __attribute__((_iwram_code));
+	virtual const u32 get_palette_number() __attribute__((_iwram_code));
+	virtual const u32 get_metatile_graphics_slot()
+		__attribute__((_iwram_code));
+} __attribute__((_align4));
+class grass_top_right_block_stuff : public block_base_stuff
+{
+public:		// variables
+	static const u32 metatile_number = 9;
+	static const u32 palette_number = 0;
+	static const u32 metatile_graphics_slot = metatile_number;
+	
+public:		// functions
+	virtual const u32 get_metatile_number() __attribute__((_iwram_code));
+	virtual const u32 get_palette_number() __attribute__((_iwram_code));
+	virtual const u32 get_metatile_graphics_slot()
+		__attribute__((_iwram_code));
+} __attribute__((_align4));
+
+
+class dirt_middle_left_block_stuff : public block_base_stuff
+{
+public:		// variables
+	static const u32 metatile_number = 10;
+	static const u32 palette_number = 0;
+	static const u32 metatile_graphics_slot = metatile_number;
+	
+public:		// functions
+	virtual const u32 get_metatile_number() __attribute__((_iwram_code));
+	virtual const u32 get_palette_number() __attribute__((_iwram_code));
+	virtual const u32 get_metatile_graphics_slot()
+		__attribute__((_iwram_code));
+} __attribute__((_align4));
+class dirt_middle_middle_block_stuff : public block_base_stuff
+{
+public:		// variables
+	static const u32 metatile_number = 11;
+	static const u32 palette_number = 0;
+	static const u32 metatile_graphics_slot = metatile_number;
+	
+public:		// functions
+	virtual const u32 get_metatile_number() __attribute__((_iwram_code));
+	virtual const u32 get_palette_number() __attribute__((_iwram_code));
+	virtual const u32 get_metatile_graphics_slot()
+		__attribute__((_iwram_code));
+} __attribute__((_align4));
+class dirt_middle_right_block_stuff : public block_base_stuff
+{
+public:		// variables
+	static const u32 metatile_number = 12;
+	static const u32 palette_number = 0;
+	static const u32 metatile_graphics_slot = metatile_number;
+	
+public:		// functions
+	virtual const u32 get_metatile_number() __attribute__((_iwram_code));
+	virtual const u32 get_palette_number() __attribute__((_iwram_code));
+	virtual const u32 get_metatile_graphics_slot()
+		__attribute__((_iwram_code));
+} __attribute__((_align4));
+
+class dirt_bottom_left_block_stuff : public block_base_stuff
+{
+public:		// variables
+	static const u32 metatile_number = 13;
+	static const u32 palette_number = 0;
+	static const u32 metatile_graphics_slot = metatile_number;
+	
+public:		// functions
+	virtual const u32 get_metatile_number() __attribute__((_iwram_code));
+	virtual const u32 get_palette_number() __attribute__((_iwram_code));
+	virtual const u32 get_metatile_graphics_slot()
+		__attribute__((_iwram_code));
+} __attribute__((_align4));
+class dirt_bottom_middle_block_stuff : public block_base_stuff
+{
+public:		// variables
+	static const u32 metatile_number = 14;
+	static const u32 palette_number = 0;
+	static const u32 metatile_graphics_slot = metatile_number;
+	
+public:		// functions
+	virtual const u32 get_metatile_number() __attribute__((_iwram_code));
+	virtual const u32 get_palette_number() __attribute__((_iwram_code));
+	virtual const u32 get_metatile_graphics_slot()
+		__attribute__((_iwram_code));
+} __attribute__((_align4));
+class dirt_bottom_right_block_stuff : public block_base_stuff
+{
+public:		// variables
+	static const u32 metatile_number = 15;
+	static const u32 palette_number = 0;
+	static const u32 metatile_graphics_slot = metatile_number;
+	
+public:		// functions
+	virtual const u32 get_metatile_number() __attribute__((_iwram_code));
+	virtual const u32 get_palette_number() __attribute__((_iwram_code));
+	virtual const u32 get_metatile_graphics_slot()
+		__attribute__((_iwram_code));
+} __attribute__((_align4));
+
+class grass_slope_135_degrees_block_stuff : public block_base_stuff
+{
+public:		// variables
+	static const u32 metatile_number = 16;
+	static const u32 palette_number = 0;
+	static const u32 metatile_graphics_slot = metatile_number;
+	
+public:		// functions
+	virtual const u32 get_metatile_number() __attribute__((_iwram_code));
+	virtual const u32 get_palette_number() __attribute__((_iwram_code));
+	virtual const u32 get_metatile_graphics_slot()
+		__attribute__((_iwram_code));
+} __attribute__((_align4));
+class grass_slope_45_degrees_block_stuff : public block_base_stuff
+{
+public:		// variables
+	static const u32 metatile_number = 17;
+	static const u32 palette_number = 0;
+	static const u32 metatile_graphics_slot = metatile_number;
+	
+public:		// functions
+	virtual const u32 get_metatile_number() __attribute__((_iwram_code));
+	virtual const u32 get_palette_number() __attribute__((_iwram_code));
+	virtual const u32 get_metatile_graphics_slot()
+		__attribute__((_iwram_code));
+} __attribute__((_align4));
+
+class grass_in_slope_left_block_stuff : public block_base_stuff
+{
+public:		// variables
+	static const u32 metatile_number = 18;
+	static const u32 palette_number = 0;
+	static const u32 metatile_graphics_slot = metatile_number;
+	
+public:		// functions
+	virtual const u32 get_metatile_number() __attribute__((_iwram_code));
+	virtual const u32 get_palette_number() __attribute__((_iwram_code));
+	virtual const u32 get_metatile_graphics_slot()
+		__attribute__((_iwram_code));
+} __attribute__((_align4));
+class grass_in_slope_right_block_stuff : public block_base_stuff
+{
+public:		// variables
+	static const u32 metatile_number = 19;
+	static const u32 palette_number = 0;
+	static const u32 metatile_graphics_slot = metatile_number;
+	
+public:		// functions
+	virtual const u32 get_metatile_number() __attribute__((_iwram_code));
+	virtual const u32 get_palette_number() __attribute__((_iwram_code));
+	virtual const u32 get_metatile_graphics_slot()
+		__attribute__((_iwram_code));
+} __attribute__((_align4));
+
+
+#endif		// grass_and_dirt_block_stuff_classes_hpp

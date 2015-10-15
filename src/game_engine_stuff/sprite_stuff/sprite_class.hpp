@@ -1,0 +1,156 @@
+#ifndef sprite_class_hpp
+#define sprite_class_hpp
+
+#include "sprite_type_stuff.hpp"
+#include "../level_stuff/sprite_level_data_stuff.hpp"
+
+
+class sprite
+{
+protected:		// variables
+	vec2_u32 the_shape_size_vec2;
+	oam_entry::shape_size the_shape_size;
+	
+public:		// variables
+	// The type of sprite.
+	sprite_type the_sprite_type;
+	
+	// in_level_pos is the "global" position of the sprite within the
+	// current level.
+	vec2_f24p8 in_level_pos;
+	
+	// the_sprite_ipg is a pointer to the level data of this sprite.  Even
+	// though the_sprite_ipg contains an initial sprite_type, it is
+	// normally the case that sprite_init_param_groups are stored in ROM,
+	// so attempting to change the_sprite_ipg->type would not work.
+	sprite_init_param_group* the_sprite_ipg;
+	
+	
+	// vel is the velocity of the sprite.
+	vec2_f24p8 vel;
+	
+	
+	
+	// the_coll_box's "pos" member variable is the in-level coordinate
+	coll_box the_coll_box;
+	
+	// cb_pos_offset is the position of the coll_box relative to
+	// in_level_pos.  It is used because most sprites will have a coll_box
+	// with a size other than the visible 
+	vec2_f24p8 cb_pos_offset;
+	
+	
+	// on_ground is a flag that tells whether the sprite is on the ground.
+	bool on_ground;
+	
+	// jump_hold_timer is used to keep track of for how much longer the
+	// sprite can jump, if the sprite even does so.  This coul
+	s32 jump_hold_timer;
+	
+	
+	// Here is one of the most essential member variables:  an oam_entry to
+	// be copied to oam_mirror.
+	oam_entry the_oam_entry;
+	
+	
+	// Two arrays of miscellaneous sprite data.  The way these arrays are
+	// used varies by the type of sprite.
+	static constexpr u32 misc_data_size = 8;
+	u32 misc_data_u[misc_data_size];
+	s32 misc_data_s[misc_data_size];
+	
+	
+public:		// functions
+	
+	sprite();
+	sprite( sprite_init_param_group* s_the_sprite_ipg );
+	void reinit_with_sprite_ipg
+		( sprite_init_param_group* s_the_sprite_ipg );
+	inline void reinit_by_spawning( sprite_type s_the_sprite_type, 
+		const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos,
+		bool facing_left=true )
+	{
+		memfill32( this, 0, sizeof(sprite) / sizeof(u32) );
+		
+		sprite_stuff_array[s_the_sprite_type]->init( *this, s_in_level_pos,
+			camera_pos, facing_left );
+	}
+	
+	inline oam_entry::shape_size get_shape_size() const
+	{
+		return the_shape_size;
+	}
+	inline const vec2_u32& get_shape_size_as_vec2() const
+	{
+		return the_shape_size_vec2;
+	}
+	
+	inline void set_shape_size( oam_entry::shape_size n_shape_size )
+	{
+		the_shape_size = n_shape_size;
+		the_oam_entry.set_shape_size(n_shape_size);
+		the_shape_size_vec2 = get_shape_size_as_vec2_raw();
+	}
+	
+	inline void update_f24p8_positions()
+	{
+		in_level_pos += vel;
+		the_coll_box.pos = in_level_pos + cb_pos_offset;
+	}
+	
+	inline vec2_f24p8 get_on_screen_pos( const bg_point& camera_pos )
+		const
+	{
+		vec2_f24p8 ret;
+		
+		ret.x = ( in_level_pos.x - make_f24p8(camera_pos.x) );
+		ret.y = ( in_level_pos.y - make_f24p8(camera_pos.y) );
+		
+		return ret;
+	}
+	
+	void update_on_screen_pos( const bg_point& camera_pos )
+		__attribute__((_iwram_code));
+	
+	//inline void update_full( const bg_point& camera_pos )
+	//{
+	//	//in_level_pos += vel;
+	//	//the_coll_box.pos = in_level_pos + cb_pos_offset;
+	//	
+	//	update_f24p8_positions();
+	//	
+	//	update_on_screen_pos(camera_pos);
+	//	
+	//	//sprite_stuff_array[the_sprite_type]
+	//	sprite_stuff_array[the_sprite_type]->update(*this);
+	//}
+	
+	void camera_follow_basic( bg_point& camera_pos )
+		__attribute__((_iwram_code));
+	void center_camera_almost( bg_point& camera_pos ) const
+		__attribute__((_iwram_code));
+	
+	
+	//inline void copy_the_oam_entry_to_oam_mirror 
+	//	( u32 slot_for_oam_mirror )
+	//{
+	//	oam_mirror[slot_for_oam_mirror].attr0 = the_oam_entry.attr0;
+	//	oam_mirror[slot_for_oam_mirror].attr1 = the_oam_entry.attr1;
+	//	oam_mirror[slot_for_oam_mirror].attr2 = the_oam_entry.attr2;
+	//}
+	
+	void copy_the_oam_entry_to_oam_mirror( u32 slot_for_oam_mirror )
+		__attribute__((_iwram_code));
+	
+	void block_collision_stuff() __attribute__((_iwram_code));
+	
+	
+protected:		// functions
+	vec2_u32 get_shape_size_as_vec2_raw() const
+		__attribute__((_iwram_code));
+	
+	
+} __attribute__((_align4));
+
+
+#endif		// sprite_class_hpp

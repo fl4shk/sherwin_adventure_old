@@ -1,0 +1,15 @@
+14:40 <FL4SHK> If you are big, on the ground, and a wall is one block to your right, then if you hit B, you get stuck 14:40 <FL4SHK> That is a collision issue 14:40 <FL4SHK> Someone else informed me of it
+
+13:04 <~FL4SHK> NovaSquirrel I have an lolbug in my collision detection (or maybe it's response?) code
+13:04 <gatswan> is it the one i reported
+13:04 <~FL4SHK> Yes
+13:04 <~FL4SHK> I'm going to postpone fixing it
+13:04 <~FL4SHK> I did record that it exists
+13:05 <~FL4SHK> It happens when you go up to a wall when moving slowly and larger
+
+Note:  ^ those logs refer to the same bug.  Basically, when big and moving
+slowly, it's possible to get stuck when touching the left side of a wall,
+if on the ground.  My gut feeling is that the bug is in the response code,
+but perhaps the detection code is also to blame?
+
+

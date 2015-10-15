@@ -1,0 +1,24 @@
+21:26 <~FL4SHK> I'm going to go with a sprite-based HUD, I think
+21:26 <~FL4SHK> Though the HUD will be very minimal
+21:27 <~FL4SHK> I'm going to steal the reserve item from SMW
+21:27 <~FL4SHK> However, no time limit
+21:27 <+NovaSquirrel> what if had a timer that counted up instead
+21:27 <~FL4SHK> What would it do?
+21:27 <~FL4SHK> Er
+21:27 <~FL4SHK> What would it mean?
+21:28 <+NovaSquirrel> well if you're not racing to finish under the time limit it could be fun to try to complete levels fast anyway
+21:28 <~FL4SHK> I see
+21:28 <~FL4SHK> I'm going to need to learn how to do level design some time
+21:29 <~FL4SHK> The small level I made is okay
+21:29 <~FL4SHK> The engine isn't far enough along yet, though
+21:29 <~FL4SHK> Darn it
+21:29 <~FL4SHK> I want to do something different from how SMW works
+21:30 <+NovaSquirrel> is your engine just going to be like mario
+21:30 <~FL4SHK> No
+21:30 <~FL4SHK> I will be doing different things
+21:30 <~FL4SHK> I'm going to have a typical health system
+21:31 <~FL4SHK> Instead of the reserve item, I'll have an inventory
+21:32 <~FL4SHK> An inventory larger than that of SMW, I mean
+21:32 <~FL4SHK> I'm going to have some kind of abilities equipment system too
+21:33 <~FL4SHK> I'm going to need to create a hammer sprite, but that should be fun
+
