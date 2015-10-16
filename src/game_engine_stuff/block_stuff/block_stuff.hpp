@@ -18,9 +18,9 @@ enum block_type
 	// replaced with an air block) when strongly hit.
 	bt_wood,
 	
-	// A question mark block without anything inside.  It becomes an empty
+	// A block with eyes without anything inside.  It becomes an empty
 	// block upon being strongly hit.
-	bt_qmark,
+	bt_eyes,
 	
 	// A block with an exclamation point on it.  The purpose of these
 	// blocks is yet to be chosen, but I'm thinking that some kind of event
@@ -38,13 +38,13 @@ enum block_type
 	bt_wood_with_st_ice_muffin,
 	bt_wood_with_st_chocolate_muffin,
 	
-	// Question mark blocks with contents
-	//bt_qmark_with_bt_dud		// This is the same as bt_qmark.
-	bt_qmark_with_st_waffle,
-	bt_qmark_with_st_muffin,
-	bt_qmark_with_st_fire_muffin,
-	bt_qmark_with_st_ice_muffin,
-	bt_qmark_with_st_chocolate_muffin,
+	// Eyes blocks with contents
+	//bt_eyes_with_bt_dud		// This is the same as bt_eyes.
+	bt_eyes_with_st_waffle,
+	bt_eyes_with_st_muffin,
+	bt_eyes_with_st_fire_muffin,
+	bt_eyes_with_st_ice_muffin,
+	bt_eyes_with_st_chocolate_muffin,
 	
 	
 	// Grass/Dirt blocks
@@ -86,7 +86,7 @@ extern block_base_stuff* block_stuff_array[bt_count];
 #include "air_block_stuff_class.hpp"
 #include "log_block_stuff_class.hpp"
 #include "wood_block_stuff_classes.hpp"
-#include "qmark_block_stuff_classes.hpp"
+#include "eyes_block_stuff_classes.hpp"
 #include "exclam_block_stuff_classes.hpp"
 #include "dud_block_stuff_class.hpp"
 #include "grass_and_dirt_block_stuff_classes.hpp"

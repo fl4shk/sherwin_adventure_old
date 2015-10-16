@@ -18,9 +18,9 @@ block_base_stuff* block_stuff_array[bt_count] __attribute__((_iwram))
 	// replaced with an air block) when strongly hit.
 	new wood_block_stuff,
 	
-	// A question mark block without anything inside.  It becomes an empty
-	// block upon being strongly hit.
-	new qmark_block_stuff,
+	// An eyes block without anything inside.  It becomes an empty block
+	// upon being strongly hit.
+	new eyes_block_stuff,
 	
 	// A block with an exclamation point on it.  The purpose of these
 	// blocks is yet to be chosen, but I'm thinking that some kind of event
@@ -38,12 +38,12 @@ block_base_stuff* block_stuff_array[bt_count] __attribute__((_iwram))
 	new wood_block_with_st_ice_muffin_stuff,
 	new wood_block_with_st_chocolate_muffin_stuff,
 	
-	// Question mark blocks with contents
-	new qmark_block_with_st_waffle_stuff,
-	new qmark_block_with_st_muffin_stuff,
-	new qmark_block_with_st_fire_muffin_stuff,
-	new qmark_block_with_st_ice_muffin_stuff,
-	new qmark_block_with_st_chocolate_muffin_stuff,
+	// Eyes blocks with contents
+	new eyes_block_with_st_waffle_stuff,
+	new eyes_block_with_st_muffin_stuff,
+	new eyes_block_with_st_fire_muffin_stuff,
+	new eyes_block_with_st_ice_muffin_stuff,
+	new eyes_block_with_st_chocolate_muffin_stuff,
 	
 	// Grass/Dirt blocks
 	new grass_single_block_stuff,

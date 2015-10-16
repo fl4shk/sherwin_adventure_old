@@ -1,7 +1,7 @@
-#ifndef qmark_block_stuff_classes_hpp
-#define qmark_block_stuff_classes_hpp
+#ifndef eyes_block_stuff_classes_hpp
+#define eyes_block_stuff_classes_hpp
 
-class qmark_block_stuff : public block_base_stuff
+class eyes_block_stuff : public block_base_stuff
 {
 public:		// variables
 	static const u32 metatile_number = 3;
@@ -19,7 +19,7 @@ public:		// functions
 } __attribute__((_align4));
 
 
-class qmark_block_with_st_waffle_stuff : public qmark_block_stuff
+class eyes_block_with_st_waffle_stuff : public eyes_block_stuff
 {
 public:		// functions
 	virtual void strongly_hit_response( block& the_block, 
@@ -27,7 +27,7 @@ public:		// functions
 	
 } __attribute__((_align4));
 
-class qmark_block_with_st_muffin_stuff : public qmark_block_stuff
+class eyes_block_with_st_muffin_stuff : public eyes_block_stuff
 {
 public:		// functions
 	virtual void strongly_hit_response( block& the_block, 
@@ -35,7 +35,7 @@ public:		// functions
 	
 } __attribute__((_align4));
 
-class qmark_block_with_st_fire_muffin_stuff : public qmark_block_stuff
+class eyes_block_with_st_fire_muffin_stuff : public eyes_block_stuff
 {
 public:		// functions
 	virtual void strongly_hit_response( block& the_block, 
@@ -43,7 +43,7 @@ public:		// functions
 	
 } __attribute__((_align4));
 
-class qmark_block_with_st_ice_muffin_stuff : public qmark_block_stuff
+class eyes_block_with_st_ice_muffin_stuff : public eyes_block_stuff
 {
 public:		// functions
 	virtual void strongly_hit_response( block& the_block, 
@@ -51,7 +51,7 @@ public:		// functions
 	
 } __attribute__((_align4));
 
-class qmark_block_with_st_chocolate_muffin_stuff : public qmark_block_stuff
+class eyes_block_with_st_chocolate_muffin_stuff : public eyes_block_stuff
 {
 public:		// functions
 	virtual void strongly_hit_response( block& the_block, 
@@ -60,4 +60,4 @@ public:		// functions
 } __attribute__((_align4));
 
 
-#endif		// qmark_block_stuff_classes_hpp
+#endif		// eyes_block_stuff_classes_hpp

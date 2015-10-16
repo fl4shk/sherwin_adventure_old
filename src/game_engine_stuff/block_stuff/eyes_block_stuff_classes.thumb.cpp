@@ -3,27 +3,27 @@
 #include "../sprite_stuff/sprite_manager_class.hpp"
 
 
-const u32 qmark_block_stuff::get_metatile_number()
+const u32 eyes_block_stuff::get_metatile_number()
 {
 	return metatile_number;
 }
-const u32 qmark_block_stuff::get_palette_number()
+const u32 eyes_block_stuff::get_palette_number()
 {
 	return palette_number;
 }
-const u32 qmark_block_stuff::get_metatile_graphics_slot()
+const u32 eyes_block_stuff::get_metatile_graphics_slot()
 {
 	return metatile_graphics_slot;
 }
 
-void qmark_block_stuff::strongly_hit_response( block& the_block, 
+void eyes_block_stuff::strongly_hit_response( block& the_block, 
 	const vec2_s32& coord )
 {
 	active_level::horiz_level_block_data_2d.data_at(coord).type = bt_dud;
 	//active_level::persistent_block_data_arrays
 }
 
-//void qmark_block_stuff::strongly_hit_response( block& the_block, 
+//void eyes_block_stuff::strongly_hit_response( block& the_block, 
 //	const vec2_s32& coord )
 //{
 //	constexpr sprite_type the_spawnable_sprite_type = st_waffle;
@@ -39,7 +39,7 @@ void qmark_block_stuff::strongly_hit_response( block& the_block,
 //	
 //}
 
-void qmark_block_with_st_waffle_stuff::strongly_hit_response
+void eyes_block_with_st_waffle_stuff::strongly_hit_response
 	( block& the_block, const vec2_s32& coord )
 {
 	constexpr sprite_type the_spawnable_sprite_type = st_waffle;
@@ -54,7 +54,7 @@ void qmark_block_with_st_waffle_stuff::strongly_hit_response
 		spawn_in_level_pos, bgofs_mirror[0].curr, false );
 }
 
-void qmark_block_with_st_muffin_stuff::strongly_hit_response
+void eyes_block_with_st_muffin_stuff::strongly_hit_response
 	( block& the_block, const vec2_s32& coord )
 {
 	constexpr sprite_type the_spawnable_sprite_type = st_muffin;
@@ -69,7 +69,7 @@ void qmark_block_with_st_muffin_stuff::strongly_hit_response
 		spawn_in_level_pos, bgofs_mirror[0].curr, false );
 }
 
-void qmark_block_with_st_fire_muffin_stuff::strongly_hit_response
+void eyes_block_with_st_fire_muffin_stuff::strongly_hit_response
 	( block& the_block, const vec2_s32& coord )
 {
 	constexpr sprite_type the_spawnable_sprite_type = st_fire_muffin;
@@ -84,7 +84,7 @@ void qmark_block_with_st_fire_muffin_stuff::strongly_hit_response
 		spawn_in_level_pos, bgofs_mirror[0].curr, false );
 }
 
-void qmark_block_with_st_ice_muffin_stuff::strongly_hit_response
+void eyes_block_with_st_ice_muffin_stuff::strongly_hit_response
 	( block& the_block, const vec2_s32& coord )
 {
 	constexpr sprite_type the_spawnable_sprite_type = st_ice_muffin;
@@ -99,7 +99,7 @@ void qmark_block_with_st_ice_muffin_stuff::strongly_hit_response
 		spawn_in_level_pos, bgofs_mirror[0].curr, false );
 }
 
-void qmark_block_with_st_chocolate_muffin_stuff::strongly_hit_response
+void eyes_block_with_st_chocolate_muffin_stuff::strongly_hit_response
 	( block& the_block, const vec2_s32& coord )
 {
 	constexpr sprite_type the_spawnable_sprite_type = st_chocolate_muffin;
