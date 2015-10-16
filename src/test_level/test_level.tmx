@@ -45,7 +45,7 @@
 6,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,6
 </data>
  </layer>
- <objectgroup name="Sprite Layer 1" opacity="0.71">
+ <objectgroup name="Sprite Layer 1" opacity="0.8">
   <object id="80" gid="146" x="32" y="416" width="16" height="32"/>
   <object id="90" gid="103" x="160" y="496" width="16" height="16"/>
   <object id="92" gid="103" x="256" y="416" width="16" height="16"/>
@@ -76,7 +76,7 @@
     <property name="bdest" value="0"/>
    </properties>
   </object>
-  <object id="195" gid="108" x="944" y="496" width="16" height="16">
+  <object id="195" gid="108" x="16" y="496" width="16" height="16">
    <properties>
     <property name="bdest" value="0"/>
    </properties>
