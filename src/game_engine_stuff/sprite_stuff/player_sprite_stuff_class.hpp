@@ -5,16 +5,82 @@
 
 class player_sprite_stuff : public sprite_base_stuff
 {
+public:		// enums
+	// "Global" graphics frames
+	enum frame
+	{
+		// Not a real frame, just a way to hide the player
+		frm_invisible = 0, 
+		
+		// Standing frame
+		frm_stand = 1, 
+		
+		// Walking frames
+		frm_walk_0 = 2, 
+		frm_walk_1 = 3,
+		
+	} __attribute__((_align4));
+	
+	// This enum allows multiple frame_slot's to be represented by the same
+	// frame, which is used, for example, in the walking animation.
+	enum frame_slot 
+	{ 
+		// Invisible
+		frm_slot_invisible, 
+		
+		// Standing
+		frm_slot_stand,
+		
+		// Walking/running 
+		frm_slot_walk_0,
+		frm_slot_walk_1, 
+		frm_slot_walk_2, 
+		frm_slot_walk_3,
+		
+		// frm_slot_count is the amount of frame_slot's.  It is
+		// automatically updated by the compiler.
+		frm_slot_count,
+		
+	} __attribute__((_align4));
+	
+	
+	// Indices to the_player.misc_data_s
+	enum sdata_index { sdi_walk_frame_timer } __attribute__((_align4));
+	enum udata_index { udi_active_walk_frame_slot }
+		__attribute__((_align4));
+	
+	
 public:		// variables
-	static fixed24p8 speed;
-	static bool use_16x16;
-	static bool run_toggle;
+	// Static variables
+	static fixed24p8 speed __attribute__((_iwram));
+	static bool use_16x16 __attribute__((_iwram));
+	static bool run_toggle __attribute__((_iwram));
+	//static bool running __attribute__((_iwram));
 	
+	// Physics/logic constants
 	static constexpr fixed24p8 jump_vel = {-0x400};
-	static const s32 max_jump_hold_timer = 16;
+	static constexpr s32 max_jump_hold_timer = 16;
+	static constexpr s32 walk_frame_timer_end = 4;
+	static constexpr s32 run_frame_timer_end = 2;
 	
-	static const sprite_gfx_category the_gfx_category = sgc_player;
-	static const u32 relative_tile_slot = 1 * num_tiles_in_ss_16x32;
+	static constexpr fixed24p8 walk_speed = {0x100};
+	static constexpr fixed24p8 max_run_speed = {0x200};
+	
+	// A constant array that is intended to be indexed with a frame_slot,
+	// such that a frame_slot can be mapped to a frame.
+	static constexpr u32 frame_slot_to_frame_arr_size = frm_slot_count;
+	static const frame frame_slot_to_frame_arr
+		[frame_slot_to_frame_arr_size];
+	
+	
+	// Graphics constants
+	static constexpr sprite_type the_sprite_type = st_player;
+	static constexpr sprite_gfx_category the_gfx_category = sgc_player;
+	
+	static const u32 the_relative_metatile_slot_arr_size;
+	static const u32 the_relative_metatile_slot_arr[];
+	
+	static constexpr u32 num_active_gfx_tiles = num_tiles_in_ss_16x32;
 	
 	
 public:		// functions
@@ -24,8 +90,10 @@ public:		// functions
 		const vec2_u32& the_level_size_2d, bg_point& camera_pos,
 		bool facing_left=true );
 	
-	virtual const sprite_type get_sprite_type() const
-		__attribute__((_iwram_code));
+	inline virtual const sprite_type get_sprite_type() const
+	{
+		return the_sprite_type;
+	}
 	
 	virtual void gfx_update( sprite& the_player );
 	virtual void update_part_1( sprite& the_player );
@@ -36,8 +104,11 @@ public:		// functions
 	// Graphics stuff
 	//virtual const u32 get_curr_tile_slot( sprite& the_player );
 	
-	virtual const sprite_gfx_category get_gfx_category 
-		( sprite& the_player );
+	inline virtual const sprite_gfx_category get_gfx_category 
+		( sprite& the_player )
+	{
+		return the_gfx_category;
+	}
 	virtual const u32 get_curr_relative_tile_slot( sprite& the_player );
 	
 	// Physics and collision stuff

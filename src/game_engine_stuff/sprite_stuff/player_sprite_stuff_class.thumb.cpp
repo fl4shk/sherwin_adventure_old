@@ -6,9 +6,34 @@
 #include "../level_stuff/active_level_manager_class.hpp"
 #include "sprite_manager_class.hpp"
 
-fixed24p8 player_sprite_stuff::speed __attribute__((_iwram));
-bool player_sprite_stuff::use_16x16 __attribute__((_iwram));
-bool player_sprite_stuff::run_toggle __attribute__((_iwram));
+fixed24p8 player_sprite_stuff::speed;
+bool player_sprite_stuff::use_16x16;
+bool player_sprite_stuff::run_toggle;
+//bool player_sprite_stuff::running;
+
+const player_sprite_stuff::frame 
+	player_sprite_stuff::frame_slot_to_frame_arr
+	[frame_slot_to_frame_arr_size] 
+= { 
+	// Invisible
+	frm_invisible, 
+	
+	// Standing
+	frm_stand,
+	
+	// Walking/running
+	frm_stand, frm_walk_0, frm_walk_1, frm_walk_0 
+};
+
+
+// Graphics constants
+const u32 player_sprite_stuff::the_relative_metatile_slot_arr[]
+	= { frm_invisible, frm_stand, frm_walk_0, frm_walk_1 };
+
+const u32 player_sprite_stuff::the_relative_metatile_slot_arr_size
+	= sizeof(player_sprite_stuff::the_relative_metatile_slot_arr)
+	/ sizeof(u32);
+
 
 
 void player_sprite_stuff::init( sprite& the_player, bool facing_left  )
@@ -56,11 +81,6 @@ void player_sprite_stuff::init( sprite& the_player,
 }
 
 
-const sprite_type player_sprite_stuff::get_sprite_type() const
-{
-	return st_player;
-}
-
 void player_sprite_stuff::gfx_update( sprite& the_player )
 {
 	the_player.the_oam_entry.set_tile_number
@@ -72,26 +92,6 @@ void player_sprite_stuff::gfx_update( sprite& the_player )
 void player_sprite_stuff::update_part_1( sprite& the_player ) 
 {
 	gfx_update(the_player);
-	
-	//if ( key_hit(key_r) )
-	//{
-	//	if ( !use_16x32 )
-	//	{
-	//		use_16x32 = true;
-	//		the_player.set_shape_size(oam_entry::ss_16x32);
-	//		the_player.the_coll_box.size.y = make_f24p8(30);
-	//		the_player.in_level_pos.y -= ( make_f24p8(16) - the_player
-	//			.cb_pos_offset.y );
-	//	}
-	//	else
-	//	{
-	//		use_16x32 = false;
-	//		the_player.set_shape_size(oam_entry::ss_16x16);
-	//		the_player.the_coll_box.size.y = make_f24p8(14);
-	//	}
-	//}
-	
-	speed = {0x100};
 	
 	if ( key_hit(key_b) )
 	{
@@ -105,19 +105,27 @@ void player_sprite_stuff::update_part_1( sprite& the_player )
 		}
 	}
 	
-	if ( run_toggle )
-	{
-		speed = {0x200};
-	}
-	
+	speed = 0;
 	
 	if ( key_hit_or_held(key_left) )
 	{
+		speed = walk_speed;
+		if ( run_toggle )
+		{
+			speed = max_run_speed;
+		}
+		
 		the_player.vel.x = -speed;
 		the_player.the_oam_entry.enable_hflip();
 	}
 	else if ( key_hit_or_held(key_right) )
 	{
+		speed = walk_speed;
+		if ( run_toggle )
+		{
+			speed = max_run_speed;
+		}
+		
 		the_player.vel.x = speed;
 		the_player.the_oam_entry.disable_hflip();
 	}
@@ -182,15 +190,112 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 //		+ get_curr_relative_tile_slot(the_player);
 //}
 
-const sprite_gfx_category player_sprite_stuff::get_gfx_category 
-	( sprite& the_player )
-{
-	return the_gfx_category;
-}
 const u32 player_sprite_stuff::get_curr_relative_tile_slot 
 	( sprite& the_player )
 {
-	return relative_tile_slot;
+	
+	s32& walk_frame_timer = the_player.misc_data_s[sdi_walk_frame_timer];
+	u32& active_walk_frame_slot = the_player.misc_data_u
+		[udi_active_walk_frame_slot];
+	
+	if ( active_walk_frame_slot < frm_slot_walk_0 
+		|| active_walk_frame_slot > frm_slot_walk_3 )
+	{
+		active_walk_frame_slot = frm_slot_walk_0;
+	}
+	
+	if (the_player.on_ground)
+	{
+		// Standing still
+		if ( speed == (fixed24p8){0} )
+		{
+			walk_frame_timer = 0;
+			active_walk_frame_slot = frm_slot_walk_0;
+			return frame_slot_to_frame_arr[active_walk_frame_slot] 
+				* num_active_gfx_tiles;
+		}
+		
+		// Walking speed or not-max running speed
+		else if ( speed >= walk_speed && speed < max_run_speed )
+		{
+			++walk_frame_timer;
+			
+			if ( walk_frame_timer > walk_frame_timer_end )
+			{
+				walk_frame_timer = 0;
+				
+				if ( active_walk_frame_slot == frm_slot_walk_0 )
+				{
+					active_walk_frame_slot = frm_slot_walk_1;
+				}
+				else if ( active_walk_frame_slot == frm_slot_walk_1 )
+				{
+					active_walk_frame_slot = frm_slot_walk_2;
+				}
+				else if ( active_walk_frame_slot == frm_slot_walk_2 )
+				{
+					active_walk_frame_slot = frm_slot_walk_3;
+				}
+				else if ( active_walk_frame_slot == frm_slot_walk_3 )
+				{
+					active_walk_frame_slot = frm_slot_walk_0;
+				}
+				
+			}
+			
+			return frame_slot_to_frame_arr[active_walk_frame_slot] 
+				* num_active_gfx_tiles;
+			
+		}
+		
+		// Max running speed
+		else if ( speed == max_run_speed )
+		{
+			++walk_frame_timer;
+			
+			if ( walk_frame_timer > run_frame_timer_end )
+			{
+				walk_frame_timer = 0;
+				
+				if ( active_walk_frame_slot == frm_slot_walk_0 )
+				{
+					active_walk_frame_slot = frm_slot_walk_1;
+				}
+				else if ( active_walk_frame_slot == frm_slot_walk_1 )
+				{
+					active_walk_frame_slot = frm_slot_walk_2;
+				}
+				else if ( active_walk_frame_slot == frm_slot_walk_2 )
+				{
+					active_walk_frame_slot = frm_slot_walk_3;
+				}
+				else if ( active_walk_frame_slot == frm_slot_walk_3 )
+				{
+					active_walk_frame_slot = frm_slot_walk_0;
+				}
+				
+			}
+			
+			return frame_slot_to_frame_arr[active_walk_frame_slot] 
+				* num_active_gfx_tiles;
+			
+		}
+		else
+		{
+			// This should NEVER happen, so show a walking frame as a
+			// debugging tool
+			walk_frame_timer = 0;
+			active_walk_frame_slot = frm_slot_walk_3;
+			return frame_slot_to_frame_arr[active_walk_frame_slot] 
+				* num_active_gfx_tiles;
+		}
+	}
+	else //if ( !the_player.on_ground )
+	{
+		return frame_slot_to_frame_arr[frm_slot_walk_2] 
+			* num_active_gfx_tiles;
+	}
+	
 }
 
 

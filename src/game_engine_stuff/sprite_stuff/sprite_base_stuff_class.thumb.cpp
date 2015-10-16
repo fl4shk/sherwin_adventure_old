@@ -102,7 +102,7 @@ const sprite_gfx_category sprite_base_stuff::get_gfx_category
 const u32 sprite_base_stuff::get_curr_relative_tile_slot 
 	( sprite& the_sprite )
 {
-	return relative_tile_slot;
+	return the_relative_tile_slot;
 }
 
 

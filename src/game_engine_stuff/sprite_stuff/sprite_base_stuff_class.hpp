@@ -12,8 +12,9 @@ public:		// variables
 	static constexpr fixed24p8 grav_acc = {0x80};
 	static constexpr fixed24p8 max_y_vel = {0x400};
 	
-	static const sprite_gfx_category the_gfx_category = sgc_player;
-	static const u32 relative_tile_slot = 7 * num_tiles_in_ss_16x16;
+	static constexpr sprite_gfx_category the_gfx_category = sgc_player;
+	static constexpr u32 the_relative_tile_slot = 7 
+		* num_tiles_in_ss_16x16;
 	
 	
 	
