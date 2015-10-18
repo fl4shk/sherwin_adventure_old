@@ -106,6 +106,50 @@ void generate_coll_point_group_16x32( const coll_box& the_coll_box,
 	
 }
 
+void generate_coll_point_group_32x16( const coll_box& the_coll_box, 
+	coll_point_group& the_pt_group )
+{
+	// The collision points
+	vec2_f24p8 & pt_lt = the_pt_group.get_pt_lt_32x16(),
+		& pt_lb = the_pt_group.get_pt_lb_32x16(),
+		
+		& pt_tl = the_pt_group.get_pt_tl_32x16(),
+		& pt_tm = the_pt_group.get_pt_tm_32x16(),
+		& pt_tr = the_pt_group.get_pt_tr_32x16(),
+		
+		& pt_rt = the_pt_group.get_pt_rt_32x16(), 
+		& pt_rb = the_pt_group.get_pt_rb_32x16(),
+		
+		& pt_bl = the_pt_group.get_pt_bl_32x16(), 
+		& pt_bm = the_pt_group.get_pt_bm_32x16(),
+		& pt_br = the_pt_group.get_pt_br_32x16();
+	
+	// Left and Right
+	pt_lt.x = pt_lb.x = the_coll_box.left();
+	pt_rt.x = pt_rb.x = the_coll_box.right();
+	
+	pt_lt.y.data = pt_rt.y.data = the_coll_box.top().data 
+		+ ( the_coll_box.size.y.data / 4 );
+	pt_lb.y.data = pt_rb.y.data = the_coll_box.bot().data 
+		- ( the_coll_box.size.y.data / 4 );
+	
+	
+	// Top and Bottom
+	//pt_tl.x.data = pt_bl.x.data = the_coll_box.left().data 
+	//	+ ( the_coll_box.size.x.data / 4 );
+	//pt_tr.x.data = pt_br.x.data = the_coll_box.right().data 
+	//	- ( the_coll_box.size.x.data / 4 );
+	
+	
+	pt_tl.x = pt_bl.x = the_coll_box.left() + (fixed24p8){0x400};
+	pt_tm.x.data = pt_bm.x.data = the_coll_box.left().data 
+		+ ( the_coll_box.size.x.data / 2 );
+	pt_tr.x = pt_br.x = the_coll_box.right() - (fixed24p8){0x400};
+	
+	pt_tl.y = pt_tm.y = pt_tr.y = the_coll_box.top();
+	pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot();
+	
+}
 
 
 

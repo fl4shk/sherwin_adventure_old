@@ -4,6 +4,7 @@
 #include "../../gba_specific_stuff/attribute_defines.hpp"
 #include "../misc_types.hpp"
 #include "../array_2d_helper_class.hpp"
+#include "../../gba_specific_stuff/bg_reg_stuff.hpp"
 
 enum block_type
 {
@@ -65,6 +66,7 @@ enum block_type
 	bt_grass_slope_135_degrees,
 	bt_grass_slope_45_degrees,
 	
+	// These two blocks are for decoration
 	bt_grass_in_slope_left,
 	bt_grass_in_slope_right,
 	

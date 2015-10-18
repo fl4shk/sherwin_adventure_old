@@ -11,6 +11,65 @@
 // between sprites and blocks, or at least coll_boxes and blocks.
 class coll_point_group
 {
+public:		// enums
+	enum arr_index_16x16 
+	{
+		// Left side
+		arr_ind_16x16_pt_lt, arr_ind_16x16_pt_lb,
+		
+		// Top side
+		arr_ind_16x16_pt_tl, arr_ind_16x16_pt_tm, arr_ind_16x16_pt_tr,
+		
+		// Right side
+		arr_ind_16x16_pt_rt, arr_ind_16x16_pt_rb,
+		
+		// Bottom side
+		arr_ind_16x16_pt_bl, arr_ind_16x16_pt_bm, arr_ind_16x16_pt_br,
+		
+		// arr_ind_16x16_count is the amount of arr_index_16x16's.  It is
+		// automatically updated by the compiler.
+		arr_ind_16x16_count,
+	};
+	
+	
+	enum arr_index_16x32
+	{
+		// Left side
+		arr_ind_16x32_pt_lt, arr_ind_16x32_pt_lm, arr_ind_16x32_pt_lb,
+		
+		// Top side
+		arr_ind_16x32_pt_tl, arr_ind_16x32_pt_tm, arr_ind_16x32_pt_tr,
+		
+		// Right side
+		arr_ind_16x32_pt_rt, arr_ind_16x32_pt_rm, arr_ind_16x32_pt_rb,
+		
+		// Bottom side
+		arr_ind_16x32_pt_bl, arr_ind_16x32_pt_bm, arr_ind_16x32_pt_br,
+		
+		// arr_ind_16x32_count is the amount of arr_index_16x32's.  It is
+		// automatically updated by the compiler.
+		arr_ind_16x32_count,
+	};
+
+	enum arr_index_32x16
+	{
+		// Left side
+		arr_ind_32x16_pt_lt, arr_ind_32x16_pt_lb,
+		
+		// Top side
+		arr_ind_32x16_pt_tl, arr_ind_32x16_pt_tm, arr_ind_32x16_pt_tr,
+		
+		// Right side
+		arr_ind_32x16_pt_rt, arr_ind_32x16_pt_rb,
+		
+		// Bottom side
+		arr_ind_32x16_pt_bl, arr_ind_32x16_pt_bm, arr_ind_32x16_pt_br,
+		
+		// arr_ind_32x16_count is the amount of arr_index_32x16's.  It is
+		// automatically updated by the compiler.
+		arr_ind_32x16_count,
+	};
+	
 public:		// variables
 	// The maximum number of collision points, 32, is definitely more than
 	// is necessary, but thus far there's not that much need to optimize
@@ -34,39 +93,88 @@ public:		// functions
 		the_array[num_used_points++] = to_push;
 	}
 	
-	// These functions are on one line due to prevent ridiculousness with
-	// the length of this header file.  Also, it just looks cleaner.
-	inline vec2_f24p8& get_pt_lt_16x16() { return the_array[0]; }
-	inline vec2_f24p8& get_pt_lb_16x16() { return the_array[1]; }
-	inline vec2_f24p8& get_pt_tl_16x16() { return the_array[2]; }
-	inline vec2_f24p8& get_pt_tm_16x16() { return the_array[3]; }
-	inline vec2_f24p8& get_pt_tr_16x16() { return the_array[4]; }
-	inline vec2_f24p8& get_pt_rt_16x16() { return the_array[5]; }
-	inline vec2_f24p8& get_pt_rb_16x16() { return the_array[6]; }
-	inline vec2_f24p8& get_pt_bl_16x16() { return the_array[7]; }
-	inline vec2_f24p8& get_pt_bm_16x16() { return the_array[8]; }
-	inline vec2_f24p8& get_pt_br_16x16() { return the_array[9]; }
+	// These functions are on two lines to prevent ridiculousness with the
+	// length of this header file.  Also, it just looks cleaner.
+	inline vec2_f24p8& get_pt_lt_16x16()
+		{ return the_array[arr_ind_16x16_pt_lt]; }
+	inline vec2_f24p8& get_pt_lb_16x16()
+		{ return the_array[arr_ind_16x16_pt_lb]; }
+	inline vec2_f24p8& get_pt_tl_16x16()
+		{ return the_array[arr_ind_16x16_pt_tl]; }
+	inline vec2_f24p8& get_pt_tm_16x16()
+		{ return the_array[arr_ind_16x16_pt_tm]; }
+	inline vec2_f24p8& get_pt_tr_16x16()
+		{ return the_array[arr_ind_16x16_pt_tr]; }
+	inline vec2_f24p8& get_pt_rt_16x16()
+		{ return the_array[arr_ind_16x16_pt_rt]; }
+	inline vec2_f24p8& get_pt_rb_16x16()
+		{ return the_array[arr_ind_16x16_pt_rb]; }
+	inline vec2_f24p8& get_pt_bl_16x16()
+		{ return the_array[arr_ind_16x16_pt_bl]; }
+	inline vec2_f24p8& get_pt_bm_16x16()
+		{ return the_array[arr_ind_16x16_pt_bm]; }
+	inline vec2_f24p8& get_pt_br_16x16()
+		{ return the_array[arr_ind_16x16_pt_br]; }
 	
-	inline void correct_num_used_points_16x16() { num_used_points = 10; }
+	inline void correct_num_used_points_16x16()
+		{ num_used_points = arr_ind_16x16_count; }
 	
 	
-	// These functions are on one line due to prevent ridiculousness with
-	// the length of this header file.  Also, it just looks cleaner.
-	inline vec2_f24p8& get_pt_lt_16x32() { return the_array[0]; }
-	inline vec2_f24p8& get_pt_lm_16x32() { return the_array[1]; }
-	inline vec2_f24p8& get_pt_lb_16x32() { return the_array[2]; }
-	inline vec2_f24p8& get_pt_tl_16x32() { return the_array[3]; }
-	inline vec2_f24p8& get_pt_tm_16x32() { return the_array[4]; }
-	inline vec2_f24p8& get_pt_tr_16x32() { return the_array[5]; }
-	inline vec2_f24p8& get_pt_rt_16x32() { return the_array[6]; }
-	inline vec2_f24p8& get_pt_rm_16x32() { return the_array[7]; }
-	inline vec2_f24p8& get_pt_rb_16x32() { return the_array[8]; }
-	inline vec2_f24p8& get_pt_bl_16x32() { return the_array[9]; }
-	inline vec2_f24p8& get_pt_bm_16x32() { return the_array[10]; }
-	inline vec2_f24p8& get_pt_br_16x32() { return the_array[11]; }
+	// These functions are on two lines to prevent ridiculousness with the
+	// length of this header file.  Also, it just looks cleaner.
+	inline vec2_f24p8& get_pt_lt_16x32()
+		{ return the_array[arr_ind_16x32_pt_lt]; }
+	inline vec2_f24p8& get_pt_lm_16x32()
+		{ return the_array[arr_ind_16x32_pt_lm]; }
+	inline vec2_f24p8& get_pt_lb_16x32()
+		{ return the_array[arr_ind_16x32_pt_lb]; }
+	inline vec2_f24p8& get_pt_tl_16x32()
+		{ return the_array[arr_ind_16x32_pt_tl]; }
+	inline vec2_f24p8& get_pt_tm_16x32()
+		{ return the_array[arr_ind_16x32_pt_tm]; }
+	inline vec2_f24p8& get_pt_tr_16x32()
+		{ return the_array[arr_ind_16x32_pt_tr]; }
+	inline vec2_f24p8& get_pt_rt_16x32()
+		{ return the_array[arr_ind_16x32_pt_rt]; }
+	inline vec2_f24p8& get_pt_rm_16x32()
+		{ return the_array[arr_ind_16x32_pt_rm]; }
+	inline vec2_f24p8& get_pt_rb_16x32()
+		{ return the_array[arr_ind_16x32_pt_rb]; }
+	inline vec2_f24p8& get_pt_bl_16x32()
+		{ return the_array[arr_ind_16x32_pt_bl]; }
+	inline vec2_f24p8& get_pt_bm_16x32()
+		{ return the_array[arr_ind_16x32_pt_bm]; }
+	inline vec2_f24p8& get_pt_br_16x32()
+		{ return the_array[arr_ind_16x32_pt_br]; }
 	
-	inline void correct_num_used_points_16x32() { num_used_points = 12; }
+	inline void correct_num_used_points_16x32()
+		{ num_used_points = arr_ind_16x32_count; }
 	
+	// These functions are on two lines to prevent ridiculousness with the
+	// length of this header file.  Also, it just looks cleaner.
+	inline vec2_f24p8& get_pt_lt_32x16()
+		{ return the_array[arr_ind_32x16_pt_lt]; }
+	inline vec2_f24p8& get_pt_lb_32x16()
+		{ return the_array[arr_ind_32x16_pt_lb]; }
+	inline vec2_f24p8& get_pt_tl_32x16()
+		{ return the_array[arr_ind_32x16_pt_tl]; }
+	inline vec2_f24p8& get_pt_tm_32x16()
+		{ return the_array[arr_ind_32x16_pt_tm]; }
+	inline vec2_f24p8& get_pt_tr_32x16()
+		{ return the_array[arr_ind_32x16_pt_tr]; }
+	inline vec2_f24p8& get_pt_rt_32x16()
+		{ return the_array[arr_ind_32x16_pt_rt]; }
+	inline vec2_f24p8& get_pt_rb_32x16()
+		{ return the_array[arr_ind_32x16_pt_rb]; }
+	inline vec2_f24p8& get_pt_bl_32x16()
+		{ return the_array[arr_ind_32x16_pt_bl]; }
+	inline vec2_f24p8& get_pt_bm_32x16()
+		{ return the_array[arr_ind_32x16_pt_bm]; }
+	inline vec2_f24p8& get_pt_br_32x16()
+		{ return the_array[arr_ind_32x16_pt_br]; }
+	
+	inline void correct_num_used_points_32x16()
+		{ num_used_points = arr_ind_32x16_count; }
 	
 } __attribute__((_align4));
 

@@ -115,12 +115,12 @@ public:		// functions
 	virtual void block_collision_stuff( sprite& the_player )
 		__attribute__((_iwram_code));
 	
-	virtual void block_coll_response_top_16x16( sprite& the_player,
+	virtual void block_coll_response_top_16x16( sprite& the_player, 
 		const block_coll_result& tl_coll_result, 
 		const block_coll_result& tm_coll_result,
 		const block_coll_result& tr_coll_result )
 		__attribute__((_iwram_code));
-	virtual void block_coll_response_top_16x32( sprite& the_player,
+	virtual void block_coll_response_top_16x32( sprite& the_player, 
 		const block_coll_result& tl_coll_result, 
 		const block_coll_result& tm_coll_result,
 		const block_coll_result& tr_coll_result )

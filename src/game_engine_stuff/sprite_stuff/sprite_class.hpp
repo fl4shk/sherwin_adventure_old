@@ -31,7 +31,8 @@ public:		// variables
 	
 	
 	
-	// the_coll_box's "pos" member variable is the in-level coordinate
+	// the_coll_box's "pos" member variable is the in-level coordinate of
+	// the_coll_box
 	coll_box the_coll_box;
 	
 	// cb_pos_offset is the position of the coll_box relative to
