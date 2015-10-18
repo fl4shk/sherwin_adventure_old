@@ -351,13 +351,17 @@ void sprite_base_stuff::slope_block_coll_response_bot_16x32
 		( const block_coll_result& the_coll_result, 
 		const s32 height_mask_value, const vec2_s32& pt_block_rel_trunc )
 	{
+		//next_debug_s32 = num_pixels_per_block_col - pt_block_rel_trunc.y;
+		//next_debug_s32 = height_mask_value;
+		
 		// Check whether the block ABOVE that of the_coll_result.coord.y
 		// was used
 		// Check whether the_sprite is inside the slope.
 		if ( ( (s32)num_pixels_per_block_col - pt_block_rel_trunc.y )
 			<= height_mask_value )
 		{
-			if ( the_sprite.vel.y >= (fixed24p8){0} )
+			if ( the_sprite.vel.y >= (fixed24p8){0}
+				&& the_sprite.jump_hold_timer == 0 )
 			{
 				the_sprite.in_level_pos.y = make_f24p8
 					( ( the_coll_result.coord.y + 1 )
@@ -383,6 +387,7 @@ void sprite_base_stuff::slope_block_coll_response_bot_16x32
 	find_height_mask_value( br_coll_result, pt_br_height_mask_value,
 		pt_br_block_rel_trunc, pt_above_pt_br_block_coord_y );
 	
+	next_debug_s32 = 0x9900bbaa;
 	next_debug_s32 = pt_bm_height_mask_value;
 	next_debug_s32 = pt_bl_height_mask_value;
 	next_debug_s32 = pt_br_height_mask_value;
@@ -414,6 +419,7 @@ void sprite_base_stuff::slope_block_coll_response_bot_16x32
 		// I don't think this will ever be the case.
 		next_debug_s32 = 0xeebbaacc;
 	}
+	
 	
 }
 
