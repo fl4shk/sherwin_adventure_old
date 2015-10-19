@@ -18,8 +18,12 @@ Binutils.  (This is what the author uses for compilation).
 4.  **mmutil**, which is *included in DevKitARM*.
 
 #Notes for Building
-This project **won't build** without having ARM GCC and Binutils available
-through the host OS's $PATH variable.
+When using the makefile called **makefile**, this project **won't build**
+without having ARM GCC and Binutils available through the host OS's $PATH
+variable.
+
+When using the makefile called **makefile_devkitARM.mk**, devkitARM is used
+to build Sherwin's Adventure instead of what the author uses.
 
 The author uses a **more up-to-date version** of ARM GCC and Binutils than
 that provided by DevKitARM, though **gbafix** and **mmutil** *from
