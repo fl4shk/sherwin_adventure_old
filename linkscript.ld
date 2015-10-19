@@ -141,8 +141,9 @@ SECTIONS
 		*(.iwram_bss);
 		
 		. = ALIGN(4);
-		/* The symbol end is used to tell where malloc, new, and friends have free access. */
+		/* The symbols end or __end__ are used to tell where malloc, new, and friends have free access. */
 		/*end = .;*/
+		/*__end__ = .;*/
 	} >iwram
 	
 	
@@ -170,8 +171,9 @@ SECTIONS
 		. = ALIGN(4);
 		__bss_end__ = .;
 		
-		/* The symbol end is used to tell where malloc, new, and friends have free access. */
+		/* The symbols end or __end__ are used to tell where malloc, new, and friends have free access. */
 		end = .;
+		__end__ = .;
 	} >ewram
 	
 	

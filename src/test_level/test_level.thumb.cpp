@@ -505,13 +505,13 @@ const sublevel< 1990, 64, 32, 7, 5 > test_level
 	},
 	
 	{
-		{ st_warp_block, 58, 3, true },
+		{ st_warp_block, 58, 3, true, 0, 0, 0, 0 },
 		{ st_warp_block, 62, 7, true, 1, 0, 0, 0 },
-		{ st_player, 4, 29, true },
+		{ st_player, 4, 29, true, 0, 0, 0, 0 },
 		{ st_warp_block, 1, 30, true, 2, 0, 0, 0 },
 		{ st_warp_block, 52, 30, true, 3, 0, 0, 0 },
 		{ st_warp_block, 56, 30, true, 4, 0, 0, 0 },
-		{ st_waffle, 62, 30, true },
+		{ st_waffle, 62, 30, true, 0, 0, 0, 0 },
 	},
 	
 	{

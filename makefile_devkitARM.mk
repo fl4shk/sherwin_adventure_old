@@ -20,7 +20,7 @@ S_DIRS=$(CXX_DIRS)
 
 
 
-PROJ=$(shell basename $(CURDIR))
+PROJ=$(shell basename $(CURDIR))_devkitARM
 
 # The music file's basename
 MUSIC_FILE_BASENAME=practice_13
@@ -28,8 +28,8 @@ MUSIC_FILE_BASENAME=practice_13
 
 
 # This compiler prefix is ARM-specific
-#COMP_PREFIX=$(DEVKITARM)/bin/arm-none-eabi-
-COMP_PREFIX=arm-none-eabi-
+COMP_PREFIX=$(DEVKITARM)/bin/arm-none-eabi-
+#COMP_PREFIX=arm-none-eabi-
 
 
 CC=$(COMP_PREFIX)gcc
@@ -64,10 +64,10 @@ ARM_C_FLAGS=-std=c11 $(ARM_BASE_FLAGS) -O3 -Wall
 S_FLAGS=-mcpu=arm7tdmi -mthumb -mthumb-interwork
 
 # This is the LD_FLAGS for non-devkitARM GCC
-LD_FLAGS=--specs=nosys.specs $(EXTRA_LD_FLAGS) -L./maxmod/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lgcc -lc -lstdc++ -lmm $(DEBUG_FLAGS)
+#LD_FLAGS=--specs=nosys.specs $(EXTRA_LD_FLAGS) -L./maxmod/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lgcc -lc -lstdc++ -lmm $(DEBUG_FLAGS)
 
 # This is the LD_FLAGS for devkitARM
-#LD_FLAGS=$(EXTRA_LD_FLAGS) -L./maxmod/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lrdimon -lrdpmon -lmm -lgcc -lc -lstdc++ $(DEBUG_FLAGS)
+LD_FLAGS=$(EXTRA_LD_FLAGS) -L./maxmod/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lrdimon -lrdpmon -lmm -lgcc -lc -lstdc++ $(DEBUG_FLAGS)
 
 
 OBJDIR=objs
