@@ -590,17 +590,64 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 	
 	if ( tl_coll_result.type != bt_air || tr_coll_result.type != bt_air )
 	{
-		any_top_response();
-		
-		if ( lt_coll_result.type != bt_air )
+		// When not dealing with slopes, this method is used
+		if ( bm_coll_result.type != bt_grass_slope_135_degrees 
+			&& bm_coll_result.type != bt_grass_slope_45_degrees 
+			&& bl_coll_result.type != bt_grass_slope_135_degrees 
+			&& br_coll_result.type != bt_grass_slope_45_degrees 
+			&& lb_coll_result.type != bt_grass_slope_135_degrees 
+			&& rb_coll_result.type != bt_grass_slope_45_degrees )
 		{
-			any_left_response();
+			any_top_response();
+			
+			if ( lt_coll_result.type != bt_air )
+			{
+				any_left_response();
+			}
+			
+			else if ( rt_coll_result.type != bt_air )
+			{
+				any_right_response();
+			}
+		}
+		else
+		{
+			if ( the_sprite.vel.y < (fixed24p8){0} )
+			{
+				the_sprite.in_level_pos.y -= the_sprite.vel.y;
+				the_sprite.vel.y = (fixed24p8){0};
+				the_sprite.on_ground = true;
+				the_sprite.jump_hold_timer = 0;
+			}
+			
+			if ( lt_coll_result.type != bt_air 
+				|| lm_coll_result.type != bt_air
+				|| lb_coll_result.type != bt_air )
+			{
+				//any_left_response();
+				if ( the_sprite.vel.x < (fixed24p8){0} )
+				{
+					//the_sprite.vel.x = make_f24p8(4);
+					the_sprite.in_level_pos.x -= the_sprite.vel.x;
+				}
+			}
+			
+			else if ( rt_coll_result.type != bt_air 
+				|| rm_coll_result.type != bt_air
+				|| rb_coll_result.type != bt_air )
+			{
+				//any_right_response();
+				if ( the_sprite.vel.x > (fixed24p8){0} )
+				{
+					//the_sprite.vel.x = make_f24p8(-4);
+					the_sprite.in_level_pos.x -= the_sprite.vel.x;
+				}
+			}
+			
+			slope_block_coll_response_bot_16x32( the_sprite, the_pt_group,
+				bm_coll_result, bl_coll_result, br_coll_result );
 		}
 		
-		else if ( rt_coll_result.type != bt_air )
-		{
-			any_right_response();
-		}
 	}
 	
 	else if ( bl_coll_result.type != bt_air
