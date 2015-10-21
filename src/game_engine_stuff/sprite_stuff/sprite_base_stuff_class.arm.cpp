@@ -370,13 +370,52 @@ void sprite_base_stuff::slope_block_coll_response_bot_16x32
 				
 				the_sprite.vel.y = {0x00};
 				the_sprite.on_ground = true;
-				the_sprite.jump_hold_timer = 0;
+				//the_sprite.jump_hold_timer = max_jump_hold_timer;
+				
+				show_debug_str_s32("wow ");
+				show_debug_str_s32("nice");
 			}
+			else
+			{
+				show_debug_str_s32("doge");
+				show_debug_str_s32("wow ");
+			}
+		}
+		else
+		{
+			if ( pt_block_rel_trunc.y == 0 )
+			{
+				show_debug_str_s32("okay");
+				show_debug_str_s32("sure");
+				
+				//the_sprite.in_level_pos.y = make_f24p8
+				//	( ( the_coll_result.coord.y + 1 )
+				//	* num_pixels_per_block_col - height_mask_value )
+				//	- the_sprite.the_coll_box.size.y;
+				//the_sprite.in_level_pos.y += make_f24p8(4);
+				the_sprite.on_ground = false;
+				//the_sprite.jump_hold_timer = 0;
+				
+			}
+			else
+			{
+				show_debug_str_s32("not ");
+				show_debug_str_s32("cool");
+			}
+			
+			show_debug_str_s32("dbst");
+			
+			next_debug_s32 = pt_block_rel_trunc.y;
+			next_debug_s32 = (s32)num_pixels_per_block_col
+				- pt_block_rel_trunc.y;
+			show_debug_str_s32( ( ( (s32)num_pixels_per_block_col
+				- pt_block_rel_trunc.y ) <= height_mask_value ) 
+				? "true" : "fals" );
+			
+			show_debug_str_s32("dben");
 		}
 	};
 	
-	
-	// New code starts here
 	
 	find_height_mask_value( bm_coll_result, pt_bm_height_mask_value,
 		pt_bm_block_rel_trunc, pt_above_pt_bm_block_coord_y );
@@ -387,30 +426,33 @@ void sprite_base_stuff::slope_block_coll_response_bot_16x32
 	find_height_mask_value( br_coll_result, pt_br_height_mask_value,
 		pt_br_block_rel_trunc, pt_above_pt_br_block_coord_y );
 	
-	next_debug_s32 = 0x9900bbaa;
-	next_debug_s32 = pt_bm_height_mask_value;
-	next_debug_s32 = pt_bl_height_mask_value;
-	next_debug_s32 = pt_br_height_mask_value;
+	//next_debug_s32 = 0x9900bbaa;
+	//next_debug_s32 = pt_bm_height_mask_value;
+	//next_debug_s32 = pt_bl_height_mask_value;
+	//next_debug_s32 = pt_br_height_mask_value;
 	
 	// Find the highest number height_mask_value
 	if ( pt_bm_height_mask_value >= pt_bl_height_mask_value
 		&& pt_bm_height_mask_value >= pt_br_height_mask_value )
 	{
 		// Using pt_bm_height_mask_value
+		next_debug_s32 = 1;
 		respond_to_collision( bm_coll_result, pt_bm_height_mask_value,
 			pt_bm_block_rel_trunc );
 	}
-	else if ( pt_bl_height_mask_value >= pt_bm_height_mask_value
+	else if ( pt_bl_height_mask_value > pt_bm_height_mask_value
 		&& pt_bl_height_mask_value >= pt_br_height_mask_value )
 	{
 		// Using pt_bl_height_mask_value
+		next_debug_s32 = 2;
 		respond_to_collision( bl_coll_result, pt_bl_height_mask_value,
 			pt_bl_block_rel_trunc );
 	}
-	else if ( pt_br_height_mask_value >= pt_bm_height_mask_value
-		&& pt_br_height_mask_value >= pt_bl_height_mask_value )
+	else if ( pt_br_height_mask_value > pt_bm_height_mask_value
+		&& pt_br_height_mask_value > pt_bl_height_mask_value )
 	{
 		// Using pt_br_height_mask_value
+		next_debug_s32 = 3;
 		respond_to_collision( br_coll_result, pt_br_height_mask_value,
 			pt_br_block_rel_trunc );
 	}
@@ -590,6 +632,8 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 	
 	if ( tl_coll_result.type != bt_air || tr_coll_result.type != bt_air )
 	{
+		show_debug_str_s32("tltr");
+		
 		// When not dealing with slopes, this method is used
 		if ( bm_coll_result.type != bt_grass_slope_135_degrees 
 			&& bm_coll_result.type != bt_grass_slope_45_degrees 
@@ -598,6 +642,8 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 			&& lb_coll_result.type != bt_grass_slope_135_degrees 
 			&& rb_coll_result.type != bt_grass_slope_45_degrees )
 		{
+			show_debug_str_s32("nslp");
+			
 			any_top_response();
 			
 			if ( lt_coll_result.type != bt_air )
@@ -612,8 +658,11 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 		}
 		else
 		{
+			show_debug_str_s32("slop");
+			
 			if ( the_sprite.vel.y < (fixed24p8){0} )
 			{
+				// Disable jumping
 				the_sprite.in_level_pos.y -= the_sprite.vel.y;
 				the_sprite.vel.y = (fixed24p8){0};
 				the_sprite.on_ground = true;
@@ -624,7 +673,6 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 				|| lm_coll_result.type != bt_air
 				|| lb_coll_result.type != bt_air )
 			{
-				//any_left_response();
 				if ( the_sprite.vel.x < (fixed24p8){0} )
 				{
 					//the_sprite.vel.x = make_f24p8(4);
@@ -636,7 +684,6 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 				|| rm_coll_result.type != bt_air
 				|| rb_coll_result.type != bt_air )
 			{
-				//any_right_response();
 				if ( the_sprite.vel.x > (fixed24p8){0} )
 				{
 					//the_sprite.vel.x = make_f24p8(-4);
@@ -653,6 +700,8 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 	else if ( bl_coll_result.type != bt_air
 		|| br_coll_result.type != bt_air )
 	{
+		show_debug_str_s32("blbr");
+		
 		// When not dealing with slopes, this method is used
 		if ( bm_coll_result.type != bt_grass_slope_135_degrees 
 			&& bm_coll_result.type != bt_grass_slope_45_degrees 
@@ -661,6 +710,8 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 			&& lb_coll_result.type != bt_grass_slope_135_degrees 
 			&& rb_coll_result.type != bt_grass_slope_45_degrees )
 		{
+			show_debug_str_s32("nslp");
+			
 			any_non_slope_bot_response();
 			if ( lt_coll_result.type != bt_air
 				|| lm_coll_result.type != bt_air )
@@ -678,6 +729,8 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 		// When dealing with slopes, this method is used
 		else
 		{
+			show_debug_str_s32("slop");
+			
 			slope_block_coll_response_bot_16x32( the_sprite, the_pt_group,
 				bm_coll_result, bl_coll_result, br_coll_result );
 			
@@ -713,6 +766,8 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 	}
 	else
 	{
+		show_debug_str_s32("leri");
+		
 		the_sprite.on_ground = false;
 		
 		if ( lt_coll_result.type != bt_air 
