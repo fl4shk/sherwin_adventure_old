@@ -893,13 +893,13 @@ frm_walk_0	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^		frm_
 frm_walk_1	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^		frm_walk_1 = 3,$/;"	kind:e	enum:player_sprite_stuff::frame
 front	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node<type>* front()$/;"	kind:f	class:sa_forward_list	access:public	signature:()
 front_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	int front_node_index;$/;"	kind:m	class:sa_forward_list	access:public
-generate_coll_point_group_16x16	game_engine_stuff/coll_point_group_class.hpp	/^void generate_coll_point_group_16x16( const coll_box& the_coll_box, $/;"	kind:p	signature:( const coll_box& the_coll_box, coll_point_group& the_pt_group )
-generate_coll_point_group_16x16	game_engine_stuff/coll_point_group_class.thumb.cpp	/^void generate_coll_point_group_16x16( const coll_box& the_coll_box, $/;"	kind:f	signature:( const coll_box& the_coll_box, coll_point_group& the_pt_group )
-generate_coll_point_group_16x32	game_engine_stuff/coll_point_group_class.hpp	/^void generate_coll_point_group_16x32( const coll_box& the_coll_box, $/;"	kind:p	signature:( const coll_box& the_coll_box, coll_point_group& the_pt_group )
-generate_coll_point_group_16x32	game_engine_stuff/coll_point_group_class.thumb.cpp	/^void generate_coll_point_group_16x32( const coll_box& the_coll_box, $/;"	kind:f	signature:( const coll_box& the_coll_box, coll_point_group& the_pt_group )
-generate_coll_point_group_32x16	game_engine_stuff/coll_point_group_class.hpp	/^void generate_coll_point_group_32x16( const coll_box& the_coll_box, $/;"	kind:p	signature:( const coll_box& the_coll_box, coll_point_group& the_pt_group )
-generate_coll_point_group_32x16	game_engine_stuff/coll_point_group_class.thumb.cpp	/^void generate_coll_point_group_32x16( const coll_box& the_coll_box, $/;"	kind:f	signature:( const coll_box& the_coll_box, coll_point_group& the_pt_group )
-generate_coll_point_group_32x32	game_engine_stuff/coll_point_group_class.hpp	/^void generate_coll_point_group_32x32( const coll_box& the_coll_box, $/;"	kind:p	signature:( const coll_box& the_coll_box, coll_point_group& the_pt_group )
+generate_coll_point_group_16x16	game_engine_stuff/coll_point_group_class.hpp	/^void generate_coll_point_group_16x16( const sprite& the_sprite, $/;"	kind:p	signature:( const sprite& the_sprite, coll_point_group& the_pt_group )
+generate_coll_point_group_16x16	game_engine_stuff/coll_point_group_class.thumb.cpp	/^void generate_coll_point_group_16x16( const sprite& the_sprite, $/;"	kind:f	signature:( const sprite& the_sprite, coll_point_group& the_pt_group )
+generate_coll_point_group_16x32	game_engine_stuff/coll_point_group_class.hpp	/^void generate_coll_point_group_16x32( const sprite& the_sprite, $/;"	kind:p	signature:( const sprite& the_sprite, coll_point_group& the_pt_group )
+generate_coll_point_group_16x32	game_engine_stuff/coll_point_group_class.thumb.cpp	/^void generate_coll_point_group_16x32( const sprite& the_sprite, $/;"	kind:f	signature:( const sprite& the_sprite, coll_point_group& the_pt_group )
+generate_coll_point_group_32x16	game_engine_stuff/coll_point_group_class.hpp	/^void generate_coll_point_group_32x16( const sprite& the_sprite, $/;"	kind:p	signature:( const sprite& the_sprite, coll_point_group& the_pt_group )
+generate_coll_point_group_32x16	game_engine_stuff/coll_point_group_class.thumb.cpp	/^void generate_coll_point_group_32x16( const sprite& the_sprite, $/;"	kind:f	signature:( const sprite& the_sprite, coll_point_group& the_pt_group )
+generate_coll_point_group_32x32	game_engine_stuff/coll_point_group_class.hpp	/^void generate_coll_point_group_32x32( const sprite& the_sprite, $/;"	kind:p	signature:( const sprite& the_sprite, coll_point_group& the_pt_group )
 get_actual_num_sublevels	game_engine_stuff/level_stuff/level_class.hpp	/^	inline const u32 get_actual_num_sublevels() const$/;"	kind:f	class:level	access:public	signature:() const
 get_basic_block_coll_results_bot_16x16	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.arm.cpp	/^void sprite_base_stuff::get_basic_block_coll_results_bot_16x16$/;"	kind:f	class:sprite_base_stuff	signature:( coll_point_group& the_pt_group, block_coll_result& bl_coll_result, block_coll_result& bm_coll_result, block_coll_result& br_coll_result )
 get_basic_block_coll_results_bot_16x16	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	void get_basic_block_coll_results_bot_16x16$/;"	kind:p	class:sprite_base_stuff	access:protected	signature:( coll_point_group& the_pt_group, block_coll_result& bl_coll_result, block_coll_result& bm_coll_result, block_coll_result& br_coll_result )
@@ -1144,9 +1144,9 @@ grass_slope_135_degrees_block_stuff::get_metatile_number	game_engine_stuff/block
 grass_slope_135_degrees_block_stuff::get_palette_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	inline virtual const u32 get_palette_number()$/;"	kind:f	class:grass_slope_135_degrees_block_stuff	access:public	signature:()
 grass_slope_135_degrees_block_stuff::height_mask	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static const u32 height_mask[height_mask_size]; $/;"	kind:m	class:grass_slope_135_degrees_block_stuff	access:public
 grass_slope_135_degrees_block_stuff::height_mask	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.thumb.cpp	/^	grass_slope_135_degrees_block_stuff::height_mask[height_mask_size] $/;"	kind:m	class:grass_slope_135_degrees_block_stuff	file:
-grass_slope_135_degrees_block_stuff::height_mask_size	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 height_mask_size = 16;$/;"	kind:m	class:grass_slope_135_degrees_block_stuff	access:public
+grass_slope_135_degrees_block_stuff::height_mask_size	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 height_mask_size = num_pixels_per_block_row;$/;"	kind:m	class:grass_slope_135_degrees_block_stuff	access:public
 grass_slope_135_degrees_block_stuff::metatile_graphics_slot	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 metatile_graphics_slot = metatile_number;$/;"	kind:m	class:grass_slope_135_degrees_block_stuff	access:public
-grass_slope_135_degrees_block_stuff::metatile_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 metatile_number = num_pixels_per_block_row;$/;"	kind:m	class:grass_slope_135_degrees_block_stuff	access:public
+grass_slope_135_degrees_block_stuff::metatile_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 metatile_number = 17;$/;"	kind:m	class:grass_slope_135_degrees_block_stuff	access:public
 grass_slope_135_degrees_block_stuff::palette_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 palette_number = 0;$/;"	kind:m	class:grass_slope_135_degrees_block_stuff	access:public
 grass_slope_45_degrees_block_stuff	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^class grass_slope_45_degrees_block_stuff : public block_base_stuff$/;"	kind:c	inherits:block_base_stuff
 grass_slope_45_degrees_block_stuff::get_metatile_graphics_slot	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	inline virtual const u32 get_metatile_graphics_slot()$/;"	kind:f	class:grass_slope_45_degrees_block_stuff	access:public	signature:()
@@ -1156,7 +1156,7 @@ grass_slope_45_degrees_block_stuff::height_mask	game_engine_stuff/block_stuff/gr
 grass_slope_45_degrees_block_stuff::height_mask	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.thumb.cpp	/^	grass_slope_45_degrees_block_stuff::height_mask[height_mask_size] $/;"	kind:m	class:grass_slope_45_degrees_block_stuff	file:
 grass_slope_45_degrees_block_stuff::height_mask_size	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 height_mask_size = num_pixels_per_block_row;$/;"	kind:m	class:grass_slope_45_degrees_block_stuff	access:public
 grass_slope_45_degrees_block_stuff::metatile_graphics_slot	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 metatile_graphics_slot = metatile_number;$/;"	kind:m	class:grass_slope_45_degrees_block_stuff	access:public
-grass_slope_45_degrees_block_stuff::metatile_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 metatile_number = 17;$/;"	kind:m	class:grass_slope_45_degrees_block_stuff	access:public
+grass_slope_45_degrees_block_stuff::metatile_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 metatile_number = 16;$/;"	kind:m	class:grass_slope_45_degrees_block_stuff	access:public
 grass_slope_45_degrees_block_stuff::palette_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 palette_number = 0;$/;"	kind:m	class:grass_slope_45_degrees_block_stuff	access:public
 grass_top_left_block_stuff	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^class grass_top_left_block_stuff : public block_base_stuff$/;"	kind:c	inherits:block_base_stuff
 grass_top_left_block_stuff::get_metatile_graphics_slot	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	inline virtual const u32 get_metatile_graphics_slot()$/;"	kind:f	class:grass_top_left_block_stuff	access:public	signature:()
@@ -1190,7 +1190,7 @@ height_mask	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp
 height_mask	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static const u32 height_mask[height_mask_size];$/;"	kind:m	class:grass_slope_45_degrees_block_stuff	access:public
 height_mask	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.thumb.cpp	/^	grass_slope_135_degrees_block_stuff::height_mask[height_mask_size] $/;"	kind:m	class:grass_slope_135_degrees_block_stuff	file:
 height_mask	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.thumb.cpp	/^	grass_slope_45_degrees_block_stuff::height_mask[height_mask_size] $/;"	kind:m	class:grass_slope_45_degrees_block_stuff	file:
-height_mask_size	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 height_mask_size = 16;$/;"	kind:m	class:grass_slope_135_degrees_block_stuff	access:public
+height_mask_size	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 height_mask_size = num_pixels_per_block_row;$/;"	kind:m	class:grass_slope_135_degrees_block_stuff	access:public
 height_mask_size	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 height_mask_size = num_pixels_per_block_row;$/;"	kind:m	class:grass_slope_45_degrees_block_stuff	access:public
 hide_non_affine	gba_specific_stuff/oam_entry_classes.hpp	/^	void hide_non_affine()$/;"	kind:f	class:oam_entry	access:public	signature:()
 horiz_level_block_data_2d	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static array_2d_helper<block> horiz_level_block_data_2d;$/;"	kind:m	class:active_level	access:public
@@ -1429,14 +1429,14 @@ metatile_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes
 metatile_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 metatile_number = 13;$/;"	kind:m	class:dirt_bottom_left_block_stuff	access:public
 metatile_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 metatile_number = 14;$/;"	kind:m	class:dirt_bottom_middle_block_stuff	access:public
 metatile_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 metatile_number = 15;$/;"	kind:m	class:dirt_bottom_right_block_stuff	access:public
-metatile_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 metatile_number = 17;$/;"	kind:m	class:grass_slope_45_degrees_block_stuff	access:public
+metatile_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 metatile_number = 16;$/;"	kind:m	class:grass_slope_45_degrees_block_stuff	access:public
+metatile_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 metatile_number = 17;$/;"	kind:m	class:grass_slope_135_degrees_block_stuff	access:public
 metatile_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 metatile_number = 18;$/;"	kind:m	class:grass_in_slope_left_block_stuff	access:public
 metatile_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 metatile_number = 19;$/;"	kind:m	class:grass_in_slope_right_block_stuff	access:public
 metatile_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 metatile_number = 6;$/;"	kind:m	class:grass_single_block_stuff	access:public
 metatile_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 metatile_number = 7;$/;"	kind:m	class:grass_top_left_block_stuff	access:public
 metatile_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 metatile_number = 8;$/;"	kind:m	class:grass_top_middle_block_stuff	access:public
 metatile_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 metatile_number = 9;$/;"	kind:m	class:grass_top_right_block_stuff	access:public
-metatile_number	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 metatile_number = num_pixels_per_block_row;$/;"	kind:m	class:grass_slope_135_degrees_block_stuff	access:public
 metatile_number	game_engine_stuff/block_stuff/log_block_stuff_class.hpp	/^	static const u32 metatile_number = 1;$/;"	kind:m	class:log_block_stuff	access:public
 metatile_number	game_engine_stuff/block_stuff/wood_block_stuff_classes.hpp	/^	static const u32 metatile_number = 2;$/;"	kind:m	class:wood_block_stuff	access:public
 misc_bitwise_funcs_hpp	game_engine_stuff/misc_bitwise_funcs.hpp	2;"	kind:d
@@ -2277,7 +2277,7 @@ sublevel_pointer::sublevel_pointer	game_engine_stuff/level_stuff/sublevel_class.
 swi_call	gba_specific_stuff/bios_function_wrappers.hpp	113;"	kind:d
 swi_call	gba_specific_stuff/bios_function_wrappers.hpp	115;"	kind:d
 test_int_global	main.thumb.cpp	/^int test_int_global;$/;"	kind:v
-test_level	test_level/test_level.thumb.cpp	/^const sublevel< 1990, 64, 32, 7, 5 > test_level$/;"	kind:v
+test_level	test_level/test_level.thumb.cpp	/^const sublevel< 1988, 64, 32, 7, 5 > test_level$/;"	kind:v
 test_level_hpp	test_level/test_level.hpp	2;"	kind:d
 test_sram_arr	main.thumb.cpp	/^u8 test_sram_arr[test_sram_arr_size] __attribute__((_sram));$/;"	kind:v
 test_sram_arr_size	main.thumb.cpp	/^static constexpr u32 test_sram_arr_size = debug_arr_u32_size * sizeof(u32);$/;"	kind:v	file:

@@ -219,15 +219,15 @@ public:		// functions
 } __attribute__((_align4));
 
 // Slopes
-class grass_slope_135_degrees_block_stuff : public block_base_stuff
+class grass_slope_45_degrees_block_stuff : public block_base_stuff
 {
 public:		// variables
-	static constexpr u32 metatile_number = num_pixels_per_block_row;
+	static constexpr u32 metatile_number = 16;
 	static constexpr u32 palette_number = 0;
 	static constexpr u32 metatile_graphics_slot = metatile_number;
 	
-	static constexpr u32 height_mask_size = 16;
-	static const u32 height_mask[height_mask_size]; 
+	static constexpr u32 height_mask_size = num_pixels_per_block_row;
+	static const u32 height_mask[height_mask_size];
 	
 public:		// functions
 	inline virtual const u32 get_metatile_number()
@@ -243,7 +243,7 @@ public:		// functions
 		return metatile_graphics_slot;
 	}
 } __attribute__((_align4));
-class grass_slope_45_degrees_block_stuff : public block_base_stuff
+class grass_slope_135_degrees_block_stuff : public block_base_stuff
 {
 public:		// variables
 	static constexpr u32 metatile_number = 17;
@@ -251,7 +251,7 @@ public:		// variables
 	static constexpr u32 metatile_graphics_slot = metatile_number;
 	
 	static constexpr u32 height_mask_size = num_pixels_per_block_row;
-	static const u32 height_mask[height_mask_size];
+	static const u32 height_mask[height_mask_size]; 
 	
 public:		// functions
 	inline virtual const u32 get_metatile_number()

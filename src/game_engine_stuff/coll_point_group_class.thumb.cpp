@@ -1,4 +1,5 @@
 #include "coll_point_group_class.hpp"
+#include "sprite_stuff/sprite_class.hpp"
 
 // Thursday, July 23, 2015 (9:35 PM EST) Note: I will use a top middle coll
 // point and a bottom middle coll point, starting tomorrow.  
@@ -10,9 +11,15 @@
 // as the primary thing for checking if a sprite is on the ground.
 
 
-void generate_coll_point_group_16x16( const coll_box& the_coll_box, 
+// Friday, October 23, 2015 (12:10 PM CST) Lol, I forgot that the first
+// comment was there.
+
+
+void generate_coll_point_group_16x16( const sprite& the_sprite, 
 	coll_point_group& the_pt_group )
 {
+	const coll_box& the_coll_box = the_sprite.the_coll_box;
+	
 	the_pt_group.correct_num_used_points_16x16();
 	
 	// The collision points
@@ -54,16 +61,19 @@ void generate_coll_point_group_16x16( const coll_box& the_coll_box,
 	pt_tr.x = pt_br.x = the_coll_box.right() - (fixed24p8){0x400};
 	
 	pt_tl.y = pt_tm.y = pt_tr.y = the_coll_box.top();
-	pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot();
+	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot();
 	
-	
+	pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() 
+		+ the_sprite.cb_pos_offset.y;
 	
 }
 
 
-void generate_coll_point_group_16x32( const coll_box& the_coll_box, 
+void generate_coll_point_group_16x32( const sprite& the_sprite, 
 	coll_point_group& the_pt_group )
 {
+	const coll_box& the_coll_box = the_sprite.the_coll_box;
+	
 	the_pt_group.correct_num_used_points_16x32();
 	
 	// The collision_points
@@ -101,14 +111,19 @@ void generate_coll_point_group_16x32( const coll_box& the_coll_box,
 	pt_tr.x = pt_br.x = the_coll_box.right() - (fixed24p8){0x400};
 	
 	pt_tl.y = pt_tm.y = pt_tr.y = the_coll_box.top();
-	pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot();
 	
+	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() + make_f24p8(2);
+	
+	pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() 
+		+ the_sprite.cb_pos_offset.y;
 	
 }
 
-void generate_coll_point_group_32x16( const coll_box& the_coll_box, 
+void generate_coll_point_group_32x16( const sprite& the_sprite, 
 	coll_point_group& the_pt_group )
 {
+	const coll_box& the_coll_box = the_sprite.the_coll_box;
+	
 	// The collision points
 	vec2_f24p8 & pt_lt = the_pt_group.get_pt_lt_32x16(),
 		& pt_lb = the_pt_group.get_pt_lb_32x16(),
@@ -147,7 +162,10 @@ void generate_coll_point_group_32x16( const coll_box& the_coll_box,
 	pt_tr.x = pt_br.x = the_coll_box.right() - (fixed24p8){0x400};
 	
 	pt_tl.y = pt_tm.y = pt_tr.y = the_coll_box.top();
-	pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot();
+	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot();
+	
+	pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() 
+		+ the_sprite.cb_pos_offset.y;
 	
 }
 

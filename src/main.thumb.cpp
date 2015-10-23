@@ -251,6 +251,16 @@ int main()
 		sprite& the_player = sprite_manager::the_player;
 		
 		clear_debug_vars();
+		//next_debug_s32 = the_player.in_level_pos.x.data;
+		//next_debug_s32 = the_player.in_level_pos.y.data;
+		//next_debug_s32 = the_player.cb_pos_offset.x.data;
+		//next_debug_s32 = the_player.cb_pos_offset.y.data;
+		//next_debug_s32 = ( the_player.the_coll_box.pos.x 
+		//	- the_player.cb_pos_offset.x ).data;
+		//next_debug_s32 = ( the_player.the_coll_box.pos.y 
+		//	- the_player.cb_pos_offset.y ).data;
+		
+		//show_debug_str_s32( the_player.on_ground ? "ongn" : "offg" );
 		
 		memfill32( oam_mirror, 0, sizeof(oam_mirror) / sizeof(u32) );
 		

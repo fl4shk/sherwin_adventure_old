@@ -6,6 +6,8 @@
 
 #include "coll_box_class.hpp"
 
+class sprite;
+
 
 // This class is primarily used by the collision detection and response
 // between sprites and blocks, or at least coll_boxes and blocks.
@@ -178,16 +180,16 @@ public:		// functions
 	
 } __attribute__((_align4));
 
-void generate_coll_point_group_16x16( const coll_box& the_coll_box, 
+void generate_coll_point_group_16x16( const sprite& the_sprite, 
 	coll_point_group& the_pt_group ) __attribute__((_iwram_code));
 
-void generate_coll_point_group_16x32( const coll_box& the_coll_box, 
+void generate_coll_point_group_16x32( const sprite& the_sprite, 
 	coll_point_group& the_pt_group ) __attribute__((_iwram_code));
 
-void generate_coll_point_group_32x16( const coll_box& the_coll_box, 
+void generate_coll_point_group_32x16( const sprite& the_sprite, 
 	coll_point_group& the_pt_group ) __attribute__((_iwram_code));
 
-void generate_coll_point_group_32x32( const coll_box& the_coll_box, 
+void generate_coll_point_group_32x32( const sprite& the_sprite, 
 	coll_point_group& the_pt_group ) __attribute__((_iwram_code));
 
 

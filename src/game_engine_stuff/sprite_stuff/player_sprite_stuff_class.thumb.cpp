@@ -46,10 +46,11 @@ void player_sprite_stuff::init( sprite& the_player, bool facing_left  )
 		( get_gfx_category(the_player) );
 	
 	the_player.set_shape_size(oam_entry::ss_16x32);
-	the_player.the_coll_box.size = { 14 << fixed24p8::shift, 
-		30 << fixed24p8::shift };
+	the_player.the_coll_box.size = { 12 << fixed24p8::shift, 
+		29 << fixed24p8::shift };
+	
 	the_player.cb_pos_offset = { 2 << fixed24p8::shift, 
-		2 << fixed24p8::shift };
+		3 << fixed24p8::shift };
 	
 	//use_16x16 = false;
 }

@@ -63,8 +63,8 @@ enum block_type
 	bt_dirt_bottom_middle,
 	bt_dirt_bottom_right,
 	
-	bt_grass_slope_135_degrees,
 	bt_grass_slope_45_degrees,
+	bt_grass_slope_135_degrees,
 	
 	// These two blocks are for decoration
 	bt_grass_in_slope_left,

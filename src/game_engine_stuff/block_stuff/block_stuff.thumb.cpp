@@ -60,17 +60,14 @@ block_base_stuff* block_stuff_array[bt_count] __attribute__((_iwram))
 	new dirt_bottom_middle_block_stuff,
 	new dirt_bottom_right_block_stuff,
 	
-	new grass_slope_135_degrees_block_stuff,
 	new grass_slope_45_degrees_block_stuff,
+	new grass_slope_135_degrees_block_stuff,
 	
 	new grass_in_slope_left_block_stuff,
 	new grass_in_slope_right_block_stuff,
 	
 	
 };
-
-
-
 
 
 void update_block_graphics_in_vram( const unsigned short* the_tiles )

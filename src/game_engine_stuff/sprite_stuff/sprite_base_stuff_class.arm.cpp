@@ -181,7 +181,7 @@ void sprite_base_stuff::block_coll_response_top_16x16( sprite& the_sprite,
 	const block_coll_result& tr_coll_result )
 {
 	the_sprite.in_level_pos.y = make_f24p8( ( tl_coll_result.coord.y + 1 )
-		* 16 );
+		* 16 ) - the_sprite.cb_pos_offset.y;
 	
 	the_sprite.vel.y = {0x00};
 	the_sprite.jump_hold_timer = 0;
@@ -201,12 +201,17 @@ void sprite_base_stuff::non_slope_block_coll_response_bot_16x16
 	const block_coll_result& bm_coll_result, 
 	const block_coll_result& br_coll_result )
 {
-	the_sprite.in_level_pos.y = make_f24p8( bl_coll_result.coord.y * 16 ) 
-		- the_sprite.the_coll_box.size.y;
-		//- make_f24p8(the_sprite.get_shape_size_as_vec2().y);
-	the_sprite.vel.y = {0x00};
-	the_sprite.on_ground = true;
-	the_sprite.jump_hold_timer = 0;
+	if ( the_sprite.vel.y >= (fixed24p8){0} )
+	{
+		the_sprite.in_level_pos.y = make_f24p8( bl_coll_result.coord.y 
+			* 16 ) 
+			//- ( the_sprite.the_coll_box.size.y +
+			//the_sprite.cb_pos_offset.y );
+			- make_f24p8(the_sprite.get_shape_size_as_vec2().y);
+		the_sprite.vel.y = {0x00};
+		the_sprite.on_ground = true;
+		the_sprite.jump_hold_timer = 0;
+	}
 }
 void sprite_base_stuff::slope_block_coll_response_bot_16x16
 	( sprite& the_sprite, coll_point_group& the_pt_group,
@@ -260,36 +265,6 @@ void sprite_base_stuff::slope_block_coll_response_bot_16x32
 	vec2_f24p8& pt_bm = the_pt_group.get_pt_bm_16x32(),
 		& pt_bl = the_pt_group.get_pt_bl_16x32(),
 		& pt_br = the_pt_group.get_pt_br_16x32();
-	
-	if (hitting_tltr)
-	{
-		//if ( the_sprite.vel.x != (fixed24p8){0} )
-		{
-			//the_sprite.in_level_pos.x -= the_sprite.vel.x;
-			//the_sprite.in_level_pos.y += make_f24p8(2);
-			//the_sprite.the_coll_box.pos = the_sprite.in_level_pos 
-			//	+ the_sprite.cb_pos_offset;
-			
-			//generate_coll_point_group_16x32( the_sprite.the_coll_box,
-			//	the_pt_group );
-			
-			//pt_bl.x -= the_sprite.vel.x;
-			//pt_bm.x -= the_sprite.vel.x;
-			//pt_br.x -= the_sprite.vel.x;
-			
-			
-			//pt_bl.y += make_f24p8(1);
-			//pt_bm.y += make_f24p8(1);
-			//pt_br.y += make_f24p8(1);
-			
-			//get_basic_block_coll_results_bot_16x32( the_pt_group,
-			//	bl_coll_result, bm_coll_result, br_coll_result );
-			
-			//the_sprite.in_level_pos.x -= the_sprite.vel.x;
-			//the_sprite.in_level_pos.y += make_f24p8(1);
-		}
-	}
-	
 	
 	// pt_bm, pt_bl, and pt_br converted to the relative coordinate system
 	// of the block, with units of WHOLE pixels, with NO subpixels.
@@ -388,7 +363,9 @@ void sprite_base_stuff::slope_block_coll_response_bot_16x32
 				the_sprite.in_level_pos.y = make_f24p8
 					( ( the_coll_result.coord.y + 1 )
 					* num_pixels_per_block_col - height_mask_value )
-					- the_sprite.the_coll_box.size.y;
+					- make_f24p8( the_sprite.get_shape_size_as_vec2().y );
+					//- ( the_sprite.the_coll_box.size.y 
+					//+ the_sprite.cb_pos_offset );
 				
 				the_sprite.vel.y = {0x00};
 				the_sprite.on_ground = true;
@@ -507,8 +484,7 @@ void sprite_base_stuff::block_collision_stuff_16x16( sprite& the_sprite )
 	// The collision points
 	coll_point_group the_pt_group;
 	
-	generate_coll_point_group_16x16( the_sprite.the_coll_box, 
-		the_pt_group );
+	generate_coll_point_group_16x16( the_sprite, the_pt_group );
 	
 	
 	block_coll_result 
@@ -691,8 +667,7 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 	// The collision points
 	coll_point_group the_pt_group;
 	
-	generate_coll_point_group_16x32( the_sprite.the_coll_box, 
-		the_pt_group );
+	generate_coll_point_group_16x32( the_sprite, the_pt_group );
 	
 	// The block_coll_result's
 	block_coll_result lt_coll_result, lm_coll_result, lb_coll_result, 
@@ -738,6 +713,7 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 	};
 	
 	show_debug_str_s32( the_sprite.on_ground ? "ongn" : "offg" );
+	
 	// When not dealing with slopes, this method is used
 	if ( bm_coll_result.type != bt_grass_slope_135_degrees 
 		&& bm_coll_result.type != bt_grass_slope_45_degrees 
