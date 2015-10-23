@@ -107,7 +107,7 @@ void player_sprite_stuff::update_part_1( sprite& the_player )
 	
 	speed = 0;
 	
-	if ( key_hit_or_held(key_left) )
+	if ( key_hit_or_held(key_left) && !key_hit_or_held(key_right) )
 	{
 		speed = walk_speed;
 		if ( run_toggle )
@@ -118,7 +118,7 @@ void player_sprite_stuff::update_part_1( sprite& the_player )
 		the_player.vel.x = -speed;
 		the_player.the_oam_entry.enable_hflip();
 	}
-	else if ( key_hit_or_held(key_right) )
+	else if ( key_hit_or_held(key_right) && !key_hit_or_held(key_left) )
 	{
 		speed = walk_speed;
 		if ( run_toggle )

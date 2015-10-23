@@ -142,10 +142,10 @@ protected:		// functions
 		__attribute__((_iwram_code));
 	virtual void slope_block_coll_response_bot_16x16
 		( sprite& the_sprite, coll_point_group& the_pt_group,
-		const block_coll_result& bm_coll_result,
-		const block_coll_result& bl_coll_result,
-		const block_coll_result& br_coll_result );
-		__attribute__((_iwram_code))
+		block_coll_result& bl_coll_result,
+		block_coll_result& bm_coll_result,
+		block_coll_result& br_coll_result, bool hitting_tltr=false )
+		__attribute__((_iwram_code));
 	
 	
 	virtual void block_coll_response_left_16x32( sprite& the_sprite, 
@@ -170,10 +170,10 @@ protected:		// functions
 		__attribute__((_iwram_code));
 	virtual void slope_block_coll_response_bot_16x32
 		( sprite& the_sprite, coll_point_group& the_pt_group,
-		const block_coll_result& bm_coll_result,
-		const block_coll_result& bl_coll_result,
-		const block_coll_result& br_coll_result );
-		__attribute__((_iwram_code))
+		block_coll_result& bl_coll_result,
+		block_coll_result& bm_coll_result,
+		block_coll_result& br_coll_result, bool hitting_tltr=false )
+		__attribute__((_iwram_code));
 	
 	
 	virtual void block_collision_stuff_16x16( sprite& the_sprite )
