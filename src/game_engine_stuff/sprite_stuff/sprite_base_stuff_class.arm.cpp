@@ -302,10 +302,26 @@ void sprite_base_stuff::slope_block_coll_response_bot_16x32
 	
 	// Basically, these two pointers are used as aliases for long variable
 	// names.
-	const u32* height_mask_135_degrees
-		= grass_slope_135_degrees_block_stuff::height_mask;
-	const u32* height_mask_45_degrees
-		= grass_slope_45_degrees_block_stuff::height_mask;
+	
+	// 45 degree angle slope
+	const u32* height_mask_p16_p16
+		= grass_slope_p16_p16_block_stuff::height_mask;
+	
+	// 135 degree angle slope
+	const u32* height_mask_n16_p16
+		= grass_slope_n16_p16_block_stuff::height_mask;
+	
+	// Approximately 26.57 degrees angle slope, with two blocks
+	const u32* height_mask_p32_p16_short
+		= grass_slope_p32_p16_short_block_stuff::height_mask;
+	const u32* height_mask_p32_p16_tall
+		= grass_slope_p32_p16_tall_block_stuff::height_mask;
+	
+	// Approximately 153.43 degrees angle slope, with two blocks
+	const u32* height_mask_n32_p16_tall
+		= grass_slope_n32_p16_tall_block_stuff::height_mask;
+	const u32* height_mask_n32_p16_short
+		= grass_slope_n32_p16_short_block_stuff::height_mask;
 	
 	auto find_height_mask_value_normal = [&]
 		( const block_coll_result& the_coll_result, s32& height_mask_value,
@@ -313,18 +329,47 @@ void sprite_base_stuff::slope_block_coll_response_bot_16x32
 		-> void
 	{
 		// Find height_mask_value.
-		if ( the_coll_result.type == bt_grass_slope_45_degrees )
+		
+		// 45 degree angle slope
+		if ( the_coll_result.type == bt_grass_slope_p16_p16 )
 		{
 			show_debug_str_s32("norm");
-			height_mask_value = height_mask_45_degrees
-				[pt_block_rel_trunc.x];
+			height_mask_value = height_mask_p16_p16[pt_block_rel_trunc.x];
 		}
-		else if ( the_coll_result.type == bt_grass_slope_135_degrees )
+		// 135 degree angle slope
+		else if ( the_coll_result.type == bt_grass_slope_n16_p16 )
 		{
 			show_debug_str_s32("norm");
-			height_mask_value = height_mask_135_degrees
+			height_mask_value = height_mask_n16_p16[pt_block_rel_trunc.x];
+		}
+		// Approximately 26.57 degrees angle slope, with two blocks
+		else if ( the_coll_result.type == bt_grass_slope_p32_p16_short )
+		{
+			show_debug_str_s32("norm");
+			height_mask_value = height_mask_p32_p16_short
 				[pt_block_rel_trunc.x];
 		}
+		else if ( the_coll_result.type == bt_grass_slope_p32_p16_tall )
+		{
+			show_debug_str_s32("norm");
+			height_mask_value = height_mask_p32_p16_tall
+				[pt_block_rel_trunc.x];
+		}
+		
+		// Approximately 153.43 degrees angle slope, with two blocks
+		else if ( the_coll_result.type == bt_grass_slope_n32_p16_tall )
+		{
+			show_debug_str_s32("norm");
+			height_mask_value = height_mask_n32_p16_tall
+				[pt_block_rel_trunc.x];
+		}
+		else if ( the_coll_result.type == bt_grass_slope_n32_p16_short )
+		{
+			show_debug_str_s32("norm");
+			height_mask_value = height_mask_n32_p16_short
+				[pt_block_rel_trunc.x];
+		}
+		
 		// If the point doesn't intersect a slope block, then check whether
 		// the block at the block coord ABOVE the point is a slope
 		else
@@ -335,16 +380,45 @@ void sprite_base_stuff::slope_block_coll_response_bot_16x32
 				pt_above_pt_block_coord_y ) );
 			//next_debug_s32 = above_block_type;
 			
-			if ( above_block_type == bt_grass_slope_45_degrees )
+			// 45 degree angle slope
+			if ( above_block_type == bt_grass_slope_p16_p16 )
 			{
 				show_debug_str_s32("abov");
-				height_mask_value = height_mask_45_degrees
+				height_mask_value = height_mask_p16_p16
 					[pt_block_rel_trunc.x] + num_pixels_per_block_col;
 			}
-			else if ( above_block_type == bt_grass_slope_135_degrees )
+			// 135 degree angle slope
+			else if ( above_block_type == bt_grass_slope_n16_p16 )
 			{
 				show_debug_str_s32("abov");
-				height_mask_value = height_mask_135_degrees
+				height_mask_value = height_mask_n16_p16
+					[pt_block_rel_trunc.x] + num_pixels_per_block_col;
+			}
+			// Approximately 26.57 degrees angle slope, with two blocks
+			else if ( above_block_type == bt_grass_slope_p32_p16_short )
+			{
+				show_debug_str_s32("abov");
+				height_mask_value = height_mask_p32_p16_short
+					[pt_block_rel_trunc.x] + num_pixels_per_block_col;
+			}
+			else if ( above_block_type == bt_grass_slope_p32_p16_tall )
+			{
+				show_debug_str_s32("abov");
+				height_mask_value = height_mask_p32_p16_tall
+					[pt_block_rel_trunc.x] + num_pixels_per_block_col;
+			}
+			
+			// Approximately 153.43 degrees angle slope, with two blocks
+			else if ( above_block_type == bt_grass_slope_n32_p16_tall )
+			{
+				show_debug_str_s32("abov");
+				height_mask_value = height_mask_n32_p16_tall
+					[pt_block_rel_trunc.x] + num_pixels_per_block_col;
+			}
+			else if ( above_block_type == bt_grass_slope_n32_p16_short )
+			{
+				show_debug_str_s32("abov");
+				height_mask_value = height_mask_n32_p16_short
 					[pt_block_rel_trunc.x] + num_pixels_per_block_col;
 			}
 			else
@@ -445,8 +519,9 @@ void sprite_base_stuff::slope_block_coll_response_bot_16x32
 	// Find the highest number height_mask_value
 	if ( pt_bm_height_mask_value >= pt_bl_height_mask_value
 		&& pt_bm_height_mask_value >= pt_br_height_mask_value 
-		&& ( bm_coll_result.type == bt_grass_slope_135_degrees 
-		|| bm_coll_result.type == bt_grass_slope_45_degrees ) )
+		//&& ( bm_coll_result.type == bt_grass_slope_n16_p16 
+		//|| bm_coll_result.type == bt_grass_slope_p16_p16 ) )
+		&& bt_is_slope(bm_coll_result.type) )
 	{
 		// Using pt_bm_height_mask_value
 		show_debug_str_s32("bm  ");
@@ -554,12 +629,12 @@ void sprite_base_stuff::block_collision_stuff_16x16( sprite& the_sprite )
 		show_debug_str_s32("tltr");
 		
 		// When not dealing with slopes, this method is used
-		//if ( bm_coll_result.type != bt_grass_slope_135_degrees 
-		//	&& bm_coll_result.type != bt_grass_slope_45_degrees 
-		//	&& bl_coll_result.type != bt_grass_slope_135_degrees 
-		//	&& br_coll_result.type != bt_grass_slope_45_degrees 
-		//	&& lb_coll_result.type != bt_grass_slope_135_degrees 
-		//	&& rb_coll_result.type != bt_grass_slope_45_degrees )
+		//if ( bm_coll_result.type != bt_grass_slope_n16_p16 
+		//	&& bm_coll_result.type != bt_grass_slope_p16_p16 
+		//	&& bl_coll_result.type != bt_grass_slope_n16_p16 
+		//	&& br_coll_result.type != bt_grass_slope_p16_p16 
+		//	&& lb_coll_result.type != bt_grass_slope_n16_p16 
+		//	&& rb_coll_result.type != bt_grass_slope_p16_p16 )
 		{
 			show_debug_str_s32("nslp");
 			
@@ -620,12 +695,12 @@ void sprite_base_stuff::block_collision_stuff_16x16( sprite& the_sprite )
 		show_debug_str_s32("blbr");
 		
 		// When not dealing with slopes, this method is used
-		//if ( bm_coll_result.type != bt_grass_slope_135_degrees 
-		//	&& bm_coll_result.type != bt_grass_slope_45_degrees 
-		//	&& bl_coll_result.type != bt_grass_slope_135_degrees 
-		//	&& br_coll_result.type != bt_grass_slope_45_degrees 
-		//	&& lb_coll_result.type != bt_grass_slope_135_degrees 
-		//	&& rb_coll_result.type != bt_grass_slope_45_degrees )
+		//if ( bm_coll_result.type != bt_grass_slope_n16_p16 
+		//	&& bm_coll_result.type != bt_grass_slope_p16_p16 
+		//	&& bl_coll_result.type != bt_grass_slope_n16_p16 
+		//	&& br_coll_result.type != bt_grass_slope_p16_p16 
+		//	&& lb_coll_result.type != bt_grass_slope_n16_p16 
+		//	&& rb_coll_result.type != bt_grass_slope_p16_p16 )
 		{
 			show_debug_str_s32("nslp");
 			
@@ -735,12 +810,17 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 	show_debug_str_s32( the_sprite.on_ground ? "ongn" : "offg" );
 	
 	// When not dealing with slopes, this method is used
-	if ( bm_coll_result.type != bt_grass_slope_135_degrees 
-		&& bm_coll_result.type != bt_grass_slope_45_degrees 
-		&& bl_coll_result.type != bt_grass_slope_135_degrees 
-		&& br_coll_result.type != bt_grass_slope_45_degrees 
-		&& lb_coll_result.type != bt_grass_slope_135_degrees 
-		&& rb_coll_result.type != bt_grass_slope_45_degrees )
+	//if ( bm_coll_result.type != bt_grass_slope_n16_p16 
+	//	&& bm_coll_result.type != bt_grass_slope_p16_p16 
+	//	&& bl_coll_result.type != bt_grass_slope_n16_p16 
+	//	&& br_coll_result.type != bt_grass_slope_p16_p16 
+	//	&& lb_coll_result.type != bt_grass_slope_n16_p16 
+	//	&& rb_coll_result.type != bt_grass_slope_p16_p16 )
+	if ( !bt_is_left_slope(bl_coll_result.type)
+		&& !bt_is_slope(bm_coll_result.type)
+		&& !bt_is_right_slope(br_coll_result.type)
+		&& !bt_is_left_slope(lb_coll_result.type)
+		&& !bt_is_right_slope(rb_coll_result.type) )
 	{
 		show_debug_str_s32("nslp");
 		
@@ -862,21 +942,17 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 			// Don't let the_sprite move through walls
 			if ( lt_coll_result.type != bt_air 
 				|| ( lm_coll_result.type != bt_air 
-				&& lm_coll_result.type != bt_grass_slope_45_degrees
-				&& lm_coll_result.type != bt_grass_slope_135_degrees )
+				&& !bt_is_slope(lm_coll_result.type) )
 				|| ( lb_coll_result.type != bt_air 
-				&& lb_coll_result.type != bt_grass_slope_45_degrees
-				&& lb_coll_result.type != bt_grass_slope_135_degrees ) )
+				&& !bt_is_slope(lb_coll_result.type) ) )
 			{
 				any_left_response();
 			}
 			if ( rt_coll_result.type != bt_air 
 				|| ( rm_coll_result.type != bt_air 
-				&& rm_coll_result.type != bt_grass_slope_45_degrees
-				&& rm_coll_result.type != bt_grass_slope_135_degrees )
+				&& !bt_is_slope(rm_coll_result.type) )
 				|| ( rb_coll_result.type != bt_air 
-				&& rb_coll_result.type != bt_grass_slope_45_degrees
-				&& rb_coll_result.type != bt_grass_slope_135_degrees ) )
+				&& !bt_is_slope(rb_coll_result.type) ) )
 			{
 				any_right_response();
 			}

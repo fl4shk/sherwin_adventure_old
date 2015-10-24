@@ -63,8 +63,20 @@ enum block_type
 	bt_dirt_bottom_middle,
 	bt_dirt_bottom_right,
 	
-	bt_grass_slope_45_degrees,
-	bt_grass_slope_135_degrees,
+	
+	// 45 degree angle slope
+	bt_grass_slope_p16_p16,
+	
+	// 135 degree angle slope
+	bt_grass_slope_n16_p16,
+	
+	// Approximately 26.57 degrees angle slope, with two blocks
+	bt_grass_slope_p32_p16_short,
+	bt_grass_slope_p32_p16_tall,
+	
+	// Approximately 153.43 degrees angle slope, with two blocks
+	bt_grass_slope_n32_p16_tall,
+	bt_grass_slope_n32_p16_short,
 	
 	// These two blocks are for decoration
 	bt_grass_in_slope_left,
@@ -170,6 +182,24 @@ void update_block_graphics_in_vram( const unsigned short* the_tiles )
 	__attribute__((_iwram_code));
 
 
+inline bool bt_is_slope( block_type the_block_type )
+{
+	return ( the_block_type >= bt_grass_slope_p16_p16 
+		&& the_block_type <= bt_grass_slope_n32_p16_short );
+}
+
+inline bool bt_is_left_slope( block_type the_block_type )
+{
+	return ( the_block_type == bt_grass_slope_n16_p16 
+		|| the_block_type == bt_grass_slope_n32_p16_tall
+		|| the_block_type == bt_grass_slope_n32_p16_short );
+}
+inline bool bt_is_right_slope( block_type the_block_type )
+{
+	return ( the_block_type == bt_grass_slope_p16_p16 
+		|| the_block_type == bt_grass_slope_p32_p16_short 
+		|| the_block_type == bt_grass_slope_p32_p16_tall );
+}
 
 
 

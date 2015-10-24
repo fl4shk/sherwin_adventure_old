@@ -60,9 +60,21 @@ block_base_stuff* block_stuff_array[bt_count] __attribute__((_iwram))
 	new dirt_bottom_middle_block_stuff,
 	new dirt_bottom_right_block_stuff,
 	
-	new grass_slope_45_degrees_block_stuff,
-	new grass_slope_135_degrees_block_stuff,
+	// 45 degree angle slope
+	new grass_slope_p16_p16_block_stuff,
 	
+	// 135 degree angle slope
+	new grass_slope_n16_p16_block_stuff,
+	
+	// Approximately 26.57 degrees angle slope, with two blocks
+	new grass_slope_p32_p16_short_block_stuff,
+	new grass_slope_p32_p16_tall_block_stuff,
+	
+	// Approximately 153.43 degrees angle slope, with two blocks
+	new grass_slope_n32_p16_tall_block_stuff,
+	new grass_slope_n32_p16_short_block_stuff,
+	
+	// These two blocks are for decoration
 	new grass_in_slope_left_block_stuff,
 	new grass_in_slope_right_block_stuff,
 	
