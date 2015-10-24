@@ -863,14 +863,20 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 			if ( lt_coll_result.type != bt_air 
 				|| ( lm_coll_result.type != bt_air 
 				&& lm_coll_result.type != bt_grass_slope_45_degrees
-				&& lm_coll_result.type != bt_grass_slope_135_degrees ) )
+				&& lm_coll_result.type != bt_grass_slope_135_degrees )
+				|| ( lb_coll_result.type != bt_air 
+				&& lb_coll_result.type != bt_grass_slope_45_degrees
+				&& lb_coll_result.type != bt_grass_slope_135_degrees ) )
 			{
 				any_left_response();
 			}
 			if ( rt_coll_result.type != bt_air 
 				|| ( rm_coll_result.type != bt_air 
 				&& rm_coll_result.type != bt_grass_slope_45_degrees
-				&& rm_coll_result.type != bt_grass_slope_135_degrees ) )
+				&& rm_coll_result.type != bt_grass_slope_135_degrees )
+				|| ( rb_coll_result.type != bt_air 
+				&& rb_coll_result.type != bt_grass_slope_45_degrees
+				&& rb_coll_result.type != bt_grass_slope_135_degrees ) )
 			{
 				any_right_response();
 			}
