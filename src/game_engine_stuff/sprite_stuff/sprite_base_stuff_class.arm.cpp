@@ -313,40 +313,53 @@ void sprite_base_stuff::slope_block_coll_response_bot_16x32
 		-> void
 	{
 		// Find height_mask_value.
-		if ( the_coll_result.type == bt_grass_slope_135_degrees )
+		if ( the_coll_result.type == bt_grass_slope_45_degrees )
 		{
-			height_mask_value = height_mask_135_degrees
+			show_debug_str_s32("norm");
+			show_debug_str_s32("45de");
+			height_mask_value = height_mask_45_degrees
 				[pt_block_rel_trunc.x];
 		}
-		else if ( the_coll_result.type == bt_grass_slope_45_degrees )
+		else if ( the_coll_result.type == bt_grass_slope_135_degrees )
 		{
-			height_mask_value = height_mask_45_degrees
+			show_debug_str_s32("norm");
+			show_debug_str_s32("135d");
+			height_mask_value = height_mask_135_degrees
 				[pt_block_rel_trunc.x];
 		}
 		// If the point doesn't intersect a slope block, then check whether
 		// the block at the block coord ABOVE the point is a slope
 		else
 		{
+			show_debug_str_s32("abov");
 			block_type above_block_type 
 				= active_level::get_block_type_at_coord
 				( vec2_s32( the_coll_result.coord.x,
 				pt_above_pt_block_coord_y ) );
+			//next_debug_s32 = above_block_type;
 			
-			if ( above_block_type == bt_grass_slope_135_degrees )
+			if ( above_block_type == bt_grass_slope_45_degrees )
 			{
+				show_debug_str_s32("45de");
+				height_mask_value = height_mask_45_degrees
+					[pt_block_rel_trunc.x] + num_pixels_per_block_col;
+			}
+			else if ( above_block_type == bt_grass_slope_135_degrees )
+			{
+				show_debug_str_s32("135d");
 				height_mask_value = height_mask_135_degrees
 					[pt_block_rel_trunc.x] + num_pixels_per_block_col;
 			}
-			else if ( above_block_type == bt_grass_slope_45_degrees )
+			else
 			{
-				height_mask_value = height_mask_45_degrees
-					[pt_block_rel_trunc.x] + num_pixels_per_block_col;
+				//show_debug_str_s32("welp");
+				//height_mask_value = 0;
 			}
 		}
 	};
 	
-	auto respond_to_collision = [&]
-		( const block_coll_result& the_coll_result, 
+	auto respond_to_collision = [&]( const coll_point_group& the_pt_group, 
+		const block_coll_result& the_coll_result, 
 		const s32 height_mask_value, const vec2_s32& pt_block_rel_trunc )
 	{
 		//next_debug_s32 = num_pixels_per_block_col - pt_block_rel_trunc.y;
@@ -391,6 +404,16 @@ void sprite_base_stuff::slope_block_coll_response_bot_16x32
 			//the_sprite.jump_hold_timer = 0;
 			
 		}
+		else if ( the_sprite.vel.y <= (fixed24p8){0} )
+		{
+			show_debug_str_s32("hmmm");
+			the_sprite.on_ground = false;
+		}
+		else
+		{
+			show_debug_str_s32("hmm2");
+			the_sprite.on_ground = true;
+		}
 		
 		show_debug_str_s32("dbst");
 		
@@ -416,38 +439,38 @@ void sprite_base_stuff::slope_block_coll_response_bot_16x32
 	find_height_mask_value_normal( br_coll_result, pt_br_height_mask_value,
 		pt_br_block_rel_trunc, pt_above_pt_br_block_coord_y );
 	
-	//show_debug_str_s32("hstr");
-	//next_debug_s32 = pt_bm_height_mask_value;
-	//next_debug_s32 = pt_bl_height_mask_value;
-	//next_debug_s32 = pt_br_height_mask_value;
-	//show_debug_str_s32("hend");
+	show_debug_str_s32("hstr");
+	next_debug_s32 = pt_bm_height_mask_value;
+	next_debug_s32 = pt_bl_height_mask_value;
+	next_debug_s32 = pt_br_height_mask_value;
+	show_debug_str_s32("hend");
 	
 	// Find the highest number height_mask_value
 	if ( pt_bm_height_mask_value >= pt_bl_height_mask_value
-		&& pt_bm_height_mask_value >= pt_br_height_mask_value )
-		//&& ( bm_coll_result.type == bt_grass_slope_135_degrees 
-		//|| bm_coll_result.type == bt_grass_slope_45_degrees ) )
+		&& pt_bm_height_mask_value >= pt_br_height_mask_value 
+		&& ( bm_coll_result.type == bt_grass_slope_135_degrees 
+		|| bm_coll_result.type == bt_grass_slope_45_degrees ) )
 	{
 		// Using pt_bm_height_mask_value
 		show_debug_str_s32("bm  ");
-		respond_to_collision( bm_coll_result, pt_bm_height_mask_value,
-			pt_bm_block_rel_trunc );
+		respond_to_collision( the_pt_group, bm_coll_result, 
+			pt_bm_height_mask_value, pt_bm_block_rel_trunc );
 	}
 	else if ( pt_bl_height_mask_value > pt_bm_height_mask_value
 		&& pt_bl_height_mask_value >= pt_br_height_mask_value )
 	{
 		// Using pt_bl_height_mask_value
 		show_debug_str_s32("bl  ");
-		respond_to_collision( bl_coll_result, pt_bl_height_mask_value,
-			pt_bl_block_rel_trunc );
+		respond_to_collision( the_pt_group, bl_coll_result, 
+			pt_bl_height_mask_value, pt_bl_block_rel_trunc );
 	}
 	else if ( pt_br_height_mask_value > pt_bm_height_mask_value
 		&& pt_br_height_mask_value > pt_bl_height_mask_value )
 	{
 		// Using pt_br_height_mask_value
 		show_debug_str_s32("br  ");
-		respond_to_collision( br_coll_result, pt_br_height_mask_value,
-			pt_br_block_rel_trunc );
+		respond_to_collision( the_pt_group, br_coll_result, 
+			pt_br_height_mask_value, pt_br_block_rel_trunc );
 	}
 	else
 	{
@@ -729,8 +752,6 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 		{
 			show_debug_str_s32("tltr");
 			
-			any_top_response();
-			
 			if ( lt_coll_result.type != bt_air )
 			{
 				any_left_response();
@@ -740,6 +761,9 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 			{
 				any_right_response();
 			}
+			
+			any_top_response();
+			
 			
 		}
 		else if ( bl_coll_result.type != bt_air
