@@ -63,8 +63,12 @@ void generate_coll_point_group_16x16( const sprite& the_sprite,
 	pt_tl.y = pt_tm.y = pt_tr.y = the_coll_box.top();
 	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot();
 	
-	pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() 
-		+ the_sprite.cb_pos_offset.y;
+	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() 
+	//	+ the_sprite.cb_pos_offset.y;
+	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() + make_f24p8(2);
+	
+	pt_bl.y = pt_bm.y = pt_br.y = the_sprite.in_level_pos.y 
+		+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
 	
 }
 
@@ -112,10 +116,14 @@ void generate_coll_point_group_16x32( const sprite& the_sprite,
 	
 	pt_tl.y = pt_tm.y = pt_tr.y = the_coll_box.top();
 	
-	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() + make_f24p8(2);
+	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot();
 	
-	pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() 
-		+ the_sprite.cb_pos_offset.y;
+	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() 
+	//	+ the_sprite.cb_pos_offset.y;
+	
+	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() + make_f24p8(2);
+	pt_bl.y = pt_bm.y = pt_br.y = the_sprite.in_level_pos.y 
+		+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
 	
 }
 
@@ -164,9 +172,12 @@ void generate_coll_point_group_32x16( const sprite& the_sprite,
 	pt_tl.y = pt_tm.y = pt_tr.y = the_coll_box.top();
 	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot();
 	
-	pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() 
-		+ the_sprite.cb_pos_offset.y;
+	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() 
+	//	+ the_sprite.cb_pos_offset.y;
 	
+	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() + make_f24p8(2);
+	pt_bl.y = pt_bm.y = pt_br.y = the_sprite.in_level_pos.y 
+		+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
 }
 
 

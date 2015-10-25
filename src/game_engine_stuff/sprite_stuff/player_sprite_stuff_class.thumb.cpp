@@ -48,9 +48,13 @@ void player_sprite_stuff::init( sprite& the_player, bool facing_left  )
 	the_player.set_shape_size(oam_entry::ss_16x32);
 	the_player.the_coll_box.size = { 12 << fixed24p8::shift, 
 		29 << fixed24p8::shift };
+	//the_player.the_coll_box.size = { 12 << fixed24p8::shift, 
+	//	30 << fixed24p8::shift };
 	
 	the_player.cb_pos_offset = { 2 << fixed24p8::shift, 
 		3 << fixed24p8::shift };
+	//the_player.cb_pos_offset = { 2 << fixed24p8::shift, 
+	//	2 << fixed24p8::shift };
 	
 	//use_16x16 = false;
 }
@@ -194,7 +198,6 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 const u32 player_sprite_stuff::get_curr_relative_tile_slot 
 	( sprite& the_player )
 {
-	
 	s32& walk_frame_timer = the_player.misc_data_s[sdi_walk_frame_timer];
 	u32& active_walk_frame_slot = the_player.misc_data_u
 		[udi_active_walk_frame_slot];
