@@ -140,7 +140,7 @@ protected:		// functions
 		const block_coll_result& bm_coll_result, 
 		const block_coll_result& br_coll_result )
 		__attribute__((_iwram_code));
-	virtual void slope_block_coll_response_bot_16x16
+	virtual block_type slope_block_coll_response_bot_16x16
 		( sprite& the_sprite, coll_point_group& the_pt_group,
 		block_coll_result& bl_coll_result,
 		block_coll_result& bm_coll_result,
@@ -168,7 +168,7 @@ protected:		// functions
 		const block_coll_result& bm_coll_result, 
 		const block_coll_result& br_coll_result )
 		__attribute__((_iwram_code));
-	virtual void slope_block_coll_response_bot_16x32
+	virtual block_type slope_block_coll_response_bot_16x32
 		( sprite& the_sprite, coll_point_group& the_pt_group,
 		block_coll_result& bl_coll_result,
 		block_coll_result& bm_coll_result,

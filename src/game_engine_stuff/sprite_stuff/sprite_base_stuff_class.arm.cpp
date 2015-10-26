@@ -213,12 +213,13 @@ void sprite_base_stuff::non_slope_block_coll_response_bot_16x16
 		the_sprite.jump_hold_timer = 0;
 	}
 }
-void sprite_base_stuff::slope_block_coll_response_bot_16x16
+block_type sprite_base_stuff::slope_block_coll_response_bot_16x16
 	( sprite& the_sprite, coll_point_group& the_pt_group,
 	block_coll_result& bm_coll_result,
 	block_coll_result& bl_coll_result,
 	block_coll_result& br_coll_result, bool hitting_tltr )
 {
+	return bt_air;
 }
 
 
@@ -265,7 +266,7 @@ void sprite_base_stuff::non_slope_block_coll_response_bot_16x32
 	non_slope_block_coll_response_bot_16x16( the_sprite, bl_coll_result, 
 		bm_coll_result, br_coll_result );
 }
-void sprite_base_stuff::slope_block_coll_response_bot_16x32
+block_type sprite_base_stuff::slope_block_coll_response_bot_16x32
 	( sprite& the_sprite, coll_point_group& the_pt_group, 
 	block_coll_result& bl_coll_result, block_coll_result& bm_coll_result,
 	block_coll_result& br_coll_result, bool hitting_tltr )
@@ -535,6 +536,8 @@ void sprite_base_stuff::slope_block_coll_response_bot_16x32
 		show_debug_str_s32("bm  ");
 		respond_to_collision( the_pt_group, bm_coll_result, 
 			pt_bm_height_mask_value, pt_bm_block_rel_trunc );
+		
+		return bm_coll_result.type;
 	}
 	else if ( pt_bl_height_mask_value > pt_bm_height_mask_value
 		&& pt_bl_height_mask_value >= pt_br_height_mask_value )
@@ -543,6 +546,8 @@ void sprite_base_stuff::slope_block_coll_response_bot_16x32
 		show_debug_str_s32("bl  ");
 		respond_to_collision( the_pt_group, bl_coll_result, 
 			pt_bl_height_mask_value, pt_bl_block_rel_trunc );
+		
+		return bl_coll_result.type;
 	}
 	else if ( pt_br_height_mask_value > pt_bm_height_mask_value
 		&& pt_br_height_mask_value > pt_bl_height_mask_value )
@@ -551,6 +556,8 @@ void sprite_base_stuff::slope_block_coll_response_bot_16x32
 		show_debug_str_s32("br  ");
 		respond_to_collision( the_pt_group, br_coll_result, 
 			pt_br_height_mask_value, pt_br_block_rel_trunc );
+		
+		return br_coll_result.type;
 	}
 	else
 	{
@@ -563,6 +570,7 @@ void sprite_base_stuff::slope_block_coll_response_bot_16x32
 		//	the_sprite.vel.y = {0x00};
 		//	the_sprite.on_ground = true;
 		//}
+		return bt_air;
 	}
 	
 	
@@ -949,20 +957,58 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 			show_debug_str_s32("blbr");
 			show_debug_str_s32("    ");
 			
-			slope_block_coll_response_bot_16x32( the_sprite, the_pt_group,
-				bl_coll_result, bm_coll_result, br_coll_result );
+			block_type the_slope_block_type 
+				= slope_block_coll_response_bot_16x32( the_sprite, 
+				the_pt_group, bl_coll_result, bm_coll_result, 
+				br_coll_result );
+			
+			show_debug_str_s32("bt  ");
+			next_debug_s32 = the_slope_block_type;
 			
 			// Don't let the_sprite move through walls
-			if ( bt_is_neither_air_nor_slope(lt_coll_result.type) 
-				|| bt_is_neither_air_nor_slope(lm_coll_result.type) )
+			//if ( bt_is_neither_air_nor_slope(lt_coll_result.type) 
+			//	|| bt_is_neither_air_nor_slope(lm_coll_result.type)
+			//	|| bt_is_neither_air_nor_slope(lb_coll_result.type) )
+			//{
+			//	show_debug_str_s32("left");
+			//	show_debug_str_s32("2b  ");
+			//	any_left_response();
+			//}
+			//if ( bt_is_neither_air_nor_slope(rt_coll_result.type)
+			//	|| bt_is_neither_air_nor_slope(rm_coll_result.type) 
+			//	|| bt_is_neither_air_nor_slope(rb_coll_result.type) )
+			//{
+			//	show_debug_str_s32("righ");
+			//	show_debug_str_s32("2b  ");
+			//	any_right_response();
+			//}
+			
+			if ( bt_is_neither_air_nor_slope(lt_coll_result.type)
+				|| bt_is_neither_air_nor_slope(lm_coll_result.type)
+				|| ( bt_is_neither_air_nor_slope(lb_coll_result.type) 
+				&& the_slope_block_type != bt_grass_slope_n16_p16) )
 			{
+				if ( bt_is_neither_air_nor_slope(lb_coll_result.type) 
+					&& the_slope_block_type != bt_grass_slope_n16_p16 )
+				{
+					show_debug_str_s32("lb  ");
+				}
+				
 				show_debug_str_s32("left");
 				show_debug_str_s32("2b  ");
 				any_left_response();
 			}
 			if ( bt_is_neither_air_nor_slope(rt_coll_result.type)
-				|| bt_is_neither_air_nor_slope(rm_coll_result.type) )
+				|| bt_is_neither_air_nor_slope(rm_coll_result.type)
+				|| ( bt_is_neither_air_nor_slope(rb_coll_result.type) 
+				&& the_slope_block_type != bt_grass_slope_p16_p16 ) )
 			{
+				if ( bt_is_neither_air_nor_slope(rb_coll_result.type) 
+					&& the_slope_block_type != bt_grass_slope_p16_p16 )
+				{
+					show_debug_str_s32("rb  ");
+				}
+				
 				show_debug_str_s32("righ");
 				show_debug_str_s32("2b  ");
 				any_right_response();

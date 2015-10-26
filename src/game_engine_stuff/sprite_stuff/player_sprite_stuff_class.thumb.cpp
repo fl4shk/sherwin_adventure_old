@@ -22,7 +22,7 @@ const player_sprite_stuff::frame
 	frm_stand,
 	
 	// Walking/running
-	frm_stand, frm_walk_0, frm_walk_1, frm_walk_0 
+	frm_stand, frm_walk_0, frm_walk_1, frm_walk_0
 };
 
 
@@ -224,8 +224,10 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 		if ( speed == (fixed24p8){0} )
 		{
 			walk_frame_timer = 0;
-			active_walk_frame_slot = frm_slot_walk_0;
-			return frame_slot_to_frame_arr[active_walk_frame_slot] 
+			active_walk_frame_slot = frm_slot_walk_1;
+			//return frame_slot_to_frame_arr[active_walk_frame_slot] 
+			//	* num_active_gfx_tiles;
+			return frame_slot_to_frame_arr[frm_slot_walk_0]
 				* num_active_gfx_tiles;
 		}
 		

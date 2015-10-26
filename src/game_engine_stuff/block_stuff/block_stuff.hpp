@@ -207,6 +207,18 @@ inline bool bt_is_neither_air_nor_slope( block_type the_block_type )
 	return ( the_block_type != bt_air && !bt_is_slope(the_block_type) );
 }
 
+inline bool bt_is_neither_air_nor_left_slope( block_type the_block_type )
+{
+	return ( the_block_type != bt_air 
+		&& !bt_is_left_slope(the_block_type) );
+}
+
+inline bool bt_is_neither_air_nor_right_slope( block_type the_block_type )
+{
+	return ( the_block_type != bt_air 
+		&& !bt_is_right_slope(the_block_type) );
+}
+
 
 class block_coll_result
 {
