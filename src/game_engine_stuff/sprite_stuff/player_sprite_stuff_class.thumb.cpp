@@ -56,7 +56,17 @@ void player_sprite_stuff::init( sprite& the_player, bool facing_left  )
 	//the_player.cb_pos_offset = { 2 << fixed24p8::shift, 
 	//	2 << fixed24p8::shift };
 	
-	//use_16x16 = false;
+	
+	// This is for slope testing stuffs
+	//the_player.set_shape_size(oam_entry::ss_16x16);
+	////the_player.the_coll_box.size = { 12 << fixed24p8::shift,
+	////	13 << fixed24p8::shift };
+	////the_player.cb_pos_offset = { 2 << fixed24p8::shift,
+	////	3 << fixed24p8::shift };
+	//the_player.the_coll_box.size = { 16 << fixed24p8::shift,
+	//	16 << fixed24p8::shift };
+	//the_player.cb_pos_offset = { 0 << fixed24p8::shift,
+	//	0 << fixed24p8::shift };
 }
 
 void player_sprite_stuff::init( sprite& the_player, 

@@ -354,6 +354,7 @@ bt_grass_top_left	game_engine_stuff/block_stuff/block_stuff.hpp	/^	bt_grass_top_
 bt_grass_top_middle	game_engine_stuff/block_stuff/block_stuff.hpp	/^	bt_grass_top_middle,$/;"	kind:e	enum:block_type
 bt_grass_top_right	game_engine_stuff/block_stuff/block_stuff.hpp	/^	bt_grass_top_right,$/;"	kind:e	enum:block_type
 bt_is_left_slope	game_engine_stuff/block_stuff/block_stuff.hpp	/^inline bool bt_is_left_slope( block_type the_block_type )$/;"	kind:f	signature:( block_type the_block_type )
+bt_is_neither_air_nor_slope	game_engine_stuff/block_stuff/block_stuff.hpp	/^inline bool bt_is_neither_air_nor_slope( block_type the_block_type )$/;"	kind:f	signature:( block_type the_block_type )
 bt_is_right_slope	game_engine_stuff/block_stuff/block_stuff.hpp	/^inline bool bt_is_right_slope( block_type the_block_type )$/;"	kind:f	signature:( block_type the_block_type )
 bt_is_slope	game_engine_stuff/block_stuff/block_stuff.hpp	/^inline bool bt_is_slope( block_type the_block_type )$/;"	kind:f	signature:( block_type the_block_type )
 bt_log	game_engine_stuff/block_stuff/block_stuff.hpp	/^	bt_log,$/;"	kind:e	enum:block_type
@@ -2360,7 +2361,7 @@ sublevel_pointer::sublevel_pointer	game_engine_stuff/level_stuff/sublevel_class.
 swi_call	gba_specific_stuff/bios_function_wrappers.hpp	113;"	kind:d
 swi_call	gba_specific_stuff/bios_function_wrappers.hpp	115;"	kind:d
 test_int_global	main.thumb.cpp	/^int test_int_global;$/;"	kind:v
-test_level	test_level/test_level.thumb.cpp	/^const sublevel< 1994, 64, 32, 7, 5 > test_level$/;"	kind:v
+test_level	test_level/test_level.thumb.cpp	/^const sublevel< 1993, 64, 32, 7, 5 > test_level$/;"	kind:v
 test_level_hpp	test_level/test_level.hpp	2;"	kind:d
 test_sram_arr	main.thumb.cpp	/^u8 test_sram_arr[test_sram_arr_size] __attribute__((_sram));$/;"	kind:v
 test_sram_arr_size	main.thumb.cpp	/^static constexpr u32 test_sram_arr_size = debug_arr_u32_size * sizeof(u32);$/;"	kind:v	file:
