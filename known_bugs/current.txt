@@ -1,6 +1,10 @@
-sprite_manager::initial_sprite_spawning_from_level_data_old() is bugged.  I
-am not quite sure what the problem is, but I think it should be rewritten
-so that sprite_manager::init_the_player() is called from WITHIN
-sprite_manager::initial_sprite_spawning_from_level_data_old().  The "outer"
-function will find where in the level data the player's level data is
-stored.
+Some slope stuff
+
+
+
+//sprite_manager::initial_sprite_spawning_from_level_data_old() is bugged.
+//I am not quite sure what the problem is, but I think it should be
+//rewritten so that sprite_manager::init_the_player() is called from WITHIN
+//sprite_manager::initial_sprite_spawning_from_level_data_old().  The
+//"outer" function will find where in the level data the player's level
+//data is stored.
