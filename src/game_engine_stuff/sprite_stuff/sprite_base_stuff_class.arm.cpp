@@ -492,7 +492,8 @@ block_type sprite_base_stuff::slope_block_coll_response_bot_16x32
 		else
 		{
 			show_debug_str_s32("hmm2");
-			the_sprite.on_ground = true;
+			//the_sprite.on_ground = true;
+			the_sprite.on_ground = false;
 		}
 		
 		show_debug_str_s32("dbst");
@@ -825,7 +826,7 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 	
 	show_debug_str_s32( the_sprite.on_ground ? "ongn" : "offg" );
 	
-	// When not dealing with slopes, this method is used
+	// When not dealing with slopes, this method is used.
 	if ( !bt_is_left_slope(bl_coll_result.type)
 		&& !bt_is_slope(bm_coll_result.type)
 		&& !bt_is_right_slope(br_coll_result.type)
@@ -905,6 +906,7 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 		}
 		
 	}
+	// When dealing with slopes, this method is used.
 	else
 	{
 		show_debug_str_s32("slop");
@@ -925,6 +927,7 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 				the_sprite.jump_hold_timer = 0;
 			}
 			
+			// Don't let the_sprite move through walls
 			if ( lt_coll_result.type != bt_air 
 				|| lm_coll_result.type != bt_air
 				|| lb_coll_result.type != bt_air )
@@ -983,6 +986,7 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 			//	any_right_response();
 			//}
 			
+			// Don't let the_sprite move through walls
 			if ( bt_is_neither_air_nor_slope(lt_coll_result.type)
 				|| bt_is_neither_air_nor_slope(lm_coll_result.type)
 				|| ( bt_is_neither_air_nor_slope(lb_coll_result.type) 
