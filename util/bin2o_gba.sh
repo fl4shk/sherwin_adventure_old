@@ -1,2 +1,2 @@
 #!/bin/bash
-bin2s "$1" | arm-none-eabi-as -o "$1".o
+$DEVKITARM/bin/bin2s "$1" | $DEVKITARM/bin/arm-none-eabi-as -o "$1".o
