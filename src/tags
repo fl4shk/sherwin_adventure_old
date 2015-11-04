@@ -7,6 +7,7 @@
 GRIT_SHERWIN_GFX_H	gfx/sherwin_gfx.h	18;"	kind:d
 GRIT_THE_BLOCK_GFX_H	gfx/the_block_gfx.h	18;"	kind:d
 GRIT_THE_BLOCK_LIKE_SPRITES_GFX_H	gfx/the_block_like_sprites_gfx.h	18;"	kind:d
+GRIT_THE_GOLEM_ENEMY_GFX_H	gfx/the_golem_enemy_gfx.h	18;"	kind:d
 GRIT_THE_POWERUP_GFX_H	gfx/the_powerup_gfx.h	18;"	kind:d
 GRIT_TITLE_SCREEN_H	gfx/title_screen.h	19;"	kind:d
 MOD_PRACTICE_13	audio/practice_13.h	5;"	kind:d
@@ -2363,7 +2364,7 @@ sublevel_pointer::sublevel_pointer	game_engine_stuff/level_stuff/sublevel_class.
 swi_call	gba_specific_stuff/bios_function_wrappers.hpp	113;"	kind:d
 swi_call	gba_specific_stuff/bios_function_wrappers.hpp	115;"	kind:d
 test_int_global	main.thumb.cpp	/^int test_int_global;$/;"	kind:v
-test_level	test_level/test_level.thumb.cpp	/^const sublevel< 1994, 64, 32, 7, 5 > test_level$/;"	kind:v
+test_level	test_level/test_level.thumb.cpp	/^const sublevel< 1993, 64, 32, 7, 5 > test_level$/;"	kind:v
 test_level_hpp	test_level/test_level.hpp	2;"	kind:d
 test_sram_arr	main.thumb.cpp	/^u8 test_sram_arr[test_sram_arr_size] __attribute__((_sram));$/;"	kind:v
 test_sram_arr_size	main.thumb.cpp	/^static constexpr u32 test_sram_arr_size = debug_arr_u32_size * sizeof(u32);$/;"	kind:v	file:
@@ -2391,6 +2392,8 @@ the_gfx_category	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^
 the_gfx_category	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	static constexpr sprite_gfx_category the_gfx_category = sgc_player;$/;"	kind:m	class:sprite_base_stuff	access:public
 the_gfx_category	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	static constexpr sprite_gfx_category the_gfx_category = sgc_powerup;$/;"	kind:m	class:waffle_sprite_stuff	access:public
 the_gfx_category	game_engine_stuff/sprite_stuff/warp_block_sprite_stuff_class.hpp	/^	static constexpr sprite_gfx_category the_gfx_category $/;"	kind:m	class:warp_block_sprite_stuff	access:public
+the_golem_enemy_gfxPalLen	gfx/the_golem_enemy_gfx.h	23;"	kind:d
+the_golem_enemy_gfxTilesLen	gfx/the_golem_enemy_gfx.h	20;"	kind:d
 the_ice_muffin_sprite_stuff	game_engine_stuff/sprite_stuff/sprite_type_stuff.thumb.cpp	/^ice_muffin_sprite_stuff the_ice_muffin_sprite_stuff;$/;"	kind:v
 the_inner_array	game_engine_stuff/sa_list_class_stuff.hpp	/^	sa_list_node<type> the_inner_array[num_list_elems];$/;"	kind:m	class:sa_array_of_forward_lists	access:public
 the_muffin_sprite_stuff	game_engine_stuff/sprite_stuff/sprite_type_stuff.thumb.cpp	/^muffin_sprite_stuff the_muffin_sprite_stuff;$/;"	kind:v

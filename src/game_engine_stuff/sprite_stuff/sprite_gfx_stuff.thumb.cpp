@@ -12,27 +12,39 @@
 
 #include "../../gfx/sherwin_gfx.h"
 #include "../../gfx/the_powerup_gfx.h"
+#include "../../gfx/the_block_like_sprites_gfx.h"
+#include "../../gfx/the_golem_enemy_gfx.h"
 
 
 u32 next_free_sprite_vram_slot __attribute__((_iwram));
 u32 sprite_gfx_category_first_vram_slot_list[sgc_count] 
 	__attribute__((_iwram));
 
+
 void upload_default_sprite_palettes()
 {
 	//memcpy32( obj_pal_ram, the_spritesPal, 
 	//	the_spritesPalLen / sizeof(u32) );
 	
+	static constexpr u32 mul_val = 16;
+	
 	// The player's palettes
-	memcpy32( &( obj_pal_ram[sgc_player * 16] ), sherwin_gfxPal, 
+	memcpy32( &( obj_pal_ram[sgc_player * mul_val] ), sherwin_gfxPal, 
 		sherwin_gfxPalLen / sizeof(u32) );
 	
 	// The powerups' palettes
-	memcpy32( &( obj_pal_ram[sgc_powerup * 16] ), the_powerup_gfxPal,
+	memcpy32( &( obj_pal_ram[sgc_powerup * mul_val] ), the_powerup_gfxPal,
 		the_powerup_gfxPalLen / sizeof(u32) );
 	
 	// The block-like sprites' palettes
-	//memcpy32( &( obj_pal_ram[sgc_block_like_0 * 16], the_
+	memcpy32( &(obj_pal_ram[sgc_block_like_0 * mul_val]),
+		the_block_like_sprites_gfxPal, the_block_like_sprites_gfxPalLen 
+		/ sizeof(u32) );
+	
+	// The golems and other enemys' palettes
+	memcpy32( &(obj_pal_ram[sgc_enemy_0 * mul_val]),
+		the_golem_enemy_gfxPal, the_golem_enemy_gfxPalLen / sizeof(u32) );
+	
 }
 
 

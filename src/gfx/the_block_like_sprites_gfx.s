@@ -4,11 +4,11 @@
 @=======================================================================
 @
 @	the_block_like_sprites_gfx, 128x16@4, 
-@	+ palette 16 entries, not compressed
+@	+ palette 32 entries, not compressed
 @	+ 32 tiles Metatiled by 2x2 not compressed
-@	Total size: 32 + 1024 = 1056
+@	Total size: 64 + 1024 = 1088
 @
-@	Time-stamp: 2015-10-27, 16:22:21
+@	Time-stamp: 2015-11-04, 12:18:56
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -92,9 +92,11 @@ the_block_like_sprites_gfxTiles:
 
 	.section .rodata
 	.align	2
-	.global the_block_like_sprites_gfxPal		@ 32 unsigned chars
+	.global the_block_like_sprites_gfxPal		@ 64 unsigned chars
 the_block_like_sprites_gfxPal:
 	.hword 0x7FE0,0x0000,0x7FFF,0x533F,0x3658,0x7F00,0x7E00,0x7D00
 	.hword 0x6000,0x029F,0x0199,0x0114,0x00D0,0x03E0,0x03DF,0x7C1F
+	.hword 0x7FE0,0x0000,0x7FFF,0x0000,0x0000,0x0000,0x0000,0x0000
+	.hword 0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000
 
 @}}BLOCK(the_block_like_sprites_gfx)
