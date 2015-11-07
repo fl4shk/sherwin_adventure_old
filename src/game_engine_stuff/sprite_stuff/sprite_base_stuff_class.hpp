@@ -13,8 +13,8 @@ public:		// variables
 	static constexpr fixed24p8 max_y_vel = {0x400};
 	
 	static constexpr sprite_gfx_category the_gfx_category = sgc_player;
-	static constexpr u32 the_relative_tile_slot = 7 
-		* num_tiles_in_ss_16x16;
+	static constexpr u32 the_relative_metatile_slot = 7,
+		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;
 	
 	
 	
@@ -55,6 +55,9 @@ public:		// functions
 	
 	
 	// Graphics stuff
+	//virtual const u32 get_curr_tile_slot_old( sprite& the_sprite )
+	//	__attribute__((_iwram_code));
+	
 	virtual const u32 get_curr_tile_slot( sprite& the_sprite )
 		__attribute__((_iwram_code));
 	
@@ -62,6 +65,10 @@ public:		// functions
 		( sprite& the_sprite ) __attribute__((_iwram_code));
 	virtual const u32 get_curr_relative_tile_slot( sprite& the_sprite )
 		__attribute__((_iwram_code));
+	inline virtual const u32 get_num_active_gfx_tiles()
+	{
+		return num_active_gfx_tiles;
+	}
 	
 	// Physics and collision stuff
 	virtual void block_collision_stuff( sprite& the_sprite )

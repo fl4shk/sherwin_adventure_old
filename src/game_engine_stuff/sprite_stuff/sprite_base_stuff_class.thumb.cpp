@@ -10,7 +10,12 @@ void sprite_base_stuff::init( sprite& the_sprite, bool facing_left )
 {
 	the_sprite.the_sprite_type = get_sprite_type();
 	
-	the_sprite.the_oam_entry.set_tile_number 
+	//the_sprite.the_oam_entry.set_tile_number 
+	//	( get_curr_tile_slot(the_sprite) );
+	//the_sprite.the_oam_entry.set_tile_number
+	//	( the_sprite.get_vram_chunk_index() 
+	//	* sprite_gfx_manager::num_tiles_in_ss_32x32 );
+	the_sprite.the_oam_entry.set_tile_number
 		( get_curr_tile_slot(the_sprite) );
 	the_sprite.the_oam_entry.set_pal_number 
 		( get_gfx_category(the_sprite) );
@@ -55,8 +60,12 @@ const sprite_type sprite_base_stuff::get_sprite_type() const
 
 void sprite_base_stuff::gfx_update( sprite& the_sprite )
 {
-	the_sprite.the_oam_entry.set_tile_number 
-		( get_curr_tile_slot(the_sprite) );
+	//the_sprite.the_oam_entry.set_tile_number 
+	//	( get_curr_tile_slot_old(the_sprite) );
+	the_sprite.the_oam_entry.set_tile_number
+		( the_sprite.get_vram_chunk_index() 
+		* sprite_gfx_manager::num_tiles_in_ss_32x32 );
+	
 	the_sprite.the_oam_entry.set_pal_number 
 		( get_gfx_category(the_sprite) );
 }
@@ -78,18 +87,24 @@ void sprite_base_stuff::update_part_2( sprite& the_sprite,
 void sprite_base_stuff::update_part_2( sprite& the_sprite, 
 	const bg_point& camera_pos, int& next_oam_index )
 {
-	
 	gfx_update(the_sprite);
 	the_sprite.update_on_screen_pos(camera_pos);
 	the_sprite.copy_the_oam_entry_to_oam_mirror(next_oam_index++);
 }
 
 
+//const u32 sprite_base_stuff::get_curr_tile_slot_old( sprite& the_sprite )
+//{
+//	return 
+//		( ( sprite_gfx_manager::sprite_gfx_category_first_vram_slot_list 
+//		[get_gfx_category(the_sprite)] / sizeof(tile) * sizeof(u16) )
+//		+ get_curr_relative_tile_slot(the_sprite) );
+//}
+
 const u32 sprite_base_stuff::get_curr_tile_slot( sprite& the_sprite )
 {
-	return ( ( sprite_gfx_category_first_vram_slot_list 
-		[get_gfx_category(the_sprite)] / sizeof(tile) * sizeof(u16) )
-		+ get_curr_relative_tile_slot(the_sprite) );
+	return the_sprite.get_vram_chunk_index() 
+		* sprite_gfx_manager::num_tiles_in_ss_32x32;
 }
 
 // The reason this function takes a sprite instance as a parameter is that
@@ -102,18 +117,18 @@ const sprite_gfx_category sprite_base_stuff::get_gfx_category
 const u32 sprite_base_stuff::get_curr_relative_tile_slot 
 	( sprite& the_sprite )
 {
-	return the_relative_tile_slot;
+	return the_relative_metatile_slot * num_active_gfx_tiles;
 }
 
 
 
-// This is a dummy function
+// This is a dummy function that child classes implement.
 void sprite_base_stuff::block_collision_stuff( sprite& the_sprite )
 {
 }
 
 
-// This is a dummy function
+// This is a dummy function that child classes implement.
 void sprite_base_stuff::handle_jumping_stuff( sprite& the_player, 
 	u32 is_jump_key_hit, u32 is_jump_key_held )
 {

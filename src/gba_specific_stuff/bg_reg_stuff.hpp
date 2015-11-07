@@ -37,6 +37,9 @@ typedef tile8 charblock8[charblock8_size];
 
 
 #define bg_tile_vram ( (vu16*)(tile_ram[0]) )
+
+// Do note that obj_tile_vram consists of TWO charblocks, or 1024 tiles of
+// 8x8 pixels
 #define obj_tile_vram ( (vu16*)(tile_ram[4]) )
 
 // ---- End of Character/Tile Stuffs ----
@@ -158,6 +161,8 @@ static const vec2_u32 screen_size_in_blocks_2d = { screen_width_in_blocks,
 static const u32 num_pixels_per_tile_row = 8;
 static const u32 num_pixels_per_tile_col = 8;
 static const u32 num_pixels_per_tile_row_or_column = 8;
+static const u32 num_pixels_per_tile = num_pixels_per_tile_row 
+	* num_pixels_per_tile_col;
 
 static const u32 num_pixels_per_block_row = 16;
 static const u32 num_pixels_per_block_col = 16;

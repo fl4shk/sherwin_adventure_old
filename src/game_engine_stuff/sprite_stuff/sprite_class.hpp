@@ -8,28 +8,39 @@
 class sprite
 {
 protected:		// variables
+	// These are protected variables because they're not normally supposed
+	// to change after initialization.
 	vec2_u32 the_shape_size_vec2;
 	oam_entry::shape_size the_shape_size;
+	
+	// Which 32x32 VRAM chunk this sprite uses, which is equal to the
+	// actual VRAM address divided by
+	// sprite_gfx_manager::num_tiles_in_ss_32x32.  There are a few SPECIAL
+	// cases where vram_chunk_index would need to be changed, so
+	// set_vram_chunk_index() exists.
+	u32 vram_chunk_index;
 	
 public:		// variables
 	// The type of sprite.
 	sprite_type the_sprite_type;
 	
+	// the_sprite_ipg is a pointer to the level data of this sprite.  Even
+	// though the_sprite_ipg contains an initial sprite_type, it is
+	// normally the case that sprite_init_param_groups are stored in ROM,
+	// so attempting to change the_sprite_ipg->type would not work for the
+	// purposes of changing the sprite_type of sprites in different slots.
+	sprite_init_param_group* the_sprite_ipg;
+	
+	// Here is one of the most essential member variables:  an oam_entry to
+	// be copied to oam_mirror.
+	oam_entry the_oam_entry;
+	
 	// in_level_pos is the "global" position of the sprite within the
 	// current level.
 	vec2_f24p8 in_level_pos;
 	
-	// the_sprite_ipg is a pointer to the level data of this sprite.  Even
-	// though the_sprite_ipg contains an initial sprite_type, it is
-	// normally the case that sprite_init_param_groups are stored in ROM,
-	// so attempting to change the_sprite_ipg->type would not work.
-	sprite_init_param_group* the_sprite_ipg;
-	
-	
 	// vel is the velocity of the sprite.
 	vec2_f24p8 vel;
-	
-	
 	
 	// the_coll_box's "pos" member variable is the in-level coordinate of
 	// the_coll_box
@@ -40,18 +51,12 @@ public:		// variables
 	// with a size other than the visible 
 	vec2_f24p8 cb_pos_offset;
 	
-	
 	// on_ground is a flag that tells whether the sprite is on the ground.
 	bool on_ground;
 	
 	// jump_hold_timer is used to keep track of for how much longer the
 	// sprite can jump, if the sprite even does so.  This coul
 	s32 jump_hold_timer;
-	
-	
-	// Here is one of the most essential member variables:  an oam_entry to
-	// be copied to oam_mirror.
-	oam_entry the_oam_entry;
 	
 	
 	// Two arrays of miscellaneous sprite data.  The way these arrays are
@@ -64,17 +69,29 @@ public:		// variables
 public:		// functions
 	
 	sprite();
-	sprite( sprite_init_param_group* s_the_sprite_ipg );
+	inline sprite( u32 s_vram_chunk_index )
+	{
+		sprite();
+		
+		vram_chunk_index = s_vram_chunk_index;
+	}
+	
 	void reinit_with_sprite_ipg
 		( sprite_init_param_group* s_the_sprite_ipg );
+	void reinit_with_sprite_ipg( u32 s_vram_chunk_index,
+		sprite_init_param_group* s_the_sprite_ipg );
+	
 	inline void reinit_by_spawning( sprite_type s_the_sprite_type, 
-		const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos,
+		const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, 
 		bool facing_left=true )
 	{
+		u32 old_vram_chunk_index = vram_chunk_index;
 		memfill32( this, 0, sizeof(sprite) / sizeof(u32) );
 		
 		sprite_stuff_array[s_the_sprite_type]->init( *this, s_in_level_pos,
 			camera_pos, facing_left );
+		
+		vram_chunk_index = old_vram_chunk_index;
 	}
 	
 	inline oam_entry::shape_size get_shape_size() const
@@ -84,6 +101,14 @@ public:		// functions
 	inline const vec2_u32& get_shape_size_as_vec2() const
 	{
 		return the_shape_size_vec2;
+	}
+	inline u32 get_vram_chunk_index() const
+	{
+		return vram_chunk_index;
+	}
+	inline void set_vram_chunk_index( u32 n_vram_chunk_index )
+	{
+		vram_chunk_index = n_vram_chunk_index;
 	}
 	
 	inline void set_shape_size( oam_entry::shape_size n_shape_size )
@@ -140,8 +165,15 @@ public:		// functions
 	//	oam_mirror[slot_for_oam_mirror].attr2 = the_oam_entry.attr2;
 	//}
 	
-	void copy_the_oam_entry_to_oam_mirror( u32 slot_for_oam_mirror )
-		__attribute__((_iwram_code));
+	//void copy_the_oam_entry_to_oam_mirror( u32 slot_for_oam_mirror )
+	//	__attribute__((_iwram_code));
+	
+	inline void copy_the_oam_entry_to_oam_mirror( u32 slot_for_oam_mirror )
+	{
+		oam_mirror[slot_for_oam_mirror].attr0 = the_oam_entry.attr0;
+		oam_mirror[slot_for_oam_mirror].attr1 = the_oam_entry.attr1;
+		oam_mirror[slot_for_oam_mirror].attr2 = the_oam_entry.attr2;
+	}
 	
 	void block_collision_stuff() __attribute__((_iwram_code));
 	

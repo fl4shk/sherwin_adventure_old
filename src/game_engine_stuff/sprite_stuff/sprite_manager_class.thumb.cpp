@@ -16,6 +16,9 @@ void sprite_manager::init_the_player ( const vec2_f24p8& s_in_level_pos,
 {
 	sprite_stuff_array[st_player]->init( the_player,
 		s_in_level_pos, the_level_size_2d, camera_pos );
+	
+	// The player should ALWAYS use the first VRAM chunk.
+	the_player.set_vram_chunk_index(the_player_vram_chunk_index);
 }
 
 
@@ -82,7 +85,9 @@ void sprite_manager::initial_sprite_spawning_from_level_data
 {
 	sprite_init_param_group* player_ipg = NULL;
 	
-	// Find the player's level data
+	// Find the_player's level data.  This should eventually be replaced
+	// with just storing the starting parameters of the_player in the
+	// current sublevel's sublevel_entrance_arr.
 	for ( auto which_list=active_level::horiz_level_sprite_ipg_lists
 			.begin();
 		which_list!=active_level::horiz_level_sprite_ipg_lists.end();
@@ -160,7 +165,7 @@ void sprite_manager::initial_sprite_spawning_from_level_data
 			spr_on_screen_pos.x = spr_in_level_pos.x - camera_pos_f24p8.x;
 			spr_on_screen_pos.y = spr_in_level_pos.y - camera_pos_f24p8.y;
 			
-			// Don't spawn the sprite if it's HORIZONTALLY off-screen
+			// Don't spawn the sprite if it's HORIZONTALLY off-screen.
 			if ( !( spr_on_screen_pos.x.data >= 0 
 				&& spr_on_screen_pos.x.data <= ( screen_width << 8 ) ) )
 			{
@@ -168,7 +173,7 @@ void sprite_manager::initial_sprite_spawning_from_level_data
 			}
 			
 			// Don't spawn the sprite if it corresponds to the player's
-			// level data
+			// level data.
 			if ( which_node->type == st_player )
 			{
 				continue;

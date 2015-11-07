@@ -82,6 +82,28 @@ void vblank_func()
 	copy_bgofs_mirror_to_registers();
 	active_level_manager::copy_level_from_array_2d_helper_to_vram
 		( bg0_screenblock_2d, bg0_screenblock_mirror_2d );
+	
+	
+	sprite_gfx_manager::upload_sprite_tiles_to_vram
+		(sprite_manager::the_player);
+	for ( sprite& spr : sprite_manager::the_sprites )
+	{
+		//if ( spr.the_sprite_type != st_default )
+		if ( spr.get_vram_chunk_index() != 0 )
+		{
+			sprite_gfx_manager::upload_sprite_tiles_to_vram(spr);
+		}
+		
+		//next_debug_u32 = spr.get_vram_chunk_index() 
+		//	* sprite_gfx_manager::num_tiles_in_ss_32x32;
+		
+	}
+	
+	//next_debug_u32 = sprite_manager::the_player.get_vram_chunk_index()
+	//	* sprite_gfx_manager::num_tiles_in_ss_32x32;
+	//
+	//next_debug_u32 = sprite_manager::the_sprites[0].get_vram_chunk_index()
+	//	* sprite_gfx_manager::num_tiles_in_ss_32x32;
 }
 
 
@@ -183,11 +205,10 @@ int main()
 	
 	
 	// Copy the sprite palettes to OBJ Palette RAM.
-	upload_default_sprite_palettes();
+	sprite_gfx_manager::upload_default_sprite_palettes();
 	
-	// Copy the sprite graphics to OBJ Video RAM.
-	upload_default_sprite_graphics();
-	
+	//// Copy the sprite graphics to OBJ Video RAM.
+	//sprite_gfx_manager::upload_default_sprite_graphics();
 	
 	
 	// Also, copy the_block_gfxPalLen to BG Palette RAM
@@ -216,13 +237,13 @@ int main()
 		bg0_screenblock_mirror_2d );
 	
 	
-	
 	int next_oam_index; 
 	
 	
+	sprite_manager::init_the_array_of_active_sprites();
+	
 	sprite_manager::initial_sprite_spawning_from_level_data
 		( test_level.get_size_2d(), bgofs_mirror[0].curr, next_oam_index );
-	
 	
 	
 	active_level_manager::update_level_in_screenblock_mirror_2d 
@@ -240,9 +261,9 @@ int main()
 	// Disable forced blank
 	clear_bits( reg_dispcnt, dcnt_blank_mask );
 	
-	
 	bios_wait_for_vblank();
 	vblank_func(); 
+	
 	
 	for (;;)
 	{
@@ -251,16 +272,13 @@ int main()
 		sprite& the_player = sprite_manager::the_player;
 		
 		clear_debug_vars();
-		//next_debug_s32 = the_player.in_level_pos.x.data;
-		//next_debug_s32 = the_player.in_level_pos.y.data;
-		//next_debug_s32 = the_player.cb_pos_offset.x.data;
-		//next_debug_s32 = the_player.cb_pos_offset.y.data;
-		//next_debug_s32 = ( the_player.the_coll_box.pos.x 
-		//	- the_player.cb_pos_offset.x ).data;
-		//next_debug_s32 = ( the_player.the_coll_box.pos.y 
-		//	- the_player.cb_pos_offset.y ).data;
-		//
-		////show_debug_str_s32( the_player.on_ground ? "ongn" : "offg" );
+		
+		clear_debug_vars();
+		for ( sprite& spr : sprite_manager::the_sprites)
+		{
+			next_debug_u32 = spr.get_vram_chunk_index();
+			//next_debug_u32 = spr.the_sprite_type == st_waffle;
+		}
 		
 		memfill32( oam_mirror, 0, sizeof(oam_mirror) / sizeof(u32) );
 		
@@ -283,6 +301,7 @@ int main()
 			bgofs_mirror[0], next_oam_index );
 		
 		
+		// This is temporary
 		if ( key_held(key_l) )
 		{
 			sprite_manager::spawn_a_sprite_basic( st_waffle,

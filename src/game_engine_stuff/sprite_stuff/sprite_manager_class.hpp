@@ -16,25 +16,43 @@ class sprite_manager
 {
 public:		// variables
 	
-	
 	static sprite the_player;
 	
-	static constexpr u32 max_num_sprites = 40;
+	//static constexpr u32 max_num_sprites = 40;
+	static constexpr u32 max_num_sprites = 20;
 	
-	// The array of active sprites.  If necessary, an sa_free_list might be
-	// used for finding a free index in the future.  However, it is
-	// unlikely that doing so will be necessary with a maximum of only 32
+	static constexpr u32 the_player_vram_chunk_index = 1;
+	static constexpr u32 the_active_sprites_starting_vram_chunk_index = 2;
+	
+	// The array of active sprites (not counting the_player).  If
+	// necessary, an sa_free_list<max_num_sprites> might be used for
+	// finding a free index in the future.  However, it is unlikely that
+	// doing so will be necessary with a maximum of only max_num_sprites
 	// active sprites at once.
 	static std::array< sprite, max_num_sprites > the_sprites;
 	
-	
 	//static 
-	
 	
 public:		// functions
 	
 	static void init_the_player ( const vec2_f24p8& s_in_level_pos, 
 		const vec2_u32& the_level_size_2d, bg_point& camera_pos );
+	
+	static inline void init_the_array_of_active_sprites()
+	{
+		//u32 vram_chunk_index = 1;
+		//
+		//for ( sprite& spr : the_sprites )
+		//{
+		//	spr.set_vram_chunk_index(vram_chunk_index++);
+		//}
+		
+		for ( u32 i=0; i<max_num_sprites; ++i )
+		{
+			the_sprites[i].set_vram_chunk_index( i 
+				+ the_active_sprites_starting_vram_chunk_index );
+		}
+	}
 	
 	
 	static void init_horiz_level_sprite_ipg_lists

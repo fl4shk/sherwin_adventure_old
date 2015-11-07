@@ -5,17 +5,20 @@
 class waffle_sprite_stuff : public sprite_base_stuff
 {
 public:		// enums
-	enum udata_index { udi_initial_pos_was_set, };
+	// These are used to access misc_data_u and misc_data_s
+	enum udata_index { udi_initial_pos_was_set, } __attribute__((_align4));
 	enum sdata_index { sdi_initial_pos_x, sdi_initial_pos_y, 
-		sdi_move_timer, };
+		sdi_move_timer, } __attribute__((_align4));
 	
 public:		// variables
 	static constexpr sprite_type the_sprite_type = st_waffle;
 	static constexpr sprite_gfx_category the_gfx_category = sgc_powerup;
 	static constexpr u32 the_relative_metatile_slot = 0, 
-		num_gfx_tiles = num_tiles_in_ss_16x16;
+		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;
 	
 	static constexpr u32 move_timer_start = 128;
+	
+	//static const ();
 	
 public:		// functions
 	//virtual void init( sprite& the_powerup, bool facing_left );
@@ -40,7 +43,11 @@ public:		// functions
 	}
 	inline const u32 get_curr_relative_tile_slot( sprite& the_powerup )
 	{
-		return the_relative_metatile_slot * num_gfx_tiles;
+		return the_relative_metatile_slot * num_active_gfx_tiles;
+	}
+	inline virtual const u32 get_num_active_gfx_tiles()
+	{
+		return num_active_gfx_tiles;
 	}
 	
 	

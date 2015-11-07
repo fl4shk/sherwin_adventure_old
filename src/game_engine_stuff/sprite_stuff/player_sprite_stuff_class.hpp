@@ -80,7 +80,8 @@ public:		// variables
 	static const u32 the_relative_metatile_slot_arr_size;
 	static const u32 the_relative_metatile_slot_arr[];
 	
-	static constexpr u32 num_active_gfx_tiles = num_tiles_in_ss_16x32;
+	static constexpr u32 num_active_gfx_tiles 
+		= sprite_gfx_manager::num_tiles_in_ss_16x32;
 	
 	
 public:		// functions
@@ -110,6 +111,11 @@ public:		// functions
 		return the_gfx_category;
 	}
 	virtual const u32 get_curr_relative_tile_slot( sprite& the_player );
+	
+	inline virtual const u32 get_num_active_gfx_tiles()
+	{
+		return num_active_gfx_tiles;
+	}
 	
 	// Physics and collision stuff
 	virtual void block_collision_stuff( sprite& the_player )

@@ -1,5 +1,6 @@
 #include "sprite_class.hpp"
 #include "../../gba_specific_stuff/interrupt_stuff.hpp"
+#include "sprite_gfx_stuff.hpp"
 
 sprite::sprite()
 {
@@ -23,22 +24,56 @@ sprite::sprite()
 	//memfill32( misc_data_u, 0, misc_data_size );
 	//memfill32( misc_data_s, 0, misc_data_size );
 	
+	u32 old_vram_chunk_index = vram_chunk_index;
 	
 	memfill32( this, 0, sizeof(sprite) / sizeof(u32) );
 	
+	the_oam_entry.set_tile_number(0);
+	the_oam_entry.set_pal_number(sgc_player);
 	
-	this->the_oam_entry.set_tile_number(0);
-	this->the_oam_entry.set_pal_number(sgc_player);
+	set_shape_size(oam_entry::ss_16x16);
+	the_coll_box.size = { 14 << fixed24p8::shift, 14 << fixed24p8::shift };
+	cb_pos_offset = { 1 << fixed24p8::shift, 1 << fixed24p8::shift };
 	
-	this->set_shape_size(oam_entry::ss_16x16);
-	this->the_coll_box.size = { 14 << fixed24p8::shift, 
-		14 << fixed24p8::shift };
-	this->cb_pos_offset = { 1 << fixed24p8::shift, 
-		1 << fixed24p8::shift };
-	
+	vram_chunk_index = old_vram_chunk_index;
 }
-sprite::sprite( sprite_init_param_group* s_the_sprite_ipg )
+
+//sprite::sprite( u32 s_vram_chunk_index, 
+//	sprite_init_param_group* s_the_sprite_ipg )
+//{
+//	switch ( s_the_sprite_ipg->spawn_state )
+//	{
+//		case sss_not_active:
+//			memfill32( this, 0, sizeof(sprite) / sizeof(u32) );
+//			
+//			the_sprite_ipg = s_the_sprite_ipg;
+//			the_sprite_ipg->spawn_state = sss_active;
+//			
+//			the_sprite_type = the_sprite_ipg->type;
+//			in_level_pos.x = make_f24p8
+//				( the_sprite_ipg->initial_block_grid_x_coord * 16 );
+//			in_level_pos.y = make_f24p8
+//				( the_sprite_ipg->initial_block_grid_y_coord * 16 );
+//			
+//			sprite_stuff_array[the_sprite_type]->init( *this, 
+//				!the_sprite_ipg->facing_right );
+//			
+//			vram_chunk_index = s_vram_chunk_index;
+//			break;
+//			
+//		case sss_active:
+//		case sss_dead:
+//		default:
+//			break;
+//		
+//	}
+//}
+
+void sprite::reinit_with_sprite_ipg
+	( sprite_init_param_group* s_the_sprite_ipg )
 {
+	u32 old_vram_chunk_index = vram_chunk_index;
+	
 	switch ( s_the_sprite_ipg->spawn_state )
 	{
 		case sss_not_active:
@@ -53,8 +88,10 @@ sprite::sprite( sprite_init_param_group* s_the_sprite_ipg )
 			in_level_pos.y = make_f24p8
 				( the_sprite_ipg->initial_block_grid_y_coord * 16 );
 			
-			sprite_stuff_array[the_sprite_type]->init( *this, 
+			sprite_stuff_array[the_sprite_type]->init( *this,
 				!the_sprite_ipg->facing_right );
+			
+			vram_chunk_index = old_vram_chunk_index;
 			break;
 			
 		case sss_active:
@@ -65,8 +102,8 @@ sprite::sprite( sprite_init_param_group* s_the_sprite_ipg )
 	}
 }
 
-void sprite::reinit_with_sprite_ipg
-	( sprite_init_param_group* s_the_sprite_ipg )
+void sprite::reinit_with_sprite_ipg( u32 s_vram_chunk_index,
+	sprite_init_param_group* s_the_sprite_ipg )
 {
 	switch ( s_the_sprite_ipg->spawn_state )
 	{
@@ -84,6 +121,8 @@ void sprite::reinit_with_sprite_ipg
 			
 			sprite_stuff_array[the_sprite_type]->init( *this,
 				!the_sprite_ipg->facing_right );
+			
+			vram_chunk_index = s_vram_chunk_index;
 			break;
 			
 		case sss_active:
@@ -93,6 +132,7 @@ void sprite::reinit_with_sprite_ipg
 		
 	}
 }
+
 
 
 
@@ -184,58 +224,6 @@ void sprite::center_camera_almost( bg_point& camera_pos ) const
 }
 
 
-void sprite::copy_the_oam_entry_to_oam_mirror( u32 slot_for_oam_mirror )
-{
-	//oam_mirror[slot_for_oam_mirror].attr0 = the_oam_entry.attr0;
-	//oam_mirror[slot_for_oam_mirror].attr1 = the_oam_entry.attr1;
-	//oam_mirror[slot_for_oam_mirror].attr2 = the_oam_entry.attr2;
-	
-	//u32 output;
-	//asm __volatile__
-	//(
-	//	"mov r0, %1\n\t"
-	//	"mov %0, r0\n\t"
-	//	: "=r"(output)
-	//	: "r"(slot_for_oam_mirror)
-	//	: "r0"
-	//);
-	
-	
-	asm __volatile__
-	(
-		// Get the address of this->the_oam_entry
-		"add r0, #0x40\n\t"
-		
-		
-		// Load the address of the oam_mirror into r2
-		"ldr r2, =oam_mirror\n\t"
-		
-		// The size of an oam_entry is 8 bytes, so multiply
-		// slot_for_oam_mirror by 8
-		"lsl r1, #0x3\n\t"
-		
-		// Get the address of the particular oam_entry
-		"add r2, r1\n\t"
-		
-		// At this point, r0 contains &(this->the_oam_entry) and r2
-		// contains &( oam_mirror[slot_for_oam_mirror] )
-		
-		
-		// attr0 and attr1
-		"ldr r1, [r0]\n\t"
-		"str r1, [r2]\n\t"
-		
-		// attr2
-		"ldrh r1, [r0, #0x4]\n\t"
-		"strh r1, [r2, #0x4]\n\t"
-		
-		:
-		: //"r"(&the_oam_entry) 			// inputs
-		: "r0", "r1", "r2"					// clobbers
-		
-	);
-	
-}
 
 
 void sprite::block_collision_stuff()

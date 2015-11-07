@@ -261,6 +261,7 @@ void sprite_manager::update_all_sprites
 	
 	sprite* the_active_sprites[max_num_sprites];
 	
+	// Find all the currently-active sprites
 	for ( u32 i=0; i<the_sprites.size(); ++i )
 	{
 		sprite& the_spr = the_sprites[i];
@@ -270,7 +271,7 @@ void sprite_manager::update_all_sprites
 		}
 	}
 	
-	
+	// Only update the currently-active sprites 
 	for ( u32 i=0; i<num_active_sprites; ++i )
 	{
 		sprite& the_spr = *(the_active_sprites[i]);
@@ -282,16 +283,17 @@ void sprite_manager::update_all_sprites
 		( the_player, camera_pos_pc_pair.curr, the_level_size_2d );
 	
 	
-	
 	for ( u32 i=0; i<num_active_sprites; ++i )
 	{
 		sprite& the_spr = *(the_active_sprites[i]);
 		
+		// I am pretty sure this isn't a necessary sanity check
 		if ( the_spr.the_sprite_type == st_default )
 		{
 			continue;
 		}
 		
+		// Update the sprite
 		sprite_stuff_array[the_spr.the_sprite_type]->update_part_2
 			( the_spr, camera_pos_pc_pair.curr, next_oam_index );
 		
@@ -304,6 +306,8 @@ void sprite_manager::update_all_sprites
 				if ( coll_box_intersects_now( the_spr.the_coll_box,
 					the_other_spr.the_coll_box ) )
 				{
+					// Update a volatile variable so the compiler won't
+					// optimize out this loop
 					debug_arr_f8p8[0] = make_f8p8(8);
 				}
 			}
@@ -317,6 +321,8 @@ void sprite_manager::update_all_sprites
 				if ( coll_box_intersects_now( the_spr.the_coll_box,
 					the_other_spr.the_coll_box ) )
 				{
+					// Update a volatile variable so the compiler won't
+					// optimize out this loop
 					debug_arr_f8p8[0] = make_f8p8(8);
 				}
 			}
@@ -327,6 +333,8 @@ void sprite_manager::update_all_sprites
 				if ( coll_box_intersects_now( the_spr.the_coll_box,
 					the_other_spr.the_coll_box ) )
 				{
+					// Update a volatile variable so the compiler won't
+					// optimize out this loop
 					debug_arr_f8p8[0] = make_f8p8(8);
 				}
 			}

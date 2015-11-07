@@ -8,7 +8,7 @@ public:		// variables
 	static constexpr sprite_type the_sprite_type = st_muffin;
 	static constexpr sprite_gfx_category the_gfx_category = sgc_powerup;
 	static constexpr u32 the_relative_metatile_slot = 1, 
-		num_active_gfx_tiles = num_tiles_in_ss_16x16;
+		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;
 	
 public:		// functions
 	//virtual void init( sprite& the_powerup, bool facing_right=false );
@@ -29,6 +29,10 @@ public:		// functions
 		( sprite& the_powerup )
 	{
 		return the_relative_metatile_slot * num_active_gfx_tiles;
+	}
+	inline virtual const u32 get_num_active_gfx_tiles()
+	{
+		return num_active_gfx_tiles;
 	}
 	
 	
@@ -46,7 +50,7 @@ public:		// variables
 	static constexpr sprite_type the_sprite_type = st_fire_muffin;
 	static constexpr sprite_gfx_category the_gfx_category = sgc_powerup;
 	static constexpr u32 the_relative_metatile_slot = 2, 
-		num_active_gfx_tiles = num_tiles_in_ss_16x16;
+		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;
 	
 public:		// functions
 	//virtual void init( sprite& the_powerup, bool facing_right=false );
@@ -63,11 +67,15 @@ public:		// functions
 	{
 		return the_gfx_category;
 	}
-	virtual const u32 get_curr_relative_tile_slot( sprite& the_powerup )
+	inline virtual const u32 get_curr_relative_tile_slot
+		( sprite& the_powerup )
 	{
 		return the_relative_metatile_slot * num_active_gfx_tiles;
 	}
-	
+	inline virtual const u32 get_num_active_gfx_tiles()
+	{
+		return num_active_gfx_tiles;
+	}
 	
 	// Physics and collision stuff
 	//// All muffin powerups are not affected by gravity, and they don't
@@ -84,7 +92,7 @@ public:		// variables
 	static constexpr sprite_type the_sprite_type = st_ice_muffin;
 	static constexpr sprite_gfx_category the_gfx_category = sgc_powerup;
 	static constexpr u32 the_relative_metatile_slot = 3, 
-		num_active_gfx_tiles = num_tiles_in_ss_16x16;
+		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;
 	
 public:		// functions
 	//virtual void init( sprite& the_powerup, bool facing_right=false );
@@ -105,6 +113,10 @@ public:		// functions
 		( sprite& the_powerup )
 	{
 		return the_relative_metatile_slot * num_active_gfx_tiles;
+	}
+	inline virtual const u32 get_num_active_gfx_tiles()
+	{
+		return num_active_gfx_tiles;
 	}
 	
 	
@@ -121,7 +133,7 @@ public:		// variables
 	static constexpr sprite_type the_sprite_type = st_chocolate_muffin;
 	static constexpr sprite_gfx_category the_gfx_category = sgc_powerup;
 	static constexpr u32 the_relative_metatile_slot = 4, 
-		num_active_gfx_tiles = num_tiles_in_ss_16x16;
+		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;
 	
 public:		// functions
 	//virtual void init( sprite& the_powerup, bool facing_right=false );
@@ -142,6 +154,10 @@ public:		// functions
 		( sprite& the_powerup )
 	{
 		return the_relative_metatile_slot * num_active_gfx_tiles;
+	}
+	inline virtual const u32 get_num_active_gfx_tiles()
+	{
+		return num_active_gfx_tiles;
 	}
 	
 	

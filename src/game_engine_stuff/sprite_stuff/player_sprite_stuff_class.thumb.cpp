@@ -40,8 +40,11 @@ void player_sprite_stuff::init( sprite& the_player, bool facing_left  )
 {
 	the_player.the_sprite_type = get_sprite_type();
 	
-	the_player.the_oam_entry.set_tile_number 
-		( get_curr_tile_slot(the_player) );
+	//the_player.the_oam_entry.set_tile_number 
+	//	( get_curr_tile_slot_old(the_player) );
+	the_player.the_oam_entry.set_tile_number
+		( the_player.get_vram_chunk_index() 
+		* sprite_gfx_manager::num_tiles_in_ss_32x32 );
 	the_player.the_oam_entry.set_pal_number 
 		( get_gfx_category(the_player) );
 	
@@ -98,8 +101,14 @@ void player_sprite_stuff::init( sprite& the_player,
 
 void player_sprite_stuff::gfx_update( sprite& the_player )
 {
+	//the_player.the_oam_entry.set_tile_number
+	//	( get_curr_tile_slot_old(the_player) );
+	//the_player.the_oam_entry.set_tile_number
+	//	( the_player.get_vram_chunk_index() 
+	//	* sprite_gfx_manager::num_tiles_in_ss_32x32 );
 	the_player.the_oam_entry.set_tile_number
 		( get_curr_tile_slot(the_player) );
+	
 	the_player.the_oam_entry.set_pal_number 
 		( get_gfx_category(the_player) );
 }

@@ -8,7 +8,7 @@ public:		// variables
 	static constexpr sprite_gfx_category the_gfx_category 
 		= sgc_block_like_0;
 	static constexpr u32 the_relative_metatile_slot = 0, 
-		num_gfx_tiles = num_tiles_in_ss_16x16;
+		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;
 	
 public:		// functions
 	
@@ -29,7 +29,11 @@ public:		// functions
 	inline virtual const u32 get_curr_relative_tile_slot
 		( sprite& the_warp_block )
 	{
-		return the_relative_metatile_slot * num_gfx_tiles;
+		return the_relative_metatile_slot * num_active_gfx_tiles;
+	}
+	inline virtual const u32 get_num_active_gfx_tiles()
+	{
+		return num_active_gfx_tiles;
 	}
 	
 	

@@ -84,8 +84,6 @@ air_block_stuff::palette_number	game_engine_stuff/block_stuff/air_block_stuff_cl
 air_block_stuff::strongly_hit_response	game_engine_stuff/block_stuff/air_block_stuff_class.hpp	/^	virtual void strongly_hit_response( block& the_block, $/;"	kind:p	class:air_block_stuff	access:public	signature:( block& the_block, const vec2_s32& coord )
 air_block_stuff::strongly_hit_response	game_engine_stuff/block_stuff/air_block_stuff_class.thumb.cpp	/^void air_block_stuff::strongly_hit_response( block& the_block, $/;"	kind:f	class:air_block_stuff	signature:( block& the_block, const vec2_s32& coord )
 air_block_stuff_class_hpp	game_engine_stuff/block_stuff/air_block_stuff_class.hpp	2;"	kind:d
-allocate_sprite_vram_and_copy_sprite_tiles	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^void allocate_sprite_vram_and_copy_sprite_tiles( const u16* tiles, $/;"	kind:p	signature:( const u16* tiles, u32 tiles_len, sprite_gfx_category the_gfx_category )
-allocate_sprite_vram_and_copy_sprite_tiles	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.thumb.cpp	/^void allocate_sprite_vram_and_copy_sprite_tiles( const u16* tiles, $/;"	kind:f	signature:( const u16* tiles, u32 tiles_len, sprite_gfx_category the_gfx_category )
 apply_gravity	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.arm.cpp	/^void sprite_base_stuff::apply_gravity( sprite& the_sprite )$/;"	kind:f	class:sprite_base_stuff	signature:( sprite& the_sprite )
 apply_gravity	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	virtual void apply_gravity( sprite& the_sprite )$/;"	kind:p	class:sprite_base_stuff	access:public	signature:( sprite& the_sprite )
 arr_ind_16x16_count	game_engine_stuff/coll_point_group_class.hpp	/^		arr_ind_16x16_count,$/;"	kind:e	enum:coll_point_group::arr_index_16x16
@@ -172,36 +170,36 @@ bg0_sbb	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^constexpr
 bg0_screenblock_2d	main.thumb.cpp	/^array_2d_helper<scr_entry> bg0_screenblock_2d( se_ram[bg0_sbb],$/;"	kind:p	file:	signature:( se_ram[bg0_sbb], screenblock_size_2d )
 bg0_screenblock_mirror	main.thumb.cpp	/^scr_entry bg0_screenblock_mirror[screenblock_size] __attribute__((_ewram));$/;"	kind:v
 bg0_screenblock_mirror_2d	main.thumb.cpp	/^array_2d_helper<scr_entry> bg0_screenblock_mirror_2d $/;"	kind:p	file:	signature:( bg0_screenblock_mirror, screenblock_size_2d )
-bg_pal_ram	gba_specific_stuff/bg_reg_stuff.hpp	102;"	kind:d
+bg_pal_ram	gba_specific_stuff/bg_reg_stuff.hpp	105;"	kind:d
 bg_pal_ram_size	gba_specific_stuff/bg_reg_stuff.hpp	/^static const u32 bg_pal_ram_size = 0x200;$/;"	kind:v
 bg_point	gba_specific_stuff/bg_reg_stuff.hpp	/^typedef vec2_s16 bg_point;$/;"	kind:t
 bg_reg_stuff_hpp	gba_specific_stuff/bg_reg_stuff.hpp	2;"	kind:d
 bg_tile_vram	gba_specific_stuff/bg_reg_stuff.hpp	39;"	kind:d
-bgcnt_4bpp	gba_specific_stuff/bg_reg_stuff.hpp	284;"	kind:d
-bgcnt_8bpp	gba_specific_stuff/bg_reg_stuff.hpp	285;"	kind:d
-bgcnt_aff_128x128	gba_specific_stuff/bg_reg_stuff.hpp	308;"	kind:d
-bgcnt_aff_16x16	gba_specific_stuff/bg_reg_stuff.hpp	305;"	kind:d
-bgcnt_aff_32x32	gba_specific_stuff/bg_reg_stuff.hpp	306;"	kind:d
-bgcnt_aff_64x64	gba_specific_stuff/bg_reg_stuff.hpp	307;"	kind:d
-bgcnt_aff_mask	gba_specific_stuff/bg_reg_stuff.hpp	309;"	kind:d
-bgcnt_bpp_mask	gba_specific_stuff/bg_reg_stuff.hpp	286;"	kind:d
-bgcnt_cbb	gba_specific_stuff/bg_reg_stuff.hpp	275;"	kind:d
-bgcnt_cbb_mask	gba_specific_stuff/bg_reg_stuff.hpp	276;"	kind:d
-bgcnt_mosaic_mask	gba_specific_stuff/bg_reg_stuff.hpp	281;"	kind:d
-bgcnt_mosaic_off	gba_specific_stuff/bg_reg_stuff.hpp	279;"	kind:d
-bgcnt_mosaic_on	gba_specific_stuff/bg_reg_stuff.hpp	280;"	kind:d
-bgcnt_prio	gba_specific_stuff/bg_reg_stuff.hpp	271;"	kind:d
-bgcnt_prio_mask	gba_specific_stuff/bg_reg_stuff.hpp	272;"	kind:d
-bgcnt_reg_32x32	gba_specific_stuff/bg_reg_stuff.hpp	298;"	kind:d
-bgcnt_reg_32x64	gba_specific_stuff/bg_reg_stuff.hpp	300;"	kind:d
-bgcnt_reg_64x32	gba_specific_stuff/bg_reg_stuff.hpp	299;"	kind:d
-bgcnt_reg_64x64	gba_specific_stuff/bg_reg_stuff.hpp	301;"	kind:d
-bgcnt_reg_mask	gba_specific_stuff/bg_reg_stuff.hpp	302;"	kind:d
-bgcnt_sbb	gba_specific_stuff/bg_reg_stuff.hpp	289;"	kind:d
-bgcnt_sbb_mask	gba_specific_stuff/bg_reg_stuff.hpp	290;"	kind:d
-bgcnt_wrap_mask	gba_specific_stuff/bg_reg_stuff.hpp	295;"	kind:d
-bgcnt_wrap_off	gba_specific_stuff/bg_reg_stuff.hpp	293;"	kind:d
-bgcnt_wrap_on	gba_specific_stuff/bg_reg_stuff.hpp	294;"	kind:d
+bgcnt_4bpp	gba_specific_stuff/bg_reg_stuff.hpp	289;"	kind:d
+bgcnt_8bpp	gba_specific_stuff/bg_reg_stuff.hpp	290;"	kind:d
+bgcnt_aff_128x128	gba_specific_stuff/bg_reg_stuff.hpp	313;"	kind:d
+bgcnt_aff_16x16	gba_specific_stuff/bg_reg_stuff.hpp	310;"	kind:d
+bgcnt_aff_32x32	gba_specific_stuff/bg_reg_stuff.hpp	311;"	kind:d
+bgcnt_aff_64x64	gba_specific_stuff/bg_reg_stuff.hpp	312;"	kind:d
+bgcnt_aff_mask	gba_specific_stuff/bg_reg_stuff.hpp	314;"	kind:d
+bgcnt_bpp_mask	gba_specific_stuff/bg_reg_stuff.hpp	291;"	kind:d
+bgcnt_cbb	gba_specific_stuff/bg_reg_stuff.hpp	280;"	kind:d
+bgcnt_cbb_mask	gba_specific_stuff/bg_reg_stuff.hpp	281;"	kind:d
+bgcnt_mosaic_mask	gba_specific_stuff/bg_reg_stuff.hpp	286;"	kind:d
+bgcnt_mosaic_off	gba_specific_stuff/bg_reg_stuff.hpp	284;"	kind:d
+bgcnt_mosaic_on	gba_specific_stuff/bg_reg_stuff.hpp	285;"	kind:d
+bgcnt_prio	gba_specific_stuff/bg_reg_stuff.hpp	276;"	kind:d
+bgcnt_prio_mask	gba_specific_stuff/bg_reg_stuff.hpp	277;"	kind:d
+bgcnt_reg_32x32	gba_specific_stuff/bg_reg_stuff.hpp	303;"	kind:d
+bgcnt_reg_32x64	gba_specific_stuff/bg_reg_stuff.hpp	305;"	kind:d
+bgcnt_reg_64x32	gba_specific_stuff/bg_reg_stuff.hpp	304;"	kind:d
+bgcnt_reg_64x64	gba_specific_stuff/bg_reg_stuff.hpp	306;"	kind:d
+bgcnt_reg_mask	gba_specific_stuff/bg_reg_stuff.hpp	307;"	kind:d
+bgcnt_sbb	gba_specific_stuff/bg_reg_stuff.hpp	294;"	kind:d
+bgcnt_sbb_mask	gba_specific_stuff/bg_reg_stuff.hpp	295;"	kind:d
+bgcnt_wrap_mask	gba_specific_stuff/bg_reg_stuff.hpp	300;"	kind:d
+bgcnt_wrap_off	gba_specific_stuff/bg_reg_stuff.hpp	298;"	kind:d
+bgcnt_wrap_on	gba_specific_stuff/bg_reg_stuff.hpp	299;"	kind:d
 bgofs_mirror	gba_specific_stuff/bg_reg_stuff.arm.cpp	/^prev_curr_pair<bg_point> bgofs_mirror[bgofs_mirror_size];$/;"	kind:v
 bgofs_mirror_size	gba_specific_stuff/bg_reg_stuff.hpp	/^static const u32 bgofs_mirror_size = 4;$/;"	kind:v
 bios_arctan	gba_specific_stuff/bios_function_wrappers.hpp	31;"	kind:d
@@ -398,8 +396,9 @@ charblock_size	gba_specific_stuff/bg_reg_stuff.hpp	/^static const u32 charblock_
 chocolate_muffin_sprite_stuff	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^class chocolate_muffin_sprite_stuff : public sprite_base_stuff$/;"	kind:c	inherits:sprite_base_stuff
 chocolate_muffin_sprite_stuff::get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_curr_relative_tile_slot$/;"	kind:f	class:chocolate_muffin_sprite_stuff	access:public	signature:( sprite& the_powerup )
 chocolate_muffin_sprite_stuff::get_gfx_category	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const sprite_gfx_category get_gfx_category$/;"	kind:f	class:chocolate_muffin_sprite_stuff	access:public	signature:( sprite& the_powerup )
+chocolate_muffin_sprite_stuff::get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:chocolate_muffin_sprite_stuff	access:public	signature:()
 chocolate_muffin_sprite_stuff::get_sprite_type	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const sprite_type get_sprite_type() const$/;"	kind:f	class:chocolate_muffin_sprite_stuff	access:public	signature:() const
-chocolate_muffin_sprite_stuff::num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^		num_active_gfx_tiles = num_tiles_in_ss_16x16;$/;"	kind:m	class:chocolate_muffin_sprite_stuff	access:public
+chocolate_muffin_sprite_stuff::num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;$/;"	kind:m	class:chocolate_muffin_sprite_stuff	access:public
 chocolate_muffin_sprite_stuff::the_gfx_category	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr sprite_gfx_category the_gfx_category = sgc_powerup;$/;"	kind:m	class:chocolate_muffin_sprite_stuff	access:public
 chocolate_muffin_sprite_stuff::the_relative_metatile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr u32 the_relative_metatile_slot = 4, $/;"	kind:m	class:chocolate_muffin_sprite_stuff	access:public
 chocolate_muffin_sprite_stuff::the_sprite_type	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr sprite_type the_sprite_type = st_chocolate_muffin;$/;"	kind:m	class:chocolate_muffin_sprite_stuff	access:public
@@ -530,8 +529,7 @@ copy_bgofs_mirror_to_registers	gba_specific_stuff/bg_reg_stuff.hpp	/^inline void
 copy_level_from_array_2d_helper_to_vram	game_engine_stuff/level_stuff/active_level_manager_class.arm.cpp	/^void active_level_manager::copy_level_from_array_2d_helper_to_vram$/;"	kind:f	class:active_level_manager	signature:( array_2d_helper<scr_entry>& screenblock_in_vram_2d, array_2d_helper<scr_entry>& screenblock_mirror_2d )
 copy_level_from_array_2d_helper_to_vram	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^	static void copy_level_from_array_2d_helper_to_vram$/;"	kind:p	class:active_level_manager	access:public	signature:( array_2d_helper<scr_entry>& screenblock_in_vram_2d, array_2d_helper<scr_entry>& screenblock_mirror_2d )
 copy_oam_mirror_to_oam	gba_specific_stuff/oam_entry_classes.hpp	/^inline void copy_oam_mirror_to_oam()$/;"	kind:f	signature:()
-copy_the_oam_entry_to_oam_mirror	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	void copy_the_oam_entry_to_oam_mirror( u32 slot_for_oam_mirror )$/;"	kind:p	class:sprite	access:public	signature:( u32 slot_for_oam_mirror )
-copy_the_oam_entry_to_oam_mirror	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^void sprite::copy_the_oam_entry_to_oam_mirror( u32 slot_for_oam_mirror )$/;"	kind:f	class:sprite	signature:( u32 slot_for_oam_mirror )
+copy_the_oam_entry_to_oam_mirror	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline void copy_the_oam_entry_to_oam_mirror( u32 slot_for_oam_mirror )$/;"	kind:f	class:sprite	access:public	signature:( u32 slot_for_oam_mirror )
 correct_bg0_scroll_mirror	game_engine_stuff/level_stuff/active_level_manager_class.arm.cpp	/^void active_level_manager::correct_bg0_scroll_mirror $/;"	kind:f	class:active_level_manager	signature:( const vec2_u32& level_size_in_blocks_2d )
 correct_bg0_scroll_mirror	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^	static void correct_bg0_scroll_mirror $/;"	kind:p	class:active_level_manager	access:public	signature:( const vec2_u32& level_size_in_blocks_2d )
 correct_num_used_points_16x16	game_engine_stuff/coll_point_group_class.hpp	/^	inline void correct_num_used_points_16x16()$/;"	kind:f	class:coll_point_group	access:public	signature:()
@@ -561,46 +559,46 @@ data_at	game_engine_stuff/array_2d_helper_class.hpp	/^	type& data_at( const vec2
 data_at	game_engine_stuff/array_2d_helper_class.hpp	/^	type& data_at( const vec2_u32& offset_2d )$/;"	kind:f	class:array_2d_helper	access:public	signature:( const vec2_u32& offset_2d )
 data_at	game_engine_stuff/array_2d_helper_class.hpp	/^	type& data_at( u32 x, u32 y )$/;"	kind:f	class:array_2d_helper	access:public	signature:( u32 x, u32 y )
 data_at	game_engine_stuff/array_helper_class.hpp	/^	type& data_at( u32 offset )$/;"	kind:f	class:array_helper	access:public	signature:( u32 offset )
-dcnt_bg0_off	gba_specific_stuff/bg_reg_stuff.hpp	196;"	kind:d
-dcnt_bg0_on	gba_specific_stuff/bg_reg_stuff.hpp	197;"	kind:d
-dcnt_bg0_onoff_mask	gba_specific_stuff/bg_reg_stuff.hpp	198;"	kind:d
-dcnt_bg1_off	gba_specific_stuff/bg_reg_stuff.hpp	201;"	kind:d
-dcnt_bg1_on	gba_specific_stuff/bg_reg_stuff.hpp	202;"	kind:d
-dcnt_bg1_onoff_mask	gba_specific_stuff/bg_reg_stuff.hpp	203;"	kind:d
-dcnt_bg2_off	gba_specific_stuff/bg_reg_stuff.hpp	206;"	kind:d
-dcnt_bg2_on	gba_specific_stuff/bg_reg_stuff.hpp	207;"	kind:d
-dcnt_bg2_onoff_mask	gba_specific_stuff/bg_reg_stuff.hpp	208;"	kind:d
-dcnt_bg3_off	gba_specific_stuff/bg_reg_stuff.hpp	211;"	kind:d
-dcnt_bg3_on	gba_specific_stuff/bg_reg_stuff.hpp	212;"	kind:d
-dcnt_bg3_onoff_mask	gba_specific_stuff/bg_reg_stuff.hpp	213;"	kind:d
-dcnt_blank_mask	gba_specific_stuff/bg_reg_stuff.hpp	193;"	kind:d
-dcnt_blank_off	gba_specific_stuff/bg_reg_stuff.hpp	191;"	kind:d
-dcnt_blank_on	gba_specific_stuff/bg_reg_stuff.hpp	192;"	kind:d
-dcnt_mode0	gba_specific_stuff/bg_reg_stuff.hpp	172;"	kind:d
-dcnt_mode1	gba_specific_stuff/bg_reg_stuff.hpp	173;"	kind:d
-dcnt_mode2	gba_specific_stuff/bg_reg_stuff.hpp	174;"	kind:d
-dcnt_mode3	gba_specific_stuff/bg_reg_stuff.hpp	175;"	kind:d
-dcnt_mode4	gba_specific_stuff/bg_reg_stuff.hpp	176;"	kind:d
-dcnt_mode5	gba_specific_stuff/bg_reg_stuff.hpp	177;"	kind:d
-dcnt_mode_mask	gba_specific_stuff/bg_reg_stuff.hpp	178;"	kind:d
-dcnt_obj_1d	gba_specific_stuff/bg_reg_stuff.hpp	187;"	kind:d
-dcnt_obj_2d	gba_specific_stuff/bg_reg_stuff.hpp	186;"	kind:d
-dcnt_obj_dim_mask	gba_specific_stuff/bg_reg_stuff.hpp	188;"	kind:d
-dcnt_obj_off	gba_specific_stuff/bg_reg_stuff.hpp	216;"	kind:d
-dcnt_obj_on	gba_specific_stuff/bg_reg_stuff.hpp	217;"	kind:d
-dcnt_obj_onoff_mask	gba_specific_stuff/bg_reg_stuff.hpp	218;"	kind:d
-dcnt_page_0	gba_specific_stuff/bg_reg_stuff.hpp	181;"	kind:d
-dcnt_page_1	gba_specific_stuff/bg_reg_stuff.hpp	182;"	kind:d
-dcnt_page_mask	gba_specific_stuff/bg_reg_stuff.hpp	183;"	kind:d
-dcnt_win0_off	gba_specific_stuff/bg_reg_stuff.hpp	221;"	kind:d
-dcnt_win0_on	gba_specific_stuff/bg_reg_stuff.hpp	222;"	kind:d
-dcnt_win0_onoff_mask	gba_specific_stuff/bg_reg_stuff.hpp	223;"	kind:d
-dcnt_win1_off	gba_specific_stuff/bg_reg_stuff.hpp	226;"	kind:d
-dcnt_win1_on	gba_specific_stuff/bg_reg_stuff.hpp	227;"	kind:d
-dcnt_win1_onoff_mask	gba_specific_stuff/bg_reg_stuff.hpp	228;"	kind:d
-dcnt_winobj_off	gba_specific_stuff/bg_reg_stuff.hpp	231;"	kind:d
-dcnt_winobj_on	gba_specific_stuff/bg_reg_stuff.hpp	232;"	kind:d
-dcnt_winobj_onoff_mask	gba_specific_stuff/bg_reg_stuff.hpp	233;"	kind:d
+dcnt_bg0_off	gba_specific_stuff/bg_reg_stuff.hpp	201;"	kind:d
+dcnt_bg0_on	gba_specific_stuff/bg_reg_stuff.hpp	202;"	kind:d
+dcnt_bg0_onoff_mask	gba_specific_stuff/bg_reg_stuff.hpp	203;"	kind:d
+dcnt_bg1_off	gba_specific_stuff/bg_reg_stuff.hpp	206;"	kind:d
+dcnt_bg1_on	gba_specific_stuff/bg_reg_stuff.hpp	207;"	kind:d
+dcnt_bg1_onoff_mask	gba_specific_stuff/bg_reg_stuff.hpp	208;"	kind:d
+dcnt_bg2_off	gba_specific_stuff/bg_reg_stuff.hpp	211;"	kind:d
+dcnt_bg2_on	gba_specific_stuff/bg_reg_stuff.hpp	212;"	kind:d
+dcnt_bg2_onoff_mask	gba_specific_stuff/bg_reg_stuff.hpp	213;"	kind:d
+dcnt_bg3_off	gba_specific_stuff/bg_reg_stuff.hpp	216;"	kind:d
+dcnt_bg3_on	gba_specific_stuff/bg_reg_stuff.hpp	217;"	kind:d
+dcnt_bg3_onoff_mask	gba_specific_stuff/bg_reg_stuff.hpp	218;"	kind:d
+dcnt_blank_mask	gba_specific_stuff/bg_reg_stuff.hpp	198;"	kind:d
+dcnt_blank_off	gba_specific_stuff/bg_reg_stuff.hpp	196;"	kind:d
+dcnt_blank_on	gba_specific_stuff/bg_reg_stuff.hpp	197;"	kind:d
+dcnt_mode0	gba_specific_stuff/bg_reg_stuff.hpp	177;"	kind:d
+dcnt_mode1	gba_specific_stuff/bg_reg_stuff.hpp	178;"	kind:d
+dcnt_mode2	gba_specific_stuff/bg_reg_stuff.hpp	179;"	kind:d
+dcnt_mode3	gba_specific_stuff/bg_reg_stuff.hpp	180;"	kind:d
+dcnt_mode4	gba_specific_stuff/bg_reg_stuff.hpp	181;"	kind:d
+dcnt_mode5	gba_specific_stuff/bg_reg_stuff.hpp	182;"	kind:d
+dcnt_mode_mask	gba_specific_stuff/bg_reg_stuff.hpp	183;"	kind:d
+dcnt_obj_1d	gba_specific_stuff/bg_reg_stuff.hpp	192;"	kind:d
+dcnt_obj_2d	gba_specific_stuff/bg_reg_stuff.hpp	191;"	kind:d
+dcnt_obj_dim_mask	gba_specific_stuff/bg_reg_stuff.hpp	193;"	kind:d
+dcnt_obj_off	gba_specific_stuff/bg_reg_stuff.hpp	221;"	kind:d
+dcnt_obj_on	gba_specific_stuff/bg_reg_stuff.hpp	222;"	kind:d
+dcnt_obj_onoff_mask	gba_specific_stuff/bg_reg_stuff.hpp	223;"	kind:d
+dcnt_page_0	gba_specific_stuff/bg_reg_stuff.hpp	186;"	kind:d
+dcnt_page_1	gba_specific_stuff/bg_reg_stuff.hpp	187;"	kind:d
+dcnt_page_mask	gba_specific_stuff/bg_reg_stuff.hpp	188;"	kind:d
+dcnt_win0_off	gba_specific_stuff/bg_reg_stuff.hpp	226;"	kind:d
+dcnt_win0_on	gba_specific_stuff/bg_reg_stuff.hpp	227;"	kind:d
+dcnt_win0_onoff_mask	gba_specific_stuff/bg_reg_stuff.hpp	228;"	kind:d
+dcnt_win1_off	gba_specific_stuff/bg_reg_stuff.hpp	231;"	kind:d
+dcnt_win1_on	gba_specific_stuff/bg_reg_stuff.hpp	232;"	kind:d
+dcnt_win1_onoff_mask	gba_specific_stuff/bg_reg_stuff.hpp	233;"	kind:d
+dcnt_winobj_off	gba_specific_stuff/bg_reg_stuff.hpp	236;"	kind:d
+dcnt_winobj_on	gba_specific_stuff/bg_reg_stuff.hpp	237;"	kind:d
+dcnt_winobj_onoff_mask	gba_specific_stuff/bg_reg_stuff.hpp	238;"	kind:d
 debug_arr_f24p8	game_engine_stuff/debug_vars.thumb.cpp	/^fixed24p8 debug_arr_f24p8[debug_arr_f24p8_size];$/;"	kind:v
 debug_arr_f24p8_size	game_engine_stuff/debug_vars.hpp	/^static const u32 debug_arr_f24p8_size = 32;$/;"	kind:v
 debug_arr_f8p8	game_engine_stuff/debug_vars.thumb.cpp	/^fixed8p8 debug_arr_f8p8[debug_arr_f8p8_size];$/;"	kind:v
@@ -721,13 +719,13 @@ dma_src_inc	gba_specific_stuff/dma_stuff.hpp	63;"	kind:d
 dma_src_mask	gba_specific_stuff/dma_stuff.hpp	69;"	kind:d
 dma_stuff_hpp	gba_specific_stuff/dma_stuff.hpp	2;"	kind:d
 dma_timing_mask	gba_specific_stuff/dma_stuff.hpp	101;"	kind:d
-dstat_hbl_irq	gba_specific_stuff/bg_reg_stuff.hpp	254;"	kind:d
-dstat_in_hbl	gba_specific_stuff/bg_reg_stuff.hpp	245;"	kind:d
-dstat_in_vbl	gba_specific_stuff/bg_reg_stuff.hpp	242;"	kind:d
-dstat_in_vct	gba_specific_stuff/bg_reg_stuff.hpp	248;"	kind:d
-dstat_vbl_irq	gba_specific_stuff/bg_reg_stuff.hpp	251;"	kind:d
-dstat_vct	gba_specific_stuff/bg_reg_stuff.hpp	260;"	kind:d
-dstat_vct_irq	gba_specific_stuff/bg_reg_stuff.hpp	257;"	kind:d
+dstat_hbl_irq	gba_specific_stuff/bg_reg_stuff.hpp	259;"	kind:d
+dstat_in_hbl	gba_specific_stuff/bg_reg_stuff.hpp	250;"	kind:d
+dstat_in_vbl	gba_specific_stuff/bg_reg_stuff.hpp	247;"	kind:d
+dstat_in_vct	gba_specific_stuff/bg_reg_stuff.hpp	253;"	kind:d
+dstat_vbl_irq	gba_specific_stuff/bg_reg_stuff.hpp	256;"	kind:d
+dstat_vct	gba_specific_stuff/bg_reg_stuff.hpp	265;"	kind:d
+dstat_vct_irq	gba_specific_stuff/bg_reg_stuff.hpp	262;"	kind:d
 dud_block_stuff	game_engine_stuff/block_stuff/dud_block_stuff_class.hpp	/^class dud_block_stuff : public block_base_stuff$/;"	kind:c	inherits:block_base_stuff
 dud_block_stuff::get_metatile_graphics_slot	game_engine_stuff/block_stuff/dud_block_stuff_class.hpp	/^	virtual const u32 get_metatile_graphics_slot()$/;"	kind:p	class:dud_block_stuff	access:public	signature:()
 dud_block_stuff::get_metatile_graphics_slot	game_engine_stuff/block_stuff/dud_block_stuff_class.thumb.cpp	/^const u32 dud_block_stuff::get_metatile_graphics_slot()$/;"	kind:f	class:dud_block_stuff	signature:()
@@ -800,10 +798,11 @@ fill2	gba_specific_stuff/oam_entry_classes.hpp	/^	u16 fill2[fill_size];$/;"	kind
 fill3	gba_specific_stuff/oam_entry_classes.hpp	/^	u16 fill3[fill_size];$/;"	kind:m	class:oam_entry_affine	access:public
 fill_size	gba_specific_stuff/oam_entry_classes.hpp	/^	static const u32 fill_size = 3;$/;"	kind:m	class:oam_entry_affine	access:public
 fire_muffin_sprite_stuff	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^class fire_muffin_sprite_stuff : public sprite_base_stuff$/;"	kind:c	inherits:sprite_base_stuff
-fire_muffin_sprite_stuff::get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	virtual const u32 get_curr_relative_tile_slot( sprite& the_powerup )$/;"	kind:f	class:fire_muffin_sprite_stuff	access:public	signature:( sprite& the_powerup )
+fire_muffin_sprite_stuff::get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_curr_relative_tile_slot$/;"	kind:f	class:fire_muffin_sprite_stuff	access:public	signature:( sprite& the_powerup )
 fire_muffin_sprite_stuff::get_gfx_category	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const sprite_gfx_category get_gfx_category$/;"	kind:f	class:fire_muffin_sprite_stuff	access:public	signature:( sprite& the_powerup )
+fire_muffin_sprite_stuff::get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:fire_muffin_sprite_stuff	access:public	signature:()
 fire_muffin_sprite_stuff::get_sprite_type	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const sprite_type get_sprite_type() const$/;"	kind:f	class:fire_muffin_sprite_stuff	access:public	signature:() const
-fire_muffin_sprite_stuff::num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^		num_active_gfx_tiles = num_tiles_in_ss_16x16;$/;"	kind:m	class:fire_muffin_sprite_stuff	access:public
+fire_muffin_sprite_stuff::num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;$/;"	kind:m	class:fire_muffin_sprite_stuff	access:public
 fire_muffin_sprite_stuff::the_gfx_category	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr sprite_gfx_category the_gfx_category = sgc_powerup;$/;"	kind:m	class:fire_muffin_sprite_stuff	access:public
 fire_muffin_sprite_stuff::the_relative_metatile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr u32 the_relative_metatile_slot = 2, $/;"	kind:m	class:fire_muffin_sprite_stuff	access:public
 fire_muffin_sprite_stuff::the_sprite_type	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr sprite_type the_sprite_type = st_fire_muffin;$/;"	kind:m	class:fire_muffin_sprite_stuff	access:public
@@ -938,9 +937,9 @@ get_cmp_bd_size	game_engine_stuff/level_stuff/sublevel_class.hpp	/^	inline const
 get_corners	game_engine_stuff/coll_box_class.hpp	/^	void get_corners( vec2_f24p8& lt_corner, vec2_f24p8& rt_corner, $/;"	kind:p	class:coll_box	access:public	signature:( vec2_f24p8& lt_corner, vec2_f24p8& rt_corner, vec2_f24p8& rb_corner, vec2_f24p8& lb_corner )
 get_corners	game_engine_stuff/coll_box_class.thumb.cpp	/^void coll_box::get_corners( vec2_f24p8& lt_corner, vec2_f24p8& rt_corner, $/;"	kind:f	class:coll_box	signature:( vec2_f24p8& lt_corner, vec2_f24p8& rt_corner, vec2_f24p8& rb_corner, vec2_f24p8& lb_corner )
 get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_curr_relative_tile_slot$/;"	kind:f	class:chocolate_muffin_sprite_stuff	access:public	signature:( sprite& the_powerup )
+get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_curr_relative_tile_slot$/;"	kind:f	class:fire_muffin_sprite_stuff	access:public	signature:( sprite& the_powerup )
 get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_curr_relative_tile_slot$/;"	kind:f	class:ice_muffin_sprite_stuff	access:public	signature:( sprite& the_powerup )
 get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_curr_relative_tile_slot$/;"	kind:f	class:muffin_sprite_stuff	access:public	signature:( sprite& the_powerup )
-get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	virtual const u32 get_curr_relative_tile_slot( sprite& the_powerup )$/;"	kind:f	class:fire_muffin_sprite_stuff	access:public	signature:( sprite& the_powerup )
 get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	virtual const u32 get_curr_relative_tile_slot( sprite& the_player );$/;"	kind:p	class:player_sprite_stuff	access:public	signature:( sprite& the_player )
 get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.thumb.cpp	/^const u32 player_sprite_stuff::get_curr_relative_tile_slot $/;"	kind:f	class:player_sprite_stuff	signature:( sprite& the_player )
 get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	virtual const u32 get_curr_relative_tile_slot( sprite& the_sprite )$/;"	kind:p	class:sprite_base_stuff	access:public	signature:( sprite& the_sprite )
@@ -1033,6 +1032,14 @@ get_metatile_number	game_engine_stuff/block_stuff/wood_block_stuff_classes.thumb
 get_metatile_number_of_block_type	game_engine_stuff/block_stuff/block_stuff.hpp	/^inline u32 get_metatile_number_of_block_type( block_type the_block_type ) $/;"	kind:p	signature:( block_type the_block_type )
 get_metatile_number_of_block_type	game_engine_stuff/block_stuff/block_stuff.hpp	/^inline u32 get_metatile_number_of_block_type( block_type the_block_type )$/;"	kind:f	signature:( block_type the_block_type )
 get_next_node	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node<type>* get_next_node( sa_list_node<type>* pos )$/;"	kind:f	class:sa_forward_list	access:public	signature:( sa_list_node<type>* pos )
+get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:chocolate_muffin_sprite_stuff	access:public	signature:()
+get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:fire_muffin_sprite_stuff	access:public	signature:()
+get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:ice_muffin_sprite_stuff	access:public	signature:()
+get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:muffin_sprite_stuff	access:public	signature:()
+get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:player_sprite_stuff	access:public	signature:()
+get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:sprite_base_stuff	access:public	signature:()
+get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:waffle_sprite_stuff	access:public	signature:()
+get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/warp_block_sprite_stuff_class.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:warp_block_sprite_stuff	access:public	signature:()
 get_on_screen_pos	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline vec2_f24p8 get_on_screen_pos( const bg_point& camera_pos )$/;"	kind:f	class:sprite	access:public	signature:( const bg_point& camera_pos ) const
 get_pal_number	gba_specific_stuff/oam_entry_classes.hpp	/^	u32 get_pal_number() const$/;"	kind:f	class:oam_entry	access:public	signature:() const
 get_palette_number	game_engine_stuff/block_stuff/air_block_stuff_class.hpp	/^	virtual const u32 get_palette_number() __attribute__((_iwram_code));$/;"	kind:p	class:air_block_stuff	access:public	signature:()
@@ -1131,6 +1138,7 @@ get_the_sublevels	game_engine_stuff/level_stuff/level_class.hpp	/^	inline const 
 get_tile_number	gba_specific_stuff/oam_entry_classes.hpp	/^	u32 get_tile_number() const$/;"	kind:f	class:oam_entry	access:public	signature:() const
 get_uncmp_bd_size	game_engine_stuff/level_stuff/sublevel_class.hpp	/^	inline constexpr u32 get_uncmp_bd_size() const$/;"	kind:f	class:sublevel	access:public	signature:() const
 get_vflip_status	gba_specific_stuff/oam_entry_classes.hpp	/^	u32 get_vflip_status() const$/;"	kind:f	class:oam_entry	access:public	signature:() const
+get_vram_chunk_index	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline u32 get_vram_chunk_index() const$/;"	kind:f	class:sprite	access:public	signature:() const
 get_x_center	game_engine_stuff/coll_box_class.hpp	/^	inline fixed24p8 get_x_center() const$/;"	kind:f	class:coll_box	access:public	signature:() const
 get_x_coord	gba_specific_stuff/oam_entry_classes.hpp	/^	s32 get_x_coord() const$/;"	kind:f	class:oam_entry	access:public	signature:() const
 get_y_center	game_engine_stuff/coll_box_class.hpp	/^	inline fixed24p8 get_y_center() const$/;"	kind:f	class:coll_box	access:public	signature:() const
@@ -1283,8 +1291,9 @@ horiz_level_ysize	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static
 ice_muffin_sprite_stuff	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^class ice_muffin_sprite_stuff : public sprite_base_stuff$/;"	kind:c	inherits:sprite_base_stuff
 ice_muffin_sprite_stuff::get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_curr_relative_tile_slot$/;"	kind:f	class:ice_muffin_sprite_stuff	access:public	signature:( sprite& the_powerup )
 ice_muffin_sprite_stuff::get_gfx_category	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const sprite_gfx_category get_gfx_category$/;"	kind:f	class:ice_muffin_sprite_stuff	access:public	signature:( sprite& the_powerup )
+ice_muffin_sprite_stuff::get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:ice_muffin_sprite_stuff	access:public	signature:()
 ice_muffin_sprite_stuff::get_sprite_type	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const sprite_type get_sprite_type() const$/;"	kind:f	class:ice_muffin_sprite_stuff	access:public	signature:() const
-ice_muffin_sprite_stuff::num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^		num_active_gfx_tiles = num_tiles_in_ss_16x16;$/;"	kind:m	class:ice_muffin_sprite_stuff	access:public
+ice_muffin_sprite_stuff::num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;$/;"	kind:m	class:ice_muffin_sprite_stuff	access:public
 ice_muffin_sprite_stuff::the_gfx_category	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr sprite_gfx_category the_gfx_category = sgc_powerup;$/;"	kind:m	class:ice_muffin_sprite_stuff	access:public
 ice_muffin_sprite_stuff::the_relative_metatile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr u32 the_relative_metatile_slot = 3, $/;"	kind:m	class:ice_muffin_sprite_stuff	access:public
 ice_muffin_sprite_stuff::the_sprite_type	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr sprite_type the_sprite_type = st_ice_muffin;$/;"	kind:m	class:ice_muffin_sprite_stuff	access:public
@@ -1308,6 +1317,7 @@ init	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.thumb.cpp	/^void spr
 init_horiz_level_sprite_ipg_lists	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^	static inline void init_horiz_level_sprite_ipg_lists$/;"	kind:f	class:active_level_manager	access:public	signature:( const sprite_init_param_group* the_ext_sprite_ipg_arr, u32 the_ext_sprite_ipg_arr_size )
 init_horiz_level_sprite_ipg_lists	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void init_horiz_level_sprite_ipg_lists$/;"	kind:p	class:sprite_manager	access:public	signature:( const sprite_init_param_group* the_ext_sprite_ipg_arr, u32 the_ext_sprite_ipg_arr_size )
 init_horiz_level_sprite_ipg_lists	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^void sprite_manager::init_horiz_level_sprite_ipg_lists$/;"	kind:f	class:sprite_manager	signature:( const sprite_init_param_group* the_ext_sprite_ipg_arr, u32 the_ext_sprite_ipg_arr_size )
+init_the_array_of_active_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static inline void init_the_array_of_active_sprites()$/;"	kind:f	class:sprite_manager	access:public	signature:()
 init_the_player	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void init_the_player ( const vec2_f24p8& s_in_level_pos, $/;"	kind:p	class:sprite_manager	access:public	signature:( const vec2_f24p8& s_in_level_pos, const vec2_u32& the_level_size_2d, bg_point& camera_pos )
 init_the_player	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^void sprite_manager::init_the_player ( const vec2_f24p8& s_in_level_pos, $/;"	kind:f	class:sprite_manager	signature:( const vec2_f24p8& s_in_level_pos, const vec2_u32& the_level_size_2d, bg_point& camera_pos )
 initial_block_grid_x_coord	game_engine_stuff/level_stuff/sprite_level_data_stuff.hpp	/^	const u32 initial_block_grid_x_coord;$/;"	kind:m	class:sprite_init_param_group	access:public
@@ -1446,7 +1456,8 @@ main	main.thumb.cpp	/^int main()$/;"	kind:f	signature:()
 make_f24p8	game_engine_stuff/fixed_classes.hpp	/^inline fixed24p8 make_f24p8( s32 whole_part, u8 frac_part=0 )$/;"	kind:f	signature:( s32 whole_part, u8 frac_part=0 )
 make_f8p8	game_engine_stuff/fixed_classes.hpp	/^inline fixed8p8 make_f8p8( s8 whole_part, u8 frac_part=0 )$/;"	kind:f	signature:( s8 whole_part, u8 frac_part=0 )
 max_jump_hold_timer	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static constexpr s32 max_jump_hold_timer = 16;$/;"	kind:m	class:player_sprite_stuff	access:public
-max_num_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static constexpr u32 max_num_sprites = 40;$/;"	kind:m	class:sprite_manager	access:public
+max_num_32x32_metatiles	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 max_num_32x32_metatiles = 64;$/;"	kind:m	class:sprite_gfx_manager	access:public
+max_num_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static constexpr u32 max_num_sprites = 20;$/;"	kind:m	class:sprite_manager	access:public
 max_num_sublevels	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static constexpr u32 max_num_sublevels = max_num_sublevels_per_level;$/;"	kind:m	class:active_level	access:public
 max_num_sublevels	game_engine_stuff/level_stuff/level_class.hpp	/^	static constexpr u32 max_num_sublevels = max_num_sublevels_per_level;$/;"	kind:m	class:level	access:public
 max_num_sublevels_per_level	game_engine_stuff/level_stuff/level_defines.hpp	/^constexpr u32 max_num_sublevels_per_level = 8;$/;"	kind:v
@@ -1531,8 +1542,9 @@ move_timer_start	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^
 muffin_sprite_stuff	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^class muffin_sprite_stuff : public sprite_base_stuff$/;"	kind:c	inherits:sprite_base_stuff
 muffin_sprite_stuff::get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_curr_relative_tile_slot$/;"	kind:f	class:muffin_sprite_stuff	access:public	signature:( sprite& the_powerup )
 muffin_sprite_stuff::get_gfx_category	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const sprite_gfx_category get_gfx_category$/;"	kind:f	class:muffin_sprite_stuff	access:public	signature:( sprite& the_powerup )
+muffin_sprite_stuff::get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:muffin_sprite_stuff	access:public	signature:()
 muffin_sprite_stuff::get_sprite_type	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const sprite_type get_sprite_type() const$/;"	kind:f	class:muffin_sprite_stuff	access:public	signature:() const
-muffin_sprite_stuff::num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^		num_active_gfx_tiles = num_tiles_in_ss_16x16;$/;"	kind:m	class:muffin_sprite_stuff	access:public
+muffin_sprite_stuff::num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;$/;"	kind:m	class:muffin_sprite_stuff	access:public
 muffin_sprite_stuff::the_gfx_category	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr sprite_gfx_category the_gfx_category = sgc_powerup;$/;"	kind:m	class:muffin_sprite_stuff	access:public
 muffin_sprite_stuff::the_relative_metatile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr u32 the_relative_metatile_slot = 1, $/;"	kind:m	class:muffin_sprite_stuff	access:public
 muffin_sprite_stuff::the_sprite_type	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr sprite_type the_sprite_type = st_muffin;$/;"	kind:m	class:muffin_sprite_stuff	access:public
@@ -1541,7 +1553,6 @@ next_debug_f24p8	game_engine_stuff/debug_vars.hpp	33;"	kind:d
 next_debug_f8p8	game_engine_stuff/debug_vars.hpp	40;"	kind:d
 next_debug_s32	game_engine_stuff/debug_vars.hpp	19;"	kind:d
 next_debug_u32	game_engine_stuff/debug_vars.hpp	26;"	kind:d
-next_free_sprite_vram_slot	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.thumb.cpp	/^u32 next_free_sprite_vram_slot __attribute__((_iwram));$/;"	kind:v
 next_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	int next_node_index;$/;"	kind:m	class:sa_list_node	access:public
 nocash_soft_break	gba_specific_stuff/interrupt_stuff.hpp	/^inline void nocash_soft_break()$/;"	kind:f	signature:()
 node_is_at_end	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline bool node_is_at_end( sa_list_node<type>* curr_node )$/;"	kind:f	class:sa_forward_list	access:public	signature:( sa_list_node<type>* curr_node )
@@ -1549,31 +1560,33 @@ non_slope_block_coll_response_bot_16x16	game_engine_stuff/sprite_stuff/sprite_ba
 non_slope_block_coll_response_bot_16x16	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	virtual void non_slope_block_coll_response_bot_16x16$/;"	kind:p	class:sprite_base_stuff	access:protected	signature:( sprite& the_sprite, const block_coll_result& bl_coll_result, const block_coll_result& bm_coll_result, const block_coll_result& br_coll_result )
 non_slope_block_coll_response_bot_16x32	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.arm.cpp	/^void sprite_base_stuff::non_slope_block_coll_response_bot_16x32$/;"	kind:f	class:sprite_base_stuff	signature:( sprite& the_sprite, const block_coll_result& bl_coll_result, const block_coll_result& bm_coll_result, const block_coll_result& br_coll_result )
 non_slope_block_coll_response_bot_16x32	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	virtual void non_slope_block_coll_response_bot_16x32$/;"	kind:p	class:sprite_base_stuff	access:protected	signature:( sprite& the_sprite, const block_coll_result& bl_coll_result, const block_coll_result& bm_coll_result, const block_coll_result& br_coll_result )
-num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^		num_active_gfx_tiles = num_tiles_in_ss_16x16;$/;"	kind:m	class:chocolate_muffin_sprite_stuff	access:public
-num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^		num_active_gfx_tiles = num_tiles_in_ss_16x16;$/;"	kind:m	class:fire_muffin_sprite_stuff	access:public
-num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^		num_active_gfx_tiles = num_tiles_in_ss_16x16;$/;"	kind:m	class:ice_muffin_sprite_stuff	access:public
-num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^		num_active_gfx_tiles = num_tiles_in_ss_16x16;$/;"	kind:m	class:muffin_sprite_stuff	access:public
-num_active_gfx_tiles	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static constexpr u32 num_active_gfx_tiles = num_tiles_in_ss_16x32;$/;"	kind:m	class:player_sprite_stuff	access:public
-num_gfx_tiles	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^		num_gfx_tiles = num_tiles_in_ss_16x16;$/;"	kind:m	class:waffle_sprite_stuff	access:public
-num_gfx_tiles	game_engine_stuff/sprite_stuff/warp_block_sprite_stuff_class.hpp	/^		num_gfx_tiles = num_tiles_in_ss_16x16;$/;"	kind:m	class:warp_block_sprite_stuff	access:public
+num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;$/;"	kind:m	class:chocolate_muffin_sprite_stuff	access:public
+num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;$/;"	kind:m	class:fire_muffin_sprite_stuff	access:public
+num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;$/;"	kind:m	class:ice_muffin_sprite_stuff	access:public
+num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;$/;"	kind:m	class:muffin_sprite_stuff	access:public
+num_active_gfx_tiles	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static constexpr u32 num_active_gfx_tiles $/;"	kind:m	class:player_sprite_stuff	access:public
+num_active_gfx_tiles	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;$/;"	kind:m	class:sprite_base_stuff	access:public
+num_active_gfx_tiles	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;$/;"	kind:m	class:waffle_sprite_stuff	access:public
+num_active_gfx_tiles	game_engine_stuff/sprite_stuff/warp_block_sprite_stuff_class.hpp	/^		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;$/;"	kind:m	class:warp_block_sprite_stuff	access:public
 num_pixels_per_block_col	gba_specific_stuff/bg_reg_stuff.hpp	/^static const u32 num_pixels_per_block_col = 16;$/;"	kind:v
 num_pixels_per_block_row	gba_specific_stuff/bg_reg_stuff.hpp	/^static const u32 num_pixels_per_block_row = 16;$/;"	kind:v
 num_pixels_per_block_row_or_column	gba_specific_stuff/bg_reg_stuff.hpp	/^static const u32 num_pixels_per_block_row_or_column = 16;$/;"	kind:v
+num_pixels_per_tile	gba_specific_stuff/bg_reg_stuff.hpp	/^static const u32 num_pixels_per_tile = num_pixels_per_tile_row $/;"	kind:v
 num_pixels_per_tile_col	gba_specific_stuff/bg_reg_stuff.hpp	/^static const u32 num_pixels_per_tile_col = 8;$/;"	kind:v
 num_pixels_per_tile_row	gba_specific_stuff/bg_reg_stuff.hpp	/^static const u32 num_pixels_per_tile_row = 8;$/;"	kind:v
 num_pixels_per_tile_row_or_column	gba_specific_stuff/bg_reg_stuff.hpp	/^static const u32 num_pixels_per_tile_row_or_column = 8;$/;"	kind:v
-num_tiles_in_ss_16x16	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^static constexpr u32 num_tiles_in_ss_16x16 = ( 16 * 16 ) \/ ( 8 * 8 );$/;"	kind:v
-num_tiles_in_ss_16x32	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^static constexpr u32 num_tiles_in_ss_16x32 = ( 16 * 32 ) \/ ( 8 * 8 );$/;"	kind:v
-num_tiles_in_ss_16x8	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^static constexpr u32 num_tiles_in_ss_16x8 = ( 16 * 8 ) \/ ( 8 * 8 );$/;"	kind:v
-num_tiles_in_ss_32x16	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^static constexpr u32 num_tiles_in_ss_32x16 = ( 32 * 16 ) \/ ( 8 * 8 );$/;"	kind:v
-num_tiles_in_ss_32x32	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^static constexpr u32 num_tiles_in_ss_32x32 = ( 32 * 32 ) \/ ( 8 * 8 );$/;"	kind:v
-num_tiles_in_ss_32x64	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^static constexpr u32 num_tiles_in_ss_32x64 = ( 32 * 64 ) \/ ( 8 * 8 );$/;"	kind:v
-num_tiles_in_ss_32x8	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^static constexpr u32 num_tiles_in_ss_32x8 = ( 32 * 8 ) \/ ( 8 * 8 );$/;"	kind:v
-num_tiles_in_ss_64x32	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^static constexpr u32 num_tiles_in_ss_64x32 = ( 64 * 32 ) \/ ( 8 * 8 );$/;"	kind:v
-num_tiles_in_ss_64x64	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^static constexpr u32 num_tiles_in_ss_64x64 = ( 64 * 64 ) \/ ( 8 * 8 );$/;"	kind:v
-num_tiles_in_ss_8x16	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^static constexpr u32 num_tiles_in_ss_8x16 = ( 8 * 16 ) \/ ( 8 * 8 );$/;"	kind:v
-num_tiles_in_ss_8x32	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^static constexpr u32 num_tiles_in_ss_8x32 = ( 8 * 32 ) \/ ( 8 * 8 );$/;"	kind:v
-num_tiles_in_ss_8x8	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^static constexpr u32 num_tiles_in_ss_8x8 = ( 8 * 8 ) \/ ( 8 * 8 );$/;"	kind:v
+num_tiles_in_ss_16x16	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_16x16 = ( 16 * 16 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+num_tiles_in_ss_16x32	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_16x32 = ( 16 * 32 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+num_tiles_in_ss_16x8	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_16x8 = ( 16 * 8 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+num_tiles_in_ss_32x16	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_32x16 = ( 32 * 16 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+num_tiles_in_ss_32x32	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_32x32 = ( 32 * 32 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+num_tiles_in_ss_32x64	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_32x64 = ( 32 * 64 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+num_tiles_in_ss_32x8	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_32x8 = ( 32 * 8 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+num_tiles_in_ss_64x32	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_64x32 = ( 64 * 32 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+num_tiles_in_ss_64x64	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_64x64 = ( 64 * 64 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+num_tiles_in_ss_8x16	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_8x16 = ( 8 * 16 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+num_tiles_in_ss_8x32	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_8x32 = ( 8 * 32 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+num_tiles_in_ss_8x8	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_8x8 = ( 8 * 8 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
 num_used_points	game_engine_stuff/coll_point_group_class.hpp	/^	u32 num_used_points;$/;"	kind:m	class:coll_point_group	access:public
 oam_entry	gba_specific_stuff/oam_entry_classes.hpp	/^class oam_entry$/;"	kind:c
 oam_entry::attr0	gba_specific_stuff/oam_entry_classes.hpp	/^	u16 attr0;$/;"	kind:m	class:oam_entry	access:public
@@ -1699,9 +1712,9 @@ obj_attr2_pal_num_shift	gba_specific_stuff/oam_entry_defines.hpp	148;"	kind:d
 obj_attr2_tile_number	gba_specific_stuff/oam_entry_defines.hpp	126;"	kind:d
 obj_attr2_tile_number_mask	gba_specific_stuff/oam_entry_defines.hpp	128;"	kind:d
 obj_attr2_tile_number_shift	gba_specific_stuff/oam_entry_defines.hpp	129;"	kind:d
-obj_pal_ram	gba_specific_stuff/bg_reg_stuff.hpp	103;"	kind:d
+obj_pal_ram	gba_specific_stuff/bg_reg_stuff.hpp	106;"	kind:d
 obj_pal_ram_size	gba_specific_stuff/bg_reg_stuff.hpp	/^static const u32 obj_pal_ram_size = 0x200;$/;"	kind:v
-obj_tile_vram	gba_specific_stuff/bg_reg_stuff.hpp	40;"	kind:d
+obj_tile_vram	gba_specific_stuff/bg_reg_stuff.hpp	43;"	kind:d
 on_ground	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	bool on_ground;$/;"	kind:m	class:sprite	access:public
 operator !=	game_engine_stuff/fixed_classes.hpp	/^	inline bool operator != ( const fixed24p8& to_cmp ) const;$/;"	kind:p	class:fixed24p8	access:public	signature:( const fixed24p8& to_cmp ) const
 operator !=	game_engine_stuff/fixed_classes.hpp	/^	inline bool operator != ( const fixed8p8& to_cmp ) const;$/;"	kind:p	class:fixed8p8	access:public	signature:( const fixed8p8& to_cmp ) const
@@ -1864,6 +1877,7 @@ player_sprite_stuff::frm_walk_1	game_engine_stuff/sprite_stuff/player_sprite_stu
 player_sprite_stuff::get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	virtual const u32 get_curr_relative_tile_slot( sprite& the_player );$/;"	kind:p	class:player_sprite_stuff	access:public	signature:( sprite& the_player )
 player_sprite_stuff::get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.thumb.cpp	/^const u32 player_sprite_stuff::get_curr_relative_tile_slot $/;"	kind:f	class:player_sprite_stuff	signature:( sprite& the_player )
 player_sprite_stuff::get_gfx_category	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	inline virtual const sprite_gfx_category get_gfx_category $/;"	kind:f	class:player_sprite_stuff	access:public	signature:( sprite& the_player )
+player_sprite_stuff::get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:player_sprite_stuff	access:public	signature:()
 player_sprite_stuff::get_sprite_type	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	inline virtual const sprite_type get_sprite_type() const$/;"	kind:f	class:player_sprite_stuff	access:public	signature:() const
 player_sprite_stuff::gfx_update	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	virtual void gfx_update( sprite& the_player );$/;"	kind:p	class:player_sprite_stuff	access:public	signature:( sprite& the_player )
 player_sprite_stuff::gfx_update	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.thumb.cpp	/^void player_sprite_stuff::gfx_update( sprite& the_player )$/;"	kind:f	class:player_sprite_stuff	signature:( sprite& the_player )
@@ -1876,7 +1890,7 @@ player_sprite_stuff::init	game_engine_stuff/sprite_stuff/player_sprite_stuff_cla
 player_sprite_stuff::jump_vel	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static constexpr fixed24p8 jump_vel = {-0x400};$/;"	kind:m	class:player_sprite_stuff	access:public
 player_sprite_stuff::max_jump_hold_timer	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static constexpr s32 max_jump_hold_timer = 16;$/;"	kind:m	class:player_sprite_stuff	access:public
 player_sprite_stuff::max_run_speed	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static constexpr fixed24p8 max_run_speed = {0x200};$/;"	kind:m	class:player_sprite_stuff	access:public
-player_sprite_stuff::num_active_gfx_tiles	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static constexpr u32 num_active_gfx_tiles = num_tiles_in_ss_16x32;$/;"	kind:m	class:player_sprite_stuff	access:public
+player_sprite_stuff::num_active_gfx_tiles	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static constexpr u32 num_active_gfx_tiles $/;"	kind:m	class:player_sprite_stuff	access:public
 player_sprite_stuff::run_frame_timer_end	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static constexpr s32 run_frame_timer_end = 2;$/;"	kind:m	class:player_sprite_stuff	access:public
 player_sprite_stuff::run_toggle	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static bool run_toggle __attribute__((_iwram));$/;"	kind:m	class:player_sprite_stuff	access:public
 player_sprite_stuff::run_toggle	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.thumb.cpp	/^bool player_sprite_stuff::run_toggle;$/;"	kind:m	class:player_sprite_stuff	file:
@@ -1919,16 +1933,16 @@ push_coll_point	game_engine_stuff/coll_point_group_class.hpp	/^	inline void push
 push_front	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline void push_front( const type& to_push )$/;"	kind:f	class:sa_forward_list	access:public	signature:( const type& to_push )
 quotient	gba_specific_stuff/bios_function_wrappers.hpp	/^	s32 quotient;$/;"	kind:m	class:bios_div_result	access:public
 quotient_abs	gba_specific_stuff/bios_function_wrappers.hpp	/^	u32 quotient_abs;$/;"	kind:m	class:bios_div_result	access:public
-reg_bg0cnt	gba_specific_stuff/bg_reg_stuff.hpp	121;"	kind:d
-reg_bg1cnt	gba_specific_stuff/bg_reg_stuff.hpp	122;"	kind:d
-reg_bg2cnt	gba_specific_stuff/bg_reg_stuff.hpp	123;"	kind:d
-reg_bg3cnt	gba_specific_stuff/bg_reg_stuff.hpp	124;"	kind:d
-reg_bgcnt	gba_specific_stuff/bg_reg_stuff.hpp	120;"	kind:d
-reg_bghofs_n	gba_specific_stuff/bg_reg_stuff.hpp	129;"	kind:d
-reg_bgofs	gba_specific_stuff/bg_reg_stuff.hpp	127;"	kind:d
-reg_bgvofs_n	gba_specific_stuff/bg_reg_stuff.hpp	130;"	kind:d
-reg_dispcnt	gba_specific_stuff/bg_reg_stuff.hpp	115;"	kind:d
-reg_dispstat	gba_specific_stuff/bg_reg_stuff.hpp	116;"	kind:d
+reg_bg0cnt	gba_specific_stuff/bg_reg_stuff.hpp	124;"	kind:d
+reg_bg1cnt	gba_specific_stuff/bg_reg_stuff.hpp	125;"	kind:d
+reg_bg2cnt	gba_specific_stuff/bg_reg_stuff.hpp	126;"	kind:d
+reg_bg3cnt	gba_specific_stuff/bg_reg_stuff.hpp	127;"	kind:d
+reg_bgcnt	gba_specific_stuff/bg_reg_stuff.hpp	123;"	kind:d
+reg_bghofs_n	gba_specific_stuff/bg_reg_stuff.hpp	132;"	kind:d
+reg_bgofs	gba_specific_stuff/bg_reg_stuff.hpp	130;"	kind:d
+reg_bgvofs_n	gba_specific_stuff/bg_reg_stuff.hpp	133;"	kind:d
+reg_dispcnt	gba_specific_stuff/bg_reg_stuff.hpp	118;"	kind:d
+reg_dispstat	gba_specific_stuff/bg_reg_stuff.hpp	119;"	kind:d
 reg_dma0cnt	gba_specific_stuff/dma_stuff.hpp	33;"	kind:d
 reg_dma0dad	gba_specific_stuff/dma_stuff.hpp	22;"	kind:d
 reg_dma0sad	gba_specific_stuff/dma_stuff.hpp	11;"	kind:d
@@ -1962,10 +1976,12 @@ reg_tm2cnt_h	gba_specific_stuff/timer_stuff.hpp	18;"	kind:d
 reg_tm2cnt_l	gba_specific_stuff/timer_stuff.hpp	12;"	kind:d
 reg_tm3cnt_h	gba_specific_stuff/timer_stuff.hpp	19;"	kind:d
 reg_tm3cnt_l	gba_specific_stuff/timer_stuff.hpp	13;"	kind:d
-reg_vcount	gba_specific_stuff/bg_reg_stuff.hpp	117;"	kind:d
+reg_vcount	gba_specific_stuff/bg_reg_stuff.hpp	120;"	kind:d
 reinit_by_spawning	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline void reinit_by_spawning( sprite_type s_the_sprite_type, $/;"	kind:f	class:sprite	access:public	signature:( sprite_type s_the_sprite_type, const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, bool facing_left=true )
 reinit_with_sprite_ipg	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	void reinit_with_sprite_ipg$/;"	kind:p	class:sprite	access:public	signature:( sprite_init_param_group* s_the_sprite_ipg )
+reinit_with_sprite_ipg	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	void reinit_with_sprite_ipg( u32 s_vram_chunk_index,$/;"	kind:p	class:sprite	access:public	signature:( u32 s_vram_chunk_index, sprite_init_param_group* s_the_sprite_ipg )
 reinit_with_sprite_ipg	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^void sprite::reinit_with_sprite_ipg$/;"	kind:f	class:sprite	signature:( sprite_init_param_group* s_the_sprite_ipg )
+reinit_with_sprite_ipg	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^void sprite::reinit_with_sprite_ipg( u32 s_vram_chunk_index,$/;"	kind:f	class:sprite	signature:( u32 s_vram_chunk_index, sprite_init_param_group* s_the_sprite_ipg )
 remainder	gba_specific_stuff/bios_function_wrappers.hpp	/^	s32 remainder;$/;"	kind:m	class:bios_div_result	access:public
 rgb15	gba_specific_stuff/bg_reg_stuff.hpp	/^inline u16 rgb15( u32 red, u32 green, u32 blue )$/;"	kind:f	signature:( u32 red, u32 green, u32 blue )
 right	game_engine_stuff/coll_box_class.hpp	/^	inline fixed24p8 right() const$/;"	kind:f	class:coll_box	access:public	signature:() const
@@ -2000,13 +2016,13 @@ sa_forward_list::sa_forward_list	game_engine_stuff/sa_list_class_stuff.hpp	/^	in
 sa_forward_list::the_array	game_engine_stuff/sa_list_class_stuff.hpp	/^	sa_list_node<type> the_array[max_size_plus_1];$/;"	kind:m	class:sa_forward_list	access:public
 sa_forward_list::the_free_index_stack	game_engine_stuff/sa_list_class_stuff.hpp	/^	sa_free_list<max_size_plus_1> the_free_index_stack;$/;"	kind:m	class:sa_forward_list	access:public
 sa_free_list	game_engine_stuff/sa_stack_class.hpp	/^	inline sa_free_list()$/;"	kind:f	class:sa_free_list	access:public	signature:()
-sa_free_list	game_engine_stuff/sa_stack_class.hpp	/^class sa_free_list : public sa_stack < int, size >$/;"	kind:c	inherits:sa_stack
+sa_free_list	game_engine_stuff/sa_stack_class.hpp	/^class sa_free_list : public sa_stack< int, size >$/;"	kind:c	inherits:sa_stack
 sa_free_list::sa_free_list	game_engine_stuff/sa_stack_class.hpp	/^	inline sa_free_list()$/;"	kind:f	class:sa_free_list	access:public	signature:()
 sa_list_class_stuff_hpp	game_engine_stuff/sa_list_class_stuff.hpp	2;"	kind:d
 sa_list_node	game_engine_stuff/sa_list_class_stuff.hpp	/^class sa_list_node$/;"	kind:c
 sa_list_node::next_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	int next_node_index;$/;"	kind:m	class:sa_list_node	access:public
 sa_list_node::the_data	game_engine_stuff/sa_list_class_stuff.hpp	/^	type the_data;$/;"	kind:m	class:sa_list_node	access:public
-sa_stack	game_engine_stuff/sa_stack_class.hpp	/^	inline sa_stack()$/;"	kind:f	class:sa_stack	access:public	signature:()
+sa_stack	game_engine_stuff/sa_stack_class.hpp	/^	inline sa_stack() : curr_index(0)$/;"	kind:f	class:sa_stack	access:public	signature:()
 sa_stack	game_engine_stuff/sa_stack_class.hpp	/^class sa_stack$/;"	kind:c
 sa_stack::curr_index	game_engine_stuff/sa_stack_class.hpp	/^	u32 curr_index;$/;"	kind:m	class:sa_stack	access:public
 sa_stack::get_size	game_engine_stuff/sa_stack_class.hpp	/^	inline u32 get_size() const$/;"	kind:f	class:sa_stack	access:public	signature:() const
@@ -2014,7 +2030,7 @@ sa_stack::peek_top	game_engine_stuff/sa_stack_class.hpp	/^	inline const type& pe
 sa_stack::peek_top	game_engine_stuff/sa_stack_class.hpp	/^	inline type& peek_top()$/;"	kind:f	class:sa_stack	access:public	signature:()
 sa_stack::pop	game_engine_stuff/sa_stack_class.hpp	/^	inline const type& pop()$/;"	kind:f	class:sa_stack	access:public	signature:()
 sa_stack::push	game_engine_stuff/sa_stack_class.hpp	/^	inline void push( const type& to_push )$/;"	kind:f	class:sa_stack	access:public	signature:( const type& to_push )
-sa_stack::sa_stack	game_engine_stuff/sa_stack_class.hpp	/^	inline sa_stack()$/;"	kind:f	class:sa_stack	access:public	signature:()
+sa_stack::sa_stack	game_engine_stuff/sa_stack_class.hpp	/^	inline sa_stack() : curr_index(0)$/;"	kind:f	class:sa_stack	access:public	signature:()
 sa_stack::the_array	game_engine_stuff/sa_stack_class.hpp	/^	type the_array[size];$/;"	kind:m	class:sa_stack	access:public
 sa_stack_class_hpp	game_engine_stuff/sa_stack_class.hpp	2;"	kind:d
 scr_entry	gba_specific_stuff/bg_reg_stuff.hpp	/^typedef u16 scr_entry;$/;"	kind:t
@@ -2036,17 +2052,17 @@ sdata_index	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	enum
 sdata_index	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	enum sdata_index { sdi_initial_pos_x, sdi_initial_pos_y, $/;"	kind:g	class:waffle_sprite_stuff	access:public
 sdi_initial_pos_x	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	enum sdata_index { sdi_initial_pos_x, sdi_initial_pos_y, $/;"	kind:e	enum:waffle_sprite_stuff::sdata_index
 sdi_initial_pos_y	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	enum sdata_index { sdi_initial_pos_x, sdi_initial_pos_y, $/;"	kind:e	enum:waffle_sprite_stuff::sdata_index
-sdi_move_timer	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^		sdi_move_timer, };$/;"	kind:e	enum:waffle_sprite_stuff::sdata_index
+sdi_move_timer	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^		sdi_move_timer, } __attribute__((_align4));$/;"	kind:e	enum:waffle_sprite_stuff::sdata_index
 sdi_walk_frame_timer	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	enum sdata_index { sdi_walk_frame_timer } __attribute__((_align4));$/;"	kind:e	enum:player_sprite_stuff::sdata_index
-se_flip_mask	gba_specific_stuff/bg_reg_stuff.hpp	86;"	kind:d
-se_hflip	gba_specific_stuff/bg_reg_stuff.hpp	84;"	kind:d
-se_id	gba_specific_stuff/bg_reg_stuff.hpp	79;"	kind:d
-se_id_mask	gba_specific_stuff/bg_reg_stuff.hpp	80;"	kind:d
-se_no_flip	gba_specific_stuff/bg_reg_stuff.hpp	83;"	kind:d
-se_palbank	gba_specific_stuff/bg_reg_stuff.hpp	89;"	kind:d
-se_palbank_mask	gba_specific_stuff/bg_reg_stuff.hpp	90;"	kind:d
-se_ram	gba_specific_stuff/bg_reg_stuff.hpp	70;"	kind:d
-se_vflip	gba_specific_stuff/bg_reg_stuff.hpp	85;"	kind:d
+se_flip_mask	gba_specific_stuff/bg_reg_stuff.hpp	89;"	kind:d
+se_hflip	gba_specific_stuff/bg_reg_stuff.hpp	87;"	kind:d
+se_id	gba_specific_stuff/bg_reg_stuff.hpp	82;"	kind:d
+se_id_mask	gba_specific_stuff/bg_reg_stuff.hpp	83;"	kind:d
+se_no_flip	gba_specific_stuff/bg_reg_stuff.hpp	86;"	kind:d
+se_palbank	gba_specific_stuff/bg_reg_stuff.hpp	92;"	kind:d
+se_palbank_mask	gba_specific_stuff/bg_reg_stuff.hpp	93;"	kind:d
+se_ram	gba_specific_stuff/bg_reg_stuff.hpp	73;"	kind:d
+se_vflip	gba_specific_stuff/bg_reg_stuff.hpp	88;"	kind:d
 set_bits	game_engine_stuff/misc_bitwise_funcs.hpp	/^inline void set_bits( type& to_set, u32 mask )$/;"	kind:f	signature:( type& to_set, u32 mask )
 set_pal_number	gba_specific_stuff/oam_entry_classes.hpp	/^	void set_pal_number( u32 n_pal_num )$/;"	kind:f	class:oam_entry	access:public	signature:( u32 n_pal_num )
 set_shape_size	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline void set_shape_size( oam_entry::shape_size n_shape_size )$/;"	kind:f	class:sprite	access:public	signature:( oam_entry::shape_size n_shape_size )
@@ -2057,6 +2073,7 @@ set_shape_size_with_vec2	gba_specific_stuff/oam_entry_classes.thumb.cpp	/^void o
 set_side_coords	game_engine_stuff/coll_box_class.hpp	/^	void set_side_coords( fixed24p8 left_x, fixed24p8 right_x,$/;"	kind:p	class:coll_box	access:public	signature:( fixed24p8 left_x, fixed24p8 right_x, fixed24p8 top_y, fixed24p8 bot_y )
 set_side_coords	game_engine_stuff/coll_box_class.thumb.cpp	/^void coll_box::set_side_coords( fixed24p8 left_x, fixed24p8 right_x,$/;"	kind:f	class:coll_box	signature:( fixed24p8 left_x, fixed24p8 right_x, fixed24p8 top_y, fixed24p8 bot_y )
 set_tile_number	gba_specific_stuff/oam_entry_classes.hpp	/^	void set_tile_number( u32 n_tile_num )$/;"	kind:f	class:oam_entry	access:public	signature:( u32 n_tile_num )
+set_vram_chunk_index	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline void set_vram_chunk_index( u32 n_vram_chunk_index )$/;"	kind:f	class:sprite	access:public	signature:( u32 n_vram_chunk_index )
 set_x_coord	gba_specific_stuff/oam_entry_classes.hpp	/^	void set_x_coord( s32 n_x_coord )$/;"	kind:f	class:oam_entry	access:public	signature:( s32 n_x_coord )
 set_y_coord	gba_specific_stuff/oam_entry_classes.hpp	/^	void set_y_coord( s32 n_y_coord )$/;"	kind:f	class:oam_entry	access:public	signature:( s32 n_y_coord )
 sgc_block_like_0	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	sgc_block_like_0,$/;"	kind:e	enum:sprite_gfx_category
@@ -2103,10 +2120,9 @@ spawn_sprites_if_needed	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	
 spawn_state	game_engine_stuff/level_stuff/sprite_level_data_stuff.hpp	/^	sprite_spawn_state spawn_state;$/;"	kind:m	class:sprite_init_param_group	access:public
 speed	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static fixed24p8 speed __attribute__((_iwram));$/;"	kind:m	class:player_sprite_stuff	access:public
 speed	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.thumb.cpp	/^fixed24p8 player_sprite_stuff::speed;$/;"	kind:m	class:player_sprite_stuff	file:
-sprite	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	sprite( sprite_init_param_group* s_the_sprite_ipg );$/;"	kind:p	class:sprite	access:public	signature:( sprite_init_param_group* s_the_sprite_ipg )
+sprite	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline sprite( u32 s_vram_chunk_index )$/;"	kind:f	class:sprite	access:public	signature:( u32 s_vram_chunk_index )
 sprite	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	sprite();$/;"	kind:p	class:sprite	access:public	signature:()
 sprite	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^class sprite$/;"	kind:c
-sprite	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^sprite::sprite( sprite_init_param_group* s_the_sprite_ipg )$/;"	kind:f	class:sprite	signature:( sprite_init_param_group* s_the_sprite_ipg )
 sprite	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^sprite::sprite()$/;"	kind:f	class:sprite	signature:()
 sprite::block_collision_stuff	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	void block_collision_stuff() __attribute__((_iwram_code));$/;"	kind:p	class:sprite	access:public	signature:()
 sprite::block_collision_stuff	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^void sprite::block_collision_stuff()$/;"	kind:f	class:sprite	signature:()
@@ -2115,13 +2131,13 @@ sprite::camera_follow_basic	game_engine_stuff/sprite_stuff/sprite_class.thumb.cp
 sprite::cb_pos_offset	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	vec2_f24p8 cb_pos_offset;$/;"	kind:m	class:sprite	access:public
 sprite::center_camera_almost	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	void center_camera_almost( bg_point& camera_pos ) const$/;"	kind:p	class:sprite	access:public	signature:( bg_point& camera_pos ) const
 sprite::center_camera_almost	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^void sprite::center_camera_almost( bg_point& camera_pos ) const$/;"	kind:f	class:sprite	signature:( bg_point& camera_pos ) const
-sprite::copy_the_oam_entry_to_oam_mirror	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	void copy_the_oam_entry_to_oam_mirror( u32 slot_for_oam_mirror )$/;"	kind:p	class:sprite	access:public	signature:( u32 slot_for_oam_mirror )
-sprite::copy_the_oam_entry_to_oam_mirror	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^void sprite::copy_the_oam_entry_to_oam_mirror( u32 slot_for_oam_mirror )$/;"	kind:f	class:sprite	signature:( u32 slot_for_oam_mirror )
+sprite::copy_the_oam_entry_to_oam_mirror	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline void copy_the_oam_entry_to_oam_mirror( u32 slot_for_oam_mirror )$/;"	kind:f	class:sprite	access:public	signature:( u32 slot_for_oam_mirror )
 sprite::get_on_screen_pos	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline vec2_f24p8 get_on_screen_pos( const bg_point& camera_pos )$/;"	kind:f	class:sprite	access:public	signature:( const bg_point& camera_pos ) const
 sprite::get_shape_size	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline oam_entry::shape_size get_shape_size() const$/;"	kind:f	class:sprite	access:public	signature:() const
 sprite::get_shape_size_as_vec2	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline const vec2_u32& get_shape_size_as_vec2() const$/;"	kind:f	class:sprite	access:public	signature:() const
 sprite::get_shape_size_as_vec2_raw	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	vec2_u32 get_shape_size_as_vec2_raw() const$/;"	kind:p	class:sprite	access:protected	signature:() const
 sprite::get_shape_size_as_vec2_raw	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^vec2_u32 sprite::get_shape_size_as_vec2_raw() const$/;"	kind:f	class:sprite	signature:() const
+sprite::get_vram_chunk_index	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline u32 get_vram_chunk_index() const$/;"	kind:f	class:sprite	access:public	signature:() const
 sprite::in_level_pos	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	vec2_f24p8 in_level_pos;$/;"	kind:m	class:sprite	access:public
 sprite::jump_hold_timer	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	s32 jump_hold_timer;$/;"	kind:m	class:sprite	access:public
 sprite::misc_data_s	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	s32 misc_data_s[misc_data_size];$/;"	kind:m	class:sprite	access:public
@@ -2130,11 +2146,13 @@ sprite::misc_data_u	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	u32 misc_
 sprite::on_ground	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	bool on_ground;$/;"	kind:m	class:sprite	access:public
 sprite::reinit_by_spawning	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline void reinit_by_spawning( sprite_type s_the_sprite_type, $/;"	kind:f	class:sprite	access:public	signature:( sprite_type s_the_sprite_type, const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, bool facing_left=true )
 sprite::reinit_with_sprite_ipg	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	void reinit_with_sprite_ipg$/;"	kind:p	class:sprite	access:public	signature:( sprite_init_param_group* s_the_sprite_ipg )
+sprite::reinit_with_sprite_ipg	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	void reinit_with_sprite_ipg( u32 s_vram_chunk_index,$/;"	kind:p	class:sprite	access:public	signature:( u32 s_vram_chunk_index, sprite_init_param_group* s_the_sprite_ipg )
 sprite::reinit_with_sprite_ipg	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^void sprite::reinit_with_sprite_ipg$/;"	kind:f	class:sprite	signature:( sprite_init_param_group* s_the_sprite_ipg )
+sprite::reinit_with_sprite_ipg	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^void sprite::reinit_with_sprite_ipg( u32 s_vram_chunk_index,$/;"	kind:f	class:sprite	signature:( u32 s_vram_chunk_index, sprite_init_param_group* s_the_sprite_ipg )
 sprite::set_shape_size	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline void set_shape_size( oam_entry::shape_size n_shape_size )$/;"	kind:f	class:sprite	access:public	signature:( oam_entry::shape_size n_shape_size )
-sprite::sprite	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	sprite( sprite_init_param_group* s_the_sprite_ipg );$/;"	kind:p	class:sprite	access:public	signature:( sprite_init_param_group* s_the_sprite_ipg )
+sprite::set_vram_chunk_index	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline void set_vram_chunk_index( u32 n_vram_chunk_index )$/;"	kind:f	class:sprite	access:public	signature:( u32 n_vram_chunk_index )
+sprite::sprite	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline sprite( u32 s_vram_chunk_index )$/;"	kind:f	class:sprite	access:public	signature:( u32 s_vram_chunk_index )
 sprite::sprite	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	sprite();$/;"	kind:p	class:sprite	access:public	signature:()
-sprite::sprite	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^sprite::sprite( sprite_init_param_group* s_the_sprite_ipg )$/;"	kind:f	class:sprite	signature:( sprite_init_param_group* s_the_sprite_ipg )
 sprite::sprite	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^sprite::sprite()$/;"	kind:f	class:sprite	signature:()
 sprite::the_coll_box	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	coll_box the_coll_box;$/;"	kind:m	class:sprite	access:public
 sprite::the_oam_entry	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	oam_entry the_oam_entry;$/;"	kind:m	class:sprite	access:public
@@ -2146,6 +2164,7 @@ sprite::update_f24p8_positions	game_engine_stuff/sprite_stuff/sprite_class.hpp	/
 sprite::update_on_screen_pos	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	void update_on_screen_pos( const bg_point& camera_pos )$/;"	kind:p	class:sprite	access:public	signature:( const bg_point& camera_pos )
 sprite::update_on_screen_pos	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^void sprite::update_on_screen_pos( const bg_point& camera_pos )$/;"	kind:f	class:sprite	signature:( const bg_point& camera_pos )
 sprite::vel	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	vec2_f24p8 vel;$/;"	kind:m	class:sprite	access:public
+sprite::vram_chunk_index	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	u32 vram_chunk_index;$/;"	kind:m	class:sprite	access:protected
 sprite_base_stuff	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^class sprite_base_stuff$/;"	kind:c
 sprite_base_stuff::apply_gravity	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.arm.cpp	/^void sprite_base_stuff::apply_gravity( sprite& the_sprite )$/;"	kind:f	class:sprite_base_stuff	signature:( sprite& the_sprite )
 sprite_base_stuff::apply_gravity	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	virtual void apply_gravity( sprite& the_sprite )$/;"	kind:p	class:sprite_base_stuff	access:public	signature:( sprite& the_sprite )
@@ -2193,6 +2212,7 @@ sprite_base_stuff::get_curr_tile_slot	game_engine_stuff/sprite_stuff/sprite_base
 sprite_base_stuff::get_curr_tile_slot	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.thumb.cpp	/^const u32 sprite_base_stuff::get_curr_tile_slot( sprite& the_sprite )$/;"	kind:f	class:sprite_base_stuff	signature:( sprite& the_sprite )
 sprite_base_stuff::get_gfx_category	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	virtual const sprite_gfx_category get_gfx_category $/;"	kind:p	class:sprite_base_stuff	access:public	signature:( sprite& the_sprite )
 sprite_base_stuff::get_gfx_category	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.thumb.cpp	/^const sprite_gfx_category sprite_base_stuff::get_gfx_category$/;"	kind:f	class:sprite_base_stuff	signature:( sprite& the_sprite )
+sprite_base_stuff::get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:sprite_base_stuff	access:public	signature:()
 sprite_base_stuff::get_sprite_type	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	virtual const sprite_type get_sprite_type() const;$/;"	kind:p	class:sprite_base_stuff	access:public	signature:() const
 sprite_base_stuff::get_sprite_type	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.thumb.cpp	/^const sprite_type sprite_base_stuff::get_sprite_type() const$/;"	kind:f	class:sprite_base_stuff	signature:() const
 sprite_base_stuff::gfx_update	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	virtual void gfx_update( sprite& the_sprite )$/;"	kind:p	class:sprite_base_stuff	access:public	signature:( sprite& the_sprite )
@@ -2211,12 +2231,13 @@ sprite_base_stuff::non_slope_block_coll_response_bot_16x16	game_engine_stuff/spr
 sprite_base_stuff::non_slope_block_coll_response_bot_16x16	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	virtual void non_slope_block_coll_response_bot_16x16$/;"	kind:p	class:sprite_base_stuff	access:protected	signature:( sprite& the_sprite, const block_coll_result& bl_coll_result, const block_coll_result& bm_coll_result, const block_coll_result& br_coll_result )
 sprite_base_stuff::non_slope_block_coll_response_bot_16x32	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.arm.cpp	/^void sprite_base_stuff::non_slope_block_coll_response_bot_16x32$/;"	kind:f	class:sprite_base_stuff	signature:( sprite& the_sprite, const block_coll_result& bl_coll_result, const block_coll_result& bm_coll_result, const block_coll_result& br_coll_result )
 sprite_base_stuff::non_slope_block_coll_response_bot_16x32	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	virtual void non_slope_block_coll_response_bot_16x32$/;"	kind:p	class:sprite_base_stuff	access:protected	signature:( sprite& the_sprite, const block_coll_result& bl_coll_result, const block_coll_result& bm_coll_result, const block_coll_result& br_coll_result )
+sprite_base_stuff::num_active_gfx_tiles	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;$/;"	kind:m	class:sprite_base_stuff	access:public
 sprite_base_stuff::slope_block_coll_response_bot_16x16	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.arm.cpp	/^block_type sprite_base_stuff::slope_block_coll_response_bot_16x16$/;"	kind:f	class:sprite_base_stuff	signature:( sprite& the_sprite, coll_point_group& the_pt_group, block_coll_result& bm_coll_result, block_coll_result& bl_coll_result, block_coll_result& br_coll_result, bool hitting_tltr )
 sprite_base_stuff::slope_block_coll_response_bot_16x16	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	virtual block_type slope_block_coll_response_bot_16x16$/;"	kind:p	class:sprite_base_stuff	access:protected	signature:( sprite& the_sprite, coll_point_group& the_pt_group, block_coll_result& bl_coll_result, block_coll_result& bm_coll_result, block_coll_result& br_coll_result, bool hitting_tltr=false )
 sprite_base_stuff::slope_block_coll_response_bot_16x32	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.arm.cpp	/^block_type sprite_base_stuff::slope_block_coll_response_bot_16x32$/;"	kind:f	class:sprite_base_stuff	signature:( sprite& the_sprite, coll_point_group& the_pt_group, block_coll_result& bl_coll_result, block_coll_result& bm_coll_result, block_coll_result& br_coll_result, bool hitting_tltr )
 sprite_base_stuff::slope_block_coll_response_bot_16x32	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	virtual block_type slope_block_coll_response_bot_16x32$/;"	kind:p	class:sprite_base_stuff	access:protected	signature:( sprite& the_sprite, coll_point_group& the_pt_group, block_coll_result& bl_coll_result, block_coll_result& bm_coll_result, block_coll_result& br_coll_result, bool hitting_tltr=false )
 sprite_base_stuff::the_gfx_category	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	static constexpr sprite_gfx_category the_gfx_category = sgc_player;$/;"	kind:m	class:sprite_base_stuff	access:public
-sprite_base_stuff::the_relative_tile_slot	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	static constexpr u32 the_relative_tile_slot = 7 $/;"	kind:m	class:sprite_base_stuff	access:public
+sprite_base_stuff::the_relative_metatile_slot	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	static constexpr u32 the_relative_metatile_slot = 7,$/;"	kind:m	class:sprite_base_stuff	access:public
 sprite_base_stuff::update_part_1	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	virtual void update_part_1( sprite& the_sprite )$/;"	kind:p	class:sprite_base_stuff	access:public	signature:( sprite& the_sprite )
 sprite_base_stuff::update_part_1	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.thumb.cpp	/^void sprite_base_stuff::update_part_1( sprite& the_sprite )$/;"	kind:f	class:sprite_base_stuff	signature:( sprite& the_sprite )
 sprite_base_stuff::update_part_2	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	virtual void update_part_2( sprite& the_sprite, $/;"	kind:p	class:sprite_base_stuff	access:public	signature:( sprite& the_sprite, const bg_point& camera_pos, int& next_oam_index )
@@ -2226,7 +2247,28 @@ sprite_base_stuff::update_part_2	game_engine_stuff/sprite_stuff/sprite_base_stuf
 sprite_base_stuff_class_hpp	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	2;"	kind:d
 sprite_class_hpp	game_engine_stuff/sprite_stuff/sprite_class.hpp	2;"	kind:d
 sprite_gfx_category	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^enum sprite_gfx_category$/;"	kind:g
-sprite_gfx_category_first_vram_slot_list	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.thumb.cpp	/^u32 sprite_gfx_category_first_vram_slot_list[sgc_count] $/;"	kind:v
+sprite_gfx_manager	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^class sprite_gfx_manager$/;"	kind:c
+sprite_gfx_manager::max_num_32x32_metatiles	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 max_num_32x32_metatiles = 64;$/;"	kind:m	class:sprite_gfx_manager	access:public
+sprite_gfx_manager::num_tiles_in_ss_16x16	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_16x16 = ( 16 * 16 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+sprite_gfx_manager::num_tiles_in_ss_16x32	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_16x32 = ( 16 * 32 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+sprite_gfx_manager::num_tiles_in_ss_16x8	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_16x8 = ( 16 * 8 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+sprite_gfx_manager::num_tiles_in_ss_32x16	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_32x16 = ( 32 * 16 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+sprite_gfx_manager::num_tiles_in_ss_32x32	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_32x32 = ( 32 * 32 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+sprite_gfx_manager::num_tiles_in_ss_32x64	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_32x64 = ( 32 * 64 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+sprite_gfx_manager::num_tiles_in_ss_32x8	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_32x8 = ( 32 * 8 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+sprite_gfx_manager::num_tiles_in_ss_64x32	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_64x32 = ( 64 * 32 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+sprite_gfx_manager::num_tiles_in_ss_64x64	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_64x64 = ( 64 * 64 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+sprite_gfx_manager::num_tiles_in_ss_8x16	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_8x16 = ( 8 * 16 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+sprite_gfx_manager::num_tiles_in_ss_8x32	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_8x32 = ( 8 * 32 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+sprite_gfx_manager::num_tiles_in_ss_8x8	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static constexpr u32 num_tiles_in_ss_8x8 = ( 8 * 8 ) $/;"	kind:m	class:sprite_gfx_manager	access:public
+sprite_gfx_manager::temp_gfx_pointer_arr	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static const u16* temp_gfx_pointer_arr[];$/;"	kind:m	class:sprite_gfx_manager	access:public
+sprite_gfx_manager::temp_gfx_pointer_arr	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.thumb.cpp	/^const u16* sprite_gfx_manager::temp_gfx_pointer_arr[] $/;"	kind:m	class:sprite_gfx_manager	file:
+sprite_gfx_manager::temp_gfx_pointer_arr_size	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static const u32 temp_gfx_pointer_arr_size;$/;"	kind:m	class:sprite_gfx_manager	access:public
+sprite_gfx_manager::temp_gfx_pointer_arr_size	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.thumb.cpp	/^const u32 sprite_gfx_manager::temp_gfx_pointer_arr_size $/;"	kind:m	class:sprite_gfx_manager	file:
+sprite_gfx_manager::upload_default_sprite_palettes	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static void upload_default_sprite_palettes(); $/;"	kind:p	class:sprite_gfx_manager	access:public	signature:()
+sprite_gfx_manager::upload_default_sprite_palettes	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.thumb.cpp	/^void sprite_gfx_manager::upload_default_sprite_palettes()$/;"	kind:f	class:sprite_gfx_manager	signature:()
+sprite_gfx_manager::upload_sprite_tiles_to_vram	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static void upload_sprite_tiles_to_vram( sprite& the_sprite )$/;"	kind:p	class:sprite_gfx_manager	access:public	signature:( sprite& the_sprite )
+sprite_gfx_manager::upload_sprite_tiles_to_vram	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.thumb.cpp	/^void sprite_gfx_manager::upload_sprite_tiles_to_vram$/;"	kind:f	class:sprite_gfx_manager	signature:( sprite& the_sprite )
 sprite_gfx_stuff_hpp	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	2;"	kind:d
 sprite_init_param_group	game_engine_stuff/level_stuff/sprite_level_data_stuff.hpp	/^class sprite_init_param_group$/;"	kind:c
 sprite_init_param_group::extra_param_0	game_engine_stuff/level_stuff/sprite_level_data_stuff.hpp	/^	const u32 extra_param_0;$/;"	kind:m	class:sprite_init_param_group	access:public
@@ -2247,21 +2289,24 @@ sprite_manager::despawn_sprites_if_needed	game_engine_stuff/sprite_stuff/sprite_
 sprite_manager::despawn_sprites_if_needed	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void despawn_sprites_if_needed$/;"	kind:p	class:sprite_manager	access:public	signature:( const prev_curr_pair<bg_point>& camera_pos_pc_pair )
 sprite_manager::init_horiz_level_sprite_ipg_lists	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void init_horiz_level_sprite_ipg_lists$/;"	kind:p	class:sprite_manager	access:public	signature:( const sprite_init_param_group* the_ext_sprite_ipg_arr, u32 the_ext_sprite_ipg_arr_size )
 sprite_manager::init_horiz_level_sprite_ipg_lists	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^void sprite_manager::init_horiz_level_sprite_ipg_lists$/;"	kind:f	class:sprite_manager	signature:( const sprite_init_param_group* the_ext_sprite_ipg_arr, u32 the_ext_sprite_ipg_arr_size )
+sprite_manager::init_the_array_of_active_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static inline void init_the_array_of_active_sprites()$/;"	kind:f	class:sprite_manager	access:public	signature:()
 sprite_manager::init_the_player	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void init_the_player ( const vec2_f24p8& s_in_level_pos, $/;"	kind:p	class:sprite_manager	access:public	signature:( const vec2_f24p8& s_in_level_pos, const vec2_u32& the_level_size_2d, bg_point& camera_pos )
 sprite_manager::init_the_player	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^void sprite_manager::init_the_player ( const vec2_f24p8& s_in_level_pos, $/;"	kind:f	class:sprite_manager	signature:( const vec2_f24p8& s_in_level_pos, const vec2_u32& the_level_size_2d, bg_point& camera_pos )
 sprite_manager::initial_sprite_spawning_from_level_data	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void initial_sprite_spawning_from_level_data$/;"	kind:p	class:sprite_manager	access:public	signature:( const vec2_u32& the_level_size_2d, bg_point& camera_pos, int& next_oam_index )
 sprite_manager::initial_sprite_spawning_from_level_data	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^void sprite_manager::initial_sprite_spawning_from_level_data$/;"	kind:f	class:sprite_manager	signature:( const vec2_u32& the_level_size_2d, bg_point& camera_pos, int& next_oam_index )
 sprite_manager::initial_sprite_spawning_from_level_data_old	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void initial_sprite_spawning_from_level_data_old$/;"	kind:p	class:sprite_manager	access:public	signature:( const bg_point& camera_pos, int& next_oam_index )
 sprite_manager::initial_sprite_spawning_from_level_data_old	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^void sprite_manager::initial_sprite_spawning_from_level_data_old$/;"	kind:f	class:sprite_manager	signature:( const bg_point& camera_pos, int& next_oam_index )
-sprite_manager::max_num_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static constexpr u32 max_num_sprites = 40;$/;"	kind:m	class:sprite_manager	access:public
+sprite_manager::max_num_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static constexpr u32 max_num_sprites = 20;$/;"	kind:m	class:sprite_manager	access:public
 sprite_manager::some_sprite_init_thing	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void some_sprite_init_thing();$/;"	kind:p	class:sprite_manager	access:public	signature:()
 sprite_manager::some_sprite_init_thing	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^void sprite_manager::some_sprite_init_thing()$/;"	kind:f	class:sprite_manager	signature:()
 sprite_manager::spawn_a_sprite_basic	game_engine_stuff/sprite_stuff/sprite_manager_class.arm.cpp	/^void sprite_manager::spawn_a_sprite_basic ( sprite_type the_sprite_type, $/;"	kind:f	class:sprite_manager	signature:( sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, bool facing_left )
 sprite_manager::spawn_a_sprite_basic	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void spawn_a_sprite_basic ( sprite_type the_sprite_type, $/;"	kind:p	class:sprite_manager	access:public	signature:( sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, bool facing_right=false )
 sprite_manager::spawn_sprites_if_needed	game_engine_stuff/sprite_stuff/sprite_manager_class.arm.cpp	/^void sprite_manager::spawn_sprites_if_needed$/;"	kind:f	class:sprite_manager	signature:( const prev_curr_pair<bg_point>& camera_pos_pc_pair )
 sprite_manager::spawn_sprites_if_needed	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void spawn_sprites_if_needed$/;"	kind:p	class:sprite_manager	access:public	signature:( const prev_curr_pair<bg_point>& camera_pos_pc_pair )
+sprite_manager::the_active_sprites_starting_vram_chunk_index	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static constexpr u32 the_active_sprites_starting_vram_chunk_index = 2;$/;"	kind:m	class:sprite_manager	access:public
 sprite_manager::the_player	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static sprite the_player;$/;"	kind:m	class:sprite_manager	access:public
 sprite_manager::the_player	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^sprite sprite_manager::the_player __attribute__((_iwram));$/;"	kind:m	class:sprite_manager	file:
+sprite_manager::the_player_vram_chunk_index	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static constexpr u32 the_player_vram_chunk_index = 1;$/;"	kind:m	class:sprite_manager	access:public
 sprite_manager::the_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static std::array< sprite, max_num_sprites > the_sprites;$/;"	kind:m	class:sprite_manager	access:public
 sprite_manager::the_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^	sprite_manager::the_sprites; \/\/__attribute__((_iwram));$/;"	kind:m	class:sprite_manager	file:
 sprite_manager::update_all_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.arm.cpp	/^void sprite_manager::update_all_sprites$/;"	kind:f	class:sprite_manager	signature:( const vec2_u32& the_level_size_2d, prev_curr_pair<bg_point>& camera_pos_pc_pair, int& next_oam_index )
@@ -2363,11 +2408,16 @@ sublevel_pointer::sublevel_pointer	game_engine_stuff/level_stuff/sublevel_class.
 sublevel_pointer::sublevel_pointer	game_engine_stuff/level_stuff/sublevel_class.hpp	/^	inline sublevel_pointer()$/;"	kind:f	class:sublevel_pointer	access:public	signature:()
 swi_call	gba_specific_stuff/bios_function_wrappers.hpp	113;"	kind:d
 swi_call	gba_specific_stuff/bios_function_wrappers.hpp	115;"	kind:d
+temp_gfx_pointer_arr	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static const u16* temp_gfx_pointer_arr[];$/;"	kind:m	class:sprite_gfx_manager	access:public
+temp_gfx_pointer_arr	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.thumb.cpp	/^const u16* sprite_gfx_manager::temp_gfx_pointer_arr[] $/;"	kind:m	class:sprite_gfx_manager	file:
+temp_gfx_pointer_arr_size	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static const u32 temp_gfx_pointer_arr_size;$/;"	kind:m	class:sprite_gfx_manager	access:public
+temp_gfx_pointer_arr_size	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.thumb.cpp	/^const u32 sprite_gfx_manager::temp_gfx_pointer_arr_size $/;"	kind:m	class:sprite_gfx_manager	file:
 test_int_global	main.thumb.cpp	/^int test_int_global;$/;"	kind:v
-test_level	test_level/test_level.thumb.cpp	/^const sublevel< 1993, 64, 32, 7, 5 > test_level$/;"	kind:v
+test_level	test_level/test_level.thumb.cpp	/^const sublevel< 2010, 64, 32, 15, 5 > test_level$/;"	kind:v
 test_level_hpp	test_level/test_level.hpp	2;"	kind:d
 test_sram_arr	main.thumb.cpp	/^u8 test_sram_arr[test_sram_arr_size] __attribute__((_sram));$/;"	kind:v
 test_sram_arr_size	main.thumb.cpp	/^static constexpr u32 test_sram_arr_size = debug_arr_u32_size * sizeof(u32);$/;"	kind:v	file:
+the_active_sprites_starting_vram_chunk_index	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static constexpr u32 the_active_sprites_starting_vram_chunk_index = 2;$/;"	kind:m	class:sprite_manager	access:public
 the_array	game_engine_stuff/array_2d_helper_class.hpp	/^	type* the_array;$/;"	kind:m	class:array_2d_helper	access:public
 the_array	game_engine_stuff/array_helper_class.hpp	/^	type* the_array;$/;"	kind:m	class:array_helper	access:public
 the_array	game_engine_stuff/coll_point_group_class.hpp	/^	vec2_f24p8 the_array[total_coll_points];$/;"	kind:m	class:coll_point_group	access:public
@@ -2402,19 +2452,20 @@ the_outer_array	game_engine_stuff/sa_list_class_stuff.hpp	/^	sa_list_node<type>*
 the_player	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static sprite the_player;$/;"	kind:m	class:sprite_manager	access:public
 the_player	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^sprite sprite_manager::the_player __attribute__((_iwram));$/;"	kind:m	class:sprite_manager	file:
 the_player_sprite_stuff	game_engine_stuff/sprite_stuff/sprite_type_stuff.thumb.cpp	/^player_sprite_stuff the_player_sprite_stuff;$/;"	kind:v
+the_player_vram_chunk_index	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static constexpr u32 the_player_vram_chunk_index = 1;$/;"	kind:m	class:sprite_manager	access:public
 the_powerup_gfxPalLen	gfx/the_powerup_gfx.h	23;"	kind:d
 the_powerup_gfxTilesLen	gfx/the_powerup_gfx.h	20;"	kind:d
 the_relative_metatile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr u32 the_relative_metatile_slot = 1, $/;"	kind:m	class:muffin_sprite_stuff	access:public
 the_relative_metatile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr u32 the_relative_metatile_slot = 2, $/;"	kind:m	class:fire_muffin_sprite_stuff	access:public
 the_relative_metatile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr u32 the_relative_metatile_slot = 3, $/;"	kind:m	class:ice_muffin_sprite_stuff	access:public
 the_relative_metatile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr u32 the_relative_metatile_slot = 4, $/;"	kind:m	class:chocolate_muffin_sprite_stuff	access:public
+the_relative_metatile_slot	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	static constexpr u32 the_relative_metatile_slot = 7,$/;"	kind:m	class:sprite_base_stuff	access:public
 the_relative_metatile_slot	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	static constexpr u32 the_relative_metatile_slot = 0, $/;"	kind:m	class:waffle_sprite_stuff	access:public
 the_relative_metatile_slot	game_engine_stuff/sprite_stuff/warp_block_sprite_stuff_class.hpp	/^	static constexpr u32 the_relative_metatile_slot = 0, $/;"	kind:m	class:warp_block_sprite_stuff	access:public
 the_relative_metatile_slot_arr	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static const u32 the_relative_metatile_slot_arr[];$/;"	kind:m	class:player_sprite_stuff	access:public
 the_relative_metatile_slot_arr	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.thumb.cpp	/^const u32 player_sprite_stuff::the_relative_metatile_slot_arr[]$/;"	kind:m	class:player_sprite_stuff	file:
 the_relative_metatile_slot_arr_size	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static const u32 the_relative_metatile_slot_arr_size;$/;"	kind:m	class:player_sprite_stuff	access:public
 the_relative_metatile_slot_arr_size	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.thumb.cpp	/^const u32 player_sprite_stuff::the_relative_metatile_slot_arr_size$/;"	kind:m	class:player_sprite_stuff	file:
-the_relative_tile_slot	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	static constexpr u32 the_relative_tile_slot = 7 $/;"	kind:m	class:sprite_base_stuff	access:public
 the_shape_size	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	oam_entry::shape_size the_shape_size;$/;"	kind:m	class:sprite	access:protected
 the_shape_size_vec2	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	vec2_u32 the_shape_size_vec2;$/;"	kind:m	class:sprite	access:protected
 the_sprite_base_stuff	game_engine_stuff/sprite_stuff/sprite_type_stuff.thumb.cpp	/^sprite_base_stuff the_sprite_base_stuff;$/;"	kind:v
@@ -2478,9 +2529,9 @@ u32	game_engine_stuff/misc_types.hpp	/^typedef uint32_t u32; typedef int32_t s32
 u64	game_engine_stuff/misc_types.hpp	/^typedef uint64_t u64; typedef int64_t s64;$/;"	kind:t
 u8	game_engine_stuff/misc_types.hpp	/^typedef uint8_t u8; typedef int8_t s8;$/;"	kind:t
 udata_index	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	enum udata_index { udi_active_walk_frame_slot }$/;"	kind:g	class:player_sprite_stuff	access:public
-udata_index	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	enum udata_index { udi_initial_pos_was_set, };$/;"	kind:g	class:waffle_sprite_stuff	access:public
+udata_index	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	enum udata_index { udi_initial_pos_was_set, } __attribute__((_align4));$/;"	kind:g	class:waffle_sprite_stuff	access:public
 udi_active_walk_frame_slot	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	enum udata_index { udi_active_walk_frame_slot }$/;"	kind:e	enum:player_sprite_stuff::udata_index
-udi_initial_pos_was_set	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	enum udata_index { udi_initial_pos_was_set, };$/;"	kind:e	enum:waffle_sprite_stuff::udata_index
+udi_initial_pos_was_set	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	enum udata_index { udi_initial_pos_was_set, } __attribute__((_align4));$/;"	kind:e	enum:waffle_sprite_stuff::udata_index
 update_all_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.arm.cpp	/^void sprite_manager::update_all_sprites$/;"	kind:f	class:sprite_manager	signature:( const vec2_u32& the_level_size_2d, prev_curr_pair<bg_point>& camera_pos_pc_pair, int& next_oam_index )
 update_all_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void update_all_sprites ( const vec2_u32& the_level_size_2d,$/;"	kind:p	class:sprite_manager	access:public	signature:( const vec2_u32& the_level_size_2d, prev_curr_pair<bg_point>& camera_pos_pc_pair, int& next_oam_index )
 update_block_graphics_in_vram	game_engine_stuff/block_stuff/block_stuff.hpp	/^void update_block_graphics_in_vram( const unsigned short* the_tiles )$/;"	kind:p	signature:( const unsigned short* the_tiles )
@@ -2502,10 +2553,10 @@ update_part_2	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	virt
 update_part_2	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	virtual void update_part_2( sprite& the_sprite, bg_point& camera_pos,$/;"	kind:p	class:sprite_base_stuff	access:public	signature:( sprite& the_sprite, bg_point& camera_pos, const vec2_u32& the_level_size_2d )
 update_part_2	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.thumb.cpp	/^void sprite_base_stuff::update_part_2( sprite& the_sprite, $/;"	kind:f	class:sprite_base_stuff	signature:( sprite& the_sprite, bg_point& camera_pos, const vec2_u32& the_level_size_2d )
 update_part_2	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.thumb.cpp	/^void sprite_base_stuff::update_part_2( sprite& the_sprite, $/;"	kind:f	class:sprite_base_stuff	signature:( sprite& the_sprite, const bg_point& camera_pos, int& next_oam_index )
-upload_default_sprite_graphics	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^void upload_default_sprite_graphics(); \/\/__attribute__((_iwram_code));$/;"	kind:p	signature:()
-upload_default_sprite_graphics	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.thumb.cpp	/^void upload_default_sprite_graphics()$/;"	kind:f	signature:()
-upload_default_sprite_palettes	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^void upload_default_sprite_palettes(); \/\/__attribute__((_iwram_code));$/;"	kind:p	signature:()
-upload_default_sprite_palettes	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.thumb.cpp	/^void upload_default_sprite_palettes()$/;"	kind:f	signature:()
+upload_default_sprite_palettes	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static void upload_default_sprite_palettes(); $/;"	kind:p	class:sprite_gfx_manager	access:public	signature:()
+upload_default_sprite_palettes	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.thumb.cpp	/^void sprite_gfx_manager::upload_default_sprite_palettes()$/;"	kind:f	class:sprite_gfx_manager	signature:()
+upload_sprite_tiles_to_vram	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static void upload_sprite_tiles_to_vram( sprite& the_sprite )$/;"	kind:p	class:sprite_gfx_manager	access:public	signature:( sprite& the_sprite )
+upload_sprite_tiles_to_vram	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.thumb.cpp	/^void sprite_gfx_manager::upload_sprite_tiles_to_vram$/;"	kind:f	class:sprite_gfx_manager	signature:( sprite& the_sprite )
 use_16x16	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static bool use_16x16 __attribute__((_iwram));$/;"	kind:m	class:player_sprite_stuff	access:public
 use_16x16	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.thumb.cpp	/^bool player_sprite_stuff::use_16x16;$/;"	kind:m	class:player_sprite_stuff	file:
 vblank_func	main.thumb.cpp	/^void vblank_func() __attribute__((__noinline__));$/;"	kind:p	file:	signature:()
@@ -2585,6 +2636,7 @@ vec2_u16	game_engine_stuff/vec2_class.hpp	/^typedef vec2<u16> vec2_u16; typedef 
 vec2_u32	game_engine_stuff/vec2_class.hpp	/^typedef vec2<u32> vec2_u32; typedef vec2<s32> vec2_s32;$/;"	kind:t
 vec2_u64	game_engine_stuff/vec2_class.hpp	/^typedef vec2<u64> vec2_u64; typedef vec2<s64> vec2_s64;$/;"	kind:t
 vel	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	vec2_f24p8 vel;$/;"	kind:m	class:sprite	access:public
+vram_chunk_index	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	u32 vram_chunk_index;$/;"	kind:m	class:sprite	access:protected
 vs16	game_engine_stuff/misc_types.hpp	/^typedef volatile u16 vu16; typedef volatile s16 vs16;$/;"	kind:t
 vs32	game_engine_stuff/misc_types.hpp	/^typedef volatile u32 vu32; typedef volatile s32 vs32;$/;"	kind:t
 vs64	game_engine_stuff/misc_types.hpp	/^typedef volatile u64 vu64; typedef volatile s64 vs64;$/;"	kind:t
@@ -2601,18 +2653,19 @@ waffle_sprite_stuff::block_coll_response_right_16x16	game_engine_stuff/sprite_st
 waffle_sprite_stuff::block_collision_stuff	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	inline virtual void block_collision_stuff( sprite& the_powerup )$/;"	kind:f	class:waffle_sprite_stuff	access:public	signature:( sprite& the_powerup )
 waffle_sprite_stuff::get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	inline const u32 get_curr_relative_tile_slot( sprite& the_powerup )$/;"	kind:f	class:waffle_sprite_stuff	access:public	signature:( sprite& the_powerup )
 waffle_sprite_stuff::get_gfx_category	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	inline virtual const sprite_gfx_category get_gfx_category$/;"	kind:f	class:waffle_sprite_stuff	access:public	signature:( sprite& the_powerup )
+waffle_sprite_stuff::get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:waffle_sprite_stuff	access:public	signature:()
 waffle_sprite_stuff::get_sprite_type	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	inline virtual const sprite_type get_sprite_type() const$/;"	kind:f	class:waffle_sprite_stuff	access:public	signature:() const
 waffle_sprite_stuff::move_timer_start	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	static constexpr u32 move_timer_start = 128;$/;"	kind:m	class:waffle_sprite_stuff	access:public
-waffle_sprite_stuff::num_gfx_tiles	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^		num_gfx_tiles = num_tiles_in_ss_16x16;$/;"	kind:m	class:waffle_sprite_stuff	access:public
+waffle_sprite_stuff::num_active_gfx_tiles	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;$/;"	kind:m	class:waffle_sprite_stuff	access:public
 waffle_sprite_stuff::sdata_index	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	enum sdata_index { sdi_initial_pos_x, sdi_initial_pos_y, $/;"	kind:g	class:waffle_sprite_stuff	access:public
 waffle_sprite_stuff::sdi_initial_pos_x	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	enum sdata_index { sdi_initial_pos_x, sdi_initial_pos_y, $/;"	kind:e	enum:waffle_sprite_stuff::sdata_index
 waffle_sprite_stuff::sdi_initial_pos_y	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	enum sdata_index { sdi_initial_pos_x, sdi_initial_pos_y, $/;"	kind:e	enum:waffle_sprite_stuff::sdata_index
-waffle_sprite_stuff::sdi_move_timer	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^		sdi_move_timer, };$/;"	kind:e	enum:waffle_sprite_stuff::sdata_index
+waffle_sprite_stuff::sdi_move_timer	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^		sdi_move_timer, } __attribute__((_align4));$/;"	kind:e	enum:waffle_sprite_stuff::sdata_index
 waffle_sprite_stuff::the_gfx_category	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	static constexpr sprite_gfx_category the_gfx_category = sgc_powerup;$/;"	kind:m	class:waffle_sprite_stuff	access:public
 waffle_sprite_stuff::the_relative_metatile_slot	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	static constexpr u32 the_relative_metatile_slot = 0, $/;"	kind:m	class:waffle_sprite_stuff	access:public
 waffle_sprite_stuff::the_sprite_type	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	static constexpr sprite_type the_sprite_type = st_waffle;$/;"	kind:m	class:waffle_sprite_stuff	access:public
-waffle_sprite_stuff::udata_index	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	enum udata_index { udi_initial_pos_was_set, };$/;"	kind:g	class:waffle_sprite_stuff	access:public
-waffle_sprite_stuff::udi_initial_pos_was_set	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	enum udata_index { udi_initial_pos_was_set, };$/;"	kind:e	enum:waffle_sprite_stuff::udata_index
+waffle_sprite_stuff::udata_index	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	enum udata_index { udi_initial_pos_was_set, } __attribute__((_align4));$/;"	kind:g	class:waffle_sprite_stuff	access:public
+waffle_sprite_stuff::udi_initial_pos_was_set	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	enum udata_index { udi_initial_pos_was_set, } __attribute__((_align4));$/;"	kind:e	enum:waffle_sprite_stuff::udata_index
 waffle_sprite_stuff::update_part_1	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	virtual void update_part_1( sprite& the_powerup )$/;"	kind:p	class:waffle_sprite_stuff	access:public	signature:( sprite& the_powerup )
 waffle_sprite_stuff::update_part_1	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.thumb.cpp	/^void waffle_sprite_stuff::update_part_1( sprite& the_powerup )$/;"	kind:f	class:waffle_sprite_stuff	signature:( sprite& the_powerup )
 waffle_sprite_stuff_class_hpp	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	2;"	kind:d
@@ -2621,8 +2674,9 @@ walk_speed	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	stati
 warp_block_sprite_stuff	game_engine_stuff/sprite_stuff/warp_block_sprite_stuff_class.hpp	/^class warp_block_sprite_stuff : public sprite_base_stuff$/;"	kind:c	inherits:sprite_base_stuff
 warp_block_sprite_stuff::get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/warp_block_sprite_stuff_class.hpp	/^	inline virtual const u32 get_curr_relative_tile_slot$/;"	kind:f	class:warp_block_sprite_stuff	access:public	signature:( sprite& the_warp_block )
 warp_block_sprite_stuff::get_gfx_category	game_engine_stuff/sprite_stuff/warp_block_sprite_stuff_class.hpp	/^	inline virtual const sprite_gfx_category get_gfx_category$/;"	kind:f	class:warp_block_sprite_stuff	access:public	signature:( sprite& the_warp_block )
+warp_block_sprite_stuff::get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/warp_block_sprite_stuff_class.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:warp_block_sprite_stuff	access:public	signature:()
 warp_block_sprite_stuff::get_sprite_type	game_engine_stuff/sprite_stuff/warp_block_sprite_stuff_class.hpp	/^	inline virtual const sprite_type get_sprite_type() const$/;"	kind:f	class:warp_block_sprite_stuff	access:public	signature:() const
-warp_block_sprite_stuff::num_gfx_tiles	game_engine_stuff/sprite_stuff/warp_block_sprite_stuff_class.hpp	/^		num_gfx_tiles = num_tiles_in_ss_16x16;$/;"	kind:m	class:warp_block_sprite_stuff	access:public
+warp_block_sprite_stuff::num_active_gfx_tiles	game_engine_stuff/sprite_stuff/warp_block_sprite_stuff_class.hpp	/^		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;$/;"	kind:m	class:warp_block_sprite_stuff	access:public
 warp_block_sprite_stuff::the_gfx_category	game_engine_stuff/sprite_stuff/warp_block_sprite_stuff_class.hpp	/^	static constexpr sprite_gfx_category the_gfx_category $/;"	kind:m	class:warp_block_sprite_stuff	access:public
 warp_block_sprite_stuff::the_relative_metatile_slot	game_engine_stuff/sprite_stuff/warp_block_sprite_stuff_class.hpp	/^	static constexpr u32 the_relative_metatile_slot = 0, $/;"	kind:m	class:warp_block_sprite_stuff	access:public
 warp_block_sprite_stuff::the_sprite_type	game_engine_stuff/sprite_stuff/warp_block_sprite_stuff_class.hpp	/^	static constexpr sprite_type the_sprite_type = st_warp_block;$/;"	kind:m	class:warp_block_sprite_stuff	access:public

@@ -4,9 +4,10 @@
 
 #include "misc_types.hpp"
 #include "../gba_specific_stuff/attribute_defines.hpp"
+#include "../gba_specific_stuff/asm_funcs.hpp"
 
 
-template < typename type, u32 size >
+template< typename type, u32 size >
 class sa_stack
 {
 public:		// variables
@@ -14,8 +15,9 @@ public:		// variables
 	u32 curr_index;
 	
 public:		// functions
-	inline sa_stack()
+	inline sa_stack() : curr_index(0)
 	{
+		memfill32( the_array, type(), size * sizeof(type) );
 	}
 	
 	inline void push( const type& to_push )
@@ -27,7 +29,6 @@ public:		// functions
 	{
 		return the_array[--curr_index];
 	}
-	
 	
 	inline const type& peek_top() const
 	{
@@ -47,8 +48,8 @@ public:		// functions
 } __attribute__((_align4));
 
 
-template < u32 size >
-class sa_free_list : public sa_stack < int, size >
+template< u32 size >
+class sa_free_list : public sa_stack< int, size >
 {
 public:		// variables
 	
@@ -58,11 +59,12 @@ public:		// functions
 	{
 		for ( int i=size-1; i>=0; --i )
 		{
-			sa_stack < int, size >::push(i);
+			sa_stack< int, size >::push(i);
 		}
 	}
 	
 } __attribute__((_align4));
+
 
 
 
