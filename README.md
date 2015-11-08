@@ -8,14 +8,17 @@ which the author will not mention by name.
 The name of this project is supposed to be **Sherwin's Adventure**.
 
 #Dependencies for Building
-1.  DevKitARM (though the makefile and linker script used are *custom*)
+1.  **DevKitARM** (though the makefile and linker script used are
+*custom*). The default makefile uses DevKitARM to build this project.
+  1.  Alternatively, a more up-to-date version of **arm-none-eabi-**
+  prefixed GCC and Binutils can be used; its location just has to be
+  specified in the host OS's **PATH** environment variable.  To build this
+  project with updated arm-none-eabi- prefixed GCC and Binutils, use
+  **makefile_for_updated_gcc.mk** as the makefile.
+2.  **gbafix**, which is *part of DevKitARM*.
+3.  **mmutil**, which is *included in DevKitARM*.
+5.  **bin2s**, which is *included in DevKitARM*.
 
-  **and/or**
-
-2.  A more up-to-date version of **arm-none-eabi-** prefixed GCC and
-Binutils.  (This is what the author uses for compilation).
-3.  **gbafix**, which is *part of DevKitARM*.
-4.  **mmutil**, which is *included in DevKitARM*.
 
 #Notes for Building
 When using the makefile called **makefile**, this project **won't build**
