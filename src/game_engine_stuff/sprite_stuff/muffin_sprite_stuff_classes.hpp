@@ -2,6 +2,8 @@
 #define muffin_sprite_stuff_classes_hpp
 
 
+#include "../../gfx/the_powerup_gfx.h"
+
 class muffin_sprite_stuff : public sprite_base_stuff
 {
 public:		// variables
@@ -9,6 +11,9 @@ public:		// variables
 	static constexpr sprite_gfx_category the_gfx_category = sgc_powerup;
 	static constexpr u32 the_relative_metatile_slot = 1, 
 		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;
+	
+	static constexpr tile* tile_arr = const_cast<tile*>
+		(reinterpret_cast<const tile*>(the_powerup_gfxTiles));
 	
 public:		// functions
 	//virtual void init( sprite& the_powerup, bool facing_right=false );
@@ -35,6 +40,10 @@ public:		// functions
 		return num_active_gfx_tiles;
 	}
 	
+	inline virtual const tile* get_tile_arr() const
+	{
+		return tile_arr;
+	}
 	
 	// Physics and collision stuff
 	//// All muffin powerups are not affected by gravity, and they don't
@@ -52,6 +61,9 @@ public:		// variables
 	static constexpr u32 the_relative_metatile_slot = 2, 
 		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;
 	
+	static constexpr tile* tile_arr = const_cast<tile*>
+		(reinterpret_cast<const tile*>(the_powerup_gfxTiles));
+	
 public:		// functions
 	//virtual void init( sprite& the_powerup, bool facing_right=false );
 	inline virtual const sprite_type get_sprite_type() const
@@ -75,6 +87,10 @@ public:		// functions
 	inline virtual const u32 get_num_active_gfx_tiles()
 	{
 		return num_active_gfx_tiles;
+	}
+	inline virtual const tile* get_tile_arr() const
+	{
+		return tile_arr;
 	}
 	
 	// Physics and collision stuff
@@ -94,6 +110,9 @@ public:		// variables
 	static constexpr u32 the_relative_metatile_slot = 3, 
 		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;
 	
+	static constexpr tile* tile_arr = const_cast<tile*>
+		(reinterpret_cast<const tile*>(the_powerup_gfxTiles));
+	
 public:		// functions
 	//virtual void init( sprite& the_powerup, bool facing_right=false );
 	inline virtual const sprite_type get_sprite_type() const
@@ -118,7 +137,10 @@ public:		// functions
 	{
 		return num_active_gfx_tiles;
 	}
-	
+	inline virtual const tile* get_tile_arr() const
+	{
+		return tile_arr;
+	}
 	
 	// Physics and collision stuff
 	//// All muffin powerups are not affected by gravity, and they don't
@@ -135,6 +157,9 @@ public:		// variables
 	static constexpr u32 the_relative_metatile_slot = 4, 
 		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;
 	
+	static constexpr tile* tile_arr = const_cast<tile*>
+		(reinterpret_cast<const tile*>(the_powerup_gfxTiles));
+	
 public:		// functions
 	//virtual void init( sprite& the_powerup, bool facing_right=false );
 	inline virtual const sprite_type get_sprite_type() const
@@ -159,7 +184,10 @@ public:		// functions
 	{
 		return num_active_gfx_tiles;
 	}
-	
+	inline virtual const tile* get_tile_arr() const
+	{
+		return tile_arr;
+	}
 	
 	// Physics and collision stuff
 	//// All muffin powerups are not affected by gravity, and they don't

@@ -173,11 +173,9 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 	bg_point& camera_pos, const vec2_u32& the_level_size_2d )
 {
 	
-	for ( auto iter=sprite_manager::the_sprites.begin();
-		iter!=sprite_manager::the_sprites.end();
-		++iter )
+	for ( sprite& spr : sprite_manager::the_sprites )
 	{
-		switch ( iter->the_sprite_type )
+		switch ( spr.the_sprite_type )
 		{
 			//case st_waffle:
 			case st_muffin:
@@ -185,10 +183,14 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 			case st_ice_muffin:
 			case st_chocolate_muffin:
 				if ( coll_box_intersects_now( the_player.the_coll_box,
-					iter->the_coll_box ) )
+					spr.the_coll_box ) )
 				{
-					iter->the_sprite_type = st_default;
-					iter->the_sprite_ipg->spawn_state = sss_dead;
+					//nocash_soft_break();
+					spr.the_sprite_type = st_default;
+					if ( spr.the_sprite_ipg != NULL )
+					{
+						spr.the_sprite_ipg->spawn_state = sss_dead;
+					}
 				}
 				break;
 				

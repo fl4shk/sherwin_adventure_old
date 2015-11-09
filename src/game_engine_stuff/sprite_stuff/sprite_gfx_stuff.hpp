@@ -81,9 +81,9 @@ public:		// variables and constants
 	//	__attribute__((_iwram));
 	
 	
-	// These are temporary!
-	static const u16* temp_gfx_pointer_arr[];
-	static const u32 temp_gfx_pointer_arr_size;
+	//// These are temporary!
+	//static const u16* temp_gfx_pointer_arr[];
+	//static const u32 temp_gfx_pointer_arr_size;
 	
 public:		// functions
 	

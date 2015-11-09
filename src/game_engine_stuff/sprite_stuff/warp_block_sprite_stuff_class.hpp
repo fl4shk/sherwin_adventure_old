@@ -1,6 +1,8 @@
 #ifndef warp_block_sprite_stuff_class_hpp
 #define warp_block_sprite_stuff_class_hpp
 
+#include "../../gfx/the_block_like_sprites_gfx.h"
+
 class warp_block_sprite_stuff : public sprite_base_stuff
 {
 public:		// variables
@@ -9,6 +11,9 @@ public:		// variables
 		= sgc_block_like_0;
 	static constexpr u32 the_relative_metatile_slot = 0, 
 		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;
+	
+	static constexpr tile* tile_arr = const_cast<tile*>
+		(reinterpret_cast<const tile*>(the_block_like_sprites_gfxTiles));
 	
 public:		// functions
 	
@@ -34,6 +39,10 @@ public:		// functions
 	inline virtual const u32 get_num_active_gfx_tiles()
 	{
 		return num_active_gfx_tiles;
+	}
+	inline virtual const tile* get_tile_arr() const
+	{
+		return tile_arr;
 	}
 	
 	

@@ -5,6 +5,9 @@
 #include "../level_stuff/active_level_class.hpp"
 //#include "sprite_manager_class.hpp"
 
+#include "../../gfx/sherwin_gfx.h"
+
+
 class sprite_base_stuff
 {
 public:		// variables
@@ -13,10 +16,14 @@ public:		// variables
 	static constexpr fixed24p8 max_y_vel = {0x400};
 	
 	static constexpr sprite_gfx_category the_gfx_category = sgc_player;
-	static constexpr u32 the_relative_metatile_slot = 7,
+	//static constexpr u32 the_relative_metatile_slot = 7,
+	//	num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;
+	
+	static constexpr u32 the_relative_metatile_slot = 0,
 		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;
 	
-	
+	static constexpr tile* tile_arr = const_cast<tile*>
+		(reinterpret_cast<const tile*>(sherwin_gfxTiles));
 	
 public:		// functions
 	// This is the default form of init().
@@ -41,6 +48,11 @@ public:		// functions
 	
 	virtual void update_part_1( sprite& the_sprite )
 		__attribute__((_iwram_code));
+	
+	inline virtual const tile* get_tile_arr() const
+	{
+		return tile_arr;
+	}
 	
 	
 	// The player_sprite_stuff class is the primary user of this function.

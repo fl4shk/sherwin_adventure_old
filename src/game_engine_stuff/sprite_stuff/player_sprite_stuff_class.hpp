@@ -3,6 +3,8 @@
 
 #include "sprite_gfx_stuff.hpp"
 
+#include "../../gfx/sherwin_gfx.h"
+
 class player_sprite_stuff : public sprite_base_stuff
 {
 public:		// enums
@@ -83,6 +85,8 @@ public:		// variables
 	static constexpr u32 num_active_gfx_tiles 
 		= sprite_gfx_manager::num_tiles_in_ss_16x32;
 	
+	static constexpr tile* tile_arr = const_cast<tile*>
+		(reinterpret_cast<const tile*>(sherwin_gfxTiles));
 	
 public:		// functions
 	virtual void init( sprite& the_player, bool facing_left=true );
@@ -115,6 +119,11 @@ public:		// functions
 	inline virtual const u32 get_num_active_gfx_tiles()
 	{
 		return num_active_gfx_tiles;
+	}
+	
+	inline virtual const tile* get_tile_arr() const
+	{
+		return tile_arr;
 	}
 	
 	// Physics and collision stuff

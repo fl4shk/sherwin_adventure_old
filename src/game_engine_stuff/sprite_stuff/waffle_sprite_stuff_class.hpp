@@ -1,6 +1,7 @@
 #ifndef waffle_sprite_stuff_class_hpp
 #define waffle_sprite_stuff_class_hpp
 
+#include "../../gfx/the_powerup_gfx.h"
 
 class waffle_sprite_stuff : public sprite_base_stuff
 {
@@ -19,6 +20,8 @@ public:		// variables
 	static constexpr u32 move_timer_start = 128;
 	
 	//static const ();
+	static constexpr tile* tile_arr = const_cast<tile*>
+		(reinterpret_cast<const tile*>(the_powerup_gfxTiles));
 	
 public:		// functions
 	//virtual void init( sprite& the_powerup, bool facing_left );
@@ -48,6 +51,10 @@ public:		// functions
 	inline virtual const u32 get_num_active_gfx_tiles()
 	{
 		return num_active_gfx_tiles;
+	}
+	inline virtual const tile* get_tile_arr() const
+	{
+		return tile_arr;
 	}
 	
 	

@@ -28,7 +28,7 @@
 
 #include "test_level/test_level.hpp"
 
-#include "audio/practice_13.h"
+#include "audio/practice_17.h"
 
 
 #include <stdlib.h>
@@ -251,8 +251,8 @@ int main()
 	
 	
 	// Also, start playing music when the game is started.
-	mmInitDefault( (mm_addr)practice_13_bin, 8 );
-	mmStart( MOD_PRACTICE_13, MM_PLAY_LOOP );
+	mmInitDefault( (mm_addr)practice_17_bin, 8 );
+	mmStart( MOD_PRACTICE_17, MM_PLAY_LOOP );
 	
 	mmPause();
 	
