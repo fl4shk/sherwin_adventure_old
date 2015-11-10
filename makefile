@@ -1,1 +1,1 @@
-/home/fl4shk/Documents/game_system_stuff/gba_stuff/gba_homebrew_programming/projects/sherwin_adventure/sherwin_adventure/makefile_devkitARM.mk
+./makefile_devkitARM.mk

@@ -36,10 +36,9 @@
 #include "maxmod.h"
 
 
-scr_entry bg0_screenblock_mirror[screenblock_size] __attribute__((_ewram));
+//scr_entry bg0_screenblock_mirror[screenblock_size] __attribute__((_ewram));
 
 int test_int_global;
-
 
 static const char sram_const_init_str[] = "Save data initialized.";
 static constexpr u32 sram_init_str_size = sizeof(sram_const_init_str);
@@ -49,12 +48,6 @@ static constexpr u32 test_sram_arr_size = debug_arr_u32_size * sizeof(u32);
 u8 test_sram_arr[test_sram_arr_size] __attribute__((_sram));
 
 
-
-
-array_2d_helper<scr_entry> bg0_screenblock_2d( se_ram[bg0_sbb],
-	screenblock_size_2d );
-array_2d_helper<scr_entry> bg0_screenblock_mirror_2d 
-	( bg0_screenblock_mirror, screenblock_size_2d );
 
 
 // This function toggles whether music is playing if the select button is
@@ -68,7 +61,8 @@ inline void pause_or_unpause_music()
 	}
 }
 
-void vblank_func() __attribute__((__noinline__));
+
+void vblank_func() __attribute__(( _iwram_code, __noinline__ ));
 
 void vblank_func()
 {
@@ -80,32 +74,14 @@ void vblank_func()
 	update_block_graphics_in_vram(the_block_gfxTiles);
 	copy_oam_mirror_to_oam();
 	copy_bgofs_mirror_to_registers();
-	active_level_manager::copy_level_from_array_2d_helper_to_vram
-		( bg0_screenblock_2d, bg0_screenblock_mirror_2d );
+	//active_level_manager::copy_level_from_array_2d_helper_to_vram
+	//	( active_level::bg0_screenblock_2d, 
+	//	active_level::bg0_screenblock_mirror_2d );
+	active_level_manager::copy_sublevel_from_array_2d_helper_to_vram();
 	
+	sprite_manager::upload_tiles_of_active_sprites_to_vram();
 	
-	sprite_gfx_manager::upload_sprite_tiles_to_vram
-		(sprite_manager::the_player);
-	for ( sprite& spr : sprite_manager::the_sprites )
-	{
-		//if ( spr.the_sprite_type != st_default )
-		if ( spr.get_vram_chunk_index() != 0 )
-		{
-			sprite_gfx_manager::upload_sprite_tiles_to_vram(spr);
-		}
-		
-		//next_debug_u32 = spr.get_vram_chunk_index() 
-		//	* sprite_gfx_manager::num_tiles_in_ss_32x32;
-		
-	}
-	
-	//next_debug_u32 = sprite_manager::the_player.get_vram_chunk_index()
-	//	* sprite_gfx_manager::num_tiles_in_ss_32x32;
-	//
-	//next_debug_u32 = sprite_manager::the_sprites[0].get_vram_chunk_index()
-	//	* sprite_gfx_manager::num_tiles_in_ss_32x32;
 }
-
 
 void title_screen_func() __attribute__((__noinline__));
 
@@ -140,11 +116,13 @@ void title_screen_func()
 	memcpy32( bg_pal_ram, title_screenPal,
 		title_screenPalLen / sizeof(u32) );
 	
-	bios_do_lz77_uncomp_wram( title_screenMap, bg0_screenblock_mirror );
+	bios_do_lz77_uncomp_wram( title_screenMap, 
+		active_level::bg0_screenblock_mirror );
 	
-	active_level_manager::copy_level_from_array_2d_helper_to_vram 
-		( bg0_screenblock_2d, bg0_screenblock_mirror_2d );
-	
+	//active_level_manager::copy_sublevel_from_array_2d_helper_to_vram 
+	//	( active_level::bg0_screenblock_2d, 
+	//	active_level::bg0_screenblock_mirror_2d );
+	active_level_manager::copy_sublevel_from_array_2d_helper_to_vram();
 	
 	// Disable forced blank
 	clear_bits( reg_dispcnt, dcnt_blank_mask );
@@ -183,17 +161,8 @@ inline void debug_infin_loop()
 	}
 }
 
-
-int main()
+inline void reinit_the_game( int& next_oam_index )
 {
-	memcpy8( sram_init_str, sram_const_init_str, sram_init_str_size );
-	
-	irq_init();
-	
-	// 
-	title_screen_func();
-	
-	
 	// Use video Mode 0, use 1D object mapping, enable forced blank, 
 	// display objects, and display BG 0
 	reg_dispcnt |= dcnt_mode0 | dcnt_obj_1d | dcnt_blank_on | dcnt_obj_on
@@ -219,35 +188,31 @@ int main()
 	// Finally, copy the_block_gfxTiles to BG VRAM, screenblock 0
 	update_block_graphics_in_vram(the_block_gfxTiles);
 	
+	active_level::the_current_sublevel_ptr.init(test_level);
 	
-	//// Initialize the list of sprite level data.
-	//active_level_manager::init_horiz_level_sprite_ipg_lists
-	//	( sublevel_pointer(test_level) );
-	//
-	//bios_do_lz77_uncomp_wram( test_level.cmp_block_data,
-	//	active_level::block_data_array );
-	//
-	//active_level_manager::update_level_in_screenblock_mirror_2d 
-	//	( bg0_screenblock_mirror_2d, test_level.get_size_2d() );
-	//active_level_manager::copy_level_from_array_2d_helper_to_vram 
-	//	( bg0_screenblock_2d, bg0_screenblock_mirror_2d );
-	
-	active_level_manager::initial_level_loading
-		( sublevel_pointer(test_level), bg0_screenblock_2d, 
-		bg0_screenblock_mirror_2d );
+	// Initialize the list of sprite level data.
+	//active_level_manager::initial_sublevel_loading
+	//	( sublevel_pointer(test_level), active_level::bg0_screenblock_2d, 
+	//	active_level::bg0_screenblock_mirror_2d );
+	active_level_manager::initial_sublevel_loading();
 	
 	
-	int next_oam_index; 
+	next_oam_index = 0; 
 	
 	
-	sprite_manager::init_the_array_of_active_sprites();
+	//sprite_manager::init_the_array_of_active_sprites();
 	
-	sprite_manager::initial_sprite_spawning_from_level_data
-		( test_level.get_size_2d(), bgofs_mirror[0].curr, next_oam_index );
+	//sprite_manager::initial_sprite_spawning_from_sublevel_data
+	//	( test_level.get_size_2d(), bgofs_mirror[0].curr, next_oam_index );
+	sprite_manager::initial_sprite_spawning_from_sublevel_data
+		( active_level::the_current_sublevel_ptr.get_size_2d(),
+		bgofs_mirror[0].curr, next_oam_index );
 	
 	
-	active_level_manager::update_level_in_screenblock_mirror_2d 
-		( bg0_screenblock_mirror_2d, test_level.get_size_2d() );
+	//active_level_manager::update_sublevel_in_screenblock_mirror_2d 
+	//	( active_level::bg0_screenblock_mirror_2d, 
+	//	test_level.get_size_2d() );
+	active_level_manager::update_sublevel_in_screenblock_mirror_2d();
 	
 	
 	// Also, start playing music when the game is started.
@@ -258,11 +223,29 @@ int main()
 	
 	vblank_func();
 	
+	
+	
 	// Disable forced blank
 	clear_bits( reg_dispcnt, dcnt_blank_mask );
 	
 	bios_wait_for_vblank();
 	vblank_func(); 
+}
+
+
+
+int main()
+{
+	memcpy8( sram_init_str, sram_const_init_str, sram_init_str_size );
+	
+	irq_init();
+	
+	// 
+	title_screen_func();
+	
+	int next_oam_index;
+	
+	reinit_the_game(next_oam_index);
 	
 	
 	for (;;)
@@ -273,13 +256,6 @@ int main()
 		
 		clear_debug_vars();
 		
-		clear_debug_vars();
-		for ( sprite& spr : sprite_manager::the_sprites)
-		{
-			next_debug_u32 = spr.get_vram_chunk_index();
-			//next_debug_u32 = spr.the_sprite_type == st_waffle;
-		}
-		
 		memfill32( oam_mirror, 0, sizeof(oam_mirror) / sizeof(u32) );
 		
 		// Key polling is done in vblank_func()
@@ -289,15 +265,19 @@ int main()
 		if ( soft_reset_keys_down() )
 		{
 			// Reset the game if A, B, Start, and Select are pressed
-			bios_do_hard_reset();
-			//bios_do_soft_reset();
+			//bios_do_hard_reset();
+			////bios_do_soft_reset();
+			reinit_the_game(next_oam_index);
 		}
 		
 		
 		// Despawn sprites that are too far offscreen.
 		sprite_manager::despawn_sprites_if_needed(bgofs_mirror[0]);
 		
-		sprite_manager::update_all_sprites( test_level.get_size_2d(), 
+		//sprite_manager::update_all_sprites( test_level.get_size_2d(), 
+		//	bgofs_mirror[0], next_oam_index );
+		sprite_manager::update_all_sprites
+			( active_level::the_current_sublevel_ptr.get_size_2d(), 
 			bgofs_mirror[0], next_oam_index );
 		
 		
@@ -313,8 +293,10 @@ int main()
 		sprite_manager::spawn_sprites_if_needed(bgofs_mirror[0]);
 		
 		
-		active_level_manager::update_level_in_screenblock_mirror_2d
-			( bg0_screenblock_mirror_2d, test_level.get_size_2d() );
+		//active_level_manager::update_sublevel_in_screenblock_mirror_2d
+		//	( active_level::bg0_screenblock_mirror_2d, 
+		//	test_level.get_size_2d() );
+		active_level_manager::update_sublevel_in_screenblock_mirror_2d();
 		
 		
 		bios_wait_for_vblank();

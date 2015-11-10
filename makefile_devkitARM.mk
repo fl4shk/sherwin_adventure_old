@@ -20,7 +20,8 @@ S_DIRS=$(CXX_DIRS)
 
 
 
-PROJ=$(shell basename $(CURDIR))_devkitARM
+#PROJ=$(shell basename $(CURDIR))_devkitARM
+PROJ=$(shell basename $(CURDIR))
 
 # The music file's basename
 MUSIC_FILE_BASENAME=practice_17

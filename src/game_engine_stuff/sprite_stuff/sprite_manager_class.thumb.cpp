@@ -3,26 +3,27 @@
 #include "../../gba_specific_stuff/button_stuff.hpp"
 #include "../../gba_specific_stuff/interrupt_stuff.hpp"
 
+#include "sprite_class.hpp"
 
 
-sprite sprite_manager::the_player __attribute__((_iwram));
+sprite sprite_manager::the_player;
 
-std::array< sprite, sprite_manager::max_num_sprites > 
-	sprite_manager::the_sprites; //__attribute__((_iwram));
+std::array< sprite, sprite_manager::max_num_regular_sprites > 
+	sprite_manager::the_sprites;
 
 
 void sprite_manager::init_the_player ( const vec2_f24p8& s_in_level_pos, 
-	const vec2_u32& the_level_size_2d, bg_point& camera_pos )
+	const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos )
 {
-	sprite_stuff_array[st_player]->init( the_player,
-		s_in_level_pos, the_level_size_2d, camera_pos );
+	// The player should ALWAYS use the second VRAM chunk.
+	the_player = sprite(the_player_vram_chunk_index);
 	
-	// The player should ALWAYS use the first VRAM chunk.
-	the_player.set_vram_chunk_index(the_player_vram_chunk_index);
+	sprite_stuff_array[st_player]->init( the_player,
+		s_in_level_pos, the_sublevel_size_2d, camera_pos );
 }
 
 
-void sprite_manager::init_horiz_level_sprite_ipg_lists
+void sprite_manager::init_horiz_sublevel_sprite_ipg_lists
 	( const sprite_init_param_group* the_ext_sprite_ipg_arr, 
 	u32 the_ext_sprite_ipg_arr_size )
 {
@@ -30,20 +31,29 @@ void sprite_manager::init_horiz_level_sprite_ipg_lists
 	{
 		if ( the_ext_sprite_ipg_arr[i].type != st_default )
 		{
-			active_level::horiz_level_sprite_ipg_lists 
+			active_level::horiz_sublevel_sprite_ipg_lists 
 				[the_ext_sprite_ipg_arr[i].initial_block_grid_x_coord]
 				.push_front(the_ext_sprite_ipg_arr[i]);
 		}
 	}
 	
 	
-	for ( auto iter = active_level::horiz_level_sprite_ipg_lists.begin(); 
-		iter != active_level::horiz_level_sprite_ipg_lists.end(); 
-		++iter )
+	//for ( auto iter = active_level::horiz_sublevel_sprite_ipg_lists.begin(); 
+	//	iter != active_level::horiz_sublevel_sprite_ipg_lists.end(); 
+	//	++iter )
+	//{
+	//	if ( !iter->empty() )
+	//	{
+	//		iter->sort();
+	//	}
+	//}
+	
+	for ( std::forward_list<sprite_init_param_group>& the_list 
+		: active_level::horiz_sublevel_sprite_ipg_lists )
 	{
-		if ( !iter->empty() )
+		if ( !the_list.empty() )
 		{
-			iter->sort();
+			the_list.sort();
 		}
 	}
 	
@@ -79,8 +89,8 @@ void sprite_manager::some_sprite_init_thing()
 }
 
 
-void sprite_manager::initial_sprite_spawning_from_level_data
-	( const vec2_u32& the_level_size_2d, bg_point& camera_pos, 
+void sprite_manager::initial_sprite_spawning_from_sublevel_data
+	( const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos, 
 	int& next_oam_index )
 {
 	sprite_init_param_group* player_ipg = NULL;
@@ -88,9 +98,9 @@ void sprite_manager::initial_sprite_spawning_from_level_data
 	// Find the_player's level data.  This should eventually be replaced
 	// with just storing the starting parameters of the_player in the
 	// current sublevel's sublevel_entrance_arr.
-	for ( auto which_list=active_level::horiz_level_sprite_ipg_lists
+	for ( auto which_list=active_level::horiz_sublevel_sprite_ipg_lists
 			.begin();
-		which_list!=active_level::horiz_level_sprite_ipg_lists.end();
+		which_list!=active_level::horiz_sublevel_sprite_ipg_lists.end();
 		++which_list )
 	{
 		for ( auto which_node=which_list->begin(); 
@@ -123,8 +133,10 @@ void sprite_manager::initial_sprite_spawning_from_level_data
 		= { make_f24p8( player_ipg->initial_block_grid_x_coord << 4 ),
 		make_f24p8( player_ipg->initial_block_grid_y_coord << 4 ) };
 	
-	init_the_player( player_initial_in_level_pos, the_level_size_2d,
+	init_the_player( player_initial_in_level_pos, the_sublevel_size_2d,
 		camera_pos );
+	init_the_array_of_active_sprites();
+	
 	//next_debug_u32 = (vu32)(player_ipg);
 	//next_debug_u32 = player_ipg->type;
 	//nocash_soft_break();
@@ -144,9 +156,9 @@ void sprite_manager::initial_sprite_spawning_from_level_data
 	camera_block_grid_pos.y = make_f24p8( camera_pos.y >> 4 );
 	
 	
-	for ( auto which_list=active_level::horiz_level_sprite_ipg_lists
+	for ( auto which_list=active_level::horiz_sublevel_sprite_ipg_lists
 			.begin();
-		which_list!=active_level::horiz_level_sprite_ipg_lists.end();
+		which_list!=active_level::horiz_sublevel_sprite_ipg_lists.end();
 		++which_list )
 	{
 		for ( auto which_node=which_list->begin(); 
@@ -234,7 +246,7 @@ void sprite_manager::initial_sprite_spawning_from_level_data
 }
 
 
-void sprite_manager::initial_sprite_spawning_from_level_data_old
+void sprite_manager::initial_sprite_spawning_from_sublevel_data_old
 	( const bg_point& camera_pos, int& next_oam_index )
 {
 	auto iter3 = the_sprites.begin();
@@ -248,8 +260,8 @@ void sprite_manager::initial_sprite_spawning_from_level_data_old
 	camera_block_grid_pos.y = make_f24p8( camera_pos.y >> 4 );
 	
 	
-	for ( auto iter=active_level::horiz_level_sprite_ipg_lists.begin();
-		iter!=active_level::horiz_level_sprite_ipg_lists.end();
+	for ( auto iter=active_level::horiz_sublevel_sprite_ipg_lists.begin();
+		iter!=active_level::horiz_sublevel_sprite_ipg_lists.end();
 		++iter )
 	{
 		for ( auto iter2=iter->begin(); iter2!=iter->end(); ++iter2 )

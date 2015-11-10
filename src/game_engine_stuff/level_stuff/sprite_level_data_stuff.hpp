@@ -4,11 +4,14 @@
 //#include "../sa_stack_class.hpp"
 #include "../sprite_stuff/sprite_type_stuff.hpp"
 
+// This is pretty self explanatory, right?  Sprites that are not active can
+// be spawned.  Sprites that are active can't be spawned.  Sprites that are
+// dead can't be spawned.
 enum sprite_spawn_state
 {
 	sss_not_active,
 	sss_active,
-	sss_dead
+	sss_dead,
 	
 } __attribute__((_align4));
 
@@ -36,8 +39,9 @@ public:		// variables
 	const u32 extra_param_2;
 	const u32 extra_param_3;
 	
-	// I figure that it's best to merge the despawned/spawned/dead
-	// information into the sprite_init_param_group class.
+	// The despawned/spawned/dead information is merged into the
+	// sprite_init_param_group class.  For sprite_init_param_group's in
+	// ROM, this is supposed to be set to sss_not_active.
 	sprite_spawn_state spawn_state;
 	
 public:		// functions

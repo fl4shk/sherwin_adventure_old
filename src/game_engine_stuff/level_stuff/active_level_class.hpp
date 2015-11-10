@@ -20,6 +20,7 @@
 
 class sprite;
 class sprite_init_param_group;
+class sublevel_pointer;
 
 
 // This is a class that contains the data used by active levels after they
@@ -33,36 +34,63 @@ class active_level
 {
 public:		// static variables
 	
+	// This will eat up 64 kiB of EWRAM.
 	//static constexpr u32 block_data_array_size = 0x4000;
 	static constexpr u32 block_data_array_size = 16384;
-	static block block_data_array[block_data_array_size];
+	static block block_data_array[block_data_array_size]
+		__attribute__((_ewram));
 	
 	
+	// This will eat up 32 kiB of EWRAM.
+	// active_level::persistent_block_data_arrays is a 2D array of extra
+	// data.  Each "row" within this 2D array is to be "claimed" by one of
+	// the sublevels within a level
 	static constexpr u32 max_num_sublevels = max_num_sublevels_per_level;
 	static constexpr u32 persistent_block_data_array_size = 2048;
 	static u16 persistent_block_data_arrays[max_num_sublevels]
-		[persistent_block_data_array_size];
+		[persistent_block_data_array_size] __attribute__((_ewram));
 	
 	
-	// Horizontal levels can have a maximum of 16 "screens" of 32 by 32
+	// Horizontal sublevels can have a maximum of 16 "screens" of 32 by 32
 	// arrays of blocks.  
 	// 16384 / 32 = 512, and 512 / 32 = 16.
-	static constexpr u32 horiz_level_size = block_data_array_size;
-	static constexpr u32 horiz_level_ysize = 32;
-	static constexpr u32 horiz_level_xsize = block_data_array_size 
-		/ horiz_level_ysize;
+	static constexpr u32 horiz_sublevel_size = block_data_array_size;
+	static constexpr u32 horiz_sublevel_ysize = 32;
+	static constexpr u32 horiz_sublevel_xsize = block_data_array_size 
+		/ horiz_sublevel_ysize;
 	
-	static constexpr vec2_u32 horiz_level_size_2d 
-		= { horiz_level_xsize, horiz_level_ysize };
+	static constexpr vec2_u32 horiz_sublevel_size_2d 
+		= { horiz_sublevel_xsize, horiz_sublevel_ysize };
 	
-	static array_2d_helper<block> horiz_level_block_data_2d;
+	// horiz_sublevel_block_data_2d is an array_2d_helper that wraps the
+	// access to block_data_array for horizontal sublevels.  Support for
+	// vertical sublevels MIGHT come later.
+	static array_2d_helper<block> horiz_sublevel_block_data_2d;
 	
 	
 	// The array of lists of sprite initialization parameters, including
 	// the spawned/despawned/dead status.
 	static std::array< std::forward_list<sprite_init_param_group>,
-		horiz_level_xsize > horiz_level_sprite_ipg_lists;
+		horiz_sublevel_xsize > horiz_sublevel_sprite_ipg_lists
+		__attribute__((_ewram));
 	
+	
+	// 
+	static scr_entry bg0_screenblock_mirror[screenblock_size] 
+		__attribute__((_ewram));
+	
+	
+	// bg0_screenblock_2d is in VRAM.
+	static array_2d_helper<scr_entry> bg0_screenblock_2d;
+	
+	// bg0_screenblock_mirror_2d is in EWRAM.
+	static array_2d_helper<scr_entry> bg0_screenblock_mirror_2d;
+	
+	
+	// the_current_sublevel_ptr will later be replaced with a "regular"
+	// pointer to a constant level.  Also, at that time, a variable will be
+	// created which acts as an index to the array of sublevel_pointer's.
+	static sublevel_pointer the_current_sublevel_ptr;
 	
 	
 public:		// functions
@@ -81,14 +109,14 @@ public:		// functions
 	static inline block_type get_block_type_at_coord 
 		( const vec2_s32& block_coord )
 	{
-		return horiz_level_block_data_2d.data_at( block_coord.x,
+		return horiz_sublevel_block_data_2d.data_at( block_coord.x,
 			block_coord.y ).get_block_type();
 	}
 	
 	static inline block& the_block_data_at_coord 
 		( const vec2_s32& block_coord )
 	{
-		return horiz_level_block_data_2d.data_at( block_coord.x,
+		return horiz_sublevel_block_data_2d.data_at( block_coord.x,
 			block_coord.y );
 	}
 	

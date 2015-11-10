@@ -73,8 +73,8 @@ void sprite_manager::spawn_sprites_if_needed
 	if ( cm_dir > 0 )
 	{
 		// Spawn whole columns of sprites at a time, regardless of whether
-		// they are are veritcally on screen.  This assumes that all levels
-		// are horizontal.
+		// they are are veritcally on screen.  This assumes that all
+		// sublevels are horizontal.
 		for ( s32 i=camera_block_grid_pos_x.prev;
 			i<=camera_block_grid_pos_x.curr;
 			++i )
@@ -82,10 +82,8 @@ void sprite_manager::spawn_sprites_if_needed
 			
 			// Spawn sprites from the top of the column to the bottom of
 			// the column.
-			for ( auto iter=active_level::horiz_level_sprite_ipg_lists[i]
-					.begin();
-				iter!=active_level::horiz_level_sprite_ipg_lists[i].end();
-				++iter )
+			for ( sprite_init_param_group& sprite_ipg 
+				: active_level::horiz_sublevel_sprite_ipg_lists[i] )
 			{
 				// Find the lowest FREE sprite slot, if any.
 				while ( ( the_sprites[next_sprite_index].the_sprite_type 
@@ -103,7 +101,7 @@ void sprite_manager::spawn_sprites_if_needed
 				}
 				
 				the_sprites[next_sprite_index].reinit_with_sprite_ipg
-					( &(*iter) );
+					(&sprite_ipg);
 				
 			}
 			
@@ -121,10 +119,13 @@ void sprite_manager::spawn_sprites_if_needed
 	else 
 	{
 		// Spawn whole columns of sprites at a time, regardless of whether
-		// they are are veritcally on screen.  This assumes that all levels
-		// are horizontal.
-		for ( s32 i=camera_block_grid_pos_x.prev + 5;
-			i>=camera_block_grid_pos_x.curr - 1;
+		// they are are veritcally on screen.  This assumes that all
+		// sublevels are horizontal.
+		//for ( s32 i=camera_block_grid_pos_x.prev + 5;
+		//	i>=camera_block_grid_pos_x.curr - 1;
+		//	--i )
+		for ( s32 i=camera_block_grid_pos_x.prev;
+			i>=camera_block_grid_pos_x.curr - 2;
 			--i )
 		{
 			if ( i < 0 )
@@ -135,10 +136,8 @@ void sprite_manager::spawn_sprites_if_needed
 			
 			// Spawn sprites from the top of the column to the bottom of
 			// the column.
-			for ( auto iter=active_level::horiz_level_sprite_ipg_lists[i]
-					.begin();
-				iter!=active_level::horiz_level_sprite_ipg_lists[i].end();
-				++iter )
+			for ( sprite_init_param_group& sprite_ipg 
+				: active_level::horiz_sublevel_sprite_ipg_lists[i] )
 			{
 				
 				// Find the lowest FREE sprite slot, if any.
@@ -157,7 +156,7 @@ void sprite_manager::spawn_sprites_if_needed
 				}
 				
 				the_sprites[next_sprite_index].reinit_with_sprite_ipg
-					( &(*iter) );
+					(&sprite_ipg);
 				
 			}
 			
@@ -189,30 +188,29 @@ void sprite_manager::despawn_sprites_if_needed
 	camera_pos_curr_f24p8.y = make_f24p8(camera_pos_pc_pair.curr.y);
 	
 	
-	for ( auto iter=the_sprites.begin(); iter!=the_sprites.end(); ++iter )
+	for ( sprite& spr : the_sprites )
 	{
-		if ( iter->the_sprite_type != st_default )
+		if ( spr.the_sprite_type != st_default )
 		{
-			fixed24p8 spr_on_screen_pos_x
-				= iter->in_level_pos.x - camera_pos_curr_f24p8.x;
+			fixed24p8 spr_on_screen_pos_x = spr.in_level_pos.x 
+				- camera_pos_curr_f24p8.x;
 			
 			if ( !( spr_on_screen_pos_x.data >= max_left
 				&& spr_on_screen_pos_x.data <= max_right ) )
 			{
-				// I might eventually create iter->despawn() so that
+				// I might eventually create spr.despawn() so that
 				// sprites can control HOW they despawn
-				//iter->despawn();
+				//spr.despawn();
 				
-				iter->the_sprite_type = st_default;
-				if ( iter->the_sprite_ipg != NULL )
+				spr.the_sprite_type = st_default;
+				if ( spr.the_sprite_ipg != NULL )
 				{
-					iter->the_sprite_ipg->spawn_state = sss_not_active;
+					spr.the_sprite_ipg->spawn_state = sss_not_active;
 				}
 			}
 		}
 		
 	}
-	
 }
 
 
@@ -249,7 +247,7 @@ void sprite_manager::spawn_a_sprite_basic ( sprite_type the_sprite_type,
 }
 
 void sprite_manager::update_all_sprites
-	( const vec2_u32& the_level_size_2d, 
+	( const vec2_u32& the_sublevel_size_2d, 
 	prev_curr_pair<bg_point>& camera_pos_pc_pair, int& next_oam_index )
 {
 	sprite_stuff_array[the_player.the_sprite_type]
@@ -259,7 +257,7 @@ void sprite_manager::update_all_sprites
 	
 	u32 num_active_sprites = 0;
 	
-	sprite* the_active_sprites[max_num_sprites];
+	sprite* the_active_sprites[max_num_regular_sprites];
 	
 	// Find all the currently-active sprites
 	for ( u32 i=0; i<the_sprites.size(); ++i )
@@ -280,7 +278,7 @@ void sprite_manager::update_all_sprites
 	}
 	
 	sprite_stuff_array[the_player.the_sprite_type]->update_part_2
-		( the_player, camera_pos_pc_pair.curr, the_level_size_2d );
+		( the_player, camera_pos_pc_pair.curr, the_sublevel_size_2d );
 	
 	
 	for ( u32 i=0; i<num_active_sprites; ++i )

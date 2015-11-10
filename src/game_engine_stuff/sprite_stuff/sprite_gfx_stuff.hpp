@@ -65,6 +65,7 @@ public:		// variables and constants
 	static constexpr u32 num_tiles_in_ss_32x64 = ( 32 * 64 ) 
 		/ num_pixels_per_tile;
 	
+	
 	//static u32 next_free_sprite_vram_slot __attribute__((_iwram));
 	//static u32 sprite_gfx_category_first_vram_slot_list[sgc_count]
 	//	__attribute__((_iwram));
@@ -77,8 +78,6 @@ public:		// variables and constants
 	// pixels.  It's unlikely that any sprites larger than 32x32 would be
 	// needed.  Also, this is only the case for 4bpp graphics.
 	static constexpr u32 max_num_32x32_metatiles = 64;
-	//static sa_free_list<max_num_32x32_metatiles> sprite_vram_free_indices
-	//	__attribute__((_iwram));
 	
 	
 	//// These are temporary!

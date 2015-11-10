@@ -2,8 +2,10 @@
 #define level_class_hpp
 
 #include "sublevel_class.hpp"
-
 #include "level_defines.hpp"
+
+#include <array>
+using std::array;
 
 // This is a class that contains a group of COMPRESSED sublevels in ROM.
 // It also allows 
@@ -14,7 +16,7 @@ public:		// constants
 	
 protected:		// variables
 	u32 actual_num_sublevels;
-	sublevel_pointer the_sublevels[max_num_sublevels];
+	array< sublevel_pointer, max_num_sublevels > the_sublevels;
 	
 public:		// functions
 	
@@ -130,7 +132,7 @@ public:		// functions
 	
 	inline const sublevel_pointer* get_the_sublevels() const
 	{
-		return the_sublevels;
+		return the_sublevels.data();
 	}
 	
 	

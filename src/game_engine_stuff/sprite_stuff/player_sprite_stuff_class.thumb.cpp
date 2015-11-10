@@ -193,6 +193,9 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 					}
 				}
 				break;
+			
+			case st_warp_block:
+				break;
 				
 			default:
 				break;
