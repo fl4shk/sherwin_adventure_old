@@ -97,7 +97,10 @@ void sprite_manager::initial_sprite_spawning_from_sublevel_data
 	
 	// Find the_player's level data.  This should eventually be replaced
 	// with just storing the starting parameters of the_player in the
-	// current sublevel's sublevel_entrance_arr.
+	// current sublevel's sublevel_entrance_arr.  Also, there should be
+	// something to handle the case where the player might enter a sublevel
+	// using one sublevel_entrance at one time, but later enter the same
+	// sublevel using a different sublevel_entrance.
 	for ( auto which_list=active_level::horiz_sublevel_sprite_ipg_lists
 			.begin();
 		which_list!=active_level::horiz_sublevel_sprite_ipg_lists.end();

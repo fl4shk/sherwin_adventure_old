@@ -1,7 +1,7 @@
 #include "test_level.hpp"
 
 
-const sublevel< 2010, 64, 32, 15, 5 > test_level
+const sublevel< 2010, 64, 32, 15, 16 > test_level
 = {
 	{
 		0x1000010, 0x501, 0x1000600, 0x2550300,
@@ -510,8 +510,8 @@ const sublevel< 2010, 64, 32, 15, 5 > test_level
 	},
 	
 	{
-		{ st_warp_block, 58, 3, true, 0, 0, 0, 0 },
-		{ st_warp_block, 62, 7, true, 1, 0, 0, 0 },
+		{ st_warp_block, 58, 3, true, 3, 0, 0, 0 },
+		{ st_warp_block, 62, 7, true, 0, 0, 0, 0 },
 		{ st_player, 2, 24, true, 0, 0, 0, 0 },
 		{ st_ice_muffin, 4, 25, true, 0, 0, 0, 0 },
 		{ st_muffin, 11, 25, true, 0, 0, 0, 0 },
@@ -519,20 +519,31 @@ const sublevel< 2010, 64, 32, 15, 5 > test_level
 		{ st_chocolate_muffin, 16, 25, true, 0, 0, 0, 0 },
 		{ st_waffle, 42, 26, false, 0, 0, 0, 0 },
 		{ st_muffin, 47, 29, true, 0, 0, 0, 0 },
-		{ st_warp_block, 1, 30, true, 2, 0, 0, 0 },
+		{ st_warp_block, 1, 30, true, 0, 0, 0, 0 },
 		{ st_muffin, 9, 30, true, 0, 0, 0, 0 },
 		{ st_chocolate_muffin, 10, 30, true, 0, 0, 0, 0 },
-		{ st_warp_block, 52, 30, true, 3, 0, 0, 0 },
-		{ st_warp_block, 56, 30, true, 4, 0, 0, 0 },
+		{ st_warp_block, 52, 30, true, 1, 0, 0, 0 },
+		{ st_warp_block, 56, 30, true, 2, 0, 0, 0 },
 		{ st_waffle, 62, 30, true, 0, 0, 0, 0 },
 	},
 	
 	{
-		{ sle_from_warp_block, vec2_f24p8( {0x3a00}, {0x300} ) },
-		{ sle_from_warp_block, vec2_f24p8( {0x3e00}, {0x700} ) },
-		{ sle_from_warp_block, vec2_f24p8( {0x100}, {0x1e00} ) },
-		{ sle_from_warp_block, vec2_f24p8( {0x3400}, {0x1e00} ) },
-		{ sle_from_warp_block, vec2_f24p8( {0x3800}, {0x1e00} ) },
+		{ sle_from_warp_block, vec2_f24p8( {0x34000}, {0x1e000} ) },
+		{ sle_from_warp_block, vec2_f24p8( {0x3a000}, {0x3000} ) },
+		{ sle_from_warp_block, vec2_f24p8( {0x3e000}, {0x7000} ) },
+		{ sle_from_warp_block, vec2_f24p8( {0x38000}, {0x1e000} ) },
+		{ sle_from_warp_block, vec2_f24p8( {0x1000}, {0x1e000} ) },
+		{ sle_start_of_level, vec2_f24p8( {0x0}, {0x0} ) },
+		{ sle_start_of_level, vec2_f24p8( {0x0}, {0x0} ) },
+		{ sle_start_of_level, vec2_f24p8( {0x0}, {0x0} ) },
+		{ sle_start_of_level, vec2_f24p8( {0x0}, {0x0} ) },
+		{ sle_start_of_level, vec2_f24p8( {0x0}, {0x0} ) },
+		{ sle_start_of_level, vec2_f24p8( {0x0}, {0x0} ) },
+		{ sle_start_of_level, vec2_f24p8( {0x0}, {0x0} ) },
+		{ sle_start_of_level, vec2_f24p8( {0x0}, {0x0} ) },
+		{ sle_start_of_level, vec2_f24p8( {0x0}, {0x0} ) },
+		{ sle_start_of_level, vec2_f24p8( {0x0}, {0x0} ) },
+		{ sle_start_of_level, vec2_f24p8( {0x0}, {0x0} ) },
 	},
 };
 

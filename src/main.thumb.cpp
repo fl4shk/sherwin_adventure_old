@@ -36,7 +36,6 @@
 #include "maxmod.h"
 
 
-//scr_entry bg0_screenblock_mirror[screenblock_size] __attribute__((_ewram));
 
 int test_int_global;
 
@@ -74,9 +73,11 @@ void vblank_func()
 	update_block_graphics_in_vram(the_block_gfxTiles);
 	copy_oam_mirror_to_oam();
 	copy_bgofs_mirror_to_registers();
+	
 	//active_level_manager::copy_level_from_array_2d_helper_to_vram
 	//	( active_level::bg0_screenblock_2d, 
 	//	active_level::bg0_screenblock_mirror_2d );
+	
 	active_level_manager::copy_sublevel_from_array_2d_helper_to_vram();
 	
 	sprite_manager::upload_tiles_of_active_sprites_to_vram();
@@ -222,7 +223,6 @@ inline void reinit_the_game( int& next_oam_index )
 	mmPause();
 	
 	vblank_func();
-	
 	
 	
 	// Disable forced blank

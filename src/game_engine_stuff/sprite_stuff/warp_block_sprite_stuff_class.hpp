@@ -3,6 +3,8 @@
 
 #include "../../gfx/the_block_like_sprites_gfx.h"
 
+class sublevel_entrance;
+
 class warp_block_sprite_stuff : public sprite_base_stuff
 {
 public:		// variables
@@ -17,7 +19,7 @@ public:		// variables
 	
 public:		// functions
 	
-	//virtual void init( sprite& the_, bool facing_right=false );
+	//virtual void init( sprite& the_warp_block, bool facing_right=false );
 	inline virtual const sprite_type get_sprite_type() const
 	{
 		return the_sprite_type;
@@ -44,6 +46,10 @@ public:		// functions
 	{
 		return tile_arr;
 	}
+	
+	
+	// Initial
+	static const sublevel_entrance& get_dest_sle( sprite& the_warp_block );
 	
 	
 	// Physics and collision stuff

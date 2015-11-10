@@ -173,6 +173,8 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 	bg_point& camera_pos, const vec2_u32& the_level_size_2d )
 {
 	
+	bool warped_this_frame = false;
+	
 	for ( sprite& spr : sprite_manager::the_sprites )
 	{
 		switch ( spr.the_sprite_type )
@@ -195,6 +197,44 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 				break;
 			
 			case st_warp_block:
+				if ( coll_box_intersects_now( the_player.the_coll_box,
+					spr.the_coll_box ) && key_hit(key_up) 
+					&& !warped_this_frame )
+				{
+					warped_this_frame = true;
+					
+					const sublevel_entrance& the_dest_sle 
+						= warp_block_sprite_stuff::get_dest_sle(spr);
+					
+					next_debug_f24p8.data = spr.the_sprite_ipg
+						->extra_param_0;
+					//next_debug_f24p8.data 
+					//	= the_dest_sle.in_level_pos.x.data
+					//	* num_pixels_per_block_row;
+					//next_debug_f24p8.data 
+					//	= the_dest_sle.in_level_pos.y.data 
+					//	* num_pixels_per_block_col;
+					next_debug_f24p8 = the_dest_sle.in_level_pos.x;
+					next_debug_f24p8 = the_dest_sle.in_level_pos.y;
+					next_debug_f24p8 = the_player.in_level_pos.x;
+					next_debug_f24p8 = the_player.in_level_pos.y;
+					
+					//the_player.in_level_pos = the_dest_sle.in_level_pos;
+					the_player.in_level_pos.x 
+						= the_dest_sle.in_level_pos.x;
+					the_player.in_level_pos.y = the_dest_sle.in_level_pos.y
+						- make_f24p8( the_player.get_shape_size_as_vec2().y
+						- num_pixels_per_block_col );
+					//the_player.vel = vec2_f24p8();
+					
+					the_player.update_f24p8_positions();
+					the_player.update_on_screen_pos(camera_pos);
+					
+					the_player.center_camera_almost(camera_pos);
+					active_level_manager::correct_bg0_scroll_mirror
+						(the_level_size_2d);
+					the_player.update_on_screen_pos(camera_pos);
+				}
 				break;
 				
 			default:

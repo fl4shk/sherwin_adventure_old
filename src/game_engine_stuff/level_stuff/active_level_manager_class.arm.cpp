@@ -171,7 +171,6 @@ void active_level_manager::update_sublevel_in_screenblock_mirror_2d()
 	//const vec2_u32& sublevel_size_in_blocks_2d )
 {
 	
-	//correct_bg0_scroll_mirror(sublevel_size_in_blocks_2d);
 	correct_bg0_scroll_mirror
 		(active_level::the_current_sublevel_ptr.get_size_2d());
 
@@ -213,12 +212,6 @@ void active_level_manager::update_sublevel_in_screenblock_mirror_2d()
 	{
 		for ( u32 j=0; j<screen_height_in_tiles + 1; ++j )
 		{
-			//screenblock_mirror_2d.data_at
-			//	( ( sublevel_x_coord_tile + i ) & 0x1f,
-			//	( sublevel_y_coord_tile + j ) & 0x1f )
-			//= horiz_sublevel_tile_at( sublevel_x_coord_tile + i,
-			//	sublevel_y_coord_tile + j );
-			
 			active_level::bg0_screenblock_mirror_2d.data_at
 				( ( sublevel_x_coord_tile + i ) & 0x1f,
 				( sublevel_y_coord_tile + j ) & 0x1f )
@@ -235,11 +228,6 @@ void active_level_manager::copy_sublevel_from_array_2d_helper_to_vram()
 	//( array_2d_helper<scr_entry>& screenblock_in_vram_2d,
 	//array_2d_helper<scr_entry>& screenblock_mirror_2d )
 {
-	//memcpy32( screenblock_in_vram_2d.the_array, 
-	//	screenblock_mirror_2d.the_array,
-	//	sizeof(scr_entry) * screenblock_mirror_2d.get_size() 
-	//		/ sizeof(u32) ); 
-	
 	memcpy32( active_level::bg0_screenblock_2d.the_array, 
 		active_level::bg0_screenblock_mirror_2d.the_array,
 		sizeof(scr_entry) * active_level::bg0_screenblock_mirror_2d
