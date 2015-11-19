@@ -12,6 +12,8 @@
 //}
 
 
+// This function needs to be updated to support levels that have multiple 
+// sublevels, which is likely to be the usual case.
 const sublevel_entrance& warp_block_sprite_stuff::get_dest_sle
 	( sprite& the_warp_block )
 {
@@ -23,7 +25,15 @@ const sublevel_entrance& warp_block_sprite_stuff::get_dest_sle
 	//	.sublevel_entrance_arr_arr_helper.the_array
 	//	[the_warp_block.the_sprite_ipg->extra_param_0];
 	//next_debug_f24p8.data = the_warp_block.the_sprite_ipg->extra_param_0;
-	return active_level::the_current_sublevel_ptr
+	
+	//return active_level::the_current_sublevel_ptr_ptr
+	//	->sublevel_entrance_arr_arr_helper.the_array
+	//	[the_warp_block.the_sprite_ipg->extra_param_0];
+	//return active_level::the_current_level_ptr->get_the_sublevels()
+	//	[active_level::the_current_active_sublevel_index]
+	//	->sublevel_entrance_arr_arr_helper.the_array
+	//	[the_warp_block.the_sprite_ipg->extra_param_0];
+	return active_level::get_the_current_sublevel_ptr()
 		.sublevel_entrance_arr_arr_helper.the_array
 		[the_warp_block.the_sprite_ipg->extra_param_0];
 }

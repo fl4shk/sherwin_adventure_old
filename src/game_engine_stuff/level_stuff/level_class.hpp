@@ -25,9 +25,21 @@ public:		// functions
 	{
 		the_sublevels[0] = first_sublevel_ptr;
 	}
+	inline level( sublevel_pointer&& first_sublevel_ptr )
+		: actual_num_sublevels(1)
+	{
+		the_sublevels[0] = first_sublevel_ptr;
+	}
 	
 	inline level( sublevel_pointer& first_sublevel_ptr, 
 		sublevel_pointer& second_sublevel_ptr )
+		: actual_num_sublevels(2)
+	{
+		the_sublevels[0] = first_sublevel_ptr;
+		the_sublevels[1] = second_sublevel_ptr;
+	}
+	inline level( sublevel_pointer&& first_sublevel_ptr, 
+		sublevel_pointer&& second_sublevel_ptr )
 		: actual_num_sublevels(2)
 	{
 		the_sublevels[0] = first_sublevel_ptr;
@@ -43,11 +55,31 @@ public:		// functions
 		the_sublevels[1] = second_sublevel_ptr;
 		the_sublevels[2] = third_sublevel_ptr;
 	}
+	inline level( sublevel_pointer&& first_sublevel_ptr, 
+		sublevel_pointer&& second_sublevel_ptr,
+		sublevel_pointer&& third_sublevel_ptr )
+		: actual_num_sublevels(3)
+	{
+		the_sublevels[0] = first_sublevel_ptr;
+		the_sublevels[1] = second_sublevel_ptr;
+		the_sublevels[2] = third_sublevel_ptr;
+	}
 	
 	inline level( sublevel_pointer& first_sublevel_ptr, 
 		sublevel_pointer& second_sublevel_ptr,
 		sublevel_pointer& third_sublevel_ptr,
 		sublevel_pointer& fourth_sublevel_ptr )
+		: actual_num_sublevels(4)
+	{
+		the_sublevels[0] = first_sublevel_ptr;
+		the_sublevels[1] = second_sublevel_ptr;
+		the_sublevels[2] = third_sublevel_ptr;
+		the_sublevels[3] = fourth_sublevel_ptr;
+	}
+	inline level( sublevel_pointer&& first_sublevel_ptr, 
+		sublevel_pointer&& second_sublevel_ptr,
+		sublevel_pointer&& third_sublevel_ptr,
+		sublevel_pointer&& fourth_sublevel_ptr )
 		: actual_num_sublevels(4)
 	{
 		the_sublevels[0] = first_sublevel_ptr;
@@ -69,6 +101,19 @@ public:		// functions
 		the_sublevels[3] = fourth_sublevel_ptr;
 		the_sublevels[4] = fifth_sublevel_ptr;
 	}
+	inline level( sublevel_pointer&& first_sublevel_ptr, 
+		sublevel_pointer&& second_sublevel_ptr,
+		sublevel_pointer&& third_sublevel_ptr,
+		sublevel_pointer&& fourth_sublevel_ptr,
+		sublevel_pointer&& fifth_sublevel_ptr )
+		: actual_num_sublevels(5)
+	{
+		the_sublevels[0] = first_sublevel_ptr;
+		the_sublevels[1] = second_sublevel_ptr;
+		the_sublevels[2] = third_sublevel_ptr;
+		the_sublevels[3] = fourth_sublevel_ptr;
+		the_sublevels[4] = fifth_sublevel_ptr;
+	}
 	
 	inline level( sublevel_pointer& first_sublevel_ptr, 
 		sublevel_pointer& second_sublevel_ptr,
@@ -76,6 +121,21 @@ public:		// functions
 		sublevel_pointer& fourth_sublevel_ptr,
 		sublevel_pointer& fifth_sublevel_ptr,
 		sublevel_pointer& sixth_sublevel_ptr )
+		: actual_num_sublevels(6)
+	{
+		the_sublevels[0] = first_sublevel_ptr;
+		the_sublevels[1] = second_sublevel_ptr;
+		the_sublevels[2] = third_sublevel_ptr;
+		the_sublevels[3] = fourth_sublevel_ptr;
+		the_sublevels[4] = fifth_sublevel_ptr;
+		the_sublevels[5] = sixth_sublevel_ptr;
+	}
+	inline level( sublevel_pointer&& first_sublevel_ptr, 
+		sublevel_pointer&& second_sublevel_ptr,
+		sublevel_pointer&& third_sublevel_ptr,
+		sublevel_pointer&& fourth_sublevel_ptr,
+		sublevel_pointer&& fifth_sublevel_ptr,
+		sublevel_pointer&& sixth_sublevel_ptr )
 		: actual_num_sublevels(6)
 	{
 		the_sublevels[0] = first_sublevel_ptr;
@@ -103,6 +163,23 @@ public:		// functions
 		the_sublevels[5] = sixth_sublevel_ptr;
 		the_sublevels[6] = seventh_sublevel_ptr;
 	}
+	inline level( sublevel_pointer&& first_sublevel_ptr, 
+		sublevel_pointer&& second_sublevel_ptr,
+		sublevel_pointer&& third_sublevel_ptr,
+		sublevel_pointer&& fourth_sublevel_ptr,
+		sublevel_pointer&& fifth_sublevel_ptr,
+		sublevel_pointer&& sixth_sublevel_ptr,
+		sublevel_pointer&& seventh_sublevel_ptr )
+		: actual_num_sublevels(7)
+	{
+		the_sublevels[0] = first_sublevel_ptr;
+		the_sublevels[1] = second_sublevel_ptr;
+		the_sublevels[2] = third_sublevel_ptr;
+		the_sublevels[3] = fourth_sublevel_ptr;
+		the_sublevels[4] = fifth_sublevel_ptr;
+		the_sublevels[5] = sixth_sublevel_ptr;
+		the_sublevels[6] = seventh_sublevel_ptr;
+	}
 	
 	inline level( sublevel_pointer& first_sublevel_ptr, 
 		sublevel_pointer& second_sublevel_ptr,
@@ -112,6 +189,25 @@ public:		// functions
 		sublevel_pointer& sixth_sublevel_ptr,
 		sublevel_pointer& seventh_sublevel_ptr,
 		sublevel_pointer& eighth_subelevel_ptr )
+		: actual_num_sublevels(8)
+	{
+		the_sublevels[0] = first_sublevel_ptr;
+		the_sublevels[1] = second_sublevel_ptr;
+		the_sublevels[2] = third_sublevel_ptr;
+		the_sublevels[3] = fourth_sublevel_ptr;
+		the_sublevels[4] = fifth_sublevel_ptr;
+		the_sublevels[5] = sixth_sublevel_ptr;
+		the_sublevels[6] = seventh_sublevel_ptr;
+		the_sublevels[7] = eighth_subelevel_ptr;
+	}
+	inline level( sublevel_pointer&& first_sublevel_ptr, 
+		sublevel_pointer&& second_sublevel_ptr,
+		sublevel_pointer&& third_sublevel_ptr,
+		sublevel_pointer&& fourth_sublevel_ptr,
+		sublevel_pointer&& fifth_sublevel_ptr,
+		sublevel_pointer&& sixth_sublevel_ptr,
+		sublevel_pointer&& seventh_sublevel_ptr,
+		sublevel_pointer&& eighth_subelevel_ptr )
 		: actual_num_sublevels(8)
 	{
 		the_sublevels[0] = first_sublevel_ptr;

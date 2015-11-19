@@ -21,23 +21,31 @@ class sprite_init_param_group
 {
 public:		// variables
 	// The type of sprite
-	const sprite_type type;
+	//const sprite_type type;
+	sprite_type type;
 	
 	// The initial in-level x coordinate, divided by 16
-	const u32 initial_block_grid_x_coord;
+	//const u32 initial_block_grid_x_coord;
+	u32 initial_block_grid_x_coord;
 	
 	// The initial in-level y coordinate, divided by 16
-	const u32 initial_block_grid_y_coord;
+	//const u32 initial_block_grid_y_coord;
+	u32 initial_block_grid_y_coord;
 	
 	// Here is a s
-	const bool facing_right;
+	//const bool facing_right;
+	bool facing_right;
 	
 	// Here are extra parameters that are used in different ways depending
 	// on the type of sprite.
-	const u32 extra_param_0;
-	const u32 extra_param_1;
-	const u32 extra_param_2;
-	const u32 extra_param_3;
+	//const u32 extra_param_0;
+	//const u32 extra_param_1;
+	//const u32 extra_param_2;
+	//const u32 extra_param_3;
+	u32 extra_param_0;
+	u32 extra_param_1;
+	u32 extra_param_2;
+	u32 extra_param_3;
 	
 	// The despawned/spawned/dead information is merged into the
 	// sprite_init_param_group class.  For sprite_init_param_group's in

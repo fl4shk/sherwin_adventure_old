@@ -68,7 +68,7 @@ void vblank_func()
 	mmFrame();
 	
 	key_poll();
-	pause_or_unpause_music ();
+	//pause_or_unpause_music ();
 	
 	update_block_graphics_in_vram(the_block_gfxTiles);
 	copy_oam_mirror_to_oam();
@@ -82,6 +82,26 @@ void vblank_func()
 	
 	sprite_manager::upload_tiles_of_active_sprites_to_vram();
 	
+	
+	if ( key_hit(key_select) )
+	{
+		// Enable forced blank
+		reg_dispcnt |= dcnt_blank_on;
+		
+		if ( active_level::the_current_active_sublevel_index == 0 )
+		{
+			active_level_manager::load_sublevel(1);
+		}
+		else
+		{
+			active_level_manager::load_sublevel(0);
+		}
+		
+		// Disable forced blank
+		clear_bits( reg_dispcnt, dcnt_blank_mask );
+		
+		bios_wait_for_vblank();
+	}
 }
 
 void title_screen_func() __attribute__((__noinline__));
@@ -162,7 +182,7 @@ inline void debug_infin_loop()
 	}
 }
 
-inline void reinit_the_game( int& next_oam_index )
+inline void reinit_the_game()
 {
 	// Use video Mode 0, use 1D object mapping, enable forced blank, 
 	// display objects, and display BG 0
@@ -189,31 +209,11 @@ inline void reinit_the_game( int& next_oam_index )
 	// Finally, copy the_block_gfxTiles to BG VRAM, screenblock 0
 	update_block_graphics_in_vram(the_block_gfxTiles);
 	
-	active_level::the_current_sublevel_ptr.init(test_level);
+	sprite_manager::next_oam_index = 0; 
 	
-	// Initialize the list of sprite level data.
-	//active_level_manager::initial_sublevel_loading
-	//	( sublevel_pointer(test_level), active_level::bg0_screenblock_2d, 
-	//	active_level::bg0_screenblock_mirror_2d );
-	active_level_manager::initial_sublevel_loading();
-	
-	
-	next_oam_index = 0; 
-	
-	
-	//sprite_manager::init_the_array_of_active_sprites();
-	
-	//sprite_manager::initial_sprite_spawning_from_sublevel_data
-	//	( test_level.get_size_2d(), bgofs_mirror[0].curr, next_oam_index );
-	sprite_manager::initial_sprite_spawning_from_sublevel_data
-		( active_level::the_current_sublevel_ptr.get_size_2d(),
-		bgofs_mirror[0].curr, next_oam_index );
-	
-	
-	//active_level_manager::update_sublevel_in_screenblock_mirror_2d 
-	//	( active_level::bg0_screenblock_mirror_2d, 
-	//	test_level.get_size_2d() );
-	active_level_manager::update_sublevel_in_screenblock_mirror_2d();
+	//active_level::the_current_sublevel_ptr.init(test_level_sublevel_0);
+	active_level::the_current_level_ptr = &test_level;
+	active_level_manager::load_sublevel(0);
 	
 	
 	// Also, start playing music when the game is started.
@@ -243,9 +243,8 @@ int main()
 	// 
 	title_screen_func();
 	
-	int next_oam_index;
 	
-	reinit_the_game(next_oam_index);
+	reinit_the_game();
 	
 	
 	for (;;)
@@ -267,7 +266,7 @@ int main()
 			// Reset the game if A, B, Start, and Select are pressed
 			//bios_do_hard_reset();
 			////bios_do_soft_reset();
-			reinit_the_game(next_oam_index);
+			reinit_the_game();
 		}
 		
 		
@@ -277,8 +276,8 @@ int main()
 		//sprite_manager::update_all_sprites( test_level.get_size_2d(), 
 		//	bgofs_mirror[0], next_oam_index );
 		sprite_manager::update_all_sprites
-			( active_level::the_current_sublevel_ptr.get_size_2d(), 
-			bgofs_mirror[0], next_oam_index );
+			( active_level::get_the_current_sublevel_ptr().get_size_2d(), 
+			bgofs_mirror[0] );
 		
 		
 		// This is temporary

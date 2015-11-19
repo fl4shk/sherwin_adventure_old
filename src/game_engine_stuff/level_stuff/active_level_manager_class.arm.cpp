@@ -172,8 +172,8 @@ void active_level_manager::update_sublevel_in_screenblock_mirror_2d()
 {
 	
 	correct_bg0_scroll_mirror
-		(active_level::the_current_sublevel_ptr.get_size_2d());
-
+		(active_level::get_the_current_sublevel_ptr().get_size_2d());
+	
 	
 	// VRAM tiles are 8x8 pixels in size, so divide the 
 	s16 sublevel_x_coord_tile = bgofs_mirror[0].curr.x >> 3;

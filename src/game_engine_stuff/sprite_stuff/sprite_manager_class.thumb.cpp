@@ -4,6 +4,7 @@
 #include "../../gba_specific_stuff/interrupt_stuff.hpp"
 
 #include "sprite_class.hpp"
+#include "../level_stuff/level_class.hpp"
 
 
 sprite sprite_manager::the_player;
@@ -11,6 +12,7 @@ sprite sprite_manager::the_player;
 std::array< sprite, sprite_manager::max_num_regular_sprites > 
 	sprite_manager::the_sprites;
 
+int sprite_manager::next_oam_index;
 
 void sprite_manager::init_the_player ( const vec2_f24p8& s_in_level_pos, 
 	const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos )
@@ -27,35 +29,35 @@ void sprite_manager::init_horiz_sublevel_sprite_ipg_lists
 	( const sprite_init_param_group* the_ext_sprite_ipg_arr, 
 	u32 the_ext_sprite_ipg_arr_size )
 {
+	for ( auto& the_list : active_level::horiz_sublevel_sprite_ipg_lists
+		.the_array )
+	{
+		the_list.fully_deallocate();
+	}
+	
 	for ( u32 i=0; i<the_ext_sprite_ipg_arr_size; ++i )
 	{
 		if ( the_ext_sprite_ipg_arr[i].type != st_default )
 		{
-			active_level::horiz_sublevel_sprite_ipg_lists 
+			active_level::horiz_sublevel_sprite_ipg_lists.the_array
 				[the_ext_sprite_ipg_arr[i].initial_block_grid_x_coord]
 				.push_front(the_ext_sprite_ipg_arr[i]);
 		}
 	}
 	
-	
-	//for ( auto iter = active_level::horiz_sublevel_sprite_ipg_lists.begin(); 
-	//	iter != active_level::horiz_sublevel_sprite_ipg_lists.end(); 
-	//	++iter )
+	//for ( auto& the_list : active_level::horiz_sublevel_sprite_ipg_lists
+	//	.the_array )
 	//{
-	//	if ( !iter->empty() )
-	//	{
-	//		iter->sort();
-	//	}
+	//	the_list.fully_deallocate();
 	//}
 	
-	for ( std::forward_list<sprite_init_param_group>& the_list 
-		: active_level::horiz_sublevel_sprite_ipg_lists )
-	{
-		if ( !the_list.empty() )
-		{
-			the_list.sort();
-		}
-	}
+	//for ( auto& the_list : active_level::horiz_sublevel_sprite_ipg_lists
+	//	.the_array )
+	//{
+	//	the_list.insertion_sort();
+	//}
+	
+	
 	
 }
 
@@ -90,51 +92,20 @@ void sprite_manager::some_sprite_init_thing()
 
 
 void sprite_manager::initial_sprite_spawning_from_sublevel_data
-	( const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos, 
-	int& next_oam_index )
+	( const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos )
 {
-	sprite_init_param_group* player_ipg = NULL;
+	memfill32( the_sprites.data(), 0, the_sprites.size() * sizeof(sprite) 
+		/ sizeof(u32) );
 	
-	// Find the_player's level data.  This should eventually be replaced
-	// with just storing the starting parameters of the_player in the
-	// current sublevel's sublevel_entrance_arr.  Also, there should be
-	// something to handle the case where the player might enter a sublevel
-	// using one sublevel_entrance at one time, but later enter the same
-	// sublevel using a different sublevel_entrance.
-	for ( auto which_list=active_level::horiz_sublevel_sprite_ipg_lists
-			.begin();
-		which_list!=active_level::horiz_sublevel_sprite_ipg_lists.end();
-		++which_list )
-	{
-		for ( auto which_node=which_list->begin(); 
-			which_node!=which_list->end();
-			++which_node )
-		{
-			if ( which_node->type == st_player )
-			{
-				// Spawn the player.
-				if ( player_ipg == NULL )
-				{
-					player_ipg = &(*which_node);
-					
-					// Mark the player as active
-					player_ipg->spawn_state = sss_active;
-				}
-				
-				// Kill st_player sprites if there's more than one in the
-				// level data.
-				else
-				{
-					which_node->spawn_state = sss_dead;
-				}
-			}
-		}
-	}
+	const sublevel_entrance& the_start_of_level_sle
+		= active_level::get_the_current_sublevel_ptr()
+		.sublevel_entrance_arr_arr_helper.the_array
+		[active_level::get_the_current_sublevel_ptr()
+		.sublevel_entrance_arr_arr_helper.get_size() - 1];
 	
 	
-	vec2_f24p8 player_initial_in_level_pos
-		= { make_f24p8( player_ipg->initial_block_grid_x_coord << 4 ),
-		make_f24p8( player_ipg->initial_block_grid_y_coord << 4 ) };
+	vec2_f24p8 player_initial_in_level_pos 
+		= the_start_of_level_sle.in_level_pos;
 	
 	init_the_player( player_initial_in_level_pos, the_sublevel_size_2d,
 		camera_pos );
@@ -143,8 +114,6 @@ void sprite_manager::initial_sprite_spawning_from_sublevel_data
 	//next_debug_u32 = (vu32)(player_ipg);
 	//next_debug_u32 = player_ipg->type;
 	//nocash_soft_break();
-	
-	
 	
 	auto which_spr = the_sprites.begin();
 	
@@ -159,18 +128,22 @@ void sprite_manager::initial_sprite_spawning_from_sublevel_data
 	camera_block_grid_pos.y = make_f24p8( camera_pos.y >> 4 );
 	
 	
-	for ( auto which_list=active_level::horiz_sublevel_sprite_ipg_lists
-			.begin();
-		which_list!=active_level::horiz_sublevel_sprite_ipg_lists.end();
-		++which_list )
+	//for ( std::forward_list<sprite_init_param_group>& which_list
+	//	: active_level::horiz_sublevel_sprite_ipg_lists )
+	for ( auto& which_list : active_level::horiz_sublevel_sprite_ipg_lists
+		.the_array )
 	{
-		for ( auto which_node=which_list->begin(); 
-			which_node!=which_list->end(); 
-			++which_node )
+		//for ( sprite_init_param_group& sprite_ipg : which_list )
+		for ( int i=which_list.front_node_index;
+			i!=-1;
+			i=which_list.get_node_at_node_index(i).next_node_index )
 		{
+			sprite_init_param_group& sprite_ipg = which_list
+				.get_node_at_node_index(i).the_data;
+			
 			vec2_u32 spr_block_grid_coord;
-			spr_block_grid_coord.x = which_node->initial_block_grid_x_coord;
-			spr_block_grid_coord.y = which_node->initial_block_grid_y_coord;
+			spr_block_grid_coord.x = sprite_ipg.initial_block_grid_x_coord;
+			spr_block_grid_coord.y = sprite_ipg.initial_block_grid_y_coord;
 			
 			vec2_f24p8 spr_in_level_pos;
 			spr_in_level_pos.x = make_f24p8( spr_block_grid_coord.x * 16 );
@@ -181,19 +154,13 @@ void sprite_manager::initial_sprite_spawning_from_sublevel_data
 			spr_on_screen_pos.y = spr_in_level_pos.y - camera_pos_f24p8.y;
 			
 			// Don't spawn the sprite if it's HORIZONTALLY off-screen.
+			// Perhaps eventually sprites should be spawned and despawned
+			// if they are VERTICALLY off-screen.
 			if ( !( spr_on_screen_pos.x.data >= 0 
 				&& spr_on_screen_pos.x.data <= ( screen_width << 8 ) ) )
 			{
 				continue;
 			}
-			
-			// Don't spawn the sprite if it corresponds to the player's
-			// level data.
-			if ( which_node->type == st_player )
-			{
-				continue;
-			}
-			
 			
 			while ( which_spr->the_sprite_type != st_default 
 				&& which_spr != the_sprites.end() )
@@ -201,9 +168,7 @@ void sprite_manager::initial_sprite_spawning_from_sublevel_data
 				++which_spr;
 			}
 			
-			which_spr->reinit_with_sprite_ipg( &(*which_node) );
-			
-			//++which_spr;
+			which_spr->reinit_with_sprite_ipg(&sprite_ipg);
 			
 			if ( which_spr == the_sprites.end() )
 			{
@@ -222,10 +187,8 @@ void sprite_manager::initial_sprite_spawning_from_sublevel_data
 	next_oam_index = 1;
 	
 	// Run each active sprite's update_part_1() function.
-	for ( u32 i=0; i<the_sprites.size(); ++i )
+	for ( sprite& the_spr : the_sprites )
 	{
-		sprite& the_spr = the_sprites[i];
-		
 		if ( the_spr.the_sprite_type != st_default )
 		{
 			sprite_stuff_array[the_spr.the_sprite_type]
@@ -234,10 +197,8 @@ void sprite_manager::initial_sprite_spawning_from_sublevel_data
 	}
 	
 	// Run each active sprite's update_part_2() function.
-	for ( u32 i=0; i<the_sprites.size(); ++i )
+	for ( sprite& the_spr : the_sprites )
 	{
-		sprite& the_spr = the_sprites[i];
-		
 		if ( the_spr.the_sprite_type != st_default )
 		{
 			sprite_stuff_array[the_spr.the_sprite_type]
@@ -249,98 +210,98 @@ void sprite_manager::initial_sprite_spawning_from_sublevel_data
 }
 
 
-void sprite_manager::initial_sprite_spawning_from_sublevel_data_old
-	( const bg_point& camera_pos, int& next_oam_index )
-{
-	auto iter3 = the_sprites.begin();
-	
-	vec2_f24p8 camera_pos_f24p8;
-	camera_pos_f24p8.x = make_f24p8(camera_pos.x);
-	camera_pos_f24p8.y = make_f24p8(camera_pos.y);
-	
-	vec2_f24p8 camera_block_grid_pos;
-	camera_block_grid_pos.x = make_f24p8( camera_pos.x >> 4 );
-	camera_block_grid_pos.y = make_f24p8( camera_pos.y >> 4 );
-	
-	
-	for ( auto iter=active_level::horiz_sublevel_sprite_ipg_lists.begin();
-		iter!=active_level::horiz_sublevel_sprite_ipg_lists.end();
-		++iter )
-	{
-		for ( auto iter2=iter->begin(); iter2!=iter->end(); ++iter2 )
-		{
-			vec2_u32 spr_block_grid_coord;
-			spr_block_grid_coord.x = iter2->initial_block_grid_x_coord;
-			spr_block_grid_coord.y = iter2->initial_block_grid_y_coord;
-			
-			vec2_f24p8 spr_in_level_pos;
-			spr_in_level_pos.x = make_f24p8( spr_block_grid_coord.x * 16 );
-			spr_in_level_pos.y = make_f24p8( spr_block_grid_coord.y * 16 );
-			
-			vec2_f24p8 spr_on_screen_pos;
-			spr_on_screen_pos.x = spr_in_level_pos.x - camera_pos_f24p8.x;
-			spr_on_screen_pos.y = spr_in_level_pos.y - camera_pos_f24p8.y;
-			
-			
-			if ( !( spr_on_screen_pos.x.data >= 0 
-				&& spr_on_screen_pos.y.data >= 0
-				&& spr_on_screen_pos.x.data <= ( screen_width << 8 )
-				&& spr_on_screen_pos.y.data <= ( screen_height << 8 ) ) )
-			{
-				continue;
-			}
-			
-			
-			while ( iter3->the_sprite_type != st_default 
-				&& iter3 != the_sprites.end() )
-			{
-				++iter3;
-			}
-			
-			// Apparently reinit_with_sprite_ipg is bugged?
-			iter3->reinit_with_sprite_ipg( &(*iter2) );
-			
-			//++iter3;
-			
-			if ( iter3 == the_sprites.end() )
-			{
-				break;
-			}
-		}
-		
-		if ( iter3 == the_sprites.end() )
-		{
-			break;
-		}
-	}
-	
-	next_oam_index = 1;
-	
-	for ( u32 i=0; i<the_sprites.size(); ++i )
-	{
-		sprite& the_spr = the_sprites[i];
-		
-		if ( the_spr.the_sprite_type != st_default )
-		{
-			sprite_stuff_array[the_spr.the_sprite_type]
-				->update_part_1(the_spr);
-		}
-	}
-	
-	for ( u32 i=0; i<the_sprites.size(); ++i )
-	{
-		sprite& the_spr = the_sprites[i];
-		
-		if ( the_spr.the_sprite_type != st_default )
-		{
-			sprite_stuff_array[the_spr.the_sprite_type]
-				->update_part_2( the_spr, bgofs_mirror[0].curr,
-				next_oam_index );
-		}
-	}
-	
-	
-}
+//void sprite_manager::initial_sprite_spawning_from_sublevel_data_old
+//	( const bg_point& camera_pos )
+//{
+//	auto iter3 = the_sprites.begin();
+//	
+//	vec2_f24p8 camera_pos_f24p8;
+//	camera_pos_f24p8.x = make_f24p8(camera_pos.x);
+//	camera_pos_f24p8.y = make_f24p8(camera_pos.y);
+//	
+//	vec2_f24p8 camera_block_grid_pos;
+//	camera_block_grid_pos.x = make_f24p8( camera_pos.x >> 4 );
+//	camera_block_grid_pos.y = make_f24p8( camera_pos.y >> 4 );
+//	
+//	
+//	for ( auto iter=active_level::horiz_sublevel_sprite_ipg_lists.begin();
+//		iter!=active_level::horiz_sublevel_sprite_ipg_lists.end();
+//		++iter )
+//	{
+//		for ( auto iter2=iter->begin(); iter2!=iter->end(); ++iter2 )
+//		{
+//			vec2_u32 spr_block_grid_coord;
+//			spr_block_grid_coord.x = iter2->initial_block_grid_x_coord;
+//			spr_block_grid_coord.y = iter2->initial_block_grid_y_coord;
+//			
+//			vec2_f24p8 spr_in_level_pos;
+//			spr_in_level_pos.x = make_f24p8( spr_block_grid_coord.x * 16 );
+//			spr_in_level_pos.y = make_f24p8( spr_block_grid_coord.y * 16 );
+//			
+//			vec2_f24p8 spr_on_screen_pos;
+//			spr_on_screen_pos.x = spr_in_level_pos.x - camera_pos_f24p8.x;
+//			spr_on_screen_pos.y = spr_in_level_pos.y - camera_pos_f24p8.y;
+//			
+//			
+//			if ( !( spr_on_screen_pos.x.data >= 0 
+//				&& spr_on_screen_pos.y.data >= 0
+//				&& spr_on_screen_pos.x.data <= ( screen_width << 8 )
+//				&& spr_on_screen_pos.y.data <= ( screen_height << 8 ) ) )
+//			{
+//				continue;
+//			}
+//			
+//			
+//			while ( iter3->the_sprite_type != st_default 
+//				&& iter3 != the_sprites.end() )
+//			{
+//				++iter3;
+//			}
+//			
+//			// Apparently reinit_with_sprite_ipg is bugged?
+//			iter3->reinit_with_sprite_ipg( &(*iter2) );
+//			
+//			//++iter3;
+//			
+//			if ( iter3 == the_sprites.end() )
+//			{
+//				break;
+//			}
+//		}
+//		
+//		if ( iter3 == the_sprites.end() )
+//		{
+//			break;
+//		}
+//	}
+//	
+//	next_oam_index = 1;
+//	
+//	for ( u32 i=0; i<the_sprites.size(); ++i )
+//	{
+//		sprite& the_spr = the_sprites[i];
+//		
+//		if ( the_spr.the_sprite_type != st_default )
+//		{
+//			sprite_stuff_array[the_spr.the_sprite_type]
+//				->update_part_1(the_spr);
+//		}
+//	}
+//	
+//	for ( u32 i=0; i<the_sprites.size(); ++i )
+//	{
+//		sprite& the_spr = the_sprites[i];
+//		
+//		if ( the_spr.the_sprite_type != st_default )
+//		{
+//			sprite_stuff_array[the_spr.the_sprite_type]
+//				->update_part_2( the_spr, bgofs_mirror[0].curr,
+//				next_oam_index );
+//		}
+//	}
+//	
+//	
+//}
 
 
 

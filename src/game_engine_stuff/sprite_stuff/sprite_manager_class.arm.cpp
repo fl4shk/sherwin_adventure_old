@@ -79,12 +79,21 @@ void sprite_manager::spawn_sprites_if_needed
 			i<=camera_block_grid_pos_x.curr;
 			++i )
 		{
+			auto& curr_sprite_ipg_list = active_level
+				::horiz_sublevel_sprite_ipg_lists.the_array[i];
 			
 			// Spawn sprites from the top of the column to the bottom of
 			// the column.
-			for ( sprite_init_param_group& sprite_ipg 
-				: active_level::horiz_sublevel_sprite_ipg_lists[i] )
+			//for ( sprite_init_param_group& sprite_ipg 
+			//	: active_level::horiz_sublevel_sprite_ipg_lists[i] )
+			for ( int j=curr_sprite_ipg_list.front_node_index;
+				j!=-1;
+				j=curr_sprite_ipg_list.get_node_at_node_index(j)
+				.next_node_index )
 			{
+				sprite_init_param_group& sprite_ipg = curr_sprite_ipg_list
+					.get_node_at_node_index(j).the_data;
+				
 				// Find the lowest FREE sprite slot, if any.
 				while ( ( the_sprites[next_sprite_index].the_sprite_type 
 					!= st_default )
@@ -133,12 +142,20 @@ void sprite_manager::spawn_sprites_if_needed
 				break;
 			}
 			
+			auto& curr_sprite_ipg_list = active_level
+				::horiz_sublevel_sprite_ipg_lists.the_array[i];
 			
 			// Spawn sprites from the top of the column to the bottom of
 			// the column.
-			for ( sprite_init_param_group& sprite_ipg 
-				: active_level::horiz_sublevel_sprite_ipg_lists[i] )
+			//for ( sprite_init_param_group& sprite_ipg 
+			//	: active_level::horiz_sublevel_sprite_ipg_lists[i] )
+			for ( int j=curr_sprite_ipg_list.front_node_index;
+				j!=-1;
+				j=curr_sprite_ipg_list.get_node_at_node_index(j)
+				.next_node_index )
 			{
+				sprite_init_param_group& sprite_ipg = curr_sprite_ipg_list
+					.get_node_at_node_index(j).the_data;
 				
 				// Find the lowest FREE sprite slot, if any.
 				while ( ( the_sprites[next_sprite_index].the_sprite_type 
@@ -248,7 +265,7 @@ void sprite_manager::spawn_a_sprite_basic ( sprite_type the_sprite_type,
 
 void sprite_manager::update_all_sprites
 	( const vec2_u32& the_sublevel_size_2d, 
-	prev_curr_pair<bg_point>& camera_pos_pc_pair, int& next_oam_index )
+	prev_curr_pair<bg_point>& camera_pos_pc_pair )
 {
 	sprite_stuff_array[the_player.the_sprite_type]
 		->update_part_1(the_player);

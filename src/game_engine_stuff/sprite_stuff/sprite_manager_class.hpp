@@ -33,11 +33,15 @@ public:		// variables
 	
 	//static 
 	
+	static int next_oam_index __attribute__((_iwram));
+	
 public:		// functions
 	
 	static void init_the_player ( const vec2_f24p8& s_in_level_pos, 
 		const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos );
 	
+	// This function initializes the vram_chunk_index of each sprite in
+	// the_sprites.
 	static inline void init_the_array_of_active_sprites()
 	{
 		//u32 vram_chunk_index = 1;
@@ -59,16 +63,14 @@ public:		// functions
 		( const sprite_init_param_group* the_ext_sprite_ipg_arr, 
 		u32 the_ext_sprite_ipg_arr_size );
 	
-	
 	static void some_sprite_init_thing();
 	
 	static void initial_sprite_spawning_from_sublevel_data
-		( const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos, 
-		int& next_oam_index );
+		( const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos );
 	
 	
 	static void initial_sprite_spawning_from_sublevel_data_old
-		( const bg_point& camera_pos, int& next_oam_index );
+		( const bg_point& camera_pos );
 	
 	static void spawn_sprites_if_needed
 		( const prev_curr_pair<bg_point>& camera_pos_pc_pair ) 
@@ -79,6 +81,10 @@ public:		// functions
 	
 	static inline void upload_tiles_of_active_sprites_to_vram()
 	{
+		// Clear the first 32x32-pixel VRAM chunk
+		memfill32( &(((tile*)obj_tile_vram)[0]), 0, sizeof(tile)
+			* sprite_gfx_manager::num_tiles_in_ss_32x32 / sizeof(u32) );
+		
 		sprite_gfx_manager::upload_sprite_tiles_to_vram(the_player);
 		
 		for ( sprite& spr : sprite_manager::the_sprites )
@@ -106,8 +112,8 @@ public:		// functions
 	
 	
 	static void update_all_sprites ( const vec2_u32& the_sublevel_size_2d,
-		prev_curr_pair<bg_point>& camera_pos_pc_pair, 
-		int& next_oam_index ) __attribute__((_iwram_code));
+		prev_curr_pair<bg_point>& camera_pos_pc_pair ) 
+		__attribute__((_iwram_code));
 	
 };
 

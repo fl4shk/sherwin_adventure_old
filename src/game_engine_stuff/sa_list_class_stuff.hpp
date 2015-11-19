@@ -7,171 +7,404 @@
 #include "sa_stack_class.hpp"
 
 
+
+
 template< typename type >
 class sa_list_node
 {
 public:		// variables
 	type the_data;
+	int next_node_index, prev_node_index;
 	
-	int next_node_index;
+public:		// functions
+	inline sa_list_node() : the_data(type()), next_node_index(-1),
+		prev_node_index(-1)
+	{
+	}
+	
+	//inline sa_list_node()
+	//{
+	//	the_data = type();
+	//	next_node_index = -1;
+	//	prev_node_index = -1;
+	//}
+	
+	inline sa_list_node( const type& data_to_copy, int s_next_node_index,
+		int s_prev_node_index ) : the_data(data_to_copy), 
+		next_node_index(s_next_node_index),
+		prev_node_index(s_prev_node_index)
+	{
+	}
 	
 } __attribute__((_align4));
 
 
-
-template< typename type, u32 max_size_plus_1 >
-class sa_forward_list
+template< typename type, u32 total_num_nodes >
+class externally_allocated_sa_list
 {
 //protected:		// variables
 public:		// variables
 	int front_node_index;
 	
 public:		// variables
-	sa_list_node<type> the_array[max_size_plus_1];
-	sa_free_list<max_size_plus_1> the_free_index_stack;
+	array< sa_list_node<type>, total_num_nodes >* ptr_to_the_node_array;
+	sa_free_list<total_num_nodes>* ptr_to_the_free_list;
+	
 	
 public:		// functions
-	inline sa_forward_list()
+	
+	inline externally_allocated_sa_list() : front_node_index(-1), 
+		ptr_to_the_node_array(NULL), ptr_to_the_free_list(NULL)
 	{
-		clear();
-	}
-	inline sa_list_node<type>* front()
-	{
-		return &the_array[front_node_index];
 	}
 	
-	inline sa_list_node<type>* get_next_node( sa_list_node<type>* pos )
+	inline externally_allocated_sa_list( array< sa_list_node<type>,
+		total_num_nodes >* s_ptr_to_the_node_array,
+		sa_free_list<total_num_nodes>* s_ptr_to_the_free_list )
+		: front_node_index(-1)
 	{
-		if ( pos->next_node_index != -1 )
+		ptr_to_the_node_array = s_ptr_to_the_node_array;
+		ptr_to_the_free_list = s_ptr_to_the_free_list;
+	}
+	
+	virtual inline ~externally_allocated_sa_list()
+	{
+		fully_deallocate();
+	}
+	
+	inline void fully_deallocate()
+	{
+		while ( front_node_index != -1 )
 		{
-			return &the_array[pos->next_node_index];
-		}
-		else
-		{
-			return &the_array[0];
+			erase_at(front_node_index);
 		}
 	}
 	
-	inline bool node_is_at_end( sa_list_node<type>* curr_node )
+	
+	inline void set_ptr_to_the_node_array( array< sa_list_node<type>, 
+		total_num_nodes >* n_ptr_to_the_node_array )
 	{
-		return the_array[curr_node->next_node_index].next_node_index == 0;
+		ptr_to_the_node_array = n_ptr_to_the_node_array;
 	}
-	
-	
-	inline constexpr u32 get_max_size_plus_1() const
+	inline array< sa_list_node<type>, total_num_nodes >& 
+		get_the_node_array()
 	{
-		return max_size_plus_1;
+		return *ptr_to_the_node_array;
 	}
 	
 	
-	inline void clear()
+	inline void set_ptr_to_the_free_list( sa_free_list<total_num_nodes>*
+		n_ptr_to_the_free_list )
 	{
-		the_array[0].the_data = type();
-		the_array[0].next_node_index = 0;
-		
-		for ( u32 i=1; i<max_size_plus_1; ++i )
-		{
-			the_array[i].the_data = type();
-			the_array[i].next_node_index = -1;
-		}
-		
-		memfill32( the_free_index_stack.the_array, 0, 
-			sizeof(the_free_index_stack.the_array) / sizeof(u32) );
-		the_free_index_stack.curr_index = 0;
-		
-		for ( int i=the_free_index_stack.get_size()-1; i>0; --i )
-		{
-			the_free_index_stack.push(i);
-		}
-		
-		front_node_index = the_free_index_stack.pop();
+		ptr_to_the_free_list = n_ptr_to_the_free_list;
 	}
-	
-	inline void insert_after( sa_list_node<type>* pos, 
-		const type& to_insert )
+	inline sa_free_list<total_num_nodes>& get_the_free_list()
 	{
-		// Special code is used for inserting an element at the end of the
-		// list.
-		if ( pos->next_node_index == -1 )
-		{
-			pos->next_node_index = the_free_index_stack.pop();
-			get_next_node(pos)->the_data = to_insert;
-			get_next_node(pos)->next_node_index = -1;
-		}
-		else
-		{
-			int old_next_free_index = pos->next_node_index;
-			
-			pos->next_node_index = the_free_index_stack.pop();
-			sa_list_node<type>* new_next_node = get_next_node(pos);
-			
-			new_next_node->the_data = to_insert;
-			new_next_node->next_node_index = old_next_free_index;
-		}
-		
+		return *ptr_to_the_free_list;
 	}
 	
-	inline void erase_after( sa_list_node<type>* pos )
+	
+	inline sa_list_node<type>& get_node_at_node_index( int node_index )
 	{
-		the_free_index_stack.push(pos->next_node_index);
-		
-		int new_next_node_index = get_next_node(pos)->next_node_index;
-		
-		get_next_node(pos)->the_data = type();
-		get_next_node(pos)->next_node_index = -1;
-		
-		pos->next_node_index = new_next_node_index;
-		
+		return get_the_node_array()[node_index];
+	}
+	inline sa_list_node<type>& front()
+	{
+		return get_node_at_node_index(front_node_index);
 	}
 	
-	// This function 
+	inline sa_list_node<type>& get_next_node_after_node_index
+		( int node_index )
+	{
+		return get_node_at_node_index(get_node_at_node_index(node_index)
+			.next_node_index);
+	}
+	inline sa_list_node<type>& get_prev_node_before_node_index
+		( int node_index )
+	{
+		return get_node_at_node_index(get_node_at_node_index(node_index)
+			.prev_node_index);
+	}
+	
 	inline void push_front( const type& to_push )
 	{
-		int old_front_node_index = front_node_index;
-		front_node_index = the_free_index_stack.pop();
-		
-		front()->the_data = to_push;
-		front()->next_node_index = old_front_node_index;
+		// If there's nothing in the list
+		if ( front_node_index == -1 )
+		{
+			front_node_index = get_the_free_list().peek_top();
+			get_the_free_list().pop();
+			
+			front().the_data = to_push;
+			
+			// These two operations are for good measure, and they might
+			// not actually be necessary.
+			front().next_node_index = -1;
+			front().prev_node_index = -1;
+		}
+		// If there's at least one element in the list
+		else
+		{
+			
+			int old_front_node_index = front_node_index;
+			front_node_index = get_the_free_list().peek_top();
+			get_the_free_list().pop();
+			
+			get_node_at_node_index(old_front_node_index).prev_node_index 
+				= front_node_index;
+			
+			front().the_data = to_push;
+			front().next_node_index = old_front_node_index;
+			
+			// This operation is for good measure, and it might not
+			// actually be necessary.
+			front().prev_node_index = -1;
+		}
 	}
 	
 	
-	// This function removes the first element of the list, including
-	// deleting its data, and also changes front_node_index appropriately.
-	inline void pop_front()
+	inline void insert_before( int node_index, const type& to_insert )
 	{
-		the_free_index_stack.push(front_node_index);
+		int old_prev_node_index = get_node_at_node_index(node_index)
+			.prev_node_index;
+		//int old_next_node_index = get_node_at_node_index(node_index)
+		//	.next_node_index;
 		
-		int new_front_node_index = front()->next_node_index;
+		// If node_index == front_node_index
+		//if ( old_prev_node_index == -1 )
+		if ( node_index == front_node_index )
+		{
+			push_front(to_insert);
+		}
+		else
+		{
+			//int new_node_index = get_the_free_list().pop();
+			int new_node_index = get_the_free_list().peek_top();
+			get_the_free_list().pop();
+			
+			get_node_at_node_index(old_prev_node_index).next_node_index
+				= new_node_index;
+			
+			get_node_at_node_index(new_node_index).the_data = to_insert;
+			get_node_at_node_index(new_node_index).prev_node_index 
+				= old_prev_node_index;
+			get_node_at_node_index(new_node_index).next_node_index 
+				= node_index;
+			
+			get_node_at_node_index(node_index).prev_node_index 
+				= new_node_index;
+		}
+	}
+	
+	inline void insert_after( int node_index, const type& to_insert )
+	{
+		//int old_prev_node_index = get_node_at_node_index(node_index)
+		//	.prev_node_index;
+		int old_next_node_index = get_node_at_node_index(node_index)
+			.next_node_index;
 		
-		front()->the_data = type();
-		front()->next_node_index = -1;
+		//int new_node_index = get_the_free_list().pop();
+		int new_node_index = get_the_free_list().peek_top();
+		get_the_free_list().pop();
 		
-		front_node_index = new_front_node_index;
+		// Special code is used for inserting an element at the end of the
+		// list.
+		if ( old_next_node_index == -1 )
+		{
+			get_node_at_node_index(node_index).next_node_index 
+				= new_node_index;
+			
+			get_node_at_node_index(new_node_index).the_data = to_insert;
+			get_node_at_node_index(new_node_index).next_node_index = -1;
+			get_node_at_node_index(new_node_index).prev_node_index 
+				= node_index;
+		}
+		else
+		{
+			get_node_at_node_index(node_index).next_node_index 
+				= new_node_index;
+			
+			get_node_at_node_index(new_node_index).the_data = to_insert;
+			get_node_at_node_index(new_node_index).next_node_index 
+				= old_next_node_index;
+			get_node_at_node_index(new_node_index).prev_node_index
+				= node_index;
+		}
+	}
+	
+	inline void erase_at( int node_index )
+	{
+		int old_prev_node_index = get_node_at_node_index(node_index)
+			.prev_node_index,
+			old_next_node_index = get_node_at_node_index(node_index)
+			.next_node_index;
+		
+		// Special code is used for erasing an element at the beginning of
+		// the list.
+		//if ( old_prev_node_index == -1 )
+		if ( node_index == front_node_index )
+		{
+			//int old_front_node_index = front_node_index;
+			
+			get_node_at_node_index(front_node_index).the_data = type();
+			get_node_at_node_index(front_node_index).next_node_index = -1;
+			get_node_at_node_index(front_node_index).prev_node_index = -1;
+			
+			get_the_free_list().push(front_node_index);
+			
+			front_node_index = old_next_node_index;
+			
+			if ( old_next_node_index != -1 )
+			{
+				front().prev_node_index = -1;
+			}
+		}
+		else 
+		{
+			get_node_at_node_index(node_index).the_data = type();
+			get_node_at_node_index(node_index).next_node_index = -1;
+			get_node_at_node_index(node_index).prev_node_index = -1;
+			get_the_free_list().push(node_index);
+			
+			if ( old_next_node_index != -1 )
+			{
+				get_node_at_node_index(old_prev_node_index).next_node_index
+					= old_next_node_index;
+				get_node_at_node_index(old_next_node_index).prev_node_index
+					= old_prev_node_index;
+			}
+			else
+			{
+				get_node_at_node_index(old_prev_node_index).next_node_index 
+					= -1;
+			}
+		}
 		
 	}
 	
+	// This function is dangerous!  There might not be enough nodes left in
+	// the extreme case!
+	inline void move_node_before_basic( int original_node_index, 
+		int new_node_index )
+	{
+		type data_to_move = get_node_at_node_index(original_node_index)
+			.the_data;
+		
+		insert_before( new_node_index, data_to_move );
+		erase_at(original_node_index);
+	}
 	
+	
+	inline void insertion_sort()
+	{
+		// Don't do anything if this list has zero or one nodes.
+		if ( front_node_index == -1 )
+		{
+			return;
+		}
+		if ( front().next_node_index == -1 )
+		{
+			return;
+		}
+		
+		externally_allocated_sa_list< type, total_num_nodes >
+			sorted_list( ptr_to_the_node_array, ptr_to_the_free_list );
+		
+		int curr_node_index = sorted_list.front_node_index;
+		
+		for ( int i=front_node_index;
+			i!=-1;  )
+			//i=get_node_at_node_index(i).next_node_index )
+		{
+			
+			//get_the_free_list().debug_print();
+			
+			int index_of_node_with_lowest_value = i;
+			
+			// Find the lowest
+			for ( int j=index_of_node_with_lowest_value;
+				j!=-1;
+				j=get_node_at_node_index(j).next_node_index )
+			{
+				if ( get_node_at_node_index(j).the_data 
+					< get_node_at_node_index
+					(index_of_node_with_lowest_value).the_data )
+				{
+					index_of_node_with_lowest_value = j;
+				}
+				
+			}
+			
+			type data_to_push = get_node_at_node_index
+				(index_of_node_with_lowest_value).the_data;
+			
+			if ( i == index_of_node_with_lowest_value )
+			{
+				i = get_node_at_node_index(i).next_node_index;
+			}
+			
+			erase_at(index_of_node_with_lowest_value);
+			
+			if ( sorted_list.front_node_index == -1 )
+			{
+				sorted_list.push_front(data_to_push);
+				curr_node_index = sorted_list.front_node_index;
+			}
+			else
+			{
+				sorted_list.insert_after( curr_node_index, data_to_push );
+				curr_node_index = sorted_list.get_node_at_node_index
+					(curr_node_index).next_node_index;
+			}
+			
+		}
+		
+		
+		front_node_index = sorted_list.front_node_index;
+		
+		sorted_list.front_node_index = -1;
+		
+	}
 	
 } __attribute__((_align4));
 
 
-
-// This is a template class for a statically allocated array of
-// modifiable singly-linked lists.  "sa" is short for 
-// "statically allocated".
-template< typename type, u32 arr_size, u32 num_list_elems >
-class sa_array_of_forward_lists
+// This is a template class for a statically allocated array of modifiable
+// doubly-linked lists.  "sa" is short for "statically allocated".
+template< typename type, u32 total_num_nodes, u32 num_lists >
+class sa_array_of_lists
 {
 public:		// variables
-	sa_list_node<type>* the_outer_array[arr_size];
-	sa_list_node<type> the_inner_array[num_list_elems];
-	sa_free_list<num_list_elems> the_free_index_stack;
-	
+	array< externally_allocated_sa_list< type, total_num_nodes >, 
+		num_lists > the_array;
+	array< sa_list_node<type>, total_num_nodes > the_node_array;
+	sa_free_list<total_num_nodes> the_free_list;
 	
 public:		// functions
 	
+	inline sa_array_of_lists()
+	{
+		for ( auto& the_list : the_array )
+		{
+			the_list.set_ptr_to_the_node_array(&the_node_array);
+			the_list.set_ptr_to_the_free_list(&the_free_list);
+		}
+	}
+	
+	inline constexpr u32 get_total_num_nodes() const
+	{
+		return total_num_nodes;
+	}
+	
+	inline constexpr u32 get_num_lists() const
+	{
+		return num_lists;
+	}
 	
 } __attribute__((_align4));
+
+
+
+
 
 
 #endif		// sa_list_class_stuff_hpp

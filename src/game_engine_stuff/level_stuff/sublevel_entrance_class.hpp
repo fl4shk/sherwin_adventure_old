@@ -6,12 +6,14 @@
 
 enum sublevel_entrance_type
 {
+	sle_blank,
+	
 	sle_start_of_level,
 	
 	sle_from_warp_block,
 	
-	// The number of level entrance types is automatically updated by the
-	// compiler via the le_count enum id
+	// The number of sublevel_entrance_type's is automatically updated by
+	// the compiler via the sle_count enum id.
 	sle_count,
 } __attribute__((_align4));
 
