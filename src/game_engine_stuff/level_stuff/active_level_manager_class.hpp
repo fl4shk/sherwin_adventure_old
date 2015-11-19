@@ -9,10 +9,13 @@
 #include "active_level_class.hpp"
 #include "../sprite_stuff/sprite_manager_class.hpp"
 
+
 //#define bg0_sbb 31
 constexpr u32 bg0_sbb = 31;
 
 #include "level_class.hpp"
+
+#include "../housekeeping.hpp"
 
 class active_level_manager
 {
@@ -88,14 +91,6 @@ public:		// functions
 	{
 		active_level::the_current_level_ptr = n_the_current_level_ptr;
 		load_sublevel_basic(0);
-		
-		// Despawn sprites that are too far offscreen.
-		sprite_manager::despawn_sprites_if_needed(bgofs_mirror[0]);
-		sprite_manager::update_all_sprites
-			( active_level::get_the_current_sublevel_ptr().get_size_2d(), 
-			bgofs_mirror[0] );
-		sprite_manager::spawn_sprites_if_needed(bgofs_mirror[0]);
-		active_level_manager::update_sublevel_in_screenblock_mirror_2d();
 	}
 	
 	//static inline void initial_sublevel_loading()
@@ -127,20 +122,25 @@ public:		// functions
 		//bgofs_mirror[0].prev = bg_point();
 		//bgofs_mirror[0].curr = bg_point();
 		
-		//sprite_manager::initial_sprite_spawning_from_sublevel_data
-		//	( active_level::get_the_current_sublevel_ptr().get_size_2d(),
-		//	bgofs_mirror[0].curr );
 		sprite_manager::initial_sprite_spawning_at_start_of_level
 			(bgofs_mirror[0].curr);
 		
-		//update_sublevel_in_screenblock_mirror_2d();
+		update_sublevel_in_screenblock_mirror_2d();
 	}
 	
 	//static inline void load_sublevel_warp_based( u32 n_sublevel_index )
 	static inline void load_sublevel_at_intra_sublevel_warp
 		( u32 n_sublevel_index, u32 sublevel_entrance_index )
 	{
+		// Enable forced blank
+		reg_dispcnt |= dcnt_blank_on;
+		
 		active_level::the_current_active_sublevel_index = n_sublevel_index;
+		
+		memfill32( oam_mirror, 0, sizeof(oam_entry) * oam_mirror_size 
+			/ sizeof(u32) );
+		copy_oam_mirror_to_oam();
+		
 		
 		// Initialize the list of sprite level data.
 		init_horiz_sublevel_sprite_ipg_lists();
@@ -160,18 +160,25 @@ public:		// functions
 		}
 		
 		update_sublevel_in_screenblock_mirror_2d();
-		
 		copy_sublevel_from_array_2d_helper_to_vram();
 		
-		//bgofs_mirror
 		
-		//sprite_manager::initial_sprite_spawning_from_sublevel_data
-		//	( active_level::get_the_current_sublevel_ptr().get_size_2d(),
-		//	bgofs_mirror[0].curr );
 		sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
 			( bgofs_mirror[0].curr, sublevel_entrance_index );
+		update_sublevel_in_screenblock_mirror_2d();
 		
-		//update_sublevel_in_screenblock_mirror_2d();
+		vblank_func();
+		
+		// Wait for about 0.25 seconds.
+		for ( u32 i=0; i<15; ++i )
+		{
+			bios_wait_for_vblank();
+		}
+		
+		// Disable forced blank
+		clear_bits( reg_dispcnt, dcnt_blank_mask );
+		
+		bios_wait_for_vblank();
 	}
 	
 } __attribute__((_align4));

@@ -227,13 +227,6 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 						warped_to_other_sublevel_this_frame = true;
 					}
 					
-					
-					//the_dest_sle_ptr 
-					//	= &active_level::get_the_current_sublevel_ptr()
-					//	.sublevel_entrance_arr_arr_helper.the_array
-					//	[spr.the_sprite_ipg->extra_param_0];
-					
-					
 					//next_debug_f24p8.data = spr.the_sprite_ipg
 					//	->extra_param_0;
 					////next_debug_f24p8.data 
