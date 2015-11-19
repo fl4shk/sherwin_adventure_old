@@ -51,11 +51,11 @@ void sprite_manager::init_horiz_sublevel_sprite_ipg_lists
 	//	the_list.fully_deallocate();
 	//}
 	
-	//for ( auto& the_list : active_level::horiz_sublevel_sprite_ipg_lists
-	//	.the_array )
-	//{
-	//	the_list.insertion_sort();
-	//}
+	for ( auto& the_list : active_level::horiz_sublevel_sprite_ipg_lists
+		.the_array )
+	{
+		the_list.insertion_sort();
+	}
 	
 	
 	
@@ -90,9 +90,8 @@ void sprite_manager::some_sprite_init_thing()
 	}
 }
 
-
-void sprite_manager::initial_sprite_spawning_from_sublevel_data
-	( const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos )
+void sprite_manager::initial_sprite_spawning_at_start_of_level
+	( bg_point& camera_pos )
 {
 	memfill32( the_sprites.data(), 0, the_sprites.size() * sizeof(sprite) 
 		/ sizeof(u32) );
@@ -103,18 +102,60 @@ void sprite_manager::initial_sprite_spawning_from_sublevel_data
 		[active_level::get_the_current_sublevel_ptr()
 		.sublevel_entrance_arr_arr_helper.get_size() - 1];
 	
-	
 	vec2_f24p8 player_initial_in_level_pos 
 		= the_start_of_level_sle.in_level_pos;
 	
-	init_the_player( player_initial_in_level_pos, the_sublevel_size_2d,
+	init_the_player( player_initial_in_level_pos, 
+		active_level::get_the_current_sublevel_ptr().get_size_2d(),
 		camera_pos );
+	
 	init_the_array_of_active_sprites();
 	
 	//next_debug_u32 = (vu32)(player_ipg);
 	//next_debug_u32 = player_ipg->type;
 	//nocash_soft_break();
 	
+	initial_sprite_spawning_shared_code(camera_pos);
+}
+
+void sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
+	( bg_point& camera_pos, u32 sublevel_entrance_index )
+{
+	memfill32( the_sprites.data(), 0, the_sprites.size() * sizeof(sprite) 
+		/ sizeof(u32) );
+	
+	const sublevel_entrance& the_dest_sle
+		= active_level::get_the_current_sublevel_ptr()
+		.sublevel_entrance_arr_arr_helper.the_array
+		[sublevel_entrance_index];
+	
+	vec2_f24p8 player_initial_in_level_pos;
+	player_initial_in_level_pos.x = the_dest_sle.in_level_pos.x;
+	//	= the_dest_sle.in_level_pos - vec2_f24p8( {0}, 
+	//	make_f24p8(num_pixels_per_block_col) );
+	player_initial_in_level_pos.y = the_dest_sle.in_level_pos.y
+		- make_f24p8( the_player.get_shape_size_as_vec2().y
+		- num_pixels_per_block_col );
+	
+	// This function call needs to be replaced with some non-destructive
+	// form of changing the player's in_level_pos.
+	init_the_player( player_initial_in_level_pos, 
+		active_level::get_the_current_sublevel_ptr().get_size_2d(),
+		camera_pos );
+	
+	init_the_array_of_active_sprites();
+	
+	//next_debug_u32 = (vu32)(player_ipg);
+	//next_debug_u32 = player_ipg->type;
+	//nocash_soft_break();
+	
+	initial_sprite_spawning_shared_code(camera_pos);
+}
+
+
+void sprite_manager::initial_sprite_spawning_shared_code
+	( bg_point& camera_pos )
+{
 	auto which_spr = the_sprites.begin();
 	
 	// Convert 
@@ -206,7 +247,6 @@ void sprite_manager::initial_sprite_spawning_from_sublevel_data
 				next_oam_index );
 		}
 	}
-	
 }
 
 

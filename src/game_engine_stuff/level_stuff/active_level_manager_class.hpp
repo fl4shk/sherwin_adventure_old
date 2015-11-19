@@ -84,10 +84,22 @@ public:		// functions
 			.sprite_ipg_arr_arr_helper.get_size() );
 	}
 	
-	
+	static inline void load_level( const level* n_the_current_level_ptr )
+	{
+		active_level::the_current_level_ptr = n_the_current_level_ptr;
+		load_sublevel_basic(0);
+		
+		// Despawn sprites that are too far offscreen.
+		sprite_manager::despawn_sprites_if_needed(bgofs_mirror[0]);
+		sprite_manager::update_all_sprites
+			( active_level::get_the_current_sublevel_ptr().get_size_2d(), 
+			bgofs_mirror[0] );
+		sprite_manager::spawn_sprites_if_needed(bgofs_mirror[0]);
+		active_level_manager::update_sublevel_in_screenblock_mirror_2d();
+	}
 	
 	//static inline void initial_sublevel_loading()
-	static inline void load_sublevel( u32 n_sublevel_index )
+	static inline void load_sublevel_basic( u32 n_sublevel_index )
 	{
 		active_level::the_current_active_sublevel_index = n_sublevel_index;
 		
@@ -112,15 +124,54 @@ public:		// functions
 		
 		copy_sublevel_from_array_2d_helper_to_vram();
 		
-		bgofs_mirror[0].prev = bg_point();
-		bgofs_mirror[0].curr = bg_point();
+		//bgofs_mirror[0].prev = bg_point();
+		//bgofs_mirror[0].curr = bg_point();
 		
-		sprite_manager::initial_sprite_spawning_from_sublevel_data
-			( active_level::get_the_current_sublevel_ptr().get_size_2d(),
-			bgofs_mirror[0].curr );
+		//sprite_manager::initial_sprite_spawning_from_sublevel_data
+		//	( active_level::get_the_current_sublevel_ptr().get_size_2d(),
+		//	bgofs_mirror[0].curr );
+		sprite_manager::initial_sprite_spawning_at_start_of_level
+			(bgofs_mirror[0].curr);
 		
 		//update_sublevel_in_screenblock_mirror_2d();
+	}
+	
+	//static inline void load_sublevel_warp_based( u32 n_sublevel_index )
+	static inline void load_sublevel_at_intra_sublevel_warp
+		( u32 n_sublevel_index, u32 sublevel_entrance_index )
+	{
+		active_level::the_current_active_sublevel_index = n_sublevel_index;
 		
+		// Initialize the list of sprite level data.
+		init_horiz_sublevel_sprite_ipg_lists();
+		
+		// Decompress the sublevel's block data into block_data_array.
+		bios_do_lz77_uncomp_wram
+			( active_level::get_the_current_sublevel_ptr()
+			.cmp_bd_arr_helper.the_array, 
+			active_level::block_data_array );
+		
+		for ( u32 i=0; i<active_level::block_data_array_size; ++i )
+		{
+			block& the_block = active_level::block_data_array[i];
+			
+			block_stuff_array[the_block.type]
+				->finish_initializing_using_persistent_data(the_block);
+		}
+		
+		update_sublevel_in_screenblock_mirror_2d();
+		
+		copy_sublevel_from_array_2d_helper_to_vram();
+		
+		//bgofs_mirror
+		
+		//sprite_manager::initial_sprite_spawning_from_sublevel_data
+		//	( active_level::get_the_current_sublevel_ptr().get_size_2d(),
+		//	bgofs_mirror[0].curr );
+		sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
+			( bgofs_mirror[0].curr, sublevel_entrance_index );
+		
+		//update_sublevel_in_screenblock_mirror_2d();
 	}
 	
 } __attribute__((_align4));

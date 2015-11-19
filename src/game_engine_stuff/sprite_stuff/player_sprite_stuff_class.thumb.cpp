@@ -173,7 +173,8 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 	bg_point& camera_pos, const vec2_u32& the_level_size_2d )
 {
 	
-	bool warped_this_frame = false;
+	bool warped_this_frame = false, 
+		warped_to_other_sublevel_this_frame = false;
 	
 	for ( sprite& spr : sprite_manager::the_sprites )
 	{
@@ -203,27 +204,55 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 				{
 					warped_this_frame = true;
 					
-					const sublevel_entrance& the_dest_sle 
-						= warp_block_sprite_stuff::get_dest_sle(spr);
+					//const sublevel_entrance& the_dest_sle 
+					//	= warp_block_sprite_stuff::get_dest_sle(spr);
 					
-					next_debug_f24p8.data = spr.the_sprite_ipg
-						->extra_param_0;
-					//next_debug_f24p8.data 
-					//	= the_dest_sle.in_level_pos.x.data
-					//	* num_pixels_per_block_row;
-					//next_debug_f24p8.data 
-					//	= the_dest_sle.in_level_pos.y.data 
-					//	* num_pixels_per_block_col;
-					next_debug_f24p8 = the_dest_sle.in_level_pos.x;
-					next_debug_f24p8 = the_dest_sle.in_level_pos.y;
-					next_debug_f24p8 = the_player.in_level_pos.x;
-					next_debug_f24p8 = the_player.in_level_pos.y;
+					const sublevel_entrance* the_dest_sle_ptr
+						= &( active_level::the_current_level_ptr
+						->get_the_sublevels()[spr.the_sprite_ipg
+						->extra_param_1]
+						.sublevel_entrance_arr_arr_helper.the_array
+						[spr.the_sprite_ipg->extra_param_0] );
+					
+					
+					if ( spr.the_sprite_ipg->extra_param_1 
+						!= active_level
+						::the_current_active_sublevel_index )
+					{
+						active_level_manager
+							::load_sublevel_at_intra_sublevel_warp
+							( spr.the_sprite_ipg->extra_param_1, 
+							spr.the_sprite_ipg->extra_param_0 );
+						
+						warped_to_other_sublevel_this_frame = true;
+					}
+					
+					
+					//the_dest_sle_ptr 
+					//	= &active_level::get_the_current_sublevel_ptr()
+					//	.sublevel_entrance_arr_arr_helper.the_array
+					//	[spr.the_sprite_ipg->extra_param_0];
+					
+					
+					//next_debug_f24p8.data = spr.the_sprite_ipg
+					//	->extra_param_0;
+					////next_debug_f24p8.data 
+					////	= the_dest_sle.in_level_pos.x.data
+					////	* num_pixels_per_block_row;
+					////next_debug_f24p8.data 
+					////	= the_dest_sle.in_level_pos.y.data 
+					////	* num_pixels_per_block_col;
+					//next_debug_f24p8 = the_dest_sle.in_level_pos.x;
+					//next_debug_f24p8 = the_dest_sle.in_level_pos.y;
+					//next_debug_f24p8 = the_player.in_level_pos.x;
+					//next_debug_f24p8 = the_player.in_level_pos.y;
 					
 					//the_player.in_level_pos = the_dest_sle.in_level_pos;
-					the_player.in_level_pos.x 
-						= the_dest_sle.in_level_pos.x;
-					the_player.in_level_pos.y = the_dest_sle.in_level_pos.y
-						- make_f24p8( the_player.get_shape_size_as_vec2().y
+					the_player.in_level_pos.x = the_dest_sle_ptr
+						->in_level_pos.x;
+					the_player.in_level_pos.y = the_dest_sle_ptr
+						->in_level_pos.y - make_f24p8
+						( the_player.get_shape_size_as_vec2().y
 						- num_pixels_per_block_col );
 					//the_player.vel = vec2_f24p8();
 					
@@ -239,6 +268,11 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 				
 			default:
 				break;
+		}
+		
+		if ( warped_to_other_sublevel_this_frame )
+		{
+			break;
 		}
 	}
 	

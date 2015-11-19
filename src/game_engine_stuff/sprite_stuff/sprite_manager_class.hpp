@@ -19,7 +19,7 @@ public:		// variables
 	static sprite the_player __attribute__((_iwram));
 	
 	//static constexpr u32 max_num_regular_sprites = 40;
-	static constexpr u32 max_num_regular_sprites = 20;
+	static constexpr u32 max_num_regular_sprites = 30;
 	
 	static constexpr u32 the_player_vram_chunk_index = 1;
 	static constexpr u32 the_active_sprites_starting_vram_chunk_index = 2;
@@ -65,8 +65,18 @@ public:		// functions
 	
 	static void some_sprite_init_thing();
 	
-	static void initial_sprite_spawning_from_sublevel_data
-		( const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos );
+	//static void initial_sprite_spawning_from_sublevel_data
+	//	( const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos );
+	
+	// The 
+	static void initial_sprite_spawning_at_start_of_level
+		( bg_point& camera_pos );
+	
+	static void initial_sprite_spawning_at_intra_sublevel_warp
+		( bg_point& camera_pos, u32 sublevel_entrance_index );
+	
+	static void initial_sprite_spawning_shared_code
+		( bg_point& camera_pos );
 	
 	
 	static void initial_sprite_spawning_from_sublevel_data_old

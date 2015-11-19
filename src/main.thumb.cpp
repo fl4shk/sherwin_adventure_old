@@ -68,7 +68,7 @@ void vblank_func()
 	mmFrame();
 	
 	key_poll();
-	//pause_or_unpause_music ();
+	pause_or_unpause_music();
 	
 	update_block_graphics_in_vram(the_block_gfxTiles);
 	copy_oam_mirror_to_oam();
@@ -82,26 +82,50 @@ void vblank_func()
 	
 	sprite_manager::upload_tiles_of_active_sprites_to_vram();
 	
-	
-	if ( key_hit(key_select) )
-	{
-		// Enable forced blank
-		reg_dispcnt |= dcnt_blank_on;
-		
-		if ( active_level::the_current_active_sublevel_index == 0 )
-		{
-			active_level_manager::load_sublevel(1);
-		}
-		else
-		{
-			active_level_manager::load_sublevel(0);
-		}
-		
-		// Disable forced blank
-		clear_bits( reg_dispcnt, dcnt_blank_mask );
-		
-		bios_wait_for_vblank();
-	}
+	//if ( key_hit(key_select) && !soft_reset_keys_down() )
+	//{
+	//	// Enable forced blank
+	//	reg_dispcnt |= dcnt_blank_on;
+	//	
+	//	memfill32( oam_mirror, 0, sizeof(oam_entry) * oam_mirror_size 
+	//		/ sizeof(u32) );
+	//	
+	//	copy_oam_mirror_to_oam();
+	//	
+	//	if ( active_level::the_current_active_sublevel_index == 0 )
+	//	{
+	//		//active_level_manager::load_sublevel_basic(1);
+	//		active_level_manager::load_sublevel_at_intra_sublevel_warp
+	//			( 1, 0 );
+	//	}
+	//	else
+	//	{
+	//		//active_level_manager::load_sublevel_basic(0);
+	//		active_level_manager::load_sublevel_at_intra_sublevel_warp
+	//			( 0, 4 );
+	//	}
+	//	
+	//	update_block_graphics_in_vram(the_block_gfxTiles);
+	//	copy_oam_mirror_to_oam();
+	//	
+	//	copy_bgofs_mirror_to_registers();
+	//	
+	//	active_level_manager::copy_sublevel_from_array_2d_helper_to_vram();
+	//	sprite_manager::upload_tiles_of_active_sprites_to_vram();
+	//	
+	//	
+	//	// Wait for about 0.25 seconds.
+	//	for ( u32 i=0; i<15; ++i )
+	//	{
+	//		bios_wait_for_vblank();
+	//	}
+	//	
+	//	// Disable forced blank
+	//	clear_bits( reg_dispcnt, dcnt_blank_mask );
+	//	
+	//	bios_wait_for_vblank();
+	//	vblank_func();
+	//}
 }
 
 void title_screen_func() __attribute__((__noinline__));
@@ -200,7 +224,6 @@ inline void reinit_the_game()
 	//// Copy the sprite graphics to OBJ Video RAM.
 	//sprite_gfx_manager::upload_default_sprite_graphics();
 	
-	
 	// Also, copy the_block_gfxPalLen to BG Palette RAM
 	memcpy32( bg_pal_ram, the_block_gfxPal,
 		the_block_gfxPalLen / sizeof(u32) );
@@ -209,11 +232,19 @@ inline void reinit_the_game()
 	// Finally, copy the_block_gfxTiles to BG VRAM, screenblock 0
 	update_block_graphics_in_vram(the_block_gfxTiles);
 	
+	bios_wait_for_vblank();
+	
+	
 	sprite_manager::next_oam_index = 0; 
 	
-	//active_level::the_current_sublevel_ptr.init(test_level_sublevel_0);
-	active_level::the_current_level_ptr = &test_level;
-	active_level_manager::load_sublevel(0);
+	active_level_manager::load_level(&test_level);
+	
+	
+	// Wait for about 0.25 seconds.
+	for ( u32 i=0; i<15; ++i )
+	{
+		bios_wait_for_vblank();
+	}
 	
 	
 	// Also, start playing music when the game is started.

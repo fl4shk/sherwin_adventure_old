@@ -49,7 +49,7 @@ public:		// functions
 	
 	
 	// Initial
-	static const sublevel_entrance& get_dest_sle( sprite& the_warp_block );
+	//static const sublevel_entrance& get_dest_sle( sprite& the_warp_block );
 	
 	
 	// Physics and collision stuff
