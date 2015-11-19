@@ -16,6 +16,9 @@ public:		// functions
 	virtual void strongly_hit_response( block& the_block, 
 		const vec2_s32& coord ) __attribute__((_iwram_code));
 	
+	virtual void finish_initializing_using_persistent_data
+		( block& the_block ) __attribute__((_iwram_code));
+	
 } __attribute__((_align4));
 
 

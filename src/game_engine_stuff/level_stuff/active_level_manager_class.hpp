@@ -100,6 +100,14 @@ public:		// functions
 			.cmp_bd_arr_helper.the_array, 
 			active_level::block_data_array );
 		
+		for ( u32 i=0; i<active_level::block_data_array_size; ++i )
+		{
+			block& the_block = active_level::block_data_array[i];
+			
+			block_stuff_array[the_block.type]
+				->finish_initializing_using_persistent_data(the_block);
+		}
+		
 		update_sublevel_in_screenblock_mirror_2d();
 		
 		copy_sublevel_from_array_2d_helper_to_vram();

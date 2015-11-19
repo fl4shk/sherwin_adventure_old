@@ -3,6 +3,10 @@
 
 class exclam_block_stuff : public block_base_stuff
 {
+public:		// enums
+	enum persistent_data_state { is_exclam, is_bt_dud } 
+		__attribute__((_align4));
+	
 public:		// variables
 	static const u32 metatile_number = 4;
 	static const u32 palette_number = 0;
@@ -15,6 +19,9 @@ public:		// functions
 		__attribute__((_iwram_code));
 	virtual void strongly_hit_response( block& the_block, 
 		const vec2_s32& coord ) __attribute__((_iwram_code));
+	
+	virtual void finish_initializing_using_persistent_data
+		( block& the_block ) __attribute__((_iwram_code));
 	
 } __attribute__((_align4));
 
