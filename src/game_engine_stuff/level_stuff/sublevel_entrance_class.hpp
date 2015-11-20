@@ -10,7 +10,7 @@ enum sublevel_entrance_type
 	
 	sle_start_of_level,
 	
-	sle_from_warp_block,
+	sle_from_door,
 	
 	// The number of sublevel_entrance_type's is automatically updated by
 	// the compiler via the sle_count enum id.

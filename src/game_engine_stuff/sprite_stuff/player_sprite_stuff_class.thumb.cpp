@@ -34,6 +34,10 @@ const u32 player_sprite_stuff::the_relative_metatile_slot_arr_size
 	= sizeof(player_sprite_stuff::the_relative_metatile_slot_arr)
 	/ sizeof(u32);
 
+const vec2_f24p8 player_sprite_stuff::the_initial_coll_box_size 
+	= { {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },
+	player_sprite_stuff::the_initial_cb_pos_offset 
+	= { {2 << fixed24p8::shift }, {3 << fixed24p8::shift } };
 
 
 void player_sprite_stuff::init( sprite& the_player, bool facing_left  )
@@ -48,16 +52,19 @@ void player_sprite_stuff::init( sprite& the_player, bool facing_left  )
 	the_player.the_oam_entry.set_pal_number 
 		( get_gfx_category(the_player) );
 	
-	the_player.set_shape_size(oam_entry::ss_16x32);
-	the_player.the_coll_box.size = { 12 << fixed24p8::shift, 
-		29 << fixed24p8::shift };
+	////the_player.set_shape_size(oam_entry::ss_16x32);
+	//the_player.set_shape_size( get_initial_shape_size() );
 	//the_player.the_coll_box.size = { 12 << fixed24p8::shift, 
-	//	30 << fixed24p8::shift };
-	
-	the_player.cb_pos_offset = { 2 << fixed24p8::shift, 
-		3 << fixed24p8::shift };
+	//	29 << fixed24p8::shift };
+	////the_player.the_coll_box.size = { 12 << fixed24p8::shift, 
+	////	30 << fixed24p8::shift };
+	//
 	//the_player.cb_pos_offset = { 2 << fixed24p8::shift, 
-	//	2 << fixed24p8::shift };
+	//	3 << fixed24p8::shift };
+	////the_player.cb_pos_offset = { 2 << fixed24p8::shift, 
+	////	2 << fixed24p8::shift };
+	set_initial_shape_size_of_sprite(the_player);
+	set_initial_coll_box_stuff_of_sprite(the_player);
 	
 	
 	// This is for slope testing stuffs
@@ -197,7 +204,7 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 				}
 				break;
 			
-			case st_warp_block:
+			case st_door:
 				if ( coll_box_intersects_now( the_player.the_coll_box,
 					spr.the_coll_box ) && key_hit(key_up) 
 					&& !warped_this_frame )
@@ -243,10 +250,17 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 					//the_player.in_level_pos = the_dest_sle.in_level_pos;
 					the_player.in_level_pos.x = the_dest_sle_ptr
 						->in_level_pos.x;
+					//the_player.in_level_pos.y = the_dest_sle_ptr
+					//	->in_level_pos.y - make_f24p8
+					//	( the_player.get_shape_size_as_vec2().y
+					//	- num_pixels_per_block_col );
+					//the_player.in_level_pos.y = the_dest_sle_ptr
+					//	->in_level_pos.y - make_f24p8
+					//	( the_player.get_shape_size_as_vec2().y
+					//	- spr.get_shape_size_as_vec2().y );
 					the_player.in_level_pos.y = the_dest_sle_ptr
-						->in_level_pos.y - make_f24p8
-						( the_player.get_shape_size_as_vec2().y
-						- num_pixels_per_block_col );
+						->in_level_pos.y;
+					
 					//the_player.vel = vec2_f24p8();
 					
 					the_player.update_f24p8_positions();

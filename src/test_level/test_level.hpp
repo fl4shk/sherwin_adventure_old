@@ -10,7 +10,7 @@
 extern const sublevel< 2010, 64, 32, 14, 33 > test_level_sublevel_0;
 
 // test_level_2.tmx
-extern const sublevel< 1992, 64, 32, 5, 33 > test_level_sublevel_1;
+extern const sublevel< 1997, 64, 32, 6, 33 > test_level_sublevel_1;
 
 // test_level_3.tmx
 extern const sublevel< 1953, 64, 32, 6, 33 > test_level_sublevel_2;

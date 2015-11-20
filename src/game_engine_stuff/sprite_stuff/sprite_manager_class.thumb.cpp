@@ -133,9 +133,10 @@ void sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
 	player_initial_in_level_pos.x = the_dest_sle.in_level_pos.x;
 	//	= the_dest_sle.in_level_pos - vec2_f24p8( {0}, 
 	//	make_f24p8(num_pixels_per_block_col) );
-	player_initial_in_level_pos.y = the_dest_sle.in_level_pos.y
-		- make_f24p8( the_player.get_shape_size_as_vec2().y
-		- num_pixels_per_block_col );
+	//player_initial_in_level_pos.y = the_dest_sle.in_level_pos.y
+	//	- make_f24p8( the_player.get_shape_size_as_vec2().y
+	//	- num_pixels_per_block_col );
+	player_initial_in_level_pos.y = the_dest_sle.in_level_pos.y;
 	
 	// This function call needs to be replaced with some non-destructive
 	// form of changing the player's in_level_pos.

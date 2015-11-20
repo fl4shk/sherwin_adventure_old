@@ -40,8 +40,10 @@ enum sprite_type
 	st_ice_muffin,
 	st_chocolate_muffin,
 	
-	// Block-like Sprites
-	st_warp_block,
+	//// Block-like Sprites
+	//st_warp_block,
+	// Warp Sprites
+	st_door,
 	
 	// st_count is the amount of sprite types.  It is automatically updated
 	// by the compiler.
@@ -55,7 +57,7 @@ enum sprite_type
 #include "player_sprite_stuff_class.hpp"
 #include "waffle_sprite_stuff_class.hpp"
 #include "muffin_sprite_stuff_classes.hpp"
-#include "warp_block_sprite_stuff_class.hpp"
+#include "door_sprite_stuff_class.hpp"
 
 
 
@@ -73,7 +75,7 @@ extern ice_muffin_sprite_stuff the_ice_muffin_sprite_stuff
 	__attribute__((_iwram));
 extern chocolate_muffin_sprite_stuff the_chocolate_muffin_sprite_stuff
 	__attribute__((_iwram));
-extern warp_block_sprite_stuff the_warp_block_sprite_stuff
+extern door_sprite_stuff the_door_sprite_stuff
 	__attribute__((_iwram));
 
 extern sprite_base_stuff* sprite_stuff_array[st_count]

@@ -3,28 +3,25 @@
 
 #include "sprite_manager_class.hpp"
 
+const oam_entry::shape_size sprite_base_stuff::the_initial_shape_size 
+	= oam_entry::ss_16x16;
 
-
+const vec2_f24p8 sprite_base_stuff::the_initial_coll_box_size
+	= { {14 << fixed24p8::shift}, {14 << fixed24p8::shift} },
+	sprite_base_stuff::the_initial_cb_pos_offset 
+	= { {1 << fixed24p8::shift}, {1 << fixed24p8::shift} };
 
 void sprite_base_stuff::init( sprite& the_sprite, bool facing_left )
 {
 	the_sprite.the_sprite_type = get_sprite_type();
 	
-	//the_sprite.the_oam_entry.set_tile_number 
-	//	( get_curr_tile_slot(the_sprite) );
-	//the_sprite.the_oam_entry.set_tile_number
-	//	( the_sprite.get_vram_chunk_index() 
-	//	* sprite_gfx_manager::num_tiles_in_ss_32x32 );
 	the_sprite.the_oam_entry.set_tile_number
 		( get_curr_tile_slot(the_sprite) );
 	the_sprite.the_oam_entry.set_pal_number 
 		( get_gfx_category(the_sprite) );
 	
-	the_sprite.set_shape_size(oam_entry::ss_16x16);
-	the_sprite.the_coll_box.size = { 14 << fixed24p8::shift, 
-		14 << fixed24p8::shift };
-	the_sprite.cb_pos_offset = { 1 << fixed24p8::shift, 
-		1 << fixed24p8::shift };
+	set_initial_shape_size_of_sprite(the_sprite);
+	set_initial_coll_box_stuff_of_sprite(the_sprite);
 	
 	if ( facing_left )
 	{
@@ -58,6 +55,20 @@ const sprite_type sprite_base_stuff::get_sprite_type() const
 	return st_default;
 }
 
+void sprite_base_stuff::set_initial_shape_size_of_sprite
+	( sprite& the_sprite ) const
+{
+	the_sprite.set_shape_size( get_the_initial_shape_size() );
+}
+
+void sprite_base_stuff::set_initial_coll_box_stuff_of_sprite
+	( sprite& the_sprite ) const
+{
+	the_sprite.the_coll_box.size = get_the_initial_coll_box_size();
+	the_sprite.cb_pos_offset = get_the_initial_cb_pos_offset();
+}
+
+
 void sprite_base_stuff::gfx_update( sprite& the_sprite )
 {
 	//the_sprite.the_oam_entry.set_tile_number 
@@ -69,6 +80,7 @@ void sprite_base_stuff::gfx_update( sprite& the_sprite )
 	the_sprite.the_oam_entry.set_pal_number 
 		( get_gfx_category(the_sprite) );
 }
+
 
 void sprite_base_stuff::update_part_1( sprite& the_sprite )
 {

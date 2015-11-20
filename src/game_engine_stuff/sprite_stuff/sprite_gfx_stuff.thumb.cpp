@@ -13,7 +13,8 @@
 
 #include "../../gfx/sherwin_gfx.h"
 #include "../../gfx/the_powerup_gfx.h"
-#include "../../gfx/the_block_like_sprites_gfx.h"
+//#include "../../gfx/the_block_like_sprites_gfx.h"
+#include "../../gfx/the_door_gfx.h"
 #include "../../gfx/the_golem_enemy_gfx.h"
 
 
@@ -45,10 +46,14 @@ void sprite_gfx_manager::upload_default_sprite_palettes()
 	memcpy32( &( obj_pal_ram[sgc_powerup * mul_val] ), the_powerup_gfxPal,
 		the_powerup_gfxPalLen / sizeof(u32) );
 	
-	// The block-like sprites' palettes
-	memcpy32( &(obj_pal_ram[sgc_block_like_0 * mul_val]),
-		the_block_like_sprites_gfxPal, the_block_like_sprites_gfxPalLen 
-		/ sizeof(u32) );
+	//// The block-like sprites' palettes
+	//memcpy32( &(obj_pal_ram[sgc_block_like_0 * mul_val]),
+	//	the_block_like_sprites_gfxPal, the_block_like_sprites_gfxPalLen 
+	//	/ sizeof(u32) );
+	
+	// The door sprites' palettes
+	memcpy32( &(obj_pal_ram[sgc_door * mul_val]), the_door_gfxPal, 
+		the_door_gfxPalLen / sizeof(u32) );
 	
 	// The golems and other enemys' palettes
 	memcpy32( &(obj_pal_ram[sgc_enemy_0 * mul_val]),
@@ -56,8 +61,7 @@ void sprite_gfx_manager::upload_default_sprite_palettes()
 	
 }
 
-void sprite_gfx_manager::upload_sprite_tiles_to_vram
-	( sprite& the_sprite )
+void sprite_gfx_manager::upload_sprite_tiles_to_vram( sprite& the_sprite )
 {
 	// It gets tiring to have to type
 	// sprite_stuff_array[the_sprite.the_sprite_type] so much.

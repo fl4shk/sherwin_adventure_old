@@ -21,8 +21,6 @@ inline void pause_or_unpause_music()
 }
 
 
-
-
 //void vblank_func() __attribute__(( _iwram_code, __noinline__ ));
 void vblank_func() __attribute__((_iwram_code));
 

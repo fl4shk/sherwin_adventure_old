@@ -8,7 +8,7 @@ muffin_sprite_stuff the_muffin_sprite_stuff;
 fire_muffin_sprite_stuff the_fire_muffin_sprite_stuff;
 ice_muffin_sprite_stuff the_ice_muffin_sprite_stuff;
 chocolate_muffin_sprite_stuff the_chocolate_muffin_sprite_stuff;
-warp_block_sprite_stuff the_warp_block_sprite_stuff;
+door_sprite_stuff the_door_sprite_stuff;
 
 
 sprite_base_stuff* sprite_stuff_array[st_count] __attribute__((_iwram))
@@ -30,7 +30,7 @@ sprite_base_stuff* sprite_stuff_array[st_count] __attribute__((_iwram))
 	&the_chocolate_muffin_sprite_stuff,
 	
 	// Block-like Sprites
-	&the_warp_block_sprite_stuff,
+	&the_door_sprite_stuff,
 	
 };
 

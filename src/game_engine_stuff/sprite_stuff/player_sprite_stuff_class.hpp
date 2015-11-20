@@ -88,6 +88,12 @@ public:		// variables
 	static constexpr tile* tile_arr = const_cast<tile*>
 		(reinterpret_cast<const tile*>(sherwin_gfxTiles));
 	
+	static const oam_entry::shape_size the_initial_shape_size 
+		= oam_entry::ss_16x32;
+	
+	static const vec2_f24p8 the_initial_coll_box_size,
+		the_initial_cb_pos_offset;
+	
 public:		// functions
 	virtual void init( sprite& the_player, bool facing_left=true );
 	virtual void init( sprite& the_player, 
@@ -125,6 +131,22 @@ public:		// functions
 	{
 		return tile_arr;
 	}
+	
+	inline virtual const oam_entry::shape_size get_the_initial_shape_size() 
+		const
+	{
+		return the_initial_shape_size;
+	}
+	
+	inline virtual const vec2_f24p8& get_the_initial_coll_box_size() const
+	{
+		return the_initial_coll_box_size;
+	}
+	inline virtual const vec2_f24p8& get_the_initial_cb_pos_offset() const
+	{
+		return the_initial_cb_pos_offset;
+	}
+	
 	
 	// Physics and collision stuff
 	virtual void block_collision_stuff( sprite& the_player )

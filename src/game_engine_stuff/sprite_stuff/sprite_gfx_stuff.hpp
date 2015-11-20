@@ -19,11 +19,15 @@ enum sprite_gfx_category
 	// Powerup sprites use sprite palette slot 1
 	sgc_powerup,
 	
-	// Block-like sprites use sprite palette slots 2 and 3
-	sgc_block_like_0,
-	sgc_block_like_1,
+	//// Block-like sprites use sprite palette slots 2 and 3
+	//sgc_block_like_0,
+	//sgc_block_like_1,
 	
-	// Enemy sprites use sprite palette slots 4, 5, and 6
+	// Door sprites use sprite palette slot 2
+	sgc_door,
+	
+	//// Enemy sprites use sprite palette slots 4, 5, and 6
+	// Enemy sprites use sprite palette slots 3, 4, and 5
 	sgc_enemy_0,
 	sgc_enemy_1,
 	sgc_enemy_2,

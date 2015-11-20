@@ -25,6 +25,11 @@ public:		// variables
 	static constexpr tile* tile_arr = const_cast<tile*>
 		(reinterpret_cast<const tile*>(sherwin_gfxTiles));
 	
+	static const oam_entry::shape_size the_initial_shape_size;
+	
+	static const vec2_f24p8 the_initial_coll_box_size,
+		the_initial_cb_pos_offset;
+	
 public:		// functions
 	// This is the default form of init().
 	virtual void init( sprite& the_sprite, bool facing_left=true );
@@ -43,16 +48,41 @@ public:		// functions
 	
 	virtual const sprite_type get_sprite_type() const;
 	
-	virtual void gfx_update( sprite& the_sprite )
-		__attribute__((_iwram_code));
-	
-	virtual void update_part_1( sprite& the_sprite )
-		__attribute__((_iwram_code));
-	
 	inline virtual const tile* get_tile_arr() const
 	{
 		return tile_arr;
 	}
+	
+	virtual void set_initial_shape_size_of_sprite( sprite& the_sprite ) 
+		const;
+	inline virtual const oam_entry::shape_size get_the_initial_shape_size() 
+		const
+	{
+		return the_initial_shape_size;
+	}
+	
+	virtual void set_initial_coll_box_stuff_of_sprite( sprite& the_sprite )
+		const;
+	
+	inline virtual const vec2_f24p8& get_the_initial_coll_box_size() const
+	{
+		return the_initial_coll_box_size;
+	}
+	inline virtual const vec2_f24p8& get_the_initial_cb_pos_offset() const
+	{
+		return the_initial_cb_pos_offset;
+	}
+	
+	
+	
+	
+	virtual void gfx_update( sprite& the_sprite )
+		__attribute__((_iwram_code));
+	
+	
+	virtual void update_part_1( sprite& the_sprite )
+		__attribute__((_iwram_code));
+	
 	
 	
 	// The player_sprite_stuff class is the primary user of this function.

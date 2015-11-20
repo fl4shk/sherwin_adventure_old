@@ -20,9 +20,6 @@
 #include "game_engine_stuff/sprite_stuff/sprite_manager_class.hpp"
 
 
-//#include "game_engine_stuff/sa_list_class_stuff.hpp"
-
-
 #include "game_engine_stuff/housekeeping.hpp"
 
 
@@ -75,13 +72,13 @@ int main()
 			bgofs_mirror[0] );
 		
 		
-		// This is temporary
-		if ( key_held(key_l) )
-		{
-			sprite_manager::spawn_a_sprite_basic( st_waffle,
-				the_player.in_level_pos, bgofs_mirror[0].curr,
-				(bool)the_player.the_oam_entry.get_hflip_status() );
-		}
+		//// This is temporary
+		//if ( key_held(key_l) )
+		//{
+		//	sprite_manager::spawn_a_sprite_basic( st_waffle,
+		//		the_player.in_level_pos, bgofs_mirror[0].curr,
+		//		(bool)the_player.the_oam_entry.get_hflip_status() );
+		//}
 		
 		
 		sprite_manager::spawn_sprites_if_needed(bgofs_mirror[0]);
