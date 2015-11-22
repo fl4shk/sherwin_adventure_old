@@ -4,8 +4,9 @@
 #include "../../gba_specific_stuff/attribute_defines.hpp"
 #include "../misc_types.hpp"
 #include "../array_2d_helper_class.hpp"
-#include "../../gba_specific_stuff/bg_reg_stuff.hpp"
+#include "../../gba_specific_stuff/gfx_reg_stuff.hpp"
 
+// These block_type's are used by BG0
 enum block_type
 {
 	// A graphics-less block that sprites are free to move through.
@@ -90,6 +91,24 @@ enum block_type
 } __attribute__((_align4));
 
 
+
+// These bg1_block_type's are used by BG1.
+enum bg1_block_type
+{
+	// Day Sky
+	bg1bt_day_sky,
+	
+	// Night Sky block.  Also doubles as a go-to block for fading out or
+	// in.
+	bg1bt_night_sky,
+	
+	
+	// bg1bt_count is the amount of block types.  It is automatically
+	// updated by the compiler.
+	bg1bt_count,
+} __attribute__((_align4));
+
+
 class block;
 
 
@@ -104,6 +123,7 @@ extern block_base_stuff* block_stuff_array[bt_count];
 #include "exclam_block_stuff_classes.hpp"
 #include "dud_block_stuff_class.hpp"
 #include "grass_and_dirt_block_stuff_classes.hpp"
+#include "day_sky_and_night_sky_block_classes.hpp"
 
 
 // A class for unique block data.
@@ -175,7 +195,6 @@ inline u32 get_palette_number_of_block_type( block_type the_block_type )
 	
 	return block_stuff_array[the_block_type]->get_palette_number();
 }
-
 
 
 void update_block_graphics_in_vram( const unsigned short* the_tiles )

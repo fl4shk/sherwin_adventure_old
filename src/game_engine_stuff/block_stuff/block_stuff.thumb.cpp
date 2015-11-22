@@ -1,7 +1,7 @@
 //#include "block_stuff.hpp"
 #include "../level_stuff/active_level_class.hpp"
 
-#include "../../gba_specific_stuff/bg_reg_stuff.hpp"
+#include "../../gba_specific_stuff/gfx_reg_stuff.hpp"
 #include "../../gba_specific_stuff/dma_stuff.hpp"
 
 

@@ -1,5 +1,5 @@
 #include "interrupt_stuff.hpp"
-#include "bg_reg_stuff.hpp"
+#include "gfx_reg_stuff.hpp"
 
 
 extern "C"

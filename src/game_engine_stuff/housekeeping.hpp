@@ -9,16 +9,6 @@
 #include "maxmod.h"
 
 
-// This function toggles whether music is playing if the select button is
-// down this frame but was not down on the previous frame.
-inline void pause_or_unpause_music()
-{
-	if( key_hit(key_select) )
-	{
-		if ( mmActive() ) { mmPause(); }
-		else { mmResume(); }
-	}
-}
 
 
 //void vblank_func() __attribute__(( _iwram_code, __noinline__ ));
@@ -30,12 +20,38 @@ void title_screen_func();
 
 void reinit_the_game();
 
+void fade_out_to_black( u32 amount_to_subtract_per_iter, 
+	u32 num_frames_to_wait_per_iter=1 );
+
+void fade_in_from_black( u32 amount_to_add_per_iter,
+	u32 num_frames_to_wait_per_iter=1 );
+
+
+// This function toggles whether music is playing if the select button is
+// down this frame but was not down on the previous frame.
+inline void pause_or_unpause_music()
+{
+	if( key_hit(key_select) )
+	{
+		if ( mmActive() ) { mmPause(); }
+		else { mmResume(); }
+	}
+}
+
 inline void debug_infin_loop()
 {
 	for (;;)
 	{
 		bios_wait_for_vblank();
 		vblank_func();
+	}
+}
+
+inline void wait_for_x_frames( u32 x )
+{
+	for ( u32 i=0; i<x; ++i )
+	{
+		bios_wait_for_vblank();
 	}
 }
 

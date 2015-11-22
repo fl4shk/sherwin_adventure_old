@@ -2,7 +2,7 @@
 #define sprite_type_stuff_hpp
 
 
-#include "../../gba_specific_stuff/bg_reg_stuff.hpp"
+#include "../../gba_specific_stuff/gfx_reg_stuff.hpp"
 #include "../../gba_specific_stuff/oam_entry_defines.hpp"
 #include "../../gba_specific_stuff/dma_stuff.hpp"
 #include "../../gba_specific_stuff/asm_funcs.hpp"

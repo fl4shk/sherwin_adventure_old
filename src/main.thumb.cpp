@@ -1,7 +1,7 @@
 #include "gba_specific_stuff/asm_funcs.hpp"
 
 #include "gba_specific_stuff/button_stuff.hpp"
-#include "gba_specific_stuff/bg_reg_stuff.hpp"
+#include "gba_specific_stuff/gfx_reg_stuff.hpp"
 #include "gba_specific_stuff/oam_entry_classes.hpp"
 #include "gba_specific_stuff/interrupt_stuff.hpp"
 #include "gba_specific_stuff/bios_function_wrappers.hpp"
@@ -21,7 +21,6 @@
 
 
 #include "game_engine_stuff/housekeeping.hpp"
-
 
 
 
@@ -65,8 +64,6 @@ int main()
 		// Despawn sprites that are too far offscreen.
 		sprite_manager::despawn_sprites_if_needed(bgofs_mirror[0]);
 		
-		//sprite_manager::update_all_sprites( test_level.get_size_2d(), 
-		//	bgofs_mirror[0], next_oam_index );
 		sprite_manager::update_all_sprites
 			( active_level::get_the_current_sublevel_ptr().get_size_2d(), 
 			bgofs_mirror[0] );
@@ -80,6 +77,16 @@ int main()
 		//		(bool)the_player.the_oam_entry.get_hflip_status() );
 		//}
 		
+		//if ( key_hit(key_select) )
+		//{
+		//	fade_out_to_black(1);
+		//	
+		//	wait_for_x_frames(60);
+		//	
+		//	fade_in_from_black(1);
+		//}
+		
+		
 		
 		sprite_manager::spawn_sprites_if_needed(bgofs_mirror[0]);
 		
@@ -88,6 +95,7 @@ int main()
 		//	( active_level::bg0_screenblock_mirror_2d, 
 		//	test_level.get_size_2d() );
 		active_level_manager::update_sublevel_in_screenblock_mirror_2d();
+		
 		
 		
 		bios_wait_for_vblank();

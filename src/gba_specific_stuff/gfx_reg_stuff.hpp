@@ -1,10 +1,11 @@
-#ifndef bg_reg_stuff_hpp
-#define bg_reg_stuff_hpp
+#ifndef gfx_reg_stuff_hpp
+#define gfx_reg_stuff_hpp
 
 #include "../game_engine_stuff/misc_types.hpp"
 #include "memory_map.hpp"
 #include "../game_engine_stuff/vec2_class.hpp"
 #include "../game_engine_stuff/prev_curr_pair_class.hpp"
+#include "../game_engine_stuff/misc_bitwise_funcs.hpp"
 
 
 /* ---- Some Helper Structs ---- */
@@ -68,11 +69,8 @@ static constexpr vec2_u32 screenblock_size_2d
 typedef scr_entry screenblock[screenblock_size];
 
 
-
 // Screen-entry mapping: se_ram[y][x] is SBB y, entry x
 #define se_ram ((screenblock*)mem_vram)
-
-
 
 
 
@@ -108,6 +106,10 @@ typedef scr_entry screenblock[screenblock_size];
 static const u32 pal_ram_size = 0x200;
 static const u32 bg_pal_ram_size = 0x200;
 static const u32 obj_pal_ram_size = 0x200;
+
+static const u32 pal_ram_size_in_u16 = pal_ram_size / sizeof(u16);
+static const u32 bg_pal_ram_size_in_u16 = bg_pal_ram_size / sizeof(u16);
+static const u32 obj_pal_ram_size_in_u16 = obj_pal_ram_size / sizeof(u16);
 /* ---- End of Palette RAM Stuffs ---- */
 
 
@@ -131,6 +133,12 @@ static const u32 obj_pal_ram_size = 0x200;
 
 #define reg_bghofs_n(n) *((vu16*)(mem_io + 0x0010 + 0x04 * n))
 #define reg_bgvofs_n(n) *((vu16*)(mem_io + 0x0012 + 0x04 * n))
+
+
+// Alpha Blending Registers
+#define reg_bldcnt *((vu16*)(mem_io + 0x0050))
+#define reg_bldalpha *((vu16*)(mem_io + 0x0052))
+#define reg_bldy *((vu16*)(mem_io + 0x0054))
 
 
 /* ---- End of Graphics-related Registers ---- */
@@ -316,9 +324,117 @@ static const u32 num_pixels_per_block_row_or_column = 16;
 /* ---- End of Defines for reg_bgXcnt ---- */
 
 
+/* ---- Defines for reg_bldcnt ---- */
+
+// The (A) top layers
+#define bldcnt_top_bg0 ( 0x0 << 0x0 )
+#define bldcnt_top_bg1 ( 0x1 << 0x0 )
+#define bldcnt_top_bg2 ( 0x2 << 0x0 )
+#define bldcnt_top_bg3 ( 0x3 << 0x0 )
+#define bldcnt_top_obj ( 0x4 << 0x0 )
+#define bldcnt_top_backdrop ( 0x5 << 0x0 )
+#define bldcnt_top_mask ( (u16)(0x001f) )
+
+// The blending mode
+#define bldcnt_bld_off ( 0x0 << 0x6 )
+#define bldcnt_bld_normal ( 0x1 << 0x6 )
+#define bldcnt_bld_white ( 0x2 << 0x6 )
+#define bldcnt_bld_black ( 0x3 << 0x6 )
+#define bldcnt_bld_mask ( (u16)(0x00c0) )
+
+// The (B) bottom layers
+#define bldcnt_bot_bg0 ( 0x0 << 0x8 )
+#define bldcnt_bot_bg1 ( 0x1 << 0x8 )
+#define bldcnt_bot_bg2 ( 0x2 << 0x8 )
+#define bldcnt_bot_bg3 ( 0x3 << 0x8 )
+#define bldcnt_bot_obj ( 0x4 << 0x8 )
+#define bldcnt_bot_backdrop ( 0x5 << 0x8 )
+#define bldcnt_bot_mask ( (u16)(0x1f00) )
+
+/* ---- End of Defines for reg_bldcnt ---- */
+
+
+/* ---- Defines for reg_bldalpha ---- */
+
+// Top blend weight.  Only used for normal blending.
+#define bldalpha_top( n ) ( n & 0x1f )
+
+// Bot blend weight.  Only used for normal blending.
+#define bldalpha_bot( n ) ( ( n & 0x1f ) << 0x8 )
+
+/* ---- End of Defines for reg_bldalpha ---- */
+
+
+/* ---- Defines for reg_bldalpha ---- */
+
+// Top blend weight.  Only used for normal blending.
+#define bldy( n ) ( n & 0x1f )
+
+/* ---- End of Defines for reg_bldalpha ---- */
+
 
 
 /* ---- Some misc. inline functions ---- */
+#define rgb15_red_shift ( 0x0 )
+#define rgb15_green_shift ( 0x5 )
+#define rgb15_blue_shift ( 0xa )
+
+#define rgb15_red_mask ( (u16)0x001f )
+#define rgb15_green_mask ( (u16)0x03e0 )
+#define rgb15_blue_mask ( (u16)0x7c00 )
+
+#define rgb15_component_max_val ( 0x1f )
+
+inline u16 make_rgb15( u32 red, u32 green, u32 blue )
+{
+	return ( ( ( red & 0x1f ) << rgb15_red_shift ) 
+		| ( ( green & 0x1f ) << rgb15_green_shift ) 
+		| ( ( blue & 0x1f ) << rgb15_blue_shift ) );
+}
+
+inline u32 rgb15_get_red_component( u32 the_rgb15_val )
+{
+	return get_bits( the_rgb15_val, rgb15_red_mask, rgb15_red_shift );
+}
+inline u32 rgb15_get_green_component( u32 the_rgb15_val )
+{
+	return get_bits( the_rgb15_val, rgb15_green_mask, rgb15_green_shift );
+}
+inline u32 rgb15_get_blue_component( u32 the_rgb15_val )
+{
+	return get_bits( the_rgb15_val, rgb15_blue_mask, rgb15_blue_shift );
+}
+
+// Subtract from an rgb15 component, then make it zero if it became
+// negative.
+inline void clamped_rgb15_component_subtract( u32& component, 
+	u32 amount_to_subtract )
+{
+	component -= amount_to_subtract;
+	
+	// Test whether the component became negative.  Make it zero if so.
+	//if ( component & 0xffff0000 )
+	if ( (s32)component < 0 )
+	{
+		component = 0;
+	}
+}
+
+inline void clamped_rgb15_component_add( u32& component, u32 amount_to_add, 
+	u32 component_max_value=rgb15_component_max_val )
+{
+	component += amount_to_add;
+	
+	if ( component > component_max_value  )
+	{
+		component =  component_max_value;
+	}
+}
+
+
+
+
+
 inline void m3_plot( u32 x, u32 y, u32 color )
 {
 	( (vu16*)(mem_vram) )[y * screen_width + x] = color;
@@ -397,13 +513,6 @@ inline void m4_plot( s32 x, s32 y, u32 color_id, u32 page )
 
 
 
-inline u16 rgb15( u32 red, u32 green, u32 blue )
-{
-	return ( red | ( green << 5 ) | ( blue << 10 ) );
-}
-
-
-
 
 static const u32 bgofs_mirror_size = 4;
 
@@ -432,4 +541,4 @@ inline void copy_bgofs_mirror_to_registers()
 
 
 
-#endif		// bg_reg_stuff_hpp
+#endif		// gfx_reg_stuff_hpp

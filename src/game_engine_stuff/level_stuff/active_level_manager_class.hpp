@@ -2,7 +2,7 @@
 #define active_level_manager_class_hpp
 
 
-#include "../../gba_specific_stuff/bg_reg_stuff.hpp"
+#include "../../gba_specific_stuff/gfx_reg_stuff.hpp"
 #include "../../gba_specific_stuff/bios_function_wrappers.hpp"
 #include "../array_2d_helper_class.hpp"
 #include "../block_stuff/block_stuff.hpp"
@@ -11,7 +11,10 @@
 
 
 //#define bg0_sbb 31
-constexpr u32 bg0_sbb = 31;
+constexpr u32 bg0_sbb = 28;
+constexpr u32 bg1_sbb = 29;
+constexpr u32 bg2_sbb = 30;
+constexpr u32 bg3_sbb = 31;
 
 #include "level_class.hpp"
 
@@ -132,13 +135,14 @@ public:		// functions
 	static inline void load_sublevel_at_intra_sublevel_warp
 		( u32 n_sublevel_index, u32 sublevel_entrance_index )
 	{
-		// Enable forced blank
-		reg_dispcnt |= dcnt_blank_on;
+		fade_out_to_black(2);
 		
 		active_level::the_current_active_sublevel_index = n_sublevel_index;
 		
 		memfill32( oam_mirror, 0, sizeof(oam_entry) * oam_mirror_size 
 			/ sizeof(u32) );
+		
+		bios_wait_for_vblank();
 		copy_oam_mirror_to_oam();
 		
 		
@@ -160,25 +164,24 @@ public:		// functions
 		}
 		
 		update_sublevel_in_screenblock_mirror_2d();
-		copy_sublevel_from_array_2d_helper_to_vram();
+		
 		
 		
 		sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
 			( bgofs_mirror[0].curr, sublevel_entrance_index );
 		update_sublevel_in_screenblock_mirror_2d();
 		
+		//bios_wait_for_vblank();
+		//copy_sublevel_from_array_2d_helper_to_vram();
+		
+		bios_wait_for_vblank();
 		vblank_func();
 		
 		// Wait for about 0.25 seconds.
-		for ( u32 i=0; i<15; ++i )
-		{
-			bios_wait_for_vblank();
-		}
+		//wait_for_x_frames(15);
 		
-		// Disable forced blank
-		clear_bits( reg_dispcnt, dcnt_blank_mask );
+		fade_in_from_black(2);
 		
-		bios_wait_for_vblank();
 	}
 	
 } __attribute__((_align4));

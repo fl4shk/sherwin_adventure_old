@@ -1,7 +1,7 @@
 #ifndef oam_entry_classes_hpp
 #define oam_entry_classes_hpp
 
-#include "bg_reg_stuff.hpp"
+#include "gfx_reg_stuff.hpp"
 #include "oam_entry_defines.hpp"
 #include "dma_stuff.hpp"
 #include "asm_funcs.hpp"

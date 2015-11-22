@@ -3,7 +3,7 @@
 
 #include "../misc_types.hpp"
 #include "../../gba_specific_stuff/attribute_defines.hpp"
-#include "../../gba_specific_stuff/bg_reg_stuff.hpp"
+#include "../../gba_specific_stuff/gfx_reg_stuff.hpp"
 
 #include "../sa_stack_class.hpp"
 
@@ -70,10 +70,6 @@ public:		// variables and constants
 		/ num_pixels_per_tile;
 	
 	
-	//static u32 next_free_sprite_vram_slot __attribute__((_iwram));
-	//static u32 sprite_gfx_category_first_vram_slot_list[sgc_count]
-	//	__attribute__((_iwram));
-	
 	
 	// Sprite VRAM allocation stuff
 	
@@ -83,27 +79,25 @@ public:		// variables and constants
 	// needed.  Also, this is only the case for 4bpp graphics.
 	static constexpr u32 max_num_32x32_metatiles = 64;
 	
+	// Sprite palette stuff
 	
-	//// These are temporary!
-	//static const u16* temp_gfx_pointer_arr[];
-	//static const u32 temp_gfx_pointer_arr_size;
+	static u16 obj_pal_mirror[obj_pal_ram_size_in_u16] 
+		__attribute__((_ewram));
 	
 public:		// functions
 	
-	static void upload_default_sprite_palettes(); 
+	static void upload_default_sprite_palettes_to_obj_pal_ram(); 
 		//__attribute__((_iwram_code));
+	
+	static void upload_default_sprite_palettes_to_obj_pal_mirror();
+		//__attribute__((_iwram_code));
+	static void copy_obj_pal_mirror_to_obj_pal_ram();
+		//__attribute__((_iwram_code));
+	
+	
 	static void upload_sprite_tiles_to_vram( sprite& the_sprite )
 		__attribute__((_iwram_code));
 	
-	//// These two functions rely on the fact that the sprite_gfx_category
-	//// enum combines sprite tileset stuff and sprite palette stuff.  
-	//static void allocate_sprite_vram_and_copy_sprite_tiles_old
-	//	( const u16* tiles, u32 tiles_len, 
-	//	sprite_gfx_category the_gfx_category );
-	//	//__attribute__((_iwram_code));
-	//
-	//static void upload_default_sprite_graphics_old(); 
-	//	//__attribute__((_iwram_code));
 	
 	
 	
