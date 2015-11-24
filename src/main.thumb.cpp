@@ -36,7 +36,7 @@ int main()
 	// 
 	title_screen_func();
 	
-	reinit_the_game();
+	//reinit_the_game();
 	
 	for (;;)
 	{
@@ -85,8 +85,6 @@ int main()
 		//	
 		//	fade_in_from_black(1);
 		//}
-		
-		
 		
 		sprite_manager::spawn_sprites_if_needed(bgofs_mirror[0]);
 		

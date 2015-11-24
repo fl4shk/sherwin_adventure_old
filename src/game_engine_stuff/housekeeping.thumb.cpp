@@ -151,7 +151,7 @@ void title_screen_func()
 		// Start the game if the Start button is hit
 		if ( key_hit(key_start) )
 		{
-			
+			reinit_the_game();
 			break;
 		}
 		
@@ -187,7 +187,7 @@ void reinit_the_game()
 	//	se_ram[bg1_sbb][i] = bt_wood * 4;
 	//}
 	
-	
+	bios_wait_for_vblank();
 	// Copy the sprite palettes to OBJ Palette RAM.
 	sprite_gfx_manager::upload_default_sprite_palettes_to_obj_pal_ram();
 	
@@ -202,11 +202,8 @@ void reinit_the_game()
 	// Finally, copy the_block_gfxTiles to BG VRAM, screenblock 0
 	update_block_graphics_in_vram(the_block_gfxTiles);
 	
-	bios_wait_for_vblank();
-	
-	
+	//bios_wait_for_vblank();
 	sprite_manager::next_oam_index = 0; 
-	
 	active_level_manager::load_level(&test_level);
 	
 	
@@ -220,8 +217,8 @@ void reinit_the_game()
 	
 	mmPause();
 	
-	vblank_func();
-	
+	//bios_wait_for_vblank();
+	//vblank_func();
 	
 	// Disable forced blank
 	clear_bits( reg_dispcnt, dcnt_blank_mask );
@@ -230,117 +227,181 @@ void reinit_the_game()
 	vblank_func(); 
 }
 
-void fade_out_to_black( u32 amount_to_subtract_per_iter, 
-	u32 num_frames_to_wait_per_iter )
+
+void fade_out_to_black( u32 num_steps, u32 num_frames_to_wait_per_iter )
 {
+	
+	// Build the BG arrays of step amounts
+	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	{
+		s32 red_orig = rgb15_get_red_component(bg_pal_ram[i]);
+		s32 green_orig = rgb15_get_green_component(bg_pal_ram[i]);
+		s32 blue_orig = rgb15_get_blue_component(bg_pal_ram[i]);
+		
+		s32 target_red = 0;
+		s32 target_green = 0;
+		s32 target_blue = 0;
+		
+		// The target color is black, for the entire screen.
+		fixed24p8& red_step_amount = bg_fade_red_step_amount_arr[i];
+		fixed24p8& green_step_amount = bg_fade_green_step_amount_arr[i];
+		fixed24p8& blue_step_amount = bg_fade_blue_step_amount_arr[i];
+		
+		red_step_amount = make_f24p8( target_red - red_orig ) 
+			/ (u16)num_steps;
+		green_step_amount = make_f24p8( target_green - green_orig ) 
+			/ (u16)num_steps;
+		blue_step_amount = make_f24p8( target_blue - blue_orig ) 
+			/ (u16)num_steps;
+	}
+	
+	// Build the OBJ arrays of step amounts
+	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	{
+		s32 red_orig = rgb15_get_red_component(obj_pal_ram[i]);
+		s32 green_orig = rgb15_get_green_component(obj_pal_ram[i]);
+		s32 blue_orig = rgb15_get_blue_component(obj_pal_ram[i]);
+		
+		s32 target_red = 0;
+		s32 target_green = 0;
+		s32 target_blue = 0;
+		
+		// The target color is black, for the entire screen.
+		fixed24p8& red_step_amount = obj_fade_red_step_amount_arr[i];
+		fixed24p8& green_step_amount = obj_fade_green_step_amount_arr[i];
+		fixed24p8& blue_step_amount = obj_fade_blue_step_amount_arr[i];
+		
+		red_step_amount = make_f24p8( target_red - red_orig ) 
+			/ (u16)num_steps;
+		green_step_amount = make_f24p8( target_green - green_orig ) 
+			/ (u16)num_steps;
+		blue_step_amount = make_f24p8( target_blue - blue_orig ) 
+			/ (u16)num_steps;
+	}
+	
 	bios_wait_for_vblank();
 	
-	for ( u32 i=0; i<=rgb15_component_max_val; ++i )
+	// Fading iteration
+	for ( u32 i=0; i<num_steps; ++i )
 	{
 		// For each BG palette
-		for ( u32 j=0; j<bg_pal_ram_size_in_u16; ++j )
+		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
-			u32 red = rgb15_get_red_component(bg_pal_ram[j]);
-			u32 green = rgb15_get_green_component(bg_pal_ram[j]);
-			u32 blue = rgb15_get_blue_component(bg_pal_ram[j]);
+			s32 curr_red = rgb15_get_red_component(bg_pal_ram[j]);
+			s32 curr_green = rgb15_get_green_component(bg_pal_ram[j]);
+			s32 curr_blue = rgb15_get_blue_component(bg_pal_ram[j]);
 			
-			clamped_rgb15_component_subtract( red,
-				amount_to_subtract_per_iter );
-			clamped_rgb15_component_subtract( green,
-				amount_to_subtract_per_iter );
-			clamped_rgb15_component_subtract( blue,
-				amount_to_subtract_per_iter );
+			fixed24p8 curr_red_f24p8 = (fixed24p8){ curr_red 
+				<< fixed24p8::shift };
+			fixed24p8 curr_green_f24p8 = (fixed24p8){ curr_green 
+				<< fixed24p8::shift };
+			fixed24p8 curr_blue_f24p8 = (fixed24p8){ curr_blue 
+				<< fixed24p8::shift };
 			
-			bg_pal_ram[j] = make_rgb15( red, green, blue );
+			fixed24p8 red_step_amount 
+				= bg_fade_red_step_amount_arr[j];
+			fixed24p8 green_step_amount 
+				= bg_fade_green_step_amount_arr[j];
+			fixed24p8 blue_step_amount 
+				= bg_fade_blue_step_amount_arr[j];
+			
+			clamped_rgb15_f24p8_component_add( curr_red_f24p8,
+				red_step_amount, (fixed24p8){0} );
+			clamped_rgb15_f24p8_component_add( curr_green_f24p8,
+				green_step_amount, (fixed24p8){0} );
+			clamped_rgb15_f24p8_component_add( curr_blue_f24p8,
+				blue_step_amount, (fixed24p8){0} );
+			
+			bg_pal_ram[j] = make_rgb15( curr_red_f24p8.round_to_int(),
+				curr_green_f24p8.round_to_int(),
+				curr_blue_f24p8.round_to_int() );
 		}
 		
 		// For each OBJ palette
-		for ( u32 j=0; j<obj_pal_ram_size_in_u16; ++j )
+		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
-			u32 red = rgb15_get_red_component(obj_pal_ram[j]);
-			u32 green = rgb15_get_green_component(obj_pal_ram[j]);
-			u32 blue = rgb15_get_blue_component(obj_pal_ram[j]);
+			s32 curr_red = rgb15_get_red_component(obj_pal_ram[j]);
+			s32 curr_green = rgb15_get_green_component(obj_pal_ram[j]);
+			s32 curr_blue = rgb15_get_blue_component(obj_pal_ram[j]);
 			
-			clamped_rgb15_component_subtract( red,
-				amount_to_subtract_per_iter );
-			clamped_rgb15_component_subtract( green,
-				amount_to_subtract_per_iter );
-			clamped_rgb15_component_subtract( blue,
-				amount_to_subtract_per_iter );
+			fixed24p8 curr_red_f24p8 = (fixed24p8){ curr_red 
+				<< fixed24p8::shift };
+			fixed24p8 curr_green_f24p8 = (fixed24p8){ curr_green 
+				<< fixed24p8::shift };
+			fixed24p8 curr_blue_f24p8 = (fixed24p8){ curr_blue 
+				<< fixed24p8::shift };
 			
-			obj_pal_ram[j] = make_rgb15( red, green, blue );
+			fixed24p8 red_step_amount 
+				= obj_fade_red_step_amount_arr[j];
+			fixed24p8 green_step_amount 
+				= obj_fade_green_step_amount_arr[j];
+			fixed24p8 blue_step_amount 
+				= obj_fade_blue_step_amount_arr[j];
+			
+			clamped_rgb15_f24p8_component_add( curr_red_f24p8,
+				red_step_amount, (fixed24p8){0} );
+			clamped_rgb15_f24p8_component_add( curr_green_f24p8,
+				green_step_amount, (fixed24p8){0} );
+			clamped_rgb15_f24p8_component_add( curr_blue_f24p8,
+				blue_step_amount, (fixed24p8){0} );
+			
+			obj_pal_ram[j] = make_rgb15( curr_red_f24p8.round_to_int(),
+				curr_green_f24p8.round_to_int(),
+				curr_blue_f24p8.round_to_int() );
 		}
 		
 		wait_for_x_frames(num_frames_to_wait_per_iter);
 	}
+	
+	
+	// Just in case
+	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	{
+		bg_pal_ram[i] = 0;
+	}
+	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	{
+		obj_pal_ram[i] = 0;
+	}
+	
+	
 }
 
 
-void fade_in_from_black( u32 amount_to_add_per_iter,
-	u32 num_frames_to_wait_per_iter )
+void fade_in_from_black( u32 num_steps, u32 num_frames_to_wait_per_iter )
 {
 	// A function like this should eventually be created for background
-	// palettes
+	// palettes.
 	sprite_gfx_manager::upload_default_sprite_palettes_to_obj_pal_mirror();
 	
 	bios_wait_for_vblank();
 	
-	for ( u32 i=0; i<=rgb15_component_max_val; ++i )
+	//for ( u32 i=0; i<bg_fade_step_amount_arr_size; ++i )
+	for ( u32 i=0; i<the_block_gfxPalLen / sizeof(u16); ++i )
 	{
-		// For each BG palette
-		//for ( u32 j=0; j<bg_pal_ram_size_in_u16; ++j )
-		for ( u32 j=0; j<the_block_gfxPalLen / sizeof(u16); ++j )
-		{
-			u32 red = rgb15_get_red_component(bg_pal_ram[j]);
-			u32 green = rgb15_get_green_component(bg_pal_ram[j]);
-			u32 blue = rgb15_get_blue_component(bg_pal_ram[j]);
-			
-			u32 max_red_val = rgb15_get_red_component
-				(the_block_gfxPal[j]);
-			u32 max_green_val = rgb15_get_green_component
-				(the_block_gfxPal[j]);
-			u32 max_blue_val = rgb15_get_blue_component
-				(the_block_gfxPal[j]);
-			
-			clamped_rgb15_component_add( red, amount_to_add_per_iter,
-				max_red_val );
-			clamped_rgb15_component_add( green, amount_to_add_per_iter,
-				max_green_val );
-			clamped_rgb15_component_add( blue, amount_to_add_per_iter,
-				max_blue_val );
-			
-			bg_pal_ram[j] = make_rgb15( red, green, blue );
-		}
-		
-		// For each OBJ palette
-		for ( u32 j=0; j<obj_pal_ram_size_in_u16; ++j )
-		{
-			u32 red = rgb15_get_red_component(obj_pal_ram[j]);
-			u32 green = rgb15_get_green_component(obj_pal_ram[j]);
-			u32 blue = rgb15_get_blue_component(obj_pal_ram[j]);
-			
-			u32 max_red_val = rgb15_get_red_component
-				(sprite_gfx_manager::obj_pal_mirror[j]);
-			u32 max_green_val = rgb15_get_green_component
-				(sprite_gfx_manager::obj_pal_mirror[j]);
-			u32 max_blue_val = rgb15_get_blue_component
-				(sprite_gfx_manager::obj_pal_mirror[j]);
-			
-			clamped_rgb15_component_add( red, amount_to_add_per_iter, 
-				max_red_val );
-			clamped_rgb15_component_add( green, amount_to_add_per_iter, 
-				max_green_val );
-			clamped_rgb15_component_add( blue, amount_to_add_per_iter, 
-				max_blue_val );
-			
-			obj_pal_ram[j] = make_rgb15( red, green, blue );
-		}
-		
-		wait_for_x_frames(num_frames_to_wait_per_iter);
 	}
 	
 	
+	//for ( u32 i=0; i<=rgb15_component_max_val; ++i )
+	//{
+	//	// For each BG palette
+	//	for ( u32 j=0; j<the_block_gfxPalLen / sizeof(u16); ++j )
+	//	{
+	//	}
+	//	
+	//	// For each OBJ palette
+	//	for ( u32 j=0; j<obj_pal_ram_size_in_u16; ++j )
+	//	{
+	//	}
+	//	
+	//	wait_for_x_frames(num_frames_to_wait_per_iter);
+	//}
+	
+	// Just in case the conversion wasn't complete.
+	memcpy32( bg_pal_ram, the_block_gfxPal,
+		the_block_gfxPalLen / sizeof(u32) );
+	sprite_gfx_manager::upload_default_sprite_palettes_to_obj_pal_ram();
+	
 }
-
 
 

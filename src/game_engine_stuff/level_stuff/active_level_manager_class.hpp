@@ -120,8 +120,6 @@ public:		// functions
 		
 		update_sublevel_in_screenblock_mirror_2d();
 		
-		copy_sublevel_from_array_2d_helper_to_vram();
-		
 		//bgofs_mirror[0].prev = bg_point();
 		//bgofs_mirror[0].curr = bg_point();
 		
@@ -129,13 +127,19 @@ public:		// functions
 			(bgofs_mirror[0].curr);
 		
 		update_sublevel_in_screenblock_mirror_2d();
+		
+		//bios_wait_for_vblank();
+		//copy_sublevel_from_array_2d_helper_to_vram();
+		
+		bios_wait_for_vblank();
+		vblank_func();
 	}
 	
 	//static inline void load_sublevel_warp_based( u32 n_sublevel_index )
 	static inline void load_sublevel_at_intra_sublevel_warp
 		( u32 n_sublevel_index, u32 sublevel_entrance_index )
 	{
-		fade_out_to_black(2);
+		fade_out_to_black( 5, 6 );
 		
 		active_level::the_current_active_sublevel_index = n_sublevel_index;
 		
@@ -180,7 +184,7 @@ public:		// functions
 		// Wait for about 0.25 seconds.
 		//wait_for_x_frames(15);
 		
-		fade_in_from_black(2);
+		fade_in_from_black( 5, 6 );
 		
 	}
 	

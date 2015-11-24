@@ -195,36 +195,40 @@ bg1bt_day_sky	game_engine_stuff/block_stuff/block_stuff.hpp	/^	bg1bt_day_sky,$/;
 bg1bt_night_sky	game_engine_stuff/block_stuff/block_stuff.hpp	/^	bg1bt_night_sky,$/;"	kind:e	enum:bg1_block_type
 bg2_sbb	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^constexpr u32 bg2_sbb = 30;$/;"	kind:v
 bg3_sbb	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^constexpr u32 bg3_sbb = 31;$/;"	kind:v
+bg_fade_blue_step_amount_arr	gba_specific_stuff/gfx_reg_stuff.arm.cpp	/^fixed24p8 bg_fade_blue_step_amount_arr[bg_fade_step_amount_arr_size];$/;"	kind:v
+bg_fade_green_step_amount_arr	gba_specific_stuff/gfx_reg_stuff.arm.cpp	/^fixed24p8 bg_fade_green_step_amount_arr[bg_fade_step_amount_arr_size];$/;"	kind:v
+bg_fade_red_step_amount_arr	gba_specific_stuff/gfx_reg_stuff.arm.cpp	/^fixed24p8 bg_fade_red_step_amount_arr[bg_fade_step_amount_arr_size];$/;"	kind:v
+bg_fade_step_amount_arr_size	gba_specific_stuff/gfx_reg_stuff.hpp	/^static constexpr u32 bg_fade_step_amount_arr_size $/;"	kind:v
 bg_pal_ram	gba_specific_stuff/gfx_reg_stuff.hpp	103;"	kind:d
 bg_pal_ram_size	gba_specific_stuff/gfx_reg_stuff.hpp	/^static const u32 bg_pal_ram_size = 0x200;$/;"	kind:v
 bg_pal_ram_size_in_u16	gba_specific_stuff/gfx_reg_stuff.hpp	/^static const u32 bg_pal_ram_size_in_u16 = bg_pal_ram_size \/ sizeof(u16);$/;"	kind:v
 bg_point	gba_specific_stuff/gfx_reg_stuff.hpp	/^typedef vec2_s16 bg_point;$/;"	kind:t
 bg_tile_vram	gba_specific_stuff/gfx_reg_stuff.hpp	40;"	kind:d
-bgcnt_4bpp	gba_specific_stuff/gfx_reg_stuff.hpp	297;"	kind:d
-bgcnt_8bpp	gba_specific_stuff/gfx_reg_stuff.hpp	298;"	kind:d
-bgcnt_aff_128x128	gba_specific_stuff/gfx_reg_stuff.hpp	321;"	kind:d
-bgcnt_aff_16x16	gba_specific_stuff/gfx_reg_stuff.hpp	318;"	kind:d
-bgcnt_aff_32x32	gba_specific_stuff/gfx_reg_stuff.hpp	319;"	kind:d
-bgcnt_aff_64x64	gba_specific_stuff/gfx_reg_stuff.hpp	320;"	kind:d
-bgcnt_aff_mask	gba_specific_stuff/gfx_reg_stuff.hpp	322;"	kind:d
-bgcnt_bpp_mask	gba_specific_stuff/gfx_reg_stuff.hpp	299;"	kind:d
-bgcnt_cbb	gba_specific_stuff/gfx_reg_stuff.hpp	288;"	kind:d
-bgcnt_cbb_mask	gba_specific_stuff/gfx_reg_stuff.hpp	289;"	kind:d
-bgcnt_mosaic_mask	gba_specific_stuff/gfx_reg_stuff.hpp	294;"	kind:d
-bgcnt_mosaic_off	gba_specific_stuff/gfx_reg_stuff.hpp	292;"	kind:d
-bgcnt_mosaic_on	gba_specific_stuff/gfx_reg_stuff.hpp	293;"	kind:d
-bgcnt_prio	gba_specific_stuff/gfx_reg_stuff.hpp	284;"	kind:d
-bgcnt_prio_mask	gba_specific_stuff/gfx_reg_stuff.hpp	285;"	kind:d
-bgcnt_reg_32x32	gba_specific_stuff/gfx_reg_stuff.hpp	311;"	kind:d
-bgcnt_reg_32x64	gba_specific_stuff/gfx_reg_stuff.hpp	313;"	kind:d
-bgcnt_reg_64x32	gba_specific_stuff/gfx_reg_stuff.hpp	312;"	kind:d
-bgcnt_reg_64x64	gba_specific_stuff/gfx_reg_stuff.hpp	314;"	kind:d
-bgcnt_reg_mask	gba_specific_stuff/gfx_reg_stuff.hpp	315;"	kind:d
-bgcnt_sbb	gba_specific_stuff/gfx_reg_stuff.hpp	302;"	kind:d
-bgcnt_sbb_mask	gba_specific_stuff/gfx_reg_stuff.hpp	303;"	kind:d
-bgcnt_wrap_mask	gba_specific_stuff/gfx_reg_stuff.hpp	308;"	kind:d
-bgcnt_wrap_off	gba_specific_stuff/gfx_reg_stuff.hpp	306;"	kind:d
-bgcnt_wrap_on	gba_specific_stuff/gfx_reg_stuff.hpp	307;"	kind:d
+bgcnt_4bpp	gba_specific_stuff/gfx_reg_stuff.hpp	299;"	kind:d
+bgcnt_8bpp	gba_specific_stuff/gfx_reg_stuff.hpp	300;"	kind:d
+bgcnt_aff_128x128	gba_specific_stuff/gfx_reg_stuff.hpp	323;"	kind:d
+bgcnt_aff_16x16	gba_specific_stuff/gfx_reg_stuff.hpp	320;"	kind:d
+bgcnt_aff_32x32	gba_specific_stuff/gfx_reg_stuff.hpp	321;"	kind:d
+bgcnt_aff_64x64	gba_specific_stuff/gfx_reg_stuff.hpp	322;"	kind:d
+bgcnt_aff_mask	gba_specific_stuff/gfx_reg_stuff.hpp	324;"	kind:d
+bgcnt_bpp_mask	gba_specific_stuff/gfx_reg_stuff.hpp	301;"	kind:d
+bgcnt_cbb	gba_specific_stuff/gfx_reg_stuff.hpp	290;"	kind:d
+bgcnt_cbb_mask	gba_specific_stuff/gfx_reg_stuff.hpp	291;"	kind:d
+bgcnt_mosaic_mask	gba_specific_stuff/gfx_reg_stuff.hpp	296;"	kind:d
+bgcnt_mosaic_off	gba_specific_stuff/gfx_reg_stuff.hpp	294;"	kind:d
+bgcnt_mosaic_on	gba_specific_stuff/gfx_reg_stuff.hpp	295;"	kind:d
+bgcnt_prio	gba_specific_stuff/gfx_reg_stuff.hpp	286;"	kind:d
+bgcnt_prio_mask	gba_specific_stuff/gfx_reg_stuff.hpp	287;"	kind:d
+bgcnt_reg_32x32	gba_specific_stuff/gfx_reg_stuff.hpp	313;"	kind:d
+bgcnt_reg_32x64	gba_specific_stuff/gfx_reg_stuff.hpp	315;"	kind:d
+bgcnt_reg_64x32	gba_specific_stuff/gfx_reg_stuff.hpp	314;"	kind:d
+bgcnt_reg_64x64	gba_specific_stuff/gfx_reg_stuff.hpp	316;"	kind:d
+bgcnt_reg_mask	gba_specific_stuff/gfx_reg_stuff.hpp	317;"	kind:d
+bgcnt_sbb	gba_specific_stuff/gfx_reg_stuff.hpp	304;"	kind:d
+bgcnt_sbb_mask	gba_specific_stuff/gfx_reg_stuff.hpp	305;"	kind:d
+bgcnt_wrap_mask	gba_specific_stuff/gfx_reg_stuff.hpp	310;"	kind:d
+bgcnt_wrap_off	gba_specific_stuff/gfx_reg_stuff.hpp	308;"	kind:d
+bgcnt_wrap_on	gba_specific_stuff/gfx_reg_stuff.hpp	309;"	kind:d
 bgofs_mirror	gba_specific_stuff/gfx_reg_stuff.arm.cpp	/^prev_curr_pair<bg_point> bgofs_mirror[bgofs_mirror_size];$/;"	kind:v
 bgofs_mirror_size	gba_specific_stuff/gfx_reg_stuff.hpp	/^static const u32 bgofs_mirror_size = 4;$/;"	kind:v
 bios_arctan	gba_specific_stuff/bios_function_wrappers.hpp	31;"	kind:d
@@ -287,28 +291,28 @@ bios_sqrt	gba_specific_stuff/bios_function_wrappers.hpp	29;"	kind:d
 bios_stop	gba_specific_stuff/bios_function_wrappers.hpp	17;"	kind:d
 bios_vblank_intr_wait	gba_specific_stuff/bios_function_wrappers.hpp	21;"	kind:d
 bios_wait_for_vblank	gba_specific_stuff/bios_function_wrappers.hpp	/^inline void bios_wait_for_vblank()$/;"	kind:f	signature:()
-bldalpha_bot	gba_specific_stuff/gfx_reg_stuff.hpp	363;"	kind:d
-bldalpha_top	gba_specific_stuff/gfx_reg_stuff.hpp	360;"	kind:d
-bldcnt_bld_black	gba_specific_stuff/gfx_reg_stuff.hpp	342;"	kind:d
-bldcnt_bld_mask	gba_specific_stuff/gfx_reg_stuff.hpp	343;"	kind:d
-bldcnt_bld_normal	gba_specific_stuff/gfx_reg_stuff.hpp	340;"	kind:d
-bldcnt_bld_off	gba_specific_stuff/gfx_reg_stuff.hpp	339;"	kind:d
-bldcnt_bld_white	gba_specific_stuff/gfx_reg_stuff.hpp	341;"	kind:d
-bldcnt_bot_backdrop	gba_specific_stuff/gfx_reg_stuff.hpp	351;"	kind:d
-bldcnt_bot_bg0	gba_specific_stuff/gfx_reg_stuff.hpp	346;"	kind:d
-bldcnt_bot_bg1	gba_specific_stuff/gfx_reg_stuff.hpp	347;"	kind:d
-bldcnt_bot_bg2	gba_specific_stuff/gfx_reg_stuff.hpp	348;"	kind:d
-bldcnt_bot_bg3	gba_specific_stuff/gfx_reg_stuff.hpp	349;"	kind:d
-bldcnt_bot_mask	gba_specific_stuff/gfx_reg_stuff.hpp	352;"	kind:d
-bldcnt_bot_obj	gba_specific_stuff/gfx_reg_stuff.hpp	350;"	kind:d
-bldcnt_top_backdrop	gba_specific_stuff/gfx_reg_stuff.hpp	335;"	kind:d
-bldcnt_top_bg0	gba_specific_stuff/gfx_reg_stuff.hpp	330;"	kind:d
-bldcnt_top_bg1	gba_specific_stuff/gfx_reg_stuff.hpp	331;"	kind:d
-bldcnt_top_bg2	gba_specific_stuff/gfx_reg_stuff.hpp	332;"	kind:d
-bldcnt_top_bg3	gba_specific_stuff/gfx_reg_stuff.hpp	333;"	kind:d
-bldcnt_top_mask	gba_specific_stuff/gfx_reg_stuff.hpp	336;"	kind:d
-bldcnt_top_obj	gba_specific_stuff/gfx_reg_stuff.hpp	334;"	kind:d
-bldy	gba_specific_stuff/gfx_reg_stuff.hpp	371;"	kind:d
+bldalpha_bot	gba_specific_stuff/gfx_reg_stuff.hpp	365;"	kind:d
+bldalpha_top	gba_specific_stuff/gfx_reg_stuff.hpp	362;"	kind:d
+bldcnt_bld_black	gba_specific_stuff/gfx_reg_stuff.hpp	344;"	kind:d
+bldcnt_bld_mask	gba_specific_stuff/gfx_reg_stuff.hpp	345;"	kind:d
+bldcnt_bld_normal	gba_specific_stuff/gfx_reg_stuff.hpp	342;"	kind:d
+bldcnt_bld_off	gba_specific_stuff/gfx_reg_stuff.hpp	341;"	kind:d
+bldcnt_bld_white	gba_specific_stuff/gfx_reg_stuff.hpp	343;"	kind:d
+bldcnt_bot_backdrop	gba_specific_stuff/gfx_reg_stuff.hpp	353;"	kind:d
+bldcnt_bot_bg0	gba_specific_stuff/gfx_reg_stuff.hpp	348;"	kind:d
+bldcnt_bot_bg1	gba_specific_stuff/gfx_reg_stuff.hpp	349;"	kind:d
+bldcnt_bot_bg2	gba_specific_stuff/gfx_reg_stuff.hpp	350;"	kind:d
+bldcnt_bot_bg3	gba_specific_stuff/gfx_reg_stuff.hpp	351;"	kind:d
+bldcnt_bot_mask	gba_specific_stuff/gfx_reg_stuff.hpp	354;"	kind:d
+bldcnt_bot_obj	gba_specific_stuff/gfx_reg_stuff.hpp	352;"	kind:d
+bldcnt_top_backdrop	gba_specific_stuff/gfx_reg_stuff.hpp	337;"	kind:d
+bldcnt_top_bg0	gba_specific_stuff/gfx_reg_stuff.hpp	332;"	kind:d
+bldcnt_top_bg1	gba_specific_stuff/gfx_reg_stuff.hpp	333;"	kind:d
+bldcnt_top_bg2	gba_specific_stuff/gfx_reg_stuff.hpp	334;"	kind:d
+bldcnt_top_bg3	gba_specific_stuff/gfx_reg_stuff.hpp	335;"	kind:d
+bldcnt_top_mask	gba_specific_stuff/gfx_reg_stuff.hpp	338;"	kind:d
+bldcnt_top_obj	gba_specific_stuff/gfx_reg_stuff.hpp	336;"	kind:d
+bldy	gba_specific_stuff/gfx_reg_stuff.hpp	373;"	kind:d
 block	game_engine_stuff/block_stuff/block_stuff.hpp	/^class block$/;"	kind:c
 block::get_block_type	game_engine_stuff/block_stuff/block_stuff.hpp	/^	inline block_type get_block_type() const$/;"	kind:f	class:block	access:public	signature:() const
 block::persistent_data_index	game_engine_stuff/block_stuff/block_stuff.hpp	/^	u16 persistent_data_index;$/;"	kind:m	class:block	access:public
@@ -453,8 +457,8 @@ chocolate_muffin_sprite_stuff::the_gfx_category	game_engine_stuff/sprite_stuff/m
 chocolate_muffin_sprite_stuff::the_relative_metatile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr u32 the_relative_metatile_slot = 4, $/;"	kind:m	class:chocolate_muffin_sprite_stuff	access:public
 chocolate_muffin_sprite_stuff::the_sprite_type	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr sprite_type the_sprite_type = st_chocolate_muffin;$/;"	kind:m	class:chocolate_muffin_sprite_stuff	access:public
 chocolate_muffin_sprite_stuff::tile_arr	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr tile* tile_arr = const_cast<tile*>$/;"	kind:m	class:chocolate_muffin_sprite_stuff	access:public
-clamped_rgb15_component_add	gba_specific_stuff/gfx_reg_stuff.hpp	/^inline void clamped_rgb15_component_add( u32& component, u32 amount_to_add, $/;"	kind:f	signature:( u32& component, u32 amount_to_add, u32 component_max_value=rgb15_component_max_val )
-clamped_rgb15_component_subtract	gba_specific_stuff/gfx_reg_stuff.hpp	/^inline void clamped_rgb15_component_subtract( u32& component, $/;"	kind:f	signature:( u32& component, u32 amount_to_subtract )
+clamped_rgb15_component_add	gba_specific_stuff/gfx_reg_stuff.hpp	/^inline void clamped_rgb15_component_add( s32& component, s32 amount_to_add, $/;"	kind:f	signature:( s32& component, s32 amount_to_add, s32 component_max_value=rgb15_component_max_val )
+clamped_rgb15_f24p8_component_add	gba_specific_stuff/gfx_reg_stuff.hpp	/^inline void clamped_rgb15_f24p8_component_add( fixed24p8& component,$/;"	kind:f	signature:( fixed24p8& component, const fixed24p8& amount_to_add, const fixed24p8& target_value )
 clear_and_set_bits	game_engine_stuff/misc_bitwise_funcs.hpp	/^inline void clear_and_set_bits( type& to_change, u32 clear_mask,$/;"	kind:f	signature:( type& to_change, u32 clear_mask, u32 set_mask )
 clear_bits	game_engine_stuff/misc_bitwise_funcs.hpp	/^inline void clear_bits( type& to_clear, u32 mask )$/;"	kind:f	signature:( type& to_clear, u32 mask )
 clear_debug_vars	game_engine_stuff/debug_vars.hpp	/^void clear_debug_vars() __attribute__((_iwram_code));$/;"	kind:p	signature:()
@@ -614,46 +618,46 @@ data_at	game_engine_stuff/array_2d_helper_class.hpp	/^	type& data_at( const vec2
 data_at	game_engine_stuff/array_2d_helper_class.hpp	/^	type& data_at( u32 x, u32 y )$/;"	kind:f	class:array_2d_helper	access:public	signature:( u32 x, u32 y )
 data_at	game_engine_stuff/array_helper_class.hpp	/^	type& data_at( u32 offset )$/;"	kind:f	class:array_helper	access:public	signature:( u32 offset )
 day_sky_and_night_sky_block_classes_hpp	game_engine_stuff/block_stuff/day_sky_and_night_sky_block_classes.hpp	2;"	kind:d
-dcnt_bg0_off	gba_specific_stuff/gfx_reg_stuff.hpp	209;"	kind:d
-dcnt_bg0_on	gba_specific_stuff/gfx_reg_stuff.hpp	210;"	kind:d
-dcnt_bg0_onoff_mask	gba_specific_stuff/gfx_reg_stuff.hpp	211;"	kind:d
-dcnt_bg1_off	gba_specific_stuff/gfx_reg_stuff.hpp	214;"	kind:d
-dcnt_bg1_on	gba_specific_stuff/gfx_reg_stuff.hpp	215;"	kind:d
-dcnt_bg1_onoff_mask	gba_specific_stuff/gfx_reg_stuff.hpp	216;"	kind:d
-dcnt_bg2_off	gba_specific_stuff/gfx_reg_stuff.hpp	219;"	kind:d
-dcnt_bg2_on	gba_specific_stuff/gfx_reg_stuff.hpp	220;"	kind:d
-dcnt_bg2_onoff_mask	gba_specific_stuff/gfx_reg_stuff.hpp	221;"	kind:d
-dcnt_bg3_off	gba_specific_stuff/gfx_reg_stuff.hpp	224;"	kind:d
-dcnt_bg3_on	gba_specific_stuff/gfx_reg_stuff.hpp	225;"	kind:d
-dcnt_bg3_onoff_mask	gba_specific_stuff/gfx_reg_stuff.hpp	226;"	kind:d
-dcnt_blank_mask	gba_specific_stuff/gfx_reg_stuff.hpp	206;"	kind:d
-dcnt_blank_off	gba_specific_stuff/gfx_reg_stuff.hpp	204;"	kind:d
-dcnt_blank_on	gba_specific_stuff/gfx_reg_stuff.hpp	205;"	kind:d
-dcnt_mode0	gba_specific_stuff/gfx_reg_stuff.hpp	185;"	kind:d
-dcnt_mode1	gba_specific_stuff/gfx_reg_stuff.hpp	186;"	kind:d
-dcnt_mode2	gba_specific_stuff/gfx_reg_stuff.hpp	187;"	kind:d
-dcnt_mode3	gba_specific_stuff/gfx_reg_stuff.hpp	188;"	kind:d
-dcnt_mode4	gba_specific_stuff/gfx_reg_stuff.hpp	189;"	kind:d
-dcnt_mode5	gba_specific_stuff/gfx_reg_stuff.hpp	190;"	kind:d
-dcnt_mode_mask	gba_specific_stuff/gfx_reg_stuff.hpp	191;"	kind:d
-dcnt_obj_1d	gba_specific_stuff/gfx_reg_stuff.hpp	200;"	kind:d
-dcnt_obj_2d	gba_specific_stuff/gfx_reg_stuff.hpp	199;"	kind:d
-dcnt_obj_dim_mask	gba_specific_stuff/gfx_reg_stuff.hpp	201;"	kind:d
-dcnt_obj_off	gba_specific_stuff/gfx_reg_stuff.hpp	229;"	kind:d
-dcnt_obj_on	gba_specific_stuff/gfx_reg_stuff.hpp	230;"	kind:d
-dcnt_obj_onoff_mask	gba_specific_stuff/gfx_reg_stuff.hpp	231;"	kind:d
-dcnt_page_0	gba_specific_stuff/gfx_reg_stuff.hpp	194;"	kind:d
-dcnt_page_1	gba_specific_stuff/gfx_reg_stuff.hpp	195;"	kind:d
-dcnt_page_mask	gba_specific_stuff/gfx_reg_stuff.hpp	196;"	kind:d
-dcnt_win0_off	gba_specific_stuff/gfx_reg_stuff.hpp	234;"	kind:d
-dcnt_win0_on	gba_specific_stuff/gfx_reg_stuff.hpp	235;"	kind:d
-dcnt_win0_onoff_mask	gba_specific_stuff/gfx_reg_stuff.hpp	236;"	kind:d
-dcnt_win1_off	gba_specific_stuff/gfx_reg_stuff.hpp	239;"	kind:d
-dcnt_win1_on	gba_specific_stuff/gfx_reg_stuff.hpp	240;"	kind:d
-dcnt_win1_onoff_mask	gba_specific_stuff/gfx_reg_stuff.hpp	241;"	kind:d
-dcnt_winobj_off	gba_specific_stuff/gfx_reg_stuff.hpp	244;"	kind:d
-dcnt_winobj_on	gba_specific_stuff/gfx_reg_stuff.hpp	245;"	kind:d
-dcnt_winobj_onoff_mask	gba_specific_stuff/gfx_reg_stuff.hpp	246;"	kind:d
+dcnt_bg0_off	gba_specific_stuff/gfx_reg_stuff.hpp	211;"	kind:d
+dcnt_bg0_on	gba_specific_stuff/gfx_reg_stuff.hpp	212;"	kind:d
+dcnt_bg0_onoff_mask	gba_specific_stuff/gfx_reg_stuff.hpp	213;"	kind:d
+dcnt_bg1_off	gba_specific_stuff/gfx_reg_stuff.hpp	216;"	kind:d
+dcnt_bg1_on	gba_specific_stuff/gfx_reg_stuff.hpp	217;"	kind:d
+dcnt_bg1_onoff_mask	gba_specific_stuff/gfx_reg_stuff.hpp	218;"	kind:d
+dcnt_bg2_off	gba_specific_stuff/gfx_reg_stuff.hpp	221;"	kind:d
+dcnt_bg2_on	gba_specific_stuff/gfx_reg_stuff.hpp	222;"	kind:d
+dcnt_bg2_onoff_mask	gba_specific_stuff/gfx_reg_stuff.hpp	223;"	kind:d
+dcnt_bg3_off	gba_specific_stuff/gfx_reg_stuff.hpp	226;"	kind:d
+dcnt_bg3_on	gba_specific_stuff/gfx_reg_stuff.hpp	227;"	kind:d
+dcnt_bg3_onoff_mask	gba_specific_stuff/gfx_reg_stuff.hpp	228;"	kind:d
+dcnt_blank_mask	gba_specific_stuff/gfx_reg_stuff.hpp	208;"	kind:d
+dcnt_blank_off	gba_specific_stuff/gfx_reg_stuff.hpp	206;"	kind:d
+dcnt_blank_on	gba_specific_stuff/gfx_reg_stuff.hpp	207;"	kind:d
+dcnt_mode0	gba_specific_stuff/gfx_reg_stuff.hpp	187;"	kind:d
+dcnt_mode1	gba_specific_stuff/gfx_reg_stuff.hpp	188;"	kind:d
+dcnt_mode2	gba_specific_stuff/gfx_reg_stuff.hpp	189;"	kind:d
+dcnt_mode3	gba_specific_stuff/gfx_reg_stuff.hpp	190;"	kind:d
+dcnt_mode4	gba_specific_stuff/gfx_reg_stuff.hpp	191;"	kind:d
+dcnt_mode5	gba_specific_stuff/gfx_reg_stuff.hpp	192;"	kind:d
+dcnt_mode_mask	gba_specific_stuff/gfx_reg_stuff.hpp	193;"	kind:d
+dcnt_obj_1d	gba_specific_stuff/gfx_reg_stuff.hpp	202;"	kind:d
+dcnt_obj_2d	gba_specific_stuff/gfx_reg_stuff.hpp	201;"	kind:d
+dcnt_obj_dim_mask	gba_specific_stuff/gfx_reg_stuff.hpp	203;"	kind:d
+dcnt_obj_off	gba_specific_stuff/gfx_reg_stuff.hpp	231;"	kind:d
+dcnt_obj_on	gba_specific_stuff/gfx_reg_stuff.hpp	232;"	kind:d
+dcnt_obj_onoff_mask	gba_specific_stuff/gfx_reg_stuff.hpp	233;"	kind:d
+dcnt_page_0	gba_specific_stuff/gfx_reg_stuff.hpp	196;"	kind:d
+dcnt_page_1	gba_specific_stuff/gfx_reg_stuff.hpp	197;"	kind:d
+dcnt_page_mask	gba_specific_stuff/gfx_reg_stuff.hpp	198;"	kind:d
+dcnt_win0_off	gba_specific_stuff/gfx_reg_stuff.hpp	236;"	kind:d
+dcnt_win0_on	gba_specific_stuff/gfx_reg_stuff.hpp	237;"	kind:d
+dcnt_win0_onoff_mask	gba_specific_stuff/gfx_reg_stuff.hpp	238;"	kind:d
+dcnt_win1_off	gba_specific_stuff/gfx_reg_stuff.hpp	241;"	kind:d
+dcnt_win1_on	gba_specific_stuff/gfx_reg_stuff.hpp	242;"	kind:d
+dcnt_win1_onoff_mask	gba_specific_stuff/gfx_reg_stuff.hpp	243;"	kind:d
+dcnt_winobj_off	gba_specific_stuff/gfx_reg_stuff.hpp	246;"	kind:d
+dcnt_winobj_on	gba_specific_stuff/gfx_reg_stuff.hpp	247;"	kind:d
+dcnt_winobj_onoff_mask	gba_specific_stuff/gfx_reg_stuff.hpp	248;"	kind:d
 debug_arr_f24p8	game_engine_stuff/debug_vars.thumb.cpp	/^fixed24p8 debug_arr_f24p8[debug_arr_f24p8_size];$/;"	kind:v
 debug_arr_f24p8_size	game_engine_stuff/debug_vars.hpp	/^static const u32 debug_arr_f24p8_size = 32;$/;"	kind:v
 debug_arr_f8p8	game_engine_stuff/debug_vars.thumb.cpp	/^fixed8p8 debug_arr_f8p8[debug_arr_f8p8_size];$/;"	kind:v
@@ -793,13 +797,13 @@ door_sprite_stuff::the_initial_shape_size	game_engine_stuff/sprite_stuff/door_sp
 door_sprite_stuff::the_relative_metatile_slot	game_engine_stuff/sprite_stuff/door_sprite_stuff_class.hpp	/^	static constexpr u32 the_relative_metatile_slot = 0, $/;"	kind:m	class:door_sprite_stuff	access:public
 door_sprite_stuff::the_sprite_type	game_engine_stuff/sprite_stuff/door_sprite_stuff_class.hpp	/^	static constexpr sprite_type the_sprite_type = st_door;$/;"	kind:m	class:door_sprite_stuff	access:public
 door_sprite_stuff::tile_arr	game_engine_stuff/sprite_stuff/door_sprite_stuff_class.hpp	/^	static constexpr tile* tile_arr = const_cast<tile*>$/;"	kind:m	class:door_sprite_stuff	access:public
-dstat_hbl_irq	gba_specific_stuff/gfx_reg_stuff.hpp	267;"	kind:d
-dstat_in_hbl	gba_specific_stuff/gfx_reg_stuff.hpp	258;"	kind:d
-dstat_in_vbl	gba_specific_stuff/gfx_reg_stuff.hpp	255;"	kind:d
-dstat_in_vct	gba_specific_stuff/gfx_reg_stuff.hpp	261;"	kind:d
-dstat_vbl_irq	gba_specific_stuff/gfx_reg_stuff.hpp	264;"	kind:d
-dstat_vct	gba_specific_stuff/gfx_reg_stuff.hpp	273;"	kind:d
-dstat_vct_irq	gba_specific_stuff/gfx_reg_stuff.hpp	270;"	kind:d
+dstat_hbl_irq	gba_specific_stuff/gfx_reg_stuff.hpp	269;"	kind:d
+dstat_in_hbl	gba_specific_stuff/gfx_reg_stuff.hpp	260;"	kind:d
+dstat_in_vbl	gba_specific_stuff/gfx_reg_stuff.hpp	257;"	kind:d
+dstat_in_vct	gba_specific_stuff/gfx_reg_stuff.hpp	263;"	kind:d
+dstat_vbl_irq	gba_specific_stuff/gfx_reg_stuff.hpp	266;"	kind:d
+dstat_vct	gba_specific_stuff/gfx_reg_stuff.hpp	275;"	kind:d
+dstat_vct_irq	gba_specific_stuff/gfx_reg_stuff.hpp	272;"	kind:d
 dud_block_stuff	game_engine_stuff/block_stuff/dud_block_stuff_class.hpp	/^class dud_block_stuff : public block_base_stuff$/;"	kind:c	inherits:block_base_stuff
 dud_block_stuff::get_metatile_graphics_slot	game_engine_stuff/block_stuff/dud_block_stuff_class.hpp	/^	virtual const u32 get_metatile_graphics_slot()$/;"	kind:p	class:dud_block_stuff	access:public	signature:()
 dud_block_stuff::get_metatile_graphics_slot	game_engine_stuff/block_stuff/dud_block_stuff_class.thumb.cpp	/^const u32 dud_block_stuff::get_metatile_graphics_slot()$/;"	kind:f	class:dud_block_stuff	signature:()
@@ -896,13 +900,15 @@ eyes_block_with_st_muffin_stuff::strongly_hit_response	game_engine_stuff/block_s
 eyes_block_with_st_waffle_stuff	game_engine_stuff/block_stuff/eyes_block_stuff_classes.hpp	/^class eyes_block_with_st_waffle_stuff : public eyes_block_stuff$/;"	kind:c	inherits:eyes_block_stuff
 eyes_block_with_st_waffle_stuff::strongly_hit_response	game_engine_stuff/block_stuff/eyes_block_stuff_classes.hpp	/^	virtual void strongly_hit_response( block& the_block, $/;"	kind:p	class:eyes_block_with_st_waffle_stuff	access:public	signature:( block& the_block, const vec2_s32& coord )
 eyes_block_with_st_waffle_stuff::strongly_hit_response	game_engine_stuff/block_stuff/eyes_block_stuff_classes.thumb.cpp	/^void eyes_block_with_st_waffle_stuff::strongly_hit_response$/;"	kind:f	class:eyes_block_with_st_waffle_stuff	signature:( block& the_block, const vec2_s32& coord )
-f24p8_div_by_f8p8	game_engine_stuff/fixed_classes.hpp	/^extern fixed24p8 f24p8_div_by_f8p8( const fixed24p8& num, $/;"	kind:p	signature:( const fixed24p8& num, const fixed8p8& den )
+f24p8_div_by_f8p8	game_engine_stuff/fixed_classes.hpp	/^fixed24p8 f24p8_div_by_f8p8( const fixed24p8& num, const fixed8p8& den ) $/;"	kind:p	signature:( const fixed24p8& num, const fixed8p8& den )
 f24p8_div_by_f8p8	game_engine_stuff/fixed_classes.thumb.cpp	/^fixed24p8 f24p8_div_by_f8p8( const fixed24p8& num, const fixed8p8& den )$/;"	kind:f	signature:( const fixed24p8& num, const fixed8p8& den )
+f24p8_div_by_u16	game_engine_stuff/fixed_classes.hpp	/^fixed24p8 f24p8_div_by_u16( const fixed24p8& num, u16 den )$/;"	kind:p	signature:( const fixed24p8& num, u16 den )
+f24p8_div_by_u16	game_engine_stuff/fixed_classes.thumb.cpp	/^fixed24p8 f24p8_div_by_u16( const fixed24p8& num, u16 den )$/;"	kind:f	signature:( const fixed24p8& num, u16 den )
 facing_right	game_engine_stuff/level_stuff/sprite_level_data_stuff.hpp	/^	bool facing_right;$/;"	kind:m	class:sprite_init_param_group	access:public
-fade_in_from_black	game_engine_stuff/housekeeping.hpp	/^void fade_in_from_black( u32 amount_to_add_per_iter,$/;"	kind:p	signature:( u32 amount_to_add_per_iter, u32 num_frames_to_wait_per_iter=1 )
-fade_in_from_black	game_engine_stuff/housekeeping.thumb.cpp	/^void fade_in_from_black( u32 amount_to_add_per_iter,$/;"	kind:f	signature:( u32 amount_to_add_per_iter, u32 num_frames_to_wait_per_iter )
-fade_out_to_black	game_engine_stuff/housekeeping.hpp	/^void fade_out_to_black( u32 amount_to_subtract_per_iter, $/;"	kind:p	signature:( u32 amount_to_subtract_per_iter, u32 num_frames_to_wait_per_iter=1 )
-fade_out_to_black	game_engine_stuff/housekeeping.thumb.cpp	/^void fade_out_to_black( u32 amount_to_subtract_per_iter, $/;"	kind:f	signature:( u32 amount_to_subtract_per_iter, u32 num_frames_to_wait_per_iter )
+fade_in_from_black	game_engine_stuff/housekeeping.hpp	/^void fade_in_from_black( u32 num_steps, u32 num_frames_to_wait_per_iter=1 )$/;"	kind:p	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter=1 )
+fade_in_from_black	game_engine_stuff/housekeeping.thumb.cpp	/^void fade_in_from_black( u32 num_steps, u32 num_frames_to_wait_per_iter )$/;"	kind:f	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter )
+fade_out_to_black	game_engine_stuff/housekeeping.hpp	/^void fade_out_to_black( u32 num_steps, u32 num_frames_to_wait_per_iter=1 )$/;"	kind:p	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter=1 )
+fade_out_to_black	game_engine_stuff/housekeeping.thumb.cpp	/^void fade_out_to_black( u32 num_steps, u32 num_frames_to_wait_per_iter )$/;"	kind:f	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter )
 fill	gba_specific_stuff/oam_entry_classes.hpp	/^	s16 fill;$/;"	kind:m	class:oam_entry	access:public
 fill0	gba_specific_stuff/oam_entry_classes.hpp	/^	u16 fill0[fill_size];$/;"	kind:m	class:oam_entry_affine	access:public
 fill1	gba_specific_stuff/oam_entry_classes.hpp	/^	u16 fill1[fill_size];$/;"	kind:m	class:oam_entry_affine	access:public
@@ -958,7 +964,9 @@ fixed24p8::operator -	game_engine_stuff/fixed_classes.hpp	/^inline fixed24p8 fix
 fixed24p8::operator -=	game_engine_stuff/fixed_classes.hpp	/^	inline void operator -= ( const fixed24p8& to_sub );$/;"	kind:p	class:fixed24p8	access:public	signature:( const fixed24p8& to_sub )
 fixed24p8::operator -=	game_engine_stuff/fixed_classes.hpp	/^inline void fixed24p8::operator -= ( const fixed24p8& to_sub )$/;"	kind:f	class:fixed24p8	signature:( const fixed24p8& to_sub )
 fixed24p8::operator /	game_engine_stuff/fixed_classes.hpp	/^	inline fixed24p8 operator \/ ( const fixed8p8& den ) const$/;"	kind:f	class:fixed24p8	access:public	signature:( const fixed8p8& den ) const
+fixed24p8::operator /	game_engine_stuff/fixed_classes.hpp	/^	inline fixed24p8 operator \/ ( u16 den ) const$/;"	kind:f	class:fixed24p8	access:public	signature:( u16 den ) const
 fixed24p8::operator /=	game_engine_stuff/fixed_classes.hpp	/^	inline void operator \/= ( const fixed8p8& den )$/;"	kind:f	class:fixed24p8	access:public	signature:( const fixed8p8& den )
+fixed24p8::operator /=	game_engine_stuff/fixed_classes.hpp	/^	inline void operator \/= ( u16 den )$/;"	kind:f	class:fixed24p8	access:public	signature:( u16 den )
 fixed24p8::operator <	game_engine_stuff/fixed_classes.hpp	/^	inline bool operator < ( const fixed24p8& to_cmp ) const;$/;"	kind:p	class:fixed24p8	access:public	signature:( const fixed24p8& to_cmp ) const
 fixed24p8::operator <	game_engine_stuff/fixed_classes.hpp	/^inline bool fixed24p8::operator < ( const fixed24p8& to_cmp ) const$/;"	kind:f	class:fixed24p8	signature:( const fixed24p8& to_cmp ) const
 fixed24p8::operator <=	game_engine_stuff/fixed_classes.hpp	/^	inline bool operator <= ( const fixed24p8& to_cmp ) const;$/;"	kind:p	class:fixed24p8	access:public	signature:( const fixed24p8& to_cmp ) const
@@ -1760,6 +1768,7 @@ num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.
 num_active_gfx_tiles	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static constexpr u32 num_active_gfx_tiles $/;"	kind:m	class:player_sprite_stuff	access:public
 num_active_gfx_tiles	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;$/;"	kind:m	class:sprite_base_stuff	access:public
 num_active_gfx_tiles	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;$/;"	kind:m	class:waffle_sprite_stuff	access:public
+num_colors_in_8_palettes	gba_specific_stuff/gfx_reg_stuff.hpp	/^static const u32 num_colors_in_8_palettes = pal_ram_size_in_u16;$/;"	kind:v
 num_pixels_per_block_col	gba_specific_stuff/gfx_reg_stuff.hpp	/^static const u32 num_pixels_per_block_col = 16;$/;"	kind:v
 num_pixels_per_block_row	gba_specific_stuff/gfx_reg_stuff.hpp	/^static const u32 num_pixels_per_block_row = 16;$/;"	kind:v
 num_pixels_per_block_row_or_column	gba_specific_stuff/gfx_reg_stuff.hpp	/^static const u32 num_pixels_per_block_row_or_column = 16;$/;"	kind:v
@@ -1904,6 +1913,10 @@ obj_attr2_pal_num_shift	gba_specific_stuff/oam_entry_defines.hpp	148;"	kind:d
 obj_attr2_tile_number	gba_specific_stuff/oam_entry_defines.hpp	126;"	kind:d
 obj_attr2_tile_number_mask	gba_specific_stuff/oam_entry_defines.hpp	128;"	kind:d
 obj_attr2_tile_number_shift	gba_specific_stuff/oam_entry_defines.hpp	129;"	kind:d
+obj_fade_blue_step_amount_arr	gba_specific_stuff/gfx_reg_stuff.arm.cpp	/^fixed24p8 obj_fade_blue_step_amount_arr[obj_fade_step_amount_arr_size];$/;"	kind:v
+obj_fade_green_step_amount_arr	gba_specific_stuff/gfx_reg_stuff.arm.cpp	/^fixed24p8 obj_fade_green_step_amount_arr[obj_fade_step_amount_arr_size];$/;"	kind:v
+obj_fade_red_step_amount_arr	gba_specific_stuff/gfx_reg_stuff.arm.cpp	/^fixed24p8 obj_fade_red_step_amount_arr[obj_fade_step_amount_arr_size];$/;"	kind:v
+obj_fade_step_amount_arr_size	gba_specific_stuff/gfx_reg_stuff.hpp	/^static constexpr u32 obj_fade_step_amount_arr_size $/;"	kind:v
 obj_pal_mirror	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.hpp	/^	static u16 obj_pal_mirror[obj_pal_ram_size_in_u16] $/;"	kind:m	class:sprite_gfx_manager	access:public
 obj_pal_mirror	game_engine_stuff/sprite_stuff/sprite_gfx_stuff.thumb.cpp	/^u16 sprite_gfx_manager::obj_pal_mirror[obj_pal_ram_size_in_u16];$/;"	kind:m	class:sprite_gfx_manager	file:
 obj_pal_ram	gba_specific_stuff/gfx_reg_stuff.hpp	104;"	kind:d
@@ -1963,7 +1976,9 @@ operator -=	game_engine_stuff/vec2_class.hpp	/^	inline void operator -= ( const 
 operator -=	game_engine_stuff/vec2_class.hpp	/^	inline void operator -= ( const vec2<fixed8p8>& to_sub )$/;"	kind:f	class:vec2	access:public	signature:( const vec2<fixed8p8>& to_sub )
 operator -=	game_engine_stuff/vec2_class.hpp	/^	inline void operator -= ( const vec2<type>& to_sub )$/;"	kind:f	class:vec2	access:public	signature:( const vec2<type>& to_sub )
 operator /	game_engine_stuff/fixed_classes.hpp	/^	inline fixed24p8 operator \/ ( const fixed8p8& den ) const$/;"	kind:f	class:fixed24p8	access:public	signature:( const fixed8p8& den ) const
+operator /	game_engine_stuff/fixed_classes.hpp	/^	inline fixed24p8 operator \/ ( u16 den ) const$/;"	kind:f	class:fixed24p8	access:public	signature:( u16 den ) const
 operator /=	game_engine_stuff/fixed_classes.hpp	/^	inline void operator \/= ( const fixed8p8& den )$/;"	kind:f	class:fixed24p8	access:public	signature:( const fixed8p8& den )
+operator /=	game_engine_stuff/fixed_classes.hpp	/^	inline void operator \/= ( u16 den )$/;"	kind:f	class:fixed24p8	access:public	signature:( u16 den )
 operator <	game_engine_stuff/fixed_classes.hpp	/^	inline bool operator < ( const fixed24p8& to_cmp ) const;$/;"	kind:p	class:fixed24p8	access:public	signature:( const fixed24p8& to_cmp ) const
 operator <	game_engine_stuff/fixed_classes.hpp	/^	inline bool operator < ( const fixed8p8& to_cmp ) const;$/;"	kind:p	class:fixed8p8	access:public	signature:( const fixed8p8& to_cmp ) const
 operator <	game_engine_stuff/fixed_classes.hpp	/^inline bool fixed24p8::operator < ( const fixed24p8& to_cmp ) const$/;"	kind:f	class:fixed24p8	signature:( const fixed24p8& to_cmp ) const
@@ -2144,19 +2159,19 @@ push_coll_point	game_engine_stuff/coll_point_group_class.hpp	/^	inline void push
 push_front	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline void push_front( const type& to_push )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( const type& to_push )
 quotient	gba_specific_stuff/bios_function_wrappers.hpp	/^	s32 quotient;$/;"	kind:m	class:bios_div_result	access:public
 quotient_abs	gba_specific_stuff/bios_function_wrappers.hpp	/^	u32 quotient_abs;$/;"	kind:m	class:bios_div_result	access:public
-reg_bg0cnt	gba_specific_stuff/gfx_reg_stuff.hpp	126;"	kind:d
-reg_bg1cnt	gba_specific_stuff/gfx_reg_stuff.hpp	127;"	kind:d
-reg_bg2cnt	gba_specific_stuff/gfx_reg_stuff.hpp	128;"	kind:d
-reg_bg3cnt	gba_specific_stuff/gfx_reg_stuff.hpp	129;"	kind:d
-reg_bgcnt	gba_specific_stuff/gfx_reg_stuff.hpp	125;"	kind:d
-reg_bghofs_n	gba_specific_stuff/gfx_reg_stuff.hpp	134;"	kind:d
-reg_bgofs	gba_specific_stuff/gfx_reg_stuff.hpp	132;"	kind:d
-reg_bgvofs_n	gba_specific_stuff/gfx_reg_stuff.hpp	135;"	kind:d
-reg_bldalpha	gba_specific_stuff/gfx_reg_stuff.hpp	140;"	kind:d
-reg_bldcnt	gba_specific_stuff/gfx_reg_stuff.hpp	139;"	kind:d
-reg_bldy	gba_specific_stuff/gfx_reg_stuff.hpp	141;"	kind:d
-reg_dispcnt	gba_specific_stuff/gfx_reg_stuff.hpp	120;"	kind:d
-reg_dispstat	gba_specific_stuff/gfx_reg_stuff.hpp	121;"	kind:d
+reg_bg0cnt	gba_specific_stuff/gfx_reg_stuff.hpp	128;"	kind:d
+reg_bg1cnt	gba_specific_stuff/gfx_reg_stuff.hpp	129;"	kind:d
+reg_bg2cnt	gba_specific_stuff/gfx_reg_stuff.hpp	130;"	kind:d
+reg_bg3cnt	gba_specific_stuff/gfx_reg_stuff.hpp	131;"	kind:d
+reg_bgcnt	gba_specific_stuff/gfx_reg_stuff.hpp	127;"	kind:d
+reg_bghofs_n	gba_specific_stuff/gfx_reg_stuff.hpp	136;"	kind:d
+reg_bgofs	gba_specific_stuff/gfx_reg_stuff.hpp	134;"	kind:d
+reg_bgvofs_n	gba_specific_stuff/gfx_reg_stuff.hpp	137;"	kind:d
+reg_bldalpha	gba_specific_stuff/gfx_reg_stuff.hpp	142;"	kind:d
+reg_bldcnt	gba_specific_stuff/gfx_reg_stuff.hpp	141;"	kind:d
+reg_bldy	gba_specific_stuff/gfx_reg_stuff.hpp	143;"	kind:d
+reg_dispcnt	gba_specific_stuff/gfx_reg_stuff.hpp	122;"	kind:d
+reg_dispstat	gba_specific_stuff/gfx_reg_stuff.hpp	123;"	kind:d
 reg_dma0cnt	gba_specific_stuff/dma_stuff.hpp	33;"	kind:d
 reg_dma0dad	gba_specific_stuff/dma_stuff.hpp	22;"	kind:d
 reg_dma0sad	gba_specific_stuff/dma_stuff.hpp	11;"	kind:d
@@ -2190,7 +2205,7 @@ reg_tm2cnt_h	gba_specific_stuff/timer_stuff.hpp	18;"	kind:d
 reg_tm2cnt_l	gba_specific_stuff/timer_stuff.hpp	12;"	kind:d
 reg_tm3cnt_h	gba_specific_stuff/timer_stuff.hpp	19;"	kind:d
 reg_tm3cnt_l	gba_specific_stuff/timer_stuff.hpp	13;"	kind:d
-reg_vcount	gba_specific_stuff/gfx_reg_stuff.hpp	122;"	kind:d
+reg_vcount	gba_specific_stuff/gfx_reg_stuff.hpp	124;"	kind:d
 reinit_by_spawning	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline void reinit_by_spawning( sprite_type s_the_sprite_type, $/;"	kind:f	class:sprite	access:public	signature:( sprite_type s_the_sprite_type, const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, bool facing_left=true )
 reinit_the_game	game_engine_stuff/housekeeping.hpp	/^void reinit_the_game();$/;"	kind:p	signature:()
 reinit_the_game	game_engine_stuff/housekeeping.thumb.cpp	/^void reinit_the_game()$/;"	kind:f	signature:()
@@ -2199,16 +2214,17 @@ reinit_with_sprite_ipg	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	void r
 reinit_with_sprite_ipg	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^void sprite::reinit_with_sprite_ipg$/;"	kind:f	class:sprite	signature:( sprite_init_param_group* s_the_sprite_ipg )
 reinit_with_sprite_ipg	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^void sprite::reinit_with_sprite_ipg( u32 s_vram_chunk_index,$/;"	kind:f	class:sprite	signature:( u32 s_vram_chunk_index, sprite_init_param_group* s_the_sprite_ipg )
 remainder	gba_specific_stuff/bios_function_wrappers.hpp	/^	s32 remainder;$/;"	kind:m	class:bios_div_result	access:public
-rgb15_blue_mask	gba_specific_stuff/gfx_reg_stuff.hpp	384;"	kind:d
-rgb15_blue_shift	gba_specific_stuff/gfx_reg_stuff.hpp	380;"	kind:d
-rgb15_component_max_val	gba_specific_stuff/gfx_reg_stuff.hpp	386;"	kind:d
+rgb15_blue_mask	gba_specific_stuff/gfx_reg_stuff.hpp	387;"	kind:d
+rgb15_blue_shift	gba_specific_stuff/gfx_reg_stuff.hpp	383;"	kind:d
+rgb15_component_max_val	gba_specific_stuff/gfx_reg_stuff.hpp	389;"	kind:d
 rgb15_get_blue_component	gba_specific_stuff/gfx_reg_stuff.hpp	/^inline u32 rgb15_get_blue_component( u32 the_rgb15_val )$/;"	kind:f	signature:( u32 the_rgb15_val )
 rgb15_get_green_component	gba_specific_stuff/gfx_reg_stuff.hpp	/^inline u32 rgb15_get_green_component( u32 the_rgb15_val )$/;"	kind:f	signature:( u32 the_rgb15_val )
 rgb15_get_red_component	gba_specific_stuff/gfx_reg_stuff.hpp	/^inline u32 rgb15_get_red_component( u32 the_rgb15_val )$/;"	kind:f	signature:( u32 the_rgb15_val )
-rgb15_green_mask	gba_specific_stuff/gfx_reg_stuff.hpp	383;"	kind:d
-rgb15_green_shift	gba_specific_stuff/gfx_reg_stuff.hpp	379;"	kind:d
-rgb15_red_mask	gba_specific_stuff/gfx_reg_stuff.hpp	382;"	kind:d
-rgb15_red_shift	gba_specific_stuff/gfx_reg_stuff.hpp	378;"	kind:d
+rgb15_green_mask	gba_specific_stuff/gfx_reg_stuff.hpp	386;"	kind:d
+rgb15_green_shift	gba_specific_stuff/gfx_reg_stuff.hpp	382;"	kind:d
+rgb15_num_components	gba_specific_stuff/gfx_reg_stuff.hpp	391;"	kind:d
+rgb15_red_mask	gba_specific_stuff/gfx_reg_stuff.hpp	385;"	kind:d
+rgb15_red_shift	gba_specific_stuff/gfx_reg_stuff.hpp	381;"	kind:d
 right	game_engine_stuff/coll_box_class.hpp	/^	inline fixed24p8 right() const$/;"	kind:f	class:coll_box	access:public	signature:() const
 round_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s16 round_to_int() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
 round_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s32 round_to_int() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const

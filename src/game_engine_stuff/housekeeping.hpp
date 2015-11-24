@@ -20,11 +20,10 @@ void title_screen_func();
 
 void reinit_the_game();
 
-void fade_out_to_black( u32 amount_to_subtract_per_iter, 
-	u32 num_frames_to_wait_per_iter=1 );
-
-void fade_in_from_black( u32 amount_to_add_per_iter,
-	u32 num_frames_to_wait_per_iter=1 );
+void fade_out_to_black( u32 num_steps, u32 num_frames_to_wait_per_iter=1 )
+	__attribute__((_iwram_code));
+void fade_in_from_black( u32 num_steps, u32 num_frames_to_wait_per_iter=1 )
+	__attribute__((_iwram_code));
 
 
 // This function toggles whether music is playing if the select button is

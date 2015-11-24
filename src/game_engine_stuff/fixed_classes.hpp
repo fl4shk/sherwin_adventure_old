@@ -9,8 +9,12 @@ class fixed24p8;
 class fixed8p8;
 
 
-extern fixed24p8 f24p8_div_by_f8p8( const fixed24p8& num, 
-	const fixed8p8& den ) __attribute__((_iwram_code));
+//extern fixed24p8 f24p8_div_by_f8p8( const fixed24p8& num, 
+//	const fixed8p8& den ) __attribute__((_iwram_code));
+fixed24p8 f24p8_div_by_f8p8( const fixed24p8& num, const fixed8p8& den ) 
+	__attribute__((_iwram_code));
+fixed24p8 f24p8_div_by_u16( const fixed24p8& num, u16 den )
+	__attribute__((_iwram_code));
 
 
 // Underlying type is s32, with 8 fraction bits
@@ -47,6 +51,16 @@ public:		// functions
 		return f24p8_div_by_f8p8( (fixed24p8){data}, den );
 	}
 	
+	//inline fixed24p8 operator * ( u32 den ) const
+	//{
+	//	return {data * den};
+	//}
+	inline fixed24p8 operator / ( u16 den ) const
+	{
+		return f24p8_div_by_u16( (fixed24p8){data}, den );
+	}
+	
+	
 	inline fixed24p8& operator = ( const fixed24p8& to_copy );
 	inline fixed24p8& operator = ( s32 to_copy );
 	
@@ -58,6 +72,16 @@ public:		// functions
 	{
 		data = f24p8_div_by_f8p8( (fixed24p8){data}, den ).data;
 	}
+	
+	//inline void operator *= ( u32 den )
+	//{
+	//	data *= den;
+	//}
+	inline void operator /= ( u16 den )
+	{
+		data = f24p8_div_by_u16( (fixed24p8){data}, den ).data;
+	}
+	
 	
 	
 	

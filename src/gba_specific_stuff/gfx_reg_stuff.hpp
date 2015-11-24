@@ -110,6 +110,8 @@ static const u32 obj_pal_ram_size = 0x200;
 static const u32 pal_ram_size_in_u16 = pal_ram_size / sizeof(u16);
 static const u32 bg_pal_ram_size_in_u16 = bg_pal_ram_size / sizeof(u16);
 static const u32 obj_pal_ram_size_in_u16 = obj_pal_ram_size / sizeof(u16);
+
+static const u32 num_colors_in_8_palettes = pal_ram_size_in_u16;
 /* ---- End of Palette RAM Stuffs ---- */
 
 
@@ -375,6 +377,7 @@ static const u32 num_pixels_per_block_row_or_column = 16;
 
 
 /* ---- Some misc. inline functions ---- */
+
 #define rgb15_red_shift ( 0x0 )
 #define rgb15_green_shift ( 0x5 )
 #define rgb15_blue_shift ( 0xa )
@@ -385,11 +388,34 @@ static const u32 num_pixels_per_block_row_or_column = 16;
 
 #define rgb15_component_max_val ( 0x1f )
 
+#define rgb15_num_components ( 3 )
+
+
+// Fade out/in step amounts.
+static constexpr u32 bg_fade_step_amount_arr_size 
+	= num_colors_in_8_palettes;
+extern fixed24p8 bg_fade_red_step_amount_arr
+	[bg_fade_step_amount_arr_size] __attribute__((_ewram));
+extern fixed24p8 bg_fade_green_step_amount_arr
+	[bg_fade_step_amount_arr_size] __attribute__((_ewram));
+extern fixed24p8 bg_fade_blue_step_amount_arr
+	[bg_fade_step_amount_arr_size] __attribute__((_ewram));
+
+static constexpr u32 obj_fade_step_amount_arr_size 
+	= num_colors_in_8_palettes;
+extern fixed24p8 obj_fade_red_step_amount_arr
+	[obj_fade_step_amount_arr_size] __attribute__((_ewram));
+extern fixed24p8 obj_fade_green_step_amount_arr
+	[obj_fade_step_amount_arr_size] __attribute__((_ewram));
+extern fixed24p8 obj_fade_blue_step_amount_arr
+	[obj_fade_step_amount_arr_size] __attribute__((_ewram));
+
+
 inline u16 make_rgb15( u32 red, u32 green, u32 blue )
 {
-	return ( ( ( red & 0x1f ) << rgb15_red_shift ) 
-		| ( ( green & 0x1f ) << rgb15_green_shift ) 
-		| ( ( blue & 0x1f ) << rgb15_blue_shift ) );
+	return ( ( ( red & rgb15_component_max_val ) << rgb15_red_shift ) 
+		| ( ( green & rgb15_component_max_val ) << rgb15_green_shift ) 
+		| ( ( blue & rgb15_component_max_val ) << rgb15_blue_shift ) );
 }
 
 inline u32 rgb15_get_red_component( u32 the_rgb15_val )
@@ -405,29 +431,33 @@ inline u32 rgb15_get_blue_component( u32 the_rgb15_val )
 	return get_bits( the_rgb15_val, rgb15_blue_mask, rgb15_blue_shift );
 }
 
-// Subtract from an rgb15 component, then make it zero if it became
-// negative.
-inline void clamped_rgb15_component_subtract( u32& component, 
-	u32 amount_to_subtract )
-{
-	component -= amount_to_subtract;
-	
-	// Test whether the component became negative.  Make it zero if so.
-	//if ( component & 0xffff0000 )
-	if ( (s32)component < 0 )
-	{
-		component = 0;
-	}
-}
-
-inline void clamped_rgb15_component_add( u32& component, u32 amount_to_add, 
-	u32 component_max_value=rgb15_component_max_val )
+inline void clamped_rgb15_component_add( s32& component, s32 amount_to_add, 
+	s32 component_max_value=rgb15_component_max_val )
 {
 	component += amount_to_add;
 	
 	if ( component > component_max_value  )
 	{
-		component =  component_max_value;
+		component = component_max_value;
+	}
+	else if ( component < 0 )
+	{
+		component = 0;
+	}
+}
+
+inline void clamped_rgb15_f24p8_component_add( fixed24p8& component,
+	const fixed24p8& amount_to_add, const fixed24p8& target_value )
+{
+	component += amount_to_add;
+	
+	if ( amount_to_add > (fixed24p8){0} && component > target_value )
+	{
+		component = target_value;
+	}
+	else if ( amount_to_add < (fixed24p8){0} && component < target_value )
+	{
+		component = target_value;
 	}
 }
 
