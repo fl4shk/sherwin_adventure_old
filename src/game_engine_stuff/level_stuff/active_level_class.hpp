@@ -69,7 +69,8 @@ public:		// static variables
 	
 	
 	// The maximum number of sprite_init_param_group's in a sublevel.
-	static constexpr u32 max_num_sprite_ipgs_per_sublevel = 512;
+	//static constexpr u32 max_num_sprite_ipgs_per_sublevel = 512;
+	static constexpr u32 max_num_sprite_ipgs_per_sublevel = 256;
 	
 	// The array of lists of sprite initialization parameters, including
 	// the spawned/despawned/dead status.
@@ -77,9 +78,9 @@ public:		// static variables
 	//	horiz_sublevel_xsize > horiz_sublevel_sprite_ipg_lists
 	//	__attribute__((_ewram));
 	
-	static sa_array_of_lists< sprite_init_param_group, 512,
-		horiz_sublevel_xsize > horiz_sublevel_sprite_ipg_lists
-		__attribute__((_ewram));
+	static sa_array_of_lists< sprite_init_param_group,
+		max_num_sprite_ipgs_per_sublevel, horiz_sublevel_xsize > 
+		horiz_sublevel_sprite_ipg_lists __attribute__((_ewram));
 	
 	// 
 	static scr_entry bg0_screenblock_mirror[screenblock_size] 

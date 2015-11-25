@@ -29,7 +29,8 @@ array_2d_helper<block> active_level::horiz_sublevel_block_data_2d
 //	active_level::horiz_sublevel_sprite_ipg_lists; 
 //	//__attribute__((_ewram));
 
-sa_array_of_lists< sprite_init_param_group, 512,
+sa_array_of_lists< sprite_init_param_group, 
+	active_level::max_num_sprite_ipgs_per_sublevel,
 	active_level::horiz_sublevel_xsize > 
 	active_level::horiz_sublevel_sprite_ipg_lists;
 

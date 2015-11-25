@@ -18,12 +18,11 @@ constexpr u32 bg3_sbb = 31;
 
 #include "level_class.hpp"
 
-#include "../housekeeping.hpp"
+#include "../game_manager_class.hpp"
 
 class active_level_manager
 {
 public:		// variables
-	
 	
 	static u32 converted_block_tile_ids_0[bt_count],
 		converted_block_tile_ids_1[bt_count],
@@ -92,6 +91,7 @@ public:		// functions
 	
 	static inline void load_level( const level* n_the_current_level_ptr )
 	{
+		game_manager::curr_game_mode = gm_loading_level;
 		active_level::the_current_level_ptr = n_the_current_level_ptr;
 		load_sublevel_basic(0);
 	}
@@ -99,6 +99,7 @@ public:		// functions
 	//static inline void initial_sublevel_loading()
 	static inline void load_sublevel_basic( u32 n_sublevel_index )
 	{
+		game_manager::curr_game_mode = gm_changing_sublevel;
 		active_level::the_current_active_sublevel_index = n_sublevel_index;
 		
 		// Initialize the list of sprite level data.
@@ -131,15 +132,18 @@ public:		// functions
 		//bios_wait_for_vblank();
 		//copy_sublevel_from_array_2d_helper_to_vram();
 		
+		game_manager::curr_game_mode = gm_in_sublevel;
+		
 		bios_wait_for_vblank();
-		vblank_func();
+		//game_manager::vblank_func();
 	}
 	
 	//static inline void load_sublevel_warp_based( u32 n_sublevel_index )
 	static inline void load_sublevel_at_intra_sublevel_warp
 		( u32 n_sublevel_index, u32 sublevel_entrance_index )
 	{
-		fade_out_to_black(45);
+		game_manager::curr_game_mode = gm_changing_sublevel;
+		game_manager::fade_out_to_black(45);
 		
 		active_level::the_current_active_sublevel_index = n_sublevel_index;
 		
@@ -160,8 +164,6 @@ public:		// functions
 			.cmp_bd_arr_helper.the_array, 
 			active_level::block_data_array );
 		
-		//bios_wait_for_vblank();
-		
 		for ( u32 i=0; i<active_level::block_data_array_size; ++i )
 		{
 			block& the_block = active_level::block_data_array[i];
@@ -170,27 +172,22 @@ public:		// functions
 				->finish_initializing_using_persistent_data(the_block);
 		}
 		
-		bios_wait_for_vblank();
-		
 		update_sublevel_in_screenblock_mirror_2d();
 		
-		bios_wait_for_vblank();
 		
 		sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
 			( bgofs_mirror[0].curr, sublevel_entrance_index );
 		update_sublevel_in_screenblock_mirror_2d();
 		
-		//bios_wait_for_vblank();
-		//copy_sublevel_from_array_2d_helper_to_vram();
+		game_manager::curr_game_mode = gm_in_sublevel;
 		
 		bios_wait_for_vblank();
-		vblank_func();
+		//game_manager::vblank_func();
 		
 		// Wait for about 0.25 seconds.
 		//wait_for_x_frames(15);
 		
-		fade_in_from_black(45);
-		
+		game_manager::fade_in_from_black(45);
 	}
 	
 } __attribute__((_align4));

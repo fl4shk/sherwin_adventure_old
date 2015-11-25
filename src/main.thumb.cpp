@@ -20,8 +20,8 @@
 #include "game_engine_stuff/sprite_stuff/sprite_manager_class.hpp"
 
 
-#include "game_engine_stuff/housekeeping.hpp"
 
+#include "game_engine_stuff/game_manager_class.hpp"
 
 
 extern "C" int ewram_test_func();
@@ -29,12 +29,14 @@ extern "C" int ewram_test_func();
 
 int main()
 {
-	memcpy8( sram_init_str, sram_const_init_str, sram_init_str_size );
+	//
+	memcpy8( game_manager::sram_init_str,
+		game_manager::sram_const_init_str, 
+		game_manager::sram_init_str_size );
 	
 	irq_init();
 	
-	// 
-	title_screen_func();
+	game_manager::title_screen_func();
 	
 	//reinit_the_game();
 	
@@ -48,7 +50,7 @@ int main()
 		
 		memfill32( oam_mirror, 0, sizeof(oam_mirror) / sizeof(u32) );
 		
-		// Key polling is done in vblank_func()
+		// Key polling is done in game_manager::vblank_func()
 		//key_poll();
 		
 		
@@ -57,7 +59,7 @@ int main()
 			// Reset the game if A, B, Start, and Select are pressed
 			//bios_do_hard_reset();
 			////bios_do_soft_reset();
-			reinit_the_game();
+			game_manager::reinit_the_game();
 		}
 		
 		
@@ -79,11 +81,11 @@ int main()
 		
 		//if ( key_hit(key_select) )
 		//{
-		//	fade_out_to_black(1);
+		//	game_manager::fade_out_to_black(1);
 		//	
-		//	wait_for_x_frames(60);
+		//	game_manager::wait_for_x_frames(60);
 		//	
-		//	fade_in_from_black(1);
+		//	game_manager::fade_in_from_black(1);
 		//}
 		
 		sprite_manager::spawn_sprites_if_needed(bgofs_mirror[0]);
@@ -97,8 +99,7 @@ int main()
 		
 		
 		bios_wait_for_vblank();
-		
-		vblank_func();
+		//game_manager::vblank_func();
 		
 	}
 	
