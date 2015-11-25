@@ -391,6 +391,29 @@ static const u32 num_pixels_per_block_row_or_column = 16;
 #define rgb15_num_components ( 3 )
 
 
+
+// Current component arrays, stored in EWRAM as fixed24p8's for speed and
+// accuracy reasons.
+static constexpr u32 bg_fade_curr_component_arr_size 
+	= num_colors_in_8_palettes;
+extern fixed24p8 bg_fade_curr_red_arr
+	[bg_fade_curr_component_arr_size] __attribute__((_ewram));
+extern fixed24p8 bg_fade_curr_green_arr
+	[bg_fade_curr_component_arr_size] __attribute__((_ewram));
+extern fixed24p8 bg_fade_curr_blue_arr
+	[bg_fade_curr_component_arr_size] __attribute__((_ewram));
+
+static constexpr u32 obj_fade_curr_component_arr_size 
+	= num_colors_in_8_palettes;
+extern fixed24p8 obj_fade_curr_red_arr
+	[obj_fade_curr_component_arr_size] __attribute__((_ewram));
+extern fixed24p8 obj_fade_curr_green_arr
+	[obj_fade_curr_component_arr_size] __attribute__((_ewram));
+extern fixed24p8 obj_fade_curr_blue_arr
+	[obj_fade_curr_component_arr_size] __attribute__((_ewram));
+
+
+
 // Fade out/in step amounts.
 static constexpr u32 bg_fade_step_amount_arr_size 
 	= num_colors_in_8_palettes;

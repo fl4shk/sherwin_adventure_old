@@ -104,11 +104,12 @@ typedef void (*isr_funcptr)(void);
 extern "C"
 {
 	// Also
-	extern isr_funcptr isr_table [intr_amount];
+	extern volatile isr_funcptr isr_table [intr_amount];
 	
 	void irqEnable( int mask );
 	
-	void irqSet( int mask, isr_funcptr func );
+	//void irqSet( int mask, isr_funcptr func );
+	void irqSet( int mask, u32 func_addr );
 	
 	
 }

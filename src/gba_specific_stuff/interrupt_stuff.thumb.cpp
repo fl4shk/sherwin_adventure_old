@@ -1,16 +1,21 @@
 #include "interrupt_stuff.hpp"
 #include "gfx_reg_stuff.hpp"
 
+#include "maxmod.h"
+
+#include "../game_engine_stuff/debug_vars.hpp"
+
+
+extern "C" void maxmod_vblank_updater_func();
 
 extern "C"
 {
-	isr_funcptr isr_table[intr_amount] __attribute__((_bss));
+	volatile isr_funcptr isr_table[intr_amount] __attribute__((_bss));
 	
 	
 	// This is for maxmod compatibility
 	void irqEnable( int mask )
 	{
-		
 		//reg_ime = 0;
 		ime_disable();
 		
@@ -35,70 +40,73 @@ extern "C"
 	
 	// This is also for maxmod compatibility, written somewhat differently
 	// from that used in libgba.
-	void irqSet( int mask, isr_funcptr func )
+	//void irqSet( int mask, isr_funcptr func )
+	void irqSet( int mask, u32 func_addr )
 	{
+		
 		switch ( mask )
 		{
 			case irq_vblank:
-				isr_table[intr_vblank] = func;
+				isr_table[intr_vblank] = (void (*)())func_addr;
 				break;
 				
 			case irq_hblank:
-				isr_table[intr_hblank] = func;
+				isr_table[intr_hblank] = (void (*)())func_addr;
 				break;
 				
 			case irq_vcount:
-				isr_table[intr_vcount] = func;
+				isr_table[intr_vcount] = (void (*)())func_addr;
 				break;
 				
 			case irq_timer0:
-				isr_table[intr_timer0] = func;
+				isr_table[intr_timer0] = (void (*)())func_addr;
 				break;
 			
 			case irq_timer1:
-				isr_table[intr_timer1] = func;
+				isr_table[intr_timer1] = (void (*)())func_addr;
 				break;
 			
 			case irq_timer2:
-				isr_table[intr_timer2] = func;
+				isr_table[intr_timer2] = (void (*)())func_addr;
 				break;
 			
 			case irq_timer3:
-				isr_table[intr_timer3] = func;
+				isr_table[intr_timer3] = (void (*)())func_addr;
 				break;
 			
 			case irq_com:
-				isr_table[intr_com] = func;
+				isr_table[intr_com] = (void (*)())func_addr;
 				break;
 			
 			case irq_dma0:
-				isr_table[intr_dma0] = func;
+				isr_table[intr_dma0] = (void (*)())func_addr;
 				break;
 			
 			case irq_dma1:
-				isr_table[intr_dma1] = func;
+				isr_table[intr_dma1] = (void (*)())func_addr;
 				break;
 			
 			case irq_dma2:
-				isr_table[intr_dma2] = func;
+				isr_table[intr_dma2] = (void (*)())func_addr;
 				break;
 			
 			case irq_dma3:
-				isr_table[intr_dma3] = func;
+				isr_table[intr_dma3] = (void (*)())func_addr;
 				break;
 			
 			case irq_keypad:
-				isr_table[intr_keypad] = func;
+				isr_table[intr_keypad] = (void (*)())func_addr;
 				break;
 			
 			case irq_gamepak:
-				isr_table[intr_gamepak] = func;
+				isr_table[intr_gamepak] = (void (*)())func_addr;
 				break;
-			
 			
 			default:
 				break;
 		}
+		
+		
 	}
 }
 
@@ -117,7 +125,6 @@ void irq_init()
 		isr_table[i] = &irq_dummy;
 	}
 	
-	
 	// Clear reg_ie (for safety or something)
 	reg_ie &= ~(irq_mask);
 	
@@ -130,6 +137,14 @@ void irq_init()
 	
 	//irqEnable(irq_vblank);
 	
+	//irqSet( irq_vblank, mmVBlank );
+	//irqSet( irq_vblank, reinterpret_cast<isr_funcptr>
+	//	(&maxmod_vblank_updater_func) );
+	
+	//irqSet( irq_vblank, (u32)mmVBlank );
+	//irqEnable(irq_vblank);
+	//mmSetVBlankHandler( reinterpret_cast<void*>
+	//	(&maxmod_vblank_updater_func) );
 	
 	
 	// We will use isr_main() as the primary Interrupt Service Routine

@@ -157,6 +157,7 @@ inline void bios_wait_for_vblank()
 	swi_call(0x05);
 }
 
+
 inline s32 bios_do_div( s32 numerator, s32 denominator )
 {
 	//nocash_soft_break();

@@ -139,14 +139,15 @@ public:		// functions
 	static inline void load_sublevel_at_intra_sublevel_warp
 		( u32 n_sublevel_index, u32 sublevel_entrance_index )
 	{
-		fade_out_to_black( 5, 6 );
+		fade_out_to_black(45);
 		
 		active_level::the_current_active_sublevel_index = n_sublevel_index;
 		
 		memfill32( oam_mirror, 0, sizeof(oam_entry) * oam_mirror_size 
 			/ sizeof(u32) );
 		
-		bios_wait_for_vblank();
+		//bios_wait_for_vblank();
+		
 		copy_oam_mirror_to_oam();
 		
 		
@@ -159,6 +160,8 @@ public:		// functions
 			.cmp_bd_arr_helper.the_array, 
 			active_level::block_data_array );
 		
+		//bios_wait_for_vblank();
+		
 		for ( u32 i=0; i<active_level::block_data_array_size; ++i )
 		{
 			block& the_block = active_level::block_data_array[i];
@@ -167,9 +170,11 @@ public:		// functions
 				->finish_initializing_using_persistent_data(the_block);
 		}
 		
+		bios_wait_for_vblank();
+		
 		update_sublevel_in_screenblock_mirror_2d();
 		
-		
+		bios_wait_for_vblank();
 		
 		sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
 			( bgofs_mirror[0].curr, sublevel_entrance_index );
@@ -184,7 +189,7 @@ public:		// functions
 		// Wait for about 0.25 seconds.
 		//wait_for_x_frames(15);
 		
-		fade_in_from_black( 5, 6 );
+		fade_in_from_black(45);
 		
 	}
 	

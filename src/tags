@@ -196,6 +196,10 @@ bg1bt_night_sky	game_engine_stuff/block_stuff/block_stuff.hpp	/^	bg1bt_night_sky
 bg2_sbb	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^constexpr u32 bg2_sbb = 30;$/;"	kind:v
 bg3_sbb	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^constexpr u32 bg3_sbb = 31;$/;"	kind:v
 bg_fade_blue_step_amount_arr	gba_specific_stuff/gfx_reg_stuff.arm.cpp	/^fixed24p8 bg_fade_blue_step_amount_arr[bg_fade_step_amount_arr_size];$/;"	kind:v
+bg_fade_curr_blue_arr	gba_specific_stuff/gfx_reg_stuff.arm.cpp	/^fixed24p8 bg_fade_curr_blue_arr[bg_fade_curr_component_arr_size];$/;"	kind:v
+bg_fade_curr_component_arr_size	gba_specific_stuff/gfx_reg_stuff.hpp	/^static constexpr u32 bg_fade_curr_component_arr_size $/;"	kind:v
+bg_fade_curr_green_arr	gba_specific_stuff/gfx_reg_stuff.arm.cpp	/^fixed24p8 bg_fade_curr_green_arr[bg_fade_curr_component_arr_size];$/;"	kind:v
+bg_fade_curr_red_arr	gba_specific_stuff/gfx_reg_stuff.arm.cpp	/^fixed24p8 bg_fade_curr_red_arr[bg_fade_curr_component_arr_size];$/;"	kind:v
 bg_fade_green_step_amount_arr	gba_specific_stuff/gfx_reg_stuff.arm.cpp	/^fixed24p8 bg_fade_green_step_amount_arr[bg_fade_step_amount_arr_size];$/;"	kind:v
 bg_fade_red_step_amount_arr	gba_specific_stuff/gfx_reg_stuff.arm.cpp	/^fixed24p8 bg_fade_red_step_amount_arr[bg_fade_step_amount_arr_size];$/;"	kind:v
 bg_fade_step_amount_arr_size	gba_specific_stuff/gfx_reg_stuff.hpp	/^static constexpr u32 bg_fade_step_amount_arr_size $/;"	kind:v
@@ -1522,8 +1526,8 @@ intr_vblank	gba_specific_stuff/interrupt_stuff.hpp	/^	intr_vblank = 0x0,$/;"	kin
 intr_vcount	gba_specific_stuff/interrupt_stuff.hpp	/^	intr_vcount = 0x2,$/;"	kind:e	enum:intr_type
 irqEnable	gba_specific_stuff/interrupt_stuff.hpp	/^	void irqEnable( int mask );$/;"	kind:p	signature:( int mask )
 irqEnable	gba_specific_stuff/interrupt_stuff.thumb.cpp	/^	void irqEnable( int mask )$/;"	kind:f	signature:( int mask )
-irqSet	gba_specific_stuff/interrupt_stuff.hpp	/^	void irqSet( int mask, isr_funcptr func );$/;"	kind:p	signature:( int mask, isr_funcptr func )
-irqSet	gba_specific_stuff/interrupt_stuff.thumb.cpp	/^	void irqSet( int mask, isr_funcptr func )$/;"	kind:f	signature:( int mask, isr_funcptr func )
+irqSet	gba_specific_stuff/interrupt_stuff.hpp	/^	void irqSet( int mask, u32 func_addr );$/;"	kind:p	signature:( int mask, u32 func_addr )
+irqSet	gba_specific_stuff/interrupt_stuff.thumb.cpp	/^	void irqSet( int mask, u32 func_addr )$/;"	kind:f	signature:( int mask, u32 func_addr )
 irq_com	gba_specific_stuff/interrupt_stuff.hpp	52;"	kind:d
 irq_dma0	gba_specific_stuff/interrupt_stuff.hpp	54;"	kind:d
 irq_dma1	gba_specific_stuff/interrupt_stuff.hpp	55;"	kind:d
@@ -1552,7 +1556,7 @@ is_wood	game_engine_stuff/block_stuff/wood_block_stuff_classes.hpp	/^	enum subcl
 isr_funcptr	gba_specific_stuff/interrupt_stuff.hpp	/^typedef void (*isr_funcptr)(void);$/;"	kind:t
 isr_main	gba_specific_stuff/interrupt_stuff.arm.cpp	/^void isr_main()$/;"	kind:f	signature:()
 isr_main	gba_specific_stuff/interrupt_stuff.hpp	/^void isr_main() __attribute__((_iwram_code));$/;"	kind:p	signature:()
-isr_table	gba_specific_stuff/interrupt_stuff.thumb.cpp	/^	isr_funcptr isr_table[intr_amount] __attribute__((_bss));$/;"	kind:v
+isr_table	gba_specific_stuff/interrupt_stuff.thumb.cpp	/^	volatile isr_funcptr isr_table[intr_amount] __attribute__((_bss));$/;"	kind:v
 jump_hold_timer	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	s32 jump_hold_timer;$/;"	kind:m	class:sprite	access:public
 jump_vel	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static constexpr fixed24p8 jump_vel = {-0x400};$/;"	kind:m	class:player_sprite_stuff	access:public
 key_a	gba_specific_stuff/button_stuff.hpp	22;"	kind:d
@@ -1659,6 +1663,8 @@ max_num_sublevels	game_engine_stuff/level_stuff/level_class.hpp	/^	static conste
 max_num_sublevels_per_level	game_engine_stuff/level_stuff/level_defines.hpp	/^constexpr u32 max_num_sublevels_per_level = 8;$/;"	kind:v
 max_run_speed	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static constexpr fixed24p8 max_run_speed = {0x200};$/;"	kind:m	class:player_sprite_stuff	access:public
 max_y_vel	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	static constexpr fixed24p8 max_y_vel = {0x400};$/;"	kind:m	class:sprite_base_stuff	access:public
+maxmod_vblank_updater_func	game_engine_stuff/housekeeping.thumb.cpp	/^void maxmod_vblank_updater_func()$/;"	kind:f	signature:()
+maxmod_vblank_updater_func	gba_specific_stuff/interrupt_stuff.thumb.cpp	/^extern "C" void maxmod_vblank_updater_func();$/;"	kind:p	file:	signature:()
 mem_bg_pal	gba_specific_stuff/memory_map.hpp	24;"	kind:d
 mem_ewram	gba_specific_stuff/memory_map.hpp	7;"	kind:d
 mem_io	gba_specific_stuff/memory_map.hpp	12;"	kind:d
@@ -1914,6 +1920,10 @@ obj_attr2_tile_number	gba_specific_stuff/oam_entry_defines.hpp	126;"	kind:d
 obj_attr2_tile_number_mask	gba_specific_stuff/oam_entry_defines.hpp	128;"	kind:d
 obj_attr2_tile_number_shift	gba_specific_stuff/oam_entry_defines.hpp	129;"	kind:d
 obj_fade_blue_step_amount_arr	gba_specific_stuff/gfx_reg_stuff.arm.cpp	/^fixed24p8 obj_fade_blue_step_amount_arr[obj_fade_step_amount_arr_size];$/;"	kind:v
+obj_fade_curr_blue_arr	gba_specific_stuff/gfx_reg_stuff.arm.cpp	/^fixed24p8 obj_fade_curr_blue_arr[obj_fade_curr_component_arr_size];$/;"	kind:v
+obj_fade_curr_component_arr_size	gba_specific_stuff/gfx_reg_stuff.hpp	/^static constexpr u32 obj_fade_curr_component_arr_size $/;"	kind:v
+obj_fade_curr_green_arr	gba_specific_stuff/gfx_reg_stuff.arm.cpp	/^fixed24p8 obj_fade_curr_green_arr[obj_fade_curr_component_arr_size];$/;"	kind:v
+obj_fade_curr_red_arr	gba_specific_stuff/gfx_reg_stuff.arm.cpp	/^fixed24p8 obj_fade_curr_red_arr[obj_fade_curr_component_arr_size];$/;"	kind:v
 obj_fade_green_step_amount_arr	gba_specific_stuff/gfx_reg_stuff.arm.cpp	/^fixed24p8 obj_fade_green_step_amount_arr[obj_fade_step_amount_arr_size];$/;"	kind:v
 obj_fade_red_step_amount_arr	gba_specific_stuff/gfx_reg_stuff.arm.cpp	/^fixed24p8 obj_fade_red_step_amount_arr[obj_fade_step_amount_arr_size];$/;"	kind:v
 obj_fade_step_amount_arr_size	gba_specific_stuff/gfx_reg_stuff.hpp	/^static constexpr u32 obj_fade_step_amount_arr_size $/;"	kind:v

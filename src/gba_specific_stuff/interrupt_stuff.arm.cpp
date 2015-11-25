@@ -17,13 +17,13 @@ void isr_main()
 	// IRQ was serviced.
 	if ( reg_if & irq_vblank )
 	{
-		//mmVBlank();
+		//mmFrame();
 		isr_table[intr_vblank]();
-		
 		
 		// Acknowledge the VBlank interrupt.
 		reg_ifbios = irq_vblank;
 		reg_if = irq_vblank;
+		
 	}
 	
 	if ( reg_if & irq_timer0 )

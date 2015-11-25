@@ -9,8 +9,6 @@
 #include "maxmod.h"
 
 
-
-
 //void vblank_func() __attribute__(( _iwram_code, __noinline__ ));
 void vblank_func() __attribute__((_iwram_code));
 
@@ -51,6 +49,7 @@ inline void wait_for_x_frames( u32 x )
 	for ( u32 i=0; i<x; ++i )
 	{
 		bios_wait_for_vblank();
+		//mmFrame();
 	}
 }
 

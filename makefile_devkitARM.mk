@@ -50,10 +50,10 @@ LD_SCRIPT=linkscript.ld
 
 
 ##DEBUG_FLAGS=-gdwarf-2 -ggdb -gstrict-dwarf
-#DEBUG_FLAGS=-gdwarf-3
+DEBUG_FLAGS=-gdwarf-3
 
-GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I./maxmod/include -O3
-#GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I./maxmod/include -O1 -g
+#GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I./maxmod/include -O3
+GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I./maxmod/include -O1 -g
 
 THUMB_BASE_FLAGS=$(GLOBAL_BASE_FLAGS) -mthumb -mthumb-interwork
 ARM_BASE_FLAGS=$(GLOBAL_BASE_FLAGS) -marm -mthumb-interwork
