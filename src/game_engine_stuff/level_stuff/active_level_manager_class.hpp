@@ -143,7 +143,7 @@ public:		// functions
 		( u32 n_sublevel_index, u32 sublevel_entrance_index )
 	{
 		game_manager::curr_game_mode = gm_changing_sublevel;
-		game_manager::fade_out_to_black(45);
+		game_manager::fade_out_to_black(15);
 		
 		active_level::the_current_active_sublevel_index = n_sublevel_index;
 		
@@ -187,7 +187,7 @@ public:		// functions
 		// Wait for about 0.25 seconds.
 		//wait_for_x_frames(15);
 		
-		game_manager::fade_in_from_black(45);
+		game_manager::fade_in_from_black(15);
 	}
 	
 } __attribute__((_align4));

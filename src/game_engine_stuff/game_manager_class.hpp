@@ -75,6 +75,10 @@ public:		// functions
 	static void fade_in_from_black( u32 num_steps, 
 		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_iwram_code));
 	
+	static void fade_out_to_white( u32 num_steps, 
+		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_iwram_code));
+	static void fade_in_from_white( u32 num_steps, 
+		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_iwram_code));
 	
 	// This function toggles whether music is playing if the select button
 	// is down this frame but was not down on the previous frame.

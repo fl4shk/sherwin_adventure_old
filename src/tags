@@ -913,8 +913,12 @@ f24p8_div_by_u16	game_engine_stuff/fixed_classes.thumb.cpp	/^fixed24p8 f24p8_div
 facing_right	game_engine_stuff/level_stuff/sprite_level_data_stuff.hpp	/^	bool facing_right;$/;"	kind:m	class:sprite_init_param_group	access:public
 fade_in_from_black	game_engine_stuff/game_manager_class.hpp	/^	static void fade_in_from_black( u32 num_steps, $/;"	kind:p	class:game_manager	access:public	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter=1 )
 fade_in_from_black	game_engine_stuff/game_manager_class.thumb.cpp	/^void game_manager::fade_in_from_black( u32 num_steps, $/;"	kind:f	class:game_manager	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter )
+fade_in_from_white	game_engine_stuff/game_manager_class.hpp	/^	static void fade_in_from_white( u32 num_steps, $/;"	kind:p	class:game_manager	access:public	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter=1 )
+fade_in_from_white	game_engine_stuff/game_manager_class.thumb.cpp	/^void game_manager::fade_in_from_white( u32 num_steps, $/;"	kind:f	class:game_manager	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter )
 fade_out_to_black	game_engine_stuff/game_manager_class.hpp	/^	static void fade_out_to_black( u32 num_steps, $/;"	kind:p	class:game_manager	access:public	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter=1 )
 fade_out_to_black	game_engine_stuff/game_manager_class.thumb.cpp	/^void game_manager::fade_out_to_black( u32 num_steps, $/;"	kind:f	class:game_manager	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter )
+fade_out_to_white	game_engine_stuff/game_manager_class.hpp	/^	static void fade_out_to_white( u32 num_steps, $/;"	kind:p	class:game_manager	access:public	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter=1 )
+fade_out_to_white	game_engine_stuff/game_manager_class.thumb.cpp	/^void game_manager::fade_out_to_white( u32 num_steps, $/;"	kind:f	class:game_manager	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter )
 fill	gba_specific_stuff/oam_entry_classes.hpp	/^	s16 fill;$/;"	kind:m	class:oam_entry	access:public
 fill0	gba_specific_stuff/oam_entry_classes.hpp	/^	u16 fill0[fill_size];$/;"	kind:m	class:oam_entry_affine	access:public
 fill1	gba_specific_stuff/oam_entry_classes.hpp	/^	u16 fill1[fill_size];$/;"	kind:m	class:oam_entry_affine	access:public
@@ -1056,8 +1060,12 @@ game_manager::curr_game_mode	game_engine_stuff/game_manager_class.thumb.cpp	/^ga
 game_manager::debug_infin_loop	game_engine_stuff/game_manager_class.hpp	/^	static inline void debug_infin_loop()$/;"	kind:f	class:game_manager	access:public	signature:()
 game_manager::fade_in_from_black	game_engine_stuff/game_manager_class.hpp	/^	static void fade_in_from_black( u32 num_steps, $/;"	kind:p	class:game_manager	access:public	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter=1 )
 game_manager::fade_in_from_black	game_engine_stuff/game_manager_class.thumb.cpp	/^void game_manager::fade_in_from_black( u32 num_steps, $/;"	kind:f	class:game_manager	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter )
+game_manager::fade_in_from_white	game_engine_stuff/game_manager_class.hpp	/^	static void fade_in_from_white( u32 num_steps, $/;"	kind:p	class:game_manager	access:public	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter=1 )
+game_manager::fade_in_from_white	game_engine_stuff/game_manager_class.thumb.cpp	/^void game_manager::fade_in_from_white( u32 num_steps, $/;"	kind:f	class:game_manager	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter )
 game_manager::fade_out_to_black	game_engine_stuff/game_manager_class.hpp	/^	static void fade_out_to_black( u32 num_steps, $/;"	kind:p	class:game_manager	access:public	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter=1 )
 game_manager::fade_out_to_black	game_engine_stuff/game_manager_class.thumb.cpp	/^void game_manager::fade_out_to_black( u32 num_steps, $/;"	kind:f	class:game_manager	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter )
+game_manager::fade_out_to_white	game_engine_stuff/game_manager_class.hpp	/^	static void fade_out_to_white( u32 num_steps, $/;"	kind:p	class:game_manager	access:public	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter=1 )
+game_manager::fade_out_to_white	game_engine_stuff/game_manager_class.thumb.cpp	/^void game_manager::fade_out_to_white( u32 num_steps, $/;"	kind:f	class:game_manager	signature:( u32 num_steps, u32 num_frames_to_wait_per_iter )
 game_manager::pause_or_unpause_music	game_engine_stuff/game_manager_class.hpp	/^	static inline void pause_or_unpause_music()$/;"	kind:f	class:game_manager	access:public	signature:()
 game_manager::reinit_the_game	game_engine_stuff/game_manager_class.hpp	/^	static void reinit_the_game();$/;"	kind:p	class:game_manager	access:public	signature:()
 game_manager::reinit_the_game	game_engine_stuff/game_manager_class.thumb.cpp	/^void game_manager::reinit_the_game()$/;"	kind:f	class:game_manager	signature:()
