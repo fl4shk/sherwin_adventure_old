@@ -69,7 +69,7 @@ void sprite_manager::some_sprite_init_thing()
 	the_sprites[0].in_level_pos = the_player.in_level_pos;
 	
 	the_sprites[0].update_f24p8_positions();
-	the_sprites[0].update_on_screen_pos(bgofs_mirror[0].curr);
+	the_sprites[0].update_on_screen_pos(gfx_manager::bgofs_mirror[0].curr);
 	the_sprites[0].copy_the_oam_entry_to_oam_mirror(1);
 	
 	for ( u32 i=1; i<the_sprites.size(); ++i )
@@ -83,7 +83,7 @@ void sprite_manager::some_sprite_init_thing()
 			+ vec2_s32( 0x1000, 0 );
 		
 		the_spr.update_f24p8_positions();
-		the_spr.update_on_screen_pos(bgofs_mirror[0].curr);
+		the_spr.update_on_screen_pos(gfx_manager::bgofs_mirror[0].curr);
 		
 		the_spr.copy_the_oam_entry_to_oam_mirror(i + 1);
 		
@@ -243,8 +243,8 @@ void sprite_manager::initial_sprite_spawning_shared_code
 	{
 		if ( the_spr.the_sprite_type != st_default )
 		{
-			sprite_stuff_array[the_spr.the_sprite_type]
-				->update_part_2( the_spr, bgofs_mirror[0].curr,
+			sprite_stuff_array[the_spr.the_sprite_type]->update_part_2
+				( the_spr, gfx_manager::bgofs_mirror[0].curr, 
 				next_oam_index );
 		}
 	}
@@ -335,8 +335,8 @@ void sprite_manager::initial_sprite_spawning_shared_code
 //		
 //		if ( the_spr.the_sprite_type != st_default )
 //		{
-//			sprite_stuff_array[the_spr.the_sprite_type]
-//				->update_part_2( the_spr, bgofs_mirror[0].curr,
+//			sprite_stuff_array[the_spr.the_sprite_type]->update_part_2
+//				( the_spr, gfx_manager::bgofs_mirror[0].curr,
 //				next_oam_index );
 //		}
 //	}

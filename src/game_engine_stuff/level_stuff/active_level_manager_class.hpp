@@ -93,10 +93,17 @@ public:		// functions
 	{
 		game_manager::curr_game_mode = gm_loading_level;
 		active_level::the_current_level_ptr = n_the_current_level_ptr;
+		
+		for ( u32 i=0; i<active_level::max_num_sublevels; ++i )
+		{
+			memfill32( active_level::persistent_block_data_arrays[i],
+				0, sizeof(active_level::persistent_block_data_arrays[i])
+				/ sizeof(u32) );
+		}
+		
 		load_sublevel_basic(0);
 	}
 	
-	//static inline void initial_sublevel_loading()
 	static inline void load_sublevel_basic( u32 n_sublevel_index )
 	{
 		game_manager::curr_game_mode = gm_changing_sublevel;
@@ -121,24 +128,16 @@ public:		// functions
 		
 		update_sublevel_in_screenblock_mirror_2d();
 		
-		//bgofs_mirror[0].prev = bg_point();
-		//bgofs_mirror[0].curr = bg_point();
-		
 		sprite_manager::initial_sprite_spawning_at_start_of_level
-			(bgofs_mirror[0].curr);
+			(gfx_manager::bgofs_mirror[0].curr);
 		
 		update_sublevel_in_screenblock_mirror_2d();
-		
-		//bios_wait_for_vblank();
-		//copy_sublevel_from_array_2d_helper_to_vram();
 		
 		game_manager::curr_game_mode = gm_in_sublevel;
 		
 		bios_wait_for_vblank();
-		//game_manager::vblank_func();
 	}
 	
-	//static inline void load_sublevel_warp_based( u32 n_sublevel_index )
 	static inline void load_sublevel_at_intra_sublevel_warp
 		( u32 n_sublevel_index, u32 sublevel_entrance_index )
 	{
@@ -147,13 +146,9 @@ public:		// functions
 		
 		active_level::the_current_active_sublevel_index = n_sublevel_index;
 		
-		memfill32( oam_mirror, 0, sizeof(oam_entry) * oam_mirror_size 
-			/ sizeof(u32) );
-		
+		clear_oam_mirror();
 		//bios_wait_for_vblank();
-		
 		copy_oam_mirror_to_oam();
-		
 		
 		// Initialize the list of sprite level data.
 		init_horiz_sublevel_sprite_ipg_lists();
@@ -176,7 +171,7 @@ public:		// functions
 		
 		
 		sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
-			( bgofs_mirror[0].curr, sublevel_entrance_index );
+			( gfx_manager::bgofs_mirror[0].curr, sublevel_entrance_index );
 		update_sublevel_in_screenblock_mirror_2d();
 		
 		game_manager::curr_game_mode = gm_in_sublevel;
@@ -187,7 +182,7 @@ public:		// functions
 		// Wait for about 0.25 seconds.
 		//wait_for_x_frames(15);
 		
-		game_manager::fade_in_from_black(15);
+		game_manager::fade_in(15);
 	}
 	
 } __attribute__((_align4));

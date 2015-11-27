@@ -11,7 +11,7 @@ public:		// variables
 	static constexpr sprite_type the_sprite_type = st_door;
 	static constexpr sprite_gfx_category the_gfx_category = sgc_door;
 	static constexpr u32 the_relative_metatile_slot = 0, 
-		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x32;
+		num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x32;
 	
 	static constexpr tile* tile_arr = const_cast<tile*>
 		(reinterpret_cast<const tile*>(the_door_gfxTiles));

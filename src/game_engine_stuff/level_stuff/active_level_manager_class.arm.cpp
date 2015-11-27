@@ -3,6 +3,7 @@
 
 
 #include "../../gba_specific_stuff/interrupt_stuff.hpp"
+#include "../gfx_manager_class.hpp"
 
 
 
@@ -32,9 +33,9 @@ scr_entry active_level_manager::horiz_sublevel_tile_at_basic( u32 tile_x,
 	}
 	
 	
-	u32 the_metatile_id = get_metatile_number_of_block_type
+	u32 the_metatile_id = gfx_manager::get_metatile_number_of_block_type
 		(the_block_type);
-	u32 the_palette_id = get_palette_number_of_block_type
+	u32 the_palette_id = gfx_manager::get_palette_number_of_block_type
 		(the_block_type);
 	
 	
@@ -128,20 +129,20 @@ scr_entry active_level_manager::horiz_sublevel_tile_at( u32 tile_x,
 void active_level_manager::correct_bg0_scroll_mirror 
 	( const vec2_u32& sublevel_size_in_blocks_2d )
 {
-	s16 sublevel_x_coord_tile = bgofs_mirror[0].curr.x >> 3;
-	s16 sublevel_y_coord_tile = bgofs_mirror[0].curr.y >> 3;
+	s16 sublevel_x_coord_tile = gfx_manager::bgofs_mirror[0].curr.x >> 3;
+	s16 sublevel_y_coord_tile = gfx_manager::bgofs_mirror[0].curr.y >> 3;
 	
 	
 	if ( sublevel_x_coord_tile < 0 )
 	{
-		bgofs_mirror[0].curr.x = 0;
+		gfx_manager::bgofs_mirror[0].curr.x = 0;
 	}
 	
 	else if ( sublevel_x_coord_tile 
 		> (s16)(sublevel_width_in_tiles(sublevel_size_in_blocks_2d) 
 		- screen_width_in_tiles - 1 ) )
 	{
-		bgofs_mirror[0].curr.x = ( sublevel_width_in_tiles
+		gfx_manager::bgofs_mirror[0].curr.x = ( sublevel_width_in_tiles
 			(sublevel_size_in_blocks_2d)
 			* num_pixels_per_tile_row_or_column )
 			- screen_width;
@@ -151,14 +152,14 @@ void active_level_manager::correct_bg0_scroll_mirror
 	
 	if ( sublevel_y_coord_tile < 0 )
 	{
-		bgofs_mirror[0].curr.y = 0;
+		gfx_manager::bgofs_mirror[0].curr.y = 0;
 	}
 	
 	else if ( sublevel_y_coord_tile 
 		> (s16)(sublevel_height_in_tiles(sublevel_size_in_blocks_2d)
 		- screen_height_in_tiles -1 ) )
 	{
-		bgofs_mirror[0].curr.y = ( sublevel_height_in_tiles
+		gfx_manager::bgofs_mirror[0].curr.y = ( sublevel_height_in_tiles
 			(sublevel_size_in_blocks_2d)
 			* num_pixels_per_tile_row_or_column )
 			- screen_height;
@@ -176,8 +177,8 @@ void active_level_manager::update_sublevel_in_screenblock_mirror_2d()
 	
 	
 	// VRAM tiles are 8x8 pixels in size, so divide the 
-	s16 sublevel_x_coord_tile = bgofs_mirror[0].curr.x >> 3;
-	s16 sublevel_y_coord_tile = bgofs_mirror[0].curr.y >> 3;
+	s16 sublevel_x_coord_tile = gfx_manager::bgofs_mirror[0].curr.x >> 3;
+	s16 sublevel_y_coord_tile = gfx_manager::bgofs_mirror[0].curr.y >> 3;
 	
 	
 	// Create a list of 8x8 tile IDs for each block_type
@@ -185,9 +186,10 @@ void active_level_manager::update_sublevel_in_screenblock_mirror_2d()
 	{
 		block_type the_block_type = (block_type)i;
 		
-		u32 the_metatile_id = get_metatile_number_of_block_type
+		u32 the_metatile_id 
+			= gfx_manager::get_metatile_number_of_block_type
 			(the_block_type);
-		u32 the_palette_id = get_palette_number_of_block_type
+		u32 the_palette_id = gfx_manager::get_palette_number_of_block_type
 			(the_block_type);
 		
 		// Top-left 8x8 tile ID

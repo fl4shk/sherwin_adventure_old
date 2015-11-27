@@ -83,7 +83,7 @@ public:		// variables
 	static const u32 the_relative_metatile_slot_arr[];
 	
 	static constexpr u32 num_active_gfx_tiles 
-		= sprite_gfx_manager::num_tiles_in_ss_16x32;
+		= gfx_manager::num_tiles_in_ss_16x32;
 	
 	static constexpr tile* tile_arr = const_cast<tile*>
 		(reinterpret_cast<const tile*>(sherwin_gfxTiles));

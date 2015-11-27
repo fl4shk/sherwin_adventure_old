@@ -38,10 +38,12 @@ typedef tile8 charblock8[charblock8_size];
 
 
 #define bg_tile_vram ( (vu16*)(tile_ram[0]) )
+#define bg_tile_vram_as_tiles ( (volatile tile*)(tile_ram[0]) )
 
-// Do note that obj_tile_vram consists of TWO charblocks, or 1024 tiles of
-// 8x8 pixels
+// Do note that obj_tile_vram consists of TWO charblocks, or 1024 4bpp
+// tiles of 8x8 pixels (512 8bpp tiles of 8x8 pixels).
 #define obj_tile_vram ( (vu16*)(tile_ram[4]) )
+#define obj_tile_vram_as_tiles ( (volatile tile*)(tile_ram[4]) )
 
 // ---- End of Character/Tile Stuffs ----
 
@@ -392,47 +394,6 @@ static const u32 num_pixels_per_block_row_or_column = 16;
 
 
 
-// Current component arrays, stored in EWRAM as fixed24p8's for speed and
-// accuracy reasons.
-static constexpr u32 bg_fade_curr_component_arr_size 
-	= num_colors_in_8_palettes;
-extern fixed24p8 bg_fade_curr_red_arr
-	[bg_fade_curr_component_arr_size] __attribute__((_ewram));
-extern fixed24p8 bg_fade_curr_green_arr
-	[bg_fade_curr_component_arr_size] __attribute__((_ewram));
-extern fixed24p8 bg_fade_curr_blue_arr
-	[bg_fade_curr_component_arr_size] __attribute__((_ewram));
-
-static constexpr u32 obj_fade_curr_component_arr_size 
-	= num_colors_in_8_palettes;
-extern fixed24p8 obj_fade_curr_red_arr
-	[obj_fade_curr_component_arr_size] __attribute__((_ewram));
-extern fixed24p8 obj_fade_curr_green_arr
-	[obj_fade_curr_component_arr_size] __attribute__((_ewram));
-extern fixed24p8 obj_fade_curr_blue_arr
-	[obj_fade_curr_component_arr_size] __attribute__((_ewram));
-
-
-
-// Fade out/in step amounts.
-static constexpr u32 bg_fade_step_amount_arr_size 
-	= num_colors_in_8_palettes;
-extern fixed24p8 bg_fade_red_step_amount_arr
-	[bg_fade_step_amount_arr_size] __attribute__((_ewram));
-extern fixed24p8 bg_fade_green_step_amount_arr
-	[bg_fade_step_amount_arr_size] __attribute__((_ewram));
-extern fixed24p8 bg_fade_blue_step_amount_arr
-	[bg_fade_step_amount_arr_size] __attribute__((_ewram));
-
-static constexpr u32 obj_fade_step_amount_arr_size 
-	= num_colors_in_8_palettes;
-extern fixed24p8 obj_fade_red_step_amount_arr
-	[obj_fade_step_amount_arr_size] __attribute__((_ewram));
-extern fixed24p8 obj_fade_green_step_amount_arr
-	[obj_fade_step_amount_arr_size] __attribute__((_ewram));
-extern fixed24p8 obj_fade_blue_step_amount_arr
-	[obj_fade_step_amount_arr_size] __attribute__((_ewram));
-
 
 inline u16 make_rgb15( u32 red, u32 green, u32 blue )
 {
@@ -567,30 +528,6 @@ inline void m4_plot( s32 x, s32 y, u32 color_id, u32 page )
 
 
 
-static const u32 bgofs_mirror_size = 4;
-
-extern prev_curr_pair<bg_point> bgofs_mirror[bgofs_mirror_size]
-	__attribute__((_iwram));
-
-
-inline void back_up_bgofs_mirror()
-{
-	bgofs_mirror[0].back_up();
-	bgofs_mirror[1].back_up();
-	bgofs_mirror[2].back_up();
-	bgofs_mirror[3].back_up();
-}
-
-inline void copy_bgofs_mirror_to_registers()
-{
-	//memcpy32( reg_bgofs, bgofs_mirror,
-	//	( bgofs_mirror_size * sizeof(bg_point) ) / sizeof(u32) );
-	
-	reg_bgofs[0] = bgofs_mirror[0].curr;
-	reg_bgofs[1] = bgofs_mirror[1].curr;
-	reg_bgofs[2] = bgofs_mirror[2].curr;
-	reg_bgofs[3] = bgofs_mirror[3].curr;
-}
 
 
 

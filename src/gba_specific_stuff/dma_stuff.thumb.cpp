@@ -23,7 +23,6 @@ void dma3_cpy( volatile void* dst, const void* src, u32 count,
 	reg_dma3cnt = dma3cnt_mirror | dma_enable;
 	
 	
-	
 	// We have to wait at least two cycles before we can access DMA
 	// registers again.
 	asm volatile

@@ -93,9 +93,9 @@ public:		// functions
 	{
 		// Clear the first 32x32-pixel VRAM chunk
 		memfill32( &(((tile*)obj_tile_vram)[0]), 0, sizeof(tile)
-			* sprite_gfx_manager::num_tiles_in_ss_32x32 / sizeof(u32) );
+			* gfx_manager::num_tiles_in_ss_32x32 / sizeof(u32) );
 		
-		sprite_gfx_manager::upload_sprite_tiles_to_vram(the_player);
+		gfx_manager::upload_sprite_tiles_to_vram(the_player);
 		
 		for ( sprite& spr : sprite_manager::the_sprites )
 		{
@@ -104,7 +104,7 @@ public:		// functions
 			//if ( spr.get_vram_chunk_index() != 0 )
 			if ( spr.the_sprite_type != st_default )
 			{
-				sprite_gfx_manager::upload_sprite_tiles_to_vram(spr);
+				gfx_manager::upload_sprite_tiles_to_vram(spr);
 			}
 		}
 	}

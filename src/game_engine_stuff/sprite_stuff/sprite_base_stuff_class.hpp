@@ -1,7 +1,7 @@
 #ifndef sprite_base_stuff_class_hpp
 #define sprite_base_stuff_class_hpp
 
-#include "sprite_gfx_stuff.hpp"
+#include "../gfx_manager_class.hpp"
 #include "../level_stuff/active_level_class.hpp"
 //#include "sprite_manager_class.hpp"
 
@@ -17,10 +17,10 @@ public:		// variables
 	
 	static constexpr sprite_gfx_category the_gfx_category = sgc_player;
 	//static constexpr u32 the_relative_metatile_slot = 7,
-	//	num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;
+	//	num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
 	
 	static constexpr u32 the_relative_metatile_slot = 0,
-		num_active_gfx_tiles = sprite_gfx_manager::num_tiles_in_ss_16x16;
+		num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
 	
 	static constexpr tile* tile_arr = const_cast<tile*>
 		(reinterpret_cast<const tile*>(sherwin_gfxTiles));

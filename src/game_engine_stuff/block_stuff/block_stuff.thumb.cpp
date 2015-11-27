@@ -82,24 +82,6 @@ block_base_stuff* block_stuff_array[bt_count] __attribute__((_iwram))
 };
 
 
-void update_block_graphics_in_vram( const unsigned short* the_tiles )
-{
-	// Note:  this function currently does multiple VRAM graphics updates
-	// whenever more than one block_type use the same graphics_slot.
-	for ( u32 i=0; i<block_type::bt_count; ++i )
-	{
-		u32 graphics_slot = get_graphics_slot_of_block_type 
-			( (block_type)i );
-		u32 metatile_number = get_metatile_number_of_block_type
-			( (block_type)i );
-		
-		dma3_cpy( &( bg_tile_vram[graphics_slot * 16]), 
-			&( the_tiles 
-				[metatile_number * 16 * 4] ),
-			16 * 4, 0 );
-		
-	}
-}
 
 
 

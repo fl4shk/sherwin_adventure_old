@@ -4,8 +4,6 @@
 #include "../../gba_specific_stuff/interrupt_stuff.hpp"
 
 
-
-
 void sprite_manager::spawn_sprites_if_needed
 	( const prev_curr_pair<bg_point>& camera_pos_pc_pair )
 {

@@ -181,6 +181,11 @@ inline void copy_oam_mirror_to_oam()
 		( oam_mirror_size * sizeof(oam_entry) ) / sizeof(u32) );
 }
 
+inline void clear_oam_mirror()
+{
+	memfill32( oam_mirror, 0, sizeof(oam_mirror) / sizeof(u32) );
+}
+
 
 
 #endif		// oam_entry_classes_hpp

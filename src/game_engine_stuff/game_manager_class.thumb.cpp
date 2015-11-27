@@ -53,9 +53,9 @@ void game_manager::vblank_func()
 		
 		// When in a sublevel.
 		case gm_in_sublevel:
-			update_block_graphics_in_vram(the_block_gfxTiles);
+			gfx_manager::update_block_graphics_in_vram(the_block_gfxTiles);
 			copy_oam_mirror_to_oam();
-			copy_bgofs_mirror_to_registers();
+			gfx_manager::copy_bgofs_mirror_to_registers();
 			
 			active_level_manager
 				::copy_sublevel_from_array_2d_helper_to_vram();
@@ -96,11 +96,13 @@ void game_manager::title_screen_func()
 	// Clear bgofs_mirror
 	for ( u32 i=0; i<3; ++i )
 	{
-		bgofs_mirror[i].curr.x = bgofs_mirror[i].prev.x = 0;
-		bgofs_mirror[i].curr.y = bgofs_mirror[i].prev.y = 0;
+		gfx_manager::bgofs_mirror[i].curr.x 
+			= gfx_manager::bgofs_mirror[i].prev.x = 0;
+		gfx_manager::bgofs_mirror[i].curr.y 
+			= gfx_manager::bgofs_mirror[i].prev.y = 0;
 	}
 	
-	copy_bgofs_mirror_to_registers();
+	gfx_manager::copy_bgofs_mirror_to_registers();
 	
 	
 	// Copy the title screen's tiles and tilemap to VRAM
@@ -137,12 +139,13 @@ void game_manager::title_screen_func()
 
 void game_manager::reinit_the_game()
 {
+	curr_game_mode = gm_initializing_the_game;
 	bios_wait_for_vblank();
+	
 	fade_out_to_white(15);
 	
-	curr_game_mode = gm_initializing_the_game;
 	
-	// Use video Mode 0, use 1D object mapping, enable forced blank, 
+	// Use video Mode 0, use 1D object mapping, enable forced blank,
 	// display BG 0 and objects.
 	reg_dispcnt |= dcnt_mode0 | dcnt_obj_1d | dcnt_blank_on | dcnt_bg0_on
 		| dcnt_obj_on;
@@ -167,10 +170,10 @@ void game_manager::reinit_the_game()
 	//}
 	
 	// Copy the sprite palettes to OBJ Palette RAM.
-	sprite_gfx_manager::upload_default_sprite_palettes_to_obj_pal_ram();
+	gfx_manager::upload_default_sprite_palettes_to_obj_pal_ram();
 	
 	//// Copy the sprite graphics to OBJ Video RAM.
-	//sprite_gfx_manager::upload_default_sprite_graphics();
+	//gfx_manager::upload_default_sprite_graphics();
 	
 	// Also, copy the_block_gfxPalLen to BG Palette RAM
 	memcpy32( bg_pal_ram, the_block_gfxPal,
@@ -179,7 +182,7 @@ void game_manager::reinit_the_game()
 	//bios_wait_for_vblank();
 	
 	// Finally, copy the_block_gfxTiles to BG VRAM, screenblock 0
-	update_block_graphics_in_vram(the_block_gfxTiles);
+	gfx_manager::update_block_graphics_in_vram(the_block_gfxTiles);
 	
 	//bios_wait_for_vblank();
 	sprite_manager::next_oam_index = 0; 
@@ -202,7 +205,7 @@ void game_manager::reinit_the_game()
 	// Disable forced blank
 	clear_bits( reg_dispcnt, dcnt_blank_mask );
 	
-	fade_in_from_white(15);
+	fade_in(15);
 	
 	bios_wait_for_vblank();
 	
@@ -225,21 +228,24 @@ void game_manager::fade_out_to_black( u32 num_steps,
 		s32 target_green = 0;
 		s32 target_blue = 0;
 		
-		bg_fade_curr_red_arr[i] = make_f24p8(red_orig);
-		bg_fade_curr_green_arr[i] = make_f24p8(green_orig);
-		bg_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
+		gfx_manager::bg_fade_curr_red_arr[i] = make_f24p8(red_orig);
+		gfx_manager::bg_fade_curr_green_arr[i] = make_f24p8(green_orig);
+		gfx_manager::bg_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
 		
 		// The target color is black, for the entire screen.
-		fixed24p8& red_step_amount = bg_fade_red_step_amount_arr[i];
-		fixed24p8& green_step_amount = bg_fade_green_step_amount_arr[i];
-		fixed24p8& blue_step_amount = bg_fade_blue_step_amount_arr[i];
+		fixed24p8& red_step_amount 
+			= gfx_manager::bg_fade_red_step_amount_arr[i];
+		fixed24p8& green_step_amount 
+			= gfx_manager::bg_fade_green_step_amount_arr[i];
+		fixed24p8& blue_step_amount 
+			= gfx_manager::bg_fade_blue_step_amount_arr[i];
 		
 		red_step_amount = ( make_f24p8(target_red) 
-			- bg_fade_curr_red_arr[i] ) / (u16)num_steps;
+			- gfx_manager::bg_fade_curr_red_arr[i] ) / (u16)num_steps;
 		green_step_amount = ( make_f24p8(target_green)
-			- bg_fade_curr_green_arr[i] ) / (u16)num_steps;
+			- gfx_manager::bg_fade_curr_green_arr[i] ) / (u16)num_steps;
 		blue_step_amount = ( make_f24p8(target_green)
-			- bg_fade_curr_blue_arr[i] ) / (u16)num_steps;
+			- gfx_manager::bg_fade_curr_blue_arr[i] ) / (u16)num_steps;
 	}
 	
 	// Build the OBJ arrays of step amounts
@@ -253,21 +259,24 @@ void game_manager::fade_out_to_black( u32 num_steps,
 		s32 target_green = 0;
 		s32 target_blue = 0;
 		
-		obj_fade_curr_red_arr[i] = make_f24p8(red_orig);
-		obj_fade_curr_green_arr[i] = make_f24p8(green_orig);
-		obj_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
+		gfx_manager::obj_fade_curr_red_arr[i] = make_f24p8(red_orig);
+		gfx_manager::obj_fade_curr_green_arr[i] = make_f24p8(green_orig);
+		gfx_manager::obj_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
 		
 		// The target color is black, for the entire screen.
-		fixed24p8& red_step_amount = obj_fade_red_step_amount_arr[i];
-		fixed24p8& green_step_amount = obj_fade_green_step_amount_arr[i];
-		fixed24p8& blue_step_amount = obj_fade_blue_step_amount_arr[i];
+		fixed24p8& red_step_amount 
+			= gfx_manager::obj_fade_red_step_amount_arr[i];
+		fixed24p8& green_step_amount 
+			= gfx_manager::obj_fade_green_step_amount_arr[i];
+		fixed24p8& blue_step_amount 
+			= gfx_manager::obj_fade_blue_step_amount_arr[i];
 		
 		red_step_amount = ( make_f24p8(target_red) 
-			- obj_fade_curr_red_arr[i] ) / (u16)num_steps;
+			- gfx_manager::obj_fade_curr_red_arr[i] ) / (u16)num_steps;
 		green_step_amount = ( make_f24p8(target_green)
-			- obj_fade_curr_green_arr[i] ) / (u16)num_steps;
+			- gfx_manager::obj_fade_curr_green_arr[i] ) / (u16)num_steps;
 		blue_step_amount = ( make_f24p8(target_green)
-			- obj_fade_curr_blue_arr[i] ) / (u16)num_steps;
+			- gfx_manager::obj_fade_curr_blue_arr[i] ) / (u16)num_steps;
 	}
 	
 	// Fading iteration
@@ -276,16 +285,16 @@ void game_manager::fade_out_to_black( u32 num_steps,
 		// For each BG palette
 		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
-			fixed24p8& curr_red = bg_fade_curr_red_arr[j];
-			fixed24p8& curr_green = bg_fade_curr_green_arr[j];
-			fixed24p8& curr_blue = bg_fade_curr_blue_arr[j];
+			fixed24p8& curr_red = gfx_manager::bg_fade_curr_red_arr[j];
+			fixed24p8& curr_green = gfx_manager::bg_fade_curr_green_arr[j];
+			fixed24p8& curr_blue = gfx_manager::bg_fade_curr_blue_arr[j];
 			
 			fixed24p8 red_step_amount 
-				= bg_fade_red_step_amount_arr[j];
+				= gfx_manager::bg_fade_red_step_amount_arr[j];
 			fixed24p8 green_step_amount 
-				= bg_fade_green_step_amount_arr[j];
+				= gfx_manager::bg_fade_green_step_amount_arr[j];
 			fixed24p8 blue_step_amount 
-				= bg_fade_blue_step_amount_arr[j];
+				= gfx_manager::bg_fade_blue_step_amount_arr[j];
 			
 			clamped_rgb15_f24p8_component_add( curr_red, 
 				red_step_amount, (fixed24p8){0} );
@@ -302,16 +311,16 @@ void game_manager::fade_out_to_black( u32 num_steps,
 		// For each OBJ palette
 		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
-			fixed24p8& curr_red = obj_fade_curr_red_arr[j];
-			fixed24p8& curr_green = obj_fade_curr_green_arr[j];
-			fixed24p8& curr_blue = obj_fade_curr_blue_arr[j];
+			fixed24p8& curr_red = gfx_manager::obj_fade_curr_red_arr[j];
+			fixed24p8& curr_green = gfx_manager::obj_fade_curr_green_arr[j];
+			fixed24p8& curr_blue = gfx_manager::obj_fade_curr_blue_arr[j];
 			
 			fixed24p8 red_step_amount 
-				= obj_fade_red_step_amount_arr[j];
+				= gfx_manager::obj_fade_red_step_amount_arr[j];
 			fixed24p8 green_step_amount 
-				= obj_fade_green_step_amount_arr[j];
+				= gfx_manager::obj_fade_green_step_amount_arr[j];
 			fixed24p8 blue_step_amount 
-				= obj_fade_blue_step_amount_arr[j];
+				= gfx_manager::obj_fade_blue_step_amount_arr[j];
 			
 			clamped_rgb15_f24p8_component_add( curr_red, 
 				red_step_amount, (fixed24p8){0} );
@@ -341,160 +350,6 @@ void game_manager::fade_out_to_black( u32 num_steps,
 }
 
 
-void game_manager::fade_in_from_black( u32 num_steps, 
-	u32 num_frames_to_wait_per_iter )
-{
-	// A function like this should eventually be created for background
-	// palettes.
-	sprite_gfx_manager::upload_default_sprite_palettes_to_obj_pal_mirror();
-	
-	bios_wait_for_vblank();
-	
-	// Build the BG arrays of step amounts
-	for ( u32 i=0; i<the_block_gfxPalLen / sizeof(u16); ++i )
-	{
-		s32 red_orig = rgb15_get_red_component(bg_pal_ram[i]);
-		s32 green_orig = rgb15_get_green_component(bg_pal_ram[i]);
-		s32 blue_orig = rgb15_get_blue_component(bg_pal_ram[i]);
-		
-		s32 target_red = rgb15_get_red_component(the_block_gfxPal[i]);
-		s32 target_green = rgb15_get_green_component(the_block_gfxPal[i]);
-		s32 target_blue = rgb15_get_blue_component(the_block_gfxPal[i]);
-		
-		bg_fade_curr_red_arr[i] = make_f24p8(red_orig);
-		bg_fade_curr_green_arr[i] = make_f24p8(green_orig);
-		bg_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
-		
-		// The target color is black, for the entire screen.
-		fixed24p8& red_step_amount = bg_fade_red_step_amount_arr[i];
-		fixed24p8& green_step_amount = bg_fade_green_step_amount_arr[i];
-		fixed24p8& blue_step_amount = bg_fade_blue_step_amount_arr[i];
-		
-		red_step_amount = ( make_f24p8(target_red) 
-			- bg_fade_curr_red_arr[i] ) / (u16)num_steps;
-		green_step_amount = ( make_f24p8(target_green)
-			- bg_fade_curr_green_arr[i] ) / (u16)num_steps;
-		blue_step_amount = ( make_f24p8(target_green)
-			- bg_fade_curr_blue_arr[i] ) / (u16)num_steps;
-	}
-	
-	// Build the OBJ arrays of step amounts
-	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
-	{
-		s32 red_orig = rgb15_get_red_component(obj_pal_ram[i]);
-		s32 green_orig = rgb15_get_green_component(obj_pal_ram[i]);
-		s32 blue_orig = rgb15_get_blue_component(obj_pal_ram[i]);
-		
-		s32 target_red = rgb15_get_red_component
-			(sprite_gfx_manager::obj_pal_mirror[i]);
-		s32 target_green = rgb15_get_green_component
-			(sprite_gfx_manager::obj_pal_mirror[i]);
-		s32 target_blue = rgb15_get_blue_component
-			(sprite_gfx_manager::obj_pal_mirror[i]);
-		
-		obj_fade_curr_red_arr[i] = make_f24p8(red_orig);
-		obj_fade_curr_green_arr[i] = make_f24p8(green_orig);
-		obj_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
-		
-		// The target color is black, for the entire screen.
-		fixed24p8& red_step_amount = obj_fade_red_step_amount_arr[i];
-		fixed24p8& green_step_amount = obj_fade_green_step_amount_arr[i];
-		fixed24p8& blue_step_amount = obj_fade_blue_step_amount_arr[i];
-		
-		red_step_amount = ( make_f24p8(target_red) 
-			- obj_fade_curr_red_arr[i] ) / (u16)num_steps;
-		green_step_amount = ( make_f24p8(target_green)
-			- obj_fade_curr_green_arr[i] ) / (u16)num_steps;
-		blue_step_amount = ( make_f24p8(target_green)
-			- obj_fade_curr_blue_arr[i] ) / (u16)num_steps;
-	}
-	
-	// Fading iteration
-	for ( u32 i=0; i<num_steps; ++i )
-	{
-		// For each BG palette
-		for ( u32 j=0; j<the_block_gfxPalLen / sizeof(u16); ++j )
-		{
-			fixed24p8& curr_red = bg_fade_curr_red_arr[j];
-			fixed24p8& curr_green = bg_fade_curr_green_arr[j];
-			fixed24p8& curr_blue = bg_fade_curr_blue_arr[j];
-			
-			fixed24p8 red_step_amount 
-				= bg_fade_red_step_amount_arr[j];
-			fixed24p8 green_step_amount 
-				= bg_fade_green_step_amount_arr[j];
-			fixed24p8 blue_step_amount 
-				= bg_fade_blue_step_amount_arr[j];
-			
-			// Don't need make_f24p8() for these because color component
-			// values are guaranteed to be positive.
-			fixed24p8 target_red = { (s32)rgb15_get_red_component
-				(the_block_gfxPal[j]) << fixed24p8::shift };
-			fixed24p8 target_green = { (s32)rgb15_get_green_component
-				(the_block_gfxPal[j]) << fixed24p8::shift };
-			fixed24p8 target_blue = { (s32)rgb15_get_blue_component
-				(the_block_gfxPal[j]) << fixed24p8::shift };
-			
-			clamped_rgb15_f24p8_component_add( curr_red, 
-				red_step_amount, target_red );
-			clamped_rgb15_f24p8_component_add( curr_green, 
-				green_step_amount, target_green );
-			clamped_rgb15_f24p8_component_add( curr_blue, 
-				blue_step_amount, target_blue );
-			
-			bg_pal_ram[j] = make_rgb15( curr_red.round_to_int(),
-				curr_green.round_to_int(),
-				curr_blue.round_to_int() );
-		}
-		
-		// For each OBJ palette
-		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
-		{
-			fixed24p8& curr_red = obj_fade_curr_red_arr[j];
-			fixed24p8& curr_green = obj_fade_curr_green_arr[j];
-			fixed24p8& curr_blue = obj_fade_curr_blue_arr[j];
-			
-			fixed24p8 red_step_amount 
-				= obj_fade_red_step_amount_arr[j];
-			fixed24p8 green_step_amount 
-				= obj_fade_green_step_amount_arr[j];
-			fixed24p8 blue_step_amount 
-				= obj_fade_blue_step_amount_arr[j];
-			
-			fixed24p8 target_red = { (s32)rgb15_get_red_component
-				(sprite_gfx_manager::obj_pal_mirror[j]) 
-				<< fixed24p8::shift };
-			fixed24p8 target_green = { (s32)rgb15_get_green_component
-				(sprite_gfx_manager::obj_pal_mirror[j])
-				<< fixed24p8::shift };
-			fixed24p8 target_blue = { (s32)rgb15_get_blue_component
-				(sprite_gfx_manager::obj_pal_mirror[j])
-				<< fixed24p8::shift };
-			
-			clamped_rgb15_f24p8_component_add( curr_red, 
-				red_step_amount, target_red );
-			clamped_rgb15_f24p8_component_add( curr_green, 
-				green_step_amount, target_green );
-			clamped_rgb15_f24p8_component_add( curr_blue, 
-				blue_step_amount, target_blue );
-			
-			obj_pal_ram[j] = make_rgb15( curr_red.round_to_int(),
-				curr_green.round_to_int(),
-				curr_blue.round_to_int() );
-		}
-		
-		wait_for_x_frames(num_frames_to_wait_per_iter);
-	}
-	
-	
-	bios_wait_for_vblank();
-	// Just in case the conversion wasn't complete.
-	memcpy32( bg_pal_ram, the_block_gfxPal,
-		the_block_gfxPalLen / sizeof(u32) );
-	sprite_gfx_manager::upload_default_sprite_palettes_to_obj_pal_ram();
-}
-
-
 void game_manager::fade_out_to_white( u32 num_steps, 
 	u32 num_frames_to_wait_per_iter )
 {
@@ -509,21 +364,24 @@ void game_manager::fade_out_to_white( u32 num_steps,
 		s32 target_green = rgb15_component_max_val;
 		s32 target_blue = rgb15_component_max_val;
 		
-		bg_fade_curr_red_arr[i] = make_f24p8(red_orig);
-		bg_fade_curr_green_arr[i] = make_f24p8(green_orig);
-		bg_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
+		gfx_manager::bg_fade_curr_red_arr[i] = make_f24p8(red_orig);
+		gfx_manager::bg_fade_curr_green_arr[i] = make_f24p8(green_orig);
+		gfx_manager::bg_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
 		
 		// The target color is white, for the entire screen.
-		fixed24p8& red_step_amount = bg_fade_red_step_amount_arr[i];
-		fixed24p8& green_step_amount = bg_fade_green_step_amount_arr[i];
-		fixed24p8& blue_step_amount = bg_fade_blue_step_amount_arr[i];
+		fixed24p8& red_step_amount 
+			= gfx_manager::bg_fade_red_step_amount_arr[i];
+		fixed24p8& green_step_amount 
+			= gfx_manager::bg_fade_green_step_amount_arr[i];
+		fixed24p8& blue_step_amount 
+			= gfx_manager::bg_fade_blue_step_amount_arr[i];
 		
 		red_step_amount = ( make_f24p8(target_red) 
-			- bg_fade_curr_red_arr[i] ) / (u16)num_steps;
+			- gfx_manager::bg_fade_curr_red_arr[i] ) / (u16)num_steps;
 		green_step_amount = ( make_f24p8(target_green)
-			- bg_fade_curr_green_arr[i] ) / (u16)num_steps;
+			- gfx_manager::bg_fade_curr_green_arr[i] ) / (u16)num_steps;
 		blue_step_amount = ( make_f24p8(target_green)
-			- bg_fade_curr_blue_arr[i] ) / (u16)num_steps;
+			- gfx_manager::bg_fade_curr_blue_arr[i] ) / (u16)num_steps;
 	}
 	
 	// Build the OBJ arrays of step amounts
@@ -537,21 +395,24 @@ void game_manager::fade_out_to_white( u32 num_steps,
 		s32 target_green = rgb15_component_max_val;
 		s32 target_blue = rgb15_component_max_val;
 		
-		obj_fade_curr_red_arr[i] = make_f24p8(red_orig);
-		obj_fade_curr_green_arr[i] = make_f24p8(green_orig);
-		obj_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
+		gfx_manager::obj_fade_curr_red_arr[i] = make_f24p8(red_orig);
+		gfx_manager::obj_fade_curr_green_arr[i] = make_f24p8(green_orig);
+		gfx_manager::obj_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
 		
 		// The target color is white, for the entire screen.
-		fixed24p8& red_step_amount = obj_fade_red_step_amount_arr[i];
-		fixed24p8& green_step_amount = obj_fade_green_step_amount_arr[i];
-		fixed24p8& blue_step_amount = obj_fade_blue_step_amount_arr[i];
+		fixed24p8& red_step_amount 
+			= gfx_manager::obj_fade_red_step_amount_arr[i];
+		fixed24p8& green_step_amount 
+			= gfx_manager::obj_fade_green_step_amount_arr[i];
+		fixed24p8& blue_step_amount 
+			= gfx_manager::obj_fade_blue_step_amount_arr[i];
 		
 		red_step_amount = ( make_f24p8(target_red) 
-			- obj_fade_curr_red_arr[i] ) / (u16)num_steps;
+			- gfx_manager::obj_fade_curr_red_arr[i] ) / (u16)num_steps;
 		green_step_amount = ( make_f24p8(target_green)
-			- obj_fade_curr_green_arr[i] ) / (u16)num_steps;
+			- gfx_manager::obj_fade_curr_green_arr[i] ) / (u16)num_steps;
 		blue_step_amount = ( make_f24p8(target_green)
-			- obj_fade_curr_blue_arr[i] ) / (u16)num_steps;
+			- gfx_manager::obj_fade_curr_blue_arr[i] ) / (u16)num_steps;
 	}
 	
 	// Fading iteration
@@ -560,16 +421,16 @@ void game_manager::fade_out_to_white( u32 num_steps,
 		// For each BG palette
 		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
-			fixed24p8& curr_red = bg_fade_curr_red_arr[j];
-			fixed24p8& curr_green = bg_fade_curr_green_arr[j];
-			fixed24p8& curr_blue = bg_fade_curr_blue_arr[j];
+			fixed24p8& curr_red = gfx_manager::bg_fade_curr_red_arr[j];
+			fixed24p8& curr_green = gfx_manager::bg_fade_curr_green_arr[j];
+			fixed24p8& curr_blue = gfx_manager::bg_fade_curr_blue_arr[j];
 			
 			fixed24p8 red_step_amount 
-				= bg_fade_red_step_amount_arr[j];
+				= gfx_manager::bg_fade_red_step_amount_arr[j];
 			fixed24p8 green_step_amount 
-				= bg_fade_green_step_amount_arr[j];
+				= gfx_manager::bg_fade_green_step_amount_arr[j];
 			fixed24p8 blue_step_amount 
-				= bg_fade_blue_step_amount_arr[j];
+				= gfx_manager::bg_fade_blue_step_amount_arr[j];
 			
 			clamped_rgb15_f24p8_component_add( curr_red, 
 				red_step_amount, (fixed24p8){ rgb15_component_max_val 
@@ -589,16 +450,16 @@ void game_manager::fade_out_to_white( u32 num_steps,
 		// For each OBJ palette
 		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
-			fixed24p8& curr_red = obj_fade_curr_red_arr[j];
-			fixed24p8& curr_green = obj_fade_curr_green_arr[j];
-			fixed24p8& curr_blue = obj_fade_curr_blue_arr[j];
+			fixed24p8& curr_red = gfx_manager::obj_fade_curr_red_arr[j];
+			fixed24p8& curr_green = gfx_manager::obj_fade_curr_green_arr[j];
+			fixed24p8& curr_blue = gfx_manager::obj_fade_curr_blue_arr[j];
 			
 			fixed24p8 red_step_amount 
-				= obj_fade_red_step_amount_arr[j];
+				= gfx_manager::obj_fade_red_step_amount_arr[j];
 			fixed24p8 green_step_amount 
-				= obj_fade_green_step_amount_arr[j];
+				= gfx_manager::obj_fade_green_step_amount_arr[j];
 			fixed24p8 blue_step_amount 
-				= obj_fade_blue_step_amount_arr[j];
+				= gfx_manager::obj_fade_blue_step_amount_arr[j];
 			
 			clamped_rgb15_f24p8_component_add( curr_red, 
 				red_step_amount, (fixed24p8){ rgb15_component_max_val
@@ -636,12 +497,12 @@ void game_manager::fade_out_to_white( u32 num_steps,
 }
 
 
-void game_manager::fade_in_from_white( u32 num_steps, 
+void game_manager::fade_in( u32 num_steps, 
 	u32 num_frames_to_wait_per_iter )
 {
 	// A function like this should eventually be created for background
 	// palettes.
-	sprite_gfx_manager::upload_default_sprite_palettes_to_obj_pal_mirror();
+	gfx_manager::upload_default_sprite_palettes_to_obj_pal_mirror();
 	
 	bios_wait_for_vblank();
 	
@@ -656,21 +517,24 @@ void game_manager::fade_in_from_white( u32 num_steps,
 		s32 target_green = rgb15_get_green_component(the_block_gfxPal[i]);
 		s32 target_blue = rgb15_get_blue_component(the_block_gfxPal[i]);
 		
-		bg_fade_curr_red_arr[i] = make_f24p8(red_orig);
-		bg_fade_curr_green_arr[i] = make_f24p8(green_orig);
-		bg_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
+		gfx_manager::bg_fade_curr_red_arr[i] = make_f24p8(red_orig);
+		gfx_manager::bg_fade_curr_green_arr[i] = make_f24p8(green_orig);
+		gfx_manager::bg_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
 		
 		// The target color is white, for the entire screen.
-		fixed24p8& red_step_amount = bg_fade_red_step_amount_arr[i];
-		fixed24p8& green_step_amount = bg_fade_green_step_amount_arr[i];
-		fixed24p8& blue_step_amount = bg_fade_blue_step_amount_arr[i];
+		fixed24p8& red_step_amount 
+			= gfx_manager::bg_fade_red_step_amount_arr[i];
+		fixed24p8& green_step_amount 
+			= gfx_manager::bg_fade_green_step_amount_arr[i];
+		fixed24p8& blue_step_amount 
+			= gfx_manager::bg_fade_blue_step_amount_arr[i];
 		
 		red_step_amount = ( make_f24p8(target_red) 
-			- bg_fade_curr_red_arr[i] ) / (u16)num_steps;
+			- gfx_manager::bg_fade_curr_red_arr[i] ) / (u16)num_steps;
 		green_step_amount = ( make_f24p8(target_green)
-			- bg_fade_curr_green_arr[i] ) / (u16)num_steps;
+			- gfx_manager::bg_fade_curr_green_arr[i] ) / (u16)num_steps;
 		blue_step_amount = ( make_f24p8(target_green)
-			- bg_fade_curr_blue_arr[i] ) / (u16)num_steps;
+			- gfx_manager::bg_fade_curr_blue_arr[i] ) / (u16)num_steps;
 	}
 	
 	// Build the OBJ arrays of step amounts
@@ -681,27 +545,30 @@ void game_manager::fade_in_from_white( u32 num_steps,
 		s32 blue_orig = rgb15_get_blue_component(obj_pal_ram[i]);
 		
 		s32 target_red = rgb15_get_red_component
-			(sprite_gfx_manager::obj_pal_mirror[i]);
+			(gfx_manager::obj_pal_mirror[i]);
 		s32 target_green = rgb15_get_green_component
-			(sprite_gfx_manager::obj_pal_mirror[i]);
+			(gfx_manager::obj_pal_mirror[i]);
 		s32 target_blue = rgb15_get_blue_component
-			(sprite_gfx_manager::obj_pal_mirror[i]);
+			(gfx_manager::obj_pal_mirror[i]);
 		
-		obj_fade_curr_red_arr[i] = make_f24p8(red_orig);
-		obj_fade_curr_green_arr[i] = make_f24p8(green_orig);
-		obj_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
+		gfx_manager::obj_fade_curr_red_arr[i] = make_f24p8(red_orig);
+		gfx_manager::obj_fade_curr_green_arr[i] = make_f24p8(green_orig);
+		gfx_manager::obj_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
 		
 		// The target color is white, for the entire screen.
-		fixed24p8& red_step_amount = obj_fade_red_step_amount_arr[i];
-		fixed24p8& green_step_amount = obj_fade_green_step_amount_arr[i];
-		fixed24p8& blue_step_amount = obj_fade_blue_step_amount_arr[i];
+		fixed24p8& red_step_amount 
+			= gfx_manager::obj_fade_red_step_amount_arr[i];
+		fixed24p8& green_step_amount 
+			= gfx_manager::obj_fade_green_step_amount_arr[i];
+		fixed24p8& blue_step_amount 
+			= gfx_manager::obj_fade_blue_step_amount_arr[i];
 		
 		red_step_amount = ( make_f24p8(target_red) 
-			- obj_fade_curr_red_arr[i] ) / (u16)num_steps;
+			- gfx_manager::obj_fade_curr_red_arr[i] ) / (u16)num_steps;
 		green_step_amount = ( make_f24p8(target_green)
-			- obj_fade_curr_green_arr[i] ) / (u16)num_steps;
+			- gfx_manager::obj_fade_curr_green_arr[i] ) / (u16)num_steps;
 		blue_step_amount = ( make_f24p8(target_green)
-			- obj_fade_curr_blue_arr[i] ) / (u16)num_steps;
+			- gfx_manager::obj_fade_curr_blue_arr[i] ) / (u16)num_steps;
 	}
 	
 	// Fading iteration
@@ -710,16 +577,16 @@ void game_manager::fade_in_from_white( u32 num_steps,
 		// For each BG palette
 		for ( u32 j=0; j<the_block_gfxPalLen / sizeof(u16); ++j )
 		{
-			fixed24p8& curr_red = bg_fade_curr_red_arr[j];
-			fixed24p8& curr_green = bg_fade_curr_green_arr[j];
-			fixed24p8& curr_blue = bg_fade_curr_blue_arr[j];
+			fixed24p8& curr_red = gfx_manager::bg_fade_curr_red_arr[j];
+			fixed24p8& curr_green = gfx_manager::bg_fade_curr_green_arr[j];
+			fixed24p8& curr_blue = gfx_manager::bg_fade_curr_blue_arr[j];
 			
 			fixed24p8 red_step_amount 
-				= bg_fade_red_step_amount_arr[j];
+				= gfx_manager::bg_fade_red_step_amount_arr[j];
 			fixed24p8 green_step_amount 
-				= bg_fade_green_step_amount_arr[j];
+				= gfx_manager::bg_fade_green_step_amount_arr[j];
 			fixed24p8 blue_step_amount 
-				= bg_fade_blue_step_amount_arr[j];
+				= gfx_manager::bg_fade_blue_step_amount_arr[j];
 			
 			// Don't need make_f24p8() for these because color component
 			// values are guaranteed to be positive.
@@ -745,26 +612,23 @@ void game_manager::fade_in_from_white( u32 num_steps,
 		// For each OBJ palette
 		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
-			fixed24p8& curr_red = obj_fade_curr_red_arr[j];
-			fixed24p8& curr_green = obj_fade_curr_green_arr[j];
-			fixed24p8& curr_blue = obj_fade_curr_blue_arr[j];
+			fixed24p8& curr_red = gfx_manager::obj_fade_curr_red_arr[j];
+			fixed24p8& curr_green = gfx_manager::obj_fade_curr_green_arr[j];
+			fixed24p8& curr_blue = gfx_manager::obj_fade_curr_blue_arr[j];
 			
 			fixed24p8 red_step_amount 
-				= obj_fade_red_step_amount_arr[j];
+				= gfx_manager::obj_fade_red_step_amount_arr[j];
 			fixed24p8 green_step_amount 
-				= obj_fade_green_step_amount_arr[j];
+				= gfx_manager::obj_fade_green_step_amount_arr[j];
 			fixed24p8 blue_step_amount 
-				= obj_fade_blue_step_amount_arr[j];
+				= gfx_manager::obj_fade_blue_step_amount_arr[j];
 			
 			fixed24p8 target_red = { (s32)rgb15_get_red_component
-				(sprite_gfx_manager::obj_pal_mirror[j]) 
-				<< fixed24p8::shift };
+				(gfx_manager::obj_pal_mirror[j]) << fixed24p8::shift };
 			fixed24p8 target_green = { (s32)rgb15_get_green_component
-				(sprite_gfx_manager::obj_pal_mirror[j])
-				<< fixed24p8::shift };
+				(gfx_manager::obj_pal_mirror[j]) << fixed24p8::shift };
 			fixed24p8 target_blue = { (s32)rgb15_get_blue_component
-				(sprite_gfx_manager::obj_pal_mirror[j])
-				<< fixed24p8::shift };
+				(gfx_manager::obj_pal_mirror[j]) << fixed24p8::shift };
 			
 			clamped_rgb15_f24p8_component_add( curr_red, 
 				red_step_amount, target_red );
@@ -786,7 +650,7 @@ void game_manager::fade_in_from_white( u32 num_steps,
 	// Just in case the conversion wasn't complete.
 	memcpy32( bg_pal_ram, the_block_gfxPal,
 		the_block_gfxPalLen / sizeof(u32) );
-	sprite_gfx_manager::upload_default_sprite_palettes_to_obj_pal_ram();
+	gfx_manager::upload_default_sprite_palettes_to_obj_pal_ram();
 	
 }
 

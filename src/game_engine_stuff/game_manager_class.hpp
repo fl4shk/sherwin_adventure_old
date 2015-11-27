@@ -9,6 +9,9 @@
 #include "maxmod.h"
 
 
+#include "gfx_manager_class.hpp"
+
+
 enum game_mode
 {
 	// When on the title screen.
@@ -72,12 +75,11 @@ public:		// functions
 	
 	static void fade_out_to_black( u32 num_steps, 
 		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_iwram_code));
-	static void fade_in_from_black( u32 num_steps, 
-		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_iwram_code));
 	
 	static void fade_out_to_white( u32 num_steps, 
 		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_iwram_code));
-	static void fade_in_from_white( u32 num_steps, 
+	
+	static void fade_in( u32 num_steps, 
 		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_iwram_code));
 	
 	// This function toggles whether music is playing if the select button

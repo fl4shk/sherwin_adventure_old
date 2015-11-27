@@ -15,7 +15,7 @@ protected:		// variables
 	
 	// Which 32x32 VRAM chunk this sprite uses, which is equal to the
 	// actual VRAM address divided by
-	// sprite_gfx_manager::num_tiles_in_ss_32x32.  There are a few SPECIAL
+	// gfx_manager::num_tiles_in_ss_32x32.  There are a few SPECIAL
 	// cases where vram_chunk_index would need to be changed, so
 	// set_vram_chunk_index() exists.
 	u32 vram_chunk_index;

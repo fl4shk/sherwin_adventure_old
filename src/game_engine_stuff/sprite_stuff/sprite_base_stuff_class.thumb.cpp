@@ -75,7 +75,7 @@ void sprite_base_stuff::gfx_update( sprite& the_sprite )
 	//	( get_curr_tile_slot_old(the_sprite) );
 	the_sprite.the_oam_entry.set_tile_number
 		( the_sprite.get_vram_chunk_index() 
-		* sprite_gfx_manager::num_tiles_in_ss_32x32 );
+		* gfx_manager::num_tiles_in_ss_32x32 );
 	
 	the_sprite.the_oam_entry.set_pal_number 
 		( get_gfx_category(the_sprite) );
@@ -108,7 +108,7 @@ void sprite_base_stuff::update_part_2( sprite& the_sprite,
 //const u32 sprite_base_stuff::get_curr_tile_slot_old( sprite& the_sprite )
 //{
 //	return 
-//		( ( sprite_gfx_manager::sprite_gfx_category_first_vram_slot_list 
+//		( ( gfx_manager::sprite_gfx_category_first_vram_slot_list 
 //		[get_gfx_category(the_sprite)] / sizeof(tile) * sizeof(u16) )
 //		+ get_curr_relative_tile_slot(the_sprite) );
 //}
@@ -116,7 +116,7 @@ void sprite_base_stuff::update_part_2( sprite& the_sprite,
 const u32 sprite_base_stuff::get_curr_tile_slot( sprite& the_sprite )
 {
 	return the_sprite.get_vram_chunk_index() 
-		* sprite_gfx_manager::num_tiles_in_ss_32x32;
+		* gfx_manager::num_tiles_in_ss_32x32;
 }
 
 // The reason this function takes a sprite instance as a parameter is that

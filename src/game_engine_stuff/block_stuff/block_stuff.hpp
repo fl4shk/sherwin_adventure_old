@@ -145,62 +145,6 @@ public:		// functions
 
 
 
-inline u32 get_metatile_number_of_block_type( block_type the_block_type ) 
-	__attribute__((always_inline));
-
-
-inline u32 get_metatile_number_of_block_type( block_type the_block_type )
-{
-	//if ( the_block_type < 0 || the_block_type >= block_type::bt_count )
-	//{
-	//	return block_stuff_array[bt_air]->get_metatile_number();
-	//}
-	//else
-	//{
-	//	return block_stuff_array[the_block_type]->get_metatile_number();
-	//}
-	
-	return block_stuff_array[the_block_type]->get_metatile_number();
-}
-
-
-
-inline const u32 get_graphics_slot_of_block_type 
-	( block_type the_block_type ) __attribute__((always_inline));
-
-
-inline const u32 get_graphics_slot_of_block_type 
-	( block_type the_block_type )
-{
-	// This assumes that EVERY block uses 4 graphics slots in VRAM
-	//return ( the_block_type * 4 );
-	return block_stuff_array[the_block_type]->get_metatile_graphics_slot()
-		* 4;
-}
-
-inline u32 get_palette_number_of_block_type( block_type the_block_type ) 
-	__attribute__((always_inline));
-
-
-inline u32 get_palette_number_of_block_type( block_type the_block_type )
-{
-	//if ( the_block_type < 0 || the_block_type >= block_type::bt_count )
-	//{
-	//	return block_stuff_array[bt_air]->get_palette_number();
-	//}
-	//else
-	//{
-	//	return block_stuff_array[the_block_type]->get_palette_number();
-	//}
-	
-	return block_stuff_array[the_block_type]->get_palette_number();
-}
-
-
-void update_block_graphics_in_vram( const unsigned short* the_tiles )
-	__attribute__((_iwram_code));
-
-
 inline bool bt_is_slope( block_type the_block_type )
 {
 	return ( the_block_type >= bt_grass_slope_p16_p16 

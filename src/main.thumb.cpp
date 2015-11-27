@@ -20,8 +20,8 @@
 #include "game_engine_stuff/sprite_stuff/sprite_manager_class.hpp"
 
 
-
 #include "game_engine_stuff/game_manager_class.hpp"
+#include "game_engine_stuff/gfx_manager_class.hpp"
 
 
 extern "C" int ewram_test_func();
@@ -38,17 +38,17 @@ int main()
 	
 	game_manager::title_screen_func();
 	
-	//reinit_the_game();
+	//game_manager::reinit_the_game();
 	
 	for (;;)
 	{
-		back_up_bgofs_mirror();
+		gfx_manager::back_up_bgofs_mirror();
 		
 		sprite& the_player = sprite_manager::the_player;
 		
 		clear_debug_vars();
 		
-		memfill32( oam_mirror, 0, sizeof(oam_mirror) / sizeof(u32) );
+		clear_oam_mirror();
 		
 		// Key polling is done in game_manager::vblank_func()
 		//key_poll();
@@ -64,18 +64,19 @@ int main()
 		
 		
 		// Despawn sprites that are too far offscreen.
-		sprite_manager::despawn_sprites_if_needed(bgofs_mirror[0]);
+		sprite_manager::despawn_sprites_if_needed
+			(gfx_manager::bgofs_mirror[0]);
 		
 		sprite_manager::update_all_sprites
 			( active_level::get_the_current_sublevel_ptr().get_size_2d(), 
-			bgofs_mirror[0] );
+			gfx_manager::bgofs_mirror[0] );
 		
 		
 		//// This is temporary
 		//if ( key_held(key_l) )
 		//{
 		//	sprite_manager::spawn_a_sprite_basic( st_waffle,
-		//		the_player.in_level_pos, bgofs_mirror[0].curr,
+		//		the_player.in_level_pos, gfx_manager::bgofs_mirror[0].curr,
 		//		(bool)the_player.the_oam_entry.get_hflip_status() );
 		//}
 		
@@ -85,10 +86,11 @@ int main()
 		//	
 		//	game_manager::wait_for_x_frames(60);
 		//	
-		//	game_manager::fade_in_from_black(1);
+		//	game_manager::fade_in(1);
 		//}
 		
-		sprite_manager::spawn_sprites_if_needed(bgofs_mirror[0]);
+		sprite_manager::spawn_sprites_if_needed
+			(gfx_manager::bgofs_mirror[0]);
 		
 		
 		//active_level_manager::update_sublevel_in_screenblock_mirror_2d
