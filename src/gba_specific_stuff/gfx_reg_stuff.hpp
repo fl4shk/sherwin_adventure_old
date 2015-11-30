@@ -288,7 +288,7 @@ static const u32 num_pixels_per_block_row_or_column = 16;
 #define bgcnt_prio( n ) ( n & 0x1 )
 #define bgcnt_prio_mask ( (u16)(0x0001) )
 
-// Character Base Block
+// Character Base Block (Virtually Worthless)
 #define bgcnt_cbb( n ) ( ( n & 0x3 ) << 0x2 )
 #define bgcnt_cbb_mask ( (u16)(0x000c) )
 
@@ -297,7 +297,7 @@ static const u32 num_pixels_per_block_row_or_column = 16;
 #define bgcnt_mosaic_on ( 0x1 << 0x6 )
 #define bgcnt_mosaic_mask ( (u16)(0x0040) )
 
-// Whether the BG is 4bpp or 8bpp 
+// Whether the BG is 4bpp or 8bpp (I'll probably be using 4bpp exclusively)
 #define bgcnt_4bpp ( 0x0 << 0x7 )
 #define bgcnt_8bpp ( 0x1 << 0x7 )
 #define bgcnt_bpp_mask ( (u16)(0x0080) )

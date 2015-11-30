@@ -77,7 +77,7 @@ void game_manager::title_screen_func()
 	bios_wait_for_vblank();
 	
 	// Use video Mode 0, use 1D object mapping, enable forced blank, 
-	// and display BG 0
+	// and display BG 0 and BG 1.
 	reg_dispcnt |= dcnt_mode0 | dcnt_obj_1d | dcnt_blank_on | dcnt_bg0_on;
 	
 	//// Use video Mode 0, use 1D object mapping, enable forced blank, 
@@ -91,6 +91,9 @@ void game_manager::title_screen_func()
 	reg_bg1cnt |= bgcnt_sbb(bg1_sbb);
 	reg_bg2cnt |= bgcnt_sbb(bg2_sbb);
 	reg_bg3cnt |= bgcnt_sbb(bg3_sbb);
+	
+	////
+	//reg_bg0cnt 
 	
 	
 	// Clear bgofs_mirror
@@ -146,21 +149,38 @@ void game_manager::reinit_the_game()
 	
 	
 	// Use video Mode 0, use 1D object mapping, enable forced blank,
-	// display BG 0 and objects.
+	// display BG 0, BG 1, and objects.
 	reg_dispcnt |= dcnt_mode0 | dcnt_obj_1d | dcnt_blank_on | dcnt_bg0_on
-		| dcnt_obj_on;
+		| dcnt_bg1_on | dcnt_obj_on;
 	
 	//// Use video Mode 0, use 1D object mapping, enable forced blank, 
 	//// and display BG 0, BG 1, BG 2, BG 3, and objects
 	//reg_dispcnt = dcnt_mode0 | dcnt_obj_1d | dcnt_blank_on | dcnt_bg0_on
 	//	| dcnt_bg1_on | dcnt_bg2_on | dcnt_bg3_on | dcnt_obj_on;
 	
-	// Use screen base block 28 for BG0's Map
-	reg_bg0cnt |= bgcnt_sbb(bg0_sbb);
+	// Use screen base block 28 for BG0's Map.
+	reg_bg0cnt |= bgcnt_sbb(bg0_sbb) | bgcnt_prio(1);
 	
-	reg_bg1cnt |= bgcnt_sbb(bg1_sbb);
-	reg_bg2cnt |= bgcnt_sbb(bg2_sbb);
-	reg_bg3cnt |= bgcnt_sbb(bg3_sbb);
+	// Give BG1 a higher display priority than BG0.
+	reg_bg1cnt |= bgcnt_sbb(bg1_sbb) | bgcnt_prio(0);
+	reg_bg2cnt |= bgcnt_sbb(bg2_sbb) | bgcnt_prio(1);
+	reg_bg3cnt |= bgcnt_sbb(bg3_sbb) | bgcnt_prio(1);
+	
+	
+	//u32 the_metatile_id = gfx_manager::get_metatile_number_of_block_type
+	//	(bt_eyes);
+	//u32 the_palette_id = gfx_manager::get_palette_number_of_block_type
+	//	(bt_eyes);
+	//u32 num_tiles_per_metatile = gfx_manager::num_tiles_in_ss_16x16;
+	//
+	//for ( u32 i=0; i<screenblock_size; ++i )
+	//{
+	//	se_ram[bg1_sbb][i] 
+	//		= se_id( the_metatile_id * num_tiles_per_metatile )
+	//		| se_palbank(the_palette_id);
+	//}
+	
+	
 	
 	//bios_wait_for_vblank();
 	

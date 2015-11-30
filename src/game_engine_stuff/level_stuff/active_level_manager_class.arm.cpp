@@ -38,18 +38,22 @@ scr_entry active_level_manager::horiz_sublevel_tile_at_basic( u32 tile_x,
 	u32 the_palette_id = gfx_manager::get_palette_number_of_block_type
 		(the_block_type);
 	
+	u32 num_tiles_per_metatile = gfx_manager::num_tiles_in_ss_16x16;
+	
 	
 	// First inner row
 	if ( inner_block_y == 0 )
 	{
 		if ( inner_block_x == 0 )
 		{
-			return (u16)( ( se_id( the_metatile_id * 4 ) + 0 )
+			return (u16)( ( se_id( the_metatile_id 
+				* num_tiles_per_metatile ) + 0 )
 				| se_palbank(the_palette_id) );
 		}
 		else //if ( inner_block_x == 1 )
 		{
-			return (u16)( se_id ( ( the_metatile_id * 4 ) + 1 ) 
+			return (u16)( se_id ( ( the_metatile_id 
+				* num_tiles_per_metatile ) + 1 ) 
 				| se_palbank(the_palette_id) );
 		}
 	}
@@ -58,12 +62,14 @@ scr_entry active_level_manager::horiz_sublevel_tile_at_basic( u32 tile_x,
 	{
 		if ( inner_block_x == 0 )
 		{
-			return (u16)( se_id( ( the_metatile_id * 4 ) + 2 ) 
+			return (u16)( se_id( ( the_metatile_id 
+				* num_tiles_per_metatile ) + 2 ) 
 				| se_palbank(the_palette_id) );
 		}
 		else //if ( inner_block_x == 1 )
 		{
-			return (u16)( se_id( ( the_metatile_id * 4 ) + 3 )
+			return (u16)( se_id( ( the_metatile_id 
+				* num_tiles_per_metatile ) + 3 )
 				| se_palbank(the_palette_id) );
 		}
 	}

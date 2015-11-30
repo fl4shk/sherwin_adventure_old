@@ -94,6 +94,8 @@ public:		// functions
 		game_manager::curr_game_mode = gm_loading_level;
 		active_level::the_current_level_ptr = n_the_current_level_ptr;
 		
+		player_sprite_stuff::run_toggle = false;
+		
 		for ( u32 i=0; i<active_level::max_num_sublevels; ++i )
 		{
 			memfill32( active_level::persistent_block_data_arrays[i],
