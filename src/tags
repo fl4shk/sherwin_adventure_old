@@ -5,6 +5,7 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 GRIT_SHERWIN_GFX_H	gfx/sherwin_gfx.h	18;"	kind:d
+GRIT_TEXT_8X16_GFX_H	gfx/text_8x16_gfx.h	18;"	kind:d
 GRIT_THE_BLOCK_GFX_H	gfx/the_block_gfx.h	18;"	kind:d
 GRIT_THE_DOOR_GFX_H	gfx/the_door_gfx.h	18;"	kind:d
 GRIT_THE_GOLEM_ENEMY_GFX_H	gfx/the_golem_enemy_gfx.h	18;"	kind:d
@@ -2794,6 +2795,8 @@ test_level_sublevel_2	test_level/test_level.thumb.cpp	/^const sublevel< 1953, 64
 test_sram_arr	game_engine_stuff/game_manager_class.hpp	/^	static u8 test_sram_arr[test_sram_arr_size] __attribute__((_sram));$/;"	kind:m	class:game_manager	access:public
 test_sram_arr	game_engine_stuff/game_manager_class.thumb.cpp	/^u8 game_manager::test_sram_arr[game_manager::test_sram_arr_size];$/;"	kind:m	class:game_manager	file:
 test_sram_arr_size	game_engine_stuff/game_manager_class.hpp	/^	static constexpr u32 test_sram_arr_size = debug_arr_u32_size $/;"	kind:m	class:game_manager	access:public
+text_8x16_gfxPalLen	gfx/text_8x16_gfx.h	23;"	kind:d
+text_8x16_gfxTilesLen	gfx/text_8x16_gfx.h	20;"	kind:d
 the_active_sprites_starting_vram_chunk_index	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static constexpr u32 the_active_sprites_starting_vram_chunk_index = 2;$/;"	kind:m	class:sprite_manager	access:public
 the_array	game_engine_stuff/array_2d_helper_class.hpp	/^	type* the_array;$/;"	kind:m	class:array_2d_helper	access:public
 the_array	game_engine_stuff/array_helper_class.hpp	/^	type* the_array;$/;"	kind:m	class:array_helper	access:public
