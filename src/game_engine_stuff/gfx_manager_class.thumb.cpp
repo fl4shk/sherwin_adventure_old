@@ -112,6 +112,8 @@ void gfx_manager::copy_bg_pal_mirror_to_bg_pal_ram()
 void gfx_manager::upload_bg_tiles_to_vram()
 {
 	
+	u32 highest_graphics_slot = 0;
+	
 	// Note:  this function currently does multiple VRAM graphics updates
 	// whenever multiple block_types share the same graphics_slot.  An
 	// example of this is how each variation of bt_eyes shares the same
@@ -122,6 +124,11 @@ void gfx_manager::upload_bg_tiles_to_vram()
 			( (block_type)i );
 		u32 metatile_number = get_metatile_number_of_block_type
 			( (block_type)i );
+		
+		if ( highest_graphics_slot < graphics_slot )
+		{
+			highest_graphics_slot = graphics_slot;
+		}
 		
 		//dma3_cpy( &( bg_tile_vram[graphics_slot * 16]), 
 		//	&( the_tiles 
@@ -137,6 +144,22 @@ void gfx_manager::upload_bg_tiles_to_vram()
 			[metatile_number * num_tiles_in_ss_16x16]),
 			sizeof(tile) * num_tiles_in_ss_16x16 / sizeof (u32) );
 	}
+	
+	highest_graphics_slot += num_tiles_in_ss_16x16;
+	
+	//memcpy32( &(bg_tile_vram_as_tiles[highest_graphics_slot]),
+	//	&((reinterpret_cast<const tile*>(text_8x16_gfxTiles))
+	//	[highest_graphics_slot]), text_8x16_gfxTilesLen 
+	//	/ ( sizeof(tile) * sizeof(u32) ) );
+	
+	//for ( u32 i=0; i<text_8x16_gfxTilesLen / sizeof(u16); ++i )
+	//{
+	//	((vu16*)&(bg_tile_vram_as_tiles[highest_graphics_slot]))[i]
+	//		= text_8x16_gfxTiles[i];
+	//}
+	
+	memcpy32( &(bg_tile_vram_as_tiles[highest_graphics_slot]),
+		text_8x16_gfxTiles, text_8x16_gfxTilesLen / sizeof(u32) );
 }
 
 //// Note:  There needs to be some way to keep track of multiple graphics

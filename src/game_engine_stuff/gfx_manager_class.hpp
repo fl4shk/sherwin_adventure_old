@@ -159,6 +159,7 @@ public:		// variables and constants
 	obj_fade_blue_step_amount_arr
 		[obj_fade_step_amount_arr_size] __attribute__((_ewram));
 	
+	
 	// Sprite VRAM allocation stuff
 	
 	// 64 max sprites on screen at once should be plenty.  Sprite
@@ -221,7 +222,6 @@ public:		// functions
 	//static inline const u32 get_graphics_slot_of_block_type 
 	//	( block_type the_block_type ) __attribute__((always_inline));
 	
-	
 	static inline const u32 get_graphics_slot_of_block_type 
 		( block_type the_block_type )
 	{
@@ -233,7 +233,6 @@ public:		// functions
 	
 	//static inline u32 get_palette_number_of_block_type
 	//	( block_type the_block_type ) __attribute__((always_inline));
-	
 	
 	static inline u32 get_palette_number_of_block_type
 		( block_type the_block_type )

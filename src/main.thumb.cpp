@@ -53,7 +53,6 @@ int main()
 		// Key polling is done in game_manager::vblank_func()
 		//key_poll();
 		
-		
 		if ( soft_reset_keys_down() )
 		{
 			// Reset the game if A, B, Start, and Select are pressed
