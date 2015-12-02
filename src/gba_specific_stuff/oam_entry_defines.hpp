@@ -129,16 +129,16 @@
 #define obj_attr2_tile_number_shift		( 0 )
 
 
-// Object Priority Relative to BG
-#define obj_attr2_bg_prio( n )			( ( n & 0x3 ) << 10 )
+// Object Priority Relative to BG and Other Objects
+#define obj_attr2_prio( n )			( ( n & 0x3 ) << 10 )
 
-#define obj_attr2_bg_prio_0				( 0x0 << 10 )
-#define obj_attr2_bg_prio_1				( 0x1 << 10 )
-#define obj_attr2_bg_prio_2				( 0x2 << 10 )
-#define obj_attr2_bg_prio_3				( 0x3 << 10 )
+#define obj_attr2_prio_0				( 0x0 << 10 )
+#define obj_attr2_prio_1				( 0x1 << 10 )
+#define obj_attr2_prio_2				( 0x2 << 10 )
+#define obj_attr2_prio_3				( 0x3 << 10 )
 
-#define obj_attr2_bg_prio_mask			( 0x0c00 )
-#define obj_attr2_bg_prio_shift			( 10 )
+#define obj_attr2_prio_mask			( 0x0c00 )
+#define obj_attr2_prio_shift			( 10 )
 
 
 // Object Palette Number (Not used in 256 color/1 palette mode)

@@ -1,7 +1,8 @@
 #ifndef player_sprite_stuff_class_hpp
 #define player_sprite_stuff_class_hpp
 
-#include "sprite_gfx_stuff.hpp"
+//#include "../gfx_manager_class.hpp"
+#include "../gfx_manager_class.hpp"
 
 #include "../../gfx/sherwin_gfx.h"
 
@@ -77,7 +78,7 @@ public:		// variables
 	
 	// Graphics constants
 	static constexpr sprite_type the_sprite_type = st_player;
-	static constexpr sprite_gfx_category the_gfx_category = sgc_player;
+	static constexpr sprite_palette_slot the_palette_slot = sps_player;
 	
 	static const u32 the_relative_metatile_slot_arr_size;
 	static const u32 the_relative_metatile_slot_arr[];
@@ -115,10 +116,10 @@ public:		// functions
 	// Graphics stuff
 	//virtual const u32 get_curr_tile_slot( sprite& the_player );
 	
-	inline virtual const sprite_gfx_category get_gfx_category 
+	inline virtual const sprite_palette_slot get_palette_slot 
 		( sprite& the_player )
 	{
-		return the_gfx_category;
+		return the_palette_slot;
 	}
 	virtual const u32 get_curr_relative_tile_slot( sprite& the_player );
 	

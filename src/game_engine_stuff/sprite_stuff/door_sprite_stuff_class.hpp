@@ -9,7 +9,7 @@ class door_sprite_stuff : public sprite_base_stuff
 {
 public:		// variables
 	static constexpr sprite_type the_sprite_type = st_door;
-	static constexpr sprite_gfx_category the_gfx_category = sgc_door;
+	static constexpr sprite_palette_slot the_palette_slot = sps_door;
 	static constexpr u32 the_relative_metatile_slot = 0, 
 		num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x32;
 	
@@ -23,7 +23,7 @@ public:		// variables
 		the_initial_cb_pos_offset;
 	
 public:		// functions
-	//virtual void init( sprite& the_door, bool facing_left=false );
+	virtual void init( sprite& the_door, bool facing_left=false );
 	
 	inline virtual const sprite_type get_sprite_type() const
 	{
@@ -33,10 +33,10 @@ public:		// functions
 	// Graphics stuff
 	//virtual void gfx_update( sprite& the_door );
 	
-	inline virtual const sprite_gfx_category get_gfx_category
+	inline virtual const sprite_palette_slot get_palette_slot
 		( sprite& the_door )
 	{
-		return the_gfx_category;
+		return the_palette_slot;
 	}
 	inline virtual const u32 get_curr_relative_tile_slot
 		( sprite& the_door )

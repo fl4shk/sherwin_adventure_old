@@ -8,7 +8,7 @@ class muffin_sprite_stuff : public sprite_base_stuff
 {
 public:		// variables
 	static constexpr sprite_type the_sprite_type = st_muffin;
-	static constexpr sprite_gfx_category the_gfx_category = sgc_powerup;
+	static constexpr sprite_palette_slot the_palette_slot = sps_powerup;
 	static constexpr u32 the_relative_metatile_slot = 1, 
 		num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
 	
@@ -25,10 +25,10 @@ public:		// functions
 	// Graphics stuff
 	//virtual void gfx_update( sprite& the_powerup );
 	
-	inline virtual const sprite_gfx_category get_gfx_category
+	inline virtual const sprite_palette_slot get_palette_slot
 		( sprite& the_powerup )
 	{
-		return the_gfx_category;
+		return the_palette_slot;
 	}
 	inline virtual const u32 get_curr_relative_tile_slot
 		( sprite& the_powerup )
@@ -57,7 +57,7 @@ class fire_muffin_sprite_stuff : public sprite_base_stuff
 {
 public:		// variables
 	static constexpr sprite_type the_sprite_type = st_fire_muffin;
-	static constexpr sprite_gfx_category the_gfx_category = sgc_powerup;
+	static constexpr sprite_palette_slot the_palette_slot = sps_powerup;
 	static constexpr u32 the_relative_metatile_slot = 2, 
 		num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
 	
@@ -74,10 +74,10 @@ public:		// functions
 	// Graphics stuff
 	//virtual void gfx_update( sprite& the_powerup );
 	
-	inline virtual const sprite_gfx_category get_gfx_category
+	inline virtual const sprite_palette_slot get_palette_slot
 		( sprite& the_powerup )
 	{
-		return the_gfx_category;
+		return the_palette_slot;
 	}
 	inline virtual const u32 get_curr_relative_tile_slot
 		( sprite& the_powerup )
@@ -106,7 +106,7 @@ class ice_muffin_sprite_stuff : public sprite_base_stuff
 {
 public:		// variables
 	static constexpr sprite_type the_sprite_type = st_ice_muffin;
-	static constexpr sprite_gfx_category the_gfx_category = sgc_powerup;
+	static constexpr sprite_palette_slot the_palette_slot = sps_powerup;
 	static constexpr u32 the_relative_metatile_slot = 3, 
 		num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
 	
@@ -123,10 +123,10 @@ public:		// functions
 	// Graphics stuff
 	//virtual void gfx_update( sprite& the_powerup );
 	
-	inline virtual const sprite_gfx_category get_gfx_category
+	inline virtual const sprite_palette_slot get_palette_slot
 		( sprite& the_powerup )
 	{
-		return the_gfx_category;
+		return the_palette_slot;
 	}
 	inline virtual const u32 get_curr_relative_tile_slot
 		( sprite& the_powerup )
@@ -153,7 +153,7 @@ class chocolate_muffin_sprite_stuff : public sprite_base_stuff
 {
 public:		// variables
 	static constexpr sprite_type the_sprite_type = st_chocolate_muffin;
-	static constexpr sprite_gfx_category the_gfx_category = sgc_powerup;
+	static constexpr sprite_palette_slot the_palette_slot = sps_powerup;
 	static constexpr u32 the_relative_metatile_slot = 4, 
 		num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
 	
@@ -170,10 +170,10 @@ public:		// functions
 	// Graphics stuff
 	//virtual void gfx_update( sprite& the_powerup );
 	
-	inline virtual const sprite_gfx_category get_gfx_category
+	inline virtual const sprite_palette_slot get_palette_slot
 		( sprite& the_powerup )
 	{
-		return the_gfx_category;
+		return the_palette_slot;
 	}
 	inline virtual const u32 get_curr_relative_tile_slot
 		( sprite& the_powerup )

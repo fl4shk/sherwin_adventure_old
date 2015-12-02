@@ -50,7 +50,7 @@ void player_sprite_stuff::init( sprite& the_player, bool facing_left  )
 		( the_player.get_vram_chunk_index() 
 		* gfx_manager::num_tiles_in_ss_32x32 );
 	the_player.the_oam_entry.set_pal_number 
-		( get_gfx_category(the_player) );
+		( get_palette_slot(the_player) );
 	
 	////the_player.set_shape_size(oam_entry::ss_16x32);
 	//the_player.set_shape_size( get_initial_shape_size() );
@@ -77,6 +77,10 @@ void player_sprite_stuff::init( sprite& the_player, bool facing_left  )
 	//	16 << fixed24p8::shift };
 	//the_player.cb_pos_offset = { 0 << fixed24p8::shift,
 	//	0 << fixed24p8::shift };
+	
+	
+	clear_and_set_bits( the_player.the_oam_entry.attr2, 
+		obj_attr2_prio_mask, obj_attr2_prio_1 );
 }
 
 void player_sprite_stuff::init( sprite& the_player, 
@@ -103,6 +107,8 @@ void player_sprite_stuff::init( sprite& the_player,
 	the_player.update_on_screen_pos(camera_pos);
 	the_player.copy_the_oam_entry_to_oam_mirror(0);
 	
+	clear_and_set_bits( the_player.the_oam_entry.attr2, 
+		obj_attr2_prio_mask, obj_attr2_prio_1 );
 }
 
 
@@ -117,7 +123,7 @@ void player_sprite_stuff::gfx_update( sprite& the_player )
 		( get_curr_tile_slot(the_player) );
 	
 	the_player.the_oam_entry.set_pal_number 
-		( get_gfx_category(the_player) );
+		( get_palette_slot(the_player) );
 }
 
 void player_sprite_stuff::update_part_1( sprite& the_player ) 
@@ -295,8 +301,8 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 
 //const u32 player_sprite_stuff::get_curr_tile_slot( sprite& the_player )
 //{
-//	return sprite_gfx_category_first_vram_slot_list 
-//		[get_gfx_category(the_player)]
+//	return sprite_palette_slot_first_vram_slot_list 
+//		[get_palette_slot(the_player)]
 //		+ get_curr_relative_tile_slot(the_player);
 //}
 

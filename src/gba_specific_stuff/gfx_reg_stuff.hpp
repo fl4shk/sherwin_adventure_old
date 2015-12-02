@@ -114,6 +114,8 @@ static const u32 bg_pal_ram_size_in_u16 = bg_pal_ram_size / sizeof(u16);
 static const u32 obj_pal_ram_size_in_u16 = obj_pal_ram_size / sizeof(u16);
 
 static const u32 num_colors_in_8_palettes = pal_ram_size_in_u16;
+static const u32 num_colors_per_palette = 16;
+
 /* ---- End of Palette RAM Stuffs ---- */
 
 

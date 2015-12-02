@@ -18,7 +18,7 @@ void sprite_base_stuff::init( sprite& the_sprite, bool facing_left )
 	the_sprite.the_oam_entry.set_tile_number
 		( get_curr_tile_slot(the_sprite) );
 	the_sprite.the_oam_entry.set_pal_number 
-		( get_gfx_category(the_sprite) );
+		( get_palette_slot(the_sprite) );
 	
 	set_initial_shape_size_of_sprite(the_sprite);
 	set_initial_coll_box_stuff_of_sprite(the_sprite);
@@ -27,6 +27,10 @@ void sprite_base_stuff::init( sprite& the_sprite, bool facing_left )
 	{
 		the_sprite.the_oam_entry.enable_hflip();
 	}
+	
+	
+	clear_and_set_bits( the_sprite.the_oam_entry.attr2, 
+		obj_attr2_prio_mask, obj_attr2_prio_1 );
 	
 }
 
@@ -78,7 +82,7 @@ void sprite_base_stuff::gfx_update( sprite& the_sprite )
 		* gfx_manager::num_tiles_in_ss_32x32 );
 	
 	the_sprite.the_oam_entry.set_pal_number 
-		( get_gfx_category(the_sprite) );
+		( get_palette_slot(the_sprite) );
 }
 
 
@@ -108,8 +112,8 @@ void sprite_base_stuff::update_part_2( sprite& the_sprite,
 //const u32 sprite_base_stuff::get_curr_tile_slot_old( sprite& the_sprite )
 //{
 //	return 
-//		( ( gfx_manager::sprite_gfx_category_first_vram_slot_list 
-//		[get_gfx_category(the_sprite)] / sizeof(tile) * sizeof(u16) )
+//		( ( gfx_manager::sprite_palette_slot_first_vram_slot_list 
+//		[get_palette_slot(the_sprite)] / sizeof(tile) * sizeof(u16) )
 //		+ get_curr_relative_tile_slot(the_sprite) );
 //}
 
@@ -121,10 +125,10 @@ const u32 sprite_base_stuff::get_curr_tile_slot( sprite& the_sprite )
 
 // The reason this function takes a sprite instance as a parameter is that
 // sprites may use different palettes depending on their state.
-const sprite_gfx_category sprite_base_stuff::get_gfx_category
+const sprite_palette_slot sprite_base_stuff::get_palette_slot
 	( sprite& the_sprite )
 {
-	return the_gfx_category;
+	return the_palette_slot;
 }
 const u32 sprite_base_stuff::get_curr_relative_tile_slot 
 	( sprite& the_sprite )

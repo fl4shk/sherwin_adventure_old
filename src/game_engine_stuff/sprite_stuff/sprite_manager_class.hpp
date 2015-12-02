@@ -91,7 +91,9 @@ public:		// functions
 	
 	static inline void upload_tiles_of_active_sprites_to_vram()
 	{
-		// Clear the first 32x32-pixel VRAM chunk
+		// Clear the first 32x32-pixel VRAM chunk.  This prevents unused
+		// OAM indices from displaying any graphics.  Perhaps this should
+		// be optimized to use only a single 8x8-pixel VRAM chunk.
 		memfill32( &(((tile*)obj_tile_vram)[0]), 0, sizeof(tile)
 			* gfx_manager::num_tiles_in_ss_32x32 / sizeof(u32) );
 		

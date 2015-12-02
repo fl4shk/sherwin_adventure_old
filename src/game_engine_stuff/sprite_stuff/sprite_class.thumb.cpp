@@ -1,6 +1,6 @@
 #include "sprite_class.hpp"
 #include "../../gba_specific_stuff/interrupt_stuff.hpp"
-#include "sprite_gfx_stuff.hpp"
+#include "../gfx_manager_class.hpp"
 
 sprite::sprite()
 {
@@ -29,7 +29,7 @@ sprite::sprite()
 	memfill32( this, 0, sizeof(sprite) / sizeof(u32) );
 	
 	the_oam_entry.set_tile_number(0);
-	the_oam_entry.set_pal_number(sgc_player);
+	the_oam_entry.set_pal_number(sps_player);
 	
 	set_shape_size(oam_entry::ss_16x16);
 	the_coll_box.size = { 14 << fixed24p8::shift, 14 << fixed24p8::shift };

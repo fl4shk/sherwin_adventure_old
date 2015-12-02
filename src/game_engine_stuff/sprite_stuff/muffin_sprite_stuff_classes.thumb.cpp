@@ -6,7 +6,7 @@
 //	the_powerup.the_oam_entry.set_tile_number 
 //		( get_curr_tile_slot(the_powerup) );
 //	the_powerup.the_oam_entry.set_pal_number 
-//		( get_gfx_category(the_powerup) );
+//		( get_palette_slot(the_powerup) );
 //}
 
 
@@ -16,7 +16,7 @@
 //	the_powerup.the_oam_entry.set_tile_number 
 //		( get_curr_tile_slot(the_powerup) );
 //	the_powerup.the_oam_entry.set_pal_number 
-//		( get_gfx_category(the_powerup) );
+//		( get_palette_slot(the_powerup) );
 //}
 
 // Graphics stuff
@@ -25,7 +25,7 @@
 //	the_powerup.the_oam_entry.set_tile_number 
 //		( get_curr_tile_slot(the_powerup) );
 //	the_powerup.the_oam_entry.set_pal_number 
-//		( get_gfx_category(the_powerup) );
+//		( get_palette_slot(the_powerup) );
 //}
 
 
@@ -35,5 +35,5 @@
 //	the_powerup.the_oam_entry.set_tile_number 
 //		( get_curr_tile_slot(the_powerup) );
 //	the_powerup.the_oam_entry.set_pal_number 
-//		( get_gfx_category(the_powerup) );
+//		( get_palette_slot(the_powerup) );
 //}

@@ -20,7 +20,8 @@
 class sprite;
 
 
-#include "sprite_gfx_stuff.hpp"
+//#include "../gfx_manager_class.hpp"
+#include "../gfx_manager_class.hpp"
 
 // Adding, removing, or changing sprite types
 enum sprite_type

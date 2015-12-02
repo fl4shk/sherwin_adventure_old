@@ -13,7 +13,7 @@ public:		// enums
 	
 public:		// variables
 	static constexpr sprite_type the_sprite_type = st_waffle;
-	static constexpr sprite_gfx_category the_gfx_category = sgc_powerup;
+	static constexpr sprite_palette_slot the_palette_slot = sps_powerup;
 	static constexpr u32 the_relative_metatile_slot = 0, 
 		num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
 	
@@ -39,10 +39,10 @@ public:		// functions
 	//virtual void gfx_update( sprite& the_powerup )
 	//	__attribute__((_iwram_code));
 	
-	inline virtual const sprite_gfx_category get_gfx_category
+	inline virtual const sprite_palette_slot get_palette_slot
 		( sprite& the_powerup )
 	{
-		return the_gfx_category;
+		return the_palette_slot;
 	}
 	inline const u32 get_curr_relative_tile_slot( sprite& the_powerup )
 	{

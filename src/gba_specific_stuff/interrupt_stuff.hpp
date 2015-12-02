@@ -99,8 +99,7 @@ typedef void (*isr_funcptr)(void);
 
 // These extern "C" functions are for maxmod compatibility.  They were
 // written based on devkitARM's interrupt code, but using my own custom
-// "libgba" code instead.  I suppose that means I should include
-// devkitARM's license with this project.
+// "libgba" code instead.
 extern "C"
 {
 	// Also
@@ -110,8 +109,6 @@ extern "C"
 	
 	//void irqSet( int mask, isr_funcptr func );
 	void irqSet( int mask, u32 func_addr );
-	
-	
 }
 
 

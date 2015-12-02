@@ -50,8 +50,9 @@ public:		// variables
 	static const u32 sram_init_str_size;
 	static char sram_init_str[] __attribute__((_sram));
 	
-	static constexpr u32 test_sram_arr_size = debug_arr_u32_size 
-		* sizeof(u32);
+	//static constexpr u32 test_sram_arr_size = debug_arr_u32_size 
+	//	* sizeof(u32);
+	static constexpr u32 test_sram_arr_size = sizeof(debug_arr_u32);
 	static u8 test_sram_arr[test_sram_arr_size] __attribute__((_sram));
 	
 	
@@ -61,26 +62,6 @@ public:		// variables
 	
 	
 public:		// functions
-	
-	//static void maxmod_vblank_updater_func();
-	
-	//static void vblank_func() __attribute__(( _iwram_code, __noinline__ ));
-	static void vblank_func() __attribute__((_iwram_code));
-	
-	//static void title_screen_func() __attribute__((__noinline__));
-	static void title_screen_func();
-	
-	
-	static void reinit_the_game();
-	
-	static void fade_out_to_black( u32 num_steps, 
-		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_iwram_code));
-	
-	static void fade_out_to_white( u32 num_steps, 
-		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_iwram_code));
-	
-	static void fade_in( u32 num_steps, 
-		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_iwram_code));
 	
 	// This function toggles whether music is playing if the select button
 	// is down this frame but was not down on the previous frame.
@@ -98,7 +79,7 @@ public:		// functions
 		for (;;)
 		{
 			bios_wait_for_vblank();
-			vblank_func();
+			//vblank_func();
 		}
 	}
 	
@@ -109,6 +90,19 @@ public:		// functions
 			bios_wait_for_vblank();
 		}
 	}
+	
+	
+	//static void vblank_func() __attribute__(( _iwram_code, __noinline__ ));
+	static void vblank_func() __attribute__((_iwram_code));
+	
+	//static void title_screen_func() __attribute__((__noinline__));
+	static void title_screen_func();
+	
+	static void reinit_the_game();
+	
+	
+	
+	
 	
 	
 } __attribute__((_align4));

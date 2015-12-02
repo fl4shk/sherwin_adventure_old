@@ -92,25 +92,24 @@ enum block_type
 
 
 
-// These bg1_block_type's are used by BG1.
-enum bg1_block_type
-{
-	// Day Sky
-	bg1bt_day_sky,
-	
-	// Night Sky block.  Also doubles as a go-to block for fading out or
-	// in.
-	bg1bt_night_sky,
-	
-	
-	// bg1bt_count is the amount of block types.  It is automatically
-	// updated by the compiler.
-	bg1bt_count,
-} __attribute__((_align4));
+//// These bg1_block_type's are used by BG1.
+//enum bg1_block_type
+//{
+//	// Day Sky
+//	bg1bt_day_sky,
+//	
+//	// Night Sky block.  Also doubles as a go-to block for fading out or
+//	// in.
+//	bg1bt_night_sky,
+//	
+//	
+//	// bg1bt_count is the amount of block types.  It is automatically
+//	// updated by the compiler.
+//	bg1bt_count,
+//} __attribute__((_align4));
 
 
 class block;
-
 
 #include "block_base_stuff_class.hpp"
 
@@ -130,7 +129,6 @@ extern block_base_stuff* block_stuff_array[bt_count];
 class block
 {
 public:		// variables
-	
 	u16 type;
 	u16 persistent_data_index;
 	

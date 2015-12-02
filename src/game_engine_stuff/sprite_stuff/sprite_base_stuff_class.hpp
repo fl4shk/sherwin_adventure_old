@@ -15,7 +15,7 @@ public:		// variables
 	static constexpr fixed24p8 grav_acc = {0x80};
 	static constexpr fixed24p8 max_y_vel = {0x400};
 	
-	static constexpr sprite_gfx_category the_gfx_category = sgc_player;
+	static constexpr sprite_palette_slot the_palette_slot = sps_player;
 	//static constexpr u32 the_relative_metatile_slot = 7,
 	//	num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
 	
@@ -103,7 +103,7 @@ public:		// functions
 	virtual const u32 get_curr_tile_slot( sprite& the_sprite )
 		__attribute__((_iwram_code));
 	
-	virtual const sprite_gfx_category get_gfx_category 
+	virtual const sprite_palette_slot get_palette_slot 
 		( sprite& the_sprite ) __attribute__((_iwram_code));
 	virtual const u32 get_curr_relative_tile_slot( sprite& the_sprite )
 		__attribute__((_iwram_code));

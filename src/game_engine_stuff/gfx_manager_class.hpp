@@ -2,8 +2,85 @@
 #define gfx_manager_class_hpp
 
 
-#include "sprite_stuff/sprite_gfx_stuff.hpp"
 #include "block_stuff/block_stuff.hpp"
+
+#include "misc_types.hpp"
+#include "../gba_specific_stuff/attribute_defines.hpp"
+#include "../gba_specific_stuff/gfx_reg_stuff.hpp"
+
+#include "sa_stack_class.hpp"
+
+class sprite;
+
+
+
+
+
+// There are a total of 16 BG palettes provided by the GBA hardware, each
+// with 15 colors (and one transparent "color").  This enum is intended to
+// be used for BG palette slots during these game modes:  gm_loading_level,
+// gm_changing_sublevel, and gm_in_sublevel.
+enum bg_palette_slot_in_level
+{
+	// When in a level, blocks use palette slots 0, 1, 2, and 3 for now.
+	// Perhaps in the future blocks will be able to use more than just
+	// these palette slots, what with there being 16 total BG palette
+	// slots.
+	bgps_in_level_block_0,
+	bgps_in_level_block_1,
+	bgps_in_level_block_2,
+	bgps_in_level_block_3,
+	
+	// The HUD gets its own palette slot, too.  It is possible that the HUD
+	// may eventually need to use more than one palette slot.
+	bgps_in_level_hud,
+	
+	// This is the number of --used-- BG palette slots when in a level,
+	// and it is automatically updated by the compiler.  This might count
+	// as a simple hack since it basically abuses the way enums work.
+	bgps_in_level_count,
+	
+} __attribute__((_align4));
+
+
+//enum bg_palette_slot_in_overworld
+
+
+
+// There are a total of 16 sprite palettes provided by the GBA hardware,
+// each with 15 colors (and one transparent "color").  This enum is
+// intended to be used for sprite palette slots during these game_mode's:
+// gm_loading_level, gm_changing_sublevel, and gm_in_sublevel.
+enum sprite_palette_slot
+{
+	// The player uses sprite palette slot 0.
+	sps_player,
+	
+	// Powerup sprites use sprite palette slot 1.
+	sps_powerup,
+	
+	//// Block-like sprites use sprite palette slots 2 and 3.
+	//sps_block_like_0,
+	//sps_block_like_1,
+	
+	// Door sprites use sprite palette slot 2.  Eventually, doors might be
+	// represented using block stuff.
+	sps_door,
+	
+	//// Enemy sprites use sprite palette slots 4, 5, and 6
+	// Enemy sprites use sprite palette slots 3, 4, and 5.  
+	// Perhaps there will eventually be a need for dynamic enemy palettes,
+	// based on which types of enemies are in a particular level.
+	sps_enemy_0,
+	sps_enemy_1,
+	sps_enemy_2,
+	
+	
+	// This is the number of --used-- sprite palette slots when in a level,
+	// and it is automatically updated by the compiler.  This might count
+	// as a simple hack since it basically abuses the way enums work.
+	sps_count,
+} __attribute__((_align4));
 
 
 class gfx_manager
@@ -82,7 +159,6 @@ public:		// variables and constants
 	obj_fade_blue_step_amount_arr
 		[obj_fade_step_amount_arr_size] __attribute__((_ewram));
 	
-	
 	// Sprite VRAM allocation stuff
 	
 	// 64 max sprites on screen at once should be plenty.  Sprite
@@ -91,8 +167,11 @@ public:		// variables and constants
 	// needed.  Also, this is only the case for 4bpp graphics.
 	static constexpr u32 max_num_32x32_metatiles = 64;
 	
-	// Sprite palette stuff
+	// BG palette stuff
+	static u16 bg_pal_mirror[bg_pal_ram_size_in_u16]
+		__attribute__((_ewram));
 	
+	// Sprite palette stuff
 	static u16 obj_pal_mirror[obj_pal_ram_size_in_u16] 
 		__attribute__((_ewram));
 	
@@ -108,9 +187,6 @@ public:		// functions
 
 	static inline void copy_bgofs_mirror_to_registers()
 	{
-		//memcpy32( reg_bgofs, bgofs_mirror,
-		//	( bgofs_mirror_size * sizeof(bg_point) ) / sizeof(u32) );
-		
 		reg_bgofs[0] = bgofs_mirror[0].curr;
 		reg_bgofs[1] = bgofs_mirror[1].curr;
 		reg_bgofs[2] = bgofs_mirror[2].curr;
@@ -175,27 +251,38 @@ public:		// functions
 		return block_stuff_array[the_block_type]->get_palette_number();
 	}
 	
+	static void upload_bg_palettes_to_bg_pal_ram();
 	
-	static void update_block_graphics_in_vram
-		( const unsigned short* the_tiles ) __attribute__((_iwram_code));
+	//static void update_block_graphics_in_vram
+	//	( const unsigned short* the_tiles ) __attribute__((_iwram_code));
+	static void upload_block_tiles_to_vram() __attribute__((_iwram_code));
+	
+	
+	//// HUD stuff
+	//static void update_hud_contents();
+	
 	
 	
 	// Sprite graphics stuff
+	static void upload_sprite_palettes_to_obj_pal_ram(); 
 	
-	
-	static void upload_default_sprite_palettes_to_obj_pal_ram(); 
-		//__attribute__((_iwram_code));
-	
-	static void upload_default_sprite_palettes_to_obj_pal_mirror();
-		//__attribute__((_iwram_code));
+	static void upload_sprite_palettes_to_obj_pal_mirror();
 	static void copy_obj_pal_mirror_to_obj_pal_ram();
-		//__attribute__((_iwram_code));
 	
 	
 	static void upload_sprite_tiles_to_vram( sprite& the_sprite )
 		__attribute__((_iwram_code));
 	
 	
+	// Fading stuff
+	static void fade_out_to_black( u32 num_steps, 
+		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_iwram_code));
+	
+	static void fade_out_to_white( u32 num_steps, 
+		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_iwram_code));
+	
+	static void fade_in( u32 num_steps, 
+		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_iwram_code));
 	
 	
 	
