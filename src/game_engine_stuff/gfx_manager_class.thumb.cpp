@@ -81,11 +81,37 @@ void gfx_manager::upload_bg_palettes_to_bg_pal_ram()
 	}
 }
 
+void gfx_manager::upload_bg_palettes_to_bg_pal_mirror()
+{
+	if ( game_manager::curr_game_mode == gm_title_screen )
+	{
+		memcpy32( bg_pal_mirror, title_screenPal,
+			title_screenPalLen / sizeof(u32) );
+	}
+	else //if ( game_manager::curr_game_mode >= gm_initializing_the_game
+		//&& game_manager::curr_game_mode <= gm_in_sublevel )
+	{
+		memcpy32( &(bg_pal_mirror[bgps_in_level_block_0 
+			* num_colors_per_palette]), the_block_gfxPal,
+			the_block_gfxPalLen / sizeof(u32) );
+		memcpy32( &(bg_pal_mirror[bgps_in_level_hud 
+			* num_colors_per_palette]), text_8x16_gfxPal,
+			text_8x16_gfxPalLen / sizeof(u32) );
+	}
+}
+
+void gfx_manager::copy_bg_pal_mirror_to_bg_pal_ram()
+{
+	memcpy32( bg_pal_ram, bg_pal_mirror, bg_pal_ram_size 
+		/ sizeof(u32) );
+}
+
 
 //void gfx_manager::update_block_graphics_in_vram
 //	( const unsigned short* the_tiles )
-void gfx_manager::upload_block_tiles_to_vram()
+void gfx_manager::upload_bg_tiles_to_vram()
 {
+	
 	// Note:  this function currently does multiple VRAM graphics updates
 	// whenever multiple block_types share the same graphics_slot.  An
 	// example of this is how each variation of bt_eyes shares the same
@@ -495,22 +521,26 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 
 void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 {
-	// A function like this should eventually be created for background
-	// palettes.
+	upload_bg_palettes_to_bg_pal_mirror();
 	upload_sprite_palettes_to_obj_pal_mirror();
 	
 	bios_wait_for_vblank();
 	
 	// Build the BG arrays of step amounts
-	for ( u32 i=0; i<the_block_gfxPalLen / sizeof(u16); ++i )
+	//for ( u32 i=0; i<the_block_gfxPalLen / sizeof(u16); ++i )
+	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
 		s32 red_orig = rgb15_get_red_component(bg_pal_ram[i]);
 		s32 green_orig = rgb15_get_green_component(bg_pal_ram[i]);
 		s32 blue_orig = rgb15_get_blue_component(bg_pal_ram[i]);
 		
-		s32 target_red = rgb15_get_red_component(the_block_gfxPal[i]);
-		s32 target_green = rgb15_get_green_component(the_block_gfxPal[i]);
-		s32 target_blue = rgb15_get_blue_component(the_block_gfxPal[i]);
+		//s32 target_red = rgb15_get_red_component(the_block_gfxPal[i]);
+		//s32 target_green = rgb15_get_green_component(the_block_gfxPal[i]);
+		//s32 target_blue = rgb15_get_blue_component(the_block_gfxPal[i]);
+		
+		s32 target_red = rgb15_get_red_component(bg_pal_mirror[i]);
+		s32 target_green = rgb15_get_green_component(bg_pal_mirror[i]);
+		s32 target_blue = rgb15_get_blue_component(bg_pal_mirror[i]);
 		
 		bg_fade_curr_red_arr[i] = make_f24p8(red_orig);
 		bg_fade_curr_green_arr[i] = make_f24p8(green_orig);
@@ -570,7 +600,8 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 	for ( u32 i=0; i<num_steps; ++i )
 	{
 		// For each BG palette
-		for ( u32 j=0; j<the_block_gfxPalLen / sizeof(u16); ++j )
+		//for ( u32 j=0; j<the_block_gfxPalLen / sizeof(u16); ++j )
+		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
 			fixed24p8& curr_red = bg_fade_curr_red_arr[j];
 			fixed24p8& curr_green = bg_fade_curr_green_arr[j];
@@ -585,12 +616,19 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 			
 			// Don't need make_f24p8() for these because color component
 			// values are guaranteed to be positive.
+			//fixed24p8 target_red = { (s32)rgb15_get_red_component
+			//	(the_block_gfxPal[j]) << fixed24p8::shift };
+			//fixed24p8 target_green = { (s32)rgb15_get_green_component
+			//	(the_block_gfxPal[j]) << fixed24p8::shift };
+			//fixed24p8 target_blue = { (s32)rgb15_get_blue_component
+			//	(the_block_gfxPal[j]) << fixed24p8::shift };
+			
 			fixed24p8 target_red = { (s32)rgb15_get_red_component
-				(the_block_gfxPal[j]) << fixed24p8::shift };
+				(bg_pal_mirror[j]) << fixed24p8::shift };
 			fixed24p8 target_green = { (s32)rgb15_get_green_component
-				(the_block_gfxPal[j]) << fixed24p8::shift };
+				(bg_pal_mirror[j]) << fixed24p8::shift };
 			fixed24p8 target_blue = { (s32)rgb15_get_blue_component
-				(the_block_gfxPal[j]) << fixed24p8::shift };
+				(bg_pal_mirror[j]) << fixed24p8::shift };
 			
 			clamped_rgb15_f24p8_component_add( curr_red, 
 				red_step_amount, target_red );
@@ -647,3 +685,4 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 	upload_sprite_palettes_to_obj_pal_ram();
 	
 }
+

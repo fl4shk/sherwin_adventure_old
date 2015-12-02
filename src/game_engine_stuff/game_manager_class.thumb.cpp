@@ -53,7 +53,7 @@ void game_manager::vblank_func()
 		
 		// When in a sublevel.
 		case gm_in_sublevel:
-			gfx_manager::upload_block_tiles_to_vram();
+			gfx_manager::upload_bg_tiles_to_vram();
 			copy_oam_mirror_to_oam();
 			gfx_manager::copy_bgofs_mirror_to_registers();
 			
@@ -197,7 +197,7 @@ void game_manager::reinit_the_game()
 	//bios_wait_for_vblank();
 	
 	// Finally, copy the_block_gfxTiles to BG VRAM, screenblock 0
-	gfx_manager::upload_block_tiles_to_vram();
+	gfx_manager::upload_bg_tiles_to_vram();
 	
 	//bios_wait_for_vblank();
 	sprite_manager::next_oam_index = 0; 

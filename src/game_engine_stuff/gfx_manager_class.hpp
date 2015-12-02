@@ -252,10 +252,12 @@ public:		// functions
 	}
 	
 	static void upload_bg_palettes_to_bg_pal_ram();
+	static void upload_bg_palettes_to_bg_pal_mirror();
+	static void copy_bg_pal_mirror_to_bg_pal_ram();
 	
 	//static void update_block_graphics_in_vram
 	//	( const unsigned short* the_tiles ) __attribute__((_iwram_code));
-	static void upload_block_tiles_to_vram() __attribute__((_iwram_code));
+	static void upload_bg_tiles_to_vram() __attribute__((_iwram_code));
 	
 	
 	//// HUD stuff
@@ -265,7 +267,6 @@ public:		// functions
 	
 	// Sprite graphics stuff
 	static void upload_sprite_palettes_to_obj_pal_ram(); 
-	
 	static void upload_sprite_palettes_to_obj_pal_mirror();
 	static void copy_obj_pal_mirror_to_obj_pal_ram();
 	
