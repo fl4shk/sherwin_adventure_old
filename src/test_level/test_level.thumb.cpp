@@ -2,7 +2,7 @@
 
 
 // test_level.tmx
-const sublevel< 2010, 64, 32, 14, 33 > test_level_sublevel_0
+const sublevel< 2010, 64, 32, 29, 33 > test_level_sublevel_0
 = {
 	{
 		0x1000010, 0x501, 0x1000600, 0x2550300,
@@ -518,12 +518,27 @@ const sublevel< 2010, 64, 32, 14, 33 > test_level_sublevel_0
 		{ st_fire_muffin, 14, 25, true, 0, 0, 0, 0 },
 		{ st_chocolate_muffin, 16, 25, true, 0, 0, 0, 0 },
 		{ st_waffle, 42, 26, false, 0, 0, 0, 0 },
+		{ st_waffle, 59, 27, true, 0, 0, 0, 0 },
+		{ st_waffle, 60, 27, true, 0, 0, 0, 0 },
+		{ st_waffle, 61, 27, true, 0, 0, 0, 0 },
+		{ st_waffle, 62, 27, true, 0, 0, 0, 0 },
+		{ st_waffle, 59, 28, true, 0, 0, 0, 0 },
+		{ st_waffle, 60, 28, true, 0, 0, 0, 0 },
+		{ st_waffle, 61, 28, true, 0, 0, 0, 0 },
+		{ st_waffle, 62, 28, true, 0, 0, 0, 0 },
 		{ st_door, 1, 29, true, 0, 0, 0, 0 },
 		{ st_muffin, 47, 29, true, 0, 0, 0, 0 },
 		{ st_door, 52, 29, true, 1, 0, 0, 0 },
 		{ st_door, 56, 29, true, 2, 0, 0, 0 },
+		{ st_waffle, 59, 29, true, 0, 0, 0, 0 },
+		{ st_waffle, 60, 29, true, 0, 0, 0, 0 },
+		{ st_waffle, 61, 29, true, 0, 0, 0, 0 },
+		{ st_waffle, 62, 29, true, 0, 0, 0, 0 },
 		{ st_muffin, 9, 30, true, 0, 0, 0, 0 },
 		{ st_chocolate_muffin, 10, 30, true, 0, 0, 0, 0 },
+		{ st_waffle, 59, 30, true, 0, 0, 0, 0 },
+		{ st_waffle, 60, 30, true, 0, 0, 0, 0 },
+		{ st_waffle, 61, 30, true, 0, 0, 0, 0 },
 		{ st_waffle, 62, 30, true, 0, 0, 0, 0 },
 	},
 	

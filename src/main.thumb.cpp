@@ -97,8 +97,6 @@ int main()
 		//	test_level.get_size_2d() );
 		active_level_manager::update_sublevel_in_screenblock_mirror_2d();
 		
-		
-		
 		bios_wait_for_vblank();
 		//game_manager::vblank_func();
 		

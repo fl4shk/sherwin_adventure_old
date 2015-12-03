@@ -14,8 +14,6 @@ class sprite;
 
 
 
-
-
 // There are a total of 16 BG palettes provided by the GBA hardware, each
 // with 15 colors (and one transparent "color").  This enum is intended to
 // be used for BG palette slots during these game modes:  gm_loading_level,
@@ -176,6 +174,9 @@ public:		// variables and constants
 	static u16 obj_pal_mirror[obj_pal_ram_size_in_u16] 
 		__attribute__((_ewram));
 	
+	// HUD stuff
+	static u32 hud_vram_as_tiles_start_offset __attribute__((_ewram));
+	
 public:		// functions
 	
 	static inline void back_up_bgofs_mirror()
@@ -198,8 +199,6 @@ public:		// functions
 	// Block graphics stuff
 	//static inline u32 get_metatile_number_of_block_type
 	//	( block_type the_block_type ) __attribute__((always_inline));
-	
-	
 	static inline u32 get_metatile_number_of_block_type
 		( block_type the_block_type )
 	{
@@ -221,7 +220,6 @@ public:		// functions
 	
 	//static inline const u32 get_graphics_slot_of_block_type 
 	//	( block_type the_block_type ) __attribute__((always_inline));
-	
 	static inline const u32 get_graphics_slot_of_block_type 
 		( block_type the_block_type )
 	{
@@ -233,7 +231,6 @@ public:		// functions
 	
 	//static inline u32 get_palette_number_of_block_type
 	//	( block_type the_block_type ) __attribute__((always_inline));
-	
 	static inline u32 get_palette_number_of_block_type
 		( block_type the_block_type )
 	{
@@ -250,28 +247,45 @@ public:		// functions
 		return block_stuff_array[the_block_type]->get_palette_number();
 	}
 	
-	static void upload_bg_palettes_to_bg_pal_ram();
-	static void upload_bg_palettes_to_bg_pal_mirror();
+	static void upload_bg_palettes_to_target( vu16* target );
+	static inline void upload_bg_palettes_to_target( u16* target )
+	{
+		upload_bg_palettes_to_target((vu16*)target);
+	}
+	
 	static void copy_bg_pal_mirror_to_bg_pal_ram();
 	
-	//static void update_block_graphics_in_vram
-	//	( const unsigned short* the_tiles ) __attribute__((_iwram_code));
 	static void upload_bg_tiles_to_vram() __attribute__((_iwram_code));
 	
 	
-	//// HUD stuff
-	//static void update_hud_contents();
-	
-	
-	
 	// Sprite graphics stuff
-	static void upload_sprite_palettes_to_obj_pal_ram(); 
-	static void upload_sprite_palettes_to_obj_pal_mirror();
+	static void upload_sprite_palettes_to_target( vu16* target ); 
+	static inline void upload_sprite_palettes_to_target( u16* target )
+	{
+		upload_sprite_palettes_to_target((vu16*)target);
+	}
 	static void copy_obj_pal_mirror_to_obj_pal_ram();
 	
 	
 	static void upload_sprite_tiles_to_vram( sprite& the_sprite )
 		__attribute__((_iwram_code));
+	
+	// HUD stuff
+	static inline void init_hud_vram_as_tiles_start_offset()
+	{
+		hud_vram_as_tiles_start_offset = 0;
+		for ( u32 i=0; i<block_type::bt_count; ++i )
+		{
+			u32 graphics_slot = get_graphics_slot_of_block_type 
+				( (block_type)i );
+			
+			if ( hud_vram_as_tiles_start_offset < graphics_slot )
+			{
+				hud_vram_as_tiles_start_offset = graphics_slot;
+			}
+		}
+		hud_vram_as_tiles_start_offset += num_tiles_in_ss_16x16;
+	}
 	
 	
 	// Fading stuff

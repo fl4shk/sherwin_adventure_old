@@ -53,6 +53,7 @@ LD_SCRIPT=linkscript.ld
 #DEBUG_FLAGS=-gdwarf-3
 
 GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I./maxmod/include -O3
+#GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I./maxmod/include -O3 -g
 #GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I./maxmod/include -O1 -g
 
 THUMB_BASE_FLAGS=$(GLOBAL_BASE_FLAGS) -mthumb -mthumb-interwork
@@ -71,10 +72,10 @@ S_FLAGS=-mcpu=arm7tdmi -mthumb -mthumb-interwork
 #LD_FLAGS=--specs=nosys.specs $(EXTRA_LD_FLAGS) -L./maxmod/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lgcc -lc -lstdc++ -lmm $(DEBUG_FLAGS)
 
 # This is the LD_FLAGS for devkitARM
-#LD_FLAGS=$(EXTRA_LD_FLAGS) -L./maxmod/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm  $(DEBUG_FLAGS)
+#LD_FLAGS=$(EXTRA_LD_FLAGS) -L./maxmod/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm $(DEBUG_FLAGS)
 #LD_FLAGS=$(EXTRA_LD_FLAGS) -L./maxmod/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lrdimon -lrdpmon -lmm -lgcc -lc -lstdc++ $(DEBUG_FLAGS)
-LD_FLAGS=$(EXTRA_LD_FLAGS) -g -L./maxmod/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm  $(DEBUG_FLAGS) 
-#LD_FLAGS=$(EXTRA_LD_FLAGS) -g -L./maxmod/lib -nostartfiles -T $(LD_SCRIPT) -Wl,--entry=_start2 -lmm  $(DEBUG_FLAGS) 
+LD_FLAGS=$(EXTRA_LD_FLAGS) -g -L./maxmod/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm $(DEBUG_FLAGS) 
+#LD_FLAGS=$(EXTRA_LD_FLAGS) -g -L./maxmod/lib -nostartfiles -T $(LD_SCRIPT) -Wl,--entry=_start2 -lmm $(DEBUG_FLAGS) 
 
 
 OBJDIR=objs

@@ -14,7 +14,8 @@
 
 #include "block_stuff/block_stuff.hpp"
 #include "../gfx/the_block_gfx.h"
-#include "../gfx/text_8x16_gfx.h"
+//#include "../gfx/text_8x16_gfx.h"
+#include "../gfx/text_8x8_gfx.h"
 
 
 #include "sprite_stuff/sprite_class.hpp"
@@ -59,46 +60,42 @@ gfx_manager::obj_fade_blue_step_amount_arr
 	[obj_fade_step_amount_arr_size];
 
 
+// BG palette stuff
 u16 gfx_manager::bg_pal_mirror[bg_pal_ram_size_in_u16];
+
+// Sprite palette stuff
 u16 gfx_manager::obj_pal_mirror[obj_pal_ram_size_in_u16];
 
-void gfx_manager::upload_bg_palettes_to_bg_pal_ram()
+// HUD stuff
+u32 gfx_manager::hud_vram_as_tiles_start_offset;
+
+
+
+void gfx_manager::upload_bg_palettes_to_target( vu16* target )
 {
 	if ( game_manager::curr_game_mode == gm_title_screen )
 	{
-		memcpy32( bg_pal_ram, title_screenPal,
+		memcpy32( target, title_screenPal,
 			title_screenPalLen / sizeof(u32) );
 	}
 	else //if ( game_manager::curr_game_mode >= gm_initializing_the_game
 		//&& game_manager::curr_game_mode <= gm_in_sublevel )
 	{
-		memcpy32( &(bg_pal_ram[bgps_in_level_block_0 
-			* num_colors_per_palette]), the_block_gfxPal,
+		memcpy32( &(target[bgps_in_level_block_0 
+			* num_colors_per_palette]), 
+			the_block_gfxPal,
 			the_block_gfxPalLen / sizeof(u32) );
-		memcpy32( &(bg_pal_ram[bgps_in_level_hud 
-			* num_colors_per_palette]), text_8x16_gfxPal,
-			text_8x16_gfxPalLen / sizeof(u32) );
+		//memcpy32( &(target[bgps_in_level_hud 
+		//	* num_colors_per_palette]), 
+		//	text_8x16_gfxPal,
+		//	text_8x16_gfxPalLen / sizeof(u32) );
+		memcpy32( &(target[bgps_in_level_hud 
+			* num_colors_per_palette]),
+			text_8x8_gfxPal,
+			text_8x8_gfxPalLen / sizeof(u32) );
 	}
 }
 
-void gfx_manager::upload_bg_palettes_to_bg_pal_mirror()
-{
-	if ( game_manager::curr_game_mode == gm_title_screen )
-	{
-		memcpy32( bg_pal_mirror, title_screenPal,
-			title_screenPalLen / sizeof(u32) );
-	}
-	else //if ( game_manager::curr_game_mode >= gm_initializing_the_game
-		//&& game_manager::curr_game_mode <= gm_in_sublevel )
-	{
-		memcpy32( &(bg_pal_mirror[bgps_in_level_block_0 
-			* num_colors_per_palette]), the_block_gfxPal,
-			the_block_gfxPalLen / sizeof(u32) );
-		memcpy32( &(bg_pal_mirror[bgps_in_level_hud 
-			* num_colors_per_palette]), text_8x16_gfxPal,
-			text_8x16_gfxPalLen / sizeof(u32) );
-	}
-}
 
 void gfx_manager::copy_bg_pal_mirror_to_bg_pal_ram()
 {
@@ -112,8 +109,6 @@ void gfx_manager::copy_bg_pal_mirror_to_bg_pal_ram()
 void gfx_manager::upload_bg_tiles_to_vram()
 {
 	
-	u32 highest_graphics_slot = 0;
-	
 	// Note:  this function currently does multiple VRAM graphics updates
 	// whenever multiple block_types share the same graphics_slot.  An
 	// example of this is how each variation of bt_eyes shares the same
@@ -125,11 +120,6 @@ void gfx_manager::upload_bg_tiles_to_vram()
 		u32 metatile_number = get_metatile_number_of_block_type
 			( (block_type)i );
 		
-		if ( highest_graphics_slot < graphics_slot )
-		{
-			highest_graphics_slot = graphics_slot;
-		}
-		
 		//dma3_cpy( &( bg_tile_vram[graphics_slot * 16]), 
 		//	&( the_tiles 
 		//		[metatile_number * 16 * 4] ),
@@ -140,90 +130,48 @@ void gfx_manager::upload_bg_tiles_to_vram()
 		//	16 * 4 / sizeof(u16) );
 		
 		memcpy32( &(bg_tile_vram_as_tiles[graphics_slot]),
+			
 			&((reinterpret_cast<const tile*>(the_block_gfxTiles))
 			[metatile_number * num_tiles_in_ss_16x16]),
+			
 			sizeof(tile) * num_tiles_in_ss_16x16 / sizeof (u32) );
 	}
 	
-	highest_graphics_slot += num_tiles_in_ss_16x16;
-	
-	//memcpy32( &(bg_tile_vram_as_tiles[highest_graphics_slot]),
-	//	&((reinterpret_cast<const tile*>(text_8x16_gfxTiles))
-	//	[highest_graphics_slot]), text_8x16_gfxTilesLen 
-	//	/ ( sizeof(tile) * sizeof(u32) ) );
-	
-	//for ( u32 i=0; i<text_8x16_gfxTilesLen / sizeof(u16); ++i )
-	//{
-	//	((vu16*)&(bg_tile_vram_as_tiles[highest_graphics_slot]))[i]
-	//		= text_8x16_gfxTiles[i];
-	//}
-	
-	memcpy32( &(bg_tile_vram_as_tiles[highest_graphics_slot]),
-		text_8x16_gfxTiles, text_8x16_gfxTilesLen / sizeof(u32) );
+	//memcpy32( &(bg_tile_vram_as_tiles[hud_vram_as_tiles_start_offset]),
+	//	text_8x16_gfxTiles, 
+	//	text_8x16_gfxTilesLen / sizeof(u32) );
+	memcpy32( &(bg_tile_vram_as_tiles[hud_vram_as_tiles_start_offset]),
+		text_8x8_gfxTiles,
+		text_8x8_gfxTilesLen / sizeof(u32) );
 }
 
-//// Note:  There needs to be some way to keep track of multiple graphics
-//// arrays for the background.  This related to the fact that HUD text
-//// graphics use 8x16 metatiles instead of 16x16 metatiles.  Perhaps
-//// something akin to sprite_gfx_category's could be used for the
-//// background.
-//void gfx_manager::update_hud_contents()
-//{
-//	
-//}
 
-
-void gfx_manager::upload_sprite_palettes_to_obj_pal_ram()
+void gfx_manager::upload_sprite_palettes_to_target( vu16* target )
 {
-	//memcpy32( obj_pal_ram, the_spritesPal, 
+	//memcpy32( target, the_spritesPal, 
 	//	the_spritesPalLen / sizeof(u32) );
 	
 	//static constexpr u32 num_colors_per_palette = 16;
 	
 	// The player's palettes
-	memcpy32( &(obj_pal_ram[sps_player * num_colors_per_palette]), 
+	memcpy32( &(target[sps_player * num_colors_per_palette]), 
 		sherwin_gfxPal, sherwin_gfxPalLen / sizeof(u32) );
 	
 	// The powerups' palettes
-	memcpy32( &(obj_pal_ram[sps_powerup * num_colors_per_palette]), 
+	memcpy32( &(target[sps_powerup * num_colors_per_palette]), 
 		the_powerup_gfxPal, the_powerup_gfxPalLen / sizeof(u32) );
 	
 	//// The block-like sprites' palettes
-	//memcpy32( &(obj_pal_ram[sps_block_like_0 * num_colors_per_palette]),
+	//memcpy32( &(target[sps_block_like_0 * num_colors_per_palette]),
 	//	the_block_like_sprites_gfxPal, the_block_like_sprites_gfxPalLen 
 	//	/ sizeof(u32) );
 	
 	// The door sprites' palettes
-	memcpy32( &(obj_pal_ram[sps_door * num_colors_per_palette]), 
+	memcpy32( &(target[sps_door * num_colors_per_palette]), 
 		the_door_gfxPal, the_door_gfxPalLen / sizeof(u32) );
 	
 	// The golems and other enemys' palettes
-	memcpy32( &(obj_pal_ram[sps_enemy_0 * num_colors_per_palette]),
-		the_golem_enemy_gfxPal, the_golem_enemy_gfxPalLen / sizeof(u32) );
-}
-
-
-void gfx_manager::upload_sprite_palettes_to_obj_pal_mirror()
-{
-	//memcpy32( obj_pal_ram, the_spritesPal, 
-	//	the_spritesPalLen / sizeof(u32) );
-	
-	//static constexpr u32 num_colors_per_palette = 16;
-	
-	// The player's palettes
-	memcpy32( &(obj_pal_mirror[sps_player * num_colors_per_palette]), 
-		sherwin_gfxPal, sherwin_gfxPalLen / sizeof(u32) );
-	
-	// The powerups' palettes
-	memcpy32( &(obj_pal_mirror[sps_powerup * num_colors_per_palette]), 
-		the_powerup_gfxPal, the_powerup_gfxPalLen / sizeof(u32) );
-	
-	// The door sprites' palettes
-	memcpy32( &(obj_pal_mirror[sps_door * num_colors_per_palette]), 
-		the_door_gfxPal, the_door_gfxPalLen / sizeof(u32) );
-	
-	// The golems and other enemys' palettes
-	memcpy32( &(obj_pal_mirror[sps_enemy_0 * num_colors_per_palette]),
+	memcpy32( &(target[sps_enemy_0 * num_colors_per_palette]),
 		the_golem_enemy_gfxPal, the_golem_enemy_gfxPalLen / sizeof(u32) );
 }
 
@@ -241,11 +189,11 @@ void gfx_manager::upload_sprite_tiles_to_vram( sprite& the_sprite )
 	sprite_base_stuff* sbs_ptr = sprite_stuff_array
 		[the_sprite.the_sprite_type];
 	
-	// This memfill32() call isn't strictly necessary, but it makes VRAM
-	// look nicer in the VRAM viewer functionality of some emulators.
-	memfill32( &(((tile*)obj_tile_vram)[the_sprite.get_vram_chunk_index()
-		* num_tiles_in_ss_32x32]), 0, sizeof(tile) * num_tiles_in_ss_32x32
-		/ sizeof(u32) );
+	//// This memfill32() call isn't strictly necessary, but it makes VRAM
+	//// look nicer in the VRAM viewer functionality of some emulators.
+	//memfill32( &(((tile*)obj_tile_vram)[the_sprite.get_vram_chunk_index()
+	//	* num_tiles_in_ss_32x32]), 0, sizeof(tile) * num_tiles_in_ss_32x32
+	//	/ sizeof(u32) );
 	
 	
 	memcpy32( &(((tile*)obj_tile_vram)[the_sprite.get_vram_chunk_index()
@@ -544,8 +492,8 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 
 void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 {
-	upload_bg_palettes_to_bg_pal_mirror();
-	upload_sprite_palettes_to_obj_pal_mirror();
+	upload_bg_palettes_to_target(bg_pal_mirror);
+	upload_sprite_palettes_to_target(obj_pal_mirror);
 	
 	bios_wait_for_vblank();
 	
@@ -592,12 +540,9 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 		s32 green_orig = rgb15_get_green_component(obj_pal_ram[i]);
 		s32 blue_orig = rgb15_get_blue_component(obj_pal_ram[i]);
 		
-		s32 target_red = rgb15_get_red_component
-			(obj_pal_mirror[i]);
-		s32 target_green = rgb15_get_green_component
-			(obj_pal_mirror[i]);
-		s32 target_blue = rgb15_get_blue_component
-			(obj_pal_mirror[i]);
+		s32 target_red = rgb15_get_red_component(obj_pal_mirror[i]);
+		s32 target_green = rgb15_get_green_component(obj_pal_mirror[i]);
+		s32 target_blue = rgb15_get_blue_component(obj_pal_mirror[i]);
 		
 		obj_fade_curr_red_arr[i] = make_f24p8(red_orig);
 		obj_fade_curr_green_arr[i] = make_f24p8(green_orig);
@@ -704,8 +649,8 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 	
 	bios_wait_for_vblank();
 	// Just in case the conversion wasn't complete.
-	upload_bg_palettes_to_bg_pal_ram();
-	upload_sprite_palettes_to_obj_pal_ram();
+	upload_bg_palettes_to_target(bg_pal_ram);
+	upload_sprite_palettes_to_target(obj_pal_ram);
 	
 }
 

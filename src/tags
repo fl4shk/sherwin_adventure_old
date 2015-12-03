@@ -6,6 +6,7 @@
 !_TAG_PROGRAM_VERSION	5.8	//
 GRIT_SHERWIN_GFX_H	gfx/sherwin_gfx.h	18;"	kind:d
 GRIT_TEXT_8X16_GFX_H	gfx/text_8x16_gfx.h	18;"	kind:d
+GRIT_TEXT_8X8_GFX_H	gfx/text_8x8_gfx.h	18;"	kind:d
 GRIT_THE_BLOCK_GFX_H	gfx/the_block_gfx.h	18;"	kind:d
 GRIT_THE_DOOR_GFX_H	gfx/the_door_gfx.h	18;"	kind:d
 GRIT_THE_GOLEM_ENEMY_GFX_H	gfx/the_golem_enemy_gfx.h	18;"	kind:d
@@ -190,6 +191,12 @@ bg0_screenblock_mirror	game_engine_stuff/level_stuff/active_level_class.thumb.cp
 bg0_screenblock_mirror_2d	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static array_2d_helper<scr_entry> bg0_screenblock_mirror_2d;$/;"	kind:m	class:active_level	access:public
 bg0_screenblock_mirror_2d	game_engine_stuff/level_stuff/active_level_class.thumb.cpp	/^array_2d_helper<scr_entry> active_level::bg0_screenblock_mirror_2d $/;"	kind:p	class:active_level	file:	signature:( bg0_screenblock_mirror, screenblock_size_2d )
 bg1_sbb	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^constexpr u32 bg1_sbb = 29;$/;"	kind:v
+bg1_screenblock_2d	game_engine_stuff/hud_manager_class.hpp	/^	static array_2d_helper<scr_entry> bg1_screenblock_2d;$/;"	kind:m	class:hud_manager	access:public
+bg1_screenblock_2d	game_engine_stuff/hud_manager_class.thumb.cpp	/^array_2d_helper<scr_entry> hud_manager::bg1_screenblock_2d$/;"	kind:p	class:hud_manager	file:	signature:( se_ram[bg1_sbb], screenblock_size_2d )
+bg1_screenblock_mirror	game_engine_stuff/hud_manager_class.hpp	/^	static scr_entry bg1_screenblock_mirror[screenblock_size]$/;"	kind:m	class:hud_manager	access:public
+bg1_screenblock_mirror	game_engine_stuff/hud_manager_class.thumb.cpp	/^scr_entry hud_manager::bg1_screenblock_mirror[screenblock_size];$/;"	kind:m	class:hud_manager	file:
+bg1_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.hpp	/^	static array_2d_helper<scr_entry> bg1_screenblock_mirror_2d;$/;"	kind:m	class:hud_manager	access:public
+bg1_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.thumb.cpp	/^array_2d_helper<scr_entry> hud_manager::bg1_screenblock_mirror_2d $/;"	kind:p	class:hud_manager	file:	signature:( bg1_screenblock_mirror, screenblock_size_2d )
 bg2_sbb	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^constexpr u32 bg2_sbb = 30;$/;"	kind:v
 bg3_sbb	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^constexpr u32 bg3_sbb = 31;$/;"	kind:v
 bg_fade_blue_step_amount_arr	game_engine_stuff/gfx_manager_class.hpp	/^	bg_fade_blue_step_amount_arr$/;"	kind:m	class:gfx_manager	access:public
@@ -603,6 +610,8 @@ coord	game_engine_stuff/block_stuff/block_stuff.hpp	/^	vec2_s32 coord;$/;"	kind:
 copy_bg_pal_mirror_to_bg_pal_ram	game_engine_stuff/gfx_manager_class.hpp	/^	static void copy_bg_pal_mirror_to_bg_pal_ram();$/;"	kind:p	class:gfx_manager	access:public	signature:()
 copy_bg_pal_mirror_to_bg_pal_ram	game_engine_stuff/gfx_manager_class.thumb.cpp	/^void gfx_manager::copy_bg_pal_mirror_to_bg_pal_ram()$/;"	kind:f	class:gfx_manager	signature:()
 copy_bgofs_mirror_to_registers	game_engine_stuff/gfx_manager_class.hpp	/^	static inline void copy_bgofs_mirror_to_registers()$/;"	kind:f	class:gfx_manager	access:public	signature:()
+copy_hud_from_array_2d_helper_to_vram	game_engine_stuff/hud_manager_class.hpp	/^	static void copy_hud_from_array_2d_helper_to_vram();$/;"	kind:p	class:hud_manager	access:public	signature:()
+copy_hud_from_array_2d_helper_to_vram	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::copy_hud_from_array_2d_helper_to_vram()$/;"	kind:f	class:hud_manager	signature:()
 copy_oam_mirror_to_oam	gba_specific_stuff/oam_entry_classes.hpp	/^inline void copy_oam_mirror_to_oam()$/;"	kind:f	signature:()
 copy_obj_pal_mirror_to_obj_pal_ram	game_engine_stuff/gfx_manager_class.hpp	/^	static void copy_obj_pal_mirror_to_obj_pal_ram();$/;"	kind:p	class:gfx_manager	access:public	signature:()
 copy_obj_pal_mirror_to_obj_pal_ram	game_engine_stuff/gfx_manager_class.thumb.cpp	/^void gfx_manager::copy_obj_pal_mirror_to_obj_pal_ram()$/;"	kind:f	class:gfx_manager	signature:()
@@ -1392,6 +1401,9 @@ gfx_manager::fade_out_to_white	game_engine_stuff/gfx_manager_class.thumb.cpp	/^v
 gfx_manager::get_graphics_slot_of_block_type	game_engine_stuff/gfx_manager_class.hpp	/^	static inline const u32 get_graphics_slot_of_block_type $/;"	kind:f	class:gfx_manager	access:public	signature:( block_type the_block_type )
 gfx_manager::get_metatile_number_of_block_type	game_engine_stuff/gfx_manager_class.hpp	/^	static inline u32 get_metatile_number_of_block_type$/;"	kind:f	class:gfx_manager	access:public	signature:( block_type the_block_type )
 gfx_manager::get_palette_number_of_block_type	game_engine_stuff/gfx_manager_class.hpp	/^	static inline u32 get_palette_number_of_block_type$/;"	kind:f	class:gfx_manager	access:public	signature:( block_type the_block_type )
+gfx_manager::hud_vram_as_tiles_start_offset	game_engine_stuff/gfx_manager_class.hpp	/^	static u32 hud_vram_as_tiles_start_offset __attribute__((_ewram));$/;"	kind:m	class:gfx_manager	access:public
+gfx_manager::hud_vram_as_tiles_start_offset	game_engine_stuff/gfx_manager_class.thumb.cpp	/^u32 gfx_manager::hud_vram_as_tiles_start_offset;$/;"	kind:m	class:gfx_manager	file:
+gfx_manager::init_hud_vram_as_tiles_start_offset	game_engine_stuff/gfx_manager_class.hpp	/^	static inline void init_hud_vram_as_tiles_start_offset()$/;"	kind:f	class:gfx_manager	access:public	signature:()
 gfx_manager::max_num_32x32_metatiles	game_engine_stuff/gfx_manager_class.hpp	/^	static constexpr u32 max_num_32x32_metatiles = 64;$/;"	kind:m	class:gfx_manager	access:public
 gfx_manager::num_tiles_in_ss_16x16	game_engine_stuff/gfx_manager_class.hpp	/^	static constexpr u32 num_tiles_in_ss_16x16 = ( 16 * 16 ) $/;"	kind:m	class:gfx_manager	access:public
 gfx_manager::num_tiles_in_ss_16x32	game_engine_stuff/gfx_manager_class.hpp	/^	static constexpr u32 num_tiles_in_ss_16x32 = ( 16 * 32 ) $/;"	kind:m	class:gfx_manager	access:public
@@ -1421,16 +1433,14 @@ gfx_manager::obj_fade_red_step_amount_arr	game_engine_stuff/gfx_manager_class.th
 gfx_manager::obj_fade_step_amount_arr_size	game_engine_stuff/gfx_manager_class.hpp	/^	static constexpr u32 obj_fade_step_amount_arr_size $/;"	kind:m	class:gfx_manager	access:public
 gfx_manager::obj_pal_mirror	game_engine_stuff/gfx_manager_class.hpp	/^	static u16 obj_pal_mirror[obj_pal_ram_size_in_u16] $/;"	kind:m	class:gfx_manager	access:public
 gfx_manager::obj_pal_mirror	game_engine_stuff/gfx_manager_class.thumb.cpp	/^u16 gfx_manager::obj_pal_mirror[obj_pal_ram_size_in_u16];$/;"	kind:m	class:gfx_manager	file:
-gfx_manager::upload_bg_palettes_to_bg_pal_mirror	game_engine_stuff/gfx_manager_class.hpp	/^	static void upload_bg_palettes_to_bg_pal_mirror();$/;"	kind:p	class:gfx_manager	access:public	signature:()
-gfx_manager::upload_bg_palettes_to_bg_pal_mirror	game_engine_stuff/gfx_manager_class.thumb.cpp	/^void gfx_manager::upload_bg_palettes_to_bg_pal_mirror()$/;"	kind:f	class:gfx_manager	signature:()
-gfx_manager::upload_bg_palettes_to_bg_pal_ram	game_engine_stuff/gfx_manager_class.hpp	/^	static void upload_bg_palettes_to_bg_pal_ram();$/;"	kind:p	class:gfx_manager	access:public	signature:()
-gfx_manager::upload_bg_palettes_to_bg_pal_ram	game_engine_stuff/gfx_manager_class.thumb.cpp	/^void gfx_manager::upload_bg_palettes_to_bg_pal_ram()$/;"	kind:f	class:gfx_manager	signature:()
+gfx_manager::upload_bg_palettes_to_target	game_engine_stuff/gfx_manager_class.hpp	/^	static inline void upload_bg_palettes_to_target( u16* target )$/;"	kind:f	class:gfx_manager	access:public	signature:( u16* target )
+gfx_manager::upload_bg_palettes_to_target	game_engine_stuff/gfx_manager_class.hpp	/^	static void upload_bg_palettes_to_target( vu16* target );$/;"	kind:p	class:gfx_manager	access:public	signature:( vu16* target )
+gfx_manager::upload_bg_palettes_to_target	game_engine_stuff/gfx_manager_class.thumb.cpp	/^void gfx_manager::upload_bg_palettes_to_target( vu16* target )$/;"	kind:f	class:gfx_manager	signature:( vu16* target )
 gfx_manager::upload_bg_tiles_to_vram	game_engine_stuff/gfx_manager_class.hpp	/^	static void upload_bg_tiles_to_vram() __attribute__((_iwram_code));$/;"	kind:p	class:gfx_manager	access:public	signature:()
 gfx_manager::upload_bg_tiles_to_vram	game_engine_stuff/gfx_manager_class.thumb.cpp	/^void gfx_manager::upload_bg_tiles_to_vram()$/;"	kind:f	class:gfx_manager	signature:()
-gfx_manager::upload_sprite_palettes_to_obj_pal_mirror	game_engine_stuff/gfx_manager_class.hpp	/^	static void upload_sprite_palettes_to_obj_pal_mirror();$/;"	kind:p	class:gfx_manager	access:public	signature:()
-gfx_manager::upload_sprite_palettes_to_obj_pal_mirror	game_engine_stuff/gfx_manager_class.thumb.cpp	/^void gfx_manager::upload_sprite_palettes_to_obj_pal_mirror()$/;"	kind:f	class:gfx_manager	signature:()
-gfx_manager::upload_sprite_palettes_to_obj_pal_ram	game_engine_stuff/gfx_manager_class.hpp	/^	static void upload_sprite_palettes_to_obj_pal_ram(); $/;"	kind:p	class:gfx_manager	access:public	signature:()
-gfx_manager::upload_sprite_palettes_to_obj_pal_ram	game_engine_stuff/gfx_manager_class.thumb.cpp	/^void gfx_manager::upload_sprite_palettes_to_obj_pal_ram()$/;"	kind:f	class:gfx_manager	signature:()
+gfx_manager::upload_sprite_palettes_to_target	game_engine_stuff/gfx_manager_class.hpp	/^	static inline void upload_sprite_palettes_to_target( u16* target )$/;"	kind:f	class:gfx_manager	access:public	signature:( u16* target )
+gfx_manager::upload_sprite_palettes_to_target	game_engine_stuff/gfx_manager_class.hpp	/^	static void upload_sprite_palettes_to_target( vu16* target ); $/;"	kind:p	class:gfx_manager	access:public	signature:( vu16* target )
+gfx_manager::upload_sprite_palettes_to_target	game_engine_stuff/gfx_manager_class.thumb.cpp	/^void gfx_manager::upload_sprite_palettes_to_target( vu16* target )$/;"	kind:f	class:gfx_manager	signature:( vu16* target )
 gfx_manager::upload_sprite_tiles_to_vram	game_engine_stuff/gfx_manager_class.hpp	/^	static void upload_sprite_tiles_to_vram( sprite& the_sprite )$/;"	kind:p	class:gfx_manager	access:public	signature:( sprite& the_sprite )
 gfx_manager::upload_sprite_tiles_to_vram	game_engine_stuff/gfx_manager_class.thumb.cpp	/^void gfx_manager::upload_sprite_tiles_to_vram( sprite& the_sprite )$/;"	kind:f	class:gfx_manager	signature:( sprite& the_sprite )
 gfx_manager_class_hpp	game_engine_stuff/gfx_manager_class.hpp	2;"	kind:d
@@ -1586,6 +1596,24 @@ horiz_sublevel_tile_at_basic	game_engine_stuff/level_stuff/active_level_manager_
 horiz_sublevel_tile_at_basic	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^	static scr_entry horiz_sublevel_tile_at_basic( u32 tile_x, $/;"	kind:p	class:active_level_manager	access:public	signature:( u32 tile_x, u32 tile_y )
 horiz_sublevel_xsize	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static constexpr u32 horiz_sublevel_xsize = block_data_array_size $/;"	kind:m	class:active_level	access:public
 horiz_sublevel_ysize	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static constexpr u32 horiz_sublevel_ysize = 32;$/;"	kind:m	class:active_level	access:public
+hud_manager	game_engine_stuff/hud_manager_class.hpp	/^class hud_manager$/;"	kind:c
+hud_manager::bg1_screenblock_2d	game_engine_stuff/hud_manager_class.hpp	/^	static array_2d_helper<scr_entry> bg1_screenblock_2d;$/;"	kind:m	class:hud_manager	access:public
+hud_manager::bg1_screenblock_2d	game_engine_stuff/hud_manager_class.thumb.cpp	/^array_2d_helper<scr_entry> hud_manager::bg1_screenblock_2d$/;"	kind:p	class:hud_manager	file:	signature:( se_ram[bg1_sbb], screenblock_size_2d )
+hud_manager::bg1_screenblock_mirror	game_engine_stuff/hud_manager_class.hpp	/^	static scr_entry bg1_screenblock_mirror[screenblock_size]$/;"	kind:m	class:hud_manager	access:public
+hud_manager::bg1_screenblock_mirror	game_engine_stuff/hud_manager_class.thumb.cpp	/^scr_entry hud_manager::bg1_screenblock_mirror[screenblock_size];$/;"	kind:m	class:hud_manager	file:
+hud_manager::bg1_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.hpp	/^	static array_2d_helper<scr_entry> bg1_screenblock_mirror_2d;$/;"	kind:m	class:hud_manager	access:public
+hud_manager::bg1_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.thumb.cpp	/^array_2d_helper<scr_entry> hud_manager::bg1_screenblock_mirror_2d $/;"	kind:p	class:hud_manager	file:	signature:( bg1_screenblock_mirror, screenblock_size_2d )
+hud_manager::copy_hud_from_array_2d_helper_to_vram	game_engine_stuff/hud_manager_class.hpp	/^	static void copy_hud_from_array_2d_helper_to_vram();$/;"	kind:p	class:hud_manager	access:public	signature:()
+hud_manager::copy_hud_from_array_2d_helper_to_vram	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::copy_hud_from_array_2d_helper_to_vram()$/;"	kind:f	class:hud_manager	signature:()
+hud_manager::hud_was_generated	game_engine_stuff/hud_manager_class.hpp	/^	static bool hud_was_generated __attribute__((_ewram));$/;"	kind:m	class:hud_manager	access:public
+hud_manager::plot_char_8x8_to_screenblock_mirror	game_engine_stuff/hud_manager_class.hpp	/^	static void plot_char_8x8_to_screenblock_mirror( u32 the_char,$/;"	kind:p	class:hud_manager	access:public	signature:( u32 the_char, u32 pos_x, u32 pos_y )
+hud_manager::plot_char_8x8_to_screenblock_mirror	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::plot_char_8x8_to_screenblock_mirror( u32 the_char,$/;"	kind:f	class:hud_manager	signature:( u32 the_char, u32 pos_x, u32 pos_y )
+hud_manager::update_hud_in_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.hpp	/^	static void update_hud_in_screenblock_mirror_2d();$/;"	kind:p	class:hud_manager	access:public	signature:()
+hud_manager::update_hud_in_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::update_hud_in_screenblock_mirror_2d()$/;"	kind:f	class:hud_manager	signature:()
+hud_manager_class_hpp	game_engine_stuff/hud_manager_class.hpp	2;"	kind:d
+hud_vram_as_tiles_start_offset	game_engine_stuff/gfx_manager_class.hpp	/^	static u32 hud_vram_as_tiles_start_offset __attribute__((_ewram));$/;"	kind:m	class:gfx_manager	access:public
+hud_vram_as_tiles_start_offset	game_engine_stuff/gfx_manager_class.thumb.cpp	/^u32 gfx_manager::hud_vram_as_tiles_start_offset;$/;"	kind:m	class:gfx_manager	file:
+hud_was_generated	game_engine_stuff/hud_manager_class.hpp	/^	static bool hud_was_generated __attribute__((_ewram));$/;"	kind:m	class:hud_manager	access:public
 ice_muffin_sprite_stuff	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^class ice_muffin_sprite_stuff : public sprite_base_stuff$/;"	kind:c	inherits:sprite_base_stuff
 ice_muffin_sprite_stuff::get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_curr_relative_tile_slot$/;"	kind:f	class:ice_muffin_sprite_stuff	access:public	signature:( sprite& the_powerup )
 ice_muffin_sprite_stuff::get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:ice_muffin_sprite_stuff	access:public	signature:()
@@ -1619,6 +1647,7 @@ init	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.thumb.cpp	/^void spr
 init_horiz_sublevel_sprite_ipg_lists	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^	static inline void init_horiz_sublevel_sprite_ipg_lists()$/;"	kind:f	class:active_level_manager	access:public	signature:()
 init_horiz_sublevel_sprite_ipg_lists	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void init_horiz_sublevel_sprite_ipg_lists$/;"	kind:p	class:sprite_manager	access:public	signature:( const sprite_init_param_group* the_ext_sprite_ipg_arr, u32 the_ext_sprite_ipg_arr_size )
 init_horiz_sublevel_sprite_ipg_lists	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^void sprite_manager::init_horiz_sublevel_sprite_ipg_lists$/;"	kind:f	class:sprite_manager	signature:( const sprite_init_param_group* the_ext_sprite_ipg_arr, u32 the_ext_sprite_ipg_arr_size )
+init_hud_vram_as_tiles_start_offset	game_engine_stuff/gfx_manager_class.hpp	/^	static inline void init_hud_vram_as_tiles_start_offset()$/;"	kind:f	class:gfx_manager	access:public	signature:()
 init_the_array_of_active_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static inline void init_the_array_of_active_sprites()$/;"	kind:f	class:sprite_manager	access:public	signature:()
 init_the_player	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void init_the_player ( const vec2_f24p8& s_in_level_pos, $/;"	kind:p	class:sprite_manager	access:public	signature:( const vec2_f24p8& s_in_level_pos, const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos )
 init_the_player	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^void sprite_manager::init_the_player ( const vec2_f24p8& s_in_level_pos, $/;"	kind:f	class:sprite_manager	signature:( const vec2_f24p8& s_in_level_pos, const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos )
@@ -2284,6 +2313,8 @@ player_sprite_stuff::use_16x16	game_engine_stuff/sprite_stuff/player_sprite_stuf
 player_sprite_stuff::walk_frame_timer_end	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static constexpr s32 walk_frame_timer_end = 4;$/;"	kind:m	class:player_sprite_stuff	access:public
 player_sprite_stuff::walk_speed	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static constexpr fixed24p8 walk_speed = {0x100};$/;"	kind:m	class:player_sprite_stuff	access:public
 player_sprite_stuff_class_hpp	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	2;"	kind:d
+plot_char_8x8_to_screenblock_mirror	game_engine_stuff/hud_manager_class.hpp	/^	static void plot_char_8x8_to_screenblock_mirror( u32 the_char,$/;"	kind:p	class:hud_manager	access:public	signature:( u32 the_char, u32 pos_x, u32 pos_y )
+plot_char_8x8_to_screenblock_mirror	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::plot_char_8x8_to_screenblock_mirror( u32 the_char,$/;"	kind:f	class:hud_manager	signature:( u32 the_char, u32 pos_x, u32 pos_y )
 pop	game_engine_stuff/sa_stack_class.hpp	/^	inline virtual void pop()$/;"	kind:f	class:sa_free_list	access:public	signature:()
 pop	game_engine_stuff/sa_stack_class.hpp	/^	inline virtual void pop()$/;"	kind:f	class:sa_stack	access:public	signature:()
 pos	game_engine_stuff/coll_box_class.hpp	/^	vec2_f24p8 pos;$/;"	kind:m	class:coll_box	access:public
@@ -2808,7 +2839,7 @@ test_int_global	game_engine_stuff/game_manager_class.hpp	/^	static int test_int_
 test_int_global	game_engine_stuff/game_manager_class.thumb.cpp	/^int game_manager::test_int_global;$/;"	kind:m	class:game_manager	file:
 test_level	test_level/test_level.thumb.cpp	/^const level test_level = level$/;"	kind:v
 test_level_hpp	test_level/test_level.hpp	2;"	kind:d
-test_level_sublevel_0	test_level/test_level.thumb.cpp	/^const sublevel< 2010, 64, 32, 14, 33 > test_level_sublevel_0$/;"	kind:v
+test_level_sublevel_0	test_level/test_level.thumb.cpp	/^const sublevel< 2010, 64, 32, 29, 33 > test_level_sublevel_0$/;"	kind:v
 test_level_sublevel_1	test_level/test_level.thumb.cpp	/^const sublevel< 1997, 64, 32, 6, 33 > test_level_sublevel_1$/;"	kind:v
 test_level_sublevel_2	test_level/test_level.thumb.cpp	/^const sublevel< 1953, 64, 32, 6, 33 > test_level_sublevel_2$/;"	kind:v
 test_sram_arr	game_engine_stuff/game_manager_class.hpp	/^	static u8 test_sram_arr[test_sram_arr_size] __attribute__((_sram));$/;"	kind:m	class:game_manager	access:public
@@ -2816,6 +2847,8 @@ test_sram_arr	game_engine_stuff/game_manager_class.thumb.cpp	/^u8 game_manager::
 test_sram_arr_size	game_engine_stuff/game_manager_class.hpp	/^	static constexpr u32 test_sram_arr_size = sizeof(debug_arr_u32);$/;"	kind:m	class:game_manager	access:public
 text_8x16_gfxPalLen	gfx/text_8x16_gfx.h	23;"	kind:d
 text_8x16_gfxTilesLen	gfx/text_8x16_gfx.h	20;"	kind:d
+text_8x8_gfxPalLen	gfx/text_8x8_gfx.h	23;"	kind:d
+text_8x8_gfxTilesLen	gfx/text_8x8_gfx.h	20;"	kind:d
 the_active_sprites_starting_vram_chunk_index	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static constexpr u32 the_active_sprites_starting_vram_chunk_index = 2;$/;"	kind:m	class:sprite_manager	access:public
 the_array	game_engine_stuff/array_2d_helper_class.hpp	/^	type* the_array;$/;"	kind:m	class:array_2d_helper	access:public
 the_array	game_engine_stuff/array_helper_class.hpp	/^	type* the_array;$/;"	kind:m	class:array_helper	access:public
@@ -2960,6 +2993,8 @@ udi_initial_pos_was_set	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class
 update_all_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.arm.cpp	/^void sprite_manager::update_all_sprites$/;"	kind:f	class:sprite_manager	signature:( const vec2_u32& the_sublevel_size_2d, prev_curr_pair<bg_point>& camera_pos_pc_pair )
 update_all_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void update_all_sprites ( const vec2_u32& the_sublevel_size_2d,$/;"	kind:p	class:sprite_manager	access:public	signature:( const vec2_u32& the_sublevel_size_2d, prev_curr_pair<bg_point>& camera_pos_pc_pair )
 update_f24p8_positions	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline void update_f24p8_positions()$/;"	kind:f	class:sprite	access:public	signature:()
+update_hud_in_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.hpp	/^	static void update_hud_in_screenblock_mirror_2d();$/;"	kind:p	class:hud_manager	access:public	signature:()
+update_hud_in_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::update_hud_in_screenblock_mirror_2d()$/;"	kind:f	class:hud_manager	signature:()
 update_on_screen_pos	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	void update_on_screen_pos( const bg_point& camera_pos )$/;"	kind:p	class:sprite	access:public	signature:( const bg_point& camera_pos )
 update_on_screen_pos	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^void sprite::update_on_screen_pos( const bg_point& camera_pos )$/;"	kind:f	class:sprite	signature:( const bg_point& camera_pos )
 update_part_1	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	virtual void update_part_1( sprite& the_player );$/;"	kind:p	class:player_sprite_stuff	access:public	signature:( sprite& the_player )
@@ -2976,16 +3011,14 @@ update_part_2	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.thumb.cpp	/
 update_part_2	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.thumb.cpp	/^void sprite_base_stuff::update_part_2( sprite& the_sprite, $/;"	kind:f	class:sprite_base_stuff	signature:( sprite& the_sprite, const bg_point& camera_pos, int& next_oam_index )
 update_sublevel_in_screenblock_mirror_2d	game_engine_stuff/level_stuff/active_level_manager_class.arm.cpp	/^void active_level_manager::update_sublevel_in_screenblock_mirror_2d()$/;"	kind:f	class:active_level_manager	signature:()
 update_sublevel_in_screenblock_mirror_2d	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^	static void update_sublevel_in_screenblock_mirror_2d()$/;"	kind:p	class:active_level_manager	access:public	signature:()
-upload_bg_palettes_to_bg_pal_mirror	game_engine_stuff/gfx_manager_class.hpp	/^	static void upload_bg_palettes_to_bg_pal_mirror();$/;"	kind:p	class:gfx_manager	access:public	signature:()
-upload_bg_palettes_to_bg_pal_mirror	game_engine_stuff/gfx_manager_class.thumb.cpp	/^void gfx_manager::upload_bg_palettes_to_bg_pal_mirror()$/;"	kind:f	class:gfx_manager	signature:()
-upload_bg_palettes_to_bg_pal_ram	game_engine_stuff/gfx_manager_class.hpp	/^	static void upload_bg_palettes_to_bg_pal_ram();$/;"	kind:p	class:gfx_manager	access:public	signature:()
-upload_bg_palettes_to_bg_pal_ram	game_engine_stuff/gfx_manager_class.thumb.cpp	/^void gfx_manager::upload_bg_palettes_to_bg_pal_ram()$/;"	kind:f	class:gfx_manager	signature:()
+upload_bg_palettes_to_target	game_engine_stuff/gfx_manager_class.hpp	/^	static inline void upload_bg_palettes_to_target( u16* target )$/;"	kind:f	class:gfx_manager	access:public	signature:( u16* target )
+upload_bg_palettes_to_target	game_engine_stuff/gfx_manager_class.hpp	/^	static void upload_bg_palettes_to_target( vu16* target );$/;"	kind:p	class:gfx_manager	access:public	signature:( vu16* target )
+upload_bg_palettes_to_target	game_engine_stuff/gfx_manager_class.thumb.cpp	/^void gfx_manager::upload_bg_palettes_to_target( vu16* target )$/;"	kind:f	class:gfx_manager	signature:( vu16* target )
 upload_bg_tiles_to_vram	game_engine_stuff/gfx_manager_class.hpp	/^	static void upload_bg_tiles_to_vram() __attribute__((_iwram_code));$/;"	kind:p	class:gfx_manager	access:public	signature:()
 upload_bg_tiles_to_vram	game_engine_stuff/gfx_manager_class.thumb.cpp	/^void gfx_manager::upload_bg_tiles_to_vram()$/;"	kind:f	class:gfx_manager	signature:()
-upload_sprite_palettes_to_obj_pal_mirror	game_engine_stuff/gfx_manager_class.hpp	/^	static void upload_sprite_palettes_to_obj_pal_mirror();$/;"	kind:p	class:gfx_manager	access:public	signature:()
-upload_sprite_palettes_to_obj_pal_mirror	game_engine_stuff/gfx_manager_class.thumb.cpp	/^void gfx_manager::upload_sprite_palettes_to_obj_pal_mirror()$/;"	kind:f	class:gfx_manager	signature:()
-upload_sprite_palettes_to_obj_pal_ram	game_engine_stuff/gfx_manager_class.hpp	/^	static void upload_sprite_palettes_to_obj_pal_ram(); $/;"	kind:p	class:gfx_manager	access:public	signature:()
-upload_sprite_palettes_to_obj_pal_ram	game_engine_stuff/gfx_manager_class.thumb.cpp	/^void gfx_manager::upload_sprite_palettes_to_obj_pal_ram()$/;"	kind:f	class:gfx_manager	signature:()
+upload_sprite_palettes_to_target	game_engine_stuff/gfx_manager_class.hpp	/^	static inline void upload_sprite_palettes_to_target( u16* target )$/;"	kind:f	class:gfx_manager	access:public	signature:( u16* target )
+upload_sprite_palettes_to_target	game_engine_stuff/gfx_manager_class.hpp	/^	static void upload_sprite_palettes_to_target( vu16* target ); $/;"	kind:p	class:gfx_manager	access:public	signature:( vu16* target )
+upload_sprite_palettes_to_target	game_engine_stuff/gfx_manager_class.thumb.cpp	/^void gfx_manager::upload_sprite_palettes_to_target( vu16* target )$/;"	kind:f	class:gfx_manager	signature:( vu16* target )
 upload_sprite_tiles_to_vram	game_engine_stuff/gfx_manager_class.hpp	/^	static void upload_sprite_tiles_to_vram( sprite& the_sprite )$/;"	kind:p	class:gfx_manager	access:public	signature:( sprite& the_sprite )
 upload_sprite_tiles_to_vram	game_engine_stuff/gfx_manager_class.thumb.cpp	/^void gfx_manager::upload_sprite_tiles_to_vram( sprite& the_sprite )$/;"	kind:f	class:gfx_manager	signature:( sprite& the_sprite )
 upload_tiles_of_active_sprites_to_vram	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static inline void upload_tiles_of_active_sprites_to_vram()$/;"	kind:f	class:sprite_manager	access:public	signature:()

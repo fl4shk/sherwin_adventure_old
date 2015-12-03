@@ -76,6 +76,9 @@ void sprite_manager::spawn_sprites_if_needed
 		for ( s32 i=camera_block_grid_pos_x.prev;
 			i<=camera_block_grid_pos_x.curr;
 			++i )
+		//for ( s32 i=camera_block_grid_pos_x.prev;
+		//	i<=camera_block_grid_pos_x.curr + 1;
+		//	++i )
 		{
 			auto& curr_sprite_ipg_list = active_level
 				::horiz_sublevel_sprite_ipg_lists.the_array[i];

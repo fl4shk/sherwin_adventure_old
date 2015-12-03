@@ -2,6 +2,7 @@
 
 #include "level_stuff/active_level_manager_class.hpp"
 #include "sprite_stuff/sprite_manager_class.hpp"
+#include "hud_manager_class.hpp"
 
 #include "../gfx/the_block_gfx.h"
 #include "../gfx/title_screen.h"
@@ -45,6 +46,7 @@ void game_manager::vblank_func()
 		
 		// When loading a level.
 		case gm_loading_level:
+			hud_manager::hud_was_generated = false;
 			break;
 		
 		// When changing from one sublevel to another.
@@ -60,6 +62,9 @@ void game_manager::vblank_func()
 			active_level_manager
 				::copy_sublevel_from_array_2d_helper_to_vram();
 			sprite_manager::upload_tiles_of_active_sprites_to_vram();
+			
+			hud_manager::update_hud_in_screenblock_mirror_2d();
+			hud_manager::copy_hud_from_array_2d_helper_to_vram();
 			break;
 		
 		default:
@@ -92,9 +97,6 @@ void game_manager::title_screen_func()
 	reg_bg2cnt = bgcnt_sbb(bg2_sbb);
 	reg_bg3cnt = bgcnt_sbb(bg3_sbb);
 	
-	////
-	//reg_bg0cnt 
-	
 	
 	// Clear bgofs_mirror
 	for ( u32 i=0; i<3; ++i )
@@ -111,12 +113,13 @@ void game_manager::title_screen_func()
 	// Copy the title screen's tiles and tilemap to VRAM
 	bios_do_lz77_uncomp_vram( title_screenTiles, bg_tile_vram );
 	
-	gfx_manager::upload_bg_palettes_to_bg_pal_ram();
+	gfx_manager::upload_bg_palettes_to_target(bg_pal_ram);
 	
+	// This is sort of a hack.
 	bios_do_lz77_uncomp_wram( title_screenMap, 
 		active_level::bg0_screenblock_mirror );
-	
 	active_level_manager::copy_sublevel_from_array_2d_helper_to_vram();
+	
 	
 	// Disable forced blank
 	clear_bits( reg_dispcnt, dcnt_blank_mask );
@@ -145,6 +148,8 @@ void game_manager::reinit_the_game()
 	bios_wait_for_vblank();
 	
 	gfx_manager::fade_out_to_white(15);
+	
+	gfx_manager::init_hud_vram_as_tiles_start_offset();
 	
 	
 	// Use video Mode 0, use 1D object mapping, enable forced blank,
@@ -186,13 +191,13 @@ void game_manager::reinit_the_game()
 	//}
 	
 	// Copy the sprite palettes to OBJ Palette RAM.
-	gfx_manager::upload_sprite_palettes_to_obj_pal_ram();
+	gfx_manager::upload_sprite_palettes_to_target(obj_pal_ram);
 	
 	//// Copy the sprite graphics to OBJ Video RAM.
 	//gfx_manager::upload_default_sprite_graphics();
 	
 	// Also, copy the_block_gfxPalLen to BG Palette RAM
-	gfx_manager::upload_bg_palettes_to_bg_pal_ram();
+	gfx_manager::upload_bg_palettes_to_target(bg_pal_ram);
 	
 	//bios_wait_for_vblank();
 	
