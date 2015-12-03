@@ -478,16 +478,11 @@ Archive member included to satisfy reference by file (symbol)
                               /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(vterminate.o) (__getreent)
 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(iosupport.o)
                               /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(open.o) (FindDevice)
-/opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libg.a(lib_a-errno.o)
+/opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-errno.o)
                               /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(handle_manager.o) (__errno)
 
 Discarded input sections
 
- .debug_line    0x0000000000000000       0xa2 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/crt0.o
- .debug_info    0x0000000000000000       0xc8 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/crt0.o
- .debug_abbrev  0x0000000000000000       0x14 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/crt0.o
- .debug_aranges
-                0x0000000000000000       0x20 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/crt0.o
  .group         0x0000000000000000       0x10 objs/active_level_class.thumb.o
  .group         0x0000000000000000       0x10 objs/active_level_class.thumb.o
  .group         0x0000000000000000       0x1c objs/active_level_class.thumb.o
@@ -1996,7 +1991,6 @@ LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm
 LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a
 START GROUP
 LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/libgcc.a
-LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libg.a
 LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a
 LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a
 END GROUP
@@ -7655,8 +7649,8 @@ LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtn.o
                 0x000000000806bcb8                RemoveDevice
                 0x000000000806bce8                AddDevice
                 0x000000000806bd84                GetDeviceOpTab
- .text          0x000000000806bdac        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libg.a(lib_a-errno.o)
- .text.__errno  0x000000000806bdac       0x10 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libg.a(lib_a-errno.o)
+ .text          0x000000000806bdac        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-errno.o)
+ .text.__errno  0x000000000806bdac       0x10 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-errno.o)
                 0x000000000806bdac                __errno
  .text          0x000000000806bdbc        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtend.o
  .text          0x000000000806bdbc        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtn.o
@@ -16684,7 +16678,7 @@ LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtn.o
  .ARM.attributes
                 0x00000000080ce43c       0x30 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(iosupport.o)
  .ARM.attributes
-                0x00000000080ce46c       0x30 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libg.a(lib_a-errno.o)
+                0x00000000080ce46c       0x30 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-errno.o)
  .ARM.attributes
                 0x00000000080ce49c       0x30 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtend.o
  .ARM.attributes
@@ -17107,7 +17101,7 @@ LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtn.o
  .data          0x0000000002022f0c        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(getreent.o)
  .data          0x0000000002022f0c       0x44 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(iosupport.o)
                 0x0000000002022f10                devoptab_list
- .data          0x0000000002022f50        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libg.a(lib_a-errno.o)
+ .data          0x0000000002022f50        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-errno.o)
  .data          0x0000000002022f50        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtend.o
  .data          0x0000000002022f50        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtn.o
                 0x0000000002022f50                . = ALIGN (0x4)
@@ -18056,7 +18050,7 @@ LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtn.o
  .bss           0x0000000002026ed8        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(handle_manager.o)
  .bss           0x0000000002026ed8        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(getreent.o)
  .bss           0x0000000002026ed8        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(iosupport.o)
- .bss           0x0000000002026ed8        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libg.a(lib_a-errno.o)
+ .bss           0x0000000002026ed8        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-errno.o)
  .bss           0x0000000002026ed8        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtend.o
  .bss           0x0000000002026ed8        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtn.o
  *(.ewram .ewram.*)
@@ -18341,17 +18335,22 @@ LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtn.o
  .comment       0x00000000080f430a       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(handle_manager.o)
  .comment       0x00000000080f430a       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(getreent.o)
  .comment       0x00000000080f430a       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(iosupport.o)
- .comment       0x00000000080f430a       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libg.a(lib_a-errno.o)
+ .comment       0x00000000080f430a       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-errno.o)
  .comment       0x00000000080f430a       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtend.o
 
 .debug_frame
  *(.debug_frame)
 OUTPUT(sherwin_adventure.elf elf32-littlearm)
 
-.debug_line
+.debug_line     0x0000000000000000       0xa2
+ .debug_line    0x0000000000000000       0xa2 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/crt0.o
 
-.debug_info
+.debug_info     0x0000000000000000       0xc8
+ .debug_info    0x0000000000000000       0xc8 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/crt0.o
 
-.debug_abbrev
+.debug_abbrev   0x0000000000000000       0x14
+ .debug_abbrev  0x0000000000000000       0x14 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/crt0.o
 
-.debug_aranges
+.debug_aranges  0x0000000000000000       0x20
+ .debug_aranges
+                0x0000000000000000       0x20 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/crt0.o
