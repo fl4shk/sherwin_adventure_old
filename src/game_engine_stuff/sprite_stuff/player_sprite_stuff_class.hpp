@@ -55,6 +55,7 @@ public:		// enums
 	
 public:		// variables
 	// Static variables
+	
 	static fixed24p8 speed __attribute__((_iwram));
 	static bool use_16x16 __attribute__((_iwram));
 	static bool run_toggle __attribute__((_iwram));
@@ -94,6 +95,7 @@ public:		// variables
 	
 	static const vec2_f24p8 the_initial_coll_box_size,
 		the_initial_cb_pos_offset;
+	
 	
 public:		// functions
 	virtual void init( sprite& the_player, bool facing_left=true );
