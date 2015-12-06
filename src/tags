@@ -1606,6 +1606,7 @@ hud_manager::bg1_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.thumb
 hud_manager::copy_hud_from_array_2d_helper_to_vram	game_engine_stuff/hud_manager_class.hpp	/^	static void copy_hud_from_array_2d_helper_to_vram();$/;"	kind:p	class:hud_manager	access:public	signature:()
 hud_manager::copy_hud_from_array_2d_helper_to_vram	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::copy_hud_from_array_2d_helper_to_vram()$/;"	kind:f	class:hud_manager	signature:()
 hud_manager::hud_was_generated	game_engine_stuff/hud_manager_class.hpp	/^	static bool hud_was_generated __attribute__((_ewram));$/;"	kind:m	class:hud_manager	access:public
+hud_manager::hud_was_generated	game_engine_stuff/hud_manager_class.thumb.cpp	/^bool hud_manager::hud_was_generated;$/;"	kind:m	class:hud_manager	file:
 hud_manager::plot_char_8x8_to_screenblock_mirror	game_engine_stuff/hud_manager_class.hpp	/^	static void plot_char_8x8_to_screenblock_mirror( u32 the_char,$/;"	kind:p	class:hud_manager	access:public	signature:( u32 the_char, u32 pos_x, u32 pos_y )
 hud_manager::plot_char_8x8_to_screenblock_mirror	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::plot_char_8x8_to_screenblock_mirror( u32 the_char,$/;"	kind:f	class:hud_manager	signature:( u32 the_char, u32 pos_x, u32 pos_y )
 hud_manager::update_hud_in_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.hpp	/^	static void update_hud_in_screenblock_mirror_2d();$/;"	kind:p	class:hud_manager	access:public	signature:()
@@ -1614,6 +1615,7 @@ hud_manager_class_hpp	game_engine_stuff/hud_manager_class.hpp	2;"	kind:d
 hud_vram_as_tiles_start_offset	game_engine_stuff/gfx_manager_class.hpp	/^	static u32 hud_vram_as_tiles_start_offset __attribute__((_ewram));$/;"	kind:m	class:gfx_manager	access:public
 hud_vram_as_tiles_start_offset	game_engine_stuff/gfx_manager_class.thumb.cpp	/^u32 gfx_manager::hud_vram_as_tiles_start_offset;$/;"	kind:m	class:gfx_manager	file:
 hud_was_generated	game_engine_stuff/hud_manager_class.hpp	/^	static bool hud_was_generated __attribute__((_ewram));$/;"	kind:m	class:hud_manager	access:public
+hud_was_generated	game_engine_stuff/hud_manager_class.thumb.cpp	/^bool hud_manager::hud_was_generated;$/;"	kind:m	class:hud_manager	file:
 ice_muffin_sprite_stuff	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^class ice_muffin_sprite_stuff : public sprite_base_stuff$/;"	kind:c	inherits:sprite_base_stuff
 ice_muffin_sprite_stuff::get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_curr_relative_tile_slot$/;"	kind:f	class:ice_muffin_sprite_stuff	access:public	signature:( sprite& the_powerup )
 ice_muffin_sprite_stuff::get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:ice_muffin_sprite_stuff	access:public	signature:()

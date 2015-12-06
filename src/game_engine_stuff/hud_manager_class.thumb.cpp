@@ -1,9 +1,13 @@
 #include "hud_manager_class.hpp"
 #include "level_stuff/active_level_manager_class.hpp"
 
-#include <string>
-#include <sstream>
-using namespace std;
+//#include <string>
+//#include <sstream>
+//using namespace std;
+
+#include <stdlib.h>
+#include <string.h>
+
 
 bool hud_manager::hud_was_generated;
 
@@ -30,6 +34,11 @@ array_2d_helper<scr_entry> hud_manager::bg1_screenblock_mirror_2d
 void hud_manager::plot_char_8x8_to_screenblock_mirror( u32 the_char,
 	u32 pos_x, u32 pos_y )
 {
+	if ( the_char < ' ' )
+	{
+		return;
+	}
+	
 	bg1_screenblock_mirror_2d.data_at( pos_x, pos_y )
 		= gfx_manager::hud_vram_as_tiles_start_offset
 		+ ( (char)the_char - ' ' ) | se_palbank(bgps_in_level_hud);
@@ -46,20 +55,18 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 	}
 	
 	
-	//static const char to_plot[] = "SHERWIN";
-	//static const u32 to_plot_size = sizeof(to_plot) - 1;
-	//
-	//for ( u32 i=0; i<to_plot_size; ++i )
-	//{
-	//	plot_char_8x8_to_screenblock_mirror( to_plot[i], 2 + i, 0 );
-	//}
+	static const char sherwin_str[] = "SHERWIN:";
+	//static const u32 sherwin_str_size = sizeof(sherwin_str) - 1;
+	static const u32 sherwin_str_size = strlen(sherwin_str);
 	
-	string to_plot = "SHERWIN";
+	u32 plot_x = 2;
 	
-	for ( u32 i=0; i<to_plot.size(); ++i )
+	for ( u32 i=0; i<sherwin_str_size; ++i )
 	{
-		plot_char_8x8_to_screenblock_mirror( to_plot[i], 1 + i, 0 );
+		plot_char_8x8_to_screenblock_mirror( sherwin_str[i], plot_x, 0 );
+		++plot_x;
 	}
+	
 	
 	
 }
