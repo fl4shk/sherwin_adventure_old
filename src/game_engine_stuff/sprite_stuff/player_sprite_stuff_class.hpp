@@ -61,6 +61,9 @@ public:		// variables
 	static bool run_toggle __attribute__((_iwram));
 	//static bool running __attribute__((_iwram));
 	
+	static s32 max_hp __attribute__((_iwram));
+	static s32 remaining_hp __attribute__((_iwram));
+	
 	// Physics/logic constants
 	static constexpr fixed24p8 jump_vel = {-0x400};
 	static constexpr s32 max_jump_hold_timer = 16;

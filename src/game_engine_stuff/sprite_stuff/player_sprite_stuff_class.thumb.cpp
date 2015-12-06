@@ -11,6 +11,9 @@ bool player_sprite_stuff::use_16x16;
 bool player_sprite_stuff::run_toggle;
 //bool player_sprite_stuff::running;
 
+s32 player_sprite_stuff::max_hp;
+s32 player_sprite_stuff::remaining_hp;
+
 const player_sprite_stuff::frame 
 	player_sprite_stuff::frame_slot_to_frame_arr
 	[frame_slot_to_frame_arr_size] 

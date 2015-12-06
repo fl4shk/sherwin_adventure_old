@@ -96,6 +96,11 @@ public:		// functions
 		
 		player_sprite_stuff::run_toggle = false;
 		
+		// The following line is temporary!
+		player_sprite_stuff::max_hp = 10;
+		
+		player_sprite_stuff::remaining_hp = player_sprite_stuff::max_hp;
+		
 		for ( u32 i=0; i<active_level::max_num_sublevels; ++i )
 		{
 			memfill32( active_level::persistent_block_data_arrays[i],
