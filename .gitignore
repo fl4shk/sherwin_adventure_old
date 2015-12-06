@@ -2,5 +2,4 @@
 deps/*
 objs/*
 disassembly_all_2.armasm
-linker_map.txt
 symbols.txt
