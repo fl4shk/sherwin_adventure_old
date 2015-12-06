@@ -15,7 +15,7 @@
 #include "block_stuff/block_stuff.hpp"
 #include "../gfx/the_block_gfx.h"
 //#include "../gfx/text_8x16_gfx.h"
-#include "../gfx/text_8x8_gfx.h"
+#include "../gfx/text_8x8_thick_gfx.h"
 
 
 #include "sprite_stuff/sprite_class.hpp"
@@ -91,8 +91,8 @@ void gfx_manager::upload_bg_palettes_to_target( vu16* target )
 		//	text_8x16_gfxPalLen / sizeof(u32) );
 		memcpy32( &(target[bgps_in_level_hud 
 			* num_colors_per_palette]),
-			text_8x8_gfxPal,
-			text_8x8_gfxPalLen / sizeof(u32) );
+			text_8x8_thick_gfxPal,
+			text_8x8_thick_gfxPalLen / sizeof(u32) );
 	}
 }
 
@@ -141,8 +141,8 @@ void gfx_manager::upload_bg_tiles_to_vram()
 	//	text_8x16_gfxTiles, 
 	//	text_8x16_gfxTilesLen / sizeof(u32) );
 	memcpy32( &(bg_tile_vram_as_tiles[hud_vram_as_tiles_start_offset]),
-		text_8x8_gfxTiles,
-		text_8x8_gfxTilesLen / sizeof(u32) );
+		text_8x8_thick_gfxTiles,
+		text_8x8_thick_gfxTilesLen / sizeof(u32) );
 }
 
 

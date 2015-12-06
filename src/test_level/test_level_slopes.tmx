@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" nextobjectid="201">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" nextobjectid="206">
  <tileset firstgid="1" name="the_blocks" tilewidth="16" tileheight="16" tilecount="96">
   <image source="gfx_for_tiled/the_block_gfx_for_tiled.png" trans="00ffff" width="192" height="128"/>
  </tileset>
- <tileset firstgid="97" name="spr_16x16" tilewidth="16" tileheight="16" tilecount="48">
-  <image source="gfx_for_tiled/the_16x16_sprite_gfx_for_tiled.png" trans="00ffff" width="128" height="96"/>
+ <tileset firstgid="97" name="spr_16x16" tilewidth="16" tileheight="16" tilecount="104">
+  <image source="gfx_for_tiled/the_16x16_sprite_gfx_for_tiled.png" trans="00ffff" width="208" height="128"/>
  </tileset>
- <tileset firstgid="145" name="spr_16x32" tilewidth="16" tileheight="32" tilecount="24">
-  <image source="gfx_for_tiled/the_16x32_sprite_gfx_for_tiled.png" trans="00ffff" width="192" height="64"/>
+ <tileset firstgid="201" name="spr_16x32" tilewidth="16" tileheight="32" tilecount="65">
+  <image source="gfx_for_tiled/the_16x32_sprite_gfx_for_tiled.png" trans="00ffff" width="208" height="160"/>
  </tileset>
  <layer name="Tile Layer 1" width="64" height="32">
   <data encoding="csv">
@@ -46,32 +46,27 @@
 </data>
  </layer>
  <objectgroup name="Sprite Layer 1" opacity="0.8">
-  <object id="80" gid="146" x="64" y="496" width="16" height="32"/>
+  <object id="80" gid="202" x="64" y="496" width="16" height="32"/>
   <object id="138" gid="99" x="992" y="496" width="16" height="16"/>
-  <object id="185" gid="104" x="960" y="496" width="16" height="16">
+  <object id="201" gid="208" x="16" y="496" width="16" height="32">
    <properties>
-    <property name="bdest" value="1"/>
+    <property name="bdest" value="5"/>
     <property name="sdest" value="0"/>
    </properties>
   </object>
-  <object id="186" gid="105" x="928" y="64" width="16" height="16">
-   <properties>
-    <property name="bdest" value="3"/>
-   </properties>
-  </object>
-  <object id="190" gid="107" x="912" y="496" width="16" height="16">
+  <object id="202" gid="209" x="48" y="496" width="16" height="32">
    <properties>
     <property name="bdest" value="2"/>
    </properties>
   </object>
-  <object id="191" gid="106" x="992" y="128" width="16" height="16">
+  <object id="203" gid="210" x="928" y="496" width="16" height="32">
    <properties>
-    <property name="bdest" value="0"/>
+    <property name="bdest" value="3"/>
    </properties>
   </object>
-  <object id="195" gid="108" x="16" y="496" width="16" height="16">
+  <object id="204" gid="211" x="992" y="128" width="16" height="32">
    <properties>
-    <property name="bdest" value="0"/>
+    <property name="bdest" value="1"/>
    </properties>
   </object>
  </objectgroup>

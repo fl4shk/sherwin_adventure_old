@@ -29,10 +29,15 @@ game_mode game_manager::curr_game_mode;
 
 void game_manager::vblank_func()
 {
-	mmFrame();
+	//mmFrame();
 	
 	key_poll();
 	//pause_or_unpause_music();
+	
+	if ( curr_game_mode != gm_title_screen )
+	{
+		mmFrame();
+	}
 	
 	switch ( curr_game_mode )
 	{
@@ -135,6 +140,14 @@ void game_manager::title_screen_func()
 		// Start the game if the Start button is hit
 		if ( key_hit(key_start) )
 		{
+			irqSet( irq_vblank, (u32)mmVBlank );
+			irqEnable(irq_vblank);
+			
+			// Don't call mmInitDefault more than once.  It uses malloc(),
+			// and it apparently MaxMOD doesn't ever call free().
+			mmInitDefault( (mm_addr)practice_17_bin, 8 );
+			mmSetVBlankHandler(reinterpret_cast<void*>(vblank_func));
+			
 			reinit_the_game();
 			break;
 		}
@@ -209,13 +222,7 @@ void game_manager::reinit_the_game()
 	active_level_manager::load_level(&test_level);
 	
 	// Also, start playing music when the game is started.
-	irqSet( irq_vblank, (u32)mmVBlank );
-	irqEnable(irq_vblank);
-	
-	mmInitDefault( (mm_addr)practice_17_bin, 8 );
 	mmStart( MOD_PRACTICE_17, MM_PLAY_LOOP );
-	
-	mmSetVBlankHandler(reinterpret_cast<void*>(vblank_func));
 	
 	// An extra bios_wait_for_vblank() so that 
 	bios_wait_for_vblank();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" nextobjectid="235">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" nextobjectid="238">
  <tileset firstgid="1" name="the_blocks" tilewidth="16" tileheight="16" tilecount="96">
   <image source="gfx_for_tiled/the_block_gfx_for_tiled.png" trans="00ffff" width="192" height="128"/>
  </tileset>
@@ -98,5 +98,13 @@
   <object id="223" gid="99" x="960" y="448" width="16" height="16"/>
   <object id="224" gid="99" x="976" y="448" width="16" height="16"/>
   <object id="225" gid="99" x="992" y="448" width="16" height="16"/>
+  <object id="235" gid="2147483888" x="272" y="496" width="16" height="32"/>
+  <object id="236" gid="240" x="64" y="496" width="16" height="32"/>
+  <object id="237" gid="213" x="208" y="496" width="16" height="32">
+   <properties>
+    <property name="bdest" value="0"/>
+    <property name="sdest" value="3"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -70,50 +70,51 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 	}
 	
 	
-	//const u32 player_hp_str_max_size = 5;
-	//char player_hp_str[player_hp_str_max_size];
-	//u32 player_hp_str_curr_size = 0;
-	//
-	//char temp_buf[player_hp_str_max_size];
-	//
-	//for ( u32 i=0; i<player_hp_str_max_size; ++i )
-	//{
-	//	player_hp_str[i] = '\0';
-	//}
-	//
-	//
+	const u32 player_hp_str_max_size = 5;
+	char player_hp_str[player_hp_str_max_size];
+	u32 player_hp_str_curr_size = 0;
+	
+	char temp_buf[player_hp_str_max_size];
+	
+	for ( u32 i=0; i<player_hp_str_max_size; ++i )
+	{
+		player_hp_str[i] = '\0';
+	}
+	
+	
 	//s32 to_convert = ( player_sprite_stuff::remaining_hp < 0 )
 	//	? 0 : player_sprite_stuff::remaining_hp;
-	//
-	//for (;;)
-	//{
-	//	for ( u32 i=0; i<player_hp_str_max_size; ++i )
-	//	{
-	//		temp_buf[i] = '\0';
-	//	}
-	//	
-	//	u32 rem = to_convert % 10;
-	//	to_convert /= 10;
-	//	//player_hp_str = (char)( '0' + rem ) + player_hp_str;
-	//	
-	//	temp_buf[0] = (char)( '0' + rem );
-	//	strcat( temp_buf, player_hp_str ); 
-	//	strcpy( player_hp_str, temp_buf );
-	//	
-	//	++player_hp_str_curr_size;
-	//	
-	//	if ( to_convert == 0 )
-	//	{
-	//		break;
-	//	}
-	//}
-	//
-	////for ( u32 i=0; i<player_hp_str_curr_size; ++i )
-	//for ( u32 i=0; i<player_hp_str_max_size; ++i )
-	//{
-	//	plot_char_8x8_to_screenblock_mirror( player_hp_str[i], plot_x, 0 );
-	//	++plot_x;
-	//}
+	s32 to_convert = 10;
+	
+	for (;;)
+	{
+		for ( u32 i=0; i<player_hp_str_max_size; ++i )
+		{
+			temp_buf[i] = '\0';
+		}
+		
+		u32 rem = to_convert % 10;
+		to_convert /= 10;
+		//player_hp_str = (char)( '0' + rem ) + player_hp_str;
+		
+		temp_buf[0] = (char)( '0' + rem );
+		strcat( temp_buf, player_hp_str ); 
+		strcpy( player_hp_str, temp_buf );
+		
+		++player_hp_str_curr_size;
+		
+		if ( to_convert == 0 )
+		{
+			break;
+		}
+	}
+	
+	//for ( u32 i=0; i<player_hp_str_curr_size; ++i )
+	for ( u32 i=0; i<player_hp_str_max_size; ++i )
+	{
+		plot_char_8x8_to_screenblock_mirror( player_hp_str[i], plot_x, 0 );
+		++plot_x;
+	}
 	
 }
 

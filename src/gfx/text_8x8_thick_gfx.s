@@ -1,14 +1,14 @@
 
-@{{BLOCK(text_8x8_gfx)
+@{{BLOCK(text_8x8_thick_gfx)
 
 @=======================================================================
 @
-@	text_8x8_gfx, 128x48@4, 
+@	text_8x8_thick_gfx, 128x48@4, 
 @	+ palette 16 entries, not compressed
 @	+ 96 tiles not compressed
 @	Total size: 32 + 3072 = 3104
 @
-@	Time-stamp: 2015-12-03, 19:08:18
+@	Time-stamp: 2015-12-06, 14:27:23
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 @	( http://www.coranac.com/projects/#grit )
 @
@@ -16,8 +16,8 @@
 
 	.section .rodata
 	.align	2
-	.global text_8x8_gfxTiles		@ 3072 unsigned chars
-text_8x8_gfxTiles:
+	.global text_8x8_thick_gfxTiles		@ 3072 unsigned chars
+text_8x8_thick_gfxTiles:
 	.hword 0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000
 	.hword 0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000
 	.hword 0x2211,0x0111,0x2211,0x0111,0x2211,0x0111,0x2211,0x0111
@@ -236,9 +236,9 @@ text_8x8_gfxTiles:
 
 	.section .rodata
 	.align	2
-	.global text_8x8_gfxPal		@ 32 unsigned chars
-text_8x8_gfxPal:
+	.global text_8x8_thick_gfxPal		@ 32 unsigned chars
+text_8x8_thick_gfxPal:
 	.hword 0x7FE0,0x0000,0x7FFF,0x533F,0x3658,0x7F00,0x7E00,0x7D00
 	.hword 0x6000,0x029F,0x0199,0x0114,0x00D0,0x03E0,0x03DF,0x7C1F
 
-@}}BLOCK(text_8x8_gfx)
+@}}BLOCK(text_8x8_thick_gfx)
