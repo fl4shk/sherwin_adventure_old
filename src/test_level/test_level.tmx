@@ -99,7 +99,6 @@
   <object id="224" gid="99" x="976" y="448" width="16" height="16"/>
   <object id="225" gid="99" x="992" y="448" width="16" height="16"/>
   <object id="235" gid="2147483888" x="272" y="496" width="16" height="32"/>
-  <object id="236" gid="240" x="64" y="496" width="16" height="32"/>
   <object id="237" gid="213" x="208" y="496" width="16" height="32">
    <properties>
     <property name="bdest" value="0"/>

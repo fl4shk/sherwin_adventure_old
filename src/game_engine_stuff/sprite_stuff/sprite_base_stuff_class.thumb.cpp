@@ -77,9 +77,12 @@ void sprite_base_stuff::gfx_update( sprite& the_sprite )
 {
 	//the_sprite.the_oam_entry.set_tile_number 
 	//	( get_curr_tile_slot_old(the_sprite) );
+	
+	//the_sprite.the_oam_entry.set_tile_number
+	//	( the_sprite.get_vram_chunk_index() 
+	//	* gfx_manager::num_tiles_in_ss_32x32 );
 	the_sprite.the_oam_entry.set_tile_number
-		( the_sprite.get_vram_chunk_index() 
-		* gfx_manager::num_tiles_in_ss_32x32 );
+		( get_curr_tile_slot(the_sprite) );
 	
 	the_sprite.the_oam_entry.set_pal_number 
 		( get_palette_slot(the_sprite) );

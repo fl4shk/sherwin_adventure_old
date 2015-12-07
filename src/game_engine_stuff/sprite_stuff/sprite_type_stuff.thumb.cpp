@@ -9,7 +9,7 @@ fire_muffin_sprite_stuff the_fire_muffin_sprite_stuff;
 ice_muffin_sprite_stuff the_ice_muffin_sprite_stuff;
 chocolate_muffin_sprite_stuff the_chocolate_muffin_sprite_stuff;
 door_sprite_stuff the_door_sprite_stuff;
-
+snow_golem_sprite_stuff the_snow_golem_sprite_stuff;
 
 sprite_base_stuff* sprite_stuff_array[st_count] __attribute__((_iwram))
 = {
@@ -32,6 +32,8 @@ sprite_base_stuff* sprite_stuff_array[st_count] __attribute__((_iwram))
 	// Block-like Sprites
 	&the_door_sprite_stuff,
 	
+	// Enemy sprites
+	&the_snow_golem_sprite_stuff,
 };
 
 
