@@ -31,7 +31,8 @@ int main()
 {
 	// This will eventually be used to identify whether save data has been
 	// created.  As of right now, there is no need for save data, but that
-	// will change in the future.
+	// will change in the future.  It is likely that 64 kiB of save data
+	// will be more than enough.
 	memcpy8( game_manager::sram_init_str,
 		game_manager::sram_const_init_str, 
 		game_manager::sram_init_str_size );

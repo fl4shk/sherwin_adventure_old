@@ -468,6 +468,9 @@ channel_gbc_vol_100	gba_specific_stuff/sound_reg_stuff.hpp	39;"	kind:d
 channel_gbc_vol_25	gba_specific_stuff/sound_reg_stuff.hpp	35;"	kind:d
 channel_gbc_vol_50	gba_specific_stuff/sound_reg_stuff.hpp	37;"	kind:d
 channel_gbc_vol_mask	gba_specific_stuff/sound_reg_stuff.hpp	41;"	kind:d
+char_to_plottable_char_arr	game_engine_stuff/hud_manager_class.hpp	/^	static const char char_to_plottable_char_arr$/;"	kind:m	class:hud_manager	access:public
+char_to_plottable_char_arr	game_engine_stuff/hud_manager_class.thumb.cpp	/^const char hud_manager::char_to_plottable_char_arr$/;"	kind:m	class:hud_manager	file:
+char_to_plottable_char_arr_size	game_engine_stuff/hud_manager_class.hpp	/^	static constexpr u32 char_to_plottable_char_arr_size = 0x100;$/;"	kind:m	class:hud_manager	access:public
 charblock	gba_specific_stuff/gfx_reg_stuff.hpp	/^typedef tile charblock[charblock_size];$/;"	kind:t
 charblock8	gba_specific_stuff/gfx_reg_stuff.hpp	/^typedef tile8 charblock8[charblock8_size];$/;"	kind:t
 charblock8_size	gba_specific_stuff/gfx_reg_stuff.hpp	/^static const u32 charblock8_size = 0x100;$/;"	kind:v
@@ -1625,16 +1628,17 @@ hud_manager::bg1_screenblock_mirror	game_engine_stuff/hud_manager_class.hpp	/^	s
 hud_manager::bg1_screenblock_mirror	game_engine_stuff/hud_manager_class.thumb.cpp	/^scr_entry hud_manager::bg1_screenblock_mirror[screenblock_size];$/;"	kind:m	class:hud_manager	file:
 hud_manager::bg1_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.hpp	/^	static array_2d_helper<scr_entry> bg1_screenblock_mirror_2d;$/;"	kind:m	class:hud_manager	access:public
 hud_manager::bg1_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.thumb.cpp	/^array_2d_helper<scr_entry> hud_manager::bg1_screenblock_mirror_2d $/;"	kind:p	class:hud_manager	file:	signature:( bg1_screenblock_mirror, screenblock_size_2d )
+hud_manager::char_to_plottable_char_arr	game_engine_stuff/hud_manager_class.hpp	/^	static const char char_to_plottable_char_arr$/;"	kind:m	class:hud_manager	access:public
+hud_manager::char_to_plottable_char_arr	game_engine_stuff/hud_manager_class.thumb.cpp	/^const char hud_manager::char_to_plottable_char_arr$/;"	kind:m	class:hud_manager	file:
+hud_manager::char_to_plottable_char_arr_size	game_engine_stuff/hud_manager_class.hpp	/^	static constexpr u32 char_to_plottable_char_arr_size = 0x100;$/;"	kind:m	class:hud_manager	access:public
 hud_manager::copy_hud_from_array_2d_helper_to_vram	game_engine_stuff/hud_manager_class.hpp	/^	static void copy_hud_from_array_2d_helper_to_vram();$/;"	kind:p	class:hud_manager	access:public	signature:()
 hud_manager::copy_hud_from_array_2d_helper_to_vram	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::copy_hud_from_array_2d_helper_to_vram()$/;"	kind:f	class:hud_manager	signature:()
 hud_manager::hud_was_generated	game_engine_stuff/hud_manager_class.hpp	/^	static bool hud_was_generated __attribute__((_ewram));$/;"	kind:m	class:hud_manager	access:public
 hud_manager::hud_was_generated	game_engine_stuff/hud_manager_class.thumb.cpp	/^bool hud_manager::hud_was_generated;$/;"	kind:m	class:hud_manager	file:
-hud_manager::plot_char_8x16_to_screenblock_mirror	game_engine_stuff/hud_manager_class.hpp	/^	static void plot_char_8x16_to_screenblock_mirror( u32 the_char, $/;"	kind:p	class:hud_manager	access:public	signature:( u32 the_char, u32 pos_x, u32 pos_y )
-hud_manager::plot_char_8x16_to_screenblock_mirror	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::plot_char_8x16_to_screenblock_mirror( u32 the_char, $/;"	kind:f	class:hud_manager	signature:( u32 the_char, u32 pos_x, u32 pos_y )
 hud_manager::plot_char_8x8_to_screenblock_mirror	game_engine_stuff/hud_manager_class.hpp	/^	static void plot_char_8x8_to_screenblock_mirror( u32 the_char,$/;"	kind:p	class:hud_manager	access:public	signature:( u32 the_char, u32 pos_x, u32 pos_y )
 hud_manager::plot_char_8x8_to_screenblock_mirror	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::plot_char_8x8_to_screenblock_mirror( u32 the_char,$/;"	kind:f	class:hud_manager	signature:( u32 the_char, u32 pos_x, u32 pos_y )
+hud_manager::update_hud_in_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.arm.cpp	/^void hud_manager::update_hud_in_screenblock_mirror_2d()$/;"	kind:f	class:hud_manager	signature:()
 hud_manager::update_hud_in_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.hpp	/^	static void update_hud_in_screenblock_mirror_2d();$/;"	kind:p	class:hud_manager	access:public	signature:()
-hud_manager::update_hud_in_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::update_hud_in_screenblock_mirror_2d()$/;"	kind:f	class:hud_manager	signature:()
 hud_manager_class_hpp	game_engine_stuff/hud_manager_class.hpp	2;"	kind:d
 hud_vram_as_tiles_start_offset	game_engine_stuff/gfx_manager_class.hpp	/^	static u32 hud_vram_as_tiles_start_offset __attribute__((_ewram));$/;"	kind:m	class:gfx_manager	access:public
 hud_vram_as_tiles_start_offset	game_engine_stuff/gfx_manager_class.thumb.cpp	/^u32 gfx_manager::hud_vram_as_tiles_start_offset;$/;"	kind:m	class:gfx_manager	file:
@@ -2344,8 +2348,6 @@ player_sprite_stuff::use_16x16	game_engine_stuff/sprite_stuff/player_sprite_stuf
 player_sprite_stuff::walk_frame_timer_end	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static constexpr s32 walk_frame_timer_end = 4;$/;"	kind:m	class:player_sprite_stuff	access:public
 player_sprite_stuff::walk_speed	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static constexpr fixed24p8 walk_speed = {0x100};$/;"	kind:m	class:player_sprite_stuff	access:public
 player_sprite_stuff_class_hpp	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	2;"	kind:d
-plot_char_8x16_to_screenblock_mirror	game_engine_stuff/hud_manager_class.hpp	/^	static void plot_char_8x16_to_screenblock_mirror( u32 the_char, $/;"	kind:p	class:hud_manager	access:public	signature:( u32 the_char, u32 pos_x, u32 pos_y )
-plot_char_8x16_to_screenblock_mirror	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::plot_char_8x16_to_screenblock_mirror( u32 the_char, $/;"	kind:f	class:hud_manager	signature:( u32 the_char, u32 pos_x, u32 pos_y )
 plot_char_8x8_to_screenblock_mirror	game_engine_stuff/hud_manager_class.hpp	/^	static void plot_char_8x8_to_screenblock_mirror( u32 the_char,$/;"	kind:p	class:hud_manager	access:public	signature:( u32 the_char, u32 pos_x, u32 pos_y )
 plot_char_8x8_to_screenblock_mirror	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::plot_char_8x8_to_screenblock_mirror( u32 the_char,$/;"	kind:f	class:hud_manager	signature:( u32 the_char, u32 pos_x, u32 pos_y )
 pop	game_engine_stuff/sa_stack_class.hpp	/^	inline virtual void pop()$/;"	kind:f	class:sa_free_list	access:public	signature:()
@@ -3085,8 +3087,8 @@ udi_initial_pos_was_set	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class
 update_all_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.arm.cpp	/^void sprite_manager::update_all_sprites$/;"	kind:f	class:sprite_manager	signature:( const vec2_u32& the_sublevel_size_2d, prev_curr_pair<bg_point>& camera_pos_pc_pair )
 update_all_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void update_all_sprites ( const vec2_u32& the_sublevel_size_2d,$/;"	kind:p	class:sprite_manager	access:public	signature:( const vec2_u32& the_sublevel_size_2d, prev_curr_pair<bg_point>& camera_pos_pc_pair )
 update_f24p8_positions	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline void update_f24p8_positions()$/;"	kind:f	class:sprite	access:public	signature:()
+update_hud_in_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.arm.cpp	/^void hud_manager::update_hud_in_screenblock_mirror_2d()$/;"	kind:f	class:hud_manager	signature:()
 update_hud_in_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.hpp	/^	static void update_hud_in_screenblock_mirror_2d();$/;"	kind:p	class:hud_manager	access:public	signature:()
-update_hud_in_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::update_hud_in_screenblock_mirror_2d()$/;"	kind:f	class:hud_manager	signature:()
 update_on_screen_pos	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	void update_on_screen_pos( const bg_point& camera_pos )$/;"	kind:p	class:sprite	access:public	signature:( const bg_point& camera_pos )
 update_on_screen_pos	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^void sprite::update_on_screen_pos( const bg_point& camera_pos )$/;"	kind:f	class:sprite	signature:( const bg_point& camera_pos )
 update_part_1	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	virtual void update_part_1( sprite& the_player );$/;"	kind:p	class:player_sprite_stuff	access:public	signature:( sprite& the_player )
