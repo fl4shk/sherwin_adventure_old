@@ -1629,6 +1629,8 @@ hud_manager::copy_hud_from_array_2d_helper_to_vram	game_engine_stuff/hud_manager
 hud_manager::copy_hud_from_array_2d_helper_to_vram	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::copy_hud_from_array_2d_helper_to_vram()$/;"	kind:f	class:hud_manager	signature:()
 hud_manager::hud_was_generated	game_engine_stuff/hud_manager_class.hpp	/^	static bool hud_was_generated __attribute__((_ewram));$/;"	kind:m	class:hud_manager	access:public
 hud_manager::hud_was_generated	game_engine_stuff/hud_manager_class.thumb.cpp	/^bool hud_manager::hud_was_generated;$/;"	kind:m	class:hud_manager	file:
+hud_manager::plot_char_8x16_to_screenblock_mirror	game_engine_stuff/hud_manager_class.hpp	/^	static void plot_char_8x16_to_screenblock_mirror( u32 the_char, $/;"	kind:p	class:hud_manager	access:public	signature:( u32 the_char, u32 pos_x, u32 pos_y )
+hud_manager::plot_char_8x16_to_screenblock_mirror	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::plot_char_8x16_to_screenblock_mirror( u32 the_char, $/;"	kind:f	class:hud_manager	signature:( u32 the_char, u32 pos_x, u32 pos_y )
 hud_manager::plot_char_8x8_to_screenblock_mirror	game_engine_stuff/hud_manager_class.hpp	/^	static void plot_char_8x8_to_screenblock_mirror( u32 the_char,$/;"	kind:p	class:hud_manager	access:public	signature:( u32 the_char, u32 pos_x, u32 pos_y )
 hud_manager::plot_char_8x8_to_screenblock_mirror	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::plot_char_8x8_to_screenblock_mirror( u32 the_char,$/;"	kind:f	class:hud_manager	signature:( u32 the_char, u32 pos_x, u32 pos_y )
 hud_manager::update_hud_in_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.hpp	/^	static void update_hud_in_screenblock_mirror_2d();$/;"	kind:p	class:hud_manager	access:public	signature:()
@@ -2342,6 +2344,8 @@ player_sprite_stuff::use_16x16	game_engine_stuff/sprite_stuff/player_sprite_stuf
 player_sprite_stuff::walk_frame_timer_end	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static constexpr s32 walk_frame_timer_end = 4;$/;"	kind:m	class:player_sprite_stuff	access:public
 player_sprite_stuff::walk_speed	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static constexpr fixed24p8 walk_speed = {0x100};$/;"	kind:m	class:player_sprite_stuff	access:public
 player_sprite_stuff_class_hpp	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	2;"	kind:d
+plot_char_8x16_to_screenblock_mirror	game_engine_stuff/hud_manager_class.hpp	/^	static void plot_char_8x16_to_screenblock_mirror( u32 the_char, $/;"	kind:p	class:hud_manager	access:public	signature:( u32 the_char, u32 pos_x, u32 pos_y )
+plot_char_8x16_to_screenblock_mirror	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::plot_char_8x16_to_screenblock_mirror( u32 the_char, $/;"	kind:f	class:hud_manager	signature:( u32 the_char, u32 pos_x, u32 pos_y )
 plot_char_8x8_to_screenblock_mirror	game_engine_stuff/hud_manager_class.hpp	/^	static void plot_char_8x8_to_screenblock_mirror( u32 the_char,$/;"	kind:p	class:hud_manager	access:public	signature:( u32 the_char, u32 pos_x, u32 pos_y )
 plot_char_8x8_to_screenblock_mirror	game_engine_stuff/hud_manager_class.thumb.cpp	/^void hud_manager::plot_char_8x8_to_screenblock_mirror( u32 the_char,$/;"	kind:f	class:hud_manager	signature:( u32 the_char, u32 pos_x, u32 pos_y )
 pop	game_engine_stuff/sa_stack_class.hpp	/^	inline virtual void pop()$/;"	kind:f	class:sa_free_list	access:public	signature:()

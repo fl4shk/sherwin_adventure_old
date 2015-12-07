@@ -29,7 +29,9 @@ extern "C" int ewram_test_func();
 
 int main()
 {
-	// Well now, let's see.
+	// This will eventually be used to identify whether save data has been
+	// created.  As of right now, there is no need for save data, but that
+	// will change in the future.
 	memcpy8( game_manager::sram_init_str,
 		game_manager::sram_const_init_str, 
 		game_manager::sram_init_str_size );
