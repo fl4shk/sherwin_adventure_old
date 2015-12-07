@@ -3309,7 +3309,7 @@ LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtn.o
                 0x000000000807e6dc       0x28 objs/gfx_manager_class.thumb.o
  .ARM.exidx.iwram_code
                 0x000000000807e704        0x8 objs/hud_manager_class.thumb.o
-                                         0x10 (size before relaxing)
+                                         0x18 (size before relaxing)
  .ARM.exidx     0x000000000807e84c       0x10 objs/hud_manager_class.thumb.o
  .ARM.exidx.text.startup
                 0x000000000807e85c        0x8 objs/hud_manager_class.thumb.o
@@ -4400,7 +4400,7 @@ LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtn.o
                 0x00000000030001ac                . = ALIGN (0x4)
                 0x00000000030001ac                __iwram_data_end = .
 
-.iwram_code     0x00000000030001b0     0x4fe0 load address 0x00000000080a1a84
+.iwram_code     0x00000000030001b0     0x5020 load address 0x00000000080a1a84
                 0x00000000080a1a84                iwram_code_rom_start = LOADADDR (.iwram_code)
                 0x00000000030001b0                iwram_code_iwram_start = .
  *(.iwram_code)
@@ -4467,140 +4467,140 @@ LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtn.o
                 0x0000000003000f4c                gfx_manager::fade_out_to_black(unsigned long, unsigned long)
                 0x00000000030012a4                gfx_manager::fade_out_to_white(unsigned long, unsigned long)
                 0x00000000030016cc                gfx_manager::fade_in(unsigned long, unsigned long)
- .iwram_code    0x0000000003001c48       0x80 objs/hud_manager_class.thumb.o
-                0x0000000003001c7c                hud_manager::plot_char_8x8_to_screenblock_mirror(unsigned long, unsigned long, unsigned long)
- .iwram_code    0x0000000003001cc8       0x7c objs/interrupt_stuff.arm.o
-                0x0000000003001cc8                isr_main()
- .iwram_code    0x0000000003001d44        0x4 objs/interrupt_stuff.thumb.o
-                0x0000000003001d44                irq_dummy()
- .iwram_code    0x0000000003001d48       0x10 objs/log_block_stuff_class.thumb.o
-                0x0000000003001d48                log_block_stuff::get_metatile_number()
-                0x0000000003001d4c                log_block_stuff::get_palette_number()
-                0x0000000003001d50                log_block_stuff::get_metatile_graphics_slot()
-                0x0000000003001d54                log_block_stuff::strongly_hit_response(block&, vec2<long> const&)
- .iwram_code    0x0000000003001d58       0x88 objs/memcpy32_from_tonc.o
-                0x0000000003001d58                memcpy32
-                0x0000000003001d90                memfill32
- .iwram_code    0x0000000003001de0       0x24 objs/memory_funcs_8bit.o
-                0x0000000003001de0                memcpy8
-                0x0000000003001df4                memfill8
- .iwram_code    0x0000000003001e04      0x384 objs/player_sprite_stuff_class.thumb.o
-                0x0000000003001e04                player_sprite_stuff::block_coll_response_top_16x16(sprite&, block_coll_result const&, block_coll_result const&, block_coll_result const&)
-                0x0000000003001e5c                player_sprite_stuff::update_part_2(sprite&, vec2<short>&, vec2<unsigned long> const&)
-                0x0000000003002084                player_sprite_stuff::handle_jumping_stuff(sprite&, unsigned long, unsigned long)
-                0x00000000030020d4                player_sprite_stuff::block_collision_stuff(sprite&)
-                0x0000000003002114                player_sprite_stuff::block_coll_response_top_16x32(sprite&, block_coll_result const&, block_coll_result const&, block_coll_result const&)
- .iwram_code    0x0000000003002188       0x18 objs/ram_funcs1.o
-                0x0000000003002188                iwram_test_func
-                0x0000000003002190                iwram_test_func2
- .iwram_code    0x00000000030021a0     0x20a4 objs/sprite_base_stuff_class.arm.o
-                0x00000000030021a0                sprite_base_stuff::non_slope_block_coll_response_bot_16x16(sprite&, block_coll_result const&, block_coll_result const&, block_coll_result const&)
-                0x00000000030021e4                sprite_base_stuff::block_coll_response_left_16x32(sprite&, block_coll_result const&, block_coll_result const&, block_coll_result const&)
-                0x0000000003002208                sprite_base_stuff::block_coll_response_right_16x32(sprite&, block_coll_result const&, block_coll_result const&, block_coll_result const&)
-                0x0000000003002230                sprite_base_stuff::non_slope_block_coll_response_bot_16x32(sprite&, block_coll_result const&, block_coll_result const&, block_coll_result const&)
-                0x00000000030022ac                sprite_base_stuff::get_basic_block_coll_results_left_16x16(coll_point_group&, block_coll_result&, block_coll_result&)
-                0x000000000300236c                sprite_base_stuff::get_basic_block_coll_results_top_16x16(coll_point_group&, block_coll_result&, block_coll_result&, block_coll_result&)
-                0x0000000003002484                sprite_base_stuff::get_basic_block_coll_results_right_16x16(coll_point_group&, block_coll_result&, block_coll_result&)
-                0x0000000003002544                sprite_base_stuff::get_basic_block_coll_results_bot_16x16(coll_point_group&, block_coll_result&, block_coll_result&, block_coll_result&)
-                0x000000000300265c                sprite_base_stuff::get_basic_block_coll_results_left_16x32(coll_point_group&, block_coll_result&, block_coll_result&, block_coll_result&)
-                0x0000000003002774                sprite_base_stuff::get_basic_block_coll_results_top_16x32(coll_point_group&, block_coll_result&, block_coll_result&, block_coll_result&)
-                0x000000000300288c                sprite_base_stuff::get_basic_block_coll_results_right_16x32(coll_point_group&, block_coll_result&, block_coll_result&, block_coll_result&)
-                0x00000000030029a4                sprite_base_stuff::get_basic_block_coll_results_bot_16x32(coll_point_group&, block_coll_result&, block_coll_result&, block_coll_result&)
-                0x0000000003002abc                sprite_base_stuff::block_coll_response_left_16x16(sprite&, block_coll_result const&, block_coll_result const&)
-                0x0000000003002ae0                sprite_base_stuff::block_coll_response_top_16x16(sprite&, block_coll_result const&, block_coll_result const&, block_coll_result const&)
-                0x0000000003002b10                sprite_base_stuff::block_coll_response_right_16x16(sprite&, block_coll_result const&, block_coll_result const&)
-                0x0000000003002b38                sprite_base_stuff::slope_block_coll_response_bot_16x16(sprite&, coll_point_group&, block_coll_result&, block_coll_result&, block_coll_result&, bool)
-                0x0000000003002b40                sprite_base_stuff::block_coll_response_top_16x32(sprite&, block_coll_result const&, block_coll_result const&, block_coll_result const&)
-                0x0000000003002b4c                sprite_base_stuff::slope_block_coll_response_bot_16x32(sprite&, coll_point_group&, block_coll_result&, block_coll_result&, block_coll_result&, bool)
-                0x0000000003003174                sprite_base_stuff::apply_gravity(sprite&)
-                0x000000000300318c                sprite_base_stuff::block_collision_stuff_16x16(sprite&)
-                0x0000000003003684                sprite_base_stuff::block_collision_stuff_16x32(sprite&)
-                0x000000000300423c                sprite_base_stuff::block_collision_stuff_32x16(sprite&)
-                0x0000000003004240                sprite_base_stuff::block_collision_stuff_32x32(sprite&)
- .iwram_code    0x0000000003004244      0x160 objs/sprite_base_stuff_class.thumb.o
-                0x0000000003004244                sprite_base_stuff::update_part_1(sprite&)
-                0x0000000003004280                sprite_base_stuff::update_part_2(sprite&, vec2<short>&, vec2<unsigned long> const&)
-                0x0000000003004284                sprite_base_stuff::get_curr_tile_slot(sprite&)
-                0x000000000300428c                sprite_base_stuff::get_palette_slot(sprite&)
-                0x0000000003004290                sprite_base_stuff::get_curr_relative_tile_slot(sprite&)
-                0x0000000003004294                sprite_base_stuff::block_collision_stuff(sprite&)
-                0x0000000003004298                sprite_base_stuff::handle_jumping_stuff(sprite&, unsigned long, unsigned long)
-                0x000000000300429c                sprite_base_stuff::gfx_update(sprite&)
-                0x00000000030042fc                sprite_base_stuff::update_part_2(sprite&, vec2<short> const&, int&)
- .iwram_code    0x00000000030043a4      0x1e8 objs/sprite_class.thumb.o
-                0x00000000030043a4                sprite::update_on_screen_pos(vec2<short> const&)
-                0x0000000003004424                sprite::camera_follow_basic(vec2<short>&)
-                0x00000000030044c0                sprite::center_camera_almost(vec2<short>&) const
-                0x00000000030044e4                sprite::block_collision_stuff()
-                0x0000000003004508                sprite::get_shape_size_as_vec2_raw() const
- .iwram_code    0x000000000300458c      0x584 objs/sprite_manager_class.arm.o
-                0x000000000300458c                sprite_manager::spawn_sprites_if_needed(prev_curr_pair<vec2<short> > const&)
-                0x00000000030047b0                sprite_manager::despawn_sprites_if_needed(prev_curr_pair<vec2<short> > const&)
-                0x000000000300480c                sprite_manager::spawn_a_sprite_basic(sprite_type, vec2<fixed24p8> const&, vec2<short> const&, bool)
-                0x00000000030048ac                sprite_manager::update_all_sprites(vec2<unsigned long> const&, prev_curr_pair<vec2<short> >&)
- .iwram_code    0x0000000003004b10      0x12c objs/sprite_manager_class.thumb.o
-                0x0000000003004b10                sprite_manager::initial_sprite_spawning_shared_code(vec2<short>&)
- .iwram_code    0x0000000003004c3c       0xd4 objs/waffle_sprite_stuff_class.thumb.o
-                0x0000000003004c3c                waffle_sprite_stuff::block_coll_response_left_16x16(sprite&, block_coll_result const&, block_coll_result const&)
-                0x0000000003004c60                waffle_sprite_stuff::block_coll_response_right_16x16(sprite&, block_coll_result const&, block_coll_result const&)
-                0x0000000003004c84                waffle_sprite_stuff::update_part_1(sprite&)
- .iwram_code    0x0000000003004d10      0x39c objs/wood_block_stuff_classes.thumb.o
-                0x0000000003004d10                wood_block_stuff::get_metatile_number()
-                0x0000000003004d14                wood_block_stuff::get_palette_number()
-                0x0000000003004d18                wood_block_stuff::get_metatile_graphics_slot()
-                0x0000000003004d1c                wood_block_stuff::strongly_hit_response(block&, vec2<long> const&)
-                0x0000000003004d3c                wood_block_with_bt_dud_stuff::strongly_hit_response(block&, vec2<long> const&)
-                0x0000000003004d7c                wood_block_with_bt_dud_stuff::finish_initializing_using_persistent_data(block&)
-                0x0000000003004da0                wood_block_with_st_waffle_stuff::finish_initializing_using_persistent_data(block&)
-                0x0000000003004dc4                wood_block_with_st_muffin_stuff::finish_initializing_using_persistent_data(block&)
-                0x0000000003004de8                wood_block_with_st_fire_muffin_stuff::finish_initializing_using_persistent_data(block&)
-                0x0000000003004e0c                wood_block_with_st_ice_muffin_stuff::finish_initializing_using_persistent_data(block&)
-                0x0000000003004e30                wood_block_with_st_chocolate_muffin_stuff::finish_initializing_using_persistent_data(block&)
-                0x0000000003004e54                wood_block_with_st_waffle_stuff::strongly_hit_response(block&, vec2<long> const&)
-                0x0000000003004ecc                wood_block_with_st_muffin_stuff::strongly_hit_response(block&, vec2<long> const&)
-                0x0000000003004f44                wood_block_with_st_fire_muffin_stuff::strongly_hit_response(block&, vec2<long> const&)
-                0x0000000003004fbc                wood_block_with_st_ice_muffin_stuff::strongly_hit_response(block&, vec2<long> const&)
-                0x0000000003005034                wood_block_with_st_chocolate_muffin_stuff::strongly_hit_response(block&, vec2<long> const&)
- *fill*         0x00000000030050ac        0x4 
+ .iwram_code    0x0000000003001c48       0xc8 objs/hud_manager_class.thumb.o
+                0x0000000003001c7c                hud_manager::plot_char_8x16_to_screenblock_mirror(unsigned long, unsigned long, unsigned long)
+                0x0000000003001cc4                hud_manager::plot_char_8x8_to_screenblock_mirror(unsigned long, unsigned long, unsigned long)
+ .iwram_code    0x0000000003001d10       0x7c objs/interrupt_stuff.arm.o
+                0x0000000003001d10                isr_main()
+ .iwram_code    0x0000000003001d8c        0x4 objs/interrupt_stuff.thumb.o
+                0x0000000003001d8c                irq_dummy()
+ .iwram_code    0x0000000003001d90       0x10 objs/log_block_stuff_class.thumb.o
+                0x0000000003001d90                log_block_stuff::get_metatile_number()
+                0x0000000003001d94                log_block_stuff::get_palette_number()
+                0x0000000003001d98                log_block_stuff::get_metatile_graphics_slot()
+                0x0000000003001d9c                log_block_stuff::strongly_hit_response(block&, vec2<long> const&)
+ .iwram_code    0x0000000003001da0       0x88 objs/memcpy32_from_tonc.o
+                0x0000000003001da0                memcpy32
+                0x0000000003001dd8                memfill32
+ .iwram_code    0x0000000003001e28       0x24 objs/memory_funcs_8bit.o
+                0x0000000003001e28                memcpy8
+                0x0000000003001e3c                memfill8
+ .iwram_code    0x0000000003001e4c      0x384 objs/player_sprite_stuff_class.thumb.o
+                0x0000000003001e4c                player_sprite_stuff::block_coll_response_top_16x16(sprite&, block_coll_result const&, block_coll_result const&, block_coll_result const&)
+                0x0000000003001ea4                player_sprite_stuff::update_part_2(sprite&, vec2<short>&, vec2<unsigned long> const&)
+                0x00000000030020cc                player_sprite_stuff::handle_jumping_stuff(sprite&, unsigned long, unsigned long)
+                0x000000000300211c                player_sprite_stuff::block_collision_stuff(sprite&)
+                0x000000000300215c                player_sprite_stuff::block_coll_response_top_16x32(sprite&, block_coll_result const&, block_coll_result const&, block_coll_result const&)
+ .iwram_code    0x00000000030021d0       0x18 objs/ram_funcs1.o
+                0x00000000030021d0                iwram_test_func
+                0x00000000030021d8                iwram_test_func2
+ .iwram_code    0x00000000030021e8     0x20a4 objs/sprite_base_stuff_class.arm.o
+                0x00000000030021e8                sprite_base_stuff::non_slope_block_coll_response_bot_16x16(sprite&, block_coll_result const&, block_coll_result const&, block_coll_result const&)
+                0x000000000300222c                sprite_base_stuff::block_coll_response_left_16x32(sprite&, block_coll_result const&, block_coll_result const&, block_coll_result const&)
+                0x0000000003002250                sprite_base_stuff::block_coll_response_right_16x32(sprite&, block_coll_result const&, block_coll_result const&, block_coll_result const&)
+                0x0000000003002278                sprite_base_stuff::non_slope_block_coll_response_bot_16x32(sprite&, block_coll_result const&, block_coll_result const&, block_coll_result const&)
+                0x00000000030022f4                sprite_base_stuff::get_basic_block_coll_results_left_16x16(coll_point_group&, block_coll_result&, block_coll_result&)
+                0x00000000030023b4                sprite_base_stuff::get_basic_block_coll_results_top_16x16(coll_point_group&, block_coll_result&, block_coll_result&, block_coll_result&)
+                0x00000000030024cc                sprite_base_stuff::get_basic_block_coll_results_right_16x16(coll_point_group&, block_coll_result&, block_coll_result&)
+                0x000000000300258c                sprite_base_stuff::get_basic_block_coll_results_bot_16x16(coll_point_group&, block_coll_result&, block_coll_result&, block_coll_result&)
+                0x00000000030026a4                sprite_base_stuff::get_basic_block_coll_results_left_16x32(coll_point_group&, block_coll_result&, block_coll_result&, block_coll_result&)
+                0x00000000030027bc                sprite_base_stuff::get_basic_block_coll_results_top_16x32(coll_point_group&, block_coll_result&, block_coll_result&, block_coll_result&)
+                0x00000000030028d4                sprite_base_stuff::get_basic_block_coll_results_right_16x32(coll_point_group&, block_coll_result&, block_coll_result&, block_coll_result&)
+                0x00000000030029ec                sprite_base_stuff::get_basic_block_coll_results_bot_16x32(coll_point_group&, block_coll_result&, block_coll_result&, block_coll_result&)
+                0x0000000003002b04                sprite_base_stuff::block_coll_response_left_16x16(sprite&, block_coll_result const&, block_coll_result const&)
+                0x0000000003002b28                sprite_base_stuff::block_coll_response_top_16x16(sprite&, block_coll_result const&, block_coll_result const&, block_coll_result const&)
+                0x0000000003002b58                sprite_base_stuff::block_coll_response_right_16x16(sprite&, block_coll_result const&, block_coll_result const&)
+                0x0000000003002b80                sprite_base_stuff::slope_block_coll_response_bot_16x16(sprite&, coll_point_group&, block_coll_result&, block_coll_result&, block_coll_result&, bool)
+                0x0000000003002b88                sprite_base_stuff::block_coll_response_top_16x32(sprite&, block_coll_result const&, block_coll_result const&, block_coll_result const&)
+                0x0000000003002b94                sprite_base_stuff::slope_block_coll_response_bot_16x32(sprite&, coll_point_group&, block_coll_result&, block_coll_result&, block_coll_result&, bool)
+                0x00000000030031bc                sprite_base_stuff::apply_gravity(sprite&)
+                0x00000000030031d4                sprite_base_stuff::block_collision_stuff_16x16(sprite&)
+                0x00000000030036cc                sprite_base_stuff::block_collision_stuff_16x32(sprite&)
+                0x0000000003004284                sprite_base_stuff::block_collision_stuff_32x16(sprite&)
+                0x0000000003004288                sprite_base_stuff::block_collision_stuff_32x32(sprite&)
+ .iwram_code    0x000000000300428c      0x160 objs/sprite_base_stuff_class.thumb.o
+                0x000000000300428c                sprite_base_stuff::update_part_1(sprite&)
+                0x00000000030042c8                sprite_base_stuff::update_part_2(sprite&, vec2<short>&, vec2<unsigned long> const&)
+                0x00000000030042cc                sprite_base_stuff::get_curr_tile_slot(sprite&)
+                0x00000000030042d4                sprite_base_stuff::get_palette_slot(sprite&)
+                0x00000000030042d8                sprite_base_stuff::get_curr_relative_tile_slot(sprite&)
+                0x00000000030042dc                sprite_base_stuff::block_collision_stuff(sprite&)
+                0x00000000030042e0                sprite_base_stuff::handle_jumping_stuff(sprite&, unsigned long, unsigned long)
+                0x00000000030042e4                sprite_base_stuff::gfx_update(sprite&)
+                0x0000000003004344                sprite_base_stuff::update_part_2(sprite&, vec2<short> const&, int&)
+ .iwram_code    0x00000000030043ec      0x1e8 objs/sprite_class.thumb.o
+                0x00000000030043ec                sprite::update_on_screen_pos(vec2<short> const&)
+                0x000000000300446c                sprite::camera_follow_basic(vec2<short>&)
+                0x0000000003004508                sprite::center_camera_almost(vec2<short>&) const
+                0x000000000300452c                sprite::block_collision_stuff()
+                0x0000000003004550                sprite::get_shape_size_as_vec2_raw() const
+ .iwram_code    0x00000000030045d4      0x580 objs/sprite_manager_class.arm.o
+                0x00000000030045d4                sprite_manager::spawn_sprites_if_needed(prev_curr_pair<vec2<short> > const&)
+                0x00000000030047f4                sprite_manager::despawn_sprites_if_needed(prev_curr_pair<vec2<short> > const&)
+                0x0000000003004850                sprite_manager::spawn_a_sprite_basic(sprite_type, vec2<fixed24p8> const&, vec2<short> const&, bool)
+                0x00000000030048f0                sprite_manager::update_all_sprites(vec2<unsigned long> const&, prev_curr_pair<vec2<short> >&)
+ .iwram_code    0x0000000003004b54      0x12c objs/sprite_manager_class.thumb.o
+                0x0000000003004b54                sprite_manager::initial_sprite_spawning_shared_code(vec2<short>&)
+ .iwram_code    0x0000000003004c80       0xd4 objs/waffle_sprite_stuff_class.thumb.o
+                0x0000000003004c80                waffle_sprite_stuff::block_coll_response_left_16x16(sprite&, block_coll_result const&, block_coll_result const&)
+                0x0000000003004ca4                waffle_sprite_stuff::block_coll_response_right_16x16(sprite&, block_coll_result const&, block_coll_result const&)
+                0x0000000003004cc8                waffle_sprite_stuff::update_part_1(sprite&)
+ .iwram_code    0x0000000003004d54      0x39c objs/wood_block_stuff_classes.thumb.o
+                0x0000000003004d54                wood_block_stuff::get_metatile_number()
+                0x0000000003004d58                wood_block_stuff::get_palette_number()
+                0x0000000003004d5c                wood_block_stuff::get_metatile_graphics_slot()
+                0x0000000003004d60                wood_block_stuff::strongly_hit_response(block&, vec2<long> const&)
+                0x0000000003004d80                wood_block_with_bt_dud_stuff::strongly_hit_response(block&, vec2<long> const&)
+                0x0000000003004dc0                wood_block_with_bt_dud_stuff::finish_initializing_using_persistent_data(block&)
+                0x0000000003004de4                wood_block_with_st_waffle_stuff::finish_initializing_using_persistent_data(block&)
+                0x0000000003004e08                wood_block_with_st_muffin_stuff::finish_initializing_using_persistent_data(block&)
+                0x0000000003004e2c                wood_block_with_st_fire_muffin_stuff::finish_initializing_using_persistent_data(block&)
+                0x0000000003004e50                wood_block_with_st_ice_muffin_stuff::finish_initializing_using_persistent_data(block&)
+                0x0000000003004e74                wood_block_with_st_chocolate_muffin_stuff::finish_initializing_using_persistent_data(block&)
+                0x0000000003004e98                wood_block_with_st_waffle_stuff::strongly_hit_response(block&, vec2<long> const&)
+                0x0000000003004f10                wood_block_with_st_muffin_stuff::strongly_hit_response(block&, vec2<long> const&)
+                0x0000000003004f88                wood_block_with_st_fire_muffin_stuff::strongly_hit_response(block&, vec2<long> const&)
+                0x0000000003005000                wood_block_with_st_ice_muffin_stuff::strongly_hit_response(block&, vec2<long> const&)
+                0x0000000003005078                wood_block_with_st_chocolate_muffin_stuff::strongly_hit_response(block&, vec2<long> const&)
  .iwram_code.__stub
-                0x00000000030050b0       0xd0 linker stubs
-                0x0000000003005180                . = ALIGN (0x4)
-                0x0000000000004fe0                iwram_code_size = SIZEOF (.iwram_code)
+                0x00000000030050f0       0xd0 linker stubs
+                0x00000000030051c0                . = ALIGN (0x4)
+                0x0000000000005020                iwram_code_size = SIZEOF (.iwram_code)
 
-.maxmod_code    0x0000000003005190     0x13dc load address 0x00000000080a6a64
-                0x0000000003005190                . = ALIGN (0x4)
-                0x00000000080a6a64                maxmod_code_rom_start = LOADADDR (.maxmod_code)
-                0x0000000003005190                maxmod_code_iwram_start = .
+.maxmod_code    0x00000000030051d0     0x13dc load address 0x00000000080a6aa4
+                0x00000000030051d0                . = ALIGN (0x4)
+                0x00000000080a6aa4                maxmod_code_rom_start = LOADADDR (.maxmod_code)
+                0x00000000030051d0                maxmod_code_iwram_start = .
  *(.iwram)
- .iwram         0x0000000003005190        0x8 ./maxmod/lib/libmm.a(mm_main.o)
-                0x0000000003005190                mpp_call_r7i
-                0x0000000003005192                mpp_call_r2i
-                0x0000000003005194                mpp_call_r1i
- .iwram         0x0000000003005198      0x554 ./maxmod/lib/libmm.a(mm_mas.o)
-                0x0000000003005198                mppProcessTick
-                0x000000000300527c                mpp_Channel_NewNote
-                0x000000000300535c                mpp_Update_ACHN_notest
- .iwram         0x00000000030056ec      0x838 ./maxmod/lib/libmm.a(mm_mixer_gba.o)
-                0x00000000030056f0                mmVBlank
-                0x0000000003005774                mmMixerMix
- .iwram         0x0000000003005f24      0x648 ./maxmod/lib/libmm.a(mm_mas_arm.o)
-                0x0000000003005f24                mmAllocChannel
-                0x0000000003005f98                mmReadPattern
-                0x0000000003006084                mmUpdateChannel_T0
-                0x00000000030062c4                mmUpdateChannel_TN
-                0x0000000003006464                mmGetPeriod
-                0x00000000030064a8                note_table_oct
-                0x00000000030064c6                note_table_mod
-                0x000000000300656c                maxmod_code_iwram_end = .
-                0x000000000300656c                . = ALIGN (0x4)
+ .iwram         0x00000000030051d0        0x8 ./maxmod/lib/libmm.a(mm_main.o)
+                0x00000000030051d0                mpp_call_r7i
+                0x00000000030051d2                mpp_call_r2i
+                0x00000000030051d4                mpp_call_r1i
+ .iwram         0x00000000030051d8      0x554 ./maxmod/lib/libmm.a(mm_mas.o)
+                0x00000000030051d8                mppProcessTick
+                0x00000000030052bc                mpp_Channel_NewNote
+                0x000000000300539c                mpp_Update_ACHN_notest
+ .iwram         0x000000000300572c      0x838 ./maxmod/lib/libmm.a(mm_mixer_gba.o)
+                0x0000000003005730                mmVBlank
+                0x00000000030057b4                mmMixerMix
+ .iwram         0x0000000003005f64      0x648 ./maxmod/lib/libmm.a(mm_mas_arm.o)
+                0x0000000003005f64                mmAllocChannel
+                0x0000000003005fd8                mmReadPattern
+                0x00000000030060c4                mmUpdateChannel_T0
+                0x0000000003006304                mmUpdateChannel_TN
+                0x00000000030064a4                mmGetPeriod
+                0x00000000030064e8                note_table_oct
+                0x0000000003006506                note_table_mod
+                0x00000000030065ac                maxmod_code_iwram_end = .
+                0x00000000030065ac                . = ALIGN (0x4)
                 0x00000000000013dc                maxmod_code_size = SIZEOF (.maxmod_code)
 
-.iwram_bss      0x000000000300656c        0x0 load address 0x00000000080a7e40
+.iwram_bss      0x00000000030065ac        0x0 load address 0x00000000080a7e80
  *(.iwram_bss)
-                0x000000000300656c                . = ALIGN (0x4)
+                0x00000000030065ac                . = ALIGN (0x4)
 
-.ewram_code     0x0000000002022eb4        0xc load address 0x00000000080a7e40
-                0x00000000080a7e40                ewram_code_rom_start = LOADADDR (.ewram_code)
+.ewram_code     0x0000000002022eb4        0xc load address 0x00000000080a7e80
+                0x00000000080a7e80                ewram_code_rom_start = LOADADDR (.ewram_code)
                 0x0000000002022eb4                ewram_code_ewram_start = .
  *(.ewram_code)
  .ewram_code    0x0000000002022eb4        0xc objs/ram_funcs1.o
@@ -4608,10 +4608,10 @@ LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtn.o
                 0x0000000002022ec0                . = ALIGN (0x4)
                 0x000000000000000c                ewram_code_size = SIZEOF (.ewram_code)
 
-.rel.dyn        0x0000000002022ec0        0x0 load address 0x00000000080a7e4c
+.rel.dyn        0x0000000002022ec0        0x0 load address 0x00000000080a7e8c
  .rel.iplt      0x0000000002022ec0        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtbegin.o
 
-.bss            0x0000000002022ec0     0x2f50 load address 0x00000000080a7e4c
+.bss            0x0000000002022ec0     0x2f50 load address 0x00000000080a7e8c
                 0x0000000002022ec0                __bss_start__ = .
  *(.bss .bss.* .gnu.linkonce.b.*)
  .bss           0x0000000002022ec0        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crti.o
@@ -4927,161 +4927,161 @@ LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtn.o
 .stabstr
  *(.stabstr)
 
-.comment        0x00000000080a7e4c       0x22
+.comment        0x00000000080a7e8c       0x22
  *(.comment)
- .comment       0x00000000080a7e4c       0x22 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtbegin.o
+ .comment       0x00000000080a7e8c       0x22 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtbegin.o
                                          0x23 (size before relaxing)
- .comment       0x00000000080a7e6e       0x23 objs/active_level_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/active_level_manager_class.arm.o
- .comment       0x00000000080a7e6e       0x23 objs/active_level_manager_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/air_block_stuff_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/block_base_stuff_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/block_stuff.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/button_stuff.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/coll_box_class.arm.o
- .comment       0x00000000080a7e6e       0x23 objs/coll_box_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/coll_point_group_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/debug_vars.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/dma_stuff.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/door_sprite_stuff_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/dud_block_stuff_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/exclam_block_stuff_classes.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/eyes_block_stuff_classes.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/fixed_classes.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/game_manager_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/gfx_manager_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/gfx_reg_stuff.arm.o
- .comment       0x00000000080a7e6e       0x23 objs/grass_and_dirt_block_stuff_classes.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/hud_manager_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/interrupt_stuff.arm.o
- .comment       0x00000000080a7e6e       0x23 objs/interrupt_stuff.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/level_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/log_block_stuff_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/main.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/muffin_sprite_stuff_classes.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/oam_entry_classes.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/player_sprite_stuff_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/snow_golem_sprite_stuff_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/sprite_base_stuff_class.arm.o
- .comment       0x00000000080a7e6e       0x23 objs/sprite_base_stuff_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/sprite_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/sprite_manager_class.arm.o
- .comment       0x00000000080a7e6e       0x23 objs/sprite_manager_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/sprite_type_stuff.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/sublevel_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/test_level.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/waffle_sprite_stuff_class.arm.o
- .comment       0x00000000080a7e6e       0x23 objs/waffle_sprite_stuff_class.thumb.o
- .comment       0x00000000080a7e6e       0x23 objs/wood_block_stuff_classes.thumb.o
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/libgcc.a(unwind-arm.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/libgcc.a(pr-support.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_arm.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_globals.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(atexit_arm.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(del_op.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(si_class_type_info.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_exception.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_terminate.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(tinfo.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_call.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(new_op.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(new_handler.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_term_handler.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_personality.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(class_type_info.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(bad_alloc.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_throw.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(vterminate.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_catch.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(cp-demangle.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(pure.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_type.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_alloc.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_unex_handler.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-abort.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-atexit.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-cxa_atexit.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-exit.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-fini.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-fputc.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-fputs.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-fvwrite.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-fwrite.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-impure.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-init.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-malloc.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-mallocr.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-memchr.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-memcmp.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-memcpy.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-memmove.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-memset.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-mlock.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-putc.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-realloc.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-reallocr.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-signal.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-sprintf.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strcat.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strcpy.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strlen.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strncmp.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-svfprintf.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-syswrite.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-wbuf.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-wcrtomb.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-wcsrtombs.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-wctomb_r.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-wsetup.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-__atexit.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-__call_atexit.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-dtoa.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-fflush.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-findfp.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-freer.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-fwalk.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-locale.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-makebuf.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-mbtowc_r.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-mprec.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-s_fpclassify.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-s_frexp.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-stdio.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strcasecmp.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strchr.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strlcpy.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strncasecmp.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strncpy.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strtol.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-svfiprintf.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-wcsnrtombs.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-callocr.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-ctype_.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-fclose.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-getenv_r.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-environ.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-envlock.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/libgcc.a(bpabi.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/libgcc.a(_divdi3.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/libgcc.a(_udivdi3.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(close.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(fstat.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(getpid.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(isatty.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(kill.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(lseek.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(read.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(sbrk.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(write.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(_exit.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(malloc_vars.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(flock.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(syscall_support.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(handle_manager.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(getreent.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(iosupport.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-errno.o)
- .comment       0x00000000080a7e6e       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtend.o
+ .comment       0x00000000080a7eae       0x23 objs/active_level_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/active_level_manager_class.arm.o
+ .comment       0x00000000080a7eae       0x23 objs/active_level_manager_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/air_block_stuff_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/block_base_stuff_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/block_stuff.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/button_stuff.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/coll_box_class.arm.o
+ .comment       0x00000000080a7eae       0x23 objs/coll_box_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/coll_point_group_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/debug_vars.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/dma_stuff.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/door_sprite_stuff_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/dud_block_stuff_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/exclam_block_stuff_classes.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/eyes_block_stuff_classes.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/fixed_classes.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/game_manager_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/gfx_manager_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/gfx_reg_stuff.arm.o
+ .comment       0x00000000080a7eae       0x23 objs/grass_and_dirt_block_stuff_classes.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/hud_manager_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/interrupt_stuff.arm.o
+ .comment       0x00000000080a7eae       0x23 objs/interrupt_stuff.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/level_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/log_block_stuff_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/main.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/muffin_sprite_stuff_classes.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/oam_entry_classes.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/player_sprite_stuff_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/snow_golem_sprite_stuff_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/sprite_base_stuff_class.arm.o
+ .comment       0x00000000080a7eae       0x23 objs/sprite_base_stuff_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/sprite_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/sprite_manager_class.arm.o
+ .comment       0x00000000080a7eae       0x23 objs/sprite_manager_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/sprite_type_stuff.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/sublevel_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/test_level.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/waffle_sprite_stuff_class.arm.o
+ .comment       0x00000000080a7eae       0x23 objs/waffle_sprite_stuff_class.thumb.o
+ .comment       0x00000000080a7eae       0x23 objs/wood_block_stuff_classes.thumb.o
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/libgcc.a(unwind-arm.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/libgcc.a(pr-support.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_arm.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_globals.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(atexit_arm.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(del_op.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(si_class_type_info.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_exception.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_terminate.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(tinfo.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_call.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(new_op.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(new_handler.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_term_handler.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_personality.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(class_type_info.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(bad_alloc.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_throw.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(vterminate.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_catch.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(cp-demangle.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(pure.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_type.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_alloc.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_unex_handler.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-abort.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-atexit.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-cxa_atexit.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-exit.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-fini.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-fputc.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-fputs.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-fvwrite.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-fwrite.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-impure.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-init.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-malloc.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-mallocr.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-memchr.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-memcmp.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-memcpy.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-memmove.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-memset.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-mlock.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-putc.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-realloc.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-reallocr.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-signal.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-sprintf.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strcat.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strcpy.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strlen.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strncmp.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-svfprintf.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-syswrite.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-wbuf.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-wcrtomb.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-wcsrtombs.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-wctomb_r.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-wsetup.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-__atexit.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-__call_atexit.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-dtoa.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-fflush.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-findfp.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-freer.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-fwalk.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-locale.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-makebuf.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-mbtowc_r.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-mprec.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-s_fpclassify.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-s_frexp.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-stdio.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strcasecmp.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strchr.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strlcpy.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strncasecmp.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strncpy.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-strtol.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-svfiprintf.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-wcsnrtombs.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-callocr.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-ctype_.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-fclose.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-getenv_r.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-environ.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-envlock.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/libgcc.a(bpabi.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/libgcc.a(_divdi3.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/libgcc.a(_udivdi3.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(close.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(fstat.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(getpid.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(isatty.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(kill.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(lseek.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(read.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(sbrk.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(write.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(_exit.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(malloc_vars.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(flock.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(syscall_support.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(handle_manager.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(getreent.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libsysbase.a(iosupport.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-errno.o)
+ .comment       0x00000000080a7eae       0x23 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtend.o
 
 .debug_frame
  *(.debug_frame)

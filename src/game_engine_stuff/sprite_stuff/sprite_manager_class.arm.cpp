@@ -134,7 +134,10 @@ void sprite_manager::spawn_sprites_if_needed
 		//for ( s32 i=camera_block_grid_pos_x.prev + 5;
 		//	i>=camera_block_grid_pos_x.curr - 1;
 		//	--i )
-		for ( s32 i=camera_block_grid_pos_x.prev;
+		//for ( s32 i=camera_block_grid_pos_x.prev;
+		//	i>=camera_block_grid_pos_x.curr - 2;
+		//	--i )
+		for ( s32 i=camera_block_grid_pos_x.prev - 1;
 			i>=camera_block_grid_pos_x.curr - 2;
 			--i )
 		{
