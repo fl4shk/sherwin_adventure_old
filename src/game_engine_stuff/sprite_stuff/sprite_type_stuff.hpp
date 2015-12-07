@@ -66,27 +66,17 @@ enum sprite_type
 
 
 
-extern sprite_base_stuff the_sprite_base_stuff
-	__attribute__((_iwram));
-extern player_sprite_stuff the_player_sprite_stuff
-	__attribute__((_iwram));
-extern waffle_sprite_stuff the_waffle_sprite_stuff
-	__attribute__((_iwram));
-extern muffin_sprite_stuff the_muffin_sprite_stuff
-	__attribute__((_iwram));
-extern fire_muffin_sprite_stuff the_fire_muffin_sprite_stuff
-	__attribute__((_iwram));
-extern ice_muffin_sprite_stuff the_ice_muffin_sprite_stuff
-	__attribute__((_iwram));
-extern chocolate_muffin_sprite_stuff the_chocolate_muffin_sprite_stuff
-	__attribute__((_iwram));
-extern door_sprite_stuff the_door_sprite_stuff
-	__attribute__((_iwram));
-extern snow_golem_sprite_stuff the_snow_golem_sprite_stuff
-	__attribute__((_iwram));
+extern sprite_base_stuff the_sprite_base_stuff;
+extern player_sprite_stuff the_player_sprite_stuff;
+extern waffle_sprite_stuff the_waffle_sprite_stuff;
+extern muffin_sprite_stuff the_muffin_sprite_stuff;
+extern fire_muffin_sprite_stuff the_fire_muffin_sprite_stuff;
+extern ice_muffin_sprite_stuff the_ice_muffin_sprite_stuff;
+extern chocolate_muffin_sprite_stuff the_chocolate_muffin_sprite_stuff;
+extern door_sprite_stuff the_door_sprite_stuff;
+extern snow_golem_sprite_stuff the_snow_golem_sprite_stuff;
 
-extern sprite_base_stuff* sprite_stuff_array[st_count]
-	__attribute__((_iwram));
+extern sprite_base_stuff* sprite_stuff_array[st_count];
 
 
 

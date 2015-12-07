@@ -31,13 +31,10 @@ public:		// functions
 	}
 	
 	
-	virtual void update_part_1( sprite& the_powerup )
-		__attribute__((_iwram_code));
-	
+	virtual void update_part_1( sprite& the_powerup );
 	
 	// Graphics stuff
-	//virtual void gfx_update( sprite& the_powerup )
-	//	__attribute__((_iwram_code));
+	//virtual void gfx_update( sprite& the_powerup );
 	
 	inline virtual const sprite_palette_slot get_palette_slot
 		( sprite& the_powerup )

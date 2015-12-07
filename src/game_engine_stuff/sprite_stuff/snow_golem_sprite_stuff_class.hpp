@@ -37,8 +37,14 @@ public:		// enums
 		
 	} __attribute__((_align4));
 	
+	// These are used to access misc_data_u and misc_data_s
+	enum udata_index { udi_frame_stuff_initalized, udi_curr_frame_slot } 
+		__attribute__((_align4));
+	enum sdata_index { sdi_frame_change_timer } __attribute__((_align4));
 	
 public:		// variables
+	
+	static constexpr u32 frame_change_timer_start = 10;
 	
 	// A constant array that is intended to be indexed with a frame_slot,
 	// such that a frame_slot can be mapped to a frame.

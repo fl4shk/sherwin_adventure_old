@@ -1,5 +1,6 @@
 *.swp
 deps/*
 objs/*
+asmouts/*
 disassembly_all_2.armasm
 symbols.txt

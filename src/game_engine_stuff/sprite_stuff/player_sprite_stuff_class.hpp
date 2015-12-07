@@ -47,10 +47,10 @@ public:		// enums
 	} __attribute__((_align4));
 	
 	
-	// Indices to the_player.misc_data_s
-	enum sdata_index { sdi_walk_frame_timer } __attribute__((_align4));
+	// These are used to access misc_data_u and misc_data_s
 	enum udata_index { udi_active_walk_frame_slot }
 		__attribute__((_align4));
+	enum sdata_index { sdi_walk_frame_timer } __attribute__((_align4));
 	
 	
 public:		// variables
@@ -115,7 +115,7 @@ public:		// functions
 	//virtual void gfx_update( sprite& the_player );
 	virtual void update_part_1( sprite& the_player );
 	virtual void update_part_2( sprite& the_player, bg_point& camera_pos,
-		const vec2_u32& the_level_size_2d ) __attribute__((_iwram_code));
+		const vec2_u32& the_level_size_2d );
 	
 	
 	// Graphics stuff

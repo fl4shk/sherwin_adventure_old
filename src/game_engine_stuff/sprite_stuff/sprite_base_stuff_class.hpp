@@ -76,37 +76,31 @@ public:		// functions
 	
 	
 	
-	virtual void gfx_update( sprite& the_sprite )
-		__attribute__((_iwram_code));
+	//virtual void gfx_update( sprite& the_sprite );
+	void gfx_update( sprite& the_sprite );
 	
 	
-	virtual void update_part_1( sprite& the_sprite )
-		__attribute__((_iwram_code));
-	
+	virtual void update_part_1( sprite& the_sprite );
 	
 	
 	// The player_sprite_stuff class is the primary user of this function.
 	virtual void update_part_2( sprite& the_sprite, bg_point& camera_pos,
-		const vec2_u32& the_level_size_2d ) __attribute__((_iwram_code));
+		const vec2_u32& the_level_size_2d );
 	
 	virtual void update_part_2( sprite& the_sprite, 
-		const bg_point& camera_pos, int& next_oam_index )
-		__attribute__((_iwram_code));
+		const bg_point& camera_pos, int& next_oam_index );
 	
 	
 	
 	
 	// Graphics stuff
-	//virtual const u32 get_curr_tile_slot_old( sprite& the_sprite )
-	//	__attribute__((_iwram_code));
+	//virtual const u32 get_curr_tile_slot_old( sprite& the_sprite );
 	
-	virtual const u32 get_curr_tile_slot( sprite& the_sprite )
-		__attribute__((_iwram_code));
+	const u32 get_curr_tile_slot( sprite& the_sprite );
 	
 	virtual const sprite_palette_slot get_palette_slot 
-		( sprite& the_sprite ) __attribute__((_iwram_code));
-	virtual const u32 get_curr_relative_tile_slot( sprite& the_sprite )
-		__attribute__((_iwram_code));
+		( sprite& the_sprite );
+	virtual const u32 get_curr_relative_tile_slot( sprite& the_sprite );
 	inline virtual const u32 get_num_active_gfx_tiles()
 	{
 		return num_active_gfx_tiles;
