@@ -35,9 +35,18 @@ array_2d_helper<scr_entry> hud_manager::bg1_screenblock_mirror_2d
 void hud_manager::plot_char_8x8_to_screenblock_mirror( u32 the_char,
 	u32 pos_x, u32 pos_y )
 {
-	// Don't plot ASCII control codes.
+	//// Don't plot ASCII control codes.
+	//if ( the_char < ' ' )
+	//{
+	//	return;
+	//}
+	
+	// Plot ASCII control codes as ' '.
 	if ( the_char < ' ' )
 	{
+		bg1_screenblock_mirror_2d.data_at( pos_x, pos_y )
+			= gfx_manager::hud_vram_as_tiles_start_offset
+			| se_palbank(bgps_in_level_hud);
 		return;
 	}
 	

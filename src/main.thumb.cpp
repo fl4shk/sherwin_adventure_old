@@ -29,7 +29,7 @@ extern "C" int ewram_test_func();
 
 int main()
 {
-	//
+	// Well now, let's see.
 	memcpy8( game_manager::sram_init_str,
 		game_manager::sram_const_init_str, 
 		game_manager::sram_init_str_size );
@@ -38,6 +38,7 @@ int main()
 	
 	game_manager::title_screen_func();
 	
+	// This function is called by game_manager::title_screen_func().
 	//game_manager::reinit_the_game();
 	
 	for (;;)
@@ -90,6 +91,26 @@ int main()
 		
 		sprite_manager::spawn_sprites_if_needed
 			(gfx_manager::bgofs_mirror[0]);
+		
+		if ( key_hit(key_l) )
+		{
+			--player_sprite_stuff::remaining_hp;
+		}
+		if ( key_hit(key_r) )
+		{
+			++player_sprite_stuff::remaining_hp;
+		}
+		
+		if ( player_sprite_stuff::remaining_hp < 0 )
+		{
+			player_sprite_stuff::remaining_hp = 0;
+		}
+		else if ( player_sprite_stuff::remaining_hp 
+			> player_sprite_stuff::max_hp )
+		{
+			player_sprite_stuff::remaining_hp 
+				= player_sprite_stuff::max_hp;
+		}
 		
 		
 		//active_level_manager::update_sublevel_in_screenblock_mirror_2d
