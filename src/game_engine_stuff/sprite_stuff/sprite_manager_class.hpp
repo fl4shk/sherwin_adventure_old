@@ -75,8 +75,11 @@ public:		// functions
 	static void initial_sprite_spawning_at_intra_sublevel_warp
 		( bg_point& camera_pos, u32 sublevel_entrance_index );
 	
+	// This function is put in IWRAM because when the_player warps around a
+	// particular sublevel without CHANGING sublevels, sprites need to be
+	// spawned.
 	static void initial_sprite_spawning_shared_code
-		( bg_point& camera_pos );
+		( bg_point& camera_pos ) __attribute__((_iwram_code));
 	
 	
 	static void initial_sprite_spawning_from_sublevel_data_old

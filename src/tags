@@ -1469,8 +1469,6 @@ gfx_manager::upload_sprite_tiles_to_vram	game_engine_stuff/gfx_manager_class.hpp
 gfx_manager::upload_sprite_tiles_to_vram	game_engine_stuff/gfx_manager_class.thumb.cpp	/^void gfx_manager::upload_sprite_tiles_to_vram( sprite& the_sprite )$/;"	kind:f	class:gfx_manager	signature:( sprite& the_sprite )
 gfx_manager_class_hpp	game_engine_stuff/gfx_manager_class.hpp	2;"	kind:d
 gfx_reg_stuff_hpp	gba_specific_stuff/gfx_reg_stuff.hpp	2;"	kind:d
-gfx_update	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	virtual void gfx_update( sprite& the_player );$/;"	kind:p	class:player_sprite_stuff	access:public	signature:( sprite& the_player )
-gfx_update	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.thumb.cpp	/^void player_sprite_stuff::gfx_update( sprite& the_player )$/;"	kind:f	class:player_sprite_stuff	signature:( sprite& the_player )
 gfx_update	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	virtual void gfx_update( sprite& the_sprite )$/;"	kind:p	class:sprite_base_stuff	access:public	signature:( sprite& the_sprite )
 gfx_update	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.thumb.cpp	/^void sprite_base_stuff::gfx_update( sprite& the_sprite )$/;"	kind:f	class:sprite_base_stuff	signature:( sprite& the_sprite )
 gm_changing_sublevel	game_engine_stuff/game_manager_class.hpp	/^	gm_changing_sublevel,$/;"	kind:e	enum:game_mode
@@ -2300,8 +2298,6 @@ player_sprite_stuff::get_the_initial_cb_pos_offset	game_engine_stuff/sprite_stuf
 player_sprite_stuff::get_the_initial_coll_box_size	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	inline virtual const vec2_f24p8& get_the_initial_coll_box_size() const$/;"	kind:f	class:player_sprite_stuff	access:public	signature:() const
 player_sprite_stuff::get_the_initial_shape_size	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	inline virtual const oam_entry::shape_size get_the_initial_shape_size() $/;"	kind:f	class:player_sprite_stuff	access:public	signature:() const
 player_sprite_stuff::get_tile_arr	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	inline virtual const tile* get_tile_arr() const$/;"	kind:f	class:player_sprite_stuff	access:public	signature:() const
-player_sprite_stuff::gfx_update	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	virtual void gfx_update( sprite& the_player );$/;"	kind:p	class:player_sprite_stuff	access:public	signature:( sprite& the_player )
-player_sprite_stuff::gfx_update	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.thumb.cpp	/^void player_sprite_stuff::gfx_update( sprite& the_player )$/;"	kind:f	class:player_sprite_stuff	signature:( sprite& the_player )
 player_sprite_stuff::handle_jumping_stuff	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	virtual void handle_jumping_stuff( sprite& the_player, u32$/;"	kind:p	class:player_sprite_stuff	access:public	signature:( sprite& the_player, u32 is_jump_key_hit, u32 is_jump_key_held )
 player_sprite_stuff::handle_jumping_stuff	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.thumb.cpp	/^void player_sprite_stuff::handle_jumping_stuff( sprite& the_player, $/;"	kind:f	class:player_sprite_stuff	signature:( sprite& the_player, u32 is_jump_key_hit, u32 is_jump_key_held )
 player_sprite_stuff::init	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	virtual void init( sprite& the_player, $/;"	kind:p	class:player_sprite_stuff	access:public	signature:( sprite& the_player, const vec2_f24p8& s_in_level_pos, const vec2_u32& the_level_size_2d, bg_point& camera_pos, bool facing_left=true )
@@ -2915,7 +2911,7 @@ test_int_global	game_engine_stuff/game_manager_class.hpp	/^	static int test_int_
 test_int_global	game_engine_stuff/game_manager_class.thumb.cpp	/^int game_manager::test_int_global;$/;"	kind:m	class:game_manager	file:
 test_level	test_level/test_level.thumb.cpp	/^const level test_level = level$/;"	kind:v
 test_level_hpp	test_level/test_level.hpp	2;"	kind:d
-test_level_sublevel_0	test_level/test_level.thumb.cpp	/^const sublevel< 2010, 64, 32, 31, 33 > test_level_sublevel_0$/;"	kind:v
+test_level_sublevel_0	test_level/test_level.thumb.cpp	/^const sublevel< 2010, 64, 32, 32, 33 > test_level_sublevel_0$/;"	kind:v
 test_level_sublevel_1	test_level/test_level.thumb.cpp	/^const sublevel< 1997, 64, 32, 6, 33 > test_level_sublevel_1$/;"	kind:v
 test_level_sublevel_2	test_level/test_level.thumb.cpp	/^const sublevel< 1953, 64, 32, 6, 33 > test_level_sublevel_2$/;"	kind:v
 test_level_sublevel_3	test_level/test_level.thumb.cpp	/^const sublevel< 1993, 64, 32, 5, 33 > test_level_sublevel_3$/;"	kind:v

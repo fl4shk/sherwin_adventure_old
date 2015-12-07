@@ -69,17 +69,17 @@
   </object>
   <object id="208" gid="210" x="992" y="128" width="16" height="32">
    <properties>
-    <property name="bdest" value="0"/>
+    <property name="bdest" value="4"/>
    </properties>
   </object>
   <object id="209" gid="211" x="896" y="496" width="16" height="32">
    <properties>
-    <property name="bdest" value="2"/>
+    <property name="bdest" value="1"/>
    </properties>
   </object>
   <object id="210" gid="208" x="832" y="496" width="16" height="32">
    <properties>
-    <property name="bdest" value="1"/>
+    <property name="bdest" value="2"/>
     <property name="sdest" value="0"/>
    </properties>
   </object>
@@ -99,6 +99,7 @@
   <object id="224" gid="99" x="976" y="448" width="16" height="16"/>
   <object id="225" gid="99" x="992" y="448" width="16" height="16"/>
   <object id="235" gid="2147483888" x="272" y="496" width="16" height="32"/>
+  <object id="236" gid="240" x="64" y="496" width="16" height="32"/>
   <object id="237" gid="213" x="208" y="496" width="16" height="32">
    <properties>
     <property name="bdest" value="0"/>

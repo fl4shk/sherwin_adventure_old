@@ -112,7 +112,7 @@ public:		// functions
 		return the_sprite_type;
 	}
 	
-	virtual void gfx_update( sprite& the_player );
+	//virtual void gfx_update( sprite& the_player );
 	virtual void update_part_1( sprite& the_player );
 	virtual void update_part_2( sprite& the_player, bg_point& camera_pos,
 		const vec2_u32& the_level_size_2d ) __attribute__((_iwram_code));

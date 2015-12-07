@@ -115,19 +115,19 @@ void player_sprite_stuff::init( sprite& the_player,
 }
 
 
-void player_sprite_stuff::gfx_update( sprite& the_player )
-{
-	//the_player.the_oam_entry.set_tile_number
-	//	( get_curr_tile_slot_old(the_player) );
-	//the_player.the_oam_entry.set_tile_number
-	//	( the_player.get_vram_chunk_index() 
-	//	* gfx_manager::num_tiles_in_ss_32x32 );
-	the_player.the_oam_entry.set_tile_number
-		( get_curr_tile_slot(the_player) );
-	
-	the_player.the_oam_entry.set_pal_number 
-		( get_palette_slot(the_player) );
-}
+//void player_sprite_stuff::gfx_update( sprite& the_player )
+//{
+//	//the_player.the_oam_entry.set_tile_number
+//	//	( get_curr_tile_slot_old(the_player) );
+//	//the_player.the_oam_entry.set_tile_number
+//	//	( the_player.get_vram_chunk_index() 
+//	//	* gfx_manager::num_tiles_in_ss_32x32 );
+//	the_player.the_oam_entry.set_tile_number
+//		( get_curr_tile_slot(the_player) );
+//	
+//	the_player.the_oam_entry.set_pal_number 
+//		( get_palette_slot(the_player) );
+//}
 
 void player_sprite_stuff::update_part_1( sprite& the_player ) 
 {
@@ -243,34 +243,10 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 						warped_to_other_sublevel_this_frame = true;
 					}
 					
-					//next_debug_f24p8.data = spr.the_sprite_ipg
-					//	->extra_param_0;
-					////next_debug_f24p8.data 
-					////	= the_dest_sle.in_level_pos.x.data
-					////	* num_pixels_per_block_row;
-					////next_debug_f24p8.data 
-					////	= the_dest_sle.in_level_pos.y.data 
-					////	* num_pixels_per_block_col;
-					//next_debug_f24p8 = the_dest_sle.in_level_pos.x;
-					//next_debug_f24p8 = the_dest_sle.in_level_pos.y;
-					//next_debug_f24p8 = the_player.in_level_pos.x;
-					//next_debug_f24p8 = the_player.in_level_pos.y;
-					
-					//the_player.in_level_pos = the_dest_sle.in_level_pos;
 					the_player.in_level_pos.x = the_dest_sle_ptr
 						->in_level_pos.x;
-					//the_player.in_level_pos.y = the_dest_sle_ptr
-					//	->in_level_pos.y - make_f24p8
-					//	( the_player.get_shape_size_as_vec2().y
-					//	- num_pixels_per_block_col );
-					//the_player.in_level_pos.y = the_dest_sle_ptr
-					//	->in_level_pos.y - make_f24p8
-					//	( the_player.get_shape_size_as_vec2().y
-					//	- spr.get_shape_size_as_vec2().y );
 					the_player.in_level_pos.y = the_dest_sle_ptr
 						->in_level_pos.y;
-					
-					//the_player.vel = vec2_f24p8();
 					
 					the_player.update_f24p8_positions();
 					the_player.update_on_screen_pos(camera_pos);
@@ -279,6 +255,7 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 					active_level_manager::correct_bg0_scroll_mirror
 						(the_level_size_2d);
 					the_player.update_on_screen_pos(camera_pos);
+					
 				}
 				break;
 				
@@ -298,8 +275,17 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 	
 	active_level_manager::correct_bg0_scroll_mirror(the_level_size_2d);
 	
-	
 	the_player.update_on_screen_pos(camera_pos);
+	
+	// Spawn sprites if the_player warped from one part of
+	// the current sublevel to another part of the current
+	// sublevel.
+	if ( warped_this_frame && !warped_to_other_sublevel_this_frame )
+	{
+		sprite_manager::initial_sprite_spawning_shared_code
+			(camera_pos);
+	}
+	
 	the_player.copy_the_oam_entry_to_oam_mirror(0);
 }
 
