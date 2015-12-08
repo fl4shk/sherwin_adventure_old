@@ -47,11 +47,11 @@ LD_SCRIPT=linkscript.ld
 
 
 
-#DEBUG_FLAGS=-gdwarf-2 -ggdb -gstrict-dwarf
-DEBUG_FLAGS=-gdwarf-3
+##DEBUG_FLAGS=-gdwarf-2 -ggdb -gstrict-dwarf -g
+#DEBUG_FLAGS=-gdwarf-3 -g
 
-#GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I./maxmod/include -nostartfiles -O3
-GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I./maxmod/include -nostartfiles -O3
+GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles -O3
+#GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles -O3 -g
 
 THUMB_BASE_FLAGS=$(GLOBAL_BASE_FLAGS) -mthumb -mthumb-interwork
 ARM_BASE_FLAGS=$(GLOBAL_BASE_FLAGS) -marm -mthumb-interwork
@@ -66,14 +66,12 @@ ARM_C_FLAGS=-std=c11 $(ARM_BASE_FLAGS) -Wall
 S_FLAGS=-mcpu=arm7tdmi -mthumb -mthumb-interwork
 
 # This is the LD_FLAGS for non-devkitARM GCC
-LD_FLAGS=--specs=nosys.specs -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L./maxmod/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lmm $(DEBUG_FLAGS)
-#LD_FLAGS=--specs=nosys.specs -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L./maxmod/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lmm $(DEBUG_FLAGS) -g
+LD_FLAGS=--specs=nosys.specs -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lmm $(DEBUG_FLAGS)
+#LD_FLAGS=--specs=nosys.specs -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lmm $(DEBUG_FLAGS) -g
 
-#LD_FLAGS=--specs=nosys.specs -nostartfiles -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L./maxmod/lib -T $(LD_SCRIPT) `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lmm $(DEBUG_FLAGS)
-#LD_FLAGS=--specs=nosys.specs -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L./maxmod/lib -T $(LD_SCRIPT) `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lmm $(DEBUG_FLAGS)
+#LD_FLAGS=--specs=nosys.specs -nostartfiles -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lmm $(DEBUG_FLAGS)
+#LD_FLAGS=--specs=nosys.specs -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lmm $(DEBUG_FLAGS)
 
-# This is the LD_FLAGS for devkitARM
-#LD_FLAGS=$(EXTRA_LD_FLAGS) -lgcc -lc -lstdc++ -L./maxmod/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lmm  $(DEBUG_FLAGS)
 
 
 OBJDIR=objs

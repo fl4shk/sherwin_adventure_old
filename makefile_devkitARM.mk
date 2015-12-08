@@ -52,13 +52,9 @@ LD_SCRIPT=linkscript.ld
 ##DEBUG_FLAGS=-gdwarf-2 -ggdb -gstrict-dwarf -g
 #DEBUG_FLAGS=-gdwarf-3 -g
 
-#GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I./maxmod/include -O3
-##GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I./maxmod/include -O3 -g
-##GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I./maxmod/include -O1 -g
-
-GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -O3
-#GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -O3 -g
-#GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -O1 -g
+GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles -O3
+#GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles -O3 -g
+#GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles -O1 -g
 
 THUMB_BASE_FLAGS=$(GLOBAL_BASE_FLAGS) -mthumb -mthumb-interwork
 ARM_BASE_FLAGS=$(GLOBAL_BASE_FLAGS) -marm -mthumb-interwork
@@ -72,19 +68,16 @@ ARM_C_FLAGS=-std=c11 $(ARM_BASE_FLAGS) -Wall
 
 S_FLAGS=-mcpu=arm7tdmi -mthumb -mthumb-interwork
 
-# This is the LD_FLAGS for non-devkitARM GCC
-#LD_FLAGS=--specs=nosys.specs $(EXTRA_LD_FLAGS) -L./maxmod/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lgcc -lc -lstdc++ -lmm $(DEBUG_FLAGS)
+COMMON_LD_FLAGS=--specs=nosys.specs -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm
 
 # This is the LD_FLAGS for devkitARM
-#LD_FLAGS=$(EXTRA_LD_FLAGS) -L./maxmod/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm $(DEBUG_FLAGS)
-##LD_FLAGS=$(EXTRA_LD_FLAGS) -L./maxmod/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lrdimon -lrdpmon -lmm -lgcc -lc -lstdc++ $(DEBUG_FLAGS)
-##LD_FLAGS=$(EXTRA_LD_FLAGS) -g -L./maxmod/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm $(DEBUG_FLAGS) 
-##LD_FLAGS=$(EXTRA_LD_FLAGS) -g -L./maxmod/lib -nostartfiles -T $(LD_SCRIPT) -Wl,--entry=_start2 -lmm $(DEBUG_FLAGS) 
+#LD_FLAGS=$(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm $(DEBUG_FLAGS)
+##LD_FLAGS=$(EXTRA_LD_FLAGS) -g -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm $(DEBUG_FLAGS) 
+##LD_FLAGS=$(EXTRA_LD_FLAGS) -g -L$(DEVKITPRO)/libgba/lib -nostartfiles -T $(LD_SCRIPT) -Wl,--entry=_start2 -lmm $(DEBUG_FLAGS) 
 
-LD_FLAGS=$(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm $(DEBUG_FLAGS)
-#LD_FLAGS=$(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lrdimon -lrdpmon -lmm -lgcc -lc -lstdc++ $(DEBUG_FLAGS)
-#LD_FLAGS=$(EXTRA_LD_FLAGS) -g -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm $(DEBUG_FLAGS) 
-#LD_FLAGS=$(EXTRA_LD_FLAGS) -g -L$(DEVKITPRO)/libgba/lib -nostartfiles -T $(LD_SCRIPT) -Wl,--entry=_start2 -lmm $(DEBUG_FLAGS) 
+LD_FLAGS=$(COMMON_LD_FLAGS) $(DEBUG_FLAGS)
+#LD_FLAGS=$(COMMON_LD_FLAGS) -g $(DEBUG_FLAGS)
+#LD_FLAGS=$(COMMON_LD_FLAGS) -g $(DEBUG_FLAGS)
 
 
 OBJDIR=objs

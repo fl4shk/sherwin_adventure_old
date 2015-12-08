@@ -2,5 +2,8 @@
 deps/*
 objs/*
 asmouts/*
+*.elf
+*.gba
 disassembly_all_2.armasm
 symbols.txt
+linker_map.txt
