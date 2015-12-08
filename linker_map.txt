@@ -52,18 +52,18 @@ Archive member included to satisfy reference by file (symbol)
                               /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_call.o) (__cxa_allocate_exception)
 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_unex_handler.o)
                               /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_terminate.o) (__cxxabiv1::__unexpected_handler)
-./maxmod/lib/libmm.a(mm_main.o)
-                              objs/game_manager_class.thumb.o (mmSetVBlankHandler)
-./maxmod/lib/libmm.a(mm_mas.o)
-                              ./maxmod/lib/libmm.a(mm_main.o) (mmLayerMain)
-./maxmod/lib/libmm.a(mm_init_default.o)
-                              objs/game_manager_class.thumb.o (mmInitDefault)
-./maxmod/lib/libmm.a(mm_mixer_gba.o)
+/opt/devkitpro/libgba/lib/libmm.a(mm_mas.o)
+                              objs/game_manager_class.thumb.o (mmStart)
+/opt/devkitpro/libgba/lib/libmm.a(mm_main.o)
+                              /opt/devkitpro/libgba/lib/libmm.a(mm_mas.o) (mmCallback)
+/opt/devkitpro/libgba/lib/libmm.a(mm_effect.o)
+                              /opt/devkitpro/libgba/lib/libmm.a(mm_main.o) (mmResetEffects)
+/opt/devkitpro/libgba/lib/libmm.a(mm_mas_arm.o)
+                              /opt/devkitpro/libgba/lib/libmm.a(mm_mas.o) (mmAllocChannel)
+/opt/devkitpro/libgba/lib/libmm.a(mm_mixer_gba.o)
                               objs/game_manager_class.thumb.o (mmVBlank)
-./maxmod/lib/libmm.a(mm_effect.o)
-                              ./maxmod/lib/libmm.a(mm_main.o) (mmResetEffects)
-./maxmod/lib/libmm.a(mm_mas_arm.o)
-                              ./maxmod/lib/libmm.a(mm_mas.o) (mmAllocChannel)
+/opt/devkitpro/libgba/lib/libmm.a(mm_init_default.o)
+                              objs/game_manager_class.thumb.o (mmInitDefault)
 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-abort.o)
                               /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/libgcc.a(unwind-arm.o) (abort)
 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-atexit.o)
@@ -199,7 +199,7 @@ Archive member included to satisfy reference by file (symbol)
 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/libgcc.a(_dvmd_tls.o)
                               /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/libgcc.a(_udivsi3.o) (__aeabi_idiv0)
 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/libgcc.a(_call_via_rX.o)
-                              ./maxmod/lib/libmm.a(mm_main.o) (_call_via_r1)
+                              /opt/devkitpro/libgba/lib/libmm.a(mm_main.o) (_call_via_r1)
 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/libgcc.a(_arm_addsubdf3.o)
                               /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-svfprintf.o) (__aeabi_dsub)
 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/libgcc.a(_arm_muldivdf3.o)
@@ -605,7 +605,7 @@ LOAD objs/waffle_sprite_stuff_class.thumb.o
 LOAD objs/wood_block_stuff_classes.thumb.o
 LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/libgcc.a
 LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a
-LOAD ./maxmod/lib/libmm.a
+LOAD /opt/devkitpro/libgba/lib/libmm.a
 LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a
 LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libm.a
 LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a
@@ -1395,60 +1395,60 @@ LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtn.o
                 0x00000000080134a4       0x70 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_alloc.o)
                 0x00000000080134a4                __cxa_free_dependent_exception
  .text          0x0000000008013514        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_unex_handler.o)
- .text          0x0000000008013514      0x140 ./maxmod/lib/libmm.a(mm_main.o)
-                0x0000000008013514                mpp_call_r7
-                0x0000000008013516                mpp_call_r1
-                0x0000000008013518                mpp_call_r2
-                0x000000000801351a                mpp_call_r3
-                0x000000000801351c                mmSetEventHandler
-                0x0000000008013524                mmInit
-                0x0000000008013578                mmSetVBlankHandler
-                0x000000000801357e                mmFrame
- .text          0x0000000008013654     0x155c ./maxmod/lib/libmm.a(mm_mas.o)
-                0x00000000080136c8                mmStart
-                0x00000000080136e8                mmJingle
-                0x00000000080136ee                mmPlayModule
-                0x00000000080137b8                mmPause
-                0x00000000080137d4                mmResume
-                0x00000000080137e4                mmActive
-                0x00000000080137ea                mmActiveSub
-                0x00000000080137f0                mmSetModuleVolume
-                0x0000000008013800                mmSetJingleVolume
-                0x000000000801383c                mmPosition
-                0x0000000008013856                mmSetModuleTempo
-                0x0000000008013888                mmSetModulePitch
-                0x00000000080138c8                mmStop
-                0x000000000801398e                mppUpdateSub
-                0x0000000008013aea                mpp_Process_VolumeCommand
-                0x0000000008013d22                mpp_Process_Effect
-                0x0000000008014470                ST3_FREQTABLE
-                0x0000000008014890                IT_PitchTable
- .text          0x0000000008014bb0       0x54 ./maxmod/lib/libmm.a(mm_init_default.o)
-                0x0000000008014bb0                mmInitDefault
- .text          0x0000000008014c04      0x1e0 ./maxmod/lib/libmm.a(mm_mixer_gba.o)
-                0x0000000008014c04                mmMixerSetSource
-                0x0000000008014c18                mmMixerSetRead
-                0x0000000008014c26                mmMixerSetFreq
-                0x0000000008014c36                mmMixerMulFreq
-                0x0000000008014c4a                mmMixerStopChannel
-                0x0000000008014c5c                mmMixerChannelActive
-                0x0000000008014c6e                mmMixerSetVolume
-                0x0000000008014c7c                mmMixerSetPan
-                0x0000000008014c8a                mmMixerInit
- .text          0x0000000008014de4      0x300 ./maxmod/lib/libmm.a(mm_effect.o)
-                0x0000000008014de4                mmResetEffects
-                0x0000000008014e10                mmEffect
-                0x0000000008014e26                mmEffectEx
-                0x0000000008014f44                mmEffectVolume
-                0x0000000008014f60                mmEffectPanning
-                0x0000000008014f74                mmEffectRate
-                0x0000000008014f88                mmEffectCancel
-                0x0000000008014fc2                mmEffectRelease
-                0x0000000008014fe8                mmEffectScaleRate
-                0x0000000008014ffc                mmSetEffectsVolume
-                0x000000000801500a                mmEffectCancelAll
-                0x000000000801504a                mmUpdateEffects
- .text          0x00000000080150e4        0x0 ./maxmod/lib/libmm.a(mm_mas_arm.o)
+ .text          0x0000000008013514     0x155c /opt/devkitpro/libgba/lib/libmm.a(mm_mas.o)
+                0x0000000008013588                mmStart
+                0x00000000080135a8                mmJingle
+                0x00000000080135ae                mmPlayModule
+                0x0000000008013678                mmPause
+                0x0000000008013694                mmResume
+                0x00000000080136a4                mmActive
+                0x00000000080136aa                mmActiveSub
+                0x00000000080136b0                mmSetModuleVolume
+                0x00000000080136c0                mmSetJingleVolume
+                0x00000000080136fc                mmPosition
+                0x0000000008013716                mmSetModuleTempo
+                0x0000000008013748                mmSetModulePitch
+                0x0000000008013788                mmStop
+                0x000000000801384e                mppUpdateSub
+                0x00000000080139aa                mpp_Process_VolumeCommand
+                0x0000000008013be2                mpp_Process_Effect
+                0x0000000008014330                ST3_FREQTABLE
+                0x0000000008014750                IT_PitchTable
+ .text          0x0000000008014a70      0x140 /opt/devkitpro/libgba/lib/libmm.a(mm_main.o)
+                0x0000000008014a70                mpp_call_r7
+                0x0000000008014a72                mpp_call_r1
+                0x0000000008014a74                mpp_call_r2
+                0x0000000008014a76                mpp_call_r3
+                0x0000000008014a78                mmSetEventHandler
+                0x0000000008014a80                mmInit
+                0x0000000008014ad4                mmSetVBlankHandler
+                0x0000000008014ada                mmFrame
+ .text          0x0000000008014bb0      0x300 /opt/devkitpro/libgba/lib/libmm.a(mm_effect.o)
+                0x0000000008014bb0                mmResetEffects
+                0x0000000008014bdc                mmEffect
+                0x0000000008014bf2                mmEffectEx
+                0x0000000008014d10                mmEffectVolume
+                0x0000000008014d2c                mmEffectPanning
+                0x0000000008014d40                mmEffectRate
+                0x0000000008014d54                mmEffectCancel
+                0x0000000008014d8e                mmEffectRelease
+                0x0000000008014db4                mmEffectScaleRate
+                0x0000000008014dc8                mmSetEffectsVolume
+                0x0000000008014dd6                mmEffectCancelAll
+                0x0000000008014e16                mmUpdateEffects
+ .text          0x0000000008014eb0        0x0 /opt/devkitpro/libgba/lib/libmm.a(mm_mas_arm.o)
+ .text          0x0000000008014eb0      0x1e0 /opt/devkitpro/libgba/lib/libmm.a(mm_mixer_gba.o)
+                0x0000000008014eb0                mmMixerSetSource
+                0x0000000008014ec4                mmMixerSetRead
+                0x0000000008014ed2                mmMixerSetFreq
+                0x0000000008014ee2                mmMixerMulFreq
+                0x0000000008014ef6                mmMixerStopChannel
+                0x0000000008014f08                mmMixerChannelActive
+                0x0000000008014f1a                mmMixerSetVolume
+                0x0000000008014f28                mmMixerSetPan
+                0x0000000008014f36                mmMixerInit
+ .text          0x0000000008015090       0x54 /opt/devkitpro/libgba/lib/libmm.a(mm_init_default.o)
+                0x0000000008015090                mmInitDefault
  .text          0x00000000080150e4        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-abort.o)
  .text.abort    0x00000000080150e4       0x14 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-abort.o)
                 0x00000000080150e4                abort
@@ -3875,17 +3875,17 @@ LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtn.o
  .ARM.attributes
                 0x000000000807fda2       0x30 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_unex_handler.o)
  .ARM.attributes
-                0x000000000807fdd2       0x14 ./maxmod/lib/libmm.a(mm_main.o)
+                0x000000000807fdd2       0x16 /opt/devkitpro/libgba/lib/libmm.a(mm_mas.o)
  .ARM.attributes
-                0x000000000807fde6       0x16 ./maxmod/lib/libmm.a(mm_mas.o)
+                0x000000000807fde8       0x14 /opt/devkitpro/libgba/lib/libmm.a(mm_main.o)
  .ARM.attributes
-                0x000000000807fdfc       0x14 ./maxmod/lib/libmm.a(mm_init_default.o)
+                0x000000000807fdfc       0x14 /opt/devkitpro/libgba/lib/libmm.a(mm_effect.o)
  .ARM.attributes
-                0x000000000807fe10       0x16 ./maxmod/lib/libmm.a(mm_mixer_gba.o)
+                0x000000000807fe10       0x16 /opt/devkitpro/libgba/lib/libmm.a(mm_mas_arm.o)
  .ARM.attributes
-                0x000000000807fe26       0x14 ./maxmod/lib/libmm.a(mm_effect.o)
+                0x000000000807fe26       0x16 /opt/devkitpro/libgba/lib/libmm.a(mm_mixer_gba.o)
  .ARM.attributes
-                0x000000000807fe3a       0x16 ./maxmod/lib/libmm.a(mm_mas_arm.o)
+                0x000000000807fe3c       0x14 /opt/devkitpro/libgba/lib/libmm.a(mm_init_default.o)
  .ARM.attributes
                 0x000000000807fe50       0x30 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-abort.o)
  .ARM.attributes
@@ -4228,12 +4228,12 @@ LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtn.o
  .data._ZN10__cxxabiv120__unexpected_handlerE
                 0x0000000002021458        0x4 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_unex_handler.o)
                 0x0000000002021458                __cxxabiv1::__unexpected_handler
- .data          0x000000000202145c        0x0 ./maxmod/lib/libmm.a(mm_main.o)
- .data          0x000000000202145c        0x0 ./maxmod/lib/libmm.a(mm_mas.o)
- .data          0x000000000202145c        0x0 ./maxmod/lib/libmm.a(mm_init_default.o)
- .data          0x000000000202145c        0x0 ./maxmod/lib/libmm.a(mm_mixer_gba.o)
- .data          0x000000000202145c        0x0 ./maxmod/lib/libmm.a(mm_effect.o)
- .data          0x000000000202145c        0x0 ./maxmod/lib/libmm.a(mm_mas_arm.o)
+ .data          0x000000000202145c        0x0 /opt/devkitpro/libgba/lib/libmm.a(mm_mas.o)
+ .data          0x000000000202145c        0x0 /opt/devkitpro/libgba/lib/libmm.a(mm_main.o)
+ .data          0x000000000202145c        0x0 /opt/devkitpro/libgba/lib/libmm.a(mm_effect.o)
+ .data          0x000000000202145c        0x0 /opt/devkitpro/libgba/lib/libmm.a(mm_mas_arm.o)
+ .data          0x000000000202145c        0x0 /opt/devkitpro/libgba/lib/libmm.a(mm_mixer_gba.o)
+ .data          0x000000000202145c        0x0 /opt/devkitpro/libgba/lib/libmm.a(mm_init_default.o)
  .data          0x000000000202145c        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-abort.o)
  .data          0x000000000202145c        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-atexit.o)
  .data          0x000000000202145c        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-cxa_atexit.o)
@@ -4584,25 +4584,25 @@ LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtn.o
                 0x00000000080a6a6c                maxmod_code_rom_start = LOADADDR (.maxmod_code)
                 0x0000000003004cc8                maxmod_code_iwram_start = .
  *(.iwram)
- .iwram         0x0000000003004cc8        0x8 ./maxmod/lib/libmm.a(mm_main.o)
-                0x0000000003004cc8                mpp_call_r7i
-                0x0000000003004cca                mpp_call_r2i
-                0x0000000003004ccc                mpp_call_r1i
- .iwram         0x0000000003004cd0      0x554 ./maxmod/lib/libmm.a(mm_mas.o)
-                0x0000000003004cd0                mppProcessTick
-                0x0000000003004db4                mpp_Channel_NewNote
-                0x0000000003004e94                mpp_Update_ACHN_notest
- .iwram         0x0000000003005224      0x838 ./maxmod/lib/libmm.a(mm_mixer_gba.o)
-                0x0000000003005228                mmVBlank
-                0x00000000030052ac                mmMixerMix
- .iwram         0x0000000003005a5c      0x648 ./maxmod/lib/libmm.a(mm_mas_arm.o)
-                0x0000000003005a5c                mmAllocChannel
-                0x0000000003005ad0                mmReadPattern
-                0x0000000003005bbc                mmUpdateChannel_T0
-                0x0000000003005dfc                mmUpdateChannel_TN
-                0x0000000003005f9c                mmGetPeriod
-                0x0000000003005fe0                note_table_oct
-                0x0000000003005ffe                note_table_mod
+ .iwram         0x0000000003004cc8      0x554 /opt/devkitpro/libgba/lib/libmm.a(mm_mas.o)
+                0x0000000003004cc8                mppProcessTick
+                0x0000000003004dac                mpp_Channel_NewNote
+                0x0000000003004e8c                mpp_Update_ACHN_notest
+ .iwram         0x000000000300521c        0x8 /opt/devkitpro/libgba/lib/libmm.a(mm_main.o)
+                0x000000000300521c                mpp_call_r7i
+                0x000000000300521e                mpp_call_r2i
+                0x0000000003005220                mpp_call_r1i
+ .iwram         0x0000000003005224      0x648 /opt/devkitpro/libgba/lib/libmm.a(mm_mas_arm.o)
+                0x0000000003005224                mmAllocChannel
+                0x0000000003005298                mmReadPattern
+                0x0000000003005384                mmUpdateChannel_T0
+                0x00000000030055c4                mmUpdateChannel_TN
+                0x0000000003005764                mmGetPeriod
+                0x00000000030057a8                note_table_oct
+                0x00000000030057c6                note_table_mod
+ .iwram         0x000000000300586c      0x838 /opt/devkitpro/libgba/lib/libmm.a(mm_mixer_gba.o)
+                0x0000000003005870                mmVBlank
+                0x00000000030058f4                mmMixerMix
                 0x00000000030060a4                maxmod_code_iwram_end = .
                 0x00000000030060a4                . = ALIGN (0x4)
                 0x00000000000013dc                maxmod_code_size = SIZEOF (.maxmod_code)
@@ -4756,39 +4756,39 @@ LOAD /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/crtn.o
  .bss._ZL16emergency_buffer
                 0x0000000002024b88      0x800 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_alloc.o)
  .bss           0x0000000002025388        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libstdc++.a(eh_unex_handler.o)
- .bss           0x0000000002025388       0x20 ./maxmod/lib/libmm.a(mm_main.o)
-                0x0000000002025388                mmCallback
-                0x000000000202538c                mmModuleCount
-                0x0000000002025390                mmModuleBank
-                0x0000000002025394                mmSampleBank
-                0x0000000002025398                mm_ch_mask
-                0x000000000202539c                mm_vblank_function
-                0x00000000020253a0                mmInitialized
-                0x00000000020253a4                mp_solution
- .bss           0x00000000020253a8      0x148 ./maxmod/lib/libmm.a(mm_mas.o)
-                0x00000000020253a8                mmLayerMain
-                0x00000000020253e0                mmLayerSub
-                0x0000000002025418                mpp_vars
-                0x0000000002025428                mpp_layerp
-                0x000000000202542c                mpp_channels
-                0x000000000202543c                mpp_nchannels
-                0x000000000202543d                mpp_clayer
-                0x0000000002025440                mm_achannels
-                0x0000000002025444                mm_pchannels
-                0x0000000002025448                mm_num_mch
-                0x000000000202544c                mm_num_ach
-                0x0000000002025450                mm_schannels
- .bss           0x00000000020254f0      0x420 ./maxmod/lib/libmm.a(mm_init_default.o)
- .bss           0x0000000002025910      0x1bc ./maxmod/lib/libmm.a(mm_mixer_gba.o)
-                0x0000000002025910                mp_writepos
-                0x0000000002025918                mm_mixchannels
-                0x0000000002025920                mm_mixlen
-                0x0000000002025934                mm_bpmdv
-                0x0000000002025938                mp_mix_seg
- .bss           0x0000000002025acc       0x30 ./maxmod/lib/libmm.a(mm_effect.o)
-                0x0000000002025af0                mm_sfx_bitmask
-                0x0000000002025af4                mm_sfx_clearmask
- .bss           0x0000000002025afc        0x0 ./maxmod/lib/libmm.a(mm_mas_arm.o)
+ .bss           0x0000000002025388      0x148 /opt/devkitpro/libgba/lib/libmm.a(mm_mas.o)
+                0x0000000002025388                mmLayerMain
+                0x00000000020253c0                mmLayerSub
+                0x00000000020253f8                mpp_vars
+                0x0000000002025408                mpp_layerp
+                0x000000000202540c                mpp_channels
+                0x000000000202541c                mpp_nchannels
+                0x000000000202541d                mpp_clayer
+                0x0000000002025420                mm_achannels
+                0x0000000002025424                mm_pchannels
+                0x0000000002025428                mm_num_mch
+                0x000000000202542c                mm_num_ach
+                0x0000000002025430                mm_schannels
+ .bss           0x00000000020254d0       0x20 /opt/devkitpro/libgba/lib/libmm.a(mm_main.o)
+                0x00000000020254d0                mmCallback
+                0x00000000020254d4                mmModuleCount
+                0x00000000020254d8                mmModuleBank
+                0x00000000020254dc                mmSampleBank
+                0x00000000020254e0                mm_ch_mask
+                0x00000000020254e4                mm_vblank_function
+                0x00000000020254e8                mmInitialized
+                0x00000000020254ec                mp_solution
+ .bss           0x00000000020254f0       0x30 /opt/devkitpro/libgba/lib/libmm.a(mm_effect.o)
+                0x0000000002025514                mm_sfx_bitmask
+                0x0000000002025518                mm_sfx_clearmask
+ .bss           0x0000000002025520        0x0 /opt/devkitpro/libgba/lib/libmm.a(mm_mas_arm.o)
+ .bss           0x0000000002025520      0x1bc /opt/devkitpro/libgba/lib/libmm.a(mm_mixer_gba.o)
+                0x0000000002025520                mp_writepos
+                0x0000000002025528                mm_mixchannels
+                0x0000000002025530                mm_mixlen
+                0x0000000002025544                mm_bpmdv
+                0x0000000002025548                mp_mix_seg
+ .bss           0x00000000020256dc      0x420 /opt/devkitpro/libgba/lib/libmm.a(mm_init_default.o)
  .bss           0x0000000002025afc        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-abort.o)
  .bss           0x0000000002025afc        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-atexit.o)
  .bss           0x0000000002025afc        0x0 /opt/devkitpro/devkitARM/bin/../lib/gcc/arm-none-eabi/4.9.2/../../../../arm-none-eabi/lib/libc.a(lib_a-cxa_atexit.o)
