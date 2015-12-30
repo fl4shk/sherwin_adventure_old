@@ -34,7 +34,8 @@ void game_manager::vblank_func()
 	key_poll();
 	//pause_or_unpause_music();
 	
-	if ( curr_game_mode != gm_title_screen )
+	if ( curr_game_mode != gm_title_screen 
+		&& curr_game_mode != gm_initializing_the_game )
 	{
 		mmFrame();
 	}

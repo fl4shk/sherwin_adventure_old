@@ -286,6 +286,17 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 			(camera_pos);
 	}
 	
+	if ( player_sprite_stuff::remaining_hp < 0 )
+	{
+		player_sprite_stuff::remaining_hp = 0;
+	}
+	else if ( player_sprite_stuff::remaining_hp 
+		> player_sprite_stuff::max_hp )
+	{
+		player_sprite_stuff::remaining_hp 
+			= player_sprite_stuff::max_hp;
+	}
+	
 	the_player.copy_the_oam_entry_to_oam_mirror(0);
 }
 

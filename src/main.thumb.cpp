@@ -96,25 +96,15 @@ int main()
 		sprite_manager::spawn_sprites_if_needed
 			(gfx_manager::bgofs_mirror[0]);
 		
-		if ( key_hit(key_l) )
-		{
-			--player_sprite_stuff::remaining_hp;
-		}
-		if ( key_hit(key_r) )
-		{
-			++player_sprite_stuff::remaining_hp;
-		}
-		
-		if ( player_sprite_stuff::remaining_hp < 0 )
-		{
-			player_sprite_stuff::remaining_hp = 0;
-		}
-		else if ( player_sprite_stuff::remaining_hp 
-			> player_sprite_stuff::max_hp )
-		{
-			player_sprite_stuff::remaining_hp 
-				= player_sprite_stuff::max_hp;
-		}
+		//if ( key_hit(key_l) )
+		//{
+		//	--player_sprite_stuff::remaining_hp;
+		//}
+		//if ( key_hit(key_r) )
+		//{
+		//	++player_sprite_stuff::remaining_hp;
+		//}
+		//
 		
 		
 		//active_level_manager::update_sublevel_in_screenblock_mirror_2d
