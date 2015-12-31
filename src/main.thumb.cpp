@@ -24,7 +24,7 @@
 #include "game_engine_stuff/gfx_manager_class.hpp"
 
 
-// This is an assembly function.
+// This is an assembly function.  It doesn't do very much.
 extern "C" int ewram_test_func();
 
 

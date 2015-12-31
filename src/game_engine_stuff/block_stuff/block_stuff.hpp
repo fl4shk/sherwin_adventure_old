@@ -113,7 +113,8 @@ class block;
 
 #include "block_base_stuff_class.hpp"
 
-extern block_base_stuff* block_stuff_array[bt_count];
+extern block_base_stuff* block_stuff_array[bt_count]
+	__attribute__((_iwram));
 
 #include "air_block_stuff_class.hpp"
 #include "log_block_stuff_class.hpp"
