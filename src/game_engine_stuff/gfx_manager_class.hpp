@@ -68,7 +68,8 @@ enum sprite_palette_slot
 	//// Enemy sprites use sprite palette slots 4, 5, and 6
 	// Enemy sprites use sprite palette slots 3, 4, and 5.  
 	// Perhaps there will eventually be a need for dynamic enemy palettes,
-	// based on which types of enemies are in a particular level.
+	// based on which types of enemies are in a particular level.  This
+	// would require some changes to the level class.
 	sps_enemy_0,
 	sps_enemy_1,
 	sps_enemy_2,

@@ -68,7 +68,7 @@ void sprite_base_stuff::set_initial_shape_size_of_sprite
 void sprite_base_stuff::set_initial_coll_box_stuff_of_sprite
 	( sprite& the_sprite ) const
 {
-	the_sprite.the_coll_box.size = get_the_initial_coll_box_size();
+	the_sprite.the_regular_coll_box.size = get_the_initial_coll_box_size();
 	the_sprite.cb_pos_offset = get_the_initial_cb_pos_offset();
 }
 

@@ -57,9 +57,9 @@ void player_sprite_stuff::init( sprite& the_player, bool facing_left  )
 	
 	////the_player.set_shape_size(oam_entry::ss_16x32);
 	//the_player.set_shape_size( get_initial_shape_size() );
-	//the_player.the_coll_box.size = { 12 << fixed24p8::shift, 
+	//the_player.the_regular_coll_box.size = { 12 << fixed24p8::shift, 
 	//	29 << fixed24p8::shift };
-	////the_player.the_coll_box.size = { 12 << fixed24p8::shift, 
+	////the_player.the_regular_coll_box.size = { 12 << fixed24p8::shift, 
 	////	30 << fixed24p8::shift };
 	//
 	//the_player.cb_pos_offset = { 2 << fixed24p8::shift, 
@@ -72,11 +72,11 @@ void player_sprite_stuff::init( sprite& the_player, bool facing_left  )
 	
 	// This is for slope testing stuffs
 	//the_player.set_shape_size(oam_entry::ss_16x16);
-	////the_player.the_coll_box.size = { 12 << fixed24p8::shift,
+	////the_player.the_regular_coll_box.size = { 12 << fixed24p8::shift,
 	////	13 << fixed24p8::shift };
 	////the_player.cb_pos_offset = { 2 << fixed24p8::shift,
 	////	3 << fixed24p8::shift };
-	//the_player.the_coll_box.size = { 16 << fixed24p8::shift,
+	//the_player.the_regular_coll_box.size = { 16 << fixed24p8::shift,
 	//	16 << fixed24p8::shift };
 	//the_player.cb_pos_offset = { 0 << fixed24p8::shift,
 	//	0 << fixed24p8::shift };
@@ -201,8 +201,8 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 			case st_fire_muffin:
 			case st_ice_muffin:
 			case st_chocolate_muffin:
-				if ( coll_box_intersects_now( the_player.the_coll_box,
-					spr.the_coll_box ) )
+				if ( coll_box_intersects_now( the_player.the_regular_coll_box,
+					spr.the_regular_coll_box ) )
 				{
 					//nocash_soft_break();
 					spr.the_sprite_type = st_default;
@@ -214,8 +214,8 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 				break;
 			
 			case st_door:
-				if ( coll_box_intersects_now( the_player.the_coll_box,
-					spr.the_coll_box ) && key_hit(key_up) 
+				if ( coll_box_intersects_now( the_player.the_regular_coll_box,
+					spr.the_regular_coll_box ) && key_hit(key_up) 
 					&& !warped_this_frame )
 				{
 					warped_this_frame = true;
@@ -420,10 +420,10 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 
 void player_sprite_stuff::block_collision_stuff( sprite& the_player )
 {
-	if ( the_player.the_coll_box.size.x >= make_f24p8(0)
-		&& the_player.the_coll_box.size.x <= make_f24p8(16)
-		&& the_player.the_coll_box.size.y > make_f24p8(16 )
-		&& the_player.the_coll_box.size.y <= make_f24p8(32) )
+	if ( the_player.the_regular_coll_box.size.x >= make_f24p8(0)
+		&& the_player.the_regular_coll_box.size.x <= make_f24p8(16)
+		&& the_player.the_regular_coll_box.size.y > make_f24p8(16 )
+		&& the_player.the_regular_coll_box.size.y <= make_f24p8(32) )
 	{
 		block_collision_stuff_16x32(the_player);
 	}

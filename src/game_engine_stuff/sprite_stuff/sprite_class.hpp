@@ -42,9 +42,10 @@ public:		// variables
 	// vel is the velocity of the sprite.
 	vec2_f24p8 vel;
 	
-	// the_coll_box's "pos" member variable is the in-level coordinate of
-	// the_coll_box
-	coll_box the_coll_box;
+	// the_regular_coll_box's "pos" member variable is the in-level
+	// coordinate of the_regular_coll_box.  Also, the_regular_coll_box is
+	// only used for non-oriented sprites.
+	coll_box the_regular_coll_box;
 	
 	// cb_pos_offset is the position of the coll_box relative to
 	// in_level_pos.  It is used because most sprites will have a coll_box
@@ -121,7 +122,7 @@ public:		// functions
 	inline void update_f24p8_positions()
 	{
 		in_level_pos += vel;
-		the_coll_box.pos = in_level_pos + cb_pos_offset;
+		the_regular_coll_box.pos = in_level_pos + cb_pos_offset;
 	}
 	
 	inline vec2_f24p8 get_on_screen_pos( const bg_point& camera_pos )
@@ -141,7 +142,7 @@ public:		// functions
 	//inline void update_full( const bg_point& camera_pos )
 	//{
 	//	//in_level_pos += vel;
-	//	//the_coll_box.pos = in_level_pos + cb_pos_offset;
+	//	//the_regular_coll_box.pos = in_level_pos + cb_pos_offset;
 	//	
 	//	update_f24p8_positions();
 	//	

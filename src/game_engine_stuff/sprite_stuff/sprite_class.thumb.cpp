@@ -16,8 +16,8 @@ sprite::sprite()
 	
 	//set_shape_size(oam_entry::ss_16x16);
 	//
-	//the_coll_box.pos = { 0, 0 };
-	//the_coll_box.size = { make_f24p8(16), make_f24p8(16) };
+	//the_regular_coll_box.pos = { 0, 0 };
+	//the_regular_coll_box.size = { make_f24p8(16), make_f24p8(16) };
 	//
 	//cb_pos_offset = { 0, 0 };
 	
@@ -32,7 +32,8 @@ sprite::sprite()
 	the_oam_entry.set_pal_number(sps_player);
 	
 	set_shape_size(oam_entry::ss_16x16);
-	the_coll_box.size = { 14 << fixed24p8::shift, 14 << fixed24p8::shift };
+	the_regular_coll_box.size = { 14 << fixed24p8::shift, 
+		14 << fixed24p8::shift };
 	cb_pos_offset = { 1 << fixed24p8::shift, 1 << fixed24p8::shift };
 	
 	vram_chunk_index = old_vram_chunk_index;

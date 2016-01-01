@@ -80,7 +80,7 @@ void waffle_sprite_stuff::block_coll_response_right_16x16
 	s32& move_timer = the_powerup.misc_data_s[sdi_move_timer];
 	
 	the_powerup.in_level_pos.x = make_f24p8( rt_coll_result.coord.x * 16 )
-		- the_powerup.the_coll_box.size.x - the_powerup.cb_pos_offset.x;
+		- the_powerup.the_regular_coll_box.size.x - the_powerup.cb_pos_offset.x;
 		//- make_f24p8(the_powerup.get_shape_size_as_vec2().x);
 	
 	

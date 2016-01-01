@@ -322,8 +322,8 @@ void sprite_manager::update_all_sprites
 			{
 				sprite& the_other_spr = *(the_active_sprites[j]);
 				
-				if ( coll_box_intersects_now( the_spr.the_coll_box,
-					the_other_spr.the_coll_box ) )
+				if ( coll_box_intersects_now( the_spr.the_regular_coll_box,
+					the_other_spr.the_regular_coll_box ) )
 				{
 					// Update a volatile variable so the compiler won't
 					// optimize out this loop
@@ -337,8 +337,8 @@ void sprite_manager::update_all_sprites
 			{
 				sprite& the_other_spr = *(the_active_sprites[j]);
 				
-				if ( coll_box_intersects_now( the_spr.the_coll_box,
-					the_other_spr.the_coll_box ) )
+				if ( coll_box_intersects_now( the_spr.the_regular_coll_box,
+					the_other_spr.the_regular_coll_box ) )
 				{
 					// Update a volatile variable so the compiler won't
 					// optimize out this loop
@@ -349,8 +349,8 @@ void sprite_manager::update_all_sprites
 			{
 				sprite& the_other_spr = *(the_active_sprites[j]);
 				
-				if ( coll_box_intersects_now( the_spr.the_coll_box,
-					the_other_spr.the_coll_box ) )
+				if ( coll_box_intersects_now( the_spr.the_regular_coll_box,
+					the_other_spr.the_regular_coll_box ) )
 				{
 					// Update a volatile variable so the compiler won't
 					// optimize out this loop

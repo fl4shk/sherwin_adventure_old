@@ -18,7 +18,7 @@
 void generate_coll_point_group_16x16( const sprite& the_sprite, 
 	coll_point_group& the_pt_group )
 {
-	const coll_box& the_coll_box = the_sprite.the_coll_box;
+	const coll_box& the_regular_coll_box = the_sprite.the_regular_coll_box;
 	
 	the_pt_group.correct_num_used_points_16x16();
 	
@@ -39,33 +39,33 @@ void generate_coll_point_group_16x16( const sprite& the_sprite,
 	
 	
 	// Left and Right
-	pt_lt.x = pt_lb.x = the_coll_box.left();
-	pt_rt.x = pt_rb.x = the_coll_box.right();
+	pt_lt.x = pt_lb.x = the_regular_coll_box.left();
+	pt_rt.x = pt_rb.x = the_regular_coll_box.right();
 	
-	pt_lt.y.data = pt_rt.y.data = the_coll_box.top().data 
-		+ ( the_coll_box.size.y.data / 4 );
-	pt_lb.y.data = pt_rb.y.data = the_coll_box.bot().data 
-		- ( the_coll_box.size.y.data / 4 );
+	pt_lt.y.data = pt_rt.y.data = the_regular_coll_box.top().data 
+		+ ( the_regular_coll_box.size.y.data / 4 );
+	pt_lb.y.data = pt_rb.y.data = the_regular_coll_box.bot().data 
+		- ( the_regular_coll_box.size.y.data / 4 );
 	
 	
 	// Top and Bottom
-	//pt_tl.x.data = pt_bl.x.data = the_coll_box.left().data 
-	//	+ ( the_coll_box.size.x.data / 4 );
-	//pt_tr.x.data = pt_br.x.data = the_coll_box.right().data 
-	//	- ( the_coll_box.size.x.data / 4 );
+	//pt_tl.x.data = pt_bl.x.data = the_regular_coll_box.left().data 
+	//	+ ( the_regular_coll_box.size.x.data / 4 );
+	//pt_tr.x.data = pt_br.x.data = the_regular_coll_box.right().data 
+	//	- ( the_regular_coll_box.size.x.data / 4 );
 	
 	
-	pt_tl.x = pt_bl.x = the_coll_box.left() + (fixed24p8){0x400};
-	pt_tm.x.data = pt_bm.x.data = the_coll_box.left().data 
-		+ ( the_coll_box.size.x.data / 2 );
-	pt_tr.x = pt_br.x = the_coll_box.right() - (fixed24p8){0x400};
+	pt_tl.x = pt_bl.x = the_regular_coll_box.left() + (fixed24p8){0x400};
+	pt_tm.x.data = pt_bm.x.data = the_regular_coll_box.left().data 
+		+ ( the_regular_coll_box.size.x.data / 2 );
+	pt_tr.x = pt_br.x = the_regular_coll_box.right() - (fixed24p8){0x400};
 	
-	pt_tl.y = pt_tm.y = pt_tr.y = the_coll_box.top();
-	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot();
+	pt_tl.y = pt_tm.y = pt_tr.y = the_regular_coll_box.top();
+	//pt_bl.y = pt_bm.y = pt_br.y = the_regular_coll_box.bot();
 	
-	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() 
+	//pt_bl.y = pt_bm.y = pt_br.y = the_regular_coll_box.bot() 
 	//	+ the_sprite.cb_pos_offset.y;
-	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() + make_f24p8(2);
+	//pt_bl.y = pt_bm.y = pt_br.y = the_regular_coll_box.bot() + make_f24p8(2);
 	
 	pt_bl.y = pt_bm.y = pt_br.y = the_sprite.in_level_pos.y 
 		+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
@@ -76,7 +76,7 @@ void generate_coll_point_group_16x16( const sprite& the_sprite,
 void generate_coll_point_group_16x32( const sprite& the_sprite, 
 	coll_point_group& the_pt_group )
 {
-	const coll_box& the_coll_box = the_sprite.the_coll_box;
+	const coll_box& the_regular_coll_box = the_sprite.the_regular_coll_box;
 	
 	the_pt_group.correct_num_used_points_16x32();
 	
@@ -99,29 +99,29 @@ void generate_coll_point_group_16x32( const sprite& the_sprite,
 	
 	
 	// Left and Right
-	pt_lt.x = pt_lm.x = pt_lb.x = the_coll_box.left();
-	pt_rt.x = pt_rm.x = pt_rb.x = the_coll_box.right();
+	pt_lt.x = pt_lm.x = pt_lb.x = the_regular_coll_box.left();
+	pt_rt.x = pt_rm.x = pt_rb.x = the_regular_coll_box.right();
 	
-	pt_lt.y = pt_rt.y = the_coll_box.top() + (fixed24p8){0x480};
-	pt_lm.y.data = pt_rm.y.data = the_coll_box.top().data 
-		+ ( the_coll_box.size.y.data / 2 );
-	pt_lb.y = pt_rb.y = the_coll_box.bot() - (fixed24p8){0x480};
+	pt_lt.y = pt_rt.y = the_regular_coll_box.top() + (fixed24p8){0x480};
+	pt_lm.y.data = pt_rm.y.data = the_regular_coll_box.top().data 
+		+ ( the_regular_coll_box.size.y.data / 2 );
+	pt_lb.y = pt_rb.y = the_regular_coll_box.bot() - (fixed24p8){0x480};
 	
 	
 	// Top and Bottom
-	pt_tl.x = pt_bl.x = the_coll_box.left() + (fixed24p8){0x400};
-	pt_tm.x.data = pt_bm.x.data = the_coll_box.left().data 
-		+ ( the_coll_box.size.x.data / 2 );
-	pt_tr.x = pt_br.x = the_coll_box.right() - (fixed24p8){0x400};
+	pt_tl.x = pt_bl.x = the_regular_coll_box.left() + (fixed24p8){0x400};
+	pt_tm.x.data = pt_bm.x.data = the_regular_coll_box.left().data 
+		+ ( the_regular_coll_box.size.x.data / 2 );
+	pt_tr.x = pt_br.x = the_regular_coll_box.right() - (fixed24p8){0x400};
 	
-	pt_tl.y = pt_tm.y = pt_tr.y = the_coll_box.top();
+	pt_tl.y = pt_tm.y = pt_tr.y = the_regular_coll_box.top();
 	
-	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot();
+	//pt_bl.y = pt_bm.y = pt_br.y = the_regular_coll_box.bot();
 	
-	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() 
+	//pt_bl.y = pt_bm.y = pt_br.y = the_regular_coll_box.bot() 
 	//	+ the_sprite.cb_pos_offset.y;
 	
-	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() + make_f24p8(2);
+	//pt_bl.y = pt_bm.y = pt_br.y = the_regular_coll_box.bot() + make_f24p8(2);
 	pt_bl.y = pt_bm.y = pt_br.y = the_sprite.in_level_pos.y 
 		+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
 	
@@ -130,7 +130,7 @@ void generate_coll_point_group_16x32( const sprite& the_sprite,
 void generate_coll_point_group_32x16( const sprite& the_sprite, 
 	coll_point_group& the_pt_group )
 {
-	const coll_box& the_coll_box = the_sprite.the_coll_box;
+	const coll_box& the_regular_coll_box = the_sprite.the_regular_coll_box;
 	
 	// The collision points
 	vec2_f24p8 & pt_lt = the_pt_group.get_pt_lt_32x16(),
@@ -148,34 +148,34 @@ void generate_coll_point_group_32x16( const sprite& the_sprite,
 		& pt_br = the_pt_group.get_pt_br_32x16();
 	
 	// Left and Right
-	pt_lt.x = pt_lb.x = the_coll_box.left();
-	pt_rt.x = pt_rb.x = the_coll_box.right();
+	pt_lt.x = pt_lb.x = the_regular_coll_box.left();
+	pt_rt.x = pt_rb.x = the_regular_coll_box.right();
 	
-	pt_lt.y.data = pt_rt.y.data = the_coll_box.top().data 
-		+ ( the_coll_box.size.y.data / 4 );
-	pt_lb.y.data = pt_rb.y.data = the_coll_box.bot().data 
-		- ( the_coll_box.size.y.data / 4 );
+	pt_lt.y.data = pt_rt.y.data = the_regular_coll_box.top().data 
+		+ ( the_regular_coll_box.size.y.data / 4 );
+	pt_lb.y.data = pt_rb.y.data = the_regular_coll_box.bot().data 
+		- ( the_regular_coll_box.size.y.data / 4 );
 	
 	
 	// Top and Bottom
-	//pt_tl.x.data = pt_bl.x.data = the_coll_box.left().data 
-	//	+ ( the_coll_box.size.x.data / 4 );
-	//pt_tr.x.data = pt_br.x.data = the_coll_box.right().data 
-	//	- ( the_coll_box.size.x.data / 4 );
+	//pt_tl.x.data = pt_bl.x.data = the_regular_coll_box.left().data 
+	//	+ ( the_regular_coll_box.size.x.data / 4 );
+	//pt_tr.x.data = pt_br.x.data = the_regular_coll_box.right().data 
+	//	- ( the_regular_coll_box.size.x.data / 4 );
 	
 	
-	pt_tl.x = pt_bl.x = the_coll_box.left() + (fixed24p8){0x400};
-	pt_tm.x.data = pt_bm.x.data = the_coll_box.left().data 
-		+ ( the_coll_box.size.x.data / 2 );
-	pt_tr.x = pt_br.x = the_coll_box.right() - (fixed24p8){0x400};
+	pt_tl.x = pt_bl.x = the_regular_coll_box.left() + (fixed24p8){0x400};
+	pt_tm.x.data = pt_bm.x.data = the_regular_coll_box.left().data 
+		+ ( the_regular_coll_box.size.x.data / 2 );
+	pt_tr.x = pt_br.x = the_regular_coll_box.right() - (fixed24p8){0x400};
 	
-	pt_tl.y = pt_tm.y = pt_tr.y = the_coll_box.top();
-	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot();
+	pt_tl.y = pt_tm.y = pt_tr.y = the_regular_coll_box.top();
+	//pt_bl.y = pt_bm.y = pt_br.y = the_regular_coll_box.bot();
 	
-	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() 
+	//pt_bl.y = pt_bm.y = pt_br.y = the_regular_coll_box.bot() 
 	//	+ the_sprite.cb_pos_offset.y;
 	
-	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() + make_f24p8(2);
+	//pt_bl.y = pt_bm.y = pt_br.y = the_regular_coll_box.bot() + make_f24p8(2);
 	pt_bl.y = pt_bm.y = pt_br.y = the_sprite.in_level_pos.y 
 		+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
 }
