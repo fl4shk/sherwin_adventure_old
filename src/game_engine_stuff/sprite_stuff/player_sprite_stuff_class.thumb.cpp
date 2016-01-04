@@ -1,3 +1,21 @@
+// This file is part of Sherwin's Adventure.
+// 
+// Copyright 2015-2016 by Andy Clark (FL4SHK).
+// 
+// Sherwin's Adventure is free software: you can redistribute it and/or
+// modify it under the terms of the GNU General Public License as published
+// by the Free Software Foundation, either version 3 of the License, or (at
+// your option) any later version.
+// 
+// Sherwin's Adventure is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License along
+// with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
+
+
 #include "sprite_type_stuff.hpp"
 #include "sprite_class.hpp"
 
@@ -57,9 +75,9 @@ void player_sprite_stuff::init( sprite& the_player, bool facing_left  )
 	
 	////the_player.set_shape_size(oam_entry::ss_16x32);
 	//the_player.set_shape_size( get_initial_shape_size() );
-	//the_player.the_regular_coll_box.size = { 12 << fixed24p8::shift, 
+	//the_player.the_coll_box.size = { 12 << fixed24p8::shift, 
 	//	29 << fixed24p8::shift };
-	////the_player.the_regular_coll_box.size = { 12 << fixed24p8::shift, 
+	////the_player.the_coll_box.size = { 12 << fixed24p8::shift, 
 	////	30 << fixed24p8::shift };
 	//
 	//the_player.cb_pos_offset = { 2 << fixed24p8::shift, 
@@ -72,11 +90,11 @@ void player_sprite_stuff::init( sprite& the_player, bool facing_left  )
 	
 	// This is for slope testing stuffs
 	//the_player.set_shape_size(oam_entry::ss_16x16);
-	////the_player.the_regular_coll_box.size = { 12 << fixed24p8::shift,
+	////the_player.the_coll_box.size = { 12 << fixed24p8::shift,
 	////	13 << fixed24p8::shift };
 	////the_player.cb_pos_offset = { 2 << fixed24p8::shift,
 	////	3 << fixed24p8::shift };
-	//the_player.the_regular_coll_box.size = { 16 << fixed24p8::shift,
+	//the_player.the_coll_box.size = { 16 << fixed24p8::shift,
 	//	16 << fixed24p8::shift };
 	//the_player.cb_pos_offset = { 0 << fixed24p8::shift,
 	//	0 << fixed24p8::shift };
@@ -201,8 +219,8 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 			case st_fire_muffin:
 			case st_ice_muffin:
 			case st_chocolate_muffin:
-				if ( coll_box_intersects_now( the_player.the_regular_coll_box,
-					spr.the_regular_coll_box ) )
+				if ( coll_box_intersects_now( the_player.the_coll_box,
+					spr.the_coll_box ) )
 				{
 					//nocash_soft_break();
 					spr.the_sprite_type = st_default;
@@ -214,8 +232,8 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 				break;
 			
 			case st_door:
-				if ( coll_box_intersects_now( the_player.the_regular_coll_box,
-					spr.the_regular_coll_box ) && key_hit(key_up) 
+				if ( coll_box_intersects_now( the_player.the_coll_box,
+					spr.the_coll_box ) && key_hit(key_up) 
 					&& !warped_this_frame )
 				{
 					warped_this_frame = true;
@@ -420,10 +438,10 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 
 void player_sprite_stuff::block_collision_stuff( sprite& the_player )
 {
-	if ( the_player.the_regular_coll_box.size.x >= make_f24p8(0)
-		&& the_player.the_regular_coll_box.size.x <= make_f24p8(16)
-		&& the_player.the_regular_coll_box.size.y > make_f24p8(16 )
-		&& the_player.the_regular_coll_box.size.y <= make_f24p8(32) )
+	if ( the_player.the_coll_box.size.x >= make_f24p8(0)
+		&& the_player.the_coll_box.size.x <= make_f24p8(16)
+		&& the_player.the_coll_box.size.y > make_f24p8(16 )
+		&& the_player.the_coll_box.size.y <= make_f24p8(32) )
 	{
 		block_collision_stuff_16x32(the_player);
 	}

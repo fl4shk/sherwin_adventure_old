@@ -1,3 +1,21 @@
+// This file is part of Sherwin's Adventure.
+// 
+// Copyright 2015-2016 by Andy Clark (FL4SHK).
+// 
+// Sherwin's Adventure is free software: you can redistribute it and/or
+// modify it under the terms of the GNU General Public License as published
+// by the Free Software Foundation, either version 3 of the License, or (at
+// your option) any later version.
+// 
+// Sherwin's Adventure is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License along
+// with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
+
+
 #include "sprite_type_stuff.hpp"
 #include "sprite_class.hpp"
 
@@ -192,7 +210,7 @@ void sprite_base_stuff::block_coll_response_right_16x16
 	const block_coll_result& rb_coll_result )
 {
 	the_sprite.in_level_pos.x = make_f24p8( rt_coll_result.coord.x * 16 ) 
-		- the_sprite.the_regular_coll_box.size.x - the_sprite.cb_pos_offset.x;
+		- the_sprite.the_coll_box.size.x - the_sprite.cb_pos_offset.x;
 		//- make_f24p8(the_sprite.get_shape_size_as_vec2().x);
 }
 
@@ -205,7 +223,7 @@ void sprite_base_stuff::non_slope_block_coll_response_bot_16x16
 	{
 		the_sprite.in_level_pos.y = make_f24p8( bl_coll_result.coord.y 
 			* 16 ) 
-			//- ( the_sprite.the_regular_coll_box.size.y +
+			//- ( the_sprite.the_coll_box.size.y +
 			//the_sprite.cb_pos_offset.y );
 			- make_f24p8(the_sprite.get_shape_size_as_vec2().y);
 		the_sprite.vel.y = {0x00};
@@ -253,7 +271,7 @@ void sprite_base_stuff::block_coll_response_right_16x32
 	//show_debug_str_s32("bkri");
 	//show_debug_str_s32("    ");
 	the_sprite.in_level_pos.x = make_f24p8( rt_coll_result.coord.x * 16 ) 
-		- the_sprite.the_regular_coll_box.size.x - the_sprite.cb_pos_offset.x;
+		- the_sprite.the_coll_box.size.x - the_sprite.cb_pos_offset.x;
 		//- the_sprite.get_shape_size_as_vec2().x );
 }
 void sprite_base_stuff::non_slope_block_coll_response_bot_16x32
@@ -457,7 +475,7 @@ block_type sprite_base_stuff::slope_block_coll_response_bot_16x32
 					( ( the_coll_result.coord.y + 1 )
 					* num_pixels_per_block_col - height_mask_value )
 					- make_f24p8( the_sprite.get_shape_size_as_vec2().y );
-					//- ( the_sprite.the_regular_coll_box.size.y 
+					//- ( the_sprite.the_coll_box.size.y 
 					//+ the_sprite.cb_pos_offset );
 				
 				the_sprite.vel.y = {0x00};
@@ -477,7 +495,7 @@ block_type sprite_base_stuff::slope_block_coll_response_bot_16x32
 			//the_sprite.in_level_pos.y = make_f24p8
 			//	( ( the_coll_result.coord.y + 1 )
 			//	* num_pixels_per_block_col - height_mask_value )
-			//	- the_sprite.the_regular_coll_box.size.y;
+			//	- the_sprite.the_coll_box.size.y;
 			
 			//the_sprite.in_level_pos.y += make_f24p8(1);
 			the_sprite.on_ground = false;

@@ -2,8 +2,10 @@
 deps/*
 objs/*
 asmouts/*
+small_code_testing_things/*
 *.elf
 *.gba
 disassembly_all_2.armasm
 symbols.txt
 linker_map.txt
+copyright_text_thing.txt

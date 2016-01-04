@@ -1,3 +1,21 @@
+// This file is part of Sherwin's Adventure.
+// 
+// Copyright 2015-2016 by Andy Clark (FL4SHK).
+// 
+// Sherwin's Adventure is free software: you can redistribute it and/or
+// modify it under the terms of the GNU General Public License as published
+// by the Free Software Foundation, either version 3 of the License, or (at
+// your option) any later version.
+// 
+// Sherwin's Adventure is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License along
+// with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
+
+
 #ifndef sprite_class_hpp
 #define sprite_class_hpp
 
@@ -42,10 +60,10 @@ public:		// variables
 	// vel is the velocity of the sprite.
 	vec2_f24p8 vel;
 	
-	// the_regular_coll_box's "pos" member variable is the in-level
-	// coordinate of the_regular_coll_box.  Also, the_regular_coll_box is
+	// the_coll_box's "pos" member variable is the in-level
+	// coordinate of the_coll_box.  Also, the_coll_box is
 	// only used for non-oriented sprites.
-	coll_box the_regular_coll_box;
+	coll_box the_coll_box;
 	
 	// cb_pos_offset is the position of the coll_box relative to
 	// in_level_pos.  It is used because most sprites will have a coll_box
@@ -122,7 +140,7 @@ public:		// functions
 	inline void update_f24p8_positions()
 	{
 		in_level_pos += vel;
-		the_regular_coll_box.pos = in_level_pos + cb_pos_offset;
+		the_coll_box.pos = in_level_pos + cb_pos_offset;
 	}
 	
 	inline vec2_f24p8 get_on_screen_pos( const bg_point& camera_pos )
@@ -142,7 +160,7 @@ public:		// functions
 	//inline void update_full( const bg_point& camera_pos )
 	//{
 	//	//in_level_pos += vel;
-	//	//the_regular_coll_box.pos = in_level_pos + cb_pos_offset;
+	//	//the_coll_box.pos = in_level_pos + cb_pos_offset;
 	//	
 	//	update_f24p8_positions();
 	//	
