@@ -55,11 +55,18 @@ const u32 player_sprite_stuff::the_relative_metatile_slot_arr_size
 	= sizeof(player_sprite_stuff::the_relative_metatile_slot_arr)
 	/ sizeof(u32);
 
+//const vec2_f24p8 player_sprite_stuff::the_initial_coll_box_size 
+//	= { {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },
+//	player_sprite_stuff::the_initial_cb_pos_offset 
+//	= { {2 << fixed24p8::shift }, {3 << fixed24p8::shift } };
+
 const vec2_f24p8 player_sprite_stuff::the_initial_coll_box_size 
 	= { {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },
 	player_sprite_stuff::the_initial_cb_pos_offset 
-	= { {2 << fixed24p8::shift }, {3 << fixed24p8::shift } };
+	= { {( 2 + 8 ) << fixed24p8::shift }, {3 << fixed24p8::shift } };
 
+const vec2_f24p8 player_sprite_stuff::the_initial_in_level_pos_offset
+	= { {8 << fixed24p8::shift}, {0 << fixed24p8::shift} };
 
 void player_sprite_stuff::init( sprite& the_player, bool facing_left  )
 {
@@ -112,7 +119,8 @@ void player_sprite_stuff::init( sprite& the_player,
 	//sprite_stuff_array[the_player.the_sprite_type]->init(the_player);
 	init(the_player);
 	
-	the_player.in_level_pos = s_in_level_pos;
+	the_player.in_level_pos = s_in_level_pos 
+		- get_the_initial_in_level_pos_offset();
 	
 	//the_player.in_level_pos = { 0x2000, 0x18000 };
 	//the_player.the_sprite_type = st_player;
@@ -262,9 +270,11 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 					}
 					
 					the_player.in_level_pos.x = the_dest_sle_ptr
-						->in_level_pos.x;
+						->in_level_pos.x 
+						- get_the_initial_in_level_pos_offset().x;
 					the_player.in_level_pos.y = the_dest_sle_ptr
-						->in_level_pos.y;
+						->in_level_pos.y
+						- get_the_initial_in_level_pos_offset().y;
 					
 					the_player.update_f24p8_positions();
 					the_player.update_on_screen_pos(camera_pos);

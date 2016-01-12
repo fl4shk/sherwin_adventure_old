@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef warp_block_sprite_stuff_class_hpp
-#define warp_block_sprite_stuff_class_hpp
+#ifndef door_sprite_stuff_class_hpp
+#define door_sprite_stuff_class_hpp
 
 #include "../../gfx/the_door_gfx.h"
 
@@ -97,4 +97,4 @@ public:		// functions
 } __attribute__((_align4));
 
 
-#endif		// warp_block_sprite_stuff_class_hpp
+#endif		// door_sprite_stuff_class_hpp

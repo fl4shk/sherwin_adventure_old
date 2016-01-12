@@ -29,6 +29,9 @@ const vec2_f24p8 sprite_base_stuff::the_initial_coll_box_size
 	sprite_base_stuff::the_initial_cb_pos_offset 
 	= { {1 << fixed24p8::shift}, {1 << fixed24p8::shift} };
 
+const vec2_f24p8 sprite_base_stuff::the_initial_in_level_pos_offset
+	= { {0 << fixed24p8::shift}, {0 << fixed24p8::shift} };
+
 void sprite_base_stuff::init( sprite& the_sprite, bool facing_left )
 {
 	the_sprite.the_sprite_type = get_sprite_type();
@@ -57,7 +60,8 @@ void sprite_base_stuff::init( sprite& the_sprite,
 	bool facing_left )
 {
 	init( the_sprite, facing_left );
-	the_sprite.in_level_pos = s_in_level_pos;
+	the_sprite.in_level_pos = s_in_level_pos 
+		- get_the_initial_in_level_pos_offset();
 	the_sprite.update_on_screen_pos(camera_pos);
 }
 
@@ -66,7 +70,8 @@ void sprite_base_stuff::init( sprite& the_sprite,
 	bg_point& camera_pos, bool facing_left )
 {
 	init( the_sprite, facing_left );
-	the_sprite.in_level_pos = s_in_level_pos;
+	the_sprite.in_level_pos = s_in_level_pos 
+		- get_the_initial_in_level_pos_offset();
 	the_sprite.update_on_screen_pos(camera_pos);
 	
 }

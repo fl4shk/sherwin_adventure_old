@@ -19,7 +19,6 @@
 #ifndef player_sprite_stuff_class_hpp
 #define player_sprite_stuff_class_hpp
 
-//#include "../gfx_manager_class.hpp"
 #include "../gfx_manager_class.hpp"
 
 #include "../../gfx/sherwin_gfx.h"
@@ -105,17 +104,29 @@ public:		// variables
 	static const u32 the_relative_metatile_slot_arr_size;
 	static const u32 the_relative_metatile_slot_arr[];
 	
+	//static constexpr u32 num_active_gfx_tiles 
+	//	= gfx_manager::num_tiles_in_ss_16x32;
 	static constexpr u32 num_active_gfx_tiles 
-		= gfx_manager::num_tiles_in_ss_16x32;
+		= gfx_manager::num_tiles_in_ss_32x32;
 	
 	static constexpr tile* tile_arr = const_cast<tile*>
 		(reinterpret_cast<const tile*>(sherwin_gfxTiles));
 	
+	//static const oam_entry::shape_size the_initial_shape_size 
+	//	= oam_entry::ss_16x32;
 	static const oam_entry::shape_size the_initial_shape_size 
-		= oam_entry::ss_16x32;
+		= oam_entry::ss_32x32;
 	
 	static const vec2_f24p8 the_initial_coll_box_size,
 		the_initial_cb_pos_offset;
+	
+	// This is used to correct the initial in-level position for sprites
+	// that are normally considered to be of a certain size but that use
+	// larger graphics for some frames.  An example of this is the
+	// st_player sprite_type, which is normally considered to be a 16x32
+	// sprite but uses 32x32 graphics in some cases, like during the hammer
+	// swing animation.
+	static const vec2_f24p8 the_initial_in_level_pos_offset;
 	
 	
 public:		// functions
@@ -169,6 +180,12 @@ public:		// functions
 	inline virtual const vec2_f24p8& get_the_initial_cb_pos_offset() const
 	{
 		return the_initial_cb_pos_offset;
+	}
+	
+	inline virtual const vec2_f24p8& get_the_initial_in_level_pos_offset()
+		const
+	{
+		return the_initial_in_level_pos_offset;
 	}
 	
 	

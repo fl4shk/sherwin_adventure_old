@@ -64,6 +64,8 @@ public:		// functions
 	inline fixed24p8 operator - ( const fixed24p8& to_sub ) const;
 	//inline fixed24p8 operator * ( const fixed24p8& to_mul ) const;
 	inline fixed24p8 operator * ( const fixed8p8& to_mul ) const;
+	fixed24p8 guaranteed_f24p8_by_f8p8_multiplication
+		( const fixed8p8& to_mul ) __attribute__((_iwram_code));
 	inline fixed24p8 operator / ( const fixed8p8& den ) const
 	{
 		return f24p8_div_by_f8p8( (fixed24p8){data}, den );
@@ -374,6 +376,7 @@ inline fixed24p8 operator * ( const fixed8p8& a, const fixed8p8& b )
 	
 	return ret;
 }
+
 
 
 inline fixed24p8 operator + ( const fixed8p8& a, const fixed24p8& b )

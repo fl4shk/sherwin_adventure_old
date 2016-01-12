@@ -16,28 +16,21 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include "sprite_type_stuff.hpp"
+#include "fixed_classes.hpp"
 
 
-sprite_base_stuff the_sprite_base_stuff;
-
-#define X(name) name##_sprite_stuff the_##name##_sprite_stuff;
-list_of_main_sprite_types
-#undef X
-
-
-sprite_base_stuff* sprite_stuff_array[st_count]
-= {
-	// The Default Sprite (also used for when there is no sprite in the
-	// slot).
-	&the_sprite_base_stuff,
+fixed24p8 fixed24p8::guaranteed_f24p8_by_f8p8_multiplication
+	( const fixed8p8& to_mul )
+{
+	fixed24p8 ret;
 	
-	#define X(name) &the_##name##_sprite_stuff,
-	list_of_main_sprite_types
-	#undef X
-};
-
-
-#include "sprite_class.hpp"
+	s64 ret_data_s64 = (s64)data * (s64)to_mul.data;
+	ret_data_s64 >>= fixed24p8::shift;
+	
+	ret.data = (s32)ret_data_s64;
+	
+	return ret;
+	
+}
 
 

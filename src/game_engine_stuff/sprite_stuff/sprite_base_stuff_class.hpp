@@ -48,6 +48,14 @@ public:		// variables
 	static const vec2_f24p8 the_initial_coll_box_size,
 		the_initial_cb_pos_offset;
 	
+	// This is used to correct the initial in-level position for sprites
+	// that are normally considered to be of a certain size but that use
+	// larger graphics for some frames.  An example of this is the
+	// st_player sprite_type, which is normally considered to be a 16x32
+	// sprite but uses 32x32 graphics in some cases, like during the hammer
+	// swing animation.
+	static const vec2_f24p8 the_initial_in_level_pos_offset;
+	
 public:		// functions
 	// This is the default form of init().
 	virtual void init( sprite& the_sprite, bool facing_left=true );
@@ -91,6 +99,11 @@ public:		// functions
 		return the_initial_cb_pos_offset;
 	}
 	
+	inline virtual const vec2_f24p8& get_the_initial_in_level_pos_offset()
+		const
+	{
+		return the_initial_in_level_pos_offset;
+	}
 	
 	
 	

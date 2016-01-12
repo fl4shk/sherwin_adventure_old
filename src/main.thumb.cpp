@@ -41,7 +41,6 @@
 #include "game_engine_stuff/game_manager_class.hpp"
 #include "game_engine_stuff/gfx_manager_class.hpp"
 
-#include "game_engine_stuff/orientable_reflectable_coll_box_class.hpp"
 
 
 // This is an assembly function.  It doesn't do very much.
