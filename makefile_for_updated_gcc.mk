@@ -45,13 +45,16 @@ OBJCOPY=$(COMP_PREFIX)objcopy
 
 LD_SCRIPT=linkscript.ld
 
+#DEBUG=yeah do debug
 
-
-##DEBUG_FLAGS=-gdwarf-2 -ggdb -gstrict-dwarf -g
-#DEBUG_FLAGS=-gdwarf-3 -g
-
-GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles -O3
-#GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles -O3 -g
+ifdef DEBUG
+	##DEBUG_FLAGS=-gdwarf-2 -ggdb -gstrict-dwarf -g
+	DEBUG_FLAGS=-gdwarf-3 -g
+	
+	GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles -O3 -g
+else
+	GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles -O3
+endif
 
 THUMB_BASE_FLAGS=$(GLOBAL_BASE_FLAGS) -mthumb -mthumb-interwork
 ARM_BASE_FLAGS=$(GLOBAL_BASE_FLAGS) -marm -mthumb-interwork
