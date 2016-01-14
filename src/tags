@@ -4,7 +4,6 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-GRIT_ROLLING_PIN_ENEMY_GFX_H	gfx/rolling_pin_enemy_gfx.h	18;"	kind:d
 GRIT_SHERWIN_GFX_H	gfx/sherwin_gfx.h	18;"	kind:d
 GRIT_TEXT_8X16_GFX_H	gfx/text_8x16_gfx.h	18;"	kind:d
 GRIT_TEXT_8X8_THICK_GFX_H	gfx/text_8x8_thick_gfx.h	18;"	kind:d
@@ -1638,6 +1637,9 @@ height_mask_size	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classe
 height_mask_size	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 height_mask_size = num_pixels_per_block_row;$/;"	kind:m	class:grass_slope_p32_p16_short_block_stuff	access:public
 height_mask_size	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr u32 height_mask_size = num_pixels_per_block_row;$/;"	kind:m	class:grass_slope_p32_p16_tall_block_stuff	access:public
 hide_non_affine	gba_specific_stuff/oam_entry_classes.hpp	/^	void hide_non_affine()$/;"	kind:f	class:oam_entry	access:public	signature:()
+hit_box	game_engine_stuff/hit_box_class.hpp	/^class hit_box : public coll_box$/;"	kind:c	inherits:coll_box
+hit_box::strength	game_engine_stuff/hit_box_class.hpp	/^	u32 strength;$/;"	kind:m	class:hit_box	access:public
+hit_box_class_hpp	game_engine_stuff/hit_box_class.hpp	20;"	kind:d
 horiz_sublevel_block_data_2d	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static array_2d_helper<block> horiz_sublevel_block_data_2d;$/;"	kind:m	class:active_level	access:public
 horiz_sublevel_block_data_2d	game_engine_stuff/level_stuff/active_level_class.thumb.cpp	/^array_2d_helper<block> active_level::horiz_sublevel_block_data_2d $/;"	kind:p	class:active_level	file:	signature:( active_level::block_data_array, active_level::horiz_sublevel_size_2d )
 horiz_sublevel_size	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static constexpr u32 horiz_sublevel_size = block_data_array_size;$/;"	kind:m	class:active_level	access:public
@@ -2513,8 +2515,6 @@ rgb15_num_components	gba_specific_stuff/gfx_reg_stuff.hpp	413;"	kind:d
 rgb15_red_mask	gba_specific_stuff/gfx_reg_stuff.hpp	407;"	kind:d
 rgb15_red_shift	gba_specific_stuff/gfx_reg_stuff.hpp	403;"	kind:d
 right	game_engine_stuff/coll_box_class.hpp	/^	inline fixed24p8 right() const$/;"	kind:f	class:coll_box	access:public	signature:() const
-rolling_pin_enemy_gfxPalLen	gfx/rolling_pin_enemy_gfx.h	23;"	kind:d
-rolling_pin_enemy_gfxTilesLen	gfx/rolling_pin_enemy_gfx.h	20;"	kind:d
 round_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s16 round_to_int() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
 round_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s32 round_to_int() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
 round_to_int	game_engine_stuff/fixed_classes.hpp	/^inline s16 fixed8p8::round_to_int() const$/;"	kind:f	class:fixed8p8	signature:() const
@@ -2932,6 +2932,7 @@ st_muffin	game_engine_stuff/sprite_stuff/sprite_type_stuff.hpp	/^	st_muffin,$/;"
 st_player	game_engine_stuff/sprite_stuff/sprite_type_stuff.hpp	/^	st_player,$/;"	kind:e	enum:sprite_type
 st_snow_golem	game_engine_stuff/sprite_stuff/sprite_type_stuff.hpp	/^	st_snow_golem,$/;"	kind:e	enum:sprite_type
 st_waffle	game_engine_stuff/sprite_stuff/sprite_type_stuff.hpp	/^	st_waffle,$/;"	kind:e	enum:sprite_type
+strength	game_engine_stuff/hit_box_class.hpp	/^	u32 strength;$/;"	kind:m	class:hit_box	access:public
 strongly_hit_response	game_engine_stuff/block_stuff/air_block_stuff_class.hpp	/^	virtual void strongly_hit_response( block& the_block, $/;"	kind:p	class:air_block_stuff	access:public	signature:( block& the_block, const vec2_s32& coord )
 strongly_hit_response	game_engine_stuff/block_stuff/air_block_stuff_class.thumb.cpp	/^void air_block_stuff::strongly_hit_response( block& the_block, $/;"	kind:f	class:air_block_stuff	signature:( block& the_block, const vec2_s32& coord )
 strongly_hit_response	game_engine_stuff/block_stuff/block_base_stuff_class.hpp	/^	virtual void strongly_hit_response( block& the_block, $/;"	kind:p	class:block_base_stuff	access:public	signature:( block& the_block, const vec2_s32& coord )
