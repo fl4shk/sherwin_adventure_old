@@ -35,6 +35,7 @@ class sprite_manager
 public:		// variables
 	
 	static constexpr u32 max_num_player_secondary_sprites = 4;
+	//static constexpr u32 max_num_player_secondary_sprites = 10;
 	
 	static constexpr u32 max_num_secondary_sprites = 10;
 	

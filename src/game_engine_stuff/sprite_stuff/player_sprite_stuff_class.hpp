@@ -90,9 +90,10 @@ public:		// enums
 	
 	
 	// These are used to access misc_data_u and misc_data_s
-	enum udata_index { udi_active_walk_frame_slot }
+	enum udata_index { udi_active_walk_frame_slot, 
+		udi_active_hammer_swing_frame_slot } __attribute__((_align4));
+	enum sdata_index { sdi_walk_frame_timer, sdi_hammer_swing_frame_timer } 
 		__attribute__((_align4));
-	enum sdata_index { sdi_walk_frame_timer } __attribute__((_align4));
 	
 	
 public:		// variables
@@ -101,16 +102,25 @@ public:		// variables
 	static fixed24p8 speed __attribute__((_iwram));
 	static bool use_16x16 __attribute__((_iwram));
 	static bool run_toggle __attribute__((_iwram));
-	static bool swinging_hammer __attribute__((_iwram));
 	
 	static s32 max_hp __attribute__((_iwram));
 	static s32 remaining_hp __attribute__((_iwram));
+	
+	// Hammer stuff
+	static bool swinging_hammer __attribute__((_iwram));
+	static u32 hammer_sprite_slot __attribute__((_iwram));
+	
+	
+	
 	
 	// Physics/logic constants
 	static constexpr fixed24p8 jump_vel = {-0x400};
 	static constexpr s32 max_jump_hold_timer = 16;
 	static constexpr s32 walk_frame_timer_end = 4;
 	static constexpr s32 run_frame_timer_end = 2;
+	
+	//static constexpr s32 hammer_swing_frame_timer_end = 4;
+	static constexpr s32 hammer_swing_frame_timer_end = 2;
 	
 	static constexpr fixed24p8 walk_speed = {0x100};
 	static constexpr fixed24p8 max_run_speed = {0x200};

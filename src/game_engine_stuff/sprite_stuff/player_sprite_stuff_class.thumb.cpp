@@ -29,10 +29,15 @@
 fixed24p8 player_sprite_stuff::speed;
 bool player_sprite_stuff::use_16x16;
 bool player_sprite_stuff::run_toggle;
-bool player_sprite_stuff::swinging_hammer;
 
 s32 player_sprite_stuff::max_hp;
 s32 player_sprite_stuff::remaining_hp;
+
+
+// Hammer stuff
+bool player_sprite_stuff::swinging_hammer;
+u32 player_sprite_stuff::hammer_sprite_slot;
+
 
 
 
@@ -179,12 +184,18 @@ void player_sprite_stuff::update_part_1( sprite& the_player )
 {
 	gfx_update(the_player);
 	
-	if ( key_hit(key_r) )
+	if ( key_hit(key_r) && !swinging_hammer )
 	{
-		sprite_manager::spawn_a_player_secondary_sprite_basic
+		hammer_sprite_slot 
+			= sprite_manager::spawn_a_player_secondary_sprite_basic
 			( st_player_hammer, the_player.in_level_pos,
 			gfx_manager::bgofs_mirror[0].curr,
 			the_player.the_oam_entry.get_hflip_status() );
+		
+		if ( hammer_sprite_slot != -1 )
+		{
+			swinging_hammer = true;
+		}
 	}
 	
 	if ( key_hit(key_b) )
@@ -368,9 +379,17 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 const u32 player_sprite_stuff::get_curr_relative_tile_slot 
 	( sprite& the_player )
 {
+	// Walk frame stuff
 	s32& walk_frame_timer = the_player.misc_data_s[sdi_walk_frame_timer];
 	u32& active_walk_frame_slot = the_player.misc_data_u
 		[udi_active_walk_frame_slot];
+	
+	// Hammer swing frame stuff
+	s32& hammer_swing_frame_timer = the_player.misc_data_s
+		[sdi_hammer_swing_frame_timer];
+	u32& active_hammer_swing_frame_slot = the_player.misc_data_u
+		[udi_active_hammer_swing_frame_slot];
+	
 	
 	if ( active_walk_frame_slot < frm_slot_walk_0 
 		|| active_walk_frame_slot > frm_slot_walk_3 )
@@ -380,96 +399,210 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 	
 	if (the_player.on_ground)
 	{
-		// Standing still
-		if ( speed == (fixed24p8){0} )
+		if ( active_hammer_swing_frame_slot 
+			< frm_slot_hammer_swing_ground_0 
+			|| active_hammer_swing_frame_slot 
+			> frm_slot_hammer_swing_ground_3 )
 		{
-			walk_frame_timer = 0;
-			active_walk_frame_slot = frm_slot_walk_1;
-			//return frame_slot_to_frame_arr[active_walk_frame_slot] 
-			//	* num_active_gfx_tiles;
-			return frame_slot_to_frame_arr[frm_slot_walk_0]
-				* num_active_gfx_tiles;
-		}
-		
-		// Walking speed or not-max running speed
-		else if ( speed >= walk_speed && speed < max_run_speed )
-		{
-			++walk_frame_timer;
-			
-			if ( walk_frame_timer > walk_frame_timer_end )
-			{
-				walk_frame_timer = 0;
-				
-				if ( active_walk_frame_slot == frm_slot_walk_0 )
-				{
-					active_walk_frame_slot = frm_slot_walk_1;
-				}
-				else if ( active_walk_frame_slot == frm_slot_walk_1 )
-				{
-					active_walk_frame_slot = frm_slot_walk_2;
-				}
-				else if ( active_walk_frame_slot == frm_slot_walk_2 )
-				{
-					active_walk_frame_slot = frm_slot_walk_3;
-				}
-				else if ( active_walk_frame_slot == frm_slot_walk_3 )
-				{
-					active_walk_frame_slot = frm_slot_walk_0;
-				}
-				
-			}
-			
-			return frame_slot_to_frame_arr[active_walk_frame_slot] 
-				* num_active_gfx_tiles;
-			
-		}
-		
-		// Max running speed
-		else if ( speed == max_run_speed )
-		{
-			++walk_frame_timer;
-			
-			if ( walk_frame_timer > run_frame_timer_end )
-			{
-				walk_frame_timer = 0;
-				
-				if ( active_walk_frame_slot == frm_slot_walk_0 )
-				{
-					active_walk_frame_slot = frm_slot_walk_1;
-				}
-				else if ( active_walk_frame_slot == frm_slot_walk_1 )
-				{
-					active_walk_frame_slot = frm_slot_walk_2;
-				}
-				else if ( active_walk_frame_slot == frm_slot_walk_2 )
-				{
-					active_walk_frame_slot = frm_slot_walk_3;
-				}
-				else if ( active_walk_frame_slot == frm_slot_walk_3 )
-				{
-					active_walk_frame_slot = frm_slot_walk_0;
-				}
-				
-			}
-			
-			return frame_slot_to_frame_arr[active_walk_frame_slot] 
-				* num_active_gfx_tiles;
-			
-		}
-		else
-		{
-			// This should NEVER happen, so show a walking frame as a
-			// debugging tool
-			walk_frame_timer = 0;
-			active_walk_frame_slot = frm_slot_walk_3;
-			return frame_slot_to_frame_arr[active_walk_frame_slot] 
-				* num_active_gfx_tiles;
+			active_hammer_swing_frame_slot 
+				= frm_slot_hammer_swing_ground_0;
 		}
 	}
-	else //if ( !the_player.on_ground )
+	else //if (!the_player.on_ground)
 	{
-		return frame_slot_to_frame_arr[frm_slot_walk_2] 
-			* num_active_gfx_tiles;
+		if ( active_hammer_swing_frame_slot 
+			< frm_slot_hammer_swing_air_0 
+			|| active_hammer_swing_frame_slot 
+			> frm_slot_hammer_swing_air_3 )
+		{
+			active_hammer_swing_frame_slot = frm_slot_hammer_swing_air_0;
+		}
+	}
+	
+	if (the_player.on_ground)
+	{
+		if (!swinging_hammer)
+		{
+			hammer_swing_frame_timer = 0;
+			active_hammer_swing_frame_slot 
+				= frm_slot_hammer_swing_ground_0;
+			
+			auto lambda_func_for_else_if = [&]( const u32 frame_timer_end ) 
+				-> void
+			{
+				++walk_frame_timer;
+				
+				if ( walk_frame_timer > frame_timer_end )
+				{
+					walk_frame_timer = 0;
+					
+					if ( active_walk_frame_slot == frm_slot_walk_0 )
+					{
+						active_walk_frame_slot = frm_slot_walk_1;
+					}
+					else if ( active_walk_frame_slot == frm_slot_walk_1 )
+					{
+						active_walk_frame_slot = frm_slot_walk_2;
+					}
+					else if ( active_walk_frame_slot == frm_slot_walk_2 )
+					{
+						active_walk_frame_slot = frm_slot_walk_3;
+					}
+					else if ( active_walk_frame_slot == frm_slot_walk_3 )
+					{
+						active_walk_frame_slot = frm_slot_walk_0;
+					}
+					
+				}
+				
+			};
+			
+			// Standing still
+			if ( speed == (fixed24p8){0} )
+			{
+				walk_frame_timer = 0;
+				//active_walk_frame_slot = frm_slot_walk_1;
+				active_walk_frame_slot = frm_slot_walk_0;
+				//return frame_slot_to_frame_arr[active_walk_frame_slot] 
+				//	* num_active_gfx_tiles;
+				return frame_slot_to_frame_arr[frm_slot_walk_0]
+					* num_active_gfx_tiles;
+			}
+			
+			
+			// Walking speed or not-max running speed
+			else if ( speed >= walk_speed && speed < max_run_speed )
+			{
+				lambda_func_for_else_if(walk_frame_timer_end);
+				
+				return frame_slot_to_frame_arr[active_walk_frame_slot] 
+					* num_active_gfx_tiles;
+			}
+			
+			// Max running speed
+			else if ( speed == max_run_speed )
+			{
+				lambda_func_for_else_if(run_frame_timer_end);
+				
+				return frame_slot_to_frame_arr[active_walk_frame_slot] 
+					* num_active_gfx_tiles;
+			}
+			
+			else
+			{
+				// This should NEVER happen, so show a walking frame as a
+				// debugging tool
+				walk_frame_timer = 0;
+				active_walk_frame_slot = frm_slot_walk_3;
+				return frame_slot_to_frame_arr[active_walk_frame_slot] 
+					* num_active_gfx_tiles;
+			}
+		}
+		else //if (swinging_hammer)
+		{
+			++hammer_swing_frame_timer;
+			
+			if ( hammer_swing_frame_timer > hammer_swing_frame_timer_end )
+			{
+				hammer_swing_frame_timer = 0;
+				
+				if ( active_hammer_swing_frame_slot 
+					== frm_slot_hammer_swing_ground_0 )
+				{
+					active_hammer_swing_frame_slot 
+						= frm_slot_hammer_swing_ground_1;
+				}
+				else if ( active_hammer_swing_frame_slot 
+					== frm_slot_hammer_swing_ground_1 )
+				{
+					active_hammer_swing_frame_slot 
+						= frm_slot_hammer_swing_ground_2;
+				}
+				else if ( active_hammer_swing_frame_slot 
+					== frm_slot_hammer_swing_ground_2 )
+				{
+					active_hammer_swing_frame_slot 
+						= frm_slot_hammer_swing_ground_3;
+				}
+				else if ( active_hammer_swing_frame_slot 
+					== frm_slot_hammer_swing_ground_3 )
+				{
+					//active_hammer_swing_frame_slot 
+					//	= frm_slot_hammer_swing_ground_0;
+					swinging_hammer = false;
+				}
+			}
+			
+			if (swinging_hammer)
+			{
+				return frame_slot_to_frame_arr
+					[active_hammer_swing_frame_slot] 
+					* num_active_gfx_tiles;
+			}
+			else //if (!swinging_hammer)
+			{
+				return frame_slot_to_frame_arr[active_walk_frame_slot]
+					* num_active_gfx_tiles;
+			}
+		}
+	}
+	else //if (!the_player.on_ground)
+	{
+		if (!swinging_hammer)
+		{
+			hammer_swing_frame_timer = 0;
+			active_hammer_swing_frame_slot = frm_slot_hammer_swing_air_0;
+			
+			return frame_slot_to_frame_arr[frm_slot_walk_2] 
+				* num_active_gfx_tiles;
+		}
+		else //if(swinging_hammer)
+		{
+			++hammer_swing_frame_timer;
+			
+			if ( hammer_swing_frame_timer > hammer_swing_frame_timer_end )
+			{
+				hammer_swing_frame_timer = 0;
+				
+				if ( active_hammer_swing_frame_slot 
+					== frm_slot_hammer_swing_air_0 )
+				{
+					active_hammer_swing_frame_slot 
+						= frm_slot_hammer_swing_air_1;
+				}
+				else if ( active_hammer_swing_frame_slot 
+					== frm_slot_hammer_swing_air_1 )
+				{
+					active_hammer_swing_frame_slot 
+						= frm_slot_hammer_swing_air_2;
+				}
+				else if ( active_hammer_swing_frame_slot 
+					== frm_slot_hammer_swing_air_2 )
+				{
+					active_hammer_swing_frame_slot 
+						= frm_slot_hammer_swing_air_3;
+				}
+				else if ( active_hammer_swing_frame_slot 
+					== frm_slot_hammer_swing_air_3 )
+				{
+					//active_hammer_swing_frame_slot 
+					//	= frm_slot_hammer_swing_air_0;
+					swinging_hammer = false;
+				}
+			}
+			
+			if (swinging_hammer)
+			{
+				return frame_slot_to_frame_arr
+					[active_hammer_swing_frame_slot] 
+					* num_active_gfx_tiles;
+			}
+			else //if (!swinging_hammer)
+			{
+				return frame_slot_to_frame_arr[active_walk_frame_slot]
+					* num_active_gfx_tiles;
+			}
+		}
 	}
 	
 }
