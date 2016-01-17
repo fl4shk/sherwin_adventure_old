@@ -24,6 +24,8 @@
 #include "../array_2d_helper_class.hpp"
 #include "../../gba_specific_stuff/gfx_reg_stuff.hpp"
 
+#include <array>
+
 // These block_type's are used by BG0
 enum block_type
 {
@@ -109,6 +111,83 @@ enum block_type
 } __attribute__((_align4));
 
 
+#define list_of_block_stuff_classes \
+\
+/* A graphics-less block that sprites are free to move through. */ \
+X(air_block_stuff) \
+\
+/* A block that looks like a wooden log.  It is indestructible, which
+  is quite unlike real life wooden logs. */ \
+X(log_block_stuff) \
+\
+/* A wooden block without anything inside.  It is destroyed (that is, 
+  replaced with an air block) when strongly hit. */ \
+X(wood_block_stuff) \
+\
+/* A block with eyes without anything inside.  It becomes an empty 
+  block upon being strongly hit. */ \
+X(eyes_block_stuff) \
+\
+/* A block with an exclamation point on it.  The purpose of these 
+  blocks is yet to be chosen, but I'm thinking that some kind of
+  event will happen when one is strongly hit. */ \
+X(exclam_block_stuff) \
+\
+/* An empty block that is indestructible.   */ \
+X(dud_block_stuff) \
+\
+/* Wooden blocks with contents */ \
+X(wood_block_with_bt_dud_stuff) \
+X(wood_block_with_st_waffle_stuff) \
+X(wood_block_with_st_muffin_stuff) \
+X(wood_block_with_st_fire_muffin_stuff) \
+X(wood_block_with_st_ice_muffin_stuff) \
+X(wood_block_with_st_chocolate_muffin_stuff) \
+\
+/* Eyes blocks with contents */ \
+/*bt_eyes_with_bt_dud		// This is the same as bt_eyes. */ \
+X(eyes_block_with_st_waffle_stuff) \
+X(eyes_block_with_st_muffin_stuff) \
+X(eyes_block_with_st_fire_muffin_stuff) \
+X(eyes_block_with_st_ice_muffin_stuff) \
+X(eyes_block_with_st_chocolate_muffin_stuff) \
+\
+\
+/* Grass/Dirt blocks */ \
+X(grass_single_block_stuff) \
+\
+X(grass_top_left_block_stuff) \
+X(grass_top_middle_block_stuff) \
+X(grass_top_right_block_stuff) \
+\
+X(dirt_middle_left_block_stuff) \
+X(dirt_middle_middle_block_stuff) \
+X(dirt_middle_right_block_stuff) \
+\
+X(dirt_bottom_left_block_stuff) \
+X(dirt_bottom_middle_block_stuff) \
+X(dirt_bottom_right_block_stuff) \
+\
+\
+/* 45 degree angle slope */ \
+X(grass_slope_p16_p16_block_stuff) \
+\
+/* 135 degree angle slope */ \
+X(grass_slope_n16_p16_block_stuff) \
+\
+/* Approximately 26.57 degrees angle slope, with two blocks */ \
+X(grass_slope_p32_p16_short_block_stuff) \
+X(grass_slope_p32_p16_tall_block_stuff) \
+\
+/* Approximately 153.43 degrees angle slope, with two blocks */ \
+X(grass_slope_n32_p16_tall_block_stuff) \
+X(grass_slope_n32_p16_short_block_stuff) \
+\
+/* These two blocks are for decoration */ \
+X(grass_in_slope_left_block_stuff) \
+X(grass_in_slope_right_block_stuff)
+
+
 
 //// These bg1_block_type's are used by BG1.
 //enum bg1_block_type
@@ -131,7 +210,7 @@ class block;
 
 #include "block_base_stuff_class.hpp"
 
-extern block_base_stuff* block_stuff_array[bt_count]
+extern std::array< block_base_stuff*, bt_count > block_stuff_array
 	__attribute__((_iwram));
 
 #include "air_block_stuff_class.hpp"
@@ -143,6 +222,9 @@ extern block_base_stuff* block_stuff_array[bt_count]
 #include "grass_and_dirt_block_stuff_classes.hpp"
 #include "day_sky_and_night_sky_block_classes.hpp"
 
+#define X(name) extern name the_##name __attribute__((_iwram));
+list_of_block_stuff_classes
+#undef X
 
 // A class for unique block data.
 class block

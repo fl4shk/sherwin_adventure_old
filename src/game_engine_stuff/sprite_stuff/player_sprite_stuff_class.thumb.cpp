@@ -24,14 +24,19 @@
 #include "../level_stuff/active_level_manager_class.hpp"
 #include "sprite_manager_class.hpp"
 
+#include "../gfx_manager_class.hpp"
+
 fixed24p8 player_sprite_stuff::speed;
 bool player_sprite_stuff::use_16x16;
 bool player_sprite_stuff::run_toggle;
-//bool player_sprite_stuff::running;
+bool player_sprite_stuff::swinging_hammer;
 
 s32 player_sprite_stuff::max_hp;
 s32 player_sprite_stuff::remaining_hp;
 
+
+
+// Graphics constants
 const player_sprite_stuff::frame 
 	player_sprite_stuff::frame_slot_to_frame_arr
 	[frame_slot_to_frame_arr_size] 
@@ -43,30 +48,44 @@ const player_sprite_stuff::frame
 	frm_stand,
 	
 	// Walking/running
-	frm_stand, frm_walk_0, frm_walk_1, frm_walk_0
+	frm_stand, frm_walk_0, frm_walk_1, frm_walk_0,
+	
+	// Swinging the hammer, on the ground
+	frm_hammer_swing_ground_0, frm_hammer_swing_ground_1,
+	frm_hammer_swing_ground_2, frm_hammer_swing_ground_3,
+	
+	// Swinging the hammer, in the air
+	frm_hammer_swing_air_0, frm_hammer_swing_air_1, frm_hammer_swing_air_2,
+	frm_hammer_swing_air_3
 };
 
 
-// Graphics constants
 const u32 player_sprite_stuff::the_relative_metatile_slot_arr[]
-	= { frm_invisible, frm_stand, frm_walk_0, frm_walk_1 };
+	= { frm_invisible, frm_stand, frm_walk_0, frm_walk_1, 
+	frm_hammer_swing_ground_0, frm_hammer_swing_ground_1,
+	frm_hammer_swing_ground_2, frm_hammer_swing_ground_3,
+	frm_hammer_swing_air_0, frm_hammer_swing_air_1, frm_hammer_swing_air_2,
+	frm_hammer_swing_air_3 };
 
 const u32 player_sprite_stuff::the_relative_metatile_slot_arr_size
 	= sizeof(player_sprite_stuff::the_relative_metatile_slot_arr)
 	/ sizeof(u32);
 
-//const vec2_f24p8 player_sprite_stuff::the_initial_coll_box_size 
-//	= { {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },
-//	player_sprite_stuff::the_initial_cb_pos_offset 
-//	= { {2 << fixed24p8::shift }, {3 << fixed24p8::shift } };
-
 const vec2_f24p8 player_sprite_stuff::the_initial_coll_box_size 
 	= { {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },
 	player_sprite_stuff::the_initial_cb_pos_offset 
-	= { {( 2 + 8 ) << fixed24p8::shift }, {3 << fixed24p8::shift } };
+	= { {2 << fixed24p8::shift }, {3 << fixed24p8::shift } };
 
 const vec2_f24p8 player_sprite_stuff::the_initial_in_level_pos_offset
-	= { {8 << fixed24p8::shift}, {0 << fixed24p8::shift} };
+	= { {0 << fixed24p8::shift}, {0 << fixed24p8::shift} };
+
+//const vec2_f24p8 player_sprite_stuff::the_initial_coll_box_size 
+//	= { {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },
+//	player_sprite_stuff::the_initial_cb_pos_offset 
+//	= { {( 2 + 8 ) << fixed24p8::shift }, {3 << fixed24p8::shift } };
+//
+//const vec2_f24p8 player_sprite_stuff::the_initial_in_level_pos_offset
+//	= { {8 << fixed24p8::shift}, {0 << fixed24p8::shift} };
 
 void player_sprite_stuff::init( sprite& the_player, bool facing_left  )
 {
@@ -134,7 +153,8 @@ void player_sprite_stuff::init( sprite& the_player,
 	the_player.center_camera_almost(camera_pos);
 	active_level_manager::correct_bg0_scroll_mirror(the_level_size_2d);
 	the_player.update_on_screen_pos(camera_pos);
-	the_player.copy_the_oam_entry_to_oam_mirror(0);
+	the_player.copy_the_oam_entry_to_oam_mirror
+		(sprite_manager::the_player_oam_index);
 	
 	clear_and_set_bits( the_player.the_oam_entry.attr2, 
 		obj_attr2_prio_mask, obj_attr2_prio_1 );
@@ -158,6 +178,14 @@ void player_sprite_stuff::init( sprite& the_player,
 void player_sprite_stuff::update_part_1( sprite& the_player ) 
 {
 	gfx_update(the_player);
+	
+	if ( key_hit(key_r) )
+	{
+		sprite_manager::spawn_a_player_secondary_sprite_basic
+			( st_player_hammer, the_player.in_level_pos,
+			gfx_manager::bgofs_mirror[0].curr,
+			the_player.the_oam_entry.get_hflip_status() );
+	}
 	
 	if ( key_hit(key_b) )
 	{
@@ -305,13 +333,14 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 	
 	the_player.update_on_screen_pos(camera_pos);
 	
-	// Spawn sprites if the_player warped from one part of
-	// the current sublevel to another part of the current
-	// sublevel.
+	// Despawn sprites if the_player warped from one part of the current
+	// sublevel to another part of the current sublevel, if they are
+	// offscreen.  Also, spawn sprites that are in the new area.
 	if ( warped_this_frame && !warped_to_other_sublevel_this_frame )
 	{
-		sprite_manager::initial_sprite_spawning_shared_code
-			(camera_pos);
+		sprite_manager::despawn_sprites_if_needed(camera_pos);
+		
+		sprite_manager::initial_sprite_spawning_shared_code(camera_pos);
 	}
 	
 	if ( player_sprite_stuff::remaining_hp < 0 )
@@ -325,7 +354,8 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 			= player_sprite_stuff::max_hp;
 	}
 	
-	the_player.copy_the_oam_entry_to_oam_mirror(0);
+	the_player.copy_the_oam_entry_to_oam_mirror
+		(sprite_manager::the_player_oam_index);
 }
 
 //const u32 player_sprite_stuff::get_curr_tile_slot( sprite& the_player )

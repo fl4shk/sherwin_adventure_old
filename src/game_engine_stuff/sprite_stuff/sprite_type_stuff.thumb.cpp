@@ -26,7 +26,7 @@ list_of_main_sprite_types
 #undef X
 
 
-sprite_base_stuff* sprite_stuff_array[st_count]
+std::array< sprite_base_stuff*, st_count > sprite_stuff_array
 = {
 	// The Default Sprite (also used for when there is no sprite in the
 	// slot).

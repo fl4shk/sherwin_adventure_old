@@ -48,7 +48,7 @@ OBJCOPY=$(COMP_PREFIX)objcopy
 LD_SCRIPT=linkscript.ld
 
 
-DEBUG=yeah do debug
+#DEBUG=yeah do debug
 
 ifdef DEBUG
 	##DEBUG_FLAGS=-gdwarf-2 -ggdb -gstrict-dwarf -g

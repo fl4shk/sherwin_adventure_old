@@ -21,6 +21,8 @@
 
 #include "sprite_manager_class.hpp"
 
+
+// Graphics constants
 const snow_golem_sprite_stuff::frame
 	snow_golem_sprite_stuff::frame_slot_to_frame_arr
 	[frame_slot_to_frame_arr_size]
@@ -32,7 +34,6 @@ const snow_golem_sprite_stuff::frame
 	frm_throw_0, frm_throw_1, frm_throw_2
 };
 
-// Graphics constants
 const u32 snow_golem_sprite_stuff::the_relative_metatile_slot_arr[]
 	= { frm_stand, frm_throw_0, frm_throw_1, frm_throw_2 };
 const u32 snow_golem_sprite_stuff::the_relative_metatile_slot_arr_size

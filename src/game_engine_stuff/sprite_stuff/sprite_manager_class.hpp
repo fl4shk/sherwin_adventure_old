@@ -34,22 +34,72 @@ class sprite_manager
 {
 public:		// variables
 	
-	static sprite the_player __attribute__((_iwram));
+	static constexpr u32 max_num_player_secondary_sprites = 4;
+	
+	static constexpr u32 max_num_secondary_sprites = 10;
 	
 	//static constexpr u32 max_num_regular_sprites = 40;
-	static constexpr u32 max_num_regular_sprites = 30;
+	//static constexpr u32 max_num_regular_sprites = 30;
+	static constexpr u32 max_num_regular_sprites = 20;
 	
-	static constexpr u32 the_player_vram_chunk_index = 1;
-	static constexpr u32 the_active_sprites_starting_vram_chunk_index = 2;
 	
-	// The array of active sprites (not counting the_player).  If
-	// necessary, an sa_free_list<max_num_regular_sprites> might be used for
-	// finding a free index in the future.  However, it is unlikely that
-	// doing so will be necessary with a maximum of only
-	// max_num_regular_sprites active sprites at once.
+	
+	static std::array< sprite, max_num_player_secondary_sprites >
+		the_player_secondary_sprites __attribute__((_iwram));
+	
+	// The array of secondary active sprites, not counting those "claimed"
+	// by the_player.
+	static std::array< sprite, max_num_secondary_sprites > 
+		the_secondary_sprites;
+	
+	
+	static sprite the_player __attribute__((_iwram));
+	
+	// The array of REGULAR active sprites, not counting the_player.
 	static std::array< sprite, max_num_regular_sprites > the_sprites;
 	
-	//static 
+	
+	
+	//static constexpr u32 the_player_vram_chunk_index = 1;
+	//static constexpr u32 
+	//	the_player_secondary_sprites_starting_vram_chunk_index = 2;
+	//static constexpr u32 the_active_sprites_starting_vram_chunk_index 
+	//	= the_player_secondary_sprites_starting_vram_chunk_index 
+	//	+ max_num_player_secondary_sprites;
+	//static constexpr u32 the_secondary_sprites_starting_vram_chunk_index
+	//	= the_active_sprites_starting_vram_chunk_index 
+	//	+ max_num_regular_sprites;
+	
+	static constexpr u32
+		the_player_secondary_sprites_starting_vram_chunk_index = 1;
+	
+	static constexpr u32 the_secondary_sprites_starting_vram_chunk_index
+		= the_player_secondary_sprites_starting_vram_chunk_index
+		+ max_num_player_secondary_sprites;
+	
+	static constexpr u32 the_player_vram_chunk_index 
+		= the_secondary_sprites_starting_vram_chunk_index 
+		+ max_num_secondary_sprites;
+	
+	static constexpr u32 the_active_sprites_starting_vram_chunk_index
+		= the_player_vram_chunk_index + 1;
+	
+	
+	
+	
+	// OAM indices and VRAM chunk indices are shared.
+	static constexpr u32 the_player_secondary_sprites_starting_oam_index 
+		= the_player_secondary_sprites_starting_vram_chunk_index;
+	
+	static constexpr u32 the_secondary_sprites_starting_oam_index 
+		= the_secondary_sprites_starting_vram_chunk_index;
+	
+	static constexpr u32 the_player_oam_index 
+		= the_player_vram_chunk_index;
+	
+	static constexpr u32 the_active_sprites_starting_oam_index
+		= the_active_sprites_starting_vram_chunk_index;
+	
 	
 	static int next_oam_index __attribute__((_iwram));
 	
@@ -60,7 +110,7 @@ public:		// functions
 	
 	// This function initializes the vram_chunk_index of each sprite in
 	// the_sprites.
-	static inline void init_the_array_of_active_sprites()
+	static inline void init_the_sprite_arrays()
 	{
 		//u32 vram_chunk_index = 1;
 		//
@@ -69,11 +119,27 @@ public:		// functions
 		//	spr.set_vram_chunk_index(vram_chunk_index++);
 		//}
 		
+		// Secondary sprites "claimed" by the_player.
+		for ( u32 i=0; i<max_num_player_secondary_sprites; ++i )
+		{
+			the_player_secondary_sprites[i].set_vram_chunk_index( i 
+				+ the_player_secondary_sprites_starting_vram_chunk_index );
+		}
+		
+		// Other secondary sprites
+		for ( u32 i=0; i<max_num_secondary_sprites; ++i )
+		{
+			the_secondary_sprites[i].set_vram_chunk_index( i
+				+ the_secondary_sprites_starting_vram_chunk_index );
+		}
+		
+		// Regular sprites
 		for ( u32 i=0; i<max_num_regular_sprites; ++i )
 		{
 			the_sprites[i].set_vram_chunk_index( i 
 				+ the_active_sprites_starting_vram_chunk_index );
 		}
+		
 	}
 	
 	
@@ -95,7 +161,7 @@ public:		// functions
 	
 	// This function is put in IWRAM because when the_player warps around a
 	// particular sublevel without CHANGING sublevels, sprites need to be
-	// spawned.
+	// spawned, which can be an intensive operation.
 	static void initial_sprite_spawning_shared_code
 		( bg_point& camera_pos ) __attribute__((_iwram_code));
 	
@@ -107,8 +173,7 @@ public:		// functions
 		( const prev_curr_pair<bg_point>& camera_pos_pc_pair ) 
 		__attribute__((_iwram_code));
 	static void despawn_sprites_if_needed
-		( const prev_curr_pair<bg_point>& camera_pos_pc_pair )
-		__attribute__((_iwram_code));
+		( const bg_point& camera_pos ) __attribute__((_iwram_code));
 	
 	static inline void upload_tiles_of_active_sprites_to_vram()
 	{
@@ -120,7 +185,7 @@ public:		// functions
 		
 		gfx_manager::upload_sprite_tiles_to_vram(the_player);
 		
-		for ( sprite& spr : sprite_manager::the_sprites )
+		auto for_loop_contents = [&]( sprite& spr ) -> void
 		{
 			// These two if statements probably accomplish the same goal,
 			// which is why one of them is commented out
@@ -129,22 +194,45 @@ public:		// functions
 			{
 				gfx_manager::upload_sprite_tiles_to_vram(spr);
 			}
+		};
+		
+		for ( sprite& spr : sprite_manager::the_player_secondary_sprites )
+		{
+			for_loop_contents(spr);
+		}
+		
+		for ( sprite& spr : sprite_manager::the_sprites )
+		{
+			for_loop_contents(spr);
+		}
+		
+		for ( sprite& spr : sprite_manager::the_secondary_sprites )
+		{
+			for_loop_contents(spr);
 		}
 	}
+	
+	static s32 spawn_a_player_secondary_sprite_basic
+		( sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos, 
+		const bg_point& camera_pos, bool facing_left=false ) 
+		__attribute__((_iwram_code));
 	
 	// This is a temporary function.  It should be replaced by a function
 	// that inserts sprite spawning parameters into a list.  The sprites
 	// from said list would be spawned from within the function called
 	// spawn_sprites_if_needed().
 	// That said, this is PROBABLY good enough.
-	static void spawn_a_sprite_basic ( sprite_type the_sprite_type, 
+	static void spawn_a_sprite_basic( sprite_type the_sprite_type, 
 		const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, 
-		bool facing_right=false )
+		bool facing_left=false )
 		__attribute__((_iwram_code));
 	
+	static s32 spawn_a_secondary_sprite_basic( sprite_type the_sprite_type,
+		const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, 
+		bool facing_left=false ) __attribute__((_iwram_code));
 	
 	
-	static void update_all_sprites ( const vec2_u32& the_sublevel_size_2d,
+	static void update_all_sprites( const vec2_u32& the_sublevel_size_2d,
 		prev_curr_pair<bg_point>& camera_pos_pc_pair ) 
 		__attribute__((_iwram_code));
 	

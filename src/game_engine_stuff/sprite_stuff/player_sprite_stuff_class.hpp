@@ -39,6 +39,19 @@ public:		// enums
 		frm_walk_0 = 2, 
 		frm_walk_1 = 3,
 		
+		// Hammer swinging frames, on the ground
+		frm_hammer_swing_ground_0 = 4,
+		frm_hammer_swing_ground_1 = 5,
+		frm_hammer_swing_ground_2 = 6,
+		frm_hammer_swing_ground_3 = 7,
+		
+		// Hammer swinging frames, in the air
+		frm_hammer_swing_air_0 = 8,
+		frm_hammer_swing_air_1 = 9,
+		frm_hammer_swing_air_2 = 10,
+		frm_hammer_swing_air_3 = 11,
+		
+		
 	} __attribute__((_align4));
 	
 	// This enum allows multiple frame_slot's to be represented by the same
@@ -56,6 +69,18 @@ public:		// enums
 		frm_slot_walk_1, 
 		frm_slot_walk_2, 
 		frm_slot_walk_3,
+		
+		// Swinging the hammer, on the ground
+		frm_slot_hammer_swing_ground_0,
+		frm_slot_hammer_swing_ground_1,
+		frm_slot_hammer_swing_ground_2,
+		frm_slot_hammer_swing_ground_3,
+		
+		// Swinging the hammer, in the air
+		frm_slot_hammer_swing_air_0,
+		frm_slot_hammer_swing_air_1,
+		frm_slot_hammer_swing_air_2,
+		frm_slot_hammer_swing_air_3,
 		
 		// frm_slot_count is the amount of frame_slot's.  It is
 		// automatically updated by the compiler.
@@ -76,7 +101,7 @@ public:		// variables
 	static fixed24p8 speed __attribute__((_iwram));
 	static bool use_16x16 __attribute__((_iwram));
 	static bool run_toggle __attribute__((_iwram));
-	//static bool running __attribute__((_iwram));
+	static bool swinging_hammer __attribute__((_iwram));
 	
 	static s32 max_hp __attribute__((_iwram));
 	static s32 remaining_hp __attribute__((_iwram));
@@ -90,32 +115,28 @@ public:		// variables
 	static constexpr fixed24p8 walk_speed = {0x100};
 	static constexpr fixed24p8 max_run_speed = {0x200};
 	
+	// Graphics constants
+	
 	// A constant array that is intended to be indexed with a frame_slot,
 	// such that a frame_slot can be mapped to a frame.
 	static constexpr u32 frame_slot_to_frame_arr_size = frm_slot_count;
 	static const frame frame_slot_to_frame_arr
 		[frame_slot_to_frame_arr_size];
 	
-	
-	// Graphics constants
-	static constexpr sprite_type the_sprite_type = st_player;
-	static constexpr sprite_palette_slot the_palette_slot = sps_player;
-	
 	static const u32 the_relative_metatile_slot_arr_size;
 	static const u32 the_relative_metatile_slot_arr[];
 	
-	//static constexpr u32 num_active_gfx_tiles 
-	//	= gfx_manager::num_tiles_in_ss_16x32;
+	static constexpr sprite_type the_sprite_type = st_player;
+	static constexpr sprite_palette_slot the_palette_slot = sps_player;
+	
 	static constexpr u32 num_active_gfx_tiles 
-		= gfx_manager::num_tiles_in_ss_32x32;
+		= gfx_manager::num_tiles_in_ss_16x32;
 	
 	static constexpr tile* tile_arr = const_cast<tile*>
 		(reinterpret_cast<const tile*>(sherwin_gfxTiles));
 	
-	//static const oam_entry::shape_size the_initial_shape_size 
-	//	= oam_entry::ss_16x32;
 	static const oam_entry::shape_size the_initial_shape_size 
-		= oam_entry::ss_32x32;
+		= oam_entry::ss_16x32;
 	
 	static const vec2_f24p8 the_initial_coll_box_size,
 		the_initial_cb_pos_offset;

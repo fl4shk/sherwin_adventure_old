@@ -25,12 +25,19 @@
 #include "../level_stuff/level_class.hpp"
 
 
+std::array< sprite, sprite_manager::max_num_player_secondary_sprites >
+	sprite_manager::the_player_secondary_sprites;
+
+std::array< sprite, sprite_manager::max_num_secondary_sprites >
+	sprite_manager::the_secondary_sprites;
+
 sprite sprite_manager::the_player;
 
 std::array< sprite, sprite_manager::max_num_regular_sprites > 
 	sprite_manager::the_sprites;
 
 int sprite_manager::next_oam_index;
+
 
 void sprite_manager::init_the_player ( const vec2_f24p8& s_in_level_pos, 
 	const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos )
@@ -127,7 +134,7 @@ void sprite_manager::initial_sprite_spawning_at_start_of_level
 		active_level::get_the_current_sublevel_ptr().get_size_2d(),
 		camera_pos );
 	
-	init_the_array_of_active_sprites();
+	init_the_sprite_arrays();
 	
 	//next_debug_u32 = (vu32)(player_ipg);
 	//next_debug_u32 = player_ipg->type;
@@ -162,7 +169,7 @@ void sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
 		active_level::get_the_current_sublevel_ptr().get_size_2d(),
 		camera_pos );
 	
-	init_the_array_of_active_sprites();
+	init_the_sprite_arrays();
 	
 	//next_debug_u32 = (vu32)(player_ipg);
 	//next_debug_u32 = player_ipg->type;
@@ -243,8 +250,8 @@ void sprite_manager::initial_sprite_spawning_shared_code
 	}
 	
 	
-	// sprite_manager::the_player uses OAM index 0.
-	next_oam_index = 1;
+	// sprite_manager::the_player uses OAM index the_player_oam_index.
+	next_oam_index = the_active_sprites_starting_oam_index;
 	
 	// Run each active sprite's update_part_1() function.
 	for ( sprite& the_spr : the_sprites )

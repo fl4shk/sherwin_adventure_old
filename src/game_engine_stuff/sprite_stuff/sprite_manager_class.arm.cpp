@@ -213,8 +213,10 @@ void sprite_manager::spawn_sprites_if_needed
 }
 
 
+// This function despawns sprites from the_player_secondary_sprites,
+// the_sprites, and the_secondary_sprites, if they are offscreen.
 void sprite_manager::despawn_sprites_if_needed
-	( const prev_curr_pair<bg_point>& camera_pos_pc_pair )
+	( const bg_point& camera_pos )
 {
 	// Sprites are despawned only when they are HORIZONTALLY too far off
 	// screen.
@@ -222,17 +224,16 @@ void sprite_manager::despawn_sprites_if_needed
 		max_right = ( screen_width + 2 * 16 ) << 8;
 	
 	
-	vec2_f24p8 camera_pos_curr_f24p8;
-	camera_pos_curr_f24p8.x = make_f24p8(camera_pos_pc_pair.curr.x);
-	camera_pos_curr_f24p8.y = make_f24p8(camera_pos_pc_pair.curr.y);
+	vec2_f24p8 camera_pos_f24p8;
+	camera_pos_f24p8.x = make_f24p8(camera_pos.x);
+	camera_pos_f24p8.y = make_f24p8(camera_pos.y);
 	
-	
-	for ( sprite& spr : the_sprites )
+	auto for_loop_contents = [&]( sprite& spr ) -> void
 	{
 		if ( spr.the_sprite_type != st_default )
 		{
 			fixed24p8 spr_on_screen_pos_x = spr.in_level_pos.x 
-				- camera_pos_curr_f24p8.x;
+				- camera_pos_f24p8.x;
 			
 			if ( !( spr_on_screen_pos_x.data >= max_left
 				&& spr_on_screen_pos_x.data <= max_right ) )
@@ -248,17 +249,92 @@ void sprite_manager::despawn_sprites_if_needed
 				}
 			}
 		}
-		
+	};
+	
+	for ( sprite& spr : the_player_secondary_sprites )
+	{
+		for_loop_contents(spr);
 	}
+	
+	for ( sprite& spr : the_secondary_sprites )
+	{
+		for_loop_contents(spr);
+	}
+	
+	for ( sprite& spr : the_sprites )
+	{
+		for_loop_contents(spr);
+	}
+	
 }
 
+
+s32 sprite_manager::spawn_a_player_secondary_sprite_basic
+	( sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos, 
+	const bg_point& camera_pos, bool facing_left )
+{
+	u32 next_sprite_index = 0;
+	
+	// Find a free sprite slot.
+	for ( ;
+		next_sprite_index<the_player_secondary_sprites.size();
+		++next_sprite_index )
+	{
+		if ( the_player_secondary_sprites[next_sprite_index]
+			.the_sprite_type == st_default )
+		{
+			break;
+		}
+	}
+	
+	// Don't spawn any sprites if too many are active.
+	if ( next_sprite_index == the_player_secondary_sprites.size() )
+	{
+		return -1;
+	}
+	
+	the_player_secondary_sprites[next_sprite_index].reinit_by_spawning
+		( the_sprite_type, s_in_level_pos, camera_pos, facing_left );
+	
+	return next_sprite_index;
+}
+
+s32 sprite_manager::spawn_a_secondary_sprite_basic
+	( sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos, 
+	const bg_point& camera_pos, bool facing_left )
+{
+	u32 next_sprite_index = 0;
+	
+	// Find a free sprite slot.
+	for ( ;
+		next_sprite_index<the_secondary_sprites.size();
+		++next_sprite_index )
+	{
+		if ( the_secondary_sprites[next_sprite_index].the_sprite_type 
+			== st_default )
+		{
+			break;
+		}
+	}
+	
+	// Don't spawn any sprites if too many are active.
+	if ( next_sprite_index == the_secondary_sprites.size() )
+	{
+		return -1;
+	}
+	
+	the_secondary_sprites[next_sprite_index].reinit_by_spawning
+		( the_sprite_type, s_in_level_pos, camera_pos, facing_left );
+	
+	return next_sprite_index;
+}
 
 
 // This is a temporary function.  It should be replaced by a function that
 // inserts sprite spawning parameters into a list.  The sprites from said
 // list would be spawned from within the function called
 // spawn_sprites_if_needed().
-void sprite_manager::spawn_a_sprite_basic ( sprite_type the_sprite_type, 
+void sprite_manager::spawn_a_sprite_basic( sprite_type the_sprite_type, 
 	const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, 
 	bool facing_left )
 {
@@ -282,8 +358,8 @@ void sprite_manager::spawn_a_sprite_basic ( sprite_type the_sprite_type,
 	the_sprites[next_sprite_index].reinit_by_spawning( the_sprite_type,
 		s_in_level_pos, camera_pos, facing_left );
 	
-	
 }
+
 
 void sprite_manager::update_all_sprites
 	( const vec2_u32& the_sublevel_size_2d, 
@@ -292,33 +368,148 @@ void sprite_manager::update_all_sprites
 	sprite_stuff_array[the_player.the_sprite_type]
 		->update_part_1(the_player);
 	
-	next_oam_index = 1;
 	
-	u32 num_active_sprites = 0;
+	u32 num_active_player_secondary_sprites = 0, num_active_sprites = 0, 
+		num_active_secondary_sprites = 0;
 	
-	sprite* the_active_sprites[max_num_regular_sprites];
+	std::array< sprite*, max_num_player_secondary_sprites>
+		the_active_player_secondary_sprites;
+	std::array< sprite*, max_num_secondary_sprites>
+		the_active_secondary_sprites;
+	std::array< sprite*, max_num_regular_sprites> the_active_sprites;
 	
-	// Find all the currently-active sprites
-	for ( u32 i=0; i<the_sprites.size(); ++i )
+	auto find_active_sprites = []( sprite* sprites_arr, 
+		sprite** active_sprites_arr, const u32 sprites_arr_size, 
+		u32& num_active_sprites_in_category ) -> void
 	{
-		sprite& the_spr = the_sprites[i];
-		if ( the_spr.the_sprite_type != st_default )
+		for ( u32 i=0; i<sprites_arr_size; ++i )
 		{
-			the_active_sprites[num_active_sprites++] = &the_spr;
+			sprite& the_spr = sprites_arr[i];
+			if ( the_spr.the_sprite_type != st_default )
+			{
+				active_sprites_arr[num_active_sprites_in_category++] 
+					= &the_spr;
+			}
 		}
-	}
+	};
 	
-	// Only update the currently-active sprites 
-	for ( u32 i=0; i<num_active_sprites; ++i )
+	// Find all the currently-active secondary sprites "claimed" by
+	// the_player.
+	find_active_sprites( the_player_secondary_sprites.data(),
+		the_active_player_secondary_sprites.data(),
+		the_player_secondary_sprites.size(),
+		num_active_player_secondary_sprites );
+	
+	// Find all the currently-active secondary sprites.
+	find_active_sprites( the_secondary_sprites.data(), 
+		the_active_secondary_sprites.data(), the_secondary_sprites.size(), 
+		num_active_secondary_sprites );
+	
+	// Find all the currently-active sprites.
+	find_active_sprites( the_sprites.data(), the_active_sprites.data(), 
+		the_sprites.size(), num_active_sprites );
+	
+	
+	
+	auto update_part_1_for_active_sprites 
+		= []( u32 num_active_sprites_in_category, 
+		sprite** active_sprites_arr ) -> void
 	{
-		sprite& the_spr = *(the_active_sprites[i]);
-		sprite_stuff_array[the_spr.the_sprite_type]
-			->update_part_1(the_spr);
-	}
+		for ( u32 i=0; i<num_active_sprites_in_category; ++i )
+		{
+			sprite& the_spr = *(active_sprites_arr[i]);
+			sprite_stuff_array[the_spr.the_sprite_type]
+				->update_part_1(the_spr);
+		}
+	};
+	
+	
+	// Only update the currently-active secondary sprites "claimed" by
+	// the_player.
+	update_part_1_for_active_sprites( num_active_player_secondary_sprites,
+		the_active_player_secondary_sprites.data() );
+	
+	// Only update the currently-active secondary sprites.
+	update_part_1_for_active_sprites( num_active_secondary_sprites,
+		the_active_secondary_sprites.data() );
+	
+	// Only update the currently-active sprites.
+	update_part_1_for_active_sprites( num_active_sprites,
+		the_active_sprites.data() );
+	
 	
 	sprite_stuff_array[the_player.the_sprite_type]->update_part_2
 		( the_player, camera_pos_pc_pair.curr, the_sublevel_size_2d );
 	
+	auto two_sprites_coll_box_test_thing = []( sprite& the_spr,
+		sprite& the_other_spr ) -> void
+	{
+		if ( coll_box_intersects_now( the_spr.the_coll_box,
+			the_other_spr.the_coll_box ) )
+		{
+			// Update a volatile variable so the compiler won't
+			// optimize out this loop
+			debug_arr_f8p8[0] = make_f8p8(8);
+		}
+	};
+	
+	
+	// Secondary sprites "claimed" by the_player
+	next_oam_index = the_player_secondary_sprites_starting_oam_index;
+	
+	for ( u32 i=0; i<num_active_player_secondary_sprites; ++i )
+	{
+		sprite& the_spr = *(the_active_player_secondary_sprites[i]);
+		
+		// I am pretty sure this isn't a necessary sanity check
+		if ( the_spr.the_sprite_type == st_default )
+		{
+			continue;
+		}
+		
+		// Update the sprite
+		sprite_stuff_array[the_spr.the_sprite_type]->update_part_2
+			( the_spr, camera_pos_pc_pair.curr, next_oam_index );
+		
+		for ( u32 j=0; j<num_active_sprites; ++j )
+		{
+			sprite& the_other_spr = *(the_active_sprites[j]);
+			
+			two_sprites_coll_box_test_thing( the_spr, the_other_spr );
+		}
+		
+	}
+	
+	
+	// Other secondary sprites
+	next_oam_index = the_secondary_sprites_starting_oam_index;
+	
+	for ( u32 i=0; i<num_active_secondary_sprites; ++i )
+	{
+		sprite& the_spr = *(the_active_secondary_sprites[i]);
+		
+		// I am pretty sure this isn't a necessary sanity check
+		if ( the_spr.the_sprite_type == st_default )
+		{
+			continue;
+		}
+		
+		// Update the sprite
+		sprite_stuff_array[the_spr.the_sprite_type]->update_part_2
+			( the_spr, camera_pos_pc_pair.curr, next_oam_index );
+		
+		for ( u32 j=0; j<num_active_sprites; ++j )
+		{
+			sprite& the_other_spr = *(the_active_sprites[j]);
+			
+			two_sprites_coll_box_test_thing( the_spr, the_other_spr );
+		}
+		
+	}
+	
+	
+	// Regular sprites
+	next_oam_index = the_active_sprites_starting_oam_index;
 	
 	for ( u32 i=0; i<num_active_sprites; ++i )
 	{
@@ -340,13 +531,7 @@ void sprite_manager::update_all_sprites
 			{
 				sprite& the_other_spr = *(the_active_sprites[j]);
 				
-				if ( coll_box_intersects_now( the_spr.the_coll_box,
-					the_other_spr.the_coll_box ) )
-				{
-					// Update a volatile variable so the compiler won't
-					// optimize out this loop
-					debug_arr_f8p8[0] = make_f8p8(8);
-				}
+				two_sprites_coll_box_test_thing( the_spr, the_other_spr );
 			}
 		}
 		else if ( i > 0 && i < num_active_sprites - 1 )
@@ -355,27 +540,18 @@ void sprite_manager::update_all_sprites
 			{
 				sprite& the_other_spr = *(the_active_sprites[j]);
 				
-				if ( coll_box_intersects_now( the_spr.the_coll_box,
-					the_other_spr.the_coll_box ) )
-				{
-					// Update a volatile variable so the compiler won't
-					// optimize out this loop
-					debug_arr_f8p8[0] = make_f8p8(8);
-				}
+				two_sprites_coll_box_test_thing( the_spr, the_other_spr );
 			}
 			for ( u32 j=i+1; j<num_active_sprites; ++j )
 			{
 				sprite& the_other_spr = *(the_active_sprites[j]);
 				
-				if ( coll_box_intersects_now( the_spr.the_coll_box,
-					the_other_spr.the_coll_box ) )
-				{
-					// Update a volatile variable so the compiler won't
-					// optimize out this loop
-					debug_arr_f8p8[0] = make_f8p8(8);
-				}
+				two_sprites_coll_box_test_thing( the_spr, the_other_spr );
 			}
 		}
 		
 	}
+	
+	
 }
+

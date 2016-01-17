@@ -42,6 +42,7 @@
 //#include "../gfx/the_block_like_sprites_gfx.h"
 #include "../gfx/the_door_gfx.h"
 #include "../gfx/the_golem_enemy_gfx.h"
+#include "../gfx/the_16x16_secondary_sprites_gfx.h"
 
 prev_curr_pair<bg_point> gfx_manager::bgofs_mirror[bgofs_mirror_size];
 
@@ -188,9 +189,14 @@ void gfx_manager::upload_sprite_palettes_to_target( vu16* target )
 	memcpy32( &(target[sps_door * num_colors_per_palette]), 
 		the_door_gfxPal, the_door_gfxPalLen / sizeof(u32) );
 	
-	// The golems and other enemys' palettes
+	// The golems and other enemies' palettes
 	memcpy32( &(target[sps_enemy_0 * num_colors_per_palette]),
 		the_golem_enemy_gfxPal, the_golem_enemy_gfxPalLen / sizeof(u32) );
+	
+	// The secondary sprites' palettes
+	memcpy32( &(target[sps_secondary_0 * num_colors_per_palette]),
+		the_16x16_secondary_sprites_gfxPal,
+		the_16x16_secondary_sprites_gfxPalLen / sizeof(u32) );
 }
 
 void gfx_manager::copy_obj_pal_mirror_to_obj_pal_ram()

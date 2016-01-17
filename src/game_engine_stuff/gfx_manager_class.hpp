@@ -92,6 +92,10 @@ enum sprite_palette_slot
 	sps_enemy_1,
 	sps_enemy_2,
 	
+	// Secondary sprites use sprite palette slots 6 and 7
+	sps_secondary_0,
+	sps_secondary_1,
+	
 	
 	// This is the number of --used-- sprite palette slots when in a level,
 	// and it is automatically updated by the compiler.  This might count

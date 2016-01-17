@@ -68,12 +68,16 @@ enum sprite_type
 	// Enemy Sprites
 	st_snow_golem,
 	
+	// Secondary Sprites
+	st_player_hammer,
+	
 	// st_count is the amount of sprite types.  It is automatically updated
 	// by the compiler.
 	st_count,
 	
 } __attribute__((_align4));
 
+// woo, an X-macro
 #define list_of_main_sprite_types \
 \
 /* The Player */ \
@@ -93,7 +97,10 @@ st_warp_block, */ \
 X(door) \
 \
 /* Enemy Sprites */ \
-X(snow_golem)
+X(snow_golem) \
+\
+/* Secondary Sprites */ \
+X(player_hammer)
 
 
 
@@ -113,16 +120,20 @@ X(snow_golem)
 // Enemy Sprites
 #include "snow_golem_sprite_stuff_class.hpp"
 
+// Secondary Sprites
+#include "player_hammer_sprite_stuff_class.hpp"
+
 
 
 extern sprite_base_stuff the_sprite_base_stuff;
 
-#define X(name) extern name##_sprite_stuff the_##name##_sprite_stuff;
+#define X(name) extern name##_sprite_stuff the_##name##_sprite_stuff \
+	__attribute__((_iwram));
 list_of_main_sprite_types
 #undef X
 
 
-extern sprite_base_stuff* sprite_stuff_array[st_count]
+extern std::array< sprite_base_stuff*, st_count > sprite_stuff_array
 	__attribute__((_iwram));
 
 
