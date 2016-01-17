@@ -192,7 +192,7 @@ void player_sprite_stuff::update_part_1( sprite& the_player )
 			gfx_manager::bgofs_mirror[0].curr,
 			the_player.the_oam_entry.get_hflip_status() );
 		
-		if ( hammer_sprite_slot != -1 )
+		//if ( hammer_sprite_slot != -1 )
 		{
 			swinging_hammer = true;
 		}

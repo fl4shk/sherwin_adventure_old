@@ -30,8 +30,11 @@ class sprite_base_stuff
 {
 public:		// variables
 	
-	static constexpr fixed24p8 grav_acc = {0x80};
-	static constexpr fixed24p8 max_y_vel = {0x400};
+	//static constexpr fixed24p8 grav_acc = {0x80};
+	//static constexpr fixed24p8 grav_acc = {0x40};
+	static constexpr fixed24p8 grav_acc = {0x60};
+	//static constexpr fixed24p8 max_y_vel = {0x400};
+	static constexpr fixed24p8 max_y_vel = {0x300};
 	
 	static constexpr sprite_palette_slot the_palette_slot = sps_player;
 	//static constexpr u32 the_relative_metatile_slot = 7,
