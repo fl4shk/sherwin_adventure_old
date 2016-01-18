@@ -76,10 +76,14 @@ const u32 player_sprite_stuff::the_relative_metatile_slot_arr_size
 	= sizeof(player_sprite_stuff::the_relative_metatile_slot_arr)
 	/ sizeof(u32);
 
+//const vec2_f24p8 player_sprite_stuff::the_initial_coll_box_size 
+//	= { {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },
+//	player_sprite_stuff::the_initial_cb_pos_offset 
+//	= { {2 << fixed24p8::shift }, {3 << fixed24p8::shift } };
 const vec2_f24p8 player_sprite_stuff::the_initial_coll_box_size 
-	= { {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },
+	= { {12 << fixed24p8::shift }, {27 << fixed24p8::shift } },
 	player_sprite_stuff::the_initial_cb_pos_offset 
-	= { {2 << fixed24p8::shift }, {3 << fixed24p8::shift } };
+	= { {2 << fixed24p8::shift }, {5 << fixed24p8::shift } };
 
 const vec2_f24p8 player_sprite_stuff::the_initial_in_level_pos_offset
 	= { {0 << fixed24p8::shift}, {0 << fixed24p8::shift} };
@@ -236,7 +240,11 @@ void player_sprite_stuff::update_part_1( sprite& the_player )
 		}
 		
 		the_player.vel.x = -speed;
-		the_player.the_oam_entry.enable_hflip();
+		
+		if ( the_player.on_ground && !swinging_hammer )
+		{
+			the_player.the_oam_entry.enable_hflip();
+		}
 	}
 	else if ( key_hit_or_held(key_right) && !key_hit_or_held(key_left) )
 	{
@@ -247,7 +255,11 @@ void player_sprite_stuff::update_part_1( sprite& the_player )
 		}
 		
 		the_player.vel.x = speed;
-		the_player.the_oam_entry.disable_hflip();
+		
+		if ( the_player.on_ground && !swinging_hammer )
+		{
+			the_player.the_oam_entry.disable_hflip();
+		}
 	}
 	else
 	{
