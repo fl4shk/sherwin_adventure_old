@@ -122,8 +122,8 @@ public:		// variables
 	static constexpr s32 walk_frame_timer_end = 4;
 	static constexpr s32 run_frame_timer_end = 2;
 	
-	static constexpr s32 hammer_swing_frame_timer_end = 4;
-	//static constexpr s32 hammer_swing_frame_timer_end = 2;
+	//static constexpr s32 hammer_swing_frame_timer_end = 4;
+	static constexpr s32 hammer_swing_frame_timer_end = 2;
 	
 	static constexpr fixed24p8 walk_speed = {0x100};
 	static constexpr fixed24p8 max_run_speed = {0x200};
@@ -156,10 +156,7 @@ public:		// variables
 	
 	// This is used to correct the initial in-level position for sprites
 	// that are normally considered to be of a certain size but that use
-	// larger graphics for some frames.  An example of this is the
-	// st_player sprite_type, which is normally considered to be a 16x32
-	// sprite but uses 32x32 graphics in some cases, like during the hammer
-	// swing animation.
+	// larger graphics for some frames.
 	static const vec2_f24p8 the_initial_in_level_pos_offset;
 	
 	

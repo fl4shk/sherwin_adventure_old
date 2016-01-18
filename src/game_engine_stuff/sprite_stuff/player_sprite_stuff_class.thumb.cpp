@@ -577,6 +577,16 @@ void player_sprite_stuff::update_the_hammer( sprite& the_player )
 		u32 active_hammer_swing_frame_slot = the_player.misc_data_u
 			[udi_active_hammer_swing_frame_slot];
 		
+		if ( the_player.the_oam_entry.get_hflip_status() 
+			&& !the_hammer.the_oam_entry.get_hflip_status() )
+		{
+			the_hammer.the_oam_entry.enable_hflip();
+		}
+		else if ( !the_player.the_oam_entry.get_hflip_status() 
+			&& the_hammer.the_oam_entry.get_hflip_status() )
+		{
+			the_hammer.the_oam_entry.disable_hflip();
+		}
 		
 		switch (active_hammer_swing_frame_slot)
 		{
