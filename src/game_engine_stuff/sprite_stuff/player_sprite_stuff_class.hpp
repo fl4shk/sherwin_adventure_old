@@ -250,6 +250,10 @@ protected:		// functions
 	//virtual void block_collision_stuff_16x32( sprite& the_player )
 	//	__attribute__((_iwram_code));
 	
+	virtual void update_frames_and_frame_timers( sprite& the_player );
+	
+	virtual void update_the_hammer( sprite& the_player );
+	
 	
 	
 } __attribute__((_align4));

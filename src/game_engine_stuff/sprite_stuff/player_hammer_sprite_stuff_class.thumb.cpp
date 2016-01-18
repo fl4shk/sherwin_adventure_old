@@ -53,7 +53,7 @@ const u32 player_hammer_sprite_stuff::get_curr_relative_tile_slot
 	( sprite& the_hammer )
 {
 	return frame_slot_to_frame_arr[the_hammer.misc_data_u
-		[udi_curr_frame_slot]];
+		[udi_curr_frame_slot]] * num_active_gfx_tiles;
 }
 
 
