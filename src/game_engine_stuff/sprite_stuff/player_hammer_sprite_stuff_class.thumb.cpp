@@ -26,16 +26,10 @@ const player_hammer_sprite_stuff::frame
 	player_hammer_sprite_stuff::frame_slot_to_frame_arr
 	[frame_slot_to_frame_arr_size]
 = {
-	frm_angle_negative_23, frm_angle_0, frm_angle_45, frm_angle_90
+	frm_angle_0, frm_angle_23, frm_angle_45, frm_angle_90
 };
 
 
-const u32 player_hammer_sprite_stuff::the_relative_metatile_slot_arr[]
-	= { frm_slot_angle_negative_23, frm_slot_angle_0, frm_slot_angle_45,
-	frm_slot_angle_90 };
-const u32 player_hammer_sprite_stuff::the_relative_metatile_slot_arr_size
-	= sizeof(player_hammer_sprite_stuff::the_relative_metatile_slot_arr)
-	/ sizeof(u32);
 
 
 const vec2_f24p8 player_hammer_sprite_stuff::the_initial_coll_box_size

@@ -606,7 +606,7 @@ void player_sprite_stuff::update_the_hammer( sprite& the_player )
 			case frm_slot_hammer_swing_ground_still_0:
 			case frm_slot_hammer_swing_air_0:
 				the_hammer_frame_slot = player_hammer_sprite_stuff
-					::frm_slot_angle_negative_23;
+					::frm_slot_angle_23;
 				if ( !the_player.the_oam_entry.get_hflip_status() )
 				{
 					the_hammer.in_level_pos = the_player.in_level_pos

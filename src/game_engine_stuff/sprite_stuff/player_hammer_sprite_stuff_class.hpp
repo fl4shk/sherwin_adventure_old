@@ -28,8 +28,8 @@ public:		// enums
 	// "Global" graphics frames
 	enum frame
 	{
-		frm_angle_negative_23 = 0, 
-		frm_angle_0 = 1,
+		frm_angle_0 = 0,
+		frm_angle_23 = 1, 
 		frm_angle_45 = 2,
 		frm_angle_90 = 3,
 		
@@ -39,8 +39,8 @@ public:		// enums
 	// frame.
 	enum frame_slot 
 	{
-		frm_slot_angle_negative_23, 
 		frm_slot_angle_0,
+		frm_slot_angle_23, 
 		frm_slot_angle_45,
 		frm_slot_angle_90,
 		
@@ -67,9 +67,6 @@ public:		// variables
 	static constexpr sprite_type the_sprite_type = st_player_hammer;
 	static constexpr sprite_palette_slot the_palette_slot 
 		= sps_secondary_0;
-	
-	static const u32 the_relative_metatile_slot_arr_size;
-	static const u32 the_relative_metatile_slot_arr[];
 	
 	static constexpr u32 num_active_gfx_tiles 
 		= gfx_manager::num_tiles_in_ss_16x16;

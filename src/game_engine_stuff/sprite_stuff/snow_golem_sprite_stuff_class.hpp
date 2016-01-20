@@ -76,9 +76,6 @@ public:		// variables
 	static constexpr sprite_type the_sprite_type = st_snow_golem;
 	static constexpr sprite_palette_slot the_palette_slot = sps_enemy_0;
 	
-	static const u32 the_relative_metatile_slot_arr_size;
-	static const u32 the_relative_metatile_slot_arr[];
-	
 	static constexpr u32 num_active_gfx_tiles 
 		= gfx_manager::num_tiles_in_ss_16x32;
 	

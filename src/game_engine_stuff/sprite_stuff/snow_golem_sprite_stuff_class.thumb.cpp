@@ -34,12 +34,6 @@ const snow_golem_sprite_stuff::frame
 	frm_throw_0, frm_throw_1, frm_throw_2
 };
 
-const u32 snow_golem_sprite_stuff::the_relative_metatile_slot_arr[]
-	= { frm_stand, frm_throw_0, frm_throw_1, frm_throw_2 };
-const u32 snow_golem_sprite_stuff::the_relative_metatile_slot_arr_size
-	= sizeof(snow_golem_sprite_stuff::the_relative_metatile_slot_arr)
-	/ sizeof(u32);
-
 // This needs to be better fit to snow golem enemies.
 const vec2_f24p8 snow_golem_sprite_stuff::the_initial_coll_box_size 
 	= { {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },

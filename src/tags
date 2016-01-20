@@ -1101,10 +1101,10 @@ frame_slot_to_frame_arr	game_engine_stuff/sprite_stuff/snow_golem_sprite_stuff_c
 frame_slot_to_frame_arr_size	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^	static constexpr u32 frame_slot_to_frame_arr_size = frm_slot_count;$/;"	kind:m	class:player_hammer_sprite_stuff	access:public
 frame_slot_to_frame_arr_size	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^	static constexpr u32 frame_slot_to_frame_arr_size = frm_slot_count;$/;"	kind:m	class:player_sprite_stuff	access:public
 frame_slot_to_frame_arr_size	game_engine_stuff/sprite_stuff/snow_golem_sprite_stuff_class.hpp	/^	static constexpr u32 frame_slot_to_frame_arr_size = frm_slot_count;$/;"	kind:m	class:snow_golem_sprite_stuff	access:public
-frm_angle_0	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_angle_0 = 1,$/;"	kind:e	enum:player_hammer_sprite_stuff::frame
+frm_angle_0	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_angle_0 = 0,$/;"	kind:e	enum:player_hammer_sprite_stuff::frame
+frm_angle_23	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_angle_23 = 1, $/;"	kind:e	enum:player_hammer_sprite_stuff::frame
 frm_angle_45	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_angle_45 = 2,$/;"	kind:e	enum:player_hammer_sprite_stuff::frame
 frm_angle_90	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_angle_90 = 3,$/;"	kind:e	enum:player_hammer_sprite_stuff::frame
-frm_angle_negative_23	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_angle_negative_23 = 0, $/;"	kind:e	enum:player_hammer_sprite_stuff::frame
 frm_hammer_swing_air_0	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^		frm_hammer_swing_air_0,$/;"	kind:e	enum:player_sprite_stuff::frame
 frm_hammer_swing_air_1	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^		frm_hammer_swing_air_1,$/;"	kind:e	enum:player_sprite_stuff::frame
 frm_hammer_swing_air_2	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^		frm_hammer_swing_air_2,$/;"	kind:e	enum:player_sprite_stuff::frame
@@ -1122,9 +1122,9 @@ frm_hammer_swing_ground_still_4	game_engine_stuff/sprite_stuff/player_sprite_stu
 frm_hammer_swing_ground_still_5	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^		frm_hammer_swing_ground_still_5,$/;"	kind:e	enum:player_sprite_stuff::frame
 frm_invisible	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^		frm_invisible, $/;"	kind:e	enum:player_sprite_stuff::frame
 frm_slot_angle_0	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_slot_angle_0,$/;"	kind:e	enum:player_hammer_sprite_stuff::frame_slot
+frm_slot_angle_23	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_slot_angle_23, $/;"	kind:e	enum:player_hammer_sprite_stuff::frame_slot
 frm_slot_angle_45	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_slot_angle_45,$/;"	kind:e	enum:player_hammer_sprite_stuff::frame_slot
 frm_slot_angle_90	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_slot_angle_90,$/;"	kind:e	enum:player_hammer_sprite_stuff::frame_slot
-frm_slot_angle_negative_23	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_slot_angle_negative_23, $/;"	kind:e	enum:player_hammer_sprite_stuff::frame_slot
 frm_slot_count	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_slot_count,$/;"	kind:e	enum:player_hammer_sprite_stuff::frame_slot
 frm_slot_count	game_engine_stuff/sprite_stuff/player_sprite_stuff_class.hpp	/^		frm_slot_count,$/;"	kind:e	enum:player_sprite_stuff::frame_slot
 frm_slot_count	game_engine_stuff/sprite_stuff/snow_golem_sprite_stuff_class.hpp	/^		frm_slot_count,$/;"	kind:e	enum:snow_golem_sprite_stuff::frame_slot
@@ -2420,14 +2420,14 @@ player_hammer_sprite_stuff::frame_slot	game_engine_stuff/sprite_stuff/player_ham
 player_hammer_sprite_stuff::frame_slot_to_frame_arr	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^	static const frame frame_slot_to_frame_arr$/;"	kind:m	class:player_hammer_sprite_stuff	access:public
 player_hammer_sprite_stuff::frame_slot_to_frame_arr	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.thumb.cpp	/^	player_hammer_sprite_stuff::frame_slot_to_frame_arr$/;"	kind:m	class:player_hammer_sprite_stuff	file:
 player_hammer_sprite_stuff::frame_slot_to_frame_arr_size	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^	static constexpr u32 frame_slot_to_frame_arr_size = frm_slot_count;$/;"	kind:m	class:player_hammer_sprite_stuff	access:public
-player_hammer_sprite_stuff::frm_angle_0	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_angle_0 = 1,$/;"	kind:e	enum:player_hammer_sprite_stuff::frame
+player_hammer_sprite_stuff::frm_angle_0	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_angle_0 = 0,$/;"	kind:e	enum:player_hammer_sprite_stuff::frame
+player_hammer_sprite_stuff::frm_angle_23	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_angle_23 = 1, $/;"	kind:e	enum:player_hammer_sprite_stuff::frame
 player_hammer_sprite_stuff::frm_angle_45	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_angle_45 = 2,$/;"	kind:e	enum:player_hammer_sprite_stuff::frame
 player_hammer_sprite_stuff::frm_angle_90	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_angle_90 = 3,$/;"	kind:e	enum:player_hammer_sprite_stuff::frame
-player_hammer_sprite_stuff::frm_angle_negative_23	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_angle_negative_23 = 0, $/;"	kind:e	enum:player_hammer_sprite_stuff::frame
 player_hammer_sprite_stuff::frm_slot_angle_0	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_slot_angle_0,$/;"	kind:e	enum:player_hammer_sprite_stuff::frame_slot
+player_hammer_sprite_stuff::frm_slot_angle_23	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_slot_angle_23, $/;"	kind:e	enum:player_hammer_sprite_stuff::frame_slot
 player_hammer_sprite_stuff::frm_slot_angle_45	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_slot_angle_45,$/;"	kind:e	enum:player_hammer_sprite_stuff::frame_slot
 player_hammer_sprite_stuff::frm_slot_angle_90	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_slot_angle_90,$/;"	kind:e	enum:player_hammer_sprite_stuff::frame_slot
-player_hammer_sprite_stuff::frm_slot_angle_negative_23	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_slot_angle_negative_23, $/;"	kind:e	enum:player_hammer_sprite_stuff::frame_slot
 player_hammer_sprite_stuff::frm_slot_count	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^		frm_slot_count,$/;"	kind:e	enum:player_hammer_sprite_stuff::frame_slot
 player_hammer_sprite_stuff::get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^	virtual const u32 get_curr_relative_tile_slot( sprite& the_hammer );$/;"	kind:p	class:player_hammer_sprite_stuff	access:public	signature:( sprite& the_hammer )
 player_hammer_sprite_stuff::get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.thumb.cpp	/^const u32 player_hammer_sprite_stuff::get_curr_relative_tile_slot$/;"	kind:f	class:player_hammer_sprite_stuff	signature:( sprite& the_hammer )
@@ -2445,10 +2445,6 @@ player_hammer_sprite_stuff::the_initial_coll_box_size	game_engine_stuff/sprite_s
 player_hammer_sprite_stuff::the_initial_coll_box_size	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.thumb.cpp	/^const vec2_f24p8 player_hammer_sprite_stuff::the_initial_coll_box_size$/;"	kind:m	class:player_hammer_sprite_stuff	file:
 player_hammer_sprite_stuff::the_initial_shape_size	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^	static const oam_entry::shape_size the_initial_shape_size $/;"	kind:m	class:player_hammer_sprite_stuff	access:public
 player_hammer_sprite_stuff::the_palette_slot	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^	static constexpr sprite_palette_slot the_palette_slot $/;"	kind:m	class:player_hammer_sprite_stuff	access:public
-player_hammer_sprite_stuff::the_relative_metatile_slot_arr	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^	static const u32 the_relative_metatile_slot_arr[];$/;"	kind:m	class:player_hammer_sprite_stuff	access:public
-player_hammer_sprite_stuff::the_relative_metatile_slot_arr	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.thumb.cpp	/^const u32 player_hammer_sprite_stuff::the_relative_metatile_slot_arr[]$/;"	kind:m	class:player_hammer_sprite_stuff	file:
-player_hammer_sprite_stuff::the_relative_metatile_slot_arr_size	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^	static const u32 the_relative_metatile_slot_arr_size;$/;"	kind:m	class:player_hammer_sprite_stuff	access:public
-player_hammer_sprite_stuff::the_relative_metatile_slot_arr_size	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.thumb.cpp	/^const u32 player_hammer_sprite_stuff::the_relative_metatile_slot_arr_size$/;"	kind:m	class:player_hammer_sprite_stuff	file:
 player_hammer_sprite_stuff::the_sprite_type	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^	static constexpr sprite_type the_sprite_type = st_player_hammer;$/;"	kind:m	class:player_hammer_sprite_stuff	access:public
 player_hammer_sprite_stuff::tile_arr	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^	static constexpr tile* tile_arr = const_cast<tile*>$/;"	kind:m	class:player_hammer_sprite_stuff	access:public
 player_hammer_sprite_stuff::udata_index	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^	enum udata_index { udi_curr_frame_slot } __attribute__((_align4));$/;"	kind:g	class:player_hammer_sprite_stuff	access:public
@@ -2821,10 +2817,6 @@ snow_golem_sprite_stuff::the_initial_coll_box_size	game_engine_stuff/sprite_stuf
 snow_golem_sprite_stuff::the_initial_coll_box_size	game_engine_stuff/sprite_stuff/snow_golem_sprite_stuff_class.thumb.cpp	/^const vec2_f24p8 snow_golem_sprite_stuff::the_initial_coll_box_size $/;"	kind:m	class:snow_golem_sprite_stuff	file:
 snow_golem_sprite_stuff::the_initial_shape_size	game_engine_stuff/sprite_stuff/snow_golem_sprite_stuff_class.hpp	/^	static const oam_entry::shape_size the_initial_shape_size $/;"	kind:m	class:snow_golem_sprite_stuff	access:public
 snow_golem_sprite_stuff::the_palette_slot	game_engine_stuff/sprite_stuff/snow_golem_sprite_stuff_class.hpp	/^	static constexpr sprite_palette_slot the_palette_slot = sps_enemy_0;$/;"	kind:m	class:snow_golem_sprite_stuff	access:public
-snow_golem_sprite_stuff::the_relative_metatile_slot_arr	game_engine_stuff/sprite_stuff/snow_golem_sprite_stuff_class.hpp	/^	static const u32 the_relative_metatile_slot_arr[];$/;"	kind:m	class:snow_golem_sprite_stuff	access:public
-snow_golem_sprite_stuff::the_relative_metatile_slot_arr	game_engine_stuff/sprite_stuff/snow_golem_sprite_stuff_class.thumb.cpp	/^const u32 snow_golem_sprite_stuff::the_relative_metatile_slot_arr[]$/;"	kind:m	class:snow_golem_sprite_stuff	file:
-snow_golem_sprite_stuff::the_relative_metatile_slot_arr_size	game_engine_stuff/sprite_stuff/snow_golem_sprite_stuff_class.hpp	/^	static const u32 the_relative_metatile_slot_arr_size;$/;"	kind:m	class:snow_golem_sprite_stuff	access:public
-snow_golem_sprite_stuff::the_relative_metatile_slot_arr_size	game_engine_stuff/sprite_stuff/snow_golem_sprite_stuff_class.thumb.cpp	/^const u32 snow_golem_sprite_stuff::the_relative_metatile_slot_arr_size$/;"	kind:m	class:snow_golem_sprite_stuff	file:
 snow_golem_sprite_stuff::the_sprite_type	game_engine_stuff/sprite_stuff/snow_golem_sprite_stuff_class.hpp	/^	static constexpr sprite_type the_sprite_type = st_snow_golem;$/;"	kind:m	class:snow_golem_sprite_stuff	access:public
 snow_golem_sprite_stuff::tile_arr	game_engine_stuff/sprite_stuff/snow_golem_sprite_stuff_class.hpp	/^	static constexpr tile* tile_arr = const_cast<tile*>$/;"	kind:m	class:snow_golem_sprite_stuff	access:public
 snow_golem_sprite_stuff::udata_index	game_engine_stuff/sprite_stuff/snow_golem_sprite_stuff_class.hpp	/^	enum udata_index { udi_frame_stuff_initalized, udi_curr_frame_slot } $/;"	kind:g	class:snow_golem_sprite_stuff	access:public
@@ -3279,14 +3271,6 @@ the_relative_metatile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_cl
 the_relative_metatile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_stuff_classes.hpp	/^	static constexpr u32 the_relative_metatile_slot = 4, $/;"	kind:m	class:chocolate_muffin_sprite_stuff	access:public
 the_relative_metatile_slot	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	static constexpr u32 the_relative_metatile_slot = 0,$/;"	kind:m	class:sprite_base_stuff	access:public
 the_relative_metatile_slot	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	static constexpr u32 the_relative_metatile_slot = 0, $/;"	kind:m	class:waffle_sprite_stuff	access:public
-the_relative_metatile_slot_arr	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^	static const u32 the_relative_metatile_slot_arr[];$/;"	kind:m	class:player_hammer_sprite_stuff	access:public
-the_relative_metatile_slot_arr	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.thumb.cpp	/^const u32 player_hammer_sprite_stuff::the_relative_metatile_slot_arr[]$/;"	kind:m	class:player_hammer_sprite_stuff	file:
-the_relative_metatile_slot_arr	game_engine_stuff/sprite_stuff/snow_golem_sprite_stuff_class.hpp	/^	static const u32 the_relative_metatile_slot_arr[];$/;"	kind:m	class:snow_golem_sprite_stuff	access:public
-the_relative_metatile_slot_arr	game_engine_stuff/sprite_stuff/snow_golem_sprite_stuff_class.thumb.cpp	/^const u32 snow_golem_sprite_stuff::the_relative_metatile_slot_arr[]$/;"	kind:m	class:snow_golem_sprite_stuff	file:
-the_relative_metatile_slot_arr_size	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.hpp	/^	static const u32 the_relative_metatile_slot_arr_size;$/;"	kind:m	class:player_hammer_sprite_stuff	access:public
-the_relative_metatile_slot_arr_size	game_engine_stuff/sprite_stuff/player_hammer_sprite_stuff_class.thumb.cpp	/^const u32 player_hammer_sprite_stuff::the_relative_metatile_slot_arr_size$/;"	kind:m	class:player_hammer_sprite_stuff	file:
-the_relative_metatile_slot_arr_size	game_engine_stuff/sprite_stuff/snow_golem_sprite_stuff_class.hpp	/^	static const u32 the_relative_metatile_slot_arr_size;$/;"	kind:m	class:snow_golem_sprite_stuff	access:public
-the_relative_metatile_slot_arr_size	game_engine_stuff/sprite_stuff/snow_golem_sprite_stuff_class.thumb.cpp	/^const u32 snow_golem_sprite_stuff::the_relative_metatile_slot_arr_size$/;"	kind:m	class:snow_golem_sprite_stuff	file:
 the_secondary_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^		the_secondary_sprites;$/;"	kind:m	class:sprite_manager	access:public
 the_secondary_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^	sprite_manager::the_secondary_sprites;$/;"	kind:m	class:sprite_manager	file:
 the_secondary_sprites_starting_oam_index	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static constexpr u32 the_secondary_sprites_starting_oam_index $/;"	kind:m	class:sprite_manager	access:public
