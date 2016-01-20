@@ -65,6 +65,8 @@ void generate_coll_point_group_16x16( const sprite& the_sprite,
 	pt_lb.y.data = pt_rb.y.data = the_coll_box.bot().data 
 		- ( the_coll_box.size.y.data / 4 );
 	
+	//pt_lt.y = pt_rt.y = the_coll_box.top() + (fixed24p8){0x480};
+	//pt_lb.y = pt_rb.y = the_coll_box.bot() - (fixed24p8){0x480};
 	
 	// Top and Bottom
 	//pt_tl.x.data = pt_bl.x.data = the_coll_box.left().data 
@@ -85,8 +87,13 @@ void generate_coll_point_group_16x16( const sprite& the_sprite,
 	//	+ the_sprite.cb_pos_offset.y;
 	//pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() + make_f24p8(2);
 	
+	//pt_bl.y = pt_bm.y = pt_br.y = the_sprite.in_level_pos.y 
+	//	+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
+	
 	pt_bl.y = pt_bm.y = pt_br.y = the_sprite.in_level_pos.y 
 		+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
+	//pt_bl.y = pt_bm.y = pt_br.y = the_sprite.in_level_pos.y 
+	//	+ make_f24p8( the_sprite.get_shape_size_as_vec2().y );
 	
 }
 

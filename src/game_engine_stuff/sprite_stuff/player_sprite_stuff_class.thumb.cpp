@@ -42,6 +42,9 @@ u32 player_sprite_stuff::hammer_sprite_slot;
 
 
 // Graphics constants
+
+// A constant array that is intended to be indexed with a frame_slot,
+// such that a frame_slot can be mapped to a frame. 
 const player_sprite_stuff::frame 
 	player_sprite_stuff::frame_slot_to_frame_arr
 	[frame_slot_to_frame_arr_size] 
@@ -55,26 +58,23 @@ const player_sprite_stuff::frame
 	// Walking/running
 	frm_stand, frm_walk_0, frm_walk_1, frm_walk_0,
 	
-	// Swinging the hammer, on the ground
-	frm_hammer_swing_ground_0, frm_hammer_swing_ground_1,
-	frm_hammer_swing_ground_2, frm_hammer_swing_ground_3,
+	// Swinging the hammer, on the ground, while not moving
+	frm_hammer_swing_ground_still_0, frm_hammer_swing_ground_still_1,
+	frm_hammer_swing_ground_still_2, frm_hammer_swing_ground_still_3,
+	frm_hammer_swing_ground_still_4, frm_hammer_swing_ground_still_5,
+	
+	// Swinging the hammer, on the ground, but also moving
+	frm_hammer_swing_ground_moving_0, frm_hammer_swing_ground_moving_1,
+	frm_hammer_swing_ground_moving_2, frm_hammer_swing_ground_moving_3,
+	frm_hammer_swing_ground_moving_4, frm_hammer_swing_ground_moving_5,
 	
 	// Swinging the hammer, in the air
 	frm_hammer_swing_air_0, frm_hammer_swing_air_1, frm_hammer_swing_air_2,
-	frm_hammer_swing_air_3
+	frm_hammer_swing_ground_moving_3, frm_hammer_swing_ground_moving_4,
+	frm_hammer_swing_ground_moving_5,
 };
 
 
-const u32 player_sprite_stuff::the_relative_metatile_slot_arr[]
-	= { frm_invisible, frm_stand, frm_walk_0, frm_walk_1, 
-	frm_hammer_swing_ground_0, frm_hammer_swing_ground_1,
-	frm_hammer_swing_ground_2, frm_hammer_swing_ground_3,
-	frm_hammer_swing_air_0, frm_hammer_swing_air_1, frm_hammer_swing_air_2,
-	frm_hammer_swing_air_3 };
-
-const u32 player_sprite_stuff::the_relative_metatile_slot_arr_size
-	= sizeof(player_sprite_stuff::the_relative_metatile_slot_arr)
-	/ sizeof(u32);
 
 //const vec2_f24p8 player_sprite_stuff::the_initial_coll_box_size 
 //	= { {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },
@@ -437,7 +437,8 @@ void player_sprite_stuff::update_frames_and_frame_timers
 	if (!swinging_hammer)
 	{
 		hammer_swing_frame_timer = 0;
-		active_hammer_swing_frame_slot = frm_slot_hammer_swing_ground_0;
+		active_hammer_swing_frame_slot 
+			= frm_slot_hammer_swing_ground_still_0;
 	}
 	
 	if (!swinging_hammer)
@@ -518,28 +519,28 @@ void player_sprite_stuff::update_frames_and_frame_timers
 			
 			switch (active_hammer_swing_frame_slot)
 			{
-				case frm_slot_hammer_swing_ground_0:
+				case frm_slot_hammer_swing_ground_still_0:
 				case frm_slot_hammer_swing_air_0:
 					active_hammer_swing_frame_slot 
-						= frm_slot_hammer_swing_ground_1;
+						= frm_slot_hammer_swing_ground_still_1;
 					break;
 				
-				case frm_slot_hammer_swing_ground_1:
+				case frm_slot_hammer_swing_ground_still_1:
 				case frm_slot_hammer_swing_air_1:
 					active_hammer_swing_frame_slot 
-						= frm_slot_hammer_swing_ground_2;
+						= frm_slot_hammer_swing_ground_still_2;
 					break;
 				
-				case frm_slot_hammer_swing_ground_2:
+				case frm_slot_hammer_swing_ground_still_2:
 				case frm_slot_hammer_swing_air_2:
 					active_hammer_swing_frame_slot 
-						= frm_slot_hammer_swing_ground_3;
+						= frm_slot_hammer_swing_ground_still_3;
 					break;
 				
-				case frm_slot_hammer_swing_ground_3:
+				case frm_slot_hammer_swing_ground_still_3:
 				case frm_slot_hammer_swing_air_3:
 					//active_hammer_swing_frame_slot 
-					//	= frm_slot_hammer_swing_ground_0;
+					//	= frm_slot_hammer_swing_ground_still_0;
 					swinging_hammer = false;
 					break;
 				
@@ -602,7 +603,7 @@ void player_sprite_stuff::update_the_hammer( sprite& the_player )
 		
 		switch (active_hammer_swing_frame_slot)
 		{
-			case frm_slot_hammer_swing_ground_0:
+			case frm_slot_hammer_swing_ground_still_0:
 			case frm_slot_hammer_swing_air_0:
 				the_hammer_frame_slot = player_hammer_sprite_stuff
 					::frm_slot_angle_negative_23;
@@ -621,7 +622,7 @@ void player_sprite_stuff::update_the_hammer( sprite& the_player )
 				
 				break;
 			
-			case frm_slot_hammer_swing_ground_1:
+			case frm_slot_hammer_swing_ground_still_1:
 			case frm_slot_hammer_swing_air_1:
 				the_hammer_frame_slot = player_hammer_sprite_stuff
 					::frm_slot_angle_0;
@@ -644,7 +645,7 @@ void player_sprite_stuff::update_the_hammer( sprite& the_player )
 				
 				break;
 			
-			case frm_slot_hammer_swing_ground_2:
+			case frm_slot_hammer_swing_ground_still_2:
 			case frm_slot_hammer_swing_air_2:
 				the_hammer_frame_slot = player_hammer_sprite_stuff
 					::frm_slot_angle_45;
@@ -667,7 +668,7 @@ void player_sprite_stuff::update_the_hammer( sprite& the_player )
 				
 				break;
 			
-			case frm_slot_hammer_swing_ground_3:
+			case frm_slot_hammer_swing_ground_still_3:
 			case frm_slot_hammer_swing_air_3:
 				the_hammer_frame_slot = player_hammer_sprite_stuff
 					::frm_slot_angle_90;
@@ -761,12 +762,12 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 	{
 		switch (active_hammer_swing_frame_slot)
 		{
-			case frm_slot_hammer_swing_ground_0:
+			case frm_slot_hammer_swing_ground_still_0:
 			case frm_slot_hammer_swing_air_0:
 				if (the_player.on_ground)
 				{
 					return frame_slot_to_frame_arr
-						[frm_slot_hammer_swing_ground_0] 
+						[frm_slot_hammer_swing_ground_still_0] 
 						* num_active_gfx_tiles;
 				}
 				else //if (!the_player.on_ground)
@@ -778,12 +779,12 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 				
 				break;
 			
-			case frm_slot_hammer_swing_ground_1:
+			case frm_slot_hammer_swing_ground_still_1:
 			case frm_slot_hammer_swing_air_1:
 				if (the_player.on_ground)
 				{
 					return frame_slot_to_frame_arr
-						[frm_slot_hammer_swing_ground_1] 
+						[frm_slot_hammer_swing_ground_still_1] 
 						* num_active_gfx_tiles;
 				}
 				else //if (!the_player.on_ground)
@@ -795,12 +796,12 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 				
 				break;
 			
-			case frm_slot_hammer_swing_ground_2:
+			case frm_slot_hammer_swing_ground_still_2:
 			case frm_slot_hammer_swing_air_2:
 				if (the_player.on_ground)
 				{
 					return frame_slot_to_frame_arr
-						[frm_slot_hammer_swing_ground_2] 
+						[frm_slot_hammer_swing_ground_still_2] 
 						* num_active_gfx_tiles;
 				}
 				else //if (!the_player.on_ground)
@@ -812,12 +813,12 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 				
 				break;
 			
-			case frm_slot_hammer_swing_ground_3:
+			case frm_slot_hammer_swing_ground_still_3:
 			case frm_slot_hammer_swing_air_3:
 				if (the_player.on_ground)
 				{
 					return frame_slot_to_frame_arr
-						[frm_slot_hammer_swing_ground_3] 
+						[frm_slot_hammer_swing_ground_still_3] 
 						* num_active_gfx_tiles;
 				}
 				else //if (!the_player.on_ground)

@@ -49,7 +49,7 @@ public:		// enums
 		// arr_ind_16x16_count is the amount of arr_index_16x16's.  It is
 		// automatically updated by the compiler.
 		arr_ind_16x16_count,
-	};
+	} __attribute__((_align4));
 	
 	
 	enum arr_index_16x32
@@ -69,7 +69,7 @@ public:		// enums
 		// arr_ind_16x32_count is the amount of arr_index_16x32's.  It is
 		// automatically updated by the compiler.
 		arr_ind_16x32_count,
-	};
+	} __attribute__((_align4));
 
 	enum arr_index_32x16
 	{
@@ -88,7 +88,7 @@ public:		// enums
 		// arr_ind_32x16_count is the amount of arr_index_32x16's.  It is
 		// automatically updated by the compiler.
 		arr_ind_32x16_count,
-	};
+	} __attribute__((_align4));
 	
 public:		// variables
 	// The maximum number of collision points, 32, is definitely more than
@@ -119,16 +119,19 @@ public:		// functions
 		{ return the_array[arr_ind_16x16_pt_lt]; }
 	inline vec2_f24p8& get_pt_lb_16x16()
 		{ return the_array[arr_ind_16x16_pt_lb]; }
+	
 	inline vec2_f24p8& get_pt_tl_16x16()
 		{ return the_array[arr_ind_16x16_pt_tl]; }
 	inline vec2_f24p8& get_pt_tm_16x16()
 		{ return the_array[arr_ind_16x16_pt_tm]; }
 	inline vec2_f24p8& get_pt_tr_16x16()
 		{ return the_array[arr_ind_16x16_pt_tr]; }
+	
 	inline vec2_f24p8& get_pt_rt_16x16()
 		{ return the_array[arr_ind_16x16_pt_rt]; }
 	inline vec2_f24p8& get_pt_rb_16x16()
 		{ return the_array[arr_ind_16x16_pt_rb]; }
+	
 	inline vec2_f24p8& get_pt_bl_16x16()
 		{ return the_array[arr_ind_16x16_pt_bl]; }
 	inline vec2_f24p8& get_pt_bm_16x16()
@@ -148,18 +151,21 @@ public:		// functions
 		{ return the_array[arr_ind_16x32_pt_lm]; }
 	inline vec2_f24p8& get_pt_lb_16x32()
 		{ return the_array[arr_ind_16x32_pt_lb]; }
+	
 	inline vec2_f24p8& get_pt_tl_16x32()
 		{ return the_array[arr_ind_16x32_pt_tl]; }
 	inline vec2_f24p8& get_pt_tm_16x32()
 		{ return the_array[arr_ind_16x32_pt_tm]; }
 	inline vec2_f24p8& get_pt_tr_16x32()
 		{ return the_array[arr_ind_16x32_pt_tr]; }
+	
 	inline vec2_f24p8& get_pt_rt_16x32()
 		{ return the_array[arr_ind_16x32_pt_rt]; }
 	inline vec2_f24p8& get_pt_rm_16x32()
 		{ return the_array[arr_ind_16x32_pt_rm]; }
 	inline vec2_f24p8& get_pt_rb_16x32()
 		{ return the_array[arr_ind_16x32_pt_rb]; }
+	
 	inline vec2_f24p8& get_pt_bl_16x32()
 		{ return the_array[arr_ind_16x32_pt_bl]; }
 	inline vec2_f24p8& get_pt_bm_16x32()
@@ -176,16 +182,19 @@ public:		// functions
 		{ return the_array[arr_ind_32x16_pt_lt]; }
 	inline vec2_f24p8& get_pt_lb_32x16()
 		{ return the_array[arr_ind_32x16_pt_lb]; }
+	
 	inline vec2_f24p8& get_pt_tl_32x16()
 		{ return the_array[arr_ind_32x16_pt_tl]; }
 	inline vec2_f24p8& get_pt_tm_32x16()
 		{ return the_array[arr_ind_32x16_pt_tm]; }
 	inline vec2_f24p8& get_pt_tr_32x16()
 		{ return the_array[arr_ind_32x16_pt_tr]; }
+	
 	inline vec2_f24p8& get_pt_rt_32x16()
 		{ return the_array[arr_ind_32x16_pt_rt]; }
 	inline vec2_f24p8& get_pt_rb_32x16()
 		{ return the_array[arr_ind_32x16_pt_rb]; }
+	
 	inline vec2_f24p8& get_pt_bl_32x16()
 		{ return the_array[arr_ind_32x16_pt_bl]; }
 	inline vec2_f24p8& get_pt_bm_32x16()

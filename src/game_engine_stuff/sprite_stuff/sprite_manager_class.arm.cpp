@@ -424,16 +424,16 @@ void sprite_manager::update_all_sprites
 	};
 	
 	
-	// Only update the currently-active secondary sprites "claimed" by
+	// Update the currently-active secondary sprites "claimed" by
 	// the_player.
 	update_part_1_for_active_sprites( num_active_player_secondary_sprites,
 		the_active_player_secondary_sprites.data() );
 	
-	// Only update the currently-active secondary sprites.
+	// Update the currently-active secondary sprites.
 	update_part_1_for_active_sprites( num_active_secondary_sprites,
 		the_active_secondary_sprites.data() );
 	
-	// Only update the currently-active sprites.
+	// Update the currently-active sprites.
 	update_part_1_for_active_sprites( num_active_sprites,
 		the_active_sprites.data() );
 	

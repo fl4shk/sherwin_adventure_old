@@ -30,32 +30,45 @@ public:		// enums
 	enum frame
 	{
 		// Not a real frame, just a way to hide the player
-		frm_invisible = 0, 
+		frm_invisible, 
 		
 		// Standing frame
-		frm_stand = 1, 
+		frm_stand, 
 		
 		// Walking frames
-		frm_walk_0 = 2, 
-		frm_walk_1 = 3,
+		frm_walk_0, 
+		frm_walk_1,
 		
-		// Hammer swinging frames, on the ground
-		frm_hammer_swing_ground_0 = 4,
-		frm_hammer_swing_ground_1 = 5,
-		frm_hammer_swing_ground_2 = 6,
-		frm_hammer_swing_ground_3 = 7,
+		// Hammer swinging frames, on the ground, while not moving
+		frm_hammer_swing_ground_still_0,
+		frm_hammer_swing_ground_still_1,
+		frm_hammer_swing_ground_still_2,
+		frm_hammer_swing_ground_still_3,
+		frm_hammer_swing_ground_still_4,
+		frm_hammer_swing_ground_still_5,
+		
+		// Hammer swinging frames, on the ground, but also moving
+		frm_hammer_swing_ground_moving_0,
+		frm_hammer_swing_ground_moving_1,
+		frm_hammer_swing_ground_moving_2,
+		frm_hammer_swing_ground_moving_3,
+		frm_hammer_swing_ground_moving_4,
+		frm_hammer_swing_ground_moving_5,
 		
 		// Hammer swinging frames, in the air
-		frm_hammer_swing_air_0 = 8,
-		frm_hammer_swing_air_1 = 9,
-		frm_hammer_swing_air_2 = 10,
-		frm_hammer_swing_air_3 = 11,
+		frm_hammer_swing_air_0,
+		frm_hammer_swing_air_1,
+		frm_hammer_swing_air_2,
 		
 		
 	} __attribute__((_align4));
 	
 	// This enum allows multiple frame_slot's to be represented by the same
-	// frame, which is used, for example, in the walking animation.
+	// frame, which is used, for example, in the walking animation.  Also,
+	// the reason this is necessary is that so which frame is currently
+	// active can be determined.  If two frames in the enum share a value,
+	// it is impossible to tell where in the walk cycle the player's
+	// animation is.
 	enum frame_slot 
 	{ 
 		// Invisible
@@ -70,17 +83,29 @@ public:		// enums
 		frm_slot_walk_2, 
 		frm_slot_walk_3,
 		
-		// Swinging the hammer, on the ground
-		frm_slot_hammer_swing_ground_0,
-		frm_slot_hammer_swing_ground_1,
-		frm_slot_hammer_swing_ground_2,
-		frm_slot_hammer_swing_ground_3,
+		// Swinging the hammer, on the ground, while not moving
+		frm_slot_hammer_swing_ground_still_0,
+		frm_slot_hammer_swing_ground_still_1,
+		frm_slot_hammer_swing_ground_still_2,
+		frm_slot_hammer_swing_ground_still_3,
+		frm_slot_hammer_swing_ground_still_4,
+		frm_slot_hammer_swing_ground_still_5,
+		
+		// Swinging the hammer, on the ground, but also moving
+		frm_slot_hammer_swing_ground_moving_0,
+		frm_slot_hammer_swing_ground_moving_1,
+		frm_slot_hammer_swing_ground_moving_2,
+		frm_slot_hammer_swing_ground_moving_3,
+		frm_slot_hammer_swing_ground_moving_4,
+		frm_slot_hammer_swing_ground_moving_5,
 		
 		// Swinging the hammer, in the air
 		frm_slot_hammer_swing_air_0,
 		frm_slot_hammer_swing_air_1,
 		frm_slot_hammer_swing_air_2,
 		frm_slot_hammer_swing_air_3,
+		frm_slot_hammer_swing_air_4,
+		frm_slot_hammer_swing_air_5,
 		
 		// frm_slot_count is the amount of frame_slot's.  It is
 		// automatically updated by the compiler.
@@ -132,13 +157,11 @@ public:		// variables
 	// Graphics constants
 	
 	// A constant array that is intended to be indexed with a frame_slot,
-	// such that a frame_slot can be mapped to a frame.
+	// such that a frame_slot can be mapped to a frame. 
 	static constexpr u32 frame_slot_to_frame_arr_size = frm_slot_count;
 	static const frame frame_slot_to_frame_arr
 		[frame_slot_to_frame_arr_size];
 	
-	static const u32 the_relative_metatile_slot_arr_size;
-	static const u32 the_relative_metatile_slot_arr[];
 	
 	static constexpr sprite_type the_sprite_type = st_player;
 	static constexpr sprite_palette_slot the_palette_slot = sps_player;

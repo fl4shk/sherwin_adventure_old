@@ -3,12 +3,12 @@
 
 //======================================================================
 //
-//	sherwin_gfx, 64x128@4, 
+//	sherwin_gfx, 96x128@4, 
 //	+ palette 16 entries, not compressed
-//	+ 128 tiles Metatiled by 2x4 not compressed
-//	Total size: 32 + 4096 = 4128
+//	+ 192 tiles Metatiled by 2x4 not compressed
+//	Total size: 32 + 6144 = 6176
 //
-//	Time-stamp: 2016-01-17, 16:48:42
+//	Time-stamp: 2016-01-19, 19:10:41
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -17,8 +17,8 @@
 #ifndef GRIT_SHERWIN_GFX_H
 #define GRIT_SHERWIN_GFX_H
 
-#define sherwin_gfxTilesLen 4096
-extern const unsigned short sherwin_gfxTiles[2048];
+#define sherwin_gfxTilesLen 6144
+extern const unsigned short sherwin_gfxTiles[3072];
 
 #define sherwin_gfxPalLen 32
 extern const unsigned short sherwin_gfxPal[16];
