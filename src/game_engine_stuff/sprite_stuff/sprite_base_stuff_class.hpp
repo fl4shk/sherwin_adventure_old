@@ -55,7 +55,7 @@ public:		// variables
 	// that are normally considered to be of a certain size but that use
 	// larger graphics for some frames.  An example of this is the
 	// st_player sprite_type, which is normally considered to be a 16x32
-	// sprite but uses 32x32 graphics in some cases, like during the hammer
+	// sprite but uses 32x32 graphics in some cases, like during the pickaxe
 	// swing animation.
 	static const vec2_f24p8 the_initial_in_level_pos_offset;
 	

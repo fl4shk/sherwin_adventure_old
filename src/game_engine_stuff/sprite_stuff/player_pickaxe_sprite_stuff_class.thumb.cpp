@@ -22,8 +22,8 @@
 #include "sprite_manager_class.hpp"
 
 // Graphics constants
-const player_hammer_sprite_stuff::frame
-	player_hammer_sprite_stuff::frame_slot_to_frame_arr
+const player_pickaxe_sprite_stuff::frame
+	player_pickaxe_sprite_stuff::frame_slot_to_frame_arr
 	[frame_slot_to_frame_arr_size]
 = {
 	frm_angle_0, frm_angle_23, frm_angle_45, frm_angle_90
@@ -32,21 +32,21 @@ const player_hammer_sprite_stuff::frame
 
 
 
-const vec2_f24p8 player_hammer_sprite_stuff::the_initial_coll_box_size
+const vec2_f24p8 player_pickaxe_sprite_stuff::the_initial_coll_box_size
 	= { {15 << fixed24p8::shift}, {15 << fixed24p8::shift} },
-	player_hammer_sprite_stuff::the_initial_cb_pos_offset 
+	player_pickaxe_sprite_stuff::the_initial_cb_pos_offset 
 	= { {0 << fixed24p8::shift}, {0 << fixed24p8::shift} };
 
 
-//void player_hammer_sprite_stuff::update_part_1( sprite& the_hammer )
+//void player_pickaxe_sprite_stuff::update_part_1( sprite& the_pickaxe )
 //{
 //	
 //}
 
-const u32 player_hammer_sprite_stuff::get_curr_relative_tile_slot
-	( sprite& the_hammer )
+const u32 player_pickaxe_sprite_stuff::get_curr_relative_tile_slot
+	( sprite& the_pickaxe )
 {
-	return frame_slot_to_frame_arr[the_hammer.misc_data_u
+	return frame_slot_to_frame_arr[the_pickaxe.misc_data_u
 		[udi_curr_frame_slot]] * num_active_gfx_tiles;
 }
 

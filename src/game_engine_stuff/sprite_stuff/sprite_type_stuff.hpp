@@ -69,7 +69,7 @@ enum sprite_type
 	st_snow_golem,
 	
 	// Secondary Sprites
-	st_player_hammer,
+	st_player_pickaxe,
 	
 	// st_count is the amount of sprite types.  It is automatically updated
 	// by the compiler.
@@ -100,7 +100,7 @@ X(door) \
 X(snow_golem) \
 \
 /* Secondary Sprites */ \
-X(player_hammer)
+X(player_pickaxe)
 
 
 
@@ -121,7 +121,7 @@ X(player_hammer)
 #include "snow_golem_sprite_stuff_class.hpp"
 
 // Secondary Sprites
-#include "player_hammer_sprite_stuff_class.hpp"
+#include "player_pickaxe_sprite_stuff_class.hpp"
 
 
 

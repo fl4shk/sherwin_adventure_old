@@ -16,13 +16,13 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef player_hammer_sprite_stuff_class_hpp
-#define player_hammer_sprite_stuff_class_hpp
+#ifndef player_pickaxe_sprite_stuff_class_hpp
+#define player_pickaxe_sprite_stuff_class_hpp
 
 
 #include "../../gfx/the_16x16_secondary_sprites_gfx.h"
 
-class player_hammer_sprite_stuff : public sprite_base_stuff
+class player_pickaxe_sprite_stuff : public sprite_base_stuff
 {
 public:		// enums
 	// "Global" graphics frames
@@ -64,7 +64,7 @@ public:		// variables
 	static const frame frame_slot_to_frame_arr
 		[frame_slot_to_frame_arr_size];
 	
-	static constexpr sprite_type the_sprite_type = st_player_hammer;
+	static constexpr sprite_type the_sprite_type = st_player_pickaxe;
 	static constexpr sprite_palette_slot the_palette_slot 
 		= sps_secondary_0;
 	
@@ -89,21 +89,21 @@ public:		// functions
 		return the_sprite_type;
 	}
 	
-	//virtual void update_part_1( sprite& the_hammer );
+	//virtual void update_part_1( sprite& the_pickaxe );
 	
-	//virtual void update_part_2( sprite& the_hammer, bg_point& camera_pos,
+	//virtual void update_part_2( sprite& the_pickaxe, bg_point& camera_pos,
 	//	const vec2_u32& the_level_size_2d ) __attribute__((_iwram_code));
 	
 	
 	// Graphics stuff
-	//virtual const u32 get_curr_tile_slot( sprite& the_hammer );
+	//virtual const u32 get_curr_tile_slot( sprite& the_pickaxe );
 	
 	inline virtual const sprite_palette_slot get_palette_slot 
-		( sprite& the_hammer )
+		( sprite& the_pickaxe )
 	{
 		return the_palette_slot;
 	}
-	virtual const u32 get_curr_relative_tile_slot( sprite& the_hammer );
+	virtual const u32 get_curr_relative_tile_slot( sprite& the_pickaxe );
 	
 	inline virtual const u32 get_num_active_gfx_tiles()
 	{
@@ -134,4 +134,4 @@ public:		// functions
 } __attribute__((_align4));
 
 
-#endif		// player_hammer_sprite_stuff_class_hpp
+#endif		// player_pickaxe_sprite_stuff_class_hpp

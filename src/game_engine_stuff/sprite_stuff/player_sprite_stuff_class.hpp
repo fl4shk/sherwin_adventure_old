@@ -39,26 +39,44 @@ public:		// enums
 		frm_walk_0, 
 		frm_walk_1,
 		
-		// Hammer swinging frames, on the ground, while not moving
-		frm_hammer_swing_ground_still_0,
-		frm_hammer_swing_ground_still_1,
-		frm_hammer_swing_ground_still_2,
-		frm_hammer_swing_ground_still_3,
-		frm_hammer_swing_ground_still_4,
-		frm_hammer_swing_ground_still_5,
+		// Weapon swinging frames, on the ground, while not moving
+		frm_weapon_swing_ground_still_0,
+		frm_weapon_swing_ground_still_1,
+		frm_weapon_swing_ground_still_2,
+		frm_weapon_swing_ground_still_3,
+		frm_weapon_swing_ground_still_4,
+		frm_weapon_swing_ground_still_5,
 		
-		// Hammer swinging frames, on the ground, but also moving
-		frm_hammer_swing_ground_moving_0,
-		frm_hammer_swing_ground_moving_1,
-		frm_hammer_swing_ground_moving_2,
-		frm_hammer_swing_ground_moving_3,
-		frm_hammer_swing_ground_moving_4,
-		frm_hammer_swing_ground_moving_5,
+		// Two taller weapon swinging frames, which could be used as part
+		// of item throwing animations instead of
+		// frm_weapon_swing_ground_still_4 and
+		// frm_weapon_swing_ground_still_5.
+		frm_weapon_swing_ground_still_4_tall,
+		frm_weapon_swing_ground_still_5_tall,
 		
-		// Hammer swinging frames, in the air
-		frm_hammer_swing_air_0,
-		frm_hammer_swing_air_1,
-		frm_hammer_swing_air_2,
+		// Weapon swinging frames, on the ground, but also moving, row 0
+		frm_weapon_swing_ground_moving_0_row_0,
+		frm_weapon_swing_ground_moving_1_row_0,
+		frm_weapon_swing_ground_moving_2_row_0,
+		frm_weapon_swing_ground_moving_3_row_0,
+		frm_weapon_swing_ground_moving_4_row_0,
+		frm_weapon_swing_ground_moving_5_row_0,
+		
+		// Weapon swinging frames, on the ground, but also moving, row 1
+		frm_weapon_swing_ground_moving_0_row_1,
+		frm_weapon_swing_ground_moving_1_row_1,
+		frm_weapon_swing_ground_moving_2_row_1,
+		frm_weapon_swing_ground_moving_3_row_1,
+		frm_weapon_swing_ground_moving_4_row_1,
+		frm_weapon_swing_ground_moving_5_row_1,
+		
+		// Weapon swinging frames, on the ground, but also moving, row 2
+		frm_weapon_swing_ground_moving_0_row_2,
+		frm_weapon_swing_ground_moving_1_row_2,
+		frm_weapon_swing_ground_moving_2_row_2,
+		frm_weapon_swing_ground_moving_3_row_2,
+		frm_weapon_swing_ground_moving_4_row_2,
+		frm_weapon_swing_ground_moving_5_row_2,
 		
 		
 	} __attribute__((_align4));
@@ -83,29 +101,53 @@ public:		// enums
 		frm_slot_walk_2, 
 		frm_slot_walk_3,
 		
-		// Swinging the hammer, on the ground, while not moving
-		frm_slot_hammer_swing_ground_still_0,
-		frm_slot_hammer_swing_ground_still_1,
-		frm_slot_hammer_swing_ground_still_2,
-		frm_slot_hammer_swing_ground_still_3,
-		frm_slot_hammer_swing_ground_still_4,
-		frm_slot_hammer_swing_ground_still_5,
+		// Swinging a weapon, on the ground, while not moving
+		frm_slot_weapon_swing_ground_still_0,
+		frm_slot_weapon_swing_ground_still_1,
+		frm_slot_weapon_swing_ground_still_2,
+		frm_slot_weapon_swing_ground_still_3,
+		frm_slot_weapon_swing_ground_still_4,
+		frm_slot_weapon_swing_ground_still_5,
 		
-		// Swinging the hammer, on the ground, but also moving
-		frm_slot_hammer_swing_ground_moving_0,
-		frm_slot_hammer_swing_ground_moving_1,
-		frm_slot_hammer_swing_ground_moving_2,
-		frm_slot_hammer_swing_ground_moving_3,
-		frm_slot_hammer_swing_ground_moving_4,
-		frm_slot_hammer_swing_ground_moving_5,
+		// Two taller weapon swinging frames, which could be used as part
+		// of item throwing animations instead of
+		// frm_slot_weapon_swing_ground_still_4 and
+		// frm_slot_weapon_swing_ground_still_5.
+		frm_slot_weapon_swing_ground_still_4_tall,
+		frm_slot_weapon_swing_ground_still_5_tall,
 		
-		// Swinging the hammer, in the air
-		frm_slot_hammer_swing_air_0,
-		frm_slot_hammer_swing_air_1,
-		frm_slot_hammer_swing_air_2,
-		frm_slot_hammer_swing_air_3,
-		frm_slot_hammer_swing_air_4,
-		frm_slot_hammer_swing_air_5,
+		// Swinging a weapon, on the ground, but also moving, row 0
+		frm_slot_weapon_swing_ground_moving_0_row_0,
+		frm_slot_weapon_swing_ground_moving_1_row_0,
+		frm_slot_weapon_swing_ground_moving_2_row_0,
+		frm_slot_weapon_swing_ground_moving_3_row_0,
+		frm_slot_weapon_swing_ground_moving_4_row_0,
+		frm_slot_weapon_swing_ground_moving_5_row_0,
+		
+		// Swinging a weapon, on the ground, but also moving, row 1
+		frm_slot_weapon_swing_ground_moving_0_row_1,
+		frm_slot_weapon_swing_ground_moving_1_row_1,
+		frm_slot_weapon_swing_ground_moving_2_row_1,
+		frm_slot_weapon_swing_ground_moving_3_row_1,
+		frm_slot_weapon_swing_ground_moving_4_row_1,
+		frm_slot_weapon_swing_ground_moving_5_row_1,
+		
+		// Swinging a weapon, on the ground, but also moving, row 2
+		frm_slot_weapon_swing_ground_moving_0_row_2,
+		frm_slot_weapon_swing_ground_moving_1_row_2,
+		frm_slot_weapon_swing_ground_moving_2_row_2,
+		frm_slot_weapon_swing_ground_moving_3_row_2,
+		frm_slot_weapon_swing_ground_moving_4_row_2,
+		frm_slot_weapon_swing_ground_moving_5_row_2,
+		
+		// Swinging a weapon, in the air (uses the same graphics as the
+		// ones for weapon swing, on the ground, but also moving, row 2).
+		frm_slot_weapon_swing_air_0,
+		frm_slot_weapon_swing_air_1,
+		frm_slot_weapon_swing_air_2,
+		frm_slot_weapon_swing_air_3,
+		frm_slot_weapon_swing_air_4,
+		frm_slot_weapon_swing_air_5,
 		
 		// frm_slot_count is the amount of frame_slot's.  It is
 		// automatically updated by the compiler.
@@ -116,8 +158,8 @@ public:		// enums
 	
 	// These are used to access misc_data_u and misc_data_s
 	enum udata_index { udi_active_walk_frame_slot, 
-		udi_active_hammer_swing_frame_slot } __attribute__((_align4));
-	enum sdata_index { sdi_walk_frame_timer, sdi_hammer_swing_frame_timer } 
+		udi_active_pickaxe_swing_frame_slot } __attribute__((_align4));
+	enum sdata_index { sdi_walk_frame_timer, sdi_pickaxe_swing_frame_timer } 
 		__attribute__((_align4));
 	
 	
@@ -132,8 +174,8 @@ public:		// variables
 	static s32 remaining_hp __attribute__((_iwram));
 	
 	// Hammer stuff
-	static bool swinging_hammer __attribute__((_iwram));
-	static u32 hammer_sprite_slot __attribute__((_iwram));
+	static bool swinging_pickaxe __attribute__((_iwram));
+	static u32 pickaxe_sprite_slot __attribute__((_iwram));
 	
 	
 	
@@ -147,10 +189,11 @@ public:		// variables
 	static constexpr s32 walk_frame_timer_end = 4;
 	static constexpr s32 run_frame_timer_end = 2;
 	
-	//static constexpr s32 hammer_swing_frame_timer_end = 4;
-	//static constexpr s32 hammer_swing_frame_timer_end = 2;
-	static constexpr s32 hammer_swing_frame_timer_end = 4;
-	static constexpr s32 hammer_swing_ground_still_final_frame_timer_end 
+	//static constexpr s32 pickaxe_swing_frame_timer_end = 4;
+	//static constexpr s32 pickaxe_swing_frame_timer_end = 2;
+	static constexpr s32 pickaxe_swing_start_frame_timer_end = 10;
+	static constexpr s32 pickaxe_swing_frame_timer_end = 1;
+	static constexpr s32 pickaxe_swing_still_final_frame_timer_end 
 		= 20;
 	
 	static constexpr fixed24p8 walk_speed = {0x100};
@@ -275,7 +318,7 @@ protected:		// functions
 	
 	virtual void update_frames_and_frame_timers( sprite& the_player );
 	
-	virtual void update_the_hammer( sprite& the_player );
+	virtual void update_the_pickaxe( sprite& the_player );
 	
 	
 	

@@ -35,8 +35,8 @@ s32 player_sprite_stuff::remaining_hp;
 
 
 // Hammer stuff
-bool player_sprite_stuff::swinging_hammer;
-u32 player_sprite_stuff::hammer_sprite_slot;
+bool player_sprite_stuff::swinging_pickaxe;
+u32 player_sprite_stuff::pickaxe_sprite_slot;
 
 
 
@@ -58,20 +58,50 @@ const player_sprite_stuff::frame
 	// Walking/running
 	frm_stand, frm_walk_0, frm_walk_1, frm_walk_0,
 	
-	// Swinging the hammer, on the ground, while not moving
-	frm_hammer_swing_ground_still_0, frm_hammer_swing_ground_still_1,
-	frm_hammer_swing_ground_still_2, frm_hammer_swing_ground_still_3,
-	frm_hammer_swing_ground_still_4, frm_hammer_swing_ground_still_5,
+	// Swinging a weapon, on the ground, while not moving
+	frm_weapon_swing_ground_still_0, frm_weapon_swing_ground_still_1,
+	frm_weapon_swing_ground_still_2, frm_weapon_swing_ground_still_3,
+	frm_weapon_swing_ground_still_4, frm_weapon_swing_ground_still_5,
 	
-	// Swinging the hammer, on the ground, but also moving
-	frm_hammer_swing_ground_moving_0, frm_hammer_swing_ground_moving_1,
-	frm_hammer_swing_ground_moving_2, frm_hammer_swing_ground_moving_3,
-	frm_hammer_swing_ground_moving_4, frm_hammer_swing_ground_moving_5,
+	// Two taller weapon swinging frames, which could be used as part
+	// of item throwing animations instead of
+	// frm_weapon_swing_ground_still_4 and
+	// frm_weapon_swing_ground_still_5.
+	frm_weapon_swing_ground_still_4_tall,
+	frm_weapon_swing_ground_still_5_tall,
 	
-	// Swinging the hammer, in the air
-	frm_hammer_swing_air_0, frm_hammer_swing_air_1, frm_hammer_swing_air_2,
-	frm_hammer_swing_ground_moving_3, frm_hammer_swing_ground_moving_4,
-	frm_hammer_swing_ground_moving_5,
+	// Swinging a weapon, on the ground, but also moving, row 0
+	frm_weapon_swing_ground_moving_0_row_0, 
+	frm_weapon_swing_ground_moving_1_row_0,
+	frm_weapon_swing_ground_moving_2_row_0,
+	frm_weapon_swing_ground_moving_3_row_0,
+	frm_weapon_swing_ground_moving_4_row_0,
+	frm_weapon_swing_ground_moving_5_row_0,
+	
+	// Swinging a weapon, on the ground, but also moving, row 1
+	frm_weapon_swing_ground_moving_0_row_1,
+	frm_weapon_swing_ground_moving_1_row_1,
+	frm_weapon_swing_ground_moving_2_row_1,
+	frm_weapon_swing_ground_moving_3_row_1,
+	frm_weapon_swing_ground_moving_4_row_1,
+	frm_weapon_swing_ground_moving_5_row_1,
+	
+	// Swinging a weapon, on the ground, but also moving, row 2
+	frm_weapon_swing_ground_moving_0_row_2,
+	frm_weapon_swing_ground_moving_1_row_2,
+	frm_weapon_swing_ground_moving_2_row_2,
+	frm_weapon_swing_ground_moving_3_row_2,
+	frm_weapon_swing_ground_moving_4_row_2,
+	frm_weapon_swing_ground_moving_5_row_2,
+	
+	// Swinging a weapon, in the air (uses the same graphics as the
+	// ones for weapon swing, on the ground, but also moving, row 2).
+	frm_weapon_swing_ground_moving_0_row_2,
+	frm_weapon_swing_ground_moving_1_row_2,
+	frm_weapon_swing_ground_moving_2_row_2,
+	frm_weapon_swing_ground_moving_3_row_2,
+	frm_weapon_swing_ground_moving_4_row_2,
+	frm_weapon_swing_ground_moving_5_row_2,
 };
 
 
@@ -138,8 +168,8 @@ void player_sprite_stuff::init( sprite& the_player, bool facing_left  )
 	clear_and_set_bits( the_player.the_oam_entry.attr2, 
 		obj_attr2_prio_mask, obj_attr2_prio_1 );
 	
-	swinging_hammer = false;
-	hammer_sprite_slot = -1;
+	swinging_pickaxe = false;
+	pickaxe_sprite_slot = -1;
 }
 
 void player_sprite_stuff::init( sprite& the_player, 
@@ -190,30 +220,30 @@ void player_sprite_stuff::update_part_1( sprite& the_player )
 {
 	gfx_update(the_player);
 	
-	if (!swinging_hammer)
+	if (!swinging_pickaxe)
 	{
 		if ( key_hit(key_r) )
 		{
-			hammer_sprite_slot 
+			pickaxe_sprite_slot 
 				= sprite_manager::spawn_a_player_secondary_sprite_basic
-				( st_player_hammer, the_player.in_level_pos,
+				( st_player_pickaxe, the_player.in_level_pos,
 				gfx_manager::bgofs_mirror[0].curr,
 				the_player.the_oam_entry.get_hflip_status() );
 			
-			if ( hammer_sprite_slot != -1 )
+			if ( pickaxe_sprite_slot != -1 )
 			{
-				swinging_hammer = true;
+				swinging_pickaxe = true;
 			}
 			
 		}
 		
 		//else //if (!key_hit(key_r))
 		//{
-		//	// Despawn the hammer if the_player is no longer swinging it.
+		//	// Despawn the pickaxe if the_player is no longer swinging it.
 		//	sprite_manager::the_player_secondary_sprites
-		//		[hammer_sprite_slot].the_sprite_type = st_default;
+		//		[pickaxe_sprite_slot].the_sprite_type = st_default;
 		//	
-		//	hammer_sprite_slot = -1;
+		//	pickaxe_sprite_slot = -1;
 		//}
 	}
 	
@@ -241,7 +271,7 @@ void player_sprite_stuff::update_part_1( sprite& the_player )
 		
 		the_player.vel.x = -speed;
 		
-		if ( the_player.on_ground && !swinging_hammer )
+		if ( the_player.on_ground && !swinging_pickaxe )
 		{
 			the_player.the_oam_entry.enable_hflip();
 		}
@@ -256,7 +286,7 @@ void player_sprite_stuff::update_part_1( sprite& the_player )
 		
 		the_player.vel.x = speed;
 		
-		if ( the_player.on_ground && !swinging_hammer )
+		if ( the_player.on_ground && !swinging_pickaxe )
 		{
 			the_player.the_oam_entry.disable_hflip();
 		}
@@ -286,10 +316,10 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 		[udi_active_walk_frame_slot];
 	
 	// Hammer swing frame stuff
-	s32& hammer_swing_frame_timer = the_player.misc_data_s
-		[sdi_hammer_swing_frame_timer];
-	u32& active_hammer_swing_frame_slot = the_player.misc_data_u
-		[udi_active_hammer_swing_frame_slot];
+	s32& pickaxe_swing_frame_timer = the_player.misc_data_s
+		[sdi_pickaxe_swing_frame_timer];
+	u32& active_pickaxe_swing_frame_slot = the_player.misc_data_u
+		[udi_active_pickaxe_swing_frame_slot];
 	
 	update_frames_and_frame_timers(the_player);
 	
@@ -409,7 +439,7 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 	the_player.copy_the_oam_entry_to_oam_mirror
 		(sprite_manager::the_player_oam_index);
 	
-	update_the_hammer(the_player);
+	update_the_pickaxe(the_player);
 	
 }
 
@@ -422,10 +452,10 @@ void player_sprite_stuff::update_frames_and_frame_timers
 		[udi_active_walk_frame_slot];
 	
 	// Hammer swing frame stuff
-	s32& hammer_swing_frame_timer = the_player.misc_data_s
-		[sdi_hammer_swing_frame_timer];
-	u32& active_hammer_swing_frame_slot = the_player.misc_data_u
-		[udi_active_hammer_swing_frame_slot];
+	s32& pickaxe_swing_frame_timer = the_player.misc_data_s
+		[sdi_pickaxe_swing_frame_timer];
+	u32& active_pickaxe_swing_frame_slot = the_player.misc_data_u
+		[udi_active_pickaxe_swing_frame_slot];
 	
 	
 	if ( active_walk_frame_slot < frm_slot_walk_0 
@@ -434,155 +464,159 @@ void player_sprite_stuff::update_frames_and_frame_timers
 		active_walk_frame_slot = frm_slot_walk_0;
 	}
 	
-	if (!swinging_hammer)
+	if (!swinging_pickaxe)
 	{
-		hammer_swing_frame_timer = 0;
-		active_hammer_swing_frame_slot 
-			= frm_slot_hammer_swing_ground_still_0;
+		pickaxe_swing_frame_timer = 0;
+		active_pickaxe_swing_frame_slot 
+			= frm_slot_weapon_swing_ground_still_0;
 	}
 	
-	if (!swinging_hammer)
+	if (the_player.on_ground)
 	{
-		if (the_player.on_ground)
+		auto lambda_func_for_else_if = [&]( const u32 frame_timer_end )
+			-> void
 		{
-			auto lambda_func_for_else_if = [&]( const u32 frame_timer_end ) 
-				-> void
+			++walk_frame_timer;
+			
+			if ( walk_frame_timer > frame_timer_end )
 			{
-				++walk_frame_timer;
+				walk_frame_timer = 0;
 				
-				if ( walk_frame_timer > frame_timer_end )
+				if ( active_walk_frame_slot == frm_slot_walk_0 )
 				{
-					walk_frame_timer = 0;
-					
-					if ( active_walk_frame_slot == frm_slot_walk_0 )
-					{
-						active_walk_frame_slot = frm_slot_walk_1;
-					}
-					else if ( active_walk_frame_slot == frm_slot_walk_1 )
-					{
-						active_walk_frame_slot = frm_slot_walk_2;
-					}
-					else if ( active_walk_frame_slot == frm_slot_walk_2 )
-					{
-						active_walk_frame_slot = frm_slot_walk_3;
-					}
-					else if ( active_walk_frame_slot == frm_slot_walk_3 )
-					{
-						active_walk_frame_slot = frm_slot_walk_0;
-					}
-					
+					active_walk_frame_slot = frm_slot_walk_1;
+				}
+				else if ( active_walk_frame_slot == frm_slot_walk_1 )
+				{
+					active_walk_frame_slot = frm_slot_walk_2;
+				}
+				else if ( active_walk_frame_slot == frm_slot_walk_2 )
+				{
+					active_walk_frame_slot = frm_slot_walk_3;
+				}
+				else if ( active_walk_frame_slot == frm_slot_walk_3 )
+				{
+					active_walk_frame_slot = frm_slot_walk_0;
 				}
 				
-			};
-			
-			// Standing still
-			if ( speed == (fixed24p8){0} )
-			{
-				walk_frame_timer = 0;
-				//active_walk_frame_slot = frm_slot_walk_1;
-				active_walk_frame_slot = frm_slot_walk_0;
 			}
 			
-			
-			// Walking speed or not-max running speed
-			else if ( speed >= walk_speed && speed < max_run_speed )
-			{
-				lambda_func_for_else_if(walk_frame_timer_end);
-			}
-			
-			// Max running speed
-			else if ( speed == max_run_speed )
-			{
-				lambda_func_for_else_if(run_frame_timer_end);
-			}
-			
-			else
-			{
-				// This should NEVER happen, so show a walking frame as a
-				// debugging tool
-				walk_frame_timer = 0;
-				active_walk_frame_slot = frm_slot_walk_3;
-			}
-		}
-		else //if (!the_player.on_ground)
+		};
+		
+		// Standing still
+		if ( speed == (fixed24p8){0} )
 		{
-			active_walk_frame_slot = frm_slot_walk_2;
+			walk_frame_timer = 0;
+			//active_walk_frame_slot = frm_slot_walk_1;
+			active_walk_frame_slot = frm_slot_walk_0;
+		}
+		
+		
+		// Walking speed or not-max running speed
+		else if ( speed >= walk_speed && speed < max_run_speed )
+		{
+			lambda_func_for_else_if(walk_frame_timer_end);
+		}
+		
+		// Max running speed
+		else if ( speed == max_run_speed )
+		{
+			lambda_func_for_else_if(run_frame_timer_end);
+		}
+		
+		else
+		{
+			// This should NEVER happen, so show a walking frame as a
+			// debugging tool
+			walk_frame_timer = 0;
+			active_walk_frame_slot = frm_slot_walk_3;
 		}
 	}
-	else //if (swinging_hammer)
+	else //if (!the_player.on_ground)
 	{
-		++hammer_swing_frame_timer;
+		active_walk_frame_slot = frm_slot_walk_2;
+	}
+	
+	if (swinging_pickaxe)
+	{
+		++pickaxe_swing_frame_timer;
 		
-		if ( hammer_swing_frame_timer > hammer_swing_frame_timer_end )
+		if ( pickaxe_swing_frame_timer > pickaxe_swing_frame_timer_end )
 		{
-			if ( active_hammer_swing_frame_slot 
-				!= frm_slot_hammer_swing_ground_still_5 )
+			if ( active_pickaxe_swing_frame_slot
+				!= frm_slot_weapon_swing_ground_still_0
+				&& active_pickaxe_swing_frame_slot 
+				!= frm_slot_weapon_swing_ground_still_5 )
 			{
-				hammer_swing_frame_timer = 0;
+				pickaxe_swing_frame_timer = 0;
 			}
 			
-			switch (active_hammer_swing_frame_slot)
+			switch (active_pickaxe_swing_frame_slot)
 			{
-				case frm_slot_hammer_swing_ground_still_0:
-					active_hammer_swing_frame_slot 
-						= frm_slot_hammer_swing_ground_still_1;
+				case frm_slot_weapon_swing_ground_still_0:
+					if ( pickaxe_swing_frame_timer
+						> pickaxe_swing_start_frame_timer_end )
+					{
+						active_pickaxe_swing_frame_slot 
+							= frm_slot_weapon_swing_ground_still_1;
+					}
 					break;
 				
-				case frm_slot_hammer_swing_ground_still_1:
-					active_hammer_swing_frame_slot 
-						= frm_slot_hammer_swing_ground_still_2;
+				case frm_slot_weapon_swing_ground_still_1:
+					active_pickaxe_swing_frame_slot 
+						= frm_slot_weapon_swing_ground_still_2;
 					break;
 				
-				case frm_slot_hammer_swing_ground_still_2:
-					active_hammer_swing_frame_slot 
-						= frm_slot_hammer_swing_ground_still_3;
+				case frm_slot_weapon_swing_ground_still_2:
+					active_pickaxe_swing_frame_slot 
+						= frm_slot_weapon_swing_ground_still_3;
 					break;
 				
-				case frm_slot_hammer_swing_ground_still_3:
-					active_hammer_swing_frame_slot 
-						= frm_slot_hammer_swing_ground_still_4;
+				case frm_slot_weapon_swing_ground_still_3:
+					active_pickaxe_swing_frame_slot 
+						= frm_slot_weapon_swing_ground_still_4;
 					break;
 				
-				case frm_slot_hammer_swing_ground_still_4:
-					active_hammer_swing_frame_slot 
-						= frm_slot_hammer_swing_ground_still_5;
+				case frm_slot_weapon_swing_ground_still_4:
+					active_pickaxe_swing_frame_slot 
+						= frm_slot_weapon_swing_ground_still_5;
 					break;
 				
-				case frm_slot_hammer_swing_ground_still_5:
-					//active_hammer_swing_frame_slot 
-					//	= frm_slot_hammer_swing_ground_still_0;
+				case frm_slot_weapon_swing_ground_still_5:
+					//active_pickaxe_swing_frame_slot 
+					//	= frm_slot_weapon_swing_ground_still_0;
 					
 					if ( speed == (fixed24p8){0} && the_player.on_ground 
-						&& hammer_swing_frame_timer 
-						> hammer_swing_ground_still_final_frame_timer_end )
+						&& pickaxe_swing_frame_timer 
+						> pickaxe_swing_still_final_frame_timer_end )
 					{
-						hammer_swing_frame_timer = 0;
-						swinging_hammer = false;
+						pickaxe_swing_frame_timer = 0;
+						swinging_pickaxe = false;
 					}
 					else if ( speed != (fixed24p8){0} 
 						|| !the_player.on_ground )
 					{
-						hammer_swing_frame_timer = 0;
-						swinging_hammer = false;
+						pickaxe_swing_frame_timer = 0;
+						swinging_pickaxe = false;
 					}
 					
 					break;
 				
 				default:
-					swinging_hammer = false;
+					swinging_pickaxe = false;
 					break;
 				
 			}
 			
 		}
 		
-		//if (swinging_hammer)
+		//if (swinging_pickaxe)
 		//{
 		//	return frame_slot_to_frame_arr
-		//		[active_hammer_swing_frame_slot] 
+		//		[active_pickaxe_swing_frame_slot] 
 		//		* num_active_gfx_tiles;
 		//}
-		//else //if (!swinging_hammer)
+		//else //if (!swinging_pickaxe)
 		//{
 		//	return frame_slot_to_frame_arr[active_walk_frame_slot]
 		//		* num_active_gfx_tiles;
@@ -591,193 +625,193 @@ void player_sprite_stuff::update_frames_and_frame_timers
 	
 }
 
-void player_sprite_stuff::update_the_hammer( sprite& the_player )
+void player_sprite_stuff::update_the_pickaxe( sprite& the_player )
 {
-	if ( hammer_sprite_slot == -1 )
+	if ( pickaxe_sprite_slot == -1 )
 	{
 		return;
 	}
 	
-	sprite& the_hammer = sprite_manager::the_player_secondary_sprites
-		[hammer_sprite_slot];
-	u32& the_hammer_frame_slot = the_hammer.misc_data_u
-		[player_hammer_sprite_stuff::udi_curr_frame_slot];
+	sprite& the_pickaxe = sprite_manager::the_player_secondary_sprites
+		[pickaxe_sprite_slot];
+	u32& the_pickaxe_frame_slot = the_pickaxe.misc_data_u
+		[player_pickaxe_sprite_stuff::udi_curr_frame_slot];
 	
-	if (!swinging_hammer)
+	if (!swinging_pickaxe)
 	{
-		// Despawn the hammer if the_player is no longer swinging it.
-		the_hammer.the_sprite_type = st_default;
+		// Despawn the pickaxe if the_player is no longer swinging it.
+		the_pickaxe.the_sprite_type = st_default;
 		
-		hammer_sprite_slot = -1;
+		pickaxe_sprite_slot = -1;
 	}
-	else //if (swinging_hammer)
+	else //if (swinging_pickaxe)
 	{
-		u32 active_hammer_swing_frame_slot = the_player.misc_data_u
-			[udi_active_hammer_swing_frame_slot];
+		u32 active_pickaxe_swing_frame_slot = the_player.misc_data_u
+			[udi_active_pickaxe_swing_frame_slot];
 		
-		if ( active_hammer_swing_frame_slot 
-			>= frm_slot_hammer_swing_ground_still_0 
-			&& active_hammer_swing_frame_slot 
-			<= frm_slot_hammer_swing_ground_still_1 )
+		if ( active_pickaxe_swing_frame_slot 
+			>= frm_slot_weapon_swing_ground_still_0 
+			&& active_pickaxe_swing_frame_slot 
+			<= frm_slot_weapon_swing_ground_still_1 )
 		{
 			if ( the_player.the_oam_entry.get_hflip_status() 
-				&& the_hammer.the_oam_entry.get_hflip_status() )
+				&& the_pickaxe.the_oam_entry.get_hflip_status() )
 			{
-				the_hammer.the_oam_entry.disable_hflip();
+				the_pickaxe.the_oam_entry.disable_hflip();
 			}
 			else if ( !the_player.the_oam_entry.get_hflip_status() 
-				&& !the_hammer.the_oam_entry.get_hflip_status() )
+				&& !the_pickaxe.the_oam_entry.get_hflip_status() )
 			{
-				the_hammer.the_oam_entry.enable_hflip();
+				the_pickaxe.the_oam_entry.enable_hflip();
 			}
 		}
 		else
 		{
 			if ( the_player.the_oam_entry.get_hflip_status() 
-				&& !the_hammer.the_oam_entry.get_hflip_status() )
+				&& !the_pickaxe.the_oam_entry.get_hflip_status() )
 			{
-				the_hammer.the_oam_entry.enable_hflip();
+				the_pickaxe.the_oam_entry.enable_hflip();
 			}
 			else if ( !the_player.the_oam_entry.get_hflip_status() 
-				&& the_hammer.the_oam_entry.get_hflip_status() )
+				&& the_pickaxe.the_oam_entry.get_hflip_status() )
 			{
-				the_hammer.the_oam_entry.disable_hflip();
+				the_pickaxe.the_oam_entry.disable_hflip();
 			}
 		}
 		
-		switch (active_hammer_swing_frame_slot)
+		switch (active_pickaxe_swing_frame_slot)
 		{
-			case frm_slot_hammer_swing_ground_still_0:
-				the_hammer_frame_slot = player_hammer_sprite_stuff
+			case frm_slot_weapon_swing_ground_still_0:
+				the_pickaxe_frame_slot = player_pickaxe_sprite_stuff
 					::frm_slot_angle_45;
 				if ( !the_player.the_oam_entry.get_hflip_status() )
 				{
-					the_hammer.in_level_pos = the_player.in_level_pos
+					the_pickaxe.in_level_pos = the_player.in_level_pos
 						+ (vec2_f24p8){ make_f24p8(-14), make_f24p8(0) };
 				}
 				else //if ( the_player.the_oam_entry.get_hflip_status() )
 				{
-					the_hammer.in_level_pos = the_player.in_level_pos
+					the_pickaxe.in_level_pos = the_player.in_level_pos
 						+ (vec2_f24p8){ make_f24p8(14), make_f24p8(0) };
 				}
 				
-				the_hammer.update_f24p8_positions();
+				the_pickaxe.update_f24p8_positions();
 				
 				break;
 			
-			case frm_slot_hammer_swing_ground_still_1:
-				the_hammer_frame_slot = player_hammer_sprite_stuff
+			case frm_slot_weapon_swing_ground_still_1:
+				the_pickaxe_frame_slot = player_pickaxe_sprite_stuff
 					::frm_slot_angle_23;
 				if ( !the_player.the_oam_entry.get_hflip_status() )
 				{
-					the_hammer.in_level_pos = the_player.in_level_pos
-						+ (vec2_f24p8){ make_f24p8(-8), make_f24p8(-3) };
+					the_pickaxe.in_level_pos = the_player.in_level_pos
+						+ (vec2_f24p8){ make_f24p8(-10), make_f24p8(-2) };
 				}
 				else //if ( the_player.the_oam_entry.get_hflip_status() )
 				{
-					the_hammer.in_level_pos = the_player.in_level_pos
-						+ (vec2_f24p8){ make_f24p8(8), make_f24p8(-3) };
+					the_pickaxe.in_level_pos = the_player.in_level_pos
+						+ (vec2_f24p8){ make_f24p8(10), make_f24p8(-2) };
 				}
 				if ( ( speed != (fixed24p8){0} && the_player.on_ground )
 					|| !the_player.on_ground )
 				{
-					the_hammer.in_level_pos.y -= make_f24p8(1);
+					the_pickaxe.in_level_pos.y -= make_f24p8(1);
 				}
 				
-				the_hammer.update_f24p8_positions();
+				the_pickaxe.update_f24p8_positions();
 				
 				break;
 			
-			case frm_slot_hammer_swing_ground_still_2:
-				the_hammer_frame_slot = player_hammer_sprite_stuff
+			case frm_slot_weapon_swing_ground_still_2:
+				the_pickaxe_frame_slot = player_pickaxe_sprite_stuff
 					::frm_slot_angle_0;
 				if ( !the_player.the_oam_entry.get_hflip_status() )
 				{
-					the_hammer.in_level_pos = the_player.in_level_pos
+					the_pickaxe.in_level_pos = the_player.in_level_pos
 						+ (vec2_f24p8){ make_f24p8(-1), make_f24p8(-4) };
 				}
 				else //if ( the_player.the_oam_entry.get_hflip_status() )
 				{
-					the_hammer.in_level_pos = the_player.in_level_pos
+					the_pickaxe.in_level_pos = the_player.in_level_pos
 						+ (vec2_f24p8){ make_f24p8(1), make_f24p8(-4) };
 				}
 				if ( ( speed != (fixed24p8){0} && the_player.on_ground )
 					|| !the_player.on_ground )
 				{
-					the_hammer.in_level_pos.y -= make_f24p8(1);
+					the_pickaxe.in_level_pos.y -= make_f24p8(1);
 				}
 				
-				the_hammer.update_f24p8_positions();
+				the_pickaxe.update_f24p8_positions();
 				
 				break;
 			
-			case frm_slot_hammer_swing_ground_still_3:
-				the_hammer_frame_slot = player_hammer_sprite_stuff
+			case frm_slot_weapon_swing_ground_still_3:
+				the_pickaxe_frame_slot = player_pickaxe_sprite_stuff
 					::frm_slot_angle_23;
 				if ( !the_player.the_oam_entry.get_hflip_status() )
 				{
-					the_hammer.in_level_pos = the_player.in_level_pos
-						+ (vec2_f24p8){ make_f24p8(5), make_f24p8(-3) };
+					the_pickaxe.in_level_pos = the_player.in_level_pos
+						+ (vec2_f24p8){ make_f24p8(7), make_f24p8(-2) };
 				}
 				else //if ( the_player.the_oam_entry.get_hflip_status() )
 				{
-					the_hammer.in_level_pos = the_player.in_level_pos
-						+ (vec2_f24p8){ make_f24p8(-5), make_f24p8(-3) };
+					the_pickaxe.in_level_pos = the_player.in_level_pos
+						+ (vec2_f24p8){ make_f24p8(-7), make_f24p8(-2) };
 				}
 				if ( ( speed != (fixed24p8){0} && the_player.on_ground )
 					|| !the_player.on_ground )
 				{
-					the_hammer.in_level_pos.y -= make_f24p8(1);
+					the_pickaxe.in_level_pos.y -= make_f24p8(1);
 				}
 				
-				the_hammer.update_f24p8_positions();
+				the_pickaxe.update_f24p8_positions();
 				
 				break;
 			
-			case frm_slot_hammer_swing_ground_still_4:
-				the_hammer_frame_slot = player_hammer_sprite_stuff
+			case frm_slot_weapon_swing_ground_still_4:
+				the_pickaxe_frame_slot = player_pickaxe_sprite_stuff
 					::frm_slot_angle_45;
 				if ( !the_player.the_oam_entry.get_hflip_status() )
 				{
-					the_hammer.in_level_pos = the_player.in_level_pos
+					the_pickaxe.in_level_pos = the_player.in_level_pos
 						+ (vec2_f24p8){ make_f24p8(11), make_f24p8(3) };
 				}
 				else //if ( the_player.the_oam_entry.get_hflip_status() )
 				{
-					the_hammer.in_level_pos = the_player.in_level_pos
+					the_pickaxe.in_level_pos = the_player.in_level_pos
 						+ (vec2_f24p8){ make_f24p8(-11), make_f24p8(3) };
 				}
 				if ( ( speed != (fixed24p8){0} && the_player.on_ground )
 					|| !the_player.on_ground )
 				{
-					the_hammer.in_level_pos.y -= make_f24p8(2);
+					the_pickaxe.in_level_pos.y -= make_f24p8(2);
 				}
 				
-				the_hammer.update_f24p8_positions();
+				the_pickaxe.update_f24p8_positions();
 				
 				break;
 			
 			
-			case frm_slot_hammer_swing_ground_still_5:
-				the_hammer_frame_slot = player_hammer_sprite_stuff
+			case frm_slot_weapon_swing_ground_still_5:
+				the_pickaxe_frame_slot = player_pickaxe_sprite_stuff
 					::frm_slot_angle_90;
 				if ( !the_player.the_oam_entry.get_hflip_status() )
 				{
-					the_hammer.in_level_pos = the_player.in_level_pos
+					the_pickaxe.in_level_pos = the_player.in_level_pos
 						+ (vec2_f24p8){ make_f24p8(14), make_f24p8(17) };
 				}
 				else //if ( the_player.the_oam_entry.get_hflip_status() )
 				{
-					the_hammer.in_level_pos = the_player.in_level_pos
+					the_pickaxe.in_level_pos = the_player.in_level_pos
 						+ (vec2_f24p8){ make_f24p8(-14), make_f24p8(17) };
 				}
 				if ( ( speed != (fixed24p8){0} && the_player.on_ground )
 					|| !the_player.on_ground )
 				{
-					the_hammer.in_level_pos.y -= make_f24p8(3);
+					the_pickaxe.in_level_pos.y -= make_f24p8(3);
 				}
 				
-				the_hammer.update_f24p8_positions();
+				the_pickaxe.update_f24p8_positions();
 				
 				break;
 			
@@ -803,13 +837,13 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 		[udi_active_walk_frame_slot];
 	
 	// Hammer swing frame stuff
-	s32& hammer_swing_frame_timer = the_player.misc_data_s
-		[sdi_hammer_swing_frame_timer];
-	u32& active_hammer_swing_frame_slot = the_player.misc_data_u
-		[udi_active_hammer_swing_frame_slot];
+	s32& pickaxe_swing_frame_timer = the_player.misc_data_s
+		[sdi_pickaxe_swing_frame_timer];
+	u32& active_pickaxe_swing_frame_slot = the_player.misc_data_u
+		[udi_active_pickaxe_swing_frame_slot];
 	
 	
-	if (!swinging_hammer)
+	if (!swinging_pickaxe)
 	{
 		if (the_player.on_ground)
 		{
@@ -819,7 +853,6 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 				return frame_slot_to_frame_arr[frm_slot_walk_0]
 					* num_active_gfx_tiles;
 			}
-			
 			
 			// Walking speed or not-max running speed
 			else if ( speed >= walk_speed && speed < max_run_speed )
@@ -851,163 +884,59 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 				* num_active_gfx_tiles;
 		}
 	}
-	else //if (swinging_hammer)
+	else //if (swinging_pickaxe)
 	{
-		switch (active_hammer_swing_frame_slot)
+		switch (active_pickaxe_swing_frame_slot)
 		{
-			case frm_slot_hammer_swing_ground_still_0:
-				if (the_player.on_ground)
-				{
-					if ( speed == (fixed24p8){0} )
-					{
-						return frame_slot_to_frame_arr
-							[frm_slot_hammer_swing_ground_still_0] 
-							* num_active_gfx_tiles;
-					}
-					else
-					{
-						return frame_slot_to_frame_arr
-							[frm_slot_hammer_swing_ground_moving_0] 
-							* num_active_gfx_tiles;
-					}
-				}
-				else //if (!the_player.on_ground)
-				{
-					return frame_slot_to_frame_arr
-						[frm_slot_hammer_swing_air_0] 
-						* num_active_gfx_tiles;
-				}
-				
-				break;
+			// Yay, another use for X-macros!
+			#define list_of_weapon_swing_frame_slot_numbers(macro) \
+				macro(0) macro(1) macro(2) macro(3) macro(4) macro(5)
 			
-			case frm_slot_hammer_swing_ground_still_1:
-				if (the_player.on_ground)
-				{
-					if ( speed == (fixed24p8){0} )
-					{
-						return frame_slot_to_frame_arr
-							[frm_slot_hammer_swing_ground_still_1] 
-							* num_active_gfx_tiles;
-					}
-					else
-					{
-						return frame_slot_to_frame_arr
-							[frm_slot_hammer_swing_ground_moving_1] 
-							* num_active_gfx_tiles;
-					}
-				}
-				else //if (!the_player.on_ground)
-				{
-					return frame_slot_to_frame_arr
-						[frm_slot_hammer_swing_air_1] 
-						* num_active_gfx_tiles;
-				}
-				
-				break;
+			#define X(number) \
+			\
+			case frm_slot_weapon_swing_ground_still_##number: \
+				if (the_player.on_ground) \
+				{ \
+					if ( speed == (fixed24p8){0} ) \
+					{ \
+						return frame_slot_to_frame_arr \
+							[frm_slot_weapon_swing_ground_still_ \
+							## number] * num_active_gfx_tiles; \
+					} \
+					else if ( active_walk_frame_slot \
+						== frm_slot_walk_0 ) \
+					{ \
+						return frame_slot_to_frame_arr \
+							[frm_slot_weapon_swing_ground_moving_ \
+							## number ## _row_0] * num_active_gfx_tiles; \
+					} \
+					else if ( active_walk_frame_slot == frm_slot_walk_1 \
+						|| active_walk_frame_slot == frm_slot_walk_3 ) \
+					{ \
+						return frame_slot_to_frame_arr \
+							[frm_slot_weapon_swing_ground_moving_ \
+							## number ## _row_1] * num_active_gfx_tiles; \
+					} \
+					else if ( active_walk_frame_slot \
+						== frm_slot_walk_2 ) \
+					{ \
+						return frame_slot_to_frame_arr \
+							[frm_slot_weapon_swing_ground_moving_ \
+							## number ## _row_2] * num_active_gfx_tiles; \
+					} \
+				} \
+				else /*if (!the_player.on_ground)*/ \
+				{ \
+					return frame_slot_to_frame_arr \
+						[frm_slot_weapon_swing_air_##number] \
+						* num_active_gfx_tiles; \
+				} \
+				\
+				break; \
 			
+			list_of_weapon_swing_frame_slot_numbers(X)
+			#undef X
 			
-			case frm_slot_hammer_swing_ground_still_2:
-				if (the_player.on_ground)
-				{
-					if ( speed == (fixed24p8){0} )
-					{
-						return frame_slot_to_frame_arr
-							[frm_slot_hammer_swing_ground_still_2] 
-							* num_active_gfx_tiles;
-					}
-					else
-					{
-						return frame_slot_to_frame_arr
-							[frm_slot_hammer_swing_ground_moving_2] 
-							* num_active_gfx_tiles;
-					}
-				}
-				else //if (!the_player.on_ground)
-				{
-					return frame_slot_to_frame_arr
-						[frm_slot_hammer_swing_air_2] 
-						* num_active_gfx_tiles;
-				}
-				
-				break;
-			
-			
-			case frm_slot_hammer_swing_ground_still_3:
-				if (the_player.on_ground)
-				{
-					if ( speed == (fixed24p8){0} )
-					{
-						return frame_slot_to_frame_arr
-							[frm_slot_hammer_swing_ground_still_3] 
-							* num_active_gfx_tiles;
-					}
-					else
-					{
-						return frame_slot_to_frame_arr
-							[frm_slot_hammer_swing_ground_moving_3] 
-							* num_active_gfx_tiles;
-					}
-				}
-				else //if (!the_player.on_ground)
-				{
-					return frame_slot_to_frame_arr
-						[frm_slot_hammer_swing_air_3] 
-						* num_active_gfx_tiles;
-				}
-				
-				break;
-			
-			
-			case frm_slot_hammer_swing_ground_still_4:
-				if (the_player.on_ground)
-				{
-					if ( speed == (fixed24p8){0} )
-					{
-						return frame_slot_to_frame_arr
-							[frm_slot_hammer_swing_ground_still_4] 
-							* num_active_gfx_tiles;
-					}
-					else
-					{
-						return frame_slot_to_frame_arr
-							[frm_slot_hammer_swing_ground_moving_4] 
-							* num_active_gfx_tiles;
-					}
-				}
-				else //if (!the_player.on_ground)
-				{
-					return frame_slot_to_frame_arr
-						[frm_slot_hammer_swing_air_4] 
-						* num_active_gfx_tiles;
-				}
-				
-				break;
-			
-			
-			case frm_slot_hammer_swing_ground_still_5:
-				if (the_player.on_ground)
-				{
-					if ( speed == (fixed24p8){0} )
-					{
-						return frame_slot_to_frame_arr
-							[frm_slot_hammer_swing_ground_still_5] 
-							* num_active_gfx_tiles;
-					}
-					else
-					{
-						return frame_slot_to_frame_arr
-							[frm_slot_hammer_swing_ground_moving_5] 
-							* num_active_gfx_tiles;
-					}
-				}
-				else //if (!the_player.on_ground)
-				{
-					return frame_slot_to_frame_arr
-						[frm_slot_hammer_swing_air_5] 
-						* num_active_gfx_tiles;
-				}
-				
-				break;
 			
 			
 			default:
