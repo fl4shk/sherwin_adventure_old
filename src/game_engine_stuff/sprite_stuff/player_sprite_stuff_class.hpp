@@ -149,7 +149,9 @@ public:		// variables
 	
 	//static constexpr s32 hammer_swing_frame_timer_end = 4;
 	//static constexpr s32 hammer_swing_frame_timer_end = 2;
-	static constexpr s32 hammer_swing_frame_timer_end = 3;
+	static constexpr s32 hammer_swing_frame_timer_end = 4;
+	static constexpr s32 hammer_swing_ground_still_final_frame_timer_end 
+		= 20;
 	
 	static constexpr fixed24p8 walk_speed = {0x100};
 	static constexpr fixed24p8 max_run_speed = {0x200};

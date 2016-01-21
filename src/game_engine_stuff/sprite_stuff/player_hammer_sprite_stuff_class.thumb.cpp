@@ -33,7 +33,7 @@ const player_hammer_sprite_stuff::frame
 
 
 const vec2_f24p8 player_hammer_sprite_stuff::the_initial_coll_box_size
-	= { {14 << fixed24p8::shift}, {14 << fixed24p8::shift} },
+	= { {15 << fixed24p8::shift}, {15 << fixed24p8::shift} },
 	player_hammer_sprite_stuff::the_initial_cb_pos_offset 
 	= { {0 << fixed24p8::shift}, {0 << fixed24p8::shift} };
 

@@ -515,33 +515,57 @@ void player_sprite_stuff::update_frames_and_frame_timers
 		
 		if ( hammer_swing_frame_timer > hammer_swing_frame_timer_end )
 		{
-			hammer_swing_frame_timer = 0;
+			if ( active_hammer_swing_frame_slot 
+				!= frm_slot_hammer_swing_ground_still_5 )
+			{
+				hammer_swing_frame_timer = 0;
+			}
 			
 			switch (active_hammer_swing_frame_slot)
 			{
 				case frm_slot_hammer_swing_ground_still_0:
-				case frm_slot_hammer_swing_air_0:
 					active_hammer_swing_frame_slot 
 						= frm_slot_hammer_swing_ground_still_1;
 					break;
 				
 				case frm_slot_hammer_swing_ground_still_1:
-				case frm_slot_hammer_swing_air_1:
 					active_hammer_swing_frame_slot 
 						= frm_slot_hammer_swing_ground_still_2;
 					break;
 				
 				case frm_slot_hammer_swing_ground_still_2:
-				case frm_slot_hammer_swing_air_2:
 					active_hammer_swing_frame_slot 
 						= frm_slot_hammer_swing_ground_still_3;
 					break;
 				
 				case frm_slot_hammer_swing_ground_still_3:
-				case frm_slot_hammer_swing_air_3:
+					active_hammer_swing_frame_slot 
+						= frm_slot_hammer_swing_ground_still_4;
+					break;
+				
+				case frm_slot_hammer_swing_ground_still_4:
+					active_hammer_swing_frame_slot 
+						= frm_slot_hammer_swing_ground_still_5;
+					break;
+				
+				case frm_slot_hammer_swing_ground_still_5:
 					//active_hammer_swing_frame_slot 
 					//	= frm_slot_hammer_swing_ground_still_0;
-					swinging_hammer = false;
+					
+					if ( speed == (fixed24p8){0} && the_player.on_ground 
+						&& hammer_swing_frame_timer 
+						> hammer_swing_ground_still_final_frame_timer_end )
+					{
+						hammer_swing_frame_timer = 0;
+						swinging_hammer = false;
+					}
+					else if ( speed != (fixed24p8){0} 
+						|| !the_player.on_ground )
+					{
+						hammer_swing_frame_timer = 0;
+						swinging_hammer = false;
+					}
+					
 					break;
 				
 				default:
@@ -549,6 +573,7 @@ void player_sprite_stuff::update_frames_and_frame_timers
 					break;
 				
 			}
+			
 		}
 		
 		//if (swinging_hammer)
@@ -590,32 +615,50 @@ void player_sprite_stuff::update_the_hammer( sprite& the_player )
 		u32 active_hammer_swing_frame_slot = the_player.misc_data_u
 			[udi_active_hammer_swing_frame_slot];
 		
-		if ( the_player.the_oam_entry.get_hflip_status() 
-			&& !the_hammer.the_oam_entry.get_hflip_status() )
+		if ( active_hammer_swing_frame_slot 
+			>= frm_slot_hammer_swing_ground_still_0 
+			&& active_hammer_swing_frame_slot 
+			<= frm_slot_hammer_swing_ground_still_1 )
 		{
-			the_hammer.the_oam_entry.enable_hflip();
+			if ( the_player.the_oam_entry.get_hflip_status() 
+				&& the_hammer.the_oam_entry.get_hflip_status() )
+			{
+				the_hammer.the_oam_entry.disable_hflip();
+			}
+			else if ( !the_player.the_oam_entry.get_hflip_status() 
+				&& !the_hammer.the_oam_entry.get_hflip_status() )
+			{
+				the_hammer.the_oam_entry.enable_hflip();
+			}
 		}
-		else if ( !the_player.the_oam_entry.get_hflip_status() 
-			&& the_hammer.the_oam_entry.get_hflip_status() )
+		else
 		{
-			the_hammer.the_oam_entry.disable_hflip();
+			if ( the_player.the_oam_entry.get_hflip_status() 
+				&& !the_hammer.the_oam_entry.get_hflip_status() )
+			{
+				the_hammer.the_oam_entry.enable_hflip();
+			}
+			else if ( !the_player.the_oam_entry.get_hflip_status() 
+				&& the_hammer.the_oam_entry.get_hflip_status() )
+			{
+				the_hammer.the_oam_entry.disable_hflip();
+			}
 		}
 		
 		switch (active_hammer_swing_frame_slot)
 		{
 			case frm_slot_hammer_swing_ground_still_0:
-			case frm_slot_hammer_swing_air_0:
 				the_hammer_frame_slot = player_hammer_sprite_stuff
-					::frm_slot_angle_23;
+					::frm_slot_angle_45;
 				if ( !the_player.the_oam_entry.get_hflip_status() )
 				{
 					the_hammer.in_level_pos = the_player.in_level_pos
-						+ (vec2_f24p8){ make_f24p8(-8), make_f24p8(2) };
+						+ (vec2_f24p8){ make_f24p8(-14), make_f24p8(0) };
 				}
 				else //if ( the_player.the_oam_entry.get_hflip_status() )
 				{
 					the_hammer.in_level_pos = the_player.in_level_pos
-						+ (vec2_f24p8){ make_f24p8(8), make_f24p8(2) };
+						+ (vec2_f24p8){ make_f24p8(14), make_f24p8(0) };
 				}
 				
 				the_hammer.update_f24p8_positions();
@@ -623,22 +666,22 @@ void player_sprite_stuff::update_the_hammer( sprite& the_player )
 				break;
 			
 			case frm_slot_hammer_swing_ground_still_1:
-			case frm_slot_hammer_swing_air_1:
 				the_hammer_frame_slot = player_hammer_sprite_stuff
-					::frm_slot_angle_0;
+					::frm_slot_angle_23;
 				if ( !the_player.the_oam_entry.get_hflip_status() )
 				{
 					the_hammer.in_level_pos = the_player.in_level_pos
-						+ (vec2_f24p8){ make_f24p8(0), make_f24p8(-2) };
+						+ (vec2_f24p8){ make_f24p8(-8), make_f24p8(-3) };
 				}
 				else //if ( the_player.the_oam_entry.get_hflip_status() )
 				{
 					the_hammer.in_level_pos = the_player.in_level_pos
-						+ (vec2_f24p8){ make_f24p8(0), make_f24p8(-2) };
+						+ (vec2_f24p8){ make_f24p8(8), make_f24p8(-3) };
 				}
-				if (!the_player.on_ground)
+				if ( ( speed != (fixed24p8){0} && the_player.on_ground )
+					|| !the_player.on_ground )
 				{
-					the_hammer.in_level_pos.y += make_f24p8(1);
+					the_hammer.in_level_pos.y -= make_f24p8(1);
 				}
 				
 				the_hammer.update_f24p8_positions();
@@ -646,22 +689,22 @@ void player_sprite_stuff::update_the_hammer( sprite& the_player )
 				break;
 			
 			case frm_slot_hammer_swing_ground_still_2:
-			case frm_slot_hammer_swing_air_2:
 				the_hammer_frame_slot = player_hammer_sprite_stuff
-					::frm_slot_angle_45;
+					::frm_slot_angle_0;
 				if ( !the_player.the_oam_entry.get_hflip_status() )
 				{
 					the_hammer.in_level_pos = the_player.in_level_pos
-						+ (vec2_f24p8){ make_f24p8(10), make_f24p8(0) };
+						+ (vec2_f24p8){ make_f24p8(-1), make_f24p8(-4) };
 				}
 				else //if ( the_player.the_oam_entry.get_hflip_status() )
 				{
 					the_hammer.in_level_pos = the_player.in_level_pos
-						+ (vec2_f24p8){ make_f24p8(-10), make_f24p8(0) };
+						+ (vec2_f24p8){ make_f24p8(1), make_f24p8(-4) };
 				}
-				if (!the_player.on_ground)
+				if ( ( speed != (fixed24p8){0} && the_player.on_ground )
+					|| !the_player.on_ground )
 				{
-					the_hammer.in_level_pos.y += make_f24p8(1);
+					the_hammer.in_level_pos.y -= make_f24p8(1);
 				}
 				
 				the_hammer.update_f24p8_positions();
@@ -669,19 +712,69 @@ void player_sprite_stuff::update_the_hammer( sprite& the_player )
 				break;
 			
 			case frm_slot_hammer_swing_ground_still_3:
-			case frm_slot_hammer_swing_air_3:
 				the_hammer_frame_slot = player_hammer_sprite_stuff
-					::frm_slot_angle_90;
-				
+					::frm_slot_angle_23;
 				if ( !the_player.the_oam_entry.get_hflip_status() )
 				{
 					the_hammer.in_level_pos = the_player.in_level_pos
-						+ (vec2_f24p8){ make_f24p8(14), make_f24p8(13) };
+						+ (vec2_f24p8){ make_f24p8(5), make_f24p8(-3) };
 				}
 				else //if ( the_player.the_oam_entry.get_hflip_status() )
 				{
 					the_hammer.in_level_pos = the_player.in_level_pos
-						+ (vec2_f24p8){ make_f24p8(-14), make_f24p8(13) };
+						+ (vec2_f24p8){ make_f24p8(-5), make_f24p8(-3) };
+				}
+				if ( ( speed != (fixed24p8){0} && the_player.on_ground )
+					|| !the_player.on_ground )
+				{
+					the_hammer.in_level_pos.y -= make_f24p8(1);
+				}
+				
+				the_hammer.update_f24p8_positions();
+				
+				break;
+			
+			case frm_slot_hammer_swing_ground_still_4:
+				the_hammer_frame_slot = player_hammer_sprite_stuff
+					::frm_slot_angle_45;
+				if ( !the_player.the_oam_entry.get_hflip_status() )
+				{
+					the_hammer.in_level_pos = the_player.in_level_pos
+						+ (vec2_f24p8){ make_f24p8(11), make_f24p8(3) };
+				}
+				else //if ( the_player.the_oam_entry.get_hflip_status() )
+				{
+					the_hammer.in_level_pos = the_player.in_level_pos
+						+ (vec2_f24p8){ make_f24p8(-11), make_f24p8(3) };
+				}
+				if ( ( speed != (fixed24p8){0} && the_player.on_ground )
+					|| !the_player.on_ground )
+				{
+					the_hammer.in_level_pos.y -= make_f24p8(2);
+				}
+				
+				the_hammer.update_f24p8_positions();
+				
+				break;
+			
+			
+			case frm_slot_hammer_swing_ground_still_5:
+				the_hammer_frame_slot = player_hammer_sprite_stuff
+					::frm_slot_angle_90;
+				if ( !the_player.the_oam_entry.get_hflip_status() )
+				{
+					the_hammer.in_level_pos = the_player.in_level_pos
+						+ (vec2_f24p8){ make_f24p8(14), make_f24p8(17) };
+				}
+				else //if ( the_player.the_oam_entry.get_hflip_status() )
+				{
+					the_hammer.in_level_pos = the_player.in_level_pos
+						+ (vec2_f24p8){ make_f24p8(-14), make_f24p8(17) };
+				}
+				if ( ( speed != (fixed24p8){0} && the_player.on_ground )
+					|| !the_player.on_ground )
+				{
+					the_hammer.in_level_pos.y -= make_f24p8(3);
 				}
 				
 				the_hammer.update_f24p8_positions();
@@ -763,12 +856,20 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 		switch (active_hammer_swing_frame_slot)
 		{
 			case frm_slot_hammer_swing_ground_still_0:
-			case frm_slot_hammer_swing_air_0:
 				if (the_player.on_ground)
 				{
-					return frame_slot_to_frame_arr
-						[frm_slot_hammer_swing_ground_still_0] 
-						* num_active_gfx_tiles;
+					if ( speed == (fixed24p8){0} )
+					{
+						return frame_slot_to_frame_arr
+							[frm_slot_hammer_swing_ground_still_0] 
+							* num_active_gfx_tiles;
+					}
+					else
+					{
+						return frame_slot_to_frame_arr
+							[frm_slot_hammer_swing_ground_moving_0] 
+							* num_active_gfx_tiles;
+					}
 				}
 				else //if (!the_player.on_ground)
 				{
@@ -780,12 +881,20 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 				break;
 			
 			case frm_slot_hammer_swing_ground_still_1:
-			case frm_slot_hammer_swing_air_1:
 				if (the_player.on_ground)
 				{
-					return frame_slot_to_frame_arr
-						[frm_slot_hammer_swing_ground_still_1] 
-						* num_active_gfx_tiles;
+					if ( speed == (fixed24p8){0} )
+					{
+						return frame_slot_to_frame_arr
+							[frm_slot_hammer_swing_ground_still_1] 
+							* num_active_gfx_tiles;
+					}
+					else
+					{
+						return frame_slot_to_frame_arr
+							[frm_slot_hammer_swing_ground_moving_1] 
+							* num_active_gfx_tiles;
+					}
 				}
 				else //if (!the_player.on_ground)
 				{
@@ -796,13 +905,22 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 				
 				break;
 			
+			
 			case frm_slot_hammer_swing_ground_still_2:
-			case frm_slot_hammer_swing_air_2:
 				if (the_player.on_ground)
 				{
-					return frame_slot_to_frame_arr
-						[frm_slot_hammer_swing_ground_still_2] 
-						* num_active_gfx_tiles;
+					if ( speed == (fixed24p8){0} )
+					{
+						return frame_slot_to_frame_arr
+							[frm_slot_hammer_swing_ground_still_2] 
+							* num_active_gfx_tiles;
+					}
+					else
+					{
+						return frame_slot_to_frame_arr
+							[frm_slot_hammer_swing_ground_moving_2] 
+							* num_active_gfx_tiles;
+					}
 				}
 				else //if (!the_player.on_ground)
 				{
@@ -813,13 +931,22 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 				
 				break;
 			
+			
 			case frm_slot_hammer_swing_ground_still_3:
-			case frm_slot_hammer_swing_air_3:
 				if (the_player.on_ground)
 				{
-					return frame_slot_to_frame_arr
-						[frm_slot_hammer_swing_ground_still_3] 
-						* num_active_gfx_tiles;
+					if ( speed == (fixed24p8){0} )
+					{
+						return frame_slot_to_frame_arr
+							[frm_slot_hammer_swing_ground_still_3] 
+							* num_active_gfx_tiles;
+					}
+					else
+					{
+						return frame_slot_to_frame_arr
+							[frm_slot_hammer_swing_ground_moving_3] 
+							* num_active_gfx_tiles;
+					}
 				}
 				else //if (!the_player.on_ground)
 				{
@@ -829,6 +956,59 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 				}
 				
 				break;
+			
+			
+			case frm_slot_hammer_swing_ground_still_4:
+				if (the_player.on_ground)
+				{
+					if ( speed == (fixed24p8){0} )
+					{
+						return frame_slot_to_frame_arr
+							[frm_slot_hammer_swing_ground_still_4] 
+							* num_active_gfx_tiles;
+					}
+					else
+					{
+						return frame_slot_to_frame_arr
+							[frm_slot_hammer_swing_ground_moving_4] 
+							* num_active_gfx_tiles;
+					}
+				}
+				else //if (!the_player.on_ground)
+				{
+					return frame_slot_to_frame_arr
+						[frm_slot_hammer_swing_air_4] 
+						* num_active_gfx_tiles;
+				}
+				
+				break;
+			
+			
+			case frm_slot_hammer_swing_ground_still_5:
+				if (the_player.on_ground)
+				{
+					if ( speed == (fixed24p8){0} )
+					{
+						return frame_slot_to_frame_arr
+							[frm_slot_hammer_swing_ground_still_5] 
+							* num_active_gfx_tiles;
+					}
+					else
+					{
+						return frame_slot_to_frame_arr
+							[frm_slot_hammer_swing_ground_moving_5] 
+							* num_active_gfx_tiles;
+					}
+				}
+				else //if (!the_player.on_ground)
+				{
+					return frame_slot_to_frame_arr
+						[frm_slot_hammer_swing_air_5] 
+						* num_active_gfx_tiles;
+				}
+				
+				break;
+			
 			
 			default:
 				return frame_slot_to_frame_arr[frm_slot_walk_0];
