@@ -586,15 +586,21 @@ void player_sprite_stuff::update_frames_and_frame_timers
 					//active_pickaxe_swing_frame_slot 
 					//	= frm_slot_weapon_swing_ground_still_0;
 					
-					if ( speed == (fixed24p8){0} && the_player.on_ground 
-						&& pickaxe_swing_frame_timer 
-						> pickaxe_swing_still_final_frame_timer_end )
-					{
-						pickaxe_swing_frame_timer = 0;
-						swinging_pickaxe = false;
-					}
-					else if ( speed != (fixed24p8){0} 
-						|| !the_player.on_ground )
+					//if ( speed == (fixed24p8){0} && the_player.on_ground 
+					//	&& pickaxe_swing_frame_timer 
+					//	> pickaxe_swing_still_final_frame_timer_end )
+					//{
+					//	pickaxe_swing_frame_timer = 0;
+					//	swinging_pickaxe = false;
+					//}
+					//else if ( speed != (fixed24p8){0} 
+					//	|| !the_player.on_ground )
+					//{
+					//	pickaxe_swing_frame_timer = 0;
+					//	swinging_pickaxe = false;
+					//}
+					if ( pickaxe_swing_frame_timer 
+						> pickaxe_swing_final_frame_timer_end )
 					{
 						pickaxe_swing_frame_timer = 0;
 						swinging_pickaxe = false;
