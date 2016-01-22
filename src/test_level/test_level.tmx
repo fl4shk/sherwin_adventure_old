@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" nextobjectid="238">
- <tileset firstgid="1" name="the_blocks" tilewidth="16" tileheight="16" tilecount="96">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" nextobjectid="329">
+ <tileset firstgid="1" name="the_blocks" tilewidth="16" tileheight="16" tilecount="96" columns="12">
   <image source="gfx_for_tiled/the_block_gfx_for_tiled.png" trans="00ffff" width="192" height="128"/>
  </tileset>
- <tileset firstgid="97" name="spr_16x16" tilewidth="16" tileheight="16" tilecount="104">
+ <tileset firstgid="97" name="spr_16x16" tilewidth="16" tileheight="16" tilecount="104" columns="13">
   <image source="gfx_for_tiled/the_16x16_sprite_gfx_for_tiled.png" trans="00ffff" width="208" height="128"/>
  </tileset>
- <tileset firstgid="201" name="spr_16x32" tilewidth="16" tileheight="32" tilecount="65">
+ <tileset firstgid="201" name="spr_16x32" tilewidth="16" tileheight="32" tilecount="65" columns="13">
   <image source="gfx_for_tiled/the_16x32_sprite_gfx_for_tiled.png" trans="00ffff" width="208" height="160"/>
  </tileset>
  <layer name="Tile Layer 1" width="64" height="32">
@@ -106,5 +106,37 @@
     <property name="sdest" value="3"/>
    </properties>
   </object>
+  <object id="297" gid="99" x="336" y="464" width="16" height="16"/>
+  <object id="298" gid="99" x="352" y="480" width="16" height="16"/>
+  <object id="299" gid="99" x="336" y="480" width="16" height="16"/>
+  <object id="300" gid="99" x="336" y="496" width="16" height="16"/>
+  <object id="301" gid="99" x="352" y="496" width="16" height="16"/>
+  <object id="302" gid="99" x="352" y="464" width="16" height="16"/>
+  <object id="303" gid="99" x="368" y="464" width="16" height="16"/>
+  <object id="304" gid="99" x="368" y="480" width="16" height="16"/>
+  <object id="305" gid="99" x="368" y="496" width="16" height="16"/>
+  <object id="306" gid="99" x="384" y="496" width="16" height="16"/>
+  <object id="307" gid="99" x="384" y="480" width="16" height="16"/>
+  <object id="308" gid="99" x="384" y="464" width="16" height="16"/>
+  <object id="309" gid="99" x="400" y="464" width="16" height="16"/>
+  <object id="310" gid="99" x="400" y="496" width="16" height="16"/>
+  <object id="311" gid="99" x="400" y="480" width="16" height="16"/>
+  <object id="312" gid="99" x="384" y="448" width="16" height="16"/>
+  <object id="313" gid="99" x="400" y="448" width="16" height="16"/>
+  <object id="314" gid="99" x="384" y="432" width="16" height="16"/>
+  <object id="315" gid="99" x="400" y="432" width="16" height="16"/>
+  <object id="316" gid="99" x="368" y="432" width="16" height="16"/>
+  <object id="317" gid="99" x="352" y="432" width="16" height="16"/>
+  <object id="318" gid="99" x="336" y="432" width="16" height="16"/>
+  <object id="319" gid="99" x="304" y="432" width="16" height="16"/>
+  <object id="320" gid="99" x="320" y="432" width="16" height="16"/>
+  <object id="321" gid="99" x="320" y="464" width="16" height="16"/>
+  <object id="322" gid="99" x="304" y="448" width="16" height="16"/>
+  <object id="323" gid="99" x="320" y="448" width="16" height="16"/>
+  <object id="324" gid="99" x="320" y="480" width="16" height="16"/>
+  <object id="325" gid="99" x="304" y="464" width="16" height="16"/>
+  <object id="326" gid="99" x="304" y="480" width="16" height="16"/>
+  <object id="327" gid="99" x="320" y="496" width="16" height="16"/>
+  <object id="328" gid="99" x="304" y="496" width="16" height="16"/>
  </objectgroup>
 </map>

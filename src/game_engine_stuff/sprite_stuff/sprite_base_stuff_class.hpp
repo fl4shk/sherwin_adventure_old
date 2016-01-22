@@ -32,7 +32,8 @@ public:		// variables
 	
 	//static constexpr fixed24p8 grav_acc = {0x80};
 	//static constexpr fixed24p8 grav_acc = {0x40};
-	static constexpr fixed24p8 grav_acc = {0x60};
+	//static constexpr fixed24p8 grav_acc = {0x60};
+	static constexpr fixed24p8 grav_acc = {0x50};
 	//static constexpr fixed24p8 max_y_vel = {0x400};
 	static constexpr fixed24p8 max_y_vel = {0x300};
 	
@@ -253,14 +254,21 @@ protected:		// functions
 		__attribute__((_iwram_code));
 	
 	
-	virtual void block_collision_stuff_16x16( sprite& the_sprite )
-		__attribute__((_iwram_code));
-	virtual void block_collision_stuff_16x32( sprite& the_sprite )
-		__attribute__((_iwram_code));
-	virtual void block_collision_stuff_32x16( sprite& the_sprite )
-		__attribute__((_iwram_code));
-	virtual void block_collision_stuff_32x32( sprite& the_sprite )
-		__attribute__((_iwram_code));
+	// Regular block collision stuff
+	virtual void block_collision_stuff_16x16( sprite& the_sprite );
+	virtual void block_collision_stuff_16x32( sprite& the_sprite );
+	virtual void block_collision_stuff_32x16( sprite& the_sprite );
+	virtual void block_collision_stuff_32x32( sprite& the_sprite );
+	
+	// Block collision stuff with just strongly hit response 
+	virtual void block_collision_stuff_strongly_hit_stuff_only_16x16
+		( sprite& the_sprite );
+	virtual void block_collision_stuff_strongly_hit_stuff_only_16x32
+		( sprite& the_sprite );
+	virtual void block_collision_stuff_strongly_hit_stuff_only_32x16
+		( sprite& the_sprite );
+	virtual void block_collision_stuff_strongly_hit_stuff_only_32x32
+		( sprite& the_sprite );
 	
 	
 	

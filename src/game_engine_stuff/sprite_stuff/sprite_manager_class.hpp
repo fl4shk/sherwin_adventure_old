@@ -40,13 +40,13 @@ public:		// variables
 	static constexpr u32 max_num_secondary_sprites = 10;
 	
 	//static constexpr u32 max_num_regular_sprites = 40;
-	//static constexpr u32 max_num_regular_sprites = 30;
-	static constexpr u32 max_num_regular_sprites = 20;
+	static constexpr u32 max_num_regular_sprites = 30;
+	//static constexpr u32 max_num_regular_sprites = 20;
 	
 	
 	
 	static std::array< sprite, max_num_player_secondary_sprites >
-		the_player_secondary_sprites __attribute__((_iwram));
+		the_player_secondary_sprites;
 	
 	// The array of secondary active sprites, not counting those "claimed"
 	// by the_player.
@@ -54,7 +54,7 @@ public:		// variables
 		the_secondary_sprites;
 	
 	
-	static sprite the_player __attribute__((_iwram));
+	static sprite the_player;
 	
 	// The array of REGULAR active sprites, not counting the_player.
 	static std::array< sprite, max_num_regular_sprites > the_sprites;
