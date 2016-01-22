@@ -186,14 +186,14 @@ public:		// variables
 	//static constexpr s32 max_jump_hold_timer = 16;
 	//static constexpr s32 max_jump_hold_timer = 20;
 	static constexpr s32 max_jump_hold_timer = 24;
-	static constexpr s32 walk_frame_timer_end = 4;
-	static constexpr s32 run_frame_timer_end = 2;
+	static constexpr s32 walk_frame_timer_end = 5;
+	static constexpr s32 run_frame_timer_end = 3;
 	
 	//static constexpr s32 pickaxe_swing_frame_timer_end = 4;
 	//static constexpr s32 pickaxe_swing_frame_timer_end = 2;
-	static constexpr s32 pickaxe_swing_start_frame_timer_end = 8;
-	static constexpr s32 pickaxe_swing_frame_timer_end = 0;
-	static constexpr s32 pickaxe_swing_final_frame_timer_end = 8;
+	static constexpr s32 pickaxe_swing_start_frame_timer_end = 10;
+	static constexpr s32 pickaxe_swing_frame_timer_end = 1;
+	static constexpr s32 pickaxe_swing_final_frame_timer_end = 10;
 	
 	static constexpr fixed24p8 walk_speed = {0x100};
 	static constexpr fixed24p8 max_run_speed = {0x200};
