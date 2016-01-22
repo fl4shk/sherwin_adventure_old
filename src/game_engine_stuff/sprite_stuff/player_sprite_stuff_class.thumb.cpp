@@ -271,7 +271,8 @@ void player_sprite_stuff::update_part_1( sprite& the_player )
 		
 		the_player.vel.x = -speed;
 		
-		if ( the_player.on_ground && !swinging_pickaxe )
+		//if ( the_player.on_ground && !swinging_pickaxe )
+		if (!swinging_pickaxe)
 		{
 			the_player.the_oam_entry.enable_hflip();
 		}
@@ -286,7 +287,8 @@ void player_sprite_stuff::update_part_1( sprite& the_player )
 		
 		the_player.vel.x = speed;
 		
-		if ( the_player.on_ground && !swinging_pickaxe )
+		//if ( the_player.on_ground && !swinging_pickaxe )
+		if (!swinging_pickaxe)
 		{
 			the_player.the_oam_entry.disable_hflip();
 		}
@@ -478,7 +480,7 @@ void player_sprite_stuff::update_frames_and_frame_timers
 		{
 			++walk_frame_timer;
 			
-			if ( walk_frame_timer > frame_timer_end )
+			if ( walk_frame_timer >= frame_timer_end )
 			{
 				walk_frame_timer = 0;
 				
@@ -541,7 +543,7 @@ void player_sprite_stuff::update_frames_and_frame_timers
 	{
 		++pickaxe_swing_frame_timer;
 		
-		if ( pickaxe_swing_frame_timer > pickaxe_swing_frame_timer_end )
+		if ( pickaxe_swing_frame_timer >= pickaxe_swing_frame_timer_end )
 		{
 			if ( active_pickaxe_swing_frame_slot
 				!= frm_slot_weapon_swing_ground_still_0
@@ -555,7 +557,7 @@ void player_sprite_stuff::update_frames_and_frame_timers
 			{
 				case frm_slot_weapon_swing_ground_still_0:
 					if ( pickaxe_swing_frame_timer
-						> pickaxe_swing_start_frame_timer_end )
+						>= pickaxe_swing_start_frame_timer_end )
 					{
 						active_pickaxe_swing_frame_slot 
 							= frm_slot_weapon_swing_ground_still_1;
@@ -588,7 +590,7 @@ void player_sprite_stuff::update_frames_and_frame_timers
 					
 					//if ( speed == (fixed24p8){0} && the_player.on_ground 
 					//	&& pickaxe_swing_frame_timer 
-					//	> pickaxe_swing_still_final_frame_timer_end )
+					//	>= pickaxe_swing_still_final_frame_timer_end )
 					//{
 					//	pickaxe_swing_frame_timer = 0;
 					//	swinging_pickaxe = false;
@@ -600,7 +602,7 @@ void player_sprite_stuff::update_frames_and_frame_timers
 					//	swinging_pickaxe = false;
 					//}
 					if ( pickaxe_swing_frame_timer 
-						> pickaxe_swing_final_frame_timer_end )
+						>= pickaxe_swing_final_frame_timer_end )
 					{
 						pickaxe_swing_frame_timer = 0;
 						swinging_pickaxe = false;
