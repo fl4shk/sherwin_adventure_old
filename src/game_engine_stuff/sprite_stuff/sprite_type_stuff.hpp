@@ -78,29 +78,29 @@ enum sprite_type
 } __attribute__((_align4));
 
 // woo, an X-macro
-#define list_of_main_sprite_types \
+#define list_of_main_sprite_types(macro) \
 \
 /* The Player */ \
-X(player) \
+macro(player) \
 \
 /* Powerup Sprites */ \
-X(waffle) \
+macro(waffle) \
 \
-X(muffin) \
-X(fire_muffin) \
-X(ice_muffin) \
-X(chocolate_muffin) \
+macro(muffin) \
+macro(fire_muffin) \
+macro(ice_muffin) \
+macro(chocolate_muffin) \
 \
 /* // Block-like Sprites \
 st_warp_block, */ \
 /* Warp Sprites */ \
-X(door) \
+macro(door) \
 \
 /* Enemy Sprites */ \
-X(snow_golem) \
+macro(snow_golem) \
 \
 /* Secondary Sprites */ \
-X(player_pickaxe)
+macro(player_pickaxe)
 
 
 
@@ -129,7 +129,7 @@ extern sprite_base_stuff the_sprite_base_stuff;
 
 #define X(name) extern name##_sprite_stuff the_##name##_sprite_stuff \
 	__attribute__((_iwram));
-list_of_main_sprite_types
+list_of_main_sprite_types(X)
 #undef X
 
 

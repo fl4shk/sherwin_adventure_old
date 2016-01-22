@@ -22,7 +22,7 @@
 sprite_base_stuff the_sprite_base_stuff;
 
 #define X(name) name##_sprite_stuff the_##name##_sprite_stuff;
-list_of_main_sprite_types
+list_of_main_sprite_types(X)
 #undef X
 
 
@@ -33,7 +33,7 @@ std::array< sprite_base_stuff*, st_count > sprite_stuff_array
 	&the_sprite_base_stuff,
 	
 	#define X(name) &the_##name##_sprite_stuff,
-	list_of_main_sprite_types
+	list_of_main_sprite_types(X)
 	#undef X
 };
 

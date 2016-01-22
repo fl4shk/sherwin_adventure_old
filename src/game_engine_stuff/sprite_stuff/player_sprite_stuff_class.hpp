@@ -173,7 +173,7 @@ public:		// variables
 	static s32 max_hp __attribute__((_iwram));
 	static s32 remaining_hp __attribute__((_iwram));
 	
-	// Hammer stuff
+	// Pickaxe stuff
 	static bool swinging_pickaxe __attribute__((_iwram));
 	static u32 pickaxe_sprite_slot __attribute__((_iwram));
 	
@@ -181,8 +181,10 @@ public:		// variables
 	
 	
 	// Physics/logic constants
-	//static constexpr fixed24p8 jump_vel = {-0x400};
-	static constexpr fixed24p8 jump_vel = {-0x300};
+	static constexpr fixed24p8 jump_vel = {-0x400};
+	//static constexpr fixed24p8 jump_vel = {-0x300};
+	static constexpr fixed24p8 jump_grav_acc = {0x1b};
+	
 	//static constexpr s32 max_jump_hold_timer = 16;
 	//static constexpr s32 max_jump_hold_timer = 20;
 	static constexpr s32 max_jump_hold_timer = 24;

@@ -27,68 +27,58 @@ void sprite_base_stuff::get_basic_block_coll_results_left_16x16
 	( coll_point_group& the_pt_group, block_coll_result& lt_coll_result, 
 	block_coll_result& lb_coll_result )
 {
-	lt_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_lt_16x16());
-	lt_coll_result.type = active_level::get_block_type_at_coord
-		(lt_coll_result.coord);
-	
-	lb_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_lb_16x16());
-	lb_coll_result.type = active_level::get_block_type_at_coord
-		(lb_coll_result.coord);
+	#define X(name) \
+		name##_coll_result.coord \
+			= active_level::get_block_coord_of_point \
+			(the_pt_group.get_pt_##name##_16x16()); \
+		name##_coll_result.type \
+			= active_level::get_block_type_at_coord \
+			(name##_coll_result.coord);
+	list_of_16x16_left_side_coll_point_names(X)
+	#undef X
 }
 void sprite_base_stuff::get_basic_block_coll_results_top_16x16
 	( coll_point_group& the_pt_group, block_coll_result& tl_coll_result, 
 	block_coll_result& tm_coll_result, block_coll_result& tr_coll_result ) 
 	
 {
-	tl_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_tl_16x16());
-	tl_coll_result.type = active_level::get_block_type_at_coord
-		(tl_coll_result.coord);
-	
-	tm_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_tm_16x16());
-	tm_coll_result.type = active_level::get_block_type_at_coord
-		(tm_coll_result.coord);
-	
-	tr_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_tr_16x16());
-	tr_coll_result.type = active_level::get_block_type_at_coord
-		(tr_coll_result.coord);
+	#define X(name) \
+		name##_coll_result.coord \
+			= active_level::get_block_coord_of_point \
+			(the_pt_group.get_pt_##name##_16x16()); \
+		name##_coll_result.type \
+			= active_level::get_block_type_at_coord \
+			(name##_coll_result.coord);
+	list_of_16x16_top_side_coll_point_names(X)
+	#undef X
 }
 void sprite_base_stuff::get_basic_block_coll_results_right_16x16
 	( coll_point_group& the_pt_group, block_coll_result& rt_coll_result, 
 	block_coll_result& rb_coll_result )
 {
-	rt_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_rt_16x16());
-	rt_coll_result.type = active_level::get_block_type_at_coord
-		(rt_coll_result.coord);
-	
-	rb_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_rb_16x16());
-	rb_coll_result.type = active_level::get_block_type_at_coord
-		(rb_coll_result.coord);
+	#define X(name) \
+		name##_coll_result.coord \
+			= active_level::get_block_coord_of_point \
+			(the_pt_group.get_pt_##name##_16x16()); \
+		name##_coll_result.type \
+			= active_level::get_block_type_at_coord \
+			(name##_coll_result.coord);
+	list_of_16x16_right_side_coll_point_names(X)
+	#undef X
 }
 void sprite_base_stuff::get_basic_block_coll_results_bot_16x16
 	( coll_point_group& the_pt_group, block_coll_result& bl_coll_result, 
 	block_coll_result& bm_coll_result, block_coll_result& br_coll_result )
 {
-	bl_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_bl_16x16());
-	bl_coll_result.type = active_level::get_block_type_at_coord
-		(bl_coll_result.coord);
-	
-	bm_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_bm_16x16());
-	bm_coll_result.type = active_level::get_block_type_at_coord
-		(bm_coll_result.coord);
-	
-	br_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_br_16x16());
-	br_coll_result.type = active_level::get_block_type_at_coord
-		(br_coll_result.coord);
+	#define X(name) \
+		name##_coll_result.coord \
+			= active_level::get_block_coord_of_point \
+			(the_pt_group.get_pt_##name##_16x16()); \
+		name##_coll_result.type \
+			= active_level::get_block_type_at_coord \
+			(name##_coll_result.coord);
+	list_of_16x16_bottom_side_coll_point_names(X)
+	#undef X
 }
 
 
@@ -99,21 +89,15 @@ void sprite_base_stuff::get_basic_block_coll_results_left_16x32
 	// DON'T change this function unless in the future a 16x32 hitbox uses
 	// more than three left side collision points
 	
-	lt_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_lt_16x32());
-	lt_coll_result.type = active_level::get_block_type_at_coord
-		(lt_coll_result.coord);
-	
-	lm_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_lm_16x32());
-	lm_coll_result.type = active_level::get_block_type_at_coord
-		(lm_coll_result.coord);
-	
-	lb_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_lb_16x32());
-	lb_coll_result.type = active_level::get_block_type_at_coord
-		(lb_coll_result.coord);
-	
+	#define X(name) \
+		name##_coll_result.coord \
+			= active_level::get_block_coord_of_point \
+			(the_pt_group.get_pt_##name##_16x32()); \
+		name##_coll_result.type \
+			= active_level::get_block_type_at_coord \
+			(name##_coll_result.coord);
+	list_of_16x32_left_side_coll_point_names(X)
+	#undef X
 }
 void sprite_base_stuff::get_basic_block_coll_results_top_16x32
 	( coll_point_group& the_pt_group, block_coll_result& tl_coll_result, 
@@ -122,21 +106,15 @@ void sprite_base_stuff::get_basic_block_coll_results_top_16x32
 	// DON'T change this function unless in the future a 16x32 hitbox uses
 	// more than three top side collision points
 	
-	tl_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_tl_16x32());
-	tl_coll_result.type = active_level::get_block_type_at_coord
-		(tl_coll_result.coord);
-	
-	tm_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_tm_16x32());
-	tm_coll_result.type = active_level::get_block_type_at_coord
-		(tm_coll_result.coord);
-	
-	tr_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_tr_16x32());
-	tr_coll_result.type = active_level::get_block_type_at_coord
-		(tr_coll_result.coord);
-	
+	#define X(name) \
+		name##_coll_result.coord \
+			= active_level::get_block_coord_of_point \
+			(the_pt_group.get_pt_##name##_16x32()); \
+		name##_coll_result.type \
+			= active_level::get_block_type_at_coord \
+			(name##_coll_result.coord);
+	list_of_16x32_top_side_coll_point_names(X)
+	#undef X
 }
 void sprite_base_stuff::get_basic_block_coll_results_right_16x32
 	( coll_point_group& the_pt_group, block_coll_result& rt_coll_result,
@@ -145,21 +123,15 @@ void sprite_base_stuff::get_basic_block_coll_results_right_16x32
 	// DON'T change this function unless in the future a 16x32 hitbox uses
 	// more than three right side collision points
 	
-	rt_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_rt_16x32());
-	rt_coll_result.type = active_level::get_block_type_at_coord
-		(rt_coll_result.coord);
-	
-	rm_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_rm_16x32());
-	rm_coll_result.type = active_level::get_block_type_at_coord
-		(rm_coll_result.coord);
-	
-	rb_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_rb_16x32());
-	rb_coll_result.type = active_level::get_block_type_at_coord
-		(rb_coll_result.coord);
-	
+	#define X(name) \
+		name##_coll_result.coord \
+			= active_level::get_block_coord_of_point \
+			(the_pt_group.get_pt_##name##_16x32()); \
+		name##_coll_result.type \
+			= active_level::get_block_type_at_coord \
+			(name##_coll_result.coord);
+	list_of_16x32_right_side_coll_point_names(X)
+	#undef X
 }
 void sprite_base_stuff::get_basic_block_coll_results_bot_16x32
 	( coll_point_group& the_pt_group, block_coll_result& bl_coll_result, 
@@ -167,20 +139,16 @@ void sprite_base_stuff::get_basic_block_coll_results_bot_16x32
 {
 	// DON'T change this function unless in the future a 16x32 hitbox uses
 	// more than three bottom side collision points
-	bl_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_bl_16x32());
-	bl_coll_result.type = active_level::get_block_type_at_coord
-		(bl_coll_result.coord);
 	
-	bm_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_bm_16x32());
-	bm_coll_result.type = active_level::get_block_type_at_coord
-		(bm_coll_result.coord);
-	
-	br_coll_result.coord = active_level::get_block_coord_of_point 
-		(the_pt_group.get_pt_br_16x32());
-	br_coll_result.type = active_level::get_block_type_at_coord
-		(br_coll_result.coord);
+	#define X(name) \
+		name##_coll_result.coord \
+			= active_level::get_block_coord_of_point \
+			(the_pt_group.get_pt_##name##_16x32()); \
+		name##_coll_result.type \
+			= active_level::get_block_type_at_coord \
+			(name##_coll_result.coord);
+	list_of_16x32_bottom_side_coll_point_names(X)
+	#undef X
 }
 
 
@@ -201,8 +169,12 @@ void sprite_base_stuff::block_coll_response_top_16x16( sprite& the_sprite,
 	the_sprite.in_level_pos.y = make_f24p8( ( tl_coll_result.coord.y + 1 )
 		* 16 ) - the_sprite.cb_pos_offset.y;
 	
-	the_sprite.vel.y = {0x00};
-	the_sprite.jump_hold_timer = 0;
+	if ( the_sprite.vel.y < (fixed24p8){0x00} )
+	{
+		the_sprite.vel.y = {0x00};
+	}
+	//the_sprite.jump_hold_timer = 0;
+	the_sprite.is_jumping = false;
 }
 
 void sprite_base_stuff::block_coll_response_right_16x16
@@ -228,7 +200,8 @@ void sprite_base_stuff::non_slope_block_coll_response_bot_16x16
 			- make_f24p8(the_sprite.get_shape_size_as_vec2().y);
 		the_sprite.vel.y = {0x00};
 		the_sprite.on_ground = true;
-		the_sprite.jump_hold_timer = 0;
+		//the_sprite.jump_hold_timer = 0;
+		the_sprite.is_jumping = false;
 	}
 }
 //block_type sprite_base_stuff::slope_block_coll_response_bot_16x16
@@ -425,7 +398,8 @@ block_type sprite_base_stuff::slope_block_coll_response_bot_16x16
 		{
 			//show_debug_str_s32("wow ");
 			if ( the_sprite.vel.y >= (fixed24p8){0}
-				&& the_sprite.jump_hold_timer == 0 )
+				//&& the_sprite.jump_hold_timer == 0 )
+				&& !the_sprite.is_jumping )
 			{
 				the_sprite.in_level_pos.y = make_f24p8
 					( ( the_coll_result.coord.y + 1 )
@@ -436,7 +410,6 @@ block_type sprite_base_stuff::slope_block_coll_response_bot_16x16
 				
 				the_sprite.vel.y = {0x00};
 				the_sprite.on_ground = true;
-				//the_sprite.jump_hold_timer = max_jump_hold_timer;
 				
 				if ( the_sprite.vel.x != (fixed24p8){0} && hitting_tltr )
 				{
@@ -455,7 +428,6 @@ block_type sprite_base_stuff::slope_block_coll_response_bot_16x16
 			
 			//the_sprite.in_level_pos.y += make_f24p8(1);
 			the_sprite.on_ground = false;
-			//the_sprite.jump_hold_timer = 0;
 			
 		}
 		else if ( the_sprite.vel.y <= (fixed24p8){0} )
@@ -537,9 +509,8 @@ block_type sprite_base_stuff::slope_block_coll_response_bot_16x16
 	else
 	{
 		//next_debug_s32 = 0xeebbaacc;
-		//if ( the_sprite.vel.y >= (fixed24p8){0} 
-		//	&& the_sprite.jump_hold_timer == 0 )
-		
+		//if ( the_sprite.vel.y >= (fixed24p8){0} )
+		//
 		//if ( the_sprite.on_ground )
 		//{
 		//	the_sprite.vel.y = {0x00};
@@ -781,7 +752,8 @@ block_type sprite_base_stuff::slope_block_coll_response_bot_16x32
 		{
 			//show_debug_str_s32("wow ");
 			if ( the_sprite.vel.y >= (fixed24p8){0}
-				&& the_sprite.jump_hold_timer == 0 )
+				//&& the_sprite.jump_hold_timer == 0 )
+				&& !the_sprite.is_jumping )
 			{
 				the_sprite.in_level_pos.y = make_f24p8
 					( ( the_coll_result.coord.y + 1 )
@@ -792,7 +764,6 @@ block_type sprite_base_stuff::slope_block_coll_response_bot_16x32
 				
 				the_sprite.vel.y = {0x00};
 				the_sprite.on_ground = true;
-				//the_sprite.jump_hold_timer = max_jump_hold_timer;
 				
 				if ( the_sprite.vel.x != (fixed24p8){0} && hitting_tltr )
 				{
@@ -811,7 +782,6 @@ block_type sprite_base_stuff::slope_block_coll_response_bot_16x32
 			
 			//the_sprite.in_level_pos.y += make_f24p8(1);
 			the_sprite.on_ground = false;
-			//the_sprite.jump_hold_timer = 0;
 			
 		}
 		else if ( the_sprite.vel.y <= (fixed24p8){0} )
@@ -893,8 +863,7 @@ block_type sprite_base_stuff::slope_block_coll_response_bot_16x32
 	else
 	{
 		//next_debug_s32 = 0xeebbaacc;
-		//if ( the_sprite.vel.y >= (fixed24p8){0} 
-		//	&& the_sprite.jump_hold_timer == 0 )
+		//if ( the_sprite.vel.y >= (fixed24p8){0} )
 		
 		//if ( the_sprite.on_ground )
 		//{
@@ -1065,7 +1034,8 @@ void sprite_base_stuff::block_collision_stuff_16x16( sprite& the_sprite )
 				the_sprite.in_level_pos.y -= the_sprite.vel.y;
 				the_sprite.vel.y = (fixed24p8){0};
 				the_sprite.on_ground = true;
-				the_sprite.jump_hold_timer = 0;
+				//the_sprite.jump_hold_timer = 0;
+				the_sprite.is_jumping = false;
 			}
 			
 			// Don't let the_sprite move through walls
@@ -1311,7 +1281,8 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 				the_sprite.in_level_pos.y -= the_sprite.vel.y;
 				the_sprite.vel.y = (fixed24p8){0};
 				the_sprite.on_ground = true;
-				the_sprite.jump_hold_timer = 0;
+				//the_sprite.jump_hold_timer = 0;
+				the_sprite.is_jumping = false;
 			}
 			
 			// Don't let the_sprite move through walls

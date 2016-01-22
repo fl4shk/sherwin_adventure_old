@@ -73,9 +73,11 @@ public:		// variables
 	// on_ground is a flag that tells whether the sprite is on the ground.
 	bool on_ground;
 	
-	// jump_hold_timer is used to keep track of for how much longer the
-	// sprite can jump, if the sprite even does so.  This coul
-	s32 jump_hold_timer;
+	//// jump_hold_timer is used to keep track of for how much longer the
+	//// sprite can jump, if the sprite even does so.  This coul
+	//s32 jump_hold_timer;
+	
+	bool is_jumping;
 	
 	
 	// Two arrays of miscellaneous sprite data.  The way these arrays are

@@ -52,11 +52,13 @@ void snow_golem_sprite_stuff::update_part_1( sprite& the_enemy )
 	s32& frame_change_timer 
 		= the_enemy.misc_data_s[sdi_frame_change_timer];
 	
-	if ( !frame_stuff_initialized )
+	// This could just as easily be done in the init() function, but that'd
+	// require re-implementing it for this class.
+	if (!frame_stuff_initialized)
 	{
 		frame_stuff_initialized = 1;
 		
-		curr_frame_slot = frm_stand;
+		curr_frame_slot = frm_slot_stand;
 		frame_change_timer = frame_change_timer_start;
 		return;
 	}

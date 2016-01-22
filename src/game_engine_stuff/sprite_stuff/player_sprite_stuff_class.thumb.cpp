@@ -309,6 +309,9 @@ void player_sprite_stuff::update_part_1( sprite& the_player )
 	
 	the_player.block_collision_stuff();
 	
+	update_the_pickaxe(the_player);
+	
+	
 }
 
 
@@ -944,7 +947,7 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 						* num_active_gfx_tiles; \
 				} \
 				\
-				break; \
+				break;
 			
 			list_of_weapon_swing_frame_slot_numbers(X)
 			#undef X
@@ -983,11 +986,20 @@ void player_sprite_stuff::block_coll_response_top_16x16
 	const block_coll_result& tm_coll_result,
 	const block_coll_result& tr_coll_result )
 {
+	//the_player.in_level_pos.y 
+	//	= make_f24p8( ( tl_coll_result.coord.y + 1 ) * 16 );
+	//	//- the_player.cb_pos_offset.y;
 	the_player.in_level_pos.y 
-		= make_f24p8( ( tl_coll_result.coord.y + 1 ) * 16 );
-		//- the_player.cb_pos_offset.y;
-	the_player.vel.y = {0x00};
-	the_player.jump_hold_timer = 0;
+		= make_f24p8( ( tl_coll_result.coord.y + 1 ) * 16 )
+		- the_player.cb_pos_offset.y;
+	
+	if ( the_player.vel.y < (fixed24p8){0x00} )
+	{
+		the_player.vel.y = {0x00};
+	}
+	
+	//the_player.jump_hold_timer = 0;
+	the_player.is_jumping = false;
 	
 	block_stuff_array[tm_coll_result.type]->strongly_hit_response 
 		( active_level::the_block_data_at_coord(tm_coll_result.coord), 
@@ -1011,19 +1023,24 @@ void player_sprite_stuff::handle_jumping_stuff( sprite& the_player,
 	if ( the_player.on_ground && is_jump_key_hit )
 	{
 		the_player.vel.y = jump_vel;
-		the_player.jump_hold_timer = max_jump_hold_timer;
+		//the_player.jump_hold_timer = max_jump_hold_timer;
+		the_player.is_jumping = true;
 	}
-	else if ( !the_player.on_ground )
+	else if (!the_player.on_ground)
 	{
-		if ( the_player.jump_hold_timer > 0  )
+		//if ( the_player.jump_hold_timer > 0  )
+		if ( the_player.vel.y < (fixed24p8){0} )
 		{
-			if ( is_jump_key_held )
+			if (is_jump_key_held)
 			{
-				--the_player.jump_hold_timer;
+				//--the_player.jump_hold_timer;
+				//apply_gravity(the_player);
+				the_player.vel.y += jump_grav_acc;
 			}
 			else
 			{
-				the_player.jump_hold_timer = 0;
+				//the_player.jump_hold_timer = 0;
+				the_player.is_jumping = false;
 				
 				//if ( the_player.vel.y.data < -0x200 )
 				//{
@@ -1040,7 +1057,10 @@ void player_sprite_stuff::handle_jumping_stuff( sprite& the_player,
 			}
 		}
 		
-		else if ( the_player.jump_hold_timer == 0 )
+		//else if ( the_player.jump_hold_timer == 0 )
+		//else if (!the_player.is_jumping)
+		else if ( !the_player.is_jumping 
+			|| the_player.vel.y >= (fixed24p8){0} )
 		{
 			//if ( the_player.vel.y.data < -0x200 )
 			//{

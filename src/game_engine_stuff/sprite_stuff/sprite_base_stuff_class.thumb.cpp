@@ -170,7 +170,8 @@ void sprite_base_stuff::block_collision_stuff( sprite& the_sprite )
 }
 
 
-// This is a dummy function that child classes implement.
+// This is a dummy function that child classes implement (probably just
+// player_sprite_stuff).
 void sprite_base_stuff::handle_jumping_stuff( sprite& the_player, 
 	u32 is_jump_key_hit, u32 is_jump_key_held )
 {

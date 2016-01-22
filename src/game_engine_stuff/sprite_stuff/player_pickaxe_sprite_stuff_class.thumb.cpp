@@ -38,10 +38,11 @@ const vec2_f24p8 player_pickaxe_sprite_stuff::the_initial_coll_box_size
 	= { {0 << fixed24p8::shift}, {0 << fixed24p8::shift} };
 
 
-//void player_pickaxe_sprite_stuff::update_part_1( sprite& the_pickaxe )
-//{
-//	
-//}
+void player_pickaxe_sprite_stuff::update_part_1( sprite& the_pickaxe )
+{
+	
+}
+
 
 const u32 player_pickaxe_sprite_stuff::get_curr_relative_tile_slot
 	( sprite& the_pickaxe )
