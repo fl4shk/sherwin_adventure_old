@@ -158,46 +158,41 @@ protected:		// functions
 	
 	// Here are a lot of block collision functions.  It is recommended that
 	// they be stored in IWRAM for as much speed as possible.
-	void get_basic_block_coll_results_left_16x16
+	void get_basic_block_coll_results_16x16
 		( coll_point_group& the_pt_group, 
-		block_coll_result& lt_coll_result, 
-		block_coll_result& lb_coll_result ) __attribute__((_iwram_code));
-	void get_basic_block_coll_results_top_16x16
-		( coll_point_group& the_pt_group, 
-		block_coll_result& tl_coll_result, 
-		block_coll_result& tm_coll_result, 
-		block_coll_result& tr_coll_result ) __attribute__((_iwram_code));
-	void get_basic_block_coll_results_right_16x16
-		( coll_point_group& the_pt_group, 
-		block_coll_result& rt_coll_result, 
-		block_coll_result& rb_coll_result ) __attribute__((_iwram_code));
-	void get_basic_block_coll_results_bot_16x16
-		( coll_point_group& the_pt_group, 
-		block_coll_result& bl_coll_result, 
-		block_coll_result& bm_coll_result, 
-		block_coll_result& br_coll_result ) __attribute__((_iwram_code));
+		block_coll_result& lt_coll_result,
+		block_coll_result& lb_coll_result,
+		block_coll_result& tl_coll_result,
+		block_coll_result& tm_coll_result,
+		block_coll_result& tr_coll_result,
+		block_coll_result& rt_coll_result,
+		block_coll_result& rb_coll_result,
+		block_coll_result& bl_coll_result,
+		block_coll_result& bm_coll_result,
+		block_coll_result& br_coll_result,
+		block_coll_result& bl_slope_coll_result,
+		block_coll_result& bm_slope_coll_result,
+		block_coll_result& br_slope_coll_result )
+		__attribute__((_iwram_code));
 	
-	
-	void get_basic_block_coll_results_left_16x32
+	void get_basic_block_coll_results_16x32
 		( coll_point_group& the_pt_group, 
 		block_coll_result& lt_coll_result, 
 		block_coll_result& lm_coll_result,
-		block_coll_result& lb_coll_result ) __attribute__((_iwram_code));
-	void get_basic_block_coll_results_top_16x32
-		( coll_point_group& the_pt_group, 
+		block_coll_result& lb_coll_result,
 		block_coll_result& tl_coll_result, 
 		block_coll_result& tm_coll_result,
-		block_coll_result& tr_coll_result ) __attribute__((_iwram_code));
-	void get_basic_block_coll_results_right_16x32
-		( coll_point_group& the_pt_group, 
+		block_coll_result& tr_coll_result,
 		block_coll_result& rt_coll_result,
 		block_coll_result& rm_coll_result,
-		block_coll_result& rb_coll_result ) __attribute__((_iwram_code));
-	void get_basic_block_coll_results_bot_16x32
-		( coll_point_group& the_pt_group, 
+		block_coll_result& rb_coll_result,
 		block_coll_result& bl_coll_result, 
 		block_coll_result& bm_coll_result,
-		block_coll_result& br_coll_result ) __attribute__((_iwram_code));
+		block_coll_result& br_coll_result,
+		block_coll_result& bl_slope_coll_result, 
+		block_coll_result& bm_slope_coll_result, 
+		block_coll_result& br_slope_coll_result ) 
+		__attribute__((_iwram_code));
 	
 	
 	virtual void block_coll_response_left_16x16( sprite& the_sprite, 
@@ -222,7 +217,10 @@ protected:		// functions
 		( sprite& the_sprite, coll_point_group& the_pt_group,
 		block_coll_result& bl_coll_result,
 		block_coll_result& bm_coll_result,
-		block_coll_result& br_coll_result, bool hitting_tltr=false )
+		block_coll_result& br_coll_result, 
+		block_coll_result& bl_slope_coll_result, 
+		block_coll_result& bm_slope_coll_result, 
+		block_coll_result& br_slope_coll_result, bool hitting_tltr=false )
 		__attribute__((_iwram_code));
 	
 	
@@ -250,7 +248,10 @@ protected:		// functions
 		( sprite& the_sprite, coll_point_group& the_pt_group,
 		block_coll_result& bl_coll_result,
 		block_coll_result& bm_coll_result,
-		block_coll_result& br_coll_result, bool hitting_tltr=false )
+		block_coll_result& br_coll_result, 
+		block_coll_result& bl_slope_coll_result, 
+		block_coll_result& bm_slope_coll_result, 
+		block_coll_result& br_slope_coll_result, bool hitting_tltr=false )
 		__attribute__((_iwram_code));
 	
 	

@@ -200,6 +200,17 @@ macro(p32_p16_tall) \
 macro(n32_p16_tall) \
 macro(n32_p16_short)
 
+#define list_of_left_slope_configurations(macro) \
+macro(n16_p16) \
+macro(n32_p16_tall) \
+macro(n32_p16_short)
+
+#define list_of_right_slope_configurations(macro) \
+macro(p16_p16) \
+macro(p32_p16_short) \
+macro(p32_p16_tall)
+
+
 
 //// These bg1_block_type's are used by BG1.
 //enum bg1_block_type
@@ -264,15 +275,49 @@ inline bool bt_is_slope( block_type the_block_type )
 
 inline bool bt_is_left_slope( block_type the_block_type )
 {
-	return ( the_block_type == bt_grass_slope_n16_p16 
-		|| the_block_type == bt_grass_slope_n32_p16_tall
-		|| the_block_type == bt_grass_slope_n32_p16_short );
+	//return ( the_block_type == bt_grass_slope_n16_p16 
+	//	|| the_block_type == bt_grass_slope_n32_p16_tall
+	//	|| the_block_type == bt_grass_slope_n32_p16_short );
+	
+	if (false)
+	{
+	}
+	
+	#define X(name) \
+	else if ( the_block_type == bt_grass_slope_##name ) \
+	{ \
+		return true; \
+	}
+	list_of_left_slope_configurations(X)
+	#undef X
+	
+	else
+	{
+		return false;
+	}
 }
 inline bool bt_is_right_slope( block_type the_block_type )
 {
-	return ( the_block_type == bt_grass_slope_p16_p16 
-		|| the_block_type == bt_grass_slope_p32_p16_short 
-		|| the_block_type == bt_grass_slope_p32_p16_tall );
+	//return ( the_block_type == bt_grass_slope_p16_p16 
+	//	|| the_block_type == bt_grass_slope_p32_p16_short 
+	//	|| the_block_type == bt_grass_slope_p32_p16_tall );
+	
+	if (false)
+	{
+	}
+	
+	#define X(name) \
+	else if ( the_block_type == bt_grass_slope_##name ) \
+	{ \
+		return true; \
+	}
+	list_of_right_slope_configurations(X)
+	#undef X
+	
+	else
+	{
+		return false;
+	}
 }
 
 // Check whether the_block_type is fully solid
@@ -280,6 +325,8 @@ inline bool bt_is_neither_air_nor_slope( block_type the_block_type )
 {
 	return ( the_block_type != bt_air && !bt_is_slope(the_block_type) );
 }
+
+//inline bool bt_is_neither_air_nor_tall_slope( block_type the_block_type )
 
 inline bool bt_is_neither_air_nor_left_slope( block_type the_block_type )
 {
@@ -292,6 +339,7 @@ inline bool bt_is_neither_air_nor_right_slope( block_type the_block_type )
 	return ( the_block_type != bt_air 
 		&& !bt_is_right_slope(the_block_type) );
 }
+
 
 
 class block_coll_result

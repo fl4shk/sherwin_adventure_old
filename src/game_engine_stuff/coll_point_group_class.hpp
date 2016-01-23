@@ -41,6 +41,8 @@ public:		// enums
 		macro(rt) macro(rb)
 	#define list_of_16x16_bottom_side_coll_point_names(macro) \
 		macro(bl) macro(bm) macro(br)
+	#define list_of_16x16_bottom_slope_side_coll_point_names(macro) \
+		macro(bl_slope) macro(bm_slope) macro(br_slope)
 	
 	// Left or right side, same ypos collision points
 	#define list_of_16x16_vert_side_ypos_top_coll_point_names(macro) \
@@ -48,37 +50,46 @@ public:		// enums
 	#define list_of_16x16_vert_side_ypos_bottom_coll_point_names(macro) \
 		macro(lb) macro(rb)
 	
-	// Top or bottom side, same xpos collision points
+	// Top, bottom, or bottom slope side, same xpos collision points
 	#define list_of_16x16_horiz_side_xpos_left_coll_point_names(macro) \
-		macro(tl) macro(bl)
+		macro(tl) macro(bl) macro(bl_slope)
 	#define list_of_16x16_horiz_side_xpos_middle_coll_point_names(macro) \
-		macro(tm) macro(bm)
+		macro(tm) macro(bm) macro(bm_slope)
 	#define list_of_16x16_horiz_side_xpos_right_coll_point_names(macro) \
-		macro(tr) macro(br)
+		macro(tr) macro(br) macro(br_slope)
 	
 	// All the collision points
 	#define list_of_16x16_coll_point_names(macro) \
 		list_of_16x16_left_side_coll_point_names(macro) \
 		list_of_16x16_top_side_coll_point_names(macro) \
 		list_of_16x16_right_side_coll_point_names(macro) \
-		list_of_16x16_bottom_side_coll_point_names(macro)
+		list_of_16x16_bottom_side_coll_point_names(macro) \
+		list_of_16x16_bottom_slope_side_coll_point_names(macro)
 	
 	
 	// The reason an X-macro isn't used here is because ctags wouldn't be
 	// able to work with it.
 	enum arr_index_16x16 
 	{
+		#define X(name) \
+			arr_ind_16x16_pt_##name, 
+		
 		// Left side
-		arr_ind_16x16_pt_lt, arr_ind_16x16_pt_lb,
+		list_of_16x16_left_side_coll_point_names(X)
 		
 		// Top side
-		arr_ind_16x16_pt_tl, arr_ind_16x16_pt_tm, arr_ind_16x16_pt_tr,
+		list_of_16x16_top_side_coll_point_names(X)
 		
 		// Right side
-		arr_ind_16x16_pt_rt, arr_ind_16x16_pt_rb,
+		list_of_16x16_right_side_coll_point_names(X)
 		
 		// Bottom side
-		arr_ind_16x16_pt_bl, arr_ind_16x16_pt_bm, arr_ind_16x16_pt_br,
+		list_of_16x16_bottom_side_coll_point_names(X)
+		
+		// Bottom side, for walking down slopes
+		list_of_16x16_bottom_slope_side_coll_point_names(X)
+		
+		#undef X
 		
 		// arr_ind_16x16_count is the amount of arr_index_16x16's.  It is
 		// automatically updated by the compiler.
@@ -96,6 +107,8 @@ public:		// enums
 		macro(rt) macro(rm) macro(rb)
 	#define list_of_16x32_bottom_side_coll_point_names(macro) \
 		macro(bl) macro(bm) macro(br)
+	#define list_of_16x32_bottom_slope_side_coll_point_names(macro) \
+		macro(bl_slope) macro(bm_slope) macro(br_slope)
 	
 	// Left or right side, same ypos collision points
 	#define list_of_16x32_vert_side_ypos_top_coll_point_names(macro) \
@@ -105,37 +118,46 @@ public:		// enums
 	#define list_of_16x32_vert_side_ypos_bottom_coll_point_names(macro) \
 		macro(lb) macro(rb)
 	
-	// Top or bottom side, same xpos collision points
+	// Top, bottom, or bottom slope side, same xpos collision points
 	#define list_of_16x32_horiz_side_xpos_left_coll_point_names(macro) \
-		macro(tl) macro(bl)
+		macro(tl) macro(bl) macro(bl_slope)
 	#define list_of_16x32_horiz_side_xpos_middle_coll_point_names(macro) \
-		macro(tm) macro(bm)
+		macro(tm) macro(bm) macro(bm_slope)
 	#define list_of_16x32_horiz_side_xpos_right_coll_point_names(macro) \
-		macro(tr) macro(br)
-
+		macro(tr) macro(br) macro(br_slope)
+	
 	// All the collision points
 	#define list_of_16x32_coll_point_names(macro) \
 		list_of_16x32_left_side_coll_point_names(macro) \
 		list_of_16x32_top_side_coll_point_names(macro) \
 		list_of_16x32_right_side_coll_point_names(macro) \
-		list_of_16x32_bottom_side_coll_point_names(macro)
+		list_of_16x32_bottom_side_coll_point_names(macro) \
+		list_of_16x32_bottom_slope_side_coll_point_names(macro)
 	
 	
 	// The reason an X-macro isn't used here is because ctags wouldn't be
 	// able to work with it.
-	enum arr_index_16x32
+	enum arr_index_16x32 
 	{
+		#define X(name) \
+			arr_ind_16x32_pt_##name, 
+		
 		// Left side
-		arr_ind_16x32_pt_lt, arr_ind_16x32_pt_lm, arr_ind_16x32_pt_lb,
+		list_of_16x32_left_side_coll_point_names(X)
 		
 		// Top side
-		arr_ind_16x32_pt_tl, arr_ind_16x32_pt_tm, arr_ind_16x32_pt_tr,
+		list_of_16x32_top_side_coll_point_names(X)
 		
 		// Right side
-		arr_ind_16x32_pt_rt, arr_ind_16x32_pt_rm, arr_ind_16x32_pt_rb,
+		list_of_16x32_right_side_coll_point_names(X)
 		
 		// Bottom side
-		arr_ind_16x32_pt_bl, arr_ind_16x32_pt_bm, arr_ind_16x32_pt_br,
+		list_of_16x32_bottom_side_coll_point_names(X)
+		
+		// Bottom side, for walking down slopes
+		list_of_16x32_bottom_slope_side_coll_point_names(X)
+		
+		#undef X
 		
 		// arr_ind_16x32_count is the amount of arr_index_16x32's.  It is
 		// automatically updated by the compiler.
@@ -144,7 +166,6 @@ public:		// enums
 	
 	
 	
-	// 32x16
 	// Collision points that share a side
 	#define list_of_32x16_left_side_coll_point_names(macro) \
 		macro(lt) macro(lb)
@@ -154,6 +175,8 @@ public:		// enums
 		macro(rt) macro(rb)
 	#define list_of_32x16_bottom_side_coll_point_names(macro) \
 		macro(bl) macro(bm) macro(br)
+	#define list_of_32x16_bottom_slope_side_coll_point_names(macro) \
+		macro(bl_slope) macro(bm_slope) macro(br_slope)
 	
 	// Left or right side, same ypos collision points
 	#define list_of_32x16_vert_side_ypos_top_coll_point_names(macro) \
@@ -161,37 +184,44 @@ public:		// enums
 	#define list_of_32x16_vert_side_ypos_bottom_coll_point_names(macro) \
 		macro(lb) macro(rb)
 	
-	// Top or bottom side, same xpos collision points
+	// Top, bottom, or bottom slope side, same xpos collision points
 	#define list_of_32x16_horiz_side_xpos_left_coll_point_names(macro) \
-		macro(tl) macro(bl)
+		macro(tl) macro(bl) macro(bl_slope)
 	#define list_of_32x16_horiz_side_xpos_middle_coll_point_names(macro) \
-		macro(tm) macro(bm)
+		macro(tm) macro(bm) macro(bm_slope)
 	#define list_of_32x16_horiz_side_xpos_right_coll_point_names(macro) \
-		macro(tr) macro(br)
+		macro(tr) macro(br) macro(br_slope)
 	
 	// All the collision points
 	#define list_of_32x16_coll_point_names(macro) \
 		list_of_32x16_left_side_coll_point_names(macro) \
 		list_of_32x16_top_side_coll_point_names(macro) \
 		list_of_32x16_right_side_coll_point_names(macro) \
-		list_of_32x16_bottom_side_coll_point_names(macro)
+		list_of_32x16_bottom_side_coll_point_names(macro) \
+		list_of_32x16_bottom_slope_side_coll_point_names(macro)
 	
 	
-	// The reason an X-macro isn't used here is because ctags wouldn't be
-	// able to work with it.
-	enum arr_index_32x16
+	enum arr_index_32x16 
 	{
+		#define X(name) \
+			arr_ind_32x16_pt_##name, 
+		
 		// Left side
-		arr_ind_32x16_pt_lt, arr_ind_32x16_pt_lb,
+		list_of_32x16_left_side_coll_point_names(X)
 		
 		// Top side
-		arr_ind_32x16_pt_tl, arr_ind_32x16_pt_tm, arr_ind_32x16_pt_tr,
+		list_of_32x16_top_side_coll_point_names(X)
 		
 		// Right side
-		arr_ind_32x16_pt_rt, arr_ind_32x16_pt_rb,
+		list_of_32x16_right_side_coll_point_names(X)
 		
 		// Bottom side
-		arr_ind_32x16_pt_bl, arr_ind_32x16_pt_bm, arr_ind_32x16_pt_br,
+		list_of_32x16_bottom_side_coll_point_names(X)
+		
+		// Bottom side, for walking down slopes
+		list_of_32x16_bottom_slope_side_coll_point_names(X)
+		
+		#undef X
 		
 		// arr_ind_32x16_count is the amount of arr_index_32x16's.  It is
 		// automatically updated by the compiler.
@@ -222,7 +252,9 @@ public:		// functions
 	}
 	
 	// These functions are on two lines to prevent ridiculousness with the
-	// length of this header file.  Also, it just looks cleaner.
+	// length of this header file; however, the macros above definitely are
+	// a factor as well.  Additionally, the reason an X-macro isn't used
+	// here is because ctags wouldn't be able to work with it.
 	inline vec2_f24p8& get_pt_lt_16x16()
 		{ return the_array[arr_ind_16x16_pt_lt]; }
 	inline vec2_f24p8& get_pt_lb_16x16()
@@ -247,12 +279,21 @@ public:		// functions
 	inline vec2_f24p8& get_pt_br_16x16()
 		{ return the_array[arr_ind_16x16_pt_br]; }
 	
+	inline vec2_f24p8& get_pt_bl_slope_16x16()
+		{ return the_array[arr_ind_16x16_pt_bl_slope]; }
+	inline vec2_f24p8& get_pt_bm_slope_16x16()
+		{ return the_array[arr_ind_16x16_pt_bm_slope]; }
+	inline vec2_f24p8& get_pt_br_slope_16x16()
+		{ return the_array[arr_ind_16x16_pt_br_slope]; }
+	
 	inline void correct_num_used_points_16x16()
 		{ num_used_points = arr_ind_16x16_count; }
 	
 	
 	// These functions are on two lines to prevent ridiculousness with the
-	// length of this header file.  Also, it just looks cleaner.
+	// length of this header file; however, the macros above definitely are
+	// a factor as well.  Additionally, the reason an X-macro isn't used
+	// here is because ctags wouldn't be able to work with it.
 	inline vec2_f24p8& get_pt_lt_16x32()
 		{ return the_array[arr_ind_16x32_pt_lt]; }
 	inline vec2_f24p8& get_pt_lm_16x32()
@@ -281,11 +322,22 @@ public:		// functions
 	inline vec2_f24p8& get_pt_br_16x32()
 		{ return the_array[arr_ind_16x32_pt_br]; }
 	
+	inline vec2_f24p8& get_pt_bl_slope_16x32()
+		{ return the_array[arr_ind_16x32_pt_bl_slope]; }
+	inline vec2_f24p8& get_pt_bm_slope_16x32()
+		{ return the_array[arr_ind_16x32_pt_bm_slope]; }
+	inline vec2_f24p8& get_pt_br_slope_16x32()
+		{ return the_array[arr_ind_16x32_pt_br_slope]; }
+	
 	inline void correct_num_used_points_16x32()
 		{ num_used_points = arr_ind_16x32_count; }
 	
+	
+	
 	// These functions are on two lines to prevent ridiculousness with the
-	// length of this header file.  Also, it just looks cleaner.
+	// length of this header file; however, the macros above definitely are
+	// a factor as well.  Additionally, the reason an X-macro isn't used
+	// here is because ctags wouldn't be able to work with it.
 	inline vec2_f24p8& get_pt_lt_32x16()
 		{ return the_array[arr_ind_32x16_pt_lt]; }
 	inline vec2_f24p8& get_pt_lb_32x16()
@@ -309,6 +361,13 @@ public:		// functions
 		{ return the_array[arr_ind_32x16_pt_bm]; }
 	inline vec2_f24p8& get_pt_br_32x16()
 		{ return the_array[arr_ind_32x16_pt_br]; }
+	
+	inline vec2_f24p8& get_pt_bl_slope_32x16()
+		{ return the_array[arr_ind_32x16_pt_bl_slope]; }
+	inline vec2_f24p8& get_pt_bm_slope_32x16()
+		{ return the_array[arr_ind_32x16_pt_bm_slope]; }
+	inline vec2_f24p8& get_pt_br_slope_32x16()
+		{ return the_array[arr_ind_32x16_pt_br_slope]; }
 	
 	inline void correct_num_used_points_32x16()
 		{ num_used_points = arr_ind_32x16_count; }
