@@ -99,14 +99,18 @@ void generate_coll_point_group_16x16( const sprite& the_sprite,
 	
 	#define X(name) \
 		pt_##name.x =
+	//list_of_16x16_horiz_side_xpos_left_coll_point_names(X)
+	//	the_coll_box.left() + (fixed24p8){0x400};
 	list_of_16x16_horiz_side_xpos_left_coll_point_names(X)
-		the_coll_box.left() + (fixed24p8){0x400};
+		the_coll_box.left() + (fixed24p8){0x480};
 	
 	list_of_16x16_horiz_side_xpos_middle_coll_point_names(X)
 		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
 	
+	//list_of_16x16_horiz_side_xpos_right_coll_point_names(X)
+	//	the_coll_box.right() - (fixed24p8){0x400};
 	list_of_16x16_horiz_side_xpos_right_coll_point_names(X)
-		the_coll_box.right() - (fixed24p8){0x400};
+		the_coll_box.right() - (fixed24p8){0x480};
 	#undef X
 	
 	
@@ -187,12 +191,16 @@ void generate_coll_point_group_16x32( const sprite& the_sprite,
 		pt_##name.y =
 	list_of_16x32_vert_side_ypos_top_coll_point_names(X)
 		the_coll_box.top() + (fixed24p8){0x480};
+	//list_of_16x32_vert_side_ypos_top_coll_point_names(X)
+	//	the_coll_box.top() + (fixed24p8){0x500};
 	
 	list_of_16x32_vert_side_ypos_middle_coll_point_names(X)
 		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 2 };
 	
 	list_of_16x32_vert_side_ypos_bottom_coll_point_names(X)
 		the_coll_box.bot() - (fixed24p8){0x480};
+	//list_of_16x32_vert_side_ypos_bottom_coll_point_names(X)
+	//	the_coll_box.bot() - (fixed24p8){0x500};
 	#undef X
 	
 	
@@ -207,14 +215,18 @@ void generate_coll_point_group_16x32( const sprite& the_sprite,
 	
 	#define X(name) \
 		pt_##name.x =
+	//list_of_16x32_horiz_side_xpos_left_coll_point_names(X)
+	//	the_coll_box.left() + (fixed24p8){0x400};
 	list_of_16x32_horiz_side_xpos_left_coll_point_names(X)
-		the_coll_box.left() + (fixed24p8){0x400};
+		the_coll_box.left() + (fixed24p8){0x480};
 	
 	list_of_16x32_horiz_side_xpos_middle_coll_point_names(X)
 		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
 	
+	//list_of_16x32_horiz_side_xpos_right_coll_point_names(X)
+	//	the_coll_box.right() - (fixed24p8){0x400};
 	list_of_16x32_horiz_side_xpos_right_coll_point_names(X)
-		the_coll_box.right() - (fixed24p8){0x400};
+		the_coll_box.right() - (fixed24p8){0x480};
 	#undef X
 	
 	
@@ -236,7 +248,9 @@ void generate_coll_point_group_16x32( const sprite& the_sprite,
 		the_coll_box.top();
 	
 	list_of_16x32_bottom_side_coll_point_names(X)
-		the_coll_box.bot();
+		//the_coll_box.bot();
+		//the_coll_box.bot() + (fixed24p8){0x400};
+		the_coll_box.bot() + (fixed24p8){0x200};
 	
 	list_of_16x32_bottom_slope_side_coll_point_names(X)
 		the_coll_box.bot() + (fixed24p8){0x200};
@@ -317,14 +331,18 @@ void generate_coll_point_group_32x16( const sprite& the_sprite,
 	
 	#define X(name) \
 		pt_##name.x =
+	//list_of_32x16_horiz_side_xpos_left_coll_point_names(X)
+	//	the_coll_box.left() + (fixed24p8){0x400};
 	list_of_32x16_horiz_side_xpos_left_coll_point_names(X)
-		the_coll_box.left() + (fixed24p8){0x400};
+		the_coll_box.left() + (fixed24p8){0x480};
 	
 	list_of_32x16_horiz_side_xpos_middle_coll_point_names(X)
 		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
 	
+	//list_of_32x16_horiz_side_xpos_right_coll_point_names(X)
+	//	the_coll_box.right() - (fixed24p8){0x400};
 	list_of_32x16_horiz_side_xpos_right_coll_point_names(X)
-		the_coll_box.right() - (fixed24p8){0x400};
+		the_coll_box.right() - (fixed24p8){0x480};
 	#undef X
 	
 	

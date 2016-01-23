@@ -58,6 +58,10 @@ public:		// enums
 	#define list_of_16x16_horiz_side_xpos_right_coll_point_names(macro) \
 		macro(tr) macro(br) macro(br_slope)
 	
+	#define list_of_16x16_slope_stuff_coll_point_names(macro) \
+		macro(bm) macro(bl) macro(br) \
+		macro(bm_slope) macro(bl_slope) macro(br_slope)
+	
 	// All the collision points
 	#define list_of_16x16_coll_point_names(macro) \
 		list_of_16x16_left_side_coll_point_names(macro) \
@@ -126,6 +130,10 @@ public:		// enums
 	#define list_of_16x32_horiz_side_xpos_right_coll_point_names(macro) \
 		macro(tr) macro(br) macro(br_slope)
 	
+	#define list_of_16x32_slope_stuff_coll_point_names(macro) \
+		macro(bm) macro(bl) macro(br) \
+		macro(bm_slope) macro(bl_slope) macro(br_slope)
+	
 	// All the collision points
 	#define list_of_16x32_coll_point_names(macro) \
 		list_of_16x32_left_side_coll_point_names(macro) \
@@ -135,8 +143,6 @@ public:		// enums
 		list_of_16x32_bottom_slope_side_coll_point_names(macro)
 	
 	
-	// The reason an X-macro isn't used here is because ctags wouldn't be
-	// able to work with it.
 	enum arr_index_16x32 
 	{
 		#define X(name) \
@@ -191,6 +197,10 @@ public:		// enums
 		macro(tm) macro(bm) macro(bm_slope)
 	#define list_of_32x16_horiz_side_xpos_right_coll_point_names(macro) \
 		macro(tr) macro(br) macro(br_slope)
+	
+	#define list_of_32x16_slope_stuff_coll_point_names(macro) \
+		macro(bm) macro(bl) macro(br) \
+		macro(bm_slope) macro(bl_slope) macro(br_slope)
 	
 	// All the collision points
 	#define list_of_32x16_coll_point_names(macro) \

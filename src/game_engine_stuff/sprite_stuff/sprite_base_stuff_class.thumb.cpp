@@ -328,7 +328,14 @@ block_type sprite_base_stuff::slope_block_coll_response_bot_16x16
 	// The block y coord points above collision points
 	const s32 pt_above_pt_bm_block_coord_y = bm_coll_result.coord.y - 1, 
 		pt_above_pt_bl_block_coord_y = bl_coll_result.coord.y - 1,
-		pt_above_pt_br_block_coord_y = br_coll_result.coord.y - 1;
+		pt_above_pt_br_block_coord_y = br_coll_result.coord.y - 1,
+		
+		pt_above_pt_bm_slope_block_coord_y = bm_slope_coll_result.coord.y 
+			- 1, 
+		pt_above_pt_bl_slope_block_coord_y = bl_slope_coll_result.coord.y 
+			- 1,
+		pt_above_pt_br_slope_block_coord_y = br_slope_coll_result.coord.y 
+			- 1;
 	
 	// Height mask values for the points to check
 	s32 pt_bm_height_mask_value = -1, 
@@ -584,43 +591,38 @@ block_type sprite_base_stuff::slope_block_coll_response_bot_16x32
 	block_coll_result& bm_slope_coll_result, 
 	block_coll_result& br_slope_coll_result, bool hitting_tltr )
 {
-	vec2_f24p8& pt_bm = the_pt_group.get_pt_bm_16x32(),
-		& pt_bl = the_pt_group.get_pt_bl_16x32(),
-		& pt_br = the_pt_group.get_pt_br_16x32();
+	#define X(name) \
+		vec2_f24p8& pt_##name = the_pt_group.get_pt_##name##_16x32();
+	list_of_16x32_slope_stuff_coll_point_names(X)
+	#undef X
 	
-	// pt_bm, pt_bl, and pt_br converted to the relative coordinate system
-	// of the block, with units of WHOLE pixels, with NO subpixels.
-	vec2_s32 pt_bm_block_rel_round,
-		pt_bl_block_rel_round,
-		pt_br_block_rel_round;
 	
-	// These % operators will be converted to & operators by the
-	// compiler
-	pt_bm_block_rel_round.x = pt_bm.x.round_to_int() 
-		% num_pixels_per_block_row;
-	pt_bm_block_rel_round.y = pt_bm.y.round_to_int()
-		% num_pixels_per_block_col;
-	
-	pt_bl_block_rel_round.x = pt_bl.x.round_to_int() 
-		% num_pixels_per_block_row;
-	pt_bl_block_rel_round.y = pt_bl.y.round_to_int()
-		% num_pixels_per_block_col;
-	
-	pt_br_block_rel_round.x = pt_br.x.round_to_int() 
-		% num_pixels_per_block_row;
-	pt_br_block_rel_round.y = pt_br.y.round_to_int()
-		% num_pixels_per_block_col;
+	// pt_bm, pt_bl, pt_br, pt_bm_slope, pt_bl_slope, and pt_br_slope
+	// converted to the relative coordinate system of the block, with units
+	// of WHOLE pixels, with NO subpixels.  The % operators will be
+	// converted to & operators by the compiler.
+	#define X(name) \
+		vec2_s32 pt_##name##_block_rel_round \
+			= vec2_s32( pt_##name.x.round_to_int() \
+			% num_pixels_per_block_row, pt_##name.y.round_to_int() \
+			% num_pixels_per_block_col );
+	list_of_16x32_slope_stuff_coll_point_names(X)
+	#undef X
 	
 	
 	// The block y coord points above collision points
-	const s32 pt_above_pt_bm_block_coord_y = bm_coll_result.coord.y - 1, 
-		pt_above_pt_bl_block_coord_y = bl_coll_result.coord.y - 1,
-		pt_above_pt_br_block_coord_y = br_coll_result.coord.y - 1;
+	#define X(name) \
+		const s32 pt_above_pt_##name##_block_coord_y \
+			= name##_coll_result.coord.y - 1;
+	list_of_16x32_slope_stuff_coll_point_names(X)
+	#undef X
 	
 	// Height mask values for the points to check
-	s32 pt_bm_height_mask_value = -1, 
-		pt_bl_height_mask_value = -1,
-		pt_br_height_mask_value = -1;
+	#define X(name) \
+		s32 pt_##name##_height_mask_value = -1;
+	list_of_16x32_slope_stuff_coll_point_names(X)
+	#undef X
+		
 	
 	// Basically, these pointers are used as aliases for long variable
 	// names.
@@ -714,6 +716,18 @@ block_type sprite_base_stuff::slope_block_coll_response_bot_16x32
 				
 			}
 		}
+		else if ( pt_block_rel_round.y == 0 )
+		{
+			//show_debug_str_s32("okay");
+			//the_sprite.in_level_pos.y = make_f24p8
+			//	( ( the_coll_result.coord.y + 1 )
+			//	* num_pixels_per_block_col - height_mask_value )
+			//	- the_sprite.the_coll_box.size.y;
+			
+			//the_sprite.in_level_pos.y += make_f24p8(1);
+			the_sprite.on_ground = false;
+			
+		}
 		else if ( the_sprite.vel.y < (fixed24p8){0} )
 		{
 			//show_debug_str_s32("hmmm");
@@ -746,18 +760,6 @@ block_type sprite_base_stuff::slope_block_coll_response_bot_16x32
 			}
 		}
 		
-		else if ( pt_block_rel_round.y == 0 )
-		{
-			//show_debug_str_s32("okay");
-			//the_sprite.in_level_pos.y = make_f24p8
-			//	( ( the_coll_result.coord.y + 1 )
-			//	* num_pixels_per_block_col - height_mask_value )
-			//	- the_sprite.the_coll_box.size.y;
-			
-			//the_sprite.in_level_pos.y += make_f24p8(1);
-			the_sprite.on_ground = false;
-			
-		}
 		
 		else
 		{
@@ -793,8 +795,12 @@ block_type sprite_base_stuff::slope_block_coll_response_bot_16x32
 		pt_br_block_rel_round, pt_above_pt_br_block_coord_y );
 	
 	
-	s32 the_greatest_height_mask_value = max3( pt_bm_height_mask_value,
+	//s32 the_greatest_height_mask_value = max3( pt_bm_height_mask_value,
+	//	pt_bl_height_mask_value, pt_br_height_mask_value );
+	
+	s32 the_greatest_height_mask_value = max_va( pt_bm_height_mask_value,
 		pt_bl_height_mask_value, pt_br_height_mask_value );
+	
 	
 	if ( the_greatest_height_mask_value == pt_bm_height_mask_value )
 	{
@@ -1195,9 +1201,12 @@ void sprite_base_stuff::block_collision_stuff_16x32( sprite& the_sprite )
 		&& !bt_is_slope(bm_coll_result.type)
 		&& !bt_is_right_slope(br_coll_result.type)
 		&& !bt_is_left_slope(lb_coll_result.type)
-		&& !bt_is_right_slope(rb_coll_result.type) )
+		&& !bt_is_right_slope(rb_coll_result.type) 
 		//&& !bt_is_left_slope(lm_coll_result.type)
 		//&& !bt_is_right_slope(rm_coll_result.type) )
+		&& !bt_is_left_slope(bl_slope_coll_result.type) 
+		&& !bt_is_slope(bm_slope_coll_result.type)
+		&& !bt_is_right_slope(br_slope_coll_result.type) )
 	{
 		if ( tl_coll_result.type != bt_air 
 			|| tr_coll_result.type != bt_air )

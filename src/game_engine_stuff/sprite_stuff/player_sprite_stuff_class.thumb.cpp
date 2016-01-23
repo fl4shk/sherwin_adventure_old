@@ -1073,15 +1073,18 @@ void player_sprite_stuff::handle_jumping_stuff( sprite& the_player,
 			}
 		}
 		
-		//else if ( the_player.jump_hold_timer == 0 )
-		//else if (!the_player.is_jumping)
-		else if ( !the_player.is_jumping 
-			|| the_player.vel.y >= (fixed24p8){0} )
+		////else if ( the_player.jump_hold_timer == 0 )
+		////else if (!the_player.is_jumping)
+		//else if ( !the_player.is_jumping 
+		//	|| the_player.vel.y >= (fixed24p8){0} )
+		else
 		{
 			//if ( the_player.vel.y.data < -0x200 )
 			//{
 			//	the_player.vel.y.data = -0x200;
 			//}
+			
+			the_player.is_jumping = false;
 			
 			apply_gravity(the_player);
 			
