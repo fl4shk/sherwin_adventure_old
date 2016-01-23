@@ -155,8 +155,10 @@ void generate_coll_point_group_16x16( const sprite& the_sprite,
 	#define X(name) \
 		pt_##name.y =
 	list_of_16x16_bottom_side_coll_point_names(X)
+		//the_sprite.in_level_pos.y 
+		//+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
 		the_sprite.in_level_pos.y 
-		+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
+		+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 1 );
 	#undef X
 }
 
@@ -278,8 +280,12 @@ void generate_coll_point_group_16x32( const sprite& the_sprite,
 	#define X(name) \
 		pt_##name.y =
 	list_of_16x32_bottom_side_coll_point_names(X)
+		//the_sprite.in_level_pos.y 
+		//+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
+		//the_sprite.in_level_pos.y 
+		//+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 8 );
 		the_sprite.in_level_pos.y 
-		+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
+		+ make_f24p8( the_sprite.get_shape_size_as_vec2().y );
 	#undef X
 
 }

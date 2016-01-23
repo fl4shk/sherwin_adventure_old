@@ -189,9 +189,16 @@ macro(grass_in_slope_right_block_stuff)
 
 
 #define list_of_slope_configurations(macro) \
-macro(p16_p16) macro(n16_p16) \
-macro(p32_p16_short) macro(p32_p16_tall) \
-macro(n32_p16_tall) macro(n32_p16_short)
+/* 45 degree angle slope */ \
+macro(p16_p16) \
+/* 135 degree angle slope */ \
+macro(n16_p16) \
+/* Approximately 26.57 degrees angle slope, with two blocks */ \
+macro(p32_p16_short) \
+macro(p32_p16_tall) \
+/* Approximately 153.43 degrees angle slope, with two blocks */ \
+macro(n32_p16_tall) \
+macro(n32_p16_short)
 
 
 //// These bg1_block_type's are used by BG1.
