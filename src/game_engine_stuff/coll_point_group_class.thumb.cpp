@@ -138,10 +138,11 @@ void generate_coll_point_group_16x16( const sprite& the_sprite,
 		the_coll_box.top();
 	
 	list_of_16x32_bottom_side_coll_point_names(X)
-		the_coll_box.bot();
-	
-	list_of_16x32_bottom_slope_side_coll_point_names(X)
+		//the_coll_box.bot();
 		the_coll_box.bot() + (fixed24p8){0x200};
+	
+	//list_of_16x32_bottom_slope_side_coll_point_names(X)
+	//	the_coll_box.bot() + (fixed24p8){0x200};
 		
 		//the_sprite.in_level_pos.y 
 		//+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
@@ -252,8 +253,8 @@ void generate_coll_point_group_16x32( const sprite& the_sprite,
 		//the_coll_box.bot() + (fixed24p8){0x400};
 		the_coll_box.bot() + (fixed24p8){0x200};
 	
-	list_of_16x32_bottom_slope_side_coll_point_names(X)
-		the_coll_box.bot() + (fixed24p8){0x200};
+	//list_of_16x32_bottom_slope_side_coll_point_names(X)
+	//	the_coll_box.bot() + (fixed24p8){0x200};
 		
 		//the_sprite.in_level_pos.y 
 		//+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
@@ -265,10 +266,6 @@ void generate_coll_point_group_16x32( const sprite& the_sprite,
 		////+ make_f24p8( the_sprite.get_shape_size_as_vec2().y );
 	#undef X
 	
-	
-	#define X(name) \
-		pt_##name.y =
-	#undef X
 	
 }
 
@@ -365,10 +362,11 @@ void generate_coll_point_group_32x16( const sprite& the_sprite,
 		the_coll_box.top();
 	
 	list_of_16x32_bottom_side_coll_point_names(X)
-		the_coll_box.bot();
-	
-	list_of_16x32_bottom_slope_side_coll_point_names(X)
+		//the_coll_box.bot();
 		the_coll_box.bot() + (fixed24p8){0x200};
+	
+	//list_of_16x32_bottom_slope_side_coll_point_names(X)
+	//	the_coll_box.bot() + (fixed24p8){0x200};
 		
 		//the_sprite.in_level_pos.y 
 		//+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );

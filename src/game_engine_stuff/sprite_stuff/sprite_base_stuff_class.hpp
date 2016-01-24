@@ -34,8 +34,8 @@ public:		// variables
 	//static constexpr fixed24p8 grav_acc = {0x40};
 	//static constexpr fixed24p8 grav_acc = {0x60};
 	static constexpr fixed24p8 grav_acc = {0x50};
-	static constexpr fixed24p8 max_y_vel = {0x400};
-	//static constexpr fixed24p8 max_y_vel = {0x300};
+	//static constexpr fixed24p8 max_y_vel = {0x400};
+	static constexpr fixed24p8 max_y_vel = {0x300};
 	//static constexpr fixed24p8 max_y_vel = {0x280};
 	
 	static constexpr sprite_palette_slot the_palette_slot = sps_player;
@@ -170,10 +170,7 @@ protected:		// functions
 		block_coll_result& rb_coll_result,
 		block_coll_result& bl_coll_result,
 		block_coll_result& bm_coll_result,
-		block_coll_result& br_coll_result,
-		block_coll_result& bl_slope_coll_result,
-		block_coll_result& bm_slope_coll_result,
-		block_coll_result& br_slope_coll_result )
+		block_coll_result& br_coll_result )
 		__attribute__((_iwram_code));
 	
 	void get_basic_block_coll_results_16x32
@@ -189,10 +186,7 @@ protected:		// functions
 		block_coll_result& rb_coll_result,
 		block_coll_result& bl_coll_result, 
 		block_coll_result& bm_coll_result,
-		block_coll_result& br_coll_result,
-		block_coll_result& bl_slope_coll_result, 
-		block_coll_result& bm_slope_coll_result, 
-		block_coll_result& br_slope_coll_result ) 
+		block_coll_result& br_coll_result ) 
 		__attribute__((_iwram_code));
 	
 	
@@ -218,10 +212,7 @@ protected:		// functions
 		( sprite& the_sprite, coll_point_group& the_pt_group,
 		block_coll_result& bl_coll_result,
 		block_coll_result& bm_coll_result,
-		block_coll_result& br_coll_result, 
-		block_coll_result& bl_slope_coll_result, 
-		block_coll_result& bm_slope_coll_result, 
-		block_coll_result& br_slope_coll_result, bool hitting_tltr=false )
+		block_coll_result& br_coll_result, bool hitting_tltr=false )
 		__attribute__((_iwram_code));
 	
 	
@@ -249,10 +240,7 @@ protected:		// functions
 		( sprite& the_sprite, coll_point_group& the_pt_group,
 		block_coll_result& bl_coll_result,
 		block_coll_result& bm_coll_result,
-		block_coll_result& br_coll_result, 
-		block_coll_result& bl_slope_coll_result, 
-		block_coll_result& bm_slope_coll_result, 
-		block_coll_result& br_slope_coll_result, bool hitting_tltr=false )
+		block_coll_result& br_coll_result, bool hitting_tltr=false )
 		__attribute__((_iwram_code));
 	
 	
