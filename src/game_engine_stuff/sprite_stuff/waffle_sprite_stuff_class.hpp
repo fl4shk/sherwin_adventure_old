@@ -21,6 +21,7 @@
 
 #include "../../gfx/the_powerup_gfx.h"
 
+
 class waffle_sprite_stuff : public sprite_base_stuff
 {
 public:		// enums
@@ -81,12 +82,12 @@ public:		// functions
 	
 	
 protected:		// functions
-	virtual void block_coll_response_left_16x16( sprite& the_sprite, 
+	virtual void block_coll_response_left_16x16( sprite& the_powerup, 
 		const block_coll_result& lt_coll_result,
 		const block_coll_result& lb_coll_result )
 		__attribute__((_iwram_code));
 	
-	virtual void block_coll_response_right_16x16( sprite& the_sprite, 
+	virtual void block_coll_response_right_16x16( sprite& the_powerup, 
 		const block_coll_result& rt_coll_result,
 		const block_coll_result& rb_coll_result )
 		__attribute__((_iwram_code));

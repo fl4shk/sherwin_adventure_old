@@ -29,6 +29,7 @@ void waffle_sprite_stuff::update_part_1( sprite& the_powerup )
 {
 	// I can't remember why I needed to save the initial position of waffle
 	// sprites.  Eh.
+	
 	u32& initial_pos_was_set 
 		= the_powerup.misc_data_u[udi_initial_pos_was_set];
 	s32& initial_pos_x = the_powerup.misc_data_s[sdi_initial_pos_x];
@@ -79,6 +80,7 @@ void waffle_sprite_stuff::block_coll_response_left_16x16
 	const block_coll_result& lb_coll_result )
 {
 	s32& move_timer = the_powerup.misc_data_s[sdi_move_timer];
+	
 	
 	the_powerup.in_level_pos.x 
 		= make_f24p8( ( lt_coll_result.coord.x + 1 ) * 16 )

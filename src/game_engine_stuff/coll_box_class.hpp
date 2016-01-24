@@ -45,6 +45,9 @@ public:		// variables
 	
 	vec2_f24p8 size;
 	
+	// If this coll_box is actually a hit_box, then strength > 0.
+	u32 strength;
+	
 public:		// functions
 	
 	inline fixed24p8 left() const

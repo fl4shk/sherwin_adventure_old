@@ -64,6 +64,8 @@ int main()
 	// This function is called by game_manager::title_screen_func().
 	//game_manager::reinit_the_game();
 	
+	
+	
 	for (;;)
 	{
 		gfx_manager::back_up_bgofs_mirror();
