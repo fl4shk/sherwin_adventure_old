@@ -1,7 +1,8 @@
 General Mechanics Brainstorming
 ===============================
 1.  I am *not* going to allow damaging enemies by *jumping* on them, as it
-allows me to differentiate the game from Mario ones significantly.  
+allows me to differentiate the game from Mario ones significantly.
+However, I will allow *stunning* most types of enemies
 2.  I'm *not* having bottomless pits either, for that matter.  
 3.  The game will still have an emphasis on platforming, but it will also
 have an emphasis on combat.  Combat will be more important than in Mario
@@ -11,7 +12,7 @@ Mega Man games, without the bottomless pits.
   Sherwin has a lot more HP than Mario does (except in Super Mario 64 and
   Super Mario Sunshine, where Sherwin doesn't have THAT much more HP as of
   this writing (8 HP for Mario in SM64 and SMS, 10 HP for Sherwin)).
-4.  Sherwin's powerups will provide him with multiple ways to attack.  As
+4.  Sherwin's powerups will provide him with *multiple* ways to attack.  As
 of this writing, no powerup system exists.  That will be changed once more
 graphics and sprites are added that would be usable for this purpose.
 5.  I *was* thinking I wouldn't have any kind of invincibility frames for
@@ -26,11 +27,21 @@ sprites when they get hit.
   only adds a "strength" member variable.  Of course, if the "strength"
   member variable is 0, then the coll\_box is actually supposed to be a
   hit\_box.
-6.  I don't think I'll allow most types of enemies to damage Sherwin *just*
-by contacting him, at least not without an attacking animation of some
-sort.  All enemies will need to be able to do something other than just
-walk around.  This is *very* different from Mario games and nearly every
-other platform game.
+6.  I don't think I'll allow most types of enemies to damage Sherwin *just
+by contacting him*, at least *not without an attacking animation* of some
+sort.  *Most* enemies will need to be able to do something other than just
+walk around.  This is **very** different from nearly every other platform
+game.  An exception to this is enemies that, *for example*, are **spiky**
+or **made of lava**; those types of enemies will definitely be dangerous to
+touch.
+  1.  I think that bumping into some types of enemies from the top, a side,
+  or below will stun that enemy, unless it's doing an attack animation.
+  Again, **spiky** enemies and *other similar things* that you'd *think*
+  would be dangerous to touch will actually be dangerous to touch.
+  2.  Alternatively, I may make it so that Sherwin can *only* stun an enemy
+  by *jumping* on it.  Again, **spiky** enemies and *other similar things*
+  that you'd *think* would be dangerous to touch will actually be dangerous
+  to touch.
 
 
 
