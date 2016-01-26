@@ -164,8 +164,10 @@ public:		// functions
 	{
 		vec2_f24p8 ret;
 		
-		ret.x = ( in_level_pos.x - make_f24p8(camera_pos.x) );
-		ret.y = ( in_level_pos.y - make_f24p8(camera_pos.y) );
+		//ret.x = ( in_level_pos.x - make_f24p8(camera_pos.x) );
+		//ret.y = ( in_level_pos.y - make_f24p8(camera_pos.y) );
+		
+		ret = in_level_pos - camera_pos;
 		
 		return ret;
 	}

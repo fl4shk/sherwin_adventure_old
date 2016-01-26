@@ -1132,13 +1132,13 @@ void player_sprite_stuff::sprite_interaction_reponse( sprite& the_player,
 			break;
 			
 		case st_snow_golem:
-			if ( coll_box_intersects_now( the_player.the_coll_box,
-				the_other_sprite.the_coll_box ) 
-				&& the_player.invin_frame_timer == 0 )
-			{
-				--remaining_hp;
-				the_player.invin_frame_timer = initial_invin_frame_timer;
-			}
+			//if ( coll_box_intersects_now( the_player.the_coll_box,
+			//	the_other_sprite.the_coll_box ) 
+			//	&& the_player.invin_frame_timer == 0 )
+			//{
+			//	--remaining_hp;
+			//	the_player.invin_frame_timer = initial_invin_frame_timer;
+			//}
 			
 		default:
 			break;

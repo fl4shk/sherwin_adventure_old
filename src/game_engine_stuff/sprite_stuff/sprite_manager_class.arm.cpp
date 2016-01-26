@@ -28,8 +28,13 @@ void sprite_manager::spawn_sprites_if_needed
 	
 	prev_curr_pair<s32> camera_block_grid_pos_x;
 	
-	camera_block_grid_pos_x.prev = camera_pos_pc_pair.prev.x >> 4;
-	camera_block_grid_pos_x.curr = camera_pos_pc_pair.curr.x >> 4;
+	//camera_block_grid_pos_x.prev = camera_pos_pc_pair.prev.x >> 4;
+	//camera_block_grid_pos_x.curr = camera_pos_pc_pair.curr.x >> 4;
+	
+	camera_block_grid_pos_x.prev = camera_pos_pc_pair.prev.x.round_to_int() 
+		>> 4;
+	camera_block_grid_pos_x.curr = camera_pos_pc_pair.curr.x.round_to_int() 
+		>> 4;
 	
 	
 	// "cm_dir" is short for "camera_movement_direction".
@@ -224,16 +229,16 @@ void sprite_manager::despawn_sprites_if_needed
 		max_right = ( screen_width + 2 * 16 ) << 8;
 	
 	
-	vec2_f24p8 camera_pos_f24p8;
-	camera_pos_f24p8.x = make_f24p8(camera_pos.x);
-	camera_pos_f24p8.y = make_f24p8(camera_pos.y);
+	//vec2_f24p8 camera_pos_f24p8;
+	//camera_pos_f24p8.x = make_f24p8(camera_pos.x);
+	//camera_pos_f24p8.y = make_f24p8(camera_pos.y);
 	
 	auto for_loop_contents = [&]( sprite& spr ) -> void
 	{
 		if ( spr.the_sprite_type != st_default )
 		{
 			fixed24p8 spr_on_screen_pos_x = spr.in_level_pos.x 
-				- camera_pos_f24p8.x;
+				- camera_pos.x;
 			
 			if ( !( spr_on_screen_pos_x.data >= max_left
 				&& spr_on_screen_pos_x.data <= max_right ) )

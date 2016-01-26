@@ -185,14 +185,16 @@ void sprite_manager::initial_sprite_spawning_shared_code
 	auto which_spr = the_sprites.begin();
 	
 	// Convert 
-	vec2_f24p8 camera_pos_f24p8;
-	camera_pos_f24p8.x = make_f24p8(camera_pos.x);
-	camera_pos_f24p8.y = make_f24p8(camera_pos.y);
+	//vec2_f24p8 camera_pos_f24p8;
+	//camera_pos_f24p8.x = make_f24p8(camera_pos.x);
+	//camera_pos_f24p8.y = make_f24p8(camera_pos.y);
 	
 	// Convert the position of the camera to block grid coordinates
 	vec2_f24p8 camera_block_grid_pos;
-	camera_block_grid_pos.x = make_f24p8( camera_pos.x >> 4 );
-	camera_block_grid_pos.y = make_f24p8( camera_pos.y >> 4 );
+	//camera_block_grid_pos.x = make_f24p8( camera_pos.x >> 4 );
+	//camera_block_grid_pos.y = make_f24p8( camera_pos.y >> 4 );
+	camera_block_grid_pos.x = camera_pos.x.trunc_to_int() >> 4;
+	camera_block_grid_pos.y = camera_pos.y.trunc_to_int() >> 4;
 	
 	
 	//for ( std::forward_list<sprite_init_param_group>& which_list
@@ -217,8 +219,10 @@ void sprite_manager::initial_sprite_spawning_shared_code
 			spr_in_level_pos.y = make_f24p8( spr_block_grid_coord.y * 16 );
 			
 			vec2_f24p8 spr_on_screen_pos;
-			spr_on_screen_pos.x = spr_in_level_pos.x - camera_pos_f24p8.x;
-			spr_on_screen_pos.y = spr_in_level_pos.y - camera_pos_f24p8.y;
+			//spr_on_screen_pos.x = spr_in_level_pos.x - camera_pos_f24p8.x;
+			//spr_on_screen_pos.y = spr_in_level_pos.y - camera_pos_f24p8.y;
+			spr_on_screen_pos.x = spr_in_level_pos.x - camera_pos.x;
+			spr_on_screen_pos.y = spr_in_level_pos.y - camera_pos.y;
 			
 			// Don't spawn the sprite if it's HORIZONTALLY off-screen.
 			// Perhaps eventually sprites should be spawned and despawned

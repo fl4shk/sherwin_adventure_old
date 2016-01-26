@@ -202,7 +202,9 @@ public:		// variables
 	static constexpr s32 pickaxe_swing_final_frame_timer_end = 10;
 	
 	static constexpr fixed24p8 walk_speed = {0x100};
-	static constexpr fixed24p8 max_run_speed = {0x200};
+	//static constexpr fixed24p8 max_run_speed = {0x200};
+	//static constexpr fixed24p8 max_run_speed = {0x300};
+	static constexpr fixed24p8 max_run_speed = {0x380};
 	
 	// 0.5 seconds
 	static constexpr s32 initial_invin_frame_timer = 30;

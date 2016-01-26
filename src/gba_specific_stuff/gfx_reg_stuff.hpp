@@ -77,7 +77,8 @@ typedef u16 scr_entry;
 //	//s16 x, y;
 //	u16 x, y;
 //} __attribute__((aligned(4)));
-typedef vec2_s16 bg_point;
+//typedef vec2_s16 bg_point;
+typedef vec2_f24p8 bg_point;
 
 
 // Screenblock struct.  There are 32 (0x20) tiles per row, and 32 (0x20)
@@ -153,7 +154,8 @@ static const u32 num_colors_per_palette = 16;
 #define reg_bg3cnt ( reg_bgcnt[3] )
 
 // LCD I/O BG Scrolling Registers
-#define reg_bgofs ((bg_point*)(mem_io + 0x0010))
+//#define reg_bgofs ((bg_point*)(mem_io + 0x0010))
+#define reg_bgofs ((vec2_s16*)(mem_io + 0x0010))
 
 #define reg_bghofs_n(n) *((vu16*)(mem_io + 0x0010 + 0x04 * n))
 #define reg_bgvofs_n(n) *((vu16*)(mem_io + 0x0012 + 0x04 * n))

@@ -159,8 +159,10 @@ void sprite::update_on_screen_pos( const bg_point& camera_pos )
 {
 	vec2_f24p8 on_screen_pos_f24p8;
 	
-	on_screen_pos_f24p8.x = ( in_level_pos.x - make_f24p8(camera_pos.x) );
-	on_screen_pos_f24p8.y = ( in_level_pos.y - make_f24p8(camera_pos.y) );
+	//on_screen_pos_f24p8.x = ( in_level_pos.x - make_f24p8(camera_pos.x) );
+	//on_screen_pos_f24p8.y = ( in_level_pos.y - make_f24p8(camera_pos.y) );
+	
+	on_screen_pos_f24p8 = in_level_pos - camera_pos;
 	
 	vec2_u32 ss_vec2 = get_shape_size_as_vec2();
 	vec2_f24p8 offset;
@@ -197,7 +199,9 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 	if ( ( on_screen_pos.x <= make_f24p8(100) && vel.x.data < 0 ) 
 		|| ( on_screen_pos.x >= make_f24p8(140) && vel.x.data > 0 ) )
 	{
-		camera_pos.x += vel.x.round_to_int();
+		//camera_pos.x += vel.x.round_to_int();
+		
+		camera_pos.x += vel.x;
 	}
 	
 	//if ( ( on_screen_pos.y <= make_f24p8(20) && vel.y.data < 0 ) 
@@ -211,11 +215,13 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 	{
 		if (!on_ground)
 		{
-			camera_pos.y += vel.y.round_to_int();
+			//camera_pos.y += vel.y.round_to_int();
+			camera_pos.y += vel.y;
 		}
 		else
 		{
-			camera_pos.y -= 4;
+			//camera_pos.y -= 4;
+			camera_pos.y += {-0x400};
 		}
 	}
 	else if ( on_screen_bottom_pos >= make_f24p8(60) )
@@ -224,11 +230,13 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 		{
 			if (!on_ground)
 			{
-				camera_pos.y += vel.y.round_to_int();
+				//camera_pos.y += vel.y.round_to_int();
+				camera_pos.y += vel.y;
 			}
 			else
 			{
-				camera_pos.y += 4;
+				//camera_pos.y += 4;
+				camera_pos.y += {0x400};
 			}
 		}
 	}
@@ -236,10 +244,13 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 
 void sprite::center_camera_almost( bg_point& camera_pos ) const
 {
-	camera_pos.x = ( in_level_pos.x 
-		- (fixed24p8){ screen_width << 7 } ).round_to_int();
-	camera_pos.y = ( in_level_pos.y 
-		- (fixed24p8){ screen_height << 7 } ).round_to_int();
+	//camera_pos.x = ( in_level_pos.x 
+	//	- (fixed24p8){ screen_width << 7 } ).round_to_int();
+	//camera_pos.y = ( in_level_pos.y 
+	//	- (fixed24p8){ screen_height << 7 } ).round_to_int();
+	
+	camera_pos.x = in_level_pos.x - (fixed24p8){ screen_width << 7 };
+	camera_pos.y = in_level_pos.y - (fixed24p8){ screen_height << 7 };
 }
 
 

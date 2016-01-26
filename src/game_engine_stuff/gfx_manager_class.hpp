@@ -212,10 +212,22 @@ public:		// functions
 
 	static inline void copy_bgofs_mirror_to_registers()
 	{
-		reg_bgofs[0] = bgofs_mirror[0].curr;
-		reg_bgofs[1] = bgofs_mirror[1].curr;
-		reg_bgofs[2] = bgofs_mirror[2].curr;
-		reg_bgofs[3] = bgofs_mirror[3].curr;
+		//reg_bgofs[0] = bgofs_mirror[0].curr;
+		//reg_bgofs[1] = bgofs_mirror[1].curr;
+		//reg_bgofs[2] = bgofs_mirror[2].curr;
+		//reg_bgofs[3] = bgofs_mirror[3].curr;
+		
+		reg_bgofs[0].x = (s16)bgofs_mirror[0].curr.x.round_to_int();
+		reg_bgofs[0].y = (s16)bgofs_mirror[0].curr.y.round_to_int();
+		
+		reg_bgofs[1].x = (s16)bgofs_mirror[1].curr.x.round_to_int();
+		reg_bgofs[1].y = (s16)bgofs_mirror[1].curr.y.round_to_int();
+		
+		reg_bgofs[2].x = (s16)bgofs_mirror[2].curr.x.round_to_int();
+		reg_bgofs[2].y = (s16)bgofs_mirror[2].curr.y.round_to_int();
+		
+		reg_bgofs[3].x = (s16)bgofs_mirror[3].curr.x.round_to_int();
+		reg_bgofs[3].y = (s16)bgofs_mirror[3].curr.y.round_to_int();
 	}
 	
 	
