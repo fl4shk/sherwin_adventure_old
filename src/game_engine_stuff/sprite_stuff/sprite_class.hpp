@@ -39,6 +39,9 @@ protected:		// variables
 	u32 vram_chunk_index;
 	
 public:		// variables
+	
+	// General data
+	
 	// The type of sprite.
 	sprite_type the_sprite_type;
 	
@@ -53,8 +56,13 @@ public:		// variables
 	// be copied to oam_mirror.
 	oam_entry the_oam_entry;
 	
+	
+	
+	
+	// Physics and collision and stuff
+	
 	// in_level_pos is the "global" position of the sprite within the
-	// current level.
+	// current level, connected to the top left corner.
 	vec2_f24p8 in_level_pos;
 	
 	// vel is the velocity of the sprite.
@@ -70,7 +78,8 @@ public:		// variables
 	// with a size other than the visible 
 	vec2_f24p8 cb_pos_offset;
 	
-	// on_ground is a flag that tells whether the sprite is on the ground.
+	// on_ground is a flag that tells whether the sprite is on the ground,
+	// though that's really obvious.
 	bool on_ground;
 	
 	//// jump_hold_timer is used to keep track of for how much longer the
@@ -78,6 +87,11 @@ public:		// variables
 	//s32 jump_hold_timer;
 	
 	bool is_jumping;
+	
+	
+	// Invincibility frames timer, enabled after taking damage.
+	s32 invin_frame_timer;
+	
 	
 	
 	// Two arrays of miscellaneous sprite data.  The way these arrays are

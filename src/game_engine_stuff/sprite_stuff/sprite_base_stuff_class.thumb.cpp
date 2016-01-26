@@ -55,6 +55,7 @@ void sprite_base_stuff::init( sprite& the_sprite, bool facing_left )
 	clear_and_set_bits( the_sprite.the_oam_entry.attr2, 
 		obj_attr2_prio_mask, obj_attr2_prio_1 );
 	
+	the_sprite.update_f24p8_positions();
 }
 
 void sprite_base_stuff::init( sprite& the_sprite, 
@@ -65,6 +66,8 @@ void sprite_base_stuff::init( sprite& the_sprite,
 	the_sprite.in_level_pos = s_in_level_pos 
 		- get_the_initial_in_level_pos_offset();
 	the_sprite.update_on_screen_pos(camera_pos);
+	
+	the_sprite.update_f24p8_positions();
 }
 
 void sprite_base_stuff::init( sprite& the_sprite, 
@@ -76,6 +79,7 @@ void sprite_base_stuff::init( sprite& the_sprite,
 		- get_the_initial_in_level_pos_offset();
 	the_sprite.update_on_screen_pos(camera_pos);
 	
+	the_sprite.update_f24p8_positions();
 }
 
 
@@ -947,6 +951,22 @@ void sprite_base_stuff::apply_gravity( sprite& the_sprite )
 		the_sprite.vel.y = max_y_vel;
 	}
 }
+
+// Sprite-sprite interaction stuff
+void sprite_base_stuff::sprite_interaction_reponse( sprite& the_sprite, 
+	sprite& the_other_sprite )
+{
+	
+}
+
+// the_player is the primary user of this function
+void sprite_base_stuff::sprite_interaction_reponse( sprite& the_sprite, 
+	sprite& the_other_sprite, bg_point& camera_pos, 
+	const vec2_u32& the_level_size_2d )
+{
+	
+}
+
 
 
 

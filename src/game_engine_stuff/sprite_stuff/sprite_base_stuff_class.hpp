@@ -153,6 +153,15 @@ public:		// functions
 		__attribute__((_iwram_code));
 	
 	
+	// Sprite-sprite interaction stuff
+	virtual void sprite_interaction_reponse( sprite& the_sprite, 
+		sprite& the_other_sprite );
+	
+	// the_player is the primary user of this function
+	virtual void sprite_interaction_reponse( sprite& the_sprite, 
+		sprite& the_other_sprite, bg_point& camera_pos, 
+		const vec2_u32& the_level_size_2d );
+	
 	
 	
 protected:		// functions

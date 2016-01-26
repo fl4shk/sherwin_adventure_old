@@ -34,10 +34,12 @@ s32 player_sprite_stuff::max_hp;
 s32 player_sprite_stuff::remaining_hp;
 
 
-// Hammer stuff
+// Pickaxe stuff
 bool player_sprite_stuff::swinging_pickaxe;
 u32 player_sprite_stuff::pickaxe_sprite_slot;
 
+bool player_sprite_stuff::warped_this_frame;
+bool player_sprite_stuff::warped_to_other_sublevel_this_frame;
 
 
 
@@ -333,83 +335,13 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 	update_frames_and_frame_timers(the_player);
 	
 	
-	
-	bool warped_this_frame = false, 
-		warped_to_other_sublevel_this_frame = false;
+	warped_this_frame = false;
+	warped_to_other_sublevel_this_frame = false;
 	
 	for ( sprite& spr : sprite_manager::the_sprites )
 	{
-		switch ( spr.the_sprite_type )
-		{
-			//case st_waffle:
-			case st_muffin:
-			case st_fire_muffin:
-			case st_ice_muffin:
-			case st_chocolate_muffin:
-				if ( coll_box_intersects_now( the_player.the_coll_box,
-					spr.the_coll_box ) )
-				{
-					//nocash_soft_break();
-					spr.the_sprite_type = st_default;
-					if ( spr.the_sprite_ipg != NULL )
-					{
-						spr.the_sprite_ipg->spawn_state = sss_dead;
-					}
-				}
-				break;
-			
-			case st_door:
-				if ( coll_box_intersects_now( the_player.the_coll_box,
-					spr.the_coll_box ) && key_hit(key_up) 
-					&& !warped_this_frame )
-				{
-					warped_this_frame = true;
-					
-					//const sublevel_entrance& the_dest_sle 
-					//	= warp_block_sprite_stuff::get_dest_sle(spr);
-					
-					const sublevel_entrance* the_dest_sle_ptr
-						= &( active_level::the_current_level_ptr
-						->get_the_sublevels()[spr.the_sprite_ipg
-						->extra_param_1]
-						.sublevel_entrance_arr_arr_helper.the_array
-						[spr.the_sprite_ipg->extra_param_0] );
-					
-					
-					if ( spr.the_sprite_ipg->extra_param_1 
-						!= active_level
-						::the_current_active_sublevel_index )
-					{
-						active_level_manager
-							::load_sublevel_at_intra_sublevel_warp
-							( spr.the_sprite_ipg->extra_param_1, 
-							spr.the_sprite_ipg->extra_param_0 );
-						
-						warped_to_other_sublevel_this_frame = true;
-					}
-					
-					the_player.in_level_pos.x = the_dest_sle_ptr
-						->in_level_pos.x 
-						- get_the_initial_in_level_pos_offset().x;
-					the_player.in_level_pos.y = the_dest_sle_ptr
-						->in_level_pos.y
-						- get_the_initial_in_level_pos_offset().y;
-					
-					the_player.update_f24p8_positions();
-					the_player.update_on_screen_pos(camera_pos);
-					
-					the_player.center_camera_almost(camera_pos);
-					active_level_manager::correct_bg0_scroll_mirror
-						(the_level_size_2d);
-					the_player.update_on_screen_pos(camera_pos);
-					
-				}
-				break;
-				
-			case st_snow_golem:
-			default:
-				break;
-		}
+		sprite_interaction_reponse( the_player, spr, camera_pos,
+			the_level_size_2d );
 		
 		if ( warped_to_other_sublevel_this_frame )
 		{
@@ -450,6 +382,10 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 	
 	update_the_pickaxe(the_player);
 	
+	if ( the_player.invin_frame_timer > 0 )
+	{
+		--the_player.invin_frame_timer;
+	}
 }
 
 void player_sprite_stuff::update_frames_and_frame_timers
@@ -857,6 +793,27 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 	u32& active_pickaxe_swing_frame_slot = the_player.misc_data_u
 		[udi_active_pickaxe_swing_frame_slot];
 	
+	if ( the_player.invin_frame_timer > 0 )
+	{
+		switch ( the_player.invin_frame_timer % 8 )
+		{
+			case 0:
+			case 1:
+			case 2:
+			case 3:
+				//the_player.the_oam_entry.hide_non_affine();
+				return frame_slot_to_frame_arr[frm_slot_invisible]
+					* num_active_gfx_tiles;
+				break;
+			
+			case 4:
+			case 5:
+			case 6:
+			case 7:
+				//the_player.the_oam_entry.show_non_affine();
+				break;
+		}
+	}
 	
 	if (!swinging_pickaxe)
 	{
@@ -966,6 +923,7 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 
 
 
+// Physics and collision stuff
 void player_sprite_stuff::block_collision_stuff( sprite& the_player )
 {
 	if ( the_player.the_coll_box.size.x >= make_f24p8(0)
@@ -1097,6 +1055,95 @@ void player_sprite_stuff::handle_jumping_stuff( sprite& the_player,
 	
 }
 
-
+// Sprite-sprite interaction stuff
+void player_sprite_stuff::sprite_interaction_reponse( sprite& the_player, 
+	sprite& the_other_sprite, bg_point& camera_pos, 
+	const vec2_u32& the_level_size_2d )
+{
+	switch ( the_other_sprite.the_sprite_type )
+	{
+		//case st_waffle:
+		case st_muffin:
+		case st_fire_muffin:
+		case st_ice_muffin:
+		case st_chocolate_muffin:
+			if ( coll_box_intersects_now( the_player.the_coll_box,
+				the_other_sprite.the_coll_box ) )
+			{
+				//nocash_soft_break();
+				the_other_sprite.the_sprite_type = st_default;
+				if ( the_other_sprite.the_sprite_ipg != NULL )
+				{
+					the_other_sprite.the_sprite_ipg->spawn_state 
+						= sss_dead;
+				}
+				
+				++remaining_hp;
+			}
+			break;
+		
+		case st_door:
+			if ( coll_box_intersects_now( the_player.the_coll_box,
+				the_other_sprite.the_coll_box ) && key_hit(key_up) 
+				&& !warped_this_frame )
+				//&& the_player.on_ground )
+			{
+				warped_this_frame = true;
+				
+				//const sublevel_entrance& the_dest_sle 
+				//	= warp_block_sprite_stuff::get_dest_sle
+				//	(the_other_sprite);
+				
+				const sublevel_entrance* the_dest_sle_ptr
+					= &( active_level::the_current_level_ptr
+					->get_the_sublevels()[the_other_sprite.the_sprite_ipg
+					->extra_param_1]
+					.sublevel_entrance_arr_arr_helper.the_array
+					[the_other_sprite.the_sprite_ipg->extra_param_0] );
+				
+				
+				if ( the_other_sprite.the_sprite_ipg->extra_param_1 
+					!= active_level::the_current_active_sublevel_index )
+				{
+					active_level_manager
+						::load_sublevel_at_intra_sublevel_warp
+						( the_other_sprite.the_sprite_ipg->extra_param_1, 
+						the_other_sprite.the_sprite_ipg->extra_param_0 );
+					
+					warped_to_other_sublevel_this_frame = true;
+				}
+				
+				the_player.in_level_pos.x = the_dest_sle_ptr
+					->in_level_pos.x 
+					- get_the_initial_in_level_pos_offset().x;
+				the_player.in_level_pos.y = the_dest_sle_ptr
+					->in_level_pos.y
+					- get_the_initial_in_level_pos_offset().y;
+				
+				the_player.update_f24p8_positions();
+				the_player.update_on_screen_pos(camera_pos);
+				
+				the_player.center_camera_almost(camera_pos);
+				active_level_manager::correct_bg0_scroll_mirror
+					(the_level_size_2d);
+				the_player.update_on_screen_pos(camera_pos);
+				
+			}
+			break;
+			
+		case st_snow_golem:
+			if ( coll_box_intersects_now( the_player.the_coll_box,
+				the_other_sprite.the_coll_box ) 
+				&& the_player.invin_frame_timer == 0 )
+			{
+				--remaining_hp;
+				the_player.invin_frame_timer = initial_invin_frame_timer;
+			}
+			
+		default:
+			break;
+	}
+	
+}
 
 

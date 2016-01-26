@@ -76,6 +76,7 @@ void snow_golem_sprite_stuff::update_part_1( sprite& the_enemy )
 		}
 	}
 	
+	the_enemy.update_f24p8_positions();
 }
 
 

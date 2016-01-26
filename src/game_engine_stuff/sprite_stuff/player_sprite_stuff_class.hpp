@@ -159,8 +159,8 @@ public:		// enums
 	// These are used to access misc_data_u and misc_data_s
 	enum udata_index { udi_active_walk_frame_slot, 
 		udi_active_pickaxe_swing_frame_slot } __attribute__((_align4));
-	enum sdata_index { sdi_walk_frame_timer, sdi_pickaxe_swing_frame_timer } 
-		__attribute__((_align4));
+	enum sdata_index { sdi_walk_frame_timer, 
+		sdi_pickaxe_swing_frame_timer } __attribute__((_align4));
 	
 	
 public:		// variables
@@ -177,6 +177,10 @@ public:		// variables
 	static bool swinging_pickaxe __attribute__((_iwram));
 	static u32 pickaxe_sprite_slot __attribute__((_iwram));
 	
+	
+	static bool warped_this_frame __attribute__((_iwram));
+	static bool warped_to_other_sublevel_this_frame
+		__attribute__((_iwram));
 	
 	
 	
@@ -199,6 +203,9 @@ public:		// variables
 	
 	static constexpr fixed24p8 walk_speed = {0x100};
 	static constexpr fixed24p8 max_run_speed = {0x200};
+	
+	// 0.5 seconds
+	static constexpr s32 initial_invin_frame_timer = 30;
 	
 	// Graphics constants
 	
@@ -309,6 +316,11 @@ public:		// functions
 		is_jump_key_hit, u32 is_jump_key_held )
 		__attribute__((_iwram_code));
 	
+	
+	// Sprite-sprite interaction stuff
+	virtual void sprite_interaction_reponse( sprite& the_sprite, 
+		sprite& the_other_sprite, bg_point& camera_pos, 
+		const vec2_u32& the_level_size_2d );
 	
 	
 protected:		// functions
