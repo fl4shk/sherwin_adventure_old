@@ -1086,6 +1086,10 @@ fixed24p8::operator fixed8p8	game_engine_stuff/fixed_classes.hpp	/^inline fixed2
 fixed24p8::round_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s32 round_to_int() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
 fixed24p8::round_to_int	game_engine_stuff/fixed_classes.hpp	/^inline s32 fixed24p8::round_to_int() const$/;"	kind:f	class:fixed24p8	signature:() const
 fixed24p8::shift	game_engine_stuff/fixed_classes.hpp	/^	static const u32 shift = 8;$/;"	kind:m	class:fixed24p8	access:public
+fixed24p8::true_round_via_trunc	game_engine_stuff/fixed_classes.hpp	/^	inline s32 true_round_via_trunc() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
+fixed24p8::true_round_via_trunc	game_engine_stuff/fixed_classes.hpp	/^inline s32 fixed24p8::true_round_via_trunc() const$/;"	kind:f	class:fixed24p8	signature:() const
+fixed24p8::true_round_via_trunc_s16	game_engine_stuff/fixed_classes.hpp	/^	inline s16 true_round_via_trunc_s16() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
+fixed24p8::true_round_via_trunc_s16	game_engine_stuff/fixed_classes.hpp	/^inline s16 fixed24p8::true_round_via_trunc_s16() const$/;"	kind:f	class:fixed24p8	signature:() const
 fixed24p8::trunc_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s32 trunc_to_int() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
 fixed24p8::trunc_to_int	game_engine_stuff/fixed_classes.hpp	/^inline s32 fixed24p8::trunc_to_int() const$/;"	kind:f	class:fixed24p8	signature:() const
 fixed8p8	game_engine_stuff/fixed_classes.hpp	/^class fixed8p8$/;"	kind:c
@@ -3508,6 +3512,10 @@ top	game_engine_stuff/coll_box_class.hpp	/^	inline fixed24p8 top() const$/;"	kin
 total_coll_points	game_engine_stuff/coll_point_group_class.hpp	/^	static const u32 total_coll_points = 32;$/;"	kind:m	class:coll_point_group	access:public
 trig_lut_fixed_shift	game_engine_stuff/trigonometry_funcs.hpp	/^static const u32 trig_lut_fixed_shift = 12;$/;"	kind:v
 trigonometry_funcs_hpp	game_engine_stuff/trigonometry_funcs.hpp	20;"	kind:d
+true_round_via_trunc	game_engine_stuff/fixed_classes.hpp	/^	inline s32 true_round_via_trunc() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
+true_round_via_trunc	game_engine_stuff/fixed_classes.hpp	/^inline s32 fixed24p8::true_round_via_trunc() const$/;"	kind:f	class:fixed24p8	signature:() const
+true_round_via_trunc_s16	game_engine_stuff/fixed_classes.hpp	/^	inline s16 true_round_via_trunc_s16() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
+true_round_via_trunc_s16	game_engine_stuff/fixed_classes.hpp	/^inline s16 fixed24p8::true_round_via_trunc_s16() const$/;"	kind:f	class:fixed24p8	signature:() const
 trunc_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s16 trunc_to_int() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
 trunc_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s32 trunc_to_int() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
 trunc_to_int	game_engine_stuff/fixed_classes.hpp	/^inline s16 fixed8p8::trunc_to_int() const$/;"	kind:f	class:fixed8p8	signature:() const

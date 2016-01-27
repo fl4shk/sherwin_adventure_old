@@ -157,9 +157,9 @@ void active_level_manager::correct_bg0_scroll_mirror
 	//s16 sublevel_y_coord_tile = gfx_manager::bgofs_mirror[0].curr.y >> 3;
 	
 	s16 sublevel_x_coord_tile = gfx_manager::bgofs_mirror[0].curr.x
-		.round_to_int() >> 3;
+		.trunc_to_int() >> 3;
 	s16 sublevel_y_coord_tile = gfx_manager::bgofs_mirror[0].curr.y
-		.round_to_int() >> 3;
+		.trunc_to_int() >> 3;
 	
 	
 	if ( sublevel_x_coord_tile < 0 )
@@ -217,9 +217,9 @@ void active_level_manager::update_sublevel_in_screenblock_mirror_2d()
 	//s16 sublevel_x_coord_tile = gfx_manager::bgofs_mirror[0].curr.x >> 3;
 	//s16 sublevel_y_coord_tile = gfx_manager::bgofs_mirror[0].curr.y >> 3;
 	s16 sublevel_x_coord_tile = gfx_manager::bgofs_mirror[0].curr.x
-		.round_to_int() >> 3;
+		.trunc_to_int() >> 3;
 	s16 sublevel_y_coord_tile = gfx_manager::bgofs_mirror[0].curr.y
-		.round_to_int() >> 3;
+		.trunc_to_int() >> 3;
 	
 	
 	// Create a list of 8x8 tile IDs for each block_type
