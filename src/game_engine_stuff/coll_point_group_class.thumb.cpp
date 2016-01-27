@@ -251,7 +251,8 @@ void generate_coll_point_group_16x32( const sprite& the_sprite,
 	list_of_16x32_bottom_side_coll_point_names(X)
 		//the_coll_box.bot();
 		//the_coll_box.bot() + (fixed24p8){0x400};
-		the_coll_box.bot() + (fixed24p8){0x200};
+		//the_coll_box.bot() + (fixed24p8){0x200};
+		the_coll_box.bot() + (fixed24p8){0x300};
 	
 	//list_of_16x32_bottom_slope_side_coll_point_names(X)
 	//	the_coll_box.bot() + (fixed24p8){0x200};

@@ -26,7 +26,7 @@
 
 #include "../gfx_manager_class.hpp"
 
-fixed24p8 player_sprite_stuff::speed;
+//fixed24p8 player_sprite_stuff::speed;
 bool player_sprite_stuff::use_16x16;
 bool player_sprite_stuff::run_toggle;
 
@@ -176,6 +176,8 @@ void player_sprite_stuff::init( sprite& the_player, bool facing_left  )
 	
 	swinging_pickaxe = false;
 	pickaxe_sprite_slot = -1;
+	
+	the_player.max_vel_x_abs_val = max_run_speed;
 }
 
 void player_sprite_stuff::init( sprite& the_player, 
@@ -253,9 +255,9 @@ void player_sprite_stuff::update_part_1( sprite& the_player )
 		//}
 	}
 	
-	if ( key_hit(key_b) )
+	if ( key_hit(key_b) && the_player.on_ground )
 	{
-		if ( !run_toggle )
+		if (!run_toggle)
 		{
 			run_toggle = true;
 		}
@@ -265,17 +267,31 @@ void player_sprite_stuff::update_part_1( sprite& the_player )
 		}
 	}
 	
-	speed = 0;
 	
 	if ( key_hit_or_held(key_left) && !key_hit_or_held(key_right) )
 	{
-		speed = walk_speed;
-		if ( run_toggle )
+		if (run_toggle)
 		{
-			speed = max_run_speed;
+			the_player.max_vel_x_abs_val = max_run_speed;
+			
+			if ( (-the_player.vel.x) < walk_speed )
+			{
+				the_player.accel_x = -walk_speed;
+			}
+			else
+			{
+				the_player.accel_x = -run_accel_x_abs_val;
+			}
+			
+		}
+		else //if (!run_toggle)
+		{
+			//the_player.vel.x = -walk_speed;
+			
+			the_player.max_vel_x_abs_val = walk_speed;
+			the_player.accel_x = -walk_speed;
 		}
 		
-		the_player.vel.x = -speed;
 		
 		//if ( the_player.on_ground && !swinging_pickaxe )
 		if (!swinging_pickaxe)
@@ -285,13 +301,26 @@ void player_sprite_stuff::update_part_1( sprite& the_player )
 	}
 	else if ( key_hit_or_held(key_right) && !key_hit_or_held(key_left) )
 	{
-		speed = walk_speed;
-		if ( run_toggle )
+		if (run_toggle)
 		{
-			speed = max_run_speed;
+			the_player.max_vel_x_abs_val = max_run_speed;
+			
+			if ( the_player.vel.x < walk_speed )
+			{
+				the_player.accel_x = walk_speed;
+			}
+			else
+			{
+				the_player.accel_x = run_accel_x_abs_val;
+			}
+			
+		}
+		else //if (!run_toggle)
+		{
+			the_player.max_vel_x_abs_val = walk_speed;
+			the_player.accel_x = walk_speed;
 		}
 		
-		the_player.vel.x = speed;
 		
 		//if ( the_player.on_ground && !swinging_pickaxe )
 		if (!swinging_pickaxe)
@@ -301,7 +330,27 @@ void player_sprite_stuff::update_part_1( sprite& the_player )
 	}
 	else
 	{
-		the_player.vel.x = {0};
+		if ( the_player.vel.x < (fixed24p8){0x40} 
+			&& the_player.vel.x > (fixed24p8){-0x40} )
+		{
+			the_player.vel.x = 0;
+			the_player.accel_x = 0;
+		}
+		
+		// Don't allow speed changing when in the air
+		else if (the_player.on_ground)
+		{
+			if ( the_player.vel.x > (fixed24p8){0} )
+			{
+				//the_player.accel_x = -run_accel_x_abs_val;
+				the_player.accel_x.data = -run_accel_x_abs_val.data * 2;
+			}
+			else if ( the_player.vel.x < (fixed24p8){0} )
+			{
+				//the_player.accel_x = run_accel_x_abs_val;
+				the_player.accel_x.data = run_accel_x_abs_val.data * 2;
+			}
+		}
 	}
 	
 	handle_jumping_stuff( the_player, key_hit(key_a), key_held(key_a) );
@@ -449,7 +498,8 @@ void player_sprite_stuff::update_frames_and_frame_timers
 		};
 		
 		// Standing still
-		if ( speed == (fixed24p8){0} )
+		//if ( speed == (fixed24p8){0} )
+		if ( the_player.vel.x == (fixed24p8){0} )
 		{
 			walk_frame_timer = 0;
 			//active_walk_frame_slot = frm_slot_walk_1;
@@ -458,13 +508,19 @@ void player_sprite_stuff::update_frames_and_frame_timers
 		
 		
 		// Walking speed or not-max running speed
-		else if ( speed >= walk_speed && speed < max_run_speed )
+		//else if ( speed >= walk_speed && speed < max_run_speed )
+		else if ( ( the_player.vel.x >= walk_speed 
+			&& the_player.vel.x < max_run_speed )
+			|| ( (-the_player.vel.x) >= walk_speed )
+			&& (-the_player.vel.x) < max_run_speed )
 		{
 			lambda_func_for_else_if(walk_frame_timer_end);
 		}
 		
 		// Max running speed
-		else if ( speed == max_run_speed )
+		//else if ( speed == max_run_speed )
+		else if ( the_player.vel.x == max_run_speed 
+			|| (-the_player.vel.x) == max_run_speed )
 		{
 			lambda_func_for_else_if(run_frame_timer_end);
 		}
@@ -663,8 +719,10 @@ void player_sprite_stuff::update_the_pickaxe( sprite& the_player )
 					the_pickaxe.in_level_pos = the_player.in_level_pos
 						+ (vec2_f24p8){ make_f24p8(10), make_f24p8(-2) };
 				}
-				if ( ( speed != (fixed24p8){0} && the_player.on_ground )
-					|| !the_player.on_ground )
+				//if ( ( speed != (fixed24p8){0} && the_player.on_ground )
+				//	|| !the_player.on_ground )
+				if ( ( the_player.vel.x != (fixed24p8){0} 
+					&& the_player.on_ground ) || !the_player.on_ground )
 				{
 					the_pickaxe.in_level_pos.y -= make_f24p8(1);
 				}
@@ -686,8 +744,10 @@ void player_sprite_stuff::update_the_pickaxe( sprite& the_player )
 					the_pickaxe.in_level_pos = the_player.in_level_pos
 						+ (vec2_f24p8){ make_f24p8(1), make_f24p8(-4) };
 				}
-				if ( ( speed != (fixed24p8){0} && the_player.on_ground )
-					|| !the_player.on_ground )
+				//if ( ( speed != (fixed24p8){0} && the_player.on_ground )
+				//	|| !the_player.on_ground )
+				if ( ( the_player.vel.x != (fixed24p8){0} 
+					&& the_player.on_ground ) || !the_player.on_ground )
 				{
 					the_pickaxe.in_level_pos.y -= make_f24p8(1);
 				}
@@ -709,8 +769,10 @@ void player_sprite_stuff::update_the_pickaxe( sprite& the_player )
 					the_pickaxe.in_level_pos = the_player.in_level_pos
 						+ (vec2_f24p8){ make_f24p8(-7), make_f24p8(-2) };
 				}
-				if ( ( speed != (fixed24p8){0} && the_player.on_ground )
-					|| !the_player.on_ground )
+				//if ( ( speed != (fixed24p8){0} && the_player.on_ground )
+				//	|| !the_player.on_ground )
+				if ( ( the_player.vel.x != (fixed24p8){0} 
+					&& the_player.on_ground ) || !the_player.on_ground )
 				{
 					the_pickaxe.in_level_pos.y -= make_f24p8(1);
 				}
@@ -732,8 +794,10 @@ void player_sprite_stuff::update_the_pickaxe( sprite& the_player )
 					the_pickaxe.in_level_pos = the_player.in_level_pos
 						+ (vec2_f24p8){ make_f24p8(-11), make_f24p8(3) };
 				}
-				if ( ( speed != (fixed24p8){0} && the_player.on_ground )
-					|| !the_player.on_ground )
+				//if ( ( speed != (fixed24p8){0} && the_player.on_ground )
+				//	|| !the_player.on_ground )
+				if ( ( the_player.vel.x != (fixed24p8){0} 
+					&& the_player.on_ground ) || !the_player.on_ground )
 				{
 					the_pickaxe.in_level_pos.y -= make_f24p8(2);
 				}
@@ -756,8 +820,10 @@ void player_sprite_stuff::update_the_pickaxe( sprite& the_player )
 					the_pickaxe.in_level_pos = the_player.in_level_pos
 						+ (vec2_f24p8){ make_f24p8(-14), make_f24p8(17) };
 				}
-				if ( ( speed != (fixed24p8){0} && the_player.on_ground )
-					|| !the_player.on_ground )
+				//if ( ( speed != (fixed24p8){0} && the_player.on_ground )
+				//	|| !the_player.on_ground )
+				if ( ( the_player.vel.x != (fixed24p8){0} 
+					&& the_player.on_ground ) || !the_player.on_ground )
 				{
 					the_pickaxe.in_level_pos.y -= make_f24p8(3);
 				}
@@ -820,21 +886,28 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 		if (the_player.on_ground)
 		{
 			// Standing still
-			if ( speed == (fixed24p8){0} )
+			//if ( speed == (fixed24p8){0} )
+			if ( the_player.vel.x == (fixed24p8){0} )
 			{
 				return frame_slot_to_frame_arr[frm_slot_walk_0]
 					* num_active_gfx_tiles;
 			}
 			
 			// Walking speed or not-max running speed
-			else if ( speed >= walk_speed && speed < max_run_speed )
+			//else if ( speed >= walk_speed && speed < max_run_speed )
+			else if ( ( the_player.vel.x >= walk_speed 
+				&& the_player.vel.x < max_run_speed )
+				|| ( (-the_player.vel.x) >= walk_speed
+				&& (-the_player.vel.x) < max_run_speed ) )
 			{
 				return frame_slot_to_frame_arr[active_walk_frame_slot] 
 					* num_active_gfx_tiles;
 			}
 			
 			// Max running speed
-			else if ( speed == max_run_speed )
+			//else if ( speed == max_run_speed )
+			else if ( the_player.vel.x == max_run_speed 
+				|| (-the_player.vel.x) == max_run_speed )
 			{
 				return frame_slot_to_frame_arr[active_walk_frame_slot] 
 					* num_active_gfx_tiles;
@@ -869,7 +942,8 @@ const u32 player_sprite_stuff::get_curr_relative_tile_slot
 			case frm_slot_weapon_swing_ground_still_##number: \
 				if (the_player.on_ground) \
 				{ \
-					if ( speed == (fixed24p8){0} ) \
+					/*if ( speed == (fixed24p8){0} )*/ \
+					if ( the_player.vel.x == (fixed24p8){0} ) \
 					{ \
 						return frame_slot_to_frame_arr \
 							[frm_slot_weapon_swing_ground_still_ \

@@ -177,9 +177,9 @@ void sprite::update_on_screen_pos( const bg_point& camera_pos )
 		the_oam_entry.show_non_affine();
 			
 		the_oam_entry.set_x_coord 
-			( on_screen_pos_f24p8.x.round_to_int() );
+			( on_screen_pos_f24p8.x.trunc_to_int() );
 		the_oam_entry.set_y_coord 
-			( on_screen_pos_f24p8.y.round_to_int() );
+			( on_screen_pos_f24p8.y.trunc_to_int() );
 	}
 	else
 	{
@@ -199,7 +199,7 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 	if ( ( on_screen_pos.x <= make_f24p8(100) && vel.x.data < 0 ) 
 		|| ( on_screen_pos.x >= make_f24p8(140) && vel.x.data > 0 ) )
 	{
-		//camera_pos.x += vel.x.round_to_int();
+		//camera_pos.x += vel.x.trunc_to_int();
 		
 		camera_pos.x += vel.x;
 	}
@@ -207,7 +207,7 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 	//if ( ( on_screen_pos.y <= make_f24p8(20) && vel.y.data < 0 ) 
 	//	|| ( on_screen_pos.y >= make_f24p8(80) && vel.y.data > 0 ) )
 	//{
-	//	camera_pos.y += vel.y.round_to_int();
+	//	camera_pos.y += vel.y.trunc_to_int();
 	//}
 	
 	
@@ -215,7 +215,7 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 	{
 		if (!on_ground)
 		{
-			//camera_pos.y += vel.y.round_to_int();
+			//camera_pos.y += vel.y.trunc_to_int();
 			camera_pos.y += vel.y;
 		}
 		else
@@ -230,7 +230,7 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 		{
 			if (!on_ground)
 			{
-				//camera_pos.y += vel.y.round_to_int();
+				//camera_pos.y += vel.y.trunc_to_int();
 				camera_pos.y += vel.y;
 			}
 			else
@@ -245,9 +245,9 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 void sprite::center_camera_almost( bg_point& camera_pos ) const
 {
 	//camera_pos.x = ( in_level_pos.x 
-	//	- (fixed24p8){ screen_width << 7 } ).round_to_int();
+	//	- (fixed24p8){ screen_width << 7 } ).trunc_to_int();
 	//camera_pos.y = ( in_level_pos.y 
-	//	- (fixed24p8){ screen_height << 7 } ).round_to_int();
+	//	- (fixed24p8){ screen_height << 7 } ).trunc_to_int();
 	
 	camera_pos.x = in_level_pos.x - (fixed24p8){ screen_width << 7 };
 	camera_pos.y = in_level_pos.y - (fixed24p8){ screen_height << 7 };

@@ -166,7 +166,7 @@ public:		// enums
 public:		// variables
 	// Static variables
 	
-	static fixed24p8 speed __attribute__((_iwram));
+	//static fixed24p8 speed __attribute__((_iwram));
 	static bool use_16x16 __attribute__((_iwram));
 	static bool run_toggle __attribute__((_iwram));
 	
@@ -204,7 +204,10 @@ public:		// variables
 	static constexpr fixed24p8 walk_speed = {0x100};
 	//static constexpr fixed24p8 max_run_speed = {0x200};
 	//static constexpr fixed24p8 max_run_speed = {0x300};
-	static constexpr fixed24p8 max_run_speed = {0x380};
+	//static constexpr fixed24p8 max_run_speed = {0x380};
+	static constexpr fixed24p8 max_run_speed = {0x300};
+	//static constexpr fixed24p8 run_accel_x_abs_val = {0x40};
+	static constexpr fixed24p8 run_accel_x_abs_val = {0x08};
 	
 	// 0.5 seconds
 	static constexpr s32 initial_invin_frame_timer = 30;

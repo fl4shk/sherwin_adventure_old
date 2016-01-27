@@ -68,6 +68,14 @@ public:		// variables
 	// vel is the velocity of the sprite.
 	vec2_f24p8 vel;
 	
+	// The absolute value of the maximum horizontal velocity of the sprite
+	fixed24p8 max_vel_x_abs_val;
+	
+	// The horizontal acceleration of the sprite
+	fixed24p8 accel_x;
+	
+	
+	
 	// the_coll_box's "pos" member variable is the in-level
 	// coordinate of the_coll_box.  Also, the_coll_box is
 	// only used for non-oriented sprites.
@@ -155,6 +163,20 @@ public:		// functions
 	
 	inline void update_f24p8_positions()
 	{
+		vel.x += accel_x;
+		
+		if ( max_vel_x_abs_val != (fixed24p8){0} )
+		{
+			if ( vel.x > max_vel_x_abs_val )
+			{
+				vel.x = max_vel_x_abs_val;
+			}
+			else if ( vel.x < -max_vel_x_abs_val )
+			{
+				vel.x = -max_vel_x_abs_val;
+			}
+		}
+		
 		in_level_pos += vel;
 		the_coll_box.pos = in_level_pos + cb_pos_offset;
 	}
