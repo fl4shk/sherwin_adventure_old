@@ -142,7 +142,8 @@ void generate_coll_point_group_16x16( const sprite& the_sprite,
 	{
 		list_of_16x16_bottom_side_coll_point_names(X)
 			//the_coll_box.bot();
-			the_coll_box.bot() + (fixed24p8){0x200};
+			//the_coll_box.bot() + (fixed24p8){0x200};
+			the_coll_box.bot() + (fixed24p8){0x400};
 	}
 	else //if (!the_sprite.on_ground)
 	{
@@ -261,9 +262,9 @@ void generate_coll_point_group_16x32( const sprite& the_sprite,
 	if (the_sprite.on_ground)
 	{
 		list_of_16x32_bottom_side_coll_point_names(X)
-			//the_coll_box.bot() + (fixed24p8){0x400};
+			the_coll_box.bot() + (fixed24p8){0x400};
 			//the_coll_box.bot() + (fixed24p8){0x200};
-			the_coll_box.bot() + (fixed24p8){0x300};
+			//the_coll_box.bot() + (fixed24p8){0x300};
 	}
 	else //if (!the_sprite.on_ground)
 	{
@@ -383,7 +384,8 @@ void generate_coll_point_group_32x16( const sprite& the_sprite,
 	if (the_sprite.on_ground)
 	{
 		list_of_16x32_bottom_side_coll_point_names(X)
-			the_coll_box.bot() + (fixed24p8){0x200};
+			//the_coll_box.bot() + (fixed24p8){0x200};
+			the_coll_box.bot() + (fixed24p8){0x400};
 	}
 	else //if (!the_sprite.on_ground)
 	{

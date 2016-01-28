@@ -235,7 +235,7 @@ void sprite_base_stuff::block_coll_response_left_16x16( sprite& the_sprite,
 	the_sprite.in_level_pos.x = make_f24p8( ( lt_coll_result.coord.x + 1 )
 		* 16 ) - the_sprite.cb_pos_offset.x;
 	
-	if ( the_sprite.vel.x < (fixed24p8){0x00} )
+	if ( !the_sprite.on_ground && the_sprite.vel.x < (fixed24p8){0x00} )
 	{
 		the_sprite.vel.x = {0x00};
 	}
@@ -264,7 +264,7 @@ void sprite_base_stuff::block_coll_response_right_16x16
 		- the_sprite.the_coll_box.size.x - the_sprite.cb_pos_offset.x;
 		//- make_f24p8(the_sprite.get_shape_size_as_vec2().x);
 	
-	if ( the_sprite.vel.x > (fixed24p8){0x00} )
+	if ( !the_sprite.on_ground && the_sprite.vel.x > (fixed24p8){0x00} )
 	{
 		the_sprite.vel.x = {0x00};
 	}
@@ -615,7 +615,7 @@ void sprite_base_stuff::block_coll_response_left_16x32( sprite& the_sprite,
 		* 16 ) - the_sprite.cb_pos_offset.x;
 	
 	
-	if ( the_sprite.vel.x < (fixed24p8){0x00} )
+	if ( !the_sprite.on_ground && the_sprite.vel.x < (fixed24p8){0x00} )
 	{
 		the_sprite.vel.x = {0x00};
 	}
@@ -641,7 +641,7 @@ void sprite_base_stuff::block_coll_response_right_16x32
 		- the_sprite.the_coll_box.size.x - the_sprite.cb_pos_offset.x;
 		//- the_sprite.get_shape_size_as_vec2().x );
 	
-	if ( the_sprite.vel.x > (fixed24p8){0x00} )
+	if ( !the_sprite.on_ground && the_sprite.vel.x > (fixed24p8){0x00} )
 	{
 		the_sprite.vel.x = {0x00};
 	}
