@@ -334,8 +334,10 @@ void player_sprite_stuff::update_part_1( sprite& the_player )
 	}
 	else
 	{
-		if ( the_player.vel.x < (fixed24p8){0x40} 
-			&& the_player.vel.x > (fixed24p8){-0x40} )
+		//if ( the_player.vel.x < (fixed24p8){0x40} 
+		//	&& the_player.vel.x > (fixed24p8){-0x40} )
+		if ( the_player.vel.x < (fixed24p8){0x20} 
+			&& the_player.vel.x > (fixed24p8){-0x20} )
 		{
 			the_player.vel.x = 0;
 			the_player.accel_x = 0;
@@ -347,14 +349,15 @@ void player_sprite_stuff::update_part_1( sprite& the_player )
 			if ( the_player.vel.x > (fixed24p8){0} )
 			{
 				//the_player.accel_x = -run_accel_x_abs_val;
-				the_player.accel_x.data = -run_accel_x_abs_val.data * 2;
+				the_player.accel_x.data = -run_accel_x_abs_val.data * 4;
 			}
 			else if ( the_player.vel.x < (fixed24p8){0} )
 			{
 				//the_player.accel_x = run_accel_x_abs_val;
-				the_player.accel_x.data = run_accel_x_abs_val.data * 2;
+				the_player.accel_x.data = run_accel_x_abs_val.data * 4;
 			}
 		}
+		
 	}
 	
 	handle_jumping_stuff( the_player, key_hit(key_a), key_held(key_a) );

@@ -157,19 +157,12 @@ void sprite::reinit_with_sprite_ipg( u32 s_vram_chunk_index,
 
 void sprite::update_on_screen_pos( const bg_point& camera_pos )
 {
-	vec2_f24p8 on_screen_pos_f24p8;
+	vec2_f24p8 on_screen_pos_f24p8 = get_on_screen_pos(camera_pos);
 	
-	//on_screen_pos_f24p8.x = ( in_level_pos.x - make_f24p8(camera_pos.x) );
-	//on_screen_pos_f24p8.y = ( in_level_pos.y - make_f24p8(camera_pos.y) );
-	
-	//on_screen_pos_f24p8.x = ( in_level_pos.x 
-	//	- make_f24p8(camera_pos.x.trunc_to_int()) );
-	//on_screen_pos_f24p8.x = in_level_pos.x - camera_pos.x;
-	on_screen_pos_f24p8.x = in_level_pos.x - camera_pos.x;
-	on_screen_pos_f24p8.y = ( in_level_pos.y 
-		- make_f24p8(camera_pos.y.trunc_to_int()) );
-	
-	//on_screen_pos_f24p8 = in_level_pos - camera_pos;
+	//vec2_f24p8 on_screen_pos_f24p8;
+	//
+	//on_screen_pos_f24p8.x.data = in_level_pos.x.data - camera_pos.x.data;
+	//on_screen_pos_f24p8.y.data = in_level_pos.y.data - camera_pos.y.data;
 	
 	vec2_u32 ss_vec2 = get_shape_size_as_vec2();
 	vec2_f24p8 offset;
@@ -182,16 +175,17 @@ void sprite::update_on_screen_pos( const bg_point& camera_pos )
 		&& on_screen_pos_f24p8.y <= make_f24p8(screen_height) )
 	{
 		the_oam_entry.show_non_affine();
-			
-		the_oam_entry.set_x_coord 
-			( on_screen_pos_f24p8.x.trunc_to_int() );
-		the_oam_entry.set_y_coord 
-			( on_screen_pos_f24p8.y.trunc_to_int() );
 		
 		//the_oam_entry.set_x_coord 
-		//	( on_screen_pos_f24p8.x.true_round_via_trunc() );
+		//	( on_screen_pos_f24p8.x.trunc_to_int() );
+		the_oam_entry.set_x_coord 
+			( on_screen_pos_f24p8.x.true_round_via_trunc() );
+		
 		//the_oam_entry.set_y_coord 
-		//	( on_screen_pos_f24p8.y.true_round_via_trunc() );
+		//	( on_screen_pos_f24p8.y.trunc_to_int() );
+		the_oam_entry.set_y_coord 
+			( on_screen_pos_f24p8.y.true_round_via_trunc() );
+		
 	}
 	else
 	{
@@ -214,6 +208,7 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 		//camera_pos.x += vel.x.trunc_to_int();
 		
 		camera_pos.x += vel.x;
+		//camera_pos.x = make_f24p8(camera_pos.x.true_round_via_trunc());
 	}
 	
 	//if ( ( on_screen_pos.y <= make_f24p8(20) && vel.y.data < 0 ) 
@@ -228,7 +223,12 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 		if (!on_ground)
 		{
 			//camera_pos.y += vel.y.trunc_to_int();
+			
 			camera_pos.y += vel.y;
+			//camera_pos.y 
+			//	= make_f24p8(camera_pos.y.true_round_via_trunc());
+			
+			//camera_pos.y.data += vel.y.true_round_via_trunc();
 		}
 		else
 		{
@@ -243,7 +243,12 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 			if (!on_ground)
 			{
 				//camera_pos.y += vel.y.trunc_to_int();
+				
 				camera_pos.y += vel.y;
+				//camera_pos.y 
+				//	= make_f24p8(camera_pos.y.true_round_via_trunc());
+				
+				//camera_pos.y.data += vel.y.true_round_via_trunc();
 			}
 			else
 			{
@@ -252,6 +257,7 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 			}
 		}
 	}
+	
 }
 
 void sprite::center_camera_almost( bg_point& camera_pos ) const
