@@ -137,11 +137,20 @@ void generate_coll_point_group_16x16( const sprite& the_sprite,
 	list_of_16x16_top_side_coll_point_names(X)
 		the_coll_box.top();
 	
-	list_of_16x32_bottom_side_coll_point_names(X)
-		//the_coll_box.bot();
-		the_coll_box.bot() + (fixed24p8){0x200};
+	// This is a special case that covers walking down a slope.
+	if (the_sprite.on_ground)
+	{
+		list_of_16x16_bottom_side_coll_point_names(X)
+			//the_coll_box.bot();
+			the_coll_box.bot() + (fixed24p8){0x200};
+	}
+	else //if (!the_sprite.on_ground)
+	{
+		list_of_16x16_bottom_side_coll_point_names(X)
+			the_coll_box.bot();
+	}
 	
-	//list_of_16x32_bottom_slope_side_coll_point_names(X)
+	//list_of_16x16_bottom_slope_side_coll_point_names(X)
 	//	the_coll_box.bot() + (fixed24p8){0x200};
 		
 		//the_sprite.in_level_pos.y 
@@ -248,11 +257,19 @@ void generate_coll_point_group_16x32( const sprite& the_sprite,
 	list_of_16x32_top_side_coll_point_names(X)
 		the_coll_box.top();
 	
-	list_of_16x32_bottom_side_coll_point_names(X)
-		//the_coll_box.bot();
-		//the_coll_box.bot() + (fixed24p8){0x400};
-		//the_coll_box.bot() + (fixed24p8){0x200};
-		the_coll_box.bot() + (fixed24p8){0x300};
+	// This is a special case that covers walking down a slope.
+	if (the_sprite.on_ground)
+	{
+		list_of_16x32_bottom_side_coll_point_names(X)
+			//the_coll_box.bot() + (fixed24p8){0x400};
+			//the_coll_box.bot() + (fixed24p8){0x200};
+			the_coll_box.bot() + (fixed24p8){0x300};
+	}
+	else //if (!the_sprite.on_ground)
+	{
+		list_of_16x32_bottom_side_coll_point_names(X)
+			the_coll_box.bot();
+	}
 	
 	//list_of_16x32_bottom_slope_side_coll_point_names(X)
 	//	the_coll_box.bot() + (fixed24p8){0x200};
@@ -362,9 +379,17 @@ void generate_coll_point_group_32x16( const sprite& the_sprite,
 	list_of_32x16_top_side_coll_point_names(X)
 		the_coll_box.top();
 	
-	list_of_16x32_bottom_side_coll_point_names(X)
-		//the_coll_box.bot();
-		the_coll_box.bot() + (fixed24p8){0x200};
+	// This is a special case that covers walking down a slope.
+	if (the_sprite.on_ground)
+	{
+		list_of_16x32_bottom_side_coll_point_names(X)
+			the_coll_box.bot() + (fixed24p8){0x200};
+	}
+	else //if (!the_sprite.on_ground)
+	{
+		list_of_16x32_bottom_side_coll_point_names(X)
+			the_coll_box.bot();
+	}
 	
 	//list_of_16x32_bottom_slope_side_coll_point_names(X)
 	//	the_coll_box.bot() + (fixed24p8){0x200};

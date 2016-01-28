@@ -221,16 +221,6 @@ public:		// functions
 		reg_bgofs[0].x = (s16)bgofs_mirror[0].curr.x.trunc_to_int();
 		reg_bgofs[0].y = (s16)bgofs_mirror[0].curr.y.trunc_to_int();
 		
-		//if ( bgofs_mirror[0].curr.y.get_frac_bits() >= 0x80 )
-		//{
-		//	reg_bgofs[0].y = (s16)(bgofs_mirror[0].curr.y.trunc_to_int());
-		//}
-		//else
-		//{
-		//	reg_bgofs[0].y = (s16)( bgofs_mirror[0].curr.y.trunc_to_int()
-		//		+ 1 );
-		//}
-		
 		reg_bgofs[1].x = (s16)bgofs_mirror[1].curr.x.trunc_to_int();
 		reg_bgofs[1].y = (s16)bgofs_mirror[1].curr.y.trunc_to_int();
 		

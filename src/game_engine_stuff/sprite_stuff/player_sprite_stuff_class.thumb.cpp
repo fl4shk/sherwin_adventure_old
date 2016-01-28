@@ -116,8 +116,12 @@ const player_sprite_stuff::frame
 //	= { {12 << fixed24p8::shift }, {27 << fixed24p8::shift } },
 //	player_sprite_stuff::the_initial_cb_pos_offset 
 //	= { {2 << fixed24p8::shift }, {5 << fixed24p8::shift } };
+//const vec2_f24p8 player_sprite_stuff::the_initial_coll_box_size 
+//	= { {12 << fixed24p8::shift }, {28 << fixed24p8::shift } },
+//	player_sprite_stuff::the_initial_cb_pos_offset 
+//	= { {2 << fixed24p8::shift }, {4 << fixed24p8::shift } };
 const vec2_f24p8 player_sprite_stuff::the_initial_coll_box_size 
-	= { {12 << fixed24p8::shift }, {28 << fixed24p8::shift } },
+	= { {11 << fixed24p8::shift }, {28 << fixed24p8::shift } },
 	player_sprite_stuff::the_initial_cb_pos_offset 
 	= { {2 << fixed24p8::shift }, {4 << fixed24p8::shift } };
 

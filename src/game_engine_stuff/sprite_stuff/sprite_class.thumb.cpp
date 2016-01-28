@@ -162,8 +162,10 @@ void sprite::update_on_screen_pos( const bg_point& camera_pos )
 	//on_screen_pos_f24p8.x = ( in_level_pos.x - make_f24p8(camera_pos.x) );
 	//on_screen_pos_f24p8.y = ( in_level_pos.y - make_f24p8(camera_pos.y) );
 	
-	on_screen_pos_f24p8.x = ( in_level_pos.x 
-		- make_f24p8(camera_pos.x.trunc_to_int()) );
+	//on_screen_pos_f24p8.x = ( in_level_pos.x 
+	//	- make_f24p8(camera_pos.x.trunc_to_int()) );
+	//on_screen_pos_f24p8.x = in_level_pos.x - camera_pos.x;
+	on_screen_pos_f24p8.x = in_level_pos.x - camera_pos.x;
 	on_screen_pos_f24p8.y = ( in_level_pos.y 
 		- make_f24p8(camera_pos.y.trunc_to_int()) );
 	
