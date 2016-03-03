@@ -3352,7 +3352,7 @@ test_int_global	game_engine_stuff/game_manager_class.hpp	/^	static int test_int_
 test_int_global	game_engine_stuff/game_manager_class.thumb.cpp	/^int game_manager::test_int_global;$/;"	kind:m	class:game_manager	file:
 test_level	test_level/test_level.thumb.cpp	/^const level test_level = level$/;"	kind:v
 test_level_hpp	test_level/test_level.hpp	2;"	kind:d
-test_level_sublevel_0	test_level/test_level.thumb.cpp	/^const sublevel< 2010, 64, 32, 32, 33 > test_level_sublevel_0$/;"	kind:v
+test_level_sublevel_0	test_level/test_level.thumb.cpp	/^const sublevel< 2007, 64, 32, 32, 33 > test_level_sublevel_0$/;"	kind:v
 test_level_sublevel_1	test_level/test_level.thumb.cpp	/^const sublevel< 1997, 64, 32, 6, 33 > test_level_sublevel_1$/;"	kind:v
 test_level_sublevel_2	test_level/test_level.thumb.cpp	/^const sublevel< 1953, 64, 32, 6, 33 > test_level_sublevel_2$/;"	kind:v
 test_level_sublevel_3	test_level/test_level.thumb.cpp	/^const sublevel< 1993, 64, 32, 5, 33 > test_level_sublevel_3$/;"	kind:v

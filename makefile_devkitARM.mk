@@ -27,11 +27,8 @@ COMP_PREFIX=$(DEVKITARM)/bin/arm-none-eabi-
 #COMP_PREFIX=arm-none-eabi-
 
 
-#CC=$(COMP_PREFIX)gcc
-CC=$(COMP_PREFIX)g++
 CXX=$(COMP_PREFIX)g++
 AS=$(COMP_PREFIX)as
-#AS=$(COMP_PREFIX)gcc
 #LD=$(COMP_PREFIX)ld
 LD=$(COMP_PREFIX)g++
 #LD=$(COMP_PREFIX)gcc
@@ -74,8 +71,6 @@ COMMON_LD_FLAGS=--specs=nosys.specs -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -W
 ##LD_FLAGS=$(EXTRA_LD_FLAGS) -g -L$(DEVKITPRO)/libgba/lib -nostartfiles -T $(LD_SCRIPT) -Wl,--entry=_start2 -lmm $(DEBUG_FLAGS) 
 
 LD_FLAGS=$(COMMON_LD_FLAGS) $(DEBUG_FLAGS)
-#LD_FLAGS=$(COMMON_LD_FLAGS) -g $(DEBUG_FLAGS)
-#LD_FLAGS=$(COMMON_LD_FLAGS) -g $(DEBUG_FLAGS)
 
 
 OBJDIR=objs

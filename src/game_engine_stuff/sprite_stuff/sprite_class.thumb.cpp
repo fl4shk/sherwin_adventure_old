@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2016 by Andy Clark (FL4SHK).
+// Copyright 2015-2016 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -169,6 +169,7 @@ void sprite::update_on_screen_pos( const bg_point& camera_pos )
 	offset.x = make_f24p8(ss_vec2.x);
 	offset.y = make_f24p8(ss_vec2.y);
 	
+	// Check whether the sprite is on screen.
 	if ( on_screen_pos_f24p8.x + offset.x >= (fixed24p8){0} 
 		&& on_screen_pos_f24p8.x <= make_f24p8(screen_width)
 		&& on_screen_pos_f24p8.y + offset.y >= (fixed24p8){0}
@@ -176,10 +177,10 @@ void sprite::update_on_screen_pos( const bg_point& camera_pos )
 	{
 		the_oam_entry.show_non_affine();
 		
-		//the_oam_entry.set_x_coord 
-		//	( on_screen_pos_f24p8.x.trunc_to_int() );
 		the_oam_entry.set_x_coord 
-			( on_screen_pos_f24p8.x.true_round_via_trunc() );
+			( on_screen_pos_f24p8.x.trunc_to_int() );
+		//the_oam_entry.set_x_coord 
+		//	( on_screen_pos_f24p8.x.true_round_via_trunc() );
 		
 		//the_oam_entry.set_y_coord 
 		//	( on_screen_pos_f24p8.y.trunc_to_int() );
