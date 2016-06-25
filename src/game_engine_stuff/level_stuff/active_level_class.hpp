@@ -76,8 +76,10 @@ public:		// static variables
 	static constexpr u32 horiz_sublevel_xsize = block_data_array_size 
 		/ horiz_sublevel_ysize;
 	
-	static constexpr vec2_u32 horiz_sublevel_size_2d 
-		= { horiz_sublevel_xsize, horiz_sublevel_ysize };
+	//static constexpr vec2_u32 horiz_sublevel_size_2d 
+	//	= { horiz_sublevel_xsize, horiz_sublevel_ysize };
+	static const vec2_u32 horiz_sublevel_size_2d;
+	
 	
 	// horiz_sublevel_block_data_2d is an array_2d_helper that wraps the
 	// access to block_data_array for horizontal sublevels.  Support for

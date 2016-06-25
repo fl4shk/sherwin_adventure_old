@@ -85,8 +85,8 @@ typedef vec2_f24p8 bg_point;
 // tiles per column.
 static constexpr u32 screenblock_size = 0x400;
 static constexpr u32 screenblock_xsize = 0x20, screenblock_ysize = 0x20;
-static constexpr vec2_u32 screenblock_size_2d 
-	= { screenblock_xsize, screenblock_ysize };
+static const vec2_u32 screenblock_size_2d( screenblock_xsize, 
+	screenblock_ysize );
 typedef scr_entry screenblock[screenblock_size];
 
 
@@ -176,21 +176,26 @@ static const u32 num_colors_per_palette = 16;
 static const u32 screen_width = 240;
 static const u32 screen_height = 160;
 
-static const vec2_u32 screen_size_2d = { screen_width, screen_height };
+//static const vec2_u32 screen_size_2d = { screen_width, screen_height };
+static const vec2_u32 screen_size_2d( screen_width, screen_height );
 
 // The width and height of the screen, in tiles
 static const u32 screen_width_in_tiles = 30;
 static const u32 screen_height_in_tiles = 20;
 
-static const vec2_u32 screen_size_in_tiles_2d = { screen_width_in_tiles, 
-	screen_height_in_tiles };
+//static const vec2_u32 screen_size_in_tiles_2d = { screen_width_in_tiles, 
+//	screen_height_in_tiles };
+static const vec2_u32 screen_size_in_tiles_2d( screen_width_in_tiles, 
+	screen_height_in_tiles );
 
 // The width and height of the screen, in blocks
 static const u32 screen_width_in_blocks = 15;
 static const u32 screen_height_in_blocks = 10;
 
-static const vec2_u32 screen_size_in_blocks_2d = { screen_width_in_blocks, 
-	screen_height_in_blocks };
+//static const vec2_u32 screen_size_in_blocks_2d = { screen_width_in_blocks, 
+//	screen_height_in_blocks };
+static const vec2_u32 screen_size_in_blocks_2d( screen_width_in_blocks, 
+	screen_height_in_blocks );
 
 static const u32 num_pixels_per_tile_row = 8;
 static const u32 num_pixels_per_tile_col = 8;

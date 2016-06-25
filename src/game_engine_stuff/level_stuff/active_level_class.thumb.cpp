@@ -23,6 +23,8 @@
 #include "active_level_manager_class.hpp"
 //#include "../sa_list_class_stuff.hpp"
 
+const vec2_u32 active_level::horiz_sublevel_size_2d
+	( horiz_sublevel_xsize, horiz_sublevel_ysize );
 
 block active_level::block_data_array[block_data_array_size];
 //	__attribute__((_ewram));
