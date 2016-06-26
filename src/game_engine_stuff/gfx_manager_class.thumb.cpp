@@ -89,6 +89,51 @@ u16 gfx_manager::obj_pal_mirror[obj_pal_ram_size_in_u16];
 u32 gfx_manager::hud_vram_as_tiles_start_offset;
 
 
+void gfx_manager::copy_bgofs_mirror_to_registers()
+{
+	//reg_bgofs[0] = bgofs_mirror[0].curr;
+	//reg_bgofs[1] = bgofs_mirror[1].curr;
+	//reg_bgofs[2] = bgofs_mirror[2].curr;
+	//reg_bgofs[3] = bgofs_mirror[3].curr;
+	
+	
+	
+	
+	
+	reg_bgofs[0].x = (s16)bgofs_mirror[0].curr.x.trunc_to_int();
+	//reg_bgofs[0].y = (s16)bgofs_mirror[0].curr.y.trunc_to_int();
+	//
+	//reg_bgofs[1].x = (s16)bgofs_mirror[1].curr.x.trunc_to_int();
+	//reg_bgofs[1].y = (s16)bgofs_mirror[1].curr.y.trunc_to_int();
+	//
+	//reg_bgofs[2].x = (s16)bgofs_mirror[2].curr.x.trunc_to_int();
+	//reg_bgofs[2].y = (s16)bgofs_mirror[2].curr.y.trunc_to_int();
+	//
+	//reg_bgofs[3].x = (s16)bgofs_mirror[3].curr.x.trunc_to_int();
+	//reg_bgofs[3].y = (s16)bgofs_mirror[3].curr.y.trunc_to_int();
+	
+	
+	//reg_bgofs[0].x 
+	//	= (s16)bgofs_mirror[0].curr.x.true_round_via_trunc();
+	reg_bgofs[0].y 
+		= (s16)bgofs_mirror[0].curr.y.true_round_via_trunc();
+	
+	reg_bgofs[1].x 
+		= (s16)bgofs_mirror[1].curr.x.true_round_via_trunc();
+	reg_bgofs[1].y 
+		= (s16)bgofs_mirror[1].curr.y.true_round_via_trunc();
+	
+	reg_bgofs[2].x 
+		= (s16)bgofs_mirror[2].curr.x.true_round_via_trunc();
+	reg_bgofs[2].y 
+		= (s16)bgofs_mirror[2].curr.y.true_round_via_trunc();
+	
+	reg_bgofs[3].x 
+		= (s16)bgofs_mirror[3].curr.x.true_round_via_trunc();
+	reg_bgofs[3].y 
+		= (s16)bgofs_mirror[3].curr.y.true_round_via_trunc();
+}
+
 
 void gfx_manager::upload_bg_palettes_to_target( vu16* target )
 {

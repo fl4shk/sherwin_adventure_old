@@ -120,6 +120,9 @@ void sprite_base_stuff::gfx_update( sprite& the_sprite )
 
 void sprite_base_stuff::update_part_1( sprite& the_sprite )
 {
+	//the_sprite.did_update_prev_on_screen_pos_this_frame = false;
+	//the_sprite.temp_debug_thing = false;
+	
 	the_sprite.update_f24p8_positions();
 	block_collision_stuff(the_sprite);
 }
@@ -136,7 +139,11 @@ void sprite_base_stuff::update_part_2( sprite& the_sprite,
 	const bg_point& camera_pos, int& next_oam_index )
 {
 	gfx_update(the_sprite);
+	
+	
+	
 	the_sprite.update_on_screen_pos(camera_pos);
+	
 	the_sprite.copy_the_oam_entry_to_oam_mirror(next_oam_index++);
 }
 

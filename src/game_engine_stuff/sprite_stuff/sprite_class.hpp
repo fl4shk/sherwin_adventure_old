@@ -109,6 +109,13 @@ public:		// variables
 	s32 misc_data_s[misc_data_size];
 	
 	
+	// These are mainly for debugging.
+	//bool did_update_prev_on_screen_pos_this_frame;
+	//vec2_f24p8 prev_on_screen_pos, curr_on_screen_pos;
+	//prev_curr_pair<vec2_f24p8> on_screen_pos;
+	//bool temp_debug_thing;
+	
+	
 public:		// functions
 	
 	sprite();
@@ -181,32 +188,8 @@ public:		// functions
 		the_coll_box.pos = in_level_pos + cb_pos_offset;
 	}
 	
-	inline vec2_f24p8 get_on_screen_pos( const bg_point& camera_pos )
-		const
-	{
-		vec2_f24p8 ret;
-		
-		//ret.x = ( in_level_pos.x - make_f24p8(camera_pos.x) );
-		//ret.y = ( in_level_pos.y - make_f24p8(camera_pos.y) );
-		
-		ret = in_level_pos - camera_pos;
-		
-		//ret.x.data = in_level_pos.x.data - camera_pos.x.data;
-		//ret.y.data = in_level_pos.y.data - camera_pos.y.data;
-		
-		
-		//ret.x = ( in_level_pos.x 
-		//	- make_f24p8(camera_pos.x.true_round_via_trunc()) );
-		//ret.y = ( in_level_pos.y 
-		//	- make_f24p8(camera_pos.y.true_round_via_trunc()) );
-		
-		//ret.x = ( in_level_pos.x 
-		//	- make_f24p8(camera_pos.x.trunc_to_int()) );
-		//ret.y = ( in_level_pos.y 
-		//	- make_f24p8(camera_pos.y.trunc_to_int()) );
-		
-		return ret;
-	}
+	vec2_f24p8 get_on_screen_pos( const bg_point& camera_pos ) const
+		__attribute__((_iwram_code));
 	
 	void update_on_screen_pos( const bg_point& camera_pos )
 		__attribute__((_iwram_code));

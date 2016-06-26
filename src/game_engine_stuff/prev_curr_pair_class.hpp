@@ -49,7 +49,7 @@ public:		// functions
 	
 	inline bool has_changed() const
 	{
-		return ( prev == curr );
+		return ( prev != curr );
 	}
 	
 	inline operator vec2<type>() const

@@ -383,6 +383,19 @@ void sprite_manager::update_all_sprites
 		the_active_secondary_sprites;
 	std::array< sprite*, max_num_regular_sprites> the_active_sprites;
 	
+	for ( u32 i=0; i<the_active_player_secondary_sprites.size(); ++i )
+	{
+		the_active_player_secondary_sprites[i] = NULL;
+	}
+	for ( u32 i=0; i<the_active_secondary_sprites.size(); ++i )
+	{
+		the_active_secondary_sprites[i] = NULL;
+	}
+	for ( u32 i=0; i<the_active_sprites.size(); ++i )
+	{
+		the_active_sprites[i] = NULL;
+	}
+	
 	auto find_active_sprites = []( sprite* sprites_arr, 
 		sprite** active_sprites_arr, const u32 sprites_arr_size, 
 		u32& num_active_sprites_in_category ) -> void
