@@ -29,3 +29,108 @@ u32 active_level_manager::converted_block_tile_ids_0[bt_count],
 	active_level_manager::converted_block_tile_ids_2[bt_count],
 	active_level_manager::converted_block_tile_ids_3[bt_count];
 
+
+
+void active_level_manager::load_level
+	( const level* n_the_current_level_ptr )
+{
+	game_manager::curr_game_mode = gm_loading_level;
+	active_level::the_current_level_ptr = n_the_current_level_ptr;
+	
+	player_sprite_stuff::run_toggle = false;
+	
+	// The following line is temporary!
+	player_sprite_stuff::max_hp = 10;
+	
+	player_sprite_stuff::remaining_hp = player_sprite_stuff::max_hp;
+	
+	for ( u32 i=0; i<active_level::max_num_sublevels; ++i )
+	{
+		memfill32( active_level::persistent_block_data_arrays[i], 0, 
+			sizeof(active_level::persistent_block_data_arrays[i])
+			/ sizeof(u32) );
+	}
+	
+	load_sublevel_basic(0);
+}
+
+void active_level_manager::load_sublevel_basic( u32 n_sublevel_index )
+{
+	game_manager::curr_game_mode = gm_changing_sublevel;
+	active_level::the_current_active_sublevel_index = n_sublevel_index;
+	
+	// Initialize the list of sprite level data.
+	init_horiz_sublevel_sprite_ipg_lists();
+	
+	// Decompress the sublevel's block data into block_data_array.
+	bios_do_lz77_uncomp_wram
+		( active_level::get_the_current_sublevel_ptr()
+		.cmp_bd_arr_helper.the_array, 
+		active_level::block_data_array );
+	
+	for ( u32 i=0; i<active_level::block_data_array_size; ++i )
+	{
+		block& the_block = active_level::block_data_array[i];
+		
+		block_stuff_array[the_block.type]
+			->finish_initializing_using_persistent_data(the_block);
+	}
+	
+	update_sublevel_in_screenblock_mirror_2d();
+	
+	sprite_manager::initial_sprite_spawning_at_start_of_level
+		(gfx_manager::bgofs_mirror[0].curr);
+	
+	update_sublevel_in_screenblock_mirror_2d();
+	
+	game_manager::curr_game_mode = gm_in_sublevel;
+	
+	bios_wait_for_vblank();
+}
+
+void active_level_manager::load_sublevel_at_intra_sublevel_warp
+	( u32 n_sublevel_index, u32 sublevel_entrance_index )
+{
+	game_manager::curr_game_mode = gm_changing_sublevel;
+	gfx_manager::fade_out_to_black(15);
+	
+	active_level::the_current_active_sublevel_index = n_sublevel_index;
+	
+	clear_oam_mirror();
+	//bios_wait_for_vblank();
+	copy_oam_mirror_to_oam();
+	
+	// Initialize the list of sprite level data.
+	init_horiz_sublevel_sprite_ipg_lists();
+	
+	// Decompress the sublevel's block data into block_data_array.
+	bios_do_lz77_uncomp_wram
+		( active_level::get_the_current_sublevel_ptr()
+		.cmp_bd_arr_helper.the_array, 
+		active_level::block_data_array );
+	
+	for ( u32 i=0; i<active_level::block_data_array_size; ++i )
+	{
+		block& the_block = active_level::block_data_array[i];
+		
+		block_stuff_array[the_block.type]
+			->finish_initializing_using_persistent_data(the_block);
+	}
+	
+	update_sublevel_in_screenblock_mirror_2d();
+	
+	
+	sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
+		( gfx_manager::bgofs_mirror[0].curr, sublevel_entrance_index );
+	update_sublevel_in_screenblock_mirror_2d();
+	
+	game_manager::curr_game_mode = gm_in_sublevel;
+	
+	bios_wait_for_vblank();
+	//game_manager::vblank_func();
+	
+	// Wait for about 0.25 seconds.
+	//wait_for_x_frames(15);
+	
+	gfx_manager::fade_in(15);
+}

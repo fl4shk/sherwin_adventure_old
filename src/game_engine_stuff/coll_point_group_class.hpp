@@ -25,7 +25,6 @@
 #include "coll_box_class.hpp"
 
 class sprite;
-class sprite_base;
 
 
 // This class is primarily used by the collision detection and response
@@ -359,18 +358,6 @@ void generate_coll_point_group_32x16( const sprite& the_sprite,
 void generate_coll_point_group_32x32( const sprite& the_sprite, 
 	coll_point_group& the_pt_group ) __attribute__((_iwram_code));
 
-
-void generate_coll_point_group_16x16( const sprite_base& the_sprite_base, 
-	coll_point_group& the_pt_group ) __attribute__((_iwram_code));
-
-void generate_coll_point_group_16x32( const sprite_base& the_sprite_base, 
-	coll_point_group& the_pt_group ) __attribute__((_iwram_code));
-
-void generate_coll_point_group_32x16( const sprite_base& the_sprite_base, 
-	coll_point_group& the_pt_group ) __attribute__((_iwram_code));
-
-void generate_coll_point_group_32x32( const sprite_base& the_sprite_base, 
-	coll_point_group& the_pt_group ) __attribute__((_iwram_code));
 
 
 #endif		// coll_point_group_class_hpp

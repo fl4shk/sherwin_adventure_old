@@ -28,6 +28,8 @@
 
 #include "sprite_class.hpp"
 
+
+
 // This is a class that controls the spawning, despawning, and killing of
 // sprites.  The sprite list stuff is part of the active_level class.
 class sprite_manager
@@ -45,20 +47,44 @@ public:		// variables
 	
 	
 	
-	static std::array< sprite, max_num_player_secondary_sprites >
+	// The array of pointers to secondary active sprites that are "claimed"
+	// by the_player.
+	static std::array< sprite*, max_num_player_secondary_sprites >
 		the_player_secondary_sprites;
 	
-	// The array of secondary active sprites, not counting those "claimed"
-	// by the_player.
-	static std::array< sprite, max_num_secondary_sprites > 
+	// The array of pointers to secondary active sprites, not counting
+	// those "claimed" by the_player.
+	static std::array< sprite*, max_num_secondary_sprites > 
 		the_secondary_sprites;
 	
-	
+	// This version of the_player should eventually be replaced with an
+	// instance of a future class called "player_sprite".
 	static sprite the_player;
+	//static player_sprite the_player;
+	
+	// The array of pointers to REGULAR active sprites, not counting
+	// the_player.
+	static std::array< sprite*, max_num_regular_sprites > the_sprites;
+	
+	
+	
+	// An array of player secondary sprites to allocate from
+	static std::array< sprite, max_num_player_secondary_sprites > 
+		the_allocatable_player_secondary_sprites;
+	
+	// An array of secondary sprites to allocate from, other than the ones
+	// used by the_player 
+	static std::array< sprite, max_num_secondary_sprites > 
+		the_allocatable_secondary_sprites;
 	
 	// The array of REGULAR active sprites, not counting the_player.
-	static std::array< sprite, max_num_regular_sprites > the_sprites;
+	static std::array< sprite, max_num_regular_sprites > 
+		the_allocatable_sprites;
 	
+	
+	// The sprite_allocator's
+	static sprite_allocator the_player_secondary_sprites_allocator,
+		the_secondary_sprites_allocator, the_sprites_allocator;
 	
 	
 	//static constexpr u32 the_player_vram_chunk_index = 1;
@@ -70,6 +96,7 @@ public:		// variables
 	//static constexpr u32 the_secondary_sprites_starting_vram_chunk_index
 	//	= the_active_sprites_starting_vram_chunk_index 
 	//	+ max_num_regular_sprites;
+	
 	
 	static constexpr u32
 		the_player_secondary_sprites_starting_vram_chunk_index = 1;
@@ -106,12 +133,28 @@ public:		// variables
 	
 public:		// functions
 	
+	static void reinit_sprite_with_sprite_ipg( sprite* the_sprite, 
+		sprite_allocator& the_sprite_allocator, 
+		sprite_init_param_group* s_the_sprite_ipg );
+	static void reinit_sprite_with_sprite_ipg( sprite* the_sprite, 
+		sprite_allocator& the_sprite_allocator, u32 s_vram_chunk_index, 
+		sprite_init_param_group* s_the_sprite_ipg );
+	
+	static void reinit_sprite_by_spawning( sprite* the_sprite, 
+		sprite_allocator& the_sprite_allocator,
+		sprite_type s_the_sprite_type, const vec2_f24p8& s_in_level_pos, 
+		const bg_point& camera_pos, bool facing_left=true );
+	
+	
+	
 	static void init_the_player ( const vec2_f24p8& s_in_level_pos, 
 		const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos );
 	
+	static void clear_the_sprite_arrays();
+	
 	// This function initializes the vram_chunk_index of each sprite in
 	// the_sprites.
-	static inline void init_the_sprite_arrays()
+	static inline void init_the_allocatable_sprite_arrays()
 	{
 		//u32 vram_chunk_index = 1;
 		//
@@ -123,23 +166,25 @@ public:		// functions
 		// Secondary sprites "claimed" by the_player.
 		for ( u32 i=0; i<max_num_player_secondary_sprites; ++i )
 		{
-			the_player_secondary_sprites[i].set_vram_chunk_index( i 
+			the_allocatable_player_secondary_sprites[i]
+				.set_vram_chunk_index( i 
 				+ the_player_secondary_sprites_starting_vram_chunk_index );
 		}
 		
 		// Other secondary sprites
 		for ( u32 i=0; i<max_num_secondary_sprites; ++i )
 		{
-			the_secondary_sprites[i].set_vram_chunk_index( i
+			the_allocatable_secondary_sprites[i].set_vram_chunk_index( i
 				+ the_secondary_sprites_starting_vram_chunk_index );
 		}
 		
 		// Regular sprites
 		for ( u32 i=0; i<max_num_regular_sprites; ++i )
 		{
-			the_sprites[i].set_vram_chunk_index( i 
+			the_allocatable_sprites[i].set_vram_chunk_index( i 
 				+ the_active_sprites_starting_vram_chunk_index );
 		}
+		
 		
 	}
 	
@@ -148,7 +193,7 @@ public:		// functions
 		( const sprite_init_param_group* the_ext_sprite_ipg_arr, 
 		u32 the_ext_sprite_ipg_arr_size );
 	
-	static void some_sprite_init_thing();
+	//static void some_sprite_init_thing();
 	
 	//static void initial_sprite_spawning_from_sublevel_data
 	//	( const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos );
@@ -186,28 +231,33 @@ public:		// functions
 		
 		gfx_manager::upload_sprite_tiles_to_vram(the_player);
 		
-		auto for_loop_contents = [&]( sprite& spr ) -> void
+		auto for_loop_contents = [&]( sprite* spr ) -> void
 		{
-			// These two if statements probably accomplish the same goal,
-			// which is why one of them is commented out
-			//if ( spr.get_vram_chunk_index() != 0 )
-			if ( spr.the_sprite_type != st_default )
+			//// These two if statements probably accomplish the same goal,
+			//// which is why one of them is commented out
+			////if ( spr.get_vram_chunk_index() != 0 )
+			//if ( spr.the_sprite_type != st_default )
+			//{
+			//	gfx_manager::upload_sprite_tiles_to_vram(spr);
+			//}
+			
+			if ( spr != NULL && spr->the_sprite_type != st_default )
 			{
-				gfx_manager::upload_sprite_tiles_to_vram(spr);
+				gfx_manager::upload_sprite_tiles_to_vram(*spr);
 			}
 		};
 		
-		for ( sprite& spr : sprite_manager::the_player_secondary_sprites )
+		for ( sprite* spr : sprite_manager::the_player_secondary_sprites )
 		{
 			for_loop_contents(spr);
 		}
 		
-		for ( sprite& spr : sprite_manager::the_sprites )
+		for ( sprite* spr : sprite_manager::the_sprites )
 		{
 			for_loop_contents(spr);
 		}
 		
-		for ( sprite& spr : sprite_manager::the_secondary_sprites )
+		for ( sprite* spr : sprite_manager::the_secondary_sprites )
 		{
 			for_loop_contents(spr);
 		}
@@ -237,7 +287,7 @@ public:		// functions
 		prev_curr_pair<bg_point>& camera_pos_pc_pair ) 
 		__attribute__((_iwram_code));
 	
-};
+} __attribute__((_align4));
 
 
 

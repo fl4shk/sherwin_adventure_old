@@ -394,9 +394,9 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 	warped_this_frame = false;
 	warped_to_other_sublevel_this_frame = false;
 	
-	for ( sprite& spr : sprite_manager::the_sprites )
+	for ( sprite* spr : sprite_manager::the_sprites )
 	{
-		sprite_interaction_reponse( the_player, spr, camera_pos,
+		sprite_interaction_reponse( the_player, *spr, camera_pos,
 			the_level_size_2d );
 		
 		if ( warped_to_other_sublevel_this_frame )
@@ -646,7 +646,7 @@ void player_sprite_stuff::update_the_pickaxe( sprite& the_player )
 		return;
 	}
 	
-	sprite& the_pickaxe = sprite_manager::the_player_secondary_sprites
+	sprite& the_pickaxe = *sprite_manager::the_player_secondary_sprites
 		[pickaxe_sprite_slot];
 	u32& the_pickaxe_frame_slot = the_pickaxe.misc_data_u
 		[player_pickaxe_sprite_stuff::udi_curr_frame_slot];

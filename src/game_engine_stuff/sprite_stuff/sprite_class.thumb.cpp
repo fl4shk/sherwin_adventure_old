@@ -20,7 +20,19 @@
 #include "../../gba_specific_stuff/interrupt_stuff.hpp"
 #include "../gfx_manager_class.hpp"
 
+#include "sprite_allocator_class.hpp"
+
 sprite::sprite()
+{
+	shared_constructor_and_destructor_code();
+}
+
+sprite::~sprite()
+{
+	shared_constructor_and_destructor_code();
+}
+
+void sprite::shared_constructor_and_destructor_code()
 {
 	//the_sprite_type = st_player;
 	
@@ -57,6 +69,13 @@ sprite::sprite()
 	vram_chunk_index = old_vram_chunk_index;
 }
 
+void* sprite::operator new( size_t size, 
+	sprite_allocator& the_sprite_allocator )
+{
+	return the_sprite_allocator.allocate_sprite();
+}
+
+
 //sprite::sprite( u32 s_vram_chunk_index, 
 //	sprite_init_param_group* s_the_sprite_ipg )
 //{
@@ -88,69 +107,6 @@ sprite::sprite()
 //	}
 //}
 
-void sprite::reinit_with_sprite_ipg
-	( sprite_init_param_group* s_the_sprite_ipg )
-{
-	u32 old_vram_chunk_index = vram_chunk_index;
-	
-	switch ( s_the_sprite_ipg->spawn_state )
-	{
-		case sss_not_active:
-			memfill32( this, 0, sizeof(sprite) / sizeof(u32) );
-			
-			the_sprite_ipg = s_the_sprite_ipg;
-			the_sprite_ipg->spawn_state = sss_active;
-			
-			the_sprite_type = the_sprite_ipg->type;
-			in_level_pos.x = make_f24p8
-				( the_sprite_ipg->initial_block_grid_x_coord * 16 );
-			in_level_pos.y = make_f24p8
-				( the_sprite_ipg->initial_block_grid_y_coord * 16 );
-			
-			sprite_stuff_array[the_sprite_type]->init( *this,
-				!the_sprite_ipg->facing_right );
-			
-			vram_chunk_index = old_vram_chunk_index;
-			break;
-			
-		case sss_active:
-		case sss_dead:
-		default:
-			break;
-		
-	}
-}
-
-void sprite::reinit_with_sprite_ipg( u32 s_vram_chunk_index,
-	sprite_init_param_group* s_the_sprite_ipg )
-{
-	switch ( s_the_sprite_ipg->spawn_state )
-	{
-		case sss_not_active:
-			memfill32( this, 0, sizeof(sprite) / sizeof(u32) );
-			
-			the_sprite_ipg = s_the_sprite_ipg;
-			the_sprite_ipg->spawn_state = sss_active;
-			
-			the_sprite_type = the_sprite_ipg->type;
-			in_level_pos.x = make_f24p8
-				( the_sprite_ipg->initial_block_grid_x_coord * 16 );
-			in_level_pos.y = make_f24p8
-				( the_sprite_ipg->initial_block_grid_y_coord * 16 );
-			
-			sprite_stuff_array[the_sprite_type]->init( *this,
-				!the_sprite_ipg->facing_right );
-			
-			vram_chunk_index = s_vram_chunk_index;
-			break;
-			
-		case sss_active:
-		case sss_dead:
-		default:
-			break;
-		
-	}
-}
 
 
 

@@ -23,6 +23,8 @@
 #include "../level_stuff/sprite_level_data_stuff.hpp"
 
 
+class sprite_allocator;
+
 class sprite
 {
 protected:		// variables
@@ -126,23 +128,19 @@ public:		// functions
 		vram_chunk_index = s_vram_chunk_index;
 	}
 	
-	void reinit_with_sprite_ipg
-		( sprite_init_param_group* s_the_sprite_ipg );
-	void reinit_with_sprite_ipg( u32 s_vram_chunk_index,
-		sprite_init_param_group* s_the_sprite_ipg );
+	// One of the few destructors I've written in this code
+	virtual ~sprite();
 	
-	inline void reinit_by_spawning( sprite_type s_the_sprite_type, 
-		const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, 
-		bool facing_left=true )
-	{
-		u32 old_vram_chunk_index = vram_chunk_index;
-		memfill32( this, 0, sizeof(sprite) / sizeof(u32) );
-		
-		sprite_stuff_array[s_the_sprite_type]->init( *this, s_in_level_pos,
-			camera_pos, facing_left );
-		
-		vram_chunk_index = old_vram_chunk_index;
-	}
+	virtual void shared_constructor_and_destructor_code();
+	
+	void* operator new( size_t size, 
+		sprite_allocator& the_sprite_allocator )
+		__attribute__((_iwram_code));
+	
+	//void operator delete( void* the_sprite, 
+	//	sprite_allocator& the_sprite_allocator );
+	
+	
 	
 	inline oam_entry::shape_size get_shape_size() const
 	{

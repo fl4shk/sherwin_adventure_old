@@ -16,3 +16,30 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
+#ifndef sprite_allocator_class_hpp
+#define sprite_allocator_class_hpp
+
+#include "../array_helper_class.hpp"
+#include "sprite_class.hpp"
+
+class sprite_allocator : public array_helper<sprite>
+{
+public:		// functions
+	inline sprite_allocator( sprite* the_array, u32 s_size )
+		: array_helper<sprite>( the_array, s_size )
+	{
+	}
+	inline sprite_allocator
+		( const array_helper<sprite>& s_allocatable_sprite_arr )
+		: array_helper<sprite>(s_allocatable_sprite_arr)
+	{
+	}
+	
+	void* allocate_sprite() __attribute__((_iwram_code));
+	void deallocate_sprite( sprite* the_sprite )
+		__attribute__((_iwram_code));
+	
+	
+} __attribute__((_align4));
+
+#endif		// sprite_allocator_class_hpp

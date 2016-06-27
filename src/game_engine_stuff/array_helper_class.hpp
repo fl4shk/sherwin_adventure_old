@@ -46,6 +46,11 @@ public:			// functions
 	{
 	}
 	
+	array_helper( const array_helper<type>& to_copy )
+		: the_array(to_copy.the_array), size(to_copy.size)
+	{
+	}
+	
 	void init( type* s_the_array, u32 s_size )
 	{
 		the_array = s_the_array;
@@ -53,7 +58,7 @@ public:			// functions
 	}
 	
 	
-	void operator = ( array_helper<type>& to_copy )
+	void operator = ( const array_helper<type>& to_copy )
 	{
 		the_array = to_copy.the_array;
 		size = to_copy.size;

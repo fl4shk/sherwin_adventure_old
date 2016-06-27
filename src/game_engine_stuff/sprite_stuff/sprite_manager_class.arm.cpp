@@ -21,6 +21,7 @@
 #include "../../gba_specific_stuff/button_stuff.hpp"
 #include "../../gba_specific_stuff/interrupt_stuff.hpp"
 
+#include "sprite_allocator_class.hpp"
 
 void sprite_manager::spawn_sprites_if_needed
 	( const prev_curr_pair<bg_point>& camera_pos_pc_pair )
@@ -76,7 +77,11 @@ void sprite_manager::spawn_sprites_if_needed
 	// Find a free sprite slot.
 	for ( ; next_sprite_index<the_sprites.size(); ++next_sprite_index )
 	{
-		if ( the_sprites[next_sprite_index].the_sprite_type == st_default )
+		//if ( the_sprites[next_sprite_index].the_sprite_type == st_default )
+		//{
+		//	break;
+		//}
+		if ( the_sprites[next_sprite_index] == NULL )
 		{
 			break;
 		}
@@ -119,8 +124,10 @@ void sprite_manager::spawn_sprites_if_needed
 					.get_node_at_node_index(j).the_data;
 				
 				// Find the lowest FREE sprite slot, if any.
-				while ( ( the_sprites[next_sprite_index].the_sprite_type 
-					!= st_default )
+				//while ( ( the_sprites[next_sprite_index].the_sprite_type 
+				//	!= st_default )
+				//	&& ( next_sprite_index != the_sprites.size() ) )
+				while ( ( the_sprites[next_sprite_index] != NULL )
 					&& ( next_sprite_index != the_sprites.size() ) )
 				{
 					++next_sprite_index;
@@ -133,9 +140,12 @@ void sprite_manager::spawn_sprites_if_needed
 					break;
 				}
 				
-				the_sprites[next_sprite_index].reinit_with_sprite_ipg
-					(&sprite_ipg);
+				//the_sprites[next_sprite_index].reinit_with_sprite_ipg
+				//	(&sprite_ipg);
 				
+				reinit_sprite_with_sprite_ipg( the_sprites
+					[next_sprite_index], the_sprites_allocator, 
+					&sprite_ipg );
 			}
 			
 			// If there isn't a free sprite slot, then stop trying to spawn
@@ -185,8 +195,10 @@ void sprite_manager::spawn_sprites_if_needed
 					.get_node_at_node_index(j).the_data;
 				
 				// Find the lowest FREE sprite slot, if any.
-				while ( ( the_sprites[next_sprite_index].the_sprite_type 
-					!= st_default )
+				//while ( ( the_sprites[next_sprite_index].the_sprite_type 
+				//	!= st_default )
+				//	&& ( next_sprite_index != the_sprites.size() ) )
+				while ( ( the_sprites[next_sprite_index] != NULL )
 					&& ( next_sprite_index != the_sprites.size() ) )
 				{
 					++next_sprite_index;
@@ -199,9 +211,12 @@ void sprite_manager::spawn_sprites_if_needed
 					break;
 				}
 				
-				the_sprites[next_sprite_index].reinit_with_sprite_ipg
-					(&sprite_ipg);
+				//the_sprites[next_sprite_index].reinit_with_sprite_ipg
+				//	(&sprite_ipg);
 				
+				reinit_sprite_with_sprite_ipg
+					( the_sprites[next_sprite_index],
+					the_sprites_allocator, &sprite_ipg );
 			}
 			
 			// If there isn't a free sprite slot, then stop trying to spawn
@@ -233,42 +248,65 @@ void sprite_manager::despawn_sprites_if_needed
 	//camera_pos_f24p8.x = make_f24p8(camera_pos.x);
 	//camera_pos_f24p8.y = make_f24p8(camera_pos.y);
 	
-	auto for_loop_contents = [&]( sprite& spr ) -> void
+	
+	auto for_loop_contents = [&]( sprite* spr, 
+		sprite_allocator& the_sprite_allocator ) -> void
 	{
-		if ( spr.the_sprite_type != st_default )
+		//if ( spr.the_sprite_type != st_default )
+		//{
+		//	fixed24p8 spr_on_screen_pos_x = spr.in_level_pos.x 
+		//		- camera_pos.x;
+		//	
+		//	if ( !( spr_on_screen_pos_x.data >= max_left
+		//		&& spr_on_screen_pos_x.data <= max_right ) )
+		//	{
+		//		// I might eventually create spr.despawn() so that
+		//		// sprites can control HOW they despawn
+		//		//spr.despawn();
+		//		
+		//		spr.the_sprite_type = st_default;
+		//		if ( spr.the_sprite_ipg != NULL )
+		//		{
+		//			spr.the_sprite_ipg->spawn_state = sss_not_active;
+		//		}
+		//	}
+		//}
+		
+		if ( spr != NULL )
 		{
-			fixed24p8 spr_on_screen_pos_x = spr.in_level_pos.x 
+			fixed24p8 spr_on_screen_pos_x = spr->in_level_pos.x 
 				- camera_pos.x;
-			
 			if ( !( spr_on_screen_pos_x.data >= max_left
 				&& spr_on_screen_pos_x.data <= max_right ) )
 			{
-				// I might eventually create spr.despawn() so that
+				// I might eventually create spr->despawn() so that
 				// sprites can control HOW they despawn
-				//spr.despawn();
+				//spr->despawn();
 				
-				spr.the_sprite_type = st_default;
-				if ( spr.the_sprite_ipg != NULL )
+				if ( spr->the_sprite_ipg != NULL )
 				{
-					spr.the_sprite_ipg->spawn_state = sss_not_active;
+					spr->the_sprite_ipg->spawn_state = sss_not_active;
 				}
+				
+				the_sprite_allocator.deallocate_sprite(spr);
 			}
+			
 		}
 	};
 	
-	for ( sprite& spr : the_player_secondary_sprites )
+	for ( sprite* spr : the_player_secondary_sprites )
 	{
-		for_loop_contents(spr);
+		for_loop_contents( spr, the_player_secondary_sprites_allocator );
 	}
 	
-	for ( sprite& spr : the_secondary_sprites )
+	for ( sprite* spr : the_secondary_sprites )
 	{
-		for_loop_contents(spr);
+		for_loop_contents( spr, the_secondary_sprites_allocator );
 	}
 	
-	for ( sprite& spr : the_sprites )
+	for ( sprite* spr : the_sprites )
 	{
-		for_loop_contents(spr);
+		for_loop_contents( spr, the_sprites_allocator );
 	}
 	
 }
@@ -285,8 +323,9 @@ s32 sprite_manager::spawn_a_player_secondary_sprite_basic
 		next_sprite_index<the_player_secondary_sprites.size();
 		++next_sprite_index )
 	{
-		if ( the_player_secondary_sprites[next_sprite_index]
-			.the_sprite_type == st_default )
+		//if ( the_player_secondary_sprites[next_sprite_index]
+		//	.the_sprite_type == st_default )
+		if ( the_player_secondary_sprites[next_sprite_index] == NULL )
 		{
 			break;
 		}
@@ -298,8 +337,12 @@ s32 sprite_manager::spawn_a_player_secondary_sprite_basic
 		return -1;
 	}
 	
-	the_player_secondary_sprites[next_sprite_index].reinit_by_spawning
-		( the_sprite_type, s_in_level_pos, camera_pos, facing_left );
+	//the_player_secondary_sprites[next_sprite_index].reinit_by_spawning
+	//	( the_sprite_type, s_in_level_pos, camera_pos, facing_left );
+	reinit_sprite_by_spawning( the_player_secondary_sprites
+		[next_sprite_index], the_player_secondary_sprites_allocator, 
+		the_sprite_type, s_in_level_pos, camera_pos, facing_left ); 
+	
 	
 	return next_sprite_index;
 }
@@ -315,8 +358,9 @@ s32 sprite_manager::spawn_a_secondary_sprite_basic
 		next_sprite_index<the_secondary_sprites.size();
 		++next_sprite_index )
 	{
-		if ( the_secondary_sprites[next_sprite_index].the_sprite_type 
-			== st_default )
+		//if ( the_secondary_sprites[next_sprite_index].the_sprite_type 
+		//	== st_default )
+		if ( the_secondary_sprites[next_sprite_index] == NULL )
 		{
 			break;
 		}
@@ -328,8 +372,12 @@ s32 sprite_manager::spawn_a_secondary_sprite_basic
 		return -1;
 	}
 	
-	the_secondary_sprites[next_sprite_index].reinit_by_spawning
-		( the_sprite_type, s_in_level_pos, camera_pos, facing_left );
+	//the_secondary_sprites[next_sprite_index].reinit_by_spawning
+	//	( the_sprite_type, s_in_level_pos, camera_pos, facing_left );
+	
+	reinit_sprite_by_spawning( the_secondary_sprites[next_sprite_index],
+		the_secondary_sprites_allocator, the_sprite_type, s_in_level_pos, 
+		camera_pos, facing_left );
 	
 	return next_sprite_index;
 }
@@ -348,7 +396,8 @@ void sprite_manager::spawn_a_sprite_basic( sprite_type the_sprite_type,
 	// Find a free sprite slot.
 	for ( ; next_sprite_index<the_sprites.size(); ++next_sprite_index )
 	{
-		if ( the_sprites[next_sprite_index].the_sprite_type == st_default )
+		//if ( the_sprites[next_sprite_index].the_sprite_type == st_default )
+		if ( the_sprites[next_sprite_index] == NULL )
 		{
 			break;
 		}
@@ -360,8 +409,12 @@ void sprite_manager::spawn_a_sprite_basic( sprite_type the_sprite_type,
 		return;
 	}
 	
-	the_sprites[next_sprite_index].reinit_by_spawning( the_sprite_type,
-		s_in_level_pos, camera_pos, facing_left );
+	//the_sprites[next_sprite_index].reinit_by_spawning( the_sprite_type,
+	//	s_in_level_pos, camera_pos, facing_left );
+	
+	reinit_sprite_by_spawning( the_sprites[next_sprite_index], 
+		the_sprites_allocator, the_sprite_type, s_in_level_pos, camera_pos, 
+		facing_left );
 	
 }
 
@@ -370,8 +423,8 @@ void sprite_manager::update_all_sprites
 	( const vec2_u32& the_sublevel_size_2d, 
 	prev_curr_pair<bg_point>& camera_pos_pc_pair )
 {
-	sprite_stuff_array[the_player.the_sprite_type]
-		->update_part_1(the_player);
+	sprite_stuff_array[the_player.the_sprite_type]->update_part_1
+		(the_player);
 	
 	
 	u32 num_active_player_secondary_sprites = 0, num_active_sprites = 0, 
@@ -396,17 +449,40 @@ void sprite_manager::update_all_sprites
 		the_active_sprites[i] = NULL;
 	}
 	
-	auto find_active_sprites = []( sprite* sprites_arr, 
+	//auto find_active_sprites = []( sprite* sprites_arr, 
+	//	sprite** active_sprites_arr, const u32 sprites_arr_size, 
+	//	u32& num_active_sprites_in_category ) -> void
+	//{
+	//	for ( u32 i=0; i<sprites_arr_size; ++i )
+	//	{
+	//		sprite& the_spr = sprites_arr[i];
+	//		if ( the_spr.the_sprite_type != st_default )
+	//		{
+	//			active_sprites_arr[num_active_sprites_in_category++] 
+	//				= &the_spr;
+	//		}
+	//	}
+	//};
+	
+	auto find_active_sprites = []( sprite** sprite_ptr_arr, 
 		sprite** active_sprites_arr, const u32 sprites_arr_size, 
 		u32& num_active_sprites_in_category ) -> void
 	{
 		for ( u32 i=0; i<sprites_arr_size; ++i )
 		{
-			sprite& the_spr = sprites_arr[i];
-			if ( the_spr.the_sprite_type != st_default )
+			//sprite& the_spr = sprites_arr[i];
+			//if ( the_spr.the_sprite_type != st_default )
+			//{
+			//	active_sprites_arr[num_active_sprites_in_category++] 
+			//		= &the_spr;
+			//}
+			
+			sprite* the_spr_ptr = sprite_ptr_arr[i];
+			
+			if ( the_spr_ptr != NULL )
 			{
-				active_sprites_arr[num_active_sprites_in_category++] 
-					= &the_spr;
+				active_sprites_arr[num_active_sprites_in_category++]
+					= the_spr_ptr;
 			}
 		}
 	};

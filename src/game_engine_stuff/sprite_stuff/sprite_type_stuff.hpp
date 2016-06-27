@@ -137,5 +137,8 @@ extern std::array< sprite_base_stuff*, st_count > sprite_stuff_array
 	__attribute__((_iwram));
 
 
+//#include "sprite_base_class.hpp"
+//#include "player_sprite_class.hpp"
+
 
 #endif		// sprite_type_stuff_hpp
