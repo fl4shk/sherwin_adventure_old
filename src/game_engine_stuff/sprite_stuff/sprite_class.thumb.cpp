@@ -264,7 +264,10 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 	}
 	else if ( on_screen_bottom_pos >= make_f24p8(60) )
 	{
-		camera_pos_y_updater(true);
+		if ( vel.y >= (fixed24p8){0} )
+		{
+			camera_pos_y_updater(true);
+		}
 	}
 	
 }
