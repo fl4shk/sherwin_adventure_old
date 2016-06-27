@@ -231,8 +231,7 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 	//	camera_pos.y += vel.y.trunc_to_int();
 	//}
 	
-	
-	if ( temp_on_screen_pos.y <= make_f24p8(20) )
+	auto camera_pos_y_updater = [&]( bool add ) -> void
 	{
 		if (!on_ground)
 		{
@@ -246,30 +245,26 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 		}
 		else
 		{
-			//camera_pos.y -= 4;
-			camera_pos.y += {-0x400};
-		}
-	}
-	else if ( on_screen_bottom_pos >= make_f24p8(60) )
-	{
-		if ( vel.y.data >= 0 )
-		{
-			if (!on_ground)
+			if (!add)
 			{
-				//camera_pos.y += vel.y.trunc_to_int();
-				
-				camera_pos.y += vel.y;
-				//camera_pos.y 
-				//	= make_f24p8(camera_pos.y.true_round_via_trunc());
-				
-				//camera_pos.y.data += vel.y.true_round_via_trunc();
+				//camera_pos.y -= 4;
+				camera_pos.y += {-0x400};
 			}
-			else
+			else //if (add)
 			{
 				//camera_pos.y += 4;
 				camera_pos.y += {0x400};
 			}
 		}
+	};
+	
+	if ( temp_on_screen_pos.y <= make_f24p8(20) )
+	{
+		camera_pos_y_updater(false);
+	}
+	else if ( on_screen_bottom_pos >= make_f24p8(60) )
+	{
+		camera_pos_y_updater(true);
 	}
 	
 }

@@ -382,7 +382,7 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 	u32& active_walk_frame_slot = the_player.misc_data_u
 		[udi_active_walk_frame_slot];
 	
-	// Hammer swing frame stuff
+	// Pickaxe swing frame stuff
 	s32& pickaxe_swing_frame_timer = the_player.misc_data_s
 		[sdi_pickaxe_swing_frame_timer];
 	u32& active_pickaxe_swing_frame_slot = the_player.misc_data_u

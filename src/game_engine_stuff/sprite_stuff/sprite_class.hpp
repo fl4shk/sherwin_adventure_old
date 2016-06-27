@@ -190,11 +190,13 @@ public:		// functions
 	
 	inline vec2_f24p8 get_on_screen_pos( const bg_point& camera_pos ) const
 	{
-		vec2_f24p8 ret;
+		vec2_f24p8 ret( in_level_pos.x 
+			- make_f24p8(camera_pos.x.trunc_to_int()), in_level_pos.y
+			- make_f24p8(camera_pos.y.trunc_to_int()) );
 		
-		ret.x = in_level_pos.x - make_f24p8(camera_pos.x.trunc_to_int());
-		//ret.y = in_level_pos.y - camera_pos.y;
-		ret.y = in_level_pos.y - make_f24p8(camera_pos.y.trunc_to_int());
+		//ret.x = in_level_pos.x - make_f24p8(camera_pos.x.trunc_to_int());
+		////ret.y = in_level_pos.y - camera_pos.y;
+		//ret.y = in_level_pos.y - make_f24p8(camera_pos.y.trunc_to_int());
 		
 		////ret.x = ( in_level_pos.x - make_f24p8(camera_pos.x) );
 		////ret.y = ( in_level_pos.y - make_f24p8(camera_pos.y) );

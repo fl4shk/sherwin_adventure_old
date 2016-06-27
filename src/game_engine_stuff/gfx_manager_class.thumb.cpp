@@ -109,7 +109,6 @@ void gfx_manager::copy_bgofs_mirror_to_registers()
 	
 	
 	
-	
 	//reg_bgofs[0].x = (s16)bgofs_mirror[0].curr.x.trunc_to_int();
 	//reg_bgofs[0].y = (s16)bgofs_mirror[0].curr.y.trunc_to_int();
 	//
