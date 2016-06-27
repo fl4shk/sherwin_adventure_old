@@ -96,21 +96,31 @@ void gfx_manager::copy_bgofs_mirror_to_registers()
 	//reg_bgofs[2] = bgofs_mirror[2].curr;
 	//reg_bgofs[3] = bgofs_mirror[3].curr;
 	
+	for ( u32 i=0; i<4; ++i )
+	{
+		reg_bgofs[i].x = (s16)bgofs_mirror[i].curr.x.trunc_to_int();
+		reg_bgofs[i].y = (s16)bgofs_mirror[i].curr.y.trunc_to_int();
+		
+		//reg_bgofs[i].x 
+		//	= (s16)bgofs_mirror[i].curr.x.true_round_via_trunc();
+		//reg_bgofs[i].y 
+		//	= (s16)bgofs_mirror[i].curr.y.true_round_via_trunc();
+	}
 	
 	
 	
 	
-	reg_bgofs[0].x = (s16)bgofs_mirror[0].curr.x.trunc_to_int();
-	reg_bgofs[0].y = (s16)bgofs_mirror[0].curr.y.trunc_to_int();
-	
-	reg_bgofs[1].x = (s16)bgofs_mirror[1].curr.x.trunc_to_int();
-	reg_bgofs[1].y = (s16)bgofs_mirror[1].curr.y.trunc_to_int();
-	
-	reg_bgofs[2].x = (s16)bgofs_mirror[2].curr.x.trunc_to_int();
-	reg_bgofs[2].y = (s16)bgofs_mirror[2].curr.y.trunc_to_int();
-	
-	reg_bgofs[3].x = (s16)bgofs_mirror[3].curr.x.trunc_to_int();
-	reg_bgofs[3].y = (s16)bgofs_mirror[3].curr.y.trunc_to_int();
+	//reg_bgofs[0].x = (s16)bgofs_mirror[0].curr.x.trunc_to_int();
+	//reg_bgofs[0].y = (s16)bgofs_mirror[0].curr.y.trunc_to_int();
+	//
+	//reg_bgofs[1].x = (s16)bgofs_mirror[1].curr.x.trunc_to_int();
+	//reg_bgofs[1].y = (s16)bgofs_mirror[1].curr.y.trunc_to_int();
+	//
+	//reg_bgofs[2].x = (s16)bgofs_mirror[2].curr.x.trunc_to_int();
+	//reg_bgofs[2].y = (s16)bgofs_mirror[2].curr.y.trunc_to_int();
+	//
+	//reg_bgofs[3].x = (s16)bgofs_mirror[3].curr.x.trunc_to_int();
+	//reg_bgofs[3].y = (s16)bgofs_mirror[3].curr.y.trunc_to_int();
 	
 	
 	//reg_bgofs[0].x 

@@ -195,10 +195,10 @@ void sprite::update_on_screen_pos( const bg_point& camera_pos )
 		//the_oam_entry.set_x_coord 
 		//	( temp_on_screen_pos.x.true_round_via_trunc() );
 		
-		//the_oam_entry.set_y_coord 
-		//	( temp_on_screen_pos.y.trunc_to_int() );
 		the_oam_entry.set_y_coord 
-			( temp_on_screen_pos.y.true_round_via_trunc() );
+			( temp_on_screen_pos.y.trunc_to_int() );
+		//the_oam_entry.set_y_coord 
+		//	( temp_on_screen_pos.y.true_round_via_trunc() );
 		
 	}
 	else
