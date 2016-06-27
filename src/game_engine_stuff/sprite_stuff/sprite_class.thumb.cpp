@@ -154,43 +154,12 @@ void sprite::reinit_with_sprite_ipg( u32 s_vram_chunk_index,
 
 
 
-vec2_f24p8 sprite::get_on_screen_pos( const bg_point& camera_pos ) const
-{
-	vec2_f24p8 ret;
-	
-	ret.x = in_level_pos.x - make_f24p8(camera_pos.x.trunc_to_int());
-	ret.y = in_level_pos.y - camera_pos.y;
-	
-	////ret.x = ( in_level_pos.x - make_f24p8(camera_pos.x) );
-	////ret.y = ( in_level_pos.y - make_f24p8(camera_pos.y) );
-	//
-	//ret = in_level_pos - camera_pos;
-	//
-	////ret.x.data = in_level_pos.x.data - camera_pos.x.data;
-	////ret.y.data = in_level_pos.y.data - camera_pos.y.data;
-	//
-	//
-	////ret.x = ( in_level_pos.x 
-	////	- make_f24p8(camera_pos.x.true_round_via_trunc()) );
-	////ret.y = ( in_level_pos.y 
-	////	- make_f24p8(camera_pos.y.true_round_via_trunc()) );
-	//
-	////ret.x = ( in_level_pos.x 
-	////	- make_f24p8(camera_pos.x.trunc_to_int()) );
-	////ret.y = ( in_level_pos.y 
-	////	- make_f24p8(camera_pos.y.trunc_to_int()) );
-	
-	return ret;
-}
-
-
-
 void sprite::update_on_screen_pos( const bg_point& camera_pos )
 {
 	vec2_f24p8 temp_on_screen_pos = get_on_screen_pos(camera_pos);
 	
 	
-	//if ( !did_update_prev_on_screen_pos_this_frame )
+	////if ( !did_update_prev_on_screen_pos_this_frame )
 	//{
 	//	//did_update_prev_on_screen_pos_this_frame = true;
 	//	

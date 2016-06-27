@@ -101,37 +101,37 @@ void gfx_manager::copy_bgofs_mirror_to_registers()
 	
 	
 	reg_bgofs[0].x = (s16)bgofs_mirror[0].curr.x.trunc_to_int();
-	//reg_bgofs[0].y = (s16)bgofs_mirror[0].curr.y.trunc_to_int();
-	//
-	//reg_bgofs[1].x = (s16)bgofs_mirror[1].curr.x.trunc_to_int();
-	//reg_bgofs[1].y = (s16)bgofs_mirror[1].curr.y.trunc_to_int();
-	//
-	//reg_bgofs[2].x = (s16)bgofs_mirror[2].curr.x.trunc_to_int();
-	//reg_bgofs[2].y = (s16)bgofs_mirror[2].curr.y.trunc_to_int();
-	//
-	//reg_bgofs[3].x = (s16)bgofs_mirror[3].curr.x.trunc_to_int();
-	//reg_bgofs[3].y = (s16)bgofs_mirror[3].curr.y.trunc_to_int();
+	reg_bgofs[0].y = (s16)bgofs_mirror[0].curr.y.trunc_to_int();
+	
+	reg_bgofs[1].x = (s16)bgofs_mirror[1].curr.x.trunc_to_int();
+	reg_bgofs[1].y = (s16)bgofs_mirror[1].curr.y.trunc_to_int();
+	
+	reg_bgofs[2].x = (s16)bgofs_mirror[2].curr.x.trunc_to_int();
+	reg_bgofs[2].y = (s16)bgofs_mirror[2].curr.y.trunc_to_int();
+	
+	reg_bgofs[3].x = (s16)bgofs_mirror[3].curr.x.trunc_to_int();
+	reg_bgofs[3].y = (s16)bgofs_mirror[3].curr.y.trunc_to_int();
 	
 	
 	//reg_bgofs[0].x 
 	//	= (s16)bgofs_mirror[0].curr.x.true_round_via_trunc();
-	reg_bgofs[0].y 
-		= (s16)bgofs_mirror[0].curr.y.true_round_via_trunc();
-	
-	reg_bgofs[1].x 
-		= (s16)bgofs_mirror[1].curr.x.true_round_via_trunc();
-	reg_bgofs[1].y 
-		= (s16)bgofs_mirror[1].curr.y.true_round_via_trunc();
-	
-	reg_bgofs[2].x 
-		= (s16)bgofs_mirror[2].curr.x.true_round_via_trunc();
-	reg_bgofs[2].y 
-		= (s16)bgofs_mirror[2].curr.y.true_round_via_trunc();
-	
-	reg_bgofs[3].x 
-		= (s16)bgofs_mirror[3].curr.x.true_round_via_trunc();
-	reg_bgofs[3].y 
-		= (s16)bgofs_mirror[3].curr.y.true_round_via_trunc();
+	//reg_bgofs[0].y 
+	//	= (s16)bgofs_mirror[0].curr.y.true_round_via_trunc();
+	//
+	//reg_bgofs[1].x 
+	//	= (s16)bgofs_mirror[1].curr.x.true_round_via_trunc();
+	//reg_bgofs[1].y 
+	//	= (s16)bgofs_mirror[1].curr.y.true_round_via_trunc();
+	//
+	//reg_bgofs[2].x 
+	//	= (s16)bgofs_mirror[2].curr.x.true_round_via_trunc();
+	//reg_bgofs[2].y 
+	//	= (s16)bgofs_mirror[2].curr.y.true_round_via_trunc();
+	//
+	//reg_bgofs[3].x 
+	//	= (s16)bgofs_mirror[3].curr.x.true_round_via_trunc();
+	//reg_bgofs[3].y 
+	//	= (s16)bgofs_mirror[3].curr.y.true_round_via_trunc();
 }
 
 

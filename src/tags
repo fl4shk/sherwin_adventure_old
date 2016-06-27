@@ -1388,8 +1388,7 @@ get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/snow_golem_sprite_stuff_
 get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:sprite_base_stuff	access:public	signature:()
 get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/waffle_sprite_stuff_class.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:waffle_sprite_stuff	access:public	signature:()
 get_num_lists	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline constexpr u32 get_num_lists() const$/;"	kind:f	class:sa_array_of_lists	access:public	signature:() const
-get_on_screen_pos	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	vec2_f24p8 get_on_screen_pos( const bg_point& camera_pos ) const$/;"	kind:p	class:sprite	access:public	signature:( const bg_point& camera_pos ) const
-get_on_screen_pos	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^vec2_f24p8 sprite::get_on_screen_pos( const bg_point& camera_pos ) const$/;"	kind:f	class:sprite	signature:( const bg_point& camera_pos ) const
+get_on_screen_pos	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline vec2_f24p8 get_on_screen_pos( const bg_point& camera_pos ) const$/;"	kind:f	class:sprite	access:public	signature:( const bg_point& camera_pos ) const
 get_pal_number	gba_specific_stuff/oam_entry_classes.hpp	/^	u32 get_pal_number() const$/;"	kind:f	class:oam_entry	access:public	signature:() const
 get_palette_number	game_engine_stuff/block_stuff/air_block_stuff_class.hpp	/^	virtual const u32 get_palette_number() __attribute__((_iwram_code));$/;"	kind:p	class:air_block_stuff	access:public	signature:()
 get_palette_number	game_engine_stuff/block_stuff/air_block_stuff_class.thumb.cpp	/^const u32 air_block_stuff::get_palette_number()$/;"	kind:f	class:air_block_stuff	signature:()
@@ -3030,8 +3029,7 @@ sprite::cb_pos_offset	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	vec2_f2
 sprite::center_camera_almost	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	void center_camera_almost( bg_point& camera_pos ) const$/;"	kind:p	class:sprite	access:public	signature:( bg_point& camera_pos ) const
 sprite::center_camera_almost	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^void sprite::center_camera_almost( bg_point& camera_pos ) const$/;"	kind:f	class:sprite	signature:( bg_point& camera_pos ) const
 sprite::copy_the_oam_entry_to_oam_mirror	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline void copy_the_oam_entry_to_oam_mirror( u32 slot_for_oam_mirror )$/;"	kind:f	class:sprite	access:public	signature:( u32 slot_for_oam_mirror )
-sprite::get_on_screen_pos	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	vec2_f24p8 get_on_screen_pos( const bg_point& camera_pos ) const$/;"	kind:p	class:sprite	access:public	signature:( const bg_point& camera_pos ) const
-sprite::get_on_screen_pos	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^vec2_f24p8 sprite::get_on_screen_pos( const bg_point& camera_pos ) const$/;"	kind:f	class:sprite	signature:( const bg_point& camera_pos ) const
+sprite::get_on_screen_pos	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline vec2_f24p8 get_on_screen_pos( const bg_point& camera_pos ) const$/;"	kind:f	class:sprite	access:public	signature:( const bg_point& camera_pos ) const
 sprite::get_shape_size	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline oam_entry::shape_size get_shape_size() const$/;"	kind:f	class:sprite	access:public	signature:() const
 sprite::get_shape_size_as_vec2	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline const vec2_u32& get_shape_size_as_vec2() const$/;"	kind:f	class:sprite	access:public	signature:() const
 sprite::get_shape_size_as_vec2_raw	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	vec2_u32 get_shape_size_as_vec2_raw() const$/;"	kind:p	class:sprite	access:protected	signature:() const
@@ -3358,7 +3356,7 @@ test_int_global	game_engine_stuff/game_manager_class.hpp	/^	static int test_int_
 test_int_global	game_engine_stuff/game_manager_class.thumb.cpp	/^int game_manager::test_int_global;$/;"	kind:m	class:game_manager	file:
 test_level	test_level/test_level.thumb.cpp	/^const level test_level = level$/;"	kind:v
 test_level_hpp	test_level/test_level.hpp	2;"	kind:d
-test_level_sublevel_0	test_level/test_level.thumb.cpp	/^const sublevel< 1939, 32, 32, 1, 2 > test_level_sublevel_0$/;"	kind:v
+test_level_sublevel_0	test_level/test_level.thumb.cpp	/^const sublevel< 1946, 32, 32, 7, 2 > test_level_sublevel_0$/;"	kind:v
 test_level_sublevel_1	test_level/test_level.thumb.cpp	/^const sublevel< 1937, 17, 16, 0, 0 > test_level_sublevel_1$/;"	kind:v
 test_sram_arr	game_engine_stuff/game_manager_class.hpp	/^	static u8 test_sram_arr[test_sram_arr_size] __attribute__((_sram));$/;"	kind:m	class:game_manager	access:public
 test_sram_arr	game_engine_stuff/game_manager_class.thumb.cpp	/^u8 game_manager::test_sram_arr[game_manager::test_sram_arr_size];$/;"	kind:m	class:game_manager	file:
