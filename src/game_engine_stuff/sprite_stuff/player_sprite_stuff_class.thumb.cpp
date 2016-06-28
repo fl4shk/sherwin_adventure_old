@@ -405,6 +405,7 @@ void player_sprite_stuff::update_part_2( sprite& the_player,
 		}
 	}
 	
+	//the_player.update_on_screen_pos(camera_pos);
 	
 	the_player.camera_follow_basic(camera_pos);
 	

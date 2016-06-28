@@ -233,11 +233,22 @@ public:		// functions
 		the_coll_box.pos = in_level_pos + cb_pos_offset;
 	}
 	
-	inline vec2_f24p8 get_on_screen_pos( const bg_point& camera_pos ) const
+	vec2_s32 get_on_screen_pos_s32( const bg_point& camera_pos ) const
+		__attribute__((_iwram_code));
+	
+	inline vec2_f24p8 get_on_screen_pos( const bg_point& camera_pos )
+		const
 	{
+		//vec2_f24p8 ret = in_level_pos - camera_pos;
 		vec2_f24p8 ret( in_level_pos.x 
 			- make_f24p8(camera_pos.x.trunc_to_int()), in_level_pos.y
 			- make_f24p8(camera_pos.y.trunc_to_int()) );
+		
+		//vec2_f24p8 ret( in_level_pos.x 
+		//	- make_f24p8(camera_pos.x.true_round_via_trunc()), 
+		//	in_level_pos.y 
+		//	- make_f24p8(camera_pos.y.true_round_via_trunc()) );
+		
 		
 		//ret.x = in_level_pos.x - make_f24p8(camera_pos.x.trunc_to_int());
 		////ret.y = in_level_pos.y - camera_pos.y;
