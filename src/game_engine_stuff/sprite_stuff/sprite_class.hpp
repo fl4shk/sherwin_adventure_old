@@ -128,10 +128,7 @@ public:		// functions
 		vram_chunk_index = s_vram_chunk_index;
 	}
 	
-	// One of the few destructors I've written in this code
-	virtual ~sprite();
-	
-	virtual void shared_constructor_and_destructor_code();
+	virtual void shared_constructor_code();
 	
 	void* operator new( size_t size, 
 		sprite_allocator& the_sprite_allocator )

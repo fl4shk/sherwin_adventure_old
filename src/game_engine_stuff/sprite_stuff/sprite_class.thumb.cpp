@@ -24,15 +24,11 @@
 
 sprite::sprite()
 {
-	shared_constructor_and_destructor_code();
+	shared_constructor_code();
 }
 
-sprite::~sprite()
-{
-	shared_constructor_and_destructor_code();
-}
 
-void sprite::shared_constructor_and_destructor_code()
+void sprite::shared_constructor_code()
 {
 	//the_sprite_type = st_player;
 	

@@ -58,22 +58,23 @@ std::array< sprite, sprite_manager::max_num_regular_sprites >
 
 sprite_allocator sprite_manager::the_player_secondary_sprites_allocator
 	( array_helper<sprite>
-	( the_allocatable_player_secondary_sprites.data(), 
-	the_allocatable_player_secondary_sprites.size() ) );
+	( sprite_manager::the_allocatable_player_secondary_sprites.data(), 
+	sprite_manager::the_allocatable_player_secondary_sprites.size() ) );
 
 sprite_allocator sprite_manager::the_secondary_sprites_allocator
-	( array_helper<sprite>( the_allocatable_secondary_sprites.data(), 
-	the_allocatable_secondary_sprites.size() ) );
+	( array_helper<sprite>
+	( sprite_manager::the_allocatable_secondary_sprites.data(), 
+	sprite_manager::the_allocatable_secondary_sprites.size() ) );
 
 sprite_allocator sprite_manager::the_sprites_allocator
-	( array_helper<sprite>( the_allocatable_sprites.data(),
-	the_allocatable_sprites.size() ) );
+	( array_helper<sprite>( sprite_manager::the_allocatable_sprites.data(),
+	sprite_manager::the_allocatable_sprites.size() ) );
 
 
 
 int sprite_manager::next_oam_index;
 
-void sprite_manager::reinit_sprite_with_sprite_ipg( sprite* the_sprite, 
+void sprite_manager::reinit_sprite_with_sprite_ipg( sprite*& the_sprite, 
 	sprite_allocator& the_sprite_allocator, 
 	sprite_init_param_group* s_the_sprite_ipg )
 {
@@ -115,7 +116,7 @@ void sprite_manager::reinit_sprite_with_sprite_ipg( sprite* the_sprite,
 	}
 }
 
-void sprite_manager::reinit_sprite_with_sprite_ipg( sprite* the_sprite, 
+void sprite_manager::reinit_sprite_with_sprite_ipg( sprite*& the_sprite, 
 	sprite_allocator& the_sprite_allocator, u32 s_vram_chunk_index, 
 	sprite_init_param_group* s_the_sprite_ipg )
 {
@@ -155,12 +156,13 @@ void sprite_manager::reinit_sprite_with_sprite_ipg( sprite* the_sprite,
 }
 
 
-void sprite_manager::reinit_sprite_by_spawning( sprite* the_sprite, 
+void sprite_manager::reinit_sprite_by_spawning( sprite*& the_sprite, 
 	sprite_allocator& the_sprite_allocator, sprite_type s_the_sprite_type, 
 	const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, 
 	bool facing_left )
 {
 	the_sprite_allocator.deallocate_sprite(the_sprite);
+	
 	the_sprite = new (the_sprite_allocator) sprite();
 	
 	//u32 old_vram_chunk_index = the_sprite->get_vram_chunk_index();
@@ -189,8 +191,8 @@ void sprite_manager::clear_the_sprite_arrays()
 	memfill32( the_player_secondary_sprites.data(), 0,
 		the_player_secondary_sprites.size() * sizeof(sprite*) 
 		/ sizeof(u32) );
-	memfill32( the_player_secondary_sprites.data(), 0,
-		the_player_secondary_sprites.size() * sizeof(sprite*) 
+	memfill32( the_secondary_sprites.data(), 0,
+		the_secondary_sprites.size() * sizeof(sprite*) 
 		/ sizeof(u32) );
 	memfill32( the_sprites.data(), 0, the_sprites.size() 
 		* sizeof(sprite*) / sizeof(u32) );

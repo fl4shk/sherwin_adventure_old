@@ -214,9 +214,9 @@ void sprite_manager::spawn_sprites_if_needed
 				//the_sprites[next_sprite_index].reinit_with_sprite_ipg
 				//	(&sprite_ipg);
 				
-				reinit_sprite_with_sprite_ipg
-					( the_sprites[next_sprite_index],
-					the_sprites_allocator, &sprite_ipg );
+				reinit_sprite_with_sprite_ipg( the_sprites
+					[next_sprite_index], the_sprites_allocator, 
+					&sprite_ipg );
 			}
 			
 			// If there isn't a free sprite slot, then stop trying to spawn
@@ -249,7 +249,7 @@ void sprite_manager::despawn_sprites_if_needed
 	//camera_pos_f24p8.y = make_f24p8(camera_pos.y);
 	
 	
-	auto for_loop_contents = [&]( sprite* spr, 
+	auto for_loop_contents = [&]( sprite*& spr, 
 		sprite_allocator& the_sprite_allocator ) -> void
 	{
 		//if ( spr.the_sprite_type != st_default )
@@ -276,6 +276,7 @@ void sprite_manager::despawn_sprites_if_needed
 		{
 			fixed24p8 spr_on_screen_pos_x = spr->in_level_pos.x 
 				- camera_pos.x;
+			
 			if ( !( spr_on_screen_pos_x.data >= max_left
 				&& spr_on_screen_pos_x.data <= max_right ) )
 			{
@@ -289,23 +290,33 @@ void sprite_manager::despawn_sprites_if_needed
 				}
 				
 				the_sprite_allocator.deallocate_sprite(spr);
+				//spr = NULL;
 			}
 			
 		}
 	};
 	
-	for ( sprite* spr : the_player_secondary_sprites )
+	//for ( sprite*& spr : the_player_secondary_sprites )
+	for ( u32 i=0; i<the_player_secondary_sprites.size(); ++i )
 	{
+		sprite*& spr = the_player_secondary_sprites[i];
+		
 		for_loop_contents( spr, the_player_secondary_sprites_allocator );
 	}
 	
-	for ( sprite* spr : the_secondary_sprites )
+	//for ( sprite*& spr : the_secondary_sprites )
+	for ( u32 i=0; i<the_secondary_sprites.size(); ++i )
 	{
+		sprite*& spr = the_secondary_sprites[i];
+		
 		for_loop_contents( spr, the_secondary_sprites_allocator );
 	}
 	
-	for ( sprite* spr : the_sprites )
+	//for ( sprite*& spr : the_sprites )
+	for ( u32 i=0; i<the_sprites.size(); ++i )
 	{
+		sprite*& spr = the_sprites[i];
+		
 		for_loop_contents( spr, the_sprites_allocator );
 	}
 	

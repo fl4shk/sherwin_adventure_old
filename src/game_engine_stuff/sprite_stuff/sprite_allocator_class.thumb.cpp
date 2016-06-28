@@ -39,30 +39,34 @@ void* sprite_allocator::allocate_sprite()
 	return NULL;
 }
 
-void sprite_allocator::deallocate_sprite( sprite* the_sprite )
+void sprite_allocator::deallocate_sprite( sprite*& the_sprite )
 {
 	if ( the_sprite == NULL )
 	{
 		return;
 	}
 	
-	for ( u32 i=0; i<get_size(); ++i )
-	{
-		sprite& curr_sprite = data_at(i);
-		
-		if ( the_sprite == &curr_sprite )
-		{
-			the_sprite->~sprite();
-			the_sprite = NULL;
-			
-			return;
-		}
-	}
+	the_sprite->the_sprite_type = st_default;
+	the_sprite = NULL;
+	
+	//for ( u32 i=0; i<get_size(); ++i )
+	//{
+	//	sprite& curr_sprite = data_at(i);
+	//	
+	//	if ( *the_sprite == &curr_sprite )
+	//	{
+	//		the_sprite->~sprite();
+	//		the_sprite = NULL;
+	//		
+	//		return;
+	//	}
+	//}
 	
 	
-	// No sprite found, so at least put something in the debug vars.
-	// cout or printf would be nice here.
-	next_debug_u32 = ( ( 'd' << 24 ) | ( 's' << 16 ) | ( 'p' << 8 )
-		| ( 'r' << 0 ) );
+	//// No sprite found, so at least put something in the debug vars.
+	//// cout or printf would be nice here.
+	//next_debug_u32 = ( ( 'd' << 24 ) | ( 's' << 16 ) | ( 'p' << 8 )
+	//	| ( 'r' << 0 ) );
 }
+
 
