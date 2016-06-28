@@ -191,12 +191,16 @@ void* sprite::operator new( size_t size,
 vec2_s32 sprite::get_on_screen_pos_s32( const bg_point& camera_pos ) 
 	const
 {
-	vec2_s32 ret( ( in_level_pos.x
-		- make_f24p8(camera_pos.x.trunc_to_int()) )
-		.true_round_via_trunc(),
-		( in_level_pos.y - make_f24p8(camera_pos.y.trunc_to_int()) )
-		.true_round_via_trunc() );
+	//vec2_s32 ret( ( in_level_pos.x
+	//	- make_f24p8(camera_pos.x.trunc_to_int()) )
+	//	.true_round_via_trunc(),
+	//	( in_level_pos.y - make_f24p8(camera_pos.y.trunc_to_int()) )
+	//	.true_round_via_trunc() );
 	
+	vec2_s32 ret( ( in_level_pos.x 
+		- make_f24p8(camera_pos.x.trunc_to_int()) ).trunc_to_int(),
+		( in_level_pos.y 
+		- make_f24p8(camera_pos.y.trunc_to_int()) ).trunc_to_int() );
 	
 	
 	return ret;
@@ -283,7 +287,7 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 	//if ( ( temp_on_screen_pos.x <= make_f24p8(100) && vel.x.data < 0 ) 
 	//	|| ( temp_on_screen_pos.x >= make_f24p8(140) && vel.x.data > 0 ) )
 	if ( ( temp_on_screen_pos.x <= 100 && vel.x.data < 0 )
-		&& ( temp_on_screen_pos.x >= 140 && vel.x.data > 0 ) )
+		|| ( temp_on_screen_pos.x >= 140 && vel.x.data > 0 ) )
 	{
 		////camera_pos.x += vel.x.trunc_to_int();
 		//
