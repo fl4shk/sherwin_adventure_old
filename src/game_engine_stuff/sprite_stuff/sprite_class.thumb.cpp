@@ -188,35 +188,11 @@ void* sprite::operator new( size_t size,
 //}
 
 
-vec2_s32 sprite::get_on_screen_pos_s32( const bg_point& camera_pos ) 
-	const
-{
-	//vec2_s32 ret( ( in_level_pos.x
-	//	- make_f24p8(camera_pos.x.trunc_to_int()) )
-	//	.true_round_via_trunc(),
-	//	( in_level_pos.y - make_f24p8(camera_pos.y.trunc_to_int()) )
-	//	.true_round_via_trunc() );
-	
-	//vec2_s32 ret( ( in_level_pos.x 
-	//	- make_f24p8(camera_pos.x.trunc_to_int()) ).trunc_to_int(),
-	//	( in_level_pos.y 
-	//	- make_f24p8(camera_pos.y.trunc_to_int()) ).trunc_to_int() );
-	
-	//vec2_s32 ret( in_level_pos.x.trunc_to_int() 
-	//	- camera_pos.x.trunc_to_int(), in_level_pos.y.trunc_to_int()
-	//	- camera_pos.y.trunc_to_int() );
-	vec2_s32 ret( ( in_level_pos.x - camera_pos.x ).true_round_via_trunc(),
-		( in_level_pos.y - camera_pos.y ).true_round_via_trunc() );
-	
-	return ret;
-}
-
-
 
 void sprite::update_on_screen_pos( const bg_point& camera_pos )
 {
-	//vec2_f24p8 temp_on_screen_pos = get_on_screen_pos(camera_pos);
-	vec2_s32 temp_on_screen_pos = get_on_screen_pos_s32(camera_pos);
+	vec2_f24p8 temp_on_screen_pos = get_on_screen_pos(camera_pos);
+	//vec2_s32 temp_on_screen_pos = get_on_screen_pos_s32(camera_pos);
 	
 	////if ( !did_update_prev_on_screen_pos_this_frame )
 	//{
@@ -239,22 +215,22 @@ void sprite::update_on_screen_pos( const bg_point& camera_pos )
 	//temp_on_screen_pos.y.data = in_level_pos.y.data - camera_pos.y.data;
 	
 	vec2_u32 ss_vec2 = get_shape_size_as_vec2();
-	//vec2_f24p8 offset( make_f24p8(ss_vec2.x), make_f24p8(ss_vec2.y) );
+	vec2_f24p8 offset( make_f24p8(ss_vec2.x), make_f24p8(ss_vec2.y) );
 	
 	// Check whether the sprite is on screen.
-	//if ( temp_on_screen_pos.x + offset.x >= (fixed24p8){0} 
-	//	&& temp_on_screen_pos.x <= make_f24p8(screen_width)
-	//	&& temp_on_screen_pos.y + offset.y >= (fixed24p8){0}
-	//	&& temp_on_screen_pos.y <= make_f24p8(screen_height) )
-	if ( temp_on_screen_pos.x + ss_vec2.x >= 0
-		&& temp_on_screen_pos.x <= (s32)screen_width
-		&& temp_on_screen_pos.y + ss_vec2.y >= 0
-		&& temp_on_screen_pos.y <= (s32)screen_height )
+	if ( temp_on_screen_pos.x + offset.x >= (fixed24p8){0} 
+		&& temp_on_screen_pos.x <= make_f24p8(screen_width)
+		&& temp_on_screen_pos.y + offset.y >= (fixed24p8){0}
+		&& temp_on_screen_pos.y <= make_f24p8(screen_height) )
+	//if ( temp_on_screen_pos.x + ss_vec2.x >= 0
+	//	&& temp_on_screen_pos.x <= (s32)screen_width
+	//	&& temp_on_screen_pos.y + ss_vec2.y >= 0
+	//	&& temp_on_screen_pos.y <= (s32)screen_height )
 	{
 		the_oam_entry.show_non_affine();
 		
-		the_oam_entry.set_x_coord(temp_on_screen_pos.x);
-		the_oam_entry.set_y_coord(temp_on_screen_pos.y);
+		the_oam_entry.set_x_coord(temp_on_screen_pos.x.round_to_int());
+		the_oam_entry.set_y_coord(temp_on_screen_pos.y.round_to_int());
 		//the_oam_entry.set_x_coord(temp_on_screen_pos.x + 1);
 		//the_oam_entry.set_y_coord(temp_on_screen_pos.y + 1);
 		
@@ -279,20 +255,20 @@ void sprite::update_on_screen_pos( const bg_point& camera_pos )
 
 void sprite::camera_follow_basic( bg_point& camera_pos )
 {
-	//vec2_f24p8 temp_on_screen_pos = get_on_screen_pos(camera_pos);
+	vec2_f24p8 temp_on_screen_pos = get_on_screen_pos(camera_pos);
 	
-	//fixed24p8 on_screen_bottom_pos = temp_on_screen_pos.y 
-	//	+ make_f24p8(get_shape_size_as_vec2().y);
+	fixed24p8 on_screen_bottom_pos = temp_on_screen_pos.y 
+		+ make_f24p8(get_shape_size_as_vec2().y);
 	
-	vec2_s32 temp_on_screen_pos = get_on_screen_pos_s32(camera_pos);
+	//vec2_s32 temp_on_screen_pos = get_on_screen_pos_s32(camera_pos);
+	//
+	//s32 on_screen_bottom_pos = temp_on_screen_pos.y 
+	//	+ get_shape_size_as_vec2().y;
 	
-	s32 on_screen_bottom_pos = temp_on_screen_pos.y 
-		+ get_shape_size_as_vec2().y;
-	
-	//if ( ( temp_on_screen_pos.x <= make_f24p8(100) && vel.x.data < 0 ) 
-	//	|| ( temp_on_screen_pos.x >= make_f24p8(140) && vel.x.data > 0 ) )
-	if ( ( temp_on_screen_pos.x <= 100 && vel.x.data < 0 )
-		|| ( temp_on_screen_pos.x >= 140 && vel.x.data > 0 ) )
+	if ( ( temp_on_screen_pos.x <= make_f24p8(100) && vel.x.data < 0 ) 
+		|| ( temp_on_screen_pos.x >= make_f24p8(140) && vel.x.data > 0 ) )
+	//if ( ( temp_on_screen_pos.x <= 100 && vel.x.data < 0 )
+	//	|| ( temp_on_screen_pos.x >= 140 && vel.x.data > 0 ) )
 	{
 		////camera_pos.x += vel.x.trunc_to_int();
 		//
@@ -339,13 +315,13 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 		}
 	};
 	
-	//if ( temp_on_screen_pos.y <= make_f24p8(20) )
-	if ( temp_on_screen_pos.y <= 20 )
+	if ( temp_on_screen_pos.y <= make_f24p8(20) )
+	//if ( temp_on_screen_pos.y <= 20 )
 	{
 		camera_pos_y_updater(false);
 	}
-	//else if ( on_screen_bottom_pos >= make_f24p8(60) )
-	else if ( on_screen_bottom_pos >= 60 )
+	else if ( on_screen_bottom_pos >= make_f24p8(60) )
+	//else if ( on_screen_bottom_pos >= 60 )
 	{
 		if ( vel.y >= (fixed24p8){0} )
 		{

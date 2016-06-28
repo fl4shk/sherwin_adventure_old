@@ -101,10 +101,13 @@ void gfx_manager::copy_bgofs_mirror_to_registers()
 		//reg_bgofs[i].x = (s16)bgofs_mirror[i].curr.x.trunc_to_int();
 		//reg_bgofs[i].y = (s16)bgofs_mirror[i].curr.y.trunc_to_int();
 		
-		reg_bgofs[i].x 
-			= (s16)bgofs_mirror[i].curr.x.true_round_via_trunc();
-		reg_bgofs[i].y 
-			= (s16)bgofs_mirror[i].curr.y.true_round_via_trunc();
+		reg_bgofs[i].x = (s16)bgofs_mirror[i].curr.x.round_to_int();
+		reg_bgofs[i].y = (s16)bgofs_mirror[i].curr.y.round_to_int();
+		
+		//reg_bgofs[i].x 
+		//	= (s16)bgofs_mirror[i].curr.x.true_round_via_trunc();
+		//reg_bgofs[i].y 
+		//	= (s16)bgofs_mirror[i].curr.y.true_round_via_trunc();
 	}
 	
 	
