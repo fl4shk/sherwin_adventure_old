@@ -22,6 +22,7 @@
 #include "sprite_type_stuff.hpp"
 #include "../level_stuff/sprite_level_data_stuff.hpp"
 
+#include "../../gfx/sherwin_gfx.h"
 
 class sprite_allocator;
 
@@ -39,6 +40,39 @@ protected:		// variables
 	// cases where vram_chunk_index would need to be changed, so
 	// set_vram_chunk_index() exists.
 	u32 vram_chunk_index;
+	
+public:		// constants
+	
+	//static constexpr fixed24p8 grav_acc = {0x80};
+	//static constexpr fixed24p8 grav_acc = {0x40};
+	//static constexpr fixed24p8 grav_acc = {0x60};
+	static constexpr fixed24p8 grav_acc = {0x50};
+	//static constexpr fixed24p8 max_y_vel = {0x400};
+	static constexpr fixed24p8 max_y_vel = {0x300};
+	//static constexpr fixed24p8 max_y_vel = {0x280};
+	
+	static constexpr sprite_palette_slot the_palette_slot = sps_player;
+	//static constexpr u32 the_relative_metatile_slot = 7,
+	//	num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
+	
+	static constexpr u32 the_relative_metatile_slot = 0,
+		num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
+	
+	static constexpr tile* tile_arr = const_cast<tile*>
+		(reinterpret_cast<const tile*>(sherwin_gfxTiles));
+	
+	static const oam_entry::shape_size the_initial_shape_size;
+	
+	static const vec2_f24p8 the_initial_coll_box_size,
+		the_initial_cb_pos_offset;
+	
+	// This is used to correct the initial in-level position for sprites
+	// that are normally considered to be of a certain size but that use
+	// larger graphics for some frames.  An example of this is the
+	// st_player sprite_type, which is normally considered to be a 16x32
+	// sprite but uses 32x32 graphics in some cases, like during the pickaxe
+	// swing animation.
+	static const vec2_f24p8 the_initial_in_level_pos_offset;
 	
 public:		// variables
 	
@@ -130,6 +164,21 @@ public:		// functions
 	
 	// Derived classes should override this function
 	virtual void shared_constructor_code();
+	
+	// This is the default form of shared_constructor_code().
+	virtual void shared_constructor_code( bool facing_left );
+	
+	// This form of shared_constructor_code() might eventually become the
+	// default form of shared_constructor_code().
+	virtual void shared_constructor_code( const vec2_f24p8& s_in_level_pos, 
+		const bg_point& camera_pos, bool facing_left );
+	
+	// This form of shared_constructor_code() is primarily intended to be
+	// used by the_player.
+	virtual void shared_constructor_code( const vec2_f24p8& s_in_level_pos, 
+		const vec2_u32& the_level_size_2d, bg_point& camera_pos,
+		bool facing_left=false );
+	
 	
 	void* operator new( size_t size, 
 		sprite_allocator& the_sprite_allocator )
@@ -256,13 +305,187 @@ public:		// functions
 		oam_mirror[slot_for_oam_mirror].attr2 = the_oam_entry.attr2;
 	}
 	
-	void block_collision_stuff() __attribute__((_iwram_code));
+	//void block_collision_stuff() __attribute__((_iwram_code));
+	
+	virtual const sprite_type get_sprite_type() const;
+	
+	inline virtual const tile* get_tile_arr() const
+	{
+		return tile_arr;
+	}
+	
+	virtual void set_initial_shape_size();
+	inline virtual const oam_entry::shape_size get_the_initial_shape_size() 
+		const
+	{
+		return the_initial_shape_size;
+	}
+	
+	virtual void set_initial_coll_box_stuff();
+	
+	inline virtual const vec2_f24p8& get_the_initial_coll_box_size() const
+	{
+		return the_initial_coll_box_size;
+	}
+	inline virtual const vec2_f24p8& get_the_initial_cb_pos_offset() const
+	{
+		return the_initial_cb_pos_offset;
+	}
+	
+	inline virtual const vec2_f24p8& get_the_initial_in_level_pos_offset()
+		const
+	{
+		return the_initial_in_level_pos_offset;
+	}
+	
+	
+	
+	//virtual void gfx_update();
+	void gfx_update();
+	
+	
+	virtual void update_part_1();
+	
+	
+	// The player_sprite_stuff class is the primary user of this function.
+	virtual void update_part_2( bg_point& camera_pos,
+		const vec2_u32& the_level_size_2d );
+	
+	virtual void update_part_2( const bg_point& camera_pos, 
+		int& next_oam_index );
+	
+	
+	
+	
+	// Graphics stuff
+	//virtual const u32 get_curr_tile_slot_old();
+	
+	const u32 get_curr_tile_slot();
+	
+	virtual const sprite_palette_slot get_palette_slot();
+	virtual const u32 get_curr_relative_tile_slot();
+	inline virtual const u32 get_num_active_gfx_tiles()
+	{
+		return num_active_gfx_tiles;
+	}
+	
+	// Physics and collision stuff
+	virtual void block_collision_stuff() __attribute__((_iwram_code));
+	
+	virtual void apply_gravity()
+		__attribute__((_iwram_code));
+	virtual void handle_jumping_stuff( u32 is_jump_key_hit, 
+		u32 is_jump_key_held ) __attribute__((_iwram_code));
+	
+	
+	// Sprite-sprite interaction stuff
+	virtual void sprite_interaction_reponse( sprite& the_other_sprite );
+	
+	// the_player is the primary user of this function
+	virtual void sprite_interaction_reponse( sprite& the_other_sprite, 
+		bg_point& camera_pos, const vec2_u32& the_level_size_2d );
 	
 	
 protected:		// functions
 	vec2_u32 get_shape_size_as_vec2_raw() const
 		__attribute__((_iwram_code));
 	
+	// Here are a lot of block collision functions.  It is recommended that
+	// they be stored in IWRAM for as much speed as possible.
+	void get_basic_block_coll_results_16x16
+		( coll_point_group& the_pt_group, 
+		block_coll_result& lt_coll_result,
+		block_coll_result& lb_coll_result,
+		block_coll_result& tl_coll_result,
+		block_coll_result& tm_coll_result,
+		block_coll_result& tr_coll_result,
+		block_coll_result& rt_coll_result,
+		block_coll_result& rb_coll_result,
+		block_coll_result& bl_coll_result,
+		block_coll_result& bm_coll_result,
+		block_coll_result& br_coll_result ) __attribute__((_iwram_code));
+	
+	void get_basic_block_coll_results_16x32
+		( coll_point_group& the_pt_group, 
+		block_coll_result& lt_coll_result, 
+		block_coll_result& lm_coll_result,
+		block_coll_result& lb_coll_result,
+		block_coll_result& tl_coll_result, 
+		block_coll_result& tm_coll_result,
+		block_coll_result& tr_coll_result,
+		block_coll_result& rt_coll_result,
+		block_coll_result& rm_coll_result,
+		block_coll_result& rb_coll_result,
+		block_coll_result& bl_coll_result, 
+		block_coll_result& bm_coll_result,
+		block_coll_result& br_coll_result ) __attribute__((_iwram_code));
+	
+	
+	virtual void block_coll_response_left_16x16
+		( const block_coll_result& lt_coll_result, 
+		const block_coll_result& lb_coll_result )
+		__attribute__((_iwram_code));
+	virtual void block_coll_response_top_16x16
+		( const block_coll_result& tl_coll_result,
+		const block_coll_result& tm_coll_result,
+		const block_coll_result& tr_coll_result )
+		__attribute__((_iwram_code));
+	virtual void block_coll_response_right_16x16
+		( const block_coll_result& rt_coll_result,
+		const block_coll_result& rb_coll_result )
+		__attribute__((_iwram_code));
+	virtual void non_slope_block_coll_response_bot_16x16
+		( const block_coll_result& bl_coll_result,
+		const block_coll_result& bm_coll_result, 
+		const block_coll_result& br_coll_result )
+		__attribute__((_iwram_code));
+	virtual block_type slope_block_coll_response_bot_16x16
+		( coll_point_group& the_pt_group,
+		block_coll_result& bl_coll_result,
+		block_coll_result& bm_coll_result,
+		block_coll_result& br_coll_result, bool hitting_tltr=false )
+		__attribute__((_iwram_code));
+	
+	
+	virtual void block_coll_response_left_16x32
+		( const block_coll_result& lt_coll_result,
+		const block_coll_result& lm_coll_result, 
+		const block_coll_result& lb_coll_result )
+		__attribute__((_iwram_code));
+	virtual void block_coll_response_top_16x32
+		( const block_coll_result& tl_coll_result,
+		const block_coll_result& tm_coll_result, 
+		const block_coll_result& tr_coll_result )
+		__attribute__((_iwram_code));
+	virtual void block_coll_response_right_16x32
+		( const block_coll_result& rt_coll_result,
+		const block_coll_result& rm_coll_result, 
+		const block_coll_result& rb_coll_result )
+		__attribute__((_iwram_code));
+	virtual void non_slope_block_coll_response_bot_16x32
+		( const block_coll_result& bl_coll_result,
+		const block_coll_result& bm_coll_result, 
+		const block_coll_result& br_coll_result )
+		__attribute__((_iwram_code));
+	virtual block_type slope_block_coll_response_bot_16x32
+		( coll_point_group& the_pt_group,
+		block_coll_result& bl_coll_result,
+		block_coll_result& bm_coll_result,
+		block_coll_result& br_coll_result, bool hitting_tltr=false )
+		__attribute__((_iwram_code));
+	
+	
+	// Regular block collision stuff
+	virtual void block_collision_stuff_16x16();
+	virtual void block_collision_stuff_16x32();
+	virtual void block_collision_stuff_32x16();
+	virtual void block_collision_stuff_32x32();
+	
+	// Block collision stuff with just strongly hit response 
+	virtual void block_collision_stuff_strongly_hit_stuff_only_16x16();
+	virtual void block_collision_stuff_strongly_hit_stuff_only_16x32();
+	virtual void block_collision_stuff_strongly_hit_stuff_only_32x16();
+	virtual void block_collision_stuff_strongly_hit_stuff_only_32x32();
 	
 } __attribute__((_align4));
 
