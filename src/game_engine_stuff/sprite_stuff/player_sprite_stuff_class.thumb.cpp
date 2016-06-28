@@ -26,6 +26,8 @@
 
 #include "../gfx_manager_class.hpp"
 
+#include "sprite_allocator_class.hpp"
+
 //fixed24p8 player_sprite_stuff::speed;
 bool player_sprite_stuff::use_16x16;
 bool player_sprite_stuff::run_toggle;
@@ -647,15 +649,19 @@ void player_sprite_stuff::update_the_pickaxe( sprite& the_player )
 		return;
 	}
 	
-	sprite& the_pickaxe = *sprite_manager::the_player_secondary_sprites
+	sprite*& the_pickaxe_ptr = sprite_manager::the_player_secondary_sprites
 		[pickaxe_sprite_slot];
+	sprite& the_pickaxe = *the_pickaxe_ptr;
 	u32& the_pickaxe_frame_slot = the_pickaxe.misc_data_u
 		[player_pickaxe_sprite_stuff::udi_curr_frame_slot];
 	
 	if (!swinging_pickaxe)
 	{
-		// Despawn the pickaxe if the_player is no longer swinging it.
-		the_pickaxe.the_sprite_type = st_default;
+		//// Despawn the pickaxe if the_player is no longer swinging it.
+		//the_pickaxe.the_sprite_type = st_default;
+		
+		sprite_manager::the_player_secondary_sprites_allocator
+			.deallocate_sprite(the_pickaxe_ptr);
 		
 		pickaxe_sprite_slot = -1;
 	}
