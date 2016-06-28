@@ -128,6 +128,7 @@ public:		// functions
 		vram_chunk_index = s_vram_chunk_index;
 	}
 	
+	// Derived classes should override this function
 	virtual void shared_constructor_code();
 	
 	void* operator new( size_t size, 

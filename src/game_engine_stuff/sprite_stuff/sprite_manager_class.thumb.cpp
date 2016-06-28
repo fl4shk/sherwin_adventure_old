@@ -41,34 +41,62 @@ std::array< sprite*, sprite_manager::max_num_regular_sprites >
 
 
 
+//// An array of player secondary sprites to allocate from
+//std::array< sprite, sprite_manager::max_num_player_secondary_sprites > 
+//	sprite_manager::the_allocatable_player_secondary_sprites;
+//
+//// An array of secondary sprites to allocate from, other than the ones
+//// used by the_player 
+//std::array< sprite, sprite_manager::max_num_secondary_sprites > 
+//	sprite_manager::the_allocatable_secondary_sprites;
+//
+//// The array of REGULAR active sprites, not counting the_player.
+//std::array< sprite, sprite_manager::max_num_regular_sprites > 
+//	sprite_manager::the_allocatable_sprites;
+
+//sprite_allocator sprite_manager::the_player_secondary_sprites_allocator
+//	( array_helper<sprite>
+//	( sprite_manager::the_allocatable_player_secondary_sprites.data(), 
+//	sprite_manager::the_allocatable_player_secondary_sprites.size() ) );
+//
+//sprite_allocator sprite_manager::the_secondary_sprites_allocator
+//	( array_helper<sprite>
+//	( sprite_manager::the_allocatable_secondary_sprites.data(), 
+//	sprite_manager::the_allocatable_secondary_sprites.size() ) );
+//
+//sprite_allocator sprite_manager::the_sprites_allocator
+//	( array_helper<sprite>( sprite_manager::the_allocatable_sprites.data(),
+//	sprite_manager::the_allocatable_sprites.size() ) );
+
+
+// Temporarily use regular arrays to make debugging easier.
 // An array of player secondary sprites to allocate from
-std::array< sprite, sprite_manager::max_num_player_secondary_sprites > 
-	sprite_manager::the_allocatable_player_secondary_sprites;
+sprite sprite_manager::the_allocatable_player_secondary_sprites
+	[sprite_manager::max_num_player_secondary_sprites];
 
 // An array of secondary sprites to allocate from, other than the ones
 // used by the_player 
-std::array< sprite, sprite_manager::max_num_secondary_sprites > 
-	sprite_manager::the_allocatable_secondary_sprites;
+sprite sprite_manager::the_allocatable_secondary_sprites
+	[sprite_manager::max_num_secondary_sprites];
 
 // The array of REGULAR active sprites, not counting the_player.
-std::array< sprite, sprite_manager::max_num_regular_sprites > 
-	sprite_manager::the_allocatable_sprites;
-
+sprite sprite_manager::the_allocatable_sprites
+	[sprite_manager::max_num_regular_sprites];
 
 
 sprite_allocator sprite_manager::the_player_secondary_sprites_allocator
 	( array_helper<sprite>
-	( sprite_manager::the_allocatable_player_secondary_sprites.data(), 
-	sprite_manager::the_allocatable_player_secondary_sprites.size() ) );
+	( sprite_manager::the_allocatable_player_secondary_sprites, 
+	sprite_manager::max_num_player_secondary_sprites ) );
 
 sprite_allocator sprite_manager::the_secondary_sprites_allocator
 	( array_helper<sprite>
-	( sprite_manager::the_allocatable_secondary_sprites.data(), 
-	sprite_manager::the_allocatable_secondary_sprites.size() ) );
+	( sprite_manager::the_allocatable_secondary_sprites, 
+	sprite_manager::max_num_secondary_sprites ) );
 
 sprite_allocator sprite_manager::the_sprites_allocator
-	( array_helper<sprite>( sprite_manager::the_allocatable_sprites.data(),
-	sprite_manager::the_allocatable_sprites.size() ) );
+	( array_helper<sprite>( sprite_manager::the_allocatable_sprites,
+	sprite_manager::max_num_regular_sprites ) );
 
 
 
@@ -78,11 +106,12 @@ void sprite_manager::reinit_sprite_with_sprite_ipg( sprite*& the_sprite,
 	sprite_allocator& the_sprite_allocator, 
 	sprite_init_param_group* s_the_sprite_ipg )
 {
+	//u32 old_vram_chunk_index = the_sprite->get_vram_chunk_index();
+	
 	the_sprite_allocator.deallocate_sprite(the_sprite);
 	
 	the_sprite = new (the_sprite_allocator) sprite();
 	
-	u32 old_vram_chunk_index = the_sprite->get_vram_chunk_index();
 	
 	switch ( s_the_sprite_ipg->spawn_state )
 	{
@@ -105,7 +134,7 @@ void sprite_manager::reinit_sprite_with_sprite_ipg( sprite*& the_sprite,
 				->init( *the_sprite,
 				!the_sprite->the_sprite_ipg->facing_right );
 			
-			the_sprite->set_vram_chunk_index(old_vram_chunk_index);
+			//the_sprite->set_vram_chunk_index(old_vram_chunk_index);
 			break;
 			
 		case sss_active:
@@ -192,21 +221,28 @@ void sprite_manager::clear_the_sprite_arrays()
 		the_player_secondary_sprites.size() * sizeof(sprite*) 
 		/ sizeof(u32) );
 	memfill32( the_secondary_sprites.data(), 0,
-		the_secondary_sprites.size() * sizeof(sprite*) 
+		the_secondary_sprites.size() * sizeof(sprite*) / sizeof(u32) );
+	memfill32( the_sprites.data(), 0, the_sprites.size() * sizeof(sprite*) 
 		/ sizeof(u32) );
-	memfill32( the_sprites.data(), 0, the_sprites.size() 
-		* sizeof(sprite*) / sizeof(u32) );
 	
 	
-	memfill32( the_allocatable_player_secondary_sprites.data(), 0,
-		the_allocatable_player_secondary_sprites.size() 
+	//memfill32( the_allocatable_player_secondary_sprites.data(), 0,
+	//	the_allocatable_player_secondary_sprites.size() 
+	//	* sizeof(sprite) / sizeof(u32) );
+	//memfill32( the_allocatable_secondary_sprites.data(), 0,
+	//	the_allocatable_secondary_sprites.size() * sizeof(sprite) 
+	//	/ sizeof(u32) );
+	//memfill32( the_allocatable_sprites.data(), 0, 
+	//	the_allocatable_sprites.size() * sizeof(sprite) 
+	//	/ sizeof(u32) );
+	
+	
+	memfill32( the_allocatable_player_secondary_sprites, 0,
+		max_num_player_secondary_sprites * sizeof(sprite) / sizeof(u32) );
+	memfill32( the_allocatable_secondary_sprites, 0,
+		max_num_secondary_sprites * sizeof(sprite) / sizeof(u32) );
+	memfill32( the_allocatable_sprites, 0, max_num_regular_sprites 
 		* sizeof(sprite) / sizeof(u32) );
-	memfill32( the_allocatable_player_secondary_sprites.data(), 0,
-		the_allocatable_player_secondary_sprites.size() 
-		* sizeof(sprite) / sizeof(u32) );
-	memfill32( the_allocatable_sprites.data(), 0, 
-		the_allocatable_sprites.size() * sizeof(sprite) 
-		/ sizeof(u32) );
 }
 
 void sprite_manager::init_horiz_sublevel_sprite_ipg_lists

@@ -46,7 +46,20 @@ void sprite_allocator::deallocate_sprite( sprite*& the_sprite )
 		return;
 	}
 	
+	
 	the_sprite->the_sprite_type = st_default;
+	
+	//u32 old_vram_chunk_index = the_sprite->get_vram_chunk_index();
+	//
+	//memfill32( the_sprite, 0, sizeof(sprite) / sizeof(u32) );
+	//
+	//the_sprite->the_oam_entry.set_tile_number(0);
+	//the_sprite->the_oam_entry.set_pal_number(sps_player);
+	//*the_sprite = sprite();
+	//the_sprite->shared_constructor_code();
+	//*the_sprite = sprite(the_sprite->get_vram_chunk_index());
+	
+	
 	the_sprite = NULL;
 	
 	//for ( u32 i=0; i<get_size(); ++i )

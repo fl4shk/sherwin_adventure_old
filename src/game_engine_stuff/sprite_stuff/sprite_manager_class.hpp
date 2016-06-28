@@ -68,19 +68,32 @@ public:		// variables
 	
 	
 	
+	//// An array of player secondary sprites to allocate from
+	//static std::array< sprite, max_num_player_secondary_sprites > 
+	//	the_allocatable_player_secondary_sprites;
+	//
+	//// An array of secondary sprites to allocate from, other than the ones
+	//// used by the_player 
+	//static std::array< sprite, max_num_secondary_sprites > 
+	//	the_allocatable_secondary_sprites;
+	//
+	//// The array of REGULAR active sprites, not counting the_player.
+	//static std::array< sprite, max_num_regular_sprites > 
+	//	the_allocatable_sprites;
+	
+	
+	// Temporarily use regular arrays to make debugging easier.
 	// An array of player secondary sprites to allocate from
-	static std::array< sprite, max_num_player_secondary_sprites > 
-		the_allocatable_player_secondary_sprites;
+	static sprite the_allocatable_player_secondary_sprites
+		[max_num_player_secondary_sprites];
 	
 	// An array of secondary sprites to allocate from, other than the ones
 	// used by the_player 
-	static std::array< sprite, max_num_secondary_sprites > 
-		the_allocatable_secondary_sprites;
+	static sprite the_allocatable_secondary_sprites
+		[max_num_secondary_sprites];
 	
 	// The array of REGULAR active sprites, not counting the_player.
-	static std::array< sprite, max_num_regular_sprites > 
-		the_allocatable_sprites;
-	
+	static sprite the_allocatable_sprites[max_num_regular_sprites];
 	
 	// The sprite_allocator's
 	static sprite_allocator the_player_secondary_sprites_allocator,

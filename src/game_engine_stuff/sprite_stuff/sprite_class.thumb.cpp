@@ -50,20 +50,49 @@ void sprite::shared_constructor_code()
 	//memfill32( misc_data_u, 0, misc_data_size );
 	//memfill32( misc_data_s, 0, misc_data_size );
 	
-	u32 old_vram_chunk_index = vram_chunk_index;
 	
-	memfill32( this, 0, sizeof(sprite) / sizeof(u32) );
+	
+	//u32 old_vram_chunk_index = vram_chunk_index;
+	
+	// uh-oh, it looks like this overwrites the vtable for the sprite!
+	//memfill32( this, 0, sizeof(sprite) / sizeof(u32) );
+	
+	the_sprite_type = st_default;
+	the_sprite_ipg = NULL;
+	
+	memfill32( &the_oam_entry, 0, sizeof(oam_entry) / sizeof(u32) );
 	
 	the_oam_entry.set_tile_number(0);
 	the_oam_entry.set_pal_number(sps_player);
 	
 	set_shape_size(oam_entry::ss_16x16);
-	the_coll_box.size = { 14 << fixed24p8::shift, 
-		14 << fixed24p8::shift };
-	cb_pos_offset = { 1 << fixed24p8::shift, 1 << fixed24p8::shift };
 	
-	vram_chunk_index = old_vram_chunk_index;
+	
+	//in_level_pos = vec2_f24p8( (fixed24p8){0}, (fixed24p8){0} );
+	//vel = vec2_f24p8( (fixed24p8){0}, (fixed24p8){0} );
+	
+	memfill32( &in_level_pos, 0, sizeof(in_level_pos) + sizeof(vel) 
+		/ sizeof(u32) );
+	
+	max_vel_x_abs_val = {0};
+	accel_x = {0};
+	
+	
+	the_coll_box.size = { 14 << fixed24p8::shift, 14 << fixed24p8::shift };
+	cb_pos_offset = { 1 << fixed24p8::shift, 1 << fixed24p8::shift };
+	the_coll_box.pos = in_level_pos + cb_pos_offset;
+	
+	on_ground = false;
+	is_jumping = false;
+	
+	invin_frame_timer = 0;
+	
+	memfill32( misc_data_u, 0, misc_data_size );
+	memfill32( misc_data_s, 0, misc_data_size );
+	
+	//vram_chunk_index = old_vram_chunk_index;
 }
+
 
 void* sprite::operator new( size_t size, 
 	sprite_allocator& the_sprite_allocator )
