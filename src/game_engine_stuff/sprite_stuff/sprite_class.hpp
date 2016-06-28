@@ -240,38 +240,6 @@ public:		// functions
 		const
 	{
 		vec2_f24p8 ret = in_level_pos - camera_pos;
-		//vec2_f24p8 ret( in_level_pos.x 
-		//	- make_f24p8(camera_pos.x.trunc_to_int()), in_level_pos.y
-		//	- make_f24p8(camera_pos.y.trunc_to_int()) );
-		
-		//vec2_f24p8 ret( in_level_pos.x 
-		//	- make_f24p8(camera_pos.x.true_round_via_trunc()), 
-		//	in_level_pos.y 
-		//	- make_f24p8(camera_pos.y.true_round_via_trunc()) );
-		
-		
-		//ret.x = in_level_pos.x - make_f24p8(camera_pos.x.trunc_to_int());
-		////ret.y = in_level_pos.y - camera_pos.y;
-		//ret.y = in_level_pos.y - make_f24p8(camera_pos.y.trunc_to_int());
-		
-		////ret.x = ( in_level_pos.x - make_f24p8(camera_pos.x) );
-		////ret.y = ( in_level_pos.y - make_f24p8(camera_pos.y) );
-		//
-		//ret = in_level_pos - camera_pos;
-		//
-		////ret.x.data = in_level_pos.x.data - camera_pos.x.data;
-		////ret.y.data = in_level_pos.y.data - camera_pos.y.data;
-		//
-		//
-		////ret.x = ( in_level_pos.x 
-		////	- make_f24p8(camera_pos.x.true_round_via_trunc()) );
-		////ret.y = ( in_level_pos.y 
-		////	- make_f24p8(camera_pos.y.true_round_via_trunc()) );
-		//
-		////ret.x = ( in_level_pos.x 
-		////	- make_f24p8(camera_pos.x.trunc_to_int()) );
-		////ret.y = ( in_level_pos.y 
-		////	- make_f24p8(camera_pos.y.trunc_to_int()) );
 		
 		return ret;
 	}

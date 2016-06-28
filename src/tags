@@ -98,38 +98,38 @@ X	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.thumb.cpp	729;"	kind:d	
 X	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.thumb.cpp	737;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.thumb.cpp	752;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/sprite_base_stuff_class.thumb.cpp	760;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1003;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1006;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1009;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1014;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1010;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1018;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1030;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1038;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1053;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1061;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	509;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	517;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	529;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	537;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	621;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	624;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	630;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	466;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	474;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	486;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	494;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	578;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	581;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	587;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	593;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	597;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	601;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	604;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	607;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	612;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	616;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	628;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	636;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	640;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	644;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	647;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	650;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	655;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	651;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	659;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	671;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	679;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	694;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	702;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	980;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	983;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	989;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	937;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	940;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	946;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	952;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	956;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	960;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	963;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	966;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	971;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	975;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	987;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	995;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	999;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/sprite_type_stuff.hpp	130;"	kind:d
 X	game_engine_stuff/sprite_stuff/sprite_type_stuff.hpp	133;"	kind:d
 X	game_engine_stuff/sprite_stuff/sprite_type_stuff.thumb.cpp	24;"	kind:d	file:
@@ -1164,10 +1164,6 @@ fixed24p8::operator fixed8p8	game_engine_stuff/fixed_classes.hpp	/^inline fixed2
 fixed24p8::round_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s32 round_to_int() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
 fixed24p8::round_to_int	game_engine_stuff/fixed_classes.hpp	/^inline s32 fixed24p8::round_to_int() const$/;"	kind:f	class:fixed24p8	signature:() const
 fixed24p8::shift	game_engine_stuff/fixed_classes.hpp	/^	static const u32 shift = 8;$/;"	kind:m	class:fixed24p8	access:public
-fixed24p8::true_round_via_trunc	game_engine_stuff/fixed_classes.hpp	/^	inline s32 true_round_via_trunc() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
-fixed24p8::true_round_via_trunc	game_engine_stuff/fixed_classes.hpp	/^inline s32 fixed24p8::true_round_via_trunc() const$/;"	kind:f	class:fixed24p8	signature:() const
-fixed24p8::true_round_via_trunc_s16	game_engine_stuff/fixed_classes.hpp	/^	inline s16 true_round_via_trunc_s16() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
-fixed24p8::true_round_via_trunc_s16	game_engine_stuff/fixed_classes.hpp	/^inline s16 fixed24p8::true_round_via_trunc_s16() const$/;"	kind:f	class:fixed24p8	signature:() const
 fixed24p8::trunc_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s32 trunc_to_int() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
 fixed24p8::trunc_to_int	game_engine_stuff/fixed_classes.hpp	/^inline s32 fixed24p8::trunc_to_int() const$/;"	kind:f	class:fixed24p8	signature:() const
 fixed8p8	game_engine_stuff/fixed_classes.hpp	/^class fixed8p8$/;"	kind:c
@@ -3784,10 +3780,6 @@ top	game_engine_stuff/coll_box_class.hpp	/^	inline fixed24p8 top() const$/;"	kin
 total_coll_points	game_engine_stuff/coll_point_group_class.hpp	/^	static const u32 total_coll_points = 32;$/;"	kind:m	class:coll_point_group	access:public
 trig_lut_fixed_shift	game_engine_stuff/trigonometry_funcs.hpp	/^static const u32 trig_lut_fixed_shift = 12;$/;"	kind:v
 trigonometry_funcs_hpp	game_engine_stuff/trigonometry_funcs.hpp	20;"	kind:d
-true_round_via_trunc	game_engine_stuff/fixed_classes.hpp	/^	inline s32 true_round_via_trunc() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
-true_round_via_trunc	game_engine_stuff/fixed_classes.hpp	/^inline s32 fixed24p8::true_round_via_trunc() const$/;"	kind:f	class:fixed24p8	signature:() const
-true_round_via_trunc_s16	game_engine_stuff/fixed_classes.hpp	/^	inline s16 true_round_via_trunc_s16() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
-true_round_via_trunc_s16	game_engine_stuff/fixed_classes.hpp	/^inline s16 fixed24p8::true_round_via_trunc_s16() const$/;"	kind:f	class:fixed24p8	signature:() const
 trunc_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s16 trunc_to_int() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
 trunc_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s32 trunc_to_int() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
 trunc_to_int	game_engine_stuff/fixed_classes.hpp	/^inline s16 fixed8p8::trunc_to_int() const$/;"	kind:f	class:fixed8p8	signature:() const

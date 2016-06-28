@@ -53,9 +53,9 @@ public:		// functions
 	// truncating the fraction bits
 	inline s32 trunc_to_int() const;
 	
-	inline s32 true_round_via_trunc() const;
-	
-	inline s16 true_round_via_trunc_s16() const;
+	//inline s32 true_round_via_trunc() const;
+	//
+	//inline s16 true_round_via_trunc_s16() const;
 	
 	
 	inline u8 get_frac_bits() const;
@@ -138,29 +138,29 @@ inline s32 fixed24p8::trunc_to_int() const
 	}
 }
 
-inline s32 fixed24p8::true_round_via_trunc() const
-{
-	if ( get_frac_bits() >= 0x80 )
-	{
-		return trunc_to_int() + 1;
-	}
-	else
-	{
-		return trunc_to_int();
-	}
-}
-
-inline s16 fixed24p8::true_round_via_trunc_s16() const
-{
-	if ( get_frac_bits() >= 0x80 )
-	{
-		return (s16)( trunc_to_int() + 1 );
-	}
-	else
-	{
-		return (s16)(trunc_to_int());
-	}
-}
+//inline s32 fixed24p8::true_round_via_trunc() const
+//{
+//	if ( get_frac_bits() >= 0x80 )
+//	{
+//		return trunc_to_int() + 1;
+//	}
+//	else
+//	{
+//		return trunc_to_int();
+//	}
+//}
+//
+//inline s16 fixed24p8::true_round_via_trunc_s16() const
+//{
+//	if ( get_frac_bits() >= 0x80 )
+//	{
+//		return (s16)( trunc_to_int() + 1 );
+//	}
+//	else
+//	{
+//		return (s16)(trunc_to_int());
+//	}
+//}
 
 
 inline u8 fixed24p8::get_frac_bits() const
