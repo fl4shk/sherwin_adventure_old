@@ -41,6 +41,8 @@ public:		// variables
 	
 	static constexpr u32 max_num_secondary_sprites = 10;
 	
+	static constexpr u32 max_num_player_sprites = 1;
+	
 	//static constexpr u32 max_num_regular_sprites = 40;
 	static constexpr u32 max_num_regular_sprites = 30;
 	//static constexpr u32 max_num_regular_sprites = 20;
@@ -57,10 +59,7 @@ public:		// variables
 	static std::array< sprite*, max_num_secondary_sprites > 
 		the_secondary_sprites;
 	
-	// This version of the_player should eventually be replaced with an
-	// instance of a future class called "player_sprite".
-	static sprite the_player;
-	//static player_sprite the_player;
+	static sprite* the_player;
 	
 	// The array of pointers to REGULAR active sprites, not counting
 	// the_player.
@@ -92,12 +91,17 @@ public:		// variables
 	static sprite the_allocatable_secondary_sprites
 		[max_num_secondary_sprites];
 	
+	// An array of a single player to allocate from
+	static sprite the_allocatable_player[max_num_player_sprites];
+	
 	// The array of REGULAR active sprites, not counting the_player.
 	static sprite the_allocatable_sprites[max_num_regular_sprites];
 	
-	// The sprite_allocator's
+	
+	// The sprite_allocators
 	static sprite_allocator the_player_secondary_sprites_allocator,
-		the_secondary_sprites_allocator, the_sprites_allocator;
+		the_secondary_sprites_allocator, the_player_sprite_allocator, 
+		the_sprites_allocator;
 	
 	
 	//static constexpr u32 the_player_vram_chunk_index = 1;
@@ -148,15 +152,18 @@ public:		// functions
 	
 	static void allocate_sprite( sprite*& the_sprite, 
 		sprite_allocator& the_sprite_allocator, 
-		sprite_type the_sprite_type, bool facing_left );
+		sprite_type the_sprite_type, bool facing_left )
+		__attribute__((_iwram_code));
 	static void allocate_sprite( sprite*& the_sprite, 
 		sprite_allocator& the_sprite_allocator, 
 		sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos,
-		const bg_point& camera_pos, bool facing_left );
+		const bg_point& camera_pos, bool facing_left )
+		__attribute__((_iwram_code));
 	
 	static void reinit_sprite_with_sprite_ipg( sprite*& the_sprite, 
 		sprite_allocator& the_sprite_allocator, 
-		sprite_init_param_group* s_the_sprite_ipg );
+		sprite_init_param_group* s_the_sprite_ipg )
+		__attribute__((_iwram_code));
 	//static void reinit_sprite_with_sprite_ipg( sprite*& the_sprite, 
 	//	sprite_allocator& the_sprite_allocator, u32 s_vram_chunk_index, 
 	//	sprite_init_param_group* s_the_sprite_ipg );
@@ -164,7 +171,8 @@ public:		// functions
 	static void reinit_sprite_by_spawning( sprite*& the_sprite, 
 		sprite_allocator& the_sprite_allocator,
 		sprite_type s_the_sprite_type, const vec2_f24p8& s_in_level_pos, 
-		const bg_point& camera_pos, bool facing_left=true );
+		const bg_point& camera_pos, bool facing_left=true )
+		__attribute__((_iwram_code));
 	
 	
 	
@@ -250,7 +258,7 @@ public:		// functions
 		memfill32( &(((tile*)obj_tile_vram)[0]), 0, sizeof(tile)
 			* gfx_manager::num_tiles_in_ss_32x32 / sizeof(u32) );
 		
-		gfx_manager::upload_sprite_tiles_to_vram(the_player);
+		gfx_manager::upload_sprite_tiles_to_vram(*the_player);
 		
 		auto for_loop_contents = [&]( sprite* spr ) -> void
 		{

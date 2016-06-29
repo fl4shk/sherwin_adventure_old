@@ -140,9 +140,53 @@ const vec2_f24p8 player_sprite::the_initial_in_level_pos_offset
 //const vec2_f24p8 player_sprite::the_initial_in_level_pos_offset
 //	= { {8 << fixed24p8::shift}, {0 << fixed24p8::shift} };
 
-void player_sprite::shared_constructor_code_part_1()
+player_sprite::player_sprite()
 {
-	sprite::shared_constructor_code_part_1();
+	shared_constructor_code_part_1();
+	sprite::shared_constructor_code_part_2(false);
+	shared_constructor_code_part_3();
+}
+player_sprite::player_sprite( const vec2_f24p8& s_in_level_pos, 
+	const vec2_u32& the_level_size_2d, bg_point& camera_pos,
+	bool facing_left )
+{
+	shared_constructor_code_part_1();
+	shared_constructor_code_part_2( s_in_level_pos, the_level_size_2d, 
+		camera_pos, facing_left );
+	shared_constructor_code_part_3();
+}
+
+
+//void player_sprite::shared_constructor_code_part_2( bool facing_left )
+//{
+//	sprite::shared_constructor_code_part_2(facing_left);
+//}
+
+void player_sprite::shared_constructor_code_part_2
+	( const vec2_f24p8& s_in_level_pos, const vec2_u32& the_level_size_2d,
+	bg_point& camera_pos, bool facing_left )
+{
+	sprite::shared_constructor_code_part_2(facing_left);
+	
+	in_level_pos = s_in_level_pos - get_the_initial_in_level_pos_offset();
+	update_f24p8_positions();
+	update_on_screen_pos(camera_pos);
+	
+	center_camera_almost(camera_pos);
+	active_level_manager::correct_bg0_scroll_mirror(the_level_size_2d);
+	update_on_screen_pos(camera_pos);
+	copy_the_oam_entry_to_oam_mirror
+		(sprite_manager::the_player_oam_index);
+	
+	clear_and_set_bits( the_oam_entry.attr2, obj_attr2_prio_mask, 
+		obj_attr2_prio_1 );
+}
+
+void player_sprite::shared_constructor_code_part_3()
+{
+	//sprite::shared_constructor_code_part_1();
+	
+	//the_sprite_type = get_const_sprite_type();
 	
 	// This is for slope testing stuffs
 	//set_shape_size(oam_entry::ss_16x16);
@@ -160,31 +204,6 @@ void player_sprite::shared_constructor_code_part_1()
 	
 	max_vel_x_abs_val = max_run_speed;
 }
-
-//void player_sprite::shared_constructor_code_part_2( bool facing_left )
-//{
-//	sprite::shared_constructor_code_part_2(facing_left);
-//}
-
-void player_sprite::shared_constructor_code_part_2
-	( const vec2_f24p8& s_in_level_pos, const vec2_u32& the_level_size_2d,
-	bg_point& camera_pos, bool facing_left )
-{
-	//sprite_stuff_array[the_sprite_type]->init();
-	
-	sprite::shared_constructor_code_part_2(facing_left);
-	
-	
-	center_camera_almost(camera_pos);
-	active_level_manager::correct_bg0_scroll_mirror(the_level_size_2d);
-	update_on_screen_pos(camera_pos);
-	copy_the_oam_entry_to_oam_mirror
-		(sprite_manager::the_player_oam_index);
-	
-	clear_and_set_bits( the_oam_entry.attr2, obj_attr2_prio_mask, 
-		obj_attr2_prio_1 );
-}
-
 
 //void player_sprite::gfx_update()
 //{

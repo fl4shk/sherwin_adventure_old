@@ -436,7 +436,7 @@ void sprite_manager::update_all_sprites
 {
 	//sprite_stuff_array[the_player.the_sprite_type]->update_part_1
 	//	(the_player);
-	the_player.update_part_1();
+	the_player->update_part_1();
 	
 	
 	u32 num_active_player_secondary_sprites = 0, num_active_sprites = 0, 
@@ -547,7 +547,7 @@ void sprite_manager::update_all_sprites
 	
 	//sprite_stuff_array[the_player.the_sprite_type]->update_part_2
 	//	( the_player, camera_pos_pc_pair.curr, the_sublevel_size_2d );
-	the_player.update_part_2( camera_pos_pc_pair.curr,
+	the_player->update_part_2( camera_pos_pc_pair.curr,
 		the_sublevel_size_2d );
 	
 	auto two_sprites_coll_box_test_thing = []( sprite& the_spr,

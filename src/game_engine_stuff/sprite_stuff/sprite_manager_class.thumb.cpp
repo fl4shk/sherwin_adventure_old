@@ -35,7 +35,7 @@ std::array< sprite*, sprite_manager::max_num_player_secondary_sprites >
 std::array< sprite*, sprite_manager::max_num_secondary_sprites >
 	sprite_manager::the_secondary_sprites;
 
-sprite sprite_manager::the_player;
+sprite* sprite_manager::the_player;
 
 std::array< sprite*, sprite_manager::max_num_regular_sprites > 
 	sprite_manager::the_sprites;
@@ -80,9 +80,13 @@ sprite sprite_manager::the_allocatable_player_secondary_sprites
 sprite sprite_manager::the_allocatable_secondary_sprites
 	[sprite_manager::max_num_secondary_sprites];
 
+sprite sprite_manager::the_allocatable_player
+	[sprite_manager::max_num_player_sprites];
+
 // The array of REGULAR active sprites, not counting the_player.
 sprite sprite_manager::the_allocatable_sprites
 	[sprite_manager::max_num_regular_sprites];
+
 
 
 sprite_allocator sprite_manager::the_player_secondary_sprites_allocator
@@ -94,6 +98,10 @@ sprite_allocator sprite_manager::the_secondary_sprites_allocator
 	( array_helper<sprite>
 	( sprite_manager::the_allocatable_secondary_sprites, 
 	sprite_manager::max_num_secondary_sprites ) );
+
+sprite_allocator sprite_manager::the_player_sprite_allocator
+	( array_helper<sprite>( sprite_manager::the_allocatable_player,
+	sprite_manager::max_num_player_sprites ) );
 
 sprite_allocator sprite_manager::the_sprites_allocator
 	( array_helper<sprite>( sprite_manager::the_allocatable_sprites,
@@ -255,12 +263,24 @@ void sprite_manager::init_the_player ( const vec2_f24p8& s_in_level_pos,
 	const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos )
 {
 	// The player should ALWAYS use the second VRAM chunk.
-	the_player = sprite(the_player_vram_chunk_index);
+	
+	//allocate_sprite
+	
+	//the_player = sprite(the_player_vram_chunk_index);
+	//the_player->
+	//the_player.sprite(the_player_vram_chunk_index);
+	
+	the_player_sprite_allocator.deallocate_sprite(the_player);
+	
+	the_player = new (the_player_sprite_allocator) player_sprite
+		( s_in_level_pos, the_sublevel_size_2d, camera_pos, false );
+	
+	the_player->set_vram_chunk_index(the_player_vram_chunk_index);
 	
 	//sprite_stuff_array[st_player]->init( the_player,
 	//	s_in_level_pos, the_sublevel_size_2d, camera_pos );
-	the_player.shared_constructor_code_part_2( s_in_level_pos,
-		the_sublevel_size_2d, camera_pos, false );
+	//the_player->shared_constructor_code_part_2( s_in_level_pos,
+	//	the_sublevel_size_2d, camera_pos, false );
 }
 
 void sprite_manager::clear_the_sprite_arrays()

@@ -196,6 +196,7 @@ public:		// functions
 		const vec2_u32& the_level_size_2d, bg_point& camera_pos,
 		bool facing_left );
 	
+	virtual void shared_constructor_code_part_3();
 	
 	void* operator new( size_t size, 
 		sprite_allocator& the_sprite_allocator )

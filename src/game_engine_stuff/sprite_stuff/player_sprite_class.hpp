@@ -244,12 +244,23 @@ public:		// variables
 	
 	
 public:		// functions
-	virtual void shared_constructor_code_part_1();
-	//virtual void shared_constructor_code_part_2( bool facing_left=true );
+	player_sprite();
+	//player_sprite( bool facing_left );
+	//player_sprite( const vec2_f24p8& s_in_level_pos, 
+	//	const bg_point& camera_pos, bool facing_left );
+	player_sprite( const vec2_f24p8& s_in_level_pos, 
+		const vec2_u32& the_level_size_2d, bg_point& camera_pos,
+		bool facing_left );
+	
+	
+	//virtual void shared_constructor_code_part_1();
+	//virtual void shared_constructor_code_part_2( bool facing_left=false );
 	virtual void shared_constructor_code_part_2
 		( const vec2_f24p8& s_in_level_pos, 
 		const vec2_u32& the_level_size_2d, bg_point& camera_pos,
-		bool facing_left=true );
+		bool facing_left=false );
+	
+	virtual void shared_constructor_code_part_3();
 	
 	inline virtual const sprite_type get_const_sprite_type() const
 	{

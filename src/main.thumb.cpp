@@ -70,7 +70,7 @@ int main()
 	{
 		gfx_manager::back_up_bgofs_mirror();
 		
-		sprite& the_player = sprite_manager::the_player;
+		sprite& the_player = *sprite_manager::the_player;
 		
 		clear_debug_vars();
 		

@@ -118,6 +118,10 @@ void sprite::shared_constructor_code_part_2
 	update_on_screen_pos(camera_pos);
 }
 
+void sprite::shared_constructor_code_part_3()
+{
+}
+
 // This form of shared_constructor_code() is primarily intended to be
 // used by the_player.
 void sprite::shared_constructor_code_part_2
