@@ -244,7 +244,12 @@ public:		// variables
 	
 	
 public:		// functions
-	player_sprite( bool facing_left=false );
+	inline player_sprite( bool facing_left=false )
+	{
+		shared_constructor_code_part_1();
+		sprite::shared_constructor_code_part_2(facing_left);
+		shared_constructor_code_part_3();
+	}
 	//player_sprite( bool facing_left );
 	//player_sprite( const vec2_f24p8& s_in_level_pos, 
 	//	const bg_point& camera_pos, bool facing_left );

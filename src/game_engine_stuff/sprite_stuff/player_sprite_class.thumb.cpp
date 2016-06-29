@@ -140,12 +140,6 @@ const vec2_f24p8 player_sprite::the_initial_in_level_pos_offset
 //const vec2_f24p8 player_sprite::the_initial_in_level_pos_offset
 //	= { {8 << fixed24p8::shift}, {0 << fixed24p8::shift} };
 
-player_sprite::player_sprite( bool facing_left )
-{
-	shared_constructor_code_part_1();
-	sprite::shared_constructor_code_part_2(facing_left);
-	shared_constructor_code_part_3();
-}
 player_sprite::player_sprite( const vec2_f24p8& s_in_level_pos, 
 	const vec2_u32& the_level_size_2d, bg_point& camera_pos,
 	bool facing_left )

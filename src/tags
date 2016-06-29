@@ -96,8 +96,8 @@ X	game_engine_stuff/sprite_stuff/old/sprite_base_stuff_class.thumb.cpp	729;"	kin
 X	game_engine_stuff/sprite_stuff/old/sprite_base_stuff_class.thumb.cpp	737;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/old/sprite_base_stuff_class.thumb.cpp	752;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/old/sprite_base_stuff_class.thumb.cpp	760;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/player_sprite_class.thumb.cpp	934;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/player_sprite_class.thumb.cpp	978;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/player_sprite_class.thumb.cpp	928;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/player_sprite_class.thumb.cpp	972;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	414;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	422;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	434;"	kind:d	file:
@@ -2116,7 +2116,7 @@ list_of_left_slope_configurations	game_engine_stuff/block_stuff/block_stuff.hpp	
 list_of_main_sprite_types	game_engine_stuff/sprite_stuff/sprite_type_stuff.hpp	81;"	kind:d
 list_of_right_slope_configurations	game_engine_stuff/block_stuff/block_stuff.hpp	208;"	kind:d
 list_of_slope_configurations	game_engine_stuff/block_stuff/block_stuff.hpp	191;"	kind:d
-list_of_weapon_swing_frame_slot_numbers	game_engine_stuff/sprite_stuff/player_sprite_class.thumb.cpp	931;"	kind:d	file:
+list_of_weapon_swing_frame_slot_numbers	game_engine_stuff/sprite_stuff/player_sprite_class.thumb.cpp	925;"	kind:d	file:
 load_level	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^	static void load_level( const level* n_the_current_level_ptr );$/;"	kind:p	class:active_level_manager	access:public	signature:( const level* n_the_current_level_ptr )
 load_level	game_engine_stuff/level_stuff/active_level_manager_class.thumb.cpp	/^void active_level_manager::load_level$/;"	kind:f	class:active_level_manager	signature:( const level* n_the_current_level_ptr )
 load_sublevel_at_intra_sublevel_warp	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^	static void load_sublevel_at_intra_sublevel_warp$/;"	kind:p	class:active_level_manager	access:public	signature:( u32 n_sublevel_index, u32 sublevel_entrance_index )
@@ -2700,10 +2700,9 @@ player_pickaxe_sprite::udi_curr_frame_slot	game_engine_stuff/sprite_stuff/player
 player_pickaxe_sprite::update_part_1	game_engine_stuff/sprite_stuff/player_pickaxe_sprite_class.hpp	/^	virtual void update_part_1();$/;"	kind:p	class:player_pickaxe_sprite	access:public	signature:()
 player_pickaxe_sprite::update_part_1	game_engine_stuff/sprite_stuff/player_pickaxe_sprite_class.thumb.cpp	/^void player_pickaxe_sprite::update_part_1()$/;"	kind:f	class:player_pickaxe_sprite	signature:()
 player_pickaxe_sprite_class_hpp	game_engine_stuff/sprite_stuff/player_pickaxe_sprite_class.hpp	20;"	kind:d
-player_sprite	game_engine_stuff/sprite_stuff/player_sprite_class.hpp	/^	player_sprite( bool facing_left=false );$/;"	kind:p	class:player_sprite	access:public	signature:( bool facing_left=false )
+player_sprite	game_engine_stuff/sprite_stuff/player_sprite_class.hpp	/^	inline player_sprite( bool facing_left=false )$/;"	kind:f	class:player_sprite	access:public	signature:( bool facing_left=false )
 player_sprite	game_engine_stuff/sprite_stuff/player_sprite_class.hpp	/^	player_sprite( const vec2_f24p8& s_in_level_pos, $/;"	kind:p	class:player_sprite	access:public	signature:( const vec2_f24p8& s_in_level_pos, const vec2_u32& the_level_size_2d, bg_point& camera_pos, bool facing_left )
 player_sprite	game_engine_stuff/sprite_stuff/player_sprite_class.hpp	/^class player_sprite : public sprite$/;"	kind:c	inherits:sprite
-player_sprite	game_engine_stuff/sprite_stuff/player_sprite_class.thumb.cpp	/^player_sprite::player_sprite( bool facing_left )$/;"	kind:f	class:player_sprite	signature:( bool facing_left )
 player_sprite	game_engine_stuff/sprite_stuff/player_sprite_class.thumb.cpp	/^player_sprite::player_sprite( const vec2_f24p8& s_in_level_pos, $/;"	kind:f	class:player_sprite	signature:( const vec2_f24p8& s_in_level_pos, const vec2_u32& the_level_size_2d, bg_point& camera_pos, bool facing_left )
 player_sprite::block_coll_response_top_16x16	game_engine_stuff/sprite_stuff/player_sprite_class.hpp	/^	virtual void block_coll_response_top_16x16$/;"	kind:p	class:player_sprite	access:public	signature:( const block_coll_result& tl_coll_result, const block_coll_result& tm_coll_result, const block_coll_result& tr_coll_result )
 player_sprite::block_coll_response_top_16x16	game_engine_stuff/sprite_stuff/player_sprite_class.thumb.cpp	/^void player_sprite::block_coll_response_top_16x16 $/;"	kind:f	class:player_sprite	signature:( const block_coll_result& tl_coll_result, const block_coll_result& tm_coll_result, const block_coll_result& tr_coll_result )
@@ -2810,9 +2809,8 @@ player_sprite::pickaxe_sprite_slot	game_engine_stuff/sprite_stuff/player_sprite_
 player_sprite::pickaxe_swing_final_frame_timer_end	game_engine_stuff/sprite_stuff/player_sprite_class.hpp	/^	static constexpr s32 pickaxe_swing_final_frame_timer_end = 10;$/;"	kind:m	class:player_sprite	access:public
 player_sprite::pickaxe_swing_frame_timer_end	game_engine_stuff/sprite_stuff/player_sprite_class.hpp	/^	static constexpr s32 pickaxe_swing_frame_timer_end = 1;$/;"	kind:m	class:player_sprite	access:public
 player_sprite::pickaxe_swing_start_frame_timer_end	game_engine_stuff/sprite_stuff/player_sprite_class.hpp	/^	static constexpr s32 pickaxe_swing_start_frame_timer_end = 10;$/;"	kind:m	class:player_sprite	access:public
-player_sprite::player_sprite	game_engine_stuff/sprite_stuff/player_sprite_class.hpp	/^	player_sprite( bool facing_left=false );$/;"	kind:p	class:player_sprite	access:public	signature:( bool facing_left=false )
+player_sprite::player_sprite	game_engine_stuff/sprite_stuff/player_sprite_class.hpp	/^	inline player_sprite( bool facing_left=false )$/;"	kind:f	class:player_sprite	access:public	signature:( bool facing_left=false )
 player_sprite::player_sprite	game_engine_stuff/sprite_stuff/player_sprite_class.hpp	/^	player_sprite( const vec2_f24p8& s_in_level_pos, $/;"	kind:p	class:player_sprite	access:public	signature:( const vec2_f24p8& s_in_level_pos, const vec2_u32& the_level_size_2d, bg_point& camera_pos, bool facing_left )
-player_sprite::player_sprite	game_engine_stuff/sprite_stuff/player_sprite_class.thumb.cpp	/^player_sprite::player_sprite( bool facing_left )$/;"	kind:f	class:player_sprite	signature:( bool facing_left )
 player_sprite::player_sprite	game_engine_stuff/sprite_stuff/player_sprite_class.thumb.cpp	/^player_sprite::player_sprite( const vec2_f24p8& s_in_level_pos, $/;"	kind:f	class:player_sprite	signature:( const vec2_f24p8& s_in_level_pos, const vec2_u32& the_level_size_2d, bg_point& camera_pos, bool facing_left )
 player_sprite::remaining_hp	game_engine_stuff/sprite_stuff/player_sprite_class.hpp	/^	static s32 remaining_hp __attribute__((_iwram));$/;"	kind:m	class:player_sprite	access:public
 player_sprite::remaining_hp	game_engine_stuff/sprite_stuff/player_sprite_class.thumb.cpp	/^s32 player_sprite::remaining_hp;$/;"	kind:m	class:player_sprite	file:
