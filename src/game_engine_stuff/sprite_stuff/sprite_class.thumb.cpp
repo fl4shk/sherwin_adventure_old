@@ -24,6 +24,8 @@
 
 #include "../misc_utility_funcs.hpp"
 
+#include "../level_stuff/active_level_class.hpp"
+
 const oam_entry::shape_size sprite::the_initial_shape_size 
 	= oam_entry::ss_16x16;
 
@@ -37,11 +39,31 @@ const vec2_f24p8 sprite::the_initial_in_level_pos_offset
 
 sprite::sprite()
 {
-	shared_constructor_code();
+	shared_constructor_code_part_1();
+}
+sprite::sprite( bool facing_left )
+{
+	shared_constructor_code_part_1();
+	shared_constructor_code_part_2(facing_left);
+}
+sprite::sprite( const vec2_f24p8& s_in_level_pos, 
+	const bg_point& camera_pos, bool facing_left )
+{
+	shared_constructor_code_part_1();
+	shared_constructor_code_part_2( s_in_level_pos, camera_pos, 
+		facing_left );
+}
+sprite::sprite( const vec2_f24p8& s_in_level_pos, 
+	const vec2_u32& the_level_size_2d, bg_point& camera_pos,
+	bool facing_left )
+{
+	shared_constructor_code_part_1();
+	shared_constructor_code_part_2( s_in_level_pos, the_level_size_2d, 
+		camera_pos, facing_left );
 }
 
 
-void sprite::shared_constructor_code( bool facing_left )
+void sprite::shared_constructor_code_part_1()
 {
 	// uh-oh, it looks like this overwrites the vtable pointer for the
 	// sprite!
@@ -57,14 +79,11 @@ void sprite::shared_constructor_code( bool facing_left )
 	the_oam_entry.set_tile_number(get_curr_tile_slot());
 	the_oam_entry.set_pal_number(get_palette_slot());
 	
-	if ( facing_left )
-	{
-		the_oam_entry.enable_hflip();
-	}
 	clear_and_set_bits( the_oam_entry.attr2, obj_attr2_prio_mask, 
 		obj_attr2_prio_1 );
 	
 	in_level_pos = vel = vec2_f24p8( (fixed24p8){0}, (fixed24p8){0} );
+	max_vel_x_abs_val = accel_x = (fixed24p8){0};
 	
 	set_initial_coll_box_stuff();
 	
@@ -72,8 +91,6 @@ void sprite::shared_constructor_code( bool facing_left )
 	
 	invin_frame_timer = 0;
 	
-	//memfill32( misc_data_u, 0, misc_data_size );
-	//memfill32( misc_data_s, 0, misc_data_size );
 	memfill32( misc_data_u, 0, misc_data_size * 2 );
 	
 	//vram_chunk_index = old_vram_chunk_index;
@@ -81,27 +98,37 @@ void sprite::shared_constructor_code( bool facing_left )
 	
 	update_f24p8_positions();
 }
-
-
-void sprite::shared_constructor_code( const vec2_f24p8& s_in_level_pos, 
-	const bg_point& camera_pos, bool facing_left )
+void sprite::shared_constructor_code_part_2( bool facing_left )
 {
-	shared_constructor_code(facing_left);
-	in_level_pos = s_in_level_pos - get_the_initial_in_level_pos_offset();
-	update_on_screen_pos(camera_pos);
-	
-	update_f24p8_positions();
+	if ( facing_left )
+	{
+		the_oam_entry.enable_hflip();
+	}
 }
 
-void sprite::shared_constructor_code( const vec2_f24p8& s_in_level_pos, 
-	const vec2_u32& the_level_size_2d, bg_point& camera_pos, 
+
+void sprite::shared_constructor_code_part_2
+	( const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, 
 	bool facing_left )
 {
-	shared_constructor_code(facing_left);
+	shared_constructor_code_part_2(facing_left);
 	in_level_pos = s_in_level_pos - get_the_initial_in_level_pos_offset();
-	update_on_screen_pos(camera_pos);
 	
 	update_f24p8_positions();
+	update_on_screen_pos(camera_pos);
+}
+
+// This form of shared_constructor_code() is primarily intended to be
+// used by the_player.
+void sprite::shared_constructor_code_part_2
+	( const vec2_f24p8& s_in_level_pos, const vec2_u32& the_level_size_2d, 
+	bg_point& camera_pos, bool facing_left )
+{
+	shared_constructor_code_part_2(facing_left);
+	in_level_pos = s_in_level_pos - get_the_initial_in_level_pos_offset();
+	
+	update_f24p8_positions();
+	update_on_screen_pos(camera_pos);
 }
 
 void* sprite::operator new( size_t size, 
@@ -359,7 +386,7 @@ const u32 sprite::get_curr_relative_tile_slot()
 // This is a dummy function that child classes implement.
 void sprite::block_collision_stuff()
 {
-	sprite_stuff_array[the_sprite_type]->block_collision_stuff(*this);
+	//sprite_stuff_array[the_sprite_type]->block_collision_stuff(*this);
 }
 
 

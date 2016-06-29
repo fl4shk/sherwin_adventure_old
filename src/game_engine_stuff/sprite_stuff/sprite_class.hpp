@@ -158,6 +158,14 @@ public:		// variables
 public:		// functions
 	
 	sprite();
+	sprite( bool facing_left );
+	sprite( const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, 
+		bool facing_left );
+	sprite( const vec2_f24p8& s_in_level_pos, 
+		const vec2_u32& the_level_size_2d, bg_point& camera_pos,
+		bool facing_left );
+	
+	
 	inline sprite( u32 s_vram_chunk_index )
 	{
 		sprite();
@@ -165,20 +173,28 @@ public:		// functions
 		vram_chunk_index = s_vram_chunk_index;
 	}
 	
+	
+	// When derived classes override this function, it is a good idea to
+	// still call this version.
+	virtual void shared_constructor_code_part_1();
+	
+	
 	// Derived classes should override this function
 	// This is the default form of shared_constructor_code().
-	virtual void shared_constructor_code( bool facing_left=false );
+	virtual void shared_constructor_code_part_2( bool facing_left );
 	
 	// This form of shared_constructor_code() might eventually become the
 	// default form of shared_constructor_code().
-	virtual void shared_constructor_code( const vec2_f24p8& s_in_level_pos, 
-		const bg_point& camera_pos, bool facing_left );
+	virtual void shared_constructor_code_part_2
+		( const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, 
+		bool facing_left );
 	
 	// This form of shared_constructor_code() is primarily intended to be
 	// used by the_player.
-	virtual void shared_constructor_code( const vec2_f24p8& s_in_level_pos, 
+	virtual void shared_constructor_code_part_2
+		( const vec2_f24p8& s_in_level_pos, 
 		const vec2_u32& the_level_size_2d, bg_point& camera_pos,
-		bool facing_left=false );
+		bool facing_left );
 	
 	
 	void* operator new( size_t size, 

@@ -16,28 +16,28 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef sprite_allocator_class_hpp
-#define sprite_allocator_class_hpp
+#ifndef sprite_type_includes_hpp
+#define sprite_type_includes_hpp
 
-#include "../array_helper_class.hpp"
-//#include "sprite_class.hpp"
 
-class sprite;
+// The Default Sprite (also used for when there is no sprite in the slot).
+#include "sprite_class.hpp"
 
-class sprite_allocator : public array_helper<sprite>
-{
-public:		// functions
-	sprite_allocator( sprite* the_array, u32 s_size )
-		__attribute__((_iwram_code));
-	sprite_allocator
-		( const array_helper<sprite>& s_allocatable_sprite_arr )
-		__attribute__((_iwram_code));
-	
-	void* allocate_sprite() __attribute__((_iwram_code));
-	void deallocate_sprite( sprite*& the_sprite )
-		__attribute__((_iwram_code));
-	
-	
-} __attribute__((_align4));
+// The Player
+#include "player_sprite_class.hpp"
 
-#endif		// sprite_allocator_class_hpp
+// Powerup Sprites
+#include "waffle_sprite_class.hpp"
+#include "muffin_sprite_classes.hpp"
+
+// Warp Sprites
+#include "door_sprite_class.hpp"
+
+// Enemy Sprites
+#include "snow_golem_sprite_class.hpp"
+
+// Secondary Sprites
+#include "player_pickaxe_sprite_class.hpp"
+
+
+#endif		// sprite_type_includes_hpp

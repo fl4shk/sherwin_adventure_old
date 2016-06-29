@@ -17,6 +17,17 @@
 
 
 #include "sprite_allocator_class.hpp"
+#include "sprite_class.hpp"
+
+sprite_allocator::sprite_allocator( sprite* the_array, u32 s_size )
+	: array_helper<sprite>( the_array, s_size )
+{
+}
+sprite_allocator::sprite_allocator
+	( const array_helper<sprite>& s_allocatable_sprite_arr )
+	: array_helper<sprite>(s_allocatable_sprite_arr)
+{
+}
 
 void* sprite_allocator::allocate_sprite()
 {

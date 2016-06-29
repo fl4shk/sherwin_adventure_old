@@ -26,6 +26,7 @@
 
 #include "sprite_allocator_class.hpp"
 
+#include "sprite_type_includes.hpp"
 
 
 std::array< sprite*, sprite_manager::max_num_player_secondary_sprites >
@@ -102,6 +103,61 @@ sprite_allocator sprite_manager::the_sprites_allocator
 
 int sprite_manager::next_oam_index;
 
+
+void sprite_manager::allocate_sprite( sprite*& the_sprite, 
+	sprite_allocator& the_sprite_allocator, 
+	sprite_type the_sprite_type, bool facing_left )
+{
+	#define generate_else_if(name) \
+		else if ( the_sprite_type == st_##name ) \
+		{ \
+			the_sprite = new (the_sprite_allocator) name##_sprite(); \
+			the_sprite->shared_constructor_code_part_2(facing_left); \
+		}
+	
+	
+	if ( the_sprite_type == st_default )
+	{
+		the_sprite = new (the_sprite_allocator) sprite(facing_left);
+	}
+	list_of_main_sprite_types(generate_else_if)
+	else
+	{
+		next_debug_s32 = ( ( 'n' << 24 ) | ( 't' << 16 ) | ( 'y' << 8 ) 
+			| ( '0' << 0 ) );
+	}
+	
+	#undef generate_else_if
+}
+
+void sprite_manager::allocate_sprite( sprite*& the_sprite, 
+	sprite_allocator& the_sprite_allocator, sprite_type the_sprite_type, 
+	const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, 
+	bool facing_left )
+{
+	#define generate_else_if(name) \
+		else if ( the_sprite_type == st_##name ) \
+		{ \
+			the_sprite = new (the_sprite_allocator) name##_sprite(); \
+			the_sprite->shared_constructor_code_part_2( s_in_level_pos, \
+				camera_pos, facing_left ); \
+		}
+	
+	if ( the_sprite_type == st_default )
+	{
+		the_sprite = new (the_sprite_allocator) sprite( s_in_level_pos, 
+			camera_pos, facing_left );
+	}
+	list_of_main_sprite_types(generate_else_if)
+	else
+	{
+		next_debug_s32 = ( ( 'n' << 24 ) | ( 't' << 16 ) | ( 'y' << 8 ) 
+			| ( '1' << 0 ) );
+	}
+	
+	#undef generate_else_if
+}
+
 void sprite_manager::reinit_sprite_with_sprite_ipg( sprite*& the_sprite, 
 	sprite_allocator& the_sprite_allocator, 
 	sprite_init_param_group* s_the_sprite_ipg )
@@ -110,79 +166,66 @@ void sprite_manager::reinit_sprite_with_sprite_ipg( sprite*& the_sprite,
 	
 	the_sprite_allocator.deallocate_sprite(the_sprite);
 	
-	the_sprite = new (the_sprite_allocator) sprite();
 	
-	
-	switch ( s_the_sprite_ipg->spawn_state )
+	if ( s_the_sprite_ipg->spawn_state == sss_not_active )
 	{
-		case sss_not_active:
-			memfill32( the_sprite->the_sprite_ipg, 0, sizeof(sprite) 
-				/ sizeof(u32) );
-			
-			the_sprite->the_sprite_ipg = s_the_sprite_ipg;
-			the_sprite->the_sprite_ipg->spawn_state = sss_active;
-			
-			the_sprite->the_sprite_type = the_sprite->the_sprite_ipg->type;
-			the_sprite->in_level_pos.x = make_f24p8
-				( the_sprite->the_sprite_ipg->initial_block_grid_x_coord 
-				* 16 );
-			the_sprite->in_level_pos.y = make_f24p8
-				( the_sprite->the_sprite_ipg->initial_block_grid_y_coord 
-				* 16 );
-			
-			sprite_stuff_array[the_sprite->the_sprite_type]
-				->init( *the_sprite,
-				!the_sprite->the_sprite_ipg->facing_right );
-			
-			//the_sprite->set_vram_chunk_index(old_vram_chunk_index);
-			break;
-			
-		case sss_active:
-		case sss_dead:
-		default:
-			break;
+		allocate_sprite( the_sprite, the_sprite_allocator, 
+			s_the_sprite_ipg->type, !s_the_sprite_ipg->facing_right );
 		
+		the_sprite->the_sprite_ipg = s_the_sprite_ipg;
+		the_sprite->the_sprite_ipg->spawn_state = sss_active;
+		
+		//the_sprite->the_sprite_type = the_sprite->the_sprite_ipg->type;
+		the_sprite->in_level_pos.x = make_f24p8
+			( the_sprite->the_sprite_ipg->initial_block_grid_x_coord 
+			* 16 );
+		the_sprite->in_level_pos.y = make_f24p8
+			( the_sprite->the_sprite_ipg->initial_block_grid_y_coord 
+			* 16 );
+		
+		//sprite_stuff_array[the_sprite->the_sprite_type]
+		//	->init( *the_sprite,
+		//	!the_sprite->the_sprite_ipg->facing_right );
+		//the_sprite->shared_constructor_code
+		//	(!the_sprite->the_sprite_ipg->facing_right);
+		
+		//the_sprite->set_vram_chunk_index(old_vram_chunk_index);
 	}
 }
 
-void sprite_manager::reinit_sprite_with_sprite_ipg( sprite*& the_sprite, 
-	sprite_allocator& the_sprite_allocator, u32 s_vram_chunk_index, 
-	sprite_init_param_group* s_the_sprite_ipg )
-{
-	the_sprite_allocator.deallocate_sprite(the_sprite);
-	
-	the_sprite = new (the_sprite_allocator) sprite();
-	
-	switch ( s_the_sprite_ipg->spawn_state )
-	{
-		case sss_not_active:
-			memfill32( the_sprite, 0, sizeof(sprite) / sizeof(u32) );
-			
-			the_sprite->the_sprite_ipg = s_the_sprite_ipg;
-			the_sprite->the_sprite_ipg->spawn_state = sss_active;
-			
-			the_sprite->the_sprite_type = the_sprite->the_sprite_ipg->type;
-			the_sprite->in_level_pos.x = make_f24p8
-				( the_sprite->the_sprite_ipg->initial_block_grid_x_coord 
-				* 16 );
-			the_sprite->in_level_pos.y = make_f24p8
-				( the_sprite->the_sprite_ipg->initial_block_grid_y_coord 
-				* 16 );
-			
-			sprite_stuff_array[the_sprite->the_sprite_type]
-				->init( *the_sprite,
-				!the_sprite->the_sprite_ipg->facing_right );
-			
-			the_sprite->set_vram_chunk_index(s_vram_chunk_index);
-			break;
-			
-		case sss_active:
-		case sss_dead:
-		default:
-			break;
-		
-	}
-}
+//void sprite_manager::reinit_sprite_with_sprite_ipg( sprite*& the_sprite, 
+//	sprite_allocator& the_sprite_allocator, u32 s_vram_chunk_index, 
+//	sprite_init_param_group* s_the_sprite_ipg )
+//{
+//	the_sprite_allocator.deallocate_sprite(the_sprite);
+//	
+//	//the_sprite = new (the_sprite_allocator) sprite();
+//	
+//	if ( s_the_sprite_ipg->spawn_state == sss_not_active )
+//	{
+//		allocate_sprite( the_sprite, the_sprite_allocator, 
+//			s_the_sprite_ipg->type, !s_the_sprite_ipg->facing_right );
+//		
+//		the_sprite->the_sprite_ipg = s_the_sprite_ipg;
+//		the_sprite->the_sprite_ipg->spawn_state = sss_active;
+//		
+//		the_sprite->the_sprite_type = the_sprite->the_sprite_ipg->type;
+//		the_sprite->in_level_pos.x = make_f24p8
+//			( the_sprite->the_sprite_ipg->initial_block_grid_x_coord 
+//			* 16 );
+//		the_sprite->in_level_pos.y = make_f24p8
+//			( the_sprite->the_sprite_ipg->initial_block_grid_y_coord 
+//			* 16 );
+//		
+//		//sprite_stuff_array[the_sprite->the_sprite_type]
+//		//	->init( *the_sprite,
+//		//	!the_sprite->the_sprite_ipg->facing_right );
+//		//the_sprite->shared_constructor_code
+//		
+//		the_sprite->set_vram_chunk_index(s_vram_chunk_index);
+//	}
+//	
+//}
 
 
 void sprite_manager::reinit_sprite_by_spawning( sprite*& the_sprite, 
@@ -192,16 +235,19 @@ void sprite_manager::reinit_sprite_by_spawning( sprite*& the_sprite,
 {
 	the_sprite_allocator.deallocate_sprite(the_sprite);
 	
-	the_sprite = new (the_sprite_allocator) sprite();
+	//the_sprite = new (the_sprite_allocator) sprite();
 	
 	//u32 old_vram_chunk_index = the_sprite->get_vram_chunk_index();
 	//
 	//memfill32( the_sprite, 0, sizeof(sprite) / sizeof(u32) );
 	
-	sprite_stuff_array[s_the_sprite_type]->init( *the_sprite, 
-		s_in_level_pos, camera_pos, facing_left );
+	//sprite_stuff_array[s_the_sprite_type]->init( *the_sprite, 
+	//	s_in_level_pos, camera_pos, facing_left );
 	
 	//the_sprite->set_vram_chunk_index(old_vram_chunk_index);
+	
+	allocate_sprite( the_sprite, the_sprite_allocator, s_the_sprite_type,
+		s_in_level_pos, camera_pos, facing_left );
 }
 
 
@@ -211,8 +257,10 @@ void sprite_manager::init_the_player ( const vec2_f24p8& s_in_level_pos,
 	// The player should ALWAYS use the second VRAM chunk.
 	the_player = sprite(the_player_vram_chunk_index);
 	
-	sprite_stuff_array[st_player]->init( the_player,
-		s_in_level_pos, the_sublevel_size_2d, camera_pos );
+	//sprite_stuff_array[st_player]->init( the_player,
+	//	s_in_level_pos, the_sublevel_size_2d, camera_pos );
+	the_player.shared_constructor_code_part_2( s_in_level_pos,
+		the_sublevel_size_2d, camera_pos, false );
 }
 
 void sprite_manager::clear_the_sprite_arrays()
@@ -480,22 +528,27 @@ void sprite_manager::initial_sprite_spawning_shared_code
 	next_oam_index = the_active_sprites_starting_oam_index;
 	
 	// Run each active sprite's update_part_1() function.
-	for ( sprite* the_spr : the_sprites )
+	for ( sprite*& the_spr : the_sprites )
 	{
-		if ( the_spr->the_sprite_type != st_default )
+		//if ( the_spr->the_sprite_type != st_default )
+		if (the_spr)
 		{
-			sprite_stuff_array[the_spr->the_sprite_type]
-				->update_part_1(*the_spr);
+			//sprite_stuff_array[the_spr->the_sprite_type]
+			//	->update_part_1(*the_spr);
+			the_spr->update_part_1();
 		}
 	}
 	
 	// Run each active sprite's update_part_2() function.
-	for ( sprite* the_spr : the_sprites )
+	for ( sprite*& the_spr : the_sprites )
 	{
-		if ( the_spr->the_sprite_type != st_default )
+		//if ( the_spr->the_sprite_type != st_default )
+		if (the_spr)
 		{
-			sprite_stuff_array[the_spr->the_sprite_type]->update_part_2
-				( *the_spr, gfx_manager::bgofs_mirror[0].curr, 
+			//sprite_stuff_array[the_spr->the_sprite_type]->update_part_2
+			//	( *the_spr, gfx_manager::bgofs_mirror[0].curr, 
+			//	next_oam_index );
+			the_spr->update_part_2( gfx_manager::bgofs_mirror[0].curr, 
 				next_oam_index );
 		}
 	}

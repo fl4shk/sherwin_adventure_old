@@ -21,7 +21,9 @@
 
 
 #include "../../gba_specific_stuff/interrupt_stuff.hpp"
+#include "../sprite_stuff/sprite_type_includes.hpp"
 
+//#include "../sprite_stuff/player_sprite_class.hpp"
 
 
 u32 active_level_manager::converted_block_tile_ids_0[bt_count],
@@ -37,12 +39,12 @@ void active_level_manager::load_level
 	game_manager::curr_game_mode = gm_loading_level;
 	active_level::the_current_level_ptr = n_the_current_level_ptr;
 	
-	player_sprite_stuff::run_toggle = false;
+	player_sprite::run_toggle = false;
 	
 	// The following line is temporary!
-	player_sprite_stuff::max_hp = 10;
+	player_sprite::max_hp = 10;
 	
-	player_sprite_stuff::remaining_hp = player_sprite_stuff::max_hp;
+	player_sprite::remaining_hp = player_sprite::max_hp;
 	
 	for ( u32 i=0; i<active_level::max_num_sublevels; ++i )
 	{

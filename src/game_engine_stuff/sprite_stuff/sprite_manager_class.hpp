@@ -146,12 +146,20 @@ public:		// variables
 	
 public:		// functions
 	
+	static void allocate_sprite( sprite*& the_sprite, 
+		sprite_allocator& the_sprite_allocator, 
+		sprite_type the_sprite_type, bool facing_left );
+	static void allocate_sprite( sprite*& the_sprite, 
+		sprite_allocator& the_sprite_allocator, 
+		sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos,
+		const bg_point& camera_pos, bool facing_left );
+	
 	static void reinit_sprite_with_sprite_ipg( sprite*& the_sprite, 
 		sprite_allocator& the_sprite_allocator, 
 		sprite_init_param_group* s_the_sprite_ipg );
-	static void reinit_sprite_with_sprite_ipg( sprite*& the_sprite, 
-		sprite_allocator& the_sprite_allocator, u32 s_vram_chunk_index, 
-		sprite_init_param_group* s_the_sprite_ipg );
+	//static void reinit_sprite_with_sprite_ipg( sprite*& the_sprite, 
+	//	sprite_allocator& the_sprite_allocator, u32 s_vram_chunk_index, 
+	//	sprite_init_param_group* s_the_sprite_ipg );
 	
 	static void reinit_sprite_by_spawning( sprite*& the_sprite, 
 		sprite_allocator& the_sprite_allocator,

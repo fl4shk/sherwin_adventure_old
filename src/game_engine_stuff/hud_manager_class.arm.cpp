@@ -26,6 +26,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "sprite_stuff/sprite_type_includes.hpp"
+
 
 void hud_manager::update_hud_in_screenblock_mirror_2d()
 {
@@ -63,8 +65,8 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 	}
 	
 	
-	s32 to_convert = ( player_sprite_stuff::remaining_hp < 0 )
-		? 0 : player_sprite_stuff::remaining_hp;
+	s32 to_convert = ( player_sprite::remaining_hp < 0 )
+		? 0 : player_sprite::remaining_hp;
 	//s32 to_convert = 10;
 	
 	for (;;)

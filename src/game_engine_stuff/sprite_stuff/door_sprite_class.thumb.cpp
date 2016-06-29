@@ -16,23 +16,22 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-//#include "sprite_type_stuff.hpp"
-//#include "sprite_class.hpp"
-//#include "door_sprite_class.hpp"
+#include "sprite_type_stuff.hpp"
+#include "sprite_class.hpp"
+#include "door_sprite_class.hpp"
 
-//#include "../level_stuff/sublevel_class.hpp"
+#include "../level_stuff/sublevel_class.hpp"
 
-/*
 // Graphics stuff
 
 const vec2_f24p8 door_sprite::the_initial_coll_box_size
 	= { {14 << fixed24p8::shift}, {32 << fixed24p8::shift} },
 	door_sprite::the_initial_cb_pos_offset = { {1}, {0} };
 
-void door_sprite::shared_constructor_code( bool facing_left )
+void door_sprite::shared_constructor_code_part_2( bool facing_left )
 {
 	// Use the default initialization function first.
-	sprite::shared_constructor_code(facing_left);
+	sprite::shared_constructor_code_part_2(facing_left);
 	
 	// Door sprites should be thought of as part of the "background".
 	// Other sprites are supposed to appear in front of the door sprites,
@@ -69,4 +68,3 @@ void door_sprite::shared_constructor_code( bool facing_left )
 //		[the_door.the_sprite_ipg->extra_param_0];
 //}
 
-*/

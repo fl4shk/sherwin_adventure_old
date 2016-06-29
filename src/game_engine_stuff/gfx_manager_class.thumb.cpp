@@ -267,8 +267,8 @@ void gfx_manager::upload_sprite_tiles_to_vram( sprite& the_sprite )
 {
 	// It gets tiring to have to type
 	// sprite_stuff_array[the_sprite.the_sprite_type] so much.
-	sprite_base_stuff* sbs_ptr = sprite_stuff_array
-		[the_sprite.the_sprite_type];
+	//sprite_base_stuff* sbs_ptr = sprite_stuff_array
+	//	[the_sprite.the_sprite_type];
 	
 	//// This memfill32() call isn't strictly necessary, but it makes VRAM
 	//// look nicer in the VRAM viewer functionality of some emulators.
@@ -280,11 +280,12 @@ void gfx_manager::upload_sprite_tiles_to_vram( sprite& the_sprite )
 	memcpy32( &(((tile*)obj_tile_vram)[the_sprite.get_vram_chunk_index()
 			* num_tiles_in_ss_32x32]),
 		
-		&(sbs_ptr->get_tile_arr()
-			[sbs_ptr->get_curr_relative_tile_slot(the_sprite)]),
+		&(the_sprite.get_tile_arr()
+			[the_sprite.get_curr_relative_tile_slot()]),
 		
 		//sizeof(tile) * num_tiles_in_ss_32x32 / sizeof(u32) );
-		sizeof(tile) * sbs_ptr->get_num_active_gfx_tiles() / sizeof(u32) );
+		sizeof(tile) * the_sprite.get_num_active_gfx_tiles() 
+		/ sizeof(u32) );
 }
 
 

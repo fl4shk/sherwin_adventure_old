@@ -17,8 +17,42 @@
 
 
 #include "sprite_type_stuff.hpp"
+#include "sprite_type_includes.hpp"
+
+// Graphics stuff
+//void muffin_sprite::gfx_update()
+//{
+//	the_oam_entry.set_tile_number 
+//		( get_curr_tile_slot() );
+//	the_oam_entry.set_pal_number 
+//		( get_palette_slot() );
+//}
 
 
-#include "sprite_class.hpp"
+// Graphics stuff
+//void fire_muffin_sprite::gfx_update()
+//{
+//	the_oam_entry.set_tile_number 
+//		( get_curr_tile_slot() );
+//	the_oam_entry.set_pal_number 
+//		( get_palette_slot() );
+//}
+
+// Graphics stuff
+//void ice_muffin_sprite::gfx_update()
+//{
+//	the_oam_entry.set_tile_number 
+//		( get_curr_tile_slot() );
+//	the_oam_entry.set_pal_number 
+//		( get_palette_slot() );
+//}
 
 
+// Graphics stuff
+//void chocolate_muffin_sprite::gfx_update()
+//{
+//	the_oam_entry.set_tile_number 
+//		( get_curr_tile_slot() );
+//	the_oam_entry.set_pal_number 
+//		( get_palette_slot() );
+//}

@@ -43,7 +43,7 @@ public:		// variables
 		the_initial_cb_pos_offset;
 	
 public:		// functions
-	virtual void shared_constructor_code( bool facing_left );
+	virtual void shared_constructor_code_part_2( bool facing_left );
 	
 	inline virtual const sprite_type get_const_sprite_type() const
 	{

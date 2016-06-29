@@ -16,28 +16,12 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef sprite_allocator_class_hpp
-#define sprite_allocator_class_hpp
+#include "sprite_type_stuff.hpp"
 
-#include "../array_helper_class.hpp"
-//#include "sprite_class.hpp"
+#include "../../gba_specific_stuff/button_stuff.hpp"
+#include "../../gba_specific_stuff/interrupt_stuff.hpp"
+#include "../level_stuff/active_level_manager_class.hpp"
+#include "sprite_manager_class.hpp"
 
-class sprite;
 
-class sprite_allocator : public array_helper<sprite>
-{
-public:		// functions
-	sprite_allocator( sprite* the_array, u32 s_size )
-		__attribute__((_iwram_code));
-	sprite_allocator
-		( const array_helper<sprite>& s_allocatable_sprite_arr )
-		__attribute__((_iwram_code));
-	
-	void* allocate_sprite() __attribute__((_iwram_code));
-	void deallocate_sprite( sprite*& the_sprite )
-		__attribute__((_iwram_code));
-	
-	
-} __attribute__((_align4));
 
-#endif		// sprite_allocator_class_hpp

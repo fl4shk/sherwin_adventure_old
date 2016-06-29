@@ -26,7 +26,7 @@
 #include "../../gba_specific_stuff/asm_funcs.hpp"
 #include "../misc_bitwise_funcs.hpp"
 //#include "../block_stuff/block_stuff.hpp"
-#include "../level_stuff/active_level_class.hpp"
+//#include "../level_stuff/active_level_class.hpp"
 
 #include "../../gba_specific_stuff/oam_entry_classes.hpp"
 
@@ -104,45 +104,6 @@ macro(player_pickaxe)
 
 
 
-// The Default Sprite (also used for when there is no sprite in the slot).
-#include "sprite_base_stuff_class.hpp"
-
-// The Player
-#include "player_sprite_stuff_class.hpp"
-
-// Powerup Sprites
-#include "waffle_sprite_stuff_class.hpp"
-#include "muffin_sprite_stuff_classes.hpp"
-
-// Warp Sprites
-#include "door_sprite_stuff_class.hpp"
-
-// Enemy Sprites
-#include "snow_golem_sprite_stuff_class.hpp"
-
-// Secondary Sprites
-#include "player_pickaxe_sprite_stuff_class.hpp"
-
-
-
-
-
-
-
-extern sprite_base_stuff the_sprite_base_stuff;
-
-#define X(name) extern name##_sprite_stuff the_##name##_sprite_stuff \
-	__attribute__((_iwram));
-list_of_main_sprite_types(X)
-#undef X
-
-
-extern std::array< sprite_base_stuff*, st_count > sprite_stuff_array
-	__attribute__((_iwram));
-
-
-//#include "sprite_base_class.hpp"
-//#include "player_sprite_class.hpp"
 
 
 #endif		// sprite_type_stuff_hpp
