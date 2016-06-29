@@ -51,6 +51,7 @@ public:		// constants
 	static constexpr fixed24p8 max_y_vel = {0x300};
 	//static constexpr fixed24p8 max_y_vel = {0x280};
 	
+	static constexpr sprite_type the_const_sprite_type = st_default;
 	static constexpr sprite_palette_slot the_palette_slot = sps_player;
 	//static constexpr u32 the_relative_metatile_slot = 7,
 	//	num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
@@ -70,8 +71,8 @@ public:		// constants
 	// that are normally considered to be of a certain size but that use
 	// larger graphics for some frames.  An example of this is the
 	// st_player sprite_type, which is normally considered to be a 16x32
-	// sprite but uses 32x32 graphics in some cases, like during the pickaxe
-	// swing animation.
+	// sprite but uses 32x32 graphics in some cases, like during the
+	// pickaxe swing animation.
 	static const vec2_f24p8 the_initial_in_level_pos_offset;
 	
 public:		// variables
@@ -139,7 +140,9 @@ public:		// variables
 	
 	
 	// Two arrays of miscellaneous sprite data.  The way these arrays are
-	// used varies by the type of sprite.
+	// used varies by the type of sprite.  Also, since a more natural
+	// sprite type system is going to be used, they could be gotten rid of
+	// and replaced with variables that only 
 	static constexpr u32 misc_data_size = 8;
 	u32 misc_data_u[misc_data_size];
 	s32 misc_data_s[misc_data_size];
@@ -163,10 +166,8 @@ public:		// functions
 	}
 	
 	// Derived classes should override this function
-	virtual void shared_constructor_code();
-	
 	// This is the default form of shared_constructor_code().
-	virtual void shared_constructor_code( bool facing_left );
+	virtual void shared_constructor_code( bool facing_left=false );
 	
 	// This form of shared_constructor_code() might eventually become the
 	// default form of shared_constructor_code().
@@ -239,9 +240,10 @@ public:		// functions
 	inline vec2_f24p8 get_on_screen_pos( const bg_point& camera_pos )
 		const
 	{
-		vec2_f24p8 ret = in_level_pos - camera_pos;
-		
-		return ret;
+		//vec2_f24p8 ret = in_level_pos - camera_pos;
+		//
+		//return ret;
+		return in_level_pos - camera_pos;
 	}
 	
 	void update_on_screen_pos( const bg_point& camera_pos )
@@ -286,21 +288,31 @@ public:		// functions
 	
 	//void block_collision_stuff() __attribute__((_iwram_code));
 	
-	virtual const sprite_type get_sprite_type() const;
+	inline virtual const sprite_type get_const_sprite_type() const
+	{
+		return the_const_sprite_type;
+	}
 	
 	inline virtual const tile* get_tile_arr() const
 	{
 		return tile_arr;
 	}
 	
-	virtual void set_initial_shape_size();
+	inline virtual void set_initial_shape_size()
+	{
+		set_shape_size(get_the_initial_shape_size());
+	}
 	inline virtual const oam_entry::shape_size get_the_initial_shape_size() 
 		const
 	{
 		return the_initial_shape_size;
 	}
 	
-	virtual void set_initial_coll_box_stuff();
+	inline virtual void set_initial_coll_box_stuff()
+	{
+		the_coll_box.size = get_the_initial_coll_box_size();
+		cb_pos_offset = get_the_initial_cb_pos_offset();
+	}
 	
 	inline virtual const vec2_f24p8& get_the_initial_coll_box_size() const
 	{
@@ -320,7 +332,18 @@ public:		// functions
 	
 	
 	//virtual void gfx_update();
-	void gfx_update();
+	inline void gfx_update()
+	{
+		//the_oam_entry.set_tile_number 
+		//	( get_curr_tile_slot_old() );
+		
+		//the_oam_entry.set_tile_number
+		//	( get_vram_chunk_index() 
+		//	* gfx_manager::num_tiles_in_ss_32x32 );
+		the_oam_entry.set_tile_number(get_curr_tile_slot());
+		
+		the_oam_entry.set_pal_number(get_palette_slot());
+	}
 	
 	
 	virtual void update_part_1();
@@ -339,7 +362,11 @@ public:		// functions
 	// Graphics stuff
 	//virtual const u32 get_curr_tile_slot_old();
 	
-	const u32 get_curr_tile_slot();
+	inline const u32 get_curr_tile_slot()
+	{
+		return get_vram_chunk_index() 
+			* gfx_manager::num_tiles_in_ss_32x32;
+	}
 	
 	virtual const sprite_palette_slot get_palette_slot();
 	virtual const u32 get_curr_relative_tile_slot();
@@ -467,6 +494,7 @@ protected:		// functions
 	virtual void block_collision_stuff_strongly_hit_stuff_only_32x32();
 	
 } __attribute__((_align4));
+
 
 
 #endif		// sprite_class_hpp

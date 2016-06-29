@@ -56,10 +56,12 @@ public:		// functions
 	//}
 	
 	
-	inline void operator = ( const vec2<type>& to_copy )
+	inline vec2<type>& operator = ( const vec2<type>& to_copy )
 	{
 		x = to_copy.x;
 		y = to_copy.y;
+		
+		return *this;
 	}
 	
 	
@@ -162,10 +164,12 @@ public:		// functions
 	//}
 	
 	
-	inline void operator = ( const vec2<fixed24p8>& to_copy )
+	inline vec2<fixed24p8>& operator = ( const vec2<fixed24p8>& to_copy )
 	{
 		x = to_copy.x;
 		y = to_copy.y;
+		
+		return *this;
 	}
 	
 	
@@ -219,10 +223,12 @@ public:		// functions
 		return ( ( x != to_cmp.x ) || ( y != to_cmp.y ) );
 	}
 	
-	inline void operator = ( const vec2_s32& to_copy )
+	inline vec2<fixed24p8>& operator = ( const vec2_s32& to_copy )
 	{
 		x.data = to_copy.x;
 		y.data = to_copy.y;
+		
+		return *this;
 	}
 	
 } __attribute__((_align4));
@@ -262,10 +268,12 @@ public:		// functions
 	//}
 	
 	
-	inline void operator = ( const vec2<fixed8p8>& to_copy )
+	inline vec2<fixed8p8>& operator = ( const vec2<fixed8p8>& to_copy )
 	{
 		x = to_copy.x;
 		y = to_copy.y;
+		
+		return *this;
 	}
 	
 	
@@ -317,10 +325,12 @@ public:		// functions
 		return ( ( x != to_cmp.x ) || ( y != to_cmp.y ) );
 	}
 	
-	inline void operator = ( const vec2_s16& to_copy )
+	inline vec2<fixed8p8>& operator = ( const vec2_s16& to_copy )
 	{
 		x.data = to_copy.x;
 		y.data = to_copy.y;
+		
+		return *this;
 	}
 	
 	inline operator vec2<fixed24p8>() const;

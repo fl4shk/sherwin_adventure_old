@@ -41,92 +41,47 @@ sprite::sprite()
 }
 
 
-void sprite::shared_constructor_code()
+void sprite::shared_constructor_code( bool facing_left )
 {
-	//the_sprite_type = st_player;
-	
-	//in_level_pos = { 0, 0 };
-	//vel = { 0, 0 };
-	
-	//on_ground = false;
-	//jump_hold_timer = 0;
-	
-	//the_oam_entry = { 0, 0, 0, 0 };
-	
-	//set_shape_size(oam_entry::ss_16x16);
-	//
-	//the_coll_box.pos = { 0, 0 };
-	//the_coll_box.size = { make_f24p8(16), make_f24p8(16) };
-	//
-	//cb_pos_offset = { 0, 0 };
-	
-	//memfill32( misc_data_u, 0, misc_data_size );
-	//memfill32( misc_data_s, 0, misc_data_size );
-	
-	
-	
-	//u32 old_vram_chunk_index = vram_chunk_index;
-	
-	// uh-oh, it looks like this overwrites the vtable for the sprite!
+	// uh-oh, it looks like this overwrites the vtable pointer for the
+	// sprite!
 	//memfill32( this, 0, sizeof(sprite) / sizeof(u32) );
 	
-	the_sprite_type = st_default;
+	the_sprite_type = get_const_sprite_type();;
 	the_sprite_ipg = NULL;
 	
 	memfill32( &the_oam_entry, 0, sizeof(oam_entry) / sizeof(u32) );
 	
-	the_oam_entry.set_tile_number(0);
-	the_oam_entry.set_pal_number(sps_player);
-	
-	set_shape_size(oam_entry::ss_16x16);
-	
-	
-	in_level_pos = vec2_f24p8( (fixed24p8){0}, (fixed24p8){0} );
-	vel = vec2_f24p8( (fixed24p8){0}, (fixed24p8){0} );
-	
-	//memfill32( &in_level_pos, 0, sizeof(in_level_pos) + sizeof(vel) 
-	//	/ sizeof(u32) );
-	
-	max_vel_x_abs_val = {0};
-	accel_x = {0};
-	
-	
-	the_coll_box.size = { 14 << fixed24p8::shift, 14 << fixed24p8::shift };
-	cb_pos_offset = { 1 << fixed24p8::shift, 1 << fixed24p8::shift };
-	the_coll_box.pos = in_level_pos + cb_pos_offset;
-	
-	on_ground = false;
-	is_jumping = false;
-	
-	invin_frame_timer = 0;
-	
-	memfill32( misc_data_u, 0, misc_data_size );
-	memfill32( misc_data_s, 0, misc_data_size );
-	
-	//vram_chunk_index = old_vram_chunk_index;
-}
-
-void sprite::shared_constructor_code( bool facing_left )
-{
-	the_sprite_type = get_sprite_type();
-	
-	the_oam_entry.set_tile_number(get_curr_tile_slot());
-	the_oam_entry.set_pal_number(get_palette_slot());
 	
 	set_initial_shape_size();
-	set_initial_coll_box_stuff();
+	the_oam_entry.set_tile_number(get_curr_tile_slot());
+	the_oam_entry.set_pal_number(get_palette_slot());
 	
 	if ( facing_left )
 	{
 		the_oam_entry.enable_hflip();
 	}
+	clear_and_set_bits( the_oam_entry.attr2, obj_attr2_prio_mask, 
+		obj_attr2_prio_1 );
 	
+	in_level_pos = vel = vec2_f24p8( (fixed24p8){0}, (fixed24p8){0} );
 	
-	clear_and_set_bits( the_oam_entry.attr2, 
-		obj_attr2_prio_mask, obj_attr2_prio_1 );
+	set_initial_coll_box_stuff();
+	
+	on_ground = is_jumping = false;
+	
+	invin_frame_timer = 0;
+	
+	//memfill32( misc_data_u, 0, misc_data_size );
+	//memfill32( misc_data_s, 0, misc_data_size );
+	memfill32( misc_data_u, 0, misc_data_size * 2 );
+	
+	//vram_chunk_index = old_vram_chunk_index;
+	
 	
 	update_f24p8_positions();
 }
+
 
 void sprite::shared_constructor_code( const vec2_f24p8& s_in_level_pos, 
 	const bg_point& camera_pos, bool facing_left )
@@ -349,39 +304,6 @@ vec2_u32 sprite::get_shape_size_as_vec2_raw() const
 }
 
 
-
-
-const sprite_type sprite::get_sprite_type() const
-{
-	return st_default;
-}
-
-void sprite::set_initial_shape_size()
-{
-	set_shape_size(get_the_initial_shape_size());
-}
-
-void sprite::set_initial_coll_box_stuff()
-{
-	the_coll_box.size = get_the_initial_coll_box_size();
-	cb_pos_offset = get_the_initial_cb_pos_offset();
-}
-
-
-void sprite::gfx_update()
-{
-	//the_oam_entry.set_tile_number 
-	//	( get_curr_tile_slot_old() );
-	
-	//the_oam_entry.set_tile_number
-	//	( get_vram_chunk_index() 
-	//	* gfx_manager::num_tiles_in_ss_32x32 );
-	the_oam_entry.set_tile_number(get_curr_tile_slot());
-	
-	the_oam_entry.set_pal_number(get_palette_slot());
-}
-
-
 void sprite::update_part_1()
 {
 	//did_update_prev_on_screen_pos_this_frame = false;
@@ -420,11 +342,6 @@ void sprite::update_part_2( const bg_point& camera_pos,
 //		+ get_curr_relative_tile_slot() );
 //}
 
-const u32 sprite::get_curr_tile_slot()
-{
-	return get_vram_chunk_index() 
-		* gfx_manager::num_tiles_in_ss_32x32;
-}
 
 // The reason this function takes a sprite instance as a parameter is that
 // sprites may use different palettes depending on their state.

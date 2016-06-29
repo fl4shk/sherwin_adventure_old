@@ -125,6 +125,10 @@ macro(player_pickaxe)
 
 
 
+
+
+
+
 extern sprite_base_stuff the_sprite_base_stuff;
 
 #define X(name) extern name##_sprite_stuff the_##name##_sprite_stuff \
