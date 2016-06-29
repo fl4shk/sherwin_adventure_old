@@ -283,6 +283,9 @@ void sprite_manager::init_the_player ( const vec2_f24p8& s_in_level_pos,
 	//	s_in_level_pos, the_sublevel_size_2d, camera_pos );
 	//the_player->shared_constructor_code_part_2( s_in_level_pos,
 	//	the_sublevel_size_2d, camera_pos, false );
+	
+	the_player->update_part_1();
+	the_player->update_part_2( camera_pos, the_sublevel_size_2d );
 }
 
 void sprite_manager::clear_the_sprite_arrays()

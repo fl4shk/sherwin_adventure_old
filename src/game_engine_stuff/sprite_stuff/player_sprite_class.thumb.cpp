@@ -360,7 +360,7 @@ void player_sprite::update_part_1()
 
 
 void player_sprite::update_part_2( bg_point& camera_pos, 
-	const vec2_u32& the_level_size_2d )
+	const vec2_u32& the_sublevel_size_2d )
 {
 	// Walk frame stuff
 	s32& walk_frame_timer = misc_data_s[sdi_walk_frame_timer];
@@ -382,7 +382,7 @@ void player_sprite::update_part_2( bg_point& camera_pos,
 	for ( sprite* spr : sprite_manager::the_sprites )
 	{
 		sprite_interaction_reponse( *spr, camera_pos,
-			the_level_size_2d );
+			the_sublevel_size_2d );
 		
 		if ( warped_to_other_sublevel_this_frame )
 		{
@@ -394,7 +394,7 @@ void player_sprite::update_part_2( bg_point& camera_pos,
 	
 	camera_follow_basic(camera_pos);
 	
-	active_level_manager::correct_bg0_scroll_mirror(the_level_size_2d);
+	active_level_manager::correct_bg0_scroll_mirror(the_sublevel_size_2d);
 	
 	update_on_screen_pos(camera_pos);
 	
