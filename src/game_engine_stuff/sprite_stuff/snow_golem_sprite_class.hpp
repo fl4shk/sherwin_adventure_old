@@ -89,6 +89,13 @@ public:		// variables
 		the_initial_cb_pos_offset;
 	
 public:		// functions
+	inline snow_golem_sprite( bool facing_left )
+	{
+		shared_constructor_code_part_1();
+		shared_constructor_code_part_2(facing_left);
+		shared_constructor_code_part_3();
+	}
+	
 	
 	inline virtual const sprite_type get_const_sprite_type() const
 	{

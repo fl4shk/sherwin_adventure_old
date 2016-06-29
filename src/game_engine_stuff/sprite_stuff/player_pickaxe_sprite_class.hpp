@@ -83,6 +83,12 @@ public:		// variables
 	
 	
 public:		// functions
+	inline player_pickaxe_sprite( bool facing_left )
+	{
+		shared_constructor_code_part_1();
+		shared_constructor_code_part_2(facing_left);
+		shared_constructor_code_part_3();
+	}
 	
 	inline virtual const sprite_type get_const_sprite_type() const
 	{

@@ -43,6 +43,13 @@ public:		// variables
 		(reinterpret_cast<const tile*>(the_powerup_gfxTiles));
 	
 public:		// functions
+	inline waffle_sprite( bool facing_left )
+	{
+		shared_constructor_code_part_1();
+		shared_constructor_code_part_2(facing_left);
+		shared_constructor_code_part_3();
+	}
+	
 	//virtual void shared_constructor_code( bool facing_left );
 	inline virtual const sprite_type get_const_sprite_type() const
 	{

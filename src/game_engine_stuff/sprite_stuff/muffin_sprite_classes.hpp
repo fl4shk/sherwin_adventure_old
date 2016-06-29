@@ -34,6 +34,13 @@ public:		// variables
 		(reinterpret_cast<const tile*>(the_powerup_gfxTiles));
 	
 public:		// functions
+	inline muffin_sprite( bool facing_left )
+	{
+		shared_constructor_code_part_1();
+		shared_constructor_code_part_2(facing_left);
+		shared_constructor_code_part_3();
+	}
+	
 	//virtual void init( bool facing_right=false );
 	inline virtual const sprite_type get_const_sprite_type() const
 	{
@@ -81,6 +88,13 @@ public:		// variables
 		(reinterpret_cast<const tile*>(the_powerup_gfxTiles));
 	
 public:		// functions
+	inline fire_muffin_sprite( bool facing_left )
+	{
+		shared_constructor_code_part_1();
+		shared_constructor_code_part_2(facing_left);
+		shared_constructor_code_part_3();
+	}
+	
 	//virtual void init( bool facing_right=false );
 	inline virtual const sprite_type get_const_sprite_type() const
 	{
@@ -128,6 +142,13 @@ public:		// variables
 		(reinterpret_cast<const tile*>(the_powerup_gfxTiles));
 	
 public:		// functions
+	inline ice_muffin_sprite( bool facing_left )
+	{
+		shared_constructor_code_part_1();
+		shared_constructor_code_part_2(facing_left);
+		shared_constructor_code_part_3();
+	}
+	
 	//virtual void init( bool facing_right=false );
 	inline virtual const sprite_type get_const_sprite_type() const
 	{
@@ -174,6 +195,13 @@ public:		// variables
 		(reinterpret_cast<const tile*>(the_powerup_gfxTiles));
 	
 public:		// functions
+	inline chocolate_muffin_sprite( bool facing_left )
+	{
+		shared_constructor_code_part_1();
+		shared_constructor_code_part_2(facing_left);
+		shared_constructor_code_part_3();
+	}
+	
 	//virtual void init( bool facing_right=false );
 	inline virtual const sprite_type get_const_sprite_type() const
 	{

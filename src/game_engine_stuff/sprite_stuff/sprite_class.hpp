@@ -174,9 +174,9 @@ public:		// functions
 	}
 	
 	
-	// When derived classes override this function, it is a good idea to
-	// still call this version.
-	virtual void shared_constructor_code_part_1();
+	// This function is NOT virtual because because it uses virtual
+	// functions.
+	void shared_constructor_code_part_1();
 	
 	
 	// Derived classes should override this function

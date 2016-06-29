@@ -119,7 +119,8 @@ void sprite_manager::allocate_sprite( sprite*& the_sprite,
 	#define generate_else_if(name) \
 		else if ( the_sprite_type == st_##name ) \
 		{ \
-			the_sprite = new (the_sprite_allocator) name##_sprite(); \
+			the_sprite = new (the_sprite_allocator) \
+				name##_sprite(facing_left); \
 			the_sprite->shared_constructor_code_part_2(facing_left); \
 		}
 	
@@ -146,7 +147,8 @@ void sprite_manager::allocate_sprite( sprite*& the_sprite,
 	#define generate_else_if(name) \
 		else if ( the_sprite_type == st_##name ) \
 		{ \
-			the_sprite = new (the_sprite_allocator) name##_sprite(); \
+			the_sprite = new (the_sprite_allocator) \
+				name##_sprite(facing_left); \
 			the_sprite->shared_constructor_code_part_2( s_in_level_pos, \
 				camera_pos, facing_left ); \
 		}

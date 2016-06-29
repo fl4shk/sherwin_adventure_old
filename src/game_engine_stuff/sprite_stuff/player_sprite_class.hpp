@@ -244,7 +244,7 @@ public:		// variables
 	
 	
 public:		// functions
-	player_sprite();
+	player_sprite( bool facing_left=false );
 	//player_sprite( bool facing_left );
 	//player_sprite( const vec2_f24p8& s_in_level_pos, 
 	//	const bg_point& camera_pos, bool facing_left );
