@@ -157,7 +157,7 @@ public:		// functions
 	static void allocate_sprite( sprite*& the_sprite, 
 		sprite_allocator& the_sprite_allocator, 
 		sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos,
-		const bg_point& camera_pos, bool facing_left )
+		const prev_curr_pair<bg_point>& camera_pos, bool facing_left )
 		__attribute__((_iwram_code));
 	
 	static void reinit_sprite_with_sprite_ipg( sprite*& the_sprite, 
@@ -171,13 +171,14 @@ public:		// functions
 	static void reinit_sprite_by_spawning( sprite*& the_sprite, 
 		sprite_allocator& the_sprite_allocator,
 		sprite_type s_the_sprite_type, const vec2_f24p8& s_in_level_pos, 
-		const bg_point& camera_pos, bool facing_left=true )
+		const prev_curr_pair<bg_point>& camera_pos, bool facing_left=true )
 		__attribute__((_iwram_code));
 	
 	
 	
 	static void init_the_player ( const vec2_f24p8& s_in_level_pos, 
-		const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos );
+		const vec2_u32& the_sublevel_size_2d, 
+		prev_curr_pair<bg_point>& camera_pos );
 	
 	static void clear_the_sprite_arrays();
 	
@@ -229,16 +230,18 @@ public:		// functions
 	
 	// The 
 	static void initial_sprite_spawning_at_start_of_level
-		( bg_point& camera_pos );
+		( prev_curr_pair<bg_point>& camera_pos_pc_pair );
 	
 	static void initial_sprite_spawning_at_intra_sublevel_warp
-		( bg_point& camera_pos, u32 sublevel_entrance_index );
+		( prev_curr_pair<bg_point>& camera_pos, 
+		u32 sublevel_entrance_index );
 	
 	// This function is put in IWRAM because when the_player warps around a
 	// particular sublevel without CHANGING sublevels, sprites need to be
 	// spawned, which can be an intensive operation.
 	static void initial_sprite_spawning_shared_code
-		( bg_point& camera_pos ) __attribute__((_iwram_code));
+		( prev_curr_pair<bg_point>& camera_pos ) 
+		__attribute__((_iwram_code));
 	
 	
 	static void initial_sprite_spawning_from_sublevel_data_old
@@ -294,8 +297,8 @@ public:		// functions
 	
 	static s32 spawn_a_player_secondary_sprite_basic
 		( sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos, 
-		const bg_point& camera_pos, bool facing_left=false ) 
-		__attribute__((_iwram_code));
+		const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
+		bool facing_left=false ) __attribute__((_iwram_code));
 	
 	// This is a temporary function.  It should be replaced by a function
 	// that inserts sprite spawning parameters into a list.  The sprites
@@ -303,12 +306,14 @@ public:		// functions
 	// spawn_sprites_if_needed().
 	// That said, this is PROBABLY good enough.
 	static void spawn_a_sprite_basic( sprite_type the_sprite_type, 
-		const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, 
+		const vec2_f24p8& s_in_level_pos, 
+		const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
 		bool facing_left=false )
 		__attribute__((_iwram_code));
 	
 	static s32 spawn_a_secondary_sprite_basic( sprite_type the_sprite_type,
-		const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, 
+		const vec2_f24p8& s_in_level_pos, 
+		const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
 		bool facing_left=false ) __attribute__((_iwram_code));
 	
 	

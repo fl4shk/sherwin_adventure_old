@@ -157,18 +157,26 @@ public:		// variables
 	//bool did_update_prev_on_screen_pos_this_frame;
 	//vec2_f24p8 prev_on_screen_pos, curr_on_screen_pos;
 	//prev_curr_pair<vec2_f24p8> on_screen_pos;
-	//bool temp_debug_thing;
+	//prev_curr_pair<vec2_s32> on_screen_pos_s32;
+	
+	vec2_f24p8 prev_prev_on_screen_pos; 
+	prev_curr_pair<vec2_f24p8> on_screen_pos;
+	vec2_s32 prev_prev_on_screen_pos_s32;
+	prev_curr_pair<vec2_s32> on_screen_pos_s32;
+	
+	bool temp_debug_thing;
 	
 	
 public:		// functions
 	
 	sprite();
 	sprite( bool facing_left );
-	sprite( const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, 
+	sprite( const vec2_f24p8& s_in_level_pos, 
+		const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
 		bool facing_left );
 	sprite( const vec2_f24p8& s_in_level_pos, 
-		const vec2_u32& the_level_size_2d, bg_point& camera_pos,
-		bool facing_left );
+		const vec2_u32& the_level_size_2d, 
+		prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left );
 	
 	
 	inline sprite( u32 s_vram_chunk_index )
@@ -191,15 +199,16 @@ public:		// functions
 	// This form of shared_constructor_code() might eventually become the
 	// default form of shared_constructor_code().
 	virtual void shared_constructor_code_part_2
-		( const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, 
+		( const vec2_f24p8& s_in_level_pos, 
+		const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
 		bool facing_left );
 	
 	// This form of shared_constructor_code() is primarily intended to be
 	// used by the_player.
 	virtual void shared_constructor_code_part_2
 		( const vec2_f24p8& s_in_level_pos, 
-		const vec2_u32& the_level_size_2d, bg_point& camera_pos,
-		bool facing_left );
+		const vec2_u32& the_level_size_2d, 
+		prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left );
 	
 	virtual void shared_constructor_code_part_3();
 	
@@ -352,7 +361,8 @@ public:		// functions
 		return get_curr_in_level_pos() - camera_pos;
 	}
 	
-	void update_on_screen_pos( const bg_point& camera_pos )
+	void update_on_screen_pos
+		( const prev_curr_pair<bg_point>& camera_pos_pc_pair )
 		__attribute__((_iwram_code));
 	
 	//inline void update_full( const bg_point& camera_pos )
@@ -464,12 +474,14 @@ public:		// functions
 	
 	// update_part_3() used to be update_part_2()
 	// The player_sprite class is the primary user of this function.
-	virtual void update_part_3( bg_point& camera_pos,
+	virtual void update_part_3
+		( prev_curr_pair<bg_point>& camera_pos_pc_pair,
 		const vec2_u32& the_level_size_2d );
 	
 	// Sprites other than player_sprite use this function.  Some sprites
 	// won't need to override this specific version.
-	virtual void update_part_3( const bg_point& camera_pos, 
+	virtual void update_part_3
+		( const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
 		int& next_oam_index );
 	
 	
@@ -505,7 +517,8 @@ public:		// functions
 	
 	// the_player is the primary user of this function
 	virtual void sprite_interaction_reponse( sprite& the_other_sprite, 
-		bg_point& camera_pos, const vec2_u32& the_level_size_2d );
+		prev_curr_pair<bg_point>& camera_pos_pc_pair, 
+		const vec2_u32& the_level_size_2d );
 	
 	
 protected:		// functions

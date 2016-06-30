@@ -47,19 +47,19 @@ sprite::sprite( bool facing_left )
 	shared_constructor_code_part_2(facing_left);
 }
 sprite::sprite( const vec2_f24p8& s_in_level_pos, 
-	const bg_point& camera_pos, bool facing_left )
+	const prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
 {
 	shared_constructor_code_part_1();
-	shared_constructor_code_part_2( s_in_level_pos, camera_pos, 
+	shared_constructor_code_part_2( s_in_level_pos, camera_pos_pc_pair, 
 		facing_left );
 }
 sprite::sprite( const vec2_f24p8& s_in_level_pos, 
-	const vec2_u32& the_level_size_2d, bg_point& camera_pos,
-	bool facing_left )
+	const vec2_u32& the_level_size_2d, 
+	prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
 {
 	shared_constructor_code_part_1();
 	shared_constructor_code_part_2( s_in_level_pos, the_level_size_2d, 
-		camera_pos, facing_left );
+		camera_pos_pc_pair, facing_left );
 }
 
 
@@ -114,8 +114,8 @@ void sprite::shared_constructor_code_part_2( bool facing_left )
 
 
 void sprite::shared_constructor_code_part_2
-	( const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, 
-	bool facing_left )
+	( const vec2_f24p8& s_in_level_pos, 
+	const prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
 {
 	shared_constructor_code_part_2(facing_left);
 	//in_level_pos.curr = s_in_level_pos 
@@ -124,18 +124,15 @@ void sprite::shared_constructor_code_part_2
 		- get_the_initial_in_level_pos_offset() );
 	
 	update_f24p8_positions();
-	update_on_screen_pos(camera_pos);
+	update_on_screen_pos(camera_pos_pc_pair);
 }
 
-void sprite::shared_constructor_code_part_3()
-{
-}
 
 // This form of shared_constructor_code() is primarily intended to be
 // used by the_player.
 void sprite::shared_constructor_code_part_2
 	( const vec2_f24p8& s_in_level_pos, const vec2_u32& the_level_size_2d, 
-	bg_point& camera_pos, bool facing_left )
+	prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
 {
 	shared_constructor_code_part_2(facing_left);
 	//in_level_pos = s_in_level_pos - get_the_initial_in_level_pos_offset();
@@ -144,7 +141,11 @@ void sprite::shared_constructor_code_part_2
 	
 	
 	update_f24p8_positions();
-	update_on_screen_pos(camera_pos);
+	update_on_screen_pos(camera_pos_pc_pair);
+}
+
+void sprite::shared_constructor_code_part_3()
+{
 }
 
 void* sprite::operator new( size_t size, 
@@ -187,9 +188,11 @@ void* sprite::operator new( size_t size,
 
 
 
-void sprite::update_on_screen_pos( const bg_point& camera_pos )
+void sprite::update_on_screen_pos
+	( const prev_curr_pair<bg_point>& camera_pos_pc_pair )
 {
-	vec2_f24p8 temp_on_screen_pos = get_on_screen_pos(camera_pos);
+	vec2_f24p8 temp_on_screen_pos = get_on_screen_pos
+		(camera_pos_pc_pair.curr);
 	//vec2_s32 temp_on_screen_pos = get_on_screen_pos_s32(camera_pos);
 	
 	////if ( !did_update_prev_on_screen_pos_this_frame )
@@ -223,8 +226,57 @@ void sprite::update_on_screen_pos( const bg_point& camera_pos )
 	{
 		the_oam_entry.show_non_affine();
 		
-		the_oam_entry.set_x_coord(temp_on_screen_pos.x.round_to_int());
-		the_oam_entry.set_y_coord(temp_on_screen_pos.y.round_to_int());
+		//temp_on_screen_pos.x = temp_on_screen_pos.x.truncate_frac_bits();
+		//temp_on_screen_pos.y = temp_on_screen_pos.y.truncate_frac_bits();
+		
+		//the_oam_entry.set_x_coord(temp_on_screen_pos.x.round_to_int());
+		//the_oam_entry.set_y_coord(temp_on_screen_pos.y.round_to_int());
+		
+		the_oam_entry.set_x_coord(temp_on_screen_pos.x.trunc_to_int());
+		the_oam_entry.set_y_coord(temp_on_screen_pos.y.trunc_to_int());
+		
+		// I am NOT sure whether this will work
+		//s32 temp_x = temp_on_screen_pos.x.round_to_int();
+		//s32 temp_y = temp_on_screen_pos.y.round_to_int();
+		
+		
+		//s32 temp_x = temp_on_screen_pos.x.round_to_int();
+		//s32 temp_y = temp_on_screen_pos.y.round_to_int();
+		//
+		//vec2_s32 camera_pos_curr_s32
+		//	( camera_pos_pc_pair.curr.x.round_to_int(),
+		//	camera_pos_pc_pair.curr.y.round_to_int() );
+		//vec2_s32 camera_pos_prev_s32
+		//	( camera_pos_pc_pair.prev.x.round_to_int(),
+		//	camera_pos_pc_pair.prev.y.round_to_int() );
+		
+		
+		if ( the_sprite_type == st_fire_muffin )
+		{
+			//next_debug_s32 = the_oam_entry.get_x_coord();
+			//next_debug_s32 = the_oam_entry.get_y_coord();
+			
+			prev_prev_on_screen_pos = on_screen_pos.prev;
+			on_screen_pos.back_up();
+			on_screen_pos.curr = temp_on_screen_pos;
+			
+			
+			prev_prev_on_screen_pos_s32 = on_screen_pos_s32.prev;
+			on_screen_pos_s32.back_up();
+			
+			on_screen_pos_s32.curr.x = the_oam_entry.get_x_coord();
+			on_screen_pos_s32.curr.y = the_oam_entry.get_y_coord();
+			
+			
+			if ( temp_debug_thing )
+			{
+				temp_debug_thing = true;
+			}
+			else // if ( !temp_debug_thing )
+			{
+				temp_debug_thing = true;
+			}
+		}
 	}
 	else
 	{
@@ -244,7 +296,12 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 	if ( ( temp_on_screen_pos.x <= make_f24p8(100) && vel.x.data < 0 ) 
 		|| ( temp_on_screen_pos.x >= make_f24p8(140) && vel.x.data > 0 ) )
 	{
-		camera_pos.x += vel.x;
+		//camera_pos.x += vel.x;
+		//s32 value_to_add = vel.x.data
+		
+		camera_pos.x += ( get_curr_in_level_pos().x 
+			- get_prev_in_level_pos().x );
+		
 	}
 	
 	//if ( ( temp_on_screen_pos.y <= make_f24p8(20) && vel.y.data < 0 ) 
@@ -256,10 +313,17 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 	auto camera_pos_y_updater = [&]( bool add ) -> void
 	{
 		if (!get_curr_on_ground())
+		//if ( ( !get_curr_on_ground() ) || ( get_curr_on_ground()
+		//	&& get_curr_in_level_pos().y != get_prev_in_level_pos().y ) )
 		{
-			camera_pos.y += vel.y;
+			//camera_pos.y += vel.y;
+			
+			camera_pos.y += ( get_curr_in_level_pos().y 
+				- get_prev_in_level_pos().y );
+			
 		}
-		else if ( get_curr_in_level_pos().y == get_prev_in_level_pos().y )
+		//else if ( get_curr_in_level_pos().y == get_prev_in_level_pos().y )
+		else
 		{
 			if (!add)
 			{
@@ -270,12 +334,12 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 				camera_pos.y += {0x400};
 			}
 		}
-		else // if ( get_curr_on_ground() && get_curr_in_level_pos().y 
-			// != get_prev_in_level_pos().y )
-		{
-			camera_pos.y += ( get_curr_in_level_pos().y 
-				- get_prev_in_level_pos().y );
-		}
+		//else // if ( get_curr_on_ground() && get_curr_in_level_pos().y 
+		//	// != get_prev_in_level_pos().y )
+		//{
+		//	camera_pos.y += ( get_curr_in_level_pos().y 
+		//		- get_prev_in_level_pos().y );
+		//}
 	};
 	
 	if ( temp_on_screen_pos.y <= make_f24p8(20) )
@@ -358,6 +422,28 @@ void sprite::update_part_1()
 {
 	did_update_in_level_pos_this_frame = did_update_on_ground_this_frame 
 		= false;
+	
+	
+	// Truncate the fractional bits if the sprite is not moving
+	// horizontally
+	if ( get_curr_in_level_pos().x == get_prev_in_level_pos().x )
+	{
+		//set_curr_in_level_pos_x
+		//	(get_curr_in_level_pos().x.truncate_frac_bits());
+		set_curr_in_level_pos_x
+			(get_curr_in_level_pos().x.with_zero_frac_bits());
+	}
+	
+	// Truncate the fractional bits if the sprite is not moving
+	// vertically
+	if ( get_curr_in_level_pos().y == get_prev_in_level_pos().y )
+	{
+		//set_curr_in_level_pos_y
+		//	(get_curr_in_level_pos().y.truncate_frac_bits());
+		set_curr_in_level_pos_y
+			(get_curr_in_level_pos().y.with_zero_frac_bits());
+	}
+	
 }
 
 void sprite::update_part_2()
@@ -371,20 +457,21 @@ void sprite::update_part_2()
 
 
 // The player_sprite_stuff class is the primary user of this function.
-void sprite::update_part_3( bg_point& camera_pos, 
+void sprite::update_part_3( prev_curr_pair<bg_point>& camera_pos_pc_pair, 
 	const vec2_u32& the_level_size_2d )
 {
 }
 
 
 
-void sprite::update_part_3( const bg_point& camera_pos, 
+void sprite::update_part_3
+	( const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
 	int& next_oam_index )
 {
 	gfx_update();
 	
 	
-	update_on_screen_pos(camera_pos);
+	update_on_screen_pos(camera_pos_pc_pair);
 	
 	copy_the_oam_entry_to_oam_mirror(next_oam_index++);
 }
@@ -1267,7 +1354,8 @@ void sprite::sprite_interaction_reponse( sprite& the_other_sprite )
 
 // the_player is the primary user of this function
 void sprite::sprite_interaction_reponse( sprite& the_other_sprite, 
-	bg_point& camera_pos, const vec2_u32& the_level_size_2d )
+	prev_curr_pair<bg_point>& camera_pos_pc_pair, 
+	const vec2_u32& the_level_size_2d )
 {
 	
 }

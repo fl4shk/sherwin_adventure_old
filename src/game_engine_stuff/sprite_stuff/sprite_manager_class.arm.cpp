@@ -327,7 +327,7 @@ void sprite_manager::despawn_sprites_if_needed
 
 s32 sprite_manager::spawn_a_player_secondary_sprite_basic
 	( sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos, 
-	const bg_point& camera_pos, bool facing_left )
+	const prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
 {
 	u32 next_sprite_index = 0;
 	
@@ -354,7 +354,7 @@ s32 sprite_manager::spawn_a_player_secondary_sprite_basic
 	//	( the_sprite_type, s_in_level_pos, camera_pos, facing_left );
 	reinit_sprite_by_spawning( the_player_secondary_sprites
 		[next_sprite_index], the_player_secondary_sprites_allocator, 
-		the_sprite_type, s_in_level_pos, camera_pos, facing_left ); 
+		the_sprite_type, s_in_level_pos, camera_pos_pc_pair, facing_left ); 
 	
 	
 	return next_sprite_index;
@@ -362,7 +362,7 @@ s32 sprite_manager::spawn_a_player_secondary_sprite_basic
 
 s32 sprite_manager::spawn_a_secondary_sprite_basic
 	( sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos, 
-	const bg_point& camera_pos, bool facing_left )
+	const prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
 {
 	u32 next_sprite_index = 0;
 	
@@ -390,7 +390,7 @@ s32 sprite_manager::spawn_a_secondary_sprite_basic
 	
 	reinit_sprite_by_spawning( the_secondary_sprites[next_sprite_index],
 		the_secondary_sprites_allocator, the_sprite_type, s_in_level_pos, 
-		camera_pos, facing_left );
+		camera_pos_pc_pair, facing_left );
 	
 	return next_sprite_index;
 }
@@ -401,8 +401,8 @@ s32 sprite_manager::spawn_a_secondary_sprite_basic
 // list would be spawned from within the function called
 // spawn_sprites_if_needed().
 void sprite_manager::spawn_a_sprite_basic( sprite_type the_sprite_type, 
-	const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, 
-	bool facing_left )
+	const vec2_f24p8& s_in_level_pos, 
+	const prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
 {
 	u32 next_sprite_index = 0;
 	
@@ -426,8 +426,8 @@ void sprite_manager::spawn_a_sprite_basic( sprite_type the_sprite_type,
 	//	s_in_level_pos, camera_pos, facing_left );
 	
 	reinit_sprite_by_spawning( the_sprites[next_sprite_index], 
-		the_sprites_allocator, the_sprite_type, s_in_level_pos, camera_pos, 
-		facing_left );
+		the_sprites_allocator, the_sprite_type, s_in_level_pos,
+		camera_pos_pc_pair, facing_left );
 	
 }
 
@@ -581,7 +581,7 @@ void sprite_manager::update_all_sprites
 	
 	//sprite_stuff_array[the_player.the_sprite_type]->update_part_2
 	//	( the_player, camera_pos_pc_pair.curr, the_sublevel_size_2d );
-	the_player->update_part_3( camera_pos_pc_pair.curr,
+	the_player->update_part_3( camera_pos_pc_pair,
 		the_sublevel_size_2d );
 	
 	auto two_sprites_coll_box_test_thing = []( sprite& the_spr,
@@ -613,7 +613,7 @@ void sprite_manager::update_all_sprites
 		// Update the sprite
 		//sprite_stuff_array[the_spr.the_sprite_type]->update_part_3
 		//	( the_spr, camera_pos_pc_pair.curr, next_oam_index );
-		the_spr.update_part_3( camera_pos_pc_pair.curr, next_oam_index );
+		the_spr.update_part_3( camera_pos_pc_pair, next_oam_index );
 		
 		for ( u32 j=0; j<num_active_sprites; ++j )
 		{
@@ -641,7 +641,7 @@ void sprite_manager::update_all_sprites
 		// Update the sprite
 		//sprite_stuff_array[the_spr.the_sprite_type]->update_part_3
 		//	( the_spr, camera_pos_pc_pair.curr, next_oam_index );
-		the_spr.update_part_3( camera_pos_pc_pair.curr, next_oam_index );
+		the_spr.update_part_3( camera_pos_pc_pair, next_oam_index );
 		
 		for ( u32 j=0; j<num_active_sprites; ++j )
 		{
@@ -669,7 +669,7 @@ void sprite_manager::update_all_sprites
 		// Update the sprite
 		//sprite_stuff_array[the_spr.the_sprite_type]->update_part_3
 		//	( the_spr, camera_pos_pc_pair.curr, next_oam_index );
-		the_spr.update_part_3( camera_pos_pc_pair.curr, next_oam_index );
+		the_spr.update_part_3( camera_pos_pc_pair, next_oam_index );
 		
 		if ( i == 0 )
 		{

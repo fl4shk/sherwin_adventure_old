@@ -61,6 +61,16 @@ void sprite_allocator::deallocate_sprite( sprite*& the_sprite )
 	
 	the_sprite->the_sprite_type = st_default;
 	
+	
+	if ( the_sprite->the_sprite_ipg != NULL )
+	{
+		if ( the_sprite->the_sprite_ipg->spawn_state == sss_active )
+		{
+			the_sprite->the_sprite_ipg->spawn_state = sss_not_active;
+		}
+		the_sprite->the_sprite_ipg = NULL;
+	}
+	
 	//u32 old_vram_chunk_index = the_sprite->get_vram_chunk_index();
 	//
 	//*the_sprite = sprite();

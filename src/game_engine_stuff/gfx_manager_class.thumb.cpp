@@ -44,6 +44,7 @@
 #include "../gfx/the_golem_enemy_gfx.h"
 #include "../gfx/the_16x16_secondary_sprites_gfx.h"
 
+bg_point gfx_manager::prev_prev_bgofs_mirror[bgofs_mirror_size];
 prev_curr_pair<bg_point> gfx_manager::bgofs_mirror[bgofs_mirror_size];
 
 // Current component arrays, stored in EWRAM as fixed24p8's for speed and
@@ -98,11 +99,62 @@ void gfx_manager::copy_bgofs_mirror_to_registers()
 	
 	for ( u32 i=0; i<4; ++i )
 	{
+		//// Truncate the fractional bits if the camera is not moving
+		//// horizontally
+		//if ( bgofs_mirror[i].curr.x == bgofs_mirror[i].prev.x )
+		//{
+		//	bgofs_mirror[i].curr.x = bgofs_mirror[i].curr.x
+		//		.with_zero_frac_bits();
+		//}
+		//
+		//// Truncate the fractional bits if the camera is not moving
+		//// vertically
+		//if ( bgofs_mirror[i].curr.y == bgofs_mirror[i].prev.y )
+		//{
+		//	bgofs_mirror[i].curr.y = bgofs_mirror[i].curr.y
+		//		.with_zero_frac_bits();
+		//}
+		
+		//vec2_f24p8 curr_bgofs_mirror_no_frac
+		//	( bgofs_mirror[i].curr.x.truncate_frac_bits(),
+		//	bgofs_mirror[i].curr.y.truncate_frac_bits() );
+		//
+		//reg_bgofs[i].x = (s16)curr_bgofs_mirror_no_frac.x.round_to_int();
+		//reg_bgofs[i].y = (s16)curr_bgofs_mirror_no_frac.y.round_to_int();
+		
+		
 		//reg_bgofs[i].x = (s16)bgofs_mirror[i].curr.x.trunc_to_int();
 		//reg_bgofs[i].y = (s16)bgofs_mirror[i].curr.y.trunc_to_int();
 		
-		reg_bgofs[i].x = (s16)bgofs_mirror[i].curr.x.round_to_int();
-		reg_bgofs[i].y = (s16)bgofs_mirror[i].curr.y.round_to_int();
+		
+		//s32 x_dir, y_dir;
+		
+		
+		//s16 temp_x = (s16)bgofs_mirror[i].curr.x.round_to_int();
+		//s16 temp_y = (s16)bgofs_mirror[i].curr.y.round_to_int();
+		s16 temp_x = (s16)bgofs_mirror[i].curr.x.trunc_to_int();
+		s16 temp_y = (s16)bgofs_mirror[i].curr.y.trunc_to_int();
+		
+		
+		//if ( bgofs_mirror[i].curr.x.get_frac_bits() == 0x80
+		//	&& bgofs_mirror[i].curr.x < bgofs_mirror[i].prev.x )
+		//{
+		//	reg_bgofs[i].x = temp_x - 1;
+		//}
+		//else
+		{
+			reg_bgofs[i].x = temp_x;
+		}
+		
+		//if ( bgofs_mirror[i].curr.y.get_frac_bits() == 0x80
+		//	&& bgofs_mirror[i].curr.y < bgofs_mirror[i].prev.y )
+		//{
+		//	reg_bgofs[i].y = temp_y - 1;
+		//}
+		//else
+		{
+			reg_bgofs[i].y = temp_y;
+		}
 		
 		//reg_bgofs[i].x 
 		//	= (s16)bgofs_mirror[i].curr.x.true_round_via_trunc();

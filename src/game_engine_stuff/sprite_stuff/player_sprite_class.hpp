@@ -252,17 +252,18 @@ public:		// functions
 	}
 	//player_sprite( bool facing_left );
 	//player_sprite( const vec2_f24p8& s_in_level_pos, 
-	//	const bg_point& camera_pos, bool facing_left );
+	//	const prev_curr_pair<bg_point>& camera_pos, bool facing_left );
 	player_sprite( const vec2_f24p8& s_in_level_pos, 
-		const vec2_u32& the_level_size_2d, bg_point& camera_pos,
-		bool facing_left );
+		const vec2_u32& the_level_size_2d, 
+		prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left );
 	
 	
 	//virtual void shared_constructor_code_part_1();
 	//virtual void shared_constructor_code_part_2( bool facing_left=false );
 	virtual void shared_constructor_code_part_2
 		( const vec2_f24p8& s_in_level_pos, 
-		const vec2_u32& the_level_size_2d, bg_point& camera_pos,
+		const vec2_u32& the_level_size_2d, 
+		prev_curr_pair<bg_point>& camera_pos_pc_pair,
 		bool facing_left=false );
 	
 	virtual void shared_constructor_code_part_3();
@@ -276,7 +277,8 @@ public:		// functions
 	
 	virtual void update_part_1();
 	virtual void update_part_2();
-	virtual void update_part_3( bg_point& camera_pos,
+	virtual void update_part_3
+		( prev_curr_pair<bg_point>& camera_pos_pc_pair,
 		const vec2_u32& the_sublevel_size_2d );
 	
 	
@@ -342,7 +344,8 @@ public:		// functions
 	
 	// Sprite-sprite interaction stuff
 	virtual void sprite_interaction_reponse( sprite& the_other_sprite, 
-		bg_point& camera_pos, const vec2_u32& the_level_size_2d );
+		prev_curr_pair<bg_point>& camera_pos, 
+		const vec2_u32& the_level_size_2d );
 	
 	
 protected:		// functions

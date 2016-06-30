@@ -141,8 +141,8 @@ void sprite_manager::allocate_sprite( sprite*& the_sprite,
 
 void sprite_manager::allocate_sprite( sprite*& the_sprite, 
 	sprite_allocator& the_sprite_allocator, sprite_type the_sprite_type, 
-	const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, 
-	bool facing_left )
+	const vec2_f24p8& s_in_level_pos, 
+	const prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
 {
 	#define generate_else_if(name) \
 		else if ( the_sprite_type == st_##name ) \
@@ -150,13 +150,13 @@ void sprite_manager::allocate_sprite( sprite*& the_sprite,
 			the_sprite = new (the_sprite_allocator) \
 				name##_sprite(facing_left); \
 			the_sprite->shared_constructor_code_part_2( s_in_level_pos, \
-				camera_pos, facing_left ); \
+				camera_pos_pc_pair, facing_left ); \
 		}
 	
 	if ( the_sprite_type == st_default )
 	{
 		the_sprite = new (the_sprite_allocator) sprite( s_in_level_pos, 
-			camera_pos, facing_left );
+			camera_pos_pc_pair, facing_left );
 	}
 	list_of_main_sprite_types(generate_else_if)
 	else
@@ -247,7 +247,8 @@ void sprite_manager::reinit_sprite_with_sprite_ipg( sprite*& the_sprite,
 
 void sprite_manager::reinit_sprite_by_spawning( sprite*& the_sprite, 
 	sprite_allocator& the_sprite_allocator, sprite_type s_the_sprite_type, 
-	const vec2_f24p8& s_in_level_pos, const bg_point& camera_pos, 
+	const vec2_f24p8& s_in_level_pos, 
+	const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
 	bool facing_left )
 {
 	the_sprite_allocator.deallocate_sprite(the_sprite);
@@ -264,12 +265,13 @@ void sprite_manager::reinit_sprite_by_spawning( sprite*& the_sprite,
 	//the_sprite->set_vram_chunk_index(old_vram_chunk_index);
 	
 	allocate_sprite( the_sprite, the_sprite_allocator, s_the_sprite_type,
-		s_in_level_pos, camera_pos, facing_left );
+		s_in_level_pos, camera_pos_pc_pair, facing_left );
 }
 
 
 void sprite_manager::init_the_player ( const vec2_f24p8& s_in_level_pos, 
-	const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos )
+	const vec2_u32& the_sublevel_size_2d, 
+	prev_curr_pair<bg_point>& camera_pos_pc_pair )
 {
 	// The player should ALWAYS use the second VRAM chunk.
 	
@@ -282,7 +284,8 @@ void sprite_manager::init_the_player ( const vec2_f24p8& s_in_level_pos,
 	the_player_sprite_allocator.deallocate_sprite(the_player);
 	
 	the_player = new (the_player_sprite_allocator) player_sprite
-		( s_in_level_pos, the_sublevel_size_2d, camera_pos, false );
+		( s_in_level_pos, the_sublevel_size_2d, camera_pos_pc_pair, 
+		false );
 	
 	the_player->set_vram_chunk_index(the_player_vram_chunk_index);
 	
@@ -293,7 +296,7 @@ void sprite_manager::init_the_player ( const vec2_f24p8& s_in_level_pos,
 	
 	the_player->update_part_1();
 	the_player->update_part_2();
-	the_player->update_part_3( camera_pos, the_sublevel_size_2d );
+	the_player->update_part_3( camera_pos_pc_pair, the_sublevel_size_2d );
 }
 
 void sprite_manager::clear_the_sprite_arrays()
@@ -392,7 +395,7 @@ void sprite_manager::init_horiz_sublevel_sprite_ipg_lists
 //}
 
 void sprite_manager::initial_sprite_spawning_at_start_of_level
-	( bg_point& camera_pos )
+	( prev_curr_pair<bg_point>& camera_pos_pc_pair )
 {
 	clear_the_sprite_arrays();
 	
@@ -408,7 +411,7 @@ void sprite_manager::initial_sprite_spawning_at_start_of_level
 	
 	init_the_player( player_initial_in_level_pos, 
 		active_level::get_the_current_sublevel_ptr().get_size_2d(),
-		camera_pos );
+		camera_pos_pc_pair );
 	
 	//init_the_sprite_arrays();
 	init_the_allocatable_sprite_arrays();
@@ -417,11 +420,12 @@ void sprite_manager::initial_sprite_spawning_at_start_of_level
 	//next_debug_u32 = player_ipg->type;
 	//nocash_soft_break();
 	
-	initial_sprite_spawning_shared_code(camera_pos);
+	initial_sprite_spawning_shared_code(camera_pos_pc_pair);
 }
 
 void sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
-	( bg_point& camera_pos, u32 sublevel_entrance_index )
+	( prev_curr_pair<bg_point>& camera_pos_pc_pair, 
+	u32 sublevel_entrance_index )
 {
 	clear_the_sprite_arrays();
 	
@@ -444,7 +448,7 @@ void sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
 	// form of changing the player's in_level_pos.
 	init_the_player( player_initial_in_level_pos, 
 		active_level::get_the_current_sublevel_ptr().get_size_2d(),
-		camera_pos );
+		camera_pos_pc_pair );
 	
 	//init_the_sprite_arrays();
 	init_the_allocatable_sprite_arrays();
@@ -453,12 +457,12 @@ void sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
 	//next_debug_u32 = player_ipg->type;
 	//nocash_soft_break();
 	
-	initial_sprite_spawning_shared_code(camera_pos);
+	initial_sprite_spawning_shared_code(camera_pos_pc_pair);
 }
 
 
 void sprite_manager::initial_sprite_spawning_shared_code
-	( bg_point& camera_pos )
+	( prev_curr_pair<bg_point>& camera_pos_pc_pair )
 {
 	//auto which_spr = the_sprites.begin();
 	auto which_spr_ptr = the_sprites.begin();
@@ -475,8 +479,14 @@ void sprite_manager::initial_sprite_spawning_shared_code
 	vec2_f24p8 camera_block_grid_pos;
 	//camera_block_grid_pos.x = make_f24p8( camera_pos.x >> 4 );
 	//camera_block_grid_pos.y = make_f24p8( camera_pos.y >> 4 );
-	camera_block_grid_pos.x = camera_pos.x.trunc_to_int() >> 4;
-	camera_block_grid_pos.y = camera_pos.y.trunc_to_int() >> 4;
+	//camera_block_grid_pos.x = camera_pos_pc_pair.curr.x.trunc_to_int() 
+	//	>> 4;
+	//camera_block_grid_pos.y = camera_pos_pc_pair.curr.y.trunc_to_int() 
+	//	>> 4;
+	camera_block_grid_pos.x = camera_pos_pc_pair.curr.x.round_to_int() 
+		>> 4;
+	camera_block_grid_pos.y = camera_pos_pc_pair.curr.y.round_to_int() 
+		>> 4;
 	
 	
 	//for ( std::forward_list<sprite_init_param_group>& which_list
@@ -503,8 +513,10 @@ void sprite_manager::initial_sprite_spawning_shared_code
 			vec2_f24p8 spr_on_screen_pos;
 			//spr_on_screen_pos.x = spr_in_level_pos.x - camera_pos_f24p8.x;
 			//spr_on_screen_pos.y = spr_in_level_pos.y - camera_pos_f24p8.y;
-			spr_on_screen_pos.x = spr_in_level_pos.x - camera_pos.x;
-			spr_on_screen_pos.y = spr_in_level_pos.y - camera_pos.y;
+			spr_on_screen_pos.x = spr_in_level_pos.x 
+				- camera_pos_pc_pair.curr.x;
+			spr_on_screen_pos.y = spr_in_level_pos.y 
+				- camera_pos_pc_pair.curr.y;
 			
 			// Don't spawn the sprite if it's HORIZONTALLY off-screen.
 			// Perhaps eventually sprites should be spawned and despawned
@@ -592,8 +604,7 @@ void sprite_manager::initial_sprite_spawning_shared_code
 			//sprite_stuff_array[the_spr->the_sprite_type]->update_part_3
 			//	( *the_spr, gfx_manager::bgofs_mirror[0].curr, 
 			//	next_oam_index );
-			the_spr->update_part_3( gfx_manager::bgofs_mirror[0].curr, 
-				next_oam_index );
+			the_spr->update_part_3( camera_pos_pc_pair, next_oam_index );
 		}
 	}
 }

@@ -46,7 +46,7 @@ public:		// variables
 	s32 data;
 	
 public:		// functions
-	// This function does TRUE rounding, or not....
+	// This function does TRUE rounding
 	inline s32 round_to_int() const;
 	
 	// This function does "regular rounding", also known as simply
@@ -57,6 +57,29 @@ public:		// functions
 	//
 	//inline s16 true_round_via_trunc_s16() const;
 	
+	inline fixed24p8 with_zero_frac_bits() const
+	{
+		fixed24p8 n_value = *this;
+		
+		if ( n_value.data < 0 )
+		{
+			s32 positive_n_value_data = -n_value.data;
+			
+			//positive_n_value_data &= ~((s32)frac_mask);
+			positive_n_value_data >>= shift;
+			positive_n_value_data <<= shift;
+			
+			n_value.data = -positive_n_value_data;
+		}
+		else if ( n_value.data > 0 )
+		{
+			//n_value.data &= ~((s32)frac_mask);
+			n_value.data >>= shift;
+			n_value.data <<= shift;
+		}
+		
+		return n_value;
+	}
 	
 	inline u8 get_frac_bits() const;
 	
@@ -128,9 +151,24 @@ inline s32 fixed24p8::round_to_int() const
 
 inline s32 fixed24p8::trunc_to_int() const
 {
+	//if ( data < 0 )
+	//{
+	//	return (s32)( ( data + ( 1 << shift ) - 1 ) >> shift );
+	//}
+	//else
+	//{
+	//	return (s32)( data >> shift );
+	//}
+	
 	if ( data < 0 )
 	{
-		return (s32)( ( data + ( 1 << shift ) - 1 ) >> shift );
+		s32 ret = -data;
+		
+		ret >>= shift;
+		
+		ret = -ret;
+		
+		return ret;
 	}
 	else
 	{
@@ -291,9 +329,24 @@ inline s16 fixed8p8::round_to_int() const
 
 inline s16 fixed8p8::trunc_to_int() const
 {
+	//if ( data < 0 )
+	//{
+	//	return (s16)( ( data + ( 1 << shift ) - 1 ) >> shift );
+	//}
+	//else
+	//{
+	//	return (s16)( data >> shift );
+	//}
+	
 	if ( data < 0 )
 	{
-		return (s16)( ( data + ( 1 << shift ) - 1 ) >> shift );
+		s16 ret = -data;
+		
+		ret >>= shift;
+		
+		ret = -ret;
+		
+		return ret;
 	}
 	else
 	{

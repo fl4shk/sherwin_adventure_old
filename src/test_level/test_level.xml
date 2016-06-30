@@ -32,20 +32,13 @@
 			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,30,33,22,22,23,0,0,0,0,0,0,0,1,
 			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,27,33,22,22,22,22,23,0,0,0,0,0,0,0,1,
 			1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,27,33,22,22,22,22,22,23,0,0,0,0,0,0,0,1,
-			1,0,0,0,0,0,0,0,1,0,0,1,0,0,0,27,33,22,22,22,22,22,22,23,0,0,0,0,0,0,0,1,
+			1,0,0,0,0,0,0,0,1,1,0,1,0,0,0,27,33,22,22,22,22,22,22,23,0,0,0,0,0,0,0,1,
 			1,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,1,
 		</block_data>
 		<sprites>
-			<sprite type="4" ibg_x_coord="7" ibg_y_coord="17" facing_right="false" ep0="0" ep1="0" ep2="0" ep3="0" width="16" height="16" />
-			<sprite type="4" ibg_x_coord="8" ibg_y_coord="17" facing_right="false" ep0="0" ep1="0" ep2="0" ep3="0" width="16" height="16" />
 			<sprite type="7" ibg_x_coord="13" ibg_y_coord="18" facing_right="false" ep0="0" ep1="0" ep2="1" ep3="0" width="16" height="32" />
-			<sprite type="3" ibg_x_coord="5" ibg_y_coord="20" facing_right="false" ep0="0" ep1="0" ep2="0" ep3="0" width="16" height="16" />
-			<sprite type="3" ibg_x_coord="6" ibg_y_coord="20" facing_right="false" ep0="0" ep1="0" ep2="0" ep3="0" width="16" height="16" />
-			<sprite type="3" ibg_x_coord="5" ibg_y_coord="21" facing_right="false" ep0="0" ep1="0" ep2="0" ep3="0" width="16" height="16" />
-			<sprite type="3" ibg_x_coord="6" ibg_y_coord="21" facing_right="false" ep0="0" ep1="0" ep2="0" ep3="0" width="16" height="16" />
 			<sprite type="1" ibg_x_coord="3" ibg_y_coord="29" facing_right="false" ep0="0" ep1="0" ep2="0" ep3="0" width="16" height="32" />
 			<sprite type="7" ibg_x_coord="5" ibg_y_coord="29" facing_right="false" ep0="1" ep1="0" ep2="0" ep3="0" width="16" height="32" />
-			<sprite type="4" ibg_x_coord="9" ibg_y_coord="30" facing_right="false" ep0="0" ep1="0" ep2="0" ep3="0" width="16" height="16" />
 			<sprite type="4" ibg_x_coord="10" ibg_y_coord="30" facing_right="false" ep0="0" ep1="0" ep2="0" ep3="0" width="16" height="16" />
 		</sprites>
 	</sublevel>

@@ -81,7 +81,7 @@ void active_level_manager::load_sublevel_basic( u32 n_sublevel_index )
 	update_sublevel_in_screenblock_mirror_2d();
 	
 	sprite_manager::initial_sprite_spawning_at_start_of_level
-		(gfx_manager::bgofs_mirror[0].curr);
+		(gfx_manager::bgofs_mirror[0]);
 	
 	update_sublevel_in_screenblock_mirror_2d();
 	
@@ -123,7 +123,7 @@ void active_level_manager::load_sublevel_at_intra_sublevel_warp
 	
 	
 	sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
-		( gfx_manager::bgofs_mirror[0].curr, sublevel_entrance_index );
+		( gfx_manager::bgofs_mirror[0], sublevel_entrance_index );
 	update_sublevel_in_screenblock_mirror_2d();
 	
 	game_manager::curr_game_mode = gm_in_sublevel;

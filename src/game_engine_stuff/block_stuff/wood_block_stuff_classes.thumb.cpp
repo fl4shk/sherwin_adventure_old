@@ -77,7 +77,7 @@ void wood_block_with_st_waffle_stuff::strongly_hit_response
 		make_f24p8(spawn_block_grid_coord.y * num_pixels_per_block_col) );
 	
 	sprite_manager::spawn_a_sprite_basic( the_spawnable_sprite_type, 
-		spawn_in_level_pos, gfx_manager::bgofs_mirror[0].curr, false );
+		spawn_in_level_pos, gfx_manager::bgofs_mirror[0], false );
 	
 	active_level::persistent_block_data_arrays
 		[active_level::the_current_active_sublevel_index]
@@ -108,7 +108,7 @@ void wood_block_with_st_muffin_stuff::strongly_hit_response
 		make_f24p8(spawn_block_grid_coord.y * num_pixels_per_block_col) );
 	
 	sprite_manager::spawn_a_sprite_basic( the_spawnable_sprite_type, 
-		spawn_in_level_pos, gfx_manager::bgofs_mirror[0].curr, false );
+		spawn_in_level_pos, gfx_manager::bgofs_mirror[0], false );
 	
 	active_level::persistent_block_data_arrays
 		[active_level::the_current_active_sublevel_index]
@@ -139,7 +139,7 @@ void wood_block_with_st_fire_muffin_stuff::strongly_hit_response
 		make_f24p8(spawn_block_grid_coord.y * num_pixels_per_block_col) );
 	
 	sprite_manager::spawn_a_sprite_basic( the_spawnable_sprite_type, 
-		spawn_in_level_pos, gfx_manager::bgofs_mirror[0].curr, false );
+		spawn_in_level_pos, gfx_manager::bgofs_mirror[0], false );
 	
 	active_level::persistent_block_data_arrays
 		[active_level::the_current_active_sublevel_index]
@@ -169,7 +169,7 @@ void wood_block_with_st_ice_muffin_stuff::strongly_hit_response
 		make_f24p8(spawn_block_grid_coord.y * num_pixels_per_block_col) );
 	
 	sprite_manager::spawn_a_sprite_basic( the_spawnable_sprite_type, 
-		spawn_in_level_pos, gfx_manager::bgofs_mirror[0].curr, false );
+		spawn_in_level_pos, gfx_manager::bgofs_mirror[0], false );
 	
 	active_level::persistent_block_data_arrays
 		[active_level::the_current_active_sublevel_index]
@@ -199,7 +199,7 @@ void wood_block_with_st_chocolate_muffin_stuff::strongly_hit_response
 		make_f24p8(spawn_block_grid_coord.y * num_pixels_per_block_col) );
 	
 	sprite_manager::spawn_a_sprite_basic( the_spawnable_sprite_type, 
-		spawn_in_level_pos, gfx_manager::bgofs_mirror[0].curr, false );
+		spawn_in_level_pos, gfx_manager::bgofs_mirror[0], false );
 	
 	active_level::persistent_block_data_arrays
 		[active_level::the_current_active_sublevel_index]

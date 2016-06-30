@@ -141,12 +141,12 @@ const vec2_f24p8 player_sprite::the_initial_in_level_pos_offset
 //	= { {8 << fixed24p8::shift}, {0 << fixed24p8::shift} };
 
 player_sprite::player_sprite( const vec2_f24p8& s_in_level_pos, 
-	const vec2_u32& the_level_size_2d, bg_point& camera_pos,
-	bool facing_left )
+	const vec2_u32& the_level_size_2d, 
+	prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
 {
 	shared_constructor_code_part_1();
 	shared_constructor_code_part_2( s_in_level_pos, the_level_size_2d, 
-		camera_pos, facing_left );
+		camera_pos_pc_pair, facing_left );
 	shared_constructor_code_part_3();
 }
 
@@ -158,7 +158,7 @@ player_sprite::player_sprite( const vec2_f24p8& s_in_level_pos,
 
 void player_sprite::shared_constructor_code_part_2
 	( const vec2_f24p8& s_in_level_pos, const vec2_u32& the_level_size_2d,
-	bg_point& camera_pos, bool facing_left )
+	prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
 {
 	sprite::shared_constructor_code_part_2(facing_left);
 	
@@ -168,11 +168,11 @@ void player_sprite::shared_constructor_code_part_2
 
 	
 	update_f24p8_positions();
-	update_on_screen_pos(camera_pos);
+	update_on_screen_pos(camera_pos_pc_pair);
 	
-	center_camera_almost(camera_pos);
+	center_camera_almost(camera_pos_pc_pair.curr);
 	active_level_manager::correct_bg0_scroll_mirror(the_level_size_2d);
-	update_on_screen_pos(camera_pos);
+	update_on_screen_pos(camera_pos_pc_pair);
 	copy_the_oam_entry_to_oam_mirror
 		(sprite_manager::the_player_oam_index);
 	
@@ -236,7 +236,7 @@ void player_sprite::update_part_2()
 			pickaxe_sprite_slot 
 				= sprite_manager::spawn_a_player_secondary_sprite_basic
 				( st_player_pickaxe, get_curr_in_level_pos(),
-				gfx_manager::bgofs_mirror[0].curr,
+				gfx_manager::bgofs_mirror[0],
 				the_oam_entry.get_hflip_status() );
 			
 			if ( pickaxe_sprite_slot != -1 )
@@ -371,7 +371,8 @@ void player_sprite::update_part_2()
 
 
 
-void player_sprite::update_part_3( bg_point& camera_pos, 
+void player_sprite::update_part_3
+	( prev_curr_pair<bg_point>& camera_pos_pc_pair, 
 	const vec2_u32& the_sublevel_size_2d )
 {
 	// Walk frame stuff
@@ -390,7 +391,7 @@ void player_sprite::update_part_3( bg_point& camera_pos,
 	
 	for ( sprite* spr : sprite_manager::the_sprites )
 	{
-		sprite_interaction_reponse( *spr, camera_pos,
+		sprite_interaction_reponse( *spr, camera_pos_pc_pair,
 			the_sublevel_size_2d );
 		
 		if ( warped_to_other_sublevel_this_frame )
@@ -399,7 +400,7 @@ void player_sprite::update_part_3( bg_point& camera_pos,
 		}
 	}
 	
-	//update_on_screen_pos(camera_pos);
+	//update_on_screen_pos(camera_pos_pc_pair);
 	
 	if ( warped_this_frame && !warped_to_other_sublevel_this_frame )
 	{
@@ -407,21 +408,22 @@ void player_sprite::update_part_3( bg_point& camera_pos,
 	}
 	else
 	{
-		camera_follow_basic(camera_pos);
+		camera_follow_basic(camera_pos_pc_pair.curr);
 	}
 	
 	active_level_manager::correct_bg0_scroll_mirror(the_sublevel_size_2d);
 	
-	update_on_screen_pos(camera_pos);
+	update_on_screen_pos(camera_pos_pc_pair);
 	
 	// Despawn sprites if the_player warped from one part of the current
 	// sublevel to another part of the current sublevel, if they are
 	// offscreen.  Also, spawn sprites that are in the new area.
 	if ( warped_this_frame && !warped_to_other_sublevel_this_frame )
 	{
-		sprite_manager::despawn_sprites_if_needed(camera_pos);
+		sprite_manager::despawn_sprites_if_needed(camera_pos_pc_pair.curr);
 		
-		sprite_manager::initial_sprite_spawning_shared_code(camera_pos);
+		sprite_manager::initial_sprite_spawning_shared_code
+			(camera_pos_pc_pair);
 	}
 	
 	if ( player_sprite::remaining_hp < 0 )
@@ -1189,7 +1191,8 @@ void player_sprite::handle_jumping_stuff( u32 is_jump_key_hit,
 
 // Sprite-sprite interaction stuff
 void player_sprite::sprite_interaction_reponse( sprite& the_other_sprite, 
-	bg_point& camera_pos, const vec2_u32& the_level_size_2d )
+	prev_curr_pair<bg_point>& camera_pos_pc_pair, 
+	const vec2_u32& the_level_size_2d )
 {
 	switch ( the_other_sprite.the_sprite_type )
 	{
@@ -1254,12 +1257,12 @@ void player_sprite::sprite_interaction_reponse( sprite& the_other_sprite,
 					- get_the_initial_in_level_pos_offset().y );
 				
 				update_f24p8_positions();
-				update_on_screen_pos(camera_pos);
+				update_on_screen_pos(camera_pos_pc_pair);
 				
-				center_camera_almost(camera_pos);
+				center_camera_almost(camera_pos_pc_pair.curr);
 				active_level_manager::correct_bg0_scroll_mirror
 					(the_level_size_2d);
-				update_on_screen_pos(camera_pos);
+				update_on_screen_pos(camera_pos_pc_pair);
 				
 			}
 			break;

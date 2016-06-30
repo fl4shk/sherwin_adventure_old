@@ -137,6 +137,8 @@ public:		// variables and constants
 	
 	static const u32 bgofs_mirror_size = 4;
 	
+	static bg_point prev_prev_bgofs_mirror[bgofs_mirror_size]
+		__attribute__((_iwram));
 	static prev_curr_pair<bg_point> bgofs_mirror[bgofs_mirror_size]
 		__attribute__((_iwram));
 	
@@ -204,10 +206,16 @@ public:		// functions
 	
 	static inline void back_up_bgofs_mirror()
 	{
-		bgofs_mirror[0].back_up();
-		bgofs_mirror[1].back_up();
-		bgofs_mirror[2].back_up();
-		bgofs_mirror[3].back_up();
+		//bgofs_mirror[0].back_up();
+		//bgofs_mirror[1].back_up();
+		//bgofs_mirror[2].back_up();
+		//bgofs_mirror[3].back_up();
+		
+		for ( u32 i=0; i<bgofs_mirror_size; ++i )
+		{
+			prev_prev_bgofs_mirror[i] = bgofs_mirror[i].prev;
+			bgofs_mirror[i].back_up();
+		}
 	}
 
 	static void copy_bgofs_mirror_to_registers();
