@@ -26,7 +26,7 @@
 
 
 
-void waffle_sprite::update_part_1()
+void waffle_sprite::update_part_2()
 {
 	// I can't remember why I needed to save the initial position of waffle
 	// sprites.  Eh.
@@ -40,8 +40,10 @@ void waffle_sprite::update_part_1()
 	{
 		initial_pos_was_set = true;
 		
-		initial_pos_x = in_level_pos.x.data;
-		initial_pos_y = in_level_pos.y.data;
+		//initial_pos_x = in_level_pos.x.data;
+		//initial_pos_y = in_level_pos.y.data;
+		initial_pos_x = get_curr_in_level_pos().x.data;
+		initial_pos_y = get_curr_in_level_pos().y.data;
 		
 		move_timer = move_timer_start;
 		
@@ -82,8 +84,10 @@ void waffle_sprite::block_coll_response_left_16x16
 	s32& move_timer = misc_data_s[sdi_move_timer];
 	
 	
-	in_level_pos.x = make_f24p8( ( lt_coll_result.coord.x + 1 ) * 16 )
-		- cb_pos_offset.x;
+	//in_level_pos.x = make_f24p8( ( lt_coll_result.coord.x + 1 ) * 16 )
+	//	- cb_pos_offset.x;
+	set_curr_in_level_pos_x( make_f24p8( ( lt_coll_result.coord.x + 1 ) 
+		* 16 ) - cb_pos_offset.x );
 	
 	move_timer = move_timer_start;
 	
@@ -98,9 +102,11 @@ void waffle_sprite::block_coll_response_right_16x16
 {
 	s32& move_timer = misc_data_s[sdi_move_timer];
 	
-	in_level_pos.x = make_f24p8( rt_coll_result.coord.x * 16 )
-		- the_coll_box.size.x - cb_pos_offset.x;
-		//- make_f24p8(get_shape_size_as_vec2().x);
+	//in_level_pos.x = make_f24p8( rt_coll_result.coord.x * 16 )
+	//	- the_coll_box.size.x - cb_pos_offset.x;
+	//	//- make_f24p8(get_shape_size_as_vec2().x);
+	set_curr_in_level_pos_x( make_f24p8( rt_coll_result.coord.x * 16 )
+		- the_coll_box.size.x - cb_pos_offset.x );
 	
 	
 	move_timer = move_timer_start;

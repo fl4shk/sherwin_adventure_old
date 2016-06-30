@@ -274,7 +274,9 @@ void sprite_manager::despawn_sprites_if_needed
 		
 		if ( spr != NULL )
 		{
-			fixed24p8 spr_on_screen_pos_x = spr->in_level_pos.x 
+			//fixed24p8 spr_on_screen_pos_x = spr->in_level_pos.x 
+			//	- camera_pos.x;
+			fixed24p8 spr_on_screen_pos_x = spr->get_curr_in_level_pos().x 
 				- camera_pos.x;
 			
 			if ( !( spr_on_screen_pos_x.data >= max_left
@@ -434,11 +436,6 @@ void sprite_manager::update_all_sprites
 	( const vec2_u32& the_sublevel_size_2d, 
 	prev_curr_pair<bg_point>& camera_pos_pc_pair )
 {
-	//sprite_stuff_array[the_player.the_sprite_type]->update_part_1
-	//	(the_player);
-	the_player->update_part_1();
-	
-	
 	u32 num_active_player_secondary_sprites = 0, num_active_sprites = 0, 
 		num_active_secondary_sprites = 0;
 	
@@ -517,6 +514,12 @@ void sprite_manager::update_all_sprites
 	
 	
 	
+	//sprite_stuff_array[the_player.the_sprite_type]->update_part_1
+	//	(the_player);
+	the_player->update_part_1();
+	
+	
+	
 	auto update_part_1_for_active_sprites 
 		= []( u32 num_active_sprites_in_category, 
 		sprite** active_sprites_arr ) -> void
@@ -544,10 +547,41 @@ void sprite_manager::update_all_sprites
 	update_part_1_for_active_sprites( num_active_sprites,
 		the_active_sprites.data() );
 	
+	the_player->update_part_2();
+	
+	
+	auto update_part_2_for_active_sprites 
+		= []( u32 num_active_sprites_in_category, 
+		sprite** active_sprites_arr ) -> void
+	{
+		for ( u32 i=0; i<num_active_sprites_in_category; ++i )
+		{
+			sprite& the_spr = *(active_sprites_arr[i]);
+			//sprite_stuff_array[the_spr.the_sprite_type]
+			//	->update_part_2(the_spr);
+			the_spr.update_part_2();
+		}
+	};
+	
+	
+	// Update the currently-active secondary sprites "claimed" by
+	// the_player.
+	update_part_2_for_active_sprites( num_active_player_secondary_sprites,
+		the_active_player_secondary_sprites.data() );
+	
+	// Update the currently-active secondary sprites.
+	update_part_2_for_active_sprites( num_active_secondary_sprites,
+		the_active_secondary_sprites.data() );
+	
+	// Update the currently-active sprites.
+	update_part_2_for_active_sprites( num_active_sprites,
+		the_active_sprites.data() );
+	
+	
 	
 	//sprite_stuff_array[the_player.the_sprite_type]->update_part_2
 	//	( the_player, camera_pos_pc_pair.curr, the_sublevel_size_2d );
-	the_player->update_part_2( camera_pos_pc_pair.curr,
+	the_player->update_part_3( camera_pos_pc_pair.curr,
 		the_sublevel_size_2d );
 	
 	auto two_sprites_coll_box_test_thing = []( sprite& the_spr,
@@ -577,9 +611,9 @@ void sprite_manager::update_all_sprites
 		}
 		
 		// Update the sprite
-		//sprite_stuff_array[the_spr.the_sprite_type]->update_part_2
+		//sprite_stuff_array[the_spr.the_sprite_type]->update_part_3
 		//	( the_spr, camera_pos_pc_pair.curr, next_oam_index );
-		the_spr.update_part_2( camera_pos_pc_pair.curr, next_oam_index );
+		the_spr.update_part_3( camera_pos_pc_pair.curr, next_oam_index );
 		
 		for ( u32 j=0; j<num_active_sprites; ++j )
 		{
@@ -605,9 +639,9 @@ void sprite_manager::update_all_sprites
 		}
 		
 		// Update the sprite
-		//sprite_stuff_array[the_spr.the_sprite_type]->update_part_2
+		//sprite_stuff_array[the_spr.the_sprite_type]->update_part_3
 		//	( the_spr, camera_pos_pc_pair.curr, next_oam_index );
-		the_spr.update_part_2( camera_pos_pc_pair.curr, next_oam_index );
+		the_spr.update_part_3( camera_pos_pc_pair.curr, next_oam_index );
 		
 		for ( u32 j=0; j<num_active_sprites; ++j )
 		{
@@ -633,9 +667,9 @@ void sprite_manager::update_all_sprites
 		}
 		
 		// Update the sprite
-		//sprite_stuff_array[the_spr.the_sprite_type]->update_part_2
+		//sprite_stuff_array[the_spr.the_sprite_type]->update_part_3
 		//	( the_spr, camera_pos_pc_pair.curr, next_oam_index );
-		the_spr.update_part_2( camera_pos_pc_pair.curr, next_oam_index );
+		the_spr.update_part_3( camera_pos_pc_pair.curr, next_oam_index );
 		
 		if ( i == 0 )
 		{

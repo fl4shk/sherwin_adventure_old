@@ -162,7 +162,11 @@ void player_sprite::shared_constructor_code_part_2
 {
 	sprite::shared_constructor_code_part_2(facing_left);
 	
-	in_level_pos = s_in_level_pos - get_the_initial_in_level_pos_offset();
+	//in_level_pos = s_in_level_pos - get_the_initial_in_level_pos_offset();
+	set_curr_in_level_pos( s_in_level_pos 
+		- get_the_initial_in_level_pos_offset() );
+
+	
 	update_f24p8_positions();
 	update_on_screen_pos(camera_pos);
 	
@@ -213,7 +217,15 @@ void player_sprite::shared_constructor_code_part_3()
 //		( get_palette_slot() );
 //}
 
-void player_sprite::update_part_1() 
+void player_sprite::update_part_1()
+{
+	sprite::update_part_1();
+	warped_this_frame = false;
+	warped_to_other_sublevel_this_frame = false;
+}
+
+
+void player_sprite::update_part_2() 
 {
 	gfx_update();
 	
@@ -223,7 +235,7 @@ void player_sprite::update_part_1()
 		{
 			pickaxe_sprite_slot 
 				= sprite_manager::spawn_a_player_secondary_sprite_basic
-				( st_player_pickaxe, in_level_pos,
+				( st_player_pickaxe, get_curr_in_level_pos(),
 				gfx_manager::bgofs_mirror[0].curr,
 				the_oam_entry.get_hflip_status() );
 			
@@ -244,7 +256,7 @@ void player_sprite::update_part_1()
 		//}
 	}
 	
-	if ( key_hit(key_b) && on_ground )
+	if ( key_hit(key_b) && get_curr_on_ground() )
 	{
 		if (!run_toggle)
 		{
@@ -282,7 +294,7 @@ void player_sprite::update_part_1()
 		}
 		
 		
-		//if ( on_ground && !swinging_pickaxe )
+		//if ( get_curr_on_ground() && !swinging_pickaxe )
 		if (!swinging_pickaxe)
 		{
 			the_oam_entry.enable_hflip();
@@ -311,7 +323,7 @@ void player_sprite::update_part_1()
 		}
 		
 		
-		//if ( on_ground && !swinging_pickaxe )
+		//if ( get_curr_on_ground() && !swinging_pickaxe )
 		if (!swinging_pickaxe)
 		{
 			the_oam_entry.disable_hflip();
@@ -329,7 +341,7 @@ void player_sprite::update_part_1()
 		}
 		
 		// Don't allow speed changing when in the air
-		else if (on_ground)
+		else if (get_curr_on_ground())
 		{
 			if ( vel.x > (fixed24p8){0} )
 			{
@@ -359,7 +371,7 @@ void player_sprite::update_part_1()
 
 
 
-void player_sprite::update_part_2( bg_point& camera_pos, 
+void player_sprite::update_part_3( bg_point& camera_pos, 
 	const vec2_u32& the_sublevel_size_2d )
 {
 	// Walk frame stuff
@@ -376,9 +388,6 @@ void player_sprite::update_part_2( bg_point& camera_pos,
 	update_frames_and_frame_timers();
 	
 	
-	warped_this_frame = false;
-	warped_to_other_sublevel_this_frame = false;
-	
 	for ( sprite* spr : sprite_manager::the_sprites )
 	{
 		sprite_interaction_reponse( *spr, camera_pos,
@@ -392,7 +401,14 @@ void player_sprite::update_part_2( bg_point& camera_pos,
 	
 	//update_on_screen_pos(camera_pos);
 	
-	camera_follow_basic(camera_pos);
+	if ( warped_this_frame && !warped_to_other_sublevel_this_frame )
+	{
+		
+	}
+	else
+	{
+		camera_follow_basic(camera_pos);
+	}
 	
 	active_level_manager::correct_bg0_scroll_mirror(the_sublevel_size_2d);
 	
@@ -456,7 +472,7 @@ void player_sprite::update_frames_and_frame_timers()
 			= frm_slot_weapon_swing_ground_still_0;
 	}
 	
-	if (on_ground)
+	if (get_curr_on_ground())
 	{
 		auto lambda_func_for_else_if = [&]( const u32 frame_timer_end )
 			-> void
@@ -521,7 +537,7 @@ void player_sprite::update_frames_and_frame_timers()
 			active_walk_frame_slot = frm_slot_walk_3;
 		}
 	}
-	else //if (!on_ground)
+	else //if (!get_curr_on_ground())
 	{
 		active_walk_frame_slot = frm_slot_walk_2;
 	}
@@ -575,7 +591,7 @@ void player_sprite::update_frames_and_frame_timers()
 					//active_pickaxe_swing_frame_slot 
 					//	= frm_slot_weapon_swing_ground_still_0;
 					
-					//if ( speed == (fixed24p8){0} && on_ground 
+					//if ( speed == (fixed24p8){0} && get_curr_on_ground() 
 					//	&& pickaxe_swing_frame_timer 
 					//	>= pickaxe_swing_still_final_frame_timer_end )
 					//{
@@ -583,7 +599,7 @@ void player_sprite::update_frames_and_frame_timers()
 					//	swinging_pickaxe = false;
 					//}
 					//else if ( speed != (fixed24p8){0} 
-					//	|| !on_ground )
+					//	|| !get_curr_on_ground() )
 					//{
 					//	pickaxe_swing_frame_timer = 0;
 					//	swinging_pickaxe = false;
@@ -685,13 +701,19 @@ void player_sprite::update_the_pickaxe()
 					= player_pickaxe_sprite::frm_slot_angle_45;
 				if ( !the_oam_entry.get_hflip_status() )
 				{
-					the_pickaxe.in_level_pos = in_level_pos
-						+ (vec2_f24p8){ make_f24p8(-14), make_f24p8(0) };
+					//the_pickaxe.in_level_pos = in_level_pos
+					//	+ (vec2_f24p8){ make_f24p8(-14), make_f24p8(0) };
+					the_pickaxe.set_curr_in_level_pos
+						( get_curr_in_level_pos() 
+						+ (vec2_f24p8){ make_f24p8(-14), make_f24p8(0) } );
 				}
 				else //if ( the_oam_entry.get_hflip_status() )
 				{
-					the_pickaxe.in_level_pos = in_level_pos
-						+ (vec2_f24p8){ make_f24p8(14), make_f24p8(0) };
+					//the_pickaxe.in_level_pos = in_level_pos
+					//	+ (vec2_f24p8){ make_f24p8(14), make_f24p8(0) };
+					the_pickaxe.set_curr_in_level_pos
+						( get_curr_in_level_pos()
+						+ (vec2_f24p8){ make_f24p8(14), make_f24p8(0) } );
 				}
 				
 				the_pickaxe.update_f24p8_positions();
@@ -703,20 +725,30 @@ void player_sprite::update_the_pickaxe()
 					= player_pickaxe_sprite::frm_slot_angle_23;
 				if ( !the_oam_entry.get_hflip_status() )
 				{
-					the_pickaxe.in_level_pos = in_level_pos
-						+ (vec2_f24p8){ make_f24p8(-10), make_f24p8(-2) };
+					//the_pickaxe.in_level_pos = in_level_pos
+					//	+ (vec2_f24p8){ make_f24p8(-10), make_f24p8(-2) };
+					the_pickaxe.set_curr_in_level_pos
+						( get_curr_in_level_pos()
+						+ (vec2_f24p8){ make_f24p8(-10), 
+						make_f24p8(-2) } );
 				}
 				else //if ( the_oam_entry.get_hflip_status() )
 				{
-					the_pickaxe.in_level_pos = in_level_pos
-						+ (vec2_f24p8){ make_f24p8(10), make_f24p8(-2) };
+					//the_pickaxe.in_level_pos = in_level_pos
+					//	+ (vec2_f24p8){ make_f24p8(10), make_f24p8(-2) };
+					the_pickaxe.set_curr_in_level_pos( 
+						get_curr_in_level_pos()
+						+ (vec2_f24p8){ make_f24p8(10), make_f24p8(-2) } );
 				}
-				//if ( ( speed != (fixed24p8){0} && on_ground )
-				//	|| !on_ground )
-				if ( ( vel.x != (fixed24p8){0} && on_ground ) 
-					|| !on_ground )
+				//if ( ( speed != (fixed24p8){0} && get_curr_on_ground() )
+				//	|| !get_curr_on_ground() )
+				if ( ( vel.x != (fixed24p8){0} && get_curr_on_ground() ) 
+					|| !get_curr_on_ground() )
 				{
-					the_pickaxe.in_level_pos.y -= make_f24p8(1);
+					//the_pickaxe.in_level_pos.y -= make_f24p8(1);
+					the_pickaxe.set_curr_in_level_pos_y
+						( the_pickaxe.get_curr_in_level_pos().y 
+						- make_f24p8(1) );
 				}
 				
 				the_pickaxe.update_f24p8_positions();
@@ -728,20 +760,29 @@ void player_sprite::update_the_pickaxe()
 					= player_pickaxe_sprite::frm_slot_angle_0;
 				if ( !the_oam_entry.get_hflip_status() )
 				{
-					the_pickaxe.in_level_pos = in_level_pos
-						+ (vec2_f24p8){ make_f24p8(-1), make_f24p8(-4) };
+					//the_pickaxe.in_level_pos = in_level_pos
+					//	+ (vec2_f24p8){ make_f24p8(-1), make_f24p8(-4) };
+					the_pickaxe.set_curr_in_level_pos
+						( get_curr_in_level_pos()
+						+ (vec2_f24p8){ make_f24p8(-1), make_f24p8(-4) } );
 				}
 				else //if ( the_oam_entry.get_hflip_status() )
 				{
-					the_pickaxe.in_level_pos = in_level_pos
-						+ (vec2_f24p8){ make_f24p8(1), make_f24p8(-4) };
+					//the_pickaxe.in_level_pos = in_level_pos
+					//	+ (vec2_f24p8){ make_f24p8(1), make_f24p8(-4) };
+					the_pickaxe.set_curr_in_level_pos
+						( get_curr_in_level_pos()
+						+ (vec2_f24p8){ make_f24p8(1), make_f24p8(-4) } );
 				}
-				//if ( ( speed != (fixed24p8){0} && on_ground )
-				//	|| !on_ground )
-				if ( ( vel.x != (fixed24p8){0} && on_ground ) 
-					|| !on_ground )
+				//if ( ( speed != (fixed24p8){0} && get_curr_on_ground() )
+				//	|| !get_curr_on_ground() )
+				if ( ( vel.x != (fixed24p8){0} && get_curr_on_ground() ) 
+					|| !get_curr_on_ground() )
 				{
-					the_pickaxe.in_level_pos.y -= make_f24p8(1);
+					//the_pickaxe.in_level_pos.y -= make_f24p8(1);
+					the_pickaxe.set_curr_in_level_pos_y
+						( the_pickaxe.get_curr_in_level_pos().y 
+						- make_f24p8(1) );
 				}
 				
 				the_pickaxe.update_f24p8_positions();
@@ -753,20 +794,29 @@ void player_sprite::update_the_pickaxe()
 					player_pickaxe_sprite::frm_slot_angle_23;
 				if ( !the_oam_entry.get_hflip_status() )
 				{
-					the_pickaxe.in_level_pos = in_level_pos
-						+ (vec2_f24p8){ make_f24p8(7), make_f24p8(-2) };
+					//the_pickaxe.in_level_pos = in_level_pos
+					//	+ (vec2_f24p8){ make_f24p8(7), make_f24p8(-2) };
+					the_pickaxe.set_curr_in_level_pos
+						( get_curr_in_level_pos()
+						+ (vec2_f24p8){ make_f24p8(7), make_f24p8(-2) } );
 				}
 				else //if ( the_oam_entry.get_hflip_status() )
 				{
-					the_pickaxe.in_level_pos = in_level_pos
-						+ (vec2_f24p8){ make_f24p8(-7), make_f24p8(-2) };
+					//the_pickaxe.in_level_pos = in_level_pos
+					//	+ (vec2_f24p8){ make_f24p8(-7), make_f24p8(-2) };
+					the_pickaxe.set_curr_in_level_pos
+						( get_curr_in_level_pos()
+						+ (vec2_f24p8){ make_f24p8(-7), make_f24p8(-2) } );
 				}
-				//if ( ( speed != (fixed24p8){0} && on_ground )
-				//	|| !on_ground )
-				if ( ( vel.x != (fixed24p8){0} && on_ground ) 
-					|| !on_ground )
+				//if ( ( speed != (fixed24p8){0} && get_curr_on_ground() )
+				//	|| !get_curr_on_ground() )
+				if ( ( vel.x != (fixed24p8){0} && get_curr_on_ground() ) 
+					|| !get_curr_on_ground() )
 				{
-					the_pickaxe.in_level_pos.y -= make_f24p8(1);
+					//the_pickaxe.in_level_pos.y -= make_f24p8(1);
+					the_pickaxe.set_curr_in_level_pos_y
+						( the_pickaxe.get_curr_in_level_pos().y 
+						- make_f24p8(1) );
 				}
 				
 				the_pickaxe.update_f24p8_positions();
@@ -778,20 +828,29 @@ void player_sprite::update_the_pickaxe()
 					= player_pickaxe_sprite::frm_slot_angle_45;
 				if ( !the_oam_entry.get_hflip_status() )
 				{
-					the_pickaxe.in_level_pos = in_level_pos
-						+ (vec2_f24p8){ make_f24p8(11), make_f24p8(3) };
+					//the_pickaxe.in_level_pos = in_level_pos
+					//	+ (vec2_f24p8){ make_f24p8(11), make_f24p8(3) };
+					the_pickaxe.set_curr_in_level_pos
+						( get_curr_in_level_pos()
+						+ (vec2_f24p8){ make_f24p8(11), make_f24p8(3) } );
 				}
 				else //if ( the_oam_entry.get_hflip_status() )
 				{
-					the_pickaxe.in_level_pos = in_level_pos
-						+ (vec2_f24p8){ make_f24p8(-11), make_f24p8(3) };
+					//the_pickaxe.in_level_pos = in_level_pos
+					//	+ (vec2_f24p8){ make_f24p8(-11), make_f24p8(3) };
+					the_pickaxe.set_curr_in_level_pos
+						( get_curr_in_level_pos()
+						+ (vec2_f24p8){ make_f24p8(-11), make_f24p8(3) } );
 				}
-				//if ( ( speed != (fixed24p8){0} && on_ground )
-				//	|| !on_ground )
-				if ( ( vel.x != (fixed24p8){0} && on_ground ) 
-					|| !on_ground )
+				//if ( ( speed != (fixed24p8){0} && get_curr_on_ground() )
+				//	|| !get_curr_on_ground() )
+				if ( ( vel.x != (fixed24p8){0} && get_curr_on_ground() ) 
+					|| !get_curr_on_ground() )
 				{
-					the_pickaxe.in_level_pos.y -= make_f24p8(2);
+					//the_pickaxe.in_level_pos.y -= make_f24p8(2);
+					the_pickaxe.set_curr_in_level_pos_y
+						( the_pickaxe.get_curr_in_level_pos().y 
+						- make_f24p8(2) );
 				}
 				
 				the_pickaxe.update_f24p8_positions();
@@ -804,20 +863,30 @@ void player_sprite::update_the_pickaxe()
 					= player_pickaxe_sprite::frm_slot_angle_90;
 				if ( !the_oam_entry.get_hflip_status() )
 				{
-					the_pickaxe.in_level_pos = in_level_pos
-						+ (vec2_f24p8){ make_f24p8(14), make_f24p8(17) };
+					//the_pickaxe.in_level_pos = in_level_pos
+					//	+ (vec2_f24p8){ make_f24p8(14), make_f24p8(17) };
+					the_pickaxe.set_curr_in_level_pos
+						( get_curr_in_level_pos()
+						+ (vec2_f24p8){ make_f24p8(14), make_f24p8(17) } );
 				}
 				else //if ( the_oam_entry.get_hflip_status() )
 				{
-					the_pickaxe.in_level_pos = in_level_pos
-						+ (vec2_f24p8){ make_f24p8(-14), make_f24p8(17) };
+					//the_pickaxe.in_level_pos = in_level_pos
+					//	+ (vec2_f24p8){ make_f24p8(-14), make_f24p8(17) };
+					the_pickaxe.set_curr_in_level_pos
+						( get_curr_in_level_pos()
+						+ (vec2_f24p8){ make_f24p8(-14), 
+						make_f24p8(17) } );
 				}
-				//if ( ( speed != (fixed24p8){0} && on_ground )
-				//	|| !on_ground )
-				if ( ( vel.x != (fixed24p8){0} && on_ground ) 
-					|| !on_ground )
+				//if ( ( speed != (fixed24p8){0} && get_curr_on_ground() )
+				//	|| !get_curr_on_ground() )
+				if ( ( vel.x != (fixed24p8){0} && get_curr_on_ground() ) 
+					|| !get_curr_on_ground() )
 				{
-					the_pickaxe.in_level_pos.y -= make_f24p8(3);
+					//the_pickaxe.in_level_pos.y -= make_f24p8(3);
+					the_pickaxe.set_curr_in_level_pos_y
+						( the_pickaxe.get_curr_in_level_pos().y 
+						- make_f24p8(3) );
 				}
 				
 				the_pickaxe.update_f24p8_positions();
@@ -873,7 +942,7 @@ const u32 player_sprite::get_curr_relative_tile_slot()
 	
 	if (!swinging_pickaxe)
 	{
-		if (on_ground)
+		if (get_curr_on_ground())
 		{
 			// Standing still
 			//if ( speed == (fixed24p8){0} )
@@ -911,7 +980,7 @@ const u32 player_sprite::get_curr_relative_tile_slot()
 					* num_active_gfx_tiles;
 			}
 		}
-		else //if (!on_ground)
+		else //if (!get_curr_on_ground())
 		{
 			return frame_slot_to_frame_arr[frm_slot_walk_2] 
 				* num_active_gfx_tiles;
@@ -928,7 +997,7 @@ const u32 player_sprite::get_curr_relative_tile_slot()
 			#define X(number) \
 			\
 			case frm_slot_weapon_swing_ground_still_##number: \
-				if (on_ground) \
+				if (get_curr_on_ground()) \
 				{ \
 					/*if ( speed == (fixed24p8){0} )*/ \
 					if ( vel.x == (fixed24p8){0} ) \
@@ -959,7 +1028,7 @@ const u32 player_sprite::get_curr_relative_tile_slot()
 							## number ## _row_2] * num_active_gfx_tiles; \
 					} \
 				} \
-				else /*if (!on_ground)*/ \
+				else /*if (!get_curr_on_ground())*/ \
 				{ \
 					return frame_slot_to_frame_arr \
 						[frm_slot_weapon_swing_air_##number] \
@@ -1009,8 +1078,10 @@ void player_sprite::block_coll_response_top_16x16
 	//in_level_pos.y 
 	//	= make_f24p8( ( tl_coll_result.coord.y + 1 ) * 16 );
 	//	//- cb_pos_offset.y;
-	in_level_pos.y = make_f24p8( ( tl_coll_result.coord.y + 1 ) * 16 )
-		- cb_pos_offset.y;
+	//in_level_pos.y = make_f24p8( ( tl_coll_result.coord.y + 1 ) * 16 )
+	//	- cb_pos_offset.y;
+	set_curr_in_level_pos_y( make_f24p8( ( tl_coll_result.coord.y + 1 ) 
+		* 16 ) - cb_pos_offset.y );
 	
 	if ( vel.y < (fixed24p8){0x00} )
 	{
@@ -1055,13 +1126,13 @@ void player_sprite::block_coll_response_top_16x32
 void player_sprite::handle_jumping_stuff( u32 is_jump_key_hit, 
 	u32 is_jump_key_held )
 {
-	if ( on_ground && is_jump_key_hit )
+	if ( get_curr_on_ground() && is_jump_key_hit )
 	{
 		vel.y = jump_vel;
 		//jump_hold_timer = max_jump_hold_timer;
 		is_jumping = true;
 	}
-	else if (!on_ground)
+	else if (!get_curr_on_ground())
 	{
 		//if ( jump_hold_timer > 0  )
 		if ( vel.y < (fixed24p8){0} )
@@ -1146,7 +1217,7 @@ void player_sprite::sprite_interaction_reponse( sprite& the_other_sprite,
 			if ( coll_box_intersects_now( the_coll_box,
 				the_other_sprite.the_coll_box ) && key_hit(key_up) 
 				&& !warped_this_frame )
-				//&& on_ground )
+				//&& get_curr_on_ground() )
 			{
 				warped_this_frame = true;
 				
@@ -1173,12 +1244,14 @@ void player_sprite::sprite_interaction_reponse( sprite& the_other_sprite,
 					warped_to_other_sublevel_this_frame = true;
 				}
 				
-				in_level_pos.x = the_dest_sle_ptr
-					->in_level_pos.x 
-					- get_the_initial_in_level_pos_offset().x;
-				in_level_pos.y = the_dest_sle_ptr
-					->in_level_pos.y
-					- get_the_initial_in_level_pos_offset().y;
+				//in_level_pos.x = the_dest_sle_ptr->in_level_pos.x 
+				//	- get_the_initial_in_level_pos_offset().x;
+				//in_level_pos.y = the_dest_sle_ptr->in_level_pos.y
+				//	- get_the_initial_in_level_pos_offset().y;
+				set_curr_in_level_pos_x( the_dest_sle_ptr->in_level_pos.x 
+					- get_the_initial_in_level_pos_offset().x );
+				set_curr_in_level_pos_y( the_dest_sle_ptr->in_level_pos.y
+					- get_the_initial_in_level_pos_offset().y );
 				
 				update_f24p8_positions();
 				update_on_screen_pos(camera_pos);

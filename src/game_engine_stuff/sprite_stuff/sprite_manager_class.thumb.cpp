@@ -182,24 +182,31 @@ void sprite_manager::reinit_sprite_with_sprite_ipg( sprite*& the_sprite,
 		allocate_sprite( the_sprite, the_sprite_allocator, 
 			s_the_sprite_ipg->type, !s_the_sprite_ipg->facing_right );
 		
+		vec2_f24p8 s_in_level_pos( make_f24p8( s_the_sprite_ipg
+			->initial_block_grid_x_coord * 16 ), make_f24p8
+			( s_the_sprite_ipg->initial_block_grid_y_coord * 16 ) );
+		
 		the_sprite->the_sprite_ipg = s_the_sprite_ipg;
 		the_sprite->the_sprite_ipg->spawn_state = sss_active;
 		
+		the_sprite->set_curr_in_level_pos(s_in_level_pos);
+		
 		//the_sprite->the_sprite_type = the_sprite->the_sprite_ipg->type;
-		the_sprite->in_level_pos.x = make_f24p8
-			( the_sprite->the_sprite_ipg->initial_block_grid_x_coord 
-			* 16 );
-		the_sprite->in_level_pos.y = make_f24p8
-			( the_sprite->the_sprite_ipg->initial_block_grid_y_coord 
-			* 16 );
 		
-		//sprite_stuff_array[the_sprite->the_sprite_type]
-		//	->init( *the_sprite,
-		//	!the_sprite->the_sprite_ipg->facing_right );
-		//the_sprite->shared_constructor_code
-		//	(!the_sprite->the_sprite_ipg->facing_right);
+		//the_sprite->in_level_pos.x = make_f24p8
+		//	( the_sprite->the_sprite_ipg->initial_block_grid_x_coord 
+		//	* 16 );
+		//the_sprite->in_level_pos.y = make_f24p8
+		//	( the_sprite->the_sprite_ipg->initial_block_grid_y_coord 
+		//	* 16 );
 		
-		//the_sprite->set_vram_chunk_index(old_vram_chunk_index);
+		////sprite_stuff_array[the_sprite->the_sprite_type]
+		////	->init( *the_sprite,
+		////	!the_sprite->the_sprite_ipg->facing_right );
+		////the_sprite->shared_constructor_code
+		////	(!the_sprite->the_sprite_ipg->facing_right);
+		//
+		////the_sprite->set_vram_chunk_index(old_vram_chunk_index);
 	}
 }
 
@@ -285,7 +292,8 @@ void sprite_manager::init_the_player ( const vec2_f24p8& s_in_level_pos,
 	//	the_sublevel_size_2d, camera_pos, false );
 	
 	the_player->update_part_1();
-	the_player->update_part_2( camera_pos, the_sublevel_size_2d );
+	the_player->update_part_2();
+	the_player->update_part_3( camera_pos, the_sublevel_size_2d );
 }
 
 void sprite_manager::clear_the_sprite_arrays()
@@ -570,10 +578,21 @@ void sprite_manager::initial_sprite_spawning_shared_code
 		//if ( the_spr->the_sprite_type != st_default )
 		if (the_spr)
 		{
-			//sprite_stuff_array[the_spr->the_sprite_type]->update_part_2
+			//sprite_stuff_array[the_spr->the_sprite_type]->update_part_2();
+			the_spr->update_part_2();
+		}
+	}
+	
+	// Run each active sprite's update_part_3() function.
+	for ( sprite*& the_spr : the_sprites )
+	{
+		//if ( the_spr->the_sprite_type != st_default )
+		if (the_spr)
+		{
+			//sprite_stuff_array[the_spr->the_sprite_type]->update_part_3
 			//	( *the_spr, gfx_manager::bgofs_mirror[0].curr, 
 			//	next_oam_index );
-			the_spr->update_part_2( gfx_manager::bgofs_mirror[0].curr, 
+			the_spr->update_part_3( gfx_manager::bgofs_mirror[0].curr, 
 				next_oam_index );
 		}
 	}

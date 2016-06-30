@@ -41,6 +41,10 @@ protected:		// variables
 	// set_vram_chunk_index() exists.
 	u32 vram_chunk_index;
 	
+	
+	bool did_update_in_level_pos_this_frame;
+	bool did_update_on_ground_this_frame;
+	
 public:		// constants
 	
 	//static constexpr fixed24p8 grav_acc = {0x80};
@@ -100,7 +104,7 @@ public:		// variables
 	
 	// in_level_pos is the "global" position of the sprite within the
 	// current level, connected to the top left corner.
-	vec2_f24p8 in_level_pos;
+	prev_curr_pair<vec2_f24p8> in_level_pos;
 	
 	// vel is the velocity of the sprite.
 	vec2_f24p8 vel;
@@ -125,7 +129,8 @@ public:		// variables
 	
 	// on_ground is a flag that tells whether the sprite is on the ground,
 	// though that's really obvious.
-	bool on_ground;
+	prev_curr_pair<bool> on_ground;
+	
 	
 	//// jump_hold_timer is used to keep track of for how much longer the
 	//// sprite can jump, if the sprite even does so.  This coul
@@ -206,6 +211,87 @@ public:		// functions
 	//	sprite_allocator& the_sprite_allocator );
 	
 	
+	inline const vec2_f24p8& get_prev_in_level_pos() const
+	{
+		return in_level_pos.prev;
+	}
+	//inline const fixed24p8& get_prev_in_level_pos_x() const
+	//{
+	//	return get_prev_in_level_pos().x;
+	//}
+	//inline const fixed24p8& get_prev_in_level_pos_y() const
+	//{
+	//	return get_prev_in_level_pos().y;
+	//}
+	
+	inline const vec2_f24p8& get_curr_in_level_pos() const
+	{
+		return in_level_pos.curr;
+	}
+	//inline const fixed24p8& get_curr_in_level_pos_x() const
+	//{
+	//	return get_curr_in_level_pos().x;
+	//}
+	//inline const fixed24p8& get_curr_in_level_pos_y() const
+	//{
+	//	return get_curr_in_level_pos().y;
+	//}
+	
+	inline void set_curr_in_level_pos
+		( const vec2_f24p8& n_curr_in_level_pos )
+	{
+		if ( !did_update_in_level_pos_this_frame )
+		{
+			did_update_in_level_pos_this_frame = true;
+			in_level_pos.back_up();
+		}
+		
+		in_level_pos.curr = n_curr_in_level_pos;
+	}
+	inline void set_curr_in_level_pos_x
+		( const fixed24p8& n_curr_in_level_pos_x )
+	{
+		if ( !did_update_in_level_pos_this_frame )
+		{
+			did_update_in_level_pos_this_frame = true;
+			in_level_pos.back_up();
+		}
+		
+		in_level_pos.curr.x = n_curr_in_level_pos_x;
+	}
+	inline void set_curr_in_level_pos_y
+		( const fixed24p8& n_curr_in_level_pos_y )
+	{
+		if ( !did_update_in_level_pos_this_frame )
+		{
+			did_update_in_level_pos_this_frame = true;
+			in_level_pos.back_up();
+		}
+		
+		in_level_pos.curr.y = n_curr_in_level_pos_y;
+	}
+	
+	inline bool get_prev_on_ground() const
+	{
+		return on_ground.prev;
+	}
+	inline bool get_curr_on_ground() const
+	{
+		return on_ground.curr;
+	}
+	
+	inline void set_curr_on_ground( bool n_curr_on_ground )
+	{
+		if ( !did_update_on_ground_this_frame )
+		{
+			did_update_on_ground_this_frame = true;
+			on_ground.back_up();
+		}
+		
+		on_ground.curr = n_curr_on_ground;
+	}
+	
+	
 	
 	inline oam_entry::shape_size get_shape_size() const
 	{
@@ -247,8 +333,10 @@ public:		// functions
 			}
 		}
 		
-		in_level_pos += vel;
-		the_coll_box.pos = in_level_pos + cb_pos_offset;
+		//in_level_pos += vel;
+		set_curr_in_level_pos( get_curr_in_level_pos() + vel );
+		//the_coll_box.pos = in_level_pos + cb_pos_offset;
+		the_coll_box.pos = get_curr_in_level_pos() + cb_pos_offset;
 	}
 	
 	//vec2_s32 get_on_screen_pos_s32( const bg_point& camera_pos ) const
@@ -260,7 +348,8 @@ public:		// functions
 		//vec2_f24p8 ret = in_level_pos - camera_pos;
 		//
 		//return ret;
-		return in_level_pos - camera_pos;
+		//return in_level_pos - camera_pos;
+		return get_curr_in_level_pos() - camera_pos;
 	}
 	
 	void update_on_screen_pos( const bg_point& camera_pos )
@@ -362,15 +451,25 @@ public:		// functions
 		the_oam_entry.set_pal_number(get_palette_slot());
 	}
 	
-	
+
+	// This is used for setting the did_update_x_this_frame variables to
+	// false.  The player_sprite class overrides this function (but still
+	// calls the original) so that the player_sprite class can set
+	// warped_this_frame to false.
 	virtual void update_part_1();
 	
+	// This used to be update_part_1()
+	virtual void update_part_2();
 	
-	// The player_sprite_stuff class is the primary user of this function.
-	virtual void update_part_2( bg_point& camera_pos,
+	
+	// update_part_3() used to be update_part_2()
+	// The player_sprite class is the primary user of this function.
+	virtual void update_part_3( bg_point& camera_pos,
 		const vec2_u32& the_level_size_2d );
 	
-	virtual void update_part_2( const bg_point& camera_pos, 
+	// Sprites other than player_sprite use this function.  Some sprites
+	// won't need to override this specific version.
+	virtual void update_part_3( const bg_point& camera_pos, 
 		int& next_oam_index );
 	
 	

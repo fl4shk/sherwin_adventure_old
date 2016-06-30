@@ -273,8 +273,10 @@ public:		// functions
 	}
 	
 	//virtual void gfx_update();
+	
 	virtual void update_part_1();
-	virtual void update_part_2( bg_point& camera_pos,
+	virtual void update_part_2();
+	virtual void update_part_3( bg_point& camera_pos,
 		const vec2_u32& the_sublevel_size_2d );
 	
 	

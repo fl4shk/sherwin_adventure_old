@@ -57,7 +57,7 @@ public:		// functions
 	}
 	
 	
-	virtual void update_part_1();
+	virtual void update_part_2();
 	
 	// Graphics stuff
 	//virtual void gfx_update();

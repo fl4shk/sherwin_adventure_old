@@ -137,15 +137,16 @@ void generate_coll_point_group_16x16( const sprite& the_sprite,
 	list_of_16x16_top_side_coll_point_names(X)
 		the_coll_box.top();
 	
-	// This is a special case that covers walking down a slope.
-	if (the_sprite.on_ground)
+	// This is a special case that covers walking down a slope.  However,
+	// it would be good if I could make this not the case.
+	if (the_sprite.get_curr_on_ground())
 	{
 		list_of_16x16_bottom_side_coll_point_names(X)
 			//the_coll_box.bot();
 			//the_coll_box.bot() + (fixed24p8){0x200};
 			the_coll_box.bot() + (fixed24p8){0x400};
 	}
-	else //if (!the_sprite.on_ground)
+	else //if (!the_sprite.get_curr_on_ground())
 	{
 		list_of_16x16_bottom_side_coll_point_names(X)
 			the_coll_box.bot();
@@ -259,14 +260,14 @@ void generate_coll_point_group_16x32( const sprite& the_sprite,
 		the_coll_box.top();
 	
 	// This is a special case that covers walking down a slope.
-	if (the_sprite.on_ground)
+	if (the_sprite.get_curr_on_ground())
 	{
 		list_of_16x32_bottom_side_coll_point_names(X)
 			the_coll_box.bot() + (fixed24p8){0x400};
 			//the_coll_box.bot() + (fixed24p8){0x200};
 			//the_coll_box.bot() + (fixed24p8){0x300};
 	}
-	else //if (!the_sprite.on_ground)
+	else //if (!the_sprite.get_curr_on_ground())
 	{
 		list_of_16x32_bottom_side_coll_point_names(X)
 			the_coll_box.bot();
@@ -381,13 +382,13 @@ void generate_coll_point_group_32x16( const sprite& the_sprite,
 		the_coll_box.top();
 	
 	// This is a special case that covers walking down a slope.
-	if (the_sprite.on_ground)
+	if (the_sprite.get_curr_on_ground())
 	{
 		list_of_16x32_bottom_side_coll_point_names(X)
 			//the_coll_box.bot() + (fixed24p8){0x200};
 			the_coll_box.bot() + (fixed24p8){0x400};
 	}
-	else //if (!the_sprite.on_ground)
+	else //if (!the_sprite.get_curr_on_ground())
 	{
 		list_of_16x32_bottom_side_coll_point_names(X)
 			the_coll_box.bot();

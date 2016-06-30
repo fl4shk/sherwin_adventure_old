@@ -42,7 +42,7 @@ const vec2_f24p8 snow_golem_sprite::the_initial_coll_box_size
 	= { {2 << fixed24p8::shift }, {3 << fixed24p8::shift } };
 
 
-void snow_golem_sprite::update_part_1()
+void snow_golem_sprite::update_part_2()
 {
 	// Eventually, interesting stuff should happen in this function.
 	
