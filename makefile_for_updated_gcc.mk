@@ -254,11 +254,11 @@ clean_objs_with_no_source :
 
 .PHONY : disassemble
 disassemble :
-	arm-none-eabi-objdump -marm7tdmi -d $(PROJ).elf
+	arm-none-eabi-objdump -marm7tdmi -C -d $(PROJ).elf
 
 .PHONY : disassemble_all
 disassemble_all :
-	arm-none-eabi-objdump -marm7tdmi -D $(PROJ).elf
+	arm-none-eabi-objdump -marm7tdmi -C -D $(PROJ).elf
 
 
 .PHONY : disassemble_2
