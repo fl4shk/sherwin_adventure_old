@@ -150,18 +150,18 @@ public:		// variables
 	s32 misc_data_s[misc_data_size];
 	
 	
-	// These are mainly for debugging.
-	//bool did_update_prev_on_screen_pos_this_frame;
-	//vec2_f24p8 prev_on_screen_pos, curr_on_screen_pos;
+	//// These are mainly for debugging.
+	////bool did_update_prev_on_screen_pos_this_frame;
+	////vec2_f24p8 prev_on_screen_pos, curr_on_screen_pos;
+	////prev_curr_pair<vec2_f24p8> on_screen_pos;
+	////prev_curr_pair<vec2_s32> on_screen_pos_s32;
+	//
+	//vec2_f24p8 prev_prev_on_screen_pos; 
 	//prev_curr_pair<vec2_f24p8> on_screen_pos;
+	//vec2_s32 prev_prev_on_screen_pos_s32;
 	//prev_curr_pair<vec2_s32> on_screen_pos_s32;
-	
-	vec2_f24p8 prev_prev_on_screen_pos; 
-	prev_curr_pair<vec2_f24p8> on_screen_pos;
-	vec2_s32 prev_prev_on_screen_pos_s32;
-	prev_curr_pair<vec2_s32> on_screen_pos_s32;
-	
-	bool temp_debug_thing;
+	//
+	//bool temp_debug_thing;
 	
 	
 public:		// functions

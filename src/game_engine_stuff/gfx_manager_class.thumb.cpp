@@ -99,101 +99,12 @@ void gfx_manager::copy_bgofs_mirror_to_registers()
 	
 	for ( u32 i=0; i<4; ++i )
 	{
-		//// Truncate the fractional bits if the camera is not moving
-		//// horizontally
-		//if ( bgofs_mirror[i].curr.x == bgofs_mirror[i].prev.x )
-		//{
-		//	bgofs_mirror[i].curr.x = bgofs_mirror[i].curr.x
-		//		.with_zero_frac_bits();
-		//}
-		//
-		//// Truncate the fractional bits if the camera is not moving
-		//// vertically
-		//if ( bgofs_mirror[i].curr.y == bgofs_mirror[i].prev.y )
-		//{
-		//	bgofs_mirror[i].curr.y = bgofs_mirror[i].curr.y
-		//		.with_zero_frac_bits();
-		//}
-		
-		//vec2_f24p8 curr_bgofs_mirror_no_frac
-		//	( bgofs_mirror[i].curr.x.truncate_frac_bits(),
-		//	bgofs_mirror[i].curr.y.truncate_frac_bits() );
-		//
-		//reg_bgofs[i].x = (s16)curr_bgofs_mirror_no_frac.x.round_to_int();
-		//reg_bgofs[i].y = (s16)curr_bgofs_mirror_no_frac.y.round_to_int();
-		
+		reg_bgofs[i].x = (s16)bgofs_mirror[i].curr.x.to_int_for_on_screen();
+		reg_bgofs[i].y = (s16)bgofs_mirror[i].curr.y.to_int_for_on_screen();
 		
 		//reg_bgofs[i].x = (s16)bgofs_mirror[i].curr.x.trunc_to_int();
 		//reg_bgofs[i].y = (s16)bgofs_mirror[i].curr.y.trunc_to_int();
-		
-		
-		//s32 x_dir, y_dir;
-		
-		
-		s32 temp_x = bgofs_mirror[i].curr.x.to_int_for_on_screen();
-		s32 temp_y = bgofs_mirror[i].curr.y.to_int_for_on_screen();
-		//s32 temp_x = bgofs_mirror[i].curr.x.trunc_to_int();
-		//s32 temp_y = bgofs_mirror[i].curr.y.trunc_to_int();
-		
-		
-		//if ( bgofs_mirror[i].curr.x < bgofs_mirror[i].prev.x )
-		//{
-		//	reg_bgofs[i].x = (s16)(temp_x + 1);
-		//}
-		//else
-		{
-			reg_bgofs[i].x = (s16)temp_x;
-		}
-		
-		//if ( bgofs_mirror[i].curr.y < bgofs_mirror[i].prev.y )
-		//{
-		//	reg_bgofs[i].y = (s16)(temp_y + 1);
-		//}
-		//else
-		{
-			reg_bgofs[i].y = (s16)temp_y;
-		}
-		
-		//reg_bgofs[i].x 
-		//	= (s16)bgofs_mirror[i].curr.x.true_round_via_trunc();
-		//reg_bgofs[i].y 
-		//	= (s16)bgofs_mirror[i].curr.y.true_round_via_trunc();
 	}
-	
-	
-	
-	//reg_bgofs[0].x = (s16)bgofs_mirror[0].curr.x.trunc_to_int();
-	//reg_bgofs[0].y = (s16)bgofs_mirror[0].curr.y.trunc_to_int();
-	//
-	//reg_bgofs[1].x = (s16)bgofs_mirror[1].curr.x.trunc_to_int();
-	//reg_bgofs[1].y = (s16)bgofs_mirror[1].curr.y.trunc_to_int();
-	//
-	//reg_bgofs[2].x = (s16)bgofs_mirror[2].curr.x.trunc_to_int();
-	//reg_bgofs[2].y = (s16)bgofs_mirror[2].curr.y.trunc_to_int();
-	//
-	//reg_bgofs[3].x = (s16)bgofs_mirror[3].curr.x.trunc_to_int();
-	//reg_bgofs[3].y = (s16)bgofs_mirror[3].curr.y.trunc_to_int();
-	
-	
-	//reg_bgofs[0].x 
-	//	= (s16)bgofs_mirror[0].curr.x.true_round_via_trunc();
-	//reg_bgofs[0].y 
-	//	= (s16)bgofs_mirror[0].curr.y.true_round_via_trunc();
-	//
-	//reg_bgofs[1].x 
-	//	= (s16)bgofs_mirror[1].curr.x.true_round_via_trunc();
-	//reg_bgofs[1].y 
-	//	= (s16)bgofs_mirror[1].curr.y.true_round_via_trunc();
-	//
-	//reg_bgofs[2].x 
-	//	= (s16)bgofs_mirror[2].curr.x.true_round_via_trunc();
-	//reg_bgofs[2].y 
-	//	= (s16)bgofs_mirror[2].curr.y.true_round_via_trunc();
-	//
-	//reg_bgofs[3].x 
-	//	= (s16)bgofs_mirror[3].curr.x.true_round_via_trunc();
-	//reg_bgofs[3].y 
-	//	= (s16)bgofs_mirror[3].curr.y.true_round_via_trunc();
 }
 
 

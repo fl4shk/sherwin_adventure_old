@@ -1137,54 +1137,24 @@ void player_sprite::handle_jumping_stuff( u32 is_jump_key_hit,
 	}
 	else if (!get_curr_on_ground())
 	{
-		//if ( jump_hold_timer > 0  )
 		if ( vel.y < (fixed24p8){0} )
 		{
 			if (is_jump_key_held)
 			{
-				//--jump_hold_timer;
-				//apply_gravity();
 				vel.y += jump_grav_acc;
 			}
 			else
 			{
-				//jump_hold_timer = 0;
 				is_jumping = false;
 				
-				//if ( vel.y.data < -0x200 )
-				//{
-				//	vel.y.data = -0x200;
-				//}
-				
 				apply_gravity();
-				
-				//while ( vel.y.data <= 0 )
-				//{
-				//	apply_gravity();
-				//}
-				
 			}
 		}
-		
-		////else if ( jump_hold_timer == 0 )
-		////else if (!is_jumping)
-		//else if ( !is_jumping 
-		//	|| vel.y >= (fixed24p8){0} )
 		else
 		{
-			//if ( vel.y.data < -0x200 )
-			//{
-			//	vel.y.data = -0x200;
-			//}
-			
 			is_jumping = false;
 			
 			apply_gravity();
-			
-			//while ( vel.y.data <= 0 )
-			//{
-			//	apply_gravity();
-			//}
 		}
 	}
 	

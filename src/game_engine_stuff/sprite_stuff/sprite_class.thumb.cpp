@@ -200,20 +200,12 @@ void sprite::update_on_screen_pos
 	vec2_f24p8 offset( make_f24p8(ss_vec2.x), make_f24p8(ss_vec2.y) );
 	
 	
+	// USUALLY round to the nearest whole number.
 	s32 temp_x = temp_on_screen_pos.x.to_int_for_on_screen();
 	s32 temp_y = temp_on_screen_pos.y.to_int_for_on_screen();
 	
-	prev_curr_pair<vec2_s32> camera_pos_pc_pair_s32;
-	
-	camera_pos_pc_pair_s32.prev.x 
-		= camera_pos_pc_pair.prev.x.to_int_for_on_screen();
-	camera_pos_pc_pair_s32.prev.y 
-		= camera_pos_pc_pair.prev.y.to_int_for_on_screen();
-	camera_pos_pc_pair_s32.curr.x 
-		= camera_pos_pc_pair.curr.x.to_int_for_on_screen();
-	camera_pos_pc_pair_s32.curr.y 
-		= camera_pos_pc_pair.curr.y.to_int_for_on_screen();
-	
+	// I'm VERY happy this works.  I don't fully understand the math behind
+	// why it works; it's just what I came up with by using a debugger.
 	if ( temp_on_screen_pos.x.get_frac_bits() == 0x80 
 		&& camera_pos_pc_pair.curr.x > camera_pos_pc_pair.prev.x )
 	{
@@ -228,83 +220,6 @@ void sprite::update_on_screen_pos
 	the_oam_entry.set_x_coord(temp_x);
 	the_oam_entry.set_y_coord(temp_y);
 	
-	prev_prev_on_screen_pos = on_screen_pos.prev;
-	on_screen_pos.back_up();
-	on_screen_pos.curr = temp_on_screen_pos;
-	
-	
-	prev_prev_on_screen_pos_s32 = on_screen_pos_s32.prev;
-	on_screen_pos_s32.back_up();
-	
-	//on_screen_pos_s32.curr.x = the_oam_entry.get_x_coord();
-	//on_screen_pos_s32.curr.y = the_oam_entry.get_y_coord();
-	on_screen_pos_s32.curr.x = temp_x;
-	on_screen_pos_s32.curr.y = temp_y;
-	
-	if ( the_sprite_type == st_fire_muffin )
-	{
-		bool camera_pos_y_has_changed = ( camera_pos_pc_pair.curr.y
-			!= camera_pos_pc_pair.prev.y );
-		
-		s32 difference_between_camera_pos_y_s32
-			= camera_pos_pc_pair_s32.curr.y 
-			- camera_pos_pc_pair_s32.prev.y;
-		
-		s32 difference_between_on_screen_pos_y_s32
-			= on_screen_pos_s32.curr.y - on_screen_pos_s32.prev.y;
-		
-		
-		bool camera_pos_x_has_changed = ( camera_pos_pc_pair.curr.x
-			!= camera_pos_pc_pair.prev.x );
-		
-		s32 difference_between_camera_pos_x_s32
-			= camera_pos_pc_pair_s32.curr.x 
-			- camera_pos_pc_pair_s32.prev.x;
-		
-		s32 difference_between_on_screen_pos_x_s32
-			= on_screen_pos_s32.curr.x - on_screen_pos_s32.prev.x;
-		
-		
-		
-		//if ( camera_pos_pc_pair.has_changed() )
-		//if ( camera_pos_x_has_changed 
-		//	&& difference_between_camera_pos_x_s32 
-		//	!= -difference_between_on_screen_pos_x_s32 
-		//	&& on_screen_pos_s32.prev.x != 0 )
-		if ( camera_pos_x_has_changed
-			&& on_screen_pos.curr.x.get_frac_bits() == 0x80
-			&& on_screen_pos_s32.prev.x != 0 )
-		{
-			if ( temp_debug_thing )
-			{
-				temp_debug_thing = true;
-			}
-			else //if ( !temp_debug_thing )
-			{
-				temp_debug_thing = true;
-			}
-		}
-		
-		
-		//if ( camera_pos_pc_pair.has_changed() )
-		//if ( camera_pos_y_has_changed 
-		//	&& difference_between_camera_pos_y_s32 
-		//	!= -difference_between_on_screen_pos_y_s32 
-		//	&& on_screen_pos_s32.prev.y != 0 )
-		if ( camera_pos_y_has_changed
-			&& on_screen_pos.curr.y.get_frac_bits() == 0x80
-			&& on_screen_pos_s32.prev.y != 0 )
-		{
-			if ( temp_debug_thing )
-			{
-				temp_debug_thing = true;
-			}
-			else //if ( !temp_debug_thing )
-			{
-				temp_debug_thing = true;
-			}
-		}
-	}
 	
 	// Check whether the sprite is on screen.
 	if ( temp_on_screen_pos.x + offset.x >= (fixed24p8){0} 
@@ -339,20 +254,11 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 	if ( ( temp_on_screen_pos.x <= make_f24p8(100) && vel.x.data < 0 ) 
 		|| ( temp_on_screen_pos.x >= make_f24p8(140) && vel.x.data > 0 ) )
 	{
-		camera_pos.x += vel.x;
+		//camera_pos.x += vel.x;
 		//s32 value_to_add = vel.x.data
 		
-		//if ( get_curr_in_level_pos().x != get_prev_in_level_pos().x )
-		//{
-		//	camera_pos.x += ( get_curr_in_level_pos().x 
-		//		- get_prev_in_level_pos().x );
-		//	
-		//	if ( get_curr_in_level_pos().x < get_prev_in_level_pos().x )
-		//	{
-		//		camera_pos.x += make_f24p8(1);
-		//	}
-		//}
-		
+		camera_pos.x += ( get_curr_in_level_pos().x 
+			- get_prev_in_level_pos().x );
 	}
 	
 	//if ( ( temp_on_screen_pos.y <= make_f24p8(20) && vel.y.data < 0 ) 
@@ -361,22 +267,48 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 	//	camera_pos.y += vel.y.trunc_to_int();
 	//}
 	
-	auto camera_pos_y_updater = [&]( bool add ) -> void
+	
+	bool do_update_camera_pos_y = false;
+	bool add = false;
+	
+	bool on_slope = false;
+	
+	// I sincerely hope this works
+	if ( get_curr_in_level_pos().y != get_prev_in_level_pos().y
+		&& get_curr_on_ground() && get_prev_on_ground() )
 	{
-		if (!get_curr_on_ground())
-		//if ( ( !get_curr_on_ground() ) || ( get_curr_on_ground()
-		//	&& get_curr_in_level_pos().y != get_prev_in_level_pos().y ) )
+		on_slope = true;
+	}
+	
+	if ( temp_on_screen_pos.y <= make_f24p8(20) )
+	{
+		//add = false;
+		
+		do_update_camera_pos_y = true;
+	}
+	else if ( on_screen_bottom_pos >= make_f24p8(60) && !on_slope )
+	{
+		if ( vel.y >= (fixed24p8){0} )
 		{
-			camera_pos.y += vel.y;
-			
-			//if ( get_curr_in_level_pos().y != get_prev_in_level_pos().y )
-			//{
-			//	camera_pos.y += ( get_curr_in_level_pos().y 
-			//		- get_prev_in_level_pos().y ) - make_f24p8(8);
-			//}
-			
+			add = true;
+			do_update_camera_pos_y = true;
 		}
-		//else if ( get_curr_in_level_pos().y == get_prev_in_level_pos().y )
+	}
+	else if ( on_screen_bottom_pos >= make_f24p8(40) && on_slope )
+	{
+		add = true;
+		do_update_camera_pos_y = true;
+	}
+	
+	if ( do_update_camera_pos_y )
+	{
+		if ( !get_curr_on_ground() || on_slope  )
+		{
+			//camera_pos.y += vel.y;
+			
+			camera_pos.y += ( get_curr_in_level_pos().y 
+				- get_prev_in_level_pos().y );
+		}
 		else
 		{
 			if (!add)
@@ -387,24 +319,6 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 			{
 				camera_pos.y += {0x400};
 			}
-		}
-		//else // if ( get_curr_on_ground() && get_curr_in_level_pos().y 
-		//	// != get_prev_in_level_pos().y )
-		//{
-		//	camera_pos.y += ( get_curr_in_level_pos().y 
-		//		- get_prev_in_level_pos().y );
-		//}
-	};
-	
-	if ( temp_on_screen_pos.y <= make_f24p8(20) )
-	{
-		camera_pos_y_updater(false);
-	}
-	else if ( on_screen_bottom_pos >= make_f24p8(60) )
-	{
-		if ( vel.y >= (fixed24p8){0} )
-		{
-			camera_pos_y_updater(true);
 		}
 	}
 	
@@ -557,6 +471,17 @@ const u32 sprite::get_curr_relative_tile_slot()
 void sprite::block_collision_stuff()
 {
 	//sprite_stuff_array[the_sprite_type]->block_collision_stuff(*this);
+	if ( the_coll_box.size.x >= make_f24p8(0)
+		&& the_coll_box.size.x <= make_f24p8(16)
+		&& the_coll_box.size.y > make_f24p8(16 )
+		&& the_coll_box.size.y <= make_f24p8(32) )
+	{
+		block_collision_stuff_16x32();
+	}
+	else
+	{
+		block_collision_stuff_16x16();
+	}
 }
 
 
