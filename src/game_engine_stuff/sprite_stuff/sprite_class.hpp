@@ -348,8 +348,6 @@ public:		// functions
 		the_coll_box.pos = get_curr_in_level_pos() + cb_pos_offset;
 	}
 	
-	//vec2_s32 get_on_screen_pos_s32( const bg_point& camera_pos ) const
-	//	__attribute__((_iwram_code));
 	
 	inline vec2_f24p8 get_on_screen_pos( const bg_point& camera_pos )
 		const

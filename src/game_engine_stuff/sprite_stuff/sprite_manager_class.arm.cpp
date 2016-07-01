@@ -581,8 +581,7 @@ void sprite_manager::update_all_sprites
 	
 	//sprite_stuff_array[the_player.the_sprite_type]->update_part_2
 	//	( the_player, camera_pos_pc_pair.curr, the_sublevel_size_2d );
-	the_player->update_part_3( camera_pos_pc_pair,
-		the_sublevel_size_2d );
+	the_player->update_part_3( camera_pos_pc_pair, the_sublevel_size_2d );
 	
 	auto two_sprites_coll_box_test_thing = []( sprite& the_spr,
 		sprite& the_other_spr ) -> void

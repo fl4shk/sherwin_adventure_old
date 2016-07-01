@@ -191,8 +191,15 @@ void* sprite::operator new( size_t size,
 void sprite::update_on_screen_pos
 	( const prev_curr_pair<bg_point>& camera_pos_pc_pair )
 {
-	vec2_f24p8 temp_on_screen_pos = get_on_screen_pos
-		(camera_pos_pc_pair.curr);
+	//vec2_f24p8 temp_on_screen_pos = get_on_screen_pos
+	//	(camera_pos_pc_pair.curr);
+	vec2_f24p8 temp_on_screen_pos
+		( make_f24p8( get_curr_in_level_pos().x.trunc_to_int()
+		- camera_pos_pc_pair.curr.x.trunc_to_int() ),
+		make_f24p8( get_curr_in_level_pos().y.trunc_to_int()
+		- camera_pos_pc_pair.curr.y.trunc_to_int() ) );
+	
+	
 	//vec2_s32 temp_on_screen_pos = get_on_screen_pos_s32(camera_pos);
 	
 	////if ( !did_update_prev_on_screen_pos_this_frame )
@@ -268,13 +275,16 @@ void sprite::update_on_screen_pos
 			on_screen_pos_s32.curr.y = the_oam_entry.get_y_coord();
 			
 			
-			if ( temp_debug_thing )
+			if ( camera_pos_pc_pair.has_changed() )
 			{
-				temp_debug_thing = true;
-			}
-			else // if ( !temp_debug_thing )
-			{
-				temp_debug_thing = true;
+				if ( temp_debug_thing )
+				{
+					temp_debug_thing = true;
+				}
+				else //if ( !temp_debug_thing )
+				{
+					temp_debug_thing = true;
+				}
 			}
 		}
 	}
