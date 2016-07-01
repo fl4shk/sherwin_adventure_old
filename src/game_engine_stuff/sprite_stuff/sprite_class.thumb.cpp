@@ -69,9 +69,6 @@ void sprite::shared_constructor_code_part_1()
 	// sprite!
 	//memfill32( this, 0, sizeof(sprite) / sizeof(u32) );
 	
-	did_update_in_level_pos_this_frame = did_update_on_ground_this_frame 
-		= false;
-	
 	the_sprite_type = get_const_sprite_type();;
 	the_sprite_ipg = NULL;
 	
@@ -92,7 +89,6 @@ void sprite::shared_constructor_code_part_1()
 	
 	set_initial_coll_box_stuff();
 	
-	did_update_on_ground_this_frame = false;
 	on_ground.prev = on_ground.curr = is_jumping = false;
 	
 	invin_frame_timer = 0;
@@ -191,36 +187,9 @@ void* sprite::operator new( size_t size,
 void sprite::update_on_screen_pos
 	( const prev_curr_pair<bg_point>& camera_pos_pc_pair )
 {
-	//vec2_f24p8 temp_on_screen_pos = get_on_screen_pos
-	//	(camera_pos_pc_pair.curr);
-	vec2_f24p8 temp_on_screen_pos
-		( make_f24p8( get_curr_in_level_pos().x.trunc_to_int()
-		- camera_pos_pc_pair.curr.x.trunc_to_int() ),
-		make_f24p8( get_curr_in_level_pos().y.trunc_to_int()
-		- camera_pos_pc_pair.curr.y.trunc_to_int() ) );
+	vec2_f24p8 temp_on_screen_pos = get_on_screen_pos
+		(camera_pos_pc_pair.curr);
 	
-	
-	//vec2_s32 temp_on_screen_pos = get_on_screen_pos_s32(camera_pos);
-	
-	////if ( !did_update_prev_on_screen_pos_this_frame )
-	//{
-	//	//did_update_prev_on_screen_pos_this_frame = true;
-	//	
-	//	on_screen_pos.back_up_and_update(temp_on_screen_pos);
-	//	
-	//	if ( on_screen_pos.has_changed() 
-	//		&& the_sprite_ipg->type == st_door )
-	//	{
-	//		temp_debug_thing = true;
-	//	}
-	//	
-	//}
-	
-	
-	//vec2_f24p8 temp_on_screen_pos;
-	//
-	//temp_on_screen_pos.x.data = in_level_pos.x.data - camera_pos.x.data;
-	//temp_on_screen_pos.y.data = in_level_pos.y.data - camera_pos.y.data;
 	
 	vec2_u32 ss_vec2 = get_shape_size_as_vec2();
 	vec2_f24p8 offset( make_f24p8(ss_vec2.x), make_f24p8(ss_vec2.y) );
@@ -242,27 +211,9 @@ void sprite::update_on_screen_pos
 		the_oam_entry.set_x_coord(temp_on_screen_pos.x.trunc_to_int());
 		the_oam_entry.set_y_coord(temp_on_screen_pos.y.trunc_to_int());
 		
-		// I am NOT sure whether this will work
-		//s32 temp_x = temp_on_screen_pos.x.round_to_int();
-		//s32 temp_y = temp_on_screen_pos.y.round_to_int();
-		
-		
-		//s32 temp_x = temp_on_screen_pos.x.round_to_int();
-		//s32 temp_y = temp_on_screen_pos.y.round_to_int();
-		//
-		//vec2_s32 camera_pos_curr_s32
-		//	( camera_pos_pc_pair.curr.x.round_to_int(),
-		//	camera_pos_pc_pair.curr.y.round_to_int() );
-		//vec2_s32 camera_pos_prev_s32
-		//	( camera_pos_pc_pair.prev.x.round_to_int(),
-		//	camera_pos_pc_pair.prev.y.round_to_int() );
-		
 		
 		if ( the_sprite_type == st_fire_muffin )
 		{
-			//next_debug_s32 = the_oam_entry.get_x_coord();
-			//next_debug_s32 = the_oam_entry.get_y_coord();
-			
 			prev_prev_on_screen_pos = on_screen_pos.prev;
 			on_screen_pos.back_up();
 			on_screen_pos.curr = temp_on_screen_pos;
@@ -309,8 +260,11 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 		//camera_pos.x += vel.x;
 		//s32 value_to_add = vel.x.data
 		
-		camera_pos.x += ( get_curr_in_level_pos().x 
-			- get_prev_in_level_pos().x );
+		if ( get_curr_in_level_pos().x != get_prev_in_level_pos().x )
+		{
+			camera_pos.x += ( get_curr_in_level_pos().x 
+				- get_prev_in_level_pos().x );
+		}
 		
 	}
 	
@@ -328,8 +282,11 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 		{
 			//camera_pos.y += vel.y;
 			
-			camera_pos.y += ( get_curr_in_level_pos().y 
-				- get_prev_in_level_pos().y );
+			if ( get_curr_in_level_pos().y != get_prev_in_level_pos().y )
+			{
+				camera_pos.y += ( get_curr_in_level_pos().y 
+					- get_prev_in_level_pos().y );
+			}
 			
 		}
 		//else if ( get_curr_in_level_pos().y == get_prev_in_level_pos().y )
@@ -430,8 +387,8 @@ vec2_u32 sprite::get_shape_size_as_vec2_raw() const
 
 void sprite::update_part_1()
 {
-	did_update_in_level_pos_this_frame = did_update_on_ground_this_frame 
-		= false;
+	in_level_pos.back_up();
+	on_ground.back_up();
 	
 	
 	// Truncate the fractional bits if the sprite is not moving

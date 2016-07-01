@@ -156,14 +156,14 @@ void active_level_manager::correct_bg0_scroll_mirror
 	//s32 sublevel_x_coord_tile = gfx_manager::bgofs_mirror[0].curr.x >> 3;
 	//s32 sublevel_y_coord_tile = gfx_manager::bgofs_mirror[0].curr.y >> 3;
 	
-	//s32 sublevel_x_coord_tile = gfx_manager::bgofs_mirror[0].curr.x
-	//	.trunc_to_int() >> 3;
-	//s32 sublevel_y_coord_tile = gfx_manager::bgofs_mirror[0].curr.y
-	//	.trunc_to_int() >> 3;
 	s32 sublevel_x_coord_tile = gfx_manager::bgofs_mirror[0].curr.x
-		.round_to_int() >> 3;
+		.trunc_to_int() >> 3;
 	s32 sublevel_y_coord_tile = gfx_manager::bgofs_mirror[0].curr.y
-		.round_to_int() >> 3;
+		.trunc_to_int() >> 3;
+	//s32 sublevel_x_coord_tile = gfx_manager::bgofs_mirror[0].curr.x
+	//	.round_to_int() >> 3;
+	//s32 sublevel_y_coord_tile = gfx_manager::bgofs_mirror[0].curr.y
+	//	.round_to_int() >> 3;
 	
 	//s32 sublevel_x_coord_tile = gfx_manager::bgofs_mirror[0].curr.x
 	//	.true_round_via_trunc() >> 3;

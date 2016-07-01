@@ -42,9 +42,6 @@ protected:		// variables
 	u32 vram_chunk_index;
 	
 	
-	bool did_update_in_level_pos_this_frame;
-	bool did_update_on_ground_this_frame;
-	
 public:		// constants
 	
 	//static constexpr fixed24p8 grav_acc = {0x80};
@@ -249,34 +246,16 @@ public:		// functions
 	inline void set_curr_in_level_pos
 		( const vec2_f24p8& n_curr_in_level_pos )
 	{
-		if ( !did_update_in_level_pos_this_frame )
-		{
-			did_update_in_level_pos_this_frame = true;
-			in_level_pos.back_up();
-		}
-		
 		in_level_pos.curr = n_curr_in_level_pos;
 	}
 	inline void set_curr_in_level_pos_x
 		( const fixed24p8& n_curr_in_level_pos_x )
 	{
-		if ( !did_update_in_level_pos_this_frame )
-		{
-			did_update_in_level_pos_this_frame = true;
-			in_level_pos.back_up();
-		}
-		
 		in_level_pos.curr.x = n_curr_in_level_pos_x;
 	}
 	inline void set_curr_in_level_pos_y
 		( const fixed24p8& n_curr_in_level_pos_y )
 	{
-		if ( !did_update_in_level_pos_this_frame )
-		{
-			did_update_in_level_pos_this_frame = true;
-			in_level_pos.back_up();
-		}
-		
 		in_level_pos.curr.y = n_curr_in_level_pos_y;
 	}
 	
@@ -291,12 +270,6 @@ public:		// functions
 	
 	inline void set_curr_on_ground( bool n_curr_on_ground )
 	{
-		if ( !did_update_on_ground_this_frame )
-		{
-			did_update_on_ground_this_frame = true;
-			on_ground.back_up();
-		}
-		
 		on_ground.curr = n_curr_on_ground;
 	}
 	
@@ -460,10 +433,10 @@ public:		// functions
 	}
 	
 
-	// This is used for setting the did_update_x_this_frame variables to
-	// false.  The player_sprite class overrides this function (but still
-	// calls the original) so that the player_sprite class can set
-	// warped_this_frame to false.
+	// This is used for calling back_up() on some prev_curr_pair instances
+	// The player_sprite class overrides this function (but still calls the
+	// original) so that the player_sprite class can set warped_this_frame
+	// to false.
 	virtual void update_part_1();
 	
 	// This used to be update_part_1()
