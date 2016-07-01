@@ -26,6 +26,9 @@
 
 #include "../level_stuff/active_level_class.hpp"
 
+#include "sprite_manager_class.hpp"
+#include "../../gba_specific_stuff/button_stuff.hpp"
+
 const oam_entry::shape_size sprite::the_initial_shape_size 
 	= oam_entry::ss_16x16;
 
@@ -189,10 +192,119 @@ void sprite::update_on_screen_pos
 {
 	vec2_f24p8 temp_on_screen_pos = get_on_screen_pos
 		(camera_pos_pc_pair.curr);
+	//vec2_f24p8 temp_on_screen_pos = get_on_screen_pos
+	//	(camera_pos_pc_pair.prev);
 	
 	
 	vec2_u32 ss_vec2 = get_shape_size_as_vec2();
 	vec2_f24p8 offset( make_f24p8(ss_vec2.x), make_f24p8(ss_vec2.y) );
+	
+	
+	s32 temp_x = temp_on_screen_pos.x.to_int_for_on_screen();
+	s32 temp_y = temp_on_screen_pos.y.to_int_for_on_screen();
+	
+	prev_curr_pair<vec2_s32> camera_pos_pc_pair_s32;
+	
+	camera_pos_pc_pair_s32.prev.x 
+		= camera_pos_pc_pair.prev.x.to_int_for_on_screen();
+	camera_pos_pc_pair_s32.prev.y 
+		= camera_pos_pc_pair.prev.y.to_int_for_on_screen();
+	camera_pos_pc_pair_s32.curr.x 
+		= camera_pos_pc_pair.curr.x.to_int_for_on_screen();
+	camera_pos_pc_pair_s32.curr.y 
+		= camera_pos_pc_pair.curr.y.to_int_for_on_screen();
+	
+	if ( temp_on_screen_pos.x.get_frac_bits() == 0x80 
+		&& camera_pos_pc_pair.curr.x > camera_pos_pc_pair.prev.x )
+	{
+		--temp_x;
+	}
+	if ( temp_on_screen_pos.y.get_frac_bits() == 0x80 
+		&& camera_pos_pc_pair.curr.y > camera_pos_pc_pair.prev.y )
+	{
+		--temp_y;
+	}
+	
+	the_oam_entry.set_x_coord(temp_x);
+	the_oam_entry.set_y_coord(temp_y);
+	
+	prev_prev_on_screen_pos = on_screen_pos.prev;
+	on_screen_pos.back_up();
+	on_screen_pos.curr = temp_on_screen_pos;
+	
+	
+	prev_prev_on_screen_pos_s32 = on_screen_pos_s32.prev;
+	on_screen_pos_s32.back_up();
+	
+	//on_screen_pos_s32.curr.x = the_oam_entry.get_x_coord();
+	//on_screen_pos_s32.curr.y = the_oam_entry.get_y_coord();
+	on_screen_pos_s32.curr.x = temp_x;
+	on_screen_pos_s32.curr.y = temp_y;
+	
+	if ( the_sprite_type == st_fire_muffin )
+	{
+		bool camera_pos_y_has_changed = ( camera_pos_pc_pair.curr.y
+			!= camera_pos_pc_pair.prev.y );
+		
+		s32 difference_between_camera_pos_y_s32
+			= camera_pos_pc_pair_s32.curr.y 
+			- camera_pos_pc_pair_s32.prev.y;
+		
+		s32 difference_between_on_screen_pos_y_s32
+			= on_screen_pos_s32.curr.y - on_screen_pos_s32.prev.y;
+		
+		
+		bool camera_pos_x_has_changed = ( camera_pos_pc_pair.curr.x
+			!= camera_pos_pc_pair.prev.x );
+		
+		s32 difference_between_camera_pos_x_s32
+			= camera_pos_pc_pair_s32.curr.x 
+			- camera_pos_pc_pair_s32.prev.x;
+		
+		s32 difference_between_on_screen_pos_x_s32
+			= on_screen_pos_s32.curr.x - on_screen_pos_s32.prev.x;
+		
+		
+		
+		//if ( camera_pos_pc_pair.has_changed() )
+		//if ( camera_pos_x_has_changed 
+		//	&& difference_between_camera_pos_x_s32 
+		//	!= -difference_between_on_screen_pos_x_s32 
+		//	&& on_screen_pos_s32.prev.x != 0 )
+		if ( camera_pos_x_has_changed
+			&& on_screen_pos.curr.x.get_frac_bits() == 0x80
+			&& on_screen_pos_s32.prev.x != 0 )
+		{
+			if ( temp_debug_thing )
+			{
+				temp_debug_thing = true;
+			}
+			else //if ( !temp_debug_thing )
+			{
+				temp_debug_thing = true;
+			}
+		}
+		
+		
+		//if ( camera_pos_pc_pair.has_changed() )
+		//if ( camera_pos_y_has_changed 
+		//	&& difference_between_camera_pos_y_s32 
+		//	!= -difference_between_on_screen_pos_y_s32 
+		//	&& on_screen_pos_s32.prev.y != 0 )
+		if ( camera_pos_y_has_changed
+			&& on_screen_pos.curr.y.get_frac_bits() == 0x80
+			&& on_screen_pos_s32.prev.y != 0 )
+		{
+			if ( temp_debug_thing )
+			{
+				temp_debug_thing = true;
+			}
+			else //if ( !temp_debug_thing )
+			{
+				temp_debug_thing = true;
+			}
+		}
+	}
 	
 	// Check whether the sprite is on screen.
 	if ( temp_on_screen_pos.x + offset.x >= (fixed24p8){0} 
@@ -205,39 +317,9 @@ void sprite::update_on_screen_pos
 		//temp_on_screen_pos.x = temp_on_screen_pos.x.truncate_frac_bits();
 		//temp_on_screen_pos.y = temp_on_screen_pos.y.truncate_frac_bits();
 		
-		//the_oam_entry.set_x_coord(temp_on_screen_pos.x.round_to_int());
-		//the_oam_entry.set_y_coord(temp_on_screen_pos.y.round_to_int());
+		//temp_x = temp_on_screen_pos.x.round_to_int();
+		//temp_y = temp_on_screen_pos.y.round_to_int();
 		
-		the_oam_entry.set_x_coord(temp_on_screen_pos.x.trunc_to_int());
-		the_oam_entry.set_y_coord(temp_on_screen_pos.y.trunc_to_int());
-		
-		
-		if ( the_sprite_type == st_fire_muffin )
-		{
-			prev_prev_on_screen_pos = on_screen_pos.prev;
-			on_screen_pos.back_up();
-			on_screen_pos.curr = temp_on_screen_pos;
-			
-			
-			prev_prev_on_screen_pos_s32 = on_screen_pos_s32.prev;
-			on_screen_pos_s32.back_up();
-			
-			on_screen_pos_s32.curr.x = the_oam_entry.get_x_coord();
-			on_screen_pos_s32.curr.y = the_oam_entry.get_y_coord();
-			
-			
-			if ( camera_pos_pc_pair.has_changed() )
-			{
-				if ( temp_debug_thing )
-				{
-					temp_debug_thing = true;
-				}
-				else //if ( !temp_debug_thing )
-				{
-					temp_debug_thing = true;
-				}
-			}
-		}
 	}
 	else
 	{
@@ -257,14 +339,19 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 	if ( ( temp_on_screen_pos.x <= make_f24p8(100) && vel.x.data < 0 ) 
 		|| ( temp_on_screen_pos.x >= make_f24p8(140) && vel.x.data > 0 ) )
 	{
-		//camera_pos.x += vel.x;
+		camera_pos.x += vel.x;
 		//s32 value_to_add = vel.x.data
 		
-		if ( get_curr_in_level_pos().x != get_prev_in_level_pos().x )
-		{
-			camera_pos.x += ( get_curr_in_level_pos().x 
-				- get_prev_in_level_pos().x );
-		}
+		//if ( get_curr_in_level_pos().x != get_prev_in_level_pos().x )
+		//{
+		//	camera_pos.x += ( get_curr_in_level_pos().x 
+		//		- get_prev_in_level_pos().x );
+		//	
+		//	if ( get_curr_in_level_pos().x < get_prev_in_level_pos().x )
+		//	{
+		//		camera_pos.x += make_f24p8(1);
+		//	}
+		//}
 		
 	}
 	
@@ -280,13 +367,13 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 		//if ( ( !get_curr_on_ground() ) || ( get_curr_on_ground()
 		//	&& get_curr_in_level_pos().y != get_prev_in_level_pos().y ) )
 		{
-			//camera_pos.y += vel.y;
+			camera_pos.y += vel.y;
 			
-			if ( get_curr_in_level_pos().y != get_prev_in_level_pos().y )
-			{
-				camera_pos.y += ( get_curr_in_level_pos().y 
-					- get_prev_in_level_pos().y );
-			}
+			//if ( get_curr_in_level_pos().y != get_prev_in_level_pos().y )
+			//{
+			//	camera_pos.y += ( get_curr_in_level_pos().y 
+			//		- get_prev_in_level_pos().y ) - make_f24p8(8);
+			//}
 			
 		}
 		//else if ( get_curr_in_level_pos().y == get_prev_in_level_pos().y )

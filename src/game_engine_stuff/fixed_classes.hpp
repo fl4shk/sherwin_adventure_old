@@ -57,6 +57,11 @@ public:		// functions
 	//
 	//inline s16 true_round_via_trunc_s16() const;
 	
+	inline s32 to_int_for_on_screen() const
+	{
+		return round_to_int();
+	}
+	
 	inline fixed24p8 with_zero_frac_bits() const
 	{
 		fixed24p8 n_value = *this;

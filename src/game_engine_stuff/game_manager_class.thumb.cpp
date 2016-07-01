@@ -47,6 +47,8 @@ game_mode game_manager::curr_game_mode;
 
 void game_manager::vblank_func()
 {
+	gfx_manager::copy_bgofs_mirror_to_registers();
+	
 	//mmFrame();
 	
 	key_poll();
@@ -79,7 +81,7 @@ void game_manager::vblank_func()
 		
 		// When in a sublevel.
 		case gm_in_sublevel:
-			gfx_manager::copy_bgofs_mirror_to_registers();
+			//gfx_manager::copy_bgofs_mirror_to_registers();
 			gfx_manager::upload_bg_tiles_to_vram();
 			copy_oam_mirror_to_oam();
 			

@@ -130,26 +130,24 @@ void gfx_manager::copy_bgofs_mirror_to_registers()
 		//s32 x_dir, y_dir;
 		
 		
-		//s16 temp_x = (s16)bgofs_mirror[i].curr.x.round_to_int();
-		//s16 temp_y = (s16)bgofs_mirror[i].curr.y.round_to_int();
-		s32 temp_x = bgofs_mirror[i].curr.x.trunc_to_int();
-		s32 temp_y = bgofs_mirror[i].curr.y.trunc_to_int();
+		s32 temp_x = bgofs_mirror[i].curr.x.to_int_for_on_screen();
+		s32 temp_y = bgofs_mirror[i].curr.y.to_int_for_on_screen();
+		//s32 temp_x = bgofs_mirror[i].curr.x.trunc_to_int();
+		//s32 temp_y = bgofs_mirror[i].curr.y.trunc_to_int();
 		
 		
-		//if ( bgofs_mirror[i].curr.x.get_frac_bits() == 0x80
-		//	&& bgofs_mirror[i].curr.x < bgofs_mirror[i].prev.x )
+		//if ( bgofs_mirror[i].curr.x < bgofs_mirror[i].prev.x )
 		//{
-		//	reg_bgofs[i].x = (s16)(temp_x - 1);
+		//	reg_bgofs[i].x = (s16)(temp_x + 1);
 		//}
 		//else
 		{
 			reg_bgofs[i].x = (s16)temp_x;
 		}
 		
-		//if ( bgofs_mirror[i].curr.y.get_frac_bits() == 0x80
-		//	&& bgofs_mirror[i].curr.y < bgofs_mirror[i].prev.y )
+		//if ( bgofs_mirror[i].curr.y < bgofs_mirror[i].prev.y )
 		//{
-		//	reg_bgofs[i].y = (s16)(temp_y - 1);
+		//	reg_bgofs[i].y = (s16)(temp_y + 1);
 		//}
 		//else
 		{

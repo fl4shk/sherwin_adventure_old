@@ -409,6 +409,7 @@ void player_sprite::update_part_3
 	else
 	{
 		camera_follow_basic(camera_pos_pc_pair.curr);
+		//center_camera_almost(camera_pos_pc_pair.curr);
 	}
 	
 	active_level_manager::correct_bg0_scroll_mirror(the_sublevel_size_2d);
