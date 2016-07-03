@@ -50,15 +50,16 @@ first_type max_va( const first_type& arg_0, const second_type& arg_1 )
 
 template< typename first_type, typename second_type, 
 	typename... remaining_types >
-first_type max_va( first_type arg_0, second_type arg_1, 
-	remaining_types... remaining_args  )
+inline first_type max_va( const first_type& arg_0, 
+	const second_type& arg_1, remaining_types... remaining_args  )
 {
 	return max_va( max_va( arg_0, arg_1 ), remaining_args... );
 }
 
 
 template< typename first_type, typename second_type >
-first_type min_va( const first_type& arg_0, const second_type& arg_1 )
+inline first_type min_va( const first_type& arg_0, 
+	const second_type& arg_1 )
 {
 	if ( arg_0 <= arg_1 )
 	{
@@ -72,10 +73,24 @@ first_type min_va( const first_type& arg_0, const second_type& arg_1 )
 
 template< typename first_type, typename second_type, 
 	typename... remaining_types >
-first_type min_va( first_type arg_0, second_type arg_1, 
-	remaining_types... remaining_args  )
+inline first_type min_va( const first_type& arg_0, 
+	const second_type& arg_1, remaining_types... remaining_args  )
 {
 	return min_va( min_va( arg_0, arg_1 ), remaining_args... );
+}
+
+
+template< typename type >
+inline type custom_abs( const type& val )
+{
+	if ( val < static_cast<type>(0) )
+	{
+		return -val;
+	}
+	else
+	{
+		return val;
+	}
 }
 
 

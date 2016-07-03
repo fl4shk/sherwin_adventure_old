@@ -483,10 +483,14 @@ void sprite_manager::initial_sprite_spawning_shared_code
 	//	>> 4;
 	//camera_block_grid_pos.y = camera_pos_pc_pair.curr.y.trunc_to_int() 
 	//	>> 4;
-	camera_block_grid_pos.x = camera_pos_pc_pair.curr.x.round_to_int() 
-		>> 4;
-	camera_block_grid_pos.y = camera_pos_pc_pair.curr.y.round_to_int() 
-		>> 4;
+	//camera_block_grid_pos.x = camera_pos_pc_pair.curr.x.round_to_int() 
+	//	>> 4;
+	//camera_block_grid_pos.y = camera_pos_pc_pair.curr.y.round_to_int() 
+	//	>> 4;
+	camera_block_grid_pos.x = { camera_pos_pc_pair.curr.x
+		.to_int_for_on_screen() >> 4 };
+	camera_block_grid_pos.y = { camera_pos_pc_pair.curr.y
+		.to_int_for_on_screen() >> 4 };
 	
 	
 	//for ( std::forward_list<sprite_init_param_group>& which_list

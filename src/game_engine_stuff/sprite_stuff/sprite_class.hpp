@@ -136,6 +136,8 @@ public:		// variables
 	bool is_jumping;
 	
 	
+	prev_curr_pair<bool> on_slope;
+	
 	// Invincibility frames timer, enabled after taking damage.
 	s32 invin_frame_timer;
 	
@@ -150,19 +152,23 @@ public:		// variables
 	s32 misc_data_s[misc_data_size];
 	
 	
-	//// These are mainly for debugging.
-	////bool did_update_prev_on_screen_pos_this_frame;
-	////vec2_f24p8 prev_on_screen_pos, curr_on_screen_pos;
-	////prev_curr_pair<vec2_f24p8> on_screen_pos;
-	////prev_curr_pair<vec2_s32> on_screen_pos_s32;
-	//
-	//vec2_f24p8 prev_prev_on_screen_pos; 
+	// These are mainly for debugging.
+	//bool did_update_prev_on_screen_pos_this_frame;
+	//vec2_f24p8 prev_on_screen_pos, curr_on_screen_pos;
 	//prev_curr_pair<vec2_f24p8> on_screen_pos;
-	//vec2_s32 prev_prev_on_screen_pos_s32;
 	//prev_curr_pair<vec2_s32> on_screen_pos_s32;
-	//
-	//bool temp_debug_thing;
 	
+	static vec2_f24p8 prev_prev_on_screen_pos; 
+	static prev_curr_pair<vec2_f24p8> on_screen_pos;
+	static vec2_s32 prev_prev_on_screen_pos_s32;
+	static prev_curr_pair<vec2_s32> on_screen_pos_s32;
+	
+	static vec2<bool> temp_debug_thing;
+	
+	static vec2_f24p8 camera_pos_diff_abs;
+	static vec2_s32 camera_pos_s32_diff_abs;
+	static vec2_f24p8 on_screen_pos_diff_abs;
+	static vec2_s32 on_screen_pos_s32_diff_abs;
 	
 public:		// functions
 	
@@ -273,6 +279,20 @@ public:		// functions
 		on_ground.curr = n_curr_on_ground;
 	}
 	
+	
+	inline bool get_prev_on_slope() const
+	{
+		return on_slope.prev;
+	}
+	inline bool get_curr_on_slope() const
+	{
+		return on_slope.curr;
+	}
+	
+	inline void set_curr_on_slope( bool n_curr_on_slope )
+	{
+		on_slope.curr = n_curr_on_slope;
+	}
 	
 	
 	inline oam_entry::shape_size get_shape_size() const

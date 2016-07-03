@@ -22,6 +22,7 @@
 #include "misc_types.hpp"
 #include "../gba_specific_stuff/asm_funcs.hpp"
 #include "../gba_specific_stuff/attribute_defines.hpp"
+#include "misc_utility_funcs.hpp"
 
 class fixed24p8;
 class fixed8p8;
@@ -60,31 +61,10 @@ public:		// functions
 	inline s32 to_int_for_on_screen() const
 	{
 		return round_to_int();
+		//return trunc_to_int();
 	}
 	
-	inline fixed24p8 with_zero_frac_bits() const
-	{
-		fixed24p8 n_value = *this;
-		
-		if ( n_value.data < 0 )
-		{
-			s32 positive_n_value_data = -n_value.data;
-			
-			//positive_n_value_data &= ~((s32)frac_mask);
-			positive_n_value_data >>= shift;
-			positive_n_value_data <<= shift;
-			
-			n_value.data = -positive_n_value_data;
-		}
-		else if ( n_value.data > 0 )
-		{
-			//n_value.data &= ~((s32)frac_mask);
-			n_value.data >>= shift;
-			n_value.data <<= shift;
-		}
-		
-		return n_value;
-	}
+	inline fixed24p8 with_zero_frac_bits() const;
 	
 	inline u8 get_frac_bits() const;
 	
@@ -92,8 +72,11 @@ public:		// functions
 	
 	
 	// Arithmetic operator overloads
+	
+	
 	inline fixed24p8 operator + ( const fixed24p8& to_add ) const;
 	inline fixed24p8 operator - ( const fixed24p8& to_sub ) const;
+	
 	//inline fixed24p8 operator * ( const fixed24p8& to_mul ) const;
 	inline fixed24p8 operator * ( const fixed8p8& to_mul ) const;
 	fixed24p8 guaranteed_f24p8_by_f8p8_multiplication
@@ -114,7 +97,7 @@ public:		// functions
 	
 	
 	inline fixed24p8& operator = ( const fixed24p8& to_copy );
-	inline fixed24p8& operator = ( s32 to_copy );
+	//inline fixed24p8& operator = ( s32 to_copy );
 	
 	inline void operator += ( const fixed24p8& to_add );
 	inline void operator -= ( const fixed24p8& to_sub );
@@ -148,6 +131,12 @@ public:		// functions
 	
 } __attribute__((_align4));
 
+
+template<>
+inline fixed24p8 custom_abs( const fixed24p8& val )
+{
+	return (fixed24p8){custom_abs<s32>(val.data)};
+}
 
 inline s32 fixed24p8::round_to_int() const
 {
@@ -205,6 +194,20 @@ inline s32 fixed24p8::trunc_to_int() const
 //	}
 //}
 
+inline fixed24p8 fixed24p8::with_zero_frac_bits() const
+{
+	fixed24p8 positive_n_value = custom_abs(*this);
+	
+	positive_n_value.data >>= shift;
+	positive_n_value.data <<= shift;
+	
+	if ( data < 0 )
+	{
+		//n_value = -positive_n_value.data;
+		return (fixed24p8){-positive_n_value.data};
+	}
+	return positive_n_value;
+}
 
 inline u8 fixed24p8::get_frac_bits() const
 {
@@ -232,19 +235,17 @@ inline fixed24p8 fixed24p8::operator - ( const fixed24p8& to_sub ) const
 
 
 
-
-
 inline fixed24p8& fixed24p8::operator = ( const fixed24p8& to_copy )
 {
 	data = to_copy.data;
 	return *this;
 }
 
-inline fixed24p8& fixed24p8::operator = ( s32 to_copy )
-{
-	data = to_copy;
-	return *this;
-}
+//inline fixed24p8& fixed24p8::operator = ( s32 to_copy )
+//{
+//	data = to_copy;
+//	return *this;
+//}
 
 inline void fixed24p8::operator += ( const fixed24p8& to_add )
 {
@@ -283,7 +284,6 @@ inline bool fixed24p8::operator >= ( const fixed24p8& to_cmp ) const
 {
 	return ( data >= to_cmp.data );
 }
-
 
 
 
@@ -566,6 +566,8 @@ inline fixed8p8 make_f8p8( s8 whole_part, u8 frac_part=0 )
 	
 	return { ret_data };
 }
+
+
 
 
 #endif		// fixed_classes_hpp

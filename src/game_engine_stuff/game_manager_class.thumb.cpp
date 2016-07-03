@@ -128,9 +128,9 @@ void game_manager::title_screen_func()
 	for ( u32 i=0; i<3; ++i )
 	{
 		gfx_manager::bgofs_mirror[i].curr.x 
-			= gfx_manager::bgofs_mirror[i].prev.x = 0;
+			= gfx_manager::bgofs_mirror[i].prev.x = {0};
 		gfx_manager::bgofs_mirror[i].curr.y 
-			= gfx_manager::bgofs_mirror[i].prev.y = 0;
+			= gfx_manager::bgofs_mirror[i].prev.y = {0};
 	}
 	
 	gfx_manager::copy_bgofs_mirror_to_registers();

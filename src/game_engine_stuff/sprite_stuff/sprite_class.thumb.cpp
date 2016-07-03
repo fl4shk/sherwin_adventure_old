@@ -40,6 +40,21 @@ const vec2_f24p8 sprite::the_initial_coll_box_size
 const vec2_f24p8 sprite::the_initial_in_level_pos_offset
 	= { {0 << fixed24p8::shift}, {0 << fixed24p8::shift} };
 
+
+vec2_f24p8 sprite::prev_prev_on_screen_pos; 
+prev_curr_pair<vec2_f24p8> sprite::on_screen_pos;
+vec2_s32 sprite::prev_prev_on_screen_pos_s32;
+prev_curr_pair<vec2_s32> sprite::on_screen_pos_s32;
+
+vec2<bool> sprite::temp_debug_thing;
+
+vec2_f24p8 sprite::camera_pos_diff_abs;
+vec2_s32 sprite::camera_pos_s32_diff_abs;
+vec2_f24p8 sprite::on_screen_pos_diff_abs;
+vec2_s32 sprite::on_screen_pos_s32_diff_abs;
+
+
+
 sprite::sprite()
 {
 	shared_constructor_code_part_1();
@@ -204,8 +219,6 @@ void sprite::update_on_screen_pos
 	s32 temp_x = temp_on_screen_pos.x.to_int_for_on_screen();
 	s32 temp_y = temp_on_screen_pos.y.to_int_for_on_screen();
 	
-	// I'm VERY happy this works.  I don't fully understand the math behind
-	// why it works; it's just what I came up with by using a debugger.
 	if ( temp_on_screen_pos.x.get_frac_bits() == 0x80 
 		&& camera_pos_pc_pair.curr.x > camera_pos_pc_pair.prev.x )
 	{
@@ -215,6 +228,49 @@ void sprite::update_on_screen_pos
 		&& camera_pos_pc_pair.curr.y > camera_pos_pc_pair.prev.y )
 	{
 		--temp_y;
+	}
+	
+	if ( the_sprite_type == st_fire_muffin )
+	{
+		prev_prev_on_screen_pos = on_screen_pos.prev;
+		on_screen_pos.back_up();
+		
+		on_screen_pos.curr = temp_on_screen_pos;
+		
+		
+		prev_prev_on_screen_pos_s32 = on_screen_pos_s32.prev;
+		on_screen_pos_s32.back_up();
+		
+		on_screen_pos_s32.curr.x = temp_x;
+		on_screen_pos_s32.curr.y = temp_y;
+		
+		
+		camera_pos_diff_abs = custom_abs( camera_pos_pc_pair.curr 
+			- camera_pos_pc_pair.prev );
+		
+		
+		camera_pos_s32_diff_abs = custom_abs(vec2_s32
+			( ( camera_pos_pc_pair.curr.x.to_int_for_on_screen() 
+			- camera_pos_pc_pair.prev.x.to_int_for_on_screen() ), 
+			( camera_pos_pc_pair.curr.y.to_int_for_on_screen() 
+			- camera_pos_pc_pair.prev.y.to_int_for_on_screen() ) ));
+		
+		on_screen_pos_diff_abs = custom_abs( on_screen_pos.curr
+			- on_screen_pos.prev );
+		on_screen_pos_s32_diff_abs = custom_abs( on_screen_pos_s32.curr
+			- on_screen_pos_s32.prev );
+		
+		if ( camera_pos_s32_diff_abs.x != on_screen_pos_s32_diff_abs.x
+			&& on_screen_pos_s32.prev.x != 0 )
+		{
+			temp_debug_thing.x = true;
+		}
+		
+		if ( camera_pos_s32_diff_abs.y != on_screen_pos_s32_diff_abs.y
+			&& on_screen_pos_s32.prev.y != 0 )
+		{
+			temp_debug_thing.y = true;
+		}
 	}
 	
 	the_oam_entry.set_x_coord(temp_x);
@@ -271,14 +327,14 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 	bool do_update_camera_pos_y = false;
 	bool add = false;
 	
-	bool on_slope = false;
+	//bool on_slope = false;
 	
 	// I sincerely hope this works
-	if ( get_curr_in_level_pos().y != get_prev_in_level_pos().y
-		&& get_curr_on_ground() && get_prev_on_ground() )
-	{
-		on_slope = true;
-	}
+	//if ( get_curr_in_level_pos().y != get_prev_in_level_pos().y
+	//	&& get_curr_on_ground() && get_prev_on_ground() )
+	//{
+	//	on_slope = true;
+	//}
 	
 	if ( temp_on_screen_pos.y <= make_f24p8(20) )
 	{
@@ -286,7 +342,8 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 		
 		do_update_camera_pos_y = true;
 	}
-	else if ( on_screen_bottom_pos >= make_f24p8(60) && !on_slope )
+	else if ( on_screen_bottom_pos >= make_f24p8(60) 
+		&& !get_curr_on_slope() )
 	{
 		if ( vel.y >= (fixed24p8){0} )
 		{
@@ -294,15 +351,17 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 			do_update_camera_pos_y = true;
 		}
 	}
-	else if ( on_screen_bottom_pos >= make_f24p8(40) && on_slope )
+	else if ( on_screen_bottom_pos >= make_f24p8(140) 
+		&& get_curr_on_slope() )
 	{
-		add = true;
+		//add = false;
 		do_update_camera_pos_y = true;
 	}
 	
 	if ( do_update_camera_pos_y )
 	{
-		if ( !get_curr_on_ground() || on_slope  )
+		if ( !get_curr_on_ground() || ( get_curr_on_ground() 
+			&& get_curr_on_slope() ) )
 		{
 			//camera_pos.y += vel.y;
 			
@@ -350,39 +409,44 @@ void sprite::center_camera_almost( bg_point& camera_pos ) const
 
 vec2_u32 sprite::get_shape_size_as_vec2_raw() const
 {
+	const vec2_u32 shape_size_arr[oam_entry::ss_count]
+		= { { 8, 8 }, { 16, 16, }, { 32, 32 }, { 64, 64 },
+		{ 16, 8 }, { 32, 8 }, { 32, 16 }, { 64, 32 },
+		{ 8, 16 }, { 8, 32 }, { 16, 32 }, { 32, 64 } };
 	
-	switch (the_shape_size)
-	{
-		// Square shapes
-		case oam_entry::ss_8x8:
-			return { 8, 8 };
-		case oam_entry::ss_16x16:
-			return { 16, 16 };
-		case oam_entry::ss_32x32:
-			return { 32, 32 };
-		case oam_entry::ss_64x64:
-			return { 64, 64 };
-		
-		// Horizontal shapes
-		case oam_entry::ss_16x8:
-			return { 16, 8 };
-		case oam_entry::ss_32x8:
-			return { 32, 8 };
-		case oam_entry::ss_32x16:
-			return { 32, 16 };
-		case oam_entry::ss_64x32:
-			return { 64, 32 };
-		
-		// Vertical shapes
-		case oam_entry::ss_8x16:
-			return { 8, 16 };
-		case oam_entry::ss_8x32:
-			return { 8, 32 };
-		case oam_entry::ss_16x32:
-			return { 16, 32 };
-		case oam_entry::ss_32x64:
-			return { 32, 64 };
-	}
+	return shape_size_arr[the_shape_size];
+	//switch (the_shape_size)
+	//{
+	//	// Square shapes
+	//	case oam_entry::ss_8x8:
+	//		return { 8, 8 };
+	//	case oam_entry::ss_16x16:
+	//		return { 16, 16 };
+	//	case oam_entry::ss_32x32:
+	//		return { 32, 32 };
+	//	case oam_entry::ss_64x64:
+	//		return { 64, 64 };
+	//	
+	//	// Horizontal shapes
+	//	case oam_entry::ss_16x8:
+	//		return { 16, 8 };
+	//	case oam_entry::ss_32x8:
+	//		return { 32, 8 };
+	//	case oam_entry::ss_32x16:
+	//		return { 32, 16 };
+	//	case oam_entry::ss_64x32:
+	//		return { 64, 32 };
+	//	
+	//	// Vertical shapes
+	//	case oam_entry::ss_8x16:
+	//		return { 8, 16 };
+	//	case oam_entry::ss_8x32:
+	//		return { 8, 32 };
+	//	case oam_entry::ss_16x32:
+	//		return { 16, 32 };
+	//	case oam_entry::ss_32x64:
+	//		return { 32, 64 };
+	//}
 	
 }
 
@@ -390,27 +454,30 @@ void sprite::update_part_1()
 {
 	in_level_pos.back_up();
 	on_ground.back_up();
+	on_slope.back_up();
+	
+	set_curr_on_slope(false);
 	
 	
-	// Truncate the fractional bits if the sprite is not moving
-	// horizontally
-	if ( get_curr_in_level_pos().x == get_prev_in_level_pos().x )
-	{
-		//set_curr_in_level_pos_x
-		//	(get_curr_in_level_pos().x.truncate_frac_bits());
-		set_curr_in_level_pos_x
-			(get_curr_in_level_pos().x.with_zero_frac_bits());
-	}
-	
-	// Truncate the fractional bits if the sprite is not moving
-	// vertically
-	if ( get_curr_in_level_pos().y == get_prev_in_level_pos().y )
-	{
-		//set_curr_in_level_pos_y
-		//	(get_curr_in_level_pos().y.truncate_frac_bits());
-		set_curr_in_level_pos_y
-			(get_curr_in_level_pos().y.with_zero_frac_bits());
-	}
+	//// Truncate the fractional bits if the sprite is not moving
+	//// horizontally
+	//if ( get_curr_in_level_pos().x == get_prev_in_level_pos().x )
+	//{
+	//	//set_curr_in_level_pos_x
+	//	//	(get_curr_in_level_pos().x.truncate_frac_bits());
+	//	set_curr_in_level_pos_x
+	//		(get_curr_in_level_pos().x.with_zero_frac_bits());
+	//}
+	//
+	//// Truncate the fractional bits if the sprite is not moving
+	//// vertically
+	//if ( get_curr_in_level_pos().y == get_prev_in_level_pos().y )
+	//{
+	//	//set_curr_in_level_pos_y
+	//	//	(get_curr_in_level_pos().y.truncate_frac_bits());
+	//	set_curr_in_level_pos_y
+	//		(get_curr_in_level_pos().y.with_zero_frac_bits());
+	//}
 	
 }
 
@@ -624,45 +691,54 @@ block_type sprite::slope_block_coll_response_bot_16x16
 	block_coll_result& bl_coll_result, block_coll_result& bm_coll_result,
 	block_coll_result& br_coll_result, bool hitting_tltr )
 {
-	#define X(name) \
-		vec2_f24p8& pt_##name = the_pt_group.get_pt_##name##_16x16();
-	list_of_16x16_slope_stuff_coll_point_names(X)
-	#undef X
+	set_curr_on_slope(true);
 	
-	
-	// pt_bm, pt_bl, and pt_br converted to the relative coordinate system
-	// of the block, with units of WHOLE pixels, with NO subpixels.  The %
-	// operators will be converted to & operators by the compiler.
-	#define X(name) \
-		vec2_s32 pt_##name##_block_rel_round \
-			= vec2_s32( pt_##name.x.round_to_int() \
-			% num_pixels_per_block_row, pt_##name.y.round_to_int() \
-			% num_pixels_per_block_col );
-	list_of_16x16_slope_stuff_coll_point_names(X)
-	#undef X
-	
-	
-	// The block y coord points above collision points
-	#define X(name) \
-		const s32 pt_above_pt_##name##_block_coord_y \
-			= name##_coll_result.coord.y - 1;
-	list_of_16x16_slope_stuff_coll_point_names(X)
-	#undef X
-	
-	// Height mask values for the points to check
-	#define X(name) \
-		s32 pt_##name##_height_mask_value = -1;
-	list_of_16x16_slope_stuff_coll_point_names(X)
-	#undef X
+	//if ( false )
+	//{
+		#define X(name) \
+			vec2_f24p8& pt_##name = the_pt_group.get_pt_##name##_16x16();
+		list_of_16x16_slope_stuff_coll_point_names(X)
+		#undef X
 		
+		
+		// pt_bm, pt_bl, and pt_br converted to the relative coordinate
+		// system of the block, with units of WHOLE pixels, with NO
+		// subpixels.  The % operators will be converted to & operators by
+		// the compiler.
+		#define X(name) \
+			vec2_s32 pt_##name##_block_rel_round \
+				= vec2_s32( pt_##name.x.round_to_int() \
+				% num_pixels_per_block_row, pt_##name.y.round_to_int() \
+				% num_pixels_per_block_col );
+		list_of_16x16_slope_stuff_coll_point_names(X)
+		#undef X
+		
+		
+		// The block y coord points above collision points
+		#define X(name) \
+			const s32 pt_above_pt_##name##_block_coord_y \
+				= name##_coll_result.coord.y - 1;
+		list_of_16x16_slope_stuff_coll_point_names(X)
+		#undef X
+		
+		// Height mask values for the points to check
+		#define X(name) \
+			s32 pt_##name##_height_mask_value = -1;
+		list_of_16x16_slope_stuff_coll_point_names(X)
+		#undef X
+			
+		
+		// Basically, these pointers are used as aliases for long variable
+		// names.
+		#define X(name) \
+		const u32* height_mask_##name \
+			= grass_slope_##name##_block_stuff::height_mask;
+		list_of_slope_configurations(X)
+		#undef X
+	//}
 	
-	// Basically, these pointers are used as aliases for long variable
-	// names.
-	#define X(name) \
-	const u32* height_mask_##name \
-		= grass_slope_##name##_block_stuff::height_mask;
-	list_of_slope_configurations(X)
-	#undef X
+	
+	
 	
 	auto find_height_mask_value_normal = [&]
 		( const block_coll_result& the_coll_result, 
@@ -719,9 +795,6 @@ block_type sprite::slope_block_coll_response_bot_16x16
 		const block_coll_result& the_coll_result, 
 		const s32 height_mask_value, const vec2_s32& pt_block_rel_round )
 	{
-		//next_debug_s32 = num_pixels_per_block_col - pt_block_rel_round.y;
-		//next_debug_s32 = height_mask_value;
-		
 		// Check whether the_sprite is inside the slope.
 		if ( ( (s32)num_pixels_per_block_col - (s32)pt_block_rel_round.y )
 			<= height_mask_value )
@@ -756,45 +829,19 @@ block_type sprite::slope_block_coll_response_bot_16x16
 		}
 		else if ( pt_block_rel_round.y == 0 )
 		{
-			//show_debug_str_s32("okay");
-			//in_level_pos.y = make_f24p8( ( the_coll_result.coord.y + 1 )
-			//	* num_pixels_per_block_col - height_mask_value )
-			//	- the_coll_box.size.y;
-			
-			//in_level_pos.y += make_f24p8(1);
-			//get_curr_on_ground() = false;
 			set_curr_on_ground(false);
 			
 		}
 		else if ( vel.y < (fixed24p8){0} )
 		{
-			//show_debug_str_s32("hmmm");
-			//get_curr_on_ground() = false;
 			set_curr_on_ground(false);
 		}
 		else if ( vel.y == (fixed24p8){0} )
 		{
-			//in_level_pos.y = make_f24p8( ( the_coll_result.coord.y + 1 )
-			//	* num_pixels_per_block_col - height_mask_value )
-			//	- make_f24p8( get_shape_size_as_vec2().y );
-			//	//- ( the_coll_box.size.y + cb_pos_offset );
-			
-			//if ( pt_block_rel_round.y == 1 )
-			//{
-			//	in_level_pos.y += make_f24p8(3);
-			//}
-			
-			//in_level_pos.y += make_f24p8(2);
-			
-			//vel.y = make_f24p8(2);
-			
-			//vel.y = {0x00};
-			//get_curr_on_ground() = true;
 			set_curr_on_ground(true);
 			
 			if ( vel.x != (fixed24p8){0} && hitting_tltr )
 			{
-				//in_level_pos.y += make_f24p8(1);
 				set_curr_in_level_pos_y( get_curr_in_level_pos().y 
 					+ make_f24p8(1) );
 			}
@@ -803,25 +850,8 @@ block_type sprite::slope_block_coll_response_bot_16x16
 		
 		else
 		{
-			//show_debug_str_s32("hmm2");
-			//get_curr_on_ground() = true;
-			//get_curr_on_ground() = false;
 			set_curr_on_ground(false);
-			
 		}
-		
-		
-		//show_debug_str_s32("dbst");
-		
-		//next_debug_s32 = pt_block_rel_round.y;
-		//next_debug_s32 = (s32)num_pixels_per_block_col
-		//	- pt_block_rel_round.y;
-		//show_debug_str_s32( ( ( (s32)num_pixels_per_block_col
-		//	- pt_block_rel_round.y ) <= height_mask_value ) 
-		//	? "true" : "fals" );
-		//next_debug_s32 = (u32)height_mask_value;
-		
-		//show_debug_str_s32("dben");
 		
 	};
 	
@@ -1001,6 +1031,8 @@ block_type sprite::slope_block_coll_response_bot_16x32
 	block_coll_result& bl_coll_result, block_coll_result& bm_coll_result,
 	block_coll_result& br_coll_result, bool hitting_tltr )
 {
+	set_curr_on_slope(true);
+	
 	#define X(name) \
 		vec2_f24p8& pt_##name = the_pt_group.get_pt_##name##_16x32();
 	list_of_16x32_slope_stuff_coll_point_names(X)
@@ -1040,6 +1072,7 @@ block_type sprite::slope_block_coll_response_bot_16x32
 		= grass_slope_##name##_block_stuff::height_mask;
 	list_of_slope_configurations(X)
 	#undef X
+	
 	
 	auto find_height_mask_value_normal = [&]
 		( const block_coll_result& the_coll_result, 

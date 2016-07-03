@@ -22,6 +22,7 @@
 #include "misc_types.hpp"
 #include "../gba_specific_stuff/attribute_defines.hpp"
 #include "fixed_classes.hpp"
+#include "misc_utility_funcs.hpp"
 
 
 template< typename type >
@@ -363,6 +364,12 @@ template<>
 inline vec2<s32>::operator vec2<fixed24p8>() const
 {
 	return { {x}, {y} };
+}
+
+template< typename type >
+inline vec2<type> custom_abs( const vec2<type>& val )
+{
+	return vec2<type>( custom_abs(val.x), custom_abs(val.y) );
 }
 
 

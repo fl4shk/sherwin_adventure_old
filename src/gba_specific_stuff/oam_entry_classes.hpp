@@ -45,7 +45,7 @@ class oam_entry
 public:		// enums
 	enum shape_size { ss_8x8, ss_16x16, ss_32x32, ss_64x64, ss_16x8, 
 		ss_32x8, ss_32x16, ss_64x32, ss_8x16, ss_8x32, ss_16x32, 
-		ss_32x64 } __attribute__((_align4));
+		ss_32x64, ss_count } __attribute__((_align4));
 	
 public:		// variables
 	u16 attr0;

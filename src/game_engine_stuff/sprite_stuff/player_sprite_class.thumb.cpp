@@ -268,20 +268,147 @@ void player_sprite::update_part_2()
 		}
 	}
 	
+	s32 key_dir = 0;
+	s32 vel_x_dir = 0;
+	
+	if ( vel.x < (fixed24p8){0} )
+	{
+		vel_x_dir = -1;
+	}
+	else if ( vel.x > (fixed24p8){0} )
+	{
+		vel_x_dir = 1;
+	}
+	
+	fixed24p8 vel_x_abs = custom_abs(vel.x);
 	
 	if ( key_hit_or_held(key_left) && !key_hit_or_held(key_right) )
 	{
+		key_dir = -1;
+		//if (run_toggle)
+		//{
+		//	max_vel_x_abs_val = max_run_speed;
+		//	
+		//	if ( (-vel.x) < walk_speed )
+		//	{
+		//		accel_x = -walk_speed;
+		//	}
+		//	else
+		//	{
+		//		accel_x = -run_accel_x_abs_val;
+		//	}
+		//	
+		//}
+		//else //if (!run_toggle)
+		//{
+		//	//vel.x = -walk_speed;
+		//	
+		//	max_vel_x_abs_val = walk_speed;
+		//	accel_x = -walk_speed;
+		//}
+		//
+		//
+		////if ( get_curr_on_ground() && !swinging_pickaxe )
+		//if (!swinging_pickaxe)
+		//{
+		//	the_oam_entry.enable_hflip();
+		//}
+	}
+	else if ( key_hit_or_held(key_right) && !key_hit_or_held(key_left) )
+	{
+		key_dir = 1;
+		//if (run_toggle)
+		//{
+		//	max_vel_x_abs_val = max_run_speed;
+		//	
+		//	if ( vel.x < walk_speed )
+		//	{
+		//		accel_x = walk_speed;
+		//	}
+		//	else
+		//	{
+		//		accel_x = run_accel_x_abs_val;
+		//	}
+		//	
+		//}
+		//else //if (!run_toggle)
+		//{
+		//	max_vel_x_abs_val = walk_speed;
+		//	accel_x = walk_speed;
+		//}
+		//
+		//
+		////if ( get_curr_on_ground() && !swinging_pickaxe )
+		//if (!swinging_pickaxe)
+		//{
+		//	the_oam_entry.disable_hflip();
+		//}
+	}
+	else
+	{
+		//if ( vel.x < (fixed24p8){0x40} 
+		//	&& vel.x > (fixed24p8){-0x40} )
+		//if ( vel.x < (fixed24p8){0x20} 
+		//	&& vel.x > (fixed24p8){-0x20} )
+		//if ( custom_abs(vel.x) < (fixed24p8){0x20} )
+		if ( vel_x_abs < (fixed24p8){0x20} )
+		{
+			vel.x = {0};
+			accel_x = {0};
+		}
+		
+		// Don't allow speed changing when in the air
+		else if (get_curr_on_ground())
+		{
+			//if ( vel.x > (fixed24p8){0} )
+			//{
+			//	//accel_x = -run_accel_x_abs_val;
+			//	accel_x.data = -run_accel_x_abs_val.data * 4;
+			//}
+			//else if ( vel.x < (fixed24p8){0} )
+			//{
+			//	//accel_x = run_accel_x_abs_val;
+			//	accel_x.data = run_accel_x_abs_val.data * 4;
+			//}
+			
+			if ( vel_x_abs > (fixed24p8){0} )
+			{
+				accel_x.data = -vel_x_dir * run_accel_x_abs_val.data * 4;
+			}
+		}
+		
+	}
+	
+	if ( key_dir != 0 )
+	{
+		if ( ( key_dir < 0 && vel.x.data > 0 )
+			|| ( key_dir > 0 && vel.x.data < 0 ) )
+		{
+			vel.x = {0};
+		}
+		
 		if (run_toggle)
 		{
 			max_vel_x_abs_val = max_run_speed;
 			
-			if ( (-vel.x) < walk_speed )
+			//if ( (-vel.x) < walk_speed )
+			//{
+			//	accel_x = -walk_speed;
+			//}
+			//else
+			//{
+			//	accel_x = -run_accel_x_abs_val;
+			//}
+			
+			if ( vel_x_abs < walk_speed )
 			{
-				accel_x = -walk_speed;
+				//accel_x.data = vel_x_dir * walk_speed.data;
+				accel_x.data = key_dir * walk_speed.data;
 			}
 			else
 			{
-				accel_x = -run_accel_x_abs_val;
+				//accel_x.data = vel_x_dir * run_accel_x_abs_val.data;
+				accel_x.data = key_dir * run_accel_x_abs_val.data;
 			}
 			
 		}
@@ -290,71 +417,25 @@ void player_sprite::update_part_2()
 			//vel.x = -walk_speed;
 			
 			max_vel_x_abs_val = walk_speed;
-			accel_x = -walk_speed;
+			
+			//accel_x = -walk_speed;
+			//accel_x.data = vel_x_dir * walk_speed.data;
+			accel_x.data = key_dir * walk_speed.data;
 		}
 		
 		
 		//if ( get_curr_on_ground() && !swinging_pickaxe )
 		if (!swinging_pickaxe)
 		{
-			the_oam_entry.enable_hflip();
-		}
-	}
-	else if ( key_hit_or_held(key_right) && !key_hit_or_held(key_left) )
-	{
-		if (run_toggle)
-		{
-			max_vel_x_abs_val = max_run_speed;
-			
-			if ( vel.x < walk_speed )
+			if ( key_dir < 0 )
 			{
-				accel_x = walk_speed;
+				the_oam_entry.enable_hflip();
 			}
-			else
+			else if ( key_dir > 0 )
 			{
-				accel_x = run_accel_x_abs_val;
-			}
-			
-		}
-		else //if (!run_toggle)
-		{
-			max_vel_x_abs_val = walk_speed;
-			accel_x = walk_speed;
-		}
-		
-		
-		//if ( get_curr_on_ground() && !swinging_pickaxe )
-		if (!swinging_pickaxe)
-		{
-			the_oam_entry.disable_hflip();
-		}
-	}
-	else
-	{
-		//if ( vel.x < (fixed24p8){0x40} 
-		//	&& vel.x > (fixed24p8){-0x40} )
-		if ( vel.x < (fixed24p8){0x20} 
-			&& vel.x > (fixed24p8){-0x20} )
-		{
-			vel.x = 0;
-			accel_x = 0;
-		}
-		
-		// Don't allow speed changing when in the air
-		else if (get_curr_on_ground())
-		{
-			if ( vel.x > (fixed24p8){0} )
-			{
-				//accel_x = -run_accel_x_abs_val;
-				accel_x.data = -run_accel_x_abs_val.data * 4;
-			}
-			else if ( vel.x < (fixed24p8){0} )
-			{
-				//accel_x = run_accel_x_abs_val;
-				accel_x.data = run_accel_x_abs_val.data * 4;
+				the_oam_entry.disable_hflip();
 			}
 		}
-		
 	}
 	
 	handle_jumping_stuff( key_hit(key_a), key_held(key_a) );
@@ -507,6 +588,8 @@ void player_sprite::update_frames_and_frame_timers()
 			
 		};
 		
+		fixed24p8 vel_x_abs = custom_abs(vel.x);
+		
 		// Standing still
 		//if ( speed == (fixed24p8){0} )
 		if ( vel.x == (fixed24p8){0} )
@@ -519,15 +602,20 @@ void player_sprite::update_frames_and_frame_timers()
 		
 		// Walking speed or not-max running speed
 		//else if ( speed >= walk_speed && speed < max_run_speed )
-		else if ( ( vel.x >= walk_speed && vel.x < max_run_speed )
-			|| ( (-vel.x) >= walk_speed ) && (-vel.x) < max_run_speed )
+		
+		//else if ( ( vel.x >= walk_speed && vel.x < max_run_speed )
+		//	|| ( (-vel.x) >= walk_speed ) && (-vel.x) < max_run_speed )
+		//else if ( ( vel.x >= walk_speed && vel.x < max_run_speed )
+		//	|| ( (-vel.x) > walk_speed && (-vel.x) < max_run_speed ) )
+		else if ( vel_x_abs >= walk_speed && vel_x_abs < max_run_speed )
 		{
 			lambda_func_for_else_if(walk_frame_timer_end);
 		}
 		
 		// Max running speed
 		//else if ( speed == max_run_speed )
-		else if ( vel.x == max_run_speed || (-vel.x) == max_run_speed )
+		//else if ( vel.x == max_run_speed || (-vel.x) == max_run_speed )
+		else if ( vel_x_abs == max_run_speed )
 		{
 			lambda_func_for_else_if(run_frame_timer_end);
 		}
@@ -947,6 +1035,8 @@ const u32 player_sprite::get_curr_relative_tile_slot()
 	{
 		if (get_curr_on_ground())
 		{
+			fixed24p8 vel_x_abs = custom_abs(vel.x);
+			
 			// Standing still
 			//if ( speed == (fixed24p8){0} )
 			if ( vel.x == (fixed24p8){0} )
@@ -957,8 +1047,10 @@ const u32 player_sprite::get_curr_relative_tile_slot()
 			
 			// Walking speed or not-max running speed
 			//else if ( speed >= walk_speed && speed < max_run_speed )
-			else if ( ( vel.x >= walk_speed && vel.x < max_run_speed )
-				|| ( (-vel.x) >= walk_speed && (-vel.x) < max_run_speed ) )
+			//else if ( ( vel.x >= walk_speed && vel.x < max_run_speed )
+			//	|| ( (-vel.x) >= walk_speed && (-vel.x) < max_run_speed ) )
+			else if ( vel_x_abs >= walk_speed 
+				&& vel_x_abs < max_run_speed )
 			{
 				return frame_slot_to_frame_arr[active_walk_frame_slot] 
 					* num_active_gfx_tiles;
@@ -966,8 +1058,9 @@ const u32 player_sprite::get_curr_relative_tile_slot()
 			
 			// Max running speed
 			//else if ( speed == max_run_speed )
-			else if ( vel.x == max_run_speed 
-				|| (-vel.x) == max_run_speed )
+			//else if ( vel.x == max_run_speed 
+			//	|| (-vel.x) == max_run_speed )
+			else if ( vel_x_abs == max_run_speed )
 			{
 				return frame_slot_to_frame_arr[active_walk_frame_slot] 
 					* num_active_gfx_tiles;
