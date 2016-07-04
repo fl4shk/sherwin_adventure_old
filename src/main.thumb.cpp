@@ -72,7 +72,7 @@ int main()
 		
 		sprite& the_player = *sprite_manager::the_player;
 		
-		clear_debug_vars();
+		debug_arr_group::clear_debug_vars();
 		
 		clear_oam_mirror();
 		

@@ -111,32 +111,87 @@ sprite_allocator sprite_manager::the_sprites_allocator
 
 int sprite_manager::next_oam_index;
 
+// A bunch of functions whose addresses will be stored in an array of
+// function pointers that are used by the sprite_manager::allocate_sprite()
+// functions.  
+// By the way, the primary reason these functions are not stored in IWRAM
+// because I fear that doing so could cause me to run out of IWRAM if/when
+// there are ever a crapload of sprite_type's.  Of course, sprite
+// allocation is made faster by using the_sprite_type as an index to the
+// array of function pointers, so not having these in IWRAM should be fast
+// enough.
+
+
+void default_sprite_new_caller( sprite*& the_sprite,
+	sprite_allocator& the_sprite_allocator, bool facing_left )
+{
+	the_sprite = new (the_sprite_allocator) sprite(facing_left);
+}
+
+#define generate_sprite_new_caller(name) \
+	void name##_sprite_new_caller( sprite*& the_sprite, \
+		sprite_allocator& the_sprite_allocator, bool facing_left ) \
+	{ \
+		the_sprite = new (the_sprite_allocator) \
+			name##_sprite(facing_left); \
+	}
+
+list_of_main_sprite_types(generate_sprite_new_caller);
+#undef generate_sprite_new_caller
+
+
+#define generate_funcptr_arr_entry(name) &name##_sprite_new_caller, 
+
+void (*sprite_new_caller_funcptr_arr[st_count])( sprite*& the_sprite,
+	sprite_allocator& the_sprite_allocator, bool facing_left )
+	= { &default_sprite_new_caller, 
+	list_of_main_sprite_types(generate_funcptr_arr_entry) };
+#undef generate_funcptr_arr_entry
+
 
 void sprite_manager::allocate_sprite( sprite*& the_sprite, 
 	sprite_allocator& the_sprite_allocator, 
 	sprite_type the_sprite_type, bool facing_left )
 {
-	#define generate_else_if(name) \
-		else if ( the_sprite_type == st_##name ) \
-		{ \
-			the_sprite = new (the_sprite_allocator) \
-				name##_sprite(facing_left); \
-			the_sprite->shared_constructor_code_part_2(facing_left); \
-		}
-	
-	
-	if ( the_sprite_type == st_default )
+	/*
+	if (false)
 	{
-		the_sprite = new (the_sprite_allocator) sprite(facing_left);
+		#define generate_else_if(name) \
+			else if ( the_sprite_type == st_##name ) \
+			{ \
+				the_sprite = new (the_sprite_allocator) \
+					name##_sprite(facing_left); \
+				the_sprite->shared_constructor_code_part_2(facing_left); \
+			}
+		
+		
+		if ( the_sprite_type == st_default )
+		{
+			the_sprite = new (the_sprite_allocator) sprite(facing_left);
+		}
+		list_of_main_sprite_types(generate_else_if)
+		else
+		{
+			next_debug_s32 = ( ( 'n' << 24 ) | ( 't' << 16 ) | ( 'y' << 8 ) 
+				| ( '0' << 0 ) );
+		}
+		
+		#undef generate_else_if
 	}
-	list_of_main_sprite_types(generate_else_if)
+	*/
+	
+	if ( sprite_type_exists(the_sprite_type) )
+	{
+		(*sprite_new_caller_funcptr_arr[the_sprite_type])( the_sprite, 
+			the_sprite_allocator, facing_left );
+		the_sprite->shared_constructor_code_part_2(facing_left);
+	}
 	else
 	{
-		next_debug_s32 = ( ( 'n' << 24 ) | ( 't' << 16 ) | ( 'y' << 8 ) 
-			| ( '0' << 0 ) );
+		//show_debug_str_s32("nty0");
+		debug_arr_group::write_str_and_inc("NoType0");
 	}
 	
-	#undef generate_else_if
 }
 
 void sprite_manager::allocate_sprite( sprite*& the_sprite, 
@@ -144,28 +199,47 @@ void sprite_manager::allocate_sprite( sprite*& the_sprite,
 	const vec2_f24p8& s_in_level_pos, 
 	const prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
 {
-	#define generate_else_if(name) \
-		else if ( the_sprite_type == st_##name ) \
-		{ \
-			the_sprite = new (the_sprite_allocator) \
-				name##_sprite(facing_left); \
-			the_sprite->shared_constructor_code_part_2( s_in_level_pos, \
-				camera_pos_pc_pair, facing_left ); \
-		}
-	
-	if ( the_sprite_type == st_default )
+	/*
+	if (false)
 	{
-		the_sprite = new (the_sprite_allocator) sprite( s_in_level_pos, 
+		#define generate_else_if(name) \
+			else if ( the_sprite_type == st_##name ) \
+			{ \
+				the_sprite = new (the_sprite_allocator) \
+					name##_sprite(facing_left); \
+				the_sprite->shared_constructor_code_part_2( s_in_level_pos, \
+					camera_pos_pc_pair, facing_left ); \
+			}
+		
+		if ( the_sprite_type == st_default )
+		{
+			the_sprite = new (the_sprite_allocator) sprite( s_in_level_pos, 
+				camera_pos_pc_pair, facing_left );
+		}
+		list_of_main_sprite_types(generate_else_if)
+		else
+		{
+			next_debug_s32 = ( ( 'n' << 24 ) | ( 't' << 16 ) | ( 'y' << 8 ) 
+				| ( '1' << 0 ) );
+		}
+		
+		#undef generate_else_if
+	}
+	*/
+	
+	if ( sprite_type_exists(the_sprite_type) )
+	{
+		(*sprite_new_caller_funcptr_arr[the_sprite_type])( the_sprite, 
+			the_sprite_allocator, facing_left );
+		the_sprite->shared_constructor_code_part_2( s_in_level_pos, 
 			camera_pos_pc_pair, facing_left );
 	}
-	list_of_main_sprite_types(generate_else_if)
 	else
 	{
-		next_debug_s32 = ( ( 'n' << 24 ) | ( 't' << 16 ) | ( 'y' << 8 ) 
-			| ( '1' << 0 ) );
+		//show_debug_str_s32("nty1");
+		debug_arr_group::write_str_and_inc("NoType1");
 	}
 	
-	#undef generate_else_if
 }
 
 void sprite_manager::reinit_sprite_with_sprite_ipg( sprite*& the_sprite, 

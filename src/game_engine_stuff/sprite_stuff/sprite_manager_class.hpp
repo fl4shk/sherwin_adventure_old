@@ -152,13 +152,11 @@ public:		// functions
 	
 	static void allocate_sprite( sprite*& the_sprite, 
 		sprite_allocator& the_sprite_allocator, 
-		sprite_type the_sprite_type, bool facing_left )
-		__attribute__((_iwram_code));
+		sprite_type the_sprite_type, bool facing_left );
 	static void allocate_sprite( sprite*& the_sprite, 
 		sprite_allocator& the_sprite_allocator, 
 		sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos,
-		const prev_curr_pair<bg_point>& camera_pos, bool facing_left )
-		__attribute__((_iwram_code));
+		const prev_curr_pair<bg_point>& camera_pos, bool facing_left );
 	
 	static void reinit_sprite_with_sprite_ipg( sprite*& the_sprite, 
 		sprite_allocator& the_sprite_allocator, 

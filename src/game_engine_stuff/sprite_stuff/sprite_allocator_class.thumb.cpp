@@ -45,8 +45,10 @@ void* sprite_allocator::allocate_sprite()
 	
 	// No free sprite found, so at least put something in the debug vars.
 	// cout or printf would be nice here.
-	next_debug_u32 = ( ( 'a' << 24 ) | ( 's' << 16 ) | ( 'p' << 8 )
-		| ( 'r' << 0 ) );
+	//next_debug_u32 = ( ( 'a' << 24 ) | ( 's' << 16 ) | ( 'p' << 8 )
+	//	| ( 'r' << 0 ) );
+	
+	debug_arr_group::write_str_and_inc("NoFreeSprite");
 	
 	return NULL;
 }

@@ -121,7 +121,7 @@ typedef void (*isr_funcptr)(void);
 extern "C"
 {
 	// Also
-	extern volatile isr_funcptr isr_table [intr_amount];
+	extern volatile isr_funcptr isr_table[intr_amount];
 	
 	void irqEnable( int mask );
 	

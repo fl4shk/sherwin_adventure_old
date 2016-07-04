@@ -6,7 +6,7 @@
 #include "../game_engine_stuff/level_stuff/sprite_level_data_stuff.hpp"
 
 
-extern const sublevel< 1948, 32, 32, 3, 3 > test_level_sublevel_0;
+extern const sublevel< 1960, 64, 32, 3, 3 > test_level_sublevel_0;
 
 extern const sublevel< 1937, 17, 16, 0, 0 > test_level_sublevel_1;
 

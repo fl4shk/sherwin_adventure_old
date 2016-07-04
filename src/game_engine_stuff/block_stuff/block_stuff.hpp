@@ -354,6 +354,10 @@ public:		// functions
 } __attribute__((_align4));
 
 
+inline bool block_type_exists( block_type the_block_type )
+{
+	return ( the_block_type >= bt_air && the_block_type < bt_count );
+}
 
 
 #endif		// block_stuff_hpp

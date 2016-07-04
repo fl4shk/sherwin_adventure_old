@@ -103,7 +103,15 @@ macro(snow_golem) \
 macro(player_pickaxe)
 
 
+inline bool sprite_type_exists( sprite_type the_sprite_type )
+{
+	return ( the_sprite_type >= st_default && the_sprite_type < st_count );
+}
 
+inline bool sprite_type_is_derived( sprite_type the_sprite_type )
+{
+	return ( the_sprite_type > st_default && the_sprite_type < st_count );
+}
 
 
 #endif		// sprite_type_stuff_hpp

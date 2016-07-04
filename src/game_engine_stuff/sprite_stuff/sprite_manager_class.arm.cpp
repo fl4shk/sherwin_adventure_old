@@ -591,7 +591,9 @@ void sprite_manager::update_all_sprites
 		{
 			// Update a volatile variable so the compiler won't
 			// optimize out this loop
-			debug_arr_f8p8[0] = make_f8p8(8);
+			//debug_arr_f8p8[0] = make_f8p8(8);
+			debug_arr_group::debug_f8p8_arr_helper.data_at(0) 
+				= make_f8p8(8);
 		}
 	};
 	

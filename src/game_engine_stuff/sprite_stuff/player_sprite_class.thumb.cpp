@@ -285,72 +285,13 @@ void player_sprite::update_part_2()
 	if ( key_hit_or_held(key_left) && !key_hit_or_held(key_right) )
 	{
 		key_dir = -1;
-		//if (run_toggle)
-		//{
-		//	max_vel_x_abs_val = max_run_speed;
-		//	
-		//	if ( (-vel.x) < walk_speed )
-		//	{
-		//		accel_x = -walk_speed;
-		//	}
-		//	else
-		//	{
-		//		accel_x = -run_accel_x_abs_val;
-		//	}
-		//	
-		//}
-		//else //if (!run_toggle)
-		//{
-		//	//vel.x = -walk_speed;
-		//	
-		//	max_vel_x_abs_val = walk_speed;
-		//	accel_x = -walk_speed;
-		//}
-		//
-		//
-		////if ( get_curr_on_ground() && !swinging_pickaxe )
-		//if (!swinging_pickaxe)
-		//{
-		//	the_oam_entry.enable_hflip();
-		//}
 	}
 	else if ( key_hit_or_held(key_right) && !key_hit_or_held(key_left) )
 	{
 		key_dir = 1;
-		//if (run_toggle)
-		//{
-		//	max_vel_x_abs_val = max_run_speed;
-		//	
-		//	if ( vel.x < walk_speed )
-		//	{
-		//		accel_x = walk_speed;
-		//	}
-		//	else
-		//	{
-		//		accel_x = run_accel_x_abs_val;
-		//	}
-		//	
-		//}
-		//else //if (!run_toggle)
-		//{
-		//	max_vel_x_abs_val = walk_speed;
-		//	accel_x = walk_speed;
-		//}
-		//
-		//
-		////if ( get_curr_on_ground() && !swinging_pickaxe )
-		//if (!swinging_pickaxe)
-		//{
-		//	the_oam_entry.disable_hflip();
-		//}
 	}
-	else
+	else // neither left nor right hit_or_held
 	{
-		//if ( vel.x < (fixed24p8){0x40} 
-		//	&& vel.x > (fixed24p8){-0x40} )
-		//if ( vel.x < (fixed24p8){0x20} 
-		//	&& vel.x > (fixed24p8){-0x20} )
-		//if ( custom_abs(vel.x) < (fixed24p8){0x20} )
 		if ( vel_x_abs < (fixed24p8){0x20} )
 		{
 			vel.x = {0};
@@ -360,17 +301,6 @@ void player_sprite::update_part_2()
 		// Don't allow speed changing when in the air
 		else if (get_curr_on_ground())
 		{
-			//if ( vel.x > (fixed24p8){0} )
-			//{
-			//	//accel_x = -run_accel_x_abs_val;
-			//	accel_x.data = -run_accel_x_abs_val.data * 4;
-			//}
-			//else if ( vel.x < (fixed24p8){0} )
-			//{
-			//	//accel_x = run_accel_x_abs_val;
-			//	accel_x.data = run_accel_x_abs_val.data * 4;
-			//}
-			
 			if ( vel_x_abs > (fixed24p8){0} )
 			{
 				accel_x.data = -vel_x_dir * run_accel_x_abs_val.data * 4;
@@ -381,6 +311,8 @@ void player_sprite::update_part_2()
 	
 	if ( key_dir != 0 )
 	{
+		// Allow instantly turning around (not something that can be done
+		// in real life!)
 		if ( ( key_dir < 0 && vel.x.data > 0 )
 			|| ( key_dir > 0 && vel.x.data < 0 ) )
 		{
@@ -390,15 +322,6 @@ void player_sprite::update_part_2()
 		if (run_toggle)
 		{
 			max_vel_x_abs_val = max_run_speed;
-			
-			//if ( (-vel.x) < walk_speed )
-			//{
-			//	accel_x = -walk_speed;
-			//}
-			//else
-			//{
-			//	accel_x = -run_accel_x_abs_val;
-			//}
 			
 			if ( vel_x_abs < walk_speed )
 			{

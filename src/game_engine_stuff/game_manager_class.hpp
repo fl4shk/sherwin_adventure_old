@@ -70,7 +70,9 @@ public:		// variables
 	
 	//static constexpr u32 test_sram_arr_size = debug_arr_u32_size 
 	//	* sizeof(u32);
-	static constexpr u32 test_sram_arr_size = sizeof(debug_arr_u32);
+	//static constexpr u32 test_sram_arr_size = sizeof(debug_arr_u32);
+	static constexpr u32 test_sram_arr_size = debug_u32_arr_size 
+		* sizeof(u32);
 	static u8 test_sram_arr[test_sram_arr_size] __attribute__((_sram));
 	
 	
