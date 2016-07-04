@@ -39,14 +39,17 @@ OBJCOPY=$(COMP_PREFIX)objcopy
 
 LD_SCRIPT=linkscript.ld
 
-#DEBUG=yeah do debug
+#DEBUG:=yeah do debug
+#DEBUG_OPTIMIZATION_LEVEL:=-O1
+DEBUG_OPTIMIZATION_LEVEL:=-Og
+#DEBUG_OPTIMIZATION_LEVEL:=-O2
 
 ifdef DEBUG
 	##DEBUG_FLAGS=-gdwarf-2 -ggdb -gstrict-dwarf -g
 	DEBUG_FLAGS=-gdwarf-3 -g
 	
-	#GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles -Og -g
-	GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles -O1 -g
+	GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles \
+		$(DEBUG_OPTIMIZATION_LEVEL) -g
 else
 	GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles -O2
 endif
