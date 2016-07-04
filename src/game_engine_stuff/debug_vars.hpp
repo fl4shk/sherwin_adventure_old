@@ -127,7 +127,7 @@ public:		// functions
 			real_size = n_real_size;
 		}
 	}
-};
+} __attribute__((_align4));
 
 
 
@@ -144,7 +144,7 @@ protected:		// static variables (raw debug arrays)
 		fixed8p8 debug_f8p8_arr[debug_f8p8_arr_size];
 		
 		debug_str debug_str_arr[debug_str_arr_size];
-	};
+	} __attribute__((_align4));
 	static raw_array_group the_raw_array_group;
 	
 public:		// static variables (array_helpers and an array_2d_helper)
@@ -185,7 +185,7 @@ protected:		// functions
 public:		// functions
 	
 	
-	static void clear_debug_vars() __attribute__((_iwram_code));
+	static void clear_debug_vars();
 	
 	static inline void write_u32_and_inc( u32 to_write )
 	{

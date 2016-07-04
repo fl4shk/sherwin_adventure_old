@@ -324,7 +324,7 @@ public:		// functions
 	inline bool operator >= ( const fixed8p8& to_cmp ) const;
 	
 	
-};
+} __attribute__((_align4));
 
 
 inline s16 fixed8p8::round_to_int() const

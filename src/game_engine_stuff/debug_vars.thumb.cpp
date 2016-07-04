@@ -113,28 +113,31 @@ array_helper<debug_str> debug_arr_group::debug_str_arr_helper;
 
 void debug_arr_group::clear_debug_vars()
 {
-	//memfill32( curr_index_arr(), 0, cit_count / sizeof(u32) );
-	for ( u32 i=0; i<curr_index_arr_helper.get_size(); ++i )
-	{
-		curr_index_arr_helper.data_at(i) = 0;
-	}
+	////memfill32( curr_index_arr(), 0, cit_count / sizeof(u32) );
+	//for ( u32 i=0; i<curr_index_arr_helper.get_size(); ++i )
+	//{
+	//	curr_index_arr_helper.data_at(i) = 0;
+	//}
+	//
+	//// One big memfill32() call that depends on the order in which the
+	//// arrays are declared.
+	////memfill32( debug_u32_arr, 0, ( debug_u32_arr_size * sizeof(u32)
+	////	+ debug_s32_arr_size * sizeof(s32)
+	////	+ debug_f24p8_arr_size * sizeof(fixed24p8)
+	////	+ debug_f8p8_arr_size * sizeof(fixed8p8) ) / sizeof(u32) );
+	//
+	//
+	//// I believe this will work?
+	//memfill32( debug_u32_arr(), 0, ( (u32)debug_f8p8_arr() 
+	//	+ ( debug_f8p8_arr_size * sizeof(fixed8p8) ) 
+	//	- (u32)(u32*)debug_u32_arr()) / sizeof(u32) );
+	//
+	//// Use a separate memfill32() call for the array of debug_strs, just in
+	//// case.
+	//memfill32( debug_str_arr(), 0, debug_str_arr_helper.get_size() 
+	//	* sizeof(debug_str) / sizeof(u32) );
 	
-	// One big memfill32() call that depends on the order in which the
-	// arrays are declared.
-	//memfill32( debug_u32_arr, 0, ( debug_u32_arr_size * sizeof(u32)
-	//	+ debug_s32_arr_size * sizeof(s32)
-	//	+ debug_f24p8_arr_size * sizeof(fixed24p8)
-	//	+ debug_f8p8_arr_size * sizeof(fixed8p8) ) / sizeof(u32) );
-	
-	
-	// I believe this will work?
-	memfill32( debug_u32_arr(), 0, ( (u32)debug_f8p8_arr() 
-		+ ( debug_f8p8_arr_size * sizeof(fixed8p8) ) 
-		- (u32)(u32*)debug_u32_arr()) / sizeof(u32) );
-	
-	// Use a separate memfill32() call for the array of debug_strs, just in
-	// case.
-	memfill32( debug_str_arr(), 0, debug_str_arr_helper.get_size() 
+	memfill32( &the_raw_array_group, 0, sizeof(raw_array_group) 
 		/ sizeof(u32) );
 }
 

@@ -585,7 +585,7 @@ clamped_rgb15_component_add	gba_specific_stuff/gfx_reg_stuff.hpp	/^inline void c
 clamped_rgb15_f24p8_component_add	gba_specific_stuff/gfx_reg_stuff.hpp	/^inline void clamped_rgb15_f24p8_component_add( fixed24p8& component,$/;"	kind:f	signature:( fixed24p8& component, const fixed24p8& amount_to_add, const fixed24p8& target_value )
 clear_and_set_bits	game_engine_stuff/misc_bitwise_funcs.hpp	/^inline void clear_and_set_bits( type& to_change, u32 clear_mask,$/;"	kind:f	signature:( type& to_change, u32 clear_mask, u32 set_mask )
 clear_bits	game_engine_stuff/misc_bitwise_funcs.hpp	/^inline void clear_bits( type& to_clear, u32 mask )$/;"	kind:f	signature:( type& to_clear, u32 mask )
-clear_debug_vars	game_engine_stuff/debug_vars.hpp	/^	static void clear_debug_vars() __attribute__((_iwram_code));$/;"	kind:p	class:debug_arr_group	access:public	signature:()
+clear_debug_vars	game_engine_stuff/debug_vars.hpp	/^	static void clear_debug_vars();$/;"	kind:p	class:debug_arr_group	access:public	signature:()
 clear_debug_vars	game_engine_stuff/debug_vars.thumb.cpp	/^void debug_arr_group::clear_debug_vars()$/;"	kind:f	class:debug_arr_group	signature:()
 clear_oam_mirror	gba_specific_stuff/oam_entry_classes.hpp	/^inline void clear_oam_mirror()$/;"	kind:f	signature:()
 clear_the_sprite_arrays	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void clear_the_sprite_arrays();$/;"	kind:p	class:sprite_manager	access:public	signature:()
@@ -783,7 +783,7 @@ dcnt_winobj_onoff_mask	gba_specific_stuff/gfx_reg_stuff.hpp	277;"	kind:d
 deallocate_sprite	game_engine_stuff/sprite_stuff/sprite_allocator_class.hpp	/^	void deallocate_sprite( sprite*& the_sprite )$/;"	kind:p	class:sprite_allocator	access:public	signature:( sprite*& the_sprite )
 deallocate_sprite	game_engine_stuff/sprite_stuff/sprite_allocator_class.thumb.cpp	/^void sprite_allocator::deallocate_sprite( sprite*& the_sprite )$/;"	kind:f	class:sprite_allocator	signature:( sprite*& the_sprite )
 debug_arr_group	game_engine_stuff/debug_vars.hpp	/^class debug_arr_group$/;"	kind:c
-debug_arr_group::clear_debug_vars	game_engine_stuff/debug_vars.hpp	/^	static void clear_debug_vars() __attribute__((_iwram_code));$/;"	kind:p	class:debug_arr_group	access:public	signature:()
+debug_arr_group::clear_debug_vars	game_engine_stuff/debug_vars.hpp	/^	static void clear_debug_vars();$/;"	kind:p	class:debug_arr_group	access:public	signature:()
 debug_arr_group::clear_debug_vars	game_engine_stuff/debug_vars.thumb.cpp	/^void debug_arr_group::clear_debug_vars()$/;"	kind:f	class:debug_arr_group	signature:()
 debug_arr_group::curr_index_arr	game_engine_stuff/debug_vars.hpp	/^	static inline vu32* curr_index_arr()$/;"	kind:f	class:debug_arr_group	access:protected	signature:()
 debug_arr_group::curr_index_arr_helper	game_engine_stuff/debug_vars.hpp	/^	static array_helper<vu32> curr_index_arr_helper;$/;"	kind:m	class:debug_arr_group	access:public
