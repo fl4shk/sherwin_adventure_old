@@ -129,17 +129,23 @@ public:		// functions
 	}
 };
 
+
+
 class debug_arr_group
 {
 protected:		// static variables (raw debug arrays)
-	static vu32 curr_index_arr[curr_index_arr_size];
-	
-	static vu32 debug_u32_arr[debug_u32_arr_size];
-	static vs32 debug_s32_arr[debug_s32_arr_size];
-	static fixed24p8 debug_f24p8_arr[debug_f24p8_arr_size];
-	static fixed8p8 debug_f8p8_arr[debug_f8p8_arr_size];
-	
-	static debug_str debug_str_arr[debug_str_arr_size];
+	struct raw_array_group
+	{
+		vu32 curr_index_arr[curr_index_arr_size];
+		
+		vu32 debug_u32_arr[debug_u32_arr_size];
+		vs32 debug_s32_arr[debug_s32_arr_size];
+		fixed24p8 debug_f24p8_arr[debug_f24p8_arr_size];
+		fixed8p8 debug_f8p8_arr[debug_f8p8_arr_size];
+		
+		debug_str debug_str_arr[debug_str_arr_size];
+	};
+	static raw_array_group the_raw_array_group;
 	
 public:		// static variables (array_helpers and an array_2d_helper)
 	static array_helper<vu32> curr_index_arr_helper;
@@ -151,7 +157,34 @@ public:		// static variables (array_helpers and an array_2d_helper)
 	
 	static array_helper<debug_str> debug_str_arr_helper;
 	
+protected:		// functions
+	static inline vu32* curr_index_arr()
+	{
+		return the_raw_array_group.curr_index_arr;
+	}
+	static inline vu32* debug_u32_arr() 
+	{
+		return the_raw_array_group.debug_u32_arr;
+	}
+	static inline vs32* debug_s32_arr()
+	{
+		return the_raw_array_group.debug_s32_arr;
+	}
+	static inline fixed24p8* debug_f24p8_arr()
+	{
+		return the_raw_array_group.debug_f24p8_arr;
+	}
+	static inline fixed8p8* debug_f8p8_arr()
+	{
+		return the_raw_array_group.debug_f8p8_arr;
+	}
+	static inline debug_str* debug_str_arr()
+	{
+		return the_raw_array_group.debug_str_arr;
+	}
 public:		// functions
+	
+	
 	static void clear_debug_vars() __attribute__((_iwram_code));
 	
 	static inline void write_u32_and_inc( u32 to_write )

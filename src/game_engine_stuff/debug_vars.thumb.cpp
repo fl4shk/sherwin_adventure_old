@@ -98,36 +98,26 @@ debug_str& debug_str::operator = ( const char* to_copy )
 
 
 // static variables (raw debug arrays)
-vu32 debug_arr_group::curr_index_arr[curr_index_arr_size];
-
-vu32 debug_arr_group::debug_u32_arr[debug_u32_arr_size];
-vs32 debug_arr_group::debug_s32_arr[debug_s32_arr_size];
-fixed24p8 debug_arr_group::debug_f24p8_arr[debug_f24p8_arr_size];
-fixed8p8 debug_arr_group::debug_f8p8_arr[debug_f8p8_arr_size];
-
-debug_str debug_arr_group::debug_str_arr[debug_str_arr_size];
-
+debug_arr_group::raw_array_group debug_arr_group::the_raw_array_group;
 
 // static variables (array_helpers and an array_2d_helper)
-array_helper<vu32> debug_arr_group::curr_index_arr_helper
-	( curr_index_arr, curr_index_arr_size );
+array_helper<vu32> debug_arr_group::curr_index_arr_helper;
 
-array_helper<vu32> debug_arr_group::debug_u32_arr_helper( debug_u32_arr, 
-	debug_u32_arr_size );
-array_helper<vs32> debug_arr_group::debug_s32_arr_helper( debug_s32_arr, 
-	debug_s32_arr_size );
-array_helper<fixed24p8> debug_arr_group::debug_f24p8_arr_helper
-	( debug_f24p8_arr, debug_f24p8_arr_size );
-array_helper<fixed8p8> debug_arr_group::debug_f8p8_arr_helper
-	( debug_f8p8_arr, debug_f8p8_arr_size );
+array_helper<vu32> debug_arr_group::debug_u32_arr_helper;
+array_helper<vs32> debug_arr_group::debug_s32_arr_helper;
+array_helper<fixed24p8> debug_arr_group::debug_f24p8_arr_helper;
+array_helper<fixed8p8> debug_arr_group::debug_f8p8_arr_helper;
 
-array_helper<debug_str> debug_arr_group::debug_str_arr_helper
-	( debug_str_arr, debug_str_arr_size );
+array_helper<debug_str> debug_arr_group::debug_str_arr_helper;
 
 
 void debug_arr_group::clear_debug_vars()
 {
-	memfill32( curr_index_arr, 0, cit_count / sizeof(u32) );
+	//memfill32( curr_index_arr(), 0, cit_count / sizeof(u32) );
+	for ( u32 i=0; i<curr_index_arr_helper.get_size(); ++i )
+	{
+		curr_index_arr_helper.data_at(i) = 0;
+	}
 	
 	// One big memfill32() call that depends on the order in which the
 	// arrays are declared.
@@ -137,14 +127,14 @@ void debug_arr_group::clear_debug_vars()
 	//	+ debug_f8p8_arr_size * sizeof(fixed8p8) ) / sizeof(u32) );
 	
 	
-	// I believe that this works.
-	memfill32( debug_u32_arr, 0, ( (u32)(fixed8p8*)debug_f8p8_arr 
+	// I believe this will work?
+	memfill32( debug_u32_arr(), 0, ( (u32)debug_f8p8_arr() 
 		+ ( debug_f8p8_arr_size * sizeof(fixed8p8) ) 
-		- (u32)(u32*)debug_u32_arr ) / sizeof(u32) );
+		- (u32)(u32*)debug_u32_arr()) / sizeof(u32) );
 	
-	// Use a separate memfill32() call for the arrays of debug_strs, just
-	// in case.
-	memfill32( debug_str_arr, 0, debug_str_arr_helper.get_size() 
+	// Use a separate memfill32() call for the array of debug_strs, just in
+	// case.
+	memfill32( debug_str_arr(), 0, debug_str_arr_helper.get_size() 
 		/ sizeof(u32) );
 }
 

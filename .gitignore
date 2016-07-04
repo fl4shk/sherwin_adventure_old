@@ -10,3 +10,5 @@ symbols.txt
 linker_map.txt
 copyright_text_thing.txt
 disassembly*.armasm
+*.sav
+*.ss*

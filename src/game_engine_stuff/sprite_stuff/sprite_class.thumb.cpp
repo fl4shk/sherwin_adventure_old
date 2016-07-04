@@ -160,6 +160,7 @@ void sprite::shared_constructor_code_part_2
 
 void sprite::shared_constructor_code_part_3()
 {
+	debug_arr_group::debug_f8p8_arr_helper.data_at(0) = make_f8p8(3);
 }
 
 void* sprite::operator new( size_t size, 

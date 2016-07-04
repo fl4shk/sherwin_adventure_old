@@ -66,38 +66,38 @@ X	game_engine_stuff/coll_point_group_class.thumb.cpp	74;"	kind:d	file:
 X	game_engine_stuff/coll_point_group_class.thumb.cpp	81;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/player_sprite_class.thumb.cpp	1016;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/player_sprite_class.thumb.cpp	1060;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1036;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1039;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1045;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1051;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1055;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1059;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1062;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1065;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1070;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1074;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1087;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1095;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1110;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1118;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	572;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	580;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	592;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	600;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	698;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	701;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	708;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	714;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	718;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	722;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	725;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	728;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	733;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	737;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	753;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	761;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	776;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	784;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1037;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1040;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1046;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1052;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1056;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1060;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1063;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1066;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1071;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1075;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1088;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1096;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1111;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1119;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	573;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	581;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	593;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	601;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	699;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	702;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	709;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	715;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	719;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	723;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	726;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	729;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	734;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	738;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	754;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	762;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	777;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	785;"	kind:d	file:
 __key_state	gba_specific_stuff/button_stuff.thumb.cpp	/^volatile prev_curr_pair<vu16> __key_state __attribute__((_iwram)) $/;"	kind:v
 _align4	gba_specific_stuff/attribute_defines.hpp	47;"	kind:d
 _bss	gba_specific_stuff/attribute_defines.hpp	34;"	kind:d
@@ -713,10 +713,10 @@ curr	game_engine_stuff/prev_curr_pair_class.hpp	/^	type prev, curr;$/;"	kind:m	s
 curr_game_mode	game_engine_stuff/game_manager_class.hpp	/^	static game_mode curr_game_mode;$/;"	kind:m	class:game_manager	access:public
 curr_game_mode	game_engine_stuff/game_manager_class.thumb.cpp	/^game_mode game_manager::curr_game_mode;$/;"	kind:m	class:game_manager	file:
 curr_index	game_engine_stuff/sa_stack_class.hpp	/^	u32 curr_index;$/;"	kind:m	class:sa_stack	access:public
-curr_index_arr	game_engine_stuff/debug_vars.hpp	/^	static vu32 curr_index_arr[curr_index_arr_size];$/;"	kind:m	class:debug_arr_group	access:protected
-curr_index_arr	game_engine_stuff/debug_vars.thumb.cpp	/^vu32 debug_arr_group::curr_index_arr[curr_index_arr_size];$/;"	kind:m	class:debug_arr_group	file:
+curr_index_arr	game_engine_stuff/debug_vars.hpp	/^		vu32 curr_index_arr[curr_index_arr_size];$/;"	kind:m	struct:debug_arr_group::raw_array_group	access:public
+curr_index_arr	game_engine_stuff/debug_vars.hpp	/^	static inline vu32* curr_index_arr()$/;"	kind:f	class:debug_arr_group	access:protected	signature:()
 curr_index_arr_helper	game_engine_stuff/debug_vars.hpp	/^	static array_helper<vu32> curr_index_arr_helper;$/;"	kind:m	class:debug_arr_group	access:public
-curr_index_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<vu32> debug_arr_group::curr_index_arr_helper$/;"	kind:p	class:debug_arr_group	file:	signature:( curr_index_arr, curr_index_arr_size )
+curr_index_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<vu32> debug_arr_group::curr_index_arr_helper;$/;"	kind:m	class:debug_arr_group	file:
 curr_index_arr_size	game_engine_stuff/debug_vars.hpp	/^static constexpr u32 curr_index_arr_size = cit_count;$/;"	kind:v
 curr_index_type	game_engine_stuff/debug_vars.hpp	/^enum curr_index_type$/;"	kind:g
 custom_abs	game_engine_stuff/fixed_classes.hpp	/^inline fixed24p8 custom_abs( const fixed24p8& val )$/;"	kind:f	signature:( const fixed24p8& val )
@@ -785,51 +785,54 @@ deallocate_sprite	game_engine_stuff/sprite_stuff/sprite_allocator_class.thumb.cp
 debug_arr_group	game_engine_stuff/debug_vars.hpp	/^class debug_arr_group$/;"	kind:c
 debug_arr_group::clear_debug_vars	game_engine_stuff/debug_vars.hpp	/^	static void clear_debug_vars() __attribute__((_iwram_code));$/;"	kind:p	class:debug_arr_group	access:public	signature:()
 debug_arr_group::clear_debug_vars	game_engine_stuff/debug_vars.thumb.cpp	/^void debug_arr_group::clear_debug_vars()$/;"	kind:f	class:debug_arr_group	signature:()
-debug_arr_group::curr_index_arr	game_engine_stuff/debug_vars.hpp	/^	static vu32 curr_index_arr[curr_index_arr_size];$/;"	kind:m	class:debug_arr_group	access:protected
-debug_arr_group::curr_index_arr	game_engine_stuff/debug_vars.thumb.cpp	/^vu32 debug_arr_group::curr_index_arr[curr_index_arr_size];$/;"	kind:m	class:debug_arr_group	file:
+debug_arr_group::curr_index_arr	game_engine_stuff/debug_vars.hpp	/^	static inline vu32* curr_index_arr()$/;"	kind:f	class:debug_arr_group	access:protected	signature:()
 debug_arr_group::curr_index_arr_helper	game_engine_stuff/debug_vars.hpp	/^	static array_helper<vu32> curr_index_arr_helper;$/;"	kind:m	class:debug_arr_group	access:public
-debug_arr_group::curr_index_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<vu32> debug_arr_group::curr_index_arr_helper$/;"	kind:p	class:debug_arr_group	file:	signature:( curr_index_arr, curr_index_arr_size )
-debug_arr_group::debug_f24p8_arr	game_engine_stuff/debug_vars.hpp	/^	static fixed24p8 debug_f24p8_arr[debug_f24p8_arr_size];$/;"	kind:m	class:debug_arr_group	access:protected
-debug_arr_group::debug_f24p8_arr	game_engine_stuff/debug_vars.thumb.cpp	/^fixed24p8 debug_arr_group::debug_f24p8_arr[debug_f24p8_arr_size];$/;"	kind:m	class:debug_arr_group	file:
+debug_arr_group::curr_index_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<vu32> debug_arr_group::curr_index_arr_helper;$/;"	kind:m	class:debug_arr_group	file:
+debug_arr_group::debug_f24p8_arr	game_engine_stuff/debug_vars.hpp	/^	static inline fixed24p8* debug_f24p8_arr()$/;"	kind:f	class:debug_arr_group	access:protected	signature:()
 debug_arr_group::debug_f24p8_arr_helper	game_engine_stuff/debug_vars.hpp	/^	static array_helper<fixed24p8> debug_f24p8_arr_helper;$/;"	kind:m	class:debug_arr_group	access:public
-debug_arr_group::debug_f24p8_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<fixed24p8> debug_arr_group::debug_f24p8_arr_helper$/;"	kind:p	class:debug_arr_group	file:	signature:( debug_f24p8_arr, debug_f24p8_arr_size )
-debug_arr_group::debug_f8p8_arr	game_engine_stuff/debug_vars.hpp	/^	static fixed8p8 debug_f8p8_arr[debug_f8p8_arr_size];$/;"	kind:m	class:debug_arr_group	access:protected
-debug_arr_group::debug_f8p8_arr	game_engine_stuff/debug_vars.thumb.cpp	/^fixed8p8 debug_arr_group::debug_f8p8_arr[debug_f8p8_arr_size];$/;"	kind:m	class:debug_arr_group	file:
+debug_arr_group::debug_f24p8_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<fixed24p8> debug_arr_group::debug_f24p8_arr_helper;$/;"	kind:m	class:debug_arr_group	file:
+debug_arr_group::debug_f8p8_arr	game_engine_stuff/debug_vars.hpp	/^	static inline fixed8p8* debug_f8p8_arr()$/;"	kind:f	class:debug_arr_group	access:protected	signature:()
 debug_arr_group::debug_f8p8_arr_helper	game_engine_stuff/debug_vars.hpp	/^	static array_helper<fixed8p8> debug_f8p8_arr_helper;$/;"	kind:m	class:debug_arr_group	access:public
-debug_arr_group::debug_f8p8_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<fixed8p8> debug_arr_group::debug_f8p8_arr_helper$/;"	kind:p	class:debug_arr_group	file:	signature:( debug_f8p8_arr, debug_f8p8_arr_size )
-debug_arr_group::debug_s32_arr	game_engine_stuff/debug_vars.hpp	/^	static vs32 debug_s32_arr[debug_s32_arr_size];$/;"	kind:m	class:debug_arr_group	access:protected
-debug_arr_group::debug_s32_arr	game_engine_stuff/debug_vars.thumb.cpp	/^vs32 debug_arr_group::debug_s32_arr[debug_s32_arr_size];$/;"	kind:m	class:debug_arr_group	file:
+debug_arr_group::debug_f8p8_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<fixed8p8> debug_arr_group::debug_f8p8_arr_helper;$/;"	kind:m	class:debug_arr_group	file:
+debug_arr_group::debug_s32_arr	game_engine_stuff/debug_vars.hpp	/^	static inline vs32* debug_s32_arr()$/;"	kind:f	class:debug_arr_group	access:protected	signature:()
 debug_arr_group::debug_s32_arr_helper	game_engine_stuff/debug_vars.hpp	/^	static array_helper<vs32> debug_s32_arr_helper;$/;"	kind:m	class:debug_arr_group	access:public
-debug_arr_group::debug_s32_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<vs32> debug_arr_group::debug_s32_arr_helper( debug_s32_arr, $/;"	kind:p	class:debug_arr_group	file:	signature:( debug_s32_arr, debug_s32_arr_size )
-debug_arr_group::debug_str_arr	game_engine_stuff/debug_vars.hpp	/^	static debug_str debug_str_arr[debug_str_arr_size];$/;"	kind:m	class:debug_arr_group	access:protected
-debug_arr_group::debug_str_arr	game_engine_stuff/debug_vars.thumb.cpp	/^debug_str debug_arr_group::debug_str_arr[debug_str_arr_size];$/;"	kind:m	class:debug_arr_group	file:
+debug_arr_group::debug_s32_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<vs32> debug_arr_group::debug_s32_arr_helper;$/;"	kind:m	class:debug_arr_group	file:
+debug_arr_group::debug_str_arr	game_engine_stuff/debug_vars.hpp	/^	static inline debug_str* debug_str_arr()$/;"	kind:f	class:debug_arr_group	access:protected	signature:()
 debug_arr_group::debug_str_arr_helper	game_engine_stuff/debug_vars.hpp	/^	static array_helper<debug_str> debug_str_arr_helper;$/;"	kind:m	class:debug_arr_group	access:public
-debug_arr_group::debug_str_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<debug_str> debug_arr_group::debug_str_arr_helper$/;"	kind:p	class:debug_arr_group	file:	signature:( debug_str_arr, debug_str_arr_size )
-debug_arr_group::debug_u32_arr	game_engine_stuff/debug_vars.hpp	/^	static vu32 debug_u32_arr[debug_u32_arr_size];$/;"	kind:m	class:debug_arr_group	access:protected
-debug_arr_group::debug_u32_arr	game_engine_stuff/debug_vars.thumb.cpp	/^vu32 debug_arr_group::debug_u32_arr[debug_u32_arr_size];$/;"	kind:m	class:debug_arr_group	file:
+debug_arr_group::debug_str_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<debug_str> debug_arr_group::debug_str_arr_helper;$/;"	kind:m	class:debug_arr_group	file:
+debug_arr_group::debug_u32_arr	game_engine_stuff/debug_vars.hpp	/^	static inline vu32* debug_u32_arr() $/;"	kind:f	class:debug_arr_group	access:protected	signature:()
 debug_arr_group::debug_u32_arr_helper	game_engine_stuff/debug_vars.hpp	/^	static array_helper<vu32> debug_u32_arr_helper;$/;"	kind:m	class:debug_arr_group	access:public
-debug_arr_group::debug_u32_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<vu32> debug_arr_group::debug_u32_arr_helper( debug_u32_arr, $/;"	kind:p	class:debug_arr_group	file:	signature:( debug_u32_arr, debug_u32_arr_size )
+debug_arr_group::debug_u32_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<vu32> debug_arr_group::debug_u32_arr_helper;$/;"	kind:m	class:debug_arr_group	file:
+debug_arr_group::raw_array_group	game_engine_stuff/debug_vars.hpp	/^	struct raw_array_group$/;"	kind:s	class:debug_arr_group	access:protected
+debug_arr_group::raw_array_group::curr_index_arr	game_engine_stuff/debug_vars.hpp	/^		vu32 curr_index_arr[curr_index_arr_size];$/;"	kind:m	struct:debug_arr_group::raw_array_group	access:public
+debug_arr_group::raw_array_group::debug_f24p8_arr	game_engine_stuff/debug_vars.hpp	/^		fixed24p8 debug_f24p8_arr[debug_f24p8_arr_size];$/;"	kind:m	struct:debug_arr_group::raw_array_group	access:public
+debug_arr_group::raw_array_group::debug_f8p8_arr	game_engine_stuff/debug_vars.hpp	/^		fixed8p8 debug_f8p8_arr[debug_f8p8_arr_size];$/;"	kind:m	struct:debug_arr_group::raw_array_group	access:public
+debug_arr_group::raw_array_group::debug_s32_arr	game_engine_stuff/debug_vars.hpp	/^		vs32 debug_s32_arr[debug_s32_arr_size];$/;"	kind:m	struct:debug_arr_group::raw_array_group	access:public
+debug_arr_group::raw_array_group::debug_str_arr	game_engine_stuff/debug_vars.hpp	/^		debug_str debug_str_arr[debug_str_arr_size];$/;"	kind:m	struct:debug_arr_group::raw_array_group	access:public
+debug_arr_group::raw_array_group::debug_u32_arr	game_engine_stuff/debug_vars.hpp	/^		vu32 debug_u32_arr[debug_u32_arr_size];$/;"	kind:m	struct:debug_arr_group::raw_array_group	access:public
+debug_arr_group::the_raw_array_group	game_engine_stuff/debug_vars.hpp	/^	static raw_array_group the_raw_array_group;$/;"	kind:m	class:debug_arr_group	access:protected
+debug_arr_group::the_raw_array_group	game_engine_stuff/debug_vars.thumb.cpp	/^debug_arr_group::raw_array_group debug_arr_group::the_raw_array_group;$/;"	kind:m	class:debug_arr_group	file:
 debug_arr_group::write_f24p8_and_inc	game_engine_stuff/debug_vars.hpp	/^	static inline void write_f24p8_and_inc( const fixed24p8& to_write )$/;"	kind:f	class:debug_arr_group	access:public	signature:( const fixed24p8& to_write )
 debug_arr_group::write_f8p8_and_inc	game_engine_stuff/debug_vars.hpp	/^	static inline void write_f8p8_and_inc( const fixed8p8& to_write )$/;"	kind:f	class:debug_arr_group	access:public	signature:( const fixed8p8& to_write )
 debug_arr_group::write_s32_and_inc	game_engine_stuff/debug_vars.hpp	/^	static inline void write_s32_and_inc( s32 to_write )$/;"	kind:f	class:debug_arr_group	access:public	signature:( s32 to_write )
 debug_arr_group::write_str_and_inc	game_engine_stuff/debug_vars.hpp	/^	static inline void write_str_and_inc( const char* to_write )$/;"	kind:f	class:debug_arr_group	access:public	signature:( const char* to_write )
 debug_arr_group::write_str_and_inc	game_engine_stuff/debug_vars.hpp	/^	static inline void write_str_and_inc( const debug_str& to_write )$/;"	kind:f	class:debug_arr_group	access:public	signature:( const debug_str& to_write )
 debug_arr_group::write_u32_and_inc	game_engine_stuff/debug_vars.hpp	/^	static inline void write_u32_and_inc( u32 to_write )$/;"	kind:f	class:debug_arr_group	access:public	signature:( u32 to_write )
-debug_f24p8_arr	game_engine_stuff/debug_vars.hpp	/^	static fixed24p8 debug_f24p8_arr[debug_f24p8_arr_size];$/;"	kind:m	class:debug_arr_group	access:protected
-debug_f24p8_arr	game_engine_stuff/debug_vars.thumb.cpp	/^fixed24p8 debug_arr_group::debug_f24p8_arr[debug_f24p8_arr_size];$/;"	kind:m	class:debug_arr_group	file:
+debug_f24p8_arr	game_engine_stuff/debug_vars.hpp	/^		fixed24p8 debug_f24p8_arr[debug_f24p8_arr_size];$/;"	kind:m	struct:debug_arr_group::raw_array_group	access:public
+debug_f24p8_arr	game_engine_stuff/debug_vars.hpp	/^	static inline fixed24p8* debug_f24p8_arr()$/;"	kind:f	class:debug_arr_group	access:protected	signature:()
 debug_f24p8_arr_helper	game_engine_stuff/debug_vars.hpp	/^	static array_helper<fixed24p8> debug_f24p8_arr_helper;$/;"	kind:m	class:debug_arr_group	access:public
-debug_f24p8_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<fixed24p8> debug_arr_group::debug_f24p8_arr_helper$/;"	kind:p	class:debug_arr_group	file:	signature:( debug_f24p8_arr, debug_f24p8_arr_size )
+debug_f24p8_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<fixed24p8> debug_arr_group::debug_f24p8_arr_helper;$/;"	kind:m	class:debug_arr_group	file:
 debug_f24p8_arr_size	game_engine_stuff/debug_vars.hpp	/^static constexpr u32 debug_f24p8_arr_size = 32;$/;"	kind:v
-debug_f8p8_arr	game_engine_stuff/debug_vars.hpp	/^	static fixed8p8 debug_f8p8_arr[debug_f8p8_arr_size];$/;"	kind:m	class:debug_arr_group	access:protected
-debug_f8p8_arr	game_engine_stuff/debug_vars.thumb.cpp	/^fixed8p8 debug_arr_group::debug_f8p8_arr[debug_f8p8_arr_size];$/;"	kind:m	class:debug_arr_group	file:
+debug_f8p8_arr	game_engine_stuff/debug_vars.hpp	/^		fixed8p8 debug_f8p8_arr[debug_f8p8_arr_size];$/;"	kind:m	struct:debug_arr_group::raw_array_group	access:public
+debug_f8p8_arr	game_engine_stuff/debug_vars.hpp	/^	static inline fixed8p8* debug_f8p8_arr()$/;"	kind:f	class:debug_arr_group	access:protected	signature:()
 debug_f8p8_arr_helper	game_engine_stuff/debug_vars.hpp	/^	static array_helper<fixed8p8> debug_f8p8_arr_helper;$/;"	kind:m	class:debug_arr_group	access:public
-debug_f8p8_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<fixed8p8> debug_arr_group::debug_f8p8_arr_helper$/;"	kind:p	class:debug_arr_group	file:	signature:( debug_f8p8_arr, debug_f8p8_arr_size )
+debug_f8p8_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<fixed8p8> debug_arr_group::debug_f8p8_arr_helper;$/;"	kind:m	class:debug_arr_group	file:
 debug_f8p8_arr_size	game_engine_stuff/debug_vars.hpp	/^static constexpr u32 debug_f8p8_arr_size = 32;$/;"	kind:v
 debug_infin_loop	game_engine_stuff/game_manager_class.hpp	/^	static inline void debug_infin_loop()$/;"	kind:f	class:game_manager	access:public	signature:()
-debug_s32_arr	game_engine_stuff/debug_vars.hpp	/^	static vs32 debug_s32_arr[debug_s32_arr_size];$/;"	kind:m	class:debug_arr_group	access:protected
-debug_s32_arr	game_engine_stuff/debug_vars.thumb.cpp	/^vs32 debug_arr_group::debug_s32_arr[debug_s32_arr_size];$/;"	kind:m	class:debug_arr_group	file:
+debug_s32_arr	game_engine_stuff/debug_vars.hpp	/^		vs32 debug_s32_arr[debug_s32_arr_size];$/;"	kind:m	struct:debug_arr_group::raw_array_group	access:public
+debug_s32_arr	game_engine_stuff/debug_vars.hpp	/^	static inline vs32* debug_s32_arr()$/;"	kind:f	class:debug_arr_group	access:protected	signature:()
 debug_s32_arr_helper	game_engine_stuff/debug_vars.hpp	/^	static array_helper<vs32> debug_s32_arr_helper;$/;"	kind:m	class:debug_arr_group	access:public
-debug_s32_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<vs32> debug_arr_group::debug_s32_arr_helper( debug_s32_arr, $/;"	kind:p	class:debug_arr_group	file:	signature:( debug_s32_arr, debug_s32_arr_size )
+debug_s32_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<vs32> debug_arr_group::debug_s32_arr_helper;$/;"	kind:m	class:debug_arr_group	file:
 debug_s32_arr_size	game_engine_stuff/debug_vars.hpp	/^static constexpr u32 debug_s32_arr_size = 32;$/;"	kind:v
 debug_str	game_engine_stuff/debug_vars.hpp	/^	debug_str( const char* to_copy );$/;"	kind:p	class:debug_str	access:public	signature:( const char* to_copy )
 debug_str	game_engine_stuff/debug_vars.hpp	/^	debug_str( const debug_str& to_copy );$/;"	kind:p	class:debug_str	access:public	signature:( const debug_str& to_copy )
@@ -857,15 +860,15 @@ debug_str::operator =	game_engine_stuff/debug_vars.thumb.cpp	/^debug_str& debug_
 debug_str::operator =	game_engine_stuff/debug_vars.thumb.cpp	/^debug_str& debug_str::operator = ( const debug_str& to_copy )$/;"	kind:f	class:debug_str	signature:( const debug_str& to_copy )
 debug_str::real_size	game_engine_stuff/debug_vars.hpp	/^	u32 real_size;$/;"	kind:m	class:debug_str	access:protected
 debug_str::set_real_size	game_engine_stuff/debug_vars.hpp	/^	inline void set_real_size( u32 n_real_size )$/;"	kind:f	class:debug_str	access:public	signature:( u32 n_real_size )
-debug_str_arr	game_engine_stuff/debug_vars.hpp	/^	static debug_str debug_str_arr[debug_str_arr_size];$/;"	kind:m	class:debug_arr_group	access:protected
-debug_str_arr	game_engine_stuff/debug_vars.thumb.cpp	/^debug_str debug_arr_group::debug_str_arr[debug_str_arr_size];$/;"	kind:m	class:debug_arr_group	file:
+debug_str_arr	game_engine_stuff/debug_vars.hpp	/^		debug_str debug_str_arr[debug_str_arr_size];$/;"	kind:m	struct:debug_arr_group::raw_array_group	access:public
+debug_str_arr	game_engine_stuff/debug_vars.hpp	/^	static inline debug_str* debug_str_arr()$/;"	kind:f	class:debug_arr_group	access:protected	signature:()
 debug_str_arr_helper	game_engine_stuff/debug_vars.hpp	/^	static array_helper<debug_str> debug_str_arr_helper;$/;"	kind:m	class:debug_arr_group	access:public
-debug_str_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<debug_str> debug_arr_group::debug_str_arr_helper$/;"	kind:p	class:debug_arr_group	file:	signature:( debug_str_arr, debug_str_arr_size )
+debug_str_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<debug_str> debug_arr_group::debug_str_arr_helper;$/;"	kind:m	class:debug_arr_group	file:
 debug_str_arr_size	game_engine_stuff/debug_vars.hpp	/^static constexpr u32 debug_str_arr_size = 32;$/;"	kind:v
-debug_u32_arr	game_engine_stuff/debug_vars.hpp	/^	static vu32 debug_u32_arr[debug_u32_arr_size];$/;"	kind:m	class:debug_arr_group	access:protected
-debug_u32_arr	game_engine_stuff/debug_vars.thumb.cpp	/^vu32 debug_arr_group::debug_u32_arr[debug_u32_arr_size];$/;"	kind:m	class:debug_arr_group	file:
+debug_u32_arr	game_engine_stuff/debug_vars.hpp	/^		vu32 debug_u32_arr[debug_u32_arr_size];$/;"	kind:m	struct:debug_arr_group::raw_array_group	access:public
+debug_u32_arr	game_engine_stuff/debug_vars.hpp	/^	static inline vu32* debug_u32_arr() $/;"	kind:f	class:debug_arr_group	access:protected	signature:()
 debug_u32_arr_helper	game_engine_stuff/debug_vars.hpp	/^	static array_helper<vu32> debug_u32_arr_helper;$/;"	kind:m	class:debug_arr_group	access:public
-debug_u32_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<vu32> debug_arr_group::debug_u32_arr_helper( debug_u32_arr, $/;"	kind:p	class:debug_arr_group	file:	signature:( debug_u32_arr, debug_u32_arr_size )
+debug_u32_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<vu32> debug_arr_group::debug_u32_arr_helper;$/;"	kind:m	class:debug_arr_group	file:
 debug_u32_arr_size	game_engine_stuff/debug_vars.hpp	/^static constexpr u32 debug_u32_arr_size = 32;$/;"	kind:v
 debug_vars_hpp	game_engine_stuff/debug_vars.hpp	20;"	kind:d
 default_sprite_new_caller	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^void default_sprite_new_caller( sprite*& the_sprite,$/;"	kind:f	signature:( sprite*& the_sprite, sprite_allocator& the_sprite_allocator, bool facing_left )
@@ -2904,6 +2907,7 @@ push_coll_point	game_engine_stuff/coll_point_group_class.hpp	/^	inline void push
 push_front	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline void push_front( const type& to_push )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( const type& to_push )
 quotient	gba_specific_stuff/bios_function_wrappers.hpp	/^	s32 quotient;$/;"	kind:m	class:bios_div_result	access:public
 quotient_abs	gba_specific_stuff/bios_function_wrappers.hpp	/^	u32 quotient_abs;$/;"	kind:m	class:bios_div_result	access:public
+raw_array_group	game_engine_stuff/debug_vars.hpp	/^	struct raw_array_group$/;"	kind:s	class:debug_arr_group	access:protected
 real_size	game_engine_stuff/debug_vars.hpp	/^	u32 real_size;$/;"	kind:m	class:debug_str	access:protected
 reg_bg0cnt	gba_specific_stuff/gfx_reg_stuff.hpp	151;"	kind:d
 reg_bg1cnt	gba_specific_stuff/gfx_reg_stuff.hpp	152;"	kind:d
@@ -3703,6 +3707,8 @@ the_player_sprite_allocator	game_engine_stuff/sprite_stuff/sprite_manager_class.
 the_player_vram_chunk_index	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static constexpr u32 the_player_vram_chunk_index $/;"	kind:m	class:sprite_manager	access:public
 the_powerup_gfxPalLen	gfx/the_powerup_gfx.h	23;"	kind:d
 the_powerup_gfxTilesLen	gfx/the_powerup_gfx.h	20;"	kind:d
+the_raw_array_group	game_engine_stuff/debug_vars.hpp	/^	static raw_array_group the_raw_array_group;$/;"	kind:m	class:debug_arr_group	access:protected
+the_raw_array_group	game_engine_stuff/debug_vars.thumb.cpp	/^debug_arr_group::raw_array_group debug_arr_group::the_raw_array_group;$/;"	kind:m	class:debug_arr_group	file:
 the_relative_metatile_slot	game_engine_stuff/sprite_stuff/door_sprite_class.hpp	/^	static constexpr u32 the_relative_metatile_slot = 0, $/;"	kind:m	class:door_sprite	access:public
 the_relative_metatile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_classes.hpp	/^	static constexpr u32 the_relative_metatile_slot = 1, $/;"	kind:m	class:muffin_sprite	access:public
 the_relative_metatile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_classes.hpp	/^	static constexpr u32 the_relative_metatile_slot = 2, $/;"	kind:m	class:fire_muffin_sprite	access:public
