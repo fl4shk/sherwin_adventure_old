@@ -373,7 +373,11 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 			do_update_camera_pos_y = true;
 		}
 	}
-	else if ( on_screen_bottom_pos >= make_f24p8(140) 
+	//else if ( on_screen_bottom_pos >= make_f24p8(140) 
+	//	&& get_curr_on_slope() )
+	//else if ( on_screen_bottom_pos <= make_f24p8(80) 
+	//	&& get_curr_on_slope() )
+	else if ( on_screen_bottom_pos <= make_f24p8(60) 
 		&& get_curr_on_slope() )
 	{
 		//add = false;
