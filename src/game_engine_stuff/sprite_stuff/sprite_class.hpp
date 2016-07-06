@@ -162,13 +162,14 @@ public:		// variables
 	static prev_curr_pair<vec2_f24p8> on_screen_pos;
 	static vec2_s32 prev_prev_on_screen_pos_s32;
 	static prev_curr_pair<vec2_s32> on_screen_pos_s32;
+	static prev_curr_pair<vec2_s32> camera_pos_pc_pair_s32;
 	
 	static vec2<bool> temp_debug_thing;
 	
-	static vec2_f24p8 camera_pos_diff_abs;
-	static vec2_s32 camera_pos_s32_diff_abs;
 	static vec2_f24p8 on_screen_pos_diff_abs;
 	static vec2_s32 on_screen_pos_s32_diff_abs;
+	static vec2_f24p8 camera_pos_diff_abs;
+	static vec2_s32 camera_pos_s32_diff_abs;
 	
 public:		// functions
 	

@@ -45,13 +45,14 @@ vec2_f24p8 sprite::prev_prev_on_screen_pos;
 prev_curr_pair<vec2_f24p8> sprite::on_screen_pos;
 vec2_s32 sprite::prev_prev_on_screen_pos_s32;
 prev_curr_pair<vec2_s32> sprite::on_screen_pos_s32;
+prev_curr_pair<vec2_s32> sprite::camera_pos_pc_pair_s32;
 
 vec2<bool> sprite::temp_debug_thing;
 
-vec2_f24p8 sprite::camera_pos_diff_abs;
-vec2_s32 sprite::camera_pos_s32_diff_abs;
 vec2_f24p8 sprite::on_screen_pos_diff_abs;
 vec2_s32 sprite::on_screen_pos_s32_diff_abs;
+vec2_f24p8 sprite::camera_pos_diff_abs;
+vec2_s32 sprite::camera_pos_s32_diff_abs;
 
 
 
@@ -220,19 +221,32 @@ void sprite::update_on_screen_pos
 	s32 temp_x = temp_on_screen_pos.x.to_int_for_on_screen();
 	s32 temp_y = temp_on_screen_pos.y.to_int_for_on_screen();
 	
+	//if ( temp_on_screen_pos.x.get_frac_bits() == 0x80 
+	//	&& camera_pos_pc_pair.curr.x > camera_pos_pc_pair.prev.x )
+	//{
+	//	--temp_x;
+	//}
+	//if ( temp_on_screen_pos.y.get_frac_bits() == 0x80 
+	//	&& camera_pos_pc_pair.curr.y > camera_pos_pc_pair.prev.y )
+	//{
+	//	--temp_y;
+	//}
+	
+	// Perhaps this works?
 	if ( temp_on_screen_pos.x.get_frac_bits() == 0x80 
-		&& camera_pos_pc_pair.curr.x > camera_pos_pc_pair.prev.x )
+		&& camera_pos_pc_pair.curr.x != camera_pos_pc_pair.prev.x )
 	{
 		--temp_x;
 	}
 	if ( temp_on_screen_pos.y.get_frac_bits() == 0x80 
-		&& camera_pos_pc_pair.curr.y > camera_pos_pc_pair.prev.y )
+		&& camera_pos_pc_pair.curr.y != camera_pos_pc_pair.prev.y )
 	{
 		--temp_y;
 	}
 	
 	if ( the_sprite_type == st_fire_muffin )
 	{
+		temp_debug_thing.x = temp_debug_thing.y = false;
 		prev_prev_on_screen_pos = on_screen_pos.prev;
 		on_screen_pos.back_up();
 		
@@ -246,29 +260,36 @@ void sprite::update_on_screen_pos
 		on_screen_pos_s32.curr.y = temp_y;
 		
 		
-		camera_pos_diff_abs = custom_abs( camera_pos_pc_pair.curr 
-			- camera_pos_pc_pair.prev );
+		camera_pos_pc_pair_s32.prev.x = camera_pos_pc_pair.prev.x
+			.to_int_for_on_screen();
+		camera_pos_pc_pair_s32.prev.y = camera_pos_pc_pair.prev.y
+			.to_int_for_on_screen();
+		camera_pos_pc_pair_s32.curr.x = camera_pos_pc_pair.curr.x
+			.to_int_for_on_screen();
+		camera_pos_pc_pair_s32.curr.y = camera_pos_pc_pair.curr.y
+			.to_int_for_on_screen();
 		
-		
-		camera_pos_s32_diff_abs = custom_abs(vec2_s32
-			( ( camera_pos_pc_pair.curr.x.to_int_for_on_screen() 
-			- camera_pos_pc_pair.prev.x.to_int_for_on_screen() ), 
-			( camera_pos_pc_pair.curr.y.to_int_for_on_screen() 
-			- camera_pos_pc_pair.prev.y.to_int_for_on_screen() ) ));
 		
 		on_screen_pos_diff_abs = custom_abs( on_screen_pos.curr
 			- on_screen_pos.prev );
 		on_screen_pos_s32_diff_abs = custom_abs( on_screen_pos_s32.curr
 			- on_screen_pos_s32.prev );
 		
-		if ( camera_pos_s32_diff_abs.x != on_screen_pos_s32_diff_abs.x
-			&& on_screen_pos_s32.prev.x != 0 )
+		camera_pos_diff_abs = custom_abs( camera_pos_pc_pair.curr 
+			- camera_pos_pc_pair.prev );
+		camera_pos_s32_diff_abs = custom_abs( camera_pos_pc_pair_s32.curr 
+			- camera_pos_pc_pair_s32.prev );
+		
+		
+		
+		//if ( camera_pos_s32_diff_abs.x != on_screen_pos_s32_diff_abs.x
+		//	&& on_screen_pos_s32.prev.x != 0 )
 		{
 			temp_debug_thing.x = true;
 		}
 		
-		if ( camera_pos_s32_diff_abs.y != on_screen_pos_s32_diff_abs.y
-			&& on_screen_pos_s32.prev.y != 0 )
+		//if ( camera_pos_s32_diff_abs.y != on_screen_pos_s32_diff_abs.y
+		//	&& on_screen_pos_s32.prev.y != 0 )
 		{
 			temp_debug_thing.y = true;
 		}

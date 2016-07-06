@@ -86,10 +86,11 @@ static constexpr u32 debug_f8p8_arr_size = 32;
 // debug_arr_group::debug_str_arr.
 static constexpr u32 debug_str_arr_size = 32;
 
-// 16 * 32 = 512 bytes eaten up by debug_str_arr.
+// ( 16 + 4 ) * 32 = 640 bytes eaten up by debug_str_arr.
 
-// Total of 512 + 512 = 1024 bytes eaten up by debug vars (not counting
-// the array indices).  This is certainly wasteful...
+// Total of 20 + 512 + 640 = 1172 bytes (293 4-bytes-long words) eaten up
+// by debug vars (INCLUDING the array indices).  This is certainly
+// wasteful....
 
 class debug_str
 {
