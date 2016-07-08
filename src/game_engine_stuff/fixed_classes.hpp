@@ -150,24 +150,18 @@ inline s32 fixed24p8::trunc_to_int() const
 	//	return (s32)( ( data + ( 1 << shift ) - 1 ) >> shift );
 	//}
 	//else
-	//{
-	//	return (s32)( data >> shift );
-	//}
-	
-	if ( data < 0 )
-	{
-		s32 ret = -data;
-		
-		ret >>= shift;
-		
-		ret = -ret;
-		
-		return ret;
-	}
-	else
 	{
 		return (s32)( data >> shift );
 	}
+	
+	//s32 ret = custom_abs(data) >> shift;
+	//
+	//if ( data < 0 )
+	//{
+	//	ret = -ret;
+	//}
+	//
+	//return ret;
 }
 
 //inline s32 fixed24p8::true_round_via_trunc() const
@@ -211,15 +205,17 @@ inline fixed24p8 fixed24p8::with_zero_frac_bits() const
 
 inline u8 fixed24p8::get_frac_bits() const
 {
-	if ( data < 0 )
-	{
-		u32 temp1 = (u32)(-data);
-		return (u8)( temp1 & frac_mask );
-	}
-	else
-	{
-		return (u8)( data & frac_mask );
-	}
+	//if ( data < 0 )
+	//{
+	//	u32 temp1 = (u32)(-data);
+	//	return (u8)( temp1 & frac_mask );
+	//}
+	//else
+	//{
+	//	return (u8)( data & frac_mask );
+	//}
+	
+	return (u8)( custom_abs(data) & frac_mask );
 }
 
 
@@ -329,7 +325,7 @@ public:		// functions
 
 inline s16 fixed8p8::round_to_int() const
 {
-	return (s16)( ( data + ( 1 << ( shift - 1 ) ) ) >> 8 );
+	return (s16)( ( data + ( 1 << ( shift - 1 ) ) ) >> shift );
 }
 
 inline s16 fixed8p8::trunc_to_int() const
@@ -339,37 +335,34 @@ inline s16 fixed8p8::trunc_to_int() const
 	//	return (s16)( ( data + ( 1 << shift ) - 1 ) >> shift );
 	//}
 	//else
-	//{
-	//	return (s16)( data >> shift );
-	//}
-	
-	if ( data < 0 )
-	{
-		s16 ret = -data;
-		
-		ret >>= shift;
-		
-		ret = -ret;
-		
-		return ret;
-	}
-	else
 	{
 		return (s16)( data >> shift );
 	}
+	
+	
+	//s16 ret = custom_abs(data) >> shift;
+	//
+	//if ( data < 0 )
+	//{
+	//	ret = -ret;
+	//}
+	//
+	//return ret;
 }
 
 inline u8 fixed8p8::get_frac_bits() const
 {
-	if ( data < 0 )
-	{
-		u16 temp1 = (u16)(-data);
-		return (u8)( temp1 & frac_mask );
-	}
-	else
-	{
-		return (u8)( data & frac_mask );
-	}
+	//if ( data < 0 )
+	//{
+	//	u16 temp1 = (u16)(-data);
+	//	return (u8)( temp1 & frac_mask );
+	//}
+	//else
+	//{
+	//	return (u8)( data & frac_mask );
+	//}
+	
+	return (u8)( custom_abs(data) & frac_mask );
 }
 
 

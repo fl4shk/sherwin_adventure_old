@@ -217,32 +217,22 @@ void sprite::update_on_screen_pos
 	vec2_f24p8 offset( make_f24p8(ss_vec2.x), make_f24p8(ss_vec2.y) );
 	
 	
-	// USUALLY round to the nearest whole number.
+	// Round to the nearest whole number.
 	s32 temp_x = temp_on_screen_pos.x.to_int_for_on_screen();
 	s32 temp_y = temp_on_screen_pos.y.to_int_for_on_screen();
 	
+	
+	//// Perhaps this works?
 	//if ( temp_on_screen_pos.x.get_frac_bits() == 0x80 
-	//	&& camera_pos_pc_pair.curr.x > camera_pos_pc_pair.prev.x )
+	//	&& camera_pos_pc_pair.curr.x != camera_pos_pc_pair.prev.x )
 	//{
 	//	--temp_x;
 	//}
 	//if ( temp_on_screen_pos.y.get_frac_bits() == 0x80 
-	//	&& camera_pos_pc_pair.curr.y > camera_pos_pc_pair.prev.y )
+	//	&& camera_pos_pc_pair.curr.y != camera_pos_pc_pair.prev.y )
 	//{
 	//	--temp_y;
 	//}
-	
-	// Perhaps this works?
-	if ( temp_on_screen_pos.x.get_frac_bits() == 0x80 
-		&& camera_pos_pc_pair.curr.x != camera_pos_pc_pair.prev.x )
-	{
-		--temp_x;
-	}
-	if ( temp_on_screen_pos.y.get_frac_bits() == 0x80 
-		&& camera_pos_pc_pair.curr.y != camera_pos_pc_pair.prev.y )
-	{
-		--temp_y;
-	}
 	
 	if ( the_sprite_type == st_fire_muffin )
 	{
@@ -322,15 +312,33 @@ void sprite::update_on_screen_pos
 }
 
 
-void sprite::camera_follow_basic( bg_point& camera_pos )
+void sprite::camera_follow_basic
+	( prev_curr_pair<bg_point>& camera_pos_pc_pair )
 {
+	bg_point& camera_pos = camera_pos_pc_pair.curr;
+	
+	const fixed24p8 left_limit = make_f24p8(100), 
+		right_limit = make_f24p8(140), 
+		top_limit = make_f24p8(30), 
+		//top_limit = make_f24p8(30), 
+		//top_limit = make_f24p8(27), 
+		//top_limit = make_f24p8(60), 
+		bottom_limit = make_f24p8(60);
+		//bottom_limit = make_f24p8(70);
+		//bottom_limit = make_f24p8(80);
+	
+	const fixed24p8 to_add_abs = make_f24p8(4);
+	
 	vec2_f24p8 temp_on_screen_pos = get_on_screen_pos(camera_pos);
+	vec2_f24p8 prev_on_screen_pos = get_prev_in_level_pos()
+		- camera_pos_pc_pair.prev;
 	
 	fixed24p8 on_screen_bottom_pos = temp_on_screen_pos.y 
 		+ make_f24p8(get_shape_size_as_vec2().y);
 	
-	if ( ( temp_on_screen_pos.x <= make_f24p8(100) && vel.x.data < 0 ) 
-		|| ( temp_on_screen_pos.x >= make_f24p8(140) && vel.x.data > 0 ) )
+	
+	if ( ( temp_on_screen_pos.x <= left_limit && vel.x.data < 0 ) 
+		|| ( temp_on_screen_pos.x >= right_limit && vel.x.data > 0 ) )
 	{
 		//camera_pos.x += vel.x;
 		//s32 value_to_add = vel.x.data
@@ -358,13 +366,13 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 	//	on_slope = true;
 	//}
 	
-	if ( temp_on_screen_pos.y <= make_f24p8(20) )
+	if ( temp_on_screen_pos.y <= top_limit )
 	{
 		//add = false;
 		
 		do_update_camera_pos_y = true;
 	}
-	else if ( on_screen_bottom_pos >= make_f24p8(60) 
+	else if ( on_screen_bottom_pos >= bottom_limit 
 		&& !get_curr_on_slope() )
 	{
 		if ( vel.y >= (fixed24p8){0} )
@@ -373,12 +381,7 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 			do_update_camera_pos_y = true;
 		}
 	}
-	//else if ( on_screen_bottom_pos >= make_f24p8(140) 
-	//	&& get_curr_on_slope() )
-	//else if ( on_screen_bottom_pos <= make_f24p8(80) 
-	//	&& get_curr_on_slope() )
-	else if ( on_screen_bottom_pos <= make_f24p8(60) 
-		&& get_curr_on_slope() )
+	else if ( on_screen_bottom_pos <= bottom_limit && get_curr_on_slope() )
 	{
 		//add = false;
 		do_update_camera_pos_y = true;
@@ -394,15 +397,32 @@ void sprite::camera_follow_basic( bg_point& camera_pos )
 			camera_pos.y += ( get_curr_in_level_pos().y 
 				- get_prev_in_level_pos().y );
 		}
+		//else if ( in_level_pos.curr.y != in_level_pos.prev.y )
 		else
 		{
 			if (!add)
 			{
-				camera_pos.y += {-0x400};
+				//if ( camera_pos_pc_pair.curr.y - to_add_abs 
+				//	!= camera_pos_pc_pair.prev.y )
+				//if ( camera_pos_pc_pair.curr.y - to_add_abs
+				//	!= gfx_manager::prev_prev_bgofs_mirror[0].y 
+				//	&& camera_pos_pc_pair.curr.y 
+				//	!= camera_pos_pc_pair.prev.y )
+				{
+					camera_pos.y += -to_add_abs;
+				}
 			}
 			else //if (add)
 			{
-				camera_pos.y += {0x400};
+				//if ( camera_pos_pc_pair.curr.y + to_add_abs 
+				//	!= camera_pos_pc_pair.prev.y )
+				//if ( camera_pos_pc_pair.curr.y + to_add_abs 
+				//	!= gfx_manager::prev_prev_bgofs_mirror[0].y 
+				//	&& camera_pos_pc_pair.curr.y 
+				//	!= camera_pos_pc_pair.prev.y )
+				{
+					camera_pos.y += to_add_abs;
+				}
 			}
 		}
 	}

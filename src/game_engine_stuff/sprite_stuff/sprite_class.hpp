@@ -370,7 +370,8 @@ public:		// functions
 	//	sprite_stuff_array[the_sprite_type]->update(*this);
 	//}
 	
-	void camera_follow_basic( bg_point& camera_pos )
+	void camera_follow_basic
+		( prev_curr_pair<bg_point>& camera_pos_pc_pair )
 		__attribute__((_iwram_code));
 	void center_camera_almost( bg_point& camera_pos ) const
 		__attribute__((_iwram_code));

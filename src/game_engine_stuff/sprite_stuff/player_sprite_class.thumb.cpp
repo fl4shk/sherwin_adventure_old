@@ -412,7 +412,7 @@ void player_sprite::update_part_3
 	}
 	else
 	{
-		camera_follow_basic(camera_pos_pc_pair.curr);
+		camera_follow_basic(camera_pos_pc_pair);
 		//center_camera_almost(camera_pos_pc_pair.curr);
 	}
 	

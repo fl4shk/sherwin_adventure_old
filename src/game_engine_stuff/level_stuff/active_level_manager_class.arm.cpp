@@ -156,16 +156,22 @@ void active_level_manager::correct_bg0_scroll_mirror
 	//s32 sublevel_x_coord_tile = gfx_manager::bgofs_mirror[0].curr.x >> 3;
 	//s32 sublevel_y_coord_tile = gfx_manager::bgofs_mirror[0].curr.y >> 3;
 	
+	//s32 sublevel_x_coord_tile = gfx_manager::bgofs_mirror[0].curr.x
+	//	.to_int_for_on_screen() >> 3;
+	//s32 sublevel_y_coord_tile = gfx_manager::bgofs_mirror[0].curr.y
+	//	.to_int_for_on_screen() >> 3;
 	s32 sublevel_x_coord_tile = gfx_manager::bgofs_mirror[0].curr.x
-		.to_int_for_on_screen() >> 3;
+		.trunc_to_int() >> 3;
 	s32 sublevel_y_coord_tile = gfx_manager::bgofs_mirror[0].curr.y
-		.to_int_for_on_screen() >> 3;
+		.trunc_to_int() >> 3;
 	
 	
 	if ( sublevel_x_coord_tile < 0 )
 	{
 		//gfx_manager::bgofs_mirror[0].curr.x = 0;
 		gfx_manager::bgofs_mirror[0].curr.x = {0};
+		//gfx_manager::bgofs_mirror[0].curr.x.data 
+		//	= gfx_manager::bgofs_mirror[0].curr.x.get_frac_bits();
 	}
 	
 	else if ( sublevel_x_coord_tile 
@@ -176,9 +182,14 @@ void active_level_manager::correct_bg0_scroll_mirror
 		//	(sublevel_size_in_blocks_2d)
 		//	* num_pixels_per_tile_row_or_column )
 		//	- screen_width;
+		
 		gfx_manager::bgofs_mirror[0].curr.x = make_f24p8
 			( ( sublevel_width_in_tiles(sublevel_size_in_blocks_2d)
 			* num_pixels_per_tile_row_or_column ) - screen_width );
+		//gfx_manager::bgofs_mirror[0].curr.x = make_f24p8
+		//	( ( sublevel_width_in_tiles(sublevel_size_in_blocks_2d)
+		//	* num_pixels_per_tile_row_or_column ) - screen_width,
+		//	gfx_manager::bgofs_mirror[0].curr.x.get_frac_bits() );
 	}
 	
 	
@@ -187,6 +198,8 @@ void active_level_manager::correct_bg0_scroll_mirror
 	{
 		//gfx_manager::bgofs_mirror[0].curr.y = 0;
 		gfx_manager::bgofs_mirror[0].curr.y = {0};
+		//gfx_manager::bgofs_mirror[0].curr.y.data 
+		//	= gfx_manager::bgofs_mirror[0].curr.y.get_frac_bits();
 	}
 	
 	else if ( sublevel_y_coord_tile 
@@ -197,9 +210,14 @@ void active_level_manager::correct_bg0_scroll_mirror
 		//	(sublevel_size_in_blocks_2d)
 		//	* num_pixels_per_tile_row_or_column )
 		//	- screen_height;
+		
 		gfx_manager::bgofs_mirror[0].curr.y = make_f24p8
 			( ( sublevel_height_in_tiles(sublevel_size_in_blocks_2d)
 			* num_pixels_per_tile_row_or_column ) - screen_height );
+		//gfx_manager::bgofs_mirror[0].curr.y = make_f24p8
+		//	( ( sublevel_height_in_tiles(sublevel_size_in_blocks_2d)
+		//	* num_pixels_per_tile_row_or_column ) - screen_height, 
+		//	gfx_manager::bgofs_mirror[0].curr.y.get_frac_bits() );
 	}
 }
 

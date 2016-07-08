@@ -64,7 +64,7 @@ public:		// wrapper functions
 	void set_y_coord( s32 n_y_coord )
 	{
 		clear_and_set_bits( attr0, obj_attr0_y_coord_mask,
-			obj_attr0_y_coord( n_y_coord ) );
+			obj_attr0_y_coord(n_y_coord) );
 	}
 	
 	s32 get_x_coord() const
