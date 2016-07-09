@@ -66,38 +66,38 @@ X	game_engine_stuff/coll_point_group_class.thumb.cpp	74;"	kind:d	file:
 X	game_engine_stuff/coll_point_group_class.thumb.cpp	81;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/player_sprite_class.thumb.cpp	1016;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/player_sprite_class.thumb.cpp	1060;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1079;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1082;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1085;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1091;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1097;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1101;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1088;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1094;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1098;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1102;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1105;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1108;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1111;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1116;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1120;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1133;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1141;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1156;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1164;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	618;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	626;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	638;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	646;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1113;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1117;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1130;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1138;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1153;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	1161;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	615;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	623;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	635;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	643;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	741;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	744;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	747;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	754;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	760;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	764;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	751;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	757;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	761;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	765;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	768;"	kind:d	file:
 X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	771;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	774;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	779;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	783;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	799;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	807;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	822;"	kind:d	file:
-X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	830;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	776;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	780;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	796;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	804;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	819;"	kind:d	file:
+X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	827;"	kind:d	file:
 __key_state	gba_specific_stuff/button_stuff.thumb.cpp	/^volatile prev_curr_pair<vu16> __key_state __attribute__((_iwram)) $/;"	kind:v
 _align4	gba_specific_stuff/attribute_defines.hpp	47;"	kind:d
 _bss	gba_specific_stuff/attribute_defines.hpp	34;"	kind:d
@@ -1161,6 +1161,8 @@ fire_muffin_sprite::the_relative_metatile_slot	game_engine_stuff/sprite_stuff/mu
 fire_muffin_sprite::tile_arr	game_engine_stuff/sprite_stuff/muffin_sprite_classes.hpp	/^	static constexpr tile* tile_arr = const_cast<tile*>$/;"	kind:m	class:fire_muffin_sprite	access:public
 fixed24p8	game_engine_stuff/fixed_classes.hpp	/^class fixed24p8$/;"	kind:c
 fixed24p8::data	game_engine_stuff/fixed_classes.hpp	/^	s32 data;$/;"	kind:m	class:fixed24p8	access:public
+fixed24p8::floor_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s32 floor_to_int() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
+fixed24p8::floor_to_int	game_engine_stuff/fixed_classes.hpp	/^inline s32 fixed24p8::floor_to_int() const$/;"	kind:f	class:fixed24p8	signature:() const
 fixed24p8::frac_mask	game_engine_stuff/fixed_classes.hpp	/^	static const u32 frac_mask = 0xff;$/;"	kind:m	class:fixed24p8	access:public
 fixed24p8::get_frac_bits	game_engine_stuff/fixed_classes.hpp	/^	inline u8 get_frac_bits() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
 fixed24p8::get_frac_bits	game_engine_stuff/fixed_classes.hpp	/^inline u8 fixed24p8::get_frac_bits() const$/;"	kind:f	class:fixed24p8	signature:() const
@@ -1202,12 +1204,12 @@ fixed24p8::round_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s32 round_
 fixed24p8::round_to_int	game_engine_stuff/fixed_classes.hpp	/^inline s32 fixed24p8::round_to_int() const$/;"	kind:f	class:fixed24p8	signature:() const
 fixed24p8::shift	game_engine_stuff/fixed_classes.hpp	/^	static const u32 shift = 8;$/;"	kind:m	class:fixed24p8	access:public
 fixed24p8::to_int_for_on_screen	game_engine_stuff/fixed_classes.hpp	/^	inline s32 to_int_for_on_screen() const$/;"	kind:f	class:fixed24p8	access:public	signature:() const
-fixed24p8::trunc_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s32 trunc_to_int() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
-fixed24p8::trunc_to_int	game_engine_stuff/fixed_classes.hpp	/^inline s32 fixed24p8::trunc_to_int() const$/;"	kind:f	class:fixed24p8	signature:() const
 fixed24p8::with_zero_frac_bits	game_engine_stuff/fixed_classes.hpp	/^	inline fixed24p8 with_zero_frac_bits() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
 fixed24p8::with_zero_frac_bits	game_engine_stuff/fixed_classes.hpp	/^inline fixed24p8 fixed24p8::with_zero_frac_bits() const$/;"	kind:f	class:fixed24p8	signature:() const
 fixed8p8	game_engine_stuff/fixed_classes.hpp	/^class fixed8p8$/;"	kind:c
 fixed8p8::data	game_engine_stuff/fixed_classes.hpp	/^	s16 data;$/;"	kind:m	class:fixed8p8	access:public
+fixed8p8::floor_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s16 floor_to_int() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
+fixed8p8::floor_to_int	game_engine_stuff/fixed_classes.hpp	/^inline s16 fixed8p8::floor_to_int() const$/;"	kind:f	class:fixed8p8	signature:() const
 fixed8p8::frac_mask	game_engine_stuff/fixed_classes.hpp	/^	static const u32 frac_mask = 0xff;$/;"	kind:m	class:fixed8p8	access:public
 fixed8p8::get_frac_bits	game_engine_stuff/fixed_classes.hpp	/^	inline u8 get_frac_bits() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
 fixed8p8::get_frac_bits	game_engine_stuff/fixed_classes.hpp	/^inline u8 fixed8p8::get_frac_bits() const$/;"	kind:f	class:fixed8p8	signature:() const
@@ -1238,9 +1240,11 @@ fixed8p8::operator fixed24p8	game_engine_stuff/fixed_classes.hpp	/^inline fixed8
 fixed8p8::round_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s16 round_to_int() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
 fixed8p8::round_to_int	game_engine_stuff/fixed_classes.hpp	/^inline s16 fixed8p8::round_to_int() const$/;"	kind:f	class:fixed8p8	signature:() const
 fixed8p8::shift	game_engine_stuff/fixed_classes.hpp	/^	static const u32 shift = 8;$/;"	kind:m	class:fixed8p8	access:public
-fixed8p8::trunc_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s16 trunc_to_int() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
-fixed8p8::trunc_to_int	game_engine_stuff/fixed_classes.hpp	/^inline s16 fixed8p8::trunc_to_int() const$/;"	kind:f	class:fixed8p8	signature:() const
 fixed_classes_hpp	game_engine_stuff/fixed_classes.hpp	20;"	kind:d
+floor_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s16 floor_to_int() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
+floor_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s32 floor_to_int() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
+floor_to_int	game_engine_stuff/fixed_classes.hpp	/^inline s16 fixed8p8::floor_to_int() const$/;"	kind:f	class:fixed8p8	signature:() const
+floor_to_int	game_engine_stuff/fixed_classes.hpp	/^inline s32 fixed24p8::floor_to_int() const$/;"	kind:f	class:fixed24p8	signature:() const
 frac_mask	game_engine_stuff/fixed_classes.hpp	/^	static const u32 frac_mask = 0xff;$/;"	kind:m	class:fixed24p8	access:public
 frac_mask	game_engine_stuff/fixed_classes.hpp	/^	static const u32 frac_mask = 0xff;$/;"	kind:m	class:fixed8p8	access:public
 frame	game_engine_stuff/sprite_stuff/player_pickaxe_sprite_class.hpp	/^	enum frame$/;"	kind:g	class:player_pickaxe_sprite	access:public
@@ -3777,10 +3781,6 @@ top	game_engine_stuff/coll_box_class.hpp	/^	inline fixed24p8 top() const$/;"	kin
 total_coll_points	game_engine_stuff/coll_point_group_class.hpp	/^	static const u32 total_coll_points = 32;$/;"	kind:m	class:coll_point_group	access:public
 trig_lut_fixed_shift	game_engine_stuff/trigonometry_funcs.hpp	/^static const u32 trig_lut_fixed_shift = 12;$/;"	kind:v
 trigonometry_funcs_hpp	game_engine_stuff/trigonometry_funcs.hpp	20;"	kind:d
-trunc_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s16 trunc_to_int() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
-trunc_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s32 trunc_to_int() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
-trunc_to_int	game_engine_stuff/fixed_classes.hpp	/^inline s16 fixed8p8::trunc_to_int() const$/;"	kind:f	class:fixed8p8	signature:() const
-trunc_to_int	game_engine_stuff/fixed_classes.hpp	/^inline s32 fixed24p8::trunc_to_int() const$/;"	kind:f	class:fixed24p8	signature:() const
 type	game_engine_stuff/block_stuff/block_stuff.hpp	/^	block_type type;$/;"	kind:m	class:block_coll_result	access:public
 type	game_engine_stuff/block_stuff/block_stuff.hpp	/^	u16 type;$/;"	kind:m	class:block	access:public
 type	game_engine_stuff/level_stuff/sprite_level_data_stuff.hpp	/^	sprite_type type;$/;"	kind:m	class:sprite_init_param_group	access:public

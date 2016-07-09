@@ -102,8 +102,16 @@ void gfx_manager::copy_bgofs_mirror_to_registers()
 		reg_bgofs[i].x = (s16)bgofs_mirror[i].curr.x.to_int_for_on_screen();
 		reg_bgofs[i].y = (s16)bgofs_mirror[i].curr.y.to_int_for_on_screen();
 		
-		//reg_bgofs[i].x = (s16)bgofs_mirror[i].curr.x.trunc_to_int();
-		//reg_bgofs[i].y = (s16)bgofs_mirror[i].curr.y.trunc_to_int();
+		//reg_bgofs[i].x = ( (s32)bgofs_mirror[i].curr.x
+		//	.to_int_for_on_screen() ) & 0xffff;
+		//reg_bgofs[i].y = ( (s32)bgofs_mirror[i].curr.y
+		//	.to_int_for_on_screen() ) & 0xffff;
+		
+		//reg_bgofs[i].x = (s16)bgofs_mirror[i].curr.x.floor_to_int();
+		//reg_bgofs[i].y = (s16)bgofs_mirror[i].curr.y.floor_to_int();
+		
+		//reg_bgofs[i].x = bgofs_mirror[i].curr.x.floor_to_int() & 0xffff;
+		//reg_bgofs[i].y = bgofs_mirror[i].curr.y.floor_to_int() & 0xffff;
 	}
 }
 

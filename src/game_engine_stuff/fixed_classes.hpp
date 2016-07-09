@@ -50,18 +50,16 @@ public:		// functions
 	// This function does TRUE rounding
 	inline s32 round_to_int() const;
 	
-	// This function does "regular rounding", also known as simply
-	// truncating the fraction bits
-	inline s32 trunc_to_int() const;
+	inline s32 floor_to_int() const;
 	
-	//inline s32 true_round_via_trunc() const;
+	//inline s32 true_round_via_floor() const;
 	//
-	//inline s16 true_round_via_trunc_s16() const;
+	//inline s16 true_round_via_floor_s16() const;
 	
 	inline s32 to_int_for_on_screen() const
 	{
 		return round_to_int();
-		//return trunc_to_int();
+		//return floor_to_int();
 	}
 	
 	inline fixed24p8 with_zero_frac_bits() const;
@@ -143,7 +141,7 @@ inline s32 fixed24p8::round_to_int() const
 	return (s32)( ( data + ( 1 << ( shift - 1 ) ) ) >> shift );
 }
 
-inline s32 fixed24p8::trunc_to_int() const
+inline s32 fixed24p8::floor_to_int() const
 {
 	//if ( data < 0 )
 	//{
@@ -164,27 +162,27 @@ inline s32 fixed24p8::trunc_to_int() const
 	//return ret;
 }
 
-//inline s32 fixed24p8::true_round_via_trunc() const
+//inline s32 fixed24p8::true_round_via_floor() const
 //{
 //	if ( get_frac_bits() >= 0x80 )
 //	{
-//		return trunc_to_int() + 1;
+//		return floor_to_int() + 1;
 //	}
 //	else
 //	{
-//		return trunc_to_int();
+//		return floor_to_int();
 //	}
 //}
 //
-//inline s16 fixed24p8::true_round_via_trunc_s16() const
+//inline s16 fixed24p8::true_round_via_floor_s16() const
 //{
 //	if ( get_frac_bits() >= 0x80 )
 //	{
-//		return (s16)( trunc_to_int() + 1 );
+//		return (s16)( floor_to_int() + 1 );
 //	}
 //	else
 //	{
-//		return (s16)(trunc_to_int());
+//		return (s16)(floor_to_int());
 //	}
 //}
 
@@ -296,7 +294,7 @@ public:		// variables
 	
 public:		// functions
 	inline s16 round_to_int() const;
-	inline s16 trunc_to_int() const;
+	inline s16 floor_to_int() const;
 	inline u8 get_frac_bits() const;
 	
 	inline operator fixed24p8() const;
@@ -328,7 +326,7 @@ inline s16 fixed8p8::round_to_int() const
 	return (s16)( ( data + ( 1 << ( shift - 1 ) ) ) >> shift );
 }
 
-inline s16 fixed8p8::trunc_to_int() const
+inline s16 fixed8p8::floor_to_int() const
 {
 	//if ( data < 0 )
 	//{

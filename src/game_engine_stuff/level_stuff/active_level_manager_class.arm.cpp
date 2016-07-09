@@ -153,6 +153,8 @@ scr_entry active_level_manager::horiz_sublevel_tile_at( u32 tile_x,
 void active_level_manager::correct_bg0_scroll_mirror 
 	( const vec2_u32& sublevel_size_in_blocks_2d )
 {
+	//return;
+	
 	//s32 sublevel_x_coord_tile = gfx_manager::bgofs_mirror[0].curr.x >> 3;
 	//s32 sublevel_y_coord_tile = gfx_manager::bgofs_mirror[0].curr.y >> 3;
 	
@@ -161,17 +163,26 @@ void active_level_manager::correct_bg0_scroll_mirror
 	//s32 sublevel_y_coord_tile = gfx_manager::bgofs_mirror[0].curr.y
 	//	.to_int_for_on_screen() >> 3;
 	s32 sublevel_x_coord_tile = gfx_manager::bgofs_mirror[0].curr.x
-		.trunc_to_int() >> 3;
+		.floor_to_int() >> 3;
 	s32 sublevel_y_coord_tile = gfx_manager::bgofs_mirror[0].curr.y
-		.trunc_to_int() >> 3;
+		.floor_to_int() >> 3;
 	
+	//bool change_frac_bits = false;
+	bool change_frac_bits = true;
 	
 	if ( sublevel_x_coord_tile < 0 )
 	{
 		//gfx_manager::bgofs_mirror[0].curr.x = 0;
-		gfx_manager::bgofs_mirror[0].curr.x = {0};
-		//gfx_manager::bgofs_mirror[0].curr.x.data 
-		//	= gfx_manager::bgofs_mirror[0].curr.x.get_frac_bits();
+		
+		if ( change_frac_bits )
+		{
+			gfx_manager::bgofs_mirror[0].curr.x = {0};
+		}
+		else //if ( !change_frac_bits )
+		{
+			gfx_manager::bgofs_mirror[0].curr.x.data 
+				= gfx_manager::bgofs_mirror[0].curr.x.get_frac_bits();
+		}
 	}
 	
 	else if ( sublevel_x_coord_tile 
@@ -183,13 +194,19 @@ void active_level_manager::correct_bg0_scroll_mirror
 		//	* num_pixels_per_tile_row_or_column )
 		//	- screen_width;
 		
-		gfx_manager::bgofs_mirror[0].curr.x = make_f24p8
-			( ( sublevel_width_in_tiles(sublevel_size_in_blocks_2d)
-			* num_pixels_per_tile_row_or_column ) - screen_width );
-		//gfx_manager::bgofs_mirror[0].curr.x = make_f24p8
-		//	( ( sublevel_width_in_tiles(sublevel_size_in_blocks_2d)
-		//	* num_pixels_per_tile_row_or_column ) - screen_width,
-		//	gfx_manager::bgofs_mirror[0].curr.x.get_frac_bits() );
+		if ( change_frac_bits )
+		{
+			gfx_manager::bgofs_mirror[0].curr.x = make_f24p8
+				( ( sublevel_width_in_tiles(sublevel_size_in_blocks_2d)
+				* num_pixels_per_tile_row_or_column ) - screen_width );
+		}
+		else //if ( !change_frac_bits )
+		{
+			gfx_manager::bgofs_mirror[0].curr.x = make_f24p8
+				( ( sublevel_width_in_tiles(sublevel_size_in_blocks_2d)
+				* num_pixels_per_tile_row_or_column ) - screen_width,
+				gfx_manager::bgofs_mirror[0].curr.x.get_frac_bits() );
+		}
 	}
 	
 	
@@ -197,9 +214,16 @@ void active_level_manager::correct_bg0_scroll_mirror
 	if ( sublevel_y_coord_tile < 0 )
 	{
 		//gfx_manager::bgofs_mirror[0].curr.y = 0;
-		gfx_manager::bgofs_mirror[0].curr.y = {0};
-		//gfx_manager::bgofs_mirror[0].curr.y.data 
-		//	= gfx_manager::bgofs_mirror[0].curr.y.get_frac_bits();
+		
+		if ( change_frac_bits )
+		{
+			gfx_manager::bgofs_mirror[0].curr.y = {0};
+		}
+		else //if ( !change_frac_bits )
+		{
+			gfx_manager::bgofs_mirror[0].curr.y.data 
+				= gfx_manager::bgofs_mirror[0].curr.y.get_frac_bits();
+		}
 	}
 	
 	else if ( sublevel_y_coord_tile 
@@ -211,13 +235,19 @@ void active_level_manager::correct_bg0_scroll_mirror
 		//	* num_pixels_per_tile_row_or_column )
 		//	- screen_height;
 		
-		gfx_manager::bgofs_mirror[0].curr.y = make_f24p8
-			( ( sublevel_height_in_tiles(sublevel_size_in_blocks_2d)
-			* num_pixels_per_tile_row_or_column ) - screen_height );
-		//gfx_manager::bgofs_mirror[0].curr.y = make_f24p8
-		//	( ( sublevel_height_in_tiles(sublevel_size_in_blocks_2d)
-		//	* num_pixels_per_tile_row_or_column ) - screen_height, 
-		//	gfx_manager::bgofs_mirror[0].curr.y.get_frac_bits() );
+		if ( change_frac_bits )
+		{
+			gfx_manager::bgofs_mirror[0].curr.y = make_f24p8
+				( ( sublevel_height_in_tiles(sublevel_size_in_blocks_2d)
+				* num_pixels_per_tile_row_or_column ) - screen_height );
+		}
+		else //if ( !change_frac_bits )
+		{
+			gfx_manager::bgofs_mirror[0].curr.y = make_f24p8
+				( ( sublevel_height_in_tiles(sublevel_size_in_blocks_2d)
+				* num_pixels_per_tile_row_or_column ) - screen_height, 
+				gfx_manager::bgofs_mirror[0].curr.y.get_frac_bits() );
+		}
 	}
 }
 
@@ -235,9 +265,9 @@ void active_level_manager::update_sublevel_in_screenblock_mirror_2d()
 	//s32 sublevel_x_coord_tile = gfx_manager::bgofs_mirror[0].curr.x >> 3;
 	//s32 sublevel_y_coord_tile = gfx_manager::bgofs_mirror[0].curr.y >> 3;
 	s32 sublevel_x_coord_tile = gfx_manager::bgofs_mirror[0].curr.x
-		.trunc_to_int() >> 3;
+		.floor_to_int() >> 3;
 	s32 sublevel_y_coord_tile = gfx_manager::bgofs_mirror[0].curr.y
-		.trunc_to_int() >> 3;
+		.floor_to_int() >> 3;
 	
 	
 	// Create a list of 8x8 tile IDs for each block_type
@@ -273,6 +303,7 @@ void active_level_manager::update_sublevel_in_screenblock_mirror_2d()
 	{
 		for ( u32 j=0; j<screen_height_in_tiles + 1; ++j )
 		{
+			// Why exactly am I using un-named constants here?
 			active_level::bg0_screenblock_mirror_2d.data_at
 				( ( sublevel_x_coord_tile + i ) & 0x1f,
 				( sublevel_y_coord_tile + j ) & 0x1f )
