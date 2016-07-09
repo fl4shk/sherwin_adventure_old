@@ -368,29 +368,33 @@ public:		// functions
 		//	- vec2_f24p8( make_f24p8(camera_pos.x.to_int_for_on_screen()),
 		//	make_f24p8(camera_pos.y.to_int_for_on_screen()) );
 		
-		vec2_f24p8 ret;
+		vec2_f24p8 ret(get_curr_in_level_pos());
 		
 		if ( get_curr_in_level_pos().x != get_prev_in_level_pos().x )
 		{
-			ret.x = get_curr_in_level_pos().x;
+			//ret.x = get_curr_in_level_pos().x;
+			ret.x -= camera_pos.x;
 		}
 		else //if ( get_curr_in_level_pos().x 
 			//== get_prev_in_level_pos().x )
 		{
-			ret.x = make_f24p8(get_curr_in_level_pos().x.floor_to_int());
+			//ret.x = make_f24p8(get_curr_in_level_pos().x.floor_to_int());
+			ret.x -= make_f24p8(camera_pos.x.to_int_for_on_screen());
 		}
 		
 		if ( get_curr_in_level_pos().y != get_prev_in_level_pos().y )
 		{
-			ret.y = get_curr_in_level_pos().y;
+			//ret.y = get_curr_in_level_pos().y;
+			ret.y -= camera_pos.y;
 		}
 		else //if ( get_curr_in_level_pos().y 
 			//== get_prev_in_level_pos().y )
 		{
-			ret.y = make_f24p8(get_curr_in_level_pos().y.floor_to_int());
+			//ret.y = make_f24p8(get_curr_in_level_pos().y.floor_to_int());
+			ret.y -= make_f24p8(camera_pos.y.to_int_for_on_screen());
 		}
 		
-		ret -= camera_pos;
+		//ret -= camera_pos;
 		
 		return ret;
 	}
