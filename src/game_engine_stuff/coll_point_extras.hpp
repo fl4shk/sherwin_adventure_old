@@ -57,31 +57,6 @@
 	list_of_16x16_bottom_side_coll_point_names(macro) \
 
 
-// The reason an X-macro isn't used here is because ctags wouldn't be
-// able to work with it.
-enum arr_index_16x16 
-{
-	#define X(name) \
-		arr_ind_16x16_pt_##name, 
-	
-	// Left side
-	list_of_16x16_left_side_coll_point_names(X)
-	
-	// Right side
-	list_of_16x16_right_side_coll_point_names(X)
-	
-	// Top side
-	list_of_16x16_top_side_coll_point_names(X)
-	
-	// Bottom side
-	list_of_16x16_bottom_side_coll_point_names(X)
-	
-	#undef X
-	
-	// arr_ind_16x16_count is the amount of arr_index_16x16's.  It is
-	// automatically updated by the compiler.
-	arr_ind_16x16_count,
-} __attribute__((_align4));
 
 
 
@@ -122,31 +97,6 @@ enum arr_index_16x16
 	list_of_16x32_bottom_side_coll_point_names(macro) \
 
 
-// The reason an X-macro isn't used here is because ctags wouldn't be
-// able to work with it.
-enum arr_index_16x32 
-{
-	#define X(name) \
-		arr_ind_16x32_pt_##name, 
-	
-	// Left side
-	list_of_16x32_left_side_coll_point_names(X)
-	
-	// Right side
-	list_of_16x32_right_side_coll_point_names(X)
-	
-	// Top side
-	list_of_16x32_top_side_coll_point_names(X)
-	
-	// Bottom side
-	list_of_16x32_bottom_side_coll_point_names(X)
-	
-	#undef X
-	
-	// arr_ind_16x32_count is the amount of arr_index_16x32's.  It is
-	// automatically updated by the compiler.
-	arr_ind_16x32_count,
-} __attribute__((_align4));
 
 
 
@@ -185,31 +135,6 @@ enum arr_index_16x32
 	list_of_32x16_bottom_side_coll_point_names(macro) \
 
 
-// The reason an X-macro isn't used here is because ctags wouldn't be
-// able to work with it.
-enum arr_index_32x16 
-{
-	#define X(name) \
-		arr_ind_32x16_pt_##name, 
-	
-	// Left side
-	list_of_32x16_left_side_coll_point_names(X)
-	
-	// Right side
-	list_of_32x16_right_side_coll_point_names(X)
-	
-	// Top side
-	list_of_32x16_top_side_coll_point_names(X)
-	
-	// Bottom side
-	list_of_32x16_bottom_side_coll_point_names(X)
-	
-	#undef X
-	
-	// arr_ind_32x16_count is the amount of arr_index_32x16's.  It is
-	// automatically updated by the compiler.
-	arr_ind_32x16_count,
-} __attribute__((_align4));
 
 
 

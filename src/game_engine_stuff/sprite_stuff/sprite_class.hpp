@@ -642,30 +642,30 @@ protected:		// functions
 	
 	
 	virtual void block_coll_response_left_16x16
-		( const block_coll_result_group& the_bc_result_group )
+		( const block_coll_result_group_16x16& the_bc_result_group )
 		__attribute__((_iwram_code));
 	virtual void block_coll_response_right_16x16
-		( const block_coll_result_group& the_bc_result_group )
+		( const block_coll_result_group_16x16& the_bc_result_group )
 		__attribute__((_iwram_code));
 	virtual void block_coll_response_top_16x16
-		( const block_coll_result_group& the_bc_result_group )
+		( const block_coll_result_group_16x16& the_bc_result_group )
 		__attribute__((_iwram_code));
 	virtual void block_coll_response_bot_16x16
-		( const block_coll_result_group& the_bc_result_group )
+		( const block_coll_result_group_16x16& the_bc_result_group )
 		__attribute__((_iwram_code));
 	
 	
 	virtual void block_coll_response_left_16x32
-		( const block_coll_result_group& the_bc_result_group )
+		( const block_coll_result_group_16x32& the_bc_result_group )
 		__attribute__((_iwram_code));
 	virtual void block_coll_response_right_16x32
-		( const block_coll_result_group& the_bc_result_group )
+		( const block_coll_result_group_16x32& the_bc_result_group )
 		__attribute__((_iwram_code));
 	virtual void block_coll_response_top_16x32
-		( const block_coll_result_group& the_bc_result_group )
+		( const block_coll_result_group_16x32& the_bc_result_group )
 		__attribute__((_iwram_code));
 	virtual void block_coll_response_bot_16x32
-		( const block_coll_result_group& the_bc_result_group )
+		( const block_coll_result_group_16x32& the_bc_result_group )
 		__attribute__((_iwram_code));
 	
 	

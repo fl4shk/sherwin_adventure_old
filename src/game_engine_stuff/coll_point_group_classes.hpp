@@ -33,6 +33,87 @@ class sprite;
 // between sprites and blocks, or at least coll_boxes and blocks.
 class coll_point_group_base
 {
+public:		// enums
+	// The reason an X-macro isn't used here is because ctags wouldn't be
+	// able to work with it.
+	enum arr_index_16x16 
+	{
+		#define X(name) \
+			arr_ind_16x16_pt_##name, 
+		
+		// Left side
+		list_of_16x16_left_side_coll_point_names(X)
+		
+		// Right side
+		list_of_16x16_right_side_coll_point_names(X)
+		
+		// Top side
+		list_of_16x16_top_side_coll_point_names(X)
+		
+		// Bottom side
+		list_of_16x16_bottom_side_coll_point_names(X)
+		
+		#undef X
+		
+		// arr_ind_16x16_count is the amount of arr_index_16x16's.  It is
+		// automatically updated by the compiler.
+		arr_ind_16x16_count,
+	} __attribute__((_align4));
+	
+	
+	// The reason an X-macro isn't used here is because ctags wouldn't be
+	// able to work with it.
+	enum arr_index_16x32 
+	{
+		#define X(name) \
+			arr_ind_16x32_pt_##name, 
+		
+		// Left side
+		list_of_16x32_left_side_coll_point_names(X)
+		
+		// Right side
+		list_of_16x32_right_side_coll_point_names(X)
+		
+		// Top side
+		list_of_16x32_top_side_coll_point_names(X)
+		
+		// Bottom side
+		list_of_16x32_bottom_side_coll_point_names(X)
+		
+		#undef X
+		
+		// arr_ind_16x32_count is the amount of arr_index_16x32's.  It is
+		// automatically updated by the compiler.
+		arr_ind_16x32_count,
+	} __attribute__((_align4));
+	
+	
+	// The reason an X-macro isn't used here is because ctags wouldn't be
+	// able to work with it.
+	enum arr_index_32x16 
+	{
+		#define X(name) \
+			arr_ind_32x16_pt_##name, 
+		
+		// Left side
+		list_of_32x16_left_side_coll_point_names(X)
+		
+		// Right side
+		list_of_32x16_right_side_coll_point_names(X)
+		
+		// Top side
+		list_of_32x16_top_side_coll_point_names(X)
+		
+		// Bottom side
+		list_of_32x16_bottom_side_coll_point_names(X)
+		
+		#undef X
+		
+		// arr_ind_32x16_count is the amount of arr_index_32x16's.  It is
+		// automatically updated by the compiler.
+		arr_ind_32x16_count,
+	} __attribute__((_align4));
+	
 public:		// variables
 	// The maximum number of collision points, 32, is definitely more than
 	// is necessary, but thus far there's not that much need to optimize
@@ -79,7 +160,7 @@ public:		// functions
 		{ return the_array[arr_ind_16x16_pt_bm]; }
 	inline vec2_f24p8& get_pt_br()
 		{ return the_array[arr_ind_16x16_pt_br]; }
-};
+} __attribute__((_align4));
 
 
 class coll_point_group_16x32 : public coll_point_group_base
@@ -115,7 +196,7 @@ public:		// functions
 		{ return the_array[arr_ind_16x32_pt_bm]; }
 	inline vec2_f24p8& get_pt_br()
 		{ return the_array[arr_ind_16x32_pt_br]; }
-};
+} __attribute__((_align4));
 
 //void generate_coll_point_group_16x16( const sprite& the_sprite, 
 //	coll_point_group& the_pt_group ) __attribute__((_iwram_code));

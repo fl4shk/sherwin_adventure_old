@@ -23,6 +23,7 @@
 #include "block_stuff/block_stuff.hpp"
 
 #include "coll_point_extras.hpp"
+#include "coll_point_group_classes.hpp"
 
 class block_coll_result
 {
@@ -38,17 +39,169 @@ public:		// functions
 
 
 
-class block_coll_result_group
+class block_coll_result_group_base
 {
 public:		// variables
-	static const u32 max_num_block_coll_results = 9;
+	static const u32 max_num_block_coll_results 
+		= coll_point_group_base::max_num_coll_points;
 	block_coll_result the_array[max_num_block_coll_results];
 	
 public:		// functions
+	inline block_coll_result_group_base()
+	{
+		memfill32( the_array, 0, sizeof(the_array) / sizeof(u32) );
+	}
+	inline block_coll_result_group_base
+		( const block_coll_result_group_base& to_copy )
+	{
+		*this = to_copy;
+	}
+	
+	inline block_coll_result_group_base& operator = 
+		( const block_coll_result_group_base& to_copy )
+	{
+		memcpy32( the_array, to_copy.the_array, sizeof(the_array) 
+			/ sizeof(u32) );
+		
+		return *this;
+	}
+	
+} __attribute__((_align4));
+
+class block_coll_result_group_16x16 : public block_coll_result_group_base
+{
+public:		// functions
+	block_coll_result_group_16x16
+		( const coll_point_group_16x16& the_pt_group )
+		__attribute__((_iwram_code));
+	
+	inline block_coll_result_group_16x16
+		( const block_coll_result_group_base& to_copy )
+	{
+		*this = to_copy;
+	}
+	
+	inline block_coll_result& get_bcr_lt()
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_lt]; }
+	inline block_coll_result& get_bcr_lb()
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_lb]; }
+	
+	inline block_coll_result& get_bcr_rt()
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_rt]; }
+	inline block_coll_result& get_bcr_rb()
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_rb]; }
+	
+	inline block_coll_result& get_bcr_tl()
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_tl]; }
+	inline block_coll_result& get_bcr_tm()
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_tm]; }
+	inline block_coll_result& get_bcr_tr()
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_tr]; }
+	
+	inline block_coll_result& get_bcr_bl()
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_bl]; }
+	inline block_coll_result& get_bcr_bm()
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_bm]; }
+	inline block_coll_result& get_bcr_br()
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_br]; }
+	
+	
+	inline const block_coll_result& get_bcr_lt() const
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_lt]; }
+	inline const block_coll_result& get_bcr_lb() const
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_lb]; }
+	
+	inline const block_coll_result& get_bcr_rt() const
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_rt]; }
+	inline const block_coll_result& get_bcr_rb() const
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_rb]; }
+	
+	inline const block_coll_result& get_bcr_tl() const
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_tl]; }
+	inline const block_coll_result& get_bcr_tm() const
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_tm]; }
+	inline const block_coll_result& get_bcr_tr() const
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_tr]; }
+	
+	inline const block_coll_result& get_bcr_bl() const
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_bl]; }
+	inline const block_coll_result& get_bcr_bm() const
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_bm]; }
+	inline const block_coll_result& get_bcr_br() const
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_br]; }
+} __attribute__((_align4));
+
+
+class block_coll_result_group_16x32 : public block_coll_result_group_base
+{
+public:		// functions
+	block_coll_result_group_16x32
+		( const coll_point_group_16x32& the_pt_group )
+		__attribute__((_iwram_code));
+	
+	inline block_coll_result_group_16x32
+		( const block_coll_result_group_base& to_copy )
+	{
+		*this = to_copy;
+	}
+	
+	inline block_coll_result& get_bcr_lt()
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_lt]; }
+	inline block_coll_result& get_bcr_lm()
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_lm]; }
+	inline block_coll_result& get_bcr_lb()
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_lb]; }
+	
+	inline block_coll_result& get_bcr_rt()
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_rt]; }
+	inline block_coll_result& get_bcr_rm()
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_rm]; }
+	inline block_coll_result& get_bcr_rb()
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_rb]; }
+	
+	inline block_coll_result& get_bcr_tl()
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_tl]; }
+	inline block_coll_result& get_bcr_tm()
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_tm]; }
+	inline block_coll_result& get_bcr_tr()
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_tr]; }
+	
+	inline block_coll_result& get_bcr_bl()
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_bl]; }
+	inline block_coll_result& get_bcr_bm()
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_bm]; }
+	inline block_coll_result& get_bcr_br()
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_br]; }
 	
 	
 	
+	inline const block_coll_result& get_bcr_lt() const
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_lt]; }
+	inline const block_coll_result& get_bcr_lm() const
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_lm]; }
+	inline const block_coll_result& get_bcr_lb() const
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_lb]; }
 	
+	inline const block_coll_result& get_bcr_rt() const
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_rt]; }
+	inline const block_coll_result& get_bcr_rm() const
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_rm]; }
+	inline const block_coll_result& get_bcr_rb() const
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_rb]; }
+	
+	inline const block_coll_result& get_bcr_tl() const
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_tl]; }
+	inline const block_coll_result& get_bcr_tm() const
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_tm]; }
+	inline const block_coll_result& get_bcr_tr() const
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_tr]; }
+	
+	inline const block_coll_result& get_bcr_bl() const
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_bl]; }
+	inline const block_coll_result& get_bcr_bm() const
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_bm]; }
+	inline const block_coll_result& get_bcr_br() const
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_br]; }
 } __attribute__((_align4));
 
 
