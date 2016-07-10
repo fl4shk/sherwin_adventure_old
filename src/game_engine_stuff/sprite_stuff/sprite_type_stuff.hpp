@@ -31,7 +31,7 @@
 #include "../../gba_specific_stuff/oam_entry_classes.hpp"
 
 #include "../coll_box_class.hpp"
-#include "../coll_point_group_class.hpp"
+#include "../coll_point_group_classes.hpp"
 
 #include "../debug_vars.hpp"
 

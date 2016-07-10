@@ -24,7 +24,7 @@
 
 #include "../../gfx/sherwin_gfx.h"
 
-#include "../block_coll_result_group_class.hpp"
+#include "../block_coll_result_group_classes.hpp"
 
 class sprite_allocator;
 
@@ -569,7 +569,7 @@ protected:		// functions
 	// Here are a lot of block collision functions.  It is recommended that
 	// they be stored in IWRAM for as much speed as possible.
 	void get_basic_block_coll_results_16x16
-		( coll_point_group& the_pt_group, 
+		( coll_point_group_16x16& the_pt_group, 
 		block_coll_result& lt_coll_result,
 		block_coll_result& lb_coll_result,
 		block_coll_result& tl_coll_result,
@@ -582,7 +582,7 @@ protected:		// functions
 		block_coll_result& br_coll_result ) __attribute__((_iwram_code));
 	
 	void get_basic_block_coll_results_16x32
-		( coll_point_group& the_pt_group, 
+		( coll_point_group_16x32& the_pt_group, 
 		block_coll_result& lt_coll_result, 
 		block_coll_result& lm_coll_result,
 		block_coll_result& lb_coll_result,
@@ -613,7 +613,7 @@ protected:		// functions
 		const block_coll_result& bm_coll_result, 
 		const block_coll_result& br_coll_result );
 	virtual block_type slope_block_coll_response_bot_16x16_old
-		( coll_point_group& the_pt_group,
+		( coll_point_group_16x16& the_pt_group,
 		block_coll_result& bl_coll_result,
 		block_coll_result& bm_coll_result,
 		block_coll_result& br_coll_result, bool hitting_tltr=false );
@@ -635,7 +635,7 @@ protected:		// functions
 		const block_coll_result& bm_coll_result, 
 		const block_coll_result& br_coll_result );
 	virtual block_type slope_block_coll_response_bot_16x32_old
-		( coll_point_group& the_pt_group,
+		( coll_point_group_16x32& the_pt_group,
 		block_coll_result& bl_coll_result,
 		block_coll_result& bm_coll_result,
 		block_coll_result& br_coll_result, bool hitting_tltr=false );

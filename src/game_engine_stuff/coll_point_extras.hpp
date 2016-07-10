@@ -25,10 +25,10 @@
 // Collision points that share a side
 #define list_of_16x16_left_side_coll_point_names(macro) \
 	macro(lt) macro(lb)
-#define list_of_16x16_top_side_coll_point_names(macro) \
-	macro(tl) macro(tm) macro(tr)
 #define list_of_16x16_right_side_coll_point_names(macro) \
 	macro(rt) macro(rb)
+#define list_of_16x16_top_side_coll_point_names(macro) \
+	macro(tl) macro(tm) macro(tr)
 #define list_of_16x16_bottom_side_coll_point_names(macro) \
 	macro(bl) macro(bm) macro(br)
 
@@ -67,11 +67,11 @@ enum arr_index_16x16
 	// Left side
 	list_of_16x16_left_side_coll_point_names(X)
 	
-	// Top side
-	list_of_16x16_top_side_coll_point_names(X)
-	
 	// Right side
 	list_of_16x16_right_side_coll_point_names(X)
+	
+	// Top side
+	list_of_16x16_top_side_coll_point_names(X)
 	
 	// Bottom side
 	list_of_16x16_bottom_side_coll_point_names(X)
@@ -88,10 +88,10 @@ enum arr_index_16x16
 // Collision points that share a side
 #define list_of_16x32_left_side_coll_point_names(macro) \
 	macro(lt) macro(lm) macro(lb)
-#define list_of_16x32_top_side_coll_point_names(macro) \
-	macro(tl) macro(tm) macro(tr)
 #define list_of_16x32_right_side_coll_point_names(macro) \
 	macro(rt) macro(rm) macro(rb)
+#define list_of_16x32_top_side_coll_point_names(macro) \
+	macro(tl) macro(tm) macro(tr)
 #define list_of_16x32_bottom_side_coll_point_names(macro) \
 	macro(bl) macro(bm) macro(br)
 
@@ -117,8 +117,8 @@ enum arr_index_16x16
 // All the collision points
 #define list_of_16x32_coll_point_names(macro) \
 	list_of_16x32_left_side_coll_point_names(macro) \
-	list_of_16x32_top_side_coll_point_names(macro) \
 	list_of_16x32_right_side_coll_point_names(macro) \
+	list_of_16x32_top_side_coll_point_names(macro) \
 	list_of_16x32_bottom_side_coll_point_names(macro) \
 
 
@@ -132,11 +132,11 @@ enum arr_index_16x32
 	// Left side
 	list_of_16x32_left_side_coll_point_names(X)
 	
-	// Top side
-	list_of_16x32_top_side_coll_point_names(X)
-	
 	// Right side
 	list_of_16x32_right_side_coll_point_names(X)
+	
+	// Top side
+	list_of_16x32_top_side_coll_point_names(X)
 	
 	// Bottom side
 	list_of_16x32_bottom_side_coll_point_names(X)
@@ -153,10 +153,10 @@ enum arr_index_16x32
 // Collision points that share a side
 #define list_of_32x16_left_side_coll_point_names(macro) \
 	macro(lt) macro(lb)
-#define list_of_32x16_top_side_coll_point_names(macro) \
-	macro(tl) macro(tm) macro(tr)
 #define list_of_32x16_right_side_coll_point_names(macro) \
 	macro(rt) macro(rb)
+#define list_of_32x16_top_side_coll_point_names(macro) \
+	macro(tl) macro(tm) macro(tr)
 #define list_of_32x16_bottom_side_coll_point_names(macro) \
 	macro(bl) macro(bm) macro(br)
 
@@ -180,8 +180,8 @@ enum arr_index_16x32
 // All the collision points
 #define list_of_32x16_coll_point_names(macro) \
 	list_of_32x16_left_side_coll_point_names(macro) \
-	list_of_32x16_top_side_coll_point_names(macro) \
 	list_of_32x16_right_side_coll_point_names(macro) \
+	list_of_32x16_top_side_coll_point_names(macro) \
 	list_of_32x16_bottom_side_coll_point_names(macro) \
 
 
@@ -195,11 +195,11 @@ enum arr_index_32x16
 	// Left side
 	list_of_32x16_left_side_coll_point_names(X)
 	
-	// Top side
-	list_of_32x16_top_side_coll_point_names(X)
-	
 	// Right side
 	list_of_32x16_right_side_coll_point_names(X)
+	
+	// Top side
+	list_of_32x16_top_side_coll_point_names(X)
 	
 	// Bottom side
 	list_of_32x16_bottom_side_coll_point_names(X)

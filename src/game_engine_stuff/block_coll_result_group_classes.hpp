@@ -16,12 +16,13 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef block_coll_result_group_class_hpp
-#define block_coll_result_group_class_hpp
+#ifndef block_coll_result_group_classes_hpp
+#define block_coll_result_group_classes_hpp
 
 
 #include "block_stuff/block_stuff.hpp"
 
+#include "coll_point_extras.hpp"
 
 class block_coll_result
 {
@@ -53,4 +54,4 @@ public:		// functions
 
 
 
-#endif		// block_coll_result_group_class_hpp
+#endif		// block_coll_result_group_classes_hpp
