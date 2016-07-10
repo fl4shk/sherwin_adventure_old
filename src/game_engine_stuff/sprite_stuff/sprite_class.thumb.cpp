@@ -577,7 +577,7 @@ const u32 sprite::get_curr_relative_tile_slot()
 
 
 
-// This is a dummy function that child classes implement.
+// This used to be a dummy function that child classes would implement.
 void sprite::block_collision_stuff()
 {
 	//sprite_stuff_array[the_sprite_type]->block_collision_stuff(*this);
@@ -616,8 +616,8 @@ void sprite::get_basic_block_coll_results_16x16
 		name##_coll_result.coord \
 			= active_level::get_block_coord_of_point \
 			(the_pt_group.get_pt_##name##_16x16()); \
-		name##_coll_result.type \
-			= active_level::get_block_type_at_coord \
+		name##_coll_result.the_block \
+			= &active_level::the_block_data_at_coord \
 			(name##_coll_result.coord);
 	list_of_16x16_coll_point_names(X)
 	#undef X
@@ -636,8 +636,8 @@ void sprite::get_basic_block_coll_results_16x32
 		name##_coll_result.coord \
 			= active_level::get_block_coord_of_point \
 			(the_pt_group.get_pt_##name##_16x32()); \
-		name##_coll_result.type \
-			= active_level::get_block_type_at_coord \
+		name##_coll_result.the_block \
+			= &active_level::the_block_data_at_coord \
 			(name##_coll_result.coord);
 	list_of_16x32_coll_point_names(X)
 	#undef X
@@ -647,7 +647,7 @@ void sprite::get_basic_block_coll_results_16x32
 
 
 // 16x16 sprites
-void sprite::block_coll_response_left_16x16
+void sprite::block_coll_response_left_16x16_old
 	( const block_coll_result& lt_coll_result,
 	const block_coll_result& lb_coll_result )
 {
@@ -663,7 +663,7 @@ void sprite::block_coll_response_left_16x16
 		vel.x = {0x00};
 	}
 }
-void sprite::block_coll_response_top_16x16
+void sprite::block_coll_response_top_16x16_old
 	( const block_coll_result& tl_coll_result,
 	const block_coll_result& tm_coll_result,
 	const block_coll_result& tr_coll_result )
@@ -681,7 +681,7 @@ void sprite::block_coll_response_top_16x16
 	is_jumping = false;
 }
 
-void sprite::block_coll_response_right_16x16
+void sprite::block_coll_response_right_16x16_old
 	( const block_coll_result& rt_coll_result,
 	const block_coll_result& rb_coll_result )
 {
@@ -699,7 +699,7 @@ void sprite::block_coll_response_right_16x16
 	}
 }
 
-void sprite::non_slope_block_coll_response_bot_16x16
+void sprite::non_slope_block_coll_response_bot_16x16_old
 	( const block_coll_result& bl_coll_result,
 	const block_coll_result& bm_coll_result, 
 	const block_coll_result& br_coll_result )
@@ -720,7 +720,7 @@ void sprite::non_slope_block_coll_response_bot_16x16
 		is_jumping = false;
 	}
 }
-//block_type sprite::slope_block_coll_response_bot_16x16
+//block_type sprite::slope_block_coll_response_bot_16x16_old
 //	( coll_point_group& the_pt_group,
 //	block_coll_result& bm_coll_result,
 //	block_coll_result& bl_coll_result,
@@ -729,7 +729,7 @@ void sprite::non_slope_block_coll_response_bot_16x16
 //	return bt_air;
 //}
 
-block_type sprite::slope_block_coll_response_bot_16x16
+block_type sprite::slope_block_coll_response_bot_16x16_old
 	( coll_point_group& the_pt_group, 
 	block_coll_result& bl_coll_result, block_coll_result& bm_coll_result,
 	block_coll_result& br_coll_result, bool hitting_tltr )
@@ -794,7 +794,8 @@ block_type sprite::slope_block_coll_response_bot_16x16
 		{
 		}
 		#define X(name) \
-		else if ( the_coll_result.type == bt_grass_slope_##name ) \
+		else if ( the_coll_result.the_block->type \
+			== bt_grass_slope_##name ) \
 		{ \
 			/* show_debug_str_s32("norm"); */ \
 			height_mask_value = height_mask_##name \
@@ -921,21 +922,21 @@ block_type sprite::slope_block_coll_response_bot_16x16
 		respond_to_collision( the_pt_group, bm_coll_result,
 			pt_bm_height_mask_value, pt_bm_block_rel_round );
 		
-		return bm_coll_result.type;
+		return bm_coll_result.the_block->get_block_type();
 	}
 	else if ( the_greatest_height_mask_value == pt_bl_height_mask_value )
 	{
 		respond_to_collision( the_pt_group, bl_coll_result,
 			pt_bl_height_mask_value, pt_bl_block_rel_round );
 		
-		return bl_coll_result.type;
+		return bl_coll_result.the_block->get_block_type();
 	}
 	else if ( the_greatest_height_mask_value == pt_br_height_mask_value )
 	{
 		respond_to_collision( the_pt_group, br_coll_result,
 			pt_br_height_mask_value, pt_br_block_rel_round );
 		
-		return br_coll_result.type;
+		return br_coll_result.the_block->get_block_type();
 	}
 	
 	
@@ -1009,7 +1010,7 @@ block_type sprite::slope_block_coll_response_bot_16x16
 
 
 // 16x32 sprites
-void sprite::block_coll_response_left_16x32
+void sprite::block_coll_response_left_16x32_old
 	( const block_coll_result& lt_coll_result,
 	const block_coll_result& lm_coll_result, 
 	const block_coll_result& lb_coll_result )
@@ -1029,17 +1030,17 @@ void sprite::block_coll_response_left_16x32
 		vel.x = {0x00};
 	}
 }
-void sprite::block_coll_response_top_16x32
+void sprite::block_coll_response_top_16x32_old
 	( const block_coll_result& tl_coll_result,
 	const block_coll_result& tm_coll_result, 
 	const block_coll_result& tr_coll_result )
 {
 	//show_debug_str_s32("bkto");
 	//show_debug_str_s32("    ");
-	block_coll_response_top_16x16( tl_coll_result, tm_coll_result, 
+	block_coll_response_top_16x16_old( tl_coll_result, tm_coll_result, 
 		tr_coll_result );
 }
-void sprite::block_coll_response_right_16x32
+void sprite::block_coll_response_right_16x32_old
 	( const block_coll_result& rt_coll_result,
 	const block_coll_result& rm_coll_result, 
 	const block_coll_result& rb_coll_result )
@@ -1059,17 +1060,17 @@ void sprite::block_coll_response_right_16x32
 		vel.x = {0x00};
 	}
 }
-void sprite::non_slope_block_coll_response_bot_16x32
+void sprite::non_slope_block_coll_response_bot_16x32_old
 	( const block_coll_result& bl_coll_result,
 	const block_coll_result& bm_coll_result, 
 	const block_coll_result& br_coll_result )
 {
 	//show_debug_str_s32("bkbo");
 	//show_debug_str_s32("    ");
-	non_slope_block_coll_response_bot_16x16( bl_coll_result, 
+	non_slope_block_coll_response_bot_16x16_old( bl_coll_result, 
 		bm_coll_result, br_coll_result );
 }
-block_type sprite::slope_block_coll_response_bot_16x32
+block_type sprite::slope_block_coll_response_bot_16x32_old
 	( coll_point_group& the_pt_group, 
 	block_coll_result& bl_coll_result, block_coll_result& bm_coll_result,
 	block_coll_result& br_coll_result, bool hitting_tltr )
@@ -1128,7 +1129,8 @@ block_type sprite::slope_block_coll_response_bot_16x32
 		{
 		}
 		#define X(name) \
-		else if ( the_coll_result.type == bt_grass_slope_##name ) \
+		else if ( the_coll_result.the_block->type \
+			== bt_grass_slope_##name ) \
 		{ \
 			/* show_debug_str_s32("norm"); */ \
 			height_mask_value = height_mask_##name \
@@ -1304,21 +1306,21 @@ block_type sprite::slope_block_coll_response_bot_16x32
 		respond_to_collision( the_pt_group, bm_coll_result,
 			pt_bm_height_mask_value, pt_bm_block_rel_round );
 		
-		return bm_coll_result.type;
+		return bm_coll_result.the_block->get_block_type();
 	}
 	else if ( the_greatest_height_mask_value == pt_bl_height_mask_value )
 	{
 		respond_to_collision( the_pt_group, bl_coll_result,
 			pt_bl_height_mask_value, pt_bl_block_rel_round );
 		
-		return bl_coll_result.type;
+		return bl_coll_result.the_block->get_block_type();
 	}
 	else if ( the_greatest_height_mask_value == pt_br_height_mask_value )
 	{
 		respond_to_collision( the_pt_group, br_coll_result,
 			pt_br_height_mask_value, pt_br_block_rel_round );
 		
-		return br_coll_result.type;
+		return br_coll_result.the_block->get_block_type();
 	}
 	
 	
@@ -1391,6 +1393,143 @@ block_type sprite::slope_block_coll_response_bot_16x32
 }
 
 
+void sprite::block_coll_response_left_16x16
+	( const block_coll_result_group& the_bc_result_group )
+{
+	////in_level_pos.x = make_f24p8( ( lt_coll_result.coord.x + 1 ) * 16 ) 
+	////	- cb_pos_offset.x;
+	//set_curr_in_level_pos_x( make_f24p8( ( lt_coll_result.coord.x + 1 ) 
+	//	* 16 ) - cb_pos_offset.x );
+	
+	// Don't let the sprite speed up while in the air and horizontally
+	// colliding with a block.
+	if ( !get_curr_on_ground() && vel.x < (fixed24p8){0x00} )
+	{
+		vel.x = {0x00};
+	}
+}
+void sprite::block_coll_response_top_16x16
+	( const block_coll_result_group& the_bc_result_group )
+{
+	////in_level_pos.y = make_f24p8( ( tl_coll_result.coord.y + 1 ) * 16 ) 
+	////	- cb_pos_offset.y;
+	//set_curr_in_level_pos_y( make_f24p8( ( tl_coll_result.coord.y + 1 ) 
+	//	* 16 ) - cb_pos_offset.y );
+	
+	if ( vel.y < (fixed24p8){0x00} )
+	{
+		vel.y = {0x00};
+	}
+	//jump_hold_timer = 0;
+	is_jumping = false;
+}
+
+void sprite::block_coll_response_right_16x16
+	( const block_coll_result_group& the_bc_result_group )
+{
+	////in_level_pos.x = make_f24p8( rt_coll_result.coord.x * 16 ) 
+	////	- the_coll_box.size.x - cb_pos_offset.x;
+	////	//- make_f24p8(get_shape_size_as_vec2().x);
+	//set_curr_in_level_pos_x ( make_f24p8( rt_coll_result.coord.x * 16 ) 
+	//	- the_coll_box.size.x - cb_pos_offset.x );
+	
+	// Don't let the sprite speed up while in the air and horizontally
+	// colliding with a block.
+	if ( !get_curr_on_ground() && vel.x > (fixed24p8){0x00} )
+	{
+		vel.x = {0x00};
+	}
+}
+
+void sprite::block_coll_response_bot_16x16
+	( const block_coll_result_group& the_bc_result_group )
+{
+	if ( vel.y >= (fixed24p8){0} )
+	{
+		////in_level_pos.y = make_f24p8( bl_coll_result.coord.y * 16 ) 
+		////	//- ( the_coll_box.size.y +
+		////	//cb_pos_offset.y );
+		////	- make_f24p8(get_shape_size_as_vec2().y);
+		//set_curr_in_level_pos_y ( make_f24p8( bl_coll_result.coord.y 
+		//	* 16 ) - make_f24p8(get_shape_size_as_vec2().y) );
+		
+		vel.y = {0x00};
+		//get_curr_on_ground() = true;
+		set_curr_on_ground(true);
+		//jump_hold_timer = 0;
+		is_jumping = false;
+	}
+}
+
+
+// 16x32 sprites
+void sprite::block_coll_response_left_16x32
+	( const block_coll_result_group& the_bc_result_group )
+{
+	////show_debug_str_s32("bkle");
+	////show_debug_str_s32("    ");
+	////in_level_pos.x = make_f24p8( ( lt_coll_result.coord.x + 1 ) * 16 ) 
+	////	- cb_pos_offset.x;
+	//set_curr_in_level_pos_x( make_f24p8( ( lt_coll_result.coord.x + 1 ) 
+	//	* 16 ) - cb_pos_offset.x );
+	
+	
+	// Don't let the sprite speed up while in the air and horizontally
+	// colliding with a block.
+	if ( !get_curr_on_ground() && vel.x < (fixed24p8){0x00} )
+	{
+		vel.x = {0x00};
+	}
+}
+void sprite::block_coll_response_top_16x32
+	( const block_coll_result_group& the_bc_result_group )
+{
+	//show_debug_str_s32("bkto");
+	//show_debug_str_s32("    ");
+	//block_coll_response_top_16x16( tl_coll_result, tm_coll_result, 
+	//	tr_coll_result );
+	block_coll_response_top_16x16(the_bc_result_group);
+}
+void sprite::block_coll_response_right_16x32
+	( const block_coll_result_group& the_bc_result_group )
+{
+	////show_debug_str_s32("bkri");
+	////show_debug_str_s32("    ");
+	////in_level_pos.x = make_f24p8( rt_coll_result.coord.x * 16 ) 
+	////	- the_coll_box.size.x - cb_pos_offset.x;
+	////	//- get_shape_size_as_vec2().x );
+	//set_curr_in_level_pos_x( make_f24p8( rt_coll_result.coord.x * 16 ) 
+	//	- the_coll_box.size.x - cb_pos_offset.x );
+	
+	// Don't let the sprite speed up while in the air and horizontally
+	// colliding with a block.
+	if ( !get_curr_on_ground() && vel.x > (fixed24p8){0x00} )
+	{
+		vel.x = {0x00};
+	}
+}
+void sprite::block_coll_response_bot_16x32
+	( const block_coll_result_group& the_bc_result_group )
+{
+	//show_debug_str_s32("bkbo");
+	//show_debug_str_s32("    ");
+	if ( vel.y >= (fixed24p8){0} )
+	{
+		////in_level_pos.y = make_f24p8( bl_coll_result.coord.y * 16 ) 
+		////	//- ( the_coll_box.size.y +
+		////	//cb_pos_offset.y );
+		////	- make_f24p8(get_shape_size_as_vec2().y);
+		//set_curr_in_level_pos_y ( make_f24p8( bl_coll_result.coord.y 
+		//	* 16 ) - make_f24p8(get_shape_size_as_vec2().y) );
+		
+		vel.y = {0x00};
+		//get_curr_on_ground() = true;
+		set_curr_on_ground(true);
+		//jump_hold_timer = 0;
+		is_jumping = false;
+	}
+}
+
 void sprite::apply_gravity()
 {
 	vel.y += grav_acc;
@@ -1418,7 +1557,7 @@ void sprite::sprite_interaction_reponse( sprite& the_other_sprite,
 
 
 
-void sprite::block_collision_stuff_16x16()
+void sprite::block_collision_stuff_16x16_old()
 {
 	// The collision points
 	coll_point_group the_pt_group;
@@ -1440,51 +1579,53 @@ void sprite::block_collision_stuff_16x16()
 	// Lambda functions for non-slope block collision response
 	auto any_left_response = [&]() -> void
 	{
-		block_coll_response_left_16x16( lt_coll_result, lb_coll_result );
+		block_coll_response_left_16x16_old( lt_coll_result, 
+			lb_coll_result );
 	};
 	
 	auto any_top_response = [&]() -> void
 	{
-		block_coll_response_top_16x16( tl_coll_result, tm_coll_result, 
+		block_coll_response_top_16x16_old( tl_coll_result, tm_coll_result, 
 			tr_coll_result );
 	};
 	
 	auto any_right_response = [&]() -> void
 	{
-		block_coll_response_right_16x16( rt_coll_result, rb_coll_result );
+		block_coll_response_right_16x16_old( rt_coll_result, 
+			rb_coll_result );
 	};
 	
 	auto any_non_slope_bot_response = [&]() -> void
 	{
-		non_slope_block_coll_response_bot_16x16( bl_coll_result, 
+		non_slope_block_coll_response_bot_16x16_old( bl_coll_result, 
 			bm_coll_result, br_coll_result );
 	};
 	
 	//show_debug_str_s32( get_curr_on_ground() ? "ongn" : "offg" );
 	
 	// When not dealing with slopes, this method is used.
-	if ( !bt_is_left_slope(bl_coll_result.type)
-		&& !bt_is_slope(bm_coll_result.type)
-		&& !bt_is_right_slope(br_coll_result.type)
-		&& !bt_is_left_slope(lb_coll_result.type)
-		&& !bt_is_right_slope(rb_coll_result.type) )
+	if ( !bt_is_left_slope(bl_coll_result.the_block->get_block_type())
+		&& !bt_is_slope(bm_coll_result.the_block->get_block_type())
+		&& !bt_is_right_slope(br_coll_result.the_block->get_block_type())
+		&& !bt_is_left_slope(lb_coll_result.the_block->get_block_type())
+		&& !bt_is_right_slope(rb_coll_result.the_block->get_block_type()) )
 	{
 		//show_debug_str_s32("nslp");
 		//show_debug_str_s32("    ");
 		
-		if ( tl_coll_result.type != bt_air 
-			|| tr_coll_result.type != bt_air )
+		if ( tl_coll_result.the_block->type != bt_air 
+			|| tr_coll_result.the_block->type != bt_air )
 		{
 			//show_debug_str_s32("tltr");
 			//show_debug_str_s32("    ");
 			
-			if ( lt_coll_result.type != bt_air )
+			if ( lt_coll_result.the_block->type != bt_air )
 			{
 				//show_debug_str_s32("left");
 				//show_debug_str_s32("1t  ");
 				any_left_response();
 			}
-			if ( rt_coll_result.type != bt_air )
+			if ( rt_coll_result.the_block->type != bt_air )
 			{
 				//show_debug_str_s32("righ");
 				//show_debug_str_s32("1t  ");
@@ -1495,21 +1636,23 @@ void sprite::block_collision_stuff_16x16()
 			
 			
 		}
-		else if ( bl_coll_result.type != bt_air
-			|| br_coll_result.type != bt_air )
+		else if ( bl_coll_result.the_block->type != bt_air
+			|| br_coll_result.the_block->type != bt_air )
 		{
 			//show_debug_str_s32("blbr");
 			//show_debug_str_s32("    ");
 			
 			any_non_slope_bot_response();
 			
-			if ( bt_is_neither_air_nor_slope(lt_coll_result.type) )
+			if ( bt_is_neither_air_nor_slope(lt_coll_result.the_block
+				->get_block_type()) )
 			{
 				//show_debug_str_s32("left");
 				//show_debug_str_s32("1b  ");
 				any_left_response();
 			}
-			if ( bt_is_neither_air_nor_slope(rt_coll_result.type) )
+			if ( bt_is_neither_air_nor_slope(rt_coll_result.the_block
+				->get_block_type()) )
 			{
 				//show_debug_str_s32("righ");
 				//show_debug_str_s32("1b  ");
@@ -1524,14 +1667,14 @@ void sprite::block_collision_stuff_16x16()
 			//get_curr_on_ground() = false;
 			set_curr_on_ground(false);
 			
-			if ( lt_coll_result.type != bt_air 
-				|| lb_coll_result.type != bt_air )
+			if ( lt_coll_result.the_block->type != bt_air 
+				|| lb_coll_result.the_block->type != bt_air )
 			{
 				any_left_response();
 			}
 			
-			else if ( rt_coll_result.type != bt_air 
-				|| rb_coll_result.type != bt_air )
+			else if ( rt_coll_result.the_block->type != bt_air 
+				|| rb_coll_result.the_block->type != bt_air )
 			{
 				any_right_response();
 			}
@@ -1545,8 +1688,11 @@ void sprite::block_collision_stuff_16x16()
 		//show_debug_str_s32("slop");
 		//show_debug_str_s32("    ");
 		
-		if ( bt_is_neither_air_nor_slope(tl_coll_result.type) 
-			|| bt_is_neither_air_nor_slope(tr_coll_result.type) )
+		if (
+		bt_is_neither_air_nor_slope(tl_coll_result.the_block
+			->get_block_type()) 
+			|| bt_is_neither_air_nor_slope(tr_coll_result.the_block
+			->get_block_type()) )
 		{
 			//show_debug_str_s32("tltr");
 			//show_debug_str_s32("    ");
@@ -1566,8 +1712,8 @@ void sprite::block_collision_stuff_16x16()
 			}
 			
 			// Don't let the_sprite move through walls
-			if ( lt_coll_result.type != bt_air 
-				|| lb_coll_result.type != bt_air )
+			if ( lt_coll_result.the_block->type != bt_air 
+				|| lb_coll_result.the_block->type != bt_air )
 			{
 				if ( vel.x < (fixed24p8){0} )
 				{
@@ -1577,8 +1723,8 @@ void sprite::block_collision_stuff_16x16()
 						- vel.x );
 				}
 			}
-			if ( rt_coll_result.type != bt_air 
-				|| rb_coll_result.type != bt_air )
+			if ( rt_coll_result.the_block->type != bt_air 
+				|| rb_coll_result.the_block->type != bt_air )
 			{
 				if ( vel.x > (fixed24p8){0} )
 				{
@@ -1589,31 +1735,34 @@ void sprite::block_collision_stuff_16x16()
 				}
 			}
 			
-			slope_block_coll_response_bot_16x16( the_pt_group,
+			slope_block_coll_response_bot_16x16_old( the_pt_group,
 				bl_coll_result, bm_coll_result, br_coll_result, true );
 		}
-		else if ( bl_coll_result.type != bt_air
-			|| br_coll_result.type != bt_air 
-			|| lb_coll_result.type != bt_air 
-			|| rb_coll_result.type != bt_air )
+		else if ( bl_coll_result.the_block->type != bt_air
+			|| br_coll_result.the_block->type != bt_air 
+			|| lb_coll_result.the_block->type != bt_air 
+			|| rb_coll_result.the_block->type != bt_air )
 		{
 			//show_debug_str_s32("blbr");
 			//show_debug_str_s32("    ");
 			
 			block_type the_slope_block_type 
-				= slope_block_coll_response_bot_16x16( the_pt_group, 
+				= slope_block_coll_response_bot_16x16_old( the_pt_group, 
 				bl_coll_result, bm_coll_result, br_coll_result );
 			
 			//show_debug_str_s32("bt  ");
 			//next_debug_s32 = the_slope_block_type;
 			
 			// Don't let the_sprite move through walls
-			if ( bt_is_neither_air_nor_slope(lt_coll_result.type)
-				|| ( bt_is_neither_air_nor_slope(lb_coll_result.type) 
+			if ( bt_is_neither_air_nor_slope(lt_coll_result.the_block
+				->get_block_type()) 
+				|| ( bt_is_neither_air_nor_slope(lb_coll_result
+				.the_block->get_block_type()) 
 				&& the_slope_block_type != bt_grass_slope_n16_p16) )
 			{
-				if ( bt_is_neither_air_nor_slope(lb_coll_result.type) 
-					&& the_slope_block_type != bt_grass_slope_n16_p16 )
+				if ( bt_is_neither_air_nor_slope(lb_coll_result.the_block
+					->get_block_type()) && the_slope_block_type 
+					!= bt_grass_slope_n16_p16 )
 				{
 					//show_debug_str_s32("lb  ");
 				}
@@ -1622,12 +1771,15 @@ void sprite::block_collision_stuff_16x16()
 				//show_debug_str_s32("2b  ");
 				any_left_response();
 			}
-			if ( bt_is_neither_air_nor_slope(rt_coll_result.type)
-				|| ( bt_is_neither_air_nor_slope(rb_coll_result.type) 
-				&& the_slope_block_type != bt_grass_slope_p16_p16 ) )
+			if ( bt_is_neither_air_nor_slope(rt_coll_result.the_block
+				->get_block_type()) 
+				|| ( bt_is_neither_air_nor_slope(rb_coll_result
+				.the_block->get_block_type()) && the_slope_block_type 
+				!= bt_grass_slope_p16_p16 ) )
 			{
-				if ( bt_is_neither_air_nor_slope(rb_coll_result.type) 
-					&& the_slope_block_type != bt_grass_slope_p16_p16 )
+				if ( bt_is_neither_air_nor_slope(rb_coll_result.the_block
+					->get_block_type()) && the_slope_block_type 
+					!= bt_grass_slope_p16_p16 )
 				{
 					//show_debug_str_s32("rb  ");
 				}
@@ -1644,14 +1796,14 @@ void sprite::block_collision_stuff_16x16()
 			//get_curr_on_ground() = false;
 			set_curr_on_ground(false);
 			
-			if ( lt_coll_result.type != bt_air 
-				|| lb_coll_result.type != bt_air )
+			if ( lt_coll_result.the_block->type != bt_air 
+				|| lb_coll_result.the_block->type != bt_air )
 			{
 				any_left_response();
 			}
 			
-			else if ( rt_coll_result.type != bt_air 
-				|| rb_coll_result.type != bt_air )
+			else if ( rt_coll_result.the_block->type != bt_air 
+				|| rb_coll_result.the_block->type != bt_air )
 			{
 				any_right_response();
 			}
@@ -1662,7 +1814,7 @@ void sprite::block_collision_stuff_16x16()
 	//show_debug_str_s32( get_curr_on_ground() ? "ongn" : "offg" );
 }
 
-void sprite::block_collision_stuff_16x32()
+void sprite::block_collision_stuff_16x32_old()
 {
 	// The collision points
 	coll_point_group the_pt_group;
@@ -1685,51 +1837,51 @@ void sprite::block_collision_stuff_16x32()
 	// Lambda functions for non-slope block collision response
 	auto any_left_response = [&]() -> void
 	{
-		block_coll_response_left_16x32( lt_coll_result, lm_coll_result, 
-			lb_coll_result );
+		block_coll_response_left_16x32_old( lt_coll_result, 
+			lm_coll_result, lb_coll_result );
 	};
 	
 	auto any_top_response = [&]() -> void
 	{
-		block_coll_response_top_16x32( tl_coll_result, tm_coll_result, 
+		block_coll_response_top_16x32_old( tl_coll_result, tm_coll_result, 
 			tr_coll_result );
 	};
 	
 	auto any_right_response = [&]() -> void
 	{
-		block_coll_response_right_16x32( rt_coll_result, rm_coll_result, 
-			rb_coll_result );
+		block_coll_response_right_16x32_old( rt_coll_result, 
+			rm_coll_result, rb_coll_result );
 	};
 	
 	auto any_non_slope_bot_response = [&]() -> void
 	{
-		non_slope_block_coll_response_bot_16x32( bl_coll_result, 
+		non_slope_block_coll_response_bot_16x32_old( bl_coll_result, 
 			bm_coll_result, br_coll_result );
 	};
 	
 	//show_debug_str_s32( get_curr_on_ground() ? "ongn" : "offg" );
 	
 	// When not dealing with slopes, this method is used.
-	if ( !bt_is_left_slope(bl_coll_result.type)
-		&& !bt_is_slope(bm_coll_result.type)
-		&& !bt_is_right_slope(br_coll_result.type)
-		&& !bt_is_left_slope(lb_coll_result.type)
-		&& !bt_is_right_slope(rb_coll_result.type) )
-		//&& !bt_is_left_slope(lm_coll_result.type)
-		//&& !bt_is_right_slope(rm_coll_result.type) )
+	if ( !bt_is_left_slope(bl_coll_result.the_block->get_block_type())
+		&& !bt_is_slope(bm_coll_result.the_block->get_block_type())
+		&& !bt_is_right_slope(br_coll_result.the_block->get_block_type())
+		&& !bt_is_left_slope(lb_coll_result.the_block->get_block_type())
+		&& !bt_is_right_slope(rb_coll_result.the_block->get_block_type()) )
+		//&& !bt_is_left_slope(lm_coll_result.the_block->type)
+		//&& !bt_is_right_slope(rm_coll_result.the_block->type) )
 	{
-		if ( tl_coll_result.type != bt_air 
-			|| tr_coll_result.type != bt_air )
+		if ( tl_coll_result.the_block->type != bt_air 
+			|| tr_coll_result.the_block->type != bt_air )
 		{
 			//show_debug_str_s32("tltr");
 			
-			if ( lt_coll_result.type != bt_air )
+			if ( lt_coll_result.the_block->type != bt_air )
 			{
 				//show_debug_str_s32("left");
 				//show_debug_str_s32("1t  ");
 				any_left_response();
 			}
-			if ( rt_coll_result.type != bt_air )
+			if ( rt_coll_result.the_block->type != bt_air )
 			{
 				//show_debug_str_s32("righ");
 				//show_debug_str_s32("1t  ");
@@ -1740,22 +1892,26 @@ void sprite::block_collision_stuff_16x32()
 			
 			
 		}
-		else if ( bl_coll_result.type != bt_air
-			|| br_coll_result.type != bt_air )
+		else if ( bl_coll_result.the_block->type != bt_air
+			|| br_coll_result.the_block->type != bt_air )
 		{
 			//show_debug_str_s32("blbr");
 			
 			any_non_slope_bot_response();
 			
-			if ( bt_is_neither_air_nor_slope(lt_coll_result.type)
-				|| bt_is_neither_air_nor_slope(lm_coll_result.type) )
+			if ( bt_is_neither_air_nor_slope(lt_coll_result.the_block
+				->get_block_type()) 
+				|| bt_is_neither_air_nor_slope(lm_coll_result.the_block
+				->get_block_type()) )
 			{
 				//show_debug_str_s32("left");
 				//show_debug_str_s32("1b  ");
 				any_left_response();
 			}
-			if ( bt_is_neither_air_nor_slope(rt_coll_result.type)
-				|| bt_is_neither_air_nor_slope(rm_coll_result.type) )
+			if ( bt_is_neither_air_nor_slope(rt_coll_result.the_block
+				->get_block_type()) 
+				|| bt_is_neither_air_nor_slope(rm_coll_result.the_block
+				->get_block_type()) )
 			{
 				//show_debug_str_s32("righ");
 				//show_debug_str_s32("1b  ");
@@ -1769,16 +1925,16 @@ void sprite::block_collision_stuff_16x32()
 			//get_curr_on_ground() = false;
 			set_curr_on_ground(false);
 			
-			if ( lt_coll_result.type != bt_air 
-				|| lm_coll_result.type != bt_air
-				|| lb_coll_result.type != bt_air )
+			if ( lt_coll_result.the_block->type != bt_air 
+				|| lm_coll_result.the_block->type != bt_air
+				|| lb_coll_result.the_block->type != bt_air )
 			{
 				any_left_response();
 			}
 			
-			else if ( rt_coll_result.type != bt_air 
-				|| rm_coll_result.type != bt_air
-				|| rb_coll_result.type != bt_air )
+			else if ( rt_coll_result.the_block->type != bt_air 
+				|| rm_coll_result.the_block->type != bt_air
+				|| rb_coll_result.the_block->type != bt_air )
 			{
 				any_right_response();
 			}
@@ -1792,10 +1948,10 @@ void sprite::block_collision_stuff_16x32()
 		//show_debug_str_s32("slop");
 		
 		// (future thing if tall slopes are added)
-		//if ( bt_is_neither_air_nor_tall_slope(tl_coll_result.type) 
-		//	|| bt_is_neither_air_nor_tall_slope(tr_coll_result.type) )
-		if ( tl_coll_result.type != bt_air
-			|| tr_coll_result.type != bt_air )
+		//if ( bt_is_neither_air_nor_tall_slope(tl_coll_result.the_block->type) 
+		//	|| bt_is_neither_air_nor_tall_slope(tr_coll_result.the_block->type) )
+		if ( tl_coll_result.the_block->type != bt_air
+			|| tr_coll_result.the_block->type != bt_air )
 		{
 			//show_debug_str_s32("tltr");
 			
@@ -1813,9 +1969,9 @@ void sprite::block_collision_stuff_16x32()
 			}
 			
 			// Don't let the_sprite move through walls
-			if ( lt_coll_result.type != bt_air 
-				|| lm_coll_result.type != bt_air
-				|| lb_coll_result.type != bt_air )
+			if ( lt_coll_result.the_block->type != bt_air 
+				|| lm_coll_result.the_block->type != bt_air
+				|| lb_coll_result.the_block->type != bt_air )
 			{
 				if ( vel.x < (fixed24p8){0} )
 				{
@@ -1825,9 +1981,9 @@ void sprite::block_collision_stuff_16x32()
 						- vel.x );
 				}
 			}
-			if ( rt_coll_result.type != bt_air 
-				|| rm_coll_result.type != bt_air
-				|| rb_coll_result.type != bt_air )
+			if ( rt_coll_result.the_block->type != bt_air 
+				|| rm_coll_result.the_block->type != bt_air
+				|| rb_coll_result.the_block->type != bt_air )
 			{
 				if ( vel.x > (fixed24p8){0} )
 				{
@@ -1838,18 +1994,18 @@ void sprite::block_collision_stuff_16x32()
 				}
 			}
 			
-			slope_block_coll_response_bot_16x32( the_pt_group,
+			slope_block_coll_response_bot_16x32_old( the_pt_group,
 				bl_coll_result, bm_coll_result, br_coll_result, true );
 		}
-		else if ( bl_coll_result.type != bt_air
-			|| br_coll_result.type != bt_air 
-			|| lb_coll_result.type != bt_air 
-			|| rb_coll_result.type != bt_air )
+		else if ( bl_coll_result.the_block->type != bt_air
+			|| br_coll_result.the_block->type != bt_air 
+			|| lb_coll_result.the_block->type != bt_air 
+			|| rb_coll_result.the_block->type != bt_air )
 		{
 			//show_debug_str_s32("blbr");
 			
 			block_type the_slope_block_type 
-				= slope_block_coll_response_bot_16x32( the_pt_group, 
+				= slope_block_coll_response_bot_16x32_old( the_pt_group, 
 				bl_coll_result, bm_coll_result, br_coll_result );
 			
 			//show_debug_str_s32("bt  ");
@@ -1857,12 +2013,16 @@ void sprite::block_collision_stuff_16x32()
 			
 			
 			// Don't let the_sprite move through walls
-			if ( bt_is_neither_air_nor_slope(lt_coll_result.type)
-				|| bt_is_neither_air_nor_slope(lm_coll_result.type)
-				|| ( bt_is_neither_air_nor_slope(lb_coll_result.type) 
+			if ( bt_is_neither_air_nor_slope(lt_coll_result.the_block
+				->get_block_type()) 
+				|| bt_is_neither_air_nor_slope(lm_coll_result.the_block
+				->get_block_type())
+				|| ( bt_is_neither_air_nor_slope(lb_coll_result.the_block
+				->get_block_type()) 
 				&& the_slope_block_type != bt_grass_slope_n16_p16) )
 			{
-				if ( bt_is_neither_air_nor_slope(lb_coll_result.type) 
+				if ( bt_is_neither_air_nor_slope(lb_coll_result.the_block
+					->get_block_type()) 
 					&& the_slope_block_type != bt_grass_slope_n16_p16 )
 				{
 					//show_debug_str_s32("lb  ");
@@ -1872,12 +2032,16 @@ void sprite::block_collision_stuff_16x32()
 				//show_debug_str_s32("2b  ");
 				any_left_response();
 			}
-			if ( bt_is_neither_air_nor_slope(rt_coll_result.type)
-				|| bt_is_neither_air_nor_slope(rm_coll_result.type)
-				|| ( bt_is_neither_air_nor_slope(rb_coll_result.type) 
+			if ( bt_is_neither_air_nor_slope(rt_coll_result.the_block
+				->get_block_type())
+				|| bt_is_neither_air_nor_slope(rm_coll_result.the_block
+				->get_block_type())
+				|| ( bt_is_neither_air_nor_slope(rb_coll_result.the_block
+				->get_block_type()) 
 				&& the_slope_block_type != bt_grass_slope_p16_p16 ) )
 			{
-				if ( bt_is_neither_air_nor_slope(rb_coll_result.type) 
+				if ( bt_is_neither_air_nor_slope(rb_coll_result.the_block
+					->get_block_type()) 
 					&& the_slope_block_type != bt_grass_slope_p16_p16 )
 				{
 					//show_debug_str_s32("rb  ");
@@ -1895,16 +2059,16 @@ void sprite::block_collision_stuff_16x32()
 			//get_curr_on_ground() = false;
 			set_curr_on_ground(false);
 			
-			if ( lt_coll_result.type != bt_air 
-				|| lm_coll_result.type != bt_air
-				|| lb_coll_result.type != bt_air )
+			if ( lt_coll_result.the_block->type != bt_air 
+				|| lm_coll_result.the_block->type != bt_air
+				|| lb_coll_result.the_block->type != bt_air )
 			{
 				any_left_response();
 			}
 			
-			else if ( rt_coll_result.type != bt_air 
-				|| rm_coll_result.type != bt_air
-				|| rb_coll_result.type != bt_air )
+			else if ( rt_coll_result.the_block->type != bt_air 
+				|| rm_coll_result.the_block->type != bt_air
+				|| rb_coll_result.the_block->type != bt_air )
 			{
 				any_right_response();
 			}
@@ -1917,6 +2081,24 @@ void sprite::block_collision_stuff_16x32()
 	
 }
 
+void sprite::block_collision_stuff_32x16_old()
+{
+	
+}
+void sprite::block_collision_stuff_32x32_old()
+{
+	
+}
+
+
+void sprite::block_collision_stuff_16x16()
+{
+	
+}
+void sprite::block_collision_stuff_16x32()
+{
+	
+}
 void sprite::block_collision_stuff_32x16()
 {
 	
@@ -1927,70 +2109,69 @@ void sprite::block_collision_stuff_32x32()
 }
 
 
-
-void sprite::block_collision_stuff_strongly_hit_stuff_only_16x16()
-{
-	// The collision points
-	coll_point_group the_pt_group;
-	
-	generate_coll_point_group_16x16( *this, the_pt_group );
-	
-	// The block_coll_result's
-	block_coll_result lt_coll_result, lb_coll_result, tl_coll_result,
-		tm_coll_result, tr_coll_result, rt_coll_result, rb_coll_result,
-		bl_coll_result, bm_coll_result, br_coll_result;
-	
-	// Get the block_coll_result's
-	get_basic_block_coll_results_16x16( the_pt_group, lt_coll_result,
-		lb_coll_result, tl_coll_result, tm_coll_result, tr_coll_result,
-		rt_coll_result, rb_coll_result, bl_coll_result, bm_coll_result,
-		br_coll_result );
-	
-	block_coll_response_left_16x16( lt_coll_result, lb_coll_result );
-	block_coll_response_top_16x16( tl_coll_result, tm_coll_result, 
-		tr_coll_result );
-	block_coll_response_right_16x16( rt_coll_result, rb_coll_result );
-	non_slope_block_coll_response_bot_16x16( bl_coll_result, 
-		bm_coll_result, br_coll_result );
-}
-
-void sprite::block_collision_stuff_strongly_hit_stuff_only_16x32()
-{
-	// The collision points
-	coll_point_group the_pt_group;
-	
-	generate_coll_point_group_16x32( *this, the_pt_group );
-	
-	// The block_coll_result's
-	block_coll_result lt_coll_result, lm_coll_result, lb_coll_result, 
-		tl_coll_result, tm_coll_result, tr_coll_result, rt_coll_result, 
-		rm_coll_result, rb_coll_result, bl_coll_result, bm_coll_result,
-		br_coll_result;
-	
-	// Get the block_coll_result's
-	get_basic_block_coll_results_16x32( the_pt_group, lt_coll_result, 
-		lm_coll_result, lb_coll_result, tl_coll_result, tm_coll_result,
-		tr_coll_result, rt_coll_result, rm_coll_result, rb_coll_result,
-		bl_coll_result, bm_coll_result, br_coll_result );
-	
-	
-	block_coll_response_left_16x32( lt_coll_result, lm_coll_result, 
-		lb_coll_result );
-	block_coll_response_top_16x32( tl_coll_result, tm_coll_result, 
-		tr_coll_result );
-	block_coll_response_right_16x32( rt_coll_result, rm_coll_result, 
-		rb_coll_result );
-	non_slope_block_coll_response_bot_16x32( bl_coll_result, 
-		bm_coll_result, br_coll_result );
-}
-
-void sprite::block_collision_stuff_strongly_hit_stuff_only_32x16()
-{
-	
-}
-
-void sprite::block_collision_stuff_strongly_hit_stuff_only_32x32()
-{
-	
-}
+//void sprite::block_collision_stuff_strongly_hit_stuff_only_16x16()
+//{
+//	// The collision points
+//	coll_point_group the_pt_group;
+//	
+//	generate_coll_point_group_16x16( *this, the_pt_group );
+//	
+//	// The block_coll_result's
+//	block_coll_result lt_coll_result, lb_coll_result, tl_coll_result,
+//		tm_coll_result, tr_coll_result, rt_coll_result, rb_coll_result,
+//		bl_coll_result, bm_coll_result, br_coll_result;
+//	
+//	// Get the block_coll_result's
+//	get_basic_block_coll_results_16x16( the_pt_group, lt_coll_result,
+//		lb_coll_result, tl_coll_result, tm_coll_result, tr_coll_result,
+//		rt_coll_result, rb_coll_result, bl_coll_result, bm_coll_result,
+//		br_coll_result );
+//	
+//	block_coll_response_left_16x16( lt_coll_result, lb_coll_result );
+//	block_coll_response_top_16x16( tl_coll_result, tm_coll_result, 
+//		tr_coll_result );
+//	block_coll_response_right_16x16( rt_coll_result, rb_coll_result );
+//	block_coll_response_bot_16x16( bl_coll_result, bm_coll_result, 
+//		br_coll_result );
+//}
+//
+//void sprite::block_collision_stuff_strongly_hit_stuff_only_16x32()
+//{
+//	// The collision points
+//	coll_point_group the_pt_group;
+//	
+//	generate_coll_point_group_16x32( *this, the_pt_group );
+//	
+//	// The block_coll_result's
+//	block_coll_result lt_coll_result, lm_coll_result, lb_coll_result, 
+//		tl_coll_result, tm_coll_result, tr_coll_result, rt_coll_result, 
+//		rm_coll_result, rb_coll_result, bl_coll_result, bm_coll_result,
+//		br_coll_result;
+//	
+//	// Get the block_coll_result's
+//	get_basic_block_coll_results_16x32( the_pt_group, lt_coll_result, 
+//		lm_coll_result, lb_coll_result, tl_coll_result, tm_coll_result,
+//		tr_coll_result, rt_coll_result, rm_coll_result, rb_coll_result,
+//		bl_coll_result, bm_coll_result, br_coll_result );
+//	
+//	
+//	block_coll_response_left_16x32( lt_coll_result, lm_coll_result, 
+//		lb_coll_result );
+//	block_coll_response_top_16x32( tl_coll_result, tm_coll_result, 
+//		tr_coll_result );
+//	block_coll_response_right_16x32( rt_coll_result, rm_coll_result, 
+//		rb_coll_result );
+//	block_coll_response_bot_16x32( bl_coll_result, bm_coll_result, 
+//		br_coll_result );
+//}
+//
+//void sprite::block_collision_stuff_strongly_hit_stuff_only_32x16()
+//{
+//	
+//}
+//
+//void sprite::block_collision_stuff_strongly_hit_stuff_only_32x32()
+//{
+//	
+//}
 

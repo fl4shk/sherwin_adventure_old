@@ -142,30 +142,20 @@ public:		// functions
 	
 protected:		// functions
 	
-	virtual void block_coll_response_left_16x16
+	virtual void block_coll_response_left_16x16_old
 		( const block_coll_result& lt_coll_result, 
-		const block_coll_result& lb_coll_result )
-		__attribute__((_iwram_code));
-	virtual void block_coll_response_top_16x16
+		const block_coll_result& lb_coll_result );
+	virtual void block_coll_response_top_16x16_old
 		( const block_coll_result& tl_coll_result,
 		const block_coll_result& tm_coll_result,
-		const block_coll_result& tr_coll_result )
-		__attribute__((_iwram_code));
-	virtual void block_coll_response_right_16x16
+		const block_coll_result& tr_coll_result );
+	virtual void block_coll_response_right_16x16_old
 		( const block_coll_result& rt_coll_result,
-		const block_coll_result& rb_coll_result )
-		__attribute__((_iwram_code));
-	virtual void non_slope_block_coll_response_bot_16x16
+		const block_coll_result& rb_coll_result );
+	virtual void non_slope_block_coll_response_bot_16x16_old
 		( const block_coll_result& bl_coll_result,
 		const block_coll_result& bm_coll_result, 
-		const block_coll_result& br_coll_result )
-		__attribute__((_iwram_code));
-	virtual block_type slope_block_coll_response_bot_16x16
-		( coll_point_group& the_pt_group,
-		block_coll_result& bl_coll_result,
-		block_coll_result& bm_coll_result,
-		block_coll_result& br_coll_result, bool hitting_tltr=false )
-		__attribute__((_iwram_code));
+		const block_coll_result& br_coll_result );
 	
 	
 } __attribute__((_align4));

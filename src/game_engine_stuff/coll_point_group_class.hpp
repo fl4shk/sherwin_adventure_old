@@ -20,6 +20,8 @@
 #define coll_point_group_class_hpp
 
 #include "../gba_specific_stuff/attribute_defines.hpp"
+#include "coll_point_extras.hpp"
+
 #include "vec2_class.hpp"
 
 #include "coll_box_class.hpp"
@@ -31,204 +33,14 @@ class sprite;
 // between sprites and blocks, or at least coll_boxes and blocks.
 class coll_point_group
 {
-public:		// enums
-	// Collision points that share a side
-	#define list_of_16x16_left_side_coll_point_names(macro) \
-		macro(lt) macro(lb)
-	#define list_of_16x16_top_side_coll_point_names(macro) \
-		macro(tl) macro(tm) macro(tr)
-	#define list_of_16x16_right_side_coll_point_names(macro) \
-		macro(rt) macro(rb)
-	#define list_of_16x16_bottom_side_coll_point_names(macro) \
-		macro(bl) macro(bm) macro(br)
-	
-	// Left or right side, same ypos collision points
-	#define list_of_16x16_vert_side_ypos_top_coll_point_names(macro) \
-		macro(lt) macro(rt)
-	#define list_of_16x16_vert_side_ypos_bottom_coll_point_names(macro) \
-		macro(lb) macro(rb)
-	
-	// Top or bottom same xpos collision points
-	#define list_of_16x16_horiz_side_xpos_left_coll_point_names(macro) \
-		macro(tl) macro(bl)
-	#define list_of_16x16_horiz_side_xpos_middle_coll_point_names(macro) \
-		macro(tm) macro(bm)
-	#define list_of_16x16_horiz_side_xpos_right_coll_point_names(macro) \
-		macro(tr) macro(br)
-	
-	#define list_of_16x16_slope_stuff_coll_point_names(macro) \
-		macro(bm) macro(bl) macro(br)
-	
-	// All the collision points
-	#define list_of_16x16_coll_point_names(macro) \
-		list_of_16x16_left_side_coll_point_names(macro) \
-		list_of_16x16_top_side_coll_point_names(macro) \
-		list_of_16x16_right_side_coll_point_names(macro) \
-		list_of_16x16_bottom_side_coll_point_names(macro) \
-	
-	
-	// The reason an X-macro isn't used here is because ctags wouldn't be
-	// able to work with it.
-	enum arr_index_16x16 
-	{
-		#define X(name) \
-			arr_ind_16x16_pt_##name, 
-		
-		// Left side
-		list_of_16x16_left_side_coll_point_names(X)
-		
-		// Top side
-		list_of_16x16_top_side_coll_point_names(X)
-		
-		// Right side
-		list_of_16x16_right_side_coll_point_names(X)
-		
-		// Bottom side
-		list_of_16x16_bottom_side_coll_point_names(X)
-		
-		#undef X
-		
-		// arr_ind_16x16_count is the amount of arr_index_16x16's.  It is
-		// automatically updated by the compiler.
-		arr_ind_16x16_count,
-	} __attribute__((_align4));
-	
-	
-	
-	// Collision points that share a side
-	#define list_of_16x32_left_side_coll_point_names(macro) \
-		macro(lt) macro(lm) macro(lb)
-	#define list_of_16x32_top_side_coll_point_names(macro) \
-		macro(tl) macro(tm) macro(tr)
-	#define list_of_16x32_right_side_coll_point_names(macro) \
-		macro(rt) macro(rm) macro(rb)
-	#define list_of_16x32_bottom_side_coll_point_names(macro) \
-		macro(bl) macro(bm) macro(br)
-	
-	// Left or right side, same ypos collision points
-	#define list_of_16x32_vert_side_ypos_top_coll_point_names(macro) \
-		macro(lt) macro(rt)
-	#define list_of_16x32_vert_side_ypos_middle_coll_point_names(macro) \
-		macro(lm) macro(rm)
-	#define list_of_16x32_vert_side_ypos_bottom_coll_point_names(macro) \
-		macro(lb) macro(rb)
-	
-	// Top or bottom same xpos collision points
-	#define list_of_16x32_horiz_side_xpos_left_coll_point_names(macro) \
-		macro(tl) macro(bl)
-	#define list_of_16x32_horiz_side_xpos_middle_coll_point_names(macro) \
-		macro(tm) macro(bm)
-	#define list_of_16x32_horiz_side_xpos_right_coll_point_names(macro) \
-		macro(tr) macro(br)
-	
-	#define list_of_16x32_slope_stuff_coll_point_names(macro) \
-		macro(bm) macro(bl) macro(br)
-	
-	// All the collision points
-	#define list_of_16x32_coll_point_names(macro) \
-		list_of_16x32_left_side_coll_point_names(macro) \
-		list_of_16x32_top_side_coll_point_names(macro) \
-		list_of_16x32_right_side_coll_point_names(macro) \
-		list_of_16x32_bottom_side_coll_point_names(macro) \
-	
-	
-	// The reason an X-macro isn't used here is because ctags wouldn't be
-	// able to work with it.
-	enum arr_index_16x32 
-	{
-		#define X(name) \
-			arr_ind_16x32_pt_##name, 
-		
-		// Left side
-		list_of_16x32_left_side_coll_point_names(X)
-		
-		// Top side
-		list_of_16x32_top_side_coll_point_names(X)
-		
-		// Right side
-		list_of_16x32_right_side_coll_point_names(X)
-		
-		// Bottom side
-		list_of_16x32_bottom_side_coll_point_names(X)
-		
-		#undef X
-		
-		// arr_ind_16x32_count is the amount of arr_index_16x32's.  It is
-		// automatically updated by the compiler.
-		arr_ind_16x32_count,
-	} __attribute__((_align4));
-	
-	
-	
-	// Collision points that share a side
-	#define list_of_32x16_left_side_coll_point_names(macro) \
-		macro(lt) macro(lb)
-	#define list_of_32x16_top_side_coll_point_names(macro) \
-		macro(tl) macro(tm) macro(tr)
-	#define list_of_32x16_right_side_coll_point_names(macro) \
-		macro(rt) macro(rb)
-	#define list_of_32x16_bottom_side_coll_point_names(macro) \
-		macro(bl) macro(bm) macro(br)
-	
-	// Left or right side, same ypos collision points
-	#define list_of_32x16_vert_side_ypos_top_coll_point_names(macro) \
-		macro(lt) macro(rt)
-	#define list_of_32x16_vert_side_ypos_bottom_coll_point_names(macro) \
-		macro(lb) macro(rb)
-	
-	// Top or bottom same xpos collision points
-	#define list_of_32x16_horiz_side_xpos_left_coll_point_names(macro) \
-		macro(tl) macro(bl)
-	#define list_of_32x16_horiz_side_xpos_middle_coll_point_names(macro) \
-		macro(tm) macro(bm)
-	#define list_of_32x16_horiz_side_xpos_right_coll_point_names(macro) \
-		macro(tr) macro(br)
-	
-	#define list_of_32x16_slope_stuff_coll_point_names(macro) \
-		macro(bm) macro(bl) macro(br)
-	
-	// All the collision points
-	#define list_of_32x16_coll_point_names(macro) \
-		list_of_32x16_left_side_coll_point_names(macro) \
-		list_of_32x16_top_side_coll_point_names(macro) \
-		list_of_32x16_right_side_coll_point_names(macro) \
-		list_of_32x16_bottom_side_coll_point_names(macro) \
-	
-	
-	// The reason an X-macro isn't used here is because ctags wouldn't be
-	// able to work with it.
-	enum arr_index_32x16 
-	{
-		#define X(name) \
-			arr_ind_32x16_pt_##name, 
-		
-		// Left side
-		list_of_32x16_left_side_coll_point_names(X)
-		
-		// Top side
-		list_of_32x16_top_side_coll_point_names(X)
-		
-		// Right side
-		list_of_32x16_right_side_coll_point_names(X)
-		
-		// Bottom side
-		list_of_32x16_bottom_side_coll_point_names(X)
-		
-		#undef X
-		
-		// arr_ind_32x16_count is the amount of arr_index_32x16's.  It is
-		// automatically updated by the compiler.
-		arr_ind_32x16_count,
-	} __attribute__((_align4));
-	
 public:		// variables
 	// The maximum number of collision points, 32, is definitely more than
 	// is necessary, but thus far there's not that much need to optimize
 	// the number of collision points (also I'm too lazy to put effort into
 	// doing so).
-	static const u32 total_coll_points = 32;
+	static const u32 max_num_coll_points = 32;
 	u32 num_used_points;
-	vec2_f24p8 the_array[total_coll_points];
+	vec2_f24p8 the_array[max_num_coll_points];
 	
 	
 public:		// functions

@@ -57,100 +57,89 @@ const u32 player_pickaxe_sprite::get_curr_relative_tile_slot()
 // Physics and collision stuff
 void player_pickaxe_sprite::block_collision_stuff()
 {
-	block_collision_stuff_strongly_hit_stuff_only_16x16();
+	//block_collision_stuff_strongly_hit_stuff_only_16x16();
+	block_collision_stuff_16x16();
 }
 
-void player_pickaxe_sprite::block_coll_response_left_16x16
+void player_pickaxe_sprite::block_coll_response_left_16x16_old
 	( const block_coll_result& lt_coll_result, 
 	const block_coll_result& lb_coll_result )
 {
-	block_stuff_array[lt_coll_result.type]->strongly_hit_response 
-		( active_level::the_block_data_at_coord(lt_coll_result.coord), 
-		lt_coll_result.coord );
+	block_stuff_array[lt_coll_result.the_block->type]
+		->strongly_hit_response( active_level::the_block_data_at_coord
+		(lt_coll_result.coord), lt_coll_result.coord );
 	
 	if ( lb_coll_result.coord != lt_coll_result.coord )
 	{
-		block_stuff_array[lb_coll_result.type]->strongly_hit_response 
-			( active_level::the_block_data_at_coord(lb_coll_result.coord), 
-			lb_coll_result.coord );
+		block_stuff_array[lb_coll_result.the_block->type]
+			->strongly_hit_response( active_level::the_block_data_at_coord
+			(lb_coll_result.coord), lb_coll_result.coord );
 	}
 }
 
-void player_pickaxe_sprite::block_coll_response_top_16x16
+void player_pickaxe_sprite::block_coll_response_top_16x16_old
 	( const block_coll_result& tl_coll_result,
 	const block_coll_result& tm_coll_result,
 	const block_coll_result& tr_coll_result )
 {
-	block_stuff_array[tl_coll_result.type]->strongly_hit_response 
-		( active_level::the_block_data_at_coord(tl_coll_result.coord), 
-		tl_coll_result.coord );
+	block_stuff_array[tl_coll_result.the_block->type]
+		->strongly_hit_response( active_level::the_block_data_at_coord
+		(tl_coll_result.coord), tl_coll_result.coord );
 	
 	if ( tm_coll_result.coord != tl_coll_result.coord )
 	{
-		block_stuff_array[tm_coll_result.type]->strongly_hit_response 
-			( active_level::the_block_data_at_coord(tm_coll_result.coord), 
-			tm_coll_result.coord );
+		block_stuff_array[tm_coll_result.the_block->type]
+			->strongly_hit_response( active_level::the_block_data_at_coord
+			(tm_coll_result.coord), tm_coll_result.coord );
 	}
 	
 	if ( tr_coll_result.coord != tl_coll_result.coord 
 		&& tr_coll_result.coord != tm_coll_result.coord )
 	{
-		block_stuff_array[tr_coll_result.type]->strongly_hit_response 
-			( active_level::the_block_data_at_coord(tr_coll_result.coord), 
-			tr_coll_result.coord );
+		block_stuff_array[tr_coll_result.the_block->type]
+			->strongly_hit_response( active_level::the_block_data_at_coord
+			(tr_coll_result.coord), tr_coll_result.coord );
 	}
 }
 
-void player_pickaxe_sprite::block_coll_response_right_16x16
+void player_pickaxe_sprite::block_coll_response_right_16x16_old
 	( const block_coll_result& rt_coll_result,
 	const block_coll_result& rb_coll_result )
 {
-	block_stuff_array[rt_coll_result.type]->strongly_hit_response 
-		( active_level::the_block_data_at_coord(rt_coll_result.coord), 
-		rt_coll_result.coord );
+	block_stuff_array[rt_coll_result.the_block->type]
+		->strongly_hit_response( active_level::the_block_data_at_coord
+		(rt_coll_result.coord), rt_coll_result.coord );
 	
 	if ( rb_coll_result.coord != rt_coll_result.coord )
 	{
-		block_stuff_array[rb_coll_result.type]->strongly_hit_response 
-			( active_level::the_block_data_at_coord(rb_coll_result.coord), 
-			rb_coll_result.coord );
+		block_stuff_array[rb_coll_result.the_block->type]
+			->strongly_hit_response( active_level::the_block_data_at_coord
+			(rb_coll_result.coord), rb_coll_result.coord );
 	}
 }
 
-void player_pickaxe_sprite::non_slope_block_coll_response_bot_16x16
+void player_pickaxe_sprite::non_slope_block_coll_response_bot_16x16_old
 	( const block_coll_result& bl_coll_result,
 	const block_coll_result& bm_coll_result, 
 	const block_coll_result& br_coll_result )
 {
-	block_stuff_array[bl_coll_result.type]->strongly_hit_response 
-		( active_level::the_block_data_at_coord(bl_coll_result.coord), 
-		bl_coll_result.coord );
+	block_stuff_array[bl_coll_result.the_block->type]
+		->strongly_hit_response( active_level::the_block_data_at_coord
+		(bl_coll_result.coord), bl_coll_result.coord );
 	
 	if ( bm_coll_result.coord != bl_coll_result.coord )
 	{
-		block_stuff_array[bm_coll_result.type]->strongly_hit_response 
-			( active_level::the_block_data_at_coord(bm_coll_result.coord), 
-			bm_coll_result.coord );
+		block_stuff_array[bm_coll_result.the_block->type]
+			->strongly_hit_response( active_level::the_block_data_at_coord
+			(bm_coll_result.coord), bm_coll_result.coord );
 	}
 	
 	if ( br_coll_result.coord != bl_coll_result.coord 
 		&& br_coll_result.coord != bm_coll_result.coord )
 	{
-		block_stuff_array[br_coll_result.type]->strongly_hit_response 
-			( active_level::the_block_data_at_coord(br_coll_result.coord), 
-			br_coll_result.coord );
+		block_stuff_array[br_coll_result.the_block->type]
+			->strongly_hit_response( active_level::the_block_data_at_coord
+			(br_coll_result.coord), br_coll_result.coord );
 	}
 }
-
-block_type player_pickaxe_sprite::slope_block_coll_response_bot_16x16
-	( coll_point_group& the_pt_group,
-	block_coll_result& bl_coll_result, block_coll_result& bm_coll_result,
-	block_coll_result& br_coll_result, bool hitting_tltr )
-{
-	non_slope_block_coll_response_bot_16x16( bl_coll_result,
-		bm_coll_result, br_coll_result );
-	
-	return bt_air;
-}
-
 

@@ -24,6 +24,8 @@
 
 #include "../../gfx/sherwin_gfx.h"
 
+#include "../block_coll_result_group_class.hpp"
+
 class sprite_allocator;
 
 class sprite
@@ -595,71 +597,95 @@ protected:		// functions
 		block_coll_result& br_coll_result ) __attribute__((_iwram_code));
 	
 	
-	virtual void block_coll_response_left_16x16
+	
+	virtual void block_coll_response_left_16x16_old
 		( const block_coll_result& lt_coll_result, 
-		const block_coll_result& lb_coll_result )
-		__attribute__((_iwram_code));
-	virtual void block_coll_response_top_16x16
+		const block_coll_result& lb_coll_result );
+	virtual void block_coll_response_top_16x16_old
 		( const block_coll_result& tl_coll_result,
 		const block_coll_result& tm_coll_result,
-		const block_coll_result& tr_coll_result )
-		__attribute__((_iwram_code));
-	virtual void block_coll_response_right_16x16
+		const block_coll_result& tr_coll_result );
+	virtual void block_coll_response_right_16x16_old
 		( const block_coll_result& rt_coll_result,
-		const block_coll_result& rb_coll_result )
-		__attribute__((_iwram_code));
-	virtual void non_slope_block_coll_response_bot_16x16
+		const block_coll_result& rb_coll_result );
+	virtual void non_slope_block_coll_response_bot_16x16_old
 		( const block_coll_result& bl_coll_result,
 		const block_coll_result& bm_coll_result, 
-		const block_coll_result& br_coll_result )
-		__attribute__((_iwram_code));
-	virtual block_type slope_block_coll_response_bot_16x16
+		const block_coll_result& br_coll_result );
+	virtual block_type slope_block_coll_response_bot_16x16_old
 		( coll_point_group& the_pt_group,
 		block_coll_result& bl_coll_result,
 		block_coll_result& bm_coll_result,
-		block_coll_result& br_coll_result, bool hitting_tltr=false )
+		block_coll_result& br_coll_result, bool hitting_tltr=false );
+	
+	virtual void block_coll_response_left_16x32_old
+		( const block_coll_result& lt_coll_result,
+		const block_coll_result& lm_coll_result, 
+		const block_coll_result& lb_coll_result );
+	virtual void block_coll_response_top_16x32_old
+		( const block_coll_result& tl_coll_result,
+		const block_coll_result& tm_coll_result, 
+		const block_coll_result& tr_coll_result );
+	virtual void block_coll_response_right_16x32_old
+		( const block_coll_result& rt_coll_result,
+		const block_coll_result& rm_coll_result, 
+		const block_coll_result& rb_coll_result );
+	virtual void non_slope_block_coll_response_bot_16x32_old
+		( const block_coll_result& bl_coll_result,
+		const block_coll_result& bm_coll_result, 
+		const block_coll_result& br_coll_result );
+	virtual block_type slope_block_coll_response_bot_16x32_old
+		( coll_point_group& the_pt_group,
+		block_coll_result& bl_coll_result,
+		block_coll_result& bm_coll_result,
+		block_coll_result& br_coll_result, bool hitting_tltr=false );
+	
+	
+	virtual void block_coll_response_left_16x16
+		( const block_coll_result_group& the_bc_result_group )
+		__attribute__((_iwram_code));
+	virtual void block_coll_response_right_16x16
+		( const block_coll_result_group& the_bc_result_group )
+		__attribute__((_iwram_code));
+	virtual void block_coll_response_top_16x16
+		( const block_coll_result_group& the_bc_result_group )
+		__attribute__((_iwram_code));
+	virtual void block_coll_response_bot_16x16
+		( const block_coll_result_group& the_bc_result_group )
 		__attribute__((_iwram_code));
 	
 	
 	virtual void block_coll_response_left_16x32
-		( const block_coll_result& lt_coll_result,
-		const block_coll_result& lm_coll_result, 
-		const block_coll_result& lb_coll_result )
-		__attribute__((_iwram_code));
-	virtual void block_coll_response_top_16x32
-		( const block_coll_result& tl_coll_result,
-		const block_coll_result& tm_coll_result, 
-		const block_coll_result& tr_coll_result )
+		( const block_coll_result_group& the_bc_result_group )
 		__attribute__((_iwram_code));
 	virtual void block_coll_response_right_16x32
-		( const block_coll_result& rt_coll_result,
-		const block_coll_result& rm_coll_result, 
-		const block_coll_result& rb_coll_result )
+		( const block_coll_result_group& the_bc_result_group )
 		__attribute__((_iwram_code));
-	virtual void non_slope_block_coll_response_bot_16x32
-		( const block_coll_result& bl_coll_result,
-		const block_coll_result& bm_coll_result, 
-		const block_coll_result& br_coll_result )
+	virtual void block_coll_response_top_16x32
+		( const block_coll_result_group& the_bc_result_group )
 		__attribute__((_iwram_code));
-	virtual block_type slope_block_coll_response_bot_16x32
-		( coll_point_group& the_pt_group,
-		block_coll_result& bl_coll_result,
-		block_coll_result& bm_coll_result,
-		block_coll_result& br_coll_result, bool hitting_tltr=false )
+	virtual void block_coll_response_bot_16x32
+		( const block_coll_result_group& the_bc_result_group )
 		__attribute__((_iwram_code));
+	
 	
 	
 	// Regular block collision stuff
+	virtual void block_collision_stuff_16x16_old();
+	virtual void block_collision_stuff_16x32_old();
+	virtual void block_collision_stuff_32x16_old();
+	virtual void block_collision_stuff_32x32_old();
+	
 	virtual void block_collision_stuff_16x16();
 	virtual void block_collision_stuff_16x32();
 	virtual void block_collision_stuff_32x16();
 	virtual void block_collision_stuff_32x32();
 	
 	// Block collision stuff with just strongly hit response 
-	virtual void block_collision_stuff_strongly_hit_stuff_only_16x16();
-	virtual void block_collision_stuff_strongly_hit_stuff_only_16x32();
-	virtual void block_collision_stuff_strongly_hit_stuff_only_32x16();
-	virtual void block_collision_stuff_strongly_hit_stuff_only_32x32();
+	//virtual void block_collision_stuff_strongly_hit_stuff_only_16x16();
+	//virtual void block_collision_stuff_strongly_hit_stuff_only_16x32();
+	//virtual void block_collision_stuff_strongly_hit_stuff_only_32x16();
+	//virtual void block_collision_stuff_strongly_hit_stuff_only_32x32();
 	
 } __attribute__((_align4));
 

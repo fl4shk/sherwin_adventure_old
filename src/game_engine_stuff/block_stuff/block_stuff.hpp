@@ -342,18 +342,6 @@ inline bool bt_is_neither_air_nor_right_slope( block_type the_block_type )
 
 
 
-class block_coll_result
-{
-public:		// variables
-	vec2_s32 coord;
-	block_type type;
-	
-public:		// functions
-	
-	
-} __attribute__((_align4));
-
-
 inline bool block_type_exists( block_type the_block_type )
 {
 	return ( the_block_type >= bt_air && the_block_type < bt_count );
