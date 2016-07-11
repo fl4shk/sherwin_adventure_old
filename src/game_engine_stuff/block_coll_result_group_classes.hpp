@@ -33,7 +33,10 @@ public:		// variables
 	block* the_block;
 	
 public:		// functions
-	
+	inline block_type get_block_type() const
+	{
+		return the_block->get_block_type();
+	}
 	
 } __attribute__((_align4));
 
@@ -47,24 +50,12 @@ public:		// variables
 	block_coll_result the_array[max_num_block_coll_results];
 	
 public:		// functions
-	inline block_coll_result_group_base()
-	{
-		memfill32( the_array, 0, sizeof(the_array) / sizeof(u32) );
-	}
-	inline block_coll_result_group_base
-		( const block_coll_result_group_base& to_copy )
-	{
-		*this = to_copy;
-	}
+	block_coll_result_group_base();
+	block_coll_result_group_base
+		( const block_coll_result_group_base& to_copy );
 	
-	inline block_coll_result_group_base& operator = 
-		( const block_coll_result_group_base& to_copy )
-	{
-		memcpy32( the_array, to_copy.the_array, sizeof(the_array) 
-			/ sizeof(u32) );
-		
-		return *this;
-	}
+	block_coll_result_group_base& operator = 
+		( const block_coll_result_group_base& to_copy );
 	
 } __attribute__((_align4));
 
@@ -73,12 +64,9 @@ class block_coll_result_group_16x16 : public block_coll_result_group_base
 public:		// functions
 	block_coll_result_group_16x16
 		( const coll_point_group_16x16& the_pt_group );
+	block_coll_result_group_16x16
+		( const block_coll_result_group_base& to_copy );
 	
-	inline block_coll_result_group_16x16
-		( const block_coll_result_group_base& to_copy )
-	{
-		*this = to_copy;
-	}
 	
 	inline block_coll_result& get_bcr_lt()
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_lt]; }
@@ -148,12 +136,9 @@ class block_coll_result_group_16x32 : public block_coll_result_group_base
 public:		// functions
 	block_coll_result_group_16x32
 		( const coll_point_group_16x32& the_pt_group );
+	block_coll_result_group_16x32
+		( const block_coll_result_group_base& to_copy );
 	
-	inline block_coll_result_group_16x32
-		( const block_coll_result_group_base& to_copy )
-	{
-		*this = to_copy;
-	}
 	
 	inline block_coll_result& get_bcr_lt()
 		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_lt]; }

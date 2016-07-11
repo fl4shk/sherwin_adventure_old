@@ -345,17 +345,16 @@ inline bool bt_is_right_slope( block_type the_block_type )
 }
 
 // Check whether the_block_type is fully solid
-inline bool bbvt_is_neither_air_nor_slope
-	( block_behavior_type behavior_type )
+inline bool bbvt_is_fully_solid( block_behavior_type behavior_type )
 {
 	//return ( the_block_type != bt_air && !bt_is_slope(the_block_type) );
 	return behavior_type == bbvt_solid;
 }
-inline bool bt_is_neither_air_nor_slope( block_type the_block_type )
+inline bool bt_is_fully_solid( block_type the_block_type )
 {
 	//return ( the_block_type != bt_air && !bt_is_slope(the_block_type) );
 	
-	return bbvt_is_neither_air_nor_slope(get_behavior_type_of_block_type
+	return bbvt_is_fully_solid(get_behavior_type_of_block_type
 		(the_block_type));
 }
 

@@ -28,18 +28,10 @@ public:		// variables
 	static constexpr u32 metatile_graphics_slot = metatile_number;
 	
 public:		// functions
-	inline virtual const u32 get_metatile_number()
-	{
-		return metatile_number;
-	}
-	inline virtual const u32 get_palette_number()
-	{
-		return palette_number;
-	}
-	inline virtual const u32 get_metatile_graphics_slot()
-	{
-		return metatile_graphics_slot;
-	}
+	// Turns out that inline virtual is not actually inline.
+	virtual const u32 get_metatile_number();
+	virtual const u32 get_palette_number();
+	virtual const u32 get_metatile_graphics_slot();
 } __attribute__((_align4));
 
 class grass_top_left_block_stuff : public block_base_stuff
@@ -50,18 +42,9 @@ public:		// variables
 	static constexpr u32 metatile_graphics_slot = metatile_number;
 	
 public:		// functions
-	inline virtual const u32 get_metatile_number()
-	{
-		return metatile_number;
-	}
-	inline virtual const u32 get_palette_number()
-	{
-		return palette_number;
-	}
-	inline virtual const u32 get_metatile_graphics_slot()
-	{
-		return metatile_graphics_slot;
-	}
+	virtual const u32 get_metatile_number();
+	virtual const u32 get_palette_number();
+	virtual const u32 get_metatile_graphics_slot();
 } __attribute__((_align4));
 class grass_top_middle_block_stuff : public block_base_stuff
 {
@@ -71,18 +54,9 @@ public:		// variables
 	static constexpr u32 metatile_graphics_slot = metatile_number;
 	
 public:		// functions
-	inline virtual const u32 get_metatile_number()
-	{
-		return metatile_number;
-	}
-	inline virtual const u32 get_palette_number()
-	{
-		return palette_number;
-	}
-	inline virtual const u32 get_metatile_graphics_slot()
-	{
-		return metatile_graphics_slot;
-	}
+	virtual const u32 get_metatile_number();
+	virtual const u32 get_palette_number();
+	virtual const u32 get_metatile_graphics_slot();
 } __attribute__((_align4));
 class grass_top_right_block_stuff : public block_base_stuff
 {
@@ -92,18 +66,9 @@ public:		// variables
 	static constexpr u32 metatile_graphics_slot = metatile_number;
 	
 public:		// functions
-	inline virtual const u32 get_metatile_number()
-	{
-		return metatile_number;
-	}
-	inline virtual const u32 get_palette_number()
-	{
-		return palette_number;
-	}
-	inline virtual const u32 get_metatile_graphics_slot()
-	{
-		return metatile_graphics_slot;
-	}
+	virtual const u32 get_metatile_number();
+	virtual const u32 get_palette_number();
+	virtual const u32 get_metatile_graphics_slot();
 } __attribute__((_align4));
 
 
@@ -115,18 +80,9 @@ public:		// variables
 	static constexpr u32 metatile_graphics_slot = metatile_number;
 	
 public:		// functions
-	inline virtual const u32 get_metatile_number()
-	{
-		return metatile_number;
-	}
-	inline virtual const u32 get_palette_number()
-	{
-		return palette_number;
-	}
-	inline virtual const u32 get_metatile_graphics_slot()
-	{
-		return metatile_graphics_slot;
-	}
+	virtual const u32 get_metatile_number();
+	virtual const u32 get_palette_number();
+	virtual const u32 get_metatile_graphics_slot();
 } __attribute__((_align4));
 class dirt_middle_middle_block_stuff : public block_base_stuff
 {
@@ -136,18 +92,9 @@ public:		// variables
 	static constexpr u32 metatile_graphics_slot = metatile_number;
 	
 public:		// functions
-	inline virtual const u32 get_metatile_number()
-	{
-		return metatile_number;
-	}
-	inline virtual const u32 get_palette_number()
-	{
-		return palette_number;
-	}
-	inline virtual const u32 get_metatile_graphics_slot()
-	{
-		return metatile_graphics_slot;
-	}
+	virtual const u32 get_metatile_number();
+	virtual const u32 get_palette_number();
+	virtual const u32 get_metatile_graphics_slot();
 } __attribute__((_align4));
 class dirt_middle_right_block_stuff : public block_base_stuff
 {
@@ -157,19 +104,9 @@ public:		// variables
 	static constexpr u32 metatile_graphics_slot = metatile_number;
 	
 public:		// functions
-	inline virtual const u32 get_metatile_number()
-	{
-		return metatile_number;
-	}
-	inline virtual const u32 get_palette_number()
-	{
-		return palette_number;
-	}
-	inline virtual const u32 get_metatile_graphics_slot()
-	{
-		return metatile_graphics_slot;
-	}
-		__attribute__((_iwram_code));
+	virtual const u32 get_metatile_number();
+	virtual const u32 get_palette_number();
+	virtual const u32 get_metatile_graphics_slot();
 } __attribute__((_align4));
 
 class dirt_bottom_left_block_stuff : public block_base_stuff
@@ -180,18 +117,9 @@ public:		// variables
 	static constexpr u32 metatile_graphics_slot = metatile_number;
 	
 public:		// functions
-	inline virtual const u32 get_metatile_number()
-	{
-		return metatile_number;
-	}
-	inline virtual const u32 get_palette_number()
-	{
-		return palette_number;
-	}
-	inline virtual const u32 get_metatile_graphics_slot()
-	{
-		return metatile_graphics_slot;
-	}
+	virtual const u32 get_metatile_number();
+	virtual const u32 get_palette_number();
+	virtual const u32 get_metatile_graphics_slot();
 } __attribute__((_align4));
 class dirt_bottom_middle_block_stuff : public block_base_stuff
 {
@@ -201,18 +129,9 @@ public:		// variables
 	static constexpr u32 metatile_graphics_slot = metatile_number;
 	
 public:		// functions
-	inline virtual const u32 get_metatile_number()
-	{
-		return metatile_number;
-	}
-	inline virtual const u32 get_palette_number()
-	{
-		return palette_number;
-	}
-	inline virtual const u32 get_metatile_graphics_slot()
-	{
-		return metatile_graphics_slot;
-	}
+	virtual const u32 get_metatile_number();
+	virtual const u32 get_palette_number();
+	virtual const u32 get_metatile_graphics_slot();
 } __attribute__((_align4));
 class dirt_bottom_right_block_stuff : public block_base_stuff
 {
@@ -222,18 +141,9 @@ public:		// variables
 	static constexpr u32 metatile_graphics_slot = metatile_number;
 	
 public:		// functions
-	inline virtual const u32 get_metatile_number()
-	{
-		return metatile_number;
-	}
-	inline virtual const u32 get_palette_number()
-	{
-		return palette_number;
-	}
-	inline virtual const u32 get_metatile_graphics_slot()
-	{
-		return metatile_graphics_slot;
-	}
+	virtual const u32 get_metatile_number();
+	virtual const u32 get_palette_number();
+	virtual const u32 get_metatile_graphics_slot();
 } __attribute__((_align4));
 
 // Slopes
@@ -243,23 +153,14 @@ public:		// variables
 	static constexpr u32 metatile_number = 16;
 	static constexpr u32 palette_number = 0;
 	static constexpr u32 metatile_graphics_slot = metatile_number;
-	
-	static constexpr u32 height_mask_size = num_pixels_per_block_row;
-	static const u32 height_mask[height_mask_size];
+	static constexpr block_behavior_type behavior_type 
+		= bbvt_slope_p16_p16;
 	
 public:		// functions
-	inline virtual const u32 get_metatile_number()
-	{
-		return metatile_number;
-	}
-	inline virtual const u32 get_palette_number()
-	{
-		return palette_number;
-	}
-	inline virtual const u32 get_metatile_graphics_slot()
-	{
-		return metatile_graphics_slot;
-	}
+	virtual const u32 get_metatile_number();
+	virtual const u32 get_palette_number();
+	virtual const u32 get_metatile_graphics_slot();
+	virtual block_behavior_type get_behavior_type();
 } __attribute__((_align4));
 class grass_slope_n16_p16_block_stuff : public block_base_stuff
 {
@@ -267,23 +168,14 @@ public:		// variables
 	static constexpr u32 metatile_number = 17;
 	static constexpr u32 palette_number = 0;
 	static constexpr u32 metatile_graphics_slot = metatile_number;
-	
-	static constexpr u32 height_mask_size = num_pixels_per_block_row;
-	static const u32 height_mask[height_mask_size]; 
+	static constexpr block_behavior_type behavior_type 
+		= bbvt_slope_n16_p16;
 	
 public:		// functions
-	inline virtual const u32 get_metatile_number()
-	{
-		return metatile_number;
-	}
-	inline virtual const u32 get_palette_number()
-	{
-		return palette_number;
-	}
-	inline virtual const u32 get_metatile_graphics_slot()
-	{
-		return metatile_graphics_slot;
-	}
+	virtual const u32 get_metatile_number();
+	virtual const u32 get_palette_number();
+	virtual const u32 get_metatile_graphics_slot();
+	virtual block_behavior_type get_behavior_type();
 } __attribute__((_align4));
 
 class grass_slope_p32_p16_short_block_stuff : public block_base_stuff
@@ -292,23 +184,14 @@ public:		// variables
 	static constexpr u32 metatile_number = 18;
 	static constexpr u32 palette_number = 0;
 	static constexpr u32 metatile_graphics_slot = metatile_number;
-	
-	static constexpr u32 height_mask_size = num_pixels_per_block_row;
-	static const u32 height_mask[height_mask_size]; 
+	static constexpr block_behavior_type behavior_type 
+		= bbvt_slope_p32_p16_short;
 	
 public:		// functions
-	inline virtual const u32 get_metatile_number()
-	{
-		return metatile_number;
-	}
-	inline virtual const u32 get_palette_number()
-	{
-		return palette_number;
-	}
-	inline virtual const u32 get_metatile_graphics_slot()
-	{
-		return metatile_graphics_slot;
-	}
+	virtual const u32 get_metatile_number();
+	virtual const u32 get_palette_number();
+	virtual const u32 get_metatile_graphics_slot();
+	virtual block_behavior_type get_behavior_type();
 } __attribute__((_align4));
 
 class grass_slope_p32_p16_tall_block_stuff : public block_base_stuff
@@ -317,23 +200,14 @@ public:		// variables
 	static constexpr u32 metatile_number = 19;
 	static constexpr u32 palette_number = 0;
 	static constexpr u32 metatile_graphics_slot = metatile_number;
-	
-	static constexpr u32 height_mask_size = num_pixels_per_block_row;
-	static const u32 height_mask[height_mask_size]; 
+	static constexpr block_behavior_type behavior_type 
+		= bbvt_slope_p32_p16_tall;
 	
 public:		// functions
-	inline virtual const u32 get_metatile_number()
-	{
-		return metatile_number;
-	}
-	inline virtual const u32 get_palette_number()
-	{
-		return palette_number;
-	}
-	inline virtual const u32 get_metatile_graphics_slot()
-	{
-		return metatile_graphics_slot;
-	}
+	virtual const u32 get_metatile_number();
+	virtual const u32 get_palette_number();
+	virtual const u32 get_metatile_graphics_slot();
+	virtual block_behavior_type get_behavior_type();
 } __attribute__((_align4));
 
 class grass_slope_n32_p16_tall_block_stuff : public block_base_stuff
@@ -342,23 +216,14 @@ public:		// variables
 	static constexpr u32 metatile_number = 20;
 	static constexpr u32 palette_number = 0;
 	static constexpr u32 metatile_graphics_slot = metatile_number;
-	
-	static constexpr u32 height_mask_size = num_pixels_per_block_row;
-	static const u32 height_mask[height_mask_size]; 
+	static constexpr block_behavior_type behavior_type 
+		= bbvt_slope_n32_p16_tall;
 	
 public:		// functions
-	inline virtual const u32 get_metatile_number()
-	{
-		return metatile_number;
-	}
-	inline virtual const u32 get_palette_number()
-	{
-		return palette_number;
-	}
-	inline virtual const u32 get_metatile_graphics_slot()
-	{
-		return metatile_graphics_slot;
-	}
+	virtual const u32 get_metatile_number();
+	virtual const u32 get_palette_number();
+	virtual const u32 get_metatile_graphics_slot();
+	virtual block_behavior_type get_behavior_type();
 } __attribute__((_align4));
 class grass_slope_n32_p16_short_block_stuff : public block_base_stuff
 {
@@ -366,23 +231,14 @@ public:		// variables
 	static constexpr u32 metatile_number = 21;
 	static constexpr u32 palette_number = 0;
 	static constexpr u32 metatile_graphics_slot = metatile_number;
-	
-	static constexpr u32 height_mask_size = num_pixels_per_block_row;
-	static const u32 height_mask[height_mask_size]; 
+	static constexpr block_behavior_type behavior_type 
+		= bbvt_slope_n32_p16_short;
 	
 public:		// functions
-	inline virtual const u32 get_metatile_number()
-	{
-		return metatile_number;
-	}
-	inline virtual const u32 get_palette_number()
-	{
-		return palette_number;
-	}
-	inline virtual const u32 get_metatile_graphics_slot()
-	{
-		return metatile_graphics_slot;
-	}
+	virtual const u32 get_metatile_number();
+	virtual const u32 get_palette_number();
+	virtual const u32 get_metatile_graphics_slot();
+	virtual block_behavior_type get_behavior_type();
 } __attribute__((_align4));
 
 class grass_in_slope_left_block_stuff : public block_base_stuff
@@ -393,18 +249,9 @@ public:		// variables
 	static constexpr u32 metatile_graphics_slot = metatile_number;
 	
 public:		// functions
-	inline virtual const u32 get_metatile_number()
-	{
-		return metatile_number;
-	}
-	inline virtual const u32 get_palette_number()
-	{
-		return palette_number;
-	}
-	inline virtual const u32 get_metatile_graphics_slot()
-	{
-		return metatile_graphics_slot;
-	}
+	virtual const u32 get_metatile_number();
+	virtual const u32 get_palette_number();
+	virtual const u32 get_metatile_graphics_slot();
 } __attribute__((_align4));
 class grass_in_slope_right_block_stuff : public block_base_stuff
 {
@@ -414,18 +261,9 @@ public:		// variables
 	static constexpr u32 metatile_graphics_slot = metatile_number;
 	
 public:		// functions
-	inline virtual const u32 get_metatile_number()
-	{
-		return metatile_number;
-	}
-	inline virtual const u32 get_palette_number()
-	{
-		return palette_number;
-	}
-	inline virtual const u32 get_metatile_graphics_slot()
-	{
-		return metatile_graphics_slot;
-	}
+	virtual const u32 get_metatile_number();
+	virtual const u32 get_palette_number();
+	virtual const u32 get_metatile_graphics_slot();
 } __attribute__((_align4));
 
 

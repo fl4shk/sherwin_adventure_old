@@ -27,6 +27,26 @@ public:		// variables
 	static const u32 metatile_graphics_slot = metatile_number;
 	static constexpr block_behavior_type behavior_type = bbvt_solid;
 	
+	// Slope stuff
+	static constexpr u32 height_mask_size = num_pixels_per_block_row;
+	
+	// 45 degree angle slope height mask
+	static const u32 slope_p16_p16_height_mask[height_mask_size];
+	
+	// 135 degree angle slope height mask
+	static const u32 slope_n16_p16_height_mask[height_mask_size];
+	
+	// Approximately 26.57 degrees angle slope short block height mask
+	static const u32 slope_p32_p16_short_height_mask[height_mask_size];
+	
+	// Approximately 26.57 degrees angle slope tall block height mask
+	static const u32 slope_p32_p16_tall_height_mask[height_mask_size];
+	
+	// Approximately 153.43 degrees angle slope, with two blocks
+	static const u32 slope_n32_p16_tall_height_mask[height_mask_size];
+	
+	static const u32 slope_n32_p16_short_height_mask[height_mask_size];
+	
 public:		// functions
 	virtual const u32 get_metatile_number();
 	virtual const u32 get_palette_number();
