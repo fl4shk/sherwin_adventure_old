@@ -31,6 +31,9 @@
 	macro(tl) macro(tm) macro(tr)
 #define list_of_16x16_bottom_side_coll_point_names(macro) \
 	macro(bl) macro(bm) macro(br)
+// Note that these do not actually include top or bottom sides of the
+// collision box.  Instead, they are at the same y coordinates as the coll
+// points on the left or right side.
 #define list_of_16x16_middle_vert_line_coll_point_names(macro) \
 	macro(mt) macro(mb)
 
@@ -49,6 +52,7 @@
 #define list_of_16x16_horiz_side_xpos_right_coll_point_names(macro) \
 	macro(tr) macro(br)
 
+// I don't think this is in use any more
 #define list_of_16x16_slope_stuff_coll_point_names(macro) \
 	macro(bm) macro(bl) macro(br)
 
@@ -71,6 +75,9 @@
 	macro(tl) macro(tm) macro(tr)
 #define list_of_16x32_bottom_side_coll_point_names(macro) \
 	macro(bl) macro(bm) macro(br)
+// Note that these do not actually include top or bottom sides of the
+// collision box.  Instead, they are at the same y coordinates as the coll
+// points on the left or right side.
 #define list_of_16x32_middle_vert_line_coll_point_names(macro) \
 	macro(mt) macro(mm) macro(mb)
 
@@ -91,6 +98,7 @@
 #define list_of_16x32_horiz_side_xpos_right_coll_point_names(macro) \
 	macro(tr) macro(br)
 
+// I don't think this is in use any more
 #define list_of_16x32_slope_stuff_coll_point_names(macro) \
 	macro(bm) macro(bl) macro(br)
 
@@ -113,6 +121,9 @@
 	macro(tl) macro(tm) macro(tr)
 #define list_of_32x16_bottom_side_coll_point_names(macro) \
 	macro(bl) macro(bm) macro(br)
+// Note that these do not actually include top or bottom sides of the
+// collision box.  Instead, they are at the same y coordinates as the coll
+// points on the left or right side.
 #define list_of_32x16_middle_vert_line_coll_point_names(macro) \
 	macro(mt) macro(mb)
 
@@ -131,6 +142,7 @@
 #define list_of_32x16_horiz_side_xpos_right_coll_point_names(macro) \
 	macro(tr) macro(br)
 
+// I don't think this is in use any more
 #define list_of_32x16_slope_stuff_coll_point_names(macro) \
 	macro(bm) macro(bl) macro(br)
 

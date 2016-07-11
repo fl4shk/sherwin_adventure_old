@@ -2193,80 +2193,76 @@ void sprite::block_collision_stuff_16x32()
 	
 	block_coll_result_group_16x32 the_bcr_group(the_pt_group);
 	
-	//if ( the_bcr_group
 	
-	// The block_coll_result's
-	block_coll_result 
-		& bcr_lt = the_bcr_group.get_bcr_lt(),
-		& bcr_lm = the_bcr_group.get_bcr_lm(), 
-		& bcr_lb = the_bcr_group.get_bcr_lb(), 
-		& bcr_tl = the_bcr_group.get_bcr_tl(), 
-		& bcr_tm = the_bcr_group.get_bcr_tm(), 
-		& bcr_tr = the_bcr_group.get_bcr_tr(), 
-		& bcr_rt = the_bcr_group.get_bcr_rt(), 
-		& bcr_rm = the_bcr_group.get_bcr_rm(), 
-		& bcr_rb = the_bcr_group.get_bcr_rb(), 
-		& bcr_bl = the_bcr_group.get_bcr_bl(), 
-		& bcr_bm = the_bcr_group.get_bcr_bm(), 
-		& bcr_br = the_bcr_group.get_bcr_br(),
-		& bcr_mt = the_bcr_group.get_bcr_mt(),
-		& bcr_mm = the_bcr_group.get_bcr_mm(),
-		& bcr_mb = the_bcr_group.get_bcr_mb();
-	
+	// The block_behavior_type's
 	block_behavior_type
 		the_bbvt_lt = get_behavior_type_of_block_type
-			(bcr_lt.get_block_type()),
+			(the_bcr_group.get_bcr_lt().get_block_type()),
 		the_bbvt_lm = get_behavior_type_of_block_type
-			(bcr_lm.get_block_type()), 
+			(the_bcr_group.get_bcr_lm().get_block_type()), 
 		the_bbvt_lb = get_behavior_type_of_block_type
-			(bcr_lb.get_block_type()), 
+			(the_bcr_group.get_bcr_lb().get_block_type()), 
 		the_bbvt_tl = get_behavior_type_of_block_type
-			(bcr_tl.get_block_type()), 
+			(the_bcr_group.get_bcr_tl().get_block_type()), 
 		the_bbvt_tm = get_behavior_type_of_block_type
-			(bcr_tm.get_block_type()), 
+			(the_bcr_group.get_bcr_tm().get_block_type()), 
 		the_bbvt_tr = get_behavior_type_of_block_type
-			(bcr_tr.get_block_type()), 
+			(the_bcr_group.get_bcr_tr().get_block_type()), 
 		the_bbvt_rt = get_behavior_type_of_block_type
-			(bcr_rt.get_block_type()), 
+			(the_bcr_group.get_bcr_rt().get_block_type()), 
 		the_bbvt_rm = get_behavior_type_of_block_type
-			(bcr_rm.get_block_type()), 
+			(the_bcr_group.get_bcr_rm().get_block_type()), 
 		the_bbvt_rb = get_behavior_type_of_block_type
-			(bcr_rb.get_block_type()), 
+			(the_bcr_group.get_bcr_rb().get_block_type()), 
 		the_bbvt_bl = get_behavior_type_of_block_type
-			(bcr_bl.get_block_type()), 
+			(the_bcr_group.get_bcr_bl().get_block_type()), 
 		the_bbvt_bm = get_behavior_type_of_block_type
-			(bcr_bm.get_block_type()), 
+			(the_bcr_group.get_bcr_bm().get_block_type()), 
 		the_bbvt_br = get_behavior_type_of_block_type
-			(bcr_br.get_block_type()),
+			(the_bcr_group.get_bcr_br().get_block_type()),
 		the_bbvt_mt = get_behavior_type_of_block_type
-			(bcr_mt.get_block_type()),
+			(the_bcr_group.get_bcr_mt().get_block_type()),
 		the_bbvt_mm = get_behavior_type_of_block_type
-			(bcr_mm.get_block_type()),
+			(the_bcr_group.get_bcr_mm().get_block_type()),
 		the_bbvt_mb = get_behavior_type_of_block_type
-			(bcr_mb.get_block_type());
+			(the_bcr_group.get_bcr_mb().get_block_type());
 	
-	bool left_side_intersects_bbvt_solid = ( the_bbvt_lt == bbvt_solid 
-		|| the_bbvt_lm == bbvt_solid || the_bbvt_lb == bbvt_solid );
-	bool right_side_intersects_bbvt_solid = ( the_bbvt_rt == bbvt_solid 
-		|| the_bbvt_rm == bbvt_solid || the_bbvt_rb == bbvt_solid );
-	bool top_side_intersects_bbvt_solid = ( the_bbvt_tl == bbvt_solid 
-		|| the_bbvt_tm == bbvt_solid || the_bbvt_tr == bbvt_solid );
-	bool bot_side_intersects_bbvt_solid = ( the_bbvt_bl == bbvt_solid 
-		|| the_bbvt_bm == bbvt_solid || the_bbvt_br == bbvt_solid );
+	bool left_side_intersects_solid 
+		= ( bbvt_is_fully_solid(the_bbvt_lt)
+		|| bbvt_is_fully_solid(the_bbvt_lm) 
+		|| bbvt_is_fully_solid(the_bbvt_lb) );
+	bool right_side_intersects_solid 
+		= ( bbvt_is_fully_solid(the_bbvt_rt) 
+		|| bbvt_is_fully_solid(the_bbvt_rm)
+		|| bbvt_is_fully_solid(the_bbvt_rb) );
+	bool top_side_intersects_solid 
+		= ( bbvt_is_fully_solid(the_bbvt_tl)
+		|| bbvt_is_fully_solid(the_bbvt_tm)
+		|| bbvt_is_fully_solid(the_bbvt_tr) );
+	bool bot_side_intersects_solid 
+		= ( bbvt_is_fully_solid(the_bbvt_bl)
+		|| bbvt_is_fully_solid(the_bbvt_bm)
+		|| bbvt_is_fully_solid(the_bbvt_br) );
 	
-	if ( left_side_intersects_bbvt_solid )
+	bool bot_area_intersects_solid
+		= ( bot_side_intersects_solid
+		|| bbvt_is_fully_solid(the_bbvt_lb)
+		|| bbvt_is_fully_solid(the_bbvt_mb)
+		|| bbvt_is_fully_solid(the_bbvt_rb) );
+	
+	if ( left_side_intersects_solid )
 	{
 		block_coll_response_left_16x32(the_bcr_group);
 	}
-	if ( right_side_intersects_bbvt_solid )
+	if ( right_side_intersects_solid )
 	{
 		block_coll_response_right_16x32(the_bcr_group);
 	}
-	if ( top_side_intersects_bbvt_solid )
+	if ( top_side_intersects_solid )
 	{
 		block_coll_response_top_16x32(the_bcr_group);
 	}
-	if ( bot_side_intersects_bbvt_solid )
+	if ( bot_side_intersects_solid )
 	{
 		block_coll_response_bot_16x32(the_bcr_group);
 	}
