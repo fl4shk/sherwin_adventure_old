@@ -105,6 +105,12 @@ public:		// functions
 	inline block_coll_result& get_bcr_br()
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_br]; }
 	
+	inline block_coll_result& get_bcr_mt()
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_mt]; }
+	inline block_coll_result& get_bcr_mb()
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_mb]; }
+	
+	
 	
 	inline const block_coll_result& get_bcr_lt() const
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_lt]; }
@@ -129,6 +135,11 @@ public:		// functions
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_bm]; }
 	inline const block_coll_result& get_bcr_br() const
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_br]; }
+	
+	inline const block_coll_result& get_bcr_mt() const
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_mt]; }
+	inline const block_coll_result& get_bcr_mb() const
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_mb]; }
 } __attribute__((_align4));
 
 
@@ -173,6 +184,13 @@ public:		// functions
 	inline block_coll_result& get_bcr_br()
 		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_br]; }
 	
+	inline block_coll_result& get_bcr_mt()
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mt]; }
+	inline block_coll_result& get_bcr_mm()
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mm]; }
+	inline block_coll_result& get_bcr_mb()
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mb]; }
+	
 	
 	
 	inline const block_coll_result& get_bcr_lt() const
@@ -202,6 +220,13 @@ public:		// functions
 		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_bm]; }
 	inline const block_coll_result& get_bcr_br() const
 		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_br]; }
+	
+	inline const block_coll_result& get_bcr_mt() const
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mt]; }
+	inline const block_coll_result& get_bcr_mm() const
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mm]; }
+	inline const block_coll_result& get_bcr_mb() const
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mb]; }
 } __attribute__((_align4));
 
 

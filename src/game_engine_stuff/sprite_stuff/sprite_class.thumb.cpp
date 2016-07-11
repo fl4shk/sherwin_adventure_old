@@ -612,6 +612,8 @@ void sprite::get_basic_block_coll_results_16x16
 	block_coll_result& rb_coll_result, block_coll_result& bl_coll_result, 
 	block_coll_result& bm_coll_result, block_coll_result& br_coll_result )
 {
+	block_coll_result mt_coll_result, mb_coll_result;
+	
 	#define X(name) \
 		name##_coll_result.coord \
 			= active_level::get_block_coord_of_point \
@@ -632,6 +634,8 @@ void sprite::get_basic_block_coll_results_16x32
 	block_coll_result& rb_coll_result, block_coll_result& bl_coll_result,
 	block_coll_result& bm_coll_result, block_coll_result& br_coll_result )
 {
+	block_coll_result mt_coll_result, mm_coll_result, mb_coll_result;
+	
 	#define X(name) \
 		name##_coll_result.coord \
 			= active_level::get_block_coord_of_point \
