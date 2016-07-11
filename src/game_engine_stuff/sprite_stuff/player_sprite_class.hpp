@@ -324,19 +324,16 @@ public:		// functions
 	
 	
 	// Physics and collision stuff
-	virtual void block_collision_stuff()
-		__attribute__((_iwram_code));
+	virtual void block_collision_stuff();
 	
-	virtual void block_coll_response_top_16x16
+	virtual void block_coll_response_top_16x16_old
 		( const block_coll_result& tl_coll_result, 
 		const block_coll_result& tm_coll_result,
-		const block_coll_result& tr_coll_result )
-		__attribute__((_iwram_code));
-	virtual void block_coll_response_top_16x32
+		const block_coll_result& tr_coll_result );
+	virtual void block_coll_response_top_16x32_old
 		( const block_coll_result& tl_coll_result, 
 		const block_coll_result& tm_coll_result,
-		const block_coll_result& tr_coll_result )
-		__attribute__((_iwram_code));
+		const block_coll_result& tr_coll_result );
 	
 	virtual void handle_jumping_stuff( u32 is_jump_key_hit, 
 		u32 is_jump_key_held ) __attribute__((_iwram_code));

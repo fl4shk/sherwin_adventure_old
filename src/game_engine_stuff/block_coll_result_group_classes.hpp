@@ -72,8 +72,7 @@ class block_coll_result_group_16x16 : public block_coll_result_group_base
 {
 public:		// functions
 	block_coll_result_group_16x16
-		( const coll_point_group_16x16& the_pt_group )
-		__attribute__((_iwram_code));
+		( const coll_point_group_16x16& the_pt_group );
 	
 	inline block_coll_result_group_16x16
 		( const block_coll_result_group_base& to_copy )
@@ -140,6 +139,7 @@ public:		// functions
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_mt]; }
 	inline const block_coll_result& get_bcr_mb() const
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_mb]; }
+	
 } __attribute__((_align4));
 
 
@@ -147,8 +147,7 @@ class block_coll_result_group_16x32 : public block_coll_result_group_base
 {
 public:		// functions
 	block_coll_result_group_16x32
-		( const coll_point_group_16x32& the_pt_group )
-		__attribute__((_iwram_code));
+		( const coll_point_group_16x32& the_pt_group );
 	
 	inline block_coll_result_group_16x32
 		( const block_coll_result_group_base& to_copy )
@@ -227,6 +226,7 @@ public:		// functions
 		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mm]; }
 	inline const block_coll_result& get_bcr_mb() const
 		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mb]; }
+	
 } __attribute__((_align4));
 
 

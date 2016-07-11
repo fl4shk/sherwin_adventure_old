@@ -25,17 +25,20 @@ public:		// variables
 	static const u32 metatile_number = 0;
 	static const u32 palette_number = 0;
 	static const u32 metatile_graphics_slot = metatile_number;
+	static constexpr block_behavior_type behavior_type = bbvt_solid;
 	
 public:		// functions
-	virtual const u32 get_metatile_number() __attribute__((_iwram_code));
-	virtual const u32 get_palette_number() __attribute__((_iwram_code));
-	virtual const u32 get_metatile_graphics_slot()
+	virtual const u32 get_metatile_number();
+	virtual const u32 get_palette_number();
+	virtual const u32 get_metatile_graphics_slot();
+	virtual block_behavior_type get_behavior_type()
 		__attribute__((_iwram_code));
+	
 	virtual void strongly_hit_response( block& the_block, 
-		const vec2_s32& coord ) __attribute__((_iwram_code));
+		const vec2_s32& coord );
 	
 	virtual void finish_initializing_using_persistent_data
-		( block& the_block ) __attribute__((_iwram_code));
+		( block& the_block );
 	
 } __attribute__((_align4));
 

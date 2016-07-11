@@ -1089,7 +1089,7 @@ void player_sprite::block_collision_stuff()
 	}
 }
 
-void player_sprite::block_coll_response_top_16x16 
+void player_sprite::block_coll_response_top_16x16_old
 	( const block_coll_result& tl_coll_result, 
 	const block_coll_result& tm_coll_result,
 	const block_coll_result& tr_coll_result )
@@ -1131,12 +1131,12 @@ void player_sprite::block_coll_response_top_16x16
 	}
 	
 }
-void player_sprite::block_coll_response_top_16x32 
+void player_sprite::block_coll_response_top_16x32_old
 	( const block_coll_result& tl_coll_result, 
 	const block_coll_result& tm_coll_result,
 	const block_coll_result& tr_coll_result )
 {
-	block_coll_response_top_16x16( tl_coll_result, tm_coll_result, 
+	block_coll_response_top_16x16_old( tl_coll_result, tm_coll_result, 
 		tr_coll_result );
 }
 

@@ -35,5 +35,43 @@ std::array< block_base_stuff*, bt_count > block_stuff_array
 
 
 
+bool bbvt_is_left_slope( block_behavior_type behavior_type )
+{
+	switch (behavior_type)
+	{
+		#define X(name) \
+			\
+			case bbvt_slope_##name: \
+				return true; \
+				break;
+			
+		list_of_left_slope_configurations(X)
+		#undef X
+		
+		default:
+			return false;
+			break;
+	}
+}
+
+
+bool bbvt_is_right_slope( block_behavior_type behavior_type )
+{
+	switch (behavior_type)
+	{
+		#define X(name) \
+			\
+			case bbvt_slope_##name: \
+				return true; \
+				break;
+			
+		list_of_right_slope_configurations(X)
+		#undef X
+		
+		default:
+			return false;
+			break;
+	}
+}
 
 

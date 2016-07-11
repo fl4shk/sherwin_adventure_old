@@ -31,6 +31,10 @@ const u32 air_block_stuff::get_metatile_graphics_slot()
 {
 	return metatile_graphics_slot;
 }
+block_behavior_type air_block_stuff::get_behavior_type()
+{
+	return behavior_type;
+}
 void air_block_stuff::strongly_hit_response( block& the_block, 
 	const vec2_s32& coord )
 {

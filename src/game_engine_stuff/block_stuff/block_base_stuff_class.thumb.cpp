@@ -31,6 +31,10 @@ const u32 block_base_stuff::get_metatile_graphics_slot()
 {
 	return metatile_graphics_slot;
 }
+block_behavior_type block_base_stuff::get_behavior_type()
+{
+	return behavior_type;
+}
 
 // Dummy function to be implemented by classes that inherit from this one,
 // if they need it.
