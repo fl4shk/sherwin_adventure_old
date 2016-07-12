@@ -98,7 +98,6 @@ public:		// functions
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_mb]; }
 	
 	
-	
 	inline const block_coll_result& get_bcr_lt() const
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_lt]; }
 	inline const block_coll_result& get_bcr_lb() const

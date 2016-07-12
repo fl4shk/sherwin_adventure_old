@@ -36,14 +36,14 @@ public:		// functions
 	{
 	}
 	
+	inline vec2( const type& s_x, const type& s_y ) : x(s_x), y(s_y)
+	{
+	}
+	
 	inline vec2( const vec2<type>& to_copy ) : x(to_copy.x), y(to_copy.y)
 	{
 	}
 	
-	
-	inline vec2( const type& s_x, const type& s_y ) : x(s_x), y(s_y)
-	{
-	}
 	
 	
 	//inline constexpr vec2( const vec2<type>& to_copy )
@@ -143,14 +143,13 @@ public:		// functions
 	{
 	}
 	
-	inline vec2( const vec2<fixed24p8>& to_copy ) 
-		: x(to_copy.x), y(to_copy.y)
+	inline vec2( const fixed24p8& s_x, const fixed24p8& s_y )
+		: x(s_x), y(s_y)
 	{
 	}
 	
-	
-	inline vec2( const fixed24p8& s_x, const fixed24p8& s_y )
-		: x(s_x), y(s_y)
+	inline vec2( const vec2<fixed24p8>& to_copy ) 
+		: x(to_copy.x), y(to_copy.y)
 	{
 	}
 	
@@ -246,14 +245,13 @@ public:		// functions
 	{
 	}
 	
-	inline vec2( const vec2<fixed8p8>& to_copy ) 
-		: x(to_copy.x), y(to_copy.y)
+	inline vec2( const fixed8p8& s_x, const fixed8p8& s_y )
+		: x(s_x), y(s_y)
 	{
 	}
 	
-	
-	inline vec2( const fixed8p8& s_x, const fixed8p8& s_y )
-		: x(s_x), y(s_y)
+	inline vec2( const vec2<fixed8p8>& to_copy ) 
+		: x(to_copy.x), y(to_copy.y)
 	{
 	}
 	

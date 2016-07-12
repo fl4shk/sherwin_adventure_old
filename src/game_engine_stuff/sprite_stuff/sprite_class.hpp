@@ -676,10 +676,14 @@ protected:		// functions
 	virtual void block_collision_stuff_32x16_old();
 	virtual void block_collision_stuff_32x32_old();
 	
-	virtual void block_collision_stuff_16x16();
-	virtual void block_collision_stuff_16x32();
-	virtual void block_collision_stuff_32x16();
-	virtual void block_collision_stuff_32x32();
+	virtual void block_collision_stuff_16x16()
+		__attribute__((_iwram_code));
+	virtual void block_collision_stuff_16x32()
+		__attribute__((_iwram_code));
+	virtual void block_collision_stuff_32x16()
+		__attribute__((_iwram_code));
+	virtual void block_collision_stuff_32x32()
+		__attribute__((_iwram_code));
 	
 	// Block collision stuff with just strongly hit response 
 	//virtual void block_collision_stuff_strongly_hit_stuff_only_16x16();

@@ -172,6 +172,7 @@ public:		// functions
 		{ return the_array[arr_ind_16x16_pt_mt]; }
 	inline vec2_f24p8& get_pt_mb()
 		{ return the_array[arr_ind_16x16_pt_mb]; }
+	
 } __attribute__((_align4));
 
 
@@ -215,6 +216,7 @@ public:		// functions
 		{ return the_array[arr_ind_16x32_pt_mm]; }
 	inline vec2_f24p8& get_pt_mb()
 		{ return the_array[arr_ind_16x32_pt_mb]; }
+	
 } __attribute__((_align4));
 
 //void generate_coll_point_group_16x16( const sprite& the_sprite, 

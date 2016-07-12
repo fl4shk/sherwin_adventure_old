@@ -130,8 +130,11 @@ public:		// functions
 	{
 		vec2_s32 ret;
 		
-		ret.x = pt.x.round_to_int() / 16;
-		ret.y = pt.y.round_to_int() / 16;
+		//ret.x = pt.x.round_to_int() / 16;
+		//ret.y = pt.y.round_to_int() / 16;
+		
+		ret.x = pt.x.floor_to_int() / num_pixels_per_block_col;
+		ret.y = pt.y.floor_to_int() / num_pixels_per_block_row;
 		
 		return ret;
 	}

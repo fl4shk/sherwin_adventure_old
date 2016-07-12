@@ -29,6 +29,8 @@
 #include "sprite_manager_class.hpp"
 #include "../../gba_specific_stuff/button_stuff.hpp"
 
+#include "../level_stuff/sublevel_class.hpp"
+
 const oam_entry::shape_size sprite::the_initial_shape_size 
 	= oam_entry::ss_16x16;
 
@@ -2194,81 +2196,111 @@ void sprite::block_collision_stuff_16x32()
 	block_coll_result_group_16x32 the_bcr_group(the_pt_group);
 	
 	
+	block_coll_result 
+		& bcr_lt = the_bcr_group.get_bcr_lt(),
+		& bcr_lm = the_bcr_group.get_bcr_lm(),
+		& bcr_lb = the_bcr_group.get_bcr_lb(),
+		
+		& bcr_rt = the_bcr_group.get_bcr_rt(), 
+		& bcr_rm = the_bcr_group.get_bcr_rm(), 
+		& bcr_rb = the_bcr_group.get_bcr_rb(), 
+		
+		& bcr_tl = the_bcr_group.get_bcr_tl(),
+		& bcr_tm = the_bcr_group.get_bcr_tm(),
+		& bcr_tr = the_bcr_group.get_bcr_tr(),
+		
+		& bcr_bl = the_bcr_group.get_bcr_bl(), 
+		& bcr_bm = the_bcr_group.get_bcr_bm(), 
+		& bcr_br = the_bcr_group.get_bcr_br(),
+		
+		& bcr_mt = the_bcr_group.get_bcr_mt(), 
+		& bcr_mm = the_bcr_group.get_bcr_mm(), 
+		& bcr_mb = the_bcr_group.get_bcr_mb(); 
+	
+	
 	// The block_behavior_type's
 	block_behavior_type
 		the_bbvt_lt = get_behavior_type_of_block_type
-			(the_bcr_group.get_bcr_lt().get_block_type()),
+			(bcr_lt.get_block_type()),
 		the_bbvt_lm = get_behavior_type_of_block_type
-			(the_bcr_group.get_bcr_lm().get_block_type()), 
+			(bcr_lm.get_block_type()), 
 		the_bbvt_lb = get_behavior_type_of_block_type
-			(the_bcr_group.get_bcr_lb().get_block_type()), 
-		the_bbvt_tl = get_behavior_type_of_block_type
-			(the_bcr_group.get_bcr_tl().get_block_type()), 
-		the_bbvt_tm = get_behavior_type_of_block_type
-			(the_bcr_group.get_bcr_tm().get_block_type()), 
-		the_bbvt_tr = get_behavior_type_of_block_type
-			(the_bcr_group.get_bcr_tr().get_block_type()), 
+			(bcr_lb.get_block_type()), 
+		
 		the_bbvt_rt = get_behavior_type_of_block_type
-			(the_bcr_group.get_bcr_rt().get_block_type()), 
+			(bcr_rt.get_block_type()), 
 		the_bbvt_rm = get_behavior_type_of_block_type
-			(the_bcr_group.get_bcr_rm().get_block_type()), 
+			(bcr_rm.get_block_type()), 
 		the_bbvt_rb = get_behavior_type_of_block_type
-			(the_bcr_group.get_bcr_rb().get_block_type()), 
+			(bcr_rb.get_block_type()), 
+		
+		the_bbvt_tl = get_behavior_type_of_block_type
+			(bcr_tl.get_block_type()), 
+		the_bbvt_tm = get_behavior_type_of_block_type
+			(bcr_tm.get_block_type()), 
+		the_bbvt_tr = get_behavior_type_of_block_type
+			(bcr_tr.get_block_type()), 
+		
 		the_bbvt_bl = get_behavior_type_of_block_type
-			(the_bcr_group.get_bcr_bl().get_block_type()), 
+			(bcr_bl.get_block_type()), 
 		the_bbvt_bm = get_behavior_type_of_block_type
-			(the_bcr_group.get_bcr_bm().get_block_type()), 
+			(bcr_bm.get_block_type()), 
 		the_bbvt_br = get_behavior_type_of_block_type
-			(the_bcr_group.get_bcr_br().get_block_type()),
+			(bcr_br.get_block_type()),
+		
 		the_bbvt_mt = get_behavior_type_of_block_type
-			(the_bcr_group.get_bcr_mt().get_block_type()),
+			(bcr_mt.get_block_type()),
 		the_bbvt_mm = get_behavior_type_of_block_type
-			(the_bcr_group.get_bcr_mm().get_block_type()),
+			(bcr_mm.get_block_type()), 
 		the_bbvt_mb = get_behavior_type_of_block_type
-			(the_bcr_group.get_bcr_mb().get_block_type());
+			(bcr_mb.get_block_type());
 	
-	bool left_side_intersects_solid 
-		= ( bbvt_is_fully_solid(the_bbvt_lt)
-		|| bbvt_is_fully_solid(the_bbvt_lm) 
-		|| bbvt_is_fully_solid(the_bbvt_lb) );
-	bool right_side_intersects_solid 
-		= ( bbvt_is_fully_solid(the_bbvt_rt) 
-		|| bbvt_is_fully_solid(the_bbvt_rm)
-		|| bbvt_is_fully_solid(the_bbvt_rb) );
-	bool top_side_intersects_solid 
-		= ( bbvt_is_fully_solid(the_bbvt_tl)
-		|| bbvt_is_fully_solid(the_bbvt_tm)
-		|| bbvt_is_fully_solid(the_bbvt_tr) );
-	bool bot_side_intersects_solid 
-		= ( bbvt_is_fully_solid(the_bbvt_bl)
-		|| bbvt_is_fully_solid(the_bbvt_bm)
-		|| bbvt_is_fully_solid(the_bbvt_br) );
 	
-	bool bot_area_intersects_solid
-		= ( bot_side_intersects_solid
-		|| bbvt_is_fully_solid(the_bbvt_lb)
-		|| bbvt_is_fully_solid(the_bbvt_mb)
-		|| bbvt_is_fully_solid(the_bbvt_rb) );
 	
-	if ( left_side_intersects_solid )
+	static const vec2_u32 bcr_arr_2d_max_size_2d( 3, 4 );
+	block_coll_result bcr_arr_2d[bcr_arr_2d_max_size_2d.y]
+		[bcr_arr_2d_max_size_2d.x];
+	
+	vec2_s32 block_coord_pos_lt = active_level::get_block_coord_of_point
+		( vec2_f24p8( the_coll_box.left(), the_coll_box.top() ) );
+	vec2_s32 block_coord_pos_rb = active_level::get_block_coord_of_point
+		( vec2_f24p8( the_coll_box.right(), the_coll_box.bot() ) );
+	
+	const vec2_s32 bcr_arr_2d_real_size_2d = block_coord_pos_rb
+		- block_coord_pos_lt + vec2_s32( 1, 1 );
+	
+	// 
+	for ( u32 j=0; j<bcr_arr_2d_max_size_2d.y; ++j )
 	{
-		block_coll_response_left_16x32(the_bcr_group);
+		for ( u32 i=0; i<bcr_arr_2d_max_size_2d.x; ++i )
+		{
+			block_coll_result& curr_bcr = bcr_arr_2d[j][i];
+			
+			curr_bcr.coord = block_coord_pos_lt + vec2_s32( i, j );
+			
+			const vec2_u32& curr_sublevel_size_2d = active_level
+				::get_the_current_sublevel_ptr().get_size_2d();
+			
+			// Check whether there's actually a block at curr_bcr.coord.
+			if ( curr_bcr.coord.x < 0 
+				|| curr_bcr.coord.x >= (s32)curr_sublevel_size_2d.x 
+				|| curr_bcr.coord.y < 0 
+				|| curr_bcr.coord.y >= (s32)curr_sublevel_size_2d.y )
+			{
+				curr_bcr.the_block = NULL;
+			}
+			else
+			{
+				curr_bcr.the_block = &active_level::the_block_data_at_coord
+					(curr_bcr.coord);
+			}
+		}
 	}
-	if ( right_side_intersects_solid )
+	
+	// left side
+	for ( s32 j=0; j<bcr_arr_2d_real_size_2d.y; ++j )
 	{
-		block_coll_response_right_16x32(the_bcr_group);
-	}
-	if ( top_side_intersects_solid )
-	{
-		block_coll_response_top_16x32(the_bcr_group);
-	}
-	if ( bot_side_intersects_solid )
-	{
-		block_coll_response_bot_16x32(the_bcr_group);
-	}
-	else
-	{
-		set_curr_on_ground(false);
+		
 	}
 	
 	
