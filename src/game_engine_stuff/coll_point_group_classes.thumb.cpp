@@ -61,42 +61,26 @@ coll_point_group_16x16::coll_point_group_16x16( const sprite& the_sprite )
 	#undef X
 	
 	
-	////pt_lt.y = pt_rt.y = the_coll_box.top() + (fixed24p8){0x480};
-	
-	//pt_lt.y.data = pt_rt.y.data = the_coll_box.top().data 
-	//	+ ( the_coll_box.size.y.data / 4 );
-	
-	////pt_lb.y = pt_rb.y = the_coll_box.bot() - (fixed24p8){0x480};
-	
-	//pt_lb.y.data = pt_rb.y.data = the_coll_box.bot().data 
-	//	- ( the_coll_box.size.y.data / 4 );
-	
-	#define X(name) \
+	#define Y(name) \
 		pt_##name.y =
-	list_of_16x16_vert_side_ypos_top_coll_point_names(X) 
-		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 4 };
+	//list_of_16x16_vert_side_ypos_top_coll_point_names(Y) 
+	//	the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 4 };
+	list_of_16x16_vert_side_ypos_top_coll_point_names(Y) 
+		the_coll_box.top();
 	
-	list_of_16x16_vert_side_ypos_bottom_coll_point_names(X) 
-		the_coll_box.bot() - (fixed24p8){ the_coll_box.size.y.data / 4 };
-	#undef X
+	list_of_16x16_vert_side_ypos_middle_coll_point_names(Y)
+		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 2 };
+	
+	//list_of_16x16_vert_side_ypos_bottom_coll_point_names(Y) 
+	//	the_coll_box.bot() - (fixed24p8){ the_coll_box.size.y.data / 4 };
+	list_of_16x16_vert_side_ypos_bottom_coll_point_names(Y) 
+		the_coll_box.bot();
+	#undef Y
 	
 	
 	
 	
 	// Top and Bottom
-	////pt_tl.x.data = pt_bl.x.data = the_coll_box.left().data 
-	////	+ ( the_coll_box.size.x.data / 4 );
-	////pt_tr.x.data = pt_br.x.data = the_coll_box.right().data 
-	////	- ( the_coll_box.size.x.data / 4 );
-	
-	
-	//pt_tl.x = pt_bl.x = the_coll_box.left() + (fixed24p8){0x400};
-	
-	//pt_tm.x.data = pt_bm.x.data = the_coll_box.left().data 
-	//	+ ( the_coll_box.size.x.data / 2 );
-	
-	//pt_tr.x = pt_br.x = the_coll_box.right() - (fixed24p8){0x400};
-	
 	#define X(name) \
 		pt_##name.x =
 	//list_of_16x16_horiz_side_xpos_left_coll_point_names(X)
@@ -132,34 +116,35 @@ coll_point_group_16x16::coll_point_group_16x16( const sprite& the_sprite )
 	//pt_bl.y = pt_bm.y = pt_br.y = the_sprite.in_level_pos.y 
 	//	+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
 	
-	#define X(name) \
+	#define Y(name) \
 		pt_##name.y =
-	list_of_16x16_top_side_coll_point_names(X)
+	list_of_16x16_top_side_coll_point_names(Y)
 		the_coll_box.top();
 	
 	// This is a special case that covers walking down a slope.  However,
-	// it would be good if I could make this not the case.
-	if (the_sprite.get_curr_on_ground())
+	// it would be good if I could make this not needed.
+	if ( the_sprite.get_curr_on_ground() 
+		&& the_sprite.vel.y >= (fixed24p8){0} )
 	{
-		list_of_16x16_bottom_side_coll_point_names(X)
+		list_of_16x16_bottom_side_coll_point_names(Y)
 			//the_coll_box.bot();
 			//the_coll_box.bot() + (fixed24p8){0x200};
 			the_coll_box.bot() + (fixed24p8){0x400};
 	}
 	else //if (!the_sprite.get_curr_on_ground())
 	{
-		list_of_16x16_bottom_side_coll_point_names(X)
+		list_of_16x16_bottom_side_coll_point_names(Y)
 			the_coll_box.bot();
 	}
 	
-	//list_of_16x16_bottom_slope_side_coll_point_names(X)
+	//list_of_16x16_bottom_slope_side_coll_point_names(Y)
 	//	the_coll_box.bot() + (fixed24p8){0x200};
 		
 		//the_sprite.in_level_pos.y 
 		//+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
 		////the_sprite.in_level_pos.y 
 		////+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 1 );
-	#undef X
+	#undef Y
 	
 	
 }
@@ -201,21 +186,23 @@ coll_point_group_16x32::coll_point_group_16x32( const sprite& the_sprite )
 	//	+ ( the_coll_box.size.y.data / 2 );
 	
 	//pt_lb.y = pt_rb.y = the_coll_box.bot() - (fixed24p8){0x480};
-	#define X(name) \
+	#define Y(name) \
 		pt_##name.y =
-	list_of_16x32_vert_side_ypos_top_coll_point_names(X)
-		the_coll_box.top() + (fixed24p8){0x480};
-	//list_of_16x32_vert_side_ypos_top_coll_point_names(X)
+	//list_of_16x32_vert_side_ypos_top_coll_point_names(Y)
+	//	the_coll_box.top() + (fixed24p8){0x480};
+	//list_of_16x32_vert_side_ypos_top_coll_point_names(Y)
 	//	the_coll_box.top() + (fixed24p8){0x500};
+	list_of_16x32_vert_side_ypos_top_coll_point_names(Y)
+		the_coll_box.top();
 	
-	list_of_16x32_vert_side_ypos_middle_coll_point_names(X)
+	list_of_16x32_vert_side_ypos_middle_coll_point_names(Y)
 		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 2 };
 	
-	list_of_16x32_vert_side_ypos_bottom_coll_point_names(X)
+	list_of_16x32_vert_side_ypos_bottom_coll_point_names(Y)
 		the_coll_box.bot() - (fixed24p8){0x480};
-	//list_of_16x32_vert_side_ypos_bottom_coll_point_names(X)
+	//list_of_16x32_vert_side_ypos_bottom_coll_point_names(Y)
 	//	the_coll_box.bot() - (fixed24p8){0x500};
-	#undef X
+	#undef Y
 	
 	
 	
@@ -256,26 +243,28 @@ coll_point_group_16x32::coll_point_group_16x32( const sprite& the_sprite )
 	
 	//pt_bl.y = pt_bm.y = pt_br.y = the_sprite.in_level_pos.y 
 	//	+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
-	#define X(name) \
+	#define Y(name) \
 		pt_##name.y =
-	list_of_16x32_top_side_coll_point_names(X)
+	list_of_16x32_top_side_coll_point_names(Y)
 		the_coll_box.top();
 	
-	// This is a special case that covers walking down a slope.
-	if (the_sprite.get_curr_on_ground())
+	// This is a special case that covers walking down a slope.  However,
+	// it would be good if I could make this not needed.
+	if ( the_sprite.get_curr_on_ground() 
+		&& the_sprite.vel.y >= (fixed24p8){0} )
 	{
-		list_of_16x32_bottom_side_coll_point_names(X)
+		list_of_16x32_bottom_side_coll_point_names(Y)
 			the_coll_box.bot() + (fixed24p8){0x400};
 			//the_coll_box.bot() + (fixed24p8){0x200};
 			//the_coll_box.bot() + (fixed24p8){0x300};
 	}
 	else //if (!the_sprite.get_curr_on_ground())
 	{
-		list_of_16x32_bottom_side_coll_point_names(X)
+		list_of_16x32_bottom_side_coll_point_names(Y)
 			the_coll_box.bot();
 	}
 	
-	//list_of_16x32_bottom_slope_side_coll_point_names(X)
+	//list_of_16x32_bottom_slope_side_coll_point_names(Y)
 	//	the_coll_box.bot() + (fixed24p8){0x200};
 		
 		//the_sprite.in_level_pos.y 
@@ -286,7 +275,7 @@ coll_point_group_16x32::coll_point_group_16x32( const sprite& the_sprite )
 		////+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 1 );
 		////the_sprite.in_level_pos.y 
 		////+ make_f24p8( the_sprite.get_shape_size_as_vec2().y );
-	#undef X
+	#undef Y
 	
 	
 }
@@ -327,14 +316,17 @@ coll_point_group_16x32::coll_point_group_16x32( const sprite& the_sprite )
 //	//pt_lb.y.data = pt_rb.y.data = the_coll_box.bot().data 
 //	//	- ( the_coll_box.size.y.data / 4 );
 //	
-//	#define X(name) \
+//	#define Y(name) \
 //		pt_##name.y =
-//	list_of_32x16_vert_side_ypos_top_coll_point_names(X)
+//	list_of_32x16_vert_side_ypos_top_coll_point_names(Y)
 //		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 4 };
 //	
-//	list_of_32x16_vert_side_ypos_bottom_coll_point_names(X)
+//	list_of_32x16_vert_side_ypos_middle_coll_point_names(Y)
+//		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 2 };
+//	
+//	list_of_32x16_vert_side_ypos_bottom_coll_point_names(Y)
 //		the_coll_box.bot() - (fixed24p8){ the_coll_box.size.y.data / 4 };
-//	#undef X
+//	#undef Y
 //	
 //	
 //	// Top and Bottom
@@ -381,30 +373,32 @@ coll_point_group_16x32::coll_point_group_16x32( const sprite& the_sprite )
 //	//pt_bl.y = pt_bm.y = pt_br.y = the_sprite.in_level_pos.y 
 //	//	+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
 //	
-//	#define X(name) \
+//	#define Y(name) \
 //		pt_##name.y = 
-//	list_of_32x16_top_side_coll_point_names(X)
+//	list_of_32x16_top_side_coll_point_names(Y)
 //		the_coll_box.top();
 //	
-//	// This is a special case that covers walking down a slope.
-//	if (the_sprite.get_curr_on_ground())
+//	// This is a special case that covers walking down a slope.  However,
+//	// it would be good if I could make this not needed.
+//	if ( the_sprite.get_curr_on_ground() 
+//		&& the_sprite.vel.y >= (fixed24p8){0} )
 //	{
-//		list_of_16x32_bottom_side_coll_point_names(X)
+//		list_of_16x32_bottom_side_coll_point_names(Y)
 //			//the_coll_box.bot() + (fixed24p8){0x200};
 //			the_coll_box.bot() + (fixed24p8){0x400};
 //	}
 //	else //if (!the_sprite.get_curr_on_ground())
 //	{
-//		list_of_16x32_bottom_side_coll_point_names(X)
+//		list_of_16x32_bottom_side_coll_point_names(Y)
 //			the_coll_box.bot();
 //	}
 //	
-//	//list_of_16x32_bottom_slope_side_coll_point_names(X)
+//	//list_of_16x32_bottom_slope_side_coll_point_names(Y)
 //	//	the_coll_box.bot() + (fixed24p8){0x200};
 //		
 //		//the_sprite.in_level_pos.y 
 //		//+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
-//	#undef X
+//	#undef Y
 //	
 //	
 //}

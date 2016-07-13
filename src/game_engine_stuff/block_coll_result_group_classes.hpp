@@ -70,11 +70,15 @@ public:		// functions
 	
 	inline block_coll_result& get_bcr_lt()
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_lt]; }
+	inline block_coll_result& get_bcr_lm()
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_lm]; }
 	inline block_coll_result& get_bcr_lb()
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_lb]; }
 	
 	inline block_coll_result& get_bcr_rt()
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_rt]; }
+	inline block_coll_result& get_bcr_rm()
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_rm]; }
 	inline block_coll_result& get_bcr_rb()
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_rb]; }
 	
@@ -92,19 +96,22 @@ public:		// functions
 	inline block_coll_result& get_bcr_br()
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_br]; }
 	
-	inline block_coll_result& get_bcr_mt()
-		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_mt]; }
-	inline block_coll_result& get_bcr_mb()
-		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_mb]; }
+	inline block_coll_result& get_bcr_mm()
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_mm]; }
+	
 	
 	
 	inline const block_coll_result& get_bcr_lt() const
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_lt]; }
+	inline const block_coll_result& get_bcr_lm() const
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_lm]; }
 	inline const block_coll_result& get_bcr_lb() const
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_lb]; }
 	
 	inline const block_coll_result& get_bcr_rt() const
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_rt]; }
+	inline const block_coll_result& get_bcr_rm() const
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_rm]; }
 	inline const block_coll_result& get_bcr_rb() const
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_rb]; }
 	
@@ -122,10 +129,8 @@ public:		// functions
 	inline const block_coll_result& get_bcr_br() const
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_br]; }
 	
-	inline const block_coll_result& get_bcr_mt() const
-		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_mt]; }
-	inline const block_coll_result& get_bcr_mb() const
-		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_mb]; }
+	inline const block_coll_result& get_bcr_mm() const
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_mm]; }
 	
 } __attribute__((_align4));
 
@@ -167,12 +172,8 @@ public:		// functions
 	inline block_coll_result& get_bcr_br()
 		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_br]; }
 	
-	inline block_coll_result& get_bcr_mt()
-		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mt]; }
 	inline block_coll_result& get_bcr_mm()
 		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mm]; }
-	inline block_coll_result& get_bcr_mb()
-		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mb]; }
 	
 	
 	
@@ -204,12 +205,8 @@ public:		// functions
 	inline const block_coll_result& get_bcr_br() const
 		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_br]; }
 	
-	inline const block_coll_result& get_bcr_mt() const
-		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mt]; }
 	inline const block_coll_result& get_bcr_mm() const
 		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mm]; }
-	inline const block_coll_result& get_bcr_mb() const
-		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mb]; }
 	
 } __attribute__((_align4));
 

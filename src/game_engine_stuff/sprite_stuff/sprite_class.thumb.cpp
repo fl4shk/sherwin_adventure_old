@@ -614,7 +614,7 @@ void sprite::get_basic_block_coll_results_16x16
 	block_coll_result& rb_coll_result, block_coll_result& bl_coll_result, 
 	block_coll_result& bm_coll_result, block_coll_result& br_coll_result )
 {
-	block_coll_result mt_coll_result, mb_coll_result;
+	block_coll_result lm_coll_result, rm_coll_result, mm_coll_result;
 	
 	#define X(name) \
 		name##_coll_result.coord \
@@ -636,7 +636,7 @@ void sprite::get_basic_block_coll_results_16x32
 	block_coll_result& rb_coll_result, block_coll_result& bl_coll_result,
 	block_coll_result& bm_coll_result, block_coll_result& br_coll_result )
 {
-	block_coll_result mt_coll_result, mm_coll_result, mb_coll_result;
+	block_coll_result mm_coll_result;
 	
 	#define X(name) \
 		name##_coll_result.coord \
@@ -2213,9 +2213,7 @@ void sprite::block_collision_stuff_16x32()
 		& bcr_bm = the_bcr_group.get_bcr_bm(), 
 		& bcr_br = the_bcr_group.get_bcr_br(),
 		
-		& bcr_mt = the_bcr_group.get_bcr_mt(), 
-		& bcr_mm = the_bcr_group.get_bcr_mm(), 
-		& bcr_mb = the_bcr_group.get_bcr_mb(); 
+		& bcr_mm = the_bcr_group.get_bcr_mm();
 	
 	
 	// The block_behavior_type's
@@ -2248,190 +2246,13 @@ void sprite::block_collision_stuff_16x32()
 		the_bbvt_br = get_behavior_type_of_block_type
 			(bcr_br.get_block_type()),
 		
-		the_bbvt_mt = get_behavior_type_of_block_type
-			(bcr_mt.get_block_type()),
 		the_bbvt_mm = get_behavior_type_of_block_type
-			(bcr_mm.get_block_type()), 
-		the_bbvt_mb = get_behavior_type_of_block_type
-			(bcr_mb.get_block_type());
+			(bcr_mm.get_block_type());
 	
 	
-	// The max number of blocks (x, y) that can be intersected by a 16x32
-	// collision box.  In the worst case, horizontally, a collision box
-	// that is 16x32 can 
-	static const vec2_u32 bcr_arr_2d_max_size_2d( 3, 4 );
-	
-	block_coll_result bcr_arr_2d[bcr_arr_2d_max_size_2d.y]
-		[bcr_arr_2d_max_size_2d.x];
-	
-	vec2_s32 block_coord_pos_lt = active_level::get_block_coord_of_point
-		( vec2_f24p8( the_coll_box.left(), the_coll_box.top() ) );
-	vec2_s32 block_coord_pos_rb = active_level::get_block_coord_of_point
-		( vec2_f24p8( the_coll_box.right(), the_coll_box.bot() ) );
-	
-	
-	// This should permit working with the absolute limits of the block
-	// grid stuff.
-	const vec2_s32 bcr_arr_2d_real_size_2d = block_coord_pos_rb
-		- block_coord_pos_lt + vec2_s32( 1, 1 );
-	
-	
-	// Generate the block_coll_result's for the_coll_box.
-	for ( u32 j=0; j<bcr_arr_2d_max_size_2d.y; ++j )
-	{
-		for ( u32 i=0; i<bcr_arr_2d_max_size_2d.x; ++i )
-		{
-			block_coll_result& curr_bcr = bcr_arr_2d[j][i];
-			
-			curr_bcr.coord = block_coord_pos_lt + vec2_s32( i, j );
-			
-			const vec2_u32& curr_sublevel_size_2d = active_level
-				::get_the_current_sublevel_ptr().get_size_2d();
-			
-			// Check whether there's actually a block at curr_bcr.coord.
-			if ( curr_bcr.coord.x < 0 
-				|| curr_bcr.coord.x >= (s32)curr_sublevel_size_2d.x 
-				|| curr_bcr.coord.y < 0 
-				|| curr_bcr.coord.y >= (s32)curr_sublevel_size_2d.y )
-			{
-				curr_bcr.the_block = NULL;
-			}
-			else
-			{
-				curr_bcr.the_block = &active_level::the_block_data_at_coord
-					(curr_bcr.coord);
-			}
-		}
-	}
-	
-	
-	block_coll_result * obstacle_x_bcr = NULL, * obstacle_y_bcr = NULL;
-	block_behavior_type obstacle_x_bbvt, obstacle_y_bbvt;
-	
-	bool moving_left = false, moving_right = false, moving_up = false,
-		not_moving_up = false;
-	
-	//bool obstacle_x_is_fully_solid = false, 
-	//	obstacle_x_is_right_slope = false,
-	//	obstacle_x_is_left_slope = false;
-	
-	
-	if ( get_curr_in_level_pos().x < get_prev_in_level_pos().x )
-	{
-		moving_left = true;
-	}
-	else if ( get_curr_in_level_pos().x > get_prev_in_level_pos().x )
-	{
-		moving_right = true;
-	}
-	
-	if ( get_curr_in_level_pos().y < get_prev_in_level_pos().y )
-	{
-		moving_up = true;
-	}
-	else //if ( get_curr_in_level_pos().y >= get_prev_in_level_pos().y )
-	{
-		not_moving_up = true;
-	}
-	
-	// Step x first
-	for ( u32 j=0; j<bcr_arr_2d_real_size_2d.y; ++j )
-	{
-		block_coll_result* curr_bcr = NULL;
-		
-		if ( moving_left )
-		{
-			curr_bcr = &bcr_arr_2d[j][0];
-		}
-		else if ( moving_right )
-		{
-			curr_bcr = &bcr_arr_2d[j][bcr_arr_2d_real_size_2d.x - 1];
-		}
-		else
-		{
-			break;
-		}
-		
-		if ( curr_bcr->the_block == NULL )
-		{
-			continue;
-		}
-		
-		block_behavior_type curr_bbvt = get_behavior_type_of_block_type
-			(curr_bcr->get_block_type());
-		
-		if ( curr_bbvt != bbvt_air )
-		{
-			obstacle_x_bcr = curr_bcr;
-			obstacle_x_bbvt = curr_bbvt;
-			break;
-		}
-	}
-	
-	if ( moving_left && obstacle_x_bcr != NULL )
-	{
-		block_coll_response_left_16x32(the_bcr_group);
-	}
-	else if ( moving_right && obstacle_x_bcr != NULL )
-	{
-		block_coll_response_right_16x32(the_bcr_group);
-	}
-	
-	// Step y second
-	for ( u32 i=0; i<bcr_arr_2d_real_size_2d.x; ++i )
-	{
-		block_coll_result* curr_bcr = NULL;
-		
-		if ( moving_up )
-		{
-			curr_bcr = &bcr_arr_2d[0][i];
-		}
-		else if ( not_moving_up )
-		{
-			curr_bcr = &bcr_arr_2d[bcr_arr_2d_real_size_2d.y - 1][i];
-		}
-		else
-		{
-			break;
-		}
-		
-		if ( curr_bcr->the_block == NULL )
-		{
-			continue;
-		}
-		
-		block_behavior_type curr_bbvt = get_behavior_type_of_block_type
-			(curr_bcr->get_block_type());
-		
-		if ( curr_bbvt != bbvt_air )
-		{
-			obstacle_y_bcr = curr_bcr;
-			obstacle_y_bbvt = curr_bbvt;
-			break;
-		}
-	}
-	
-	if ( moving_up )
-	{
-		if ( obstacle_y_bcr != NULL )
-		{
-			block_coll_response_top_16x32(the_bcr_group);
-		}
-		
-		set_curr_on_ground(false);
-	}
-	else if ( not_moving_up )
-	{
-		if ( obstacle_y_bcr != NULL )
-		{
-			block_coll_response_bot_16x32(the_bcr_group);
-			set_curr_on_ground(true);
-		}
-		else
-		{
-			set_curr_on_ground(false);
-		}
-	}
+	// Initial values
+	//bool left_side_is_blocked 
+	//	= ( bt_is_fully_solid(the_bbvt_lt)
 	
 }
 void sprite::block_collision_stuff_32x16()

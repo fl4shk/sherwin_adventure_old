@@ -24,25 +24,25 @@
 
 // Collision points that share a side
 #define list_of_16x16_left_side_coll_point_names(macro) \
-	macro(lt) macro(lb)
+	macro(lt) macro(lm) macro(lb)
 #define list_of_16x16_right_side_coll_point_names(macro) \
-	macro(rt) macro(rb)
+	macro(rt) macro(rm) macro(rb)
 #define list_of_16x16_top_side_coll_point_names(macro) \
 	macro(tl) macro(tm) macro(tr)
 #define list_of_16x16_bottom_side_coll_point_names(macro) \
 	macro(bl) macro(bm) macro(br)
-// Note that these do not actually include top or bottom sides of the
-// collision box.  Instead, they are at the same y coordinates as the coll
-// points on the left or right side.
+// Note that tm and bm are treated the same as mt and mb now.
 #define list_of_16x16_middle_vert_line_coll_point_names(macro) \
-	macro(mt) macro(mb)
+	macro(mm)
 
 
 // Left, middle vertical line, or right side, same ypos collision points
 #define list_of_16x16_vert_side_ypos_top_coll_point_names(macro) \
-	macro(lt) macro(mt) macro(rt)
+	macro(lt) macro(rt)
+#define list_of_16x16_vert_side_ypos_middle_coll_point_names(macro) \
+	macro(lm) macro(mm) macro(rm)
 #define list_of_16x16_vert_side_ypos_bottom_coll_point_names(macro) \
-	macro(lb) macro(mb) macro(rb)
+	macro(lb) macro(rb)
 
 // Top or bottom same xpos collision points
 #define list_of_16x16_horiz_side_xpos_left_coll_point_names(macro) \
@@ -66,6 +66,7 @@
 
 
 
+
 // Collision points that share a side
 #define list_of_16x32_left_side_coll_point_names(macro) \
 	macro(lt) macro(lm) macro(lb)
@@ -75,20 +76,18 @@
 	macro(tl) macro(tm) macro(tr)
 #define list_of_16x32_bottom_side_coll_point_names(macro) \
 	macro(bl) macro(bm) macro(br)
-// Note that these do not actually include top or bottom sides of the
-// collision box.  Instead, they are at the same y coordinates as the coll
-// points on the left or right side.
+// Note that tm and bm are treated the same as mt and mb now.
 #define list_of_16x32_middle_vert_line_coll_point_names(macro) \
-	macro(mt) macro(mm) macro(mb)
+	macro(mm)
 
 
 // Left, middle vertical line, or right side, same ypos collision points
 #define list_of_16x32_vert_side_ypos_top_coll_point_names(macro) \
-	macro(lt) macro(mt) macro(rt)
+	macro(lt) macro(rt)
 #define list_of_16x32_vert_side_ypos_middle_coll_point_names(macro) \
 	macro(lm) macro(mm) macro(rm)
 #define list_of_16x32_vert_side_ypos_bottom_coll_point_names(macro) \
-	macro(lb) macro(mb) macro(rb)
+	macro(lb) macro(rb)
 
 // Top or bottom same xpos collision points
 #define list_of_16x32_horiz_side_xpos_left_coll_point_names(macro) \
@@ -112,27 +111,28 @@
 
 
 
+
 // Collision points that share a side
 #define list_of_32x16_left_side_coll_point_names(macro) \
-	macro(lt) macro(lb)
+	macro(lt) macro(lm) macro(lb)
 #define list_of_32x16_right_side_coll_point_names(macro) \
-	macro(rt) macro(rb)
+	macro(rt) macro(rm) macro(rb)
 #define list_of_32x16_top_side_coll_point_names(macro) \
 	macro(tl) macro(tm) macro(tr)
 #define list_of_32x16_bottom_side_coll_point_names(macro) \
 	macro(bl) macro(bm) macro(br)
-// Note that these do not actually include top or bottom sides of the
-// collision box.  Instead, they are at the same y coordinates as the coll
-// points on the left or right side.
+// Note that tm and bm are treated the same as mt and mb now.
 #define list_of_32x16_middle_vert_line_coll_point_names(macro) \
-	macro(mt) macro(mb)
+	macro(mm)
 
 
 // Left, middle vertical line, or right side, same ypos collision points
 #define list_of_32x16_vert_side_ypos_top_coll_point_names(macro) \
-	macro(lt) macro(mt) macro(rt)
+	macro(lt) macro(rt)
+#define list_of_32x16_vert_side_ypos_middle_coll_point_names(macro) \
+	macro(lm) macro(mm) macro(rm)
 #define list_of_32x16_vert_side_ypos_bottom_coll_point_names(macro) \
-	macro(lb) macro(mb) macro(rb)
+	macro(lb) macro(rb)
 
 // Top or bottom same xpos collision points
 #define list_of_32x16_horiz_side_xpos_left_coll_point_names(macro) \
@@ -153,8 +153,5 @@
 	list_of_32x16_right_side_coll_point_names(macro) \
 	list_of_32x16_bottom_side_coll_point_names(macro) \
 	list_of_32x16_middle_vert_line_coll_point_names(macro)
-
-
-
 
 #endif		// coll_point_extras_hpp
