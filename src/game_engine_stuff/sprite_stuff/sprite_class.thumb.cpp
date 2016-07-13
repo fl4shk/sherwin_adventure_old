@@ -2250,9 +2250,111 @@ void sprite::block_collision_stuff_16x32()
 			(bcr_mm.get_block_type());
 	
 	
-	// Initial values
-	//bool left_side_is_blocked 
-	//	= ( bt_is_fully_solid(the_bbvt_lt)
+	bool moving_left = false, moving_right = false, moving_up = false,
+		not_moving_up = false;
+	
+	if ( get_curr_in_level_pos().x < get_prev_in_level_pos().x )
+	{
+		moving_left = true;
+	}
+	else if ( get_curr_in_level_pos().x > get_prev_in_level_pos().x )
+	{
+		moving_right = true;
+	}
+	
+	if ( get_curr_in_level_pos().y < get_prev_in_level_pos().y )
+	{
+		moving_up = true;
+	}
+	else //if ( get_curr_in_level_pos().y >= get_prev_in_level_pos().y )
+	{
+		not_moving_up = true;
+	}
+	
+	// Initial values of left_side_is_blocked and right_side_is_blocked
+	bool left_side_is_blocked 
+		= ( bbvt_is_fully_solid(the_bbvt_lt)
+		|| bbvt_is_fully_solid(the_bbvt_lm) );
+	bool right_side_is_blocked 
+		= ( bbvt_is_fully_solid(the_bbvt_rt)
+		|| bbvt_is_fully_solid(the_bbvt_rm) );
+	
+	if ( !get_curr_on_ground() )
+	{
+		left_side_is_blocked = left_side_is_blocked 
+			|| bbvt_is_fully_solid(the_bbvt_lb);
+		right_side_is_blocked = right_side_is_blocked 
+			|| bbvt_is_fully_solid(the_bbvt_rb);
+	}
+	
+	// Unless more block_behavior_type's are added, top_side_is_blocked
+	// should not need to be changed.
+	bool top_side_is_blocked
+		= ( bbvt_is_fully_solid(the_bbvt_tl)
+		|| bbvt_is_fully_solid(the_bbvt_tm)
+		|| bbvt_is_fully_solid(the_bbvt_tr)
+		|| bbvt_is_slope(the_bbvt_tl)
+		|| bbvt_is_slope(the_bbvt_tm)
+		|| bbvt_is_slope(the_bbvt_tr) );
+	
+	bool bot_side_is_blocked
+		= ( bbvt_is_fully_solid(the_bbvt_bl)
+		|| bbvt_is_fully_solid(the_bbvt_bm)
+		|| bbvt_is_fully_solid(the_bbvt_br) );
+	
+	
+	
+	//// Check for right slopes and see if it is possible to jump over them.
+	//if ( moving_left && !left_side_is_blocked )
+	//{
+	//	
+	//}
+	
+	if ( moving_left && left_side_is_blocked )
+	{
+		block_coll_response_left_16x32(the_bcr_group);
+	}
+	
+	//// Check for left slopes and see if it is possible to jump over them.
+	//if ( moving_right && !right_side_is_blocked )
+	//{
+	//	
+	//}
+	
+	if ( moving_right && right_side_is_blocked )
+	{
+		block_coll_response_right_16x32(the_bcr_group);
+	}
+	
+	if (moving_up)
+	{
+		if (top_side_is_blocked)
+		{
+			block_coll_response_top_16x32(the_bcr_group);
+		}
+		
+		if (bot_side_is_blocked)
+		{
+			set_curr_on_ground(true);
+		}
+		else //if (!bot_side_is_blocked)
+		{
+			set_curr_on_ground(false);
+		}
+	}
+	
+	if (not_moving_up)
+	{
+		if (bot_side_is_blocked)
+		{
+			block_coll_response_bot_16x32(the_bcr_group);
+			set_curr_on_ground(true);
+		}
+		else //if (!bot_side_is_blocked)
+		{
+			set_curr_on_ground(false);
+		}
+	}
 	
 }
 void sprite::block_collision_stuff_32x16()

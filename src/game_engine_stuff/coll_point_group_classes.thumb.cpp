@@ -65,16 +65,40 @@ coll_point_group_16x16::coll_point_group_16x16( const sprite& the_sprite )
 		pt_##name.y =
 	//list_of_16x16_vert_side_ypos_top_coll_point_names(Y) 
 	//	the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 4 };
-	list_of_16x16_vert_side_ypos_top_coll_point_names(Y) 
-		the_coll_box.top();
+	//list_of_16x16_vert_side_ypos_top_coll_point_names(Y) 
+	//	the_coll_box.top();
+	//list_of_16x16_vert_side_ypos_top_coll_point_names(Y) 
+	//	the_coll_box.top() + (fixed24p8){0x100};
+	if ( the_sprite.vel.y < (fixed24p8){0} )
+	{
+		list_of_16x16_vert_side_ypos_top_coll_point_names(Y) 
+			the_coll_box.top() - the_sprite.vel.y;
+		//list_of_16x16_vert_side_ypos_bottom_coll_point_names(Y) 
+		//	the_coll_box.bot() - the_sprite.vel.y;
+		list_of_16x16_vert_side_ypos_bottom_coll_point_names(Y) 
+			the_coll_box.bot();
+	}
+	else //if ( the_sprite.vel.y >= (fixed24p8){0} )
+	{
+		list_of_16x16_vert_side_ypos_top_coll_point_names(Y) 
+			the_coll_box.top() + the_sprite.vel.y;
+		//list_of_16x16_vert_side_ypos_bottom_coll_point_names(Y) 
+		//	the_coll_box.bot() + the_sprite.vel.y;
+		list_of_16x16_vert_side_ypos_bottom_coll_point_names(Y) 
+			the_coll_box.bot() - the_sprite.vel.y;
+	}
 	
 	list_of_16x16_vert_side_ypos_middle_coll_point_names(Y)
 		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 2 };
 	
 	//list_of_16x16_vert_side_ypos_bottom_coll_point_names(Y) 
 	//	the_coll_box.bot() - (fixed24p8){ the_coll_box.size.y.data / 4 };
-	list_of_16x16_vert_side_ypos_bottom_coll_point_names(Y) 
-		the_coll_box.bot();
+	//list_of_16x16_vert_side_ypos_bottom_coll_point_names(Y) 
+	//	the_coll_box.bot();
+	//list_of_16x16_vert_side_ypos_bottom_coll_point_names(Y) 
+	//	the_coll_box.bot() - the_sprite.vel.y;
+	//list_of_16x16_vert_side_ypos_bottom_coll_point_names(Y) 
+	//	the_coll_box.bot() - (fixed24p8){ the_sprite.vel.y.data >> 1 };
 	#undef Y
 	
 	
@@ -192,16 +216,43 @@ coll_point_group_16x32::coll_point_group_16x32( const sprite& the_sprite )
 	//	the_coll_box.top() + (fixed24p8){0x480};
 	//list_of_16x32_vert_side_ypos_top_coll_point_names(Y)
 	//	the_coll_box.top() + (fixed24p8){0x500};
-	list_of_16x32_vert_side_ypos_top_coll_point_names(Y)
-		the_coll_box.top();
+	//list_of_16x32_vert_side_ypos_top_coll_point_names(Y)
+	//	the_coll_box.top();
+	//list_of_16x32_vert_side_ypos_top_coll_point_names(Y)
+	//	the_coll_box.top() + (fixed24p8){0x100};
+	
+	if ( the_sprite.vel.y < (fixed24p8){0} )
+	{
+		list_of_16x32_vert_side_ypos_top_coll_point_names(Y) 
+			the_coll_box.top() - the_sprite.vel.y;
+		//list_of_16x32_vert_side_ypos_bottom_coll_point_names(Y) 
+		//	the_coll_box.bot() - the_sprite.vel.y;
+		list_of_16x32_vert_side_ypos_bottom_coll_point_names(Y) 
+			the_coll_box.bot();
+	}
+	else //if ( the_sprite.vel.y >= (fixed24p8){0} )
+	{
+		list_of_16x32_vert_side_ypos_top_coll_point_names(Y) 
+			the_coll_box.top();
+		//list_of_16x32_vert_side_ypos_bottom_coll_point_names(Y) 
+		//	the_coll_box.bot();
+		list_of_16x32_vert_side_ypos_bottom_coll_point_names(Y) 
+			the_coll_box.bot() - the_sprite.vel.y;
+	}
 	
 	list_of_16x32_vert_side_ypos_middle_coll_point_names(Y)
 		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 2 };
 	
-	list_of_16x32_vert_side_ypos_bottom_coll_point_names(Y)
-		the_coll_box.bot() - (fixed24p8){0x480};
+	//list_of_16x32_vert_side_ypos_bottom_coll_point_names(Y)
+	//	the_coll_box.bot() - (fixed24p8){0x480};
 	//list_of_16x32_vert_side_ypos_bottom_coll_point_names(Y)
 	//	the_coll_box.bot() - (fixed24p8){0x500};
+	//list_of_16x32_vert_side_ypos_bottom_coll_point_names(Y)
+	//	the_coll_box.bot();
+	//list_of_16x32_vert_side_ypos_bottom_coll_point_names(Y) 
+	//	the_coll_box.bot() - the_sprite.vel.y;
+	//list_of_16x32_vert_side_ypos_bottom_coll_point_names(Y) 
+	//	the_coll_box.bot() - (fixed24p8){ the_sprite.vel.y.data >> 1 };
 	#undef Y
 	
 	
