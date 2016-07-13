@@ -135,6 +135,8 @@ public:		// functions
 		
 		ret.x = pt.x.floor_to_int() / num_pixels_per_block_col;
 		ret.y = pt.y.floor_to_int() / num_pixels_per_block_row;
+		//ret.x = pt.x.round_to_int() / num_pixels_per_block_col;
+		//ret.y = pt.y.round_to_int() / num_pixels_per_block_row;
 		
 		return ret;
 	}

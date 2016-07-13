@@ -1935,56 +1935,34 @@ void sprite::block_collision_stuff_16x32_old()
 		if ( tl_coll_result.the_block->type != bt_air 
 			|| tr_coll_result.the_block->type != bt_air )
 		{
-			//show_debug_str_s32("tltr");
-			
 			if ( lt_coll_result.the_block->type != bt_air )
 			{
-				//show_debug_str_s32("left");
-				//show_debug_str_s32("1t  ");
 				any_left_response();
 			}
 			if ( rt_coll_result.the_block->type != bt_air )
 			{
-				//show_debug_str_s32("righ");
-				//show_debug_str_s32("1t  ");
 				any_right_response();
 			}
 			
 			any_top_response();
-			
-			
 		}
 		else if ( bl_coll_result.the_block->type != bt_air
 			|| br_coll_result.the_block->type != bt_air )
 		{
-			//show_debug_str_s32("blbr");
-			
 			any_non_slope_bot_response();
 			
-			//if ( bt_is_neither_air_nor_slope(lt_coll_result.the_block
-			//	->get_block_type()) 
-			//	|| bt_is_neither_air_nor_slope(lm_coll_result.the_block
-			//	->get_block_type()) )
 			if ( bt_is_fully_solid(lt_coll_result.the_block
 				->get_block_type()) 
 				|| bt_is_fully_solid(lm_coll_result.the_block
 				->get_block_type()) )
 			{
-				//show_debug_str_s32("left");
-				//show_debug_str_s32("1b  ");
 				any_left_response();
 			}
-			//if ( bt_is_neither_air_nor_slope(rt_coll_result.the_block
-			//	->get_block_type()) 
-			//	|| bt_is_neither_air_nor_slope(rm_coll_result.the_block
-			//	->get_block_type()) )
 			if ( bt_is_fully_solid(rt_coll_result.the_block
 				->get_block_type()) 
 				|| bt_is_fully_solid(rm_coll_result.the_block
 				->get_block_type()) )
 			{
-				//show_debug_str_s32("righ");
-				//show_debug_str_s32("1b  ");
 				any_right_response();
 			}
 		}
@@ -2083,13 +2061,6 @@ void sprite::block_collision_stuff_16x32_old()
 			
 			
 			// Don't let the_sprite move through walls
-			//if ( bt_is_neither_air_nor_slope(lt_coll_result.the_block
-			//	->get_block_type()) 
-			//	|| bt_is_neither_air_nor_slope(lm_coll_result.the_block
-			//	->get_block_type())
-			//	|| ( bt_is_neither_air_nor_slope(lb_coll_result.the_block
-			//	->get_block_type()) 
-			//	&& the_slope_block_type != bt_grass_slope_n16_p16) )
 			if ( bt_is_fully_solid(lt_coll_result.the_block
 				->get_block_type()) 
 				|| bt_is_fully_solid(lm_coll_result.the_block
@@ -2098,9 +2069,6 @@ void sprite::block_collision_stuff_16x32_old()
 				->get_block_type()) 
 				&& the_slope_block_type != bt_grass_slope_n16_p16) )
 			{
-				//if ( bt_is_neither_air_nor_slope(lb_coll_result.the_block
-				//	->get_block_type()) 
-				//	&& the_slope_block_type != bt_grass_slope_n16_p16 )
 				if ( bt_is_fully_solid(lb_coll_result.the_block
 					->get_block_type()) 
 					&& the_slope_block_type != bt_grass_slope_n16_p16 )
@@ -2112,13 +2080,6 @@ void sprite::block_collision_stuff_16x32_old()
 				//show_debug_str_s32("2b  ");
 				any_left_response();
 			}
-			//if ( bt_is_neither_air_nor_slope(rt_coll_result.the_block
-			//	->get_block_type())
-			//	|| bt_is_neither_air_nor_slope(rm_coll_result.the_block
-			//	->get_block_type())
-			//	|| ( bt_is_neither_air_nor_slope(rb_coll_result.the_block
-			//	->get_block_type()) 
-			//	&& the_slope_block_type != bt_grass_slope_p16_p16 ) )
 			if ( bt_is_fully_solid(rt_coll_result.the_block
 				->get_block_type())
 				|| bt_is_fully_solid(rm_coll_result.the_block
@@ -2127,9 +2088,6 @@ void sprite::block_collision_stuff_16x32_old()
 				->get_block_type()) 
 				&& the_slope_block_type != bt_grass_slope_p16_p16 ) )
 			{
-				//if ( bt_is_neither_air_nor_slope(rb_coll_result.the_block
-				//	->get_block_type()) 
-				//	&& the_slope_block_type != bt_grass_slope_p16_p16 )
 				if ( bt_is_fully_solid(rb_coll_result.the_block
 					->get_block_type()) 
 					&& the_slope_block_type != bt_grass_slope_p16_p16 )
@@ -2144,8 +2102,6 @@ void sprite::block_collision_stuff_16x32_old()
 		}
 		else
 		{
-			//show_debug_str_s32("leri");
-			
 			//get_curr_on_ground() = false;
 			set_curr_on_ground(false);
 			
@@ -2271,24 +2227,33 @@ void sprite::block_collision_stuff_16x32()
 		not_moving_up = true;
 	}
 	
-	// Initial values of left_side_is_blocked and right_side_is_blocked
-	bool left_side_is_blocked 
+	bool left_side_is_blocked_for_bot
 		= ( bbvt_is_fully_solid(the_bbvt_lt)
 		|| bbvt_is_fully_solid(the_bbvt_lm) );
-	bool right_side_is_blocked 
+	bool right_side_is_blocked_for_bot
 		= ( bbvt_is_fully_solid(the_bbvt_rt)
 		|| bbvt_is_fully_solid(the_bbvt_rm) );
 	
-	if ( !get_curr_on_ground() )
-	{
-		left_side_is_blocked = left_side_is_blocked 
-			|| bbvt_is_fully_solid(the_bbvt_lb);
-		right_side_is_blocked = right_side_is_blocked 
-			|| bbvt_is_fully_solid(the_bbvt_rb);
-	}
+	bool left_side_is_blocked_for_top
+		= ( bbvt_is_fully_solid(the_bbvt_lm)
+		|| bbvt_is_fully_solid(the_bbvt_lb) );
+	bool right_side_is_blocked_for_top
+		= ( bbvt_is_fully_solid(the_bbvt_rm)
+		|| bbvt_is_fully_solid(the_bbvt_rb) );
 	
-	// Unless more block_behavior_type's are added, top_side_is_blocked
-	// should not need to be changed.
+	bool left_side_is_blocked_for_air
+		= ( bbvt_is_fully_solid(the_bbvt_lt)
+		|| bbvt_is_fully_solid(the_bbvt_lm) 
+		|| bbvt_is_fully_solid(the_bbvt_lb) );
+	bool right_side_is_blocked_for_air
+		= ( bbvt_is_fully_solid(the_bbvt_rt)
+		|| bbvt_is_fully_solid(the_bbvt_rm) 
+		|| bbvt_is_fully_solid(the_bbvt_rb) );
+	
+	
+	// Unless more block_behavior_type's are added (and definitely not
+	// necessarily EVERY possible block_behavior_type that could be added),
+	// top_side_is_blocked should not need to be changed.
 	bool top_side_is_blocked
 		= ( bbvt_is_fully_solid(the_bbvt_tl)
 		|| bbvt_is_fully_solid(the_bbvt_tm)
@@ -2304,55 +2269,73 @@ void sprite::block_collision_stuff_16x32()
 	
 	
 	
-	//// Check for right slopes and see if it is possible to jump over them.
-	//if ( moving_left && !left_side_is_blocked )
+	//if (moving_up)
 	//{
+	//	if (top_side_is_blocked)
+	//	{
+	//		block_coll_response_top_16x32(the_bcr_group);
+	//	}
 	//	
+	//	if (bot_side_is_blocked)
+	//	{
+	//		set_curr_on_ground(true);
+	//	}
+	//	else //if (!bot_side_is_blocked)
+	//	{
+	//		set_curr_on_ground(false);
+	//	}
+	//}
+	//
+	//if (not_moving_up)
+	//{
+	//	if (bot_side_is_blocked)
+	//	{
+	//		block_coll_response_bot_16x32(the_bcr_group);
+	//		set_curr_on_ground(true);
+	//	}
+	//	else //if (!bot_side_is_blocked)
+	//	{
+	//		set_curr_on_ground(false);
+	//	}
 	//}
 	
-	if ( moving_left && left_side_is_blocked )
+	if (top_side_is_blocked)
 	{
-		block_coll_response_left_16x32(the_bcr_group);
-	}
-	
-	//// Check for left slopes and see if it is possible to jump over them.
-	//if ( moving_right && !right_side_is_blocked )
-	//{
-	//	
-	//}
-	
-	if ( moving_right && right_side_is_blocked )
-	{
-		block_coll_response_right_16x32(the_bcr_group);
-	}
-	
-	if (moving_up)
-	{
-		if (top_side_is_blocked)
+		if (left_side_is_blocked_for_top)
 		{
-			block_coll_response_top_16x32(the_bcr_group);
+			block_coll_response_left_16x32(the_bcr_group);
+		}
+		if (right_side_is_blocked_for_top)
+		{
+			block_coll_response_right_16x32(the_bcr_group);
 		}
 		
-		if (bot_side_is_blocked)
-		{
-			set_curr_on_ground(true);
-		}
-		else //if (!bot_side_is_blocked)
-		{
-			set_curr_on_ground(false);
-		}
+		block_coll_response_top_16x32(the_bcr_group);
 	}
-	
-	if (not_moving_up)
+	else if (bot_side_is_blocked)
 	{
-		if (bot_side_is_blocked)
+		if (left_side_is_blocked_for_bot)
 		{
-			block_coll_response_bot_16x32(the_bcr_group);
-			set_curr_on_ground(true);
+			block_coll_response_left_16x32(the_bcr_group);
 		}
-		else //if (!bot_side_is_blocked)
+		if (right_side_is_blocked_for_bot)
 		{
-			set_curr_on_ground(false);
+			block_coll_response_right_16x32(the_bcr_group);
+		}
+		
+		block_coll_response_bot_16x32(the_bcr_group);
+	}
+	else // air
+	{
+		set_curr_on_ground(false);
+		
+		if (left_side_is_blocked_for_air)
+		{
+			block_coll_response_left_16x32(the_bcr_group);
+		}
+		if (right_side_is_blocked_for_air)
+		{
+			block_coll_response_right_16x32(the_bcr_group);
 		}
 	}
 	
