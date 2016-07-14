@@ -2141,13 +2141,46 @@ void sprite::block_collision_stuff_32x32_old()
 
 void sprite::block_collision_stuff_16x16()
 {
-	coll_point_group_16x16 the_pt_group(*this);
+	bool moving_left = false, moving_right = false, moving_up = false,
+		not_moving_up = false;
 	
-	block_coll_result_group_16x16 the_bcr_group(the_pt_group);
+	if ( get_curr_in_level_pos().x < get_prev_in_level_pos().x )
+	{
+		moving_left = true;
+	}
+	else if ( get_curr_in_level_pos().x > get_prev_in_level_pos().x )
+	{
+		moving_right = true;
+	}
 	
+	if ( get_curr_in_level_pos().y < get_prev_in_level_pos().y )
+	{
+		moving_up = true;
+	}
+	else //if ( get_curr_in_level_pos().y >= get_prev_in_level_pos().y )
+	{
+		not_moving_up = true;
+	}
 }
 void sprite::block_collision_stuff_16x32()
 {
+	// The maximum number of blocks, in each dimension, that can be
+	// intersected by a 16x32 sprite.
+	static const vec2_u32 bcr_arr_2d_max_size_2d( 2, 3 );
+	block_coll_result bcr_arr_2d[bcr_arr_2d_max_size_2d.y]
+		[bcr_arr_2d_max_size_2d.x];
+	array_2d_helper<block_coll_result> bcr_arr_2d_helper
+		( (block_coll_result*)bcr_arr_2d, bcr_arr_2d_max_size_2d );
+	
+	const vec2_s32 bcr_arr_2d_start_pos = active_level
+		::get_block_coord_of_point( vec2_f24p8( the_coll_box.left(),
+		the_coll_box.top() ) );
+	const vec2_s32 bcr_arr_2d_end_pos = active_level
+		::get_block_coord_of_point( vec2_f24p8( the_coll_box.right(),
+		the_coll_box.bot() ) );
+	const vec2_s32 bcr_arr_2d_real_size_2d = bcr_arr_2d_end_pos
+		- bcr_arr_2d_start_pos + vec2_s32( 1, 1 );
+	
 	
 	
 	
