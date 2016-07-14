@@ -2165,12 +2165,12 @@ void sprite::block_collision_stuff_16x16()
 void sprite::block_collision_stuff_16x32()
 {
 	// The maximum number of blocks, in each dimension, that can be
-	// intersected by a 16x32 sprite.
-	static const vec2_u32 bcr_arr_2d_max_size_2d( 2, 3 );
-	block_coll_result bcr_arr_2d[bcr_arr_2d_max_size_2d.y]
-		[bcr_arr_2d_max_size_2d.x];
+	// intersected by a 16x32 coll_box.  
+	static const vec2_u32 bcr_arr_2d_size_2d( 2, 3 );
+	block_coll_result bcr_arr_2d[bcr_arr_2d_size_2d.y]
+		[bcr_arr_2d_size_2d.x];
 	array_2d_helper<block_coll_result> bcr_arr_2d_helper
-		( (block_coll_result*)bcr_arr_2d, bcr_arr_2d_max_size_2d );
+		( (block_coll_result*)bcr_arr_2d, bcr_arr_2d_size_2d );
 	
 	const vec2_s32 bcr_arr_2d_start_pos = active_level
 		::get_block_coord_of_point( vec2_f24p8( the_coll_box.left(),
@@ -2178,10 +2178,18 @@ void sprite::block_collision_stuff_16x32()
 	const vec2_s32 bcr_arr_2d_end_pos = active_level
 		::get_block_coord_of_point( vec2_f24p8( the_coll_box.right(),
 		the_coll_box.bot() ) );
-	const vec2_s32 bcr_arr_2d_real_size_2d = bcr_arr_2d_end_pos
-		- bcr_arr_2d_start_pos + vec2_s32( 1, 1 );
 	
 	
+	block_coll_result* bcr_col_ptr_arr[bcr_arr_2d_helper.height()];
+	
+	for ( u32 j=0; j<bcr_arr_2d_helper.height(); ++j )
+	{
+		for ( u32 i=0; i<bcr_arr_2d_helper.width(); ++i )
+		{
+			bcr_arr_2d_helper.data_at( i, j ) = block_coll_result
+				( bcr_arr_2d_start_pos + vec2_s32( i, j ) );
+		}
+	}
 	
 	
 	bool moving_left = false, moving_right = false, moving_up = false,
@@ -2206,6 +2214,14 @@ void sprite::block_collision_stuff_16x32()
 	}
 	
 	
+	if (moving_left)
+	{
+		
+	}
+	else if (moving_right)
+	{
+		
+	}
 	
 	
 }
