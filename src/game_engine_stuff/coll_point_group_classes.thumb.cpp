@@ -32,24 +32,26 @@
 // Friday, October 23, 2015 (12:10 PM CST) Lol, I forgot that the first
 // comment was there.
 
+#define generate_pt(name) \
+	vec2_f24p8 & pt_##name = get_pt_##name();
+#define X(name) \
+	pt_##name.x =
+#define Y(name) \
+	pt_##name.y =
+
 
 coll_point_group_16x16::coll_point_group_16x16( const sprite& the_sprite )
 {
 	const coll_box& the_coll_box = the_sprite.the_coll_box;
 	
 	// The collision points
-	#define X(name) \
-		vec2_f24p8 & pt_##name = get_pt_##name();
-	list_of_16x16_coll_point_names(X)
-	#undef X
+	list_of_16x16_coll_point_names(generate_pt)
 	
 	// Left and Right
 	//pt_lt.x = pt_lb.x = the_coll_box.left();
 	
 	//pt_rt.x = pt_rb.x = the_coll_box.right();
 	
-	#define X(name) \
-		pt_##name.x = 
 	list_of_16x16_left_side_coll_point_names(X) 
 		the_coll_box.left();
 	
@@ -58,49 +60,46 @@ coll_point_group_16x16::coll_point_group_16x16( const sprite& the_sprite )
 	
 	list_of_16x16_middle_vert_line_coll_point_names(X)
 		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
-	#undef X
 	
 	
-	#define Y(name) \
-		pt_##name.y =
-	//list_of_16x16_vert_side_ypos_top_coll_point_names(Y) 
-	//	the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 4 };
+	
 	list_of_16x16_vert_side_ypos_top_coll_point_names(Y) 
-		the_coll_box.top();
+		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 4 };
+	//list_of_16x16_vert_side_ypos_top_coll_point_names(Y) 
+	//	the_coll_box.top();
 	
 	list_of_16x16_vert_side_ypos_middle_coll_point_names(Y)
 		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 2 };
 	
-	//list_of_16x16_vert_side_ypos_bottom_coll_point_names(Y) 
-	//	the_coll_box.bot() - (fixed24p8){ the_coll_box.size.y.data / 4 };
 	list_of_16x16_vert_side_ypos_bottom_coll_point_names(Y) 
-		the_coll_box.bot();
-	#undef Y
+		the_coll_box.bot() - (fixed24p8){ the_coll_box.size.y.data / 4 };
+	//list_of_16x16_vert_side_ypos_bottom_coll_point_names(Y) 
+	//	the_coll_box.bot();
 	
 	
 	
 	
 	// Top and Bottom
-	#define X(name) \
-		pt_##name.x =
 	//list_of_16x16_horiz_side_xpos_left_coll_point_names(X)
 	//	the_coll_box.left() + (fixed24p8){0x400};
+	//list_of_16x16_horiz_side_xpos_left_coll_point_names(X)
+	//	the_coll_box.left() + (fixed24p8){0x480};
 	list_of_16x16_horiz_side_xpos_left_coll_point_names(X)
-		the_coll_box.left() + (fixed24p8){0x480};
+		the_coll_box.left();
 	
 	list_of_16x16_horiz_side_xpos_middle_coll_point_names(X)
 		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
 	
 	//list_of_16x16_horiz_side_xpos_right_coll_point_names(X)
 	//	the_coll_box.right() - (fixed24p8){0x400};
+	//list_of_16x16_horiz_side_xpos_right_coll_point_names(X)
+	//	the_coll_box.right() - (fixed24p8){0x480};
 	list_of_16x16_horiz_side_xpos_right_coll_point_names(X)
-		the_coll_box.right() - (fixed24p8){0x480};
-	#undef X
+		the_coll_box.right();
 	
 	
 	
-	#define Y(name) \
-		pt_##name.y =
+	
 	list_of_16x16_top_side_coll_point_names(Y)
 		the_coll_box.top();
 	
@@ -119,7 +118,6 @@ coll_point_group_16x16::coll_point_group_16x16( const sprite& the_sprite )
 		list_of_16x16_bottom_side_coll_point_names(Y)
 			the_coll_box.bot();
 	}
-	#undef Y
 	
 	
 }
@@ -132,17 +130,12 @@ coll_point_group_16x32::coll_point_group_16x32( const sprite& the_sprite )
 	//the_pt_group.correct_num_used_points_16x32();
 	
 	// The collision_points
-	#define X(name) \
-		vec2_f24p8 & pt_##name = get_pt_##name();
-	list_of_16x32_coll_point_names(X)
-	#undef X
+	list_of_16x32_coll_point_names(generate_pt)
 	
 	// Left and Right
 	//pt_lt.x = pt_lm.x = pt_lb.x = the_coll_box.left();
 	
 	//pt_rt.x = pt_rm.x = pt_rb.x = the_coll_box.right();
-	#define X(name) \
-		pt_##name.x =
 	list_of_16x32_left_side_coll_point_names(X)
 		the_coll_box.left();
 	
@@ -151,49 +144,44 @@ coll_point_group_16x32::coll_point_group_16x32( const sprite& the_sprite )
 	
 	list_of_16x32_middle_vert_line_coll_point_names(X)
 		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
-	#undef X
 	
 	
 	
-	#define Y(name) \
-		pt_##name.y =
-	//list_of_16x32_vert_side_ypos_top_coll_point_names(Y)
-	//	the_coll_box.top() + (fixed24p8){0x480};
 	list_of_16x32_vert_side_ypos_top_coll_point_names(Y)
-		the_coll_box.top();
+		the_coll_box.top() + (fixed24p8){0x480};
+	//list_of_16x32_vert_side_ypos_top_coll_point_names(Y)
+	//	the_coll_box.top();
 	
 	list_of_16x32_vert_side_ypos_middle_coll_point_names(Y)
 		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 2 };
 	
-	//list_of_16x32_vert_side_ypos_bottom_coll_point_names(Y)
-	//	the_coll_box.bot() - (fixed24p8){0x480};
 	list_of_16x32_vert_side_ypos_bottom_coll_point_names(Y)
-		the_coll_box.bot();
-	#undef Y
+		the_coll_box.bot() - (fixed24p8){0x480};
+	//list_of_16x32_vert_side_ypos_bottom_coll_point_names(Y)
+	//	the_coll_box.bot();
 	
 	
 	
 	// Top and Bottom
-	#define X(name) \
-		pt_##name.x =
 	//list_of_16x32_horiz_side_xpos_left_coll_point_names(X)
 	//	the_coll_box.left() + (fixed24p8){0x400};
+	//list_of_16x32_horiz_side_xpos_left_coll_point_names(X)
+	//	the_coll_box.left() + (fixed24p8){0x480};
 	list_of_16x32_horiz_side_xpos_left_coll_point_names(X)
-		the_coll_box.left() + (fixed24p8){0x480};
+		the_coll_box.left();
 	
 	list_of_16x32_horiz_side_xpos_middle_coll_point_names(X)
 		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
 	
 	//list_of_16x32_horiz_side_xpos_right_coll_point_names(X)
 	//	the_coll_box.right() - (fixed24p8){0x400};
+	//list_of_16x32_horiz_side_xpos_right_coll_point_names(X)
+	//	the_coll_box.right() - (fixed24p8){0x480};
 	list_of_16x32_horiz_side_xpos_right_coll_point_names(X)
-		the_coll_box.right() - (fixed24p8){0x480};
-	#undef X
+		the_coll_box.right();
 	
 	
 	
-	#define Y(name) \
-		pt_##name.y =
 	list_of_16x32_top_side_coll_point_names(Y)
 		the_coll_box.top();
 	
@@ -212,131 +200,12 @@ coll_point_group_16x32::coll_point_group_16x32( const sprite& the_sprite )
 		list_of_16x32_bottom_side_coll_point_names(Y)
 			the_coll_box.bot();
 	}
-	#undef Y
 	
 	
 }
 
-//void generate_coll_point_group_32x16( const sprite& the_sprite, 
-//	coll_point_group& the_pt_group )
-//{
-//	const coll_box& the_coll_box = the_sprite.the_coll_box;
-//	
-//	// The collision points
-//	#define X(name) \
-//		vec2_f24p8 & pt_##name = the_pt_group.get_pt_##name();
-//	list_of_32x16_coll_point_names(X)
-//	#undef X
-//	
-//	// Left and Right
-//	
-//	//pt_lt.x = pt_lb.x = the_coll_box.left();
-//	
-//	//pt_rt.x = pt_rb.x = the_coll_box.right();
-//	
-//	#define X(name) \
-//		pt_##name.x =
-//	list_of_32x16_left_side_coll_point_names(X)
-//		the_coll_box.left();
-//	
-//	list_of_32x16_right_side_coll_point_names(X)
-//		the_coll_box.right();
-//	
-//	list_of_32x16_middle_vert_line_coll_point_names(X)
-//		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
-//	#undef X
-//	
-//	
-//	//pt_lt.y.data = pt_rt.y.data = the_coll_box.top().data 
-//	//	+ ( the_coll_box.size.y.data / 4 );
-//	
-//	//pt_lb.y.data = pt_rb.y.data = the_coll_box.bot().data 
-//	//	- ( the_coll_box.size.y.data / 4 );
-//	
-//	#define Y(name) \
-//		pt_##name.y =
-//	list_of_32x16_vert_side_ypos_top_coll_point_names(Y)
-//		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 4 };
-//	
-//	list_of_32x16_vert_side_ypos_middle_coll_point_names(Y)
-//		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 2 };
-//	
-//	list_of_32x16_vert_side_ypos_bottom_coll_point_names(Y)
-//		the_coll_box.bot() - (fixed24p8){ the_coll_box.size.y.data / 4 };
-//	#undef Y
-//	
-//	
-//	// Top and Bottom
-//	////pt_tl.x.data = pt_bl.x.data = the_coll_box.left().data 
-//	////	+ ( the_coll_box.size.x.data / 4 );
-//	////pt_tr.x.data = pt_br.x.data = the_coll_box.right().data 
-//	////	- ( the_coll_box.size.x.data / 4 );
-//	
-//	
-//	//pt_tl.x = pt_bl.x = the_coll_box.left() + (fixed24p8){0x400};
-//	
-//	//pt_tm.x.data = pt_bm.x.data = the_coll_box.left().data 
-//	//	+ ( the_coll_box.size.x.data / 2 );
-//	
-//	//pt_tr.x = pt_br.x = the_coll_box.right() - (fixed24p8){0x400};
-//	
-//	#define X(name) \
-//		pt_##name.x =
-//	//list_of_32x16_horiz_side_xpos_left_coll_point_names(X)
-//	//	the_coll_box.left() + (fixed24p8){0x400};
-//	list_of_32x16_horiz_side_xpos_left_coll_point_names(X)
-//		the_coll_box.left() + (fixed24p8){0x480};
-//	
-//	list_of_32x16_horiz_side_xpos_middle_coll_point_names(X)
-//		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
-//	
-//	//list_of_32x16_horiz_side_xpos_right_coll_point_names(X)
-//	//	the_coll_box.right() - (fixed24p8){0x400};
-//	list_of_32x16_horiz_side_xpos_right_coll_point_names(X)
-//		the_coll_box.right() - (fixed24p8){0x480};
-//	#undef X
-//	
-//	
-//	
-//	//pt_tl.y = pt_tm.y = pt_tr.y = the_coll_box.top();
-//	
-//	////pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot();
-//	//
-//	////pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() 
-//	////	+ the_sprite.cb_pos_offset.y;
-//	//
-//	////pt_bl.y = pt_bm.y = pt_br.y = the_coll_box.bot() + make_f24p8(2);
-//	
-//	//pt_bl.y = pt_bm.y = pt_br.y = the_sprite.in_level_pos.y 
-//	//	+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
-//	
-//	#define Y(name) \
-//		pt_##name.y = 
-//	list_of_32x16_top_side_coll_point_names(Y)
-//		the_coll_box.top();
-//	
-//	// This is a special case that covers walking down a slope.  However,
-//	// it would be good if I could make this not needed.
-//	if ( the_sprite.get_curr_on_ground() 
-//		&& the_sprite.vel.y >= (fixed24p8){0} )
-//	{
-//		list_of_16x32_bottom_side_coll_point_names(Y)
-//			//the_coll_box.bot() + (fixed24p8){0x200};
-//			the_coll_box.bot() + (fixed24p8){0x400};
-//	}
-//	else //if (!the_sprite.get_curr_on_ground())
-//	{
-//		list_of_16x32_bottom_side_coll_point_names(Y)
-//			the_coll_box.bot();
-//	}
-//	
-//	//list_of_16x32_bottom_slope_side_coll_point_names(Y)
-//	//	the_coll_box.bot() + (fixed24p8){0x200};
-//		
-//		//the_sprite.in_level_pos.y 
-//		//+ make_f24p8( the_sprite.get_shape_size_as_vec2().y + 2 );
-//	#undef Y
-//	
-//	
-//}
+#undef generate_pt
+#undef X
+#undef Y
+
 

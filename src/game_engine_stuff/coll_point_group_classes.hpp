@@ -172,8 +172,12 @@ public:		// functions
 	inline vec2_f24p8& get_pt_br()
 		{ return the_array[arr_ind_16x16_pt_br]; }
 	
+	inline vec2_f24p8& get_pt_mt()
+		{ return the_array[arr_ind_16x16_pt_mt]; }
 	inline vec2_f24p8& get_pt_mm()
 		{ return the_array[arr_ind_16x16_pt_mm]; }
+	inline vec2_f24p8& get_pt_mb()
+		{ return the_array[arr_ind_16x16_pt_mb]; }
 	
 } __attribute__((_align4));
 
@@ -212,8 +216,12 @@ public:		// functions
 	inline vec2_f24p8& get_pt_br()
 		{ return the_array[arr_ind_16x32_pt_br]; }
 	
+	inline vec2_f24p8& get_pt_mt()
+		{ return the_array[arr_ind_16x32_pt_mt]; }
 	inline vec2_f24p8& get_pt_mm()
 		{ return the_array[arr_ind_16x32_pt_mm]; }
+	inline vec2_f24p8& get_pt_mb()
+		{ return the_array[arr_ind_16x32_pt_mb]; }
 	
 } __attribute__((_align4));
 

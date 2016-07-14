@@ -93,7 +93,7 @@ int main()
 			(gfx_manager::bgofs_mirror[0].curr);
 		
 		sprite_manager::update_all_sprites
-			( active_level::get_the_current_sublevel_ptr().get_size_2d(), 
+			( active_level::get_curr_sublevel_ptr().get_size_2d(), 
 			gfx_manager::bgofs_mirror[0] );
 		
 		

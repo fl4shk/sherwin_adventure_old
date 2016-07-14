@@ -65,10 +65,8 @@ void active_level_manager::load_sublevel_basic( u32 n_sublevel_index )
 	init_horiz_sublevel_sprite_ipg_lists();
 	
 	// Decompress the sublevel's block data into block_data_array.
-	bios_do_lz77_uncomp_wram
-		( active_level::get_the_current_sublevel_ptr()
-		.cmp_bd_arr_helper.the_array, 
-		active_level::block_data_array );
+	bios_do_lz77_uncomp_wram( active_level::get_curr_sublevel_ptr()
+		.cmp_bd_arr_helper.the_array, active_level::block_data_array );
 	
 	for ( u32 i=0; i<active_level::block_data_array_size; ++i )
 	{
@@ -106,10 +104,8 @@ void active_level_manager::load_sublevel_at_intra_sublevel_warp
 	init_horiz_sublevel_sprite_ipg_lists();
 	
 	// Decompress the sublevel's block data into block_data_array.
-	bios_do_lz77_uncomp_wram
-		( active_level::get_the_current_sublevel_ptr()
-		.cmp_bd_arr_helper.the_array, 
-		active_level::block_data_array );
+	bios_do_lz77_uncomp_wram( active_level::get_curr_sublevel_ptr()
+		.cmp_bd_arr_helper.the_array, active_level::block_data_array );
 	
 	for ( u32 i=0; i<active_level::block_data_array_size; ++i )
 	{

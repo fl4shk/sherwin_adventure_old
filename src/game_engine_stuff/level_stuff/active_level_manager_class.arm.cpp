@@ -257,8 +257,8 @@ void active_level_manager::update_sublevel_in_screenblock_mirror_2d()
 	//const vec2_u32& sublevel_size_in_blocks_2d )
 {
 	
-	correct_bg0_scroll_mirror
-		(active_level::get_the_current_sublevel_ptr().get_size_2d());
+	correct_bg0_scroll_mirror(active_level::get_curr_sublevel_ptr()
+		.get_size_2d());
 	
 	
 	// VRAM tiles are 8x8 pixels in size, so divide the 

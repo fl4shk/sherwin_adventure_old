@@ -30,6 +30,7 @@
 //#include "../array_helper_class.hpp"
 
 //#include "level_class.hpp"
+#include "sublevel_class.hpp"
 #include "level_defines.hpp"
 
 
@@ -50,6 +51,7 @@ class level;
 class active_level
 {
 public:		// static variables
+	static block blank_block __attribute__((_ewram));
 	
 	// This will eat up 64 kiB of EWRAM.
 	//static constexpr u32 block_data_array_size = 0x4000;
@@ -124,6 +126,13 @@ public:		// static variables
 	
 	
 public:		// functions
+	static inline bool block_coord_is_valid( const vec2_s32& block_coord )
+	{
+		return ( block_coord.x >= 0 && block_coord.x 
+			< (s32)get_curr_sublevel_ptr().get_size_2d().x
+			&& block_coord.y >= 0 && block_coord.y 
+			< (s32)get_curr_sublevel_ptr().get_size_2d().y );
+	}
 	
 	// This function computes the block coordinate of a point.
 	static inline vec2_s32 get_block_coord_of_point( const vec2_f24p8& pt )
@@ -144,18 +153,32 @@ public:		// functions
 	static inline block_type get_block_type_at_coord 
 		( const vec2_s32& block_coord )
 	{
-		return horiz_sublevel_block_data_2d.data_at( block_coord.x,
-			block_coord.y ).get_block_type();
+		if ( block_coord_is_valid(block_coord) )
+		{
+			return horiz_sublevel_block_data_2d.data_at( block_coord.x,
+				block_coord.y ).get_block_type();
+		}
+		else
+		{
+			return blank_block.get_block_type();
+		}
 	}
 	
 	static inline block& the_block_data_at_coord 
 		( const vec2_s32& block_coord )
 	{
-		return horiz_sublevel_block_data_2d.data_at( block_coord.x,
-			block_coord.y );
+		if ( block_coord_is_valid(block_coord) )
+		{
+			return horiz_sublevel_block_data_2d.data_at( block_coord.x,
+				block_coord.y );
+		}
+		else
+		{
+			return blank_block;
+		}
 	}
 	
-	static const sublevel_pointer& get_the_current_sublevel_ptr();
+	static const sublevel_pointer& get_curr_sublevel_ptr();
 	
 	
 	// This function allocates a new block and returns the previous one

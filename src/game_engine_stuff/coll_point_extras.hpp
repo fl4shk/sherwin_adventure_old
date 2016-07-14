@@ -31,18 +31,19 @@
 	macro(tl) macro(tm) macro(tr)
 #define list_of_16x16_bottom_side_coll_point_names(macro) \
 	macro(bl) macro(bm) macro(br)
-// Note that tm and bm are treated the same as mt and mb now.
+// Note that these are set the the same y positions as the corresponding lX
+// and rX coll points.
 #define list_of_16x16_middle_vert_line_coll_point_names(macro) \
-	macro(mm)
+	macro(mt) macro(mm) macro(mb)
 
 
 // Left, middle vertical line, or right side, same ypos collision points
 #define list_of_16x16_vert_side_ypos_top_coll_point_names(macro) \
-	macro(lt) macro(rt)
+	macro(lt) macro(mt) macro(rt)
 #define list_of_16x16_vert_side_ypos_middle_coll_point_names(macro) \
 	macro(lm) macro(mm) macro(rm)
 #define list_of_16x16_vert_side_ypos_bottom_coll_point_names(macro) \
-	macro(lb) macro(rb)
+	macro(lb) macro(mb) macro(rb)
 
 // Top or bottom same xpos collision points
 #define list_of_16x16_horiz_side_xpos_left_coll_point_names(macro) \
@@ -76,18 +77,19 @@
 	macro(tl) macro(tm) macro(tr)
 #define list_of_16x32_bottom_side_coll_point_names(macro) \
 	macro(bl) macro(bm) macro(br)
-// Note that tm and bm are treated the same as mt and mb now.
+// Note that these are set the the same y positions as the corresponding lX
+// and rX coll points.
 #define list_of_16x32_middle_vert_line_coll_point_names(macro) \
-	macro(mm)
+	macro(mt) macro(mm) macro(mb)
 
 
 // Left, middle vertical line, or right side, same ypos collision points
 #define list_of_16x32_vert_side_ypos_top_coll_point_names(macro) \
-	macro(lt) macro(rt)
+	macro(lt) macro(mt) macro(rt)
 #define list_of_16x32_vert_side_ypos_middle_coll_point_names(macro) \
 	macro(lm) macro(mm) macro(rm)
 #define list_of_16x32_vert_side_ypos_bottom_coll_point_names(macro) \
-	macro(lb) macro(rb)
+	macro(lb) macro(mb) macro(rb)
 
 // Top or bottom same xpos collision points
 #define list_of_16x32_horiz_side_xpos_left_coll_point_names(macro) \
@@ -121,18 +123,19 @@
 	macro(tl) macro(tm) macro(tr)
 #define list_of_32x16_bottom_side_coll_point_names(macro) \
 	macro(bl) macro(bm) macro(br)
-// Note that tm and bm are treated the same as mt and mb now.
+// Note that these are set the the same y positions as the corresponding lX
+// and rX coll points.
 #define list_of_32x16_middle_vert_line_coll_point_names(macro) \
-	macro(mm)
+	macro(mt) macro(mm) macro(mb)
 
 
 // Left, middle vertical line, or right side, same ypos collision points
 #define list_of_32x16_vert_side_ypos_top_coll_point_names(macro) \
-	macro(lt) macro(rt)
+	macro(lt) macro(mt) macro(rt)
 #define list_of_32x16_vert_side_ypos_middle_coll_point_names(macro) \
 	macro(lm) macro(mm) macro(rm)
 #define list_of_32x16_vert_side_ypos_bottom_coll_point_names(macro) \
-	macro(lb) macro(rb)
+	macro(lb) macro(mb) macro(rb)
 
 // Top or bottom same xpos collision points
 #define list_of_32x16_horiz_side_xpos_left_coll_point_names(macro) \
@@ -153,5 +156,6 @@
 	list_of_32x16_right_side_coll_point_names(macro) \
 	list_of_32x16_bottom_side_coll_point_names(macro) \
 	list_of_32x16_middle_vert_line_coll_point_names(macro)
+
 
 #endif		// coll_point_extras_hpp

@@ -20,6 +20,19 @@
 #include "level_stuff/active_level_class.hpp"
 
 
+block_coll_result::block_coll_result( const vec2_s32& s_coord )
+	: coord(s_coord)
+{
+	the_block = &active_level::the_block_data_at_coord(coord);
+}
+
+block_coll_result::block_coll_result( const vec2_f24p8& s_coord_f24p8 )
+	: block_coll_result(active_level::get_block_coord_of_point
+	(s_coord_f24p8))
+{
+}
+
+
 block_coll_result_group_base::block_coll_result_group_base()
 {
 	memfill32( the_array, 0, sizeof(the_array) / sizeof(u32) );
@@ -73,6 +86,7 @@ block_coll_result_group_16x32::block_coll_result_group_16x32
 	{
 		the_array[i].coord = active_level::get_block_coord_of_point
 			(the_pt_group.the_array[i]);
+		
 		the_array[i].the_block = &active_level::the_block_data_at_coord
 			(the_array[i].coord);
 	}

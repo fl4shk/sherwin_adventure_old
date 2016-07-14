@@ -33,6 +33,27 @@ public:		// variables
 	block* the_block;
 	
 public:		// functions
+	inline block_coll_result() : coord(), the_block(NULL)
+	{
+	}
+	block_coll_result( const vec2_s32& s_coord )
+		__attribute__((_iwram_code));
+	block_coll_result( const vec2_f24p8& s_coord_f24p8 )
+		__attribute__((_iwram_code));
+	inline block_coll_result( const block_coll_result& to_copy )
+	{
+		*this = to_copy;
+	}
+	
+	inline block_coll_result& operator = 
+		( const block_coll_result& to_copy )
+	{
+		coord = to_copy.coord;
+		the_block = to_copy.the_block;
+		
+		return *this;
+	}
+	
 	inline block_type get_block_type() const
 	{
 		return the_block->get_block_type();
@@ -96,8 +117,12 @@ public:		// functions
 	inline block_coll_result& get_bcr_br()
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_br]; }
 	
+	inline block_coll_result& get_bcr_mt()
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_mt]; }
 	inline block_coll_result& get_bcr_mm()
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_mm]; }
+	inline block_coll_result& get_bcr_mb()
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_mb]; }
 	
 	
 	
@@ -129,8 +154,12 @@ public:		// functions
 	inline const block_coll_result& get_bcr_br() const
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_br]; }
 	
+	inline const block_coll_result& get_bcr_mt() const
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_mt]; }
 	inline const block_coll_result& get_bcr_mm() const
 		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_mm]; }
+	inline const block_coll_result& get_bcr_mb() const
+		{ return the_array[coll_point_group_base::arr_ind_16x16_pt_mb]; }
 	
 } __attribute__((_align4));
 
@@ -172,8 +201,12 @@ public:		// functions
 	inline block_coll_result& get_bcr_br()
 		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_br]; }
 	
+	inline block_coll_result& get_bcr_mt()
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mt]; }
 	inline block_coll_result& get_bcr_mm()
 		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mm]; }
+	inline block_coll_result& get_bcr_mb()
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mb]; }
 	
 	
 	
@@ -205,8 +238,12 @@ public:		// functions
 	inline const block_coll_result& get_bcr_br() const
 		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_br]; }
 	
+	inline const block_coll_result& get_bcr_mt() const
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mt]; }
 	inline const block_coll_result& get_bcr_mm() const
 		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mm]; }
+	inline const block_coll_result& get_bcr_mb() const
+		{ return the_array[coll_point_group_base::arr_ind_16x32_pt_mb]; }
 	
 } __attribute__((_align4));
 

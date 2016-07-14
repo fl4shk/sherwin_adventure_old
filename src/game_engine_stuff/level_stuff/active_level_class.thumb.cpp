@@ -23,6 +23,8 @@
 #include "active_level_manager_class.hpp"
 //#include "../sa_list_class_stuff.hpp"
 
+block active_level::blank_block;
+
 const vec2_u32 active_level::horiz_sublevel_size_2d
 	( horiz_sublevel_xsize, horiz_sublevel_ysize );
 
@@ -69,7 +71,7 @@ u32 active_level::the_current_active_sublevel_index;
 
 
 
-const sublevel_pointer& active_level::get_the_current_sublevel_ptr()
+const sublevel_pointer& active_level::get_curr_sublevel_ptr()
 {
 	return the_current_level_ptr->get_the_sublevels()
 		[the_current_active_sublevel_index];

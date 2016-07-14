@@ -475,16 +475,16 @@ void sprite_manager::initial_sprite_spawning_at_start_of_level
 	
 	
 	const sublevel_entrance& the_start_of_level_sle
-		= active_level::get_the_current_sublevel_ptr()
+		= active_level::get_curr_sublevel_ptr()
 		.sublevel_entrance_arr_arr_helper.the_array
-		[active_level::get_the_current_sublevel_ptr()
+		[active_level::get_curr_sublevel_ptr()
 		.sublevel_entrance_arr_arr_helper.get_size() - 1];
 	
 	vec2_f24p8 player_initial_in_level_pos 
 		= the_start_of_level_sle.in_level_pos;
 	
 	init_the_player( player_initial_in_level_pos, 
-		active_level::get_the_current_sublevel_ptr().get_size_2d(),
+		active_level::get_curr_sublevel_ptr().get_size_2d(),
 		camera_pos_pc_pair );
 	
 	//init_the_sprite_arrays();
@@ -505,7 +505,7 @@ void sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
 	
 	
 	const sublevel_entrance& the_dest_sle
-		= active_level::get_the_current_sublevel_ptr()
+		= active_level::get_curr_sublevel_ptr()
 		.sublevel_entrance_arr_arr_helper.the_array
 		[sublevel_entrance_index];
 	
@@ -521,7 +521,7 @@ void sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
 	// This function call needs to be replaced with some non-destructive
 	// form of changing the player's in_level_pos.
 	init_the_player( player_initial_in_level_pos, 
-		active_level::get_the_current_sublevel_ptr().get_size_2d(),
+		active_level::get_curr_sublevel_ptr().get_size_2d(),
 		camera_pos_pc_pair );
 	
 	//init_the_sprite_arrays();

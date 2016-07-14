@@ -101,9 +101,9 @@ public:		// functions
 	static inline void init_horiz_sublevel_sprite_ipg_lists()
 	{
 		sprite_manager::init_horiz_sublevel_sprite_ipg_lists
-			( active_level::get_the_current_sublevel_ptr()
+			( active_level::get_curr_sublevel_ptr()
 			.sprite_ipg_arr_arr_helper.get_the_array(),
-			active_level::get_the_current_sublevel_ptr()
+			active_level::get_curr_sublevel_ptr()
 			.sprite_ipg_arr_arr_helper.get_size() );
 	}
 	
