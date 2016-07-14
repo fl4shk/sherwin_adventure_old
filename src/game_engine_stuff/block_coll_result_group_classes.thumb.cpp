@@ -25,7 +25,6 @@ block_coll_result::block_coll_result( const vec2_s32& s_coord )
 {
 	the_block = &active_level::the_block_data_at_coord(coord);
 }
-
 block_coll_result::block_coll_result( const vec2_f24p8& s_coord_f24p8 )
 	: block_coll_result(active_level::get_block_coord_of_point
 	(s_coord_f24p8))
@@ -33,67 +32,34 @@ block_coll_result::block_coll_result( const vec2_f24p8& s_coord_f24p8 )
 }
 
 
-block_coll_result_group_base::block_coll_result_group_base()
+// The maximum number of blocks intersected by a sprite, per dimension.
+// The value of ( 3, 3 ) corresponds to a 32x32 sprite.  Definitely
+// change these two values (among other things) if there is every any
+// infrastructure for sprites larger than 32x32 pixels.
+//const vec2_u32 block_coll_result_group::shared_max_size_2d( 3, 3 );
+
+
+
+
+block_coll_result_group::block_coll_result_group
+	( const coll_box& the_coll_box )
 {
-	memfill32( the_array, 0, sizeof(the_array) / sizeof(u32) );
+	
 }
-block_coll_result_group_base::block_coll_result_group_base
-	( const block_coll_result_group_base& to_copy )
+block_coll_result_group::block_coll_result_group
+	( const block_coll_result_group& to_copy )
 {
 	*this = to_copy;
 }
-
-
-block_coll_result_group_base& block_coll_result_group_base::operator = 
-	( const block_coll_result_group_base& to_copy )
+block_coll_result_group& block_coll_result_group::operator = 
+	( const block_coll_result_group& to_copy )
 {
-	memcpy32( the_array, to_copy.the_array, sizeof(the_array) 
-		/ sizeof(u32) );
+	memcpy32( bcr_arr_2d_helper_data, to_copy.bcr_arr_2d_helper_data, 
+		sizeof(bcr_arr_2d_helper_data) / sizeof(u32) );
+	real_size_2d = to_copy.real_size_2d;
+	bcr_arr_2d_helper = to_copy.bcr_arr_2d_helper;
 	
 	return *this;
 }
 
-
-block_coll_result_group_16x16::block_coll_result_group_16x16
-	( const coll_point_group_16x16& the_pt_group ) 
-	: block_coll_result_group_base()
-{
-	for ( u32 i=0; 
-		i<coll_point_group_base::arr_ind_16x16_count; 
-		++i )
-	{
-		the_array[i].coord = active_level::get_block_coord_of_point
-			(the_pt_group.the_array[i]);
-		the_array[i].the_block = &active_level::the_block_data_at_coord
-			(the_array[i].coord);
-	}
-}
-block_coll_result_group_16x16::block_coll_result_group_16x16
-	( const block_coll_result_group_base& to_copy )
-{
-	*this = to_copy;
-}
-
-
-
-block_coll_result_group_16x32::block_coll_result_group_16x32
-	( const coll_point_group_16x32& the_pt_group )
-	: block_coll_result_group_base()
-{
-	for ( u32 i=0; 
-		i<coll_point_group_base::arr_ind_16x32_count; 
-		++i )
-	{
-		the_array[i].coord = active_level::get_block_coord_of_point
-			(the_pt_group.the_array[i]);
-		
-		the_array[i].the_block = &active_level::the_block_data_at_coord
-			(the_array[i].coord);
-	}
-}
-block_coll_result_group_16x32::block_coll_result_group_16x32
-	( const block_coll_result_group_base& to_copy )
-{
-	*this = to_copy;
-}
 

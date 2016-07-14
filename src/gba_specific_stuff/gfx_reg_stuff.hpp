@@ -205,7 +205,7 @@ static const u32 num_pixels_per_tile = num_pixels_per_tile_row
 
 static const u32 num_pixels_per_block_row = 16;
 static const u32 num_pixels_per_block_col = 16;
-static const u32 num_pixels_per_block_row_or_column = 16;
+static const u32 num_pixels_per_block_dim = 16;
 
 
 /* ---- Display Register Value Defines ---- */

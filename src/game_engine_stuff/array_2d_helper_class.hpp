@@ -49,16 +49,19 @@ public:			// functions
 	
 	void init( type* s_the_array, const vec2_u32& s_size_2d )
 	{
-		the_array = s_the_array;
 		size_2d = s_size_2d;
 		size = size_2d.x * size_2d.y;
+		the_array = s_the_array;
 	}
 	
-	void operator = ( array_2d_helper<type>& to_copy )
+	array_2d_helper<type>& operator 
+		= ( const array_2d_helper<type>& to_copy )
 	{
-		the_array = to_copy.the_array;
 		size_2d = to_copy.size_2d;
 		size = to_copy.size;
+		the_array = to_copy.the_array;
+		
+		return *this;
 	}
 	
 	

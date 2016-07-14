@@ -32,29 +32,28 @@ public:		// variables
 	type x, y;
 	
 public:		// functions
-	inline vec2() : x( type() ), y( type() )
+	constexpr inline vec2() : x( type() ), y( type() )
 	{
 	}
 	
-	inline vec2( const type& s_x, const type& s_y ) : x(s_x), y(s_y)
-	{
-	}
-	
-	inline vec2( const vec2<type>& to_copy ) : x(to_copy.x), y(to_copy.y)
-	{
-	}
-	
-	
-	
-	//inline constexpr vec2( const vec2<type>& to_copy )
-	//	: x(to_copy.x), y(to_copy.y)
+	//inline vec2( const type& s_x, const type& s_y ) : x(s_x), y(s_y)
 	//{
 	//}
 	//
-	//inline constexpr vec2( const type& s_x, const type& s_y )
-	//	: x(s_x), y(s_y)
+	//inline vec2( const vec2<type>& to_copy ) : x(to_copy.x), y(to_copy.y)
 	//{
 	//}
+	
+	
+	
+	constexpr inline vec2( const type& s_x, const type& s_y )
+		: x(s_x), y(s_y)
+	{
+	}
+	constexpr inline vec2( const vec2<type>& to_copy )
+		: x(to_copy.x), y(to_copy.y)
+	{
+	}
 	
 	
 	inline vec2<type>& operator = ( const vec2<type>& to_copy )
@@ -139,16 +138,16 @@ public:		// variables
 	fixed24p8 x, y;
 	
 public:		// functions
-	inline vec2() : x( fixed24p8() ), y( fixed24p8() )
+	constexpr inline vec2() : x( fixed24p8() ), y( fixed24p8() )
 	{
 	}
 	
-	inline vec2( const fixed24p8& s_x, const fixed24p8& s_y )
+	constexpr inline vec2( const fixed24p8& s_x, const fixed24p8& s_y )
 		: x(s_x), y(s_y)
 	{
 	}
 	
-	inline vec2( const vec2<fixed24p8>& to_copy ) 
+	constexpr inline vec2( const vec2<fixed24p8>& to_copy ) 
 		: x(to_copy.x), y(to_copy.y)
 	{
 	}
@@ -241,16 +240,16 @@ public:		// variables
 	fixed8p8 x, y;
 	
 public:		// functions
-	inline vec2() : x( fixed8p8() ), y( fixed8p8() )
+	constexpr inline vec2() : x( fixed8p8() ), y( fixed8p8() )
 	{
 	}
 	
-	inline vec2( const fixed8p8& s_x, const fixed8p8& s_y )
+	constexpr inline vec2( const fixed8p8& s_x, const fixed8p8& s_y )
 		: x(s_x), y(s_y)
 	{
 	}
 	
-	inline vec2( const vec2<fixed8p8>& to_copy ) 
+	constexpr inline vec2( const vec2<fixed8p8>& to_copy ) 
 		: x(to_copy.x), y(to_copy.y)
 	{
 	}
