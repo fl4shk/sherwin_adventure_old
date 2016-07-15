@@ -396,6 +396,7 @@ bios_sqrt	gba_specific_stuff/bios_function_wrappers.hpp	47;"	kind:d
 bios_stop	gba_specific_stuff/bios_function_wrappers.hpp	35;"	kind:d
 bios_vblank_intr_wait	gba_specific_stuff/bios_function_wrappers.hpp	39;"	kind:d
 bios_wait_for_vblank	gba_specific_stuff/bios_function_wrappers.hpp	/^inline void bios_wait_for_vblank()$/;"	kind:f	signature:()
+bl_corner	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 bl_corner() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 blank_block	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static block blank_block __attribute__((_ewram));$/;"	kind:m	class:active_level	access:public
 blank_block	game_engine_stuff/level_stuff/active_level_class.thumb.cpp	/^block active_level::blank_block;$/;"	kind:m	class:active_level	file:
 bldalpha_bot	gba_specific_stuff/gfx_reg_stuff.hpp	394;"	kind:d
@@ -514,6 +515,7 @@ block_coll_result::block_coll_result	game_engine_stuff/block_coll_result_group_c
 block_coll_result::coord	game_engine_stuff/block_coll_result_group_class.hpp	/^	vec2_s32 coord;$/;"	kind:m	class:block_coll_result	access:public
 block_coll_result::get_block_type	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline block_type get_block_type() const$/;"	kind:f	class:block_coll_result	access:public	signature:() const
 block_coll_result::operator =	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline block_coll_result& operator = $/;"	kind:f	class:block_coll_result	access:public	signature:( const block_coll_result& to_copy )
+block_coll_result::the_bbvt	game_engine_stuff/block_coll_result_group_class.hpp	/^	block_behavior_type the_bbvt;$/;"	kind:m	class:block_coll_result	access:public
 block_coll_result::the_block	game_engine_stuff/block_coll_result_group_class.hpp	/^	block* the_block;$/;"	kind:m	class:block_coll_result	access:public
 block_coll_result_group	game_engine_stuff/block_coll_result_group_class.hpp	/^	block_coll_result_group$/;"	kind:p	class:block_coll_result_group	access:public	signature:( const block_coll_result_group& to_copy )
 block_coll_result_group	game_engine_stuff/block_coll_result_group_class.hpp	/^	block_coll_result_group( const coll_box& the_coll_box );$/;"	kind:p	class:block_coll_result_group	access:public	signature:( const coll_box& the_coll_box )
@@ -522,24 +524,34 @@ block_coll_result_group	game_engine_stuff/block_coll_result_group_class.thumb.cp
 block_coll_result_group	game_engine_stuff/block_coll_result_group_class.thumb.cpp	/^block_coll_result_group::block_coll_result_group$/;"	kind:f	class:block_coll_result_group	signature:( const coll_box& the_coll_box )
 block_coll_result_group::bcr_arr_2d_helper	game_engine_stuff/block_coll_result_group_class.hpp	/^	array_2d_helper<block_coll_result> bcr_arr_2d_helper;$/;"	kind:m	class:block_coll_result_group	access:public
 block_coll_result_group::bcr_arr_2d_helper_data	game_engine_stuff/block_coll_result_group_class.hpp	/^	block_coll_result bcr_arr_2d_helper_data[max_size];$/;"	kind:m	class:block_coll_result_group	access:protected
+block_coll_result_group::bl_corner	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 bl_corner() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 block_coll_result_group::block_coll_result_group	game_engine_stuff/block_coll_result_group_class.hpp	/^	block_coll_result_group$/;"	kind:p	class:block_coll_result_group	access:public	signature:( const block_coll_result_group& to_copy )
 block_coll_result_group::block_coll_result_group	game_engine_stuff/block_coll_result_group_class.hpp	/^	block_coll_result_group( const coll_box& the_coll_box );$/;"	kind:p	class:block_coll_result_group	access:public	signature:( const coll_box& the_coll_box )
 block_coll_result_group::block_coll_result_group	game_engine_stuff/block_coll_result_group_class.thumb.cpp	/^block_coll_result_group::block_coll_result_group$/;"	kind:f	class:block_coll_result_group	signature:( const block_coll_result_group& to_copy )
 block_coll_result_group::block_coll_result_group	game_engine_stuff/block_coll_result_group_class.thumb.cpp	/^block_coll_result_group::block_coll_result_group$/;"	kind:f	class:block_coll_result_group	signature:( const coll_box& the_coll_box )
-block_coll_result_group::get_real_size_2d	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline const vec2_s32 get_real_size_2d() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+block_coll_result_group::bot	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 bot() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+block_coll_result_group::br_corner	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 br_corner() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+block_coll_result_group::get_real_size_2d	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 get_real_size_2d() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+block_coll_result_group::left	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 left() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+block_coll_result_group::local_bl_corner	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 local_bl_corner() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+block_coll_result_group::local_bot	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 local_bot() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+block_coll_result_group::local_br_corner	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 local_br_corner() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+block_coll_result_group::local_left	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 local_left() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+block_coll_result_group::local_right	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 local_right() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+block_coll_result_group::local_tl_corner	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 local_tl_corner() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+block_coll_result_group::local_top	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 local_top() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+block_coll_result_group::local_tr_corner	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 local_tr_corner() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 block_coll_result_group::max_size	game_engine_stuff/block_coll_result_group_class.hpp	/^	static constexpr u32 max_size = max_size_2d.x * max_size_2d.y;$/;"	kind:m	class:block_coll_result_group	access:protected
 block_coll_result_group::max_size_2d	game_engine_stuff/block_coll_result_group_class.hpp	/^	static constexpr vec2_u32 max_size_2d = vec2_u32( 3, 3 );$/;"	kind:m	class:block_coll_result_group	access:protected
 block_coll_result_group::operator =	game_engine_stuff/block_coll_result_group_class.hpp	/^	block_coll_result_group& operator = $/;"	kind:p	class:block_coll_result_group	access:public	signature:( const block_coll_result_group& to_copy )
 block_coll_result_group::operator =	game_engine_stuff/block_coll_result_group_class.thumb.cpp	/^block_coll_result_group& block_coll_result_group::operator = $/;"	kind:f	class:block_coll_result_group	signature:( const block_coll_result_group& to_copy )
-block_coll_result_group::real_bot	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 real_bot() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
-block_coll_result_group::real_end_pos	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 real_end_pos() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 block_coll_result_group::real_height	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 real_height() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
-block_coll_result_group::real_left	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 real_left() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
-block_coll_result_group::real_right	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 real_right() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 block_coll_result_group::real_size_2d	game_engine_stuff/block_coll_result_group_class.hpp	/^	vec2_s32 real_size_2d;$/;"	kind:m	class:block_coll_result_group	access:protected
-block_coll_result_group::real_start_pos	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 real_start_pos() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
-block_coll_result_group::real_top	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 real_top() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 block_coll_result_group::real_width	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 real_width() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+block_coll_result_group::right	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 right() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+block_coll_result_group::tl_corner	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 tl_corner() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+block_coll_result_group::top	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 top() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+block_coll_result_group::tr_corner	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 tr_corner() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 block_coll_result_group_class_hpp	game_engine_stuff/block_coll_result_group_class.hpp	20;"	kind:d
 block_collision_stuff	game_engine_stuff/sprite_stuff/player_pickaxe_sprite_class.hpp	/^	virtual void block_collision_stuff() __attribute__((_iwram_code));$/;"	kind:p	class:player_pickaxe_sprite	access:public	signature:()
 block_collision_stuff	game_engine_stuff/sprite_stuff/player_pickaxe_sprite_class.thumb.cpp	/^void player_pickaxe_sprite::block_collision_stuff()$/;"	kind:f	class:player_pickaxe_sprite	signature:()
@@ -572,7 +584,9 @@ block_stuff_array	game_engine_stuff/block_stuff/block_stuff.thumb.cpp	/^std::arr
 block_stuff_hpp	game_engine_stuff/block_stuff/block_stuff.hpp	20;"	kind:d
 block_type	game_engine_stuff/block_stuff/block_stuff.hpp	/^enum block_type$/;"	kind:g
 block_type_exists	game_engine_stuff/block_stuff/block_stuff.hpp	/^inline bool block_type_exists( block_type the_block_type )$/;"	kind:f	signature:( block_type the_block_type )
+bot	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 bot() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 bot	game_engine_stuff/coll_box_class.hpp	/^	inline fixed24p8 bot() const$/;"	kind:f	class:coll_box	access:public	signature:() const
+br_corner	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 br_corner() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 bt_air	game_engine_stuff/block_stuff/block_stuff.hpp	/^	bt_air,$/;"	kind:e	enum:block_type
 bt_count	game_engine_stuff/block_stuff/block_stuff.hpp	/^	bt_count,$/;"	kind:e	enum:block_type
 bt_dirt_bottom_left	game_engine_stuff/block_stuff/block_stuff.hpp	/^	bt_dirt_bottom_left,$/;"	kind:e	enum:block_type
@@ -1782,7 +1796,7 @@ get_pt_tr	game_engine_stuff/coll_point_group_classes.hpp	/^	inline vec2_f24p8& g
 get_rb_corner_in_local_coords	game_engine_stuff/orientable_coll_box_class.hpp	/^	inline vec2_f24p8 get_rb_corner_in_local_coords() const$/;"	kind:f	class:orientable_coll_box	access:public	signature:() const
 get_rb_corner_in_world_coords	game_engine_stuff/orientable_coll_box_class.hpp	/^	inline vec2_f24p8 get_rb_corner_in_world_coords() const$/;"	kind:f	class:orientable_coll_box	access:public	signature:() const
 get_real_size	game_engine_stuff/debug_vars.hpp	/^	inline u32 get_real_size() const$/;"	kind:f	class:debug_str	access:public	signature:() const
-get_real_size_2d	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline const vec2_s32 get_real_size_2d() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+get_real_size_2d	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 get_real_size_2d() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 get_rt_corner_in_local_coords	game_engine_stuff/orientable_coll_box_class.hpp	/^	inline vec2_f24p8 get_rt_corner_in_local_coords() const$/;"	kind:f	class:orientable_coll_box	access:public	signature:() const
 get_rt_corner_in_world_coords	game_engine_stuff/orientable_coll_box_class.hpp	/^	inline vec2_f24p8 get_rt_corner_in_world_coords() const$/;"	kind:f	class:orientable_coll_box	access:public	signature:() const
 get_shape_size	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline oam_entry::shape_size get_shape_size() const$/;"	kind:f	class:sprite	access:public	signature:() const
@@ -2238,6 +2252,7 @@ key_transit	gba_specific_stuff/button_stuff.hpp	/^inline u32 key_transit( u32 ke
 key_up	gba_specific_stuff/button_stuff.hpp	46;"	kind:d
 key_was_down	gba_specific_stuff/button_stuff.hpp	/^inline u32 key_was_down( u32 key )$/;"	kind:f	signature:( u32 key )
 key_was_up	gba_specific_stuff/button_stuff.hpp	/^inline u32 key_was_up( u32 key )$/;"	kind:f	signature:( u32 key )
+left	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 left() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 left	game_engine_stuff/coll_box_class.hpp	/^	inline fixed24p8 left() const$/;"	kind:f	class:coll_box	access:public	signature:() const
 level	game_engine_stuff/level_stuff/level_class.hpp	/^	inline level( sublevel_pointer& first_sublevel_ptr )$/;"	kind:f	class:level	access:public	signature:( sublevel_pointer& first_sublevel_ptr )
 level	game_engine_stuff/level_stuff/level_class.hpp	/^	inline level( sublevel_pointer& first_sublevel_ptr, $/;"	kind:f	class:level	access:public	signature:( sublevel_pointer& first_sublevel_ptr, sublevel_pointer& second_sublevel_ptr )
@@ -2345,6 +2360,14 @@ load_sublevel_at_intra_sublevel_warp	game_engine_stuff/level_stuff/active_level_
 load_sublevel_at_intra_sublevel_warp	game_engine_stuff/level_stuff/active_level_manager_class.thumb.cpp	/^void active_level_manager::load_sublevel_at_intra_sublevel_warp$/;"	kind:f	class:active_level_manager	signature:( u32 n_sublevel_index, u32 sublevel_entrance_index )
 load_sublevel_basic	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^	static void load_sublevel_basic( u32 n_sublevel_index );$/;"	kind:p	class:active_level_manager	access:public	signature:( u32 n_sublevel_index )
 load_sublevel_basic	game_engine_stuff/level_stuff/active_level_manager_class.thumb.cpp	/^void active_level_manager::load_sublevel_basic( u32 n_sublevel_index )$/;"	kind:f	class:active_level_manager	signature:( u32 n_sublevel_index )
+local_bl_corner	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 local_bl_corner() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+local_bot	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 local_bot() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+local_br_corner	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 local_br_corner() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+local_left	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 local_left() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+local_right	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 local_right() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+local_tl_corner	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 local_tl_corner() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+local_top	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 local_top() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
+local_tr_corner	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 local_tr_corner() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 log_block_stuff	game_engine_stuff/block_stuff/log_block_stuff_class.hpp	/^class log_block_stuff : public block_base_stuff$/;"	kind:c	inherits:block_base_stuff
 log_block_stuff::get_metatile_graphics_slot	game_engine_stuff/block_stuff/log_block_stuff_class.hpp	/^	virtual const u32 get_metatile_graphics_slot()$/;"	kind:p	class:log_block_stuff	access:public	signature:()
 log_block_stuff::get_metatile_graphics_slot	game_engine_stuff/block_stuff/log_block_stuff_class.thumb.cpp	/^const u32 log_block_stuff::get_metatile_graphics_slot()$/;"	kind:f	class:log_block_stuff	signature:()
@@ -2577,8 +2600,6 @@ oam_entry::ss_64x64	gba_specific_stuff/oam_entry_classes.hpp	/^	enum shape_size 
 oam_entry::ss_8x16	gba_specific_stuff/oam_entry_classes.hpp	/^		ss_32x8, ss_32x16, ss_64x32, ss_8x16, ss_8x32, ss_16x32, $/;"	kind:e	enum:oam_entry::shape_size
 oam_entry::ss_8x32	gba_specific_stuff/oam_entry_classes.hpp	/^		ss_32x8, ss_32x16, ss_64x32, ss_8x16, ss_8x32, ss_16x32, $/;"	kind:e	enum:oam_entry::shape_size
 oam_entry::ss_8x8	gba_specific_stuff/oam_entry_classes.hpp	/^	enum shape_size { ss_8x8, ss_16x16, ss_32x32, ss_64x64, ss_16x8, $/;"	kind:e	enum:oam_entry::shape_size
-oam_entry::ss_attrs_no_shift_to_ss_enum_arr_2d	gba_specific_stuff/oam_entry_classes.hpp	/^	static const shape_size ss_attrs_no_shift_to_ss_enum_arr_2d$/;"	kind:m	class:oam_entry	access:public
-oam_entry::ss_attrs_no_shift_to_ss_enum_arr_2d	gba_specific_stuff/oam_entry_classes.thumb.cpp	/^const oam_entry::shape_size oam_entry::ss_attrs_no_shift_to_ss_enum_arr_2d$/;"	kind:m	class:oam_entry	file:
 oam_entry::ss_count	gba_specific_stuff/oam_entry_classes.hpp	/^		ss_32x64, ss_count } alignas(4);$/;"	kind:e	enum:oam_entry::shape_size
 oam_entry::ss_enum_to_ss_attrs_arr	gba_specific_stuff/oam_entry_classes.hpp	/^	static const vec2_u32 ss_enum_to_ss_attrs_arr[ss_count];$/;"	kind:m	class:oam_entry	access:public
 oam_entry::ss_enum_to_ss_attrs_arr	gba_specific_stuff/oam_entry_classes.thumb.cpp	/^const vec2_u32 oam_entry::ss_enum_to_ss_attrs_arr[ss_count]$/;"	kind:m	class:oam_entry	file:
@@ -3135,15 +3156,9 @@ push_front	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline void push_front( 
 quotient	gba_specific_stuff/bios_function_wrappers.hpp	/^	s32 quotient;$/;"	kind:m	class:bios_div_result	access:public
 quotient_abs	gba_specific_stuff/bios_function_wrappers.hpp	/^	u32 quotient_abs;$/;"	kind:m	class:bios_div_result	access:public
 raw_array_group	game_engine_stuff/debug_vars.hpp	/^	struct raw_array_group$/;"	kind:s	class:debug_arr_group	access:protected
-real_bot	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 real_bot() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
-real_end_pos	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 real_end_pos() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 real_height	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 real_height() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
-real_left	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 real_left() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
-real_right	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 real_right() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 real_size	game_engine_stuff/debug_vars.hpp	/^	u32 real_size;$/;"	kind:m	class:debug_str	access:protected
 real_size_2d	game_engine_stuff/block_coll_result_group_class.hpp	/^	vec2_s32 real_size_2d;$/;"	kind:m	class:block_coll_result_group	access:protected
-real_start_pos	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 real_start_pos() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
-real_top	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 real_top() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 real_width	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 real_width() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 reg_bg0cnt	gba_specific_stuff/gfx_reg_stuff.hpp	151;"	kind:d
 reg_bg1cnt	gba_specific_stuff/gfx_reg_stuff.hpp	152;"	kind:d
@@ -3212,6 +3227,7 @@ rgb15_green_shift	gba_specific_stuff/gfx_reg_stuff.hpp	411;"	kind:d
 rgb15_num_components	gba_specific_stuff/gfx_reg_stuff.hpp	420;"	kind:d
 rgb15_red_mask	gba_specific_stuff/gfx_reg_stuff.hpp	414;"	kind:d
 rgb15_red_shift	gba_specific_stuff/gfx_reg_stuff.hpp	410;"	kind:d
+right	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 right() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 right	game_engine_stuff/coll_box_class.hpp	/^	inline fixed24p8 right() const$/;"	kind:f	class:coll_box	access:public	signature:() const
 round_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s16 round_to_int() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
 round_to_int	game_engine_stuff/fixed_classes.hpp	/^	inline s32 round_to_int() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
@@ -3770,8 +3786,6 @@ ss_64x64	gba_specific_stuff/oam_entry_classes.hpp	/^	enum shape_size { ss_8x8, s
 ss_8x16	gba_specific_stuff/oam_entry_classes.hpp	/^		ss_32x8, ss_32x16, ss_64x32, ss_8x16, ss_8x32, ss_16x32, $/;"	kind:e	enum:oam_entry::shape_size
 ss_8x32	gba_specific_stuff/oam_entry_classes.hpp	/^		ss_32x8, ss_32x16, ss_64x32, ss_8x16, ss_8x32, ss_16x32, $/;"	kind:e	enum:oam_entry::shape_size
 ss_8x8	gba_specific_stuff/oam_entry_classes.hpp	/^	enum shape_size { ss_8x8, ss_16x16, ss_32x32, ss_64x64, ss_16x8, $/;"	kind:e	enum:oam_entry::shape_size
-ss_attrs_no_shift_to_ss_enum_arr_2d	gba_specific_stuff/oam_entry_classes.hpp	/^	static const shape_size ss_attrs_no_shift_to_ss_enum_arr_2d$/;"	kind:m	class:oam_entry	access:public
-ss_attrs_no_shift_to_ss_enum_arr_2d	gba_specific_stuff/oam_entry_classes.thumb.cpp	/^const oam_entry::shape_size oam_entry::ss_attrs_no_shift_to_ss_enum_arr_2d$/;"	kind:m	class:oam_entry	file:
 ss_count	gba_specific_stuff/oam_entry_classes.hpp	/^		ss_32x64, ss_count } alignas(4);$/;"	kind:e	enum:oam_entry::shape_size
 ss_enum_to_ss_attrs_arr	gba_specific_stuff/oam_entry_classes.hpp	/^	static const vec2_u32 ss_enum_to_ss_attrs_arr[ss_count];$/;"	kind:m	class:oam_entry	access:public
 ss_enum_to_ss_attrs_arr	gba_specific_stuff/oam_entry_classes.thumb.cpp	/^const vec2_u32 oam_entry::ss_enum_to_ss_attrs_arr[ss_count]$/;"	kind:m	class:oam_entry	file:
@@ -3899,6 +3913,7 @@ the_array	game_engine_stuff/array_helper_class.hpp	/^	type* the_array;$/;"	kind:
 the_array	game_engine_stuff/coll_point_group_classes.hpp	/^	vec2_f24p8 the_array[max_num_coll_points];$/;"	kind:m	class:coll_point_group_base	access:public
 the_array	game_engine_stuff/sa_list_class_stuff.hpp	/^		num_lists > the_array;$/;"	kind:m	class:sa_array_of_lists	access:public
 the_array	game_engine_stuff/sa_stack_class.hpp	/^	array< type, size > the_array;$/;"	kind:m	class:sa_stack	access:public
+the_bbvt	game_engine_stuff/block_coll_result_group_class.hpp	/^	block_behavior_type the_bbvt;$/;"	kind:m	class:block_coll_result	access:public
 the_block	game_engine_stuff/block_coll_result_group_class.hpp	/^	block* the_block;$/;"	kind:m	class:block_coll_result	access:public
 the_block_data_at_coord	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static inline block& the_block_data_at_coord $/;"	kind:f	class:active_level	access:public	signature:( const vec2_s32& block_coord )
 the_block_gfxPalLen	gfx/the_block_gfx.h	23;"	kind:d
@@ -4040,8 +4055,11 @@ title_screenPalLen	gfx/title_screen.h	27;"	kind:d
 title_screenTilesLen	gfx/title_screen.h	21;"	kind:d
 title_screen_func	game_engine_stuff/game_manager_class.hpp	/^	static void title_screen_func();$/;"	kind:p	class:game_manager	access:public	signature:()
 title_screen_func	game_engine_stuff/game_manager_class.thumb.cpp	/^void game_manager::title_screen_func()$/;"	kind:f	class:game_manager	signature:()
+tl_corner	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 tl_corner() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 to_int_for_on_screen	game_engine_stuff/fixed_classes.hpp	/^	inline s32 to_int_for_on_screen() const$/;"	kind:f	class:fixed24p8	access:public	signature:() const
+top	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline s32 top() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 top	game_engine_stuff/coll_box_class.hpp	/^	inline fixed24p8 top() const$/;"	kind:f	class:coll_box	access:public	signature:() const
+tr_corner	game_engine_stuff/block_coll_result_group_class.hpp	/^	inline vec2_s32 tr_corner() const$/;"	kind:f	class:block_coll_result_group	access:public	signature:() const
 trig_lut_fixed_shift	game_engine_stuff/trigonometry_funcs.hpp	/^static const u32 trig_lut_fixed_shift = 12;$/;"	kind:v
 trigonometry_funcs_hpp	game_engine_stuff/trigonometry_funcs.hpp	20;"	kind:d
 type	game_engine_stuff/block_stuff/block_stuff.hpp	/^	u16 type;$/;"	kind:m	class:block	access:public

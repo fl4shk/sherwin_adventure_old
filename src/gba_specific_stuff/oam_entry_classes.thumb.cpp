@@ -57,18 +57,18 @@ const vec2_u32 oam_entry::ss_enum_to_ss_attrs_arr[ss_count]
 	{ obj_attr0_shape_vertical, obj_attr1_size_3 },
 };
 
-const oam_entry::shape_size oam_entry::ss_attrs_no_shift_to_ss_enum_arr_2d
-	[num_attr0_shapes][num_attr1_sizes]
-= {
-	// Square shapes
-	{ ss_8x8, ss_16x16, ss_32x32, ss_64x64 },
-	
-	// Horizontal shapes
-	{ ss_16x8, ss_32x8, ss_32x16, ss_64x32 },
-	
-	// Vertical shapes
-	{ ss_8x16, ss_8x32, ss_16x32, ss_32x64 },
-};
+//const oam_entry::shape_size oam_entry::ss_attrs_no_shift_to_ss_enum_arr_2d
+//	[num_attr0_shapes][num_attr1_sizes]
+//= {
+//	// Square shapes
+//	{ ss_8x8, ss_16x16, ss_32x32, ss_64x64 },
+//	
+//	// Horizontal shapes
+//	{ ss_16x8, ss_32x8, ss_32x16, ss_64x32 },
+//	
+//	// Vertical shapes
+//	{ ss_8x16, ss_8x32, ss_16x32, ss_32x64 },
+//};
 
 
 void oam_entry::set_shape_size( oam_entry::shape_size n_shape_size )
@@ -107,19 +107,25 @@ oam_entry::shape_size oam_entry::get_shape_size() const
 {
 	u32 attr0_shape_no_shift = get_bits( attr0, obj_attr0_shape_mask,
 		obj_attr0_shape_shift );
-	u32 attr1_size_no_shift = get_bits( attr0, obj_attr1_size_mask,
+	u32 attr1_size_no_shift = get_bits( attr1, obj_attr1_size_mask,
 		obj_attr1_size_shift );
 	
 	// Error checking
 	if ( attr0_shape_no_shift >= num_attr0_shapes 
 		|| attr1_size_no_shift >= num_attr1_sizes )
 	{
-		return ss_attrs_no_shift_to_ss_enum_arr_2d[0][0];
+		//return ss_attrs_no_shift_to_ss_enum_arr_2d[0][0];
+		return shape_size(0);
 	}
 	else
 	{
-		return ss_attrs_no_shift_to_ss_enum_arr_2d[attr0_shape_no_shift]
-			[attr1_size_no_shift];
+		//return ss_attrs_no_shift_to_ss_enum_arr_2d[attr0_shape_no_shift]
+		//	[attr1_size_no_shift];
+		
+		// Multiply by num_attr1_sizes because the expression becomes a
+		// single shift and an add instead of a shift and two adds.
+		return shape_size( attr0_shape_no_shift * num_attr1_sizes 
+			+ attr1_size_no_shift );
 	}
 }
 

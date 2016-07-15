@@ -30,6 +30,7 @@ public:		// variables
 	vec2_s32 coord;
 	//block_type type;
 	block* the_block;
+	block_behavior_type the_bbvt;
 	
 public:		// functions
 	inline block_coll_result() : coord(), the_block(NULL)
@@ -82,33 +83,6 @@ public:		// functions
 	block_coll_result_group& operator = 
 		( const block_coll_result_group& to_copy );
 	
-	inline s32 real_left() const
-	{
-		return bcr_arr_2d_helper_data[0].coord.x;
-	}
-	inline s32 real_right() const
-	{
-		return real_left() + real_size_2d.x;
-	}
-	
-	inline s32 real_top() const
-	{
-		return bcr_arr_2d_helper_data[0].coord.y;
-	}
-	inline s32 real_bot() const
-	{
-		return real_top() + real_size_2d.y;
-	}
-	
-	inline vec2_s32 real_start_pos() const
-	{
-		return vec2_s32( real_left(), real_top() );
-	}
-	inline vec2_s32 real_end_pos() const
-	{
-		return vec2_s32( real_right(), real_bot() );
-	}
-	
 	inline s32 real_width() const
 	{
 		return real_size_2d.x;
@@ -117,10 +91,87 @@ public:		// functions
 	{
 		return real_size_2d.y;
 	}
-	inline const vec2_s32 get_real_size_2d() const
+	inline vec2_s32 get_real_size_2d() const
 	{
 		return real_size_2d;
 	}
+	
+	
+	// Global coordinates
+	inline s32 left() const
+	{
+		return bcr_arr_2d_helper_data[0].coord.x;
+	}
+	inline s32 right() const
+	{
+		return left() + real_width();
+	}
+	
+	inline s32 top() const
+	{
+		return bcr_arr_2d_helper_data[0].coord.y;
+	}
+	inline s32 bot() const
+	{
+		return top() + real_height();
+	}
+	
+	// Corners
+	inline vec2_s32 tl_corner() const
+	{
+		return vec2_s32( left(), top() );
+	}
+	inline vec2_s32 tr_corner() const
+	{
+		return vec2_s32( right(), top() );
+	}
+	inline vec2_s32 bl_corner() const
+	{
+		return vec2_s32( left(), bot() );
+	}
+	inline vec2_s32 br_corner() const
+	{
+		return vec2_s32( right(), bot() );
+	}
+	
+	
+	// Local coordinates
+	inline s32 local_left() const
+	{
+		return 0;
+	}
+	inline s32 local_right() const
+	{
+		return real_width() - 1;
+	}
+	
+	inline s32 local_top() const
+	{
+		return 0;
+	}
+	inline s32 local_bot() const
+	{
+		return real_height() - 1;
+	}
+	
+	// Corners
+	inline vec2_s32 local_tl_corner() const
+	{
+		return vec2_s32( local_left(), local_top() );
+	}
+	inline vec2_s32 local_tr_corner() const
+	{
+		return vec2_s32( local_right(), local_top() );
+	}
+	inline vec2_s32 local_bl_corner() const
+	{
+		return vec2_s32( local_left(), local_bot() );
+	}
+	inline vec2_s32 local_br_corner() const
+	{
+		return vec2_s32( local_right(), local_bot() );
+	}
+	
 	
 } __attribute__((_align4));
 

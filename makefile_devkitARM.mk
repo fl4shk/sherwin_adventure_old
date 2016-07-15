@@ -46,6 +46,7 @@ LD_SCRIPT=linkscript.ld
 
 
 DEBUG=yeah do debug
+
 #DEBUG_OPTIMIZATION_LEVEL=-O1
 DEBUG_OPTIMIZATION_LEVEL=-Og
 #DEBUG_OPTIMIZATION_LEVEL=-O2
@@ -223,7 +224,8 @@ $(S_OFILES) : $(OBJDIR)/%.o : %.s
 
 # Here we have stuff for outputting assembly source code instead of an object file.
 $(CXX_ASMOUTS) : $(ASMOUTDIR)/%.thumb.s : %.thumb.cpp
-	$(CXX) $(CXX_FLAGS) -MMD -S -fverbose-asm $< -o $@
+	@#$(CXX) $(CXX_FLAGS) -MMD -S -fverbose-asm $< -o $@
+	$(CXX) $(CXX_FLAGS) -MMD -S $< -o $@
 	@cp $(ASMOUTDIR)/$*.thumb.d $(DEPDIR)/$*.thumb.P
 	@sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
 		-e '/^$$/ d' -e 's/$$/ :/' < $(ASMOUTDIR)/$*.thumb.d >> $(DEPDIR)/$*.thumb.P
@@ -233,7 +235,8 @@ $(CXX_ASMOUTS) : $(ASMOUTDIR)/%.thumb.s : %.thumb.cpp
 
 # Here we have stuff for outputting assembly source code instead of an object file.
 $(ARM_CXX_ASMOUTS) : $(ASMOUTDIR)/%.arm.s : %.arm.cpp
-	$(CXX) $(ARM_CXX_FLAGS) -MMD -S -fverbose-asm $< -o $@
+	@#$(CXX) $(ARM_CXX_FLAGS) -MMD -S -fverbose-asm $< -o $@
+	$(CXX) $(ARM_CXX_FLAGS) -MMD -S $< -o $@
 	@cp $(ASMOUTDIR)/$*.arm.d $(DEPDIR)/$*.arm.P
 	@sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
 		-e '/^$$/ d' -e 's/$$/ :/' < $(ASMOUTDIR)/$*.arm.d >> $(DEPDIR)/$*.arm.P

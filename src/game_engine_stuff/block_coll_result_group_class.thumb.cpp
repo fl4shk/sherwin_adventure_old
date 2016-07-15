@@ -24,6 +24,7 @@ block_coll_result::block_coll_result( const vec2_s32& s_coord )
 	: coord(s_coord)
 {
 	the_block = &active_level::the_block_data_at_coord(coord);
+	the_bbvt = get_behavior_type_of_block_type(get_block_type());
 }
 block_coll_result::block_coll_result( const vec2_f24p8& s_coord_f24p8 )
 	: block_coll_result(active_level::get_block_coord_of_point
@@ -60,7 +61,7 @@ block_coll_result_group::block_coll_result_group
 		for ( s32 i=0; i<real_width(); ++i )
 		{
 			bcr_arr_2d_helper.data_at( i, j ) = block_coll_result
-				( real_start_pos() + vec2_s32( i, j ) );
+				( tl_corner() + vec2_s32( i, j ) );
 		}
 	}
 }

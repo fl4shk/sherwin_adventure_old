@@ -1417,7 +1417,7 @@ void sprite::block_coll_response_left_16x16
 	//	* 16 ) - cb_pos_offset.x );
 	//set_curr_in_level_pos_x( make_f24p8( ( the_bcr_group.get_bcr_lt()
 	//	.coord.x + 1 ) * num_pixels_per_block_dim ) - cb_pos_offset.x );
-	set_curr_in_level_pos_x( make_f24p8( ( the_bcr_group.real_left() + 1 ) 
+	set_curr_in_level_pos_x( make_f24p8( ( the_bcr_group.left() + 1 ) 
 		* num_pixels_per_block_dim ) - cb_pos_offset.x );
 	
 	// Don't let the sprite speed up while in the air and horizontally
@@ -1439,7 +1439,7 @@ void sprite::block_coll_response_right_16x16
 	//set_curr_in_level_pos_x ( make_f24p8( the_bcr_group.get_bcr_rt()
 	//	.coord.x * num_pixels_per_block_dim ) - the_coll_box.size.x 
 	//	- cb_pos_offset.x );
-	set_curr_in_level_pos_x ( make_f24p8( the_bcr_group.real_right()
+	set_curr_in_level_pos_x ( make_f24p8( the_bcr_group.right()
 		* num_pixels_per_block_dim ) - the_coll_box.size.x 
 		- cb_pos_offset.x );
 	
@@ -1460,7 +1460,7 @@ void sprite::block_coll_response_top_16x16
 	//	* 16 ) - cb_pos_offset.y );
 	//set_curr_in_level_pos_y( make_f24p8( ( the_bcr_group.get_bcr_tl()
 	//	.coord.y + 1 ) * num_pixels_per_block_dim ) - cb_pos_offset.y );
-	set_curr_in_level_pos_y( make_f24p8( ( the_bcr_group.real_top() + 1 ) 
+	set_curr_in_level_pos_y( make_f24p8( ( the_bcr_group.top() + 1 ) 
 		* num_pixels_per_block_dim ) - cb_pos_offset.y );
 	
 	if ( vel.y < (fixed24p8){0x00} )
@@ -1485,7 +1485,7 @@ void sprite::block_coll_response_bot_16x16
 		//set_curr_in_level_pos_y ( make_f24p8( the_bcr_group.get_bcr_bl()
 		//	.coord.y * num_pixels_per_block_dim ) 
 		//	- make_f24p8(get_shape_size_as_vec2().y) );
-		set_curr_in_level_pos_y ( make_f24p8( the_bcr_group.real_bot()
+		set_curr_in_level_pos_y ( make_f24p8( the_bcr_group.bot()
 			* num_pixels_per_block_dim ) 
 			- make_f24p8(get_shape_size_as_vec2().y) );
 		
@@ -1510,7 +1510,7 @@ void sprite::block_coll_response_left_16x32
 	//	* 16 ) - cb_pos_offset.x );
 	//set_curr_in_level_pos_x( make_f24p8( ( the_bcr_group.get_bcr_lt()
 	//	.coord.x + 1 ) * num_pixels_per_block_dim ) - cb_pos_offset.x );
-	set_curr_in_level_pos_x( make_f24p8( ( the_bcr_group.real_left() + 1 ) 
+	set_curr_in_level_pos_x( make_f24p8( ( the_bcr_group.left() + 1 ) 
 		* num_pixels_per_block_dim ) - cb_pos_offset.x );
 	
 	
@@ -1534,7 +1534,7 @@ void sprite::block_coll_response_right_16x32
 	//set_curr_in_level_pos_x( make_f24p8( the_bcr_group.get_bcr_rt()
 	//	.coord.x * num_pixels_per_block_dim ) - the_coll_box.size.x 
 	//	- cb_pos_offset.x );
-	set_curr_in_level_pos_x( make_f24p8( the_bcr_group.real_right()
+	set_curr_in_level_pos_x( make_f24p8( the_bcr_group.right()
 		* num_pixels_per_block_dim ) - the_coll_box.size.x 
 		- cb_pos_offset.x );
 	
@@ -1556,7 +1556,7 @@ void sprite::block_coll_response_top_16x32
 	//	* 16 ) - cb_pos_offset.y );
 	//set_curr_in_level_pos_y( make_f24p8( ( the_bcr_group.get_bcr_tl()
 	//	.coord.y + 1 ) * num_pixels_per_block_dim ) - cb_pos_offset.y );
-	set_curr_in_level_pos_y( make_f24p8( ( the_bcr_group.real_top() + 1 ) 
+	set_curr_in_level_pos_y( make_f24p8( ( the_bcr_group.top() + 1 ) 
 		* num_pixels_per_block_dim ) - cb_pos_offset.y );
 	
 	if ( vel.y < (fixed24p8){0x00} )
@@ -1582,7 +1582,7 @@ void sprite::block_coll_response_bot_16x32
 		//set_curr_in_level_pos_y ( make_f24p8( the_bcr_group.get_bcr_bl()
 		//	.coord.y * num_pixels_per_block_dim ) 
 		//	- make_f24p8(get_shape_size_as_vec2().y) );
-		set_curr_in_level_pos_y ( make_f24p8( the_bcr_group.real_bot()
+		set_curr_in_level_pos_y ( make_f24p8( the_bcr_group.bot()
 			* num_pixels_per_block_dim ) 
 			- make_f24p8(get_shape_size_as_vec2().y) );
 		
@@ -2209,6 +2209,10 @@ void sprite::block_collision_stuff_16x32()
 	//	}
 	//}
 	
+	block_coll_result_group the_bcr_group(the_coll_box);
+	
+	array_2d_helper<block_coll_result>& bcr_arr_2d_helper = the_bcr_group
+		.bcr_arr_2d_helper;
 	
 	bool moving_left = false, moving_right = false, moving_up = false,
 		not_moving_up = false;
@@ -2231,14 +2235,38 @@ void sprite::block_collision_stuff_16x32()
 		not_moving_up = true;
 	}
 	
+	// The column index for horizontal movement
+	s32 hm_col_index = the_bcr_group.local_left();
+	
+	// The row indices
+	const s32 hm_top_row_index = the_bcr_group.local_top(),
+		hm_bot_row_index = the_bcr_group.local_bot();
+	
+	bool left_side_is_blocked = false, right_side_is_blocked = false,
+		top_side_is_blocked = false, bot_side_is_blocked = false;
+	
+	// Corner stuff
+	const bool tl_corner_is_non_air = ( bcr_arr_2d_helper.data_at
+		( the_bcr_group.local_tl_corner()).the_bbvt != bbvt_air ), 
+		
+		tr_corner_is_non_air = ( bcr_arr_2d_helper.data_at
+		( the_bcr_group.local_tr_corner()).the_bbvt != bbvt_air ), 
+		
+		bl_corner_is_non_air = ( bcr_arr_2d_helper.data_at
+		( the_bcr_group.local_bl_corner()).the_bbvt != bbvt_air ), 
+		
+		br_corner_is_non_air = ( bcr_arr_2d_helper.data_at
+		( the_bcr_group.local_br_corner()).the_bbvt != bbvt_air );
 	
 	if (moving_left)
 	{
+		//if ( bcr_arr_2d_helper.data_at( hm_col_index
+		
 		
 	}
 	else if (moving_right)
 	{
-		
+		hm_col_index = the_bcr_group.local_right();
 	}
 	
 	
