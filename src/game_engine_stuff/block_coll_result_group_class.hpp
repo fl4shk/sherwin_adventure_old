@@ -172,6 +172,18 @@ public:		// functions
 		return vec2_s32( local_right(), local_bot() );
 	}
 	
+	inline block_coll_result& operator () ( u32 local_x, u32 local_y )
+	{
+		return bcr_arr_2d_helper.data_at( local_x, local_y );
+	}
+	inline block_coll_result& operator () ( const vec2_u32& local_coord )
+	{
+		return bcr_arr_2d_helper.data_at(local_coord);
+	}
+	inline block_coll_result& operator () ( const vec2_s32& local_coord )
+	{
+		return bcr_arr_2d_helper.data_at(local_coord);
+	}
 	
 } __attribute__((_align4));
 
