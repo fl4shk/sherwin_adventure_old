@@ -2235,12 +2235,7 @@ void sprite::block_collision_stuff_16x32()
 		not_moving_up = true;
 	}
 	
-	// The column index for horizontal movement
-	s32 hm_col_index = the_bcr_group.local_left();
 	
-	// The row indices
-	const s32 hm_top_row_index = the_bcr_group.local_top(),
-		hm_bot_row_index = the_bcr_group.local_bot();
 	
 	bool left_side_is_blocked = false, right_side_is_blocked = false,
 		top_side_is_blocked = false, bot_side_is_blocked = false;
@@ -2258,15 +2253,105 @@ void sprite::block_collision_stuff_16x32()
 		br_corner_is_non_air = ( bcr_arr_2d_helper.data_at
 		( the_bcr_group.local_br_corner()).the_bbvt != bbvt_air );
 	
+	bool left_side_below_tl_corner_is_blocked = false, 
+		left_side_above_bl_corner_is_blocked = false;
+	
+	bool right_side_below_tr_corner_is_blocked = false,
+		right_side_above_br_corner_is_blocked = false;
+	
+	bool top_side_right_of_tl_corner_is_blocked = false,
+		top_side_left_of_tr_corner_is_blocked = false;
+	
+	bool bot_side_right_of_bl_corner_is_blocked = false,
+		bot_side_left_of_br_corner_is_blocked = false;
+	
 	if (moving_left)
 	{
 		//if ( bcr_arr_2d_helper.data_at( hm_col_index
 		
+		for ( s32 j=the_bcr_group.local_top() + 1; 
+			j<the_bcr_group.real_height();
+			++j )
+		{
+			if ( bcr_arr_2d_helper.data_at( the_bcr_group.local_left(),
+				j ).the_bbvt != bbvt_air )
+			{
+				left_side_below_tl_corner_is_blocked = true;
+				break;
+			}
+		}
 		
+		for ( s32 j=the_bcr_group.local_top(); 
+			j<the_bcr_group.real_height() - 1;
+			++j )
+		{
+			if ( bcr_arr_2d_helper.data_at( the_bcr_group.local_left(),
+				j ).the_bbvt != bbvt_air )
+			{
+				left_side_above_bl_corner_is_blocked = true;
+				break;
+			}
+		}
+		
+		for ( s32 i=the_bcr_group.local_left() + 1; 
+			i<the_bcr_group.real_width();
+			++i )
+		{
+			if ( bcr_arr_2d_helper.data_at( i, the_bcr_group.local_top() )
+				.the_bbvt != bbvt_air )
+			{
+				top_side_right_of_tl_corner_is_blocked = true;
+			}
+			
+			if ( bcr_arr_2d_helper.data_at( i, the_bcr_group.local_bot() )
+				.the_bbvt != bbvt_air )
+			{
+				bot_side_right_of_bl_corner_is_blocked = true;
+			}
+		}
 	}
 	else if (moving_right)
 	{
-		hm_col_index = the_bcr_group.local_right();
+		for ( s32 j=the_bcr_group.local_top() + 1; 
+			j<the_bcr_group.real_height();
+			++j )
+		{
+			if ( bcr_arr_2d_helper.data_at( the_bcr_group.local_right(),
+				j ).the_bbvt != bbvt_air )
+			{
+				right_side_below_tr_corner_is_blocked = true;
+				break;
+			}
+		}
+		
+		for ( s32 j=the_bcr_group.local_top(); 
+			j<the_bcr_group.real_height() - 1;
+			++j )
+		{
+			if ( bcr_arr_2d_helper.data_at( the_bcr_group.local_right(),
+				j ).the_bbvt != bbvt_air )
+			{
+				right_side_above_br_corner_is_blocked = true;
+				break;
+			}
+		}
+		
+		for ( s32 i=the_bcr_group.local_left(); 
+			i<the_bcr_group.real_width() - 1;
+			++i )
+		{
+			if ( bcr_arr_2d_helper.data_at( i, the_bcr_group.local_top() )
+				.the_bbvt != bbvt_air )
+			{
+				top_side_left_of_tr_corner_is_blocked = true;
+			}
+			
+			if ( bcr_arr_2d_helper.data_at( i, the_bcr_group.local_bot() )
+				.the_bbvt != bbvt_air )
+			{
+				bot_side_left_of_br_corner_is_blocked = true;
+			}
+		}
 	}
 	
 	
