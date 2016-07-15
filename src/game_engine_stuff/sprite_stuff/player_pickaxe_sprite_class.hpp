@@ -32,12 +32,11 @@ public:		// enums
 		frm_angle_23 = 1, 
 		frm_angle_45 = 2,
 		frm_angle_90 = 3,
-		
-	} __attribute__((_align4));
+	} alignas(4);
 	
 	// This enum allows multiple frame_slot's to be represented by the same
 	// frame.
-	enum frame_slot 
+	enum frame_slot
 	{
 		frm_slot_angle_0,
 		frm_slot_angle_23, 
@@ -47,12 +46,14 @@ public:		// enums
 		// frm_slot_count is the amount of frame_slot's.  It is
 		// automatically updated by the compiler.
 		frm_slot_count,
-		
-	} __attribute__((_align4));
+	} alignas(4);
 	
 	
 	// These are used to access misc_data_u and misc_data_s
-	enum udata_index { udi_curr_frame_slot } __attribute__((_align4));
+	enum udata_index
+	{
+		udi_curr_frame_slot
+	} alignas(4);
 	
 	
 public:		// variables

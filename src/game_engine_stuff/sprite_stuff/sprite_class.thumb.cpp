@@ -454,12 +454,15 @@ void sprite::center_camera_almost( bg_point& camera_pos ) const
 
 vec2_u32 sprite::get_shape_size_as_vec2_raw() const
 {
-	const vec2_u32 shape_size_arr[oam_entry::ss_count]
-		= { { 8, 8 }, { 16, 16, }, { 32, 32 }, { 64, 64 },
-		{ 16, 8 }, { 32, 8 }, { 32, 16 }, { 64, 32 },
-		{ 8, 16 }, { 8, 32 }, { 16, 32 }, { 32, 64 } };
+	return oam_entry::ss_to_vec2_arr[the_shape_size];
 	
-	return shape_size_arr[the_shape_size];
+	//static const vec2_u32 shape_size_arr[oam_entry::ss_count]
+	//	= { { 8, 8 }, { 16, 16, }, { 32, 32 }, { 64, 64 },
+	//	{ 16, 8 }, { 32, 8 }, { 32, 16 }, { 64, 32 },
+	//	{ 8, 16 }, { 8, 32 }, { 16, 32 }, { 32, 64 } };
+	
+	//return shape_size_arr[the_shape_size];
+	
 	//switch (the_shape_size)
 	//{
 	//	// Square shapes
@@ -493,8 +496,7 @@ vec2_u32 sprite::get_shape_size_as_vec2_raw() const
 	//		return { 32, 64 };
 	//}
 	
-}
-
+} 
 void sprite::update_part_1()
 {
 	in_level_pos.back_up();
@@ -502,6 +504,9 @@ void sprite::update_part_1()
 	on_slope.back_up();
 	
 	set_curr_on_slope(false);
+	
+	//// temporary maybe?
+	//set_curr_on_ground(true);
 	
 	
 	//// Truncate the fractional bits if the sprite is not moving
@@ -2189,22 +2194,8 @@ void sprite::block_collision_stuff_16x16()
 }
 void sprite::block_collision_stuff_16x32()
 {
-	//// The maximum number of blocks, in each dimension, that can be
-	//// intersected by a 16x32 coll_box.  
-	//static const vec2_u32 bcr_arr_2d_size_2d( 2, 3 );
-	//block_coll_result bcr_arr_2d[bcr_arr_2d_size_2d.y]
-	//	[bcr_arr_2d_size_2d.x];
-	//array_2d_helper<block_coll_result> bcr_arr_2d_helper
-	//	( (block_coll_result*)bcr_arr_2d, bcr_arr_2d_size_2d );
-	//
-	//const vec2_s32 bcr_arr_2d_start_pos = active_level
-	//	::get_block_coord_of_point( vec2_f24p8( the_coll_box.left(),
-	//	the_coll_box.top() ) );
-	//const vec2_s32 bcr_arr_2d_end_pos = active_level
-	//	::get_block_coord_of_point( vec2_f24p8( the_coll_box.right(),
-	//	the_coll_box.bot() ) );
-	//
-	//
+	
+	
 	//// Columns of block_coll_result
 	//block_coll_result* bcr_ptr_col_arr[bcr_arr_2d_helper.height()];
 	//bool bcr_is_obstacle_col_arr[bcr_arr_2d_helper.height()];

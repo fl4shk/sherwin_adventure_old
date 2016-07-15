@@ -24,7 +24,7 @@
 
 #include "../../gfx/sherwin_gfx.h"
 
-#include "../block_coll_result_group_classes.hpp"
+#include "../block_coll_result_group_class.hpp"
 
 class sprite_allocator;
 

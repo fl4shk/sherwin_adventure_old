@@ -82,12 +82,16 @@
 
 
 // Object Shape (Square, Horizontal, or Vertical)
-#define obj_attr0_shape_square			( 0x0 << 14 )
-#define obj_attr0_shape_horizontal		( 0x1 << 14 )
-#define obj_attr0_shape_vertical		( 0x2 << 14 )
+#define obj_attr0_shape_square					( 0x0 << 14 )
+#define obj_attr0_shape_horizontal				( 0x1 << 14 )
+#define obj_attr0_shape_vertical				( 0x2 << 14 )
 
-#define obj_attr0_shape_mask			( 0xc000 )
-#define obj_attr0_shape_shift			( 14 )
+#define obj_attr0_shape_mask					( 0xc000 )
+#define obj_attr0_shape_shift					( 14 )
+
+#define obj_attr0_shape_square_no_shift			( 0x0 )
+#define obj_attr0_shape_horizontal_no_shift		( 0x1 )
+#define obj_attr0_shape_vertical_no_shift		( 0x2 )
 
 // -- End of Object Attribute 0 Stuff -- 
 
@@ -133,6 +137,11 @@
 
 #define obj_attr1_size_mask				( 0xc000 )
 #define obj_attr1_size_shift			( 14 )
+
+#define obj_attr1_size_0_no_shift		( 0x0 )
+#define obj_attr1_size_1_no_shift		( 0x1 )
+#define obj_attr1_size_2_no_shift		( 0x2 )
+#define obj_attr1_size_3_no_shift		( 0x3 )
 
 // -- End of Object Attribute 1 Stuff --
 

@@ -78,9 +78,7 @@ public:		// enums
 		frm_weapon_swing_ground_moving_3_row_2,
 		frm_weapon_swing_ground_moving_4_row_2,
 		frm_weapon_swing_ground_moving_5_row_2,
-		
-		
-	} __attribute__((_align4));
+	} alignas(4) ;
 	
 	// This enum allows multiple frame_slot's to be represented by the same
 	// frame, which is used, for example, in the walking animation.  Also,
@@ -88,8 +86,8 @@ public:		// enums
 	// active can be determined.  If two frames in the enum share a value,
 	// it is impossible to tell where in the walk cycle the player's
 	// animation is.
-	enum frame_slot 
-	{ 
+	enum frame_slot
+	{
 		// Invisible
 		frm_slot_invisible, 
 		
@@ -153,15 +151,20 @@ public:		// enums
 		// frm_slot_count is the amount of frame_slot's.  It is
 		// automatically updated by the compiler.
 		frm_slot_count,
-		
-	} __attribute__((_align4));
+	} alignas(4);
 	
 	
 	// These are used to access misc_data_u and misc_data_s
-	enum udata_index { udi_active_walk_frame_slot, 
-		udi_active_pickaxe_swing_frame_slot } __attribute__((_align4));
-	enum sdata_index { sdi_walk_frame_timer, 
-		sdi_pickaxe_swing_frame_timer } __attribute__((_align4));
+	enum udata_index
+	{ 
+		udi_active_walk_frame_slot, 
+		udi_active_pickaxe_swing_frame_slot,
+	} alignas(4);
+	enum sdata_index
+	{
+		sdi_walk_frame_timer, 
+		sdi_pickaxe_swing_frame_timer,
+	} alignas(4);
 	
 	
 public:		// variables

@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef block_coll_result_group_classes_hpp
-#define block_coll_result_group_classes_hpp
+#ifndef block_coll_result_group_class_hpp
+#define block_coll_result_group_class_hpp
 
 
 #include "block_stuff/block_stuff.hpp"
@@ -65,11 +65,11 @@ class block_coll_result_group
 {
 //public:		// variables
 protected:		// variables
-	//static constexpr vec2_u32 shared_max_size_2d = vec2_u32( 3, 3 );
-	static constexpr vec2_u32 shared_max_size_2d = vec2_u32( 3, 3 );
-	block_coll_result bcr_arr_2d_helper_data[shared_max_size_2d.x 
-		* shared_max_size_2d.y];
-	vec2_u32 real_size_2d;
+	static constexpr vec2_u32 max_size_2d = vec2_u32( 3, 3 );
+	static constexpr u32 max_size = max_size_2d.x * max_size_2d.y;
+	
+	block_coll_result bcr_arr_2d_helper_data[max_size];
+	vec2_s32 real_size_2d;
 	
 public:		// variables
 	array_2d_helper<block_coll_result> bcr_arr_2d_helper;
@@ -100,10 +100,32 @@ public:		// functions
 		return real_top() + real_size_2d.y;
 	}
 	
+	inline vec2_s32 real_start_pos() const
+	{
+		return vec2_s32( real_left(), real_top() );
+	}
+	inline vec2_s32 real_end_pos() const
+	{
+		return vec2_s32( real_right(), real_bot() );
+	}
+	
+	inline s32 real_width() const
+	{
+		return real_size_2d.x;
+	}
+	inline s32 real_height() const
+	{
+		return real_size_2d.y;
+	}
+	inline const vec2_s32 get_real_size_2d() const
+	{
+		return real_size_2d;
+	}
+	
 } __attribute__((_align4));
 
 
 
 
 
-#endif		// block_coll_result_group_classes_hpp
+#endif		// block_coll_result_group_class_hpp

@@ -37,7 +37,7 @@ extern void memfill32( void* dst, u32 src, u32 wordcount );
 
 
 extern void memcpy8( void* dst, const void* src, u32 bytecount );
-extern void memfill8( void* dst, u8 src, u32 bytecount );
+extern void memfill8( void* dst, u32 src, u32 bytecount );
 
 }
 
@@ -53,18 +53,42 @@ inline void memfill32( volatile void* dst, u32 src, u32 wordcount )
 }
 
 
+template<typename type>
+inline void arr_memcpy32( type* dst, const type* src, u32 num_elems )
+{
+	memcpy32( (void*)dst, (const void*)src, num_elems * sizeof(type) 
+		/ sizeof(u32) );
+}
+template<typename type>
+inline void arr_memfill32( type* dst, u32 src, u32 num_elems )
+{
+	memfill32( (void*)dst, src, num_elems * sizeof(type) / sizeof(u32) );
+}
+
+
+
 
 
 inline void memcpy8( volatile void* dst, const void* src, u32 bytecount )
 {
 	memcpy8( (void*)dst, src, bytecount );
 }
-
-inline void memfill8( volatile void* dst, u8 src, u32 bytecount )
+inline void memfill8( volatile void* dst, u32 src, u32 bytecount )
 {
-	memfill8( (void*)dst, src, bytecount );
+	memfill8( (void*)dst, (u8)(src & 0xff), bytecount );
 }
 
+
+template<typename type>
+inline void arr_memcpy8( type* dst, const type* src, u32 num_elems )
+{
+	memcpy8( (void*)dst, src, num_elems * sizeof(type) / sizeof(u8) );
+}
+template<typename type>
+inline void arr_memfill8( type* dst, const type* src, u32 num_elems )
+{
+	memfill8( (void*)dst, src, num_elems * sizeof(type) / sizeof(u8) );
+}
 
 
 #endif		// asm_funcs_hpp

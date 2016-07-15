@@ -16,7 +16,7 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include "block_coll_result_group_classes.hpp"
+#include "block_coll_result_group_class.hpp"
 #include "level_stuff/active_level_class.hpp"
 
 
@@ -44,7 +44,25 @@ block_coll_result::block_coll_result( const vec2_f24p8& s_coord_f24p8 )
 block_coll_result_group::block_coll_result_group
 	( const coll_box& the_coll_box )
 {
+	arr_memfill32( bcr_arr_2d_helper_data, 0, max_size );
 	
+	const vec2_s32 start_pos = active_level::get_block_coord_of_point
+		( vec2_f24p8( the_coll_box.left(), the_coll_box.top() ) );
+	const vec2_s32 end_pos = active_level::get_block_coord_of_point
+		( vec2_f24p8( the_coll_box.right(), the_coll_box.bot() ) );
+	real_size_2d = end_pos - start_pos + vec2_s32( 1, 1 );
+	
+	bcr_arr_2d_helper.init( bcr_arr_2d_helper_data, vec2_u32( real_width(), 
+		real_height() ) );
+	
+	for ( s32 j=0; j<real_height(); ++j )
+	{
+		for ( s32 i=0; i<real_width(); ++i )
+		{
+			bcr_arr_2d_helper.data_at( i, j ) = block_coll_result
+				( real_start_pos() + vec2_s32( i, j ) );
+		}
+	}
 }
 block_coll_result_group::block_coll_result_group
 	( const block_coll_result_group& to_copy )
@@ -54,8 +72,8 @@ block_coll_result_group::block_coll_result_group
 block_coll_result_group& block_coll_result_group::operator = 
 	( const block_coll_result_group& to_copy )
 {
-	memcpy32( bcr_arr_2d_helper_data, to_copy.bcr_arr_2d_helper_data, 
-		sizeof(bcr_arr_2d_helper_data) / sizeof(u32) );
+	arr_memcpy32( (block_coll_result*)bcr_arr_2d_helper_data, 
+		to_copy.bcr_arr_2d_helper_data, sizeof(bcr_arr_2d_helper_data) );
 	real_size_2d = to_copy.real_size_2d;
 	bcr_arr_2d_helper = to_copy.bcr_arr_2d_helper;
 	

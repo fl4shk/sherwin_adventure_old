@@ -45,7 +45,17 @@ class oam_entry
 public:		// enums
 	enum shape_size { ss_8x8, ss_16x16, ss_32x32, ss_64x64, ss_16x8, 
 		ss_32x8, ss_32x16, ss_64x32, ss_8x16, ss_8x32, ss_16x32, 
-		ss_32x64, ss_count } __attribute__((_align4));
+		ss_32x64, ss_count } alignas(4);
+	
+public:		// constants
+	static constexpr u32 num_attr0_shapes = 3, num_attr1_sizes = 4;
+	
+	static const vec2_u32 ss_to_vec2_arr[ss_count];
+	
+	//static const vec2_u32 attrs_to_ss_arr_2d[4][3];
+	static const vec2_u32 ss_enum_to_ss_attrs_arr[ss_count];
+	static const shape_size ss_attrs_no_shift_to_ss_enum_arr_2d
+		[num_attr0_shapes][num_attr1_sizes];
 	
 public:		// variables
 	u16 attr0;

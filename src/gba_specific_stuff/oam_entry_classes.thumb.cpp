@@ -24,110 +24,77 @@ oam_entry oam_mirror[oam_mirror_size];
 //oam_entry_affine* const oam_mirror_aff = (oam_entry_affine*)oam_mirror ;
 
 
+const vec2_u32 oam_entry::ss_to_vec2_arr[ss_count]
+= {
+	// Square shapes
+	{ 8, 8 }, { 16, 16 }, { 32, 32 }, { 64, 64 },
+	
+	// Horizontal shapes
+	{ 16, 8 }, { 32, 8 }, { 32, 16 }, { 64, 32 },
+	
+	// Vertical shapes
+	{ 8, 16 }, { 8, 32 }, { 16, 32 }, { 32, 64 },
+};
+
+const vec2_u32 oam_entry::ss_enum_to_ss_attrs_arr[ss_count]
+= {
+	// Square shapes
+	{ obj_attr0_shape_square, obj_attr1_size_0 }, 
+	{ obj_attr0_shape_square, obj_attr1_size_1 }, 
+	{ obj_attr0_shape_square, obj_attr1_size_2 }, 
+	{ obj_attr0_shape_square, obj_attr1_size_3 },
+	
+	// Horizontal shapes
+	{ obj_attr0_shape_horizontal, obj_attr1_size_0 }, 
+	{ obj_attr0_shape_horizontal, obj_attr1_size_1 }, 
+	{ obj_attr0_shape_horizontal, obj_attr1_size_2 }, 
+	{ obj_attr0_shape_horizontal, obj_attr1_size_3 },
+	
+	// Vertical shapes
+	{ obj_attr0_shape_vertical, obj_attr1_size_0 }, 
+	{ obj_attr0_shape_vertical, obj_attr1_size_1 }, 
+	{ obj_attr0_shape_vertical, obj_attr1_size_2 }, 
+	{ obj_attr0_shape_vertical, obj_attr1_size_3 },
+};
+
+const oam_entry::shape_size oam_entry::ss_attrs_no_shift_to_ss_enum_arr_2d
+	[num_attr0_shapes][num_attr1_sizes]
+= {
+	// Square shapes
+	{ ss_8x8, ss_16x16, ss_32x32, ss_64x64 },
+	
+	// Horizontal shapes
+	{ ss_16x8, ss_32x8, ss_32x16, ss_64x32 },
+	
+	// Vertical shapes
+	{ ss_8x16, ss_8x32, ss_16x32, ss_32x64 },
+};
+
+
 void oam_entry::set_shape_size( oam_entry::shape_size n_shape_size )
 {
 	u32 temp_attr0 = attr0, temp_attr1 = attr1;
 	
-	switch(n_shape_size)
+	if ( n_shape_size < 0 || n_shape_size >= ss_count )
 	{
-		// Square shapes
-		default:
-		case ss_8x8:
-			clear_and_set_bits( temp_attr0, obj_attr0_shape_mask,
-				obj_attr0_shape_square );
-			clear_and_set_bits( temp_attr1, obj_attr1_size_mask,
-				obj_attr1_size_0 );
-			break;
+		const vec2_u32& ss_attrs_vec2 = ss_enum_to_ss_attrs_arr[0];
 		
-		case ss_16x16:
-			clear_and_set_bits( temp_attr0, obj_attr0_shape_mask,
-				obj_attr0_shape_square );
-			clear_and_set_bits( temp_attr1, obj_attr1_size_mask,
-				obj_attr1_size_1 );
-			break;
-		
-		
-		case ss_32x32:
-			clear_and_set_bits( temp_attr0, obj_attr0_shape_mask,
-				obj_attr0_shape_square );
-			clear_and_set_bits( temp_attr1, obj_attr1_size_mask,
-				obj_attr1_size_2 );
-			break;
-		
-		
-		case ss_64x64:
-			clear_and_set_bits( temp_attr0, obj_attr0_shape_mask,
-				obj_attr0_shape_square );
-			clear_and_set_bits( temp_attr1, obj_attr1_size_mask,
-				obj_attr1_size_3 );
-			break;
-		
-		
-		// Horizontal shapes
-		case ss_16x8:
-			clear_and_set_bits( temp_attr0, obj_attr0_shape_mask,
-				obj_attr0_shape_horizontal );
-			clear_and_set_bits( temp_attr1, obj_attr1_size_mask,
-				obj_attr1_size_0 );
-			break;
-		
-		
-		case ss_32x8:
-			clear_and_set_bits( temp_attr0, obj_attr0_shape_mask,
-				obj_attr0_shape_horizontal );
-			clear_and_set_bits( temp_attr1, obj_attr1_size_mask,
-				obj_attr1_size_1 );
-			break;
-		
-		
-		case ss_32x16:
-			clear_and_set_bits( temp_attr0, obj_attr0_shape_mask,
-				obj_attr0_shape_horizontal );
-			clear_and_set_bits( temp_attr1, obj_attr1_size_mask,
-				obj_attr1_size_2 );
-			break;
-		
-		
-		case ss_64x32:
-			clear_and_set_bits( temp_attr0, obj_attr0_shape_mask,
-				obj_attr0_shape_horizontal );
-			clear_and_set_bits( temp_attr1, obj_attr1_size_mask,
-				obj_attr1_size_3 );
-			break;
-		
-		
-		// Vertical shapes
-		case ss_8x16:
-			clear_and_set_bits( temp_attr0, obj_attr0_shape_mask,
-				obj_attr0_shape_vertical );
-			clear_and_set_bits( temp_attr1, obj_attr1_size_mask,
-				obj_attr1_size_0 );
-			break;
-		
-		
-		case ss_8x32:
-			clear_and_set_bits( temp_attr0, obj_attr0_shape_mask,
-				obj_attr0_shape_vertical );
-			clear_and_set_bits( temp_attr1, obj_attr1_size_mask,
-				obj_attr1_size_1 );
-			break;
-		
-		
-		case ss_16x32:
-			clear_and_set_bits( temp_attr0, obj_attr0_shape_mask,
-				obj_attr0_shape_vertical );
-			clear_and_set_bits( temp_attr1, obj_attr1_size_mask,
-				obj_attr1_size_2 );
-			break;
-		
-		
-		case ss_32x64:
-			clear_and_set_bits( temp_attr0, obj_attr0_shape_mask,
-				obj_attr0_shape_vertical );
-			clear_and_set_bits( temp_attr1, obj_attr1_size_mask,
-				obj_attr1_size_3 );
-			break;
+		clear_and_set_bits( temp_attr0, obj_attr0_shape_mask,
+			ss_attrs_vec2.x );
+		clear_and_set_bits( temp_attr1, obj_attr1_size_mask,
+			ss_attrs_vec2.y );
 	}
+	else
+	{
+		const vec2_u32& ss_attrs_vec2 = ss_enum_to_ss_attrs_arr
+			[n_shape_size];
+		
+		clear_and_set_bits( temp_attr0, obj_attr0_shape_mask,
+			ss_attrs_vec2.x );
+		clear_and_set_bits( temp_attr1, obj_attr1_size_mask,
+			ss_attrs_vec2.y );
+	}
+	
 	
 	attr0 = (u16)( temp_attr0 & 0xffff );
 	attr1 = (u16)( temp_attr1 & 0xffff );
@@ -138,65 +105,22 @@ void oam_entry::set_shape_size( oam_entry::shape_size n_shape_size )
 
 oam_entry::shape_size oam_entry::get_shape_size() const
 {
-	u32 attr0_shape = get_bits( attr0, obj_attr0_shape_mask );
-	u32 attr1_size = get_bits( attr1, obj_attr1_size_mask );
+	u32 attr0_shape_no_shift = get_bits( attr0, obj_attr0_shape_mask,
+		obj_attr0_shape_shift );
+	u32 attr1_size_no_shift = get_bits( attr0, obj_attr1_size_mask,
+		obj_attr1_size_shift );
 	
-	switch ( attr0_shape )
+	// Error checking
+	if ( attr0_shape_no_shift >= num_attr0_shapes 
+		|| attr1_size_no_shift >= num_attr1_sizes )
 	{
-		default:
-		case obj_attr0_shape_square:
-			switch ( attr1_size )
-			{
-				default:
-				case obj_attr1_size_0:
-					return ss_8x8;
-				
-				case obj_attr1_size_1:
-					return ss_16x16;
-				
-				case obj_attr1_size_2:
-					return ss_32x32;
-				
-				case obj_attr1_size_3:
-					return ss_64x64;
-			}
-		
-		case obj_attr0_shape_horizontal:
-			switch ( attr1_size )
-			{
-				default:
-				case obj_attr1_size_0:
-					return ss_16x8;
-					
-				case obj_attr1_size_1:
-					return ss_32x8;
-					
-				case obj_attr1_size_2:
-					return ss_32x16;
-					
-				case obj_attr1_size_3:
-					return ss_64x32;
-			}
-		
-		case obj_attr0_shape_vertical:
-			switch ( attr1_size )
-			{
-				default:
-				case obj_attr1_size_0:
-					return ss_8x16;
-					
-				case obj_attr1_size_1:
-					return ss_8x32;
-					
-				case obj_attr1_size_2:
-					return ss_16x32;
-					
-				case obj_attr1_size_3:
-					return ss_32x64;
-			}
-		
+		return ss_attrs_no_shift_to_ss_enum_arr_2d[0][0];
 	}
-	
+	else
+	{
+		return ss_attrs_no_shift_to_ss_enum_arr_2d[attr0_shape_no_shift]
+			[attr1_size_no_shift];
+	}
 }
 
 void oam_entry::set_shape_size_with_vec2( const vec2_u32& n_shape_size )
@@ -270,38 +194,7 @@ void oam_entry::set_shape_size_with_vec2( const vec2_u32& n_shape_size )
 
 vec2_u32 oam_entry::get_shape_size_as_vec2() const
 {
-	switch ( get_shape_size() )
-	{
-		// Square shapes
-		case ss_8x8:
-			return { 8, 8 };
-		case ss_16x16:
-			return { 16, 16 };
-		case ss_32x32:
-			return { 32, 32 };
-		case ss_64x64:
-			return { 64, 64 };
-		
-		// Horizontal shapes
-		case ss_16x8:
-			return { 16, 8 };
-		case ss_32x8:
-			return { 32, 8 };
-		case ss_32x16:
-			return { 32, 16 };
-		case ss_64x32:
-			return { 64, 32 };
-		
-		// Vertical shapes
-		case ss_8x16:
-			return { 8, 16 };
-		case ss_8x32:
-			return { 8, 32 };
-		case ss_16x32:
-			return { 16, 32 };
-		case ss_32x64:
-			return { 32, 64 };
-	}
+	return ss_to_vec2_arr[get_shape_size()];
 }
 
 
