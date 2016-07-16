@@ -19,6 +19,7 @@
 #include "block_coll_result_group_class.hpp"
 #include "level_stuff/active_level_class.hpp"
 
+#include "block_stuff/block_stuff.hpp"
 
 block_coll_result::block_coll_result( const vec2_s32& s_coord )
 	: coord(s_coord)
@@ -47,11 +48,14 @@ block_coll_result_group::block_coll_result_group
 {
 	arr_memfill32( bcr_arr_2d_helper_data, 0, max_size );
 	
-	const vec2_s32 start_pos = active_level::get_block_coord_of_point
-		( vec2_f24p8( the_coll_box.left(), the_coll_box.top() ) );
+	start_pos = active_level::get_block_coord_of_point( vec2_f24p8
+		( the_coll_box.left(), the_coll_box.top() ) );
 	const vec2_s32 end_pos = active_level::get_block_coord_of_point
 		( vec2_f24p8( the_coll_box.right(), the_coll_box.bot() ) );
 	real_size_2d = end_pos - start_pos + vec2_s32( 1, 1 );
+	
+	moving_left = s_moving_left;
+	moving_right = s_moving_right;
 	
 	bcr_arr_2d_helper.init( bcr_arr_2d_helper_data, vec2_u32( real_width(), 
 		real_height() ) );
@@ -65,8 +69,6 @@ block_coll_result_group::block_coll_result_group
 		}
 	}
 	
-	moving_left = s_moving_left;
-	moving_right = s_moving_right;
 	
 }
 block_coll_result_group::block_coll_result_group
@@ -80,7 +82,15 @@ block_coll_result_group& block_coll_result_group::operator =
 	arr_memcpy32( (block_coll_result*)bcr_arr_2d_helper_data, 
 		to_copy.bcr_arr_2d_helper_data, sizeof(bcr_arr_2d_helper_data) );
 	real_size_2d = to_copy.real_size_2d;
+	
+	start_pos = to_copy.start_pos;
+	
+	moving_left = to_copy.moving_left;
+	moving_right = to_copy.moving_right;
+	
 	bcr_arr_2d_helper = to_copy.bcr_arr_2d_helper;
+	
+	
 	
 	return *this;
 }
@@ -88,18 +98,26 @@ block_coll_result_group& block_coll_result_group::operator =
 
 
 void block_coll_result_group::get_corner_stuff( u32& top_corner_is_non_air,
-	u32& bot_corner_is_non_air, block_coll_result* top_corner_bcr,
-	block_coll_result* bot_corner_bcr )
+	u32& bot_corner_is_non_air, block_coll_result*& top_corner_bcr,
+	block_coll_result*& bot_corner_bcr )
 {
+	top_corner_is_non_air = ( bcr_arr_2d_helper.data_at
+		(local_tl_corner()).the_bbvt != bbvt_air );
+	bot_corner_is_non_air = ( bcr_arr_2d_helper.data_at
+		(local_bl_corner()).the_bbvt != bbvt_air );
+	
+	top_corner_bcr = &bcr_arr_2d_helper.data_at(local_tl_corner());
+	bot_corner_bcr = &bcr_arr_2d_helper.data_at(local_bl_corner());
+	
 	if (moving_left)
 	{
-		top_corner_is_non_air = ( bcr_arr_2d_helper.data_at
-			(local_tl_corner()).the_bbvt != bbvt_air );
-		bot_corner_is_non_air = ( bcr_arr_2d_helper.data_at
-			(local_bl_corner()).the_bbvt != bbvt_air );
-		
-		top_corner_bcr = &bcr_arr_2d_helper.data_at(local_tl_corner());
-		bot_corner_bcr = &bcr_arr_2d_helper.data_at(local_bl_corner());
+		//top_corner_is_non_air = ( bcr_arr_2d_helper.data_at
+		//	(local_tl_corner()).the_bbvt != bbvt_air );
+		//bot_corner_is_non_air = ( bcr_arr_2d_helper.data_at
+		//	(local_bl_corner()).the_bbvt != bbvt_air );
+		//
+		//top_corner_bcr = &bcr_arr_2d_helper.data_at(local_tl_corner());
+		//bot_corner_bcr = &bcr_arr_2d_helper.data_at(local_bl_corner());
 	}
 	else if (moving_right)
 	{
@@ -118,8 +136,8 @@ void block_coll_result_group::get_coll_box_related_stuff
 	( const coll_box& the_coll_box, const fixed24p8& vel_y, 
 	vec2_s32& adjusted_cb_top_corner_lbc,
 	vec2_s32& adjusted_cb_bot_corner_lbc,
-	block_coll_result* adjusted_cb_top_corner_bcr,
-	block_coll_result* adjusted_cb_bot_corner_bcr )
+	block_coll_result*& adjusted_cb_top_corner_bcr,
+	block_coll_result*& adjusted_cb_bot_corner_bcr )
 {
 	vec2_f24p8 cb_top_corner_f24p8( the_coll_box.left(), 
 		the_coll_box.top() ), cb_bot_corner_f24p8( the_coll_box.left(),

@@ -1577,12 +1577,12 @@ void sprite::block_coll_response_bot_16x32
 		////	//- ( the_coll_box.size.y +
 		////	//cb_pos_offset.y );
 		////	- make_f24p8(get_shape_size_as_vec2().y);
-		//set_curr_in_level_pos_y ( make_f24p8( bl_coll_result.coord.y 
+		//set_curr_in_level_pos_y( make_f24p8( bl_coll_result.coord.y 
 		//	* 16 ) - make_f24p8(get_shape_size_as_vec2().y) );
-		//set_curr_in_level_pos_y ( make_f24p8( the_bcr_group.get_bcr_bl()
+		//set_curr_in_level_pos_y( make_f24p8( the_bcr_group.get_bcr_bl()
 		//	.coord.y * num_pixels_per_block_dim ) 
 		//	- make_f24p8(get_shape_size_as_vec2().y) );
-		set_curr_in_level_pos_y ( make_f24p8( the_bcr_group.bot()
+		set_curr_in_level_pos_y( make_f24p8( the_bcr_group.bot()
 			* num_pixels_per_block_dim ) 
 			- make_f24p8(get_shape_size_as_vec2().y) );
 		
@@ -2226,7 +2226,6 @@ void sprite::block_collision_stuff_16x32()
 	//	bot_side_is_blocked = false;
 	
 	
-	// Temporarily, use 
 	u32 top_corner_is_non_air = false,
 		bot_corner_is_non_air = false;
 	
@@ -2267,49 +2266,6 @@ void sprite::block_collision_stuff_16x32()
 		top_side_other_than_corner_is_blocked,
 		bot_side_other_than_corner_is_blocked );
 	
-	//if (moving_left)
-	//{
-	//	//local_vert_side_x = the_bcr_group.local_left();
-	//	
-	//	top_corner_is_non_air = ( the_bcr_group(the_bcr_group
-	//		.local_tl_corner()).the_bbvt != bbvt_air );
-	//	bot_corner_is_non_air = ( the_bcr_group(the_bcr_group
-	//		.local_bl_corner()).the_bbvt != bbvt_air );
-	//	
-	//	++part_3_range_start;
-	//	++part_3_range_end_plus_1;
-	//	
-	//	bcr_of_top_corner = &the_bcr_group( the_bcr_group
-	//		.local_tl_corner() );
-	//	bcr_of_bot_corner = &the_bcr_group( the_bcr_group
-	//		.local_bl_corner() );
-	//	
-	//	//cb_top_corner_f24p8.x = cb_bot_corner_f24p8.x = the_coll_box
-	//	//	.left();
-	//}
-	//else if (moving_right)
-	//{
-	//	local_vert_side_x = the_bcr_group.local_right();
-	//	
-	//	top_corner_is_non_air = ( the_bcr_group(the_bcr_group
-	//		.local_tr_corner()).the_bbvt != bbvt_air );
-	//	bot_corner_is_non_air = ( the_bcr_group(the_bcr_group
-	//		.local_br_corner()).the_bbvt != bbvt_air );
-	//	
-	//	//part_3_range_start = the_bcr_group.local_left();
-	//	//part_3_range_end_plus_1 = real_width - 1;
-	//	
-	//	top_corner_bcr = &the_bcr_group( the_bcr_group
-	//		.local_tr_corner() );
-	//	bot_corner_bcr = &the_bcr_group( the_bcr_group
-	//		.local_br_corner() );
-	//	
-	//	cb_top_corner_f24p8.x = cb_bot_corner_f24p8.x = the_coll_box
-	//		.right();
-	//}
-	
-	// Find obstacles for horizontal movement
-	// Part 1
 	
 	
 	
@@ -2326,62 +2282,58 @@ void sprite::block_collision_stuff_16x32()
 		}
 	};
 	
-	//// Part 4
-	//if ( top_corner_is_non_air || top_side_other_than_corner_is_blocked )
-	//{
-	//	// Corner is air
-	//	if ( top_side_other_than_corner_is_blocked 
-	//		&& !top_corner_is_non_air )
-	//	{
-	//		if (vert_side_below_top_corner_is_blocked)
-	//		{
-	//			regular_vert_side_is_blocked_response();
-	//		}
-	//	}
-	//	else if ( top_corner_is_non_air 
-	//		&& !top_side_other_than_corner_is_blocked )
-	//	{
-	//		if (vert_side_below_top_corner_is_blocked)
-	//		{
-	//			regular_vert_side_is_blocked_response();
-	//		}
-	//	}
-	//	else //if ( top_corner_is_non_air 
-	//		//&& top_side_other_than_corner_is_blocked )
-	//	{
-	//		if (vert_side_below_top_corner_is_blocked)
-	//		{
-	//			regular_vert_side_is_blocked_response();
-	//		}
-	//	}
-	//	
-	//	
-	//	block_coll_response_top_16x32(the_bcr_group);
-	//}
-	//else if ( bot_corner_is_non_air 
-	//	|| bot_side_other_than_corner_is_blocked )
-	//{
-	//	block_coll_response_bot_16x32(the_bcr_group);
-	//	
-	//	//if
-	//}
-	//else
-	//{
-	//	set_curr_on_ground(false);
-	//	
-	//	//if ( top_corner_is_non_air 
-	//	//	|| vert_side_below_top_corner_is_blocked )
-	//	//{
-	//	//	if (moving_left)
-	//	//	{
-	//	//		
-	//	//	}
-	//	//	else if (moving_right)
-	//	//	{
-	//	//		
-	//	//	}
-	//	//}
-	//}
+	
+	if ( top_corner_is_non_air || top_side_other_than_corner_is_blocked )
+	{
+		// Corner is air
+		if ( top_side_other_than_corner_is_blocked 
+			&& !top_corner_is_non_air )
+		{
+			if (vert_side_below_top_corner_is_blocked)
+			{
+				regular_vert_side_is_blocked_response();
+			}
+			
+			block_coll_response_top_16x32(the_bcr_group);
+		}
+		// The top corner is the only relevant non-air portion intersected
+		// by the top of the sprite, so we're dealing with a VERTICAL WALL,
+		// but NO CEILING.
+		else if ( top_corner_is_non_air 
+			&& !top_side_other_than_corner_is_blocked )
+		{
+			regular_vert_side_is_blocked_response();
+		}
+		
+		// This is also used when the top corner is THE ONLY part of the
+		// top that even exists.
+		else //if ( top_corner_is_non_air 
+			//&& top_side_other_than_corner_is_blocked )
+		{
+			regular_vert_side_is_blocked_response();
+			
+			block_coll_response_top_16x32(the_bcr_group);
+		}
+		
+		
+	}
+	else if ( bot_corner_is_non_air 
+		|| bot_side_other_than_corner_is_blocked )
+	{
+		block_coll_response_bot_16x32(the_bcr_group);
+		
+		//if
+	}
+	else
+	{
+		set_curr_on_ground(false);
+		
+		if ( top_corner_is_non_air 
+			|| vert_side_below_top_corner_is_blocked )
+		{
+			regular_vert_side_is_blocked_response();
+		}
+	}
 	
 	
 	

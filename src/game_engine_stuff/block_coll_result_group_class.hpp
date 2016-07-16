@@ -19,7 +19,7 @@
 #ifndef block_coll_result_group_class_hpp
 #define block_coll_result_group_class_hpp
 
-
+#include "range_funcs.hpp"
 #include "block_stuff/block_stuff.hpp"
 
 #include "coll_box_class.hpp"
@@ -45,14 +45,15 @@ public:		// functions
 		*this = to_copy;
 	}
 	
-	inline block_coll_result& operator = 
-		( const block_coll_result& to_copy )
-	{
-		coord = to_copy.coord;
-		the_block = to_copy.the_block;
-		
-		return *this;
-	}
+	//inline block_coll_result& operator = 
+	//	( const block_coll_result& to_copy )
+	//{
+	//	coord = to_copy.coord;
+	//	the_block = to_copy.the_block;
+	//	the_bbvt = to_copy.the_bbvt;
+	//	
+	//	return *this;
+	//}
 	
 	inline block_type get_block_type() const
 	{
@@ -71,6 +72,8 @@ protected:		// variables
 	
 	block_coll_result bcr_arr_2d_helper_data[max_size];
 	vec2_s32 real_size_2d;
+	
+	vec2_s32 start_pos;
 	
 	u32 moving_left, moving_right;
 	
@@ -126,20 +129,24 @@ public:		// functions
 	// Global coordinates
 	inline s32 left() const
 	{
-		return bcr_arr_2d_helper_data[0].coord.x;
+		//return bcr_arr_2d_helper_data[0].coord.x;
+		return start_pos.x;
 	}
 	inline s32 right() const
 	{
-		return left() + real_width();
+		//return left() + real_width() - 1;
+		return left() + local_right();
 	}
 	
 	inline s32 top() const
 	{
-		return bcr_arr_2d_helper_data[0].coord.y;
+		//return bcr_arr_2d_helper_data[0].coord.y;
+		return start_pos.y;
 	}
 	inline s32 bot() const
 	{
-		return top() + real_height();
+		//return top() + real_height() - 1;
+		return top() + local_bot();
 	}
 	
 	// Corners
@@ -202,21 +209,20 @@ public:		// functions
 	inline bool contains_local_block_coord( const vec2_s32& to_check )
 		const
 	{
-		return ( to_check.x >= 0 && to_check.x <= real_width()
-			&& to_check.y >= 0 && to_check.y <= real_height() );
+		return vec2_in_range( vec2_s32( 0, 0 ), real_size_2d, to_check );
 	}
 	
 	
 	void get_corner_stuff( u32& top_corner_is_non_air,
-		u32& bot_corner_is_non_air, block_coll_result* top_corner_bcr,
-		block_coll_result* bot_corner_bcr )
+		u32& bot_corner_is_non_air, block_coll_result*& top_corner_bcr,
+		block_coll_result*& bot_corner_bcr )
 		__attribute__((_iwram_code));
 	
 	void get_coll_box_related_stuff( const coll_box& the_coll_box,
 		const fixed24p8& vel_y, vec2_s32& adjusted_cb_top_corner_lbc,
 		vec2_s32& adjusted_cb_bot_corner_lbc,
-		block_coll_result* adjusted_cb_top_corner_bcr,
-		block_coll_result* adjusted_cb_bot_corner_bcr )
+		block_coll_result*& adjusted_cb_top_corner_bcr,
+		block_coll_result*& adjusted_cb_bot_corner_bcr )
 		__attribute__((_iwram_code));
 	
 	void get_side_blocked_stuff
