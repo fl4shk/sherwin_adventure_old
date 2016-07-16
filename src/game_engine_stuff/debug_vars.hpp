@@ -60,19 +60,19 @@ void clear_debug_vars() __attribute__((_iwram_code));
 */
 
 
-enum curr_index_type
+enum curr_debug_index_type
 {
-	cit_u32,
-	cit_s32,
-	cit_f24p8,
-	cit_f8p8,
-	cit_str,
+	cdit_u32,
+	cdit_s32,
+	cdit_f24p8,
+	cdit_f8p8,
+	cdit_str,
 	
-	cit_count
+	cdit_count
 };
 
 
-static constexpr u32 curr_index_arr_size = cit_count;
+static constexpr u32 curr_index_arr_size = cdit_count;
 
 // 4 * 32 * 4 = 512 bytes eaten up by the non-string debug arrays.
 static constexpr u32 debug_u32_arr_size = 32;
@@ -191,39 +191,37 @@ public:		// functions
 	static inline void write_u32_and_inc( u32 to_write )
 	{
 		debug_u32_arr_helper.data_at(curr_index_arr_helper.data_at
-			(cit_u32)++) = to_write;
+			(cdit_u32)++) = to_write;
 	}
 	static inline void write_s32_and_inc( s32 to_write )
 	{
 		debug_s32_arr_helper.data_at(curr_index_arr_helper.data_at
-			(cit_s32)++) = to_write;
+			(cdit_s32)++) = to_write;
 	}
 	static inline void write_f24p8_and_inc( const fixed24p8& to_write )
 	{
 		debug_f24p8_arr_helper.data_at(curr_index_arr_helper.data_at
-			(cit_f24p8)++) = to_write;
+			(cdit_f24p8)++) = to_write;
 	}
 	static inline void write_f8p8_and_inc( const fixed8p8& to_write )
 	{
 		debug_f8p8_arr_helper.data_at(curr_index_arr_helper.data_at
-			(cit_f8p8)++) = to_write;
+			(cdit_f8p8)++) = to_write;
 	}
 	
 	static inline void write_str_and_inc( const debug_str& to_write )
 	{
 		debug_str_arr_helper.data_at(curr_index_arr_helper.data_at
-			(cit_str)++) = to_write;
+			(cdit_str)++) = to_write;
 	}
 	
 	static inline void write_str_and_inc( const char* to_write )
 	{
 		debug_str_arr_helper.data_at(curr_index_arr_helper.data_at
-			(cit_str)++) = to_write;
+			(cdit_str)++) = to_write;
 	}
 	
-	
-	
-};
+} __attribute__((_align4));
 
 
 

@@ -2194,26 +2194,8 @@ void sprite::block_collision_stuff_16x16()
 }
 void sprite::block_collision_stuff_16x32()
 {
-	
-	
-	//// Columns of block_coll_result
-	//block_coll_result* bcr_ptr_col_arr[bcr_arr_2d_helper.height()];
-	//bool bcr_is_obstacle_col_arr[bcr_arr_2d_helper.height()];
-	//
-	//for ( u32 j=0; j<bcr_arr_2d_helper.height(); ++j )
-	//{
-	//	for ( u32 i=0; i<bcr_arr_2d_helper.width(); ++i )
-	//	{
-	//		bcr_arr_2d_helper.data_at( i, j ) = block_coll_result
-	//			( bcr_arr_2d_start_pos + vec2_s32( i, j ) );
-	//	}
-	//}
-	
-	block_coll_result_group the_bcr_group(the_coll_box);
-	
-	
-	bool moving_left = false, moving_right = false, moving_up = false,
-		not_moving_up = false;
+	u32 moving_left = false, moving_right = false, moving_up = false,
+		moving_down = false;
 	
 	if ( get_curr_in_level_pos().x < get_prev_in_level_pos().x )
 	{
@@ -2228,129 +2210,179 @@ void sprite::block_collision_stuff_16x32()
 	{
 		moving_up = true;
 	}
-	else //if ( get_curr_in_level_pos().y >= get_prev_in_level_pos().y )
+	else if ( get_curr_in_level_pos().y > get_prev_in_level_pos().y )
 	{
-		not_moving_up = true;
+		moving_down = true;
 	}
 	
+	block_coll_result_group the_bcr_group( the_coll_box, moving_left, 
+		moving_right );
 	
 	
-	bool left_side_is_blocked = false, right_side_is_blocked = false,
-		top_side_is_blocked = false, bot_side_is_blocked = false;
 	
-	// Corner stuff
-	const bool tl_corner_is_non_air = ( the_bcr_group( the_bcr_group
-		.local_tl_corner()).the_bbvt != bbvt_air ), 
+	//// Overall side is blocked thing
+	//u32 vert_side_is_blocked = false, 
+	//	top_side_is_blocked = false,
+	//	bot_side_is_blocked = false;
+	
+	
+	// Temporarily, use 
+	u32 top_corner_is_non_air = false,
+		bot_corner_is_non_air = false;
+	
+	u32 vert_side_below_top_corner_is_blocked = false, 
+		vert_side_above_bot_corner_is_blocked = false,
 		
-		tr_corner_is_non_air = ( the_bcr_group( the_bcr_group
-		.local_tr_corner()).the_bbvt != bbvt_air ), 
-		
-		bl_corner_is_non_air = ( the_bcr_group ( the_bcr_group
-		.local_bl_corner()).the_bbvt != bbvt_air ), 
-		
-		br_corner_is_non_air = ( the_bcr_group( the_bcr_group
-		.local_br_corner()).the_bbvt != bbvt_air );
+		// The top side to the right or left of the relevant corner
+		top_side_other_than_corner_is_blocked = false,
+		bot_side_other_than_corner_is_blocked = false;
 	
-	bool left_side_below_tl_corner_is_blocked = false, 
-		left_side_above_bl_corner_is_blocked = false;
 	
-	bool right_side_below_tr_corner_is_blocked = false,
-		right_side_above_br_corner_is_blocked = false;
+	//s32 part_3_range_start = local_vert_side_x, 
+	//	part_3_range_end_plus_1 = real_width - 1;
 	
-	bool top_side_right_of_tl_corner_is_blocked = false,
-		top_side_left_of_tr_corner_is_blocked = false;
+	block_coll_result * top_corner_bcr = NULL, * bot_corner_bcr = NULL;
 	
-	bool bot_side_right_of_bl_corner_is_blocked = false,
-		bot_side_left_of_br_corner_is_blocked = false;
 	
-	if (moving_left)
+	// These are adjusted by using vel.y.  Also, "lbc" is short for "local
+	// block coord".
+	vec2_s32 adjusted_cb_top_corner_lbc, adjusted_cb_bot_corner_lbc;
+	
+	// blocks intersected by the_coll_box's corners at y positions minus
+	// vel.y
+	block_coll_result * adjusted_cb_top_corner_bcr = NULL, 
+		* adjusted_cb_bot_corner_bcr = NULL;
+	
+	
+	the_bcr_group.get_corner_stuff( top_corner_is_non_air,
+		bot_corner_is_non_air, top_corner_bcr, bot_corner_bcr );
+	
+	the_bcr_group.get_coll_box_related_stuff( the_coll_box, vel.y, 
+		adjusted_cb_top_corner_lbc, adjusted_cb_bot_corner_lbc,
+		adjusted_cb_top_corner_bcr, adjusted_cb_bot_corner_bcr );
+	
+	the_bcr_group.get_side_blocked_stuff
+		( vert_side_below_top_corner_is_blocked, 
+		vert_side_above_bot_corner_is_blocked,
+		top_side_other_than_corner_is_blocked,
+		bot_side_other_than_corner_is_blocked );
+	
+	//if (moving_left)
+	//{
+	//	//local_vert_side_x = the_bcr_group.local_left();
+	//	
+	//	top_corner_is_non_air = ( the_bcr_group(the_bcr_group
+	//		.local_tl_corner()).the_bbvt != bbvt_air );
+	//	bot_corner_is_non_air = ( the_bcr_group(the_bcr_group
+	//		.local_bl_corner()).the_bbvt != bbvt_air );
+	//	
+	//	++part_3_range_start;
+	//	++part_3_range_end_plus_1;
+	//	
+	//	bcr_of_top_corner = &the_bcr_group( the_bcr_group
+	//		.local_tl_corner() );
+	//	bcr_of_bot_corner = &the_bcr_group( the_bcr_group
+	//		.local_bl_corner() );
+	//	
+	//	//cb_top_corner_f24p8.x = cb_bot_corner_f24p8.x = the_coll_box
+	//	//	.left();
+	//}
+	//else if (moving_right)
+	//{
+	//	local_vert_side_x = the_bcr_group.local_right();
+	//	
+	//	top_corner_is_non_air = ( the_bcr_group(the_bcr_group
+	//		.local_tr_corner()).the_bbvt != bbvt_air );
+	//	bot_corner_is_non_air = ( the_bcr_group(the_bcr_group
+	//		.local_br_corner()).the_bbvt != bbvt_air );
+	//	
+	//	//part_3_range_start = the_bcr_group.local_left();
+	//	//part_3_range_end_plus_1 = real_width - 1;
+	//	
+	//	top_corner_bcr = &the_bcr_group( the_bcr_group
+	//		.local_tr_corner() );
+	//	bot_corner_bcr = &the_bcr_group( the_bcr_group
+	//		.local_br_corner() );
+	//	
+	//	cb_top_corner_f24p8.x = cb_bot_corner_f24p8.x = the_coll_box
+	//		.right();
+	//}
+	
+	// Find obstacles for horizontal movement
+	// Part 1
+	
+	
+	
+	
+	auto regular_vert_side_is_blocked_response = [&]() -> void
 	{
-		//if ( bcr_arr_2d_helper.data_at( hm_col_index
-		
-		for ( s32 j=the_bcr_group.local_top() + 1; 
-			j<the_bcr_group.real_height();
-			++j )
+		if (moving_left)
 		{
-			if ( the_bcr_group( the_bcr_group.local_left(), j ).the_bbvt 
-				!= bbvt_air )
-			{
-				left_side_below_tl_corner_is_blocked = true;
-				break;
-			}
+			block_coll_response_left_16x32(the_bcr_group);
 		}
-		
-		for ( s32 j=the_bcr_group.local_top(); 
-			j<the_bcr_group.real_height() - 1;
-			++j )
+		else if (moving_right)
 		{
-			if ( the_bcr_group( the_bcr_group.local_left(), j ).the_bbvt 
-				!= bbvt_air )
-			{
-				left_side_above_bl_corner_is_blocked = true;
-				break;
-			}
+			block_coll_response_right_16x32(the_bcr_group);
 		}
-		
-		for ( s32 i=the_bcr_group.local_left() + 1; 
-			i<the_bcr_group.real_width();
-			++i )
-		{
-			if ( the_bcr_group( i, the_bcr_group.local_top() ).the_bbvt 
-				!= bbvt_air )
-			{
-				top_side_right_of_tl_corner_is_blocked = true;
-			}
-			
-			if ( the_bcr_group( i, the_bcr_group.local_bot() ).the_bbvt 
-				!= bbvt_air )
-			{
-				bot_side_right_of_bl_corner_is_blocked = true;
-			}
-		}
-	}
-	else if (moving_right)
-	{
-		for ( s32 j=the_bcr_group.local_top() + 1; 
-			j<the_bcr_group.real_height();
-			++j )
-		{
-			if ( the_bcr_group( the_bcr_group.local_right(), j ).the_bbvt 
-				!= bbvt_air )
-			{
-				right_side_below_tr_corner_is_blocked = true;
-				break;
-			}
-		}
-		
-		for ( s32 j=the_bcr_group.local_top(); 
-			j<the_bcr_group.real_height() - 1;
-			++j )
-		{
-			if ( the_bcr_group( the_bcr_group.local_right(), j ).the_bbvt 
-				!= bbvt_air )
-			{
-				right_side_above_br_corner_is_blocked = true;
-				break;
-			}
-		}
-		
-		for ( s32 i=the_bcr_group.local_left(); 
-			i<the_bcr_group.real_width() - 1;
-			++i )
-		{
-			if ( the_bcr_group( i, the_bcr_group.local_top() ).the_bbvt 
-				!= bbvt_air )
-			{
-				top_side_left_of_tr_corner_is_blocked = true;
-			}
-			
-			if ( the_bcr_group( i, the_bcr_group.local_bot() ).the_bbvt 
-				!= bbvt_air )
-			{
-				bot_side_left_of_br_corner_is_blocked = true;
-			}
-		}
-	}
+	};
+	
+	//// Part 4
+	//if ( top_corner_is_non_air || top_side_other_than_corner_is_blocked )
+	//{
+	//	// Corner is air
+	//	if ( top_side_other_than_corner_is_blocked 
+	//		&& !top_corner_is_non_air )
+	//	{
+	//		if (vert_side_below_top_corner_is_blocked)
+	//		{
+	//			regular_vert_side_is_blocked_response();
+	//		}
+	//	}
+	//	else if ( top_corner_is_non_air 
+	//		&& !top_side_other_than_corner_is_blocked )
+	//	{
+	//		if (vert_side_below_top_corner_is_blocked)
+	//		{
+	//			regular_vert_side_is_blocked_response();
+	//		}
+	//	}
+	//	else //if ( top_corner_is_non_air 
+	//		//&& top_side_other_than_corner_is_blocked )
+	//	{
+	//		if (vert_side_below_top_corner_is_blocked)
+	//		{
+	//			regular_vert_side_is_blocked_response();
+	//		}
+	//	}
+	//	
+	//	
+	//	block_coll_response_top_16x32(the_bcr_group);
+	//}
+	//else if ( bot_corner_is_non_air 
+	//	|| bot_side_other_than_corner_is_blocked )
+	//{
+	//	block_coll_response_bot_16x32(the_bcr_group);
+	//	
+	//	//if
+	//}
+	//else
+	//{
+	//	set_curr_on_ground(false);
+	//	
+	//	//if ( top_corner_is_non_air 
+	//	//	|| vert_side_below_top_corner_is_blocked )
+	//	//{
+	//	//	if (moving_left)
+	//	//	{
+	//	//		
+	//	//	}
+	//	//	else if (moving_right)
+	//	//	{
+	//	//		
+	//	//	}
+	//	//}
+	//}
+	
 	
 	
 }

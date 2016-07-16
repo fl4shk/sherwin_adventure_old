@@ -113,7 +113,7 @@ array_helper<debug_str> debug_arr_group::debug_str_arr_helper;
 
 void debug_arr_group::clear_debug_vars()
 {
-	////memfill32( curr_index_arr(), 0, cit_count / sizeof(u32) );
+	////memfill32( curr_index_arr(), 0, cdit_count / sizeof(u32) );
 	//for ( u32 i=0; i<curr_index_arr_helper.get_size(); ++i )
 	//{
 	//	curr_index_arr_helper.data_at(i) = 0;
