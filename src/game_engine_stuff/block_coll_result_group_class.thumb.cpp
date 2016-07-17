@@ -34,12 +34,8 @@ block_coll_result::block_coll_result( const vec2_f24p8& s_coord_f24p8 )
 }
 
 
-// The maximum number of blocks intersected by a sprite, per dimension.
-// The value of ( 3, 3 ) corresponds to a 32x32 sprite.  Definitely
-// change these two values (among other things) if there is every any
-// infrastructure for sprites larger than 32x32 pixels.
-//const vec2_u32 block_coll_result_group::shared_max_size_2d( 3, 3 );
 
+u32 block_coll_result_group::temp_debug_thing;
 
 
 
@@ -97,37 +93,39 @@ block_coll_result_group& block_coll_result_group::operator =
 
 
 
-void block_coll_result_group::get_corner_stuff( u32& top_corner_is_non_air,
-	u32& bot_corner_is_non_air, block_coll_result*& top_corner_bcr,
-	block_coll_result*& bot_corner_bcr )
+void block_coll_result_group::get_corner_stuff
+	( block_coll_result*& top_corner_bcr, 
+	block_coll_result*& bot_corner_bcr, u32& top_corner_is_non_air,
+	u32& bot_corner_is_non_air )
 {
-	top_corner_is_non_air = ( bcr_arr_2d_helper.data_at
-		(local_tl_corner()).the_bbvt != bbvt_air );
-	bot_corner_is_non_air = ( bcr_arr_2d_helper.data_at
-		(local_bl_corner()).the_bbvt != bbvt_air );
-	
-	top_corner_bcr = &bcr_arr_2d_helper.data_at(local_tl_corner());
-	bot_corner_bcr = &bcr_arr_2d_helper.data_at(local_bl_corner());
+	vec2_s32 local_top_corner = local_tl_corner(),
+		local_bot_corner = local_bl_corner();
 	
 	if (moving_left)
 	{
-		//top_corner_is_non_air = ( bcr_arr_2d_helper.data_at
-		//	(local_tl_corner()).the_bbvt != bbvt_air );
-		//bot_corner_is_non_air = ( bcr_arr_2d_helper.data_at
-		//	(local_bl_corner()).the_bbvt != bbvt_air );
-		//
-		//top_corner_bcr = &bcr_arr_2d_helper.data_at(local_tl_corner());
-		//bot_corner_bcr = &bcr_arr_2d_helper.data_at(local_bl_corner());
+		//local_top_corner.x = local_bot_corner.x = local_left();
 	}
 	else if (moving_right)
 	{
-		top_corner_is_non_air = ( bcr_arr_2d_helper.data_at
-			(local_tr_corner()).the_bbvt != bbvt_air );
-		bot_corner_is_non_air = ( bcr_arr_2d_helper.data_at
-			(local_br_corner()).the_bbvt != bbvt_air );
-		
-		top_corner_bcr = &bcr_arr_2d_helper.data_at(local_tr_corner());
-		bot_corner_bcr = &bcr_arr_2d_helper.data_at(local_br_corner());
+		local_top_corner.x = local_bot_corner.x = local_right();
+	}
+	
+	
+	//top_corner_is_non_air = ( bcr_arr_2d_helper.data_at
+	//	(local_top_corner).the_bbvt != bbvt_air );
+	//bot_corner_is_non_air = ( bcr_arr_2d_helper.data_at
+	//	(local_bot_corner).the_bbvt != bbvt_air );
+	
+	top_corner_bcr = &bcr_arr_2d_helper.data_at(local_top_corner);
+	bot_corner_bcr = &bcr_arr_2d_helper.data_at(local_bot_corner);
+	
+	top_corner_is_non_air = ( top_corner_bcr->the_bbvt != bbvt_air );
+	bot_corner_is_non_air = ( bot_corner_bcr->the_bbvt != bbvt_air );
+	
+	temp_debug_thing = 0;
+	if (top_corner_is_non_air)
+	{
+		temp_debug_thing = 7;
 	}
 }
 
@@ -185,20 +183,24 @@ void block_coll_result_group::get_side_blocked_stuff
 	
 	s32 local_vert_side_x = local_left();
 	
-	s32 part_2_range_start = local_left(), 
-		part_2_range_end_plus_1 = real_width() - 1;
+	s32 part_2_range_start = local_left() + 1, 
+		part_2_range_end_plus_1 = local_right() + 1;
 	
 	if (moving_left)
 	{
 		//local_vert_side_x = local_left();
-		++part_2_range_start;
-		++part_2_range_end_plus_1;
+		
+		//part_2_range_start = local_left() + 1;
+		//part_2_range_end_plus_1 = local_right() + 1;
 	}
 	else if (moving_right)
 	{
 		local_vert_side_x = local_right();
+		
 		//part_2_range_start = local_left();
-		//part_2_range_end_plus_1 = real_width() - 1;
+		//part_2_range_end_plus_1 = local_right();
+		--part_2_range_start;
+		--part_2_range_end_plus_1;
 	}
 	
 	for ( s32 j=local_top()+1; j<real_height(); ++j )

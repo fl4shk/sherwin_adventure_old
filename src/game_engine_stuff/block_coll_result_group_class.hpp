@@ -67,6 +67,12 @@ class block_coll_result_group
 {
 //public:		// variables
 protected:		// variables
+	
+	// The maximum number of blocks intersected by a sprite, per dimension.
+	// The value of ( 3, 3 ) corresponds to a 32x32 sprite.  Definitely
+	// change these two values (among other things) if there is every any
+	// infrastructure for sprites larger than 32x32 pixels.
+	//const vec2_u32 block_coll_result_group::shared_max_size_2d( 3, 3 );
 	static constexpr vec2_u32 max_size_2d = vec2_u32( 3, 3 );
 	static constexpr u32 max_size = max_size_2d.x * max_size_2d.y;
 	
@@ -76,6 +82,8 @@ protected:		// variables
 	vec2_s32 start_pos;
 	
 	u32 moving_left, moving_right;
+	
+	static u32 temp_debug_thing;
 	
 public:		// variables
 	array_2d_helper<block_coll_result> bcr_arr_2d_helper;
@@ -213,9 +221,9 @@ public:		// functions
 	}
 	
 	
-	void get_corner_stuff( u32& top_corner_is_non_air,
-		u32& bot_corner_is_non_air, block_coll_result*& top_corner_bcr,
-		block_coll_result*& bot_corner_bcr )
+	void get_corner_stuff( block_coll_result*& top_corner_bcr,
+		block_coll_result*& bot_corner_bcr, u32& top_corner_is_non_air,
+		u32& bot_corner_is_non_air )
 		__attribute__((_iwram_code));
 	
 	void get_coll_box_related_stuff( const coll_box& the_coll_box,

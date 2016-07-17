@@ -2226,6 +2226,8 @@ void sprite::block_collision_stuff_16x32()
 	//	bot_side_is_blocked = false;
 	
 	
+	block_coll_result * top_corner_bcr = NULL, * bot_corner_bcr = NULL;
+	
 	u32 top_corner_is_non_air = false,
 		bot_corner_is_non_air = false;
 	
@@ -2240,7 +2242,6 @@ void sprite::block_collision_stuff_16x32()
 	//s32 part_3_range_start = local_vert_side_x, 
 	//	part_3_range_end_plus_1 = real_width - 1;
 	
-	block_coll_result * top_corner_bcr = NULL, * bot_corner_bcr = NULL;
 	
 	
 	// These are adjusted by using vel.y.  Also, "lbc" is short for "local
@@ -2253,8 +2254,8 @@ void sprite::block_collision_stuff_16x32()
 		* adjusted_cb_bot_corner_bcr = NULL;
 	
 	
-	the_bcr_group.get_corner_stuff( top_corner_is_non_air,
-		bot_corner_is_non_air, top_corner_bcr, bot_corner_bcr );
+	the_bcr_group.get_corner_stuff( top_corner_bcr, bot_corner_bcr,
+		top_corner_is_non_air, bot_corner_is_non_air );
 	
 	the_bcr_group.get_coll_box_related_stuff( the_coll_box, vel.y, 
 		adjusted_cb_top_corner_lbc, adjusted_cb_bot_corner_lbc,
@@ -2285,37 +2286,53 @@ void sprite::block_collision_stuff_16x32()
 	
 	if ( top_corner_is_non_air || top_side_other_than_corner_is_blocked )
 	{
-		// Corner is air
-		if ( top_side_other_than_corner_is_blocked 
-			&& !top_corner_is_non_air )
-		{
-			if (vert_side_below_top_corner_is_blocked)
-			{
-				regular_vert_side_is_blocked_response();
-			}
-			
-			block_coll_response_top_16x32(the_bcr_group);
-		}
-		// The top corner is the only relevant non-air portion intersected
-		// by the top of the sprite, so we're dealing with a VERTICAL WALL,
-		// but NO CEILING.
-		else if ( top_corner_is_non_air 
-			&& !top_side_other_than_corner_is_blocked )
-		{
-			regular_vert_side_is_blocked_response();
-		}
+		//// Corner is air
+		//if ( top_side_other_than_corner_is_blocked 
+		//	&& !top_corner_is_non_air )
+		//{
+		//	if (vert_side_below_top_corner_is_blocked)
+		//	{
+		//		regular_vert_side_is_blocked_response();
+		//	}
+		//	
+		//}
+		//
+		//// The top corner is the only relevant non-air portion intersected
+		//// by the top of the sprite, so we're dealing with a VERTICAL WALL,
+		//// but NO CEILING.
+		//else if ( top_corner_is_non_air 
+		//	&& !top_side_other_than_corner_is_blocked )
+		//{
+		//	if (vert_side_below_top_corner_is_blocked)
+		//	{
+		//		regular_vert_side_is_blocked_response();
+		//	}
+		//}
+		//
+		//// This is also used when the top corner is THE ONLY part of the
+		//// top that even exists.
+		//else //if ( top_corner_is_non_air 
+		//	//&& top_side_other_than_corner_is_blocked )
+		//{
+		//	//if (vert_side_below_top_corner_is_blocked)
+		//	//{
+		//	//	regular_vert_side_is_blocked_response();
+		//	//}
+		//	
+		//}
 		
-		// This is also used when the top corner is THE ONLY part of the
-		// top that even exists.
-		else //if ( top_corner_is_non_air 
-			//&& top_side_other_than_corner_is_blocked )
-		{
-			regular_vert_side_is_blocked_response();
-			
-			block_coll_response_top_16x32(the_bcr_group);
-		}
+		//if (vert_side_below_top_corner_is_blocked)
+		//{
+		//	regular_vert_side_is_blocked_response();
+		//}
 		
 		
+		//if (moving_up)
+		//{
+		//	block_coll_response_top_16x32(the_bcr_group);
+		//}
+		
+		block_coll_response_top_16x32(the_bcr_group);
 	}
 	else if ( bot_corner_is_non_air 
 		|| bot_side_other_than_corner_is_blocked )

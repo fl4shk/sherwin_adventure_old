@@ -129,6 +129,13 @@ if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["N
 	syn keyword CTagsMember the_initial_cb_pos_offset the_initial_coll_box_size
 	
 endif
+" Matches for file game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsMember the_player the_allocatable_player the_allocatable_sprites the_sprites next_oam_index the_allocatable_player_secondary_sprites the_allocatable_secondary_sprites the_player_secondary_sprites the_secondary_sprites
+	syn keyword CTagsFunction array_helper
+	syn keyword CTagsDefinedName generate_sprite_new_caller generate_funcptr_arr_entry
+	
+endif
 " Matches for file game_engine_stuff/sprite_stuff/snow_golem_sprite_class.thumb.cpp:
 if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "game_engine_stuff/sprite_stuff/snow_golem_sprite_class.thumb.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
 	syn keyword CTagsMember frame_slot_to_frame_arr the_initial_cb_pos_offset the_initial_coll_box_size
@@ -145,11 +152,9 @@ if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["N
 	syn keyword CTagsFunction maxmod_vblank_updater_func
 	
 endif
-" Matches for file game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp:
-if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
-	syn keyword CTagsMember the_player the_allocatable_player the_allocatable_sprites the_sprites next_oam_index the_allocatable_player_secondary_sprites the_allocatable_secondary_sprites the_player_secondary_sprites the_secondary_sprites
-	syn keyword CTagsFunction array_helper
-	syn keyword CTagsDefinedName generate_sprite_new_caller generate_funcptr_arr_entry
+" Matches for file game_engine_stuff/block_coll_result_group_class.thumb.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "game_engine_stuff/block_coll_result_group_class.thumb.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsMember temp_debug_thing
 	
 endif
 " Matches for file game_engine_stuff/sprite_stuff/player_sprite_class.thumb.cpp:
