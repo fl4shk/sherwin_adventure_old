@@ -21,6 +21,7 @@
 extern "C"
 {
 
+// Note that this won't work for copying to or from SRAM.
 void* memcpy( void* dst, const void* src, size_t n )
 {
 	//memcpy8( dst, src, n );
@@ -28,35 +29,81 @@ void* memcpy( void* dst, const void* src, size_t n )
 	const u32 dst_unaligned = ((u32)dst) & 0x3;
 	const u32 src_unaligned = ((u32)src) & 0x3;
 	
-	// Use FAST copies if both dst and src are aligned to 4 bytes.  Note
-	// that this won't work for copying to or from SRAM.
-	if ( !( dst_unaligned || src_unaligned ) )
+	const bool both_areas_equally_aligned = ( dst_unaligned 
+		== src_unaligned );
+	
+	// Use FAST copies if both dst and src are aligned to 4 bytes, or both
+	// dst and src are unaligned BUT have THE SAME number of unaligned
+	// bytes.
+	if ( !( dst_unaligned || src_unaligned ) 
+		|| both_areas_equally_aligned )
 	{
-		const u32 num_words = n / sizeof(u32), 
-			num_residual_bytes = n & 0x3;
+		void* new_dst = dst;
+		void* new_src = const_cast<void*>(src);
+		size_t new_n = n;
+		
+		
+		if ( ( dst_unaligned && src_unaligned ) 
+			&& both_areas_equally_aligned )
+		{
+			const u32 new_dst_start_addr = ( ( (u32)dst / sizeof(u32) ) 
+				* sizeof(u32) ) + sizeof(u32);
+			const u32 new_src_start_addr = ( ( (u32)src / sizeof(u32) ) 
+				* sizeof(u32) ) + sizeof(u32);
+			
+			new_dst = (void*)new_dst_start_addr;
+			new_src = (void*)new_src_start_addr;
+			
+			
+			//const u32 num_unaligned_bytes = new_dst_start_addr - (u32)dst;
+			const u32 num_unaligned_bytes = sizeof(u32) - dst_unaligned;
+			
+			if ( num_unaligned_bytes <= n )
+			{
+				new_n -= num_unaligned_bytes;
+				
+				for ( u32 i=0; i<num_unaligned_bytes; ++i )
+				{
+					((u8*)dst)[i] = ((u8*)src)[i];
+				}
+			}
+			else // if ( num_unaligned_bytes > n )
+			{
+				new_n = 0;
+				
+				for ( u32 i=0; i<n; ++i )
+				{
+					((u8*)dst)[i] = ((u8*)src)[i];
+				}
+			}
+		}
+		
+		const u32 num_words = new_n / sizeof(u32), 
+			num_residual_bytes = new_n & 0x3;
 		
 		if (num_words)
 		{
-			memcpy32( dst, src, num_words );
+			memcpy32( new_dst, new_src, num_words );
 		}
 		
 		if (num_residual_bytes)
 		{
-			const u32 dst_residual_bytes_start = ((u32)dst) + ( num_words 
-				* sizeof(u32) ),
-				src_residual_bytes_start = ( (u32)src ) + ( num_words 
-				* sizeof(u32) );
+			const u32 new_dst_residual_bytes_start = ((u32)new_dst) 
+				+ ( num_words * sizeof(u32) ),
+				new_src_residual_bytes_start = ( (u32)new_src ) 
+				+ ( num_words * sizeof(u32) );
 			
 			for ( u32 i=0; i<num_residual_bytes; ++i )
 			{
-				((u8*)dst_residual_bytes_start)[i] 
-					= ((u8*)src_residual_bytes_start)[i];
+				((u8*)new_dst_residual_bytes_start)[i] 
+					= ((u8*)new_src_residual_bytes_start)[i];
 			}
 		}
 	}
-	// Use SLOW copies if either dst or src are not aligned to 4 bytes.
+	// Use SLOW copies if either dst or src are not aligned to 4 bytes,
+	// with the number of unaligned bytes different.
 	// Since I use aligned copies most of the time, this should be fine.
-	else //if ( dst_unaligned || src_unaligned )
+	else
 	{
 		memcpy8( dst, src, n );
 	}
@@ -84,7 +131,10 @@ void* memset( void* dst, int c, size_t n )
 		
 		new_dst = (void*)new_dst_start_addr;
 		
-		const u32 num_unaligned_bytes = new_dst_start_addr - (u32)dst;
+		
+		//const u32 num_unaligned_bytes = new_dst_start_addr - (u32)dst;
+		const u32 num_unaligned_bytes = sizeof(u32) - dst_unaligned;
+		
 		
 		if ( num_unaligned_bytes <= n )
 		{
@@ -98,6 +148,7 @@ void* memset( void* dst, int c, size_t n )
 		else // if ( num_unaligned_bytes > n )
 		{
 			new_n = 0;
+			
 			for ( u32 i=0; i<n; ++i )
 			{
 				((u8*)dst)[i] = (u8)to_write;

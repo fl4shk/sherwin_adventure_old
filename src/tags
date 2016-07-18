@@ -2468,8 +2468,8 @@ mem_sram	gba_specific_stuff/memory_map.hpp	27;"	kind:d
 mem_vram	gba_specific_stuff/memory_map.hpp	32;"	kind:d
 mem_vram_page_0	gba_specific_stuff/memory_map.hpp	36;"	kind:d
 mem_vram_page_1	gba_specific_stuff/memory_map.hpp	37;"	kind:d
+memcpy	gba_specific_stuff/asm_funcs.arm.cpp	/^void* memcpy( void* dst, const void* src, size_t n )$/;"	kind:f	signature:( void* dst, const void* src, size_t n )
 memcpy	gba_specific_stuff/asm_funcs.hpp	/^void* memcpy( void* dst, const void* src, size_t n )$/;"	kind:p	signature:( void* dst, const void* src, size_t n )
-memcpy	gba_specific_stuff/asm_funcs.thumb.cpp	/^void* memcpy( void* dst, const void* src, size_t n )$/;"	kind:f	signature:( void* dst, const void* src, size_t n )
 memcpy32	gba_specific_stuff/asm_funcs.hpp	/^extern void memcpy32( void* dst, const void* src, u32 wordcount );$/;"	kind:p	signature:( void* dst, const void* src, u32 wordcount )
 memcpy32	gba_specific_stuff/asm_funcs.hpp	/^inline void memcpy32( volatile void* dst, const void* src, $/;"	kind:f	signature:( volatile void* dst, const void* src, u32 wordcount )
 memcpy8	gba_specific_stuff/asm_funcs.hpp	/^extern void memcpy8( void* dst, const void* src, u32 bytecount );$/;"	kind:p	signature:( void* dst, const void* src, u32 bytecount )
@@ -2479,8 +2479,8 @@ memfill32	gba_specific_stuff/asm_funcs.hpp	/^inline void memfill32( volatile voi
 memfill8	gba_specific_stuff/asm_funcs.hpp	/^extern void memfill8( void* dst, u32 src, u32 bytecount );$/;"	kind:p	signature:( void* dst, u32 src, u32 bytecount )
 memfill8	gba_specific_stuff/asm_funcs.hpp	/^inline void memfill8( volatile void* dst, u32 src, u32 bytecount )$/;"	kind:f	signature:( volatile void* dst, u32 src, u32 bytecount )
 memory_map_hpp	gba_specific_stuff/memory_map.hpp	20;"	kind:d
+memset	gba_specific_stuff/asm_funcs.arm.cpp	/^void* memset( void* dst, int c, size_t n )$/;"	kind:f	signature:( void* dst, int c, size_t n )
 memset	gba_specific_stuff/asm_funcs.hpp	/^void* memset( void* dst, int c, size_t n )$/;"	kind:p	signature:( void* dst, int c, size_t n )
-memset	gba_specific_stuff/asm_funcs.thumb.cpp	/^void* memset( void* dst, int c, size_t n )$/;"	kind:f	signature:( void* dst, int c, size_t n )
 metatile_graphics_slot	game_engine_stuff/block_stuff/air_block_stuff_class.hpp	/^	static const u32 metatile_graphics_slot = metatile_number;$/;"	kind:m	class:air_block_stuff	access:public
 metatile_graphics_slot	game_engine_stuff/block_stuff/block_base_stuff_class.hpp	/^	static const u32 metatile_graphics_slot = metatile_number;$/;"	kind:m	class:block_base_stuff	access:public
 metatile_graphics_slot	game_engine_stuff/block_stuff/dud_block_stuff_class.hpp	/^	static const u32 metatile_graphics_slot = metatile_number;$/;"	kind:m	class:dud_block_stuff	access:public

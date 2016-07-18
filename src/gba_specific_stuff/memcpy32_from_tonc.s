@@ -72,16 +72,9 @@ memfill32:
 	
 	push {r4-r10}
 	
-	@ Here you can see a situation where more than one instruction per
-	@ line would actually make sense :/
-	@ Perhaps a macro would be better able to do this more elegantly.
-	mov r4, r3
-	mov r5, r3
-	mov r6, r3
-	mov r7, r3
-	mov r8, r3
-	mov r9, r3
-	mov r10, r3
+	@ A bunch of moves
+	mov r4, r3 ; mov r5, r3 ; mov r6, r3 ; mov r7, r3 ; 
+	mov r8, r3 ; mov r9, r3 ; mov r10, r3
 	
 	
 	@ Fill 32-byte chunks wth 8-fold stmia
