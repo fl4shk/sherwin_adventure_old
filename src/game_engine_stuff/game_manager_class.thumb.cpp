@@ -37,7 +37,7 @@ int game_manager::test_int_global;
 
 const char game_manager::sram_const_init_str[] = "Save data initialized.";
 const u32 game_manager::sram_init_str_size 
-	= sizeof(game_manager::sram_const_init_str);
+	= sizeof(game_manager::sram_const_init_str) / sizeof(char);
 
 char game_manager::sram_init_str[game_manager::sram_init_str_size];
 u8 game_manager::test_sram_arr[game_manager::test_sram_arr_size];

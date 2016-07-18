@@ -47,8 +47,24 @@
 extern "C" int ewram_test_func();
 
 
+static const u32 ewram_test_arr_size = 10;
+u8 ewram_test_arr[ewram_test_arr_size] __attribute__((_ewram));
+
+static const char* test_str = "Birds2";
+static const u32 test_str_size = sizeof(test_str) / sizeof(char);
+
+
 int main()
 {
+	//arr_memfill8( (u8*)ewram_test_arr, '#', ewram_test_arr_size );
+	memset( ewram_test_arr, '#', ewram_test_arr_size );
+	
+	ewram_test_arr[0] = '9';
+	
+	//memcpy( &ewram_test_arr[1], test_str, 5 );
+	memset( &ewram_test_arr[1], '3', 9 );
+	
+	
 	// This will eventually be used to identify whether save data has been
 	// created.  As of right now, there is no need for save data, but that
 	// will change in the future.  It is likely that 64 kiB of save data

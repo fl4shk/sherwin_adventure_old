@@ -23,6 +23,7 @@
 #include "block_stuff/block_stuff.hpp"
 
 #include "coll_box_class.hpp"
+#include "array_helper_class.hpp"
 
 class block_coll_result
 {
@@ -63,6 +64,8 @@ public:		// functions
 } __attribute__((_align4));
 
 
+class sprite;
+
 class block_coll_result_group
 {
 //public:		// variables
@@ -77,9 +80,10 @@ protected:		// variables
 	static constexpr u32 max_size = max_size_2d.x * max_size_2d.y;
 	
 	block_coll_result bcr_arr_2d_helper_data[max_size];
-	vec2_s32 real_size_2d;
 	
 	vec2_s32 start_pos;
+	
+	vec2_s32 real_size_2d;
 	
 	u32 moving_left, moving_right;
 	
@@ -89,27 +93,46 @@ public:		// variables
 	array_2d_helper<block_coll_result> bcr_arr_2d_helper;
 	
 public:		// functions
+	block_coll_result_group() __attribute__((_iwram_code));
 	block_coll_result_group( const coll_box& the_coll_box, 
-		u32 s_moving_left, u32 s_moving_right );
+		u32 s_moving_left, u32 s_moving_right )
+		__attribute__((_iwram_code));
 	block_coll_result_group
-		( const block_coll_result_group& to_copy );
+		( const block_coll_result_group& to_copy )
+		__attribute__((_iwram_code));
 	
 	block_coll_result_group& operator = 
-		( const block_coll_result_group& to_copy );
+		( const block_coll_result_group& to_copy )
+		__attribute__((_iwram_code));
 	
 	
 	inline block_coll_result& operator () ( u32 local_x, u32 local_y )
 	{
-		return bcr_arr_2d_helper.data_at( local_x, local_y );
+		return data_at( local_x, local_y );
 	}
 	inline block_coll_result& operator () ( const vec2_u32& local_coord )
 	{
-		return bcr_arr_2d_helper.data_at(local_coord);
+		return data_at(local_coord);
 	}
 	inline block_coll_result& operator () ( const vec2_s32& local_coord )
 	{
+		return data_at(local_coord);
+	}
+	
+	inline block_coll_result& data_at( u32 local_x, u32 local_y )
+	{
+		return bcr_arr_2d_helper.data_at( local_x, local_y );
+	}
+	inline block_coll_result& data_at( const vec2_u32& local_coord )
+	{
 		return bcr_arr_2d_helper.data_at(local_coord);
 	}
+	inline block_coll_result& data_at( const vec2_s32& local_coord )
+	{
+		return bcr_arr_2d_helper.data_at(local_coord);
+	}
+	
+	
 	
 	inline s32 real_width() const
 	{
@@ -221,24 +244,26 @@ public:		// functions
 	}
 	
 	
-	void get_corner_stuff( block_coll_result*& top_corner_bcr,
-		block_coll_result*& bot_corner_bcr, u32& top_corner_is_non_air,
-		u32& bot_corner_is_non_air )
+	void get_corner_stuff
+		( array_helper<block_coll_result*>& bcr_ptr_arr_helper, 
+		array_helper<u32>& bool_as_u32_arr_helper )
 		__attribute__((_iwram_code));
 	
-	void get_coll_box_related_stuff( const coll_box& the_coll_box,
-		const fixed24p8& vel_y, vec2_s32& adjusted_cb_top_corner_lbc,
-		vec2_s32& adjusted_cb_bot_corner_lbc,
-		block_coll_result*& adjusted_cb_top_corner_bcr,
-		block_coll_result*& adjusted_cb_bot_corner_bcr )
+	void get_coll_box_related_stuff( const sprite& the_sprite,
+		array_helper<vec2_s32>& adjusted_corner_lbc_arr_helper,
+		array_helper<block_coll_result*>& bcr_ptr_arr_helper )
 		__attribute__((_iwram_code));
 	
 	void get_side_blocked_stuff
-		( u32& vert_side_below_top_corner_is_blocked,
-		u32& vert_side_above_bot_corner_is_blocked,
-		u32& top_side_other_than_corner_is_blocked,
-		u32& bot_side_other_than_corner_is_blocked )
+		( array_helper<u32>& bool_as_u32_arr_helper )
 		__attribute__((_iwram_code));
+	
+protected:		// functions
+	inline void init_bcr_arr_2d_helper()
+	{
+		bcr_arr_2d_helper.init( bcr_arr_2d_helper_data, 
+			vec2_u32( real_width(), real_height() ) );
+	}
 	
 	
 } __attribute__((_align4));

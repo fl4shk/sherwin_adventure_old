@@ -20,9 +20,22 @@
 #define asm_funcs_hpp
 
 #include "../game_engine_stuff/misc_types.hpp"
+#include "attribute_defines.hpp"
+
+#define asm_comment(stuff) \
+	asm volatile( "@ ---" stuff " ---" )
+
 
 extern "C"
 {
+
+// These two functions should now be much faster, and I can feel free to
+// allocate more stuffs on the stack!
+void* memcpy( void* dst, const void* src, size_t n )
+	__attribute__((_iwram_code));
+void* memset( void* dst, int c, size_t n )
+	__attribute__((_iwram_code));
+
 
 // lut_udiv should actually take a u16 dem, not a u32 dem
 extern u64 lut_udiv( u32 num, u32 dem );
@@ -75,7 +88,7 @@ inline void memcpy8( volatile void* dst, const void* src, u32 bytecount )
 }
 inline void memfill8( volatile void* dst, u32 src, u32 bytecount )
 {
-	memfill8( (void*)dst, (u8)(src & 0xff), bytecount );
+	memfill8( (void*)dst, (src & 0xff), bytecount );
 }
 
 
@@ -85,10 +98,12 @@ inline void arr_memcpy8( type* dst, const type* src, u32 num_elems )
 	memcpy8( (void*)dst, src, num_elems * sizeof(type) / sizeof(u8) );
 }
 template<typename type>
-inline void arr_memfill8( type* dst, const type* src, u32 num_elems )
+inline void arr_memfill8( type* dst, u32 src, u32 num_elems )
 {
-	memfill8( (void*)dst, src, num_elems * sizeof(type) / sizeof(u8) );
+	memfill8( (void*)dst, (src & 0xff), num_elems * sizeof(type) 
+		/ sizeof(u8) );
 }
+
 
 
 #endif		// asm_funcs_hpp

@@ -579,7 +579,7 @@ protected:		// functions
 		block_coll_result& rb_coll_result,
 		block_coll_result& bl_coll_result,
 		block_coll_result& bm_coll_result,
-		block_coll_result& br_coll_result ) __attribute__((_iwram_code));
+		block_coll_result& br_coll_result );
 	
 	void get_basic_block_coll_results_16x32
 		( coll_point_group_16x32& the_pt_group, 
@@ -594,7 +594,7 @@ protected:		// functions
 		block_coll_result& rb_coll_result,
 		block_coll_result& bl_coll_result, 
 		block_coll_result& bm_coll_result,
-		block_coll_result& br_coll_result ) __attribute__((_iwram_code));
+		block_coll_result& br_coll_result );
 	
 	
 	

@@ -131,18 +131,13 @@ public:		// variables
 	
 	
 public:		// functions
-	inline coll_point_group_base()
-	{
-		memfill32( the_array, 0, sizeof(the_array) / sizeof(u32) );
-	}
 	
 } __attribute__((_align4));
 
 class coll_point_group_16x16 : public coll_point_group_base
 {
 public:		// functions
-	coll_point_group_16x16( const sprite& the_sprite )
-		__attribute__((_iwram_code));
+	coll_point_group_16x16( const sprite& the_sprite );
 	
 	inline vec2_f24p8& get_pt_lt()
 		{ return the_array[arr_ind_16x16_pt_lt]; }
@@ -185,8 +180,7 @@ public:		// functions
 class coll_point_group_16x32 : public coll_point_group_base
 {
 public:		// functions
-	coll_point_group_16x32( const sprite& the_sprite )
-		__attribute__((_iwram_code));
+	coll_point_group_16x32( const sprite& the_sprite );
 	
 	inline vec2_f24p8& get_pt_lt()
 		{ return the_array[arr_ind_16x32_pt_lt]; }

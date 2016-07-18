@@ -27,7 +27,7 @@
 
 
 .section .iwram_code,"ax", %progbits
-.align 2
+.align 4
 .do_arm
 .global memcpy8
 .type memcpy8, %function
@@ -49,14 +49,14 @@ memcpy8:
 
 
 
-@ void memfill8 ( void* dst, u8 src, uint bytecount ) 
+@ void memfill8 ( void* dst, u32 src, uint bytecount ) 
 @	__attribute__ ((_iwram_code));
 @ 
 @ r0, r1:  dst, src
 @ r2:  bytecount
 
 .section .iwram_code,"ax", %progbits
-.align 2
+.align 4
 .do_arm
 .global memfill8
 .type memfill8, %function

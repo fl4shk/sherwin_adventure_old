@@ -36,7 +36,7 @@
 #define _sram section(".sram")
 
 
-// #defines for putting stuff in the code (sections for EWRAM and IWRAM
+// #defines for putting stuff in the code (sections for EWRAM and IWRAM)
 #define _ewram_code section(".ewram_code")
 #define _iwram_code section(".iwram_code")
 
