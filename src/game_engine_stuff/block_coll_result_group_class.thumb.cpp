@@ -22,10 +22,10 @@
 #include "block_stuff/block_stuff.hpp"
 #include "sprite_stuff/sprite_class.hpp"
 
+
 block_coll_result::block_coll_result( const vec2_s32& s_coord )
-	: coord(s_coord)
 {
-	the_block = &active_level::the_block_data_at_coord(coord);
+	the_block = &active_level::the_block_data_at_coord(s_coord);
 	the_bbvt = get_behavior_type_of_block_type(get_block_type());
 }
 block_coll_result::block_coll_result( const vec2_f24p8& s_coord_f24p8 )
@@ -34,18 +34,20 @@ block_coll_result::block_coll_result( const vec2_f24p8& s_coord_f24p8 )
 {
 }
 
-
-
 u32 block_coll_result_group::temp_debug_thing;
 
-
-block_coll_result_group::block_coll_result_group()
+block_coll_result_group::block_coll_result_group() 
+	: start_pos( 0, 0 ), real_size_2d( 1, 1 ), moving_left(false), 
+	moving_right(false)
 {
-	arr_memfill32( bcr_arr_2d_helper_data, 0, max_size );
-	start_pos = vec2_s32( 0, 0 );
-	real_size_2d = vec2_s32( 1, 1 );
+	//asm_comment("constructor type 1");
+	//memset( bcr_arr_2d_helper_data, 0, sizeof(bcr_arr_2d_helper_data) );
 	
-	moving_left = moving_right = false;
+	//arr_memfill32( bcr_arr_2d_helper_data, 0, max_size );
+	//start_pos = vec2_s32( 0, 0 );
+	//real_size_2d = vec2_s32( 1, 1 );
+	//
+	//moving_left = moving_right = false;
 	
 	init_bcr_arr_2d_helper();
 	
@@ -62,7 +64,10 @@ block_coll_result_group::block_coll_result_group()
 block_coll_result_group::block_coll_result_group
 	( const coll_box& the_coll_box, u32 s_moving_left, u32 s_moving_right )
 {
-	arr_memfill32( bcr_arr_2d_helper_data, 0, max_size );
+	//asm_comment("constructor type 2");
+	//memset( bcr_arr_2d_helper_data, 0, sizeof(bcr_arr_2d_helper_data) );
+	
+	//arr_memfill32( bcr_arr_2d_helper_data, 0, max_size );
 	
 	start_pos = active_level::get_block_coord_of_point( vec2_f24p8
 		( the_coll_box.left(), the_coll_box.top() ) );
@@ -85,6 +90,10 @@ block_coll_result_group::block_coll_result_group
 	}
 	
 }
+
+
+
+
 block_coll_result_group::block_coll_result_group
 	( const block_coll_result_group& to_copy )
 {
@@ -107,5 +116,38 @@ block_coll_result_group& block_coll_result_group::operator =
 	
 	return *this;
 }
+
+
+
+bcr_ptr_line::bcr_ptr_line( block_coll_result_group& the_bcr_group,
+	const vec2_s32& s_local_param_pos, u32 s_is_horiz ) 
+	: local_param_pos(s_local_param_pos), is_horiz(s_is_horiz)
+{
+	// If this line of bcr ptr's is a row
+	if (get_is_horiz())
+	{
+		real_size = the_bcr_group.real_width();
+		s32 which_row = get_local_param_pos().y;
+		
+		for ( s32 i=0; i<get_real_size(); ++i )
+		{
+			data_at(i) = &the_bcr_group( i, which_row );
+		}
+	}
+	// If this line of bcr ptr's is a column
+	else //if (get_is_vert())
+	{
+		real_size = the_bcr_group.real_height();
+		s32 which_col = get_local_param_pos().x;
+		
+		for ( s32 j=0; j<get_real_size(); ++j )
+		{
+			data_at(j) = &the_bcr_group( which_col, j );
+		}
+	}
+	
+	init_ptr_arr_helper();
+}
+
 
 

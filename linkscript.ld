@@ -146,6 +146,8 @@ SECTIONS
 		/*__end__ = .;*/
 	} >iwram
 	
+	iwram_bss_size = SIZEOF(.iwram_bss);
+	total_iwram_size = iwram_code_size + maxmod_code_size + iwram_bss_size;
 	
 	.ewram_code :
 	{
@@ -176,7 +178,7 @@ SECTIONS
 		__end__ = .;
 	} >ewram
 	
-	
+	bss_size = SIZEOF(.bss);
 	
 	
 	/*

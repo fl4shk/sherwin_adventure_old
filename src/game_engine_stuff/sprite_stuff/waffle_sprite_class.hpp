@@ -26,9 +26,9 @@ class waffle_sprite : public sprite
 {
 public:		// enums
 	// These are used to access misc_data_u and misc_data_s
-	enum udata_index { udi_initial_pos_was_set, } __attribute__((_align4));
+	enum udata_index { udi_initial_pos_was_set, } alignas4;
 	enum sdata_index { sdi_initial_pos_x, sdi_initial_pos_y, 
-		sdi_move_timer, } __attribute__((_align4));
+		sdi_move_timer, } alignas4;
 	
 public:		// variables
 	static constexpr sprite_type the_const_sprite_type = st_waffle;
@@ -88,15 +88,19 @@ public:		// functions
 	
 	
 protected:		// functions
-	virtual void block_coll_response_left_16x16
+	virtual void block_coll_response_left_16x16_old
 		( const block_coll_result& lt_coll_result, 
-		const block_coll_result& lb_coll_result )
-		__attribute__((_iwram_code));
+		const block_coll_result& lb_coll_result );
 	
-	virtual void block_coll_response_right_16x16
+	virtual void block_coll_response_right_16x16_old
 		( const block_coll_result& rt_coll_result,
-		const block_coll_result& rb_coll_result )
-		__attribute__((_iwram_code));
+		const block_coll_result& rb_coll_result );
+	
+	
+	virtual void block_coll_response_left_16x16
+		( const block_coll_result_group& the_bcr_group );
+	virtual void block_coll_response_right_16x16
+		( const block_coll_result_group& the_bcr_group );
 	
 } __attribute__((_align4));
 

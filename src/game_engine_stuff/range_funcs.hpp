@@ -22,8 +22,15 @@
 #include "vec2_class.hpp"
 
 template< typename type >
-inline bool vec2_in_range( const vec2<type>& range_start, 
-	const vec2<type>& range_end_plus_1, const vec2<type>& to_check )
+inline bool in_range( type range_start, type range_end_plus_1, 
+	type to_check )
+{
+	return ( to_check >= range_start && to_check < range_end_plus_1 );
+}
+
+template< typename type >
+inline bool vec2_in_range( vec2<type> range_start, 
+	vec2<type> range_end_plus_1, vec2<type> to_check )
 {
 	return ( to_check.x >= range_start.x 
 		&& to_check.x < range_end_plus_1.x

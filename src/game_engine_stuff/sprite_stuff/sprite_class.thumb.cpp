@@ -240,56 +240,56 @@ void sprite::update_on_screen_pos
 	//	--temp_y;
 	//}
 	
-	if ( the_sprite_type == st_fire_muffin )
-	{
-		temp_debug_thing.x = temp_debug_thing.y = false;
-		prev_prev_on_screen_pos = on_screen_pos.prev;
-		on_screen_pos.back_up();
-		
-		on_screen_pos.curr = temp_on_screen_pos;
-		
-		
-		prev_prev_on_screen_pos_s32 = on_screen_pos_s32.prev;
-		on_screen_pos_s32.back_up();
-		
-		on_screen_pos_s32.curr.x = temp_x;
-		on_screen_pos_s32.curr.y = temp_y;
-		
-		
-		camera_pos_pc_pair_s32.prev.x = camera_pos_pc_pair.prev.x
-			.to_int_for_on_screen();
-		camera_pos_pc_pair_s32.prev.y = camera_pos_pc_pair.prev.y
-			.to_int_for_on_screen();
-		camera_pos_pc_pair_s32.curr.x = camera_pos_pc_pair.curr.x
-			.to_int_for_on_screen();
-		camera_pos_pc_pair_s32.curr.y = camera_pos_pc_pair.curr.y
-			.to_int_for_on_screen();
-		
-		
-		on_screen_pos_diff_abs = custom_abs( on_screen_pos.curr
-			- on_screen_pos.prev );
-		on_screen_pos_s32_diff_abs = custom_abs( on_screen_pos_s32.curr
-			- on_screen_pos_s32.prev );
-		
-		camera_pos_diff_abs = custom_abs( camera_pos_pc_pair.curr 
-			- camera_pos_pc_pair.prev );
-		camera_pos_s32_diff_abs = custom_abs( camera_pos_pc_pair_s32.curr 
-			- camera_pos_pc_pair_s32.prev );
-		
-		
-		
-		if ( camera_pos_s32_diff_abs.x != on_screen_pos_s32_diff_abs.x
-			&& on_screen_pos_s32.prev.x != 0 )
-		{
-			temp_debug_thing.x = true;
-		}
-		
-		if ( camera_pos_s32_diff_abs.y != on_screen_pos_s32_diff_abs.y
-			&& on_screen_pos_s32.prev.y != 0 )
-		{
-			temp_debug_thing.y = true;
-		}
-	}
+	//if ( the_sprite_type == st_fire_muffin )
+	//{
+	//	temp_debug_thing.x = temp_debug_thing.y = false;
+	//	prev_prev_on_screen_pos = on_screen_pos.prev;
+	//	on_screen_pos.back_up();
+	//	
+	//	on_screen_pos.curr = temp_on_screen_pos;
+	//	
+	//	
+	//	prev_prev_on_screen_pos_s32 = on_screen_pos_s32.prev;
+	//	on_screen_pos_s32.back_up();
+	//	
+	//	on_screen_pos_s32.curr.x = temp_x;
+	//	on_screen_pos_s32.curr.y = temp_y;
+	//	
+	//	
+	//	camera_pos_pc_pair_s32.prev.x = camera_pos_pc_pair.prev.x
+	//		.to_int_for_on_screen();
+	//	camera_pos_pc_pair_s32.prev.y = camera_pos_pc_pair.prev.y
+	//		.to_int_for_on_screen();
+	//	camera_pos_pc_pair_s32.curr.x = camera_pos_pc_pair.curr.x
+	//		.to_int_for_on_screen();
+	//	camera_pos_pc_pair_s32.curr.y = camera_pos_pc_pair.curr.y
+	//		.to_int_for_on_screen();
+	//	
+	//	
+	//	on_screen_pos_diff_abs = custom_abs( on_screen_pos.curr
+	//		- on_screen_pos.prev );
+	//	on_screen_pos_s32_diff_abs = custom_abs( on_screen_pos_s32.curr
+	//		- on_screen_pos_s32.prev );
+	//	
+	//	camera_pos_diff_abs = custom_abs( camera_pos_pc_pair.curr 
+	//		- camera_pos_pc_pair.prev );
+	//	camera_pos_s32_diff_abs = custom_abs( camera_pos_pc_pair_s32.curr 
+	//		- camera_pos_pc_pair_s32.prev );
+	//	
+	//	
+	//	
+	//	if ( camera_pos_s32_diff_abs.x != on_screen_pos_s32_diff_abs.x
+	//		&& on_screen_pos_s32.prev.x != 0 )
+	//	{
+	//		temp_debug_thing.x = true;
+	//	}
+	//	
+	//	if ( camera_pos_s32_diff_abs.y != on_screen_pos_s32_diff_abs.y
+	//		&& on_screen_pos_s32.prev.y != 0 )
+	//	{
+	//		temp_debug_thing.y = true;
+	//	}
+	//}
 	
 	the_oam_entry.set_x_coord(temp_x);
 	the_oam_entry.set_y_coord(temp_y);
@@ -622,13 +622,19 @@ void sprite::get_basic_block_coll_results_16x16
 	block_coll_result lm_coll_result, rm_coll_result, mt_coll_result, 
 		mm_coll_result, mb_coll_result;
 	
+	//#define X(name) \
+	//	name##_coll_result.coord \
+	//		= active_level::get_block_coord_of_point \
+	//		(the_pt_group.get_pt_##name()); \
+	//	name##_coll_result.the_block \
+	//		= &active_level::the_block_data_at_coord \
+	//		(name##_coll_result.coord);
+	//list_of_16x16_coll_point_names(X)
+	//#undef X
+	
 	#define X(name) \
-		name##_coll_result.coord \
-			= active_level::get_block_coord_of_point \
-			(the_pt_group.get_pt_##name()); \
-		name##_coll_result.the_block \
-			= &active_level::the_block_data_at_coord \
-			(name##_coll_result.coord);
+		name##_coll_result = block_coll_result(the_pt_group \
+			.get_pt_##name()); \
 	list_of_16x16_coll_point_names(X)
 	#undef X
 }
@@ -644,13 +650,20 @@ void sprite::get_basic_block_coll_results_16x32
 {
 	block_coll_result mt_coll_result, mm_coll_result, mb_coll_result;
 	
+	//#define X(name) \
+	//	name##_coll_result.coord \
+	//		= active_level::get_block_coord_of_point \
+	//		(the_pt_group.get_pt_##name()); \
+	//	name##_coll_result.the_block \
+	//		= &active_level::the_block_data_at_coord \
+	//		(name##_coll_result.coord);
+	//list_of_16x32_coll_point_names(X)
+	//#undef X
+	
+	
 	#define X(name) \
-		name##_coll_result.coord \
-			= active_level::get_block_coord_of_point \
-			(the_pt_group.get_pt_##name()); \
-		name##_coll_result.the_block \
-			= &active_level::the_block_data_at_coord \
-			(name##_coll_result.coord);
+		name##_coll_result = block_coll_result(the_pt_group \
+			.get_pt_##name());
 	list_of_16x32_coll_point_names(X)
 	#undef X
 }
@@ -663,52 +676,52 @@ void sprite::block_coll_response_left_16x16_old
 	( const block_coll_result& lt_coll_result,
 	const block_coll_result& lb_coll_result )
 {
-	//in_level_pos.x = make_f24p8( ( lt_coll_result.coord.x + 1 ) * 16 ) 
-	//	- cb_pos_offset.x;
-	set_curr_in_level_pos_x( make_f24p8( ( lt_coll_result.coord.x + 1 ) 
-		* 16 ) - cb_pos_offset.x );
-	
-	// Don't let the sprite speed up while in the air and horizontally
-	// colliding with a block.
-	if ( !get_curr_on_ground() && vel.x < (fixed24p8){0x00} )
-	{
-		vel.x = {0x00};
-	}
+	////in_level_pos.x = make_f24p8( ( lt_coll_result.coord.x + 1 ) * 16 ) 
+	////	- cb_pos_offset.x;
+	//set_curr_in_level_pos_x( make_f24p8( ( lt_coll_result.coord.x + 1 ) 
+	//	* 16 ) - cb_pos_offset.x );
+	//
+	//// Don't let the sprite speed up while in the air and horizontally
+	//// colliding with a block.
+	//if ( !get_curr_on_ground() && vel.x < (fixed24p8){0x00} )
+	//{
+	//	vel.x = {0x00};
+	//}
 }
 void sprite::block_coll_response_top_16x16_old
 	( const block_coll_result& tl_coll_result,
 	const block_coll_result& tm_coll_result,
 	const block_coll_result& tr_coll_result )
 {
-	//in_level_pos.y = make_f24p8( ( tl_coll_result.coord.y + 1 ) * 16 ) 
-	//	- cb_pos_offset.y;
-	set_curr_in_level_pos_y( make_f24p8( ( tl_coll_result.coord.y + 1 ) 
-		* 16 ) - cb_pos_offset.y );
-	
-	if ( vel.y < (fixed24p8){0x00} )
-	{
-		vel.y = {0x00};
-	}
-	//jump_hold_timer = 0;
-	is_jumping = false;
+	////in_level_pos.y = make_f24p8( ( tl_coll_result.coord.y + 1 ) * 16 ) 
+	////	- cb_pos_offset.y;
+	//set_curr_in_level_pos_y( make_f24p8( ( tl_coll_result.coord.y + 1 ) 
+	//	* 16 ) - cb_pos_offset.y );
+	//
+	//if ( vel.y < (fixed24p8){0x00} )
+	//{
+	//	vel.y = {0x00};
+	//}
+	////jump_hold_timer = 0;
+	//is_jumping = false;
 }
 
 void sprite::block_coll_response_right_16x16_old
 	( const block_coll_result& rt_coll_result,
 	const block_coll_result& rb_coll_result )
 {
-	//in_level_pos.x = make_f24p8( rt_coll_result.coord.x * 16 ) 
-	//	- the_coll_box.size.x - cb_pos_offset.x;
-	//	//- make_f24p8(get_shape_size_as_vec2().x);
-	set_curr_in_level_pos_x ( make_f24p8( rt_coll_result.coord.x * 16 ) 
-		- the_coll_box.size.x - cb_pos_offset.x );
-	
-	// Don't let the sprite speed up while in the air and horizontally
-	// colliding with a block.
-	if ( !get_curr_on_ground() && vel.x > (fixed24p8){0x00} )
-	{
-		vel.x = {0x00};
-	}
+	////in_level_pos.x = make_f24p8( rt_coll_result.coord.x * 16 ) 
+	////	- the_coll_box.size.x - cb_pos_offset.x;
+	////	//- make_f24p8(get_shape_size_as_vec2().x);
+	//set_curr_in_level_pos_x ( make_f24p8( rt_coll_result.coord.x * 16 ) 
+	//	- the_coll_box.size.x - cb_pos_offset.x );
+	//
+	//// Don't let the sprite speed up while in the air and horizontally
+	//// colliding with a block.
+	//if ( !get_curr_on_ground() && vel.x > (fixed24p8){0x00} )
+	//{
+	//	vel.x = {0x00};
+	//}
 }
 
 void sprite::non_slope_block_coll_response_bot_16x16_old
@@ -716,21 +729,21 @@ void sprite::non_slope_block_coll_response_bot_16x16_old
 	const block_coll_result& bm_coll_result, 
 	const block_coll_result& br_coll_result )
 {
-	if ( vel.y >= (fixed24p8){0} )
-	{
-		//in_level_pos.y = make_f24p8( bl_coll_result.coord.y * 16 ) 
-		//	//- ( the_coll_box.size.y +
-		//	//cb_pos_offset.y );
-		//	- make_f24p8(get_shape_size_as_vec2().y);
-		set_curr_in_level_pos_y ( make_f24p8( bl_coll_result.coord.y 
-			* 16 ) - make_f24p8(get_shape_size_as_vec2().y) );
-		
-		vel.y = {0x00};
-		//get_curr_on_ground() = true;
-		set_curr_on_ground(true);
-		//jump_hold_timer = 0;
-		is_jumping = false;
-	}
+	//if ( vel.y >= (fixed24p8){0} )
+	//{
+	//	//in_level_pos.y = make_f24p8( bl_coll_result.coord.y * 16 ) 
+	//	//	//- ( the_coll_box.size.y +
+	//	//	//cb_pos_offset.y );
+	//	//	- make_f24p8(get_shape_size_as_vec2().y);
+	//	set_curr_in_level_pos_y ( make_f24p8( bl_coll_result.coord.y 
+	//		* 16 ) - make_f24p8(get_shape_size_as_vec2().y) );
+	//	
+	//	vel.y = {0x00};
+	//	//get_curr_on_ground() = true;
+	//	set_curr_on_ground(true);
+	//	//jump_hold_timer = 0;
+	//	is_jumping = false;
+	//}
 }
 //block_type sprite::slope_block_coll_response_bot_16x16_old
 //	( coll_point_group& the_pt_group,
@@ -748,262 +761,262 @@ block_type sprite::slope_block_coll_response_bot_16x16_old
 {
 	set_curr_on_slope(true);
 	
-	//if ( false )
+	////if ( false )
+	////{
+	//	#define X(name) \
+	//		vec2_f24p8& pt_##name = the_pt_group.get_pt_##name();
+	//	list_of_16x16_slope_stuff_coll_point_names(X)
+	//	#undef X
+	//	
+	//	
+	//	// pt_bm, pt_bl, and pt_br converted to the relative coordinate
+	//	// system of the block, with units of WHOLE pixels, with NO
+	//	// subpixels.  The % operators will be converted to & operators by
+	//	// the compiler.
+	//	#define X(name) \
+	//		vec2_s32 pt_##name##_block_rel_round \
+	//			= vec2_s32( pt_##name.x.round_to_int() \
+	//			% num_pixels_per_block_row, pt_##name.y.round_to_int() \
+	//			% num_pixels_per_block_col );
+	//	list_of_16x16_slope_stuff_coll_point_names(X)
+	//	#undef X
+	//	
+	//	
+	//	// The block y coord points above collision points
+	//	#define X(name) \
+	//		const s32 pt_above_pt_##name##_block_coord_y \
+	//			= name##_coll_result.coord.y - 1;
+	//	list_of_16x16_slope_stuff_coll_point_names(X)
+	//	#undef X
+	//	
+	//	// Height mask values for the points to check
+	//	#define X(name) \
+	//		s32 pt_##name##_height_mask_value = -1;
+	//	list_of_16x16_slope_stuff_coll_point_names(X)
+	//	#undef X
+	//		
+	//	
+	//	// Basically, these pointers are used as aliases for long variable
+	//	// names.
+	//	#define X(name) \
+	//	const u32* height_mask_##name \
+	//		= block_base_stuff::slope_##name##_height_mask;
+	//	list_of_slope_configurations(X)
+	//	#undef X
+	////}
+	//
+	//
+	//
+	//
+	//auto find_height_mask_value_normal = [&]
+	//	( const block_coll_result& the_coll_result, 
+	//	s32& height_mask_value, const vec2_s32& pt_block_rel_round, 
+	//	s32 pt_above_pt_block_coord_y ) -> void
 	//{
-		#define X(name) \
-			vec2_f24p8& pt_##name = the_pt_group.get_pt_##name();
-		list_of_16x16_slope_stuff_coll_point_names(X)
-		#undef X
-		
-		
-		// pt_bm, pt_bl, and pt_br converted to the relative coordinate
-		// system of the block, with units of WHOLE pixels, with NO
-		// subpixels.  The % operators will be converted to & operators by
-		// the compiler.
-		#define X(name) \
-			vec2_s32 pt_##name##_block_rel_round \
-				= vec2_s32( pt_##name.x.round_to_int() \
-				% num_pixels_per_block_row, pt_##name.y.round_to_int() \
-				% num_pixels_per_block_col );
-		list_of_16x16_slope_stuff_coll_point_names(X)
-		#undef X
-		
-		
-		// The block y coord points above collision points
-		#define X(name) \
-			const s32 pt_above_pt_##name##_block_coord_y \
-				= name##_coll_result.coord.y - 1;
-		list_of_16x16_slope_stuff_coll_point_names(X)
-		#undef X
-		
-		// Height mask values for the points to check
-		#define X(name) \
-			s32 pt_##name##_height_mask_value = -1;
-		list_of_16x16_slope_stuff_coll_point_names(X)
-		#undef X
-			
-		
-		// Basically, these pointers are used as aliases for long variable
-		// names.
-		#define X(name) \
-		const u32* height_mask_##name \
-			= block_base_stuff::slope_##name##_height_mask;
-		list_of_slope_configurations(X)
-		#undef X
-	//}
-	
-	
-	
-	
-	auto find_height_mask_value_normal = [&]
-		( const block_coll_result& the_coll_result, 
-		s32& height_mask_value, const vec2_s32& pt_block_rel_round, 
-		s32 pt_above_pt_block_coord_y ) -> void
-	{
-		// Find height_mask_value.
-		
-		if (false)
-		{
-		}
-		#define X(name) \
-		else if ( the_coll_result.the_block->type \
-			== bt_grass_slope_##name ) \
-		{ \
-			/* show_debug_str_s32("norm"); */ \
-			height_mask_value = height_mask_##name \
-				[pt_block_rel_round.x]; \
-		}
-		list_of_slope_configurations(X)
-		#undef X
-		
-		// If the point doesn't intersect a slope block, then check whether
-		// the block at the block coord ABOVE the point is a slope
-		else
-		{
-			block_type above_block_type 
-				= active_level::get_block_type_at_coord
-				( vec2_s32( the_coll_result.coord.x,
-				pt_above_pt_block_coord_y ) );
-			//next_debug_s32 = above_block_type;
-			
-			if (false)
-			{
-			}
-			#define X(name) \
-			else if ( above_block_type == bt_grass_slope_##name ) \
-			{ \
-				/* show_debug_str_s32("abov"); */ \
-				height_mask_value = height_mask_##name \
-					[pt_block_rel_round.x] + num_pixels_per_block_col; \
-			}
-			list_of_slope_configurations(X)
-			#undef X
-			
-			else
-			{
-				//show_debug_str_s32("welp");
-				//height_mask_value = 0;
-			}
-		}
-	};
-	
-	auto respond_to_collision = [&]
-		( const coll_point_group_16x16& the_pt_group, 
-		const block_coll_result& the_coll_result, 
-		const s32 height_mask_value, const vec2_s32& pt_block_rel_round )
-	{
-		// Check whether the_sprite is inside the slope.
-		if ( ( (s32)num_pixels_per_block_col - (s32)pt_block_rel_round.y )
-			<= height_mask_value )
-		{
-			//show_debug_str_s32("wow ");
-			if ( vel.y >= (fixed24p8){0} )
-				//&& jump_hold_timer == 0 )
-				//&& !is_jumping )
-			{
-				//in_level_pos.y = make_f24p8
-				//	( ( the_coll_result.coord.y + 1 )
-				//	* num_pixels_per_block_col - height_mask_value )
-				//	- make_f24p8( get_shape_size_as_vec2().y );
-				//	//- ( the_coll_box.size.y + cb_pos_offset );
-				set_curr_in_level_pos_y( make_f24p8
-					( ( the_coll_result.coord.y + 1 )
-					* num_pixels_per_block_col - height_mask_value )
-					- make_f24p8( get_shape_size_as_vec2().y ) );
-				
-				vel.y = {0x00};
-				//get_curr_on_ground() = true;
-				set_curr_on_ground(true);
-				
-				if ( vel.x != (fixed24p8){0} && hitting_tltr )
-				{
-					//in_level_pos.y += make_f24p8(1);
-					set_curr_in_level_pos_y( get_curr_in_level_pos().y 
-						+ make_f24p8(1) );
-				}
-				
-			}
-		}
-		else if ( pt_block_rel_round.y == 0 )
-		{
-			set_curr_on_ground(false);
-			
-		}
-		else if ( vel.y < (fixed24p8){0} )
-		{
-			set_curr_on_ground(false);
-		}
-		else if ( vel.y == (fixed24p8){0} )
-		{
-			set_curr_on_ground(true);
-			
-			if ( vel.x != (fixed24p8){0} && hitting_tltr )
-			{
-				set_curr_in_level_pos_y( get_curr_in_level_pos().y 
-					+ make_f24p8(1) );
-			}
-		}
-		
-		
-		else
-		{
-			set_curr_on_ground(false);
-		}
-		
-	};
-	
-	
-	find_height_mask_value_normal( bm_coll_result, pt_bm_height_mask_value,
-		pt_bm_block_rel_round, pt_above_pt_bm_block_coord_y );
-	
-	find_height_mask_value_normal( bl_coll_result, pt_bl_height_mask_value,
-		pt_bl_block_rel_round, pt_above_pt_bl_block_coord_y );
-	
-	find_height_mask_value_normal( br_coll_result, pt_br_height_mask_value,
-		pt_br_block_rel_round, pt_above_pt_br_block_coord_y );
-	
-	
-	//s32 the_greatest_height_mask_value = max3( pt_bm_height_mask_value,
+	//	// Find height_mask_value.
+	//	
+	//	if (false)
+	//	{
+	//	}
+	//	#define X(name) \
+	//	else if ( the_coll_result.the_block->type \
+	//		== bt_grass_slope_##name ) \
+	//	{ \
+	//		/* show_debug_str_s32("norm"); */ \
+	//		height_mask_value = height_mask_##name \
+	//			[pt_block_rel_round.x]; \
+	//	}
+	//	list_of_slope_configurations(X)
+	//	#undef X
+	//	
+	//	// If the point doesn't intersect a slope block, then check whether
+	//	// the block at the block coord ABOVE the point is a slope
+	//	else
+	//	{
+	//		block_type above_block_type 
+	//			= active_level::get_block_type_at_coord
+	//			( vec2_s32( the_coll_result.coord.x,
+	//			pt_above_pt_block_coord_y ) );
+	//		//next_debug_s32 = above_block_type;
+	//		
+	//		if (false)
+	//		{
+	//		}
+	//		#define X(name) \
+	//		else if ( above_block_type == bt_grass_slope_##name ) \
+	//		{ \
+	//			/* show_debug_str_s32("abov"); */ \
+	//			height_mask_value = height_mask_##name \
+	//				[pt_block_rel_round.x] + num_pixels_per_block_col; \
+	//		}
+	//		list_of_slope_configurations(X)
+	//		#undef X
+	//		
+	//		else
+	//		{
+	//			//show_debug_str_s32("welp");
+	//			//height_mask_value = 0;
+	//		}
+	//	}
+	//};
+	//
+	//auto respond_to_collision = [&]
+	//	( const coll_point_group_16x16& the_pt_group, 
+	//	const block_coll_result& the_coll_result, 
+	//	const s32 height_mask_value, const vec2_s32& pt_block_rel_round )
+	//{
+	//	// Check whether the_sprite is inside the slope.
+	//	if ( ( (s32)num_pixels_per_block_col - (s32)pt_block_rel_round.y )
+	//		<= height_mask_value )
+	//	{
+	//		//show_debug_str_s32("wow ");
+	//		if ( vel.y >= (fixed24p8){0} )
+	//			//&& jump_hold_timer == 0 )
+	//			//&& !is_jumping )
+	//		{
+	//			//in_level_pos.y = make_f24p8
+	//			//	( ( the_coll_result.coord.y + 1 )
+	//			//	* num_pixels_per_block_col - height_mask_value )
+	//			//	- make_f24p8( get_shape_size_as_vec2().y );
+	//			//	//- ( the_coll_box.size.y + cb_pos_offset );
+	//			set_curr_in_level_pos_y( make_f24p8
+	//				( ( the_coll_result.coord.y + 1 )
+	//				* num_pixels_per_block_col - height_mask_value )
+	//				- make_f24p8( get_shape_size_as_vec2().y ) );
+	//			
+	//			vel.y = {0x00};
+	//			//get_curr_on_ground() = true;
+	//			set_curr_on_ground(true);
+	//			
+	//			if ( vel.x != (fixed24p8){0} && hitting_tltr )
+	//			{
+	//				//in_level_pos.y += make_f24p8(1);
+	//				set_curr_in_level_pos_y( get_curr_in_level_pos().y 
+	//					+ make_f24p8(1) );
+	//			}
+	//			
+	//		}
+	//	}
+	//	else if ( pt_block_rel_round.y == 0 )
+	//	{
+	//		set_curr_on_ground(false);
+	//		
+	//	}
+	//	else if ( vel.y < (fixed24p8){0} )
+	//	{
+	//		set_curr_on_ground(false);
+	//	}
+	//	else if ( vel.y == (fixed24p8){0} )
+	//	{
+	//		set_curr_on_ground(true);
+	//		
+	//		if ( vel.x != (fixed24p8){0} && hitting_tltr )
+	//		{
+	//			set_curr_in_level_pos_y( get_curr_in_level_pos().y 
+	//				+ make_f24p8(1) );
+	//		}
+	//	}
+	//	
+	//	
+	//	else
+	//	{
+	//		set_curr_on_ground(false);
+	//	}
+	//	
+	//};
+	//
+	//
+	//find_height_mask_value_normal( bm_coll_result, pt_bm_height_mask_value,
+	//	pt_bm_block_rel_round, pt_above_pt_bm_block_coord_y );
+	//
+	//find_height_mask_value_normal( bl_coll_result, pt_bl_height_mask_value,
+	//	pt_bl_block_rel_round, pt_above_pt_bl_block_coord_y );
+	//
+	//find_height_mask_value_normal( br_coll_result, pt_br_height_mask_value,
+	//	pt_br_block_rel_round, pt_above_pt_br_block_coord_y );
+	//
+	//
+	////s32 the_greatest_height_mask_value = max3( pt_bm_height_mask_value,
+	////	pt_bl_height_mask_value, pt_br_height_mask_value );
+	//
+	//s32 the_greatest_height_mask_value = max_va( pt_bm_height_mask_value,
 	//	pt_bl_height_mask_value, pt_br_height_mask_value );
-	
-	s32 the_greatest_height_mask_value = max_va( pt_bm_height_mask_value,
-		pt_bl_height_mask_value, pt_br_height_mask_value );
-	
-	
-	if ( the_greatest_height_mask_value == pt_bm_height_mask_value )
-	{
-		respond_to_collision( the_pt_group, bm_coll_result,
-			pt_bm_height_mask_value, pt_bm_block_rel_round );
-		
-		return bm_coll_result.the_block->get_block_type();
-	}
-	else if ( the_greatest_height_mask_value == pt_bl_height_mask_value )
-	{
-		respond_to_collision( the_pt_group, bl_coll_result,
-			pt_bl_height_mask_value, pt_bl_block_rel_round );
-		
-		return bl_coll_result.the_block->get_block_type();
-	}
-	else if ( the_greatest_height_mask_value == pt_br_height_mask_value )
-	{
-		respond_to_collision( the_pt_group, br_coll_result,
-			pt_br_height_mask_value, pt_br_block_rel_round );
-		
-		return br_coll_result.the_block->get_block_type();
-	}
-	
-	
-	
-	//show_debug_str_s32("hstr");
-	//next_debug_s32 = pt_bm_height_mask_value;
-	//next_debug_s32 = pt_bl_height_mask_value;
-	//next_debug_s32 = pt_br_height_mask_value;
-	//show_debug_str_s32("hend");
-	
-	// Find the highest number height_mask_value
-	
-	//if ( pt_bm_height_mask_value >= pt_bl_height_mask_value
-	//	&& pt_bm_height_mask_value >= pt_br_height_mask_value 
-	//	&& ( bt_is_slope(bm_coll_result.type)
-	//	|| bt_is_slope(active_level::get_block_type_at_coord
-	//	((vec2_s32){ bm_coll_result.coord.x, 
-	//	pt_above_pt_bm_block_coord_y } ) ) ) )
+	//
+	//
+	//if ( the_greatest_height_mask_value == pt_bm_height_mask_value )
 	//{
-	//	// Using pt_bm_height_mask_value
-	//	//show_debug_str_s32("bm  ");
-	//	respond_to_collision( the_pt_group, bm_coll_result, 
+	//	respond_to_collision( the_pt_group, bm_coll_result,
 	//		pt_bm_height_mask_value, pt_bm_block_rel_round );
 	//	
-	//	return bm_coll_result.type;
+	//	return bm_coll_result.the_block->get_block_type();
 	//}
-	//if ( pt_bl_height_mask_value >= pt_bm_height_mask_value
-	//	&& pt_bl_height_mask_value >= pt_br_height_mask_value 
-	//	&& ( bt_is_slope(bl_coll_result.type) 
-	//	|| bt_is_slope(active_level::get_block_type_at_coord
-	//	((vec2_s32){ bl_coll_result.coord.x, 
-	//	pt_above_pt_bl_block_coord_y } ) ) ) )
+	//else if ( the_greatest_height_mask_value == pt_bl_height_mask_value )
 	//{
-	//	// Using pt_bl_height_mask_value
-	//	//show_debug_str_s32("bl  ");
-	//	respond_to_collision( the_pt_group, bl_coll_result, 
+	//	respond_to_collision( the_pt_group, bl_coll_result,
 	//		pt_bl_height_mask_value, pt_bl_block_rel_round );
 	//	
-	//	return bl_coll_result.type;
+	//	return bl_coll_result.the_block->get_block_type();
 	//}
-	//if ( pt_br_height_mask_value >= pt_bm_height_mask_value
-	//	&& pt_br_height_mask_value >= pt_bl_height_mask_value 
-	//	&& ( bt_is_slope(br_coll_result.type) 
-	//	|| bt_is_slope(active_level::get_block_type_at_coord
-	//	((vec2_s32){ br_coll_result.coord.x, 
-	//	pt_above_pt_br_block_coord_y } ) ) ) )
+	//else if ( the_greatest_height_mask_value == pt_br_height_mask_value )
 	//{
-	//	// Using pt_br_height_mask_value
-	//	//show_debug_str_s32("br  ");
-	//	respond_to_collision( the_pt_group, br_coll_result, 
+	//	respond_to_collision( the_pt_group, br_coll_result,
 	//		pt_br_height_mask_value, pt_br_block_rel_round );
 	//	
-	//	return br_coll_result.type;
+	//	return br_coll_result.the_block->get_block_type();
 	//}
+	//
+	//
+	//
+	////show_debug_str_s32("hstr");
+	////next_debug_s32 = pt_bm_height_mask_value;
+	////next_debug_s32 = pt_bl_height_mask_value;
+	////next_debug_s32 = pt_br_height_mask_value;
+	////show_debug_str_s32("hend");
+	//
+	//// Find the highest number height_mask_value
+	//
+	////if ( pt_bm_height_mask_value >= pt_bl_height_mask_value
+	////	&& pt_bm_height_mask_value >= pt_br_height_mask_value 
+	////	&& ( bt_is_slope(bm_coll_result.type)
+	////	|| bt_is_slope(active_level::get_block_type_at_coord
+	////	((vec2_s32){ bm_coll_result.coord.x, 
+	////	pt_above_pt_bm_block_coord_y } ) ) ) )
+	////{
+	////	// Using pt_bm_height_mask_value
+	////	//show_debug_str_s32("bm  ");
+	////	respond_to_collision( the_pt_group, bm_coll_result, 
+	////		pt_bm_height_mask_value, pt_bm_block_rel_round );
+	////	
+	////	return bm_coll_result.type;
+	////}
+	////if ( pt_bl_height_mask_value >= pt_bm_height_mask_value
+	////	&& pt_bl_height_mask_value >= pt_br_height_mask_value 
+	////	&& ( bt_is_slope(bl_coll_result.type) 
+	////	|| bt_is_slope(active_level::get_block_type_at_coord
+	////	((vec2_s32){ bl_coll_result.coord.x, 
+	////	pt_above_pt_bl_block_coord_y } ) ) ) )
+	////{
+	////	// Using pt_bl_height_mask_value
+	////	//show_debug_str_s32("bl  ");
+	////	respond_to_collision( the_pt_group, bl_coll_result, 
+	////		pt_bl_height_mask_value, pt_bl_block_rel_round );
+	////	
+	////	return bl_coll_result.type;
+	////}
+	////if ( pt_br_height_mask_value >= pt_bm_height_mask_value
+	////	&& pt_br_height_mask_value >= pt_bl_height_mask_value 
+	////	&& ( bt_is_slope(br_coll_result.type) 
+	////	|| bt_is_slope(active_level::get_block_type_at_coord
+	////	((vec2_s32){ br_coll_result.coord.x, 
+	////	pt_above_pt_br_block_coord_y } ) ) ) )
+	////{
+	////	// Using pt_br_height_mask_value
+	////	//show_debug_str_s32("br  ");
+	////	respond_to_collision( the_pt_group, br_coll_result, 
+	////		pt_br_height_mask_value, pt_br_block_rel_round );
+	////	
+	////	return br_coll_result.type;
+	////}
 	
 	{
 		//next_debug_s32 = 0xeebbaacc;
@@ -1028,20 +1041,20 @@ void sprite::block_coll_response_left_16x32_old
 	const block_coll_result& lm_coll_result, 
 	const block_coll_result& lb_coll_result )
 {
-	//show_debug_str_s32("bkle");
-	//show_debug_str_s32("    ");
-	//in_level_pos.x = make_f24p8( ( lt_coll_result.coord.x + 1 ) * 16 ) 
-	//	- cb_pos_offset.x;
-	set_curr_in_level_pos_x( make_f24p8( ( lt_coll_result.coord.x + 1 ) 
-		* 16 ) - cb_pos_offset.x );
-	
-	
-	// Don't let the sprite speed up while in the air and horizontally
-	// colliding with a block.
-	if ( !get_curr_on_ground() && vel.x < (fixed24p8){0x00} )
-	{
-		vel.x = {0x00};
-	}
+	////show_debug_str_s32("bkle");
+	////show_debug_str_s32("    ");
+	////in_level_pos.x = make_f24p8( ( lt_coll_result.coord.x + 1 ) * 16 ) 
+	////	- cb_pos_offset.x;
+	//set_curr_in_level_pos_x( make_f24p8( ( lt_coll_result.coord.x + 1 ) 
+	//	* 16 ) - cb_pos_offset.x );
+	//
+	//
+	//// Don't let the sprite speed up while in the air and horizontally
+	//// colliding with a block.
+	//if ( !get_curr_on_ground() && vel.x < (fixed24p8){0x00} )
+	//{
+	//	vel.x = {0x00};
+	//}
 }
 void sprite::block_coll_response_top_16x32_old
 	( const block_coll_result& tl_coll_result,
@@ -1058,20 +1071,20 @@ void sprite::block_coll_response_right_16x32_old
 	const block_coll_result& rm_coll_result, 
 	const block_coll_result& rb_coll_result )
 {
-	//show_debug_str_s32("bkri");
-	//show_debug_str_s32("    ");
-	//in_level_pos.x = make_f24p8( rt_coll_result.coord.x * 16 ) 
-	//	- the_coll_box.size.x - cb_pos_offset.x;
-	//	//- get_shape_size_as_vec2().x );
-	set_curr_in_level_pos_x( make_f24p8( rt_coll_result.coord.x * 16 ) 
-		- the_coll_box.size.x - cb_pos_offset.x );
-	
-	// Don't let the sprite speed up while in the air and horizontally
-	// colliding with a block.
-	if ( !get_curr_on_ground() && vel.x > (fixed24p8){0x00} )
-	{
-		vel.x = {0x00};
-	}
+	////show_debug_str_s32("bkri");
+	////show_debug_str_s32("    ");
+	////in_level_pos.x = make_f24p8( rt_coll_result.coord.x * 16 ) 
+	////	- the_coll_box.size.x - cb_pos_offset.x;
+	////	//- get_shape_size_as_vec2().x );
+	//set_curr_in_level_pos_x( make_f24p8( rt_coll_result.coord.x * 16 ) 
+	//	- the_coll_box.size.x - cb_pos_offset.x );
+	//
+	//// Don't let the sprite speed up while in the air and horizontally
+	//// colliding with a block.
+	//if ( !get_curr_on_ground() && vel.x > (fixed24p8){0x00} )
+	//{
+	//	vel.x = {0x00};
+	//}
 }
 void sprite::non_slope_block_coll_response_bot_16x32_old
 	( const block_coll_result& bl_coll_result,
@@ -1090,305 +1103,305 @@ block_type sprite::slope_block_coll_response_bot_16x32_old
 {
 	set_curr_on_slope(true);
 	
-	#define X(name) \
-		vec2_f24p8& pt_##name = the_pt_group.get_pt_##name();
-	list_of_16x32_slope_stuff_coll_point_names(X)
-	#undef X
-	
-	
-	// pt_bm, pt_bl, and pt_br converted to the relative coordinate system
-	// of the block, with units of WHOLE pixels, with NO subpixels.  The %
-	// operators will be converted to & operators by the compiler.
-	#define X(name) \
-		vec2_s32 pt_##name##_block_rel_round \
-			= vec2_s32( pt_##name.x.round_to_int() \
-			% num_pixels_per_block_row, pt_##name.y.round_to_int() \
-			% num_pixels_per_block_col );
-	list_of_16x32_slope_stuff_coll_point_names(X)
-	#undef X
-	
-	
-	// The block y coord points above collision points
-	#define X(name) \
-		const s32 pt_above_pt_##name##_block_coord_y \
-			= name##_coll_result.coord.y - 1;
-	list_of_16x32_slope_stuff_coll_point_names(X)
-	#undef X
-	
-	// Height mask values for the points to check
-	#define X(name) \
-		s32 pt_##name##_height_mask_value = -1;
-	list_of_16x32_slope_stuff_coll_point_names(X)
-	#undef X
-		
-	
-	// Basically, these pointers are used as aliases for long variable
-	// names.
-	#define X(name) \
-	const u32* height_mask_##name \
-		= block_base_stuff::slope_##name##_height_mask;
-	list_of_slope_configurations(X)
-	#undef X
-	
-	
-	auto find_height_mask_value_normal = [&]
-		( const block_coll_result& the_coll_result, 
-		s32& height_mask_value, const vec2_s32& pt_block_rel_round, 
-		s32 pt_above_pt_block_coord_y ) -> void
-	{
-		// Find height_mask_value.
-		
-		if (false)
-		{
-		}
-		#define X(name) \
-		else if ( the_coll_result.the_block->type \
-			== bt_grass_slope_##name ) \
-		{ \
-			/* show_debug_str_s32("norm"); */ \
-			height_mask_value = height_mask_##name \
-				[pt_block_rel_round.x]; \
-		}
-		list_of_slope_configurations(X)
-		#undef X
-		
-		// If the point doesn't intersect a slope block, then check whether
-		// the block at the block coord ABOVE the point is a slope
-		else
-		{
-			block_type above_block_type 
-				= active_level::get_block_type_at_coord
-				( vec2_s32( the_coll_result.coord.x,
-				pt_above_pt_block_coord_y ) );
-			//next_debug_s32 = above_block_type;
-			
-			if (false)
-			{
-			}
-			#define X(name) \
-			else if ( above_block_type == bt_grass_slope_##name ) \
-			{ \
-				/* show_debug_str_s32("abov"); */ \
-				height_mask_value = height_mask_##name \
-					[pt_block_rel_round.x] + num_pixels_per_block_col; \
-			}
-			list_of_slope_configurations(X)
-			#undef X
-			
-			else
-			{
-				//show_debug_str_s32("welp");
-				//height_mask_value = 0;
-			}
-		}
-	};
-	
-	auto respond_to_collision = [&]
-		( const coll_point_group_16x32& the_pt_group, 
-		const block_coll_result& the_coll_result, 
-		const s32 height_mask_value, const vec2_s32& pt_block_rel_round )
-	{
-		//next_debug_s32 = num_pixels_per_block_col - pt_block_rel_round.y;
-		//next_debug_s32 = height_mask_value;
-		
-		// Check whether the_sprite is inside the slope.
-		if ( ( (s32)num_pixels_per_block_col - (s32)pt_block_rel_round.y )
-			<= height_mask_value )
-		{
-			//show_debug_str_s32("wow ");
-			if ( vel.y >= (fixed24p8){0} )
-				//&& jump_hold_timer == 0 )
-				//&& !is_jumping )
-			{
-				//in_level_pos.y = make_f24p8( ( the_coll_result.coord.y 
-				//	+ 1 ) * num_pixels_per_block_col - height_mask_value )
-				//	- make_f24p8( get_shape_size_as_vec2().y );
-				//	//- ( the_coll_box.size.y 
-				//	//+ cb_pos_offset );
-				set_curr_in_level_pos_y( make_f24p8
-					( ( the_coll_result.coord.y + 1 ) 
-					* num_pixels_per_block_col - height_mask_value )
-					- make_f24p8( get_shape_size_as_vec2().y ) );
-				
-				vel.y = {0x00};
-				//get_curr_on_ground() = true;
-				set_curr_on_ground(true);
-				
-				if ( vel.x != (fixed24p8){0} && hitting_tltr )
-				{
-					//in_level_pos.y += make_f24p8(1);
-					set_curr_in_level_pos_y( get_curr_in_level_pos().y 
-						+ make_f24p8(1) );
-				}
-				
-			}
-		}
-		else if ( pt_block_rel_round.y == 0 )
-		{
-			//show_debug_str_s32("okay");
-			//in_level_pos.y = make_f24p8
-			//	( ( the_coll_result.coord.y + 1 )
-			//	* num_pixels_per_block_col - height_mask_value )
-			//	- the_coll_box.size.y;
-			
-			//in_level_pos.y += make_f24p8(1);
-			//get_curr_on_ground() = false;
-			set_curr_on_ground(false);
-			
-		}
-		else if ( vel.y < (fixed24p8){0} )
-		{
-			//show_debug_str_s32("hmmm");
-			//get_curr_on_ground() = false;
-			set_curr_on_ground(false);
-		}
-		else if ( vel.y == (fixed24p8){0} )
-		{
-			//in_level_pos.y = make_f24p8
-			//	( ( the_coll_result.coord.y + 1 )
-			//	* num_pixels_per_block_col - height_mask_value )
-			//	- make_f24p8( get_shape_size_as_vec2().y );
-			//	//- ( the_coll_box.size.y 
-			//	//+ cb_pos_offset );
-			
-			//if ( pt_block_rel_round.y == 1 )
-			//{
-			//	in_level_pos.y += make_f24p8(3);
-			//}
-			
-			//in_level_pos.y += make_f24p8(2);
-			
-			//vel.y = make_f24p8(2);
-			
-			//vel.y = {0x00};
-			//get_curr_on_ground() = true;
-			set_curr_on_ground(true);
-			
-			if ( vel.x != (fixed24p8){0} && hitting_tltr )
-			{
-				//in_level_pos.y += make_f24p8(1);
-				set_curr_in_level_pos_y( get_curr_in_level_pos().y 
-					+ make_f24p8(1) );
-			}
-		}
-		
-		
-		else
-		{
-			//show_debug_str_s32("hmm2");
-			//get_curr_on_ground() = true;
-			//get_curr_on_ground() = false;
-			set_curr_on_ground(false);
-			
-		}
-		
-		
-		//show_debug_str_s32("dbst");
-		
-		//next_debug_s32 = pt_block_rel_round.y;
-		//next_debug_s32 = (s32)num_pixels_per_block_col
-		//	- pt_block_rel_round.y;
-		//show_debug_str_s32( ( ( (s32)num_pixels_per_block_col
-		//	- pt_block_rel_round.y ) <= height_mask_value ) 
-		//	? "true" : "fals" );
-		//next_debug_s32 = (u32)height_mask_value;
-		
-		//show_debug_str_s32("dben");
-		
-	};
-	
-	
-	find_height_mask_value_normal( bm_coll_result, pt_bm_height_mask_value,
-		pt_bm_block_rel_round, pt_above_pt_bm_block_coord_y );
-	
-	find_height_mask_value_normal( bl_coll_result, pt_bl_height_mask_value,
-		pt_bl_block_rel_round, pt_above_pt_bl_block_coord_y );
-	
-	find_height_mask_value_normal( br_coll_result, pt_br_height_mask_value,
-		pt_br_block_rel_round, pt_above_pt_br_block_coord_y );
-	
-	
-	//s32 the_greatest_height_mask_value = max3( pt_bm_height_mask_value,
-	//	pt_bl_height_mask_value, pt_br_height_mask_value );
-	
-	s32 the_greatest_height_mask_value = max_va( pt_bm_height_mask_value,
-		pt_bl_height_mask_value, pt_br_height_mask_value );
-	
-	
-	if ( the_greatest_height_mask_value == pt_bm_height_mask_value )
-	{
-		respond_to_collision( the_pt_group, bm_coll_result,
-			pt_bm_height_mask_value, pt_bm_block_rel_round );
-		
-		return bm_coll_result.the_block->get_block_type();
-	}
-	else if ( the_greatest_height_mask_value == pt_bl_height_mask_value )
-	{
-		respond_to_collision( the_pt_group, bl_coll_result,
-			pt_bl_height_mask_value, pt_bl_block_rel_round );
-		
-		return bl_coll_result.the_block->get_block_type();
-	}
-	else if ( the_greatest_height_mask_value == pt_br_height_mask_value )
-	{
-		respond_to_collision( the_pt_group, br_coll_result,
-			pt_br_height_mask_value, pt_br_block_rel_round );
-		
-		return br_coll_result.the_block->get_block_type();
-	}
-	
-	
-	
-	//show_debug_str_s32("hstr");
-	//next_debug_s32 = pt_bm_height_mask_value;
-	//next_debug_s32 = pt_bl_height_mask_value;
-	//next_debug_s32 = pt_br_height_mask_value;
-	//show_debug_str_s32("hend");
-	
-	// Find the highest number height_mask_value
-	
-	//if ( pt_bm_height_mask_value >= pt_bl_height_mask_value
-	//	&& pt_bm_height_mask_value >= pt_br_height_mask_value 
-	//	&& ( bt_is_slope(bm_coll_result.type)
-	//	|| bt_is_slope(active_level::get_block_type_at_coord
-	//	((vec2_s32){ bm_coll_result.coord.x, 
-	//	pt_above_pt_bm_block_coord_y } ) ) ) )
+	//#define X(name) \
+	//	vec2_f24p8& pt_##name = the_pt_group.get_pt_##name();
+	//list_of_16x32_slope_stuff_coll_point_names(X)
+	//#undef X
+	//
+	//
+	//// pt_bm, pt_bl, and pt_br converted to the relative coordinate system
+	//// of the block, with units of WHOLE pixels, with NO subpixels.  The %
+	//// operators will be converted to & operators by the compiler.
+	//#define X(name) \
+	//	vec2_s32 pt_##name##_block_rel_round \
+	//		= vec2_s32( pt_##name.x.round_to_int() \
+	//		% num_pixels_per_block_row, pt_##name.y.round_to_int() \
+	//		% num_pixels_per_block_col );
+	//list_of_16x32_slope_stuff_coll_point_names(X)
+	//#undef X
+	//
+	//
+	//// The block y coord points above collision points
+	//#define X(name) \
+	//	const s32 pt_above_pt_##name##_block_coord_y \
+	//		= name##_coll_result.coord.y - 1;
+	//list_of_16x32_slope_stuff_coll_point_names(X)
+	//#undef X
+	//
+	//// Height mask values for the points to check
+	//#define X(name) \
+	//	s32 pt_##name##_height_mask_value = -1;
+	//list_of_16x32_slope_stuff_coll_point_names(X)
+	//#undef X
+	//	
+	//
+	//// Basically, these pointers are used as aliases for long variable
+	//// names.
+	//#define X(name) \
+	//const u32* height_mask_##name \
+	//	= block_base_stuff::slope_##name##_height_mask;
+	//list_of_slope_configurations(X)
+	//#undef X
+	//
+	//
+	//auto find_height_mask_value_normal = [&]
+	//	( const block_coll_result& the_coll_result, 
+	//	s32& height_mask_value, const vec2_s32& pt_block_rel_round, 
+	//	s32 pt_above_pt_block_coord_y ) -> void
 	//{
-	//	// Using pt_bm_height_mask_value
-	//	//show_debug_str_s32("bm  ");
-	//	respond_to_collision( the_pt_group, bm_coll_result, 
+	//	// Find height_mask_value.
+	//	
+	//	if (false)
+	//	{
+	//	}
+	//	#define X(name) \
+	//	else if ( the_coll_result.the_block->type \
+	//		== bt_grass_slope_##name ) \
+	//	{ \
+	//		/* show_debug_str_s32("norm"); */ \
+	//		height_mask_value = height_mask_##name \
+	//			[pt_block_rel_round.x]; \
+	//	}
+	//	list_of_slope_configurations(X)
+	//	#undef X
+	//	
+	//	// If the point doesn't intersect a slope block, then check whether
+	//	// the block at the block coord ABOVE the point is a slope
+	//	else
+	//	{
+	//		block_type above_block_type 
+	//			= active_level::get_block_type_at_coord
+	//			( vec2_s32( the_coll_result.coord.x,
+	//			pt_above_pt_block_coord_y ) );
+	//		//next_debug_s32 = above_block_type;
+	//		
+	//		if (false)
+	//		{
+	//		}
+	//		#define X(name) \
+	//		else if ( above_block_type == bt_grass_slope_##name ) \
+	//		{ \
+	//			/* show_debug_str_s32("abov"); */ \
+	//			height_mask_value = height_mask_##name \
+	//				[pt_block_rel_round.x] + num_pixels_per_block_col; \
+	//		}
+	//		list_of_slope_configurations(X)
+	//		#undef X
+	//		
+	//		else
+	//		{
+	//			//show_debug_str_s32("welp");
+	//			//height_mask_value = 0;
+	//		}
+	//	}
+	//};
+	//
+	//auto respond_to_collision = [&]
+	//	( const coll_point_group_16x32& the_pt_group, 
+	//	const block_coll_result& the_coll_result, 
+	//	const s32 height_mask_value, const vec2_s32& pt_block_rel_round )
+	//{
+	//	//next_debug_s32 = num_pixels_per_block_col - pt_block_rel_round.y;
+	//	//next_debug_s32 = height_mask_value;
+	//	
+	//	// Check whether the_sprite is inside the slope.
+	//	if ( ( (s32)num_pixels_per_block_col - (s32)pt_block_rel_round.y )
+	//		<= height_mask_value )
+	//	{
+	//		//show_debug_str_s32("wow ");
+	//		if ( vel.y >= (fixed24p8){0} )
+	//			//&& jump_hold_timer == 0 )
+	//			//&& !is_jumping )
+	//		{
+	//			//in_level_pos.y = make_f24p8( ( the_coll_result.coord.y 
+	//			//	+ 1 ) * num_pixels_per_block_col - height_mask_value )
+	//			//	- make_f24p8( get_shape_size_as_vec2().y );
+	//			//	//- ( the_coll_box.size.y 
+	//			//	//+ cb_pos_offset );
+	//			set_curr_in_level_pos_y( make_f24p8
+	//				( ( the_coll_result.coord.y + 1 ) 
+	//				* num_pixels_per_block_col - height_mask_value )
+	//				- make_f24p8( get_shape_size_as_vec2().y ) );
+	//			
+	//			vel.y = {0x00};
+	//			//get_curr_on_ground() = true;
+	//			set_curr_on_ground(true);
+	//			
+	//			if ( vel.x != (fixed24p8){0} && hitting_tltr )
+	//			{
+	//				//in_level_pos.y += make_f24p8(1);
+	//				set_curr_in_level_pos_y( get_curr_in_level_pos().y 
+	//					+ make_f24p8(1) );
+	//			}
+	//			
+	//		}
+	//	}
+	//	else if ( pt_block_rel_round.y == 0 )
+	//	{
+	//		//show_debug_str_s32("okay");
+	//		//in_level_pos.y = make_f24p8
+	//		//	( ( the_coll_result.coord.y + 1 )
+	//		//	* num_pixels_per_block_col - height_mask_value )
+	//		//	- the_coll_box.size.y;
+	//		
+	//		//in_level_pos.y += make_f24p8(1);
+	//		//get_curr_on_ground() = false;
+	//		set_curr_on_ground(false);
+	//		
+	//	}
+	//	else if ( vel.y < (fixed24p8){0} )
+	//	{
+	//		//show_debug_str_s32("hmmm");
+	//		//get_curr_on_ground() = false;
+	//		set_curr_on_ground(false);
+	//	}
+	//	else if ( vel.y == (fixed24p8){0} )
+	//	{
+	//		//in_level_pos.y = make_f24p8
+	//		//	( ( the_coll_result.coord.y + 1 )
+	//		//	* num_pixels_per_block_col - height_mask_value )
+	//		//	- make_f24p8( get_shape_size_as_vec2().y );
+	//		//	//- ( the_coll_box.size.y 
+	//		//	//+ cb_pos_offset );
+	//		
+	//		//if ( pt_block_rel_round.y == 1 )
+	//		//{
+	//		//	in_level_pos.y += make_f24p8(3);
+	//		//}
+	//		
+	//		//in_level_pos.y += make_f24p8(2);
+	//		
+	//		//vel.y = make_f24p8(2);
+	//		
+	//		//vel.y = {0x00};
+	//		//get_curr_on_ground() = true;
+	//		set_curr_on_ground(true);
+	//		
+	//		if ( vel.x != (fixed24p8){0} && hitting_tltr )
+	//		{
+	//			//in_level_pos.y += make_f24p8(1);
+	//			set_curr_in_level_pos_y( get_curr_in_level_pos().y 
+	//				+ make_f24p8(1) );
+	//		}
+	//	}
+	//	
+	//	
+	//	else
+	//	{
+	//		//show_debug_str_s32("hmm2");
+	//		//get_curr_on_ground() = true;
+	//		//get_curr_on_ground() = false;
+	//		set_curr_on_ground(false);
+	//		
+	//	}
+	//	
+	//	
+	//	//show_debug_str_s32("dbst");
+	//	
+	//	//next_debug_s32 = pt_block_rel_round.y;
+	//	//next_debug_s32 = (s32)num_pixels_per_block_col
+	//	//	- pt_block_rel_round.y;
+	//	//show_debug_str_s32( ( ( (s32)num_pixels_per_block_col
+	//	//	- pt_block_rel_round.y ) <= height_mask_value ) 
+	//	//	? "true" : "fals" );
+	//	//next_debug_s32 = (u32)height_mask_value;
+	//	
+	//	//show_debug_str_s32("dben");
+	//	
+	//};
+	//
+	//
+	//find_height_mask_value_normal( bm_coll_result, pt_bm_height_mask_value,
+	//	pt_bm_block_rel_round, pt_above_pt_bm_block_coord_y );
+	//
+	//find_height_mask_value_normal( bl_coll_result, pt_bl_height_mask_value,
+	//	pt_bl_block_rel_round, pt_above_pt_bl_block_coord_y );
+	//
+	//find_height_mask_value_normal( br_coll_result, pt_br_height_mask_value,
+	//	pt_br_block_rel_round, pt_above_pt_br_block_coord_y );
+	//
+	//
+	////s32 the_greatest_height_mask_value = max3( pt_bm_height_mask_value,
+	////	pt_bl_height_mask_value, pt_br_height_mask_value );
+	//
+	//s32 the_greatest_height_mask_value = max_va( pt_bm_height_mask_value,
+	//	pt_bl_height_mask_value, pt_br_height_mask_value );
+	//
+	//
+	//if ( the_greatest_height_mask_value == pt_bm_height_mask_value )
+	//{
+	//	respond_to_collision( the_pt_group, bm_coll_result,
 	//		pt_bm_height_mask_value, pt_bm_block_rel_round );
 	//	
-	//	return bm_coll_result.type;
+	//	return bm_coll_result.the_block->get_block_type();
 	//}
-	//if ( pt_bl_height_mask_value >= pt_bm_height_mask_value
-	//	&& pt_bl_height_mask_value >= pt_br_height_mask_value 
-	//	&& ( bt_is_slope(bl_coll_result.type) 
-	//	|| bt_is_slope(active_level::get_block_type_at_coord
-	//	((vec2_s32){ bl_coll_result.coord.x, 
-	//	pt_above_pt_bl_block_coord_y } ) ) ) )
+	//else if ( the_greatest_height_mask_value == pt_bl_height_mask_value )
 	//{
-	//	// Using pt_bl_height_mask_value
-	//	//show_debug_str_s32("bl  ");
-	//	respond_to_collision( the_pt_group, bl_coll_result, 
+	//	respond_to_collision( the_pt_group, bl_coll_result,
 	//		pt_bl_height_mask_value, pt_bl_block_rel_round );
 	//	
-	//	return bl_coll_result.type;
+	//	return bl_coll_result.the_block->get_block_type();
 	//}
-	//if ( pt_br_height_mask_value >= pt_bm_height_mask_value
-	//	&& pt_br_height_mask_value >= pt_bl_height_mask_value 
-	//	&& ( bt_is_slope(br_coll_result.type) 
-	//	|| bt_is_slope(active_level::get_block_type_at_coord
-	//	((vec2_s32){ br_coll_result.coord.x, 
-	//	pt_above_pt_br_block_coord_y } ) ) ) )
+	//else if ( the_greatest_height_mask_value == pt_br_height_mask_value )
 	//{
-	//	// Using pt_br_height_mask_value
-	//	//show_debug_str_s32("br  ");
-	//	respond_to_collision( the_pt_group, br_coll_result, 
+	//	respond_to_collision( the_pt_group, br_coll_result,
 	//		pt_br_height_mask_value, pt_br_block_rel_round );
 	//	
-	//	return br_coll_result.type;
+	//	return br_coll_result.the_block->get_block_type();
 	//}
+	//
+	//
+	//
+	////show_debug_str_s32("hstr");
+	////next_debug_s32 = pt_bm_height_mask_value;
+	////next_debug_s32 = pt_bl_height_mask_value;
+	////next_debug_s32 = pt_br_height_mask_value;
+	////show_debug_str_s32("hend");
+	//
+	//// Find the highest number height_mask_value
+	//
+	////if ( pt_bm_height_mask_value >= pt_bl_height_mask_value
+	////	&& pt_bm_height_mask_value >= pt_br_height_mask_value 
+	////	&& ( bt_is_slope(bm_coll_result.type)
+	////	|| bt_is_slope(active_level::get_block_type_at_coord
+	////	((vec2_s32){ bm_coll_result.coord.x, 
+	////	pt_above_pt_bm_block_coord_y } ) ) ) )
+	////{
+	////	// Using pt_bm_height_mask_value
+	////	//show_debug_str_s32("bm  ");
+	////	respond_to_collision( the_pt_group, bm_coll_result, 
+	////		pt_bm_height_mask_value, pt_bm_block_rel_round );
+	////	
+	////	return bm_coll_result.type;
+	////}
+	////if ( pt_bl_height_mask_value >= pt_bm_height_mask_value
+	////	&& pt_bl_height_mask_value >= pt_br_height_mask_value 
+	////	&& ( bt_is_slope(bl_coll_result.type) 
+	////	|| bt_is_slope(active_level::get_block_type_at_coord
+	////	((vec2_s32){ bl_coll_result.coord.x, 
+	////	pt_above_pt_bl_block_coord_y } ) ) ) )
+	////{
+	////	// Using pt_bl_height_mask_value
+	////	//show_debug_str_s32("bl  ");
+	////	respond_to_collision( the_pt_group, bl_coll_result, 
+	////		pt_bl_height_mask_value, pt_bl_block_rel_round );
+	////	
+	////	return bl_coll_result.type;
+	////}
+	////if ( pt_br_height_mask_value >= pt_bm_height_mask_value
+	////	&& pt_br_height_mask_value >= pt_bl_height_mask_value 
+	////	&& ( bt_is_slope(br_coll_result.type) 
+	////	|| bt_is_slope(active_level::get_block_type_at_coord
+	////	((vec2_s32){ br_coll_result.coord.x, 
+	////	pt_above_pt_br_block_coord_y } ) ) ) )
+	////{
+	////	// Using pt_br_height_mask_value
+	////	//show_debug_str_s32("br  ");
+	////	respond_to_collision( the_pt_group, br_coll_result, 
+	////		pt_br_height_mask_value, pt_br_block_rel_round );
+	////	
+	////	return br_coll_result.type;
+	////}
 	
 	{
 		//next_debug_s32 = 0xeebbaacc;
@@ -1417,8 +1430,9 @@ void sprite::block_coll_response_left_16x16
 	//	* 16 ) - cb_pos_offset.x );
 	//set_curr_in_level_pos_x( make_f24p8( ( the_bcr_group.get_bcr_lt()
 	//	.coord.x + 1 ) * num_pixels_per_block_dim ) - cb_pos_offset.x );
-	set_curr_in_level_pos_x( make_f24p8( ( the_bcr_group.left() + 1 ) 
-		* num_pixels_per_block_dim ) - cb_pos_offset.x );
+	//set_curr_in_level_pos_x( make_f24p8( ( the_bcr_group.left() + 1 ) 
+	//	* num_pixels_per_block_dim ) - cb_pos_offset.x );
+	push_out_of_left_block(the_bcr_group);
 	
 	// Don't let the sprite speed up while in the air and horizontally
 	// colliding with a block.
@@ -1439,9 +1453,10 @@ void sprite::block_coll_response_right_16x16
 	//set_curr_in_level_pos_x ( make_f24p8( the_bcr_group.get_bcr_rt()
 	//	.coord.x * num_pixels_per_block_dim ) - the_coll_box.size.x 
 	//	- cb_pos_offset.x );
-	set_curr_in_level_pos_x ( make_f24p8( the_bcr_group.right()
-		* num_pixels_per_block_dim ) - the_coll_box.size.x 
-		- cb_pos_offset.x );
+	//set_curr_in_level_pos_x ( make_f24p8( the_bcr_group.right()
+	//	* num_pixels_per_block_dim ) - the_coll_box.size.x 
+	//	- cb_pos_offset.x );
+	push_out_of_right_block(the_bcr_group);
 	
 	// Don't let the sprite speed up while in the air and horizontally
 	// colliding with a block.
@@ -1462,6 +1477,7 @@ void sprite::block_coll_response_top_16x16
 	//	.coord.y + 1 ) * num_pixels_per_block_dim ) - cb_pos_offset.y );
 	set_curr_in_level_pos_y( make_f24p8( ( the_bcr_group.top() + 1 ) 
 		* num_pixels_per_block_dim ) - cb_pos_offset.y );
+	push_out_of_top_block(the_bcr_group);
 	
 	if ( vel.y < (fixed24p8){0x00} )
 	{
@@ -1480,14 +1496,15 @@ void sprite::block_coll_response_bot_16x16
 		////	//- ( the_coll_box.size.y +
 		////	//cb_pos_offset.y );
 		////	- make_f24p8(get_shape_size_as_vec2().y);
-		//set_curr_in_level_pos_y ( make_f24p8( bl_coll_result.coord.y 
+		//set_curr_in_level_pos_y( make_f24p8( bl_coll_result.coord.y 
 		//	* 16 ) - make_f24p8(get_shape_size_as_vec2().y) );
-		//set_curr_in_level_pos_y ( make_f24p8( the_bcr_group.get_bcr_bl()
+		//set_curr_in_level_pos_y( make_f24p8( the_bcr_group.get_bcr_bl()
 		//	.coord.y * num_pixels_per_block_dim ) 
 		//	- make_f24p8(get_shape_size_as_vec2().y) );
-		set_curr_in_level_pos_y ( make_f24p8( the_bcr_group.bot()
-			* num_pixels_per_block_dim ) 
-			- make_f24p8(get_shape_size_as_vec2().y) );
+		//set_curr_in_level_pos_y( make_f24p8( the_bcr_group.bot()
+		//	* num_pixels_per_block_dim ) 
+		//	- make_f24p8(get_shape_size_as_vec2().y) );
+		push_out_of_bot_block(the_bcr_group);
 		
 		vel.y = {0x00};
 		//get_curr_on_ground() = true;
@@ -1510,8 +1527,9 @@ void sprite::block_coll_response_left_16x32
 	//	* 16 ) - cb_pos_offset.x );
 	//set_curr_in_level_pos_x( make_f24p8( ( the_bcr_group.get_bcr_lt()
 	//	.coord.x + 1 ) * num_pixels_per_block_dim ) - cb_pos_offset.x );
-	set_curr_in_level_pos_x( make_f24p8( ( the_bcr_group.left() + 1 ) 
-		* num_pixels_per_block_dim ) - cb_pos_offset.x );
+	//set_curr_in_level_pos_x( make_f24p8( ( the_bcr_group.left() + 1 ) 
+	//	* num_pixels_per_block_dim ) - cb_pos_offset.x );
+	push_out_of_left_block(the_bcr_group);
 	
 	
 	// Don't let the sprite speed up while in the air and horizontally
@@ -1534,9 +1552,10 @@ void sprite::block_coll_response_right_16x32
 	//set_curr_in_level_pos_x( make_f24p8( the_bcr_group.get_bcr_rt()
 	//	.coord.x * num_pixels_per_block_dim ) - the_coll_box.size.x 
 	//	- cb_pos_offset.x );
-	set_curr_in_level_pos_x( make_f24p8( the_bcr_group.right()
-		* num_pixels_per_block_dim ) - the_coll_box.size.x 
-		- cb_pos_offset.x );
+	//set_curr_in_level_pos_x( make_f24p8( the_bcr_group.right()
+	//	* num_pixels_per_block_dim ) - the_coll_box.size.x 
+	//	- cb_pos_offset.x );
+	push_out_of_right_block(the_bcr_group);
 	
 	// Don't let the sprite speed up while in the air and horizontally
 	// colliding with a block.
@@ -1558,6 +1577,7 @@ void sprite::block_coll_response_top_16x32
 	//	.coord.y + 1 ) * num_pixels_per_block_dim ) - cb_pos_offset.y );
 	set_curr_in_level_pos_y( make_f24p8( ( the_bcr_group.top() + 1 ) 
 		* num_pixels_per_block_dim ) - cb_pos_offset.y );
+	push_out_of_top_block(the_bcr_group);
 	
 	if ( vel.y < (fixed24p8){0x00} )
 	{
@@ -1582,9 +1602,10 @@ void sprite::block_coll_response_bot_16x32
 		//set_curr_in_level_pos_y( make_f24p8( the_bcr_group.get_bcr_bl()
 		//	.coord.y * num_pixels_per_block_dim ) 
 		//	- make_f24p8(get_shape_size_as_vec2().y) );
-		set_curr_in_level_pos_y( make_f24p8( the_bcr_group.bot()
-			* num_pixels_per_block_dim ) 
-			- make_f24p8(get_shape_size_as_vec2().y) );
+		//set_curr_in_level_pos_y( make_f24p8( the_bcr_group.bot()
+		//	* num_pixels_per_block_dim ) 
+		//	- make_f24p8(get_shape_size_as_vec2().y) );
+		push_out_of_bot_block(the_bcr_group);
 		
 		vel.y = {0x00};
 		//get_curr_on_ground() = true;
@@ -2168,6 +2189,260 @@ void sprite::block_collision_stuff_32x32_old()
 }
 
 
+void sprite::block_collision_stuff_16x16()
+{
+	//bool moving_left = false, moving_right = false, moving_up = false,
+	//	not_moving_up = false;
+	//
+	//if ( get_curr_in_level_pos().x < get_prev_in_level_pos().x )
+	//{
+	//	moving_left = true;
+	//}
+	//else if ( get_curr_in_level_pos().x > get_prev_in_level_pos().x )
+	//{
+	//	moving_right = true;
+	//}
+	//
+	//if ( get_curr_in_level_pos().y < get_prev_in_level_pos().y )
+	//{
+	//	moving_up = true;
+	//}
+	//else //if ( get_curr_in_level_pos().y >= get_prev_in_level_pos().y )
+	//{
+	//	not_moving_up = true;
+	//}
+}
+void sprite::block_collision_stuff_16x32()
+{
+	u32 moving_left = false, moving_right = false, moving_up = false,
+		moving_down = false;
+	
+	if ( get_curr_in_level_pos().x < get_prev_in_level_pos().x )
+	{
+		moving_left = true;
+	}
+	else if ( get_curr_in_level_pos().x > get_prev_in_level_pos().x )
+	{
+		moving_right = true;
+	}
+	
+	if ( get_curr_in_level_pos().y < get_prev_in_level_pos().y )
+	{
+		moving_up = true;
+	}
+	else if ( get_curr_in_level_pos().y > get_prev_in_level_pos().y )
+	{
+		moving_down = true;
+	}
+	
+	
+	//static block_coll_result_group __attribute__((_ewram)) the_bcr_group;
+	//the_bcr_group = block_coll_result_group( the_coll_box, moving_left,
+	//	moving_right );
+	block_coll_result_group the_bcr_group( the_coll_box, moving_left,
+		moving_right );
+	
+	
+	
+	static constexpr u32 num_relevant_corners = 2,
+		num_adjusted_corner_positions = 4,
+		side_is_partially_blocked_arr_size = 4;
+	
+	static constexpr u32 bcr_ptr_arr_size = num_relevant_corners
+		+ num_adjusted_corner_positions,
+		
+		bool_as_u32_arr_size = num_relevant_corners
+		+ side_is_partially_blocked_arr_size;
+	
+	
+	class arr_group
+	{
+	public:		// variables
+		block_coll_result* bcr_ptr_arr[bcr_ptr_arr_size]
+			__attribute__((_align4));
+		u32 bool_as_u32_arr[bool_as_u32_arr_size] __attribute__((_align4));
+	} __attribute__((_align4));
+	
+	
+	//static arr_group __attribute__((_ewram)) the_arr_group;
+	//memfill32( &the_arr_group, 0, sizeof(arr_group) / sizeof(u32) );
+	arr_group the_arr_group;
+	memset( &the_arr_group, 0, sizeof(arr_group) );
+	
+	
+	// I didn't know about this syntax beforehand....  Perhaps auto& would
+	// be better to use.
+	block_coll_result* (&bcr_ptr_arr)[bcr_ptr_arr_size] = the_arr_group
+		.bcr_ptr_arr;
+	u32 (&bool_as_u32_arr)[bool_as_u32_arr_size] = the_arr_group
+		.bool_as_u32_arr;
+	
+	
+	array_helper<block_coll_result*> bcr_ptr_arr_helper( bcr_ptr_arr, 
+		bcr_ptr_arr_size );
+	array_helper<u32> bool_as_u32_arr_helper( bool_as_u32_arr, 
+		bool_as_u32_arr_size );
+	
+	
+	// Oh boy, here come the references
+	block_coll_result*& top_corner_bcr = bcr_ptr_arr[0];
+	block_coll_result*& bot_corner_bcr = bcr_ptr_arr[1];
+	
+	u32& top_corner_is_non_air = bool_as_u32_arr[0];
+	u32& bot_corner_is_non_air = bool_as_u32_arr[1];
+	
+	u32& vert_side_below_top_corner_is_blocked = bool_as_u32_arr[2];
+	u32& vert_side_above_bot_corner_is_blocked = bool_as_u32_arr[3];
+	
+	// The top side to the right or left of the relevant corner
+	u32& top_side_other_than_corner_is_blocked = bool_as_u32_arr[4];
+	u32& bot_side_other_than_corner_is_blocked = bool_as_u32_arr[5];
+	
+	
+	
+	// Blocks intersected by the adjusted
+	block_coll_result*& horiz_adjusted_cb_top_corner_bcr = bcr_ptr_arr[2];
+	block_coll_result*& horiz_adjusted_cb_bot_corner_bcr = bcr_ptr_arr[3];
+	block_coll_result*& vert_adjusted_cb_top_corner_bcr = bcr_ptr_arr[4];
+	block_coll_result*& vert_adjusted_cb_bot_corner_bcr = bcr_ptr_arr[5];
+	
+	
+	the_bcr_group.get_corner_stuff( bcr_ptr_arr_helper,
+		bool_as_u32_arr_helper );
+	
+	the_bcr_group.get_coll_box_related_stuff( *this, bcr_ptr_arr_helper );
+	
+	the_bcr_group.get_side_blocked_stuff(bool_as_u32_arr_helper);
+	
+	
+	
+	// Shorthands
+	const bool horiz_adjusted_tc_is_top_corner = ( top_corner_bcr 
+		== horiz_adjusted_cb_top_corner_bcr );
+	const bool horiz_adjusted_bc_is_bot_corner = ( bot_corner_bcr 
+		== horiz_adjusted_cb_bot_corner_bcr );
+	const bool vert_adjusted_tc_is_top_corner = ( top_corner_bcr 
+		== vert_adjusted_cb_top_corner_bcr );
+	const bool vert_adjusted_bc_is_bot_corner = ( bot_corner_bcr 
+		== vert_adjusted_cb_bot_corner_bcr );
+	
+	// More shorthands
+	const bool h_and_t_non_air = ( horiz_adjusted_tc_is_top_corner
+		&& top_corner_is_non_air );
+	const bool h_and_b_non_air = ( horiz_adjusted_bc_is_bot_corner
+		&& bot_corner_is_non_air );
+	const bool v_and_t_non_air = ( vert_adjusted_tc_is_top_corner
+		&& top_corner_is_non_air );
+	const bool v_and_b_non_air = ( vert_adjusted_bc_is_bot_corner
+		&& bot_corner_is_non_air );
+	
+	
+	
+	bool did_push_for_vert_side = false, did_push_for_top = false, 
+		did_push_for_bot = false;
+	
+	auto regular_vert_side_is_blocked_response = [&]() -> void
+	{
+		if (moving_left)
+		{
+			block_coll_response_left_16x32(the_bcr_group);
+			did_push_for_vert_side = true;
+		}
+		else if (moving_right)
+		{
+			block_coll_response_right_16x32(the_bcr_group);
+			did_push_for_vert_side = true;
+		}
+	};
+	
+	auto regular_top_side_is_blocked_response = [&]() -> void
+	{
+		block_coll_response_top_16x32(the_bcr_group);
+		did_push_for_top = true;
+	};
+	auto regular_bot_side_is_blocked_response = [&]() -> void
+	{
+		block_coll_response_bot_16x32(the_bcr_group);
+		did_push_for_bot = true;
+	};
+	
+	if ( top_corner_is_non_air || top_side_other_than_corner_is_blocked )
+	{
+		// We're dealing with one block that is a ceiling and/or a vertical
+		// wall 
+		//if ( top_corner_is_non_air 
+		//	&& !top_side_other_than_corner_is_blocked)
+		//{
+		//}
+		//
+		//// We're dealing with a ceiling other than the relevant top corner
+		//else if ( !top_corner_is_non_air
+		//	&& top_side_other_than_corner_is_blocked )
+		//{
+		//	
+		//}
+		//
+		//// We're dealing with multiple ceiling 
+		//else
+		//{
+		//	
+		//}
+		
+		if ( v_and_t_non_air || vert_side_below_top_corner_is_blocked )
+		{
+			regular_vert_side_is_blocked_response();
+		}
+		if (h_and_t_non_air)
+		{
+			regular_top_side_is_blocked_response();
+		}
+		//regular_top_side_is_blocked_response();
+		//block_coll_response_top_16x32(the_bcr_group);
+	}
+	if ( !did_push_for_top && (bot_corner_is_non_air 
+		|| bot_side_other_than_corner_is_blocked ) )
+	{
+		if ( v_and_b_non_air || vert_side_above_bot_corner_is_blocked )
+		{
+			regular_vert_side_is_blocked_response();
+		}
+		if (h_and_b_non_air)
+		{
+			regular_bot_side_is_blocked_response();
+		}
+		
+		//regular_bot_side_is_blocked_response();
+		//block_coll_response_bot_16x32(the_bcr_group);
+	}
+	//if ( !did_push_for_top && !did_push_for_bot 
+	//	&& !did_push_for_vert_side 
+	//	&& !( top_corner_is_non_air 
+	//	|| top_side_other_than_corner_is_blocked )
+	//	&& !( bot_corner_is_non_air 
+	//	|| bot_side_other_than_corner_is_blocked ) )
+	if ( !did_push_for_top && !did_push_for_bot 
+		&& !did_push_for_vert_side )
+	{
+		set_curr_on_ground(false);
+		
+		if ( !did_push_for_vert_side && ( top_corner_is_non_air 
+			|| vert_side_below_top_corner_is_blocked ) )
+		{
+			regular_vert_side_is_blocked_response();
+		}
+	}
+	
+	
+	
+}
+void sprite::block_collision_stuff_32x16()
+{
+	
+}
+void sprite::block_collision_stuff_32x32()
+{
+	
+}
 
 
 

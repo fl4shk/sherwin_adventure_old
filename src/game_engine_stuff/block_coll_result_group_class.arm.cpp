@@ -22,6 +22,81 @@
 #include "sprite_stuff/sprite_class.hpp"
 
 
+
+
+inline void temp_func_get_horiz_adjusted_x
+	( const block_coll_result_group& the_bcr_group, 
+	const fixed24p8& cb_vert_side_x_coord_f24p8, const fixed24p8& disp_x,
+	array_helper<vec2_s32>& adjusted_cb_corner_lbc_arr_helper )
+{
+	vec2_s32& horiz_adjusted_cb_top_corner_lbc 
+		= adjusted_cb_corner_lbc_arr_helper.data_at(0);
+	vec2_s32& horiz_adjusted_cb_bot_corner_lbc
+		= adjusted_cb_corner_lbc_arr_helper.data_at(1);
+	
+	horiz_adjusted_cb_top_corner_lbc.x = horiz_adjusted_cb_bot_corner_lbc.x
+		= ( ( cb_vert_side_x_coord_f24p8 - disp_x ).floor_to_int() 
+		/ num_pixels_per_block_dim ) - the_bcr_group.left();
+}
+inline void temp_func_get_horiz_adjusted_y
+	( const block_coll_result_group& the_bcr_group, 
+	const vec2_f24p8& cb_corner_y_coords, 
+	array_helper<vec2_s32>& adjusted_cb_corner_lbc_arr_helper )
+{
+	vec2_s32& horiz_adjusted_cb_top_corner_lbc 
+		= adjusted_cb_corner_lbc_arr_helper.data_at(0);
+	vec2_s32& horiz_adjusted_cb_bot_corner_lbc
+		= adjusted_cb_corner_lbc_arr_helper.data_at(1);
+	
+	const fixed24p8& cb_top_y_coord_f24p8 = cb_corner_y_coords.x;
+	const fixed24p8& cb_bot_y_coord_f24p8 = cb_corner_y_coords.y;
+	
+	horiz_adjusted_cb_top_corner_lbc.y = ( cb_top_y_coord_f24p8
+		.floor_to_int() / num_pixels_per_block_dim ) - the_bcr_group.top();
+	horiz_adjusted_cb_bot_corner_lbc.y = ( cb_bot_y_coord_f24p8
+		.floor_to_int() / num_pixels_per_block_dim ) - the_bcr_group.top();
+}
+
+
+inline void temp_func_get_vert_adjusted_x
+	( const block_coll_result_group& the_bcr_group, 
+	const fixed24p8& cb_vert_side_x_coord_f24p8, 
+	array_helper<vec2_s32>& adjusted_cb_corner_lbc_arr_helper )
+{
+	vec2_s32& vert_adjusted_cb_top_corner_lbc
+		= adjusted_cb_corner_lbc_arr_helper.data_at(2);
+	vec2_s32& vert_adjusted_cb_bot_corner_lbc
+		= adjusted_cb_corner_lbc_arr_helper.data_at(3);
+	
+	vert_adjusted_cb_top_corner_lbc.x = vert_adjusted_cb_bot_corner_lbc.x
+		= ( cb_vert_side_x_coord_f24p8.floor_to_int() 
+		/ num_pixels_per_block_dim ) - the_bcr_group.left();
+}
+inline void temp_func_get_vert_adjusted_y
+	( const block_coll_result_group& the_bcr_group, 
+	const vec2_f24p8& cb_corner_y_coords, const fixed24p8& disp_y,
+	array_helper<vec2_s32>& adjusted_cb_corner_lbc_arr_helper )
+{
+	vec2_s32& vert_adjusted_cb_top_corner_lbc
+		= adjusted_cb_corner_lbc_arr_helper.data_at(2);
+	vec2_s32& vert_adjusted_cb_bot_corner_lbc
+		= adjusted_cb_corner_lbc_arr_helper.data_at(3);
+	
+	const fixed24p8& cb_top_y_coord_f24p8 = cb_corner_y_coords.x;
+	const fixed24p8& cb_bot_y_coord_f24p8 = cb_corner_y_coords.y;
+	
+	
+	vert_adjusted_cb_top_corner_lbc.y = ( ( cb_top_y_coord_f24p8 - disp_y )
+		.floor_to_int() / num_pixels_per_block_dim ) - the_bcr_group.top();
+	vert_adjusted_cb_bot_corner_lbc.y = ( ( cb_bot_y_coord_f24p8 - disp_y )
+		.floor_to_int() / num_pixels_per_block_dim ) - the_bcr_group.top();
+}
+
+
+
+
+
+
 void block_coll_result_group::get_corner_stuff
 	( array_helper<block_coll_result*>& bcr_ptr_arr_helper, 
 	array_helper<u32>& bool_as_u32_arr_helper )
@@ -56,28 +131,27 @@ void block_coll_result_group::get_corner_stuff
 	
 	top_corner_is_non_air = ( top_corner_bcr->the_bbvt != bbvt_air );
 	bot_corner_is_non_air = ( bot_corner_bcr->the_bbvt != bbvt_air );
-	
-	temp_debug_thing = 0;
-	if (top_corner_is_non_air)
-	{
-		temp_debug_thing = 7;
-	}
 }
 
 
 void block_coll_result_group::get_coll_box_related_stuff
 	( const sprite& the_sprite, 
-	array_helper<vec2_s32>& adjusted_corner_lbc_arr_helper,
 	array_helper<block_coll_result*>& bcr_ptr_arr_helper )
 {
+	static const u32 num_adjusted_corner_positions = 4;
+	vec2_s32 adjusted_cb_corner_lbc_arr[num_adjusted_corner_positions];
+	
+	array_helper<vec2_s32> adjusted_cb_corner_lbc_arr_helper
+		( adjusted_cb_corner_lbc_arr, num_adjusted_corner_positions );
+	
 	vec2_s32& horiz_adjusted_cb_top_corner_lbc 
-		= adjusted_corner_lbc_arr_helper.data_at(0);
+		= adjusted_cb_corner_lbc_arr_helper.data_at(0);
 	vec2_s32& horiz_adjusted_cb_bot_corner_lbc
-		= adjusted_corner_lbc_arr_helper.data_at(1);
+		= adjusted_cb_corner_lbc_arr_helper.data_at(1);
 	vec2_s32& vert_adjusted_cb_top_corner_lbc
-		= adjusted_corner_lbc_arr_helper.data_at(2);
+		= adjusted_cb_corner_lbc_arr_helper.data_at(2);
 	vec2_s32& vert_adjusted_cb_bot_corner_lbc
-		= adjusted_corner_lbc_arr_helper.data_at(3);
+		= adjusted_cb_corner_lbc_arr_helper.data_at(3);
 	
 	block_coll_result*& horiz_adjusted_cb_top_corner_bcr
 		= bcr_ptr_arr_helper.data_at(2);
@@ -95,59 +169,118 @@ void block_coll_result_group::get_coll_box_related_stuff
 	const fixed24p8 disp_y = the_sprite.get_curr_in_level_pos().y 
 		- the_sprite.get_prev_in_level_pos().y;
 	
-	vec2_f24p8 cb_top_corner_f24p8( the_coll_box.left(), 
-		the_coll_box.top() ), cb_bot_corner_f24p8( the_coll_box.left(),
-		the_coll_box.bot() );
+	//vec2_f24p8 cb_top_corner_f24p8( the_coll_box.left(), 
+	//	the_coll_box.top() ), cb_bot_corner_f24p8( the_coll_box.left(),
+	//	the_coll_box.bot() );
+	//vec2_f24p8 cb_top_corner_f24p8, cb_bot_corner_f24p8;
+	
+	
+	//cb_top_corner_f24p8.x = cb_bot_corner_f24p8.x = the_coll_box.left();
+	//cb_top_corner_f24p8.y = the_coll_box.top();
+	//cb_bot_corner_f24p8.y = the_coll_box.bot();
+	
+	
+	const fixed24p8 cb_top_y_coord_f24p8 = the_coll_box.top(),
+		cb_bot_y_coord_f24p8 = the_coll_box.bot();
+	
+	fixed24p8 cb_vert_side_x_coord_f24p8 = the_coll_box.left();
 	
 	if (moving_left)
 	{
-		//cb_top_corner_f24p8.x = cb_bot_corner_f24p8.x = the_coll_box
-		//	.left();
+		////cb_top_corner_f24p8.x = cb_bot_corner_f24p8.x = the_coll_box
+		////	.left();
+		//cb_vert_side_x_coord_f24p8 = the_coll_box.left();
 	}
 	else if (moving_right)
 	{
-		cb_top_corner_f24p8.x = cb_bot_corner_f24p8.x = the_coll_box
-			.right();
+		////cb_top_corner_f24p8.x = cb_bot_corner_f24p8.x = the_coll_box
+		////	.right();
+		cb_vert_side_x_coord_f24p8 = the_coll_box.right();
 	}
+	
 	
 	// The local block coords
-	horiz_adjusted_cb_top_corner_lbc = active_level
-		::get_block_coord_of_point( cb_top_corner_f24p8 
-		- vec2_f24p8( disp_x, {0} ) ) - tl_corner();
-	horiz_adjusted_cb_bot_corner_lbc = active_level
-		::get_block_coord_of_point( cb_bot_corner_f24p8 
-		- vec2_f24p8( disp_x, {0} ) ) - tl_corner();
-	
-	vert_adjusted_cb_top_corner_lbc = active_level
-		::get_block_coord_of_point( cb_top_corner_f24p8 
-		- vec2_f24p8( {0}, disp_y ) ) - tl_corner();
-	vert_adjusted_cb_bot_corner_lbc = active_level
-		::get_block_coord_of_point( cb_bot_corner_f24p8 
-		- vec2_f24p8( {0}, disp_y ) ) - tl_corner();
+	temp_func_get_horiz_adjusted_x( *this, cb_vert_side_x_coord_f24p8,
+		disp_x, adjusted_cb_corner_lbc_arr_helper );
+	temp_func_get_horiz_adjusted_y( *this, vec2_f24p8
+		( cb_top_y_coord_f24p8, cb_bot_y_coord_f24p8 ), 
+		adjusted_cb_corner_lbc_arr_helper );
 	
 	
+	temp_func_get_vert_adjusted_x( *this, cb_vert_side_x_coord_f24p8,
+		adjusted_cb_corner_lbc_arr_helper );
+	temp_func_get_vert_adjusted_y( *this, vec2_f24p8
+		( cb_top_y_coord_f24p8, cb_bot_y_coord_f24p8 ), disp_y,
+		adjusted_cb_corner_lbc_arr_helper );
 	
-	if (contains_local_block_coord(horiz_adjusted_cb_top_corner_lbc))
+	
+	//horiz_adjusted_cb_top_corner_lbc.x = horiz_adjusted_cb_bot_corner_lbc.x
+	//	= ( ( cb_vert_side_x_coord_f24p8 - disp_x ).floor_to_int() 
+	//	/ num_pixels_per_block_dim ) - left();
+	//horiz_adjusted_cb_top_corner_lbc.y = ( cb_top_y_coord_f24p8
+	//	.floor_to_int() / num_pixels_per_block_dim ) - top();
+	//horiz_adjusted_cb_bot_corner_lbc.y = ( cb_bot_y_coord_f24p8
+	//	.floor_to_int() / num_pixels_per_block_dim ) - top();
+	
+	
+	//vert_adjusted_cb_top_corner_lbc.x = vert_adjusted_cb_bot_corner_lbc.x
+	//	= ( cb_vert_side_x_coord_f24p8.floor_to_int() 
+	//	/ num_pixels_per_block_dim ) - left();
+	//vert_adjusted_cb_top_corner_lbc.y = ( ( cb_top_y_coord_f24p8 - disp_y )
+	//	.floor_to_int() / num_pixels_per_block_dim ) - top();
+	//vert_adjusted_cb_bot_corner_lbc.y = ( ( cb_bot_y_coord_f24p8 - disp_y )
+	//	.floor_to_int() / num_pixels_per_block_dim ) - top();
+	
+	
+	//horiz_adjusted_cb_top_corner_lbc.x = horiz_adjusted_cb_bot_corner_lbc.x
+	//	= ( ( cb_top_corner_f24p8.x - disp_x ).floor_to_int() 
+	//	/ num_pixels_per_block_dim ) - left();
+	//horiz_adjusted_cb_top_corner_lbc.y = ( cb_top_corner_f24p8.y
+	//	.floor_to_int() / num_pixels_per_block_dim ) - top();
+	//horiz_adjusted_cb_bot_corner_lbc.y = ( cb_bot_corner_f24p8.y
+	//	.floor_to_int() / num_pixels_per_block_dim ) - top();
+	//
+	//
+	//vert_adjusted_cb_top_corner_lbc.x = vert_adjusted_cb_bot_corner_lbc.x
+	//	= ( cb_top_corner_f24p8.x.floor_to_int() 
+	//	/ num_pixels_per_block_dim ) - left();
+	//vert_adjusted_cb_top_corner_lbc.y = ( ( cb_top_corner_f24p8.y 
+	//	- disp_y ).floor_to_int() / num_pixels_per_block_dim ) - top();
+	//vert_adjusted_cb_bot_corner_lbc.y = ( ( cb_bot_corner_f24p8.y 
+	//	- disp_y ).floor_to_int() / num_pixels_per_block_dim ) - top();
+	
+	if ( contains_local_block_x_coord(horiz_adjusted_cb_top_corner_lbc.x) )
 	{
-		horiz_adjusted_cb_top_corner_bcr = &data_at
-			(horiz_adjusted_cb_top_corner_lbc);
-	}
-	if (contains_local_block_coord(horiz_adjusted_cb_bot_corner_lbc))
-	{
-		horiz_adjusted_cb_bot_corner_bcr = &data_at
-			(horiz_adjusted_cb_bot_corner_lbc);
+		if ( contains_local_block_y_coord
+			(horiz_adjusted_cb_top_corner_lbc.y) )
+		{
+			horiz_adjusted_cb_top_corner_bcr = &data_at
+				(horiz_adjusted_cb_top_corner_lbc);
+		}
+		if ( contains_local_block_y_coord
+			(horiz_adjusted_cb_bot_corner_lbc.y) )
+		{
+			horiz_adjusted_cb_bot_corner_bcr = &data_at
+				(horiz_adjusted_cb_bot_corner_lbc);
+		}
 	}
 	
-	if (contains_local_block_coord(vert_adjusted_cb_top_corner_lbc))
+	if ( contains_local_block_x_coord(vert_adjusted_cb_top_corner_lbc.x) )
 	{
-		vert_adjusted_cb_top_corner_bcr = &data_at
-			(vert_adjusted_cb_top_corner_lbc);
+		if ( contains_local_block_y_coord
+			(vert_adjusted_cb_top_corner_lbc.y) )
+		{
+			vert_adjusted_cb_top_corner_bcr = &data_at
+				(vert_adjusted_cb_top_corner_lbc);
+		}
+		if ( contains_local_block_y_coord
+			(vert_adjusted_cb_bot_corner_lbc.y) )
+		{
+			vert_adjusted_cb_bot_corner_bcr = &data_at
+				(vert_adjusted_cb_bot_corner_lbc);
+		}
 	}
-	if (contains_local_block_coord(vert_adjusted_cb_bot_corner_lbc))
-	{
-		vert_adjusted_cb_bot_corner_bcr = &data_at
-			(vert_adjusted_cb_bot_corner_lbc);
-	}
+	
 }
 
 void block_coll_result_group::get_side_blocked_stuff
@@ -190,37 +323,78 @@ void block_coll_result_group::get_side_blocked_stuff
 		--part_2_range_end_plus_1;
 	}
 	
-	for ( s32 j=local_top()+1; j<real_height(); ++j )
+	
+	//for ( s32 j=local_top()+1; j<real_height(); ++j )
+	//{
+	//	if ( data_at( local_vert_side_x, j ).the_bbvt != bbvt_air )
+	//	{
+	//		vert_side_below_top_corner_is_blocked = true;
+	//		break;
+	//	}
+	//}
+	//
+	//for ( s32 j=local_top(); j<real_height()-1; ++j )
+	//{
+	//	if ( data_at( local_vert_side_x, j ).the_bbvt != bbvt_air )
+	//	{
+	//		vert_side_above_bot_corner_is_blocked = true;
+	//		break;
+	//	}
+	//}
+	
+	// Compress those two loops into one since they overlap
+	for ( s32 j=local_top(); j<real_height(); ++j )
 	{
-		if ( data_at( local_vert_side_x, j ).the_bbvt != bbvt_air )
+		if ( !vert_side_below_top_corner_is_blocked 
+			&& j >= local_top() + 1 )
 		{
-			vert_side_below_top_corner_is_blocked = true;
+			if ( data_at( local_vert_side_x, j ).the_bbvt != bbvt_air )
+			{
+				vert_side_below_top_corner_is_blocked = true;
+			}
+		}
+		
+		if ( !vert_side_above_bot_corner_is_blocked
+			&& j < real_height() - 1 )
+		{
+			if ( data_at( local_vert_side_x, j ).the_bbvt != bbvt_air )
+			{
+				vert_side_above_bot_corner_is_blocked = true;
+			}
+		}
+		
+		if ( vert_side_below_top_corner_is_blocked
+			&& vert_side_above_bot_corner_is_blocked )
+		{
 			break;
 		}
 	}
-	
-	for ( s32 j=local_top(); j<real_height()-1; ++j )
-	{
-		if ( data_at( local_vert_side_x, j ).the_bbvt != bbvt_air )
-		{
-			vert_side_above_bot_corner_is_blocked = true;
-			break;
-		}
-	}
-	
 	
 	
 	for ( s32 i=part_2_range_start; i<part_2_range_end_plus_1; ++i )
 	{
-		// Check whether the top
-		if ( data_at( i, local_top() ).the_bbvt != bbvt_air )
+		if (!top_side_other_than_corner_is_blocked)
 		{
-			top_side_other_than_corner_is_blocked = true;
+			if ( data_at( i, local_top() ).the_bbvt != bbvt_air )
+			{
+				top_side_other_than_corner_is_blocked = true;
+			}
 		}
 		
-		if ( data_at( i, local_bot() ).the_bbvt != bbvt_air )
+		if (!bot_side_other_than_corner_is_blocked)
 		{
-			bot_side_other_than_corner_is_blocked = true;
+			if ( data_at( i, local_bot() ).the_bbvt != bbvt_air )
+			{
+				bot_side_other_than_corner_is_blocked = true;
+			}
+		}
+		
+		if ( top_side_other_than_corner_is_blocked 
+			&& bot_side_other_than_corner_is_blocked )
+		{
+			break;
 		}
 	}
 }
+
+

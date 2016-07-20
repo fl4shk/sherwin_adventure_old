@@ -28,6 +28,10 @@
 
 class sprite_init_param_group;
 
+// The sublevel and sublevel_pointer classes need to be replaced with
+// a class that contains pointers to either ASSEMBLY arrays or .bin files
+// (which would be mentioned in an assembly file)
+
 // This is a class for COMPRESSED sublevels in ROM
 template< u32 cmp_block_data_size, u32 xsize, u32 ysize, 
 	u32 sprite_ipg_arr_size, u32 sublevel_entrance_arr_size >

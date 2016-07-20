@@ -40,6 +40,8 @@ class sprite_init_param_group;
 class sublevel_pointer;
 class level;
 
+#include "level_class.hpp"
+#include "../range_funcs.hpp"
 
 // This is a class that contains the data used by active levels after they
 // have been loaded.  Only one level will ever be fully loaded at a time,
@@ -128,10 +130,19 @@ public:		// static variables
 public:		// functions
 	static inline bool block_coord_is_valid( const vec2_s32& block_coord )
 	{
-		return ( block_coord.x >= 0 && block_coord.x 
-			< (s32)get_curr_sublevel_ptr().get_size_2d().x
-			&& block_coord.y >= 0 && block_coord.y 
-			< (s32)get_curr_sublevel_ptr().get_size_2d().y );
+		//return ( block_coord.x >= 0 && block_coord.x 
+		//	< (s32)get_curr_sublevel_ptr().get_size_2d().x
+		//	&& block_coord.y >= 0 && block_coord.y 
+		//	< (s32)get_curr_sublevel_ptr().get_size_2d().y );
+		
+		const vec2_u32& curr_sublevel_ptr_size_2d = get_curr_sublevel_ptr()
+			.get_size_2d();
+		vec2_s32 curr_sublevel_ptr_size_2d_s32
+			( (s32)curr_sublevel_ptr_size_2d.x,
+			(s32)curr_sublevel_ptr_size_2d.y );
+		
+		return vec2_in_range( vec2_s32( 0, 0 ),
+			curr_sublevel_ptr_size_2d_s32, block_coord );
 	}
 	
 	// This function computes the block coordinate of a point.
@@ -178,7 +189,11 @@ public:		// functions
 		}
 	}
 	
-	static const sublevel_pointer& get_curr_sublevel_ptr();
+	static inline const sublevel_pointer& get_curr_sublevel_ptr()
+	{
+		return the_current_level_ptr->get_the_sublevels()
+			[the_current_active_sublevel_index];
+	}
 	
 	
 	// This function allocates a new block and returns the previous one

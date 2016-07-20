@@ -37,13 +37,12 @@ public:			// variables
 	type* the_array;
 	
 public:			// functions
-	array_2d_helper()
-		: the_array(0), size_2d({ 0, 0 }), size(0)
+	array_2d_helper() : size_2d({ 0, 0 }), size(0), the_array(0)
 	{
 	}
 	array_2d_helper( type* s_the_array, const vec2_u32& s_size_2d )
-		: the_array(s_the_array), size_2d(s_size_2d), 
-		size( s_size_2d.x * s_size_2d.y )
+		: size_2d(s_size_2d), size( s_size_2d.x * s_size_2d.y ),
+		the_array(s_the_array)
 	{
 	}
 	

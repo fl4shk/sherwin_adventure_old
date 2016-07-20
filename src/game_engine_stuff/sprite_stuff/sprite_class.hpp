@@ -219,8 +219,7 @@ public:		// functions
 	virtual void shared_constructor_code_part_3();
 	
 	void* operator new( size_t size, 
-		sprite_allocator& the_sprite_allocator )
-		__attribute__((_iwram_code));
+		sprite_allocator& the_sprite_allocator );
 	
 	//void operator delete( void* the_sprite, 
 	//	sprite_allocator& the_sprite_allocator );
@@ -402,8 +401,7 @@ public:		// functions
 	}
 	
 	void update_on_screen_pos
-		( const prev_curr_pair<bg_point>& camera_pos_pc_pair )
-		__attribute__((_iwram_code));
+		( const prev_curr_pair<bg_point>& camera_pos_pc_pair );
 	
 	//inline void update_full( const bg_point& camera_pos )
 	//{
@@ -419,10 +417,8 @@ public:		// functions
 	//}
 	
 	void camera_follow_basic
-		( prev_curr_pair<bg_point>& camera_pos_pc_pair )
-		__attribute__((_iwram_code));
-	void center_camera_almost( bg_point& camera_pos ) const
-		__attribute__((_iwram_code));
+		( prev_curr_pair<bg_point>& camera_pos_pc_pair );
+	void center_camera_almost( bg_point& camera_pos ) const;
 	
 	
 	//inline void copy_the_oam_entry_to_oam_mirror 
@@ -545,12 +541,11 @@ public:		// functions
 	}
 	
 	// Physics and collision stuff
-	virtual void block_collision_stuff() __attribute__((_iwram_code));
+	virtual void block_collision_stuff();
 	
-	virtual void apply_gravity()
-		__attribute__((_iwram_code));
+	virtual void apply_gravity();
 	virtual void handle_jumping_stuff( u32 is_jump_key_hit, 
-		u32 is_jump_key_held ) __attribute__((_iwram_code));
+		u32 is_jump_key_held );
 	
 	
 	// Sprite-sprite interaction stuff
@@ -563,8 +558,7 @@ public:		// functions
 	
 	
 protected:		// functions
-	vec2_u32 get_shape_size_as_vec2_raw() const
-		__attribute__((_iwram_code));
+	vec2_u32 get_shape_size_as_vec2_raw() const;
 	
 	// Here are a lot of block collision functions.  It is recommended that
 	// they be stored in IWRAM for as much speed as possible.
@@ -642,32 +636,54 @@ protected:		// functions
 	
 	
 	virtual void block_coll_response_left_16x16
-		( const block_coll_result_group& the_bcr_group )
-		__attribute__((_iwram_code));
+		( const block_coll_result_group& the_bcr_group );
 	virtual void block_coll_response_right_16x16
-		( const block_coll_result_group& the_bcr_group )
-		__attribute__((_iwram_code));
+		( const block_coll_result_group& the_bcr_group );
 	virtual void block_coll_response_top_16x16
-		( const block_coll_result_group& the_bcr_group )
-		__attribute__((_iwram_code));
+		( const block_coll_result_group& the_bcr_group );
 	virtual void block_coll_response_bot_16x16
-		( const block_coll_result_group& the_bcr_group )
-		__attribute__((_iwram_code));
+		( const block_coll_result_group& the_bcr_group );
 	
 	
 	virtual void block_coll_response_left_16x32
-		( const block_coll_result_group& the_bcr_group )
-		__attribute__((_iwram_code));
+		( const block_coll_result_group& the_bcr_group );
 	virtual void block_coll_response_right_16x32
-		( const block_coll_result_group& the_bcr_group )
-		__attribute__((_iwram_code));
+		( const block_coll_result_group& the_bcr_group );
 	virtual void block_coll_response_top_16x32
-		( const block_coll_result_group& the_bcr_group )
-		__attribute__((_iwram_code));
+		( const block_coll_result_group& the_bcr_group );
 	virtual void block_coll_response_bot_16x32
-		( const block_coll_result_group& the_bcr_group )
-		__attribute__((_iwram_code));
+		( const block_coll_result_group& the_bcr_group );
 	
+	
+	
+	// Finally, some inline functions (probably) every sprite can use in
+	// their block_coll_response.*() functions
+	inline void push_out_of_left_block
+		( const block_coll_result_group& the_bcr_group )
+	{
+		set_curr_in_level_pos_x( make_f24p8( ( the_bcr_group.left() + 1 ) 
+			* num_pixels_per_block_dim ) - cb_pos_offset.x );
+	}
+	inline void push_out_of_right_block
+		( const block_coll_result_group& the_bcr_group )
+	{
+		set_curr_in_level_pos_x( make_f24p8( the_bcr_group.right()
+			* num_pixels_per_block_dim ) - the_coll_box.size.x 
+			- cb_pos_offset.x );
+	}
+	inline void push_out_of_top_block
+		( const block_coll_result_group& the_bcr_group )
+	{
+		set_curr_in_level_pos_y( make_f24p8( ( the_bcr_group.top() + 1 ) 
+			* num_pixels_per_block_dim ) - cb_pos_offset.y );
+	}
+	inline void push_out_of_bot_block
+		( const block_coll_result_group& the_bcr_group )
+	{
+		set_curr_in_level_pos_y( make_f24p8( the_bcr_group.bot()
+			* num_pixels_per_block_dim ) 
+			- make_f24p8(get_shape_size_as_vec2().y) );
+	}
 	
 	
 	// Regular block collision stuff

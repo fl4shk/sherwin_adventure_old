@@ -28,19 +28,22 @@
 class block_coll_result
 {
 public:		// variables
-	vec2_s32 coord;
+	//vec2_s32 coord;
 	//block_type type;
-	block* the_block;
-	block_behavior_type the_bbvt;
+	block* the_block __attribute__((_align4));
+	//block_behavior_type the_bbvt __attribute__((_align4));
+	u32 the_bbvt __attribute__((_align4));
 	
 public:		// functions
-	inline block_coll_result() : coord(), the_block(NULL)
+	inline block_coll_result()
 	{
 	}
-	block_coll_result( const vec2_s32& s_coord )
-		__attribute__((_iwram_code));
-	block_coll_result( const vec2_f24p8& s_coord_f24p8 )
-		__attribute__((_iwram_code));
+	//inline block_coll_result()
+	//{
+	//	memset( this, 0, sizeof(*this) );
+	//}
+	block_coll_result( const vec2_s32& s_coord );
+	block_coll_result( const vec2_f24p8& s_coord_f24p8 );
 	inline block_coll_result( const block_coll_result& to_copy )
 	{
 		*this = to_copy;
@@ -60,50 +63,54 @@ public:		// functions
 	{
 		return the_block->get_block_type();
 	}
+	inline block_behavior_type get_bbvt() const
+	{
+		return (block_behavior_type)the_bbvt;
+	}
 	
 } __attribute__((_align4));
 
 
+
 class sprite;
+
+class bcr_ptr_line;
 
 class block_coll_result_group
 {
-//public:		// variables
-protected:		// variables
-	
+public:		// constants
 	// The maximum number of blocks intersected by a sprite, per dimension.
 	// The value of ( 3, 3 ) corresponds to a 32x32 sprite.  Definitely
 	// change these two values (among other things) if there is every any
 	// infrastructure for sprites larger than 32x32 pixels.
 	//const vec2_u32 block_coll_result_group::shared_max_size_2d( 3, 3 );
 	static constexpr vec2_u32 max_size_2d = vec2_u32( 3, 3 );
+	//static constexpr vec2_u32 max_size_2d = vec2_u32( 80, 80 );
 	static constexpr u32 max_size = max_size_2d.x * max_size_2d.y;
 	
+protected:		// variables
 	block_coll_result bcr_arr_2d_helper_data[max_size];
 	
 	vec2_s32 start_pos;
 	
 	vec2_s32 real_size_2d;
 	
-	u32 moving_left, moving_right;
+	bool moving_left, moving_right;
 	
 	static u32 temp_debug_thing;
 	
 public:		// variables
 	array_2d_helper<block_coll_result> bcr_arr_2d_helper;
 	
+	
 public:		// functions
-	block_coll_result_group() __attribute__((_iwram_code));
+	block_coll_result_group();
 	block_coll_result_group( const coll_box& the_coll_box, 
-		u32 s_moving_left, u32 s_moving_right )
-		__attribute__((_iwram_code));
-	block_coll_result_group
-		( const block_coll_result_group& to_copy )
-		__attribute__((_iwram_code));
+		u32 s_moving_left, u32 s_moving_right );
+	block_coll_result_group( const block_coll_result_group& to_copy );
 	
 	block_coll_result_group& operator = 
-		( const block_coll_result_group& to_copy )
-		__attribute__((_iwram_code));
+		( const block_coll_result_group& to_copy );
 	
 	
 	inline block_coll_result& operator () ( u32 local_x, u32 local_y )
@@ -147,11 +154,11 @@ public:		// functions
 		return real_size_2d;
 	}
 	
-	inline u32 get_moving_left() const
+	inline bool get_moving_left() const
 	{
 		return moving_left;
 	}
-	inline u32 get_moving_right() const
+	inline bool get_moving_right() const
 	{
 		return moving_right;
 	}
@@ -237,10 +244,20 @@ public:		// functions
 	}
 	
 	
+	inline bool contains_local_block_x_coord( s32 to_check ) const
+	{
+		return in_range<s32>( 0, real_size_2d.x, to_check );
+	}
+	inline bool contains_local_block_y_coord( s32 to_check ) const
+	{
+		return in_range<s32>( 0, real_size_2d.y, to_check );
+	}
 	inline bool contains_local_block_coord( const vec2_s32& to_check )
 		const
 	{
-		return vec2_in_range( vec2_s32( 0, 0 ), real_size_2d, to_check );
+		//return vec2_in_range( vec2_s32( 0, 0 ), real_size_2d, to_check );
+		return ( contains_local_block_x_coord(to_check.x) 
+			&& contains_local_block_y_coord(to_check.y) );
 	}
 	
 	
@@ -250,7 +267,6 @@ public:		// functions
 		__attribute__((_iwram_code));
 	
 	void get_coll_box_related_stuff( const sprite& the_sprite,
-		array_helper<vec2_s32>& adjusted_corner_lbc_arr_helper,
 		array_helper<block_coll_result*>& bcr_ptr_arr_helper )
 		__attribute__((_iwram_code));
 	
@@ -269,6 +285,84 @@ protected:		// functions
 } __attribute__((_align4));
 
 
+// A line (i.e. row or column) of pointers to block_coll_result's.
+class bcr_ptr_line
+{
+public:		// constants
+	static constexpr u32 max_size = block_coll_result_group::max_size_2d.x;
+	
+protected:		// variables
+	block_coll_result* ptr_arr_helper_data[max_size];
+	
+	// The real size of the row or column of pointers to
+	// block_coll_result's
+	s32 real_size;
+	
+	// The local position that was passed to the bcr_ptr_line
+	vec2_s32 local_param_pos;
+	
+	// Whether this bcr_ptr_line represents a column (false) or a row
+	// (true)
+	u32 is_horiz;
+	
+public:		// variables
+	array_helper<block_coll_result*> ptr_arr_helper;
+	
+public:		// functions
+	inline bcr_ptr_line() : real_size(max_size), local_param_pos( 0, 0 ), 
+		is_horiz(false)
+	{
+		init_ptr_arr_helper();
+	}
+	bcr_ptr_line( block_coll_result_group& the_bcr_group,
+		const vec2_s32& s_local_param_pos, u32 s_is_horiz );
+	
+	
+	inline block_coll_result*& operator () ( u32 index )
+	{
+		return data_at(index);
+	}
+	inline block_coll_result*& data_at( u32 index )
+	{
+		return ptr_arr_helper.data_at(index);
+	}
+	
+	inline s32 get_real_size() const
+	{
+		return real_size;
+	}
+	
+	inline const vec2_s32& get_local_param_pos() const
+	{
+		return local_param_pos;
+	}
+	
+	inline bool get_is_horiz() const
+	{
+		return is_horiz;
+	}
+	inline bool get_is_vert() const
+	{
+		return !is_horiz;
+	}
+	
+	
+	
+protected:		// functions
+	//inline void clear_ptr_arr_helper_data()
+	//{
+	//	for ( u32 i=0; i<max_size; ++i )
+	//	{
+	//		ptr_arr_helper_data[i] = NULL;
+	//	}
+	//}
+	inline void init_ptr_arr_helper()
+	{
+		ptr_arr_helper.init( ptr_arr_helper_data, real_size );
+	}
+	
+	
+} __attribute__((_align4));
 
 
 

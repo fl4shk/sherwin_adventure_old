@@ -34,7 +34,7 @@ public:		// enums
 		frm_throw_0 = 1, 
 		frm_throw_1 = 2,
 		frm_throw_2 = 3,
-	} alignas(4);
+	} alignas4;
 	
 	// This enum allows multiple frame_slot's to be represented by the same
 	// frame.
@@ -51,7 +51,7 @@ public:		// enums
 		// frm_slot_count is the amount of frame_slot's.  It is
 		// automatically updated by the compiler.
 		frm_slot_count,
-	} alignas(4);
+	} alignas4;
 	
 	// These are used to access misc_data_u and misc_data_s
 	enum udata_index
@@ -59,12 +59,12 @@ public:		// enums
 		udi_frame_stuff_initalized,
 		
 		udi_curr_frame_slot,
-	} alignas(4);
+	} alignas4;
 	
 	enum sdata_index
 	{
 		sdi_frame_change_timer,
-	} alignas(4);
+	} alignas4;
 	
 public:		// variables
 	

@@ -108,7 +108,7 @@ enum block_type
 	// by the compiler.
 	bt_count,
 	
-} __attribute__((_align4));
+} alignas4;
 
 // It's about time I added in something like this!  In MANY cases, there
 // are block_type's that have the SAME behavior, so this should also be
@@ -144,7 +144,7 @@ enum block_behavior_type
 	bbvt_count,
 	
 	
-} __attribute__((_align4));
+} alignas4;
 
 #define list_of_block_stuff_classes(macro) \
 \

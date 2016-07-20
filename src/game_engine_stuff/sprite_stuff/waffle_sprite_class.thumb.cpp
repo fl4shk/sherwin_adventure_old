@@ -77,42 +77,77 @@ void waffle_sprite::update_part_2()
 
 
 // Physics and collision stuff
-void waffle_sprite::block_coll_response_left_16x16
+void waffle_sprite::block_coll_response_left_16x16_old
 	( const block_coll_result& lt_coll_result,
 	const block_coll_result& lb_coll_result )
 {
 	s32& move_timer = misc_data_s[sdi_move_timer];
 	
 	
-	//in_level_pos.x = make_f24p8( ( lt_coll_result.coord.x + 1 ) * 16 )
-	//	- cb_pos_offset.x;
-	set_curr_in_level_pos_x( make_f24p8( ( lt_coll_result.coord.x + 1 ) 
-		* 16 ) - cb_pos_offset.x );
+	////in_level_pos.x = make_f24p8( ( lt_coll_result.coord.x + 1 ) * 16 )
+	////	- cb_pos_offset.x;
+	//set_curr_in_level_pos_x( make_f24p8( ( lt_coll_result.coord.x + 1 ) 
+	//	* 16 ) - cb_pos_offset.x );
 	
 	move_timer = move_timer_start;
 	
 	vel.x.data = -vel.x.data;
-	
 }
 
 
-void waffle_sprite::block_coll_response_right_16x16
+void waffle_sprite::block_coll_response_right_16x16_old
 	( const block_coll_result& rt_coll_result,
 	const block_coll_result& rb_coll_result )
 {
 	s32& move_timer = misc_data_s[sdi_move_timer];
 	
-	//in_level_pos.x = make_f24p8( rt_coll_result.coord.x * 16 )
-	//	- the_coll_box.size.x - cb_pos_offset.x;
-	//	//- make_f24p8(get_shape_size_as_vec2().x);
-	set_curr_in_level_pos_x( make_f24p8( rt_coll_result.coord.x * 16 )
-		- the_coll_box.size.x - cb_pos_offset.x );
+	////in_level_pos.x = make_f24p8( rt_coll_result.coord.x * 16 )
+	////	- the_coll_box.size.x - cb_pos_offset.x;
+	////	//- make_f24p8(get_shape_size_as_vec2().x);
+	//set_curr_in_level_pos_x( make_f24p8( rt_coll_result.coord.x * 16 )
+	//	- the_coll_box.size.x - cb_pos_offset.x );
 	
 	
 	move_timer = move_timer_start;
 	
 	vel.x.data = -vel.x.data;
+}
+
+
+
+void waffle_sprite::block_coll_response_left_16x16
+	( const block_coll_result_group& the_bcr_group )
+{
+	s32& move_timer = misc_data_s[sdi_move_timer];
 	
+	
+	////in_level_pos.x = make_f24p8( ( lt_coll_result.coord.x + 1 ) * 16 )
+	////	- cb_pos_offset.x;
+	//set_curr_in_level_pos_x( make_f24p8( ( lt_coll_result.coord.x + 1 ) 
+	//	* 16 ) - cb_pos_offset.x );
+	push_out_of_left_block(the_bcr_group);
+	
+	move_timer = move_timer_start;
+	
+	vel.x.data = -vel.x.data;
+}
+
+void waffle_sprite::block_coll_response_right_16x16
+	( const block_coll_result_group& the_bcr_group )
+{
+	s32& move_timer = misc_data_s[sdi_move_timer];
+	
+	////in_level_pos.x = make_f24p8( rt_coll_result.coord.x * 16 )
+	////	- the_coll_box.size.x - cb_pos_offset.x;
+	////	//- make_f24p8(get_shape_size_as_vec2().x);
+	//set_curr_in_level_pos_x( make_f24p8( rt_coll_result.coord.x * 16 )
+	//	- the_coll_box.size.x - cb_pos_offset.x );
+	push_out_of_right_block(the_bcr_group);
+	
+	
+	move_timer = move_timer_start;
+	
+	vel.x.data = -vel.x.data;
 }
 
 
