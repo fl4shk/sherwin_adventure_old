@@ -26,7 +26,8 @@
 
 inline void temp_func_get_horiz_adjusted_x
 	( const block_coll_result_group& the_bcr_group, 
-	const fixed24p8& cb_vert_side_x_coord_f24p8, const fixed24p8& disp_x,
+	const fixed24p8& cb_vert_side_x_coord_f24p8, 
+	const fixed24p8& threshold_x,
 	array_helper<vec2_s32>& adjusted_cb_corner_lbc_arr_helper )
 {
 	vec2_s32& horiz_adjusted_cb_top_corner_lbc 
@@ -35,7 +36,7 @@ inline void temp_func_get_horiz_adjusted_x
 		= adjusted_cb_corner_lbc_arr_helper.data_at(1);
 	
 	horiz_adjusted_cb_top_corner_lbc.x = horiz_adjusted_cb_bot_corner_lbc.x
-		= ( ( cb_vert_side_x_coord_f24p8 - disp_x ).floor_to_int() 
+		= ( ( cb_vert_side_x_coord_f24p8 - threshold_x ).floor_to_int() 
 		/ num_pixels_per_block_dim ) - the_bcr_group.left();
 }
 inline void temp_func_get_horiz_adjusted_y
@@ -74,7 +75,7 @@ inline void temp_func_get_vert_adjusted_x
 }
 inline void temp_func_get_vert_adjusted_y
 	( const block_coll_result_group& the_bcr_group, 
-	const vec2_f24p8& cb_corner_y_coords, const fixed24p8& disp_y,
+	const vec2_f24p8& cb_corner_y_coords, const fixed24p8& threshold_y,
 	array_helper<vec2_s32>& adjusted_cb_corner_lbc_arr_helper )
 {
 	vec2_s32& vert_adjusted_cb_top_corner_lbc
@@ -86,10 +87,12 @@ inline void temp_func_get_vert_adjusted_y
 	const fixed24p8& cb_bot_y_coord_f24p8 = cb_corner_y_coords.y;
 	
 	
-	vert_adjusted_cb_top_corner_lbc.y = ( ( cb_top_y_coord_f24p8 - disp_y )
-		.floor_to_int() / num_pixels_per_block_dim ) - the_bcr_group.top();
-	vert_adjusted_cb_bot_corner_lbc.y = ( ( cb_bot_y_coord_f24p8 - disp_y )
-		.floor_to_int() / num_pixels_per_block_dim ) - the_bcr_group.top();
+	vert_adjusted_cb_top_corner_lbc.y = ( ( cb_top_y_coord_f24p8 
+		- threshold_y ).floor_to_int() / num_pixels_per_block_dim ) 
+		- the_bcr_group.top();
+	vert_adjusted_cb_bot_corner_lbc.y = ( ( cb_bot_y_coord_f24p8 
+		- threshold_y ).floor_to_int() / num_pixels_per_block_dim ) 
+		- the_bcr_group.top();
 }
 
 
@@ -164,10 +167,15 @@ void block_coll_result_group::get_coll_box_related_stuff
 	
 	
 	const coll_box& the_coll_box = the_sprite.the_coll_box; 
-	const fixed24p8 disp_x = the_sprite.get_curr_in_level_pos().x 
-		- the_sprite.get_prev_in_level_pos().x;
-	const fixed24p8 disp_y = the_sprite.get_curr_in_level_pos().y 
-		- the_sprite.get_prev_in_level_pos().y;
+	//const fixed24p8 disp_x = the_sprite.get_curr_in_level_pos().x 
+	//	- the_sprite.get_prev_in_level_pos().x;
+	//const fixed24p8 disp_y = the_sprite.get_curr_in_level_pos().y 
+	//	- the_sprite.get_prev_in_level_pos().y;
+	const fixed24p8 threshold_x = moving_right 
+		? the_sprite.max_vel_x_abs_val : -the_sprite.max_vel_x_abs_val;
+	const fixed24p8 threshold_y = ( the_sprite.get_curr_in_level_pos().y
+		> the_sprite.get_prev_in_level_pos().y ) ? the_sprite.max_y_vel
+		: -the_sprite.max_y_vel;
 	
 	//vec2_f24p8 cb_top_corner_f24p8( the_coll_box.left(), 
 	//	the_coll_box.top() ), cb_bot_corner_f24p8( the_coll_box.left(),
@@ -201,7 +209,7 @@ void block_coll_result_group::get_coll_box_related_stuff
 	
 	// The local block coords
 	temp_func_get_horiz_adjusted_x( *this, cb_vert_side_x_coord_f24p8,
-		disp_x, adjusted_cb_corner_lbc_arr_helper );
+		threshold_x, adjusted_cb_corner_lbc_arr_helper );
 	temp_func_get_horiz_adjusted_y( *this, vec2_f24p8
 		( cb_top_y_coord_f24p8, cb_bot_y_coord_f24p8 ), 
 		adjusted_cb_corner_lbc_arr_helper );
@@ -210,12 +218,12 @@ void block_coll_result_group::get_coll_box_related_stuff
 	temp_func_get_vert_adjusted_x( *this, cb_vert_side_x_coord_f24p8,
 		adjusted_cb_corner_lbc_arr_helper );
 	temp_func_get_vert_adjusted_y( *this, vec2_f24p8
-		( cb_top_y_coord_f24p8, cb_bot_y_coord_f24p8 ), disp_y,
+		( cb_top_y_coord_f24p8, cb_bot_y_coord_f24p8 ), threshold_y,
 		adjusted_cb_corner_lbc_arr_helper );
 	
 	
 	//horiz_adjusted_cb_top_corner_lbc.x = horiz_adjusted_cb_bot_corner_lbc.x
-	//	= ( ( cb_vert_side_x_coord_f24p8 - disp_x ).floor_to_int() 
+	//	= ( ( cb_vert_side_x_coord_f24p8 - threshold_x ).floor_to_int() 
 	//	/ num_pixels_per_block_dim ) - left();
 	//horiz_adjusted_cb_top_corner_lbc.y = ( cb_top_y_coord_f24p8
 	//	.floor_to_int() / num_pixels_per_block_dim ) - top();
@@ -226,14 +234,14 @@ void block_coll_result_group::get_coll_box_related_stuff
 	//vert_adjusted_cb_top_corner_lbc.x = vert_adjusted_cb_bot_corner_lbc.x
 	//	= ( cb_vert_side_x_coord_f24p8.floor_to_int() 
 	//	/ num_pixels_per_block_dim ) - left();
-	//vert_adjusted_cb_top_corner_lbc.y = ( ( cb_top_y_coord_f24p8 - disp_y )
+	//vert_adjusted_cb_top_corner_lbc.y = ( ( cb_top_y_coord_f24p8 - threshold_y )
 	//	.floor_to_int() / num_pixels_per_block_dim ) - top();
-	//vert_adjusted_cb_bot_corner_lbc.y = ( ( cb_bot_y_coord_f24p8 - disp_y )
+	//vert_adjusted_cb_bot_corner_lbc.y = ( ( cb_bot_y_coord_f24p8 - threshold_y )
 	//	.floor_to_int() / num_pixels_per_block_dim ) - top();
 	
 	
 	//horiz_adjusted_cb_top_corner_lbc.x = horiz_adjusted_cb_bot_corner_lbc.x
-	//	= ( ( cb_top_corner_f24p8.x - disp_x ).floor_to_int() 
+	//	= ( ( cb_top_corner_f24p8.x - threshold_x ).floor_to_int() 
 	//	/ num_pixels_per_block_dim ) - left();
 	//horiz_adjusted_cb_top_corner_lbc.y = ( cb_top_corner_f24p8.y
 	//	.floor_to_int() / num_pixels_per_block_dim ) - top();
@@ -245,9 +253,9 @@ void block_coll_result_group::get_coll_box_related_stuff
 	//	= ( cb_top_corner_f24p8.x.floor_to_int() 
 	//	/ num_pixels_per_block_dim ) - left();
 	//vert_adjusted_cb_top_corner_lbc.y = ( ( cb_top_corner_f24p8.y 
-	//	- disp_y ).floor_to_int() / num_pixels_per_block_dim ) - top();
+	//	- threshold_y ).floor_to_int() / num_pixels_per_block_dim ) - top();
 	//vert_adjusted_cb_bot_corner_lbc.y = ( ( cb_bot_corner_f24p8.y 
-	//	- disp_y ).floor_to_int() / num_pixels_per_block_dim ) - top();
+	//	- threshold_y ).floor_to_int() / num_pixels_per_block_dim ) - top();
 	
 	if ( contains_local_block_x_coord(horiz_adjusted_cb_top_corner_lbc.x) )
 	{

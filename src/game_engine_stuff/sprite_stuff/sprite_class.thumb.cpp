@@ -2370,58 +2370,73 @@ void sprite::block_collision_stuff_16x32()
 	{
 		// We're dealing with one block that is a ceiling and/or a vertical
 		// wall 
-		//if ( top_corner_is_non_air 
-		//	&& !top_side_other_than_corner_is_blocked)
-		//{
-		//}
-		//
-		//// We're dealing with a ceiling other than the relevant top corner
-		//else if ( !top_corner_is_non_air
-		//	&& top_side_other_than_corner_is_blocked )
-		//{
-		//	
-		//}
-		//
-		//// We're dealing with multiple ceiling 
-		//else
-		//{
-		//	
-		//}
+		if ( top_corner_is_non_air 
+			&& !top_side_other_than_corner_is_blocked)
+		{
+			
+		}
 		
-		if ( v_and_t_non_air || vert_side_below_top_corner_is_blocked )
+		// We're dealing with a ceiling other than the relevant top corner
+		else if ( !top_corner_is_non_air
+			&& top_side_other_than_corner_is_blocked )
 		{
-			regular_vert_side_is_blocked_response();
+			
 		}
-		if (h_and_t_non_air)
+		
+		// We're dealing with multiple ceiling tiles
+		else
 		{
-			regular_top_side_is_blocked_response();
+			
 		}
-		//regular_top_side_is_blocked_response();
-		//block_coll_response_top_16x32(the_bcr_group);
+		
 	}
-	if ( !did_push_for_top && (bot_corner_is_non_air 
+	if ( !did_push_for_top && ( bot_corner_is_non_air 
 		|| bot_side_other_than_corner_is_blocked ) )
 	{
-		if ( v_and_b_non_air || vert_side_above_bot_corner_is_blocked )
-		{
-			regular_vert_side_is_blocked_response();
-		}
-		if (h_and_b_non_air)
-		{
-			regular_bot_side_is_blocked_response();
-		}
+		regular_bot_side_is_blocked_response();
 		
-		//regular_bot_side_is_blocked_response();
-		//block_coll_response_bot_16x32(the_bcr_group);
+		//// We're dealing with one block that is a floor and/or a vertical
+		//// wall 
+		//if ( bot_corner_is_non_air 
+		//	&& !bot_side_other_than_corner_is_blocked)
+		//{
+		//	if ( ( v_and_b_non_air && vel.y > (fixed24p8){0} )
+		//		|| vert_side_above_bot_corner_is_blocked )
+		//	{
+		//		regular_vert_side_is_blocked_response();
+		//	}
+		//	if (h_and_b_non_air)
+		//	{
+		//		regular_bot_side_is_blocked_response();
+		//	}
+		//}
+		//
+		//// We're dealing with a floor other than the relevant bot corner
+		//else if ( !bot_corner_is_non_air
+		//	&& bot_side_other_than_corner_is_blocked )
+		//{
+		//	if ( ( v_and_b_non_air && vel.y > (fixed24p8){0} )
+		//		|| vert_side_above_bot_corner_is_blocked )
+		//	{
+		//		regular_vert_side_is_blocked_response();
+		//	}
+		//	
+		//	regular_bot_side_is_blocked_response();
+		//}
+		//
+		//// We're dealing with multiple floor tiles
+		//else
+		//{
+		//	if ( ( v_and_b_non_air && vel.y > (fixed24p8){0} )
+		//		|| vert_side_above_bot_corner_is_blocked )
+		//	{
+		//		regular_vert_side_is_blocked_response();
+		//	}
+		//	
+		//	regular_bot_side_is_blocked_response();
+		//}
 	}
-	//if ( !did_push_for_top && !did_push_for_bot 
-	//	&& !did_push_for_vert_side 
-	//	&& !( top_corner_is_non_air 
-	//	|| top_side_other_than_corner_is_blocked )
-	//	&& !( bot_corner_is_non_air 
-	//	|| bot_side_other_than_corner_is_blocked ) )
-	if ( !did_push_for_top && !did_push_for_bot 
-		&& !did_push_for_vert_side )
+	if ( !did_push_for_top && !did_push_for_bot )
 	{
 		set_curr_on_ground(false);
 		
