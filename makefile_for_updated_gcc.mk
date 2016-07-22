@@ -46,9 +46,13 @@ OBJCOPY=$(COMP_PREFIX)objcopy
 LD_SCRIPT=linkscript.ld
 
 #DEBUG=yeah do debug
+
 #DEBUG_OPTIMIZATION_LEVEL=-O1
 DEBUG_OPTIMIZATION_LEVEL=-Og
 #DEBUG_OPTIMIZATION_LEVEL=-O2
+
+REGULAR_OPTIMIZATION_LEVEL=-O2
+#REGULAR_OPTIMIZATION_LEVEL=-O3
 
 ifdef DEBUG
 	##DEBUG_FLAGS=-gdwarf-2 -ggdb -gstrict-dwarf -g
@@ -57,7 +61,8 @@ ifdef DEBUG
 	GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles \
 		$(DEBUG_OPTIMIZATION_LEVEL) -g
 else
-	GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles -O2
+	GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles \
+	$(REGULAR_OPTIMIZATION_LEVEL)
 endif
 
 THUMB_BASE_FLAGS=$(GLOBAL_BASE_FLAGS) -mthumb -mthumb-interwork

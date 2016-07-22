@@ -49,7 +49,7 @@ VERBOSE_ASM_FLAG=
 
 
 
-DEBUG=yeah do debug
+#DEBUG=yeah do debug
 
 #DEBUG_OPTIMIZATION_LEVEL=-O1
 DEBUG_OPTIMIZATION_LEVEL=-Og
@@ -80,7 +80,9 @@ ARM_CXX_FLAGS=-std=c++14 $(ARM_BASE_FLAGS) -Wall
 
 S_FLAGS=-mcpu=arm7tdmi -mthumb -mthumb-interwork
 
-COMMON_LD_FLAGS=--specs=nosys.specs -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm
+COMMON_LD_FLAGS=--specs=nosys.specs -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ `$(CXX) -print-file-name=thumb/libgcc.a` `$(CXX) -print-file-name=thumb/libc.a` `$(CXX) -print-file-name=thumb/libstdc++.a` -lmm
+
+#COMMON_LD_FLAGS=--specs=nosys.specs -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lmm
 
 # This is the LD_FLAGS for devkitARM
 #LD_FLAGS=$(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm $(DEBUG_FLAGS)

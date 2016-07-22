@@ -171,20 +171,19 @@ public:		// variables
 	// Static variables
 	
 	//static fixed24p8 speed __attribute__((_iwram));
-	static bool use_16x16 __attribute__((_iwram));
-	static bool run_toggle __attribute__((_iwram));
+	static bool use_16x16;
+	static bool run_toggle;
 	
-	static s32 max_hp __attribute__((_iwram));
-	static s32 remaining_hp __attribute__((_iwram));
+	static s32 max_hp;
+	static s32 remaining_hp;
 	
 	// Pickaxe stuff
-	static bool swinging_pickaxe __attribute__((_iwram));
-	static u32 pickaxe_sprite_slot __attribute__((_iwram));
+	static bool swinging_pickaxe;
+	static u32 pickaxe_sprite_slot;
 	
 	
-	static bool warped_this_frame __attribute__((_iwram));
-	static bool warped_to_other_sublevel_this_frame
-		__attribute__((_iwram));
+	static bool warped_this_frame;
+	static bool warped_to_other_sublevel_this_frame;
 	
 	
 	

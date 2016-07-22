@@ -38,7 +38,8 @@ public:		// variables
 public:		// functions
 	inline sa_stack() : curr_index(0)
 	{
-		memfill32( the_array.data(), type(), size * sizeof(type) );
+		//memfill32( the_array.data(), type(), size * sizeof(type) );
+		the_array.fill(type());
 	}
 	
 	inline void push( const type& to_push )
@@ -78,7 +79,7 @@ public:		// functions
 template< u32 size >
 class sa_free_list : public sa_stack< int, size >
 {
-public:		// variables
+public:		// typedefs
 	typedef sa_stack< int, size > specific_sa_stack;
 	
 public:		// functions

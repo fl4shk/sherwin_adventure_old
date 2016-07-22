@@ -46,6 +46,9 @@ protected:		// variables
 	
 public:		// constants
 	
+	static constexpr vec2_f24p8 cpg_16x32_threshold_abs = { {0x400}, 
+		{0x400} };
+	
 	//static constexpr fixed24p8 grav_acc = {0x80};
 	//static constexpr fixed24p8 grav_acc = {0x40};
 	//static constexpr fixed24p8 grav_acc = {0x60};
@@ -53,6 +56,7 @@ public:		// constants
 	//static constexpr fixed24p8 max_y_vel = {0x400};
 	static constexpr fixed24p8 max_y_vel = {0x300};
 	//static constexpr fixed24p8 max_y_vel = {0x280};
+	
 	
 	static constexpr sprite_type the_const_sprite_type = st_default;
 	static constexpr sprite_palette_slot the_palette_slot = sps_player;

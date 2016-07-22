@@ -163,22 +163,22 @@ coll_point_group_16x32::coll_point_group_16x32( const sprite& the_sprite )
 	
 	
 	// Top and Bottom
-	//list_of_16x32_horiz_side_xpos_left_coll_point_names(X)
-	//	the_coll_box.left() + (fixed24p8){0x400};
+	list_of_16x32_horiz_side_xpos_left_coll_point_names(X)
+		the_coll_box.left() + (fixed24p8){0x400};
 	//list_of_16x32_horiz_side_xpos_left_coll_point_names(X)
 	//	the_coll_box.left() + (fixed24p8){0x480};
-	list_of_16x32_horiz_side_xpos_left_coll_point_names(X)
-		the_coll_box.left();
+	//list_of_16x32_horiz_side_xpos_left_coll_point_names(X)
+	//	the_coll_box.left();
 	
 	list_of_16x32_horiz_side_xpos_middle_coll_point_names(X)
 		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
 	
-	//list_of_16x32_horiz_side_xpos_right_coll_point_names(X)
-	//	the_coll_box.right() - (fixed24p8){0x400};
+	list_of_16x32_horiz_side_xpos_right_coll_point_names(X)
+		the_coll_box.right() - (fixed24p8){0x400};
 	//list_of_16x32_horiz_side_xpos_right_coll_point_names(X)
 	//	the_coll_box.right() - (fixed24p8){0x480};
-	list_of_16x32_horiz_side_xpos_right_coll_point_names(X)
-		the_coll_box.right();
+	//list_of_16x32_horiz_side_xpos_right_coll_point_names(X)
+	//	the_coll_box.right();
 	
 	
 	

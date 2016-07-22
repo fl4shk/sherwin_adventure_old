@@ -100,7 +100,7 @@ inline void temp_func_get_vert_adjusted_y
 
 
 
-void block_coll_result_group::get_corner_stuff
+void block_coll_result_group::get_corner_stuff_old
 	( array_helper<block_coll_result*>& bcr_ptr_arr_helper, 
 	array_helper<u32>& bool_as_u32_arr_helper )
 {
@@ -137,7 +137,7 @@ void block_coll_result_group::get_corner_stuff
 }
 
 
-void block_coll_result_group::get_coll_box_related_stuff
+void block_coll_result_group::get_coll_box_related_stuff_old
 	( const sprite& the_sprite, 
 	array_helper<block_coll_result*>& bcr_ptr_arr_helper )
 {
@@ -291,7 +291,7 @@ void block_coll_result_group::get_coll_box_related_stuff
 	
 }
 
-void block_coll_result_group::get_side_blocked_stuff
+void block_coll_result_group::get_side_blocked_stuff_old
 	( array_helper<u32>& bool_as_u32_arr_helper )
 {
 	u32& vert_side_below_top_corner_is_blocked
