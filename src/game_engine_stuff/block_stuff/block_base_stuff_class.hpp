@@ -51,8 +51,7 @@ public:		// functions
 	virtual const u32 get_metatile_number();
 	virtual const u32 get_palette_number();
 	virtual const u32 get_metatile_graphics_slot();
-	virtual block_behavior_type get_behavior_type()
-		__attribute__((_iwram_code));
+	virtual block_behavior_type get_behavior_type();
 	
 	virtual void strongly_hit_response( block& the_block, 
 		const vec2_s32& coord );

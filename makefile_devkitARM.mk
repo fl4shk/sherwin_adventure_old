@@ -63,10 +63,10 @@ ifdef DEBUG
 	DEBUG_FLAGS=-gdwarf-3 -g
 	
 	GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles \
-		$(DEBUG_OPTIMIZATION_LEVEL) -g
+		-fno-exceptions -fno-rtti $(DEBUG_OPTIMIZATION_LEVEL) -g
 else
 	GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles \
-		$(REGULAR_OPTIMIZATION_LEVEL)
+		-fno-exceptions -fno-rtti $(REGULAR_OPTIMIZATION_LEVEL)
 endif
 
 
