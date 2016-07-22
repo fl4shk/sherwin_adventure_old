@@ -22,6 +22,22 @@
 	mov r11, r11
 .endm
 
+.macro long_call_via_r4_from_arm func_addr
+	ldr r4, =\func_addr
+	mov lr, pc
+	bx r4
+.endm
+
+.macro long_call_via_r4_from_arm_type_2
+	mov lr, pc
+	bx r4
+.endm
+
+.macro long_call_via_r6_from_arm_type_2
+	mov lr, pc
+	bx r6
+.endm
+
 
 .org 0x00
 .section ".startup","ax",%progbits
@@ -51,12 +67,18 @@ next:
 	@ We will use the memcpy32 from Tonc function that is --IN ROM-- to copy the memcpy32 from Tonc function to IWRAM (kind of ironic or something, isn't it?).
 	ldr r0, =iwram_code_iwram_start			@ destination
 	ldr r1, =iwram_code_rom_start	@ source
-	ldr r2, =iwram_code_size		@ \ word count
-	lsr r2, #0x02					@ / 
+	@ldr r2, =iwram_code_size		@ \ word count
+	@lsr r2, #0x02					@ / 
+	
+	ldr r2, =iwram_code_section_size		@ byte count
 	
 	
-	@ Branch to the memcpy32 function that is --IN ROM-- and use that to copy the .iwram_code section to IWRAM.
-	ldr r4, =memcpy32
+	@@@ Branch to the memcpy32 function that is --IN ROM-- and use that to copy the .iwram_code section to IWRAM.
+	@@ldr r4, =memcpy32
+	
+	
+	@ Branch to the memcpy8 function that is --IN ROM-- and use that to copy the .iwram_code section to IWRAM.
+	ldr r4, =memcpy8
 	ldr r5, =iwram_code_iwram_start
 	
 	@.soft_break
@@ -72,38 +94,52 @@ next:
 	@b .next_infin_asdf_asdf
 	@b .Lnext_infin
 	
-	mov lr, pc
-	bx r6
+	@mov lr, pc
+	@bx r6
+	long_call_via_r6_from_arm_type_2
 	
 	
 	
-	@ Now we will use the memcpy32 function that is in IWRAM to copy the .ewram_code section to EWRAM.
+	@@@ Now we will use the memcpy32 function that is in IWRAM to copy the .ewram_code section to EWRAM.
+	
+	@ Now we will use the memcpy function that is in IWRAM to copy the .ewram_code section to EWRAM.
 	ldr r0, =ewram_code_ewram_start			@ destination
 	ldr r1, =ewram_code_rom_start	@ source
-	ldr r2, =ewram_code_size		@ \ word count
-	lsr r2, #0x02					@ / 
+	@ldr r2, =ewram_code_size		@ \ word count
+	@lsr r2, #0x02					@ / 
 	
-	@ Branch to the memcpy32 function that is in IWRAM and use it to copy the .ewram_code section to EWRAM.
-	@ldr r4, =memcpy32
-	@bx_afa r4
 	
-	@ r4 still contains the address of memcpy32 in IWRAM (horray for stack
-	@ manipulation)
-	mov lr, pc
-	bx r4
+	ldr r2, =ewram_code_section_size		@ byte count
+	
+	@@ Branch to the memcpy32 function that is in IWRAM and use it to copy the .ewram_code section to EWRAM.
+	@@ldr r4, =memcpy32
+	@@bx_afa r4
+	
+	
+	@ Branch to the memcpy function that is in IWRAM and use it to copy the .ewram_code section to EWRAM.
+	@ldr r4, =memcpy
+	@mov lr, pc
+	@bx r4
+	long_call_via_r4_from_arm memcpy
 	
 	
 	
 	@ Copy the MaxMOD code to IWRAM
 	ldr r0, =maxmod_code_iwram_start	@ destination
 	ldr r1, =maxmod_code_rom_start		@ source
-	ldr r2, =maxmod_code_size			@ \ word count
-	lsr r2, #0x02						@ /
+	@ldr r2, =maxmod_code_size			@ \ word count
+	@lsr r2, #0x02						@ /
 	
-	@ r4 still contains the address of memcpy32 in IWRAM (horray for stack
+	ldr r2, =maxmod_code_section_size			@ byte count
+	
+	@@@ r4 still contains the address of memcpy32 in IWRAM (horray for stack
+	@@@ manipulation)
+	
+	@ r4 still contains the address of memcpy in IWRAM (horray for stack
 	@ manipulation)
-	mov lr, pc
-	bx r4
+	@mov lr, pc
+	@bx r4
+	long_call_via_r4_from_arm_type_2
 	
 	
 	@ Clear the .bss section (Fill with 0x00)
@@ -113,10 +149,13 @@ next:
 	
 	@ Compute the size of the .bss section in bytes.  This is the word
 	@ count, multiplied by 4.
+	
+	
+	@ Compute the size of the .bss section in bytes.
 	sub r2, r2, r0
 	
-	@ Compute the word count.
-	lsr r2, #0x02
+	@@ Compute the word count.
+	@lsr r2, #0x02
 	
 	@ The .bss section is to be filled with 0x00
 	@@mvn r1, #0x01
@@ -124,9 +163,11 @@ next:
 	@ldr r1, silly_string
 	
 	
-	ldr r4, =memfill32
-	mov lr, pc
-	bx r4
+	@@ldr r4, =memfill32
+	@ldr r4, =memset
+	@mov lr, pc
+	@bx r4
+	long_call_via_r4_from_arm memset
 	
 	
 	
@@ -146,13 +187,19 @@ next:
 	@ Compute the size of the .data section, in bytes.
 	sub r2, r2, r0
 	
-	@ Compute the wdcount parameter of memcpy32
-	lsr r2, #0x02
 	
-	@ Branch to the memcpy32 function.  It is indeed in IWRAM.
-	ldr r3, =memcpy32
-	mov lr, pc
-	bx r3
+	@@ Compute the wdcount parameter of memcpy32
+	@lsr r2, #0x02
+	
+	@@ Branch to the memcpy32 function.  It is indeed in IWRAM.
+	@ldr r3, =memcpy32
+	
+	
+	@ Branch to the memcpy function.  It is indeed in IWRAM.
+	@ldr r4, =memcpy
+	@mov lr, pc
+	@bx r4
+	long_call_via_r4_from_arm memcpy
 	
 	
 @ Now it's time to copy the initialized .iwram_data section from ROM to 
@@ -171,13 +218,15 @@ next:
 	@ Compute the size of the .iwram_data section, in bytes.
 	sub r2, r2, r0
 	
-	@ Compute the wdcount parameter of memcpy32
-	lsr r2, #0x02
+	@@ Compute the wdcount parameter of memcpy32
+	@lsr r2, #0x02
 	
-	@ Branch to the memcpy32 function.  It is indeed in IWRAM.
-	ldr r3, =memcpy32
-	mov lr, pc
-	bx r3
+	
+	@ Branch to the memcpy function.  It is indeed in IWRAM.
+	@@ldr r4, =memcpy
+	@mov lr, pc
+	@bx r4
+	long_call_via_r4_from_arm_type_2
 	
 	
 .Lcopy_init_array_section_from_rom_to_ewram:
@@ -185,20 +234,23 @@ next:
 	ldr r1, =__init_array_load
 	ldr r2, =__init_array_end
 	sub r2, r2, r0
-	lsr r2, #0x02
+	@lsr r2, #0x02
 	
-	ldr r3, =memcpy32
-	mov lr, pc
-	bx r3
+	
+	@@ldr r4, =memcpy
+	@mov lr, pc
+	@bx r4
+	long_call_via_r4_from_arm_type_2
 	
 	
 	@@ Call the global C++ constructors
-	ldr r3, =__libc_init_array
+	@ldr r4, =__libc_init_array
+	@mov lr, pc
+	@bx r4
+	long_call_via_r4_from_arm __libc_init_array
 	
-	mov lr, pc
-	bx r3
 	
-	
+	@ Switch to THUMB mode.
 	ldr r0, =asm_main + 1
 	bx r0
 
@@ -211,7 +263,7 @@ next:
 .align 2
 
 
-.section ".rodata","ax",%progbits
+.section ".rodata"
 .align 2
 .global div_table
 div_table:  

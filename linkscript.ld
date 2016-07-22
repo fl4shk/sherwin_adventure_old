@@ -29,6 +29,8 @@ SECTIONS
 		. = ALIGN(4);
 	} >rom
 	
+	startup_section_size = SIZEOF(.startup);
+	
 	.text :
 	{
 		CREATE_OBJECT_SYMBOLS
@@ -56,6 +58,10 @@ SECTIONS
 		*(.fini)
 	} >rom
 	
+	text_section_size = SIZEOF(.text);
+	
+	
+	
 	.ARM.extab   : { *(.ARM.extab* .gnu.linkonce.armextab.*) } >rom
 	__exidx_start = .;
 	.ARM.exidx   : { *(.ARM.exidx* .gnu.linkonce.armexidx.*) } >rom
@@ -73,6 +79,8 @@ SECTIONS
 		__init_array_end = .;
 	} >ewram AT >rom
 	
+	init_array_section_size = SIZEOF(.init_array);
+	
 	
 	/* Initialized data in EWRAM */
 	.data :
@@ -87,6 +95,9 @@ SECTIONS
 		__data_end = .;
 	} >ewram AT >rom
 	
+	data_section_size = SIZEOF(.data);
+	
+	
 	/* Initialized data in IWRAM */
 	.iwram_data :
 	{
@@ -98,6 +109,7 @@ SECTIONS
 		__iwram_data_end = .;
 	} >iwram AT >rom
 	
+	iwram_data_section_size = SIZEOF(.iwram_data);
 	
 	/* Code to be copied to IWRAM */
 	.iwram_code :
@@ -112,7 +124,7 @@ SECTIONS
 		. = ALIGN(4);
 	} >iwram AT >rom
 	
-	iwram_code_size = SIZEOF(.iwram_code);
+	iwram_code_section_size = SIZEOF(.iwram_code);
 	
 	
 	/* MaxMOD puts code in the .iwram segment, so it will be treated as such
@@ -133,7 +145,7 @@ SECTIONS
 		
 	} >iwram AT >rom
 	
-	maxmod_code_size = SIZEOF(.maxmod_code);
+	maxmod_code_section_size = SIZEOF(.maxmod_code);
 	
 	/* Uninitialized variables that go into IWRAM*/
 	.iwram_bss :
@@ -146,8 +158,11 @@ SECTIONS
 		/*__end__ = .;*/
 	} >iwram
 	
-	iwram_bss_size = SIZEOF(.iwram_bss);
-	total_iwram_size = iwram_code_size + maxmod_code_size + iwram_bss_size;
+	iwram_bss_section_size = SIZEOF(.iwram_bss);
+	
+	total_iwram_var_size = iwram_data_section_size + iwram_bss_section_size;
+	total_iwram_code_size = iwram_code_section_size + maxmod_code_section_size;
+	total_iwram_usage = total_iwram_var_size + total_iwram_code_size;
 	
 	.ewram_code :
 	{
@@ -160,10 +175,10 @@ SECTIONS
 		. = ALIGN(4);
 	} >ewram AT >rom
 	
-	ewram_code_size = SIZEOF(.ewram_code);
+	ewram_code_section_size = SIZEOF(.ewram_code);
 	
 	
-	/* Uninitialized variables that go into EWRAM */
+	/* Uninitialized (set to zero) variables that go into EWRAM */
 	.bss :
 	{
 		__bss_start__ = .;
@@ -178,7 +193,12 @@ SECTIONS
 		__end__ = .;
 	} >ewram
 	
-	bss_size = SIZEOF(.bss);
+	bss_section_size = SIZEOF(.bss);
+	
+	
+	total_ewram_var_size = init_array_section_size + data_section_size + bss_section_size;
+	total_ewram_code_size = ewram_code_section_size;
+	total_ewram_usage = total_ewram_var_size + total_ewram_code_size;
 	
 	
 	/*
@@ -196,6 +216,7 @@ SECTIONS
 		. = ALIGN(4);
 	} >sram
 	
+	sram_section_size = SIZEOF(.sram);
 	
 	.stab : { *(.stab) } AT >rom
 	.stabstr : { *(.stabstr) } AT >rom
