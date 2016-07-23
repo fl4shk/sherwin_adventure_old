@@ -37,6 +37,10 @@ void* memset( void* dst, int c, size_t n )
 	__attribute__((_iwram_code));
 
 
+// This function is used by crt0.s
+void* slower_memcpy( void* dst, const void* src, size_t n );
+
+
 // lut_udiv should actually take a u16 dem, not a u32 dem
 extern u64 lut_udiv( u32 num, u32 dem );
 

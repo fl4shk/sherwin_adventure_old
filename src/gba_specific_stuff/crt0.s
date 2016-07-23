@@ -22,18 +22,24 @@
 	mov r11, r11
 .endm
 
-.macro long_call_via_r4_from_arm func_addr
+.macro long_call_via_r4_fata func_addr
 	ldr r4, =\func_addr
 	mov lr, pc
 	bx r4
 .endm
 
-.macro long_call_via_r4_from_arm_type_2
+.macro long_call_via_r4_fatt func_addr
+	ldr r4, =\func_addr + 1
 	mov lr, pc
 	bx r4
 .endm
 
-.macro long_call_via_r6_from_arm_type_2
+.macro long_call_via_r4_fata_type_2
+	mov lr, pc
+	bx r4
+.endm
+
+.macro long_call_via_r6_fata_type_2
 	mov lr, pc
 	bx r6
 .endm
@@ -56,6 +62,8 @@ _start2:
 @	b next
 
 
+
+
 .org 0x0100
 .section ".startup","ax",%progbits
 .align 2
@@ -63,12 +71,17 @@ _start2:
 
 .do_arm
 next:
+	@@ Now we need to copy the code that goes in IWRAM to IWRAM
+	@@ We will use the memcpy32 from Tonc function that is --IN ROM-- to copy the memcpy32 from Tonc function to IWRAM (kind of ironic or something, isn't it?).
+	
+	
+	
 	@ Now we need to copy the code that goes in IWRAM to IWRAM
-	@ We will use the memcpy32 from Tonc function that is --IN ROM-- to copy the memcpy32 from Tonc function to IWRAM (kind of ironic or something, isn't it?).
+	
 	ldr r0, =iwram_code_iwram_start			@ destination
-	ldr r1, =iwram_code_rom_start	@ source
-	@ldr r2, =iwram_code_size		@ \ word count
-	@lsr r2, #0x02					@ / 
+	ldr r1, =iwram_code_rom_start			@ source
+	@ldr r2, =iwram_code_section_size		@ \ word count
+	@lsr r2, #0x02							@ / 
 	
 	ldr r2, =iwram_code_section_size		@ byte count
 	
@@ -77,26 +90,23 @@ next:
 	@@ldr r4, =memcpy32
 	
 	
-	@ Branch to the memcpy8 function that is --IN ROM-- and use that to copy the .iwram_code section to IWRAM.
-	ldr r4, =memcpy8
-	ldr r5, =iwram_code_iwram_start
+	@@ Branch to the slower_memcpy() function that is --IN ROM-- and use
+	@@ THAT to copy the .iwram_code section to IWRAM.
+	@ldr r4, =slower_memcpy
+	@ldr r5, =iwram_code_iwram_start
+	@
+	@@.soft_break
+	@
+	@sub r6, r4, r5
+	@
+	@ldr r5, =iwram_code_rom_start
+	@add r6, r5
+	@@bx_afa r4
+	@
+	@long_call_via_r6_fata_type_2
 	
-	@.soft_break
+	long_call_via_r4_fatt slower_memcpy
 	
-	sub r6, r4, r5
-	
-	ldr r5, =iwram_code_rom_start
-	add r6, r5
-	@bx_afa r4
-	
-@.Lnext_infin:
-	@.soft_break
-	@b .next_infin_asdf_asdf
-	@b .Lnext_infin
-	
-	@mov lr, pc
-	@bx r6
-	long_call_via_r6_from_arm_type_2
 	
 	
 	
@@ -120,7 +130,7 @@ next:
 	@ldr r4, =memcpy
 	@mov lr, pc
 	@bx r4
-	long_call_via_r4_from_arm memcpy
+	long_call_via_r4_fata memcpy
 	
 	
 	
@@ -139,11 +149,11 @@ next:
 	@ manipulation)
 	@mov lr, pc
 	@bx r4
-	long_call_via_r4_from_arm_type_2
+	long_call_via_r4_fata_type_2
 	
 	
 	@ Clear the .bss section (Fill with 0x00)
-.Lclear_bss:
+.L_clear_bss:
 	ldr r0, =__bss_start__
 	ldr r2, =__bss_end__
 	
@@ -167,13 +177,13 @@ next:
 	@ldr r4, =memset
 	@mov lr, pc
 	@bx r4
-	long_call_via_r4_from_arm memset
+	long_call_via_r4_fata memset
 	
 	
 	
 	
 @ Now it's time to copy the initialized .data section from ROM to EWRAM
-.Lcopy_initialized_data_from_rom_to_ewram:
+.L_copy_initialized_data_from_rom_to_ewram:
 	
 	@ __data_start is the destination address, in EWRAM
 	ldr r0, =__data_start
@@ -199,12 +209,12 @@ next:
 	@ldr r4, =memcpy
 	@mov lr, pc
 	@bx r4
-	long_call_via_r4_from_arm memcpy
+	long_call_via_r4_fata memcpy
 	
 	
 @ Now it's time to copy the initialized .iwram_data section from ROM to 
 @ IWRAM
-.Lcopy_initialized_iwram_data_from_rom_to_iwram:
+.L_copy_initialized_iwram_data_from_rom_to_iwram:
 	
 	@ __iwram_data_start is the destination address, in IWRAM
 	ldr r0, =__iwram_data_start
@@ -226,10 +236,10 @@ next:
 	@@ldr r4, =memcpy
 	@mov lr, pc
 	@bx r4
-	long_call_via_r4_from_arm_type_2
+	long_call_via_r4_fata_type_2
 	
 	
-.Lcopy_init_array_section_from_rom_to_ewram:
+.L_copy_init_array_section_from_rom_to_ewram:
 	ldr r0, =__init_array_start
 	ldr r1, =__init_array_load
 	ldr r2, =__init_array_end
@@ -240,14 +250,14 @@ next:
 	@@ldr r4, =memcpy
 	@mov lr, pc
 	@bx r4
-	long_call_via_r4_from_arm_type_2
+	long_call_via_r4_fata_type_2
 	
 	
 	@@ Call the global C++ constructors
 	@ldr r4, =__libc_init_array
 	@mov lr, pc
 	@bx r4
-	long_call_via_r4_from_arm __libc_init_array
+	long_call_via_r4_fata __libc_init_array
 	
 	
 	@ Switch to THUMB mode.
@@ -305,8 +315,8 @@ _blx_r3_stub:
 asm_main:
 	bl main
 	
-.Lasm_main_infin:
-	b .Lasm_main_infin
+.L_asm_main_infin:
+	b .L_asm_main_infin
 
 
 

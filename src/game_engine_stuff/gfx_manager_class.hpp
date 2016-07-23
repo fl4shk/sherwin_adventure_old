@@ -26,7 +26,7 @@
 #include "../gba_specific_stuff/attribute_defines.hpp"
 #include "../gba_specific_stuff/gfx_reg_stuff.hpp"
 
-#include "sa_stack_class.hpp"
+#include "sa_stack_classes.hpp"
 
 class sprite;
 

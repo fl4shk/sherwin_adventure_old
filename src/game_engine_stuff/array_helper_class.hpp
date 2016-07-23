@@ -26,7 +26,7 @@
 
 
 // This is a VERY thin wrapper class for working with 1D arrays
-template < typename type >
+template< typename type >
 class array_helper
 {
 public:			// variables
@@ -77,11 +77,11 @@ public:			// functions
 	
 	type& data_at( u32 offset )
 	{
-		return the_array [offset];
+		return the_array[offset];
 	}
 	
 	
-};
+} __attribute__((_align4));
 
 
 #endif		// array_helper_class_hpp

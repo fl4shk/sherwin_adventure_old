@@ -101,7 +101,7 @@ public:			// functions
 	}
 	
 	
-};
+} __attribute__((_align4));
 
 
 

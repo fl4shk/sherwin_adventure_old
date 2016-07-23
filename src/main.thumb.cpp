@@ -61,8 +61,14 @@ int main()
 	
 	ewram_test_arr[0] = '9';
 	
-	//memcpy( &ewram_test_arr[1], test_str, 5 );
+	
 	memset( &ewram_test_arr[1], '3', 9 );
+	//memcpy( &ewram_test_arr[1], test_str, 5 );
+	//slower_memcpy( &ewram_test_arr[1], test_str, 5 );
+	
+	//memcpy( &ewram_test_arr[1]
+	
+	
 	
 	
 	// This will eventually be used to identify whether save data has been
