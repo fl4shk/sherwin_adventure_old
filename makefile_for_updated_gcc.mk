@@ -269,7 +269,7 @@ $(ARM_CXX_ASMOUTS) : $(ASMOUTDIR)/%.arm.s : %.arm.cpp
 
 .PHONY : clean
 clean :
-	rm -rfv $(ASMOUTDIR) $(OBJDIR) $(DEPDIR) linker_map.txt $(PROJ).elf $(PROJ).gba 
+	rm -rfv $(ASMOUTDIR) $(OBJDIR) $(OBJDIR_DIS) $(DEPDIR) linker_map.txt $(PROJ).elf $(PROJ).gba 
 
 .PHONY : clean_objs_with_no_source
 clean_objs_with_no_source :

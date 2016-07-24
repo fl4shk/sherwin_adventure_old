@@ -1,6 +1,7 @@
 *.swp
 deps/*
 objs/*
+objs_dis/*
 asmouts/*
 small_code_testing_things/*
 *.elf
