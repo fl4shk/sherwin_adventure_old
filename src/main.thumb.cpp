@@ -50,8 +50,8 @@ extern "C" int ewram_test_func();
 static const u32 ewram_test_arr_size = 10;
 u8 ewram_test_arr[ewram_test_arr_size] __attribute__((_ewram));
 
-static const char* test_str = "Birds2";
-static const u32 test_str_size = sizeof(test_str) / sizeof(char);
+static const char test_str[] = "Birds2";
+static const u32 test_str_size = ( sizeof(test_str) / sizeof(char) ) - 1;
 
 
 int main()
