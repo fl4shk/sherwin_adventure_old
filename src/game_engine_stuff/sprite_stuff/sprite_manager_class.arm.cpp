@@ -117,11 +117,10 @@ void sprite_manager::spawn_sprites_if_needed
 			//	: active_level::horiz_sublevel_sprite_ipg_lists[i] )
 			for ( int j=curr_sprite_ipg_list.front_node_index;
 				j!=-1;
-				j=curr_sprite_ipg_list.get_node_at_node_index(j)
-				.next_node_index )
+				j=curr_sprite_ipg_list.get_node_at(j).next_node_index )
 			{
 				sprite_init_param_group& sprite_ipg = curr_sprite_ipg_list
-					.get_node_at_node_index(j).the_data;
+					.get_node_at(j).the_data;
 				
 				// Find the lowest FREE sprite slot, if any.
 				//while ( ( the_sprites[next_sprite_index].the_sprite_type 
@@ -188,11 +187,11 @@ void sprite_manager::spawn_sprites_if_needed
 			//	: active_level::horiz_sublevel_sprite_ipg_lists[i] )
 			for ( int j=curr_sprite_ipg_list.front_node_index;
 				j!=-1;
-				j=curr_sprite_ipg_list.get_node_at_node_index(j)
+				j=curr_sprite_ipg_list.get_node_at(j)
 				.next_node_index )
 			{
 				sprite_init_param_group& sprite_ipg = curr_sprite_ipg_list
-					.get_node_at_node_index(j).the_data;
+					.get_node_at(j).the_data;
 				
 				// Find the lowest FREE sprite slot, if any.
 				//while ( ( the_sprites[next_sprite_index].the_sprite_type 

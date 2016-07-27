@@ -266,7 +266,7 @@ next:
 	long_call_via_r4_fata __libc_init_array
 	
 	
-.L_branch_to_asm_main
+.L_branch_to_asm_main:
 	@ Switch to THUMB mode.
 	ldr r0, =asm_main + 1
 	bx r0

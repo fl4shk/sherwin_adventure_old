@@ -575,10 +575,10 @@ void sprite_manager::initial_sprite_spawning_shared_code
 		//for ( sprite_init_param_group& sprite_ipg : which_list )
 		for ( int i=which_list.front_node_index;
 			i!=-1;
-			i=which_list.get_node_at_node_index(i).next_node_index )
+			i=which_list.get_node_at(i).next_node_index )
 		{
-			sprite_init_param_group& sprite_ipg = which_list
-				.get_node_at_node_index(i).the_data;
+			sprite_init_param_group& sprite_ipg = which_list.get_node_at(i)
+				.the_data;
 			
 			vec2_u32 spr_block_grid_coord;
 			spr_block_grid_coord.x = sprite_ipg.initial_block_grid_x_coord;

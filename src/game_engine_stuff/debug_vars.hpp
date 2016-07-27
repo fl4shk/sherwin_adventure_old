@@ -1,19 +1,19 @@
-// This file is part of Sherwin's Adventure.
+// This file is part of GBA Project Template.
 // 
 // Copyright 2015-2016 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// GBA Project Template is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// GBA Project Template is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
-// with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
+// with GBA Project Template.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #ifndef debug_vars_hpp
@@ -22,7 +22,7 @@
 #include "misc_types.hpp"
 #include "../gba_specific_stuff/attribute_defines.hpp"
 #include "../gba_specific_stuff/asm_funcs.hpp"
-#include "coll_box_class.hpp"
+//#include "coll_box_class.hpp"
 #include "fixed_classes.hpp"
 #include "array_helper_class.hpp"
 
@@ -100,6 +100,7 @@ protected:		// variables
 public:		// and constants
 	// Please make sure that max_size is a multiple of 4.  max_size is the
 	// number of elements in arr.
+	///static constexpr u32 max_size = 16;
 	static constexpr u32 max_size = 16;
 	char arr[max_size];
 	
@@ -128,6 +129,11 @@ public:		// functions
 			real_size = n_real_size;
 		}
 	}
+	
+	inline void clear()
+	{
+		arr_memfill32( arr, 0, max_size );
+	}
 } __attribute__((_align4));
 
 
@@ -148,7 +154,7 @@ protected:		// static variables (raw debug arrays)
 	} __attribute__((_align4));
 	static raw_array_group the_raw_array_group;
 	
-public:		// static variables (array_helpers and an array_2d_helper)
+public:		// static variables (array_helpers)
 	static array_helper<vu32> curr_index_arr_helper;
 	
 	static array_helper<vu32> debug_u32_arr_helper;
