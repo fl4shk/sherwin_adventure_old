@@ -629,13 +629,13 @@ void sprite::get_basic_block_coll_results_16x16
 	//	name##_coll_result.the_block \
 	//		= &active_level::the_block_data_at_coord \
 	//		(name##_coll_result.coord);
-	//list_of_16x16_coll_point_names(X)
+	//list_of_shared_coll_point_names(X)
 	//#undef X
 	
 	#define X(name) \
 		name##_coll_result = block_coll_result(the_pt_group \
 			.get_pt_##name()); \
-	list_of_16x16_coll_point_names(X)
+	list_of_shared_coll_point_names(X)
 	#undef X
 }
 
@@ -657,14 +657,14 @@ void sprite::get_basic_block_coll_results_16x32
 	//	name##_coll_result.the_block \
 	//		= &active_level::the_block_data_at_coord \
 	//		(name##_coll_result.coord);
-	//list_of_16x32_coll_point_names(X)
+	//list_of_shared_coll_point_names(X)
 	//#undef X
 	
 	
 	#define X(name) \
 		name##_coll_result = block_coll_result(the_pt_group \
 			.get_pt_##name());
-	list_of_16x32_coll_point_names(X)
+	list_of_shared_coll_point_names(X)
 	#undef X
 }
 
@@ -1422,17 +1422,17 @@ block_type sprite::slope_block_coll_response_bot_16x32_old
 
 
 void sprite::block_coll_response_left_16x16
-	( const block_coll_result_group& the_bcr_group )
+	( const block_coll_result_rect_group& the_bcr_rect_group )
 {
 	////in_level_pos.x = make_f24p8( ( lt_coll_result.coord.x + 1 ) * 16 ) 
 	////	- cb_pos_offset.x;
 	//set_curr_in_level_pos_x( make_f24p8( ( lt_coll_result.coord.x + 1 ) 
 	//	* 16 ) - cb_pos_offset.x );
-	//set_curr_in_level_pos_x( make_f24p8( ( the_bcr_group.get_bcr_lt()
+	//set_curr_in_level_pos_x( make_f24p8( ( the_bcr_rect_group.get_bcr_lt()
 	//	.coord.x + 1 ) * num_pixels_per_block_dim ) - cb_pos_offset.x );
-	//set_curr_in_level_pos_x( make_f24p8( ( the_bcr_group.left() + 1 ) 
+	//set_curr_in_level_pos_x( make_f24p8( ( the_bcr_rect_group.left() + 1 ) 
 	//	* num_pixels_per_block_dim ) - cb_pos_offset.x );
-	push_out_of_left_block(the_bcr_group);
+	push_out_of_left_block(the_bcr_rect_group);
 	
 	// Don't let the sprite speed up while in the air and horizontally
 	// colliding with a block.
@@ -1443,20 +1443,20 @@ void sprite::block_coll_response_left_16x16
 }
 
 void sprite::block_coll_response_right_16x16
-	( const block_coll_result_group& the_bcr_group )
+	( const block_coll_result_rect_group& the_bcr_rect_group )
 {
 	////in_level_pos.x = make_f24p8( rt_coll_result.coord.x * 16 ) 
 	////	- the_coll_box.size.x - cb_pos_offset.x;
 	////	//- make_f24p8(get_shape_size_as_vec2().x);
 	//set_curr_in_level_pos_x ( make_f24p8( rt_coll_result.coord.x * 16 ) 
 	//	- the_coll_box.size.x - cb_pos_offset.x );
-	//set_curr_in_level_pos_x ( make_f24p8( the_bcr_group.get_bcr_rt()
+	//set_curr_in_level_pos_x ( make_f24p8( the_bcr_rect_group.get_bcr_rt()
 	//	.coord.x * num_pixels_per_block_dim ) - the_coll_box.size.x 
 	//	- cb_pos_offset.x );
-	//set_curr_in_level_pos_x ( make_f24p8( the_bcr_group.right()
+	//set_curr_in_level_pos_x ( make_f24p8( the_bcr_rect_group.right()
 	//	* num_pixels_per_block_dim ) - the_coll_box.size.x 
 	//	- cb_pos_offset.x );
-	push_out_of_right_block(the_bcr_group);
+	push_out_of_right_block(the_bcr_rect_group);
 	
 	// Don't let the sprite speed up while in the air and horizontally
 	// colliding with a block.
@@ -1467,17 +1467,17 @@ void sprite::block_coll_response_right_16x16
 }
 
 void sprite::block_coll_response_top_16x16
-	( const block_coll_result_group& the_bcr_group )
+	( const block_coll_result_rect_group& the_bcr_rect_group )
 {
 	////in_level_pos.y = make_f24p8( ( tl_coll_result.coord.y + 1 ) * 16 ) 
 	////	- cb_pos_offset.y;
 	//set_curr_in_level_pos_y( make_f24p8( ( tl_coll_result.coord.y + 1 ) 
 	//	* 16 ) - cb_pos_offset.y );
-	//set_curr_in_level_pos_y( make_f24p8( ( the_bcr_group.get_bcr_tl()
+	//set_curr_in_level_pos_y( make_f24p8( ( the_bcr_rect_group.get_bcr_tl()
 	//	.coord.y + 1 ) * num_pixels_per_block_dim ) - cb_pos_offset.y );
-	set_curr_in_level_pos_y( make_f24p8( ( the_bcr_group.top() + 1 ) 
+	set_curr_in_level_pos_y( make_f24p8( ( the_bcr_rect_group.top() + 1 ) 
 		* num_pixels_per_block_dim ) - cb_pos_offset.y );
-	push_out_of_top_block(the_bcr_group);
+	push_out_of_top_block(the_bcr_rect_group);
 	
 	if ( vel.y < (fixed24p8){0x00} )
 	{
@@ -1488,7 +1488,7 @@ void sprite::block_coll_response_top_16x16
 }
 
 void sprite::block_coll_response_bot_16x16
-	( const block_coll_result_group& the_bcr_group )
+	( const block_coll_result_rect_group& the_bcr_rect_group )
 {
 	if ( vel.y >= (fixed24p8){0} )
 	{
@@ -1498,13 +1498,13 @@ void sprite::block_coll_response_bot_16x16
 		////	- make_f24p8(get_shape_size_as_vec2().y);
 		//set_curr_in_level_pos_y( make_f24p8( bl_coll_result.coord.y 
 		//	* 16 ) - make_f24p8(get_shape_size_as_vec2().y) );
-		//set_curr_in_level_pos_y( make_f24p8( the_bcr_group.get_bcr_bl()
+		//set_curr_in_level_pos_y( make_f24p8( the_bcr_rect_group.get_bcr_bl()
 		//	.coord.y * num_pixels_per_block_dim ) 
 		//	- make_f24p8(get_shape_size_as_vec2().y) );
-		//set_curr_in_level_pos_y( make_f24p8( the_bcr_group.bot()
+		//set_curr_in_level_pos_y( make_f24p8( the_bcr_rect_group.bot()
 		//	* num_pixels_per_block_dim ) 
 		//	- make_f24p8(get_shape_size_as_vec2().y) );
-		push_out_of_bot_block(the_bcr_group);
+		push_out_of_bot_block(the_bcr_rect_group);
 		
 		vel.y = {0x00};
 		//get_curr_on_ground() = true;
@@ -1517,7 +1517,7 @@ void sprite::block_coll_response_bot_16x16
 
 // 16x32 sprites
 void sprite::block_coll_response_left_16x32
-	( const block_coll_result_group& the_bcr_group )
+	( const block_coll_result_rect_group& the_bcr_rect_group )
 {
 	////show_debug_str_s32("bkle");
 	////show_debug_str_s32("    ");
@@ -1525,11 +1525,11 @@ void sprite::block_coll_response_left_16x32
 	////	- cb_pos_offset.x;
 	//set_curr_in_level_pos_x( make_f24p8( ( lt_coll_result.coord.x + 1 ) 
 	//	* 16 ) - cb_pos_offset.x );
-	//set_curr_in_level_pos_x( make_f24p8( ( the_bcr_group.get_bcr_lt()
+	//set_curr_in_level_pos_x( make_f24p8( ( the_bcr_rect_group.get_bcr_lt()
 	//	.coord.x + 1 ) * num_pixels_per_block_dim ) - cb_pos_offset.x );
-	//set_curr_in_level_pos_x( make_f24p8( ( the_bcr_group.left() + 1 ) 
+	//set_curr_in_level_pos_x( make_f24p8( ( the_bcr_rect_group.left() + 1 ) 
 	//	* num_pixels_per_block_dim ) - cb_pos_offset.x );
-	push_out_of_left_block(the_bcr_group);
+	push_out_of_left_block(the_bcr_rect_group);
 	
 	
 	// Don't let the sprite speed up while in the air and horizontally
@@ -1540,7 +1540,7 @@ void sprite::block_coll_response_left_16x32
 	}
 }
 void sprite::block_coll_response_right_16x32
-	( const block_coll_result_group& the_bcr_group )
+	( const block_coll_result_rect_group& the_bcr_rect_group )
 {
 	////show_debug_str_s32("bkri");
 	////show_debug_str_s32("    ");
@@ -1549,13 +1549,13 @@ void sprite::block_coll_response_right_16x32
 	////	//- get_shape_size_as_vec2().x );
 	//set_curr_in_level_pos_x( make_f24p8( rt_coll_result.coord.x * 16 ) 
 	//	- the_coll_box.size.x - cb_pos_offset.x );
-	//set_curr_in_level_pos_x( make_f24p8( the_bcr_group.get_bcr_rt()
+	//set_curr_in_level_pos_x( make_f24p8( the_bcr_rect_group.get_bcr_rt()
 	//	.coord.x * num_pixels_per_block_dim ) - the_coll_box.size.x 
 	//	- cb_pos_offset.x );
-	//set_curr_in_level_pos_x( make_f24p8( the_bcr_group.right()
+	//set_curr_in_level_pos_x( make_f24p8( the_bcr_rect_group.right()
 	//	* num_pixels_per_block_dim ) - the_coll_box.size.x 
 	//	- cb_pos_offset.x );
-	push_out_of_right_block(the_bcr_group);
+	push_out_of_right_block(the_bcr_rect_group);
 	
 	// Don't let the sprite speed up while in the air and horizontally
 	// colliding with a block.
@@ -1565,7 +1565,7 @@ void sprite::block_coll_response_right_16x32
 	}
 }
 void sprite::block_coll_response_top_16x32
-	( const block_coll_result_group& the_bcr_group )
+	( const block_coll_result_rect_group& the_bcr_rect_group )
 {
 	////show_debug_str_s32("bkto");
 	////show_debug_str_s32("    ");
@@ -1573,11 +1573,11 @@ void sprite::block_coll_response_top_16x32
 	////	- cb_pos_offset.y;
 	//set_curr_in_level_pos_y( make_f24p8( ( tl_coll_result.coord.y + 1 ) 
 	//	* 16 ) - cb_pos_offset.y );
-	//set_curr_in_level_pos_y( make_f24p8( ( the_bcr_group.get_bcr_tl()
+	//set_curr_in_level_pos_y( make_f24p8( ( the_bcr_rect_group.get_bcr_tl()
 	//	.coord.y + 1 ) * num_pixels_per_block_dim ) - cb_pos_offset.y );
-	set_curr_in_level_pos_y( make_f24p8( ( the_bcr_group.top() + 1 ) 
+	set_curr_in_level_pos_y( make_f24p8( ( the_bcr_rect_group.top() + 1 ) 
 		* num_pixels_per_block_dim ) - cb_pos_offset.y );
-	push_out_of_top_block(the_bcr_group);
+	push_out_of_top_block(the_bcr_rect_group);
 	
 	if ( vel.y < (fixed24p8){0x00} )
 	{
@@ -1587,7 +1587,7 @@ void sprite::block_coll_response_top_16x32
 	is_jumping = false;
 }
 void sprite::block_coll_response_bot_16x32
-	( const block_coll_result_group& the_bcr_group )
+	( const block_coll_result_rect_group& the_bcr_rect_group )
 {
 	//show_debug_str_s32("bkbo");
 	//show_debug_str_s32("    ");
@@ -1599,13 +1599,13 @@ void sprite::block_coll_response_bot_16x32
 		////	- make_f24p8(get_shape_size_as_vec2().y);
 		//set_curr_in_level_pos_y( make_f24p8( bl_coll_result.coord.y 
 		//	* 16 ) - make_f24p8(get_shape_size_as_vec2().y) );
-		//set_curr_in_level_pos_y( make_f24p8( the_bcr_group.get_bcr_bl()
+		//set_curr_in_level_pos_y( make_f24p8( the_bcr_rect_group.get_bcr_bl()
 		//	.coord.y * num_pixels_per_block_dim ) 
 		//	- make_f24p8(get_shape_size_as_vec2().y) );
-		//set_curr_in_level_pos_y( make_f24p8( the_bcr_group.bot()
+		//set_curr_in_level_pos_y( make_f24p8( the_bcr_rect_group.bot()
 		//	* num_pixels_per_block_dim ) 
 		//	- make_f24p8(get_shape_size_as_vec2().y) );
-		push_out_of_bot_block(the_bcr_group);
+		push_out_of_bot_block(the_bcr_rect_group);
 		
 		vel.y = {0x00};
 		//get_curr_on_ground() = true;
@@ -2236,11 +2236,12 @@ void sprite::block_collision_stuff_16x32()
 	}
 	
 	
-	//static block_coll_result_group __attribute__((_ewram)) the_bcr_group;
-	//the_bcr_group = block_coll_result_group( the_coll_box, moving_left,
-	//	moving_right );
-	block_coll_result_group the_bcr_group( the_coll_box, moving_left,
-		moving_right );
+	//static block_coll_result_rect_group __attribute__((_ewram)) 
+	//	the_bcr_rect_group;
+	//the_bcr_rect_group = block_coll_result_rect_group( the_coll_box, 
+	//	moving_left, moving_right );
+	block_coll_result_rect_group the_bcr_rect_group( the_coll_box, 
+		moving_left, moving_right );
 	
 }
 void sprite::block_collision_stuff_32x16()

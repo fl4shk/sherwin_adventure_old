@@ -22,13 +22,15 @@
 #include "../../gba_specific_stuff/gfx_reg_stuff.hpp"
 #include "../../gba_specific_stuff/dma_stuff.hpp"
 
-#define X(name) name the_##name;
+#define X(name) \
+	name the_##name;
 list_of_block_stuff_classes(X)
 #undef X
 
 std::array< block_base_stuff*, bt_count > block_stuff_array
 = {
-	#define X(name) &the_##name,
+	#define X(name) \
+		&the_##name,
 	list_of_block_stuff_classes(X)
 	#undef X
 };

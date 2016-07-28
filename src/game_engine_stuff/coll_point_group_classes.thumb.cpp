@@ -45,62 +45,62 @@ coll_point_group_16x16::coll_point_group_16x16( const sprite& the_sprite )
 	const coll_box& the_coll_box = the_sprite.the_coll_box;
 	
 	// The collision points
-	list_of_16x16_coll_point_names(generate_pt)
+	list_of_shared_coll_point_names(generate_pt)
 	
 	// Left and Right
 	//pt_lt.x = pt_lb.x = the_coll_box.left();
 	
 	//pt_rt.x = pt_rb.x = the_coll_box.right();
 	
-	list_of_16x16_left_side_coll_point_names(X) 
+	list_of_shared_left_side_coll_point_names(X) 
 		the_coll_box.left();
 	
-	list_of_16x16_right_side_coll_point_names(X) 
+	list_of_shared_right_side_coll_point_names(X) 
 		the_coll_box.right();
 	
-	list_of_16x16_middle_vert_line_coll_point_names(X)
-		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
+	//list_of_shared_middle_vert_line_coll_point_names(X)
+	//	the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
 	
 	
 	
-	list_of_16x16_vert_side_ypos_top_coll_point_names(Y) 
+	list_of_shared_vert_side_ypos_top_coll_point_names(Y) 
 		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 4 };
-	//list_of_16x16_vert_side_ypos_top_coll_point_names(Y) 
+	//list_of_shared_vert_side_ypos_top_coll_point_names(Y) 
 	//	the_coll_box.top();
 	
-	list_of_16x16_vert_side_ypos_middle_coll_point_names(Y)
+	list_of_shared_vert_side_ypos_middle_coll_point_names(Y)
 		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 2 };
 	
-	list_of_16x16_vert_side_ypos_bottom_coll_point_names(Y) 
+	list_of_shared_vert_side_ypos_bot_coll_point_names(Y) 
 		the_coll_box.bot() - (fixed24p8){ the_coll_box.size.y.data / 4 };
-	//list_of_16x16_vert_side_ypos_bottom_coll_point_names(Y) 
+	//list_of_shared_vert_side_ypos_bot_coll_point_names(Y) 
 	//	the_coll_box.bot();
 	
 	
 	
 	
 	// Top and Bottom
-	//list_of_16x16_horiz_side_xpos_left_coll_point_names(X)
+	//list_of_shared_horiz_side_xpos_left_coll_point_names(X)
 	//	the_coll_box.left() + (fixed24p8){0x400};
-	//list_of_16x16_horiz_side_xpos_left_coll_point_names(X)
+	//list_of_shared_horiz_side_xpos_left_coll_point_names(X)
 	//	the_coll_box.left() + (fixed24p8){0x480};
-	list_of_16x16_horiz_side_xpos_left_coll_point_names(X)
+	list_of_shared_horiz_side_xpos_left_coll_point_names(X)
 		the_coll_box.left();
 	
-	list_of_16x16_horiz_side_xpos_middle_coll_point_names(X)
+	list_of_shared_horiz_side_xpos_middle_coll_point_names(X)
 		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
 	
-	//list_of_16x16_horiz_side_xpos_right_coll_point_names(X)
+	//list_of_shared_horiz_side_xpos_right_coll_point_names(X)
 	//	the_coll_box.right() - (fixed24p8){0x400};
-	//list_of_16x16_horiz_side_xpos_right_coll_point_names(X)
+	//list_of_shared_horiz_side_xpos_right_coll_point_names(X)
 	//	the_coll_box.right() - (fixed24p8){0x480};
-	list_of_16x16_horiz_side_xpos_right_coll_point_names(X)
+	list_of_shared_horiz_side_xpos_right_coll_point_names(X)
 		the_coll_box.right();
 	
 	
 	
 	
-	list_of_16x16_top_side_coll_point_names(Y)
+	list_of_shared_top_side_coll_point_names(Y)
 		the_coll_box.top();
 	
 	// This is a special case that covers walking down a slope.  However,
@@ -108,14 +108,15 @@ coll_point_group_16x16::coll_point_group_16x16( const sprite& the_sprite )
 	if ( the_sprite.get_curr_on_ground() 
 		&& the_sprite.vel.y >= (fixed24p8){0} )
 	{
-		list_of_16x16_bottom_side_coll_point_names(Y)
+		list_of_shared_bot_side_coll_point_names(Y)
 			//the_coll_box.bot();
 			//the_coll_box.bot() + (fixed24p8){0x200};
-			the_coll_box.bot() + (fixed24p8){0x400};
+			//the_coll_box.bot() + (fixed24p8){0x400};
+			the_coll_box.bot() + sprite::cpg_on_slope_threshold_abs;
 	}
 	else //if (!the_sprite.get_curr_on_ground())
 	{
-		list_of_16x16_bottom_side_coll_point_names(Y)
+		list_of_shared_bot_side_coll_point_names(Y)
 			the_coll_box.bot();
 	}
 	
@@ -127,62 +128,70 @@ coll_point_group_16x32::coll_point_group_16x32( const sprite& the_sprite )
 {
 	const coll_box& the_coll_box = the_sprite.the_coll_box;
 	
-	//the_pt_group.correct_num_used_points_16x32();
+	//the_pt_group.correct_num_used_points_shared();
 	
 	// The collision_points
-	list_of_16x32_coll_point_names(generate_pt)
+	list_of_shared_coll_point_names(generate_pt)
 	
 	// Left and Right
 	//pt_lt.x = pt_lm.x = pt_lb.x = the_coll_box.left();
 	
 	//pt_rt.x = pt_rm.x = pt_rb.x = the_coll_box.right();
-	list_of_16x32_left_side_coll_point_names(X)
+	list_of_shared_left_side_coll_point_names(X)
 		the_coll_box.left();
 	
-	list_of_16x32_right_side_coll_point_names(X)
+	list_of_shared_right_side_coll_point_names(X)
 		the_coll_box.right();
 	
-	list_of_16x32_middle_vert_line_coll_point_names(X)
-		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
+	//list_of_shared_middle_vert_line_coll_point_names(X)
+	//	the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
 	
 	
 	
-	list_of_16x32_vert_side_ypos_top_coll_point_names(Y)
-		the_coll_box.top() + (fixed24p8){0x480};
-	//list_of_16x32_vert_side_ypos_top_coll_point_names(Y)
+	list_of_shared_vert_side_ypos_top_coll_point_names(Y)
+		the_coll_box.top() + sprite::cpg_16x32_threshold_abs.y;
+	//list_of_shared_vert_side_ypos_top_coll_point_names(Y)
+	//	the_coll_box.top() + (fixed24p8){0x480};
+	//list_of_shared_vert_side_ypos_top_coll_point_names(Y)
 	//	the_coll_box.top();
 	
-	list_of_16x32_vert_side_ypos_middle_coll_point_names(Y)
+	list_of_shared_vert_side_ypos_middle_coll_point_names(Y)
 		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 2 };
 	
-	list_of_16x32_vert_side_ypos_bottom_coll_point_names(Y)
-		the_coll_box.bot() - (fixed24p8){0x480};
-	//list_of_16x32_vert_side_ypos_bottom_coll_point_names(Y)
+	list_of_shared_vert_side_ypos_bot_coll_point_names(Y)
+		the_coll_box.bot() - sprite::cpg_16x32_threshold_abs.y;
+	//list_of_shared_vert_side_ypos_bot_coll_point_names(Y)
+	//	the_coll_box.bot() - (fixed24p8){0x480};
+	//list_of_shared_vert_side_ypos_bot_coll_point_names(Y)
 	//	the_coll_box.bot();
 	
 	
 	
 	// Top and Bottom
-	list_of_16x32_horiz_side_xpos_left_coll_point_names(X)
-		the_coll_box.left() + (fixed24p8){0x400};
-	//list_of_16x32_horiz_side_xpos_left_coll_point_names(X)
+	list_of_shared_horiz_side_xpos_left_coll_point_names(X)
+		the_coll_box.left() + sprite::cpg_16x32_threshold_abs.x;
+	//list_of_shared_horiz_side_xpos_left_coll_point_names(X)
+	//	the_coll_box.left() + (fixed24p8){0x400};
+	//list_of_shared_horiz_side_xpos_left_coll_point_names(X)
 	//	the_coll_box.left() + (fixed24p8){0x480};
-	//list_of_16x32_horiz_side_xpos_left_coll_point_names(X)
+	//list_of_shared_horiz_side_xpos_left_coll_point_names(X)
 	//	the_coll_box.left();
 	
-	list_of_16x32_horiz_side_xpos_middle_coll_point_names(X)
+	list_of_shared_horiz_side_xpos_middle_coll_point_names(X)
 		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
 	
-	list_of_16x32_horiz_side_xpos_right_coll_point_names(X)
-		the_coll_box.right() - (fixed24p8){0x400};
-	//list_of_16x32_horiz_side_xpos_right_coll_point_names(X)
+	list_of_shared_horiz_side_xpos_right_coll_point_names(X)
+		the_coll_box.right() - sprite::cpg_16x32_threshold_abs.x;
+	//list_of_shared_horiz_side_xpos_right_coll_point_names(X)
+	//	the_coll_box.right() - (fixed24p8){0x400};
+	//list_of_shared_horiz_side_xpos_right_coll_point_names(X)
 	//	the_coll_box.right() - (fixed24p8){0x480};
-	//list_of_16x32_horiz_side_xpos_right_coll_point_names(X)
+	//list_of_shared_horiz_side_xpos_right_coll_point_names(X)
 	//	the_coll_box.right();
 	
 	
 	
-	list_of_16x32_top_side_coll_point_names(Y)
+	list_of_shared_top_side_coll_point_names(Y)
 		the_coll_box.top();
 	
 	// This is a special case that covers walking down a slope.  However,
@@ -190,14 +199,15 @@ coll_point_group_16x32::coll_point_group_16x32( const sprite& the_sprite )
 	if ( the_sprite.get_curr_on_ground() 
 		&& the_sprite.vel.y >= (fixed24p8){0} )
 	{
-		list_of_16x32_bottom_side_coll_point_names(Y)
-			the_coll_box.bot() + (fixed24p8){0x400};
+		list_of_shared_bot_side_coll_point_names(Y)
+			the_coll_box.bot() + sprite::cpg_on_slope_threshold_abs;
+			//the_coll_box.bot() + (fixed24p8){0x400};
 			//the_coll_box.bot() + (fixed24p8){0x200};
 			//the_coll_box.bot() + (fixed24p8){0x300};
 	}
 	else //if (!the_sprite.get_curr_on_ground())
 	{
-		list_of_16x32_bottom_side_coll_point_names(Y)
+		list_of_shared_bot_side_coll_point_names(Y)
 			the_coll_box.bot();
 	}
 	

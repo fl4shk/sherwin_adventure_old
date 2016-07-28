@@ -98,9 +98,9 @@ protected:		// functions
 	
 	
 	virtual void block_coll_response_left_16x16
-		( const block_coll_result_group& the_bcr_group );
+		( const block_coll_result_rect_group& the_bcr_rect_group );
 	virtual void block_coll_response_right_16x16
-		( const block_coll_result_group& the_bcr_group );
+		( const block_coll_result_rect_group& the_bcr_rect_group );
 	
 } __attribute__((_align4));
 

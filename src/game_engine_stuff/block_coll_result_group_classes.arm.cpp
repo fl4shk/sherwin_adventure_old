@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "block_coll_result_group_class.hpp"
+#include "block_coll_result_group_classes.hpp"
 #include "level_stuff/active_level_class.hpp"
 
 #include "block_stuff/block_stuff.hpp"
@@ -25,7 +25,7 @@
 
 
 inline void temp_func_get_horiz_adjusted_x
-	( const block_coll_result_group& the_bcr_group, 
+	( const block_coll_result_rect_group& the_bcr_group, 
 	const fixed24p8& cb_vert_side_x_coord_f24p8, 
 	const fixed24p8& threshold_x,
 	array_helper<vec2_s32>& adjusted_cb_corner_lbc_arr_helper )
@@ -40,7 +40,7 @@ inline void temp_func_get_horiz_adjusted_x
 		/ num_pixels_per_block_dim ) - the_bcr_group.left();
 }
 inline void temp_func_get_horiz_adjusted_y
-	( const block_coll_result_group& the_bcr_group, 
+	( const block_coll_result_rect_group& the_bcr_group, 
 	const vec2_f24p8& cb_corner_y_coords, 
 	array_helper<vec2_s32>& adjusted_cb_corner_lbc_arr_helper )
 {
@@ -60,7 +60,7 @@ inline void temp_func_get_horiz_adjusted_y
 
 
 inline void temp_func_get_vert_adjusted_x
-	( const block_coll_result_group& the_bcr_group, 
+	( const block_coll_result_rect_group& the_bcr_group, 
 	const fixed24p8& cb_vert_side_x_coord_f24p8, 
 	array_helper<vec2_s32>& adjusted_cb_corner_lbc_arr_helper )
 {
@@ -74,7 +74,7 @@ inline void temp_func_get_vert_adjusted_x
 		/ num_pixels_per_block_dim ) - the_bcr_group.left();
 }
 inline void temp_func_get_vert_adjusted_y
-	( const block_coll_result_group& the_bcr_group, 
+	( const block_coll_result_rect_group& the_bcr_group, 
 	const vec2_f24p8& cb_corner_y_coords, const fixed24p8& threshold_y,
 	array_helper<vec2_s32>& adjusted_cb_corner_lbc_arr_helper )
 {
@@ -100,7 +100,7 @@ inline void temp_func_get_vert_adjusted_y
 
 
 
-void block_coll_result_group::get_corner_stuff_old
+void block_coll_result_rect_group::get_corner_stuff_old
 	( array_helper<block_coll_result*>& bcr_ptr_arr_helper, 
 	array_helper<u32>& bool_as_u32_arr_helper )
 {
@@ -137,7 +137,7 @@ void block_coll_result_group::get_corner_stuff_old
 }
 
 
-void block_coll_result_group::get_coll_box_related_stuff_old
+void block_coll_result_rect_group::get_coll_box_related_stuff_old
 	( const sprite& the_sprite, 
 	array_helper<block_coll_result*>& bcr_ptr_arr_helper )
 {
@@ -291,7 +291,7 @@ void block_coll_result_group::get_coll_box_related_stuff_old
 	
 }
 
-void block_coll_result_group::get_side_blocked_stuff_old
+void block_coll_result_rect_group::get_side_blocked_stuff_old
 	( array_helper<u32>& bool_as_u32_arr_helper )
 {
 	u32& vert_side_below_top_corner_is_blocked

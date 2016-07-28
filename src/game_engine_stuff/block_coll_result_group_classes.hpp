@@ -16,14 +16,16 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef block_coll_result_group_class_hpp
-#define block_coll_result_group_class_hpp
+#ifndef block_coll_result_group_classes_hpp
+#define block_coll_result_group_classes_hpp
 
 #include "range_funcs.hpp"
 #include "block_stuff/block_stuff.hpp"
 
 #include "coll_box_class.hpp"
 #include "array_helper_class.hpp"
+
+#include "coll_point_group_classes.hpp"
 
 class block_coll_result
 {
@@ -76,14 +78,15 @@ class sprite;
 
 class bcr_ptr_line;
 
-class block_coll_result_group
+
+class block_coll_result_rect_group
 {
 public:		// constants
 	// The maximum number of blocks intersected by a sprite, per dimension.
 	// The value of ( 3, 3 ) corresponds to a 32x32 sprite.  Definitely
 	// change these two values (among other things) if there is every any
 	// infrastructure for sprites larger than 32x32 pixels.
-	//const vec2_u32 block_coll_result_group::shared_max_size_2d( 3, 3 );
+	//const vec2_u32 block_coll_result_rect_group::shared_max_size_2d( 3, 3 );
 	static constexpr vec2_u32 max_size_2d = vec2_u32( 3, 3 );
 	//static constexpr vec2_u32 max_size_2d = vec2_u32( 80, 80 );
 	static constexpr u32 max_size = max_size_2d.x * max_size_2d.y;
@@ -104,13 +107,14 @@ public:		// variables
 	
 	
 public:		// functions
-	block_coll_result_group();
-	block_coll_result_group( const coll_box& the_coll_box, 
+	block_coll_result_rect_group();
+	block_coll_result_rect_group( const coll_box& the_coll_box, 
 		u32 s_moving_left, u32 s_moving_right );
-	block_coll_result_group( const block_coll_result_group& to_copy );
+	block_coll_result_rect_group
+		( const block_coll_result_rect_group& to_copy );
 	
-	block_coll_result_group& operator = 
-		( const block_coll_result_group& to_copy );
+	block_coll_result_rect_group& operator = 
+		( const block_coll_result_rect_group& to_copy );
 	
 	
 	inline block_coll_result& operator () ( u32 local_x, u32 local_y )
@@ -281,12 +285,24 @@ protected:		// functions
 	
 } __attribute__((_align4));
 
+// A class for a group 
+class bcr_ptrs_for_points_group
+{
+public:		// variables
+	
+	
+public:		// functions
+	
+	
+} __attribute__((_align4));
+
 
 // A line (i.e. row or column) of pointers to block_coll_result's.
 class bcr_ptr_line
 {
 public:		// constants
-	static constexpr u32 max_size = block_coll_result_group::max_size_2d.x;
+	static constexpr u32 max_size 
+		= block_coll_result_rect_group::max_size_2d.x;
 	
 protected:		// variables
 	block_coll_result* ptr_arr_helper_data[max_size];
@@ -311,7 +327,7 @@ public:		// functions
 	{
 		init_ptr_arr_helper();
 	}
-	bcr_ptr_line( block_coll_result_group& the_bcr_group,
+	bcr_ptr_line( block_coll_result_rect_group& the_bcr_group,
 		const vec2_s32& s_local_param_pos, u32 s_is_horiz );
 	
 	
@@ -363,4 +379,4 @@ protected:		// functions
 
 
 
-#endif		// block_coll_result_group_class_hpp
+#endif		// block_coll_result_group_classes_hpp

@@ -16,7 +16,7 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include "block_coll_result_group_class.hpp"
+#include "block_coll_result_group_classes.hpp"
 #include "level_stuff/active_level_class.hpp"
 
 #include "block_stuff/block_stuff.hpp"
@@ -34,9 +34,9 @@ block_coll_result::block_coll_result( const vec2_f24p8& s_coord_f24p8 )
 {
 }
 
-u32 block_coll_result_group::temp_debug_thing;
+u32 block_coll_result_rect_group::temp_debug_thing;
 
-block_coll_result_group::block_coll_result_group() 
+block_coll_result_rect_group::block_coll_result_rect_group() 
 	: start_pos( 0, 0 ), real_size_2d( 1, 1 ), moving_left(false), 
 	moving_right(false)
 {
@@ -61,7 +61,7 @@ block_coll_result_group::block_coll_result_group()
 	}
 }
 
-block_coll_result_group::block_coll_result_group
+block_coll_result_rect_group::block_coll_result_rect_group
 	( const coll_box& the_coll_box, u32 s_moving_left, u32 s_moving_right )
 {
 	//asm_comment("constructor type 2");
@@ -94,13 +94,13 @@ block_coll_result_group::block_coll_result_group
 
 
 
-block_coll_result_group::block_coll_result_group
-	( const block_coll_result_group& to_copy )
+block_coll_result_rect_group::block_coll_result_rect_group
+	( const block_coll_result_rect_group& to_copy )
 {
 	*this = to_copy;
 }
-block_coll_result_group& block_coll_result_group::operator = 
-	( const block_coll_result_group& to_copy )
+block_coll_result_rect_group& block_coll_result_rect_group::operator = 
+	( const block_coll_result_rect_group& to_copy )
 {
 	arr_memcpy32( (block_coll_result*)bcr_arr_2d_helper_data, 
 		to_copy.bcr_arr_2d_helper_data, max_size );
@@ -119,7 +119,7 @@ block_coll_result_group& block_coll_result_group::operator =
 
 
 
-bcr_ptr_line::bcr_ptr_line( block_coll_result_group& the_bcr_group,
+bcr_ptr_line::bcr_ptr_line( block_coll_result_rect_group& the_bcr_group,
 	const vec2_s32& s_local_param_pos, u32 s_is_horiz ) 
 	: local_param_pos(s_local_param_pos), is_horiz(s_is_horiz)
 {

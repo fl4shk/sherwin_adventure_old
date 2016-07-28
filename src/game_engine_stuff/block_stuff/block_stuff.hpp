@@ -269,7 +269,7 @@ class block;
 #include "block_base_stuff_class.hpp"
 
 extern std::array< block_base_stuff*, bt_count > block_stuff_array
-	__attribute__((_iwram));
+	__attribute__((_ewram));
 
 #include "air_block_stuff_class.hpp"
 #include "log_block_stuff_class.hpp"
@@ -280,9 +280,11 @@ extern std::array< block_base_stuff*, bt_count > block_stuff_array
 #include "grass_and_dirt_block_stuff_classes.hpp"
 #include "day_sky_and_night_sky_block_classes.hpp"
 
-#define X(name) extern name the_##name __attribute__((_iwram));
+
+#define X(name) extern name the_##name __attribute__((_ewram));
 list_of_block_stuff_classes(X)
 #undef X
+
 
 // A class for unique block data.
 class block

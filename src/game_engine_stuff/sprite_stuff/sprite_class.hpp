@@ -24,7 +24,7 @@
 
 #include "../../gfx/sherwin_gfx.h"
 
-#include "../block_coll_result_group_class.hpp"
+#include "../block_coll_result_group_classes.hpp"
 
 class sprite_allocator;
 
@@ -46,8 +46,11 @@ protected:		// variables
 	
 public:		// constants
 	
+	static constexpr fixed24p8 cpg_on_slope_threshold_abs = {0x400};
+	
+	// coll_point_group threshold
 	static constexpr vec2_f24p8 cpg_16x32_threshold_abs = { {0x400}, 
-		{0x400} };
+		{0x480} };
 	
 	//static constexpr fixed24p8 grav_acc = {0x80};
 	//static constexpr fixed24p8 grav_acc = {0x40};
@@ -640,51 +643,51 @@ protected:		// functions
 	
 	
 	virtual void block_coll_response_left_16x16
-		( const block_coll_result_group& the_bcr_group );
+		( const block_coll_result_rect_group& the_bcr_rect_group );
 	virtual void block_coll_response_right_16x16
-		( const block_coll_result_group& the_bcr_group );
+		( const block_coll_result_rect_group& the_bcr_rect_group );
 	virtual void block_coll_response_top_16x16
-		( const block_coll_result_group& the_bcr_group );
+		( const block_coll_result_rect_group& the_bcr_rect_group );
 	virtual void block_coll_response_bot_16x16
-		( const block_coll_result_group& the_bcr_group );
+		( const block_coll_result_rect_group& the_bcr_rect_group );
 	
 	
 	virtual void block_coll_response_left_16x32
-		( const block_coll_result_group& the_bcr_group );
+		( const block_coll_result_rect_group& the_bcr_rect_group );
 	virtual void block_coll_response_right_16x32
-		( const block_coll_result_group& the_bcr_group );
+		( const block_coll_result_rect_group& the_bcr_rect_group );
 	virtual void block_coll_response_top_16x32
-		( const block_coll_result_group& the_bcr_group );
+		( const block_coll_result_rect_group& the_bcr_rect_group );
 	virtual void block_coll_response_bot_16x32
-		( const block_coll_result_group& the_bcr_group );
+		( const block_coll_result_rect_group& the_bcr_rect_group );
 	
 	
 	
 	// Finally, some inline functions (probably) every sprite can use in
 	// their block_coll_response.*() functions
 	inline void push_out_of_left_block
-		( const block_coll_result_group& the_bcr_group )
+		( const block_coll_result_rect_group& the_bcr_rect_group )
 	{
-		set_curr_in_level_pos_x( make_f24p8( ( the_bcr_group.left() + 1 ) 
-			* num_pixels_per_block_dim ) - cb_pos_offset.x );
+		set_curr_in_level_pos_x( make_f24p8( ( the_bcr_rect_group.left() 
+			+ 1 ) * num_pixels_per_block_dim ) - cb_pos_offset.x );
 	}
 	inline void push_out_of_right_block
-		( const block_coll_result_group& the_bcr_group )
+		( const block_coll_result_rect_group& the_bcr_rect_group )
 	{
-		set_curr_in_level_pos_x( make_f24p8( the_bcr_group.right()
+		set_curr_in_level_pos_x( make_f24p8( the_bcr_rect_group.right()
 			* num_pixels_per_block_dim ) - the_coll_box.size.x 
 			- cb_pos_offset.x );
 	}
 	inline void push_out_of_top_block
-		( const block_coll_result_group& the_bcr_group )
+		( const block_coll_result_rect_group& the_bcr_rect_group )
 	{
-		set_curr_in_level_pos_y( make_f24p8( ( the_bcr_group.top() + 1 ) 
-			* num_pixels_per_block_dim ) - cb_pos_offset.y );
+		set_curr_in_level_pos_y( make_f24p8( ( the_bcr_rect_group.top() 
+			+ 1 ) * num_pixels_per_block_dim ) - cb_pos_offset.y );
 	}
 	inline void push_out_of_bot_block
-		( const block_coll_result_group& the_bcr_group )
+		( const block_coll_result_rect_group& the_bcr_rect_group )
 	{
-		set_curr_in_level_pos_y( make_f24p8( the_bcr_group.bot()
+		set_curr_in_level_pos_y( make_f24p8( the_bcr_rect_group.bot()
 			* num_pixels_per_block_dim ) 
 			- make_f24p8(get_shape_size_as_vec2().y) );
 	}

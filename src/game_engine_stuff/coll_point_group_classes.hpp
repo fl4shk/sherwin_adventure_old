@@ -40,19 +40,16 @@ public:		// enums
 			arr_ind_16x16_pt_##name, 
 		
 		// Left side
-		list_of_16x16_left_side_coll_point_names(X)
+		list_of_shared_left_side_coll_point_names(X)
 		
 		// Right side
-		list_of_16x16_right_side_coll_point_names(X)
+		list_of_shared_right_side_coll_point_names(X)
 		
 		// Top side
-		list_of_16x16_top_side_coll_point_names(X)
+		list_of_shared_top_side_coll_point_names(X)
 		
 		// Bottom side
-		list_of_16x16_bottom_side_coll_point_names(X)
-		
-		// Middle vertical line
-		list_of_16x16_middle_vert_line_coll_point_names(X)
+		list_of_shared_bot_side_coll_point_names(X)
 		
 		#undef X
 		
@@ -70,19 +67,16 @@ public:		// enums
 			arr_ind_16x32_pt_##name, 
 		
 		// Left side
-		list_of_16x32_left_side_coll_point_names(X)
+		list_of_shared_left_side_coll_point_names(X)
 		
 		// Right side
-		list_of_16x32_right_side_coll_point_names(X)
+		list_of_shared_right_side_coll_point_names(X)
 		
 		// Top side
-		list_of_16x32_top_side_coll_point_names(X)
+		list_of_shared_top_side_coll_point_names(X)
 		
 		// Bottom side
-		list_of_16x32_bottom_side_coll_point_names(X)
-		
-		// Middle vertical line
-		list_of_16x32_middle_vert_line_coll_point_names(X)
+		list_of_shared_bot_side_coll_point_names(X)
 		
 		#undef X
 		
@@ -100,19 +94,16 @@ public:		// enums
 			arr_ind_32x16_pt_##name, 
 		
 		// Left side
-		list_of_32x16_left_side_coll_point_names(X)
+		list_of_shared_left_side_coll_point_names(X)
 		
 		// Right side
-		list_of_32x16_right_side_coll_point_names(X)
+		list_of_shared_right_side_coll_point_names(X)
 		
 		// Top side
-		list_of_32x16_top_side_coll_point_names(X)
+		list_of_shared_top_side_coll_point_names(X)
 		
 		// Bottom side
-		list_of_32x16_bottom_side_coll_point_names(X)
-		
-		// Middle vertical line
-		list_of_32x16_middle_vert_line_coll_point_names(X)
+		list_of_shared_bot_side_coll_point_names(X)
 		
 		#undef X
 		
@@ -167,12 +158,12 @@ public:		// functions
 	inline vec2_f24p8& get_pt_br()
 		{ return the_array[arr_ind_16x16_pt_br]; }
 	
-	inline vec2_f24p8& get_pt_mt()
-		{ return the_array[arr_ind_16x16_pt_mt]; }
-	inline vec2_f24p8& get_pt_mm()
-		{ return the_array[arr_ind_16x16_pt_mm]; }
-	inline vec2_f24p8& get_pt_mb()
-		{ return the_array[arr_ind_16x16_pt_mb]; }
+	//inline vec2_f24p8& get_pt_mt()
+	//	{ return the_array[arr_ind_16x16_pt_mt]; }
+	//inline vec2_f24p8& get_pt_mm()
+	//	{ return the_array[arr_ind_16x16_pt_mm]; }
+	//inline vec2_f24p8& get_pt_mb()
+	//	{ return the_array[arr_ind_16x16_pt_mb]; }
 	
 } __attribute__((_align4));
 
@@ -210,12 +201,12 @@ public:		// functions
 	inline vec2_f24p8& get_pt_br()
 		{ return the_array[arr_ind_16x32_pt_br]; }
 	
-	inline vec2_f24p8& get_pt_mt()
-		{ return the_array[arr_ind_16x32_pt_mt]; }
-	inline vec2_f24p8& get_pt_mm()
-		{ return the_array[arr_ind_16x32_pt_mm]; }
-	inline vec2_f24p8& get_pt_mb()
-		{ return the_array[arr_ind_16x32_pt_mb]; }
+	//inline vec2_f24p8& get_pt_mt()
+	//	{ return the_array[arr_ind_16x32_pt_mt]; }
+	//inline vec2_f24p8& get_pt_mm()
+	//	{ return the_array[arr_ind_16x32_pt_mm]; }
+	//inline vec2_f24p8& get_pt_mb()
+	//	{ return the_array[arr_ind_16x32_pt_mb]; }
 	
 } __attribute__((_align4));
 
