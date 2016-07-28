@@ -79,7 +79,7 @@ public:		// functions
 	
 	inline bool can_push() const
 	{
-		return ( get_curr_index() < get_size() );
+		return ( get_curr_index() <= get_size() );
 	}
 	inline bool can_pop() const
 	{

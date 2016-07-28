@@ -176,11 +176,13 @@ public:		// functions
 	
 	static void allocate_sprite( sprite*& the_sprite, 
 		sprite_allocator& the_sprite_allocator, 
-		sprite_type the_sprite_type, bool facing_left );
+		sprite_type the_sprite_type, bool facing_left )
+		__attribute__((_iwram_code));
 	static void allocate_sprite( sprite*& the_sprite, 
 		sprite_allocator& the_sprite_allocator, 
 		sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos,
-		const prev_curr_pair<bg_point>& camera_pos, bool facing_left );
+		const prev_curr_pair<bg_point>& camera_pos, bool facing_left )
+		__attribute__((_iwram_code));
 	
 	static void reinit_sprite_with_sprite_ipg( sprite*& the_sprite, 
 		sprite_allocator& the_sprite_allocator, 
@@ -193,7 +195,30 @@ public:		// functions
 		sprite_allocator& the_sprite_allocator,
 		sprite_type s_the_sprite_type, const vec2_f24p8& s_in_level_pos, 
 		const prev_curr_pair<bg_point>& camera_pos, 
-		bool facing_left=true );
+		bool facing_left=true ) __attribute__((_iwram_code));
+	
+	
+	static s32 spawn_a_player_secondary_sprite_basic
+		( sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos, 
+		const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
+		bool facing_left=false ) __attribute__((_iwram_code));
+	
+	// This is a temporary function.  It should be replaced by a function
+	// that inserts sprite spawning parameters into a list.  The sprites
+	// from said list would be spawned from within the function called
+	// spawn_sprites_if_needed().
+	// That said, this is PROBABLY good enough.
+	static s32 spawn_a_sprite_basic( sprite_type the_sprite_type, 
+		const vec2_f24p8& s_in_level_pos, 
+		const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
+		bool facing_left=false )
+		__attribute__((_iwram_code));
+	
+	static s32 spawn_a_secondary_sprite_basic( sprite_type the_sprite_type,
+		const vec2_f24p8& s_in_level_pos, 
+		const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
+		bool facing_left=false ) __attribute__((_iwram_code));
+	
 	
 	
 	
@@ -318,28 +343,6 @@ public:		// functions
 			for_loop_contents(spr);
 		}
 	}
-	
-	static s32 spawn_a_player_secondary_sprite_basic
-		( sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos, 
-		const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
-		bool facing_left=false ) __attribute__((_iwram_code));
-	
-	// This is a temporary function.  It should be replaced by a function
-	// that inserts sprite spawning parameters into a list.  The sprites
-	// from said list would be spawned from within the function called
-	// spawn_sprites_if_needed().
-	// That said, this is PROBABLY good enough.
-	static void spawn_a_sprite_basic( sprite_type the_sprite_type, 
-		const vec2_f24p8& s_in_level_pos, 
-		const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
-		bool facing_left=false )
-		__attribute__((_iwram_code));
-	
-	static s32 spawn_a_secondary_sprite_basic( sprite_type the_sprite_type,
-		const vec2_f24p8& s_in_level_pos, 
-		const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
-		bool facing_left=false ) __attribute__((_iwram_code));
-	
 	
 	// This function is one of the most intensive, so it is an ARM function
 	// that goes in IWRAM.

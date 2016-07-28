@@ -48,20 +48,28 @@ game_mode game_manager::curr_game_mode;
 void game_manager::vblank_func()
 {
 	// If a bug was automatically detected.
-	//if ( curr_game_mode == gm_do_halt )
-	//{
-	//	// Stop the sound stuff
-	//	if ( mmActive() )
-	//	{
-	//		mmPause();
-	//	}
-	//	
-	//	
-	//	// Enable forced blank
-	//	reg_dispcnt = dcnt_blank_on;
-	//	
-	//	return;
-	//}
+	if ( curr_game_mode == gm_do_halt )
+	{
+		// Stop the sound stuff
+		if (mmActive())
+		{
+			//mmPause();
+			mmSetModuleVolume(static_cast<mm_word>(0));
+			mmSetJingleVolume(static_cast<mm_word>(0));
+			mmEffectCancelAll();
+			
+			mmFrame();
+			
+			//mmPause();
+			//mmStop();
+		}
+		
+		
+		// Enable forced blank
+		reg_dispcnt = dcnt_blank_on;
+		
+		return;
+	}
 	
 	
 	gfx_manager::copy_bgofs_mirror_to_registers();

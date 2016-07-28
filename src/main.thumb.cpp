@@ -111,7 +111,6 @@ int main()
 		
 		
 		
-		
 		sprite_manager::find_all_active_sprites();
 		
 		
@@ -119,18 +118,24 @@ int main()
 		sprite_manager::despawn_sprites_if_needed
 			(gfx_manager::bgofs_mirror[0].curr);
 		
+		
+		sprite_manager::find_all_active_sprites();
+		
+		
 		sprite_manager::update_all_sprites
 			( active_level::get_curr_sublevel_ptr().get_size_2d(), 
 			gfx_manager::bgofs_mirror[0] );
 		
 		
-		//// This is temporary
-		//if ( key_held(key_l) )
-		//{
-		//	sprite_manager::spawn_a_sprite_basic( st_waffle,
-		//		the_player.in_level_pos, gfx_manager::bgofs_mirror[0].curr,
-		//		(bool)the_player.the_oam_entry.get_hflip_status() );
-		//}
+		
+		// This is temporary
+		if ( key_hit_or_held(key_l) )
+		{
+			sprite_manager::spawn_a_sprite_basic( st_waffle,
+				the_player.in_level_pos.curr, gfx_manager::bgofs_mirror[0],
+				(bool)the_player.the_oam_entry.get_hflip_status() );
+		}
+		
 		
 		//if ( key_hit(key_select) )
 		//{

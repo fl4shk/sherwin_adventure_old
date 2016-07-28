@@ -1145,34 +1145,34 @@ void player_sprite::block_coll_response_top_16x32_old
 void player_sprite::handle_jumping_stuff( u32 is_jump_key_hit, 
 	u32 is_jump_key_held )
 {
-	if ( get_curr_on_ground() && is_jump_key_hit )
-	{
-		vel.y = jump_vel;
-		//jump_hold_timer = max_jump_hold_timer;
-		is_jumping = true;
-	}
-	else if (!get_curr_on_ground())
-	{
-		if ( vel.y < (fixed24p8){0} )
-		{
-			if (is_jump_key_held)
-			{
-				vel.y += jump_grav_acc;
-			}
-			else
-			{
-				is_jumping = false;
-				
-				apply_gravity();
-			}
-		}
-		else
-		{
-			is_jumping = false;
-			
-			apply_gravity();
-		}
-	}
+	//if ( get_curr_on_ground() && is_jump_key_hit )
+	//{
+	//	vel.y = jump_vel;
+	//	//jump_hold_timer = max_jump_hold_timer;
+	//	is_jumping = true;
+	//}
+	//else if (!get_curr_on_ground())
+	//{
+	//	if ( vel.y < (fixed24p8){0} )
+	//	{
+	//		if (is_jump_key_held)
+	//		{
+	//			vel.y += jump_grav_acc;
+	//		}
+	//		else
+	//		{
+	//			is_jumping = false;
+	//			
+	//			apply_gravity();
+	//		}
+	//	}
+	//	else
+	//	{
+	//		is_jumping = false;
+	//		
+	//		apply_gravity();
+	//	}
+	//}
 	
 }
 

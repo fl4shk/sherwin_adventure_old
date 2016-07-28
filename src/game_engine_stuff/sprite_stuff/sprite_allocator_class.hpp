@@ -39,7 +39,22 @@ public:		// functions
 		const array_helper<sprite>& s_allocatable_sprite_arr );
 	
 	void* allocate_sprite() __attribute__((_iwram_code));
-	void deallocate_sprite( sprite*& the_sprite );
+	void deallocate_sprite( sprite*& the_sprite )
+		__attribute__((_iwram_code));
+	
+	
+	inline bool can_push_index() const
+	{
+		return the_sa_free_list_backend.can_push();
+	}
+	inline bool can_pop_index() const
+	{
+		return the_sa_free_list_backend.can_pop();
+	}
+	inline const s32 peek_top_index() const
+	{
+		return the_sa_free_list_backend.peek_top();
+	}
 	
 	
 } __attribute__((_align4));

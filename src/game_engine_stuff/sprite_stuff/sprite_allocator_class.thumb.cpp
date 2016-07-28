@@ -50,7 +50,7 @@ void* sprite_allocator::allocate_sprite()
 	//	}
 	//}
 	
-	if ( the_sa_free_list_backend.can_pop() )
+	if (can_pop_index())
 	{
 		int n_arr_index = the_sa_free_list_backend.peek_top();
 		sprite& ret = data_at(n_arr_index);
@@ -83,12 +83,13 @@ void sprite_allocator::deallocate_sprite( sprite*& the_sprite )
 {
 	if ( the_sprite == NULL )
 	{
+		//debug_arr_group::write_str_and_inc("SadsSprNULL");
 		return;
 	}
 	
-	if ( !the_sa_free_list_backend.can_push() )
+	if (!can_push_index())
 	{
-		debug_arr_group::write_str_and_inc("Can'tPush");
+		debug_arr_group::write_str_and_inc("SadsCan'tPush");
 		halt();
 	}
 	

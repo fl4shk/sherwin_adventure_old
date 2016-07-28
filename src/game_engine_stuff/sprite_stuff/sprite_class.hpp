@@ -230,7 +230,8 @@ public:		// functions
 	virtual void shared_constructor_code_part_3();
 	
 	void* operator new( size_t size, 
-		sprite_allocator& the_sprite_allocator );
+		sprite_allocator& the_sprite_allocator )
+		__attribute__((_iwram_code));
 	
 	//void operator delete( void* the_sprite, 
 	//	sprite_allocator& the_sprite_allocator );
