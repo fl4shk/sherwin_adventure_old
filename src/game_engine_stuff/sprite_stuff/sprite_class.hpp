@@ -43,6 +43,7 @@ protected:		// variables
 	// set_vram_chunk_index() exists.
 	u32 vram_chunk_index;
 	
+	int the_arr_index;
 	
 public:		// constants
 	

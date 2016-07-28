@@ -54,6 +54,7 @@ sa_free_list_backend::sa_free_list_backend( u8* s_ptr_to_the_array_u8,
 	: sa_pod_stack_backend( s_ptr_to_the_array_u8, s_ptr_to_curr_index,
 	get_the_const_type_size(), s_num_elems )
 {
+	init();
 }
 
 sa_free_list_backend::sa_free_list_backend( int* s_ptr_to_the_array,
@@ -61,6 +62,7 @@ sa_free_list_backend::sa_free_list_backend( int* s_ptr_to_the_array,
 	: sa_pod_stack_backend( (u8*)s_ptr_to_the_array, s_ptr_to_curr_index,
 	get_the_const_type_size(), s_num_elems )
 {
+	init();
 }
 
 

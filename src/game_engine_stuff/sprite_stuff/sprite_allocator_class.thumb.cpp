@@ -19,13 +19,21 @@
 #include "sprite_allocator_class.hpp"
 #include "sprite_class.hpp"
 
-sprite_allocator::sprite_allocator( sprite* the_array, u32 s_size )
-	: array_helper<sprite>( the_array, s_size )
+sprite_allocator::sprite_allocator( int* the_sa_free_list_backend_array, 
+	sprite* the_array, u32 s_size )
+	: the_sa_free_list_backend_curr_index(0),
+	the_sa_free_list_backend( the_sa_free_list_backend_array,
+	&the_sa_free_list_backend_curr_index, s_size ),
+	array_helper<sprite>( the_array, s_size )
 {
 }
-sprite_allocator::sprite_allocator
-	( const array_helper<sprite>& s_allocatable_sprite_arr )
-	: array_helper<sprite>(s_allocatable_sprite_arr)
+sprite_allocator::sprite_allocator( int* the_sa_free_list_backend_array,
+	const array_helper<sprite>& s_allocatable_sprite_arr )
+	: the_sa_free_list_backend_curr_index(0),
+	the_sa_free_list_backend( the_sa_free_list_backend_array,
+	&the_sa_free_list_backend_curr_index, 
+	s_allocatable_sprite_arr.get_size() ),
+	array_helper<sprite>(s_allocatable_sprite_arr)
 {
 }
 

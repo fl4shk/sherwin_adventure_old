@@ -22,14 +22,21 @@
 #include "../array_helper_class.hpp"
 //#include "sprite_class.hpp"
 
+#include "../sa_stack_classes.hpp"
+
 class sprite;
 
 class sprite_allocator : public array_helper<sprite>
 {
+protected:		// variables
+	u32 the_sa_free_list_backend_curr_index;
+	sa_free_list_backend the_sa_free_list_backend;
+	
 public:		// functions
-	sprite_allocator( sprite* the_array, u32 s_size );
-	sprite_allocator
-		( const array_helper<sprite>& s_allocatable_sprite_arr );
+	sprite_allocator( int* the_sa_free_list_backend_array, 
+		sprite* the_array, u32 s_size );
+	sprite_allocator( int* the_sa_free_list_backend_array,
+		const array_helper<sprite>& s_allocatable_sprite_arr );
 	
 	void* allocate_sprite() __attribute__((_iwram_code));
 	void deallocate_sprite( sprite*& the_sprite );

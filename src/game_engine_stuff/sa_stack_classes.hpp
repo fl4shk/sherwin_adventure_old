@@ -335,7 +335,7 @@ public:		// functions
 	inline sa_free_list() : the_sa_free_list_backend( the_array.data(),
 		&curr_index, get_size() ), curr_index(0)
 	{
-		the_sa_free_list_backend.init();
+		//the_sa_free_list_backend.init();
 		
 		//for ( int i=get_size()-1; i>= 0; --i )
 		//{

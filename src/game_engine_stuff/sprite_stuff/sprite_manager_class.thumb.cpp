@@ -89,24 +89,40 @@ sprite sprite_manager::the_allocatable_sprites
 
 
 
+int sprite_manager::the_allocatable_player_secondary_sprites_free_list_arr
+	[max_num_player_secondary_sprites];
+int sprite_manager::the_allocatable_secondary_sprites_free_list_arr
+	[max_num_secondary_sprites];
+int sprite_manager::the_allocatable_player_free_list_arr
+	[max_num_player_sprites];
+int sprite_manager::the_allocatable_sprites_free_list_arr
+	[max_num_regular_sprites];
+
+
 // The sprite allocators
 sprite_allocator sprite_manager::the_player_secondary_sprites_allocator
-	( array_helper<sprite>
+	( the_allocatable_player_secondary_sprites_free_list_arr,
+	array_helper<sprite>
 	( sprite_manager::the_allocatable_player_secondary_sprites, 
 	sprite_manager::max_num_player_secondary_sprites ) );
 
 sprite_allocator sprite_manager::the_secondary_sprites_allocator
-	( array_helper<sprite>
+	( the_allocatable_secondary_sprites_free_list_arr,
+	array_helper<sprite>
 	( sprite_manager::the_allocatable_secondary_sprites, 
 	sprite_manager::max_num_secondary_sprites ) );
 
 sprite_allocator sprite_manager::the_player_sprite_allocator
-	( array_helper<sprite>( sprite_manager::the_allocatable_player,
+	( the_allocatable_player_free_list_arr,
+	array_helper<sprite>( sprite_manager::the_allocatable_player,
 	sprite_manager::max_num_player_sprites ) );
 
 sprite_allocator sprite_manager::the_sprites_allocator
-	( array_helper<sprite>( sprite_manager::the_allocatable_sprites,
+	( the_allocatable_sprites_free_list_arr,
+	array_helper<sprite>( sprite_manager::the_allocatable_sprites,
 	sprite_manager::max_num_regular_sprites ) );
+
+
 
 
 // Active sprites
