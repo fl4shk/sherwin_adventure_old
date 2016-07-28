@@ -47,6 +47,23 @@ game_mode game_manager::curr_game_mode;
 
 void game_manager::vblank_func()
 {
+	// If a bug was automatically detected.
+	//if ( curr_game_mode == gm_do_halt )
+	//{
+	//	// Stop the sound stuff
+	//	if ( mmActive() )
+	//	{
+	//		mmPause();
+	//	}
+	//	
+	//	
+	//	// Enable forced blank
+	//	reg_dispcnt = dcnt_blank_on;
+	//	
+	//	return;
+	//}
+	
+	
 	gfx_manager::copy_bgofs_mirror_to_registers();
 	
 	//mmFrame();
@@ -91,6 +108,11 @@ void game_manager::vblank_func()
 			
 			hud_manager::update_hud_in_screenblock_mirror_2d();
 			hud_manager::copy_hud_from_array_2d_helper_to_vram();
+			break;
+		
+		// If a bug was automatically detected (this should never be the
+		// case since gm_do_halt is handled at the start of this function).
+		case gm_do_halt:
 			break;
 		
 		default:

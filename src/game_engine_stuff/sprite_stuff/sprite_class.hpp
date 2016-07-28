@@ -43,7 +43,10 @@ protected:		// variables
 	// set_vram_chunk_index() exists.
 	u32 vram_chunk_index;
 	
+	// These two things are used for FAST sprite allocation via a
+	// sa_free_list_backend member variable in a sprite_allocator instance.
 	int the_arr_index;
+	friend class sprite_allocator;
 	
 public:		// constants
 	

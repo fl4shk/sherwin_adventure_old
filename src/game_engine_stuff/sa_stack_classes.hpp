@@ -77,6 +77,15 @@ public:		// functions
 		return num_elems;
 	}
 	
+	inline bool can_push() const
+	{
+		return ( get_curr_index() < get_size() );
+	}
+	inline bool can_pop() const
+	{
+		return ( get_curr_index() > 0 );
+	}
+	
 	inline void push( const u8* to_push_u8 )
 	{
 		//the_array[curr_index++] = to_push;

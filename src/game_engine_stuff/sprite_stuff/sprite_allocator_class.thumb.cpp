@@ -39,15 +39,32 @@ sprite_allocator::sprite_allocator( int* the_sa_free_list_backend_array,
 
 void* sprite_allocator::allocate_sprite()
 {
-	// This could definitely be faster
-	for ( u32 i=0; i<get_size(); ++i )
+	//// This could definitely be faster
+	//for ( u32 i=0; i<get_size(); ++i )
+	//{
+	//	sprite& curr_sprite = data_at(i);
+	//	
+	//	if ( curr_sprite.the_sprite_type == st_default )
+	//	{
+	//		return (void*)(&curr_sprite);
+	//	}
+	//}
+	
+	if ( the_sa_free_list_backend.can_pop() )
 	{
-		sprite& curr_sprite = data_at(i);
+		int n_arr_index = the_sa_free_list_backend.peek_top();
+		sprite& ret = data_at(n_arr_index);
+		ret.the_arr_index = n_arr_index;
 		
-		if ( curr_sprite.the_sprite_type == st_default )
+		the_sa_free_list_backend.pop();
+		
+		if ( ret.the_sprite_type != st_default )
 		{
-			return (void*)(&curr_sprite);
+			debug_arr_group::write_str_and_inc("BadSprite");
+			halt();
 		}
+		
+		return (void*)(&ret);
 	}
 	
 	
@@ -57,6 +74,7 @@ void* sprite_allocator::allocate_sprite()
 	//	| ( 'r' << 0 ) );
 	
 	debug_arr_group::write_str_and_inc("NoFreeSprite");
+	halt();
 	
 	return NULL;
 }
@@ -68,11 +86,19 @@ void sprite_allocator::deallocate_sprite( sprite*& the_sprite )
 		return;
 	}
 	
+	if ( !the_sa_free_list_backend.can_push() )
+	{
+		debug_arr_group::write_str_and_inc("Can'tPush");
+		halt();
+	}
+	
 	
 	the_sprite->the_sprite_type = st_default;
 	
 	
-	if ( the_sprite->the_sprite_ipg != NULL )
+	// Some sprites are spawned in from something other than the level data
+	// and DON'T HAVE a the_sprite_ipg
+	if (the_sprite->the_sprite_ipg)
 	{
 		if ( the_sprite->the_sprite_ipg->spawn_state == sss_active )
 		{
@@ -86,6 +112,10 @@ void sprite_allocator::deallocate_sprite( sprite*& the_sprite )
 	//*the_sprite = sprite();
 	//the_sprite->shared_constructor_code();
 	//*the_sprite = sprite(the_sprite->get_vram_chunk_index());
+	
+	
+	the_sa_free_list_backend.push(the_sprite->the_arr_index);
+	the_sprite->the_arr_index = -1;
 	
 	
 	the_sprite = NULL;

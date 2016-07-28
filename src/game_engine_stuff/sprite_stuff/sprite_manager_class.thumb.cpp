@@ -266,6 +266,7 @@ void sprite_manager::allocate_sprite( sprite*& the_sprite,
 	{
 		//show_debug_str_s32("nty1");
 		debug_arr_group::write_str_and_inc("NoType1");
+		halt();
 	}
 	
 }
@@ -576,6 +577,8 @@ void sprite_manager::find_all_active_sprites()
 		sprite** active_sprites_arr, const u32 sprites_arr_size, 
 		u32& num_active_sprites_in_category ) -> void
 	{
+		num_active_sprites_in_category = 0;
+		
 		for ( u32 i=0; i<sprites_arr_size; ++i )
 		{
 			//sprite& the_spr = sprites_arr[i];
@@ -610,6 +613,8 @@ void sprite_manager::find_all_active_sprites()
 	// Find all the currently-active sprites.
 	find_active_sprites( the_sprites.data(), the_active_sprites.data(), 
 		the_sprites.size(), num_active_sprites );
+	
+	
 }
 
 
