@@ -71,12 +71,6 @@ void coll_point_group_base::assign_horiz_side_y_positions
 	if ( the_sprite.get_curr_on_ground() 
 		&& the_sprite.vel.y >= (fixed24p8){0} )
 	{
-		//list_of_shared_bot_side_coll_point_names(Y)
-		//	//the_coll_box.bot();
-		//	//the_coll_box.bot() + (fixed24p8){0x200};
-		//	//the_coll_box.bot() + (fixed24p8){0x400};
-		//	the_coll_box.bot() + sprite::cpg_on_slope_threshold_abs;
-		
 		list_of_shared_bot_side_coll_point_names(Y)
 			the_coll_box.bot() + sprite::cpg_on_slope_threshold_abs;
 			//the_coll_box.bot() + (fixed24p8){0x400};

@@ -103,6 +103,16 @@ public:		// variables
 		the_secondary_sprites_allocator, the_player_sprite_allocator, 
 		the_sprites_allocator;
 	
+	// Active sprites
+	static u32 num_active_player_secondary_sprites, num_active_sprites, 
+		num_active_secondary_sprites;
+	static std::array< sprite*, max_num_player_secondary_sprites>
+		the_active_player_secondary_sprites;
+	static std::array< sprite*, max_num_secondary_sprites>
+		the_active_secondary_sprites;
+	static std::array< sprite*, max_num_regular_sprites> 
+		the_active_sprites;
+	
 	
 	//static constexpr u32 the_player_vram_chunk_index = 1;
 	//static constexpr u32 
@@ -146,7 +156,7 @@ public:		// variables
 		= the_active_sprites_starting_vram_chunk_index;
 	
 	
-	static int next_oam_index __attribute__((_iwram));
+	static int next_oam_index;
 	
 public:		// functions
 	
@@ -160,8 +170,7 @@ public:		// functions
 	
 	static void reinit_sprite_with_sprite_ipg( sprite*& the_sprite, 
 		sprite_allocator& the_sprite_allocator, 
-		sprite_init_param_group* s_the_sprite_ipg )
-		__attribute__((_iwram_code));
+		sprite_init_param_group* s_the_sprite_ipg );
 	//static void reinit_sprite_with_sprite_ipg( sprite*& the_sprite, 
 	//	sprite_allocator& the_sprite_allocator, u32 s_vram_chunk_index, 
 	//	sprite_init_param_group* s_the_sprite_ipg );
@@ -169,8 +178,8 @@ public:		// functions
 	static void reinit_sprite_by_spawning( sprite*& the_sprite, 
 		sprite_allocator& the_sprite_allocator,
 		sprite_type s_the_sprite_type, const vec2_f24p8& s_in_level_pos, 
-		const prev_curr_pair<bg_point>& camera_pos, bool facing_left=true )
-		__attribute__((_iwram_code));
+		const prev_curr_pair<bg_point>& camera_pos, 
+		bool facing_left=true );
 	
 	
 	
@@ -234,6 +243,7 @@ public:		// functions
 		( prev_curr_pair<bg_point>& camera_pos, 
 		u32 sublevel_entrance_index );
 	
+	
 	// This function is put in IWRAM because when the_player warps around a
 	// particular sublevel without CHANGING sublevels, sprites need to be
 	// spawned, which can be an intensive operation.
@@ -244,6 +254,8 @@ public:		// functions
 	
 	static void initial_sprite_spawning_from_sublevel_data_old
 		( const bg_point& camera_pos );
+	
+	static void find_all_active_sprites() __attribute__((_iwram_code));
 	
 	static void spawn_sprites_if_needed
 		( const prev_curr_pair<bg_point>& camera_pos_pc_pair ) 
@@ -315,6 +327,8 @@ public:		// functions
 		bool facing_left=false ) __attribute__((_iwram_code));
 	
 	
+	// This function is one of the most intensive, so it is an ARM function
+	// that goes in IWRAM.
 	static void update_all_sprites( const vec2_u32& the_sublevel_size_2d,
 		prev_curr_pair<bg_point>& camera_pos_pc_pair ) 
 		__attribute__((_iwram_code));

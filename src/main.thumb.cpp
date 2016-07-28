@@ -110,6 +110,11 @@ int main()
 		}
 		
 		
+		
+		
+		sprite_manager::find_all_active_sprites();
+		
+		
 		// Despawn sprites that are too far offscreen.
 		sprite_manager::despawn_sprites_if_needed
 			(gfx_manager::bgofs_mirror[0].curr);

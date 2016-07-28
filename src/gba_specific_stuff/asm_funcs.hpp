@@ -25,6 +25,7 @@
 #define asm_comment(stuff) \
 	asm volatile( "@ ---" stuff " ---" )
 
+#include <array>
 
 extern "C"
 {
@@ -83,6 +84,13 @@ inline void arr_memfill32( type* dst, u32 src, u32 num_elems )
 }
 
 
+template< typename type, size_t size >
+inline void arr_memfill32( std::array< type, size >& arr_to_fill, 
+	u32 src )
+{
+	arr_memfill32<type>( arr_to_fill.data(), src, size );
+}
+
 
 
 
@@ -96,18 +104,31 @@ inline void memfill8( volatile void* dst, u32 src, u32 bytecount )
 }
 
 
-template<typename type>
+template< typename type >
 inline void arr_memcpy8( type* dst, const type* src, u32 num_elems )
 {
 	memcpy8( (void*)dst, src, num_elems * sizeof(type) / sizeof(u8) );
 }
-template<typename type>
+template< typename type >
 inline void arr_memfill8( type* dst, u32 src, u32 num_elems )
 {
 	memfill8( (void*)dst, (src & 0xff), num_elems * sizeof(type) 
 		/ sizeof(u8) );
 }
 
+
+
+template< typename type >
+inline void* arr_memcpy( type* dst, const type* src, u32 num_elems )
+{
+	return memcpy( dst, src, num_elems * sizeof(type) / sizeof(u8) );
+}
+
+template< typename type >
+inline void* arr_memset( type* dst, int c, u32 num_elems )
+{
+	return memset( dst, c, num_elems * sizeof(type) / sizeof(u8) );
+}
 
 
 #endif		// asm_funcs_hpp

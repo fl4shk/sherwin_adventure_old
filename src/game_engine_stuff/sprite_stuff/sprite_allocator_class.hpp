@@ -27,15 +27,12 @@ class sprite;
 class sprite_allocator : public array_helper<sprite>
 {
 public:		// functions
-	sprite_allocator( sprite* the_array, u32 s_size )
-		__attribute__((_iwram_code));
+	sprite_allocator( sprite* the_array, u32 s_size );
 	sprite_allocator
-		( const array_helper<sprite>& s_allocatable_sprite_arr )
-		__attribute__((_iwram_code));
+		( const array_helper<sprite>& s_allocatable_sprite_arr );
 	
 	void* allocate_sprite() __attribute__((_iwram_code));
-	void deallocate_sprite( sprite*& the_sprite )
-		__attribute__((_iwram_code));
+	void deallocate_sprite( sprite*& the_sprite );
 	
 	
 } __attribute__((_align4));

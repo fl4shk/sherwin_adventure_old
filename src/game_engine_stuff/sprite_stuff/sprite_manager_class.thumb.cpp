@@ -89,6 +89,7 @@ sprite sprite_manager::the_allocatable_sprites
 
 
 
+// The sprite allocators
 sprite_allocator sprite_manager::the_player_secondary_sprites_allocator
 	( array_helper<sprite>
 	( sprite_manager::the_allocatable_player_secondary_sprites, 
@@ -107,6 +108,17 @@ sprite_allocator sprite_manager::the_sprites_allocator
 	( array_helper<sprite>( sprite_manager::the_allocatable_sprites,
 	sprite_manager::max_num_regular_sprites ) );
 
+
+// Active sprites
+u32 sprite_manager::num_active_player_secondary_sprites, 
+	sprite_manager::num_active_sprites, 
+	sprite_manager::num_active_secondary_sprites;
+std::array< sprite*, sprite_manager::max_num_player_secondary_sprites>
+	sprite_manager::the_active_player_secondary_sprites;
+std::array< sprite*, sprite_manager::max_num_secondary_sprites>
+	sprite_manager::the_active_secondary_sprites;
+std::array< sprite*, sprite_manager::max_num_regular_sprites>
+	sprite_manager::the_active_sprites;
 
 
 int sprite_manager::next_oam_index;
@@ -375,32 +387,44 @@ void sprite_manager::init_the_player ( const vec2_f24p8& s_in_level_pos,
 
 void sprite_manager::clear_the_sprite_arrays()
 {
-	memfill32( the_player_secondary_sprites.data(), 0,
-		the_player_secondary_sprites.size() * sizeof(sprite*) 
-		/ sizeof(u32) );
-	memfill32( the_secondary_sprites.data(), 0,
-		the_secondary_sprites.size() * sizeof(sprite*) / sizeof(u32) );
-	memfill32( the_sprites.data(), 0, the_sprites.size() * sizeof(sprite*) 
-		/ sizeof(u32) );
-	
-	
-	//memfill32( the_allocatable_player_secondary_sprites.data(), 0,
-	//	the_allocatable_player_secondary_sprites.size() 
+	//memfill32( the_player_secondary_sprites.data(), 0,
+	//	the_player_secondary_sprites.size() * sizeof(sprite*) 
+	//	/ sizeof(u32) );
+	//memfill32( the_secondary_sprites.data(), 0,
+	//	the_secondary_sprites.size() * sizeof(sprite*) / sizeof(u32) );
+	//memfill32( the_sprites.data(), 0, the_sprites.size() * sizeof(sprite*) 
+	//	/ sizeof(u32) );
+	//
+	//
+	////memfill32( the_allocatable_player_secondary_sprites.data(), 0,
+	////	the_allocatable_player_secondary_sprites.size() 
+	////	* sizeof(sprite) / sizeof(u32) );
+	////memfill32( the_allocatable_secondary_sprites.data(), 0,
+	////	the_allocatable_secondary_sprites.size() * sizeof(sprite) 
+	////	/ sizeof(u32) );
+	////memfill32( the_allocatable_sprites.data(), 0, 
+	////	the_allocatable_sprites.size() * sizeof(sprite) 
+	////	/ sizeof(u32) );
+	//
+	//
+	//memfill32( the_allocatable_player_secondary_sprites, 0,
+	//	max_num_player_secondary_sprites * sizeof(sprite) / sizeof(u32) );
+	//memfill32( the_allocatable_secondary_sprites, 0,
+	//	max_num_secondary_sprites * sizeof(sprite) / sizeof(u32) );
+	//memfill32( the_allocatable_sprites, 0, max_num_regular_sprites 
 	//	* sizeof(sprite) / sizeof(u32) );
-	//memfill32( the_allocatable_secondary_sprites.data(), 0,
-	//	the_allocatable_secondary_sprites.size() * sizeof(sprite) 
-	//	/ sizeof(u32) );
-	//memfill32( the_allocatable_sprites.data(), 0, 
-	//	the_allocatable_sprites.size() * sizeof(sprite) 
-	//	/ sizeof(u32) );
 	
 	
-	memfill32( the_allocatable_player_secondary_sprites, 0,
-		max_num_player_secondary_sprites * sizeof(sprite) / sizeof(u32) );
-	memfill32( the_allocatable_secondary_sprites, 0,
-		max_num_secondary_sprites * sizeof(sprite) / sizeof(u32) );
-	memfill32( the_allocatable_sprites, 0, max_num_regular_sprites 
-		* sizeof(sprite) / sizeof(u32) );
+	arr_memfill32( the_player_secondary_sprites, 0 );
+	arr_memfill32( the_secondary_sprites, 0 );
+	arr_memfill32( the_sprites, 0 );
+	
+	
+	arr_memfill32( the_allocatable_player_secondary_sprites, 0,
+		max_num_player_secondary_sprites );
+	arr_memfill32( the_allocatable_secondary_sprites, 0,
+		max_num_secondary_sprites );
+	arr_memfill32( the_allocatable_sprites, 0, max_num_regular_sprites );
 }
 
 void sprite_manager::init_horiz_sublevel_sprite_ipg_lists
@@ -496,6 +520,82 @@ void sprite_manager::initial_sprite_spawning_at_start_of_level
 	
 	initial_sprite_spawning_shared_code(camera_pos_pc_pair);
 }
+
+void sprite_manager::find_all_active_sprites()
+{
+	//for ( u32 i=0; i<the_active_player_secondary_sprites.size(); ++i )
+	//{
+	//	the_active_player_secondary_sprites[i] = NULL;
+	//}
+	//for ( u32 i=0; i<the_active_secondary_sprites.size(); ++i )
+	//{
+	//	the_active_secondary_sprites[i] = NULL;
+	//}
+	//for ( u32 i=0; i<the_active_sprites.size(); ++i )
+	//{
+	//	the_active_sprites[i] = NULL;
+	//}
+	
+	
+	arr_memfill32( the_active_player_secondary_sprites, 0 );
+	arr_memfill32( the_active_secondary_sprites, 0 );
+	arr_memfill32( the_active_sprites, 0 );
+	
+	//auto find_active_sprites = []( sprite* sprites_arr, 
+	//	sprite** active_sprites_arr, const u32 sprites_arr_size, 
+	//	u32& num_active_sprites_in_category ) -> void
+	//{
+	//	for ( u32 i=0; i<sprites_arr_size; ++i )
+	//	{
+	//		sprite& the_spr = sprites_arr[i];
+	//		if ( the_spr.the_sprite_type != st_default )
+	//		{
+	//			active_sprites_arr[num_active_sprites_in_category++] 
+	//				= &the_spr;
+	//		}
+	//	}
+	//};
+	
+	auto find_active_sprites = []( sprite** sprite_ptr_arr, 
+		sprite** active_sprites_arr, const u32 sprites_arr_size, 
+		u32& num_active_sprites_in_category ) -> void
+	{
+		for ( u32 i=0; i<sprites_arr_size; ++i )
+		{
+			//sprite& the_spr = sprites_arr[i];
+			//if ( the_spr.the_sprite_type != st_default )
+			//{
+			//	active_sprites_arr[num_active_sprites_in_category++] 
+			//		= &the_spr;
+			//}
+			
+			sprite* the_spr_ptr = sprite_ptr_arr[i];
+			
+			if ( the_spr_ptr != NULL )
+			{
+				active_sprites_arr[num_active_sprites_in_category++]
+					= the_spr_ptr;
+			}
+		}
+	};
+	
+	// Find all the currently-active secondary sprites "claimed" by
+	// the_player.
+	find_active_sprites( the_player_secondary_sprites.data(),
+		the_active_player_secondary_sprites.data(),
+		the_player_secondary_sprites.size(),
+		num_active_player_secondary_sprites );
+	
+	// Find all the currently-active secondary sprites.
+	find_active_sprites( the_secondary_sprites.data(), 
+		the_active_secondary_sprites.data(), the_secondary_sprites.size(), 
+		num_active_secondary_sprites );
+	
+	// Find all the currently-active sprites.
+	find_active_sprites( the_sprites.data(), the_active_sprites.data(), 
+		the_sprites.size(), num_active_sprites );
+}
+
 
 void sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
 	( prev_curr_pair<bg_point>& camera_pos_pc_pair, 
@@ -783,5 +883,227 @@ void sprite_manager::initial_sprite_spawning_shared_code
 
 
 
+// This function despawns sprites from the_player_secondary_sprites,
+// the_sprites, and the_secondary_sprites, if they are offscreen.
+void sprite_manager::despawn_sprites_if_needed
+	( const bg_point& camera_pos )
+{
+	// Sprites are despawned only when they are HORIZONTALLY too far off
+	// screen.
+	constexpr s32 max_left = -( ( 2 * 16 ) << 8 ),
+		max_right = ( screen_width + 2 * 16 ) << 8;
+	
+	
+	//vec2_f24p8 camera_pos_f24p8;
+	//camera_pos_f24p8.x = make_f24p8(camera_pos.x);
+	//camera_pos_f24p8.y = make_f24p8(camera_pos.y);
+	
+	
+	auto for_loop_contents = [&]( sprite*& spr, 
+		sprite_allocator& the_sprite_allocator ) -> void
+	{
+		//if ( spr.the_sprite_type != st_default )
+		//{
+		//	fixed24p8 spr_on_screen_pos_x = spr.in_level_pos.x 
+		//		- camera_pos.x;
+		//	
+		//	if ( !( spr_on_screen_pos_x.data >= max_left
+		//		&& spr_on_screen_pos_x.data <= max_right ) )
+		//	{
+		//		// I might eventually create spr.despawn() so that
+		//		// sprites can control HOW they despawn
+		//		//spr.despawn();
+		//		
+		//		spr.the_sprite_type = st_default;
+		//		if ( spr.the_sprite_ipg != NULL )
+		//		{
+		//			spr.the_sprite_ipg->spawn_state = sss_not_active;
+		//		}
+		//	}
+		//}
+		
+		if ( spr != NULL )
+		{
+			//fixed24p8 spr_on_screen_pos_x = spr->in_level_pos.x 
+			//	- camera_pos.x;
+			fixed24p8 spr_on_screen_pos_x = spr->get_curr_in_level_pos().x 
+				- camera_pos.x;
+			
+			if ( !( spr_on_screen_pos_x.data >= max_left
+				&& spr_on_screen_pos_x.data <= max_right ) )
+			{
+				// I might eventually create spr->despawn() so that
+				// sprites can control HOW they despawn
+				//spr->despawn();
+				
+				if ( spr->the_sprite_ipg != NULL )
+				{
+					spr->the_sprite_ipg->spawn_state = sss_not_active;
+				}
+				
+				the_sprite_allocator.deallocate_sprite(spr);
+				//spr = NULL;
+			}
+			
+		}
+	};
+	
+	////for ( sprite*& spr : the_player_secondary_sprites )
+	//for ( u32 i=0; i<the_player_secondary_sprites.size(); ++i )
+	//{
+	//	sprite*& spr = the_player_secondary_sprites[i];
+	//	
+	//	for_loop_contents( spr, the_player_secondary_sprites_allocator );
+	//}
+	//
+	////for ( sprite*& spr : the_secondary_sprites )
+	//for ( u32 i=0; i<the_secondary_sprites.size(); ++i )
+	//{
+	//	sprite*& spr = the_secondary_sprites[i];
+	//	
+	//	for_loop_contents( spr, the_secondary_sprites_allocator );
+	//}
+	//
+	////for ( sprite*& spr : the_sprites )
+	//for ( u32 i=0; i<the_sprites.size(); ++i )
+	//{
+	//	sprite*& spr = the_sprites[i];
+	//	
+	//	for_loop_contents( spr, the_sprites_allocator );
+	//}
+	
+	//for ( sprite*& spr : the_player_secondary_sprites )
+	for ( u32 i=0; i<num_active_player_secondary_sprites; ++i )
+	{
+		sprite*& spr = the_active_player_secondary_sprites[i];
+		
+		for_loop_contents( spr, the_player_secondary_sprites_allocator );
+	}
+	
+	//for ( sprite*& spr : the_secondary_sprites )
+	for ( u32 i=0; i<num_active_secondary_sprites; ++i )
+	{
+		sprite*& spr = the_active_secondary_sprites[i];
+		
+		for_loop_contents( spr, the_secondary_sprites_allocator );
+	}
+	
+	//for ( sprite*& spr : the_sprites )
+	for ( u32 i=0; i<num_active_sprites; ++i )
+	{
+		sprite*& spr = the_active_sprites[i];
+		
+		for_loop_contents( spr, the_sprites_allocator );
+	}
+	
+}
 
 
+s32 sprite_manager::spawn_a_player_secondary_sprite_basic
+	( sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos, 
+	const prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
+{
+	u32 next_sprite_index = 0;
+	
+	// Find a free sprite slot.  This should really be done with an
+	// sa_free_list.
+	for ( ;
+		next_sprite_index<the_player_secondary_sprites.size();
+		++next_sprite_index )
+	{
+		//if ( the_player_secondary_sprites[next_sprite_index]
+		//	.the_sprite_type == st_default )
+		if ( the_player_secondary_sprites[next_sprite_index] == NULL )
+		{
+			break;
+		}
+	}
+	
+	// Don't spawn any sprites if too many are active.
+	if ( next_sprite_index == the_player_secondary_sprites.size() )
+	{
+		return -1;
+	}
+	
+	//the_player_secondary_sprites[next_sprite_index].reinit_by_spawning
+	//	( the_sprite_type, s_in_level_pos, camera_pos, facing_left );
+	reinit_sprite_by_spawning( the_player_secondary_sprites
+		[next_sprite_index], the_player_secondary_sprites_allocator, 
+		the_sprite_type, s_in_level_pos, camera_pos_pc_pair, facing_left ); 
+	
+	
+	return next_sprite_index;
+}
+
+s32 sprite_manager::spawn_a_secondary_sprite_basic
+	( sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos, 
+	const prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
+{
+	u32 next_sprite_index = 0;
+	
+	// Find a free sprite slot.  This should really be done with an
+	// sa_free_list.
+	for ( ;
+		next_sprite_index<the_secondary_sprites.size();
+		++next_sprite_index )
+	{
+		//if ( the_secondary_sprites[next_sprite_index].the_sprite_type 
+		//	== st_default )
+		if ( the_secondary_sprites[next_sprite_index] == NULL )
+		{
+			break;
+		}
+	}
+	
+	// Don't spawn any sprites if too many are active.
+	if ( next_sprite_index == the_secondary_sprites.size() )
+	{
+		return -1;
+	}
+	
+	//the_secondary_sprites[next_sprite_index].reinit_by_spawning
+	//	( the_sprite_type, s_in_level_pos, camera_pos, facing_left );
+	
+	reinit_sprite_by_spawning( the_secondary_sprites[next_sprite_index],
+		the_secondary_sprites_allocator, the_sprite_type, s_in_level_pos, 
+		camera_pos_pc_pair, facing_left );
+	
+	return next_sprite_index;
+}
+
+
+// This is a temporary function.  It should be replaced by a function that
+// inserts sprite spawning parameters into a list.  The sprites from said
+// list would be spawned from within the function called
+// spawn_sprites_if_needed().
+void sprite_manager::spawn_a_sprite_basic( sprite_type the_sprite_type, 
+	const vec2_f24p8& s_in_level_pos, 
+	const prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
+{
+	u32 next_sprite_index = 0;
+	
+	// Find a free sprite slot.  This should really be done with an
+	// sa_free_list.
+	for ( ; next_sprite_index<the_sprites.size(); ++next_sprite_index )
+	{
+		//if ( the_sprites[next_sprite_index].the_sprite_type == st_default )
+		if ( the_sprites[next_sprite_index] == NULL )
+		{
+			break;
+		}
+	}
+	
+	// Don't spawn any sprites if too many are active.
+	if ( next_sprite_index == the_sprites.size() )
+	{
+		return;
+	}
+	
+	//the_sprites[next_sprite_index].reinit_by_spawning( the_sprite_type,
+	//	s_in_level_pos, camera_pos, facing_left );
+	
+	reinit_sprite_by_spawning( the_sprites[next_sprite_index], 
+		the_sprites_allocator, the_sprite_type, s_in_level_pos,
+		camera_pos_pc_pair, facing_left );
+	
+}
