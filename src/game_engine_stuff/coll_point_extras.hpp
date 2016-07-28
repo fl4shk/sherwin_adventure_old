@@ -32,10 +32,10 @@
 	macro(bl) macro(bm) macro(br)
 
 
-// Left, middle vertical line, or right side, same ypos collision points
+// Left or right side, same ypos collision points
 #define list_of_shared_vert_side_ypos_top_coll_point_names(macro) \
 	macro(lt) macro(rt)
-#define list_of_shared_vert_side_ypos_middle_coll_point_names(macro) \
+#define list_of_shared_vert_side_ypos_mid_coll_point_names(macro) \
 	macro(lm) macro(rm)
 #define list_of_shared_vert_side_ypos_bot_coll_point_names(macro) \
 	macro(lb) macro(rb)
@@ -43,7 +43,7 @@
 // Top or bot same xpos collision points
 #define list_of_shared_horiz_side_xpos_left_coll_point_names(macro) \
 	macro(tl) macro(bl)
-#define list_of_shared_horiz_side_xpos_middle_coll_point_names(macro) \
+#define list_of_shared_horiz_side_xpos_mid_coll_point_names(macro) \
 	macro(tm) macro(bm)
 #define list_of_shared_horiz_side_xpos_right_coll_point_names(macro) \
 	macro(tr) macro(br)

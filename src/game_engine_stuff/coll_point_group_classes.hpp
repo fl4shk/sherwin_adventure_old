@@ -56,6 +56,7 @@ public:		// enums
 		// arr_ind_16x16_count is the amount of arr_index_16x16's.  It is
 		// automatically updated by the compiler.
 		arr_ind_16x16_count,
+		
 	} __attribute__((_align4));
 	
 	
@@ -83,6 +84,7 @@ public:		// enums
 		// arr_ind_16x32_count is the amount of arr_index_16x32's.  It is
 		// automatically updated by the compiler.
 		arr_ind_16x32_count,
+		
 	} __attribute__((_align4));
 	
 	
@@ -110,26 +112,24 @@ public:		// enums
 		// arr_ind_32x16_count is the amount of arr_index_32x16's.  It is
 		// automatically updated by the compiler.
 		arr_ind_32x16_count,
+		
 	} __attribute__((_align4));
 	
 public:		// variables
-	// The maximum number of collision points, 32, is definitely more than
-	// is necessary, but thus far there's not that much need to optimize
-	// the number of collision points (also I'm too lazy to put effort into
-	// doing so).
-	static const u32 max_num_coll_points = 32;
+	//// The maximum number of collision points, 32, is definitely more than
+	//// is necessary, but thus far there's not that much need to optimize
+	//// the number of collision points (also I'm too lazy to put effort into
+	//// doing so).
+	//static const u32 max_num_coll_points = 32;
+	
+	// Ignore that last comment.  I'm optimizing this now, mainly to save
+	// on stack space (though saving on space in other memory areas is good
+	// too).
+	static const u32 max_num_coll_points = 12;
 	vec2_f24p8 the_array[max_num_coll_points];
 	
 	
 public:		// functions
-	
-} __attribute__((_align4));
-
-class coll_point_group_16x16 : public coll_point_group_base
-{
-public:		// functions
-	coll_point_group_16x16( const sprite& the_sprite );
-	
 	inline vec2_f24p8& get_pt_lt()
 		{ return the_array[arr_ind_16x16_pt_lt]; }
 	inline vec2_f24p8& get_pt_lm()
@@ -165,6 +165,43 @@ public:		// functions
 	//inline vec2_f24p8& get_pt_mb()
 	//	{ return the_array[arr_ind_16x16_pt_mb]; }
 	
+protected:		// functions
+	void assign_vert_side_x_positions( const coll_box& the_coll_box, 
+		vec2_f24p8& pt_lt, vec2_f24p8& pt_lm, vec2_f24p8& pt_lb, 
+		vec2_f24p8& pt_rt, vec2_f24p8& pt_rm, vec2_f24p8& pt_rb );
+	void assign_horiz_side_y_positions( const sprite& the_sprite, 
+		const coll_box& the_coll_box, vec2_f24p8& pt_tl, 
+		vec2_f24p8& pt_tm, vec2_f24p8& pt_tr, vec2_f24p8& pt_bl, 
+		vec2_f24p8& pt_bm, vec2_f24p8& pt_br );
+	
+	
+	void assign_vert_side_mid_y_positions( const coll_box& the_coll_box, 
+		vec2_f24p8& pt_lm, vec2_f24p8& pt_rm );
+	void assign_horiz_side_mid_x_positions( const coll_box& the_coll_box,
+		vec2_f24p8& pt_tm, vec2_f24p8& pt_bm );
+	
+	
+} __attribute__((_align4));
+
+class coll_point_group_16x16 : public coll_point_group_base
+{
+public:		// functions
+	coll_point_group_16x16( const sprite& the_sprite );
+	
+	
+protected:		// functions
+	void assign_vert_side_top_y_positions( const coll_box& the_coll_box, 
+		vec2_f24p8& pt_lt, vec2_f24p8& pt_rt );
+	void assign_vert_side_bot_y_positions( const coll_box& the_coll_box, 
+		vec2_f24p8& pt_lb, vec2_f24p8& pt_rb );
+	
+	
+	void assign_horiz_side_left_x_positions( const coll_box& the_coll_box, 
+		vec2_f24p8& pt_tl, vec2_f24p8& pt_bl );
+	void assign_horiz_side_right_x_positions( const coll_box& the_coll_box, 
+		vec2_f24p8& pt_tr, vec2_f24p8& pt_br );
+	
+	
 } __attribute__((_align4));
 
 
@@ -173,40 +210,18 @@ class coll_point_group_16x32 : public coll_point_group_base
 public:		// functions
 	coll_point_group_16x32( const sprite& the_sprite );
 	
-	inline vec2_f24p8& get_pt_lt()
-		{ return the_array[arr_ind_16x32_pt_lt]; }
-	inline vec2_f24p8& get_pt_lm()
-		{ return the_array[arr_ind_16x32_pt_lm]; }
-	inline vec2_f24p8& get_pt_lb()
-		{ return the_array[arr_ind_16x32_pt_lb]; }
+protected:		// functions
+	void assign_vert_side_top_y_positions( const coll_box& the_coll_box, 
+		vec2_f24p8& pt_lt, vec2_f24p8& pt_rt );
+	void assign_vert_side_bot_y_positions( const coll_box& the_coll_box, 
+		vec2_f24p8& pt_lb, vec2_f24p8& pt_rb );
 	
-	inline vec2_f24p8& get_pt_rt()
-		{ return the_array[arr_ind_16x32_pt_rt]; }
-	inline vec2_f24p8& get_pt_rm()
-		{ return the_array[arr_ind_16x32_pt_rm]; }
-	inline vec2_f24p8& get_pt_rb()
-		{ return the_array[arr_ind_16x32_pt_rb]; }
 	
-	inline vec2_f24p8& get_pt_tl()
-		{ return the_array[arr_ind_16x32_pt_tl]; }
-	inline vec2_f24p8& get_pt_tm()
-		{ return the_array[arr_ind_16x32_pt_tm]; }
-	inline vec2_f24p8& get_pt_tr()
-		{ return the_array[arr_ind_16x32_pt_tr]; }
+	void assign_horiz_side_left_x_positions( const coll_box& the_coll_box, 
+		vec2_f24p8& pt_tl, vec2_f24p8& pt_bl );
+	void assign_horiz_side_right_x_positions( const coll_box& the_coll_box, 
+		vec2_f24p8& pt_tr, vec2_f24p8& pt_br );
 	
-	inline vec2_f24p8& get_pt_bl()
-		{ return the_array[arr_ind_16x32_pt_bl]; }
-	inline vec2_f24p8& get_pt_bm()
-		{ return the_array[arr_ind_16x32_pt_bm]; }
-	inline vec2_f24p8& get_pt_br()
-		{ return the_array[arr_ind_16x32_pt_br]; }
-	
-	//inline vec2_f24p8& get_pt_mt()
-	//	{ return the_array[arr_ind_16x32_pt_mt]; }
-	//inline vec2_f24p8& get_pt_mm()
-	//	{ return the_array[arr_ind_16x32_pt_mm]; }
-	//inline vec2_f24p8& get_pt_mb()
-	//	{ return the_array[arr_ind_16x32_pt_mb]; }
 	
 } __attribute__((_align4));
 

@@ -40,100 +40,11 @@
 	pt_##name.y =
 
 
-coll_point_group_16x16::coll_point_group_16x16( const sprite& the_sprite )
+void coll_point_group_base::assign_vert_side_x_positions
+	( const coll_box& the_coll_box, vec2_f24p8& pt_lt, vec2_f24p8& pt_lm, 
+	vec2_f24p8& pt_lb, vec2_f24p8& pt_rt, vec2_f24p8& pt_rm, 
+	vec2_f24p8& pt_rb )
 {
-	const coll_box& the_coll_box = the_sprite.the_coll_box;
-	
-	// The collision points
-	list_of_shared_coll_point_names(generate_pt)
-	
-	// Left and Right
-	//pt_lt.x = pt_lb.x = the_coll_box.left();
-	
-	//pt_rt.x = pt_rb.x = the_coll_box.right();
-	
-	list_of_shared_left_side_coll_point_names(X) 
-		the_coll_box.left();
-	
-	list_of_shared_right_side_coll_point_names(X) 
-		the_coll_box.right();
-	
-	//list_of_shared_middle_vert_line_coll_point_names(X)
-	//	the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
-	
-	
-	
-	list_of_shared_vert_side_ypos_top_coll_point_names(Y) 
-		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 4 };
-	//list_of_shared_vert_side_ypos_top_coll_point_names(Y) 
-	//	the_coll_box.top();
-	
-	list_of_shared_vert_side_ypos_middle_coll_point_names(Y)
-		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 2 };
-	
-	list_of_shared_vert_side_ypos_bot_coll_point_names(Y) 
-		the_coll_box.bot() - (fixed24p8){ the_coll_box.size.y.data / 4 };
-	//list_of_shared_vert_side_ypos_bot_coll_point_names(Y) 
-	//	the_coll_box.bot();
-	
-	
-	
-	
-	// Top and Bottom
-	//list_of_shared_horiz_side_xpos_left_coll_point_names(X)
-	//	the_coll_box.left() + (fixed24p8){0x400};
-	//list_of_shared_horiz_side_xpos_left_coll_point_names(X)
-	//	the_coll_box.left() + (fixed24p8){0x480};
-	list_of_shared_horiz_side_xpos_left_coll_point_names(X)
-		the_coll_box.left();
-	
-	list_of_shared_horiz_side_xpos_middle_coll_point_names(X)
-		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
-	
-	//list_of_shared_horiz_side_xpos_right_coll_point_names(X)
-	//	the_coll_box.right() - (fixed24p8){0x400};
-	//list_of_shared_horiz_side_xpos_right_coll_point_names(X)
-	//	the_coll_box.right() - (fixed24p8){0x480};
-	list_of_shared_horiz_side_xpos_right_coll_point_names(X)
-		the_coll_box.right();
-	
-	
-	
-	
-	list_of_shared_top_side_coll_point_names(Y)
-		the_coll_box.top();
-	
-	// This is a special case that covers walking down a slope.  However,
-	// it would be good if I could make this not needed.
-	if ( the_sprite.get_curr_on_ground() 
-		&& the_sprite.vel.y >= (fixed24p8){0} )
-	{
-		list_of_shared_bot_side_coll_point_names(Y)
-			//the_coll_box.bot();
-			//the_coll_box.bot() + (fixed24p8){0x200};
-			//the_coll_box.bot() + (fixed24p8){0x400};
-			the_coll_box.bot() + sprite::cpg_on_slope_threshold_abs;
-	}
-	else //if (!the_sprite.get_curr_on_ground())
-	{
-		list_of_shared_bot_side_coll_point_names(Y)
-			the_coll_box.bot();
-	}
-	
-	
-}
-
-
-coll_point_group_16x32::coll_point_group_16x32( const sprite& the_sprite )
-{
-	const coll_box& the_coll_box = the_sprite.the_coll_box;
-	
-	//the_pt_group.correct_num_used_points_shared();
-	
-	// The collision_points
-	list_of_shared_coll_point_names(generate_pt)
-	
-	// Left and Right
 	//pt_lt.x = pt_lm.x = pt_lb.x = the_coll_box.left();
 	
 	//pt_rt.x = pt_rm.x = pt_rb.x = the_coll_box.right();
@@ -146,51 +57,12 @@ coll_point_group_16x32::coll_point_group_16x32( const sprite& the_sprite )
 	//list_of_shared_middle_vert_line_coll_point_names(X)
 	//	the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
 	
-	
-	
-	list_of_shared_vert_side_ypos_top_coll_point_names(Y)
-		the_coll_box.top() + sprite::cpg_16x32_threshold_abs.y;
-	//list_of_shared_vert_side_ypos_top_coll_point_names(Y)
-	//	the_coll_box.top() + (fixed24p8){0x480};
-	//list_of_shared_vert_side_ypos_top_coll_point_names(Y)
-	//	the_coll_box.top();
-	
-	list_of_shared_vert_side_ypos_middle_coll_point_names(Y)
-		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 2 };
-	
-	list_of_shared_vert_side_ypos_bot_coll_point_names(Y)
-		the_coll_box.bot() - sprite::cpg_16x32_threshold_abs.y;
-	//list_of_shared_vert_side_ypos_bot_coll_point_names(Y)
-	//	the_coll_box.bot() - (fixed24p8){0x480};
-	//list_of_shared_vert_side_ypos_bot_coll_point_names(Y)
-	//	the_coll_box.bot();
-	
-	
-	
-	// Top and Bottom
-	list_of_shared_horiz_side_xpos_left_coll_point_names(X)
-		the_coll_box.left() + sprite::cpg_16x32_threshold_abs.x;
-	//list_of_shared_horiz_side_xpos_left_coll_point_names(X)
-	//	the_coll_box.left() + (fixed24p8){0x400};
-	//list_of_shared_horiz_side_xpos_left_coll_point_names(X)
-	//	the_coll_box.left() + (fixed24p8){0x480};
-	//list_of_shared_horiz_side_xpos_left_coll_point_names(X)
-	//	the_coll_box.left();
-	
-	list_of_shared_horiz_side_xpos_middle_coll_point_names(X)
-		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
-	
-	list_of_shared_horiz_side_xpos_right_coll_point_names(X)
-		the_coll_box.right() - sprite::cpg_16x32_threshold_abs.x;
-	//list_of_shared_horiz_side_xpos_right_coll_point_names(X)
-	//	the_coll_box.right() - (fixed24p8){0x400};
-	//list_of_shared_horiz_side_xpos_right_coll_point_names(X)
-	//	the_coll_box.right() - (fixed24p8){0x480};
-	//list_of_shared_horiz_side_xpos_right_coll_point_names(X)
-	//	the_coll_box.right();
-	
-	
-	
+}
+void coll_point_group_base::assign_horiz_side_y_positions
+	( const sprite& the_sprite, const coll_box& the_coll_box, 
+	vec2_f24p8& pt_tl, vec2_f24p8& pt_tm, vec2_f24p8& pt_tr, 
+	vec2_f24p8& pt_bl, vec2_f24p8& pt_bm, vec2_f24p8& pt_br )
+{
 	list_of_shared_top_side_coll_point_names(Y)
 		the_coll_box.top();
 	
@@ -199,6 +71,12 @@ coll_point_group_16x32::coll_point_group_16x32( const sprite& the_sprite )
 	if ( the_sprite.get_curr_on_ground() 
 		&& the_sprite.vel.y >= (fixed24p8){0} )
 	{
+		//list_of_shared_bot_side_coll_point_names(Y)
+		//	//the_coll_box.bot();
+		//	//the_coll_box.bot() + (fixed24p8){0x200};
+		//	//the_coll_box.bot() + (fixed24p8){0x400};
+		//	the_coll_box.bot() + sprite::cpg_on_slope_threshold_abs;
+		
 		list_of_shared_bot_side_coll_point_names(Y)
 			the_coll_box.bot() + sprite::cpg_on_slope_threshold_abs;
 			//the_coll_box.bot() + (fixed24p8){0x400};
@@ -210,9 +88,132 @@ coll_point_group_16x32::coll_point_group_16x32( const sprite& the_sprite )
 		list_of_shared_bot_side_coll_point_names(Y)
 			the_coll_box.bot();
 	}
-	
-	
 }
+
+
+void coll_point_group_base::assign_vert_side_mid_y_positions
+	( const coll_box& the_coll_box, vec2_f24p8& pt_lm, vec2_f24p8& pt_rm )
+{
+	list_of_shared_vert_side_ypos_mid_coll_point_names(Y)
+		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 2 };
+}
+void coll_point_group_base::assign_horiz_side_mid_x_positions
+	( const coll_box& the_coll_box, vec2_f24p8& pt_tm, vec2_f24p8& pt_bm )
+{
+	list_of_shared_horiz_side_xpos_mid_coll_point_names(X)
+		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
+}
+
+
+
+coll_point_group_16x16::coll_point_group_16x16( const sprite& the_sprite )
+{
+	const coll_box& the_coll_box = the_sprite.the_coll_box;
+	
+	// The collision points
+	list_of_shared_coll_point_names(generate_pt)
+	
+	
+	// Left and Right
+	assign_vert_side_x_positions( the_coll_box, pt_lt, pt_lm, pt_lb, pt_rt, 
+		pt_rm, pt_rb );
+	
+	assign_vert_side_top_y_positions( the_coll_box, pt_lt, pt_rt );
+	assign_vert_side_mid_y_positions( the_coll_box, pt_lm, pt_rm );
+	assign_vert_side_bot_y_positions( the_coll_box, pt_lb, pt_rb );
+	
+	
+	// Top and Bottom
+	assign_horiz_side_left_x_positions( the_coll_box, pt_tl, pt_bl );
+	assign_horiz_side_mid_x_positions( the_coll_box, pt_tm, pt_bm );
+	assign_horiz_side_right_x_positions( the_coll_box, pt_tr, pt_br );
+	
+	assign_horiz_side_y_positions( the_sprite, the_coll_box, pt_tl, pt_tm, 
+		pt_tr, pt_bl, pt_bm, pt_br );
+}
+
+void coll_point_group_16x16::assign_vert_side_top_y_positions
+	( const coll_box& the_coll_box, vec2_f24p8& pt_lt, vec2_f24p8& pt_rt )
+{
+	list_of_shared_vert_side_ypos_top_coll_point_names(Y) 
+		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 4 };
+}
+void coll_point_group_16x16::assign_vert_side_bot_y_positions
+	( const coll_box& the_coll_box, vec2_f24p8& pt_lb, vec2_f24p8& pt_rb )
+{
+	list_of_shared_vert_side_ypos_bot_coll_point_names(Y) 
+		the_coll_box.bot() - (fixed24p8){ the_coll_box.size.y.data / 4 };
+}
+
+
+void coll_point_group_16x16::assign_horiz_side_left_x_positions
+	( const coll_box& the_coll_box, vec2_f24p8& pt_tl, vec2_f24p8& pt_bl )
+{
+	list_of_shared_horiz_side_xpos_left_coll_point_names(X)
+		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 4 };
+}
+void coll_point_group_16x16::assign_horiz_side_right_x_positions
+	( const coll_box& the_coll_box, vec2_f24p8& pt_tr, vec2_f24p8& pt_br )
+{
+	list_of_shared_horiz_side_xpos_right_coll_point_names(X)
+		the_coll_box.right() - (fixed24p8){ the_coll_box.size.x.data / 4 };
+}
+
+
+
+coll_point_group_16x32::coll_point_group_16x32( const sprite& the_sprite )
+{
+	const coll_box& the_coll_box = the_sprite.the_coll_box;
+	
+	// The collision_points
+	list_of_shared_coll_point_names(generate_pt)
+	
+	// Left and Right
+	assign_vert_side_x_positions( the_coll_box, pt_lt, pt_lm, pt_lb, pt_rt, 
+		pt_rm, pt_rb );
+	
+	assign_vert_side_top_y_positions( the_coll_box, pt_lt, pt_rt );
+	assign_vert_side_mid_y_positions( the_coll_box, pt_lm, pt_rm );
+	assign_vert_side_bot_y_positions( the_coll_box, pt_lb, pt_rb );
+	
+	
+	
+	// Top and Bottom
+	assign_horiz_side_left_x_positions( the_coll_box, pt_tl, pt_bl );
+	assign_horiz_side_mid_x_positions( the_coll_box, pt_tm, pt_bm );
+	assign_horiz_side_right_x_positions( the_coll_box, pt_tr, pt_br );
+	
+	assign_horiz_side_y_positions( the_sprite, the_coll_box, pt_tl, pt_tm, 
+		pt_tr, pt_bl, pt_bm, pt_br );
+}
+
+void coll_point_group_16x32::assign_vert_side_top_y_positions
+	( const coll_box& the_coll_box, vec2_f24p8& pt_lt, vec2_f24p8& pt_rt )
+{
+	list_of_shared_vert_side_ypos_top_coll_point_names(Y)
+		the_coll_box.top() + sprite::cpg_16x32_threshold_abs.y;
+}
+void coll_point_group_16x32::assign_vert_side_bot_y_positions
+	( const coll_box& the_coll_box, vec2_f24p8& pt_lb, vec2_f24p8& pt_rb )
+{
+	list_of_shared_vert_side_ypos_bot_coll_point_names(Y)
+		the_coll_box.bot() - sprite::cpg_16x32_threshold_abs.y;
+}
+
+
+void coll_point_group_16x32::assign_horiz_side_left_x_positions
+	( const coll_box& the_coll_box, vec2_f24p8& pt_tl, vec2_f24p8& pt_bl )
+{
+	list_of_shared_horiz_side_xpos_left_coll_point_names(X)
+		the_coll_box.left() + sprite::cpg_16x32_threshold_abs.x;
+}
+void coll_point_group_16x32::assign_horiz_side_right_x_positions
+	( const coll_box& the_coll_box, vec2_f24p8& pt_tr, vec2_f24p8& pt_br )
+{
+	list_of_shared_horiz_side_xpos_right_coll_point_names(X)
+		the_coll_box.right() - sprite::cpg_16x32_threshold_abs.x;
+}
+
 
 #undef generate_pt
 #undef X
