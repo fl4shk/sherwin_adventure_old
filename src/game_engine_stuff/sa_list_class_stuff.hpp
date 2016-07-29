@@ -169,7 +169,7 @@ public:		// functions
 		}
 	}
 	
-	int push_front_old( const type& to_push )
+	int push_front( const type& to_push )
 	{
 		// If there's nothing in the list
 		if ( get_front_node_index() == -1 )
@@ -207,7 +207,7 @@ public:		// functions
 		return get_front_node_index();
 	}
 	
-	int push_front( const type& to_push ) __attribute__((noinline))
+	int push_front_new( const type& to_push ) __attribute__((noinline))
 	{
 		int& the_front_node_index = get_front_node_index();
 		int old_front_node_index = the_front_node_index;
@@ -225,6 +225,7 @@ public:		// functions
 		the_front_node_index = the_free_list_backend.peek_top();
 		the_free_list_backend.pop();
 		
+		
 		sa_list_node<type>& the_front_node 
 			= get_node_at(the_front_node_index);
 		
@@ -232,7 +233,8 @@ public:		// functions
 		int new_next_node_index = -1;
 		
 		// If there's nothing in the list
-		if ( the_front_node_index < 0 )
+		//if ( the_front_node_index < 0 )
+		if ( old_front_node_index < 0 )
 		{
 			
 		}

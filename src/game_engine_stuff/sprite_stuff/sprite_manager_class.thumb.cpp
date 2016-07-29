@@ -192,7 +192,8 @@ void sprite_manager::allocate_sprite( sprite*& the_sprite,
 	else
 	{
 		//show_debug_str_s32("nty0");
-		debug_arr_group::write_str_and_inc("NoType0");
+		debug_arr_group::write_str_and_inc("BadSprType0");
+		halt();
 	}
 	
 }
@@ -213,7 +214,7 @@ void sprite_manager::allocate_sprite( sprite*& the_sprite,
 	else
 	{
 		//show_debug_str_s32("nty1");
-		debug_arr_group::write_str_and_inc("NoType1");
+		debug_arr_group::write_str_and_inc("BadSprType1");
 		halt();
 	}
 	
@@ -479,17 +480,38 @@ void sprite_manager::clear_the_sprite_arrays()
 	//memfill32( the_allocatable_sprites, 0, max_num_regular_sprites 
 	//	* sizeof(sprite) / sizeof(u32) );
 	
+	for ( u32 i=0; i<max_num_player_secondary_sprites; ++i )
+	{
+		the_player_secondary_sprites_allocator.deallocate_sprite
+			(the_player_secondary_sprites[i]);
+	}
 	
+	for ( u32 i=0; i<max_num_secondary_sprites; ++i )
+	{
+		the_secondary_sprites_allocator.deallocate_sprite
+			(the_secondary_sprites[i]);
+	}
+	
+	for ( u32 i=0; i<max_num_regular_sprites; ++i )
+	{
+		the_sprites_allocator.deallocate_sprite(the_sprites[i]);
+	}
+	
+	
+	// Clear the arrays of pointers
 	arr_memfill32( the_player_secondary_sprites, 0 );
 	arr_memfill32( the_secondary_sprites, 0 );
 	arr_memfill32( the_sprites, 0 );
 	
 	
-	arr_memfill32( the_allocatable_player_secondary_sprites, 0,
-		max_num_player_secondary_sprites );
-	arr_memfill32( the_allocatable_secondary_sprites, 0,
-		max_num_secondary_sprites );
-	arr_memfill32( the_allocatable_sprites, 0, max_num_regular_sprites );
+	//arr_memfill32( the_allocatable_player_secondary_sprites, 0,
+	//	max_num_player_secondary_sprites );
+	//arr_memfill32( the_allocatable_secondary_sprites, 0,
+	//	max_num_secondary_sprites );
+	//arr_memfill32( the_allocatable_sprites, 0, max_num_regular_sprites );
+	
+	
+	
 }
 
 void sprite_manager::init_horiz_sublevel_sprite_ipg_lists

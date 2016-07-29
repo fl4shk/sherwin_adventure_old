@@ -25,6 +25,8 @@
 #include "misc_utility_funcs.hpp"
 
 
+// A class for 2D mathematical vectors.  This is very different from
+// std::vector.
 template< typename type >
 class vec2
 {

@@ -311,8 +311,8 @@ void player_sprite::update_part_2()
 	
 	if ( key_dir != 0 )
 	{
-		// Allow instantly turning around (not something that can be done
-		// in real life!)
+		// Allow almost instantly turning around (not something that can be
+		// done in real life!)
 		if ( ( key_dir < 0 && vel.x.data > 0 )
 			|| ( key_dir > 0 && vel.x.data < 0 ) )
 		{
@@ -379,6 +379,8 @@ void player_sprite::update_part_3
 	( prev_curr_pair<bg_point>& camera_pos_pc_pair, 
 	const vec2_u32& the_sublevel_size_2d )
 {
+	// These should totally should be replaced by getter functions
+	
 	// Walk frame stuff
 	s32& walk_frame_timer = misc_data_s[sdi_walk_frame_timer];
 	u32& active_walk_frame_slot = misc_data_u
@@ -455,6 +457,8 @@ void player_sprite::update_part_3
 
 void player_sprite::update_frames_and_frame_timers()
 {
+	// These should totally should be replaced by getter functions
+	
 	// Walk frame stuff
 	s32& walk_frame_timer = misc_data_s[sdi_walk_frame_timer];
 	u32& active_walk_frame_slot = misc_data_u[udi_active_walk_frame_slot];
@@ -650,12 +654,15 @@ void player_sprite::update_frames_and_frame_timers()
 	
 }
 
+// This is very ugly
 void player_sprite::update_the_pickaxe()
 {
 	if ( pickaxe_sprite_slot == -1 )
 	{
 		return;
 	}
+	
+	// These should totally should be replaced by getter functions
 	
 	sprite*& the_pickaxe_ptr = sprite_manager::the_player_secondary_sprites
 		[pickaxe_sprite_slot];
@@ -708,6 +715,7 @@ void player_sprite::update_the_pickaxe()
 			}
 		}
 		
+		// There should really be arrays to load from for these!
 		switch (active_pickaxe_swing_frame_slot)
 		{
 			case frm_slot_weapon_swing_ground_still_0:
@@ -922,6 +930,8 @@ void player_sprite::update_the_pickaxe()
 
 const u32 player_sprite::get_curr_relative_tile_slot()
 {
+	// These should totally should be replaced by getter functions
+	
 	// Walk frame stuff
 	s32& walk_frame_timer = misc_data_s[sdi_walk_frame_timer];
 	u32& active_walk_frame_slot = misc_data_u[udi_active_walk_frame_slot];
@@ -932,6 +942,8 @@ const u32 player_sprite::get_curr_relative_tile_slot()
 	u32& active_pickaxe_swing_frame_slot = misc_data_u
 		[udi_active_pickaxe_swing_frame_slot];
 	
+	
+	// Invincibility frames!
 	if ( invin_frame_timer > 0 )
 	{
 		switch ( invin_frame_timer % 8 )
@@ -1007,6 +1019,7 @@ const u32 player_sprite::get_curr_relative_tile_slot()
 	}
 	else //if (swinging_pickaxe)
 	{
+		// This is so ugly
 		switch (active_pickaxe_swing_frame_slot)
 		{
 			// Yay, another use for X-macros!
@@ -1076,6 +1089,7 @@ const u32 player_sprite::get_curr_relative_tile_slot()
 // Physics and collision stuff
 void player_sprite::block_collision_stuff()
 {
+	// Assume the_player can only be one of two sizes
 	if ( the_coll_box.size.x >= make_f24p8(0)
 		&& the_coll_box.size.x <= make_f24p8(16)
 		&& the_coll_box.size.y > make_f24p8(16 )
@@ -1176,7 +1190,11 @@ void player_sprite::handle_jumping_stuff( u32 is_jump_key_hit,
 	
 }
 
+
+
 // Sprite-sprite interaction stuff
+// This function SHOULD be passed a sprite_allocator so that some types of
+// sprites, such as powerups, can be properly despawned!
 void player_sprite::sprite_interaction_reponse( sprite& the_other_sprite, 
 	prev_curr_pair<bg_point>& camera_pos_pc_pair, 
 	const vec2_u32& the_level_size_2d )
@@ -1188,21 +1206,24 @@ void player_sprite::sprite_interaction_reponse( sprite& the_other_sprite,
 		case st_fire_muffin:
 		case st_ice_muffin:
 		case st_chocolate_muffin:
-			if ( coll_box_intersects_now( the_coll_box,
-				the_other_sprite.the_coll_box ) )
-			{
-				//nocash_soft_break();
-				the_other_sprite.the_sprite_type = st_default;
-				if ( the_other_sprite.the_sprite_ipg != NULL )
-				{
-					the_other_sprite.the_sprite_ipg->spawn_state 
-						= sss_dead;
-				}
-				
-				++remaining_hp;
-			}
+			
+			// This is not proper despawning!
+			//if ( coll_box_intersects_now( the_coll_box,
+			//	the_other_sprite.the_coll_box ) )
+			//{
+			//	//nocash_soft_break();
+			//	the_other_sprite.the_sprite_type = st_default;
+			//	if ( the_other_sprite.the_sprite_ipg != NULL )
+			//	{
+			//		the_other_sprite.the_sprite_ipg->spawn_state 
+			//			= sss_dead;
+			//	}
+			//	
+			//	++remaining_hp;
+			//}
 			break;
 		
+		// This should 
 		case st_door:
 			if ( coll_box_intersects_now( the_coll_box,
 				the_other_sprite.the_coll_box ) && key_hit(key_up) 

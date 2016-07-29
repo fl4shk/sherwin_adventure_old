@@ -68,8 +68,14 @@ sa_free_list_backend::sa_free_list_backend( int* s_ptr_to_the_array,
 
 void sa_free_list_backend::init()
 {
+	get_curr_index() = 0;
+	
+	// This makes it so that the values initially stored in the array are
+	// decrementing in value, starting with the highest value of
+	// ( get_size() - 1 ) and ending with 0. 
 	for ( int i=get_size()-1; i>= 0; --i )
 	{
 		push(i);
 	}
 }
+

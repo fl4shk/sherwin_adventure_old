@@ -86,7 +86,8 @@ static constexpr u32 debug_f8p8_arr_size = 32;
 // debug_arr_group::debug_str_arr.
 static constexpr u32 debug_str_arr_size = 32;
 
-// ( 16 + 4 ) * 32 = 640 bytes eaten up by debug_str_arr.
+//// ( 16 + 4 ) * 32 = 640 bytes eaten up by debug_str_arr.
+// ( 20 + 4 ) * 32 = 768 bytes eaten up by debug_str_arr.
 
 // Total of 20 + 512 + 640 = 1172 bytes (293 4-bytes-long words) eaten up
 // by debug vars (INCLUDING the array indices).  This is certainly
@@ -101,7 +102,7 @@ public:		// and constants
 	// Please make sure that max_size is a multiple of 4.  max_size is the
 	// number of elements in arr.
 	///static constexpr u32 max_size = 16;
-	static constexpr u32 max_size = 16;
+	static constexpr u32 max_size = 20;
 	char arr[max_size];
 	
 public:		// functions

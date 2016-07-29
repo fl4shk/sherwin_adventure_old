@@ -341,8 +341,8 @@ public:		// variables
 	u32 curr_index;
 	
 public:		// functions
-	inline sa_free_list() : the_sa_free_list_backend( the_array.data(),
-		&curr_index, get_size() ), curr_index(0)
+	inline sa_free_list() : the_sa_free_list_backend( the_array.data(), 
+		&curr_index, get_size() )
 	{
 		//the_sa_free_list_backend.init();
 		

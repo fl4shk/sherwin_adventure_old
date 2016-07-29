@@ -59,6 +59,7 @@ extern void memfill8( void* dst, u32 src, u32 bytecount );
 
 }
 
+// A bunch of wrappers
 inline void memcpy32( volatile void* dst, const void* src, 
 	u32 wordcount )
 {
@@ -68,27 +69,6 @@ inline void memcpy32( volatile void* dst, const void* src,
 inline void memfill32( volatile void* dst, u32 src, u32 wordcount )
 {
 	memfill32( (void*)dst, src, wordcount );
-}
-
-
-template<typename type>
-inline void arr_memcpy32( type* dst, const type* src, u32 num_elems )
-{
-	memcpy32( (void*)dst, (const void*)src, num_elems * sizeof(type) 
-		/ sizeof(u32) );
-}
-template<typename type>
-inline void arr_memfill32( type* dst, u32 src, u32 num_elems )
-{
-	memfill32( (void*)dst, src, num_elems * sizeof(type) / sizeof(u32) );
-}
-
-
-template< typename type, size_t size >
-inline void arr_memfill32( std::array< type, size >& arr_to_fill, 
-	u32 src )
-{
-	arr_memfill32<type>( arr_to_fill.data(), src, size );
 }
 
 
@@ -104,8 +84,23 @@ inline void memfill8( volatile void* dst, u32 src, u32 bytecount )
 }
 
 
+
+
+// arr_mem*() with raw arrays
 template< typename type >
-inline void arr_memcpy8( type* dst, const type* src, u32 num_elems )
+inline void arr_memcpy32( type* dst, const void* src, u32 num_elems )
+{
+	memcpy32( (void*)dst, (const void*)src, num_elems * sizeof(type) 
+		/ sizeof(u32) );
+}
+template< typename type >
+inline void arr_memfill32( type* dst, u32 src, u32 num_elems )
+{
+	memfill32( (void*)dst, src, num_elems * sizeof(type) / sizeof(u32) );
+}
+
+template< typename type >
+inline void arr_memcpy8( type* dst, const void* src, u32 num_elems )
 {
 	memcpy8( (void*)dst, src, num_elems * sizeof(type) / sizeof(u8) );
 }
@@ -116,19 +111,74 @@ inline void arr_memfill8( type* dst, u32 src, u32 num_elems )
 		/ sizeof(u8) );
 }
 
-
-
 template< typename type >
-inline void* arr_memcpy( type* dst, const type* src, u32 num_elems )
+inline void* arr_memcpy( type* dst, const void* src, u32 num_elems )
 {
-	return memcpy( dst, src, num_elems * sizeof(type) / sizeof(u8) );
+	return memcpy( (void*)dst, src, num_elems * sizeof(type) / sizeof(u8) );
 }
-
 template< typename type >
 inline void* arr_memset( type* dst, int c, u32 num_elems )
 {
-	return memset( dst, c, num_elems * sizeof(type) / sizeof(u8) );
+	return memset( (void*)dst, c, num_elems * sizeof(type) / sizeof(u8) );
 }
+
+
+
+
+
+template< typename dst_type, typename src_type, size_t size >
+inline void arr_memcpy32( std::array< dst_type, size >& dst, 
+	std::array< src_type, size >& src )
+{
+	arr_memcpy32<dst_type>( dst.data(), src.data(), size );
+}
+template< typename type, size_t size >
+inline void arr_memcpy32( std::array< type, size >& dst, const void* src )
+{
+	arr_memcpy32<type>( dst.data(), src, size );
+}
+template< typename type, size_t size >
+inline void arr_memfill32( std::array< type, size >& dst, u32 src )
+{
+	arr_memfill32<type>( dst.data(), src, size );
+}
+
+
+template< typename dst_type, typename src_type, size_t size >
+inline void arr_memcpy8( std::array< dst_type, size >& dst, 
+	std::array< src_type, size >& src )
+{
+	arr_memcpy8<dst_type>( dst.data(), src.data(), size );
+}
+template< typename type, size_t size >
+inline void arr_memcpy8( std::array< type, size >& dst, const void* src )
+{
+	arr_memcpy8<type>( dst.data(), src, size );
+}
+template< typename type, size_t size >
+inline void arr_memfill8( std::array< type, size >& dst, u32 src )
+{
+	arr_memfill8<type>( dst.data(), src, size );
+}
+
+
+template< typename dst_type, typename src_type, size_t size >
+inline void* arr_memcpy( std::array< dst_type, size >& dst, 
+	std::array< src_type, size >& src )
+{
+	return arr_memcpy<dst_type>( dst.data(), src.data(), size );
+}
+template< typename type, size_t size >
+inline void* arr_memcpy( std::array< type, size >& dst, const void* src )
+{
+	return arr_memcpy<type>( dst.data(), src, size );
+}
+template< typename type, size_t size >
+inline void* arr_memset( std::array< type, size >& dst, u32 src )
+{
+	return arr_memset<type>( dst.data(), src, size );
+}
+
 
 
 #endif		// asm_funcs_hpp

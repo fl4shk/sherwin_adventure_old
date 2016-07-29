@@ -64,35 +64,43 @@ void sprite_manager::spawn_sprites_if_needed
 	}
 	
 	
-	// Don't spawn any sprites if the camera has not horizontally moved
-	// by enough pixels.
+	// Don't spawn any sprites from the level data if the camera has not
+	// horizontally moved by enough pixels.
 	if ( cm_dir == 0 )
 	{
 		return;
 	}
 	
 	
-	u32 next_sprite_index = 0;
+	//u32 next_sprite_index = 0;
+	//
+	//// Find a free sprite slot.
+	//for ( ; next_sprite_index<the_sprites.size(); ++next_sprite_index )
+	//{
+	//	//if ( the_sprites[next_sprite_index].the_sprite_type == st_default )
+	//	//{
+	//	//	break;
+	//	//}
+	//	if ( the_sprites[next_sprite_index] == NULL )
+	//	{
+	//		break;
+	//	}
+	//}
+	//
+	//// Don't spawn any sprites if too many are active.
+	//if ( next_sprite_index == the_sprites.size() )
+	//{
+	//	return;
+	//}
 	
-	// Find a free sprite slot.
-	for ( ; next_sprite_index<the_sprites.size(); ++next_sprite_index )
+	if (!the_sprites_allocator.can_pop_index())
 	{
-		//if ( the_sprites[next_sprite_index].the_sprite_type == st_default )
-		//{
-		//	break;
-		//}
-		if ( the_sprites[next_sprite_index] == NULL )
-		{
-			break;
-		}
-	}
-	
-	// Don't spawn any sprites if too many are active.
-	if ( next_sprite_index == the_sprites.size() )
-	{
+		debug_arr_group::write_str_and_inc("CantSpawnFromLvl");
 		return;
 	}
 	
+	//s32 next_sprite_index = the_sprites_allocator.peek_top_index();
+	s32 next_sprite_index = -1;
 	
 	// If the camera moved from left to right
 	//if ( camera_block_grid_pos_x.curr > camera_block_grid_pos_x.prev )
@@ -122,22 +130,30 @@ void sprite_manager::spawn_sprites_if_needed
 				sprite_init_param_group& sprite_ipg = curr_sprite_ipg_list
 					.get_node_at(j).the_data;
 				
-				// Find the lowest FREE sprite slot, if any.
-				//while ( ( the_sprites[next_sprite_index].the_sprite_type 
-				//	!= st_default )
+				//// Find the lowest FREE sprite slot, if any.
+				////while ( ( the_sprites[next_sprite_index].the_sprite_type 
+				////	!= st_default )
+				////	&& ( next_sprite_index != the_sprites.size() ) )
+				//while ( ( the_sprites[next_sprite_index] != NULL )
 				//	&& ( next_sprite_index != the_sprites.size() ) )
-				while ( ( the_sprites[next_sprite_index] != NULL )
-					&& ( next_sprite_index != the_sprites.size() ) )
-				{
-					++next_sprite_index;
-				}
+				//{
+				//	++next_sprite_index;
+				//}
+				
 				
 				// If there isn't a free sprite slot, then stop trying to
 				// spawn sprites.
-				if ( next_sprite_index == the_sprites.size() )
+				//if ( next_sprite_index == the_sprites.size() )
+				//{
+				//	break;
+				//}
+				if (!the_sprites_allocator.can_pop_index())
 				{
 					break;
 				}
+				
+				next_sprite_index = the_sprites_allocator.peek_top_index();
+				
 				
 				//the_sprites[next_sprite_index].reinit_with_sprite_ipg
 				//	(&sprite_ipg);
@@ -149,7 +165,11 @@ void sprite_manager::spawn_sprites_if_needed
 			
 			// If there isn't a free sprite slot, then stop trying to spawn
 			// sprites.
-			if ( next_sprite_index == the_sprites.size() )
+			//if ( next_sprite_index == the_sprites.size() )
+			//{
+			//	break;
+			//}
+			if (!the_sprites_allocator.can_pop_index())
 			{
 				break;
 			}
@@ -193,22 +213,28 @@ void sprite_manager::spawn_sprites_if_needed
 				sprite_init_param_group& sprite_ipg = curr_sprite_ipg_list
 					.get_node_at(j).the_data;
 				
-				// Find the lowest FREE sprite slot, if any.
-				//while ( ( the_sprites[next_sprite_index].the_sprite_type 
-				//	!= st_default )
+				//// Find the lowest FREE sprite slot, if any.
+				////while ( ( the_sprites[next_sprite_index].the_sprite_type 
+				////	!= st_default )
+				////	&& ( next_sprite_index != the_sprites.size() ) )
+				//while ( ( the_sprites[next_sprite_index] != NULL )
 				//	&& ( next_sprite_index != the_sprites.size() ) )
-				while ( ( the_sprites[next_sprite_index] != NULL )
-					&& ( next_sprite_index != the_sprites.size() ) )
-				{
-					++next_sprite_index;
-				}
+				//{
+				//	++next_sprite_index;
+				//}
 				
 				// If there isn't a free sprite slot, then stop trying to
 				// spawn sprites.
-				if ( next_sprite_index == the_sprites.size() )
+				//if ( next_sprite_index == the_sprites.size() )
+				//{
+				//	break;
+				//}
+				if (!the_sprites_allocator.can_pop_index())
 				{
 					break;
 				}
+				
+				next_sprite_index = the_sprites_allocator.peek_top_index();
 				
 				//the_sprites[next_sprite_index].reinit_with_sprite_ipg
 				//	(&sprite_ipg);
@@ -220,7 +246,11 @@ void sprite_manager::spawn_sprites_if_needed
 			
 			// If there isn't a free sprite slot, then stop trying to spawn
 			// sprites.
-			if ( next_sprite_index == the_sprites.size() )
+			//if ( next_sprite_index == the_sprites.size() )
+			//{
+			//	break;
+			//}
+			if (!the_sprites_allocator.can_pop_index())
 			{
 				break;
 			}
