@@ -332,9 +332,11 @@ class sa_free_list
 protected:		// variables
 	sa_free_list_backend the_sa_free_list_backend;
 	
-	template< typename type > friend class sa_list_backend;
-	template< typename type, u32 total_num_nodes > friend class
-		externally_allocated_sa_list;
+	//template< typename type > friend class sa_list_backend;
+	//template< typename type, u32 total_num_nodes > friend class
+	//	externally_allocated_sa_list;
+	template< typename type, u32 total_num_nodes, u32 num_lists >
+		friend class sa_array_of_lists;
 	
 public:		// variables
 	array< int, size > the_array;
