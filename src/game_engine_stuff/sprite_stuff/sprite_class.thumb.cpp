@@ -497,6 +497,7 @@ vec2_u32 sprite::get_shape_size_as_vec2_raw() const
 	//}
 	
 } 
+
 void sprite::update_part_1()
 {
 	in_level_pos.back_up();

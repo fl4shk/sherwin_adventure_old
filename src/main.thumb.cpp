@@ -57,12 +57,13 @@ static const u32 test_str_size = ( sizeof(test_str) / sizeof(char) ) - 1;
 int main()
 {
 	//arr_memfill8( (u8*)ewram_test_arr, '#', ewram_test_arr_size );
-	memset( ewram_test_arr, '#', ewram_test_arr_size );
+	//memset( ewram_test_arr, '#', ewram_test_arr_size );
+	//memset( ewram_test_arr, '#', 4 );
 	
-	ewram_test_arr[0] = '9';
+	//ewram_test_arr[0] = '9';
 	
 	
-	memset( &ewram_test_arr[1], '3', 9 );
+	//memset( &ewram_test_arr[1], '3', 9 );
 	//memcpy( &ewram_test_arr[1], test_str, 5 );
 	//slower_memcpy( &ewram_test_arr[1], test_str, 5 );
 	
@@ -174,5 +175,10 @@ int main()
 	return 0;
 }
 
+
+// This is for updated ARM GCC when things like std::vector are used.
+extern "C" void __sync_synchronize()
+{
+}
 
 

@@ -43,8 +43,8 @@ public:		// variables
 	
 	static constexpr u32 max_num_player_sprites = 1;
 	
-	//static constexpr u32 max_num_regular_sprites = 40;
-	static constexpr u32 max_num_regular_sprites = 30;
+	static constexpr u32 max_num_regular_sprites = 40;
+	//static constexpr u32 max_num_regular_sprites = 30;
 	//static constexpr u32 max_num_regular_sprites = 20;
 	
 	
@@ -121,11 +121,11 @@ public:		// variables
 	static u32 num_active_player_secondary_sprites, num_active_sprites, 
 		num_active_secondary_sprites;
 	static std::array< sprite*, max_num_player_secondary_sprites>
-		the_active_player_secondary_sprites;
+		the_active_player_secondary_sprites __attribute__((_iwram));
 	static std::array< sprite*, max_num_secondary_sprites>
-		the_active_secondary_sprites;
+		the_active_secondary_sprites __attribute__((_iwram));
 	static std::array< sprite*, max_num_regular_sprites> 
-		the_active_sprites;
+		the_active_sprites __attribute__((_iwram));
 	
 	
 	//static constexpr u32 the_player_vram_chunk_index = 1;

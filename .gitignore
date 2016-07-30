@@ -3,6 +3,7 @@ deps/*
 objs/*
 objs_dis/*
 asmouts/*
+preprocs/*
 small_code_testing_things/*
 *.elf
 *.gba

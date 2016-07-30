@@ -515,7 +515,7 @@ public:		// functions
 	// The player_sprite class overrides this function (but still calls the
 	// original) so that the player_sprite class can set warped_this_frame
 	// to false.
-	virtual void update_part_1();
+	virtual void update_part_1() __attribute__((_iwram_code));
 	
 	// This used to be update_part_1()
 	virtual void update_part_2();

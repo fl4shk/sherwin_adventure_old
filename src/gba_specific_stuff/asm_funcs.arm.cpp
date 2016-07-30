@@ -149,6 +149,7 @@ void* memset( void* dst, int c, size_t n )
 	const u32 to_write = ( ((u8)c) << 24 ) | ( ((u8)c) << 16 ) 
 		| ( ((u8)c) << 8 ) | ( ((u8)c) << 0 );
 	
+	
 	auto write_bytes_raw = [to_write]( u8* local_dst, u32 local_n ) -> void
 	{
 		for ( s32 i=local_n-1; i>=0; --i )
@@ -157,6 +158,7 @@ void* memset( void* dst, int c, size_t n )
 			local_dst[i] = (u8)to_write;
 		}
 	};
+	
 	
 	void* new_dst = dst;
 	size_t new_n = n;

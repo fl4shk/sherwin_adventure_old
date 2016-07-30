@@ -34,7 +34,7 @@ protected:		// variables
 	
 public:		// functions
 	sprite_allocator( int* the_sa_free_list_backend_array, 
-		sprite* the_array, u32 s_size );
+		sprite* s_the_array, u32 s_size );
 	sprite_allocator( int* the_sa_free_list_backend_array,
 		const array_helper<sprite>& s_allocatable_sprite_arr );
 	

@@ -20,6 +20,8 @@ S_DIRS=$(CXX_DIRS)
 
 
 
+# This is likely specific to *nix... but then again, the entire makefile is
+# probably specific to *nix!
 PROJ=$(shell basename $(CURDIR))
 
 # The music file's basename
@@ -32,6 +34,7 @@ MUSIC_FILE_BASENAME=practice_17
 COMP_PREFIX=arm-none-eabi-
 
 
+# Compilers, assemblers, and the linker
 CC=$(COMP_PREFIX)gcc
 CXX=$(COMP_PREFIX)g++
 AS=$(COMP_PREFIX)as
@@ -43,10 +46,17 @@ OBJDUMP=$(COMP_PREFIX)objdump
 OBJCOPY=$(COMP_PREFIX)objcopy
 
 
+# The linker script
 LD_SCRIPT=linkscript.ld
+
+VERBOSE_ASM_FLAG=
+#VERBOSE_ASM_FLAG=-fverbose-asm
+
+
 
 #DEBUG=yeah do debug
 
+# Optimization levels
 #DEBUG_OPTIMIZATION_LEVEL=-O1
 DEBUG_OPTIMIZATION_LEVEL=-Og
 #DEBUG_OPTIMIZATION_LEVEL=-O2
@@ -54,29 +64,34 @@ DEBUG_OPTIMIZATION_LEVEL=-Og
 REGULAR_OPTIMIZATION_LEVEL=-O2
 #REGULAR_OPTIMIZATION_LEVEL=-O3
 
+GLOBAL_BASE_FLAGS:=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles \
+	-fno-exceptions -fno-rtti 
+
 ifdef DEBUG
 	##DEBUG_FLAGS=-gdwarf-2 -ggdb -gstrict-dwarf -g
 	DEBUG_FLAGS=-gdwarf-3 -g
 	
-	GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles \
-		-fno-exceptions -fno-rtti $(DEBUG_OPTIMIZATION_LEVEL) -g
+	GLOBAL_BASE_FLAGS:=$(GLOBAL_BASE_FLAGS) $(DEBUG_OPTIMIZATION_LEVEL) -g
 else
-	GLOBAL_BASE_FLAGS=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles \
-		-fno-exceptions -fno-rtti $(REGULAR_OPTIMIZATION_LEVEL)
+	GLOBAL_BASE_FLAGS:=$(GLOBAL_BASE_FLAGS) $(REGULAR_OPTIMIZATION_LEVEL)
 endif
 
+
+# Thumb/ARM compiler flags
 THUMB_BASE_FLAGS=$(GLOBAL_BASE_FLAGS) -mthumb -mthumb-interwork
 ARM_BASE_FLAGS=$(GLOBAL_BASE_FLAGS) -marm -mthumb-interwork
 
 
-CXX_FLAGS=-std=c++14 $(THUMB_BASE_FLAGS) -D __thumb__  #-Wall
-
+# Eventually I'll use -std=c++17
+CXX_FLAGS=-std=c++14 $(THUMB_BASE_FLAGS) -D __thumb__  -Wall
 ARM_CXX_FLAGS=-std=c++14 $(ARM_BASE_FLAGS)  -Wall
-
 S_FLAGS=-mcpu=arm7tdmi -mthumb -mthumb-interwork
 
+
+
+# Linker flags
 # This is the LD_FLAGS for non-devkitARM GCC
-LD_FLAGS=--specs=nosys.specs -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lmm $(DEBUG_FLAGS)
+LD_FLAGS=--specs=nosys.specs -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 `$(CXX) -print-file-name=thumb/libgcc.a` `$(CXX) -print-file-name=thumb/libc.a` `$(CXX) -print-file-name=thumb/libstdc++.a` -lmm $(DEBUG_FLAGS)
 #LD_FLAGS=--specs=nosys.specs -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lmm $(DEBUG_FLAGS) -g
 
 #LD_FLAGS=--specs=nosys.specs -nostartfiles -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lmm $(DEBUG_FLAGS)
@@ -84,12 +99,14 @@ LD_FLAGS=--specs=nosys.specs -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L$(DEVKITPRO)
 
 
 
+# Generated directories
 OBJDIR=objs
 ASMOUTDIR=asmouts
 DEPDIR=deps
 OBJDIR_TEMP=objs_temp
 OBJDIR_DIS=objs_dis
 
+# Flags for make disassemble*
 DISASSEMBLE_FLAGS=-marm7tdmi -C -d 
 DISASSEMBLE_ALL_FLAGS=-marm7tdmi -C -D 
 
@@ -107,21 +124,16 @@ DISASSEMBLE_ALL_4_FLAGS=$(DISASSEMBLE_ALL_2_FLAGS)
 
 # Source code files
 MUSIC_BINFILES=$(foreach DIR,$(MUSIC_DIRS),$(notdir $(wildcard $(DIR)/*.bin)))
-
 CXX_SOURCES=$(foreach DIR,$(CXX_DIRS),$(notdir $(wildcard $(DIR)/*.thumb.cpp)))
-
 ARM_CXX_SOURCES=$(foreach DIR,$(ARM_CXX_DIRS), \
 	$(notdir $(wildcard $(DIR)/*.arm.cpp)))
-
 S_SOURCES=$(foreach DIR,$(S_DIRS),$(notdir $(wildcard $(DIR)/*.s)))
 
 
+# Directories to search, specified at the top of this makefile
 export VPATH	:=	$(foreach DIR,$(MUSIC_DIRS),$(CURDIR)/$(DIR)) \
-	\
 	$(foreach DIR,$(CXX_DIRS),$(CURDIR)/$(DIR)) \
-	\
 	$(foreach DIR,$(ARM_CXX_DIRS),$(CURDIR)/$(DIR)) \
-	\
 	$(foreach DIR,$(S_DIRS),$(CURDIR)/$(DIR)) \
 
 
@@ -170,6 +182,12 @@ ARM_CXX_ASMOUTS=$(patsubst %.arm.cpp,$(ASMOUTDIR)/%.arm.s,$(ARM_CXX_SOURCES))
 ASMOUTS=$(CXX_ASMOUTS) $(ARM_CXX_ASMOUTS)
 
 
+# Preprocessed output of only C++ files
+CXX_EFILES=$(patsubst %.thumb.cpp,$(PREPROCDIR)/%.thumb.E,$(CXX_SOURCES))
+ARM_CXX_EFILES=$(patsubst %.arm.cpp,$(PREPROCDIR)/%.arm.E,$(ARM_CXX_SOURCES))
+EFILES=$(CXX_EFILES) $(ARM_CXX_EFILES)
+
+
 
 all : all_pre $(OFILES)
 	@echo
@@ -203,6 +221,9 @@ $(MUSIC_OFILES) : $(OBJDIR)/%.bin.o : %.bin
 	util/bin2o_gba.sh $< $@
 
 
+
+# Here's where things get really messy.  Oh if only GNU Make had functions
+# somehow... perhaps I should be using mktemp for a generated shell script!
 $(CXX_OFILES) : $(OBJDIR)/%.thumb.o : %.thumb.cpp
 	@#echo "Generating dependency information for "$@"...."
 	@echo $@" was updated or has no object file.  (Re)Compiling...."
@@ -265,11 +286,27 @@ $(ARM_CXX_ASMOUTS) : $(ASMOUTDIR)/%.arm.s : %.arm.cpp
 -include $(PFILES)
 
 
+
+only_preprocess : only_preprocess_pre $(EFILES)
+	@#
+
+only_preprocess_pre : 
+	mkdir -p $(PREPROCDIR)
+
+
+$(CXX_EFILES) : $(PREPROCDIR)/%.thumb.E : %.thumb.cpp
+	$(CXX) $(CXX_FLAGS) -E $< -o $@
+
+$(ARM_CXX_EFILES) : $(PREPROCDIR)/%.arm.E : %.arm.cpp
+	$(CXX) $(ARM_CXX_FLAGS) -E $< -o $@
+
+
+
 #¯\(°_o)/¯
 
 .PHONY : clean
 clean :
-	rm -rfv $(ASMOUTDIR) $(OBJDIR) $(OBJDIR_DIS) $(DEPDIR) linker_map.txt $(PROJ).elf $(PROJ).gba 
+	rm -rfv $(ASMOUTDIR) $(OBJDIR) $(OBJDIR_DIS) $(DEPDIR) $(PREPROCDIR) linker_map.txt $(PROJ).elf $(PROJ).gba 
 
 .PHONY : clean_objs_with_no_source
 clean_objs_with_no_source :
@@ -373,4 +410,4 @@ disassemble_all_4 :
 			$(OBJDUMP) $(DISASSEMBLE_ALL_4_FLAGS) $$objfile \
 				> $(OBJDIR_DIS)/$$out.armasm; \
 		fi; \
-	drm-none-eabi-objdump -marm7tdmi -C -S -D $(PROJ).elf
+	done;
