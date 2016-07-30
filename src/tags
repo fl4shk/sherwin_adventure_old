@@ -164,7 +164,7 @@ allocate_sprite	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^
 angle_in_degrees	game_engine_stuff/orientable_coll_box_class.hpp	/^	u32 angle_in_degrees;$/;"	kind:m	class:orientable_coll_box	access:protected
 apply_gravity	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	virtual void apply_gravity();$/;"	kind:p	class:sprite	access:public	signature:()
 apply_gravity	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^void sprite::apply_gravity()$/;"	kind:f	class:sprite	signature:()
-arr	game_engine_stuff/debug_vars.hpp	/^	char arr[max_size];$/;"	kind:m	class:debug_str	access:public
+arr	game_engine_stuff/debug_vars.hpp	/^	std::array< char, max_size > arr;$/;"	kind:m	class:debug_str	access:public
 arr_ind_16x16_count	game_engine_stuff/coll_point_group_classes.hpp	/^		arr_ind_16x16_count,$/;"	kind:e	enum:coll_point_group_base::arr_index_16x16
 arr_ind_16x32_count	game_engine_stuff/coll_point_group_classes.hpp	/^		arr_ind_16x32_count,$/;"	kind:e	enum:coll_point_group_base::arr_index_16x32
 arr_ind_32x16_count	game_engine_stuff/coll_point_group_classes.hpp	/^		arr_ind_32x16_count,$/;"	kind:e	enum:coll_point_group_base::arr_index_32x16
@@ -770,6 +770,7 @@ clear_debug_vars	game_engine_stuff/debug_vars.thumb.cpp	/^void debug_arr_group::
 clear_oam_mirror	gba_specific_stuff/oam_entry_classes.hpp	/^inline void clear_oam_mirror()$/;"	kind:f	signature:()
 clear_the_sprite_arrays	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void clear_the_sprite_arrays();$/;"	kind:p	class:sprite_manager	access:public	signature:()
 clear_the_sprite_arrays	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^void sprite_manager::clear_the_sprite_arrays()$/;"	kind:f	class:sprite_manager	signature:()
+clear_unused_portion	game_engine_stuff/debug_vars.hpp	/^	inline void clear_unused_portion()$/;"	kind:f	class:debug_str	access:public	signature:()
 cmp_bd_arr_helper	game_engine_stuff/level_stuff/sublevel_class.hpp	/^	array_helper<const u32> cmp_bd_arr_helper;$/;"	kind:m	class:sublevel_pointer	access:public
 cmp_block_data	game_engine_stuff/level_stuff/sublevel_class.hpp	/^	u32 cmp_block_data[cmp_block_data_size];$/;"	kind:m	class:sublevel	access:public
 coll_box	game_engine_stuff/coll_box_class.hpp	/^class coll_box$/;"	kind:c
@@ -1037,8 +1038,9 @@ debug_str	game_engine_stuff/debug_vars.thumb.cpp	/^debug_str::debug_str( const c
 debug_str	game_engine_stuff/debug_vars.thumb.cpp	/^debug_str::debug_str( const debug_str& to_copy )$/;"	kind:f	class:debug_str	signature:( const debug_str& to_copy )
 debug_str	game_engine_stuff/debug_vars.thumb.cpp	/^debug_str::debug_str( u32 n_real_size ) : real_size(n_real_size)$/;"	kind:f	class:debug_str	signature:( u32 n_real_size )
 debug_str	game_engine_stuff/debug_vars.thumb.cpp	/^debug_str::debug_str() : real_size(0)$/;"	kind:f	class:debug_str	signature:()
-debug_str::arr	game_engine_stuff/debug_vars.hpp	/^	char arr[max_size];$/;"	kind:m	class:debug_str	access:public
+debug_str::arr	game_engine_stuff/debug_vars.hpp	/^	std::array< char, max_size > arr;$/;"	kind:m	class:debug_str	access:public
 debug_str::clear	game_engine_stuff/debug_vars.hpp	/^	inline void clear()$/;"	kind:f	class:debug_str	access:public	signature:()
+debug_str::clear_unused_portion	game_engine_stuff/debug_vars.hpp	/^	inline void clear_unused_portion()$/;"	kind:f	class:debug_str	access:public	signature:()
 debug_str::debug_str	game_engine_stuff/debug_vars.hpp	/^	debug_str( const char* to_copy );$/;"	kind:p	class:debug_str	access:public	signature:( const char* to_copy )
 debug_str::debug_str	game_engine_stuff/debug_vars.hpp	/^	debug_str( const debug_str& to_copy );$/;"	kind:p	class:debug_str	access:public	signature:( const debug_str& to_copy )
 debug_str::debug_str	game_engine_stuff/debug_vars.hpp	/^	debug_str( u32 n_real_size );$/;"	kind:p	class:debug_str	access:public	signature:( u32 n_real_size )
@@ -1049,7 +1051,7 @@ debug_str::debug_str	game_engine_stuff/debug_vars.thumb.cpp	/^debug_str::debug_s
 debug_str::debug_str	game_engine_stuff/debug_vars.thumb.cpp	/^debug_str::debug_str() : real_size(0)$/;"	kind:f	class:debug_str	signature:()
 debug_str::get_real_size	game_engine_stuff/debug_vars.hpp	/^	inline u32 get_real_size() const$/;"	kind:f	class:debug_str	access:public	signature:() const
 debug_str::max_size	game_engine_stuff/debug_vars.hpp	/^	static constexpr u32 max_size = 20;$/;"	kind:m	class:debug_str	access:public
-debug_str::operator =	game_engine_stuff/debug_vars.hpp	/^	debug_str& operator = ( const char* to_copy );$/;"	kind:p	class:debug_str	access:public	signature:( const char* to_copy )
+debug_str::operator =	game_engine_stuff/debug_vars.hpp	/^	debug_str& operator = ( const char* to_copy )$/;"	kind:p	class:debug_str	access:public	signature:( const char* to_copy )
 debug_str::operator =	game_engine_stuff/debug_vars.hpp	/^	debug_str& operator = ( const debug_str& to_copy );$/;"	kind:p	class:debug_str	access:public	signature:( const debug_str& to_copy )
 debug_str::operator =	game_engine_stuff/debug_vars.thumb.cpp	/^debug_str& debug_str::operator = ( const char* to_copy )$/;"	kind:f	class:debug_str	signature:( const char* to_copy )
 debug_str::operator =	game_engine_stuff/debug_vars.thumb.cpp	/^debug_str& debug_str::operator = ( const debug_str& to_copy )$/;"	kind:f	class:debug_str	signature:( const debug_str& to_copy )
@@ -2939,7 +2941,7 @@ operator =	game_engine_stuff/array_2d_helper_class.hpp	/^	array_2d_helper<type>&
 operator =	game_engine_stuff/array_helper_class.hpp	/^	void operator = ( const array_helper<type>& to_copy )$/;"	kind:f	class:array_helper	access:public	signature:( const array_helper<type>& to_copy )
 operator =	game_engine_stuff/block_coll_result_group_classes.hpp	/^	block_coll_result_rect_group& operator = $/;"	kind:p	class:block_coll_result_rect_group	access:public	signature:( const block_coll_result_rect_group& to_copy )
 operator =	game_engine_stuff/block_coll_result_group_classes.thumb.cpp	/^block_coll_result_rect_group& block_coll_result_rect_group::operator = $/;"	kind:f	class:block_coll_result_rect_group	signature:( const block_coll_result_rect_group& to_copy )
-operator =	game_engine_stuff/debug_vars.hpp	/^	debug_str& operator = ( const char* to_copy );$/;"	kind:p	class:debug_str	access:public	signature:( const char* to_copy )
+operator =	game_engine_stuff/debug_vars.hpp	/^	debug_str& operator = ( const char* to_copy )$/;"	kind:p	class:debug_str	access:public	signature:( const char* to_copy )
 operator =	game_engine_stuff/debug_vars.hpp	/^	debug_str& operator = ( const debug_str& to_copy );$/;"	kind:p	class:debug_str	access:public	signature:( const debug_str& to_copy )
 operator =	game_engine_stuff/debug_vars.thumb.cpp	/^debug_str& debug_str::operator = ( const char* to_copy )$/;"	kind:f	class:debug_str	signature:( const char* to_copy )
 operator =	game_engine_stuff/debug_vars.thumb.cpp	/^debug_str& debug_str::operator = ( const debug_str& to_copy )$/;"	kind:f	class:debug_str	signature:( const debug_str& to_copy )

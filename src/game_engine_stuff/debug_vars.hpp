@@ -99,11 +99,16 @@ protected:		// variables
 	u32 real_size;
 	
 public:		// and constants
-	// Please make sure that max_size is a multiple of 4.  max_size is the
-	// number of elements in arr.
+	//// Please make sure that max_size is a multiple of 4.  max_size is the
+	//// number of elements in arr.
+	
+	
+	// It is a very good idea for max_size to be a multiple of 4.  It makes
+	// copying and clearing faster.
 	///static constexpr u32 max_size = 16;
 	static constexpr u32 max_size = 20;
-	char arr[max_size];
+	//char arr[max_size];
+	std::array< char, max_size > arr;
 	
 public:		// functions
 	debug_str();
@@ -112,7 +117,8 @@ public:		// functions
 	debug_str( const char* to_copy );
 	
 	debug_str& operator = ( const debug_str& to_copy );
-	debug_str& operator = ( const char* to_copy );
+	debug_str& operator = ( const char* to_copy )
+		__attribute__((_iwram_code));
 	
 	inline u32 get_real_size() const
 	{
@@ -133,8 +139,19 @@ public:		// functions
 	
 	inline void clear()
 	{
-		arr_memfill32( arr, 0, max_size );
+		//arr_memfill32( arr, 0, max_size );
+		//arr_memset( arr, 0, max_size );
+		arr_memset( arr, 0 );
 	}
+	
+	inline void clear_unused_portion()
+	{
+		for ( u32 i=get_real_size(); i<max_size; ++i )
+		{
+			arr[i] = 0;
+		}
+	}
+	
 } __attribute__((_align4));
 
 
@@ -197,35 +214,41 @@ public:		// functions
 	
 	static inline void write_u32_and_inc( u32 to_write )
 	{
-		debug_u32_arr_helper.data_at(curr_index_arr_helper.data_at
-			(cdit_u32)++) = to_write;
+		//debug_u32_arr_helper.data_at(curr_index_arr_helper.data_at
+		//	(cdit_u32)++) = to_write;
+		debug_u32_arr()[curr_index_arr()[cdit_u32]++] = to_write;
 	}
 	static inline void write_s32_and_inc( s32 to_write )
 	{
-		debug_s32_arr_helper.data_at(curr_index_arr_helper.data_at
-			(cdit_s32)++) = to_write;
+		//debug_s32_arr_helper.data_at(curr_index_arr_helper.data_at
+		//	(cdit_s32)++) = to_write;
+		debug_s32_arr()[curr_index_arr()[cdit_s32]++] = to_write;
 	}
 	static inline void write_f24p8_and_inc( const fixed24p8& to_write )
 	{
-		debug_f24p8_arr_helper.data_at(curr_index_arr_helper.data_at
-			(cdit_f24p8)++) = to_write;
+		//debug_f24p8_arr_helper.data_at(curr_index_arr_helper.data_at
+		//	(cdit_f24p8)++) = to_write;
+		debug_f24p8_arr()[curr_index_arr()[cdit_f24p8]++] = to_write;
 	}
 	static inline void write_f8p8_and_inc( const fixed8p8& to_write )
 	{
-		debug_f8p8_arr_helper.data_at(curr_index_arr_helper.data_at
-			(cdit_f8p8)++) = to_write;
+		//debug_f8p8_arr_helper.data_at(curr_index_arr_helper.data_at
+		//	(cdit_f8p8)++) = to_write;
+		debug_f8p8_arr()[curr_index_arr()[cdit_f8p8]++] = to_write;
 	}
 	
 	static inline void write_str_and_inc( const debug_str& to_write )
 	{
-		debug_str_arr_helper.data_at(curr_index_arr_helper.data_at
-			(cdit_str)++) = to_write;
+		//debug_str_arr_helper.data_at(curr_index_arr_helper.data_at
+		//	(cdit_str)++) = to_write;
+		debug_str_arr()[curr_index_arr()[cdit_str]++] = to_write;
 	}
 	
 	static inline void write_str_and_inc( const char* to_write )
 	{
-		debug_str_arr_helper.data_at(curr_index_arr_helper.data_at
-			(cdit_str)++) = to_write;
+		//debug_str_arr_helper.data_at(curr_index_arr_helper.data_at
+		//	(cdit_str)++) = to_write;
+		debug_str_arr()[curr_index_arr()[cdit_str]++] = to_write;
 	}
 	
 } __attribute__((_align4));

@@ -79,7 +79,12 @@ debug_str& debug_str::operator = ( const debug_str& to_copy )
 {
 	set_real_size(to_copy.get_real_size());
 	//memcpy32( arr, to_copy.arr, max_size / sizeof(u32) );
-	arr_memcpy32( arr, to_copy.arr, max_size );
+	//arr_memcpy32( arr, to_copy.arr, max_size );
+	//arr_memcpy( arr, to_copy.arr, max_size );
+	
+	arr_memcpy( arr.data(), to_copy.arr.data(), get_real_size() );
+	
+	clear_unused_portion();
 	
 	return *this;
 }
@@ -88,7 +93,7 @@ debug_str& debug_str::operator = ( const char* to_copy )
 {
 	//memfill32( arr, 0, max_size / sizeof(u32) );
 	//arr_memfill32( arr, 0, max_size );
-	clear();
+	//clear();
 	
 	for ( real_size=0; real_size<max_size; ++real_size )
 	{
@@ -98,6 +103,9 @@ debug_str& debug_str::operator = ( const char* to_copy )
 		}
 		arr[real_size] = to_copy[real_size];
 	}
+	
+	// Clear any leftover bytes
+	clear_unused_portion();
 	
 	return *this;
 }
