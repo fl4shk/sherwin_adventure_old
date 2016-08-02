@@ -62,12 +62,12 @@ const char hud_manager::char_to_plottable_char_arr
 //void hud_manager::plot_char_8x16_to_screenblock_mirror( u32 the_char, 
 //	u32 pos_x, u32 pos_y )
 //{
-//	bg1_screenblock_mirror_2d.data_at( pos_x, pos_y )
+//	bg1_screenblock_mirror_2d.at( pos_x, pos_y )
 //		= gfx_manager::hud_vram_as_tiles_start_offset
 //		+ ( ( (char)the_char - ' ' ) * gfx_manager::num_tiles_in_ss_8x16 )
 //		| se_palbank(bgps_in_level_hud);
 //	
-//	bg1_screenblock_mirror_2d.data_at( pos_x, pos_y + 1 )
+//	bg1_screenblock_mirror_2d.at( pos_x, pos_y + 1 )
 //		= gfx_manager::hud_vram_as_tiles_start_offset
 //		+ ( ( (char)the_char - ' ' ) * gfx_manager::num_tiles_in_ss_8x16 
 //		+ 1 ) | se_palbank(bgps_in_level_hud);
@@ -85,17 +85,17 @@ void hud_manager::plot_char_8x8_to_screenblock_mirror( u32 the_char,
 	//// Plot ASCII control codes as ' '.
 	//if ( the_char < ' ' )
 	//{
-	//	bg1_screenblock_mirror_2d.data_at( pos_x, pos_y )
+	//	bg1_screenblock_mirror_2d.at( pos_x, pos_y )
 	//		= gfx_manager::hud_vram_as_tiles_start_offset
 	//		| se_palbank(bgps_in_level_hud);
 	//	return;
 	//}
 	//
-	//bg1_screenblock_mirror_2d.data_at( pos_x, pos_y )
+	//bg1_screenblock_mirror_2d.at( pos_x, pos_y )
 	//	= gfx_manager::hud_vram_as_tiles_start_offset
 	//	+ ( (char)the_char - ' ' ) | se_palbank(bgps_in_level_hud);
 	
-	bg1_screenblock_mirror_2d.data_at( pos_x, pos_y )
+	bg1_screenblock_mirror_2d.at( pos_x, pos_y )
 		= ( gfx_manager::hud_vram_as_tiles_start_offset
 		+ ( char_to_plottable_char_arr[(char)the_char] - ' ' ) )
 		| se_palbank(bgps_in_level_hud);

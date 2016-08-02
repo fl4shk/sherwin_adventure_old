@@ -46,7 +46,7 @@ scr_entry active_level_manager::horiz_sublevel_tile_at_basic( u32 tile_x,
 	}
 	else
 	{
-		the_block_type = active_level::horiz_sublevel_block_data_2d.data_at
+		the_block_type = active_level::horiz_sublevel_block_data_2d.at
 			( block_x, block_y ).get_block_type();
 	}
 	
@@ -117,7 +117,7 @@ scr_entry active_level_manager::horiz_sublevel_tile_at( u32 tile_x,
 	}
 	else
 	{
-		//the_block_type = active_level::horiz_sublevel_block_data_2d.data_at( block_x,
+		//the_block_type = active_level::horiz_sublevel_block_data_2d.at( block_x,
 		//	block_y ).get_block_type();
 		the_block_type = active_level::block_data_array
 			[block_data_array_offset].get_block_type();
@@ -304,7 +304,7 @@ void active_level_manager::update_sublevel_in_screenblock_mirror_2d()
 		for ( u32 j=0; j<screen_height_in_tiles + 1; ++j )
 		{
 			// Why exactly am I using un-named constants here?
-			active_level::bg0_screenblock_mirror_2d.data_at
+			active_level::bg0_screenblock_mirror_2d.at
 				( ( sublevel_x_coord_tile + i ) & 0x1f,
 				( sublevel_y_coord_tile + j ) & 0x1f )
 			= horiz_sublevel_tile_at( sublevel_x_coord_tile + i,

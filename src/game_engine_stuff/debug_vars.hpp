@@ -214,39 +214,39 @@ public:		// functions
 	
 	static inline void write_u32_and_inc( u32 to_write )
 	{
-		//debug_u32_arr_helper.data_at(curr_index_arr_helper.data_at
+		//debug_u32_arr_helper.at(curr_index_arr_helper.at
 		//	(cdit_u32)++) = to_write;
 		debug_u32_arr()[curr_index_arr()[cdit_u32]++] = to_write;
 	}
 	static inline void write_s32_and_inc( s32 to_write )
 	{
-		//debug_s32_arr_helper.data_at(curr_index_arr_helper.data_at
+		//debug_s32_arr_helper.at(curr_index_arr_helper.at
 		//	(cdit_s32)++) = to_write;
 		debug_s32_arr()[curr_index_arr()[cdit_s32]++] = to_write;
 	}
 	static inline void write_f24p8_and_inc( const fixed24p8& to_write )
 	{
-		//debug_f24p8_arr_helper.data_at(curr_index_arr_helper.data_at
+		//debug_f24p8_arr_helper.at(curr_index_arr_helper.at
 		//	(cdit_f24p8)++) = to_write;
 		debug_f24p8_arr()[curr_index_arr()[cdit_f24p8]++] = to_write;
 	}
 	static inline void write_f8p8_and_inc( const fixed8p8& to_write )
 	{
-		//debug_f8p8_arr_helper.data_at(curr_index_arr_helper.data_at
+		//debug_f8p8_arr_helper.at(curr_index_arr_helper.at
 		//	(cdit_f8p8)++) = to_write;
 		debug_f8p8_arr()[curr_index_arr()[cdit_f8p8]++] = to_write;
 	}
 	
 	static inline void write_str_and_inc( const debug_str& to_write )
 	{
-		//debug_str_arr_helper.data_at(curr_index_arr_helper.data_at
+		//debug_str_arr_helper.at(curr_index_arr_helper.at
 		//	(cdit_str)++) = to_write;
 		debug_str_arr()[curr_index_arr()[cdit_str]++] = to_write;
 	}
 	
 	static inline void write_str_and_inc( const char* to_write )
 	{
-		//debug_str_arr_helper.data_at(curr_index_arr_helper.data_at
+		//debug_str_arr_helper.at(curr_index_arr_helper.at
 		//	(cdit_str)++) = to_write;
 		debug_str_arr()[curr_index_arr()[cdit_str]++] = to_write;
 	}

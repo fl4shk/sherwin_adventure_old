@@ -45,7 +45,7 @@ X	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	669;"	kind:d	file:
 Y	game_engine_stuff/coll_point_group_classes.thumb.cpp	214;"	kind:d	file:
 Y	game_engine_stuff/coll_point_group_classes.thumb.cpp	39;"	kind:d	file:
 __key_state	gba_specific_stuff/button_stuff.thumb.cpp	/^volatile prev_curr_pair<vu16> __key_state __attribute__((_iwram)) $/;"	kind:v
-__sync_synchronize	main.thumb.cpp	/^extern "C" void __sync_synchronize()$/;"	kind:f	signature:()
+__sync_synchronize	gba_specific_stuff/asm_funcs.thumb.cpp	/^void __sync_synchronize()$/;"	kind:f	signature:()
 _align4	gba_specific_stuff/attribute_defines.hpp	47;"	kind:d
 _bss	gba_specific_stuff/attribute_defines.hpp	34;"	kind:d
 _ewram	gba_specific_stuff/attribute_defines.hpp	29;"	kind:d
@@ -86,7 +86,7 @@ active_level::max_num_sublevels	game_engine_stuff/level_stuff/active_level_class
 active_level::persistent_block_data_array_size	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static constexpr u32 persistent_block_data_array_size = 2048;$/;"	kind:m	class:active_level	access:public
 active_level::persistent_block_data_arrays	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static u16 persistent_block_data_arrays[max_num_sublevels]$/;"	kind:m	class:active_level	access:public
 active_level::persistent_block_data_arrays	game_engine_stuff/level_stuff/active_level_class.thumb.cpp	/^u16 active_level::persistent_block_data_arrays[max_num_sublevels]$/;"	kind:m	class:active_level	file:
-active_level::the_block_data_at_coord	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static inline block& the_block_data_at_coord $/;"	kind:f	class:active_level	access:public	signature:( const vec2_s32& block_coord )
+active_level::the_block_at_coord	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static inline block& the_block_at_coord $/;"	kind:f	class:active_level	access:public	signature:( const vec2_s32& block_coord )
 active_level::the_current_active_sublevel_index	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static u32 the_current_active_sublevel_index __attribute__((_iwram));$/;"	kind:m	class:active_level	access:public
 active_level::the_current_active_sublevel_index	game_engine_stuff/level_stuff/active_level_class.thumb.cpp	/^u32 active_level::the_current_active_sublevel_index;$/;"	kind:m	class:active_level	file:
 active_level::the_current_level_ptr	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static const level* the_current_level_ptr __attribute__((_iwram));$/;"	kind:m	class:active_level	access:public
@@ -155,7 +155,7 @@ alignas4	game_engine_stuff/sprite_stuff/snow_golem_sprite_class.hpp	/^	} alignas
 alignas4	game_engine_stuff/sprite_stuff/waffle_sprite_class.hpp	/^		sdi_move_timer, } alignas4;$/;"	kind:m	class:waffle_sprite	typeref:enum:waffle_sprite::sdata_index	access:public
 alignas4	game_engine_stuff/sprite_stuff/waffle_sprite_class.hpp	/^	enum udata_index { udi_initial_pos_was_set, } alignas4;$/;"	kind:m	class:waffle_sprite	typeref:enum:waffle_sprite::udata_index	access:public
 alignas4	gba_specific_stuff/attribute_defines.hpp	55;"	kind:d
-allocate_sprite	game_engine_stuff/sprite_stuff/sprite_allocator_class.hpp	/^	void* allocate_sprite() __attribute__((_iwram_code));$/;"	kind:p	class:sprite_allocator	access:public	signature:()
+allocate_sprite	game_engine_stuff/sprite_stuff/sprite_allocator_class.hpp	/^	void* allocate_sprite() __attribute__((_iwram_code,returns_nonnull));$/;"	kind:p	class:sprite_allocator	access:public	signature:()
 allocate_sprite	game_engine_stuff/sprite_stuff/sprite_allocator_class.thumb.cpp	/^void* sprite_allocator::allocate_sprite()$/;"	kind:f	class:sprite_allocator	signature:()
 allocate_sprite	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void allocate_sprite( sprite*& the_sprite, $/;"	kind:p	class:sprite_manager	access:public	signature:( sprite*& the_sprite, sprite_allocator& the_sprite_allocator, sprite_type the_sprite_type, bool facing_left )
 allocate_sprite	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void allocate_sprite( sprite*& the_sprite, $/;"	kind:p	class:sprite_manager	access:public	signature:( sprite*& the_sprite, sprite_allocator& the_sprite_allocator, sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos, const prev_curr_pair<bg_point>& camera_pos, bool facing_left )
@@ -193,9 +193,12 @@ array_2d_helper	game_engine_stuff/array_2d_helper_class.hpp	/^	array_2d_helper()
 array_2d_helper	game_engine_stuff/array_2d_helper_class.hpp	/^class array_2d_helper$/;"	kind:c
 array_2d_helper::array_2d_helper	game_engine_stuff/array_2d_helper_class.hpp	/^	array_2d_helper( type* s_the_array, const vec2_u32& s_size_2d )$/;"	kind:f	class:array_2d_helper	access:public	signature:( type* s_the_array, const vec2_u32& s_size_2d )
 array_2d_helper::array_2d_helper	game_engine_stuff/array_2d_helper_class.hpp	/^	array_2d_helper() : size_2d({ 0, 0 }), size(0), the_array(0)$/;"	kind:f	class:array_2d_helper	access:public	signature:()
-array_2d_helper::data_at	game_engine_stuff/array_2d_helper_class.hpp	/^	type& data_at( const vec2_s32& offset_2d )$/;"	kind:f	class:array_2d_helper	access:public	signature:( const vec2_s32& offset_2d )
-array_2d_helper::data_at	game_engine_stuff/array_2d_helper_class.hpp	/^	type& data_at( const vec2_u32& offset_2d )$/;"	kind:f	class:array_2d_helper	access:public	signature:( const vec2_u32& offset_2d )
-array_2d_helper::data_at	game_engine_stuff/array_2d_helper_class.hpp	/^	type& data_at( u32 x, u32 y )$/;"	kind:f	class:array_2d_helper	access:public	signature:( u32 x, u32 y )
+array_2d_helper::at	game_engine_stuff/array_2d_helper_class.hpp	/^	const type& at( const vec2_s32& offset_2d ) const$/;"	kind:f	class:array_2d_helper	access:public	signature:( const vec2_s32& offset_2d ) const
+array_2d_helper::at	game_engine_stuff/array_2d_helper_class.hpp	/^	const type& at( const vec2_u32& offset_2d ) const$/;"	kind:f	class:array_2d_helper	access:public	signature:( const vec2_u32& offset_2d ) const
+array_2d_helper::at	game_engine_stuff/array_2d_helper_class.hpp	/^	const type& at( u32 x, u32 y ) const$/;"	kind:f	class:array_2d_helper	access:public	signature:( u32 x, u32 y ) const
+array_2d_helper::at	game_engine_stuff/array_2d_helper_class.hpp	/^	type& at( const vec2_s32& offset_2d )$/;"	kind:f	class:array_2d_helper	access:public	signature:( const vec2_s32& offset_2d )
+array_2d_helper::at	game_engine_stuff/array_2d_helper_class.hpp	/^	type& at( const vec2_u32& offset_2d )$/;"	kind:f	class:array_2d_helper	access:public	signature:( const vec2_u32& offset_2d )
+array_2d_helper::at	game_engine_stuff/array_2d_helper_class.hpp	/^	type& at( u32 x, u32 y )$/;"	kind:f	class:array_2d_helper	access:public	signature:( u32 x, u32 y )
 array_2d_helper::get_size	game_engine_stuff/array_2d_helper_class.hpp	/^	u32 get_size() const$/;"	kind:f	class:array_2d_helper	access:public	signature:() const
 array_2d_helper::get_size_2d	game_engine_stuff/array_2d_helper_class.hpp	/^	const vec2_u32& get_size_2d() const$/;"	kind:f	class:array_2d_helper	access:public	signature:() const
 array_2d_helper::get_the_array	game_engine_stuff/array_2d_helper_class.hpp	/^	const type* get_the_array() const$/;"	kind:f	class:array_2d_helper	access:public	signature:() const
@@ -214,7 +217,8 @@ array_helper	game_engine_stuff/array_helper_class.hpp	/^class array_helper$/;"	k
 array_helper::array_helper	game_engine_stuff/array_helper_class.hpp	/^	array_helper( const array_helper<type>& to_copy )$/;"	kind:f	class:array_helper	access:public	signature:( const array_helper<type>& to_copy )
 array_helper::array_helper	game_engine_stuff/array_helper_class.hpp	/^	array_helper( type* s_the_array, u32 s_size )$/;"	kind:f	class:array_helper	access:public	signature:( type* s_the_array, u32 s_size )
 array_helper::array_helper	game_engine_stuff/array_helper_class.hpp	/^	array_helper()$/;"	kind:f	class:array_helper	access:public	signature:()
-array_helper::data_at	game_engine_stuff/array_helper_class.hpp	/^	type& data_at( u32 offset )$/;"	kind:f	class:array_helper	access:public	signature:( u32 offset )
+array_helper::at	game_engine_stuff/array_helper_class.hpp	/^	const type& at( u32 offset ) const$/;"	kind:f	class:array_helper	access:public	signature:( u32 offset ) const
+array_helper::at	game_engine_stuff/array_helper_class.hpp	/^	type& at( u32 offset )$/;"	kind:f	class:array_helper	access:public	signature:( u32 offset )
 array_helper::get_size	game_engine_stuff/array_helper_class.hpp	/^	u32 get_size() const$/;"	kind:f	class:array_helper	access:public	signature:() const
 array_helper::get_the_array	game_engine_stuff/array_helper_class.hpp	/^	const type* get_the_array() const$/;"	kind:f	class:array_helper	access:public	signature:() const
 array_helper::init	game_engine_stuff/array_helper_class.hpp	/^	void init( type* s_the_array, u32 s_size )$/;"	kind:f	class:array_helper	access:public	signature:( type* s_the_array, u32 s_size )
@@ -250,6 +254,18 @@ assign_vert_side_top_y_positions	game_engine_stuff/coll_point_group_classes.thum
 assign_vert_side_top_y_positions	game_engine_stuff/coll_point_group_classes.thumb.cpp	/^void coll_point_group_16x32::assign_vert_side_top_y_positions$/;"	kind:f	class:coll_point_group_16x32	signature:( const coll_box& the_coll_box, vec2_f24p8& pt_lt, vec2_f24p8& pt_rt )
 assign_vert_side_x_positions	game_engine_stuff/coll_point_group_classes.hpp	/^	void assign_vert_side_x_positions( const coll_box& the_coll_box, $/;"	kind:p	class:coll_point_group_base	access:protected	signature:( const coll_box& the_coll_box, vec2_f24p8& pt_lt, vec2_f24p8& pt_lm, vec2_f24p8& pt_lb, vec2_f24p8& pt_rt, vec2_f24p8& pt_rm, vec2_f24p8& pt_rb )
 assign_vert_side_x_positions	game_engine_stuff/coll_point_group_classes.thumb.cpp	/^void coll_point_group_base::assign_vert_side_x_positions$/;"	kind:f	class:coll_point_group_base	signature:( const coll_box& the_coll_box, vec2_f24p8& pt_lt, vec2_f24p8& pt_lm, vec2_f24p8& pt_lb, vec2_f24p8& pt_rt, vec2_f24p8& pt_rm, vec2_f24p8& pt_rb )
+at	game_engine_stuff/array_2d_helper_class.hpp	/^	const type& at( const vec2_s32& offset_2d ) const$/;"	kind:f	class:array_2d_helper	access:public	signature:( const vec2_s32& offset_2d ) const
+at	game_engine_stuff/array_2d_helper_class.hpp	/^	const type& at( const vec2_u32& offset_2d ) const$/;"	kind:f	class:array_2d_helper	access:public	signature:( const vec2_u32& offset_2d ) const
+at	game_engine_stuff/array_2d_helper_class.hpp	/^	const type& at( u32 x, u32 y ) const$/;"	kind:f	class:array_2d_helper	access:public	signature:( u32 x, u32 y ) const
+at	game_engine_stuff/array_2d_helper_class.hpp	/^	type& at( const vec2_s32& offset_2d )$/;"	kind:f	class:array_2d_helper	access:public	signature:( const vec2_s32& offset_2d )
+at	game_engine_stuff/array_2d_helper_class.hpp	/^	type& at( const vec2_u32& offset_2d )$/;"	kind:f	class:array_2d_helper	access:public	signature:( const vec2_u32& offset_2d )
+at	game_engine_stuff/array_2d_helper_class.hpp	/^	type& at( u32 x, u32 y )$/;"	kind:f	class:array_2d_helper	access:public	signature:( u32 x, u32 y )
+at	game_engine_stuff/array_helper_class.hpp	/^	const type& at( u32 offset ) const$/;"	kind:f	class:array_helper	access:public	signature:( u32 offset ) const
+at	game_engine_stuff/array_helper_class.hpp	/^	type& at( u32 offset )$/;"	kind:f	class:array_helper	access:public	signature:( u32 offset )
+at	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline block_coll_result& at( const vec2_s32& local_coord )$/;"	kind:f	class:block_coll_result_rect_group	access:public	signature:( const vec2_s32& local_coord )
+at	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline block_coll_result& at( const vec2_u32& local_coord )$/;"	kind:f	class:block_coll_result_rect_group	access:public	signature:( const vec2_u32& local_coord )
+at	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline block_coll_result& at( u32 local_x, u32 local_y )$/;"	kind:f	class:block_coll_result_rect_group	access:public	signature:( u32 local_x, u32 local_y )
+at	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline block_coll_result*& at( u32 index )$/;"	kind:f	class:bcr_ptr_line	access:public	signature:( u32 index )
 attr0	gba_specific_stuff/oam_entry_classes.hpp	/^	u16 attr0;$/;"	kind:m	class:oam_entry	access:public
 attr1	gba_specific_stuff/oam_entry_classes.hpp	/^	u16 attr1;$/;"	kind:m	class:oam_entry	access:public
 attr2	gba_specific_stuff/oam_entry_classes.hpp	/^	u16 attr2;$/;"	kind:m	class:oam_entry	access:public
@@ -280,10 +296,10 @@ bcr_ptr_line	game_engine_stuff/block_coll_result_group_classes.hpp	/^	bcr_ptr_li
 bcr_ptr_line	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline bcr_ptr_line() : real_size(max_size), local_param_pos( 0, 0 ), $/;"	kind:f	class:bcr_ptr_line	access:public	signature:()
 bcr_ptr_line	game_engine_stuff/block_coll_result_group_classes.hpp	/^class bcr_ptr_line$/;"	kind:c
 bcr_ptr_line	game_engine_stuff/block_coll_result_group_classes.thumb.cpp	/^bcr_ptr_line::bcr_ptr_line( block_coll_result_rect_group& the_bcr_group,$/;"	kind:f	class:bcr_ptr_line	signature:( block_coll_result_rect_group& the_bcr_group, const vec2_s32& s_local_param_pos, u32 s_is_horiz )
+bcr_ptr_line::at	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline block_coll_result*& at( u32 index )$/;"	kind:f	class:bcr_ptr_line	access:public	signature:( u32 index )
 bcr_ptr_line::bcr_ptr_line	game_engine_stuff/block_coll_result_group_classes.hpp	/^	bcr_ptr_line( block_coll_result_rect_group& the_bcr_group,$/;"	kind:p	class:bcr_ptr_line	access:public	signature:( block_coll_result_rect_group& the_bcr_group, const vec2_s32& s_local_param_pos, u32 s_is_horiz )
 bcr_ptr_line::bcr_ptr_line	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline bcr_ptr_line() : real_size(max_size), local_param_pos( 0, 0 ), $/;"	kind:f	class:bcr_ptr_line	access:public	signature:()
 bcr_ptr_line::bcr_ptr_line	game_engine_stuff/block_coll_result_group_classes.thumb.cpp	/^bcr_ptr_line::bcr_ptr_line( block_coll_result_rect_group& the_bcr_group,$/;"	kind:f	class:bcr_ptr_line	signature:( block_coll_result_rect_group& the_bcr_group, const vec2_s32& s_local_param_pos, u32 s_is_horiz )
-bcr_ptr_line::data_at	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline block_coll_result*& data_at( u32 index )$/;"	kind:f	class:bcr_ptr_line	access:public	signature:( u32 index )
 bcr_ptr_line::get_is_horiz	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline bool get_is_horiz() const$/;"	kind:f	class:bcr_ptr_line	access:public	signature:() const
 bcr_ptr_line::get_is_vert	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline bool get_is_vert() const$/;"	kind:f	class:bcr_ptr_line	access:public	signature:() const
 bcr_ptr_line::get_local_param_pos	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline const vec2_s32& get_local_param_pos() const$/;"	kind:f	class:bcr_ptr_line	access:public	signature:() const
@@ -305,22 +321,22 @@ behavior_type	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.h
 behavior_type	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr block_behavior_type behavior_type $/;"	kind:m	class:grass_slope_p16_p16_block_stuff	access:public
 behavior_type	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr block_behavior_type behavior_type $/;"	kind:m	class:grass_slope_p32_p16_short_block_stuff	access:public
 behavior_type	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^	static constexpr block_behavior_type behavior_type $/;"	kind:m	class:grass_slope_p32_p16_tall_block_stuff	access:public
-bg0_sbb	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^constexpr u32 bg0_sbb = 28;$/;"	kind:v
+bg0_sbb	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^static constexpr u32 bg0_sbb = 28;$/;"	kind:v
 bg0_screenblock_2d	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static array_2d_helper<scr_entry> bg0_screenblock_2d;$/;"	kind:m	class:active_level	access:public
 bg0_screenblock_2d	game_engine_stuff/level_stuff/active_level_class.thumb.cpp	/^array_2d_helper<scr_entry> active_level::bg0_screenblock_2d$/;"	kind:p	class:active_level	file:	signature:( se_ram[bg0_sbb], screenblock_size_2d )
 bg0_screenblock_mirror	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static scr_entry bg0_screenblock_mirror[screenblock_size] $/;"	kind:m	class:active_level	access:public
 bg0_screenblock_mirror	game_engine_stuff/level_stuff/active_level_class.thumb.cpp	/^scr_entry active_level::bg0_screenblock_mirror[screenblock_size];$/;"	kind:m	class:active_level	file:
 bg0_screenblock_mirror_2d	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static array_2d_helper<scr_entry> bg0_screenblock_mirror_2d;$/;"	kind:m	class:active_level	access:public
 bg0_screenblock_mirror_2d	game_engine_stuff/level_stuff/active_level_class.thumb.cpp	/^array_2d_helper<scr_entry> active_level::bg0_screenblock_mirror_2d $/;"	kind:p	class:active_level	file:	signature:( bg0_screenblock_mirror, screenblock_size_2d )
-bg1_sbb	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^constexpr u32 bg1_sbb = 29;$/;"	kind:v
+bg1_sbb	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^static constexpr u32 bg1_sbb = 29;$/;"	kind:v
 bg1_screenblock_2d	game_engine_stuff/hud_manager_class.hpp	/^	static array_2d_helper<scr_entry> bg1_screenblock_2d;$/;"	kind:m	class:hud_manager	access:public
 bg1_screenblock_2d	game_engine_stuff/hud_manager_class.thumb.cpp	/^array_2d_helper<scr_entry> hud_manager::bg1_screenblock_2d$/;"	kind:p	class:hud_manager	file:	signature:( se_ram[bg1_sbb], screenblock_size_2d )
 bg1_screenblock_mirror	game_engine_stuff/hud_manager_class.hpp	/^	static scr_entry bg1_screenblock_mirror[screenblock_size]$/;"	kind:m	class:hud_manager	access:public
 bg1_screenblock_mirror	game_engine_stuff/hud_manager_class.thumb.cpp	/^scr_entry hud_manager::bg1_screenblock_mirror[screenblock_size];$/;"	kind:m	class:hud_manager	file:
 bg1_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.hpp	/^	static array_2d_helper<scr_entry> bg1_screenblock_mirror_2d;$/;"	kind:m	class:hud_manager	access:public
 bg1_screenblock_mirror_2d	game_engine_stuff/hud_manager_class.thumb.cpp	/^array_2d_helper<scr_entry> hud_manager::bg1_screenblock_mirror_2d $/;"	kind:p	class:hud_manager	file:	signature:( bg1_screenblock_mirror, screenblock_size_2d )
-bg2_sbb	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^constexpr u32 bg2_sbb = 30;$/;"	kind:v
-bg3_sbb	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^constexpr u32 bg3_sbb = 31;$/;"	kind:v
+bg2_sbb	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^static constexpr u32 bg2_sbb = 30;$/;"	kind:v
+bg3_sbb	game_engine_stuff/level_stuff/active_level_manager_class.hpp	/^static constexpr u32 bg3_sbb = 31;$/;"	kind:v
 bg_fade_blue_step_amount_arr	game_engine_stuff/gfx_manager_class.hpp	/^	bg_fade_blue_step_amount_arr$/;"	kind:m	class:gfx_manager	access:public
 bg_fade_blue_step_amount_arr	game_engine_stuff/gfx_manager_class.thumb.cpp	/^gfx_manager::bg_fade_blue_step_amount_arr$/;"	kind:m	class:gfx_manager	file:
 bg_fade_curr_blue_arr	game_engine_stuff/gfx_manager_class.hpp	/^	bg_fade_curr_blue_arr$/;"	kind:m	class:gfx_manager	access:public
@@ -570,6 +586,9 @@ block_coll_result_rect_group	game_engine_stuff/block_coll_result_group_classes.h
 block_coll_result_rect_group	game_engine_stuff/block_coll_result_group_classes.thumb.cpp	/^block_coll_result_rect_group::block_coll_result_rect_group$/;"	kind:f	class:block_coll_result_rect_group	signature:( const block_coll_result_rect_group& to_copy )
 block_coll_result_rect_group	game_engine_stuff/block_coll_result_group_classes.thumb.cpp	/^block_coll_result_rect_group::block_coll_result_rect_group$/;"	kind:f	class:block_coll_result_rect_group	signature:( const coll_box& the_coll_box, u32 s_moving_left, u32 s_moving_right )
 block_coll_result_rect_group	game_engine_stuff/block_coll_result_group_classes.thumb.cpp	/^block_coll_result_rect_group::block_coll_result_rect_group() $/;"	kind:f	class:block_coll_result_rect_group	signature:()
+block_coll_result_rect_group::at	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline block_coll_result& at( const vec2_s32& local_coord )$/;"	kind:f	class:block_coll_result_rect_group	access:public	signature:( const vec2_s32& local_coord )
+block_coll_result_rect_group::at	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline block_coll_result& at( const vec2_u32& local_coord )$/;"	kind:f	class:block_coll_result_rect_group	access:public	signature:( const vec2_u32& local_coord )
+block_coll_result_rect_group::at	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline block_coll_result& at( u32 local_x, u32 local_y )$/;"	kind:f	class:block_coll_result_rect_group	access:public	signature:( u32 local_x, u32 local_y )
 block_coll_result_rect_group::bcr_arr_2d_helper	game_engine_stuff/block_coll_result_group_classes.hpp	/^	array_2d_helper<block_coll_result> bcr_arr_2d_helper;$/;"	kind:m	class:block_coll_result_rect_group	access:public
 block_coll_result_rect_group::bcr_arr_2d_helper_data	game_engine_stuff/block_coll_result_group_classes.hpp	/^	block_coll_result bcr_arr_2d_helper_data[max_size];$/;"	kind:m	class:block_coll_result_rect_group	access:protected
 block_coll_result_rect_group::bl_corner	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline vec2_s32 bl_corner() const$/;"	kind:f	class:block_coll_result_rect_group	access:public	signature:() const
@@ -584,9 +603,6 @@ block_coll_result_rect_group::br_corner	game_engine_stuff/block_coll_result_grou
 block_coll_result_rect_group::contains_local_block_coord	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline bool contains_local_block_coord( const vec2_s32& to_check )$/;"	kind:f	class:block_coll_result_rect_group	access:public	signature:( const vec2_s32& to_check ) const
 block_coll_result_rect_group::contains_local_block_x_coord	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline bool contains_local_block_x_coord( s32 to_check ) const$/;"	kind:f	class:block_coll_result_rect_group	access:public	signature:( s32 to_check ) const
 block_coll_result_rect_group::contains_local_block_y_coord	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline bool contains_local_block_y_coord( s32 to_check ) const$/;"	kind:f	class:block_coll_result_rect_group	access:public	signature:( s32 to_check ) const
-block_coll_result_rect_group::data_at	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline block_coll_result& data_at( const vec2_s32& local_coord )$/;"	kind:f	class:block_coll_result_rect_group	access:public	signature:( const vec2_s32& local_coord )
-block_coll_result_rect_group::data_at	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline block_coll_result& data_at( const vec2_u32& local_coord )$/;"	kind:f	class:block_coll_result_rect_group	access:public	signature:( const vec2_u32& local_coord )
-block_coll_result_rect_group::data_at	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline block_coll_result& data_at( u32 local_x, u32 local_y )$/;"	kind:f	class:block_coll_result_rect_group	access:public	signature:( u32 local_x, u32 local_y )
 block_coll_result_rect_group::get_coll_box_related_stuff_old	game_engine_stuff/block_coll_result_group_classes.arm.cpp	/^void block_coll_result_rect_group::get_coll_box_related_stuff_old$/;"	kind:f	class:block_coll_result_rect_group	signature:( const sprite& the_sprite, array_helper<block_coll_result*>& bcr_ptr_arr_helper )
 block_coll_result_rect_group::get_coll_box_related_stuff_old	game_engine_stuff/block_coll_result_group_classes.hpp	/^	void get_coll_box_related_stuff_old( const sprite& the_sprite,$/;"	kind:p	class:block_coll_result_rect_group	access:public	signature:( const sprite& the_sprite, array_helper<block_coll_result*>& bcr_ptr_arr_helper )
 block_coll_result_rect_group::get_corner_stuff_old	game_engine_stuff/block_coll_result_group_classes.arm.cpp	/^void block_coll_result_rect_group::get_corner_stuff_old$/;"	kind:f	class:block_coll_result_rect_group	signature:( array_helper<block_coll_result*>& bcr_ptr_arr_helper, array_helper<u32>& bool_as_u32_arr_helper )
@@ -903,8 +919,6 @@ curr	game_engine_stuff/prev_curr_pair_class.hpp	/^	type prev, curr;$/;"	kind:m	s
 curr_debug_index_type	game_engine_stuff/debug_vars.hpp	/^enum curr_debug_index_type$/;"	kind:g
 curr_game_mode	game_engine_stuff/game_manager_class.hpp	/^	static game_mode curr_game_mode;$/;"	kind:m	class:game_manager	access:public
 curr_game_mode	game_engine_stuff/game_manager_class.thumb.cpp	/^game_mode game_manager::curr_game_mode;$/;"	kind:m	class:game_manager	file:
-curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	u32 curr_index;$/;"	kind:m	class:sa_free_list	access:public
-curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	u32 curr_index;$/;"	kind:m	class:sa_stack	access:public
 curr_index_arr	game_engine_stuff/debug_vars.hpp	/^		vu32 curr_index_arr[curr_index_arr_size];$/;"	kind:m	struct:debug_arr_group::raw_array_group	access:public
 curr_index_arr	game_engine_stuff/debug_vars.hpp	/^	static inline vu32* curr_index_arr()$/;"	kind:f	class:debug_arr_group	access:protected	signature:()
 curr_index_arr_helper	game_engine_stuff/debug_vars.hpp	/^	static array_helper<vu32> curr_index_arr_helper;$/;"	kind:m	class:debug_arr_group	access:public
@@ -926,14 +940,6 @@ data64	game_engine_stuff/misc_types.hpp	/^	u64 data64;$/;"	kind:m	union:byte_gro
 data8	game_engine_stuff/misc_types.hpp	/^		u8 data8 [2];$/;"	kind:m	struct:byte_group_16::__anon1	access:public
 data8	game_engine_stuff/misc_types.hpp	/^		u8 data8 [4];$/;"	kind:m	struct:byte_group_32::__anon3	access:public
 data8	game_engine_stuff/misc_types.hpp	/^		u8 data8 [8];$/;"	kind:m	struct:byte_group_64::__anon6	access:public
-data_at	game_engine_stuff/array_2d_helper_class.hpp	/^	type& data_at( const vec2_s32& offset_2d )$/;"	kind:f	class:array_2d_helper	access:public	signature:( const vec2_s32& offset_2d )
-data_at	game_engine_stuff/array_2d_helper_class.hpp	/^	type& data_at( const vec2_u32& offset_2d )$/;"	kind:f	class:array_2d_helper	access:public	signature:( const vec2_u32& offset_2d )
-data_at	game_engine_stuff/array_2d_helper_class.hpp	/^	type& data_at( u32 x, u32 y )$/;"	kind:f	class:array_2d_helper	access:public	signature:( u32 x, u32 y )
-data_at	game_engine_stuff/array_helper_class.hpp	/^	type& data_at( u32 offset )$/;"	kind:f	class:array_helper	access:public	signature:( u32 offset )
-data_at	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline block_coll_result& data_at( const vec2_s32& local_coord )$/;"	kind:f	class:block_coll_result_rect_group	access:public	signature:( const vec2_s32& local_coord )
-data_at	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline block_coll_result& data_at( const vec2_u32& local_coord )$/;"	kind:f	class:block_coll_result_rect_group	access:public	signature:( const vec2_u32& local_coord )
-data_at	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline block_coll_result& data_at( u32 local_x, u32 local_y )$/;"	kind:f	class:block_coll_result_rect_group	access:public	signature:( u32 local_x, u32 local_y )
-data_at	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline block_coll_result*& data_at( u32 index )$/;"	kind:f	class:bcr_ptr_line	access:public	signature:( u32 index )
 day_sky_and_night_sky_block_classes_hpp	game_engine_stuff/block_stuff/day_sky_and_night_sky_block_classes.hpp	20;"	kind:d
 dcnt_bg0_off	gba_specific_stuff/gfx_reg_stuff.hpp	240;"	kind:d
 dcnt_bg0_on	gba_specific_stuff/gfx_reg_stuff.hpp	241;"	kind:d
@@ -1068,7 +1074,6 @@ debug_u32_arr_helper	game_engine_stuff/debug_vars.hpp	/^	static array_helper<vu3
 debug_u32_arr_helper	game_engine_stuff/debug_vars.thumb.cpp	/^array_helper<vu32> debug_arr_group::debug_u32_arr_helper$/;"	kind:p	class:debug_arr_group	file:	signature:( the_raw_array_group.debug_u32_arr, debug_u32_arr_size )
 debug_u32_arr_size	game_engine_stuff/debug_vars.hpp	/^static constexpr u32 debug_u32_arr_size = 32;$/;"	kind:v
 debug_vars_hpp	game_engine_stuff/debug_vars.hpp	20;"	kind:d
-default_sprite_new_caller	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^void default_sprite_new_caller( sprite*& the_sprite,$/;"	kind:f	signature:( sprite*& the_sprite, sprite_allocator& the_sprite_allocator, bool facing_left )
 despawn_sprites_if_needed	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void despawn_sprites_if_needed$/;"	kind:p	class:sprite_manager	access:public	signature:( const bg_point& camera_pos )
 despawn_sprites_if_needed	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^void sprite_manager::despawn_sprites_if_needed$/;"	kind:f	class:sprite_manager	signature:( const bg_point& camera_pos )
 dirt_bottom_left_block_stuff	game_engine_stuff/block_stuff/grass_and_dirt_block_stuff_classes.hpp	/^class dirt_bottom_left_block_stuff : public block_base_stuff$/;"	kind:c	inherits:block_base_stuff
@@ -1243,8 +1248,8 @@ dud_block_stuff::strongly_hit_response	game_engine_stuff/block_stuff/dud_block_s
 dud_block_stuff_class_hpp	game_engine_stuff/block_stuff/dud_block_stuff_class.hpp	20;"	kind:d
 enable_hflip	gba_specific_stuff/oam_entry_classes.hpp	/^	void enable_hflip()$/;"	kind:f	class:oam_entry	access:public	signature:()
 enable_vflip	gba_specific_stuff/oam_entry_classes.hpp	/^	void enable_vflip()$/;"	kind:f	class:oam_entry	access:public	signature:()
-erase_at	game_engine_stuff/sa_list_class_stuff.hpp	/^	void erase_at( int node_index ) __attribute__((noinline))$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( int node_index )
-erase_at_old	game_engine_stuff/sa_list_class_stuff.hpp	/^	void erase_at_old( int node_index )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( int node_index )
+erase_at	game_engine_stuff/sa_list_class_stuff.hpp	/^	void erase_at( s32 node_index ) __attribute__((noinline))$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( s32 node_index )
+erase_at_old	game_engine_stuff/sa_list_class_stuff.hpp	/^	void erase_at_old( s32 node_index )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( s32 node_index )
 ewram_test_arr	main.thumb.cpp	/^u8 ewram_test_arr[ewram_test_arr_size] __attribute__((_ewram));$/;"	kind:v
 ewram_test_arr_size	main.thumb.cpp	/^static const u32 ewram_test_arr_size = 10;$/;"	kind:v	file:
 ewram_test_func	main.thumb.cpp	/^extern "C" int ewram_test_func();$/;"	kind:p	file:	signature:()
@@ -1269,33 +1274,33 @@ exclam_block_stuff_classes_hpp	game_engine_stuff/block_stuff/exclam_block_stuff_
 externally_allocated_sa_list	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline externally_allocated_sa_list$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( sa_list_node<type>* s_the_node_array, sa_free_list_backend* s_ptr_to_the_free_list_backend, u32 s_total_num_nodes )
 externally_allocated_sa_list	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline externally_allocated_sa_list() : front_node_index(-1),$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
 externally_allocated_sa_list	game_engine_stuff/sa_list_class_stuff.hpp	/^class externally_allocated_sa_list$/;"	kind:c
-externally_allocated_sa_list::erase_at	game_engine_stuff/sa_list_class_stuff.hpp	/^	void erase_at( int node_index ) __attribute__((noinline))$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( int node_index )
-externally_allocated_sa_list::erase_at_old	game_engine_stuff/sa_list_class_stuff.hpp	/^	void erase_at_old( int node_index )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( int node_index )
+externally_allocated_sa_list::erase_at	game_engine_stuff/sa_list_class_stuff.hpp	/^	void erase_at( s32 node_index ) __attribute__((noinline))$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( s32 node_index )
+externally_allocated_sa_list::erase_at_old	game_engine_stuff/sa_list_class_stuff.hpp	/^	void erase_at_old( s32 node_index )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( s32 node_index )
 externally_allocated_sa_list::externally_allocated_sa_list	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline externally_allocated_sa_list$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( sa_list_node<type>* s_the_node_array, sa_free_list_backend* s_ptr_to_the_free_list_backend, u32 s_total_num_nodes )
 externally_allocated_sa_list::externally_allocated_sa_list	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline externally_allocated_sa_list() : front_node_index(-1),$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
 externally_allocated_sa_list::front	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node<type>& front()$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
-externally_allocated_sa_list::front_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	int front_node_index;$/;"	kind:m	class:externally_allocated_sa_list	access:protected
+externally_allocated_sa_list::front_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	s32 front_node_index;$/;"	kind:m	class:externally_allocated_sa_list	access:protected
 externally_allocated_sa_list::fully_deallocate	game_engine_stuff/sa_list_class_stuff.hpp	/^	void fully_deallocate() __attribute__((noinline))$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
-externally_allocated_sa_list::get_front_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline const int get_front_node_index() const$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:() const
-externally_allocated_sa_list::get_front_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline int& get_front_node_index()$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
-externally_allocated_sa_list::get_next_node_after_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node<type>& get_next_node_after_node_index$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( int node_index )
-externally_allocated_sa_list::get_node_at	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node<type>& get_node_at( int node_index )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( int node_index )
-externally_allocated_sa_list::get_prev_node_before_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node<type>& get_prev_node_before_node_index$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( int node_index )
+externally_allocated_sa_list::get_front_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline const s32 get_front_node_index() const$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:() const
+externally_allocated_sa_list::get_front_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline s32& get_front_node_index()$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
+externally_allocated_sa_list::get_next_node_after_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node<type>& get_next_node_after_node_index$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( s32 node_index )
+externally_allocated_sa_list::get_node_at	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node<type>& get_node_at( s32 node_index )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( s32 node_index )
+externally_allocated_sa_list::get_prev_node_before_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node<type>& get_prev_node_before_node_index$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( s32 node_index )
 externally_allocated_sa_list::get_the_free_list_backend	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline const sa_free_list_backend& get_the_free_list_backend() const$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:() const
 externally_allocated_sa_list::get_the_free_list_backend	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_free_list_backend& get_the_free_list_backend()$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
 externally_allocated_sa_list::get_the_node_array	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline const sa_list_node<type>* get_the_node_array() const$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:() const
 externally_allocated_sa_list::get_the_node_array	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node<type>* get_the_node_array()$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
 externally_allocated_sa_list::get_total_num_nodes	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline u32 get_total_num_nodes() const$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:() const
 externally_allocated_sa_list::init	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline void init( sa_list_node<type>* n_the_node_array, $/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( sa_list_node<type>* n_the_node_array, sa_free_list_backend* n_ptr_to_the_free_list_backend, u32 n_total_num_nodes )
-externally_allocated_sa_list::insert_after	game_engine_stuff/sa_list_class_stuff.hpp	/^	int insert_after( int node_index, const type& to_insert )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( int node_index, const type& to_insert )
-externally_allocated_sa_list::insert_after_old	game_engine_stuff/sa_list_class_stuff.hpp	/^	int insert_after_old( int node_index, const type& to_insert )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( int node_index, const type& to_insert )
-externally_allocated_sa_list::insert_before	game_engine_stuff/sa_list_class_stuff.hpp	/^	int insert_before( int node_index, const type& to_insert )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( int node_index, const type& to_insert )
-externally_allocated_sa_list::insert_before_old	game_engine_stuff/sa_list_class_stuff.hpp	/^	int insert_before_old( int node_index, const type& to_insert )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( int node_index, const type& to_insert )
-externally_allocated_sa_list::insertion_sort	game_engine_stuff/sa_list_class_stuff.hpp	/^	int insertion_sort() __attribute__((noinline))$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
-externally_allocated_sa_list::insertion_sort_old	game_engine_stuff/sa_list_class_stuff.hpp	/^	int insertion_sort_old()$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
+externally_allocated_sa_list::insert_after	game_engine_stuff/sa_list_class_stuff.hpp	/^	s32 insert_after( s32 node_index, const type& to_insert )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( s32 node_index, const type& to_insert )
+externally_allocated_sa_list::insert_after_old	game_engine_stuff/sa_list_class_stuff.hpp	/^	s32 insert_after_old( s32 node_index, const type& to_insert )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( s32 node_index, const type& to_insert )
+externally_allocated_sa_list::insert_before	game_engine_stuff/sa_list_class_stuff.hpp	/^	s32 insert_before( s32 node_index, const type& to_insert )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( s32 node_index, const type& to_insert )
+externally_allocated_sa_list::insert_before_old	game_engine_stuff/sa_list_class_stuff.hpp	/^	s32 insert_before_old( s32 node_index, const type& to_insert )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( s32 node_index, const type& to_insert )
+externally_allocated_sa_list::insertion_sort	game_engine_stuff/sa_list_class_stuff.hpp	/^	s32 insertion_sort() __attribute__((noinline))$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
+externally_allocated_sa_list::insertion_sort_old	game_engine_stuff/sa_list_class_stuff.hpp	/^	s32 insertion_sort_old()$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
 externally_allocated_sa_list::ptr_to_the_free_list_backend	game_engine_stuff/sa_list_class_stuff.hpp	/^	sa_free_list_backend* ptr_to_the_free_list_backend;$/;"	kind:m	class:externally_allocated_sa_list	access:protected
-externally_allocated_sa_list::push_front	game_engine_stuff/sa_list_class_stuff.hpp	/^	int push_front( const type& to_push )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( const type& to_push )
-externally_allocated_sa_list::push_front_new	game_engine_stuff/sa_list_class_stuff.hpp	/^	int push_front_new( const type& to_push ) __attribute__((noinline))$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( const type& to_push )
+externally_allocated_sa_list::push_front	game_engine_stuff/sa_list_class_stuff.hpp	/^	s32 push_front( const type& to_push ) __attribute__((noinline))$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( const type& to_push )
+externally_allocated_sa_list::push_front_old	game_engine_stuff/sa_list_class_stuff.hpp	/^	s32 push_front_old( const type& to_push )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( const type& to_push )
 externally_allocated_sa_list::the_node_array	game_engine_stuff/sa_list_class_stuff.hpp	/^	sa_list_node<type>* the_node_array;$/;"	kind:m	class:externally_allocated_sa_list	access:protected
 externally_allocated_sa_list::total_num_nodes	game_engine_stuff/sa_list_class_stuff.hpp	/^	u32 total_num_nodes;$/;"	kind:m	class:externally_allocated_sa_list	access:protected
 externally_allocated_sa_list::~externally_allocated_sa_list	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline ~externally_allocated_sa_list()$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
@@ -1579,7 +1584,7 @@ frm_weapon_swing_ground_still_4_tall	game_engine_stuff/sprite_stuff/player_sprit
 frm_weapon_swing_ground_still_5	game_engine_stuff/sprite_stuff/player_sprite_class.hpp	/^		frm_weapon_swing_ground_still_5,$/;"	kind:e	enum:player_sprite::frame
 frm_weapon_swing_ground_still_5_tall	game_engine_stuff/sprite_stuff/player_sprite_class.hpp	/^		frm_weapon_swing_ground_still_5_tall,$/;"	kind:e	enum:player_sprite::frame
 front	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node<type>& front()$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
-front_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	int front_node_index;$/;"	kind:m	class:externally_allocated_sa_list	access:protected
+front_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	s32 front_node_index;$/;"	kind:m	class:externally_allocated_sa_list	access:protected
 fully_deallocate	game_engine_stuff/sa_list_class_stuff.hpp	/^	void fully_deallocate() __attribute__((noinline))$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
 game_manager	game_engine_stuff/game_manager_class.hpp	/^class game_manager$/;"	kind:c
 game_manager::curr_game_mode	game_engine_stuff/game_manager_class.hpp	/^	static game_mode curr_game_mode;$/;"	kind:m	class:game_manager	access:public
@@ -1606,13 +1611,12 @@ game_manager::vblank_func	game_engine_stuff/game_manager_class.thumb.cpp	/^void 
 game_manager::wait_for_x_frames	game_engine_stuff/game_manager_class.hpp	/^	static inline void wait_for_x_frames( u32 x )$/;"	kind:f	class:game_manager	access:public	signature:( u32 x )
 game_manager_class_hpp	game_engine_stuff/game_manager_class.hpp	20;"	kind:d
 game_mode	game_engine_stuff/game_manager_class.hpp	/^enum game_mode$/;"	kind:g
-generate_funcptr_arr_entry	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	172;"	kind:d	file:
-generate_funcptr_arr_entry	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	178;"	kind:d	file:
+generate_case_statement	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	208;"	kind:d	file:
+generate_case_statement	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	216;"	kind:d	file:
+generate_case_statement	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	249;"	kind:d	file:
+generate_case_statement	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	257;"	kind:d	file:
 generate_pt	game_engine_stuff/coll_point_group_classes.thumb.cpp	212;"	kind:d	file:
 generate_pt	game_engine_stuff/coll_point_group_classes.thumb.cpp	35;"	kind:d	file:
-generate_sprite_new_caller	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^list_of_main_sprite_types(generate_sprite_new_caller);$/;"	kind:v
-generate_sprite_new_caller	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	160;"	kind:d	file:
-generate_sprite_new_caller	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	169;"	kind:d	file:
 get_actual_num_sublevels	game_engine_stuff/level_stuff/level_class.hpp	/^	inline const u32 get_actual_num_sublevels() const$/;"	kind:f	class:level	access:public	signature:() const
 get_angle_in_degrees	game_engine_stuff/orientable_coll_box_class.hpp	/^	inline u32 get_angle_in_degrees() const$/;"	kind:f	class:orientable_coll_box	access:public	signature:() const
 get_basic_block_coll_results_16x16	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	void get_basic_block_coll_results_16x16$/;"	kind:p	class:sprite	access:protected	signature:( coll_point_group_16x16& the_pt_group, block_coll_result& lt_coll_result, block_coll_result& lb_coll_result, block_coll_result& tl_coll_result, block_coll_result& tm_coll_result, block_coll_result& tr_coll_result, block_coll_result& rt_coll_result, block_coll_result& rb_coll_result, block_coll_result& bl_coll_result, block_coll_result& bm_coll_result, block_coll_result& br_coll_result )
@@ -1662,14 +1666,6 @@ get_corner_stuff_old	game_engine_stuff/block_coll_result_group_classes.hpp	/^	vo
 get_corners	game_engine_stuff/coll_box_class.hpp	/^	void get_corners( vec2_f24p8& lt_corner, vec2_f24p8& rt_corner, $/;"	kind:p	class:coll_box	access:public	signature:( vec2_f24p8& lt_corner, vec2_f24p8& rt_corner, vec2_f24p8& rb_corner, vec2_f24p8& lb_corner )
 get_corners	game_engine_stuff/coll_box_class.thumb.cpp	/^void coll_box::get_corners( vec2_f24p8& lt_corner, vec2_f24p8& rt_corner, $/;"	kind:f	class:coll_box	signature:( vec2_f24p8& lt_corner, vec2_f24p8& rt_corner, vec2_f24p8& rb_corner, vec2_f24p8& lb_corner )
 get_curr_in_level_pos	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline const vec2_f24p8& get_curr_in_level_pos() const$/;"	kind:f	class:sprite	access:public	signature:() const
-get_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline const u32 get_curr_index() const$/;"	kind:f	class:sa_free_list	access:public	signature:() const
-get_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline const u32 get_curr_index() const$/;"	kind:f	class:sa_pod_stack_backend	access:public	signature:() const
-get_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline const u32 get_curr_index() const$/;"	kind:f	class:sa_stack	access:public	signature:() const
-get_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline const u32 get_curr_index() const$/;"	kind:f	class:sa_stack_backend	access:public	signature:() const
-get_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32& get_curr_index()$/;"	kind:f	class:sa_free_list	access:public	signature:()
-get_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32& get_curr_index()$/;"	kind:f	class:sa_pod_stack_backend	access:public	signature:()
-get_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32& get_curr_index()$/;"	kind:f	class:sa_stack	access:public	signature:()
-get_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32& get_curr_index()$/;"	kind:f	class:sa_stack_backend	access:public	signature:()
 get_curr_on_ground	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline bool get_curr_on_ground() const$/;"	kind:f	class:sprite	access:public	signature:() const
 get_curr_on_slope	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline bool get_curr_on_slope() const$/;"	kind:f	class:sprite	access:public	signature:() const
 get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/door_sprite_class.hpp	/^	inline virtual const u32 get_curr_relative_tile_slot()$/;"	kind:f	class:door_sprite	access:public	signature:()
@@ -1692,8 +1688,8 @@ get_frac_bits	game_engine_stuff/fixed_classes.hpp	/^	inline u8 get_frac_bits() c
 get_frac_bits	game_engine_stuff/fixed_classes.hpp	/^	inline u8 get_frac_bits() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
 get_frac_bits	game_engine_stuff/fixed_classes.hpp	/^inline u8 fixed24p8::get_frac_bits() const$/;"	kind:f	class:fixed24p8	signature:() const
 get_frac_bits	game_engine_stuff/fixed_classes.hpp	/^inline u8 fixed8p8::get_frac_bits() const$/;"	kind:f	class:fixed8p8	signature:() const
-get_front_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline const int get_front_node_index() const$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:() const
-get_front_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline int& get_front_node_index()$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
+get_front_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline const s32 get_front_node_index() const$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:() const
+get_front_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline s32& get_front_node_index()$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
 get_graphics_slot_of_block_type	game_engine_stuff/gfx_manager_class.hpp	/^	static inline const u32 get_graphics_slot_of_block_type $/;"	kind:f	class:gfx_manager	access:public	signature:( block_type the_block_type )
 get_hflip_status	gba_specific_stuff/oam_entry_classes.hpp	/^	u32 get_hflip_status() const$/;"	kind:f	class:oam_entry	access:public	signature:() const
 get_is_horiz	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline bool get_is_horiz() const$/;"	kind:f	class:bcr_ptr_line	access:public	signature:() const
@@ -1806,8 +1802,16 @@ get_metatile_number	game_engine_stuff/block_stuff/wood_block_stuff_classes.thumb
 get_metatile_number_of_block_type	game_engine_stuff/gfx_manager_class.hpp	/^	static inline u32 get_metatile_number_of_block_type$/;"	kind:f	class:gfx_manager	access:public	signature:( block_type the_block_type )
 get_moving_left	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline bool get_moving_left() const$/;"	kind:f	class:block_coll_result_rect_group	access:public	signature:() const
 get_moving_right	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline bool get_moving_right() const$/;"	kind:f	class:block_coll_result_rect_group	access:public	signature:() const
-get_next_node_after_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node<type>& get_next_node_after_node_index$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( int node_index )
-get_node_at	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node<type>& get_node_at( int node_index )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( int node_index )
+get_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline const u32 get_next_index() const$/;"	kind:f	class:sa_free_list	access:public	signature:() const
+get_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline const u32 get_next_index() const$/;"	kind:f	class:sa_pod_stack_backend	access:public	signature:() const
+get_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline const u32 get_next_index() const$/;"	kind:f	class:sa_stack	access:public	signature:() const
+get_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline const u32 get_next_index() const$/;"	kind:f	class:sa_stack_backend	access:public	signature:() const
+get_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32& get_next_index()$/;"	kind:f	class:sa_free_list	access:public	signature:()
+get_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32& get_next_index()$/;"	kind:f	class:sa_pod_stack_backend	access:public	signature:()
+get_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32& get_next_index()$/;"	kind:f	class:sa_stack	access:public	signature:()
+get_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32& get_next_index()$/;"	kind:f	class:sa_stack_backend	access:public	signature:()
+get_next_node_after_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node<type>& get_next_node_after_node_index$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( s32 node_index )
+get_node_at	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node<type>& get_node_at( s32 node_index )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( s32 node_index )
 get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/door_sprite_class.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:door_sprite	access:public	signature:()
 get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_classes.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:chocolate_muffin_sprite	access:public	signature:()
 get_num_active_gfx_tiles	game_engine_stuff/sprite_stuff/muffin_sprite_classes.hpp	/^	inline virtual const u32 get_num_active_gfx_tiles()$/;"	kind:f	class:fire_muffin_sprite	access:public	signature:()
@@ -1884,7 +1888,7 @@ get_palette_slot	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	virtual cons
 get_palette_slot	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^const sprite_palette_slot sprite::get_palette_slot()$/;"	kind:f	class:sprite	signature:()
 get_palette_slot	game_engine_stuff/sprite_stuff/waffle_sprite_class.hpp	/^	inline virtual const sprite_palette_slot get_palette_slot()$/;"	kind:f	class:waffle_sprite	access:public	signature:()
 get_prev_in_level_pos	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline const vec2_f24p8& get_prev_in_level_pos() const$/;"	kind:f	class:sprite	access:public	signature:() const
-get_prev_node_before_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node<type>& get_prev_node_before_node_index$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( int node_index )
+get_prev_node_before_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node<type>& get_prev_node_before_node_index$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( s32 node_index )
 get_prev_on_ground	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline bool get_prev_on_ground() const$/;"	kind:f	class:sprite	access:public	signature:() const
 get_prev_on_slope	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline bool get_prev_on_slope() const$/;"	kind:f	class:sprite	access:public	signature:() const
 get_pt_bl	game_engine_stuff/coll_point_group_classes.hpp	/^	inline vec2_f24p8& get_pt_bl()$/;"	kind:f	class:coll_point_group_base	access:public	signature:()
@@ -1929,8 +1933,8 @@ get_sprite_ipg_arr_size	game_engine_stuff/level_stuff/sublevel_class.hpp	/^	inli
 get_the_array	game_engine_stuff/array_2d_helper_class.hpp	/^	const type* get_the_array() const$/;"	kind:f	class:array_2d_helper	access:public	signature:() const
 get_the_array	game_engine_stuff/array_helper_class.hpp	/^	const type* get_the_array() const$/;"	kind:f	class:array_helper	access:public	signature:() const
 get_the_array	game_engine_stuff/sa_stack_classes.hpp	/^	const type* get_the_array() const$/;"	kind:f	class:sa_stack_backend	access:public	signature:() const
-get_the_array	game_engine_stuff/sa_stack_classes.hpp	/^	inline const int* get_the_array() const$/;"	kind:f	class:sa_free_list_backend	access:public	signature:() const
-get_the_array	game_engine_stuff/sa_stack_classes.hpp	/^	inline int* get_the_array()$/;"	kind:f	class:sa_free_list_backend	access:public	signature:()
+get_the_array	game_engine_stuff/sa_stack_classes.hpp	/^	inline const s16* get_the_array() const$/;"	kind:f	class:sa_free_list_backend	access:public	signature:() const
+get_the_array	game_engine_stuff/sa_stack_classes.hpp	/^	inline s16* get_the_array()$/;"	kind:f	class:sa_free_list_backend	access:public	signature:()
 get_the_array	game_engine_stuff/sa_stack_classes.hpp	/^	type* get_the_array()$/;"	kind:f	class:sa_stack_backend	access:public	signature:()
 get_the_array_size	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline constexpr u32 get_the_array_size() const$/;"	kind:f	class:sa_array_of_lists	access:public	signature:() const
 get_the_array_u8	game_engine_stuff/sa_stack_classes.hpp	/^	inline const u8* get_the_array_u8() const$/;"	kind:f	class:sa_pod_stack_backend	access:public	signature:() const
@@ -2213,6 +2217,7 @@ grass_top_right_block_stuff::palette_number	game_engine_stuff/block_stuff/grass_
 grav_acc	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	static constexpr fixed24p8 grav_acc = {0x50};$/;"	kind:m	class:sprite	access:public
 guaranteed_f24p8_by_f8p8_multiplication	game_engine_stuff/fixed_classes.arm.cpp	/^fixed24p8 fixed24p8::guaranteed_f24p8_by_f8p8_multiplication$/;"	kind:f	class:fixed24p8	signature:( const fixed8p8& to_mul )
 guaranteed_f24p8_by_f8p8_multiplication	game_engine_stuff/fixed_classes.hpp	/^	fixed24p8 guaranteed_f24p8_by_f8p8_multiplication$/;"	kind:p	class:fixed24p8	access:public	signature:( const fixed8p8& to_mul )
+halt	game_engine_stuff/misc_utility_funcs.hpp	/^void halt();$/;"	kind:p	signature:()
 halt	game_engine_stuff/misc_utility_funcs.thumb.cpp	/^void halt()$/;"	kind:f	signature:()
 handle_jumping_stuff	game_engine_stuff/sprite_stuff/player_sprite_class.hpp	/^	virtual void handle_jumping_stuff( u32 is_jump_key_hit, $/;"	kind:p	class:player_sprite	access:public	signature:( u32 is_jump_key_hit, u32 is_jump_key_held )
 handle_jumping_stuff	game_engine_stuff/sprite_stuff/player_sprite_class.thumb.cpp	/^void player_sprite::handle_jumping_stuff( u32 is_jump_key_hit, $/;"	kind:f	class:player_sprite	signature:( u32 is_jump_key_hit, u32 is_jump_key_held )
@@ -2280,7 +2285,7 @@ init	game_engine_stuff/array_2d_helper_class.hpp	/^	void init( type* s_the_array
 init	game_engine_stuff/array_helper_class.hpp	/^	void init( type* s_the_array, u32 s_size )$/;"	kind:f	class:array_helper	access:public	signature:( type* s_the_array, u32 s_size )
 init	game_engine_stuff/level_stuff/sublevel_class.hpp	/^	inline void init( const sublevel< cmp_block_data_size, xsize, ysize,$/;"	kind:f	class:sublevel_pointer	access:public	signature:( const sublevel< cmp_block_data_size, xsize, ysize, sprite_ipg_arr_size, sublevel_entrance_arr_size >& the_sublevel )
 init	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline void init( sa_list_node<type>* n_the_node_array, $/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( sa_list_node<type>* n_the_node_array, sa_free_list_backend* n_ptr_to_the_free_list_backend, u32 n_total_num_nodes )
-init	game_engine_stuff/sa_stack_classes.hpp	/^	void init( type* s_ptr_to_the_array, u32 s_num_elems, $/;"	kind:f	class:sa_stack_backend	access:public	signature:( type* s_ptr_to_the_array, u32 s_num_elems, u32* s_ptr_to_curr_index )
+init	game_engine_stuff/sa_stack_classes.hpp	/^	void init( type* s_ptr_to_the_array, u32 s_num_elems, $/;"	kind:f	class:sa_stack_backend	access:public	signature:( type* s_ptr_to_the_array, u32 s_num_elems, u32* s_ptr_to_next_index )
 init	game_engine_stuff/sa_stack_classes.hpp	/^	void init();$/;"	kind:p	class:sa_free_list_backend	access:public	signature:()
 init	game_engine_stuff/sa_stack_classes.thumb.cpp	/^void sa_free_list_backend::init()$/;"	kind:f	class:sa_free_list_backend	signature:()
 init_bcr_arr_2d_helper	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline void init_bcr_arr_2d_helper()$/;"	kind:f	class:block_coll_result_rect_group	access:protected	signature:()
@@ -2302,12 +2307,12 @@ initial_sprite_spawning_at_start_of_level	game_engine_stuff/sprite_stuff/sprite_
 initial_sprite_spawning_from_sublevel_data_old	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void initial_sprite_spawning_from_sublevel_data_old$/;"	kind:p	class:sprite_manager	access:public	signature:( const bg_point& camera_pos )
 initial_sprite_spawning_shared_code	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void initial_sprite_spawning_shared_code$/;"	kind:p	class:sprite_manager	access:public	signature:( prev_curr_pair<bg_point>& camera_pos )
 initial_sprite_spawning_shared_code	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^void sprite_manager::initial_sprite_spawning_shared_code$/;"	kind:f	class:sprite_manager	signature:( prev_curr_pair<bg_point>& camera_pos_pc_pair )
-insert_after	game_engine_stuff/sa_list_class_stuff.hpp	/^	int insert_after( int node_index, const type& to_insert )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( int node_index, const type& to_insert )
-insert_after_old	game_engine_stuff/sa_list_class_stuff.hpp	/^	int insert_after_old( int node_index, const type& to_insert )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( int node_index, const type& to_insert )
-insert_before	game_engine_stuff/sa_list_class_stuff.hpp	/^	int insert_before( int node_index, const type& to_insert )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( int node_index, const type& to_insert )
-insert_before_old	game_engine_stuff/sa_list_class_stuff.hpp	/^	int insert_before_old( int node_index, const type& to_insert )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( int node_index, const type& to_insert )
-insertion_sort	game_engine_stuff/sa_list_class_stuff.hpp	/^	int insertion_sort() __attribute__((noinline))$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
-insertion_sort_old	game_engine_stuff/sa_list_class_stuff.hpp	/^	int insertion_sort_old()$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
+insert_after	game_engine_stuff/sa_list_class_stuff.hpp	/^	s32 insert_after( s32 node_index, const type& to_insert )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( s32 node_index, const type& to_insert )
+insert_after_old	game_engine_stuff/sa_list_class_stuff.hpp	/^	s32 insert_after_old( s32 node_index, const type& to_insert )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( s32 node_index, const type& to_insert )
+insert_before	game_engine_stuff/sa_list_class_stuff.hpp	/^	s32 insert_before( s32 node_index, const type& to_insert )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( s32 node_index, const type& to_insert )
+insert_before_old	game_engine_stuff/sa_list_class_stuff.hpp	/^	s32 insert_before_old( s32 node_index, const type& to_insert )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( s32 node_index, const type& to_insert )
+insertion_sort	game_engine_stuff/sa_list_class_stuff.hpp	/^	s32 insertion_sort() __attribute__((noinline))$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
+insertion_sort_old	game_engine_stuff/sa_list_class_stuff.hpp	/^	s32 insertion_sort_old()$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
 interrupt_stuff_hpp	gba_specific_stuff/interrupt_stuff.hpp	20;"	kind:d
 intersects_now	game_engine_stuff/coll_box_class.hpp	/^	inline int intersects_now( const coll_box& other )$/;"	kind:f	class:coll_box	access:public	signature:( const coll_box& other )
 intersects_now	game_engine_stuff/orientable_coll_box_class.hpp	/^	inline bool intersects_now( const orientable_coll_box& other )$/;"	kind:f	class:orientable_coll_box	access:public	signature:( const orientable_coll_box& other )
@@ -2628,7 +2633,9 @@ muffin_sprite::the_palette_slot	game_engine_stuff/sprite_stuff/muffin_sprite_cla
 muffin_sprite::the_relative_metatile_slot	game_engine_stuff/sprite_stuff/muffin_sprite_classes.hpp	/^	static constexpr u32 the_relative_metatile_slot = 1, $/;"	kind:m	class:muffin_sprite	access:public
 muffin_sprite::tile_arr	game_engine_stuff/sprite_stuff/muffin_sprite_classes.hpp	/^	static constexpr tile* tile_arr = const_cast<tile*>$/;"	kind:m	class:muffin_sprite	access:public
 muffin_sprite_classes_hpp	game_engine_stuff/sprite_stuff/muffin_sprite_classes.hpp	20;"	kind:d
-next_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	int next_node_index, prev_node_index;$/;"	kind:m	class:sa_list_node	access:public
+next_index	game_engine_stuff/sa_stack_classes.hpp	/^	u32 next_index;$/;"	kind:m	class:sa_free_list	access:public
+next_index	game_engine_stuff/sa_stack_classes.hpp	/^	u32 next_index;$/;"	kind:m	class:sa_stack	access:public
+next_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	s16 next_node_index, prev_node_index;$/;"	kind:m	class:sa_list_node	access:public
 next_oam_index	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static int next_oam_index;$/;"	kind:m	class:sprite_manager	access:public
 next_oam_index	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^int sprite_manager::next_oam_index;$/;"	kind:m	class:sprite_manager	file:
 nocash_soft_break	gba_specific_stuff/interrupt_stuff.hpp	/^inline void nocash_soft_break()$/;"	kind:f	signature:()
@@ -3034,11 +3041,11 @@ pb	gba_specific_stuff/oam_entry_classes.hpp	/^	fixed8p8 pb;$/;"	kind:m	class:oam
 pc	gba_specific_stuff/oam_entry_classes.hpp	/^	fixed8p8 pc;$/;"	kind:m	class:oam_entry_affine	access:public
 pd	gba_specific_stuff/oam_entry_classes.hpp	/^	fixed8p8 pd;$/;"	kind:m	class:oam_entry_affine	access:public
 peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline const int peek_top() const$/;"	kind:f	class:sa_free_list	access:public	signature:() const
-peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline const int& peek_top() const$/;"	kind:f	class:sa_free_list_backend	access:public	signature:() const
+peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline const s32 peek_top() const$/;"	kind:f	class:sa_free_list_backend	access:public	signature:() const
 peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline const type peek_top() const$/;"	kind:f	class:sa_stack	access:public	signature:() const
 peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline const type peek_top() const$/;"	kind:f	class:sa_stack_backend	access:public	signature:() const
 peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline int peek_top()$/;"	kind:f	class:sa_free_list	access:public	signature:()
-peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline int& peek_top()$/;"	kind:f	class:sa_free_list_backend	access:public	signature:()
+peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline s16& peek_top()$/;"	kind:f	class:sa_free_list_backend	access:public	signature:()
 peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline type peek_top()$/;"	kind:f	class:sa_stack	access:public	signature:()
 peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline type peek_top()$/;"	kind:f	class:sa_stack_backend	access:public	signature:()
 peek_top_index	game_engine_stuff/sprite_stuff/sprite_allocator_class.hpp	/^	inline const s32 peek_top_index() const$/;"	kind:f	class:sprite_allocator	access:public	signature:() const
@@ -3287,7 +3294,7 @@ prev_curr_pair::has_changed	game_engine_stuff/prev_curr_pair_class.hpp	/^	inline
 prev_curr_pair::operator vec2<type>	game_engine_stuff/prev_curr_pair_class.hpp	/^	inline operator vec2<type>() const$/;"	kind:f	struct:prev_curr_pair	access:public	signature:() const
 prev_curr_pair::prev	game_engine_stuff/prev_curr_pair_class.hpp	/^	type prev, curr;$/;"	kind:m	struct:prev_curr_pair	access:public
 prev_curr_pair_class_hpp	game_engine_stuff/prev_curr_pair_class.hpp	20;"	kind:d
-prev_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	int next_node_index, prev_node_index;$/;"	kind:m	class:sa_list_node	access:public
+prev_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	s16 next_node_index, prev_node_index;$/;"	kind:m	class:sa_list_node	access:public
 prev_prev_bgofs_mirror	game_engine_stuff/gfx_manager_class.hpp	/^	static bg_point prev_prev_bgofs_mirror[bgofs_mirror_size]$/;"	kind:m	class:gfx_manager	access:public
 prev_prev_bgofs_mirror	game_engine_stuff/gfx_manager_class.thumb.cpp	/^bg_point gfx_manager::prev_prev_bgofs_mirror[bgofs_mirror_size];$/;"	kind:m	class:gfx_manager	file:
 prev_prev_on_screen_pos	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	static vec2_f24p8 prev_prev_on_screen_pos; $/;"	kind:m	class:sprite	access:public
@@ -3296,17 +3303,17 @@ prev_prev_on_screen_pos_s32	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	s
 prev_prev_on_screen_pos_s32	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^vec2_s32 sprite::prev_prev_on_screen_pos_s32;$/;"	kind:m	class:sprite	file:
 ptr_arr_helper	game_engine_stuff/block_coll_result_group_classes.hpp	/^	array_helper<block_coll_result*> ptr_arr_helper;$/;"	kind:m	class:bcr_ptr_line	access:public
 ptr_arr_helper_data	game_engine_stuff/block_coll_result_group_classes.hpp	/^	block_coll_result* ptr_arr_helper_data[max_size];$/;"	kind:m	class:bcr_ptr_line	access:protected
-ptr_to_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	u32* ptr_to_curr_index;$/;"	kind:m	class:sa_pod_stack_backend	access:protected
-ptr_to_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	u32* ptr_to_curr_index;$/;"	kind:m	class:sa_stack_backend	access:public
+ptr_to_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	u32* ptr_to_next_index;$/;"	kind:m	class:sa_pod_stack_backend	access:protected
+ptr_to_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	u32* ptr_to_next_index;$/;"	kind:m	class:sa_stack_backend	access:public
 ptr_to_the_array_u8	game_engine_stuff/sa_stack_classes.hpp	/^	u8* ptr_to_the_array_u8;$/;"	kind:m	class:sa_pod_stack_backend	access:protected
 ptr_to_the_free_list_backend	game_engine_stuff/sa_list_class_stuff.hpp	/^	sa_free_list_backend* ptr_to_the_free_list_backend;$/;"	kind:m	class:externally_allocated_sa_list	access:protected
 push	game_engine_stuff/sa_stack_classes.hpp	/^	inline void push( const type& to_push )$/;"	kind:f	class:sa_stack	access:public	signature:( const type& to_push )
 push	game_engine_stuff/sa_stack_classes.hpp	/^	inline void push( const u8* to_push_u8 )$/;"	kind:f	class:sa_pod_stack_backend	access:public	signature:( const u8* to_push_u8 )
 push	game_engine_stuff/sa_stack_classes.hpp	/^	inline void push( int to_push )$/;"	kind:f	class:sa_free_list	access:public	signature:( int to_push )
-push	game_engine_stuff/sa_stack_classes.hpp	/^	inline void push( int to_push )$/;"	kind:f	class:sa_free_list_backend	access:public	signature:( int to_push )
+push	game_engine_stuff/sa_stack_classes.hpp	/^	inline void push( s32 to_push )$/;"	kind:f	class:sa_free_list_backend	access:public	signature:( s32 to_push )
 push	game_engine_stuff/sa_stack_classes.hpp	/^	void push( const type& to_push )$/;"	kind:f	class:sa_stack_backend	access:public	signature:( const type& to_push )
-push_front	game_engine_stuff/sa_list_class_stuff.hpp	/^	int push_front( const type& to_push )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( const type& to_push )
-push_front_new	game_engine_stuff/sa_list_class_stuff.hpp	/^	int push_front_new( const type& to_push ) __attribute__((noinline))$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( const type& to_push )
+push_front	game_engine_stuff/sa_list_class_stuff.hpp	/^	s32 push_front( const type& to_push ) __attribute__((noinline))$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( const type& to_push )
+push_front_old	game_engine_stuff/sa_list_class_stuff.hpp	/^	s32 push_front_old( const type& to_push )$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:( const type& to_push )
 push_out_of_bot_block	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline void push_out_of_bot_block$/;"	kind:f	class:sprite	access:protected	signature:( const block_coll_result_rect_group& the_bcr_rect_group )
 push_out_of_left_block	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline void push_out_of_left_block$/;"	kind:f	class:sprite	access:protected	signature:( const block_coll_result_rect_group& the_bcr_rect_group )
 push_out_of_right_block	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline void push_out_of_right_block$/;"	kind:f	class:sprite	access:protected	signature:( const block_coll_result_rect_group& the_bcr_rect_group )
@@ -3413,57 +3420,57 @@ sa_array_of_lists::the_free_list	game_engine_stuff/sa_list_class_stuff.hpp	/^	sa
 sa_array_of_lists::the_node_array	game_engine_stuff/sa_list_class_stuff.hpp	/^	sa_list_node<type> the_node_array[total_num_nodes];$/;"	kind:m	class:sa_array_of_lists	access:public
 sa_free_list	game_engine_stuff/sa_stack_classes.hpp	/^	inline sa_free_list() : the_sa_free_list_backend( the_array.data(), $/;"	kind:f	class:sa_free_list	access:public	signature:()
 sa_free_list	game_engine_stuff/sa_stack_classes.hpp	/^class sa_free_list$/;"	kind:c
-sa_free_list::curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	u32 curr_index;$/;"	kind:m	class:sa_free_list	access:public
-sa_free_list::get_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline const u32 get_curr_index() const$/;"	kind:f	class:sa_free_list	access:public	signature:() const
-sa_free_list::get_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32& get_curr_index()$/;"	kind:f	class:sa_free_list	access:public	signature:()
+sa_free_list::get_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline const u32 get_next_index() const$/;"	kind:f	class:sa_free_list	access:public	signature:() const
+sa_free_list::get_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32& get_next_index()$/;"	kind:f	class:sa_free_list	access:public	signature:()
 sa_free_list::get_size	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32 get_size() const$/;"	kind:f	class:sa_free_list	access:public	signature:() const
+sa_free_list::next_index	game_engine_stuff/sa_stack_classes.hpp	/^	u32 next_index;$/;"	kind:m	class:sa_free_list	access:public
 sa_free_list::peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline const int peek_top() const$/;"	kind:f	class:sa_free_list	access:public	signature:() const
 sa_free_list::peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline int peek_top()$/;"	kind:f	class:sa_free_list	access:public	signature:()
 sa_free_list::pop	game_engine_stuff/sa_stack_classes.hpp	/^	inline void pop()$/;"	kind:f	class:sa_free_list	access:public	signature:()
 sa_free_list::push	game_engine_stuff/sa_stack_classes.hpp	/^	inline void push( int to_push )$/;"	kind:f	class:sa_free_list	access:public	signature:( int to_push )
 sa_free_list::sa_free_list	game_engine_stuff/sa_stack_classes.hpp	/^	inline sa_free_list() : the_sa_free_list_backend( the_array.data(), $/;"	kind:f	class:sa_free_list	access:public	signature:()
-sa_free_list::the_array	game_engine_stuff/sa_stack_classes.hpp	/^	array< int, size > the_array;$/;"	kind:m	class:sa_free_list	access:public
+sa_free_list::the_array	game_engine_stuff/sa_stack_classes.hpp	/^	array< s16, size > the_array __attribute__((_align4));$/;"	kind:m	class:sa_free_list	access:public
 sa_free_list::the_sa_free_list_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_free_list_backend the_sa_free_list_backend;$/;"	kind:m	class:sa_free_list	access:protected
-sa_free_list_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_free_list_backend( int* s_ptr_to_the_array, $/;"	kind:p	class:sa_free_list_backend	access:public	signature:( int* s_ptr_to_the_array, u32* s_ptr_to_curr_index, u32 s_num_elems )
-sa_free_list_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_free_list_backend( u8* s_ptr_to_the_array_u8, $/;"	kind:p	class:sa_free_list_backend	access:public	signature:( u8* s_ptr_to_the_array_u8, u32* s_ptr_to_curr_index, u32 s_num_elems )
+sa_free_list_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_free_list_backend( s16* s_ptr_to_the_array, $/;"	kind:p	class:sa_free_list_backend	access:public	signature:( s16* s_ptr_to_the_array, u32* s_ptr_to_next_index, u32 s_num_elems )
+sa_free_list_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_free_list_backend( u8* s_ptr_to_the_array_u8, $/;"	kind:p	class:sa_free_list_backend	access:public	signature:( u8* s_ptr_to_the_array_u8, u32* s_ptr_to_next_index, u32 s_num_elems )
 sa_free_list_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_free_list_backend();$/;"	kind:p	class:sa_free_list_backend	access:public	signature:()
 sa_free_list_backend	game_engine_stuff/sa_stack_classes.hpp	/^class sa_free_list_backend : public sa_pod_stack_backend$/;"	kind:c	inherits:sa_pod_stack_backend
-sa_free_list_backend	game_engine_stuff/sa_stack_classes.thumb.cpp	/^sa_free_list_backend::sa_free_list_backend( int* s_ptr_to_the_array,$/;"	kind:f	class:sa_free_list_backend	signature:( int* s_ptr_to_the_array, u32* s_ptr_to_curr_index, u32 s_num_elems )
-sa_free_list_backend	game_engine_stuff/sa_stack_classes.thumb.cpp	/^sa_free_list_backend::sa_free_list_backend( u8* s_ptr_to_the_array_u8, $/;"	kind:f	class:sa_free_list_backend	signature:( u8* s_ptr_to_the_array_u8, u32* s_ptr_to_curr_index, u32 s_num_elems )
+sa_free_list_backend	game_engine_stuff/sa_stack_classes.thumb.cpp	/^sa_free_list_backend::sa_free_list_backend( s16* s_ptr_to_the_array,$/;"	kind:f	class:sa_free_list_backend	signature:( s16* s_ptr_to_the_array, u32* s_ptr_to_next_index, u32 s_num_elems )
+sa_free_list_backend	game_engine_stuff/sa_stack_classes.thumb.cpp	/^sa_free_list_backend::sa_free_list_backend( u8* s_ptr_to_the_array_u8, $/;"	kind:f	class:sa_free_list_backend	signature:( u8* s_ptr_to_the_array_u8, u32* s_ptr_to_next_index, u32 s_num_elems )
 sa_free_list_backend	game_engine_stuff/sa_stack_classes.thumb.cpp	/^sa_free_list_backend::sa_free_list_backend() : sa_pod_stack_backend()$/;"	kind:f	class:sa_free_list_backend	signature:()
-sa_free_list_backend::get_the_array	game_engine_stuff/sa_stack_classes.hpp	/^	inline const int* get_the_array() const$/;"	kind:f	class:sa_free_list_backend	access:public	signature:() const
-sa_free_list_backend::get_the_array	game_engine_stuff/sa_stack_classes.hpp	/^	inline int* get_the_array()$/;"	kind:f	class:sa_free_list_backend	access:public	signature:()
+sa_free_list_backend::get_the_array	game_engine_stuff/sa_stack_classes.hpp	/^	inline const s16* get_the_array() const$/;"	kind:f	class:sa_free_list_backend	access:public	signature:() const
+sa_free_list_backend::get_the_array	game_engine_stuff/sa_stack_classes.hpp	/^	inline s16* get_the_array()$/;"	kind:f	class:sa_free_list_backend	access:public	signature:()
 sa_free_list_backend::get_the_const_type_size	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32 get_the_const_type_size() const$/;"	kind:f	class:sa_free_list_backend	access:public	signature:() const
 sa_free_list_backend::init	game_engine_stuff/sa_stack_classes.hpp	/^	void init();$/;"	kind:p	class:sa_free_list_backend	access:public	signature:()
 sa_free_list_backend::init	game_engine_stuff/sa_stack_classes.thumb.cpp	/^void sa_free_list_backend::init()$/;"	kind:f	class:sa_free_list_backend	signature:()
-sa_free_list_backend::peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline const int& peek_top() const$/;"	kind:f	class:sa_free_list_backend	access:public	signature:() const
-sa_free_list_backend::peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline int& peek_top()$/;"	kind:f	class:sa_free_list_backend	access:public	signature:()
-sa_free_list_backend::push	game_engine_stuff/sa_stack_classes.hpp	/^	inline void push( int to_push )$/;"	kind:f	class:sa_free_list_backend	access:public	signature:( int to_push )
-sa_free_list_backend::sa_free_list_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_free_list_backend( int* s_ptr_to_the_array, $/;"	kind:p	class:sa_free_list_backend	access:public	signature:( int* s_ptr_to_the_array, u32* s_ptr_to_curr_index, u32 s_num_elems )
-sa_free_list_backend::sa_free_list_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_free_list_backend( u8* s_ptr_to_the_array_u8, $/;"	kind:p	class:sa_free_list_backend	access:public	signature:( u8* s_ptr_to_the_array_u8, u32* s_ptr_to_curr_index, u32 s_num_elems )
+sa_free_list_backend::peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline const s32 peek_top() const$/;"	kind:f	class:sa_free_list_backend	access:public	signature:() const
+sa_free_list_backend::peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline s16& peek_top()$/;"	kind:f	class:sa_free_list_backend	access:public	signature:()
+sa_free_list_backend::push	game_engine_stuff/sa_stack_classes.hpp	/^	inline void push( s32 to_push )$/;"	kind:f	class:sa_free_list_backend	access:public	signature:( s32 to_push )
+sa_free_list_backend::sa_free_list_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_free_list_backend( s16* s_ptr_to_the_array, $/;"	kind:p	class:sa_free_list_backend	access:public	signature:( s16* s_ptr_to_the_array, u32* s_ptr_to_next_index, u32 s_num_elems )
+sa_free_list_backend::sa_free_list_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_free_list_backend( u8* s_ptr_to_the_array_u8, $/;"	kind:p	class:sa_free_list_backend	access:public	signature:( u8* s_ptr_to_the_array_u8, u32* s_ptr_to_next_index, u32 s_num_elems )
 sa_free_list_backend::sa_free_list_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_free_list_backend();$/;"	kind:p	class:sa_free_list_backend	access:public	signature:()
-sa_free_list_backend::sa_free_list_backend	game_engine_stuff/sa_stack_classes.thumb.cpp	/^sa_free_list_backend::sa_free_list_backend( int* s_ptr_to_the_array,$/;"	kind:f	class:sa_free_list_backend	signature:( int* s_ptr_to_the_array, u32* s_ptr_to_curr_index, u32 s_num_elems )
-sa_free_list_backend::sa_free_list_backend	game_engine_stuff/sa_stack_classes.thumb.cpp	/^sa_free_list_backend::sa_free_list_backend( u8* s_ptr_to_the_array_u8, $/;"	kind:f	class:sa_free_list_backend	signature:( u8* s_ptr_to_the_array_u8, u32* s_ptr_to_curr_index, u32 s_num_elems )
+sa_free_list_backend::sa_free_list_backend	game_engine_stuff/sa_stack_classes.thumb.cpp	/^sa_free_list_backend::sa_free_list_backend( s16* s_ptr_to_the_array,$/;"	kind:f	class:sa_free_list_backend	signature:( s16* s_ptr_to_the_array, u32* s_ptr_to_next_index, u32 s_num_elems )
+sa_free_list_backend::sa_free_list_backend	game_engine_stuff/sa_stack_classes.thumb.cpp	/^sa_free_list_backend::sa_free_list_backend( u8* s_ptr_to_the_array_u8, $/;"	kind:f	class:sa_free_list_backend	signature:( u8* s_ptr_to_the_array_u8, u32* s_ptr_to_next_index, u32 s_num_elems )
 sa_free_list_backend::sa_free_list_backend	game_engine_stuff/sa_stack_classes.thumb.cpp	/^sa_free_list_backend::sa_free_list_backend() : sa_pod_stack_backend()$/;"	kind:f	class:sa_free_list_backend	signature:()
 sa_free_list_backend::the_const_type_size	game_engine_stuff/sa_stack_classes.hpp	/^	static constexpr u32 the_const_type_size = sizeof(int);$/;"	kind:m	class:sa_free_list_backend	access:public
 sa_list_class_stuff_hpp	game_engine_stuff/sa_list_class_stuff.hpp	20;"	kind:d
-sa_list_node	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node( const type& data_to_copy, int s_next_node_index,$/;"	kind:f	class:sa_list_node	access:public	signature:( const type& data_to_copy, int s_next_node_index, int s_prev_node_index )
+sa_list_node	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node( const type& data_to_copy, s32 s_next_node_index,$/;"	kind:f	class:sa_list_node	access:public	signature:( const type& data_to_copy, s32 s_next_node_index, s32 s_prev_node_index )
 sa_list_node	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node() : the_data(type()), next_node_index(-1),$/;"	kind:f	class:sa_list_node	access:public	signature:()
 sa_list_node	game_engine_stuff/sa_list_class_stuff.hpp	/^class sa_list_node$/;"	kind:c
-sa_list_node::next_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	int next_node_index, prev_node_index;$/;"	kind:m	class:sa_list_node	access:public
-sa_list_node::prev_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	int next_node_index, prev_node_index;$/;"	kind:m	class:sa_list_node	access:public
-sa_list_node::sa_list_node	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node( const type& data_to_copy, int s_next_node_index,$/;"	kind:f	class:sa_list_node	access:public	signature:( const type& data_to_copy, int s_next_node_index, int s_prev_node_index )
+sa_list_node::next_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	s16 next_node_index, prev_node_index;$/;"	kind:m	class:sa_list_node	access:public
+sa_list_node::prev_node_index	game_engine_stuff/sa_list_class_stuff.hpp	/^	s16 next_node_index, prev_node_index;$/;"	kind:m	class:sa_list_node	access:public
+sa_list_node::sa_list_node	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node( const type& data_to_copy, s32 s_next_node_index,$/;"	kind:f	class:sa_list_node	access:public	signature:( const type& data_to_copy, s32 s_next_node_index, s32 s_prev_node_index )
 sa_list_node::sa_list_node	game_engine_stuff/sa_list_class_stuff.hpp	/^	inline sa_list_node() : the_data(type()), next_node_index(-1),$/;"	kind:f	class:sa_list_node	access:public	signature:()
-sa_list_node::the_data	game_engine_stuff/sa_list_class_stuff.hpp	/^	type the_data;$/;"	kind:m	class:sa_list_node	access:public
-sa_pod_stack_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_pod_stack_backend( u8* s_ptr_to_the_array_u8, $/;"	kind:p	class:sa_pod_stack_backend	access:public	signature:( u8* s_ptr_to_the_array_u8, u32* s_ptr_to_curr_index, u32 s_type_size, u32 s_num_elems )
+sa_list_node::the_data	game_engine_stuff/sa_list_class_stuff.hpp	/^	type the_data __attribute__((_align4));$/;"	kind:m	class:sa_list_node	access:public
+sa_pod_stack_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_pod_stack_backend( u8* s_ptr_to_the_array_u8, $/;"	kind:p	class:sa_pod_stack_backend	access:public	signature:( u8* s_ptr_to_the_array_u8, u32* s_ptr_to_next_index, u32 s_type_size, u32 s_num_elems )
 sa_pod_stack_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_pod_stack_backend();$/;"	kind:p	class:sa_pod_stack_backend	access:public	signature:()
 sa_pod_stack_backend	game_engine_stuff/sa_stack_classes.hpp	/^class sa_pod_stack_backend$/;"	kind:c
-sa_pod_stack_backend	game_engine_stuff/sa_stack_classes.thumb.cpp	/^sa_pod_stack_backend::sa_pod_stack_backend( u8* s_ptr_to_the_array_u8, $/;"	kind:f	class:sa_pod_stack_backend	signature:( u8* s_ptr_to_the_array_u8, u32* s_ptr_to_curr_index, u32 s_type_size, u32 s_num_elems )
+sa_pod_stack_backend	game_engine_stuff/sa_stack_classes.thumb.cpp	/^sa_pod_stack_backend::sa_pod_stack_backend( u8* s_ptr_to_the_array_u8, $/;"	kind:f	class:sa_pod_stack_backend	signature:( u8* s_ptr_to_the_array_u8, u32* s_ptr_to_next_index, u32 s_type_size, u32 s_num_elems )
 sa_pod_stack_backend	game_engine_stuff/sa_stack_classes.thumb.cpp	/^sa_pod_stack_backend::sa_pod_stack_backend() : ptr_to_the_array_u8(0),$/;"	kind:f	class:sa_pod_stack_backend	signature:()
 sa_pod_stack_backend::can_pop	game_engine_stuff/sa_stack_classes.hpp	/^	inline bool can_pop() const$/;"	kind:f	class:sa_pod_stack_backend	access:public	signature:() const
 sa_pod_stack_backend::can_push	game_engine_stuff/sa_stack_classes.hpp	/^	inline bool can_push() const$/;"	kind:f	class:sa_pod_stack_backend	access:public	signature:() const
-sa_pod_stack_backend::get_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline const u32 get_curr_index() const$/;"	kind:f	class:sa_pod_stack_backend	access:public	signature:() const
-sa_pod_stack_backend::get_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32& get_curr_index()$/;"	kind:f	class:sa_pod_stack_backend	access:public	signature:()
+sa_pod_stack_backend::get_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline const u32 get_next_index() const$/;"	kind:f	class:sa_pod_stack_backend	access:public	signature:() const
+sa_pod_stack_backend::get_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32& get_next_index()$/;"	kind:f	class:sa_pod_stack_backend	access:public	signature:()
 sa_pod_stack_backend::get_size	game_engine_stuff/sa_stack_classes.hpp	/^	inline const u32 get_size() const$/;"	kind:f	class:sa_pod_stack_backend	access:public	signature:() const
 sa_pod_stack_backend::get_the_array_u8	game_engine_stuff/sa_stack_classes.hpp	/^	inline const u8* get_the_array_u8() const$/;"	kind:f	class:sa_pod_stack_backend	access:public	signature:() const
 sa_pod_stack_backend::get_the_array_u8	game_engine_stuff/sa_stack_classes.hpp	/^	inline u8* get_the_array_u8()$/;"	kind:f	class:sa_pod_stack_backend	access:public	signature:()
@@ -3471,22 +3478,22 @@ sa_pod_stack_backend::get_type_size	game_engine_stuff/sa_stack_classes.hpp	/^	in
 sa_pod_stack_backend::num_elems	game_engine_stuff/sa_stack_classes.hpp	/^	u32 type_size, num_elems;$/;"	kind:m	class:sa_pod_stack_backend	access:protected
 sa_pod_stack_backend::pop	game_engine_stuff/sa_stack_classes.hpp	/^	virtual void pop();$/;"	kind:p	class:sa_pod_stack_backend	access:public	signature:()
 sa_pod_stack_backend::pop	game_engine_stuff/sa_stack_classes.thumb.cpp	/^void sa_pod_stack_backend::pop()$/;"	kind:f	class:sa_pod_stack_backend	signature:()
-sa_pod_stack_backend::ptr_to_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	u32* ptr_to_curr_index;$/;"	kind:m	class:sa_pod_stack_backend	access:protected
+sa_pod_stack_backend::ptr_to_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	u32* ptr_to_next_index;$/;"	kind:m	class:sa_pod_stack_backend	access:protected
 sa_pod_stack_backend::ptr_to_the_array_u8	game_engine_stuff/sa_stack_classes.hpp	/^	u8* ptr_to_the_array_u8;$/;"	kind:m	class:sa_pod_stack_backend	access:protected
 sa_pod_stack_backend::push	game_engine_stuff/sa_stack_classes.hpp	/^	inline void push( const u8* to_push_u8 )$/;"	kind:f	class:sa_pod_stack_backend	access:public	signature:( const u8* to_push_u8 )
-sa_pod_stack_backend::sa_pod_stack_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_pod_stack_backend( u8* s_ptr_to_the_array_u8, $/;"	kind:p	class:sa_pod_stack_backend	access:public	signature:( u8* s_ptr_to_the_array_u8, u32* s_ptr_to_curr_index, u32 s_type_size, u32 s_num_elems )
+sa_pod_stack_backend::sa_pod_stack_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_pod_stack_backend( u8* s_ptr_to_the_array_u8, $/;"	kind:p	class:sa_pod_stack_backend	access:public	signature:( u8* s_ptr_to_the_array_u8, u32* s_ptr_to_next_index, u32 s_type_size, u32 s_num_elems )
 sa_pod_stack_backend::sa_pod_stack_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_pod_stack_backend();$/;"	kind:p	class:sa_pod_stack_backend	access:public	signature:()
-sa_pod_stack_backend::sa_pod_stack_backend	game_engine_stuff/sa_stack_classes.thumb.cpp	/^sa_pod_stack_backend::sa_pod_stack_backend( u8* s_ptr_to_the_array_u8, $/;"	kind:f	class:sa_pod_stack_backend	signature:( u8* s_ptr_to_the_array_u8, u32* s_ptr_to_curr_index, u32 s_type_size, u32 s_num_elems )
+sa_pod_stack_backend::sa_pod_stack_backend	game_engine_stuff/sa_stack_classes.thumb.cpp	/^sa_pod_stack_backend::sa_pod_stack_backend( u8* s_ptr_to_the_array_u8, $/;"	kind:f	class:sa_pod_stack_backend	signature:( u8* s_ptr_to_the_array_u8, u32* s_ptr_to_next_index, u32 s_type_size, u32 s_num_elems )
 sa_pod_stack_backend::sa_pod_stack_backend	game_engine_stuff/sa_stack_classes.thumb.cpp	/^sa_pod_stack_backend::sa_pod_stack_backend() : ptr_to_the_array_u8(0),$/;"	kind:f	class:sa_pod_stack_backend	signature:()
 sa_pod_stack_backend::type_size	game_engine_stuff/sa_stack_classes.hpp	/^	u32 type_size, num_elems;$/;"	kind:m	class:sa_pod_stack_backend	access:protected
 sa_pod_stack_backend::write_to_the_array_u8	game_engine_stuff/sa_stack_classes.hpp	/^	void write_to_the_array_u8( const u8* to_write_u8, u32 non_u8_index );$/;"	kind:p	class:sa_pod_stack_backend	access:protected	signature:( const u8* to_write_u8, u32 non_u8_index )
 sa_pod_stack_backend::write_to_the_array_u8	game_engine_stuff/sa_stack_classes.thumb.cpp	/^void sa_pod_stack_backend::write_to_the_array_u8( const u8* to_write_u8,$/;"	kind:f	class:sa_pod_stack_backend	signature:( const u8* to_write_u8, u32 non_u8_index )
 sa_stack	game_engine_stuff/sa_stack_classes.hpp	/^	inline sa_stack() : the_sa_stack_backend( the_array.data(), get_size(), $/;"	kind:f	class:sa_stack	access:public	signature:()
 sa_stack	game_engine_stuff/sa_stack_classes.hpp	/^class sa_stack$/;"	kind:c
-sa_stack::curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	u32 curr_index;$/;"	kind:m	class:sa_stack	access:public
-sa_stack::get_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline const u32 get_curr_index() const$/;"	kind:f	class:sa_stack	access:public	signature:() const
-sa_stack::get_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32& get_curr_index()$/;"	kind:f	class:sa_stack	access:public	signature:()
+sa_stack::get_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline const u32 get_next_index() const$/;"	kind:f	class:sa_stack	access:public	signature:() const
+sa_stack::get_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32& get_next_index()$/;"	kind:f	class:sa_stack	access:public	signature:()
 sa_stack::get_size	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32 get_size() const$/;"	kind:f	class:sa_stack	access:public	signature:() const
+sa_stack::next_index	game_engine_stuff/sa_stack_classes.hpp	/^	u32 next_index;$/;"	kind:m	class:sa_stack	access:public
 sa_stack::peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline const type peek_top() const$/;"	kind:f	class:sa_stack	access:public	signature:() const
 sa_stack::peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline type peek_top()$/;"	kind:f	class:sa_stack	access:public	signature:()
 sa_stack::pop	game_engine_stuff/sa_stack_classes.hpp	/^	inline void pop()$/;"	kind:f	class:sa_stack	access:public	signature:()
@@ -3494,22 +3501,22 @@ sa_stack::push	game_engine_stuff/sa_stack_classes.hpp	/^	inline void push( const
 sa_stack::sa_stack	game_engine_stuff/sa_stack_classes.hpp	/^	inline sa_stack() : the_sa_stack_backend( the_array.data(), get_size(), $/;"	kind:f	class:sa_stack	access:public	signature:()
 sa_stack::the_array	game_engine_stuff/sa_stack_classes.hpp	/^	array< type, size > the_array;$/;"	kind:m	class:sa_stack	access:public
 sa_stack::the_sa_stack_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_stack_backend<type> the_sa_stack_backend;$/;"	kind:m	class:sa_stack	access:protected
-sa_stack_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_stack_backend( type* s_ptr_to_the_array, u32 s_num_elems, $/;"	kind:f	class:sa_stack_backend	access:public	signature:( type* s_ptr_to_the_array, u32 s_num_elems, u32* s_ptr_to_curr_index )
-sa_stack_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_stack_backend() : the_array_helper(), ptr_to_curr_index(NULL)$/;"	kind:f	class:sa_stack_backend	access:public	signature:()
+sa_stack_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_stack_backend( type* s_ptr_to_the_array, u32 s_num_elems, $/;"	kind:f	class:sa_stack_backend	access:public	signature:( type* s_ptr_to_the_array, u32 s_num_elems, u32* s_ptr_to_next_index )
+sa_stack_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_stack_backend() : the_array_helper(), ptr_to_next_index(NULL)$/;"	kind:f	class:sa_stack_backend	access:public	signature:()
 sa_stack_backend	game_engine_stuff/sa_stack_classes.hpp	/^class sa_stack_backend$/;"	kind:c
-sa_stack_backend::get_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline const u32 get_curr_index() const$/;"	kind:f	class:sa_stack_backend	access:public	signature:() const
-sa_stack_backend::get_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32& get_curr_index()$/;"	kind:f	class:sa_stack_backend	access:public	signature:()
+sa_stack_backend::get_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline const u32 get_next_index() const$/;"	kind:f	class:sa_stack_backend	access:public	signature:() const
+sa_stack_backend::get_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32& get_next_index()$/;"	kind:f	class:sa_stack_backend	access:public	signature:()
 sa_stack_backend::get_size	game_engine_stuff/sa_stack_classes.hpp	/^	inline u32 get_size() const$/;"	kind:f	class:sa_stack_backend	access:public	signature:() const
 sa_stack_backend::get_the_array	game_engine_stuff/sa_stack_classes.hpp	/^	const type* get_the_array() const$/;"	kind:f	class:sa_stack_backend	access:public	signature:() const
 sa_stack_backend::get_the_array	game_engine_stuff/sa_stack_classes.hpp	/^	type* get_the_array()$/;"	kind:f	class:sa_stack_backend	access:public	signature:()
-sa_stack_backend::init	game_engine_stuff/sa_stack_classes.hpp	/^	void init( type* s_ptr_to_the_array, u32 s_num_elems, $/;"	kind:f	class:sa_stack_backend	access:public	signature:( type* s_ptr_to_the_array, u32 s_num_elems, u32* s_ptr_to_curr_index )
+sa_stack_backend::init	game_engine_stuff/sa_stack_classes.hpp	/^	void init( type* s_ptr_to_the_array, u32 s_num_elems, $/;"	kind:f	class:sa_stack_backend	access:public	signature:( type* s_ptr_to_the_array, u32 s_num_elems, u32* s_ptr_to_next_index )
 sa_stack_backend::peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline const type peek_top() const$/;"	kind:f	class:sa_stack_backend	access:public	signature:() const
 sa_stack_backend::peek_top	game_engine_stuff/sa_stack_classes.hpp	/^	inline type peek_top()$/;"	kind:f	class:sa_stack_backend	access:public	signature:()
 sa_stack_backend::pop	game_engine_stuff/sa_stack_classes.hpp	/^	void pop()$/;"	kind:f	class:sa_stack_backend	access:public	signature:()
-sa_stack_backend::ptr_to_curr_index	game_engine_stuff/sa_stack_classes.hpp	/^	u32* ptr_to_curr_index;$/;"	kind:m	class:sa_stack_backend	access:public
+sa_stack_backend::ptr_to_next_index	game_engine_stuff/sa_stack_classes.hpp	/^	u32* ptr_to_next_index;$/;"	kind:m	class:sa_stack_backend	access:public
 sa_stack_backend::push	game_engine_stuff/sa_stack_classes.hpp	/^	void push( const type& to_push )$/;"	kind:f	class:sa_stack_backend	access:public	signature:( const type& to_push )
-sa_stack_backend::sa_stack_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_stack_backend( type* s_ptr_to_the_array, u32 s_num_elems, $/;"	kind:f	class:sa_stack_backend	access:public	signature:( type* s_ptr_to_the_array, u32 s_num_elems, u32* s_ptr_to_curr_index )
-sa_stack_backend::sa_stack_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_stack_backend() : the_array_helper(), ptr_to_curr_index(NULL)$/;"	kind:f	class:sa_stack_backend	access:public	signature:()
+sa_stack_backend::sa_stack_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_stack_backend( type* s_ptr_to_the_array, u32 s_num_elems, $/;"	kind:f	class:sa_stack_backend	access:public	signature:( type* s_ptr_to_the_array, u32 s_num_elems, u32* s_ptr_to_next_index )
+sa_stack_backend::sa_stack_backend	game_engine_stuff/sa_stack_classes.hpp	/^	sa_stack_backend() : the_array_helper(), ptr_to_next_index(NULL)$/;"	kind:f	class:sa_stack_backend	access:public	signature:()
 sa_stack_backend::the_array_helper	game_engine_stuff/sa_stack_classes.hpp	/^	array_helper<type> the_array_helper;$/;"	kind:m	class:sa_stack_backend	access:public
 sa_stack_class_hpp	game_engine_stuff/sa_stack_classes.hpp	20;"	kind:d
 scr_entry	gba_specific_stuff/gfx_reg_stuff.hpp	/^typedef u16 scr_entry;$/;"	kind:t
@@ -3895,7 +3902,7 @@ sprite_allocator	game_engine_stuff/sprite_stuff/sprite_allocator_class.hpp	/^	sp
 sprite_allocator	game_engine_stuff/sprite_stuff/sprite_allocator_class.hpp	/^class sprite_allocator : public array_helper<sprite>$/;"	kind:c	inherits:array_helper
 sprite_allocator	game_engine_stuff/sprite_stuff/sprite_allocator_class.thumb.cpp	/^sprite_allocator::sprite_allocator( int* the_sa_free_list_backend_array, $/;"	kind:f	class:sprite_allocator	signature:( int* the_sa_free_list_backend_array, sprite* s_the_array, u32 s_size )
 sprite_allocator	game_engine_stuff/sprite_stuff/sprite_allocator_class.thumb.cpp	/^sprite_allocator::sprite_allocator( int* the_sa_free_list_backend_array,$/;"	kind:f	class:sprite_allocator	signature:( int* the_sa_free_list_backend_array, const array_helper<sprite>& s_allocatable_sprite_arr )
-sprite_allocator::allocate_sprite	game_engine_stuff/sprite_stuff/sprite_allocator_class.hpp	/^	void* allocate_sprite() __attribute__((_iwram_code));$/;"	kind:p	class:sprite_allocator	access:public	signature:()
+sprite_allocator::allocate_sprite	game_engine_stuff/sprite_stuff/sprite_allocator_class.hpp	/^	void* allocate_sprite() __attribute__((_iwram_code,returns_nonnull));$/;"	kind:p	class:sprite_allocator	access:public	signature:()
 sprite_allocator::allocate_sprite	game_engine_stuff/sprite_stuff/sprite_allocator_class.thumb.cpp	/^void* sprite_allocator::allocate_sprite()$/;"	kind:f	class:sprite_allocator	signature:()
 sprite_allocator::can_pop_index	game_engine_stuff/sprite_stuff/sprite_allocator_class.hpp	/^	inline bool can_pop_index() const$/;"	kind:f	class:sprite_allocator	access:public	signature:() const
 sprite_allocator::can_push_index	game_engine_stuff/sprite_stuff/sprite_allocator_class.hpp	/^	inline bool can_push_index() const$/;"	kind:f	class:sprite_allocator	access:public	signature:() const
@@ -4027,7 +4034,6 @@ sprite_manager::update_all_sprites	game_engine_stuff/sprite_stuff/sprite_manager
 sprite_manager::update_all_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void update_all_sprites( const vec2_u32& the_sublevel_size_2d,$/;"	kind:p	class:sprite_manager	access:public	signature:( const vec2_u32& the_sublevel_size_2d, prev_curr_pair<bg_point>& camera_pos_pc_pair )
 sprite_manager::upload_tiles_of_active_sprites_to_vram	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static inline void upload_tiles_of_active_sprites_to_vram()$/;"	kind:f	class:sprite_manager	access:public	signature:()
 sprite_manager_class_hpp	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	20;"	kind:d
-sprite_new_caller_funcptr_arr	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	/^void (*sprite_new_caller_funcptr_arr[st_count])( sprite*& the_sprite,$/;"	kind:v
 sprite_palette_slot	game_engine_stuff/gfx_manager_class.hpp	/^enum sprite_palette_slot$/;"	kind:g
 sprite_spawn_state	game_engine_stuff/level_stuff/sprite_level_data_stuff.hpp	/^enum sprite_spawn_state$/;"	kind:g
 sprite_type	game_engine_stuff/sprite_stuff/sprite_type_stuff.hpp	/^enum sprite_type$/;"	kind:g
@@ -4212,12 +4218,12 @@ the_array	game_engine_stuff/array_2d_helper_class.hpp	/^	type* the_array;$/;"	ki
 the_array	game_engine_stuff/array_helper_class.hpp	/^	type* the_array;$/;"	kind:m	class:array_helper	access:public
 the_array	game_engine_stuff/coll_point_group_classes.hpp	/^	vec2_f24p8 the_array[max_num_coll_points];$/;"	kind:m	class:coll_point_group_base	access:public
 the_array	game_engine_stuff/sa_list_class_stuff.hpp	/^	externally_allocated_sa_list<type> the_array[num_lists];$/;"	kind:m	class:sa_array_of_lists	access:public
-the_array	game_engine_stuff/sa_stack_classes.hpp	/^	array< int, size > the_array;$/;"	kind:m	class:sa_free_list	access:public
+the_array	game_engine_stuff/sa_stack_classes.hpp	/^	array< s16, size > the_array __attribute__((_align4));$/;"	kind:m	class:sa_free_list	access:public
 the_array	game_engine_stuff/sa_stack_classes.hpp	/^	array< type, size > the_array;$/;"	kind:m	class:sa_stack	access:public
 the_array_helper	game_engine_stuff/sa_stack_classes.hpp	/^	array_helper<type> the_array_helper;$/;"	kind:m	class:sa_stack_backend	access:public
 the_bbvt	game_engine_stuff/block_coll_result_group_classes.hpp	/^	u32 the_bbvt __attribute__((_align4));$/;"	kind:m	class:block_coll_result	access:public
 the_block	game_engine_stuff/block_coll_result_group_classes.hpp	/^	block* the_block __attribute__((_align4));$/;"	kind:m	class:block_coll_result	access:public
-the_block_data_at_coord	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static inline block& the_block_data_at_coord $/;"	kind:f	class:active_level	access:public	signature:( const vec2_s32& block_coord )
+the_block_at_coord	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static inline block& the_block_at_coord $/;"	kind:f	class:active_level	access:public	signature:( const vec2_s32& block_coord )
 the_block_gfxPalLen	gfx/the_block_gfx.h	23;"	kind:d
 the_block_gfxTilesLen	gfx/the_block_gfx.h	20;"	kind:d
 the_coll_box	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	coll_box the_coll_box;$/;"	kind:m	class:sprite	access:public
@@ -4236,7 +4242,7 @@ the_current_active_sublevel_index	game_engine_stuff/level_stuff/active_level_cla
 the_current_active_sublevel_index	game_engine_stuff/level_stuff/active_level_class.thumb.cpp	/^u32 active_level::the_current_active_sublevel_index;$/;"	kind:m	class:active_level	file:
 the_current_level_ptr	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static const level* the_current_level_ptr __attribute__((_iwram));$/;"	kind:m	class:active_level	access:public
 the_current_level_ptr	game_engine_stuff/level_stuff/active_level_class.thumb.cpp	/^const level* active_level::the_current_level_ptr;$/;"	kind:m	class:active_level	file:
-the_data	game_engine_stuff/sa_list_class_stuff.hpp	/^	type the_data;$/;"	kind:m	class:sa_list_node	access:public
+the_data	game_engine_stuff/sa_list_class_stuff.hpp	/^	type the_data __attribute__((_align4));$/;"	kind:m	class:sa_list_node	access:public
 the_door_gfxPalLen	gfx/the_door_gfx.h	23;"	kind:d
 the_door_gfxTilesLen	gfx/the_door_gfx.h	20;"	kind:d
 the_free_list	game_engine_stuff/sa_list_class_stuff.hpp	/^	sa_free_list<total_num_nodes> the_free_list;$/;"	kind:m	class:sa_array_of_lists	access:public

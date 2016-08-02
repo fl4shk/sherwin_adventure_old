@@ -176,13 +176,11 @@ public:		// functions
 	
 	static void allocate_sprite( sprite*& the_sprite, 
 		sprite_allocator& the_sprite_allocator, 
-		sprite_type the_sprite_type, bool facing_left )
-		__attribute__((_iwram_code));
+		sprite_type the_sprite_type, bool facing_left );
 	static void allocate_sprite( sprite*& the_sprite, 
 		sprite_allocator& the_sprite_allocator, 
 		sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos,
-		const prev_curr_pair<bg_point>& camera_pos, bool facing_left )
-		__attribute__((_iwram_code));
+		const prev_curr_pair<bg_point>& camera_pos, bool facing_left );
 	
 	static void reinit_sprite_with_sprite_ipg( sprite*& the_sprite, 
 		sprite_allocator& the_sprite_allocator, 
@@ -195,13 +193,13 @@ public:		// functions
 		sprite_allocator& the_sprite_allocator,
 		sprite_type s_the_sprite_type, const vec2_f24p8& s_in_level_pos, 
 		const prev_curr_pair<bg_point>& camera_pos, 
-		bool facing_left=true ) __attribute__((_iwram_code));
+		bool facing_left=true );
 	
 	
 	static s32 spawn_a_player_secondary_sprite_basic
 		( sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos, 
 		const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
-		bool facing_left=false ) __attribute__((_iwram_code));
+		bool facing_left=false );
 	
 	// This is a temporary function.  It should be replaced by a function
 	// that inserts sprite spawning parameters into a list.  The sprites
@@ -211,13 +209,12 @@ public:		// functions
 	static s32 spawn_a_sprite_basic( sprite_type the_sprite_type, 
 		const vec2_f24p8& s_in_level_pos, 
 		const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
-		bool facing_left=false )
-		__attribute__((_iwram_code));
+		bool facing_left=false );
 	
 	static s32 spawn_a_secondary_sprite_basic( sprite_type the_sprite_type,
 		const vec2_f24p8& s_in_level_pos, 
 		const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
-		bool facing_left=false ) __attribute__((_iwram_code));
+		bool facing_left=false );
 	
 	
 	
@@ -281,6 +278,7 @@ public:		// functions
 	static void initial_sprite_spawning_at_intra_sublevel_warp
 		( prev_curr_pair<bg_point>& camera_pos, 
 		u32 sublevel_entrance_index );
+	
 	
 	
 	// This function is put in IWRAM because when the_player warps around a

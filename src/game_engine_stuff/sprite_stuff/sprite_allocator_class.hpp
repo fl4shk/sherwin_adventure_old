@@ -38,7 +38,19 @@ public:		// functions
 	sprite_allocator( int* the_sa_free_list_backend_array,
 		const array_helper<sprite>& s_allocatable_sprite_arr );
 	
-	void* allocate_sprite() __attribute__((_iwram_code));
+	////void* allocate_sprite() __attribute__((_iwram_code,hot));
+	////void* allocate_sprite() __attribute__((hot));
+	////void* allocate_sprite();
+	////void* allocate_sprite() __attribute__((_iwram_code));
+	////void deallocate_sprite( sprite*& the_sprite )
+	////	__attribute__((_iwram_code));
+	//void* allocate_sprite() __attribute__((_iwram_code,cold));
+	//void deallocate_sprite( sprite*& the_sprite )
+	//	__attribute__((_iwram_code,cold));
+	
+	//void* allocate_sprite() __attribute__((cold,returns_nonnull));
+	//void deallocate_sprite( sprite*& the_sprite ) __attribute__((cold));
+	void* allocate_sprite() __attribute__((_iwram_code,returns_nonnull));
 	void deallocate_sprite( sprite*& the_sprite )
 		__attribute__((_iwram_code));
 	
@@ -56,6 +68,8 @@ public:		// functions
 		return the_sa_free_list_backend.peek_top();
 	}
 	
+protected:		// functions
+	inline 
 	
 } __attribute__((_align4));
 

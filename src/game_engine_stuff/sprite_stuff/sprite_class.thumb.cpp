@@ -163,7 +163,7 @@ void sprite::shared_constructor_code_part_2
 
 void sprite::shared_constructor_code_part_3()
 {
-	debug_arr_group::debug_f8p8_arr_helper.data_at(0) = make_f8p8(3);
+	debug_arr_group::debug_f8p8_arr_helper.at(0) = make_f8p8(3);
 }
 
 void* sprite::operator new( size_t size, 
@@ -628,7 +628,7 @@ void sprite::get_basic_block_coll_results_16x16
 	//		= active_level::get_block_coord_of_point \
 	//		(the_pt_group.get_pt_##name()); \
 	//	name##_coll_result.the_block \
-	//		= &active_level::the_block_data_at_coord \
+	//		= &active_level::the_block_at_coord \
 	//		(name##_coll_result.coord);
 	//list_of_shared_coll_point_names(X)
 	//#undef X
@@ -656,7 +656,7 @@ void sprite::get_basic_block_coll_results_16x32
 	//		= active_level::get_block_coord_of_point \
 	//		(the_pt_group.get_pt_##name()); \
 	//	name##_coll_result.the_block \
-	//		= &active_level::the_block_data_at_coord \
+	//		= &active_level::the_block_at_coord \
 	//		(name##_coll_result.coord);
 	//list_of_shared_coll_point_names(X)
 	//#undef X

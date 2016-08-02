@@ -75,7 +75,11 @@ public:			// functions
 		return size;
 	}
 	
-	type& data_at( u32 offset )
+	type& at( u32 offset )
+	{
+		return the_array[offset];
+	}
+	const type& at( u32 offset ) const
 	{
 		return the_array[offset];
 	}

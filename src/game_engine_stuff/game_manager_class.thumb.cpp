@@ -134,6 +134,7 @@ void game_manager::title_screen_func()
 	curr_game_mode = gm_title_screen;
 	
 	irq_init();
+	//irqEnable(irq_vblank);
 	
 	bios_wait_for_vblank();
 	

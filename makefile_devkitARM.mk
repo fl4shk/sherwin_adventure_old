@@ -52,7 +52,7 @@ VERBOSE_ASM_FLAG=
 
 
 
-DEBUG=yeah do debug
+#DEBUG=yeah do debug
 
 # Optimization levels
 #DEBUG_OPTIMIZATION_LEVEL=-O1
@@ -64,7 +64,8 @@ REGULAR_OPTIMIZATION_LEVEL=-O2
 #REGULAR_OPTIMIZATION_LEVEL=-O3
 
 
-GLOBAL_BASE_FLAGS:=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles \
+GLOBAL_BASE_FLAGS:=-mcpu=arm7tdmi -mtune=arm7tdmi \
+	-I$(DEVKITPRO)/libgba/include -nostartfiles \
 	-fno-exceptions -fno-rtti -ffast-math 
 
 ifdef DEBUG
@@ -225,16 +226,16 @@ $(MUSIC_OFILES) : $(OBJDIR)/%.bin.o : %.bin
 	util/bin2o_gba.sh $< $@
 
 
+# This sed script is basically a hack for dependency generation stuff.
+sed_script:=$(shell echo "sed -e 's/\#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' -e '/^$$/ d' -e 's/$$/ :/'")
 
-# Here's where things get really messy.  Oh if only GNU Make had functions
-# somehow... perhaps I should be using mktemp for a generated shell script!
+# Here's where things get really messy.
 $(CXX_OFILES) : $(OBJDIR)/%.thumb.o : %.thumb.cpp
 	@#echo "Generating dependency information for "$@"...."
 	@echo $@" was updated or has no object file.  (Re)Compiling...."
 	$(CXX) $(CXX_FLAGS) -MMD -c $< -o $@
 	@cp $(OBJDIR)/$*.thumb.d $(DEPDIR)/$*.thumb.P
-	@sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
-		-e '/^$$/ d' -e 's/$$/ :/' < $(OBJDIR)/$*.thumb.d >> $(DEPDIR)/$*.thumb.P
+	@$(sed_script) < $(OBJDIR)/$*.thumb.d >> $(DEPDIR)/$*.thumb.P
 	@rm -f $(OBJDIR)/$*.thumb.d
 
 
@@ -243,9 +244,7 @@ $(ARM_CXX_OFILES) : $(OBJDIR)/%.arm.o : %.arm.cpp
 	@#echo "Generating dependency information for "$@"...."
 	@echo $@" was updated or has no object file.  (Re)Compiling...."
 	$(CXX) $(ARM_CXX_FLAGS) -MMD -c $< -o $@
-	@cp $(OBJDIR)/$*.arm.d $(DEPDIR)/$*.arm.P
-	@sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
-		-e '/^$$/ d' -e 's/$$/ :/' < $(OBJDIR)/$*.arm.d >> $(DEPDIR)/$*.arm.P
+	@$(sed_script) < $(OBJDIR)/$*.arm.d >> $(DEPDIR)/$*.arm.P
 	@rm -f $(OBJDIR)/$*.arm.d
 
 
@@ -255,8 +254,7 @@ $(S_OFILES) : $(OBJDIR)/%.o : %.s
 	@echo $@" was updated or has no object file.  (Re)Compiling...."
 	$(AS) $(S_FLAGS) -MD $(OBJDIR)/$*.d -c $< -o $@
 	@cp $(OBJDIR)/$*.d $(DEPDIR)/$*.P
-	@sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
-		-e '/^$$/ d' -e 's/$$/ :/' < $(OBJDIR)/$*.d >> $(DEPDIR)/$*.P
+	@$(sed_script) < $(OBJDIR)/$*.d >> $(DEPDIR)/$*.P
 	@rm -f $(OBJDIR)/$*.d
 
 
@@ -269,8 +267,7 @@ $(CXX_ASMOUTS) : $(ASMOUTDIR)/%.thumb.s : %.thumb.cpp
 	@#$(CXX) $(CXX_FLAGS) -MMD -S $< -o $@
 	$(CXX) $(CXX_FLAGS) -MMD -S $(VERBOSE_ASM_FLAG) $< -o $@
 	@cp $(ASMOUTDIR)/$*.thumb.d $(DEPDIR)/$*.thumb.P
-	@sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
-		-e '/^$$/ d' -e 's/$$/ :/' < $(ASMOUTDIR)/$*.thumb.d >> $(DEPDIR)/$*.thumb.P
+	@$(sed_script) < $(ASMOUTDIR)/$*.thumb.d >> $(DEPDIR)/$*.thumb.P
 	@rm -f $(ASMOUTDIR)/$*.thumb.d
 
 
@@ -281,8 +278,7 @@ $(ARM_CXX_ASMOUTS) : $(ASMOUTDIR)/%.arm.s : %.arm.cpp
 	@#$(CXX) $(ARM_CXX_FLAGS) -MMD -S $< -o $@
 	$(CXX) $(ARM_CXX_FLAGS) -MMD -S $(VERBOSE_ASM_FLAG) $< -o $@
 	@cp $(ASMOUTDIR)/$*.arm.d $(DEPDIR)/$*.arm.P
-	@sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
-		-e '/^$$/ d' -e 's/$$/ :/' < $(ASMOUTDIR)/$*.arm.d >> $(DEPDIR)/$*.arm.P
+	@$(sed_script) < $(ASMOUTDIR)/$*.arm.d >> $(DEPDIR)/$*.arm.P
 	@rm -f $(ASMOUTDIR)/$*.arm.d
 
 

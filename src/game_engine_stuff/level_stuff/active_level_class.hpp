@@ -166,7 +166,7 @@ public:		// functions
 	{
 		if ( block_coord_is_valid(block_coord) )
 		{
-			return horiz_sublevel_block_data_2d.data_at( block_coord.x,
+			return horiz_sublevel_block_data_2d.at( block_coord.x,
 				block_coord.y ).get_block_type();
 		}
 		else
@@ -175,12 +175,12 @@ public:		// functions
 		}
 	}
 	
-	static inline block& the_block_data_at_coord 
+	static inline block& the_block_at_coord 
 		( const vec2_s32& block_coord )
 	{
 		if ( block_coord_is_valid(block_coord) )
 		{
-			return horiz_sublevel_block_data_2d.data_at( block_coord.x,
+			return horiz_sublevel_block_data_2d.at( block_coord.x,
 				block_coord.y );
 		}
 		else

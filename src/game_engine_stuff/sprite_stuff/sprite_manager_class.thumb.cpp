@@ -140,62 +140,88 @@ std::array< sprite*, sprite_manager::max_num_regular_sprites>
 int sprite_manager::next_oam_index;
 
 
-// A bunch of functions whose addresses will be stored in an array of
-// function pointers that are used by the sprite_manager::allocate_sprite()
-// functions.  
-// By the way, the primary reason these functions are not stored in IWRAM
-// because I fear that doing so could cause me to run out of IWRAM if/when
-// there are ever a crapload of sprite_type's.  Of course, sprite
-// allocation is made faster by using the_sprite_type as an index to the
-// array of function pointers, so not having these in IWRAM should be fast
-// enough.
 
-
-void default_sprite_new_caller( sprite*& the_sprite,
-	sprite_allocator& the_sprite_allocator, bool facing_left )
-{
-	the_sprite = new (the_sprite_allocator) sprite(facing_left);
-}
-
-#define generate_sprite_new_caller(name) \
-	void name##_sprite_new_caller( sprite*& the_sprite, \
-		sprite_allocator& the_sprite_allocator, bool facing_left ) \
-	{ \
-		the_sprite = new (the_sprite_allocator) \
-			name##_sprite(facing_left); \
-	}
-
-list_of_main_sprite_types(generate_sprite_new_caller);
-#undef generate_sprite_new_caller
-
-
-#define generate_funcptr_arr_entry(name) &name##_sprite_new_caller, 
-
-void (*sprite_new_caller_funcptr_arr[st_count])( sprite*& the_sprite,
-	sprite_allocator& the_sprite_allocator, bool facing_left )
-	= { &default_sprite_new_caller, 
-	list_of_main_sprite_types(generate_funcptr_arr_entry) };
-#undef generate_funcptr_arr_entry
-
+//// A bunch of functions whose addresses will be stored in an array of
+//// function pointers that are used by the sprite_manager::allocate_sprite()
+//// functions.  
+//// By the way, the primary reason these functions are not stored in IWRAM
+//// because I fear that doing so could cause me to run out of IWRAM if/when
+//// there are ever a crapload of sprite_type's.  Of course, sprite
+//// allocation is made faster by using the_sprite_type as an index to the
+//// array of function pointers, so not having these in IWRAM should be fast
+//// enough.
+//
+//
+//void default_sprite_new_caller( sprite*& the_sprite,
+//	sprite_allocator& the_sprite_allocator, bool facing_left )
+//{
+//	the_sprite = new (the_sprite_allocator) sprite(facing_left);
+//}
+//
+//#define generate_sprite_new_caller(name) \
+//	void name##_sprite_new_caller( sprite*& the_sprite, \
+//		sprite_allocator& the_sprite_allocator, bool facing_left ) \
+//	{ \
+//		the_sprite = new (the_sprite_allocator) \
+//			name##_sprite(facing_left); \
+//	}
+//
+//list_of_main_sprite_types(generate_sprite_new_caller);
+//#undef generate_sprite_new_caller
+//
+//
+//#define generate_funcptr_arr_entry(name) &name##_sprite_new_caller, 
+//
+//void (*sprite_new_caller_funcptr_arr[st_count])( sprite*& the_sprite,
+//	sprite_allocator& the_sprite_allocator, bool facing_left )
+//	= { &default_sprite_new_caller, 
+//	list_of_main_sprite_types(generate_funcptr_arr_entry) };
+//#undef generate_funcptr_arr_entry
+//
+//
+//void test_func() __attribute__((target("arm")));
+//void test_func()
+//{
+//}
 
 void sprite_manager::allocate_sprite( sprite*& the_sprite, 
 	sprite_allocator& the_sprite_allocator, 
 	sprite_type the_sprite_type, bool facing_left )
 {
-	if ( sprite_type_exists(the_sprite_type) )
+	//if ( sprite_type_exists(the_sprite_type) )
+	//{
+	//	asm_comment("sprite_type_exists()");
+	//	(*sprite_new_caller_funcptr_arr[the_sprite_type])( the_sprite, 
+	//		the_sprite_allocator, facing_left );
+	//	the_sprite->shared_constructor_code_part_2(facing_left);
+	//}
+	//else
+	//{
+	//	//show_debug_str_s32("nty0");
+	//	debug_arr_group::write_str_and_inc("BadSprType0");
+	//	halt();
+	//}
+	
+	
+	switch (the_sprite_type)
 	{
-		asm_comment("sprite_type_exists()");
-		(*sprite_new_caller_funcptr_arr[the_sprite_type])( the_sprite, 
-			the_sprite_allocator, facing_left );
-		the_sprite->shared_constructor_code_part_2(facing_left);
-	}
-	else
-	{
-		//show_debug_str_s32("nty0");
-		debug_arr_group::write_str_and_inc("BadSprType0");
-		halt();
+		#define generate_case_statement(name) \
+		case st_##name:  \
+			the_sprite = new (the_sprite_allocator) \
+				name##_sprite(facing_left); \
+			asm_comment("st_" #name);
+			break;
+		
+		list_of_main_sprite_types(generate_case_statement)
+		#undef generate_case_statement
+		
+		default:
+			debug_arr_group::write_str_and_inc("BadSprType0");
+			halt();
+			break;
 	}
 	
+	the_sprite->shared_constructor_code_part_2(facing_left);
 }
 
 void sprite_manager::allocate_sprite( sprite*& the_sprite, 
@@ -203,20 +229,41 @@ void sprite_manager::allocate_sprite( sprite*& the_sprite,
 	const vec2_f24p8& s_in_level_pos, 
 	const prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
 {
-	if ( sprite_type_exists(the_sprite_type) )
+	//if ( sprite_type_exists(the_sprite_type) )
+	//{
+	//	asm_comment("sprite_type_exists()");
+	//	(*sprite_new_caller_funcptr_arr[the_sprite_type])( the_sprite, 
+	//		the_sprite_allocator, facing_left );
+	//	the_sprite->shared_constructor_code_part_2( s_in_level_pos, 
+	//		camera_pos_pc_pair, facing_left );
+	//}
+	//else
+	//{
+	//	//show_debug_str_s32("nty1");
+	//	debug_arr_group::write_str_and_inc("BadSprType1");
+	//	halt();
+	//}
+	
+	switch (the_sprite_type)
 	{
-		asm_comment("sprite_type_exists()");
-		(*sprite_new_caller_funcptr_arr[the_sprite_type])( the_sprite, 
-			the_sprite_allocator, facing_left );
-		the_sprite->shared_constructor_code_part_2( s_in_level_pos, 
-			camera_pos_pc_pair, facing_left );
+		#define generate_case_statement(name) \
+		case st_##name:  \
+			the_sprite = new (the_sprite_allocator) \
+				name##_sprite(facing_left); \
+			asm_comment("st_" #name);
+			break;
+		
+		list_of_main_sprite_types(generate_case_statement)
+		#undef generate_case_statement
+		
+		default:
+			debug_arr_group::write_str_and_inc("BadSprType1");
+			halt();
+			break;
 	}
-	else
-	{
-		//show_debug_str_s32("nty1");
-		debug_arr_group::write_str_and_inc("BadSprType1");
-		halt();
-	}
+	
+	the_sprite->shared_constructor_code_part_2( s_in_level_pos, 
+		camera_pos_pc_pair, facing_left );
 	
 }
 
@@ -686,7 +733,7 @@ void sprite_manager::initial_sprite_spawning_shared_code
 		.the_array )
 	{
 		//for ( sprite_init_param_group& sprite_ipg : which_list )
-		for ( int i=which_list.front_node_index;
+		for ( int i=which_list.get_front_node_index();
 			i!=-1;
 			i=which_list.get_node_at(i).next_node_index )
 		{

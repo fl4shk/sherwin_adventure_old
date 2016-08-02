@@ -110,7 +110,7 @@ inline type custom_abs( const type& val )
 	}
 }
 
-
+void halt();
 
 
 #endif		// misc_utility_funcs_hpp

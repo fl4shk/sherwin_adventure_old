@@ -137,7 +137,7 @@ void debug_arr_group::clear_debug_vars()
 	////memfill32( curr_index_arr(), 0, cdit_count / sizeof(u32) );
 	//for ( u32 i=0; i<curr_index_arr_helper.get_size(); ++i )
 	//{
-	//	curr_index_arr_helper.data_at(i) = 0;
+	//	curr_index_arr_helper.at(i) = 0;
 	//}
 	//
 	//// One big memfill32() call that depends on the order in which the

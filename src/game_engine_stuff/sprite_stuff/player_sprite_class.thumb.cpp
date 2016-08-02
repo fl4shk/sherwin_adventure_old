@@ -1126,13 +1126,13 @@ void player_sprite::block_coll_response_top_16x16_old
 	//
 	//
 	//block_stuff_array[tl_coll_result.the_block->type]
-	//	->strongly_hit_response( active_level::the_block_data_at_coord
+	//	->strongly_hit_response( active_level::the_block_at_coord
 	//	(tl_coll_result.coord), tl_coll_result.coord );
 	//
 	//if ( tm_coll_result.coord != tl_coll_result.coord )
 	//{
 	//	block_stuff_array[tm_coll_result.the_block->type]
-	//		->strongly_hit_response( active_level::the_block_data_at_coord
+	//		->strongly_hit_response( active_level::the_block_at_coord
 	//		(tm_coll_result.coord), tm_coll_result.coord );
 	//}
 	//
@@ -1140,7 +1140,7 @@ void player_sprite::block_coll_response_top_16x16_old
 	//	&& tr_coll_result.coord != tm_coll_result.coord )
 	//{
 	//	block_stuff_array[tr_coll_result.the_block->type]
-	//		->strongly_hit_response( active_level::the_block_data_at_coord
+	//		->strongly_hit_response( active_level::the_block_at_coord
 	//		(tr_coll_result.coord), tr_coll_result.coord );
 	//}
 	

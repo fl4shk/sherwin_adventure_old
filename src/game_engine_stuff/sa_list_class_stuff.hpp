@@ -30,8 +30,9 @@ template< typename type >
 class sa_list_node
 {
 public:		// variables
-	type the_data;
-	int next_node_index, prev_node_index;
+	type the_data __attribute__((_align4));
+	//s32 next_node_index, prev_node_index;
+	s16 next_node_index, prev_node_index;
 	
 public:		// functions
 	inline sa_list_node() : the_data(type()), next_node_index(-1),
@@ -46,10 +47,10 @@ public:		// functions
 	//	prev_node_index = -1;
 	//}
 	
-	inline sa_list_node( const type& data_to_copy, int s_next_node_index,
-		int s_prev_node_index ) : the_data(data_to_copy), 
-		next_node_index(s_next_node_index),
-		prev_node_index(s_prev_node_index)
+	inline sa_list_node( const type& data_to_copy, s32 s_next_node_index,
+		s32 s_prev_node_index ) : the_data(data_to_copy), 
+		next_node_index((s16)s_next_node_index),
+		prev_node_index((s16)s_prev_node_index)
 	{
 	}
 	
@@ -860,7 +861,7 @@ class externally_allocated_sa_list
 //public:		// variables
 protected:		// variables
 	//int* ptr_to_front_node_index;
-	int front_node_index;
+	s32 front_node_index;
 	sa_list_node<type>* the_node_array;
 	sa_free_list_backend* ptr_to_the_free_list_backend;
 	u32 total_num_nodes;
@@ -895,11 +896,11 @@ public:		// functions
 		total_num_nodes = n_total_num_nodes;
 	}
 	
-	inline int& get_front_node_index()
+	inline s32& get_front_node_index()
 	{
 		return front_node_index;
 	}
-	inline const int get_front_node_index() const
+	inline const s32 get_front_node_index() const
 	{
 		return front_node_index;
 	}
@@ -929,7 +930,7 @@ public:		// functions
 	
 	
 	
-	inline sa_list_node<type>& get_node_at( int node_index )
+	inline sa_list_node<type>& get_node_at( s32 node_index )
 	{
 		return get_the_node_array()[node_index];
 	}
@@ -939,13 +940,13 @@ public:		// functions
 	}
 	
 	inline sa_list_node<type>& get_next_node_after_node_index
-		( int node_index )
+		( s32 node_index )
 	{
 		return get_node_at(get_node_at(node_index)
 			.next_node_index);
 	}
 	inline sa_list_node<type>& get_prev_node_before_node_index
-		( int node_index )
+		( s32 node_index )
 	{
 		return get_node_at(get_node_at(node_index)
 			.prev_node_index);
@@ -955,7 +956,7 @@ public:		// functions
 	
 	void fully_deallocate() __attribute__((noinline))
 	{
-		int& the_front_node_index = get_front_node_index();
+		s32& the_front_node_index = get_front_node_index();
 		//while ( get_front_node_index() != -1 )
 		while ( the_front_node_index >= 0 )
 		{
@@ -964,7 +965,7 @@ public:		// functions
 		}
 	}
 	
-	int push_front( const type& to_push )
+	s32 push_front_old( const type& to_push )
 	{
 		// If there's nothing in the list
 		if ( get_front_node_index() == -1 )
@@ -983,7 +984,7 @@ public:		// functions
 		// If there's at least one element in the list
 		else
 		{
-			int old_front_node_index = get_front_node_index();
+			s32 old_front_node_index = get_front_node_index();
 			get_front_node_index() = get_the_free_list_backend()
 				.peek_top();
 			get_the_free_list_backend().pop();
@@ -1002,10 +1003,10 @@ public:		// functions
 		return get_front_node_index();
 	}
 	
-	int push_front_new( const type& to_push ) __attribute__((noinline))
+	s32 push_front( const type& to_push ) __attribute__((noinline))
 	{
-		int& the_front_node_index = get_front_node_index();
-		int old_front_node_index = the_front_node_index;
+		s32& the_front_node_index = get_front_node_index();
+		s32 old_front_node_index = the_front_node_index;
 		
 		
 		//sa_list_node<type>& the_old_front_node 
@@ -1025,7 +1026,7 @@ public:		// functions
 			= get_node_at(the_front_node_index);
 		
 		
-		int new_next_node_index = -1;
+		s32 new_next_node_index = -1;
 		
 		// If there's nothing in the list
 		//if ( the_front_node_index < 0 )
@@ -1051,11 +1052,11 @@ public:		// functions
 		return the_front_node_index;
 	}
 	
-	int insert_before_old( int node_index, const type& to_insert )
+	s32 insert_before_old( s32 node_index, const type& to_insert )
 	{
-		int old_prev_node_index = get_node_at(node_index)
+		s32 old_prev_node_index = get_node_at(node_index)
 			.prev_node_index;
-		//int old_next_node_index = get_node_at(node_index)
+		//s32 old_next_node_index = get_node_at(node_index)
 		//	.next_node_index;
 		
 		// If node_index == front_node_index
@@ -1066,8 +1067,8 @@ public:		// functions
 		}
 		else
 		{
-			//int new_node_index = get_the_free_list_backend().pop();
-			int new_node_index = get_the_free_list_backend().peek_top();
+			//s32 new_node_index = get_the_free_list_backend().pop();
+			s32 new_node_index = get_the_free_list_backend().peek_top();
 			get_the_free_list_backend().pop();
 			
 			get_node_at(old_prev_node_index).next_node_index
@@ -1089,12 +1090,12 @@ public:		// functions
 		//return new_node_index;
 	}
 	
-	int insert_before( int node_index, const type& to_insert )
+	s32 insert_before( s32 node_index, const type& to_insert )
 		__attribute__((noinline))
 	{
-		//int old_prev_node_index = get_node_at(node_index)
+		//s32 old_prev_node_index = get_node_at(node_index)
 		//	.prev_node_index;
-		////int old_next_node_index = get_node_at(node_index)
+		////s32 old_next_node_index = get_node_at(node_index)
 		////	.next_node_index;
 		
 		// If node_index == front_node_index
@@ -1108,10 +1109,10 @@ public:		// functions
 			sa_list_node<type>& node_at_node_index 
 				= get_node_at(node_index);
 			
-			const int old_prev_node_index 
+			const s32 old_prev_node_index 
 				= node_at_node_index.prev_node_index;
 			
-			const int new_node_index = get_the_free_list_backend()
+			const s32 new_node_index = get_the_free_list_backend()
 				.peek_top();
 			get_the_free_list_backend().pop();
 			
@@ -1137,15 +1138,15 @@ public:		// functions
 	}
 	
 	
-	int insert_after_old( int node_index, const type& to_insert )
+	s32 insert_after_old( s32 node_index, const type& to_insert )
 	{
-		//int old_prev_node_index = get_node_at(node_index)
+		//s32 old_prev_node_index = get_node_at(node_index)
 		//	.prev_node_index;
-		int old_next_node_index = get_node_at(node_index)
+		s32 old_next_node_index = get_node_at(node_index)
 			.next_node_index;
 		
-		//int new_node_index = get_the_free_list_backend().pop();
-		int new_node_index = get_the_free_list_backend().peek_top();
+		//s32 new_node_index = get_the_free_list_backend().pop();
+		s32 new_node_index = get_the_free_list_backend().peek_top();
 		get_the_free_list_backend().pop();
 		
 		// Special code is used for inserting an element at the end of the
@@ -1175,18 +1176,18 @@ public:		// functions
 		return new_node_index;
 	}
 	
-	int insert_after( int node_index, const type& to_insert )
+	s32 insert_after( s32 node_index, const type& to_insert )
 		__attribute__((noinline))
 	{
-		////int old_prev_node_index = get_node_at(node_index)
+		////s32 old_prev_node_index = get_node_at(node_index)
 		////	.prev_node_index;
-		//int old_next_node_index = get_node_at(node_index)
+		//s32 old_next_node_index = get_node_at(node_index)
 		//	.next_node_index;
 		sa_list_node<type>& node_at_node_index = get_node_at(node_index);
-		const int old_next_node_index = node_at_node_index.next_node_index;
+		const s32 old_next_node_index = node_at_node_index.next_node_index;
 		
-		//int new_node_index = get_the_free_list_backend().pop();
-		const int new_node_index = get_the_free_list_backend().peek_top();
+		//s32 new_node_index = get_the_free_list_backend().pop();
+		const s32 new_node_index = get_the_free_list_backend().peek_top();
 		get_the_free_list_backend().pop();
 		
 		
@@ -1195,7 +1196,7 @@ public:		// functions
 		sa_list_node<type>& node_at_new_node_index 
 			= get_node_at(new_node_index);
 		
-		int new_next_node_index = -1;
+		s32 new_next_node_index = -1;
 		
 		// Special code is used for inserting an element at the end of the
 		// list.
@@ -1220,9 +1221,9 @@ public:		// functions
 		return new_node_index;
 	}
 	
-	void erase_at_old( int node_index )
+	void erase_at_old( s32 node_index )
 	{
-		int old_prev_node_index = get_node_at(node_index)
+		s32 old_prev_node_index = get_node_at(node_index)
 			.prev_node_index,
 			old_next_node_index = get_node_at(node_index)
 			.next_node_index;
@@ -1232,7 +1233,7 @@ public:		// functions
 		//if ( old_prev_node_index == -1 )
 		if ( node_index == get_front_node_index() )
 		{
-			//int old_front_node_index = get_front_node_index();
+			//s32 old_front_node_index = get_front_node_index();
 			
 			get_node_at(get_front_node_index()).the_data = type();
 			get_node_at(get_front_node_index()).next_node_index = -1;
@@ -1270,20 +1271,20 @@ public:		// functions
 		
 	}
 	
-	void erase_at( int node_index ) __attribute__((noinline))
+	void erase_at( s32 node_index ) __attribute__((noinline))
 	{
-		//int old_prev_node_index = get_node_at(node_index)
+		//s32 old_prev_node_index = get_node_at(node_index)
 		//	.prev_node_index,
 		//	old_next_node_index = get_node_at(node_index)
 		//	.next_node_index;
 		
 		sa_list_node<type>& node_at_node_index = get_node_at(node_index);
 		
-		const int old_prev_node_index = node_at_node_index.prev_node_index,
+		const s32 old_prev_node_index = node_at_node_index.prev_node_index,
 			old_next_node_index = node_at_node_index.next_node_index;
 		
-		int& the_front_node_index = get_front_node_index();
-		const int old_front_node_index = the_front_node_index;
+		s32& the_front_node_index = get_front_node_index();
+		const s32 old_front_node_index = the_front_node_index;
 		
 		//node_at_node_index.the_data = type();
 		//node_at_node_index.next_node_index = -1;
@@ -1321,7 +1322,7 @@ public:		// functions
 	}
 	
 	
-	int insertion_sort_old()
+	s32 insertion_sort_old()
 	{
 		// Don't do anything if this list has zero or one nodes.
 		if ( get_front_node_index() == -1 )
@@ -1335,26 +1336,26 @@ public:		// functions
 		
 		////externally_allocated_sa_list< type, total_num_nodes >
 		////	sorted_list( ptr_to_the_node_array, ptr_to_the_free_list );
-		//int temp_front_node_index = -1;
+		//s32 temp_front_node_index = -1;
 		//sa_list_backend<type> sorted_list( &temp_front_node_index, 
 		//	the_node_array, ptr_to_the_free_list_backend, 
 		//	total_num_nodes );
 		externally_allocated_sa_list<type> sorted_list( the_node_array, 
 			ptr_to_the_free_list_backend, get_total_num_nodes() );
 		
-		int curr_node_index = sorted_list.get_front_node_index();
+		s32 curr_node_index = sorted_list.get_front_node_index();
 		
-		for ( int i=get_front_node_index();
+		for ( s32 i=get_front_node_index();
 			i!=-1;  )
 			//i=get_node_at(i).next_node_index )
 		{
 			
-			//get_the_free_list_backend().debug_print();
+			//get_the_free_list_backend().debug_prs32();
 			
-			int index_of_node_with_lowest_value = i;
+			s32 index_of_node_with_lowest_value = i;
 			
 			// Find the lowest
-			for ( int j=index_of_node_with_lowest_value;
+			for ( s32 j=index_of_node_with_lowest_value;
 				j!=-1;
 				j=get_node_at(j).next_node_index )
 			{
@@ -1399,9 +1400,9 @@ public:		// functions
 	}
 	
 	
-	int insertion_sort() __attribute__((noinline))
+	s32 insertion_sort() __attribute__((noinline))
 	{
-		int& the_front_node_index = get_front_node_index();
+		s32& the_front_node_index = get_front_node_index();
 		
 		// Don't do anything if this list has zero or one nodes.
 		if ( the_front_node_index < 0 )
@@ -1413,30 +1414,30 @@ public:		// functions
 			return the_front_node_index;
 		}
 		
-		//int temp_front_node_index = -1;
+		//s32 temp_front_node_index = -1;
 		//sa_list_backend<type> sorted_list( &temp_front_node_index, 
 		//	the_node_array, ptr_to_the_free_list_backend, 
 		//	total_num_nodes );
 		externally_allocated_sa_list<type> sorted_list( the_node_array, 
 			ptr_to_the_free_list_backend, get_total_num_nodes() );
 		
-		int& temp_front_node_index = sorted_list.get_front_node_index();
+		s32& temp_front_node_index = sorted_list.get_front_node_index();
 		
-		int curr_node_index = temp_front_node_index;
+		s32 curr_node_index = temp_front_node_index;
 		
-		for ( int i=the_front_node_index;
+		for ( s32 i=the_front_node_index;
 			i!=-1;  )
 			//i=get_node_at(i).next_node_index )
 		{
 			
-			//get_the_free_list_backend().debug_print();
+			//get_the_free_list_backend().debug_prs32();
 			
-			int index_low = i;
+			s32 index_low = i;
 			
 			sa_list_node<type>* node_at_j;
 			
 			// Find the lowest value at or after i.
-			for ( int j=index_low;
+			for ( s32 j=index_low;
 				j!=-1; 
 				j=node_at_j->next_node_index )
 			{
@@ -1469,7 +1470,6 @@ public:		// functions
 				sorted_list.insert_after( curr_node_index, data_to_move );
 				curr_node_index = sorted_list.get_node_at(curr_node_index)
 					.next_node_index;
-				
 			}
 			
 		}

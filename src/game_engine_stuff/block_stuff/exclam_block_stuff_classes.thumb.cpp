@@ -35,7 +35,7 @@ const u32 exclam_block_stuff::get_metatile_graphics_slot()
 void exclam_block_stuff::strongly_hit_response( block& the_block, 
 	const vec2_s32& coord )
 {
-	active_level::horiz_sublevel_block_data_2d.data_at(coord).type 
+	active_level::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
 	
 	active_level::persistent_block_data_arrays

@@ -42,13 +42,13 @@ class sa_pod_stack_backend
 {
 protected:		// variables
 	u8* ptr_to_the_array_u8;
-	u32* ptr_to_curr_index;
+	u32* ptr_to_next_index;
 	u32 type_size, num_elems;
 	
 public:		// functions
 	sa_pod_stack_backend();
 	sa_pod_stack_backend( u8* s_ptr_to_the_array_u8, 
-		u32* s_ptr_to_curr_index, u32 s_type_size, u32 s_num_elems );
+		u32* s_ptr_to_next_index, u32 s_type_size, u32 s_num_elems );
 	
 	inline u8* get_the_array_u8()
 	{
@@ -59,13 +59,13 @@ public:		// functions
 		return ptr_to_the_array_u8;
 	}
 	
-	inline u32& get_curr_index()
+	inline u32& get_next_index()
 	{
-		return *ptr_to_curr_index;
+		return *ptr_to_next_index;
 	}
-	inline const u32 get_curr_index() const
+	inline const u32 get_next_index() const
 	{
-		return *ptr_to_curr_index;
+		return *ptr_to_next_index;
 	}
 	
 	inline const u32 get_type_size() const
@@ -79,17 +79,17 @@ public:		// functions
 	
 	inline bool can_push() const
 	{
-		return ( get_curr_index() <= get_size() );
+		return ( get_next_index() <= get_size() );
 	}
 	inline bool can_pop() const
 	{
-		return ( get_curr_index() > 0 );
+		return ( get_next_index() > 0 );
 	}
 	
 	inline void push( const u8* to_push_u8 )
 	{
-		//the_array[curr_index++] = to_push;
-		write_to_the_array_u8( to_push_u8, get_curr_index()++ );
+		//the_array[next_index++] = to_push;
+		write_to_the_array_u8( to_push_u8, get_next_index()++ );
 	}
 	
 	virtual void pop();
@@ -106,14 +106,15 @@ protected:		// functions
 class sa_free_list_backend : public sa_pod_stack_backend
 {
 public:		// constants
+	//static constexpr u32 the_const_type_size = sizeof(int);
 	static constexpr u32 the_const_type_size = sizeof(int);
 	
 public:		// functions
 	sa_free_list_backend();
 	sa_free_list_backend( u8* s_ptr_to_the_array_u8, 
-		u32* s_ptr_to_curr_index, u32 s_num_elems );
-	sa_free_list_backend( int* s_ptr_to_the_array, 
-		u32* s_ptr_to_curr_index, u32 s_num_elems );
+		u32* s_ptr_to_next_index, u32 s_num_elems );
+	sa_free_list_backend( s16* s_ptr_to_the_array, 
+		u32* s_ptr_to_next_index, u32 s_num_elems );
 	
 	void init();
 	
@@ -122,35 +123,45 @@ public:		// functions
 		return the_const_type_size;
 	}
 	
-	inline int* get_the_array()
+	//inline int* get_the_array()
+	//{
+	//	int* ret = (int*)get_the_array_u8();
+	//	return ret;
+	//}
+	//inline const int* get_the_array() const
+	//{
+	//	int* ret = (int*)get_the_array_u8();
+	//	return ret;
+	//}
+	inline s16* get_the_array()
 	{
-		int* ret = (int*)get_the_array_u8();
+		s16* ret = (s16*)get_the_array_u8();
 		return ret;
 	}
-	inline const int* get_the_array() const
+	inline const s16* get_the_array() const
 	{
-		int* ret = (int*)get_the_array_u8();
+		s16* ret = (s16*)get_the_array_u8();
 		return ret;
 	}
 	
-	inline void push( int to_push )
+	inline void push( s32 to_push )
 	{
-		get_the_array()[get_curr_index()++] = to_push;
+		get_the_array()[get_next_index()++] = (s16)to_push;
 	}
 	inline void pop() override
 	{
-		get_the_array()[get_curr_index()-1] = -1;
+		get_the_array()[get_next_index()-1] = -1;
 		
 		sa_pod_stack_backend::pop();
 	}
 	
-	inline int& peek_top()
+	inline s16& peek_top()
 	{
-		return get_the_array()[get_curr_index()-1];
+		return get_the_array()[get_next_index()-1];
 	}
-	inline const int& peek_top() const
+	inline const s32 peek_top() const
 	{
-		return get_the_array()[get_curr_index()-1];
+		return get_the_array()[get_next_index()-1];
 	}
 	
 } __attribute__((_align4));
@@ -168,25 +179,25 @@ public:		// variables
 	//type* ptr_to_the_array;
 	//u32 num_elems;
 	array_helper<type> the_array_helper;
-	u32* ptr_to_curr_index;
+	u32* ptr_to_next_index;
 	
 public:		// functions
-	sa_stack_backend() : the_array_helper(), ptr_to_curr_index(NULL)
+	sa_stack_backend() : the_array_helper(), ptr_to_next_index(NULL)
 	{
 	}
 	
 	sa_stack_backend( type* s_ptr_to_the_array, u32 s_num_elems, 
-		u32* s_ptr_to_curr_index ) 
+		u32* s_ptr_to_next_index ) 
 		: the_array_helper( s_ptr_to_the_array, s_num_elems ), 
-		ptr_to_curr_index(s_ptr_to_curr_index)
+		ptr_to_next_index(s_ptr_to_next_index)
 	{
 	}
 	
 	void init( type* s_ptr_to_the_array, u32 s_num_elems, 
-		u32* s_ptr_to_curr_index )
+		u32* s_ptr_to_next_index )
 	{
 		the_array_helper.init( s_ptr_to_the_array, s_num_elems );
-		ptr_to_curr_index = s_ptr_to_curr_index;
+		ptr_to_next_index = s_ptr_to_next_index;
 	}
 	
 	type* get_the_array()
@@ -198,13 +209,13 @@ public:		// functions
 		return the_array_helper.get_the_array();
 	}
 	
-	inline u32& get_curr_index()
+	inline u32& get_next_index()
 	{
-		return *ptr_to_curr_index;
+		return *ptr_to_next_index;
 	}
-	inline const u32 get_curr_index() const
+	inline const u32 get_next_index() const
 	{
-		return *ptr_to_curr_index;
+		return *ptr_to_next_index;
 	}
 	
 	inline u32 get_size() const
@@ -215,21 +226,21 @@ public:		// functions
 	
 	void push( const type& to_push )
 	{
-		get_the_array()[get_curr_index()++] = to_push;
+		get_the_array()[get_next_index()++] = to_push;
 	}
 	
 	void pop()
 	{
-		--get_curr_index();
+		--get_next_index();
 	}
 	
 	inline type peek_top()
 	{
-		return get_the_array()[get_curr_index()-1];
+		return get_the_array()[get_next_index()-1];
 	}
 	inline const type peek_top() const
 	{
-		return get_the_array()[get_curr_index()-1];
+		return get_the_array()[get_next_index()-1];
 	}
 	
 } __attribute__((_align4));
@@ -245,24 +256,24 @@ protected:		// variables
 public:		// variables
 	//type the_array[size];
 	array< type, size > the_array;
-	u32 curr_index;
+	u32 next_index;
 	
 public:		// functions
 	inline sa_stack() : the_sa_stack_backend( the_array.data(), get_size(), 
-		&curr_index ), curr_index(0)
+		&next_index ), next_index(0)
 	{
 		//memfill32( the_array.data(), type(), size * sizeof(type) );
 		
 		the_array.fill(type());
 	}
 	
-	inline u32& get_curr_index()
+	inline u32& get_next_index()
 	{
-		return curr_index;
+		return next_index;
 	}
-	inline const u32 get_curr_index() const
+	inline const u32 get_next_index() const
 	{
-		return curr_index;
+		return next_index;
 	}
 	inline u32 get_size() const
 	{
@@ -272,29 +283,29 @@ public:		// functions
 	
 	inline void push( const type& to_push )
 	{
-		//the_array[curr_index++] = to_push;
+		//the_array[next_index++] = to_push;
 		the_sa_stack_backend.push(to_push);
 	}
 	
 	//inline virtual const type pop()
 	//{
-	//	return the_array[--curr_index];
+	//	return the_array[--next_index];
 	//}
 	
 	inline void pop()
 	{
-		//--curr_index;
+		//--next_index;
 		the_sa_stack_backend.pop();
 	}
 	
 	inline type peek_top()
 	{
-		//return the_array[curr_index-1];
+		//return the_array[next_index-1];
 		return the_sa_stack_backend.peek_top();
 	}
 	inline const type peek_top() const
 	{
-		//return the_array[curr_index-1];
+		//return the_array[next_index-1];
 		return the_sa_stack_backend.peek_top();
 	}
 	
@@ -319,8 +330,8 @@ public:		// functions
 	
 	inline void pop()
 	{
-		specific_sa_stack::the_array[specific_sa_stack::curr_index-1] = -1;
-		--specific_sa_stack::curr_index;
+		specific_sa_stack::the_array[specific_sa_stack::next_index-1] = -1;
+		--specific_sa_stack::next_index;
 	}
 	
 } __attribute__((_align4));
@@ -339,12 +350,13 @@ protected:		// variables
 		friend class sa_array_of_lists;
 	
 public:		// variables
-	array< int, size > the_array;
-	u32 curr_index;
+	//array< int, size > the_array;
+	array< s16, size > the_array __attribute__((_align4));
+	u32 next_index;
 	
 public:		// functions
 	inline sa_free_list() : the_sa_free_list_backend( the_array.data(), 
-		&curr_index, get_size() )
+		&next_index, get_size() )
 	{
 		//the_sa_free_list_backend.init();
 		
@@ -354,13 +366,13 @@ public:		// functions
 		//}
 	}
 	
-	inline u32& get_curr_index()
+	inline u32& get_next_index()
 	{
-		return the_sa_free_list_backend.get_curr_index();
+		return the_sa_free_list_backend.get_next_index();
 	}
-	inline const u32 get_curr_index() const
+	inline const u32 get_next_index() const
 	{
-		return the_sa_free_list_backend.get_curr_index();
+		return the_sa_free_list_backend.get_next_index();
 	}
 	
 	inline u32 get_size() const
@@ -371,29 +383,29 @@ public:		// functions
 	
 	inline void push( int to_push )
 	{
-		//the_array[curr_index++] = to_push;
+		//the_array[next_index++] = to_push;
 		the_sa_free_list_backend.push(to_push);
 	}
 	
 	//inline virtual const type pop()
 	//{
-	//	return the_array[--curr_index];
+	//	return the_array[--next_index];
 	//}
 	
 	inline void pop()
 	{
-		//--curr_index;
+		//--next_index;
 		the_sa_free_list_backend.pop();
 	}
 	
 	inline int peek_top()
 	{
-		//return the_array[curr_index-1];
+		//return the_array[next_index-1];
 		return the_sa_free_list_backend.peek_top();
 	}
 	inline const int peek_top() const
 	{
-		//return the_array[curr_index-1];
+		//return the_array[next_index-1];
 		return the_sa_free_list_backend.peek_top();
 	}
 	

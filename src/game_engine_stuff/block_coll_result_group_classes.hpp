@@ -119,28 +119,28 @@ public:		// functions
 	
 	inline block_coll_result& operator () ( u32 local_x, u32 local_y )
 	{
-		return data_at( local_x, local_y );
+		return at( local_x, local_y );
 	}
 	inline block_coll_result& operator () ( const vec2_u32& local_coord )
 	{
-		return data_at(local_coord);
+		return at(local_coord);
 	}
 	inline block_coll_result& operator () ( const vec2_s32& local_coord )
 	{
-		return data_at(local_coord);
+		return at(local_coord);
 	}
 	
-	inline block_coll_result& data_at( u32 local_x, u32 local_y )
+	inline block_coll_result& at( u32 local_x, u32 local_y )
 	{
-		return bcr_arr_2d_helper.data_at( local_x, local_y );
+		return bcr_arr_2d_helper.at( local_x, local_y );
 	}
-	inline block_coll_result& data_at( const vec2_u32& local_coord )
+	inline block_coll_result& at( const vec2_u32& local_coord )
 	{
-		return bcr_arr_2d_helper.data_at(local_coord);
+		return bcr_arr_2d_helper.at(local_coord);
 	}
-	inline block_coll_result& data_at( const vec2_s32& local_coord )
+	inline block_coll_result& at( const vec2_s32& local_coord )
 	{
-		return bcr_arr_2d_helper.data_at(local_coord);
+		return bcr_arr_2d_helper.at(local_coord);
 	}
 	
 	
@@ -333,11 +333,11 @@ public:		// functions
 	
 	inline block_coll_result*& operator () ( u32 index )
 	{
-		return data_at(index);
+		return at(index);
 	}
-	inline block_coll_result*& data_at( u32 index )
+	inline block_coll_result*& at( u32 index )
 	{
-		return ptr_arr_helper.data_at(index);
+		return ptr_arr_helper.at(index);
 	}
 	
 	inline s32 get_real_size() const

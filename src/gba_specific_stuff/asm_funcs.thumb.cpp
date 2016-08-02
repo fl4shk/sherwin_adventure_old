@@ -158,4 +158,9 @@ void* slower_memcpy( void* dst, const void* src, size_t n )
 	return dst;
 }
 
+// This is for updated ARM GCC when things like std::vector are used.
+void __sync_synchronize()
+{
+}
+
 }

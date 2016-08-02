@@ -87,18 +87,33 @@ public:			// functions
 		return size;
 	}
 	
-	type& data_at( u32 x, u32 y )
+	type& at( u32 x, u32 y )
 	{
 		return the_array[ y * size_2d.x + x ];
 	}
-	type& data_at( const vec2_u32& offset_2d )
+	type& at( const vec2_u32& offset_2d )
 	{
 		return the_array[ offset_2d.y * size_2d.x + offset_2d.x ];
 	}
-	type& data_at( const vec2_s32& offset_2d )
+	type& at( const vec2_s32& offset_2d )
 	{
 		return the_array[ offset_2d.y * size_2d.x + offset_2d.x ];
 	}
+	
+	
+	const type& at( u32 x, u32 y ) const
+	{
+		return the_array[ y * size_2d.x + x ];
+	}
+	const type& at( const vec2_u32& offset_2d ) const
+	{
+		return the_array[ offset_2d.y * size_2d.x + offset_2d.x ];
+	}
+	const type& at( const vec2_s32& offset_2d ) const
+	{
+		return the_array[ offset_2d.y * size_2d.x + offset_2d.x ];
+	}
+	
 	
 	
 } __attribute__((_align4));

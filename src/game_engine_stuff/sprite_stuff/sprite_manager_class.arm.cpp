@@ -123,7 +123,7 @@ void sprite_manager::spawn_sprites_if_needed
 			// the column.
 			//for ( sprite_init_param_group& sprite_ipg 
 			//	: active_level::horiz_sublevel_sprite_ipg_lists[i] )
-			for ( int j=curr_sprite_ipg_list.front_node_index;
+			for ( int j=curr_sprite_ipg_list.get_front_node_index();
 				j!=-1;
 				j=curr_sprite_ipg_list.get_node_at(j).next_node_index )
 			{
@@ -205,10 +205,9 @@ void sprite_manager::spawn_sprites_if_needed
 			// the column.
 			//for ( sprite_init_param_group& sprite_ipg 
 			//	: active_level::horiz_sublevel_sprite_ipg_lists[i] )
-			for ( int j=curr_sprite_ipg_list.front_node_index;
+			for ( int j=curr_sprite_ipg_list.get_front_node_index();
 				j!=-1;
-				j=curr_sprite_ipg_list.get_node_at(j)
-				.next_node_index )
+				j=curr_sprite_ipg_list.get_node_at(j).next_node_index )
 			{
 				sprite_init_param_group& sprite_ipg = curr_sprite_ipg_list
 					.get_node_at(j).the_data;
@@ -351,7 +350,7 @@ void sprite_manager::update_all_sprites
 			// Update a volatile variable so the compiler won't
 			// optimize out this loop
 			//debug_arr_f8p8[0] = make_f8p8(8);
-			debug_arr_group::debug_f8p8_arr_helper.data_at(0) 
+			debug_arr_group::debug_f8p8_arr_helper.at(0) 
 				= make_f8p8(8);
 		}
 	};

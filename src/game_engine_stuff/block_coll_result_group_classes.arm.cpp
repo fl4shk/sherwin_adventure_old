@@ -31,9 +31,9 @@ inline void temp_func_get_horiz_adjusted_x
 	array_helper<vec2_s32>& adjusted_cb_corner_lbc_arr_helper )
 {
 	vec2_s32& horiz_adjusted_cb_top_corner_lbc 
-		= adjusted_cb_corner_lbc_arr_helper.data_at(0);
+		= adjusted_cb_corner_lbc_arr_helper.at(0);
 	vec2_s32& horiz_adjusted_cb_bot_corner_lbc
-		= adjusted_cb_corner_lbc_arr_helper.data_at(1);
+		= adjusted_cb_corner_lbc_arr_helper.at(1);
 	
 	horiz_adjusted_cb_top_corner_lbc.x = horiz_adjusted_cb_bot_corner_lbc.x
 		= ( ( cb_vert_side_x_coord_f24p8 - threshold_x ).floor_to_int() 
@@ -45,9 +45,9 @@ inline void temp_func_get_horiz_adjusted_y
 	array_helper<vec2_s32>& adjusted_cb_corner_lbc_arr_helper )
 {
 	vec2_s32& horiz_adjusted_cb_top_corner_lbc 
-		= adjusted_cb_corner_lbc_arr_helper.data_at(0);
+		= adjusted_cb_corner_lbc_arr_helper.at(0);
 	vec2_s32& horiz_adjusted_cb_bot_corner_lbc
-		= adjusted_cb_corner_lbc_arr_helper.data_at(1);
+		= adjusted_cb_corner_lbc_arr_helper.at(1);
 	
 	const fixed24p8& cb_top_y_coord_f24p8 = cb_corner_y_coords.x;
 	const fixed24p8& cb_bot_y_coord_f24p8 = cb_corner_y_coords.y;
@@ -65,9 +65,9 @@ inline void temp_func_get_vert_adjusted_x
 	array_helper<vec2_s32>& adjusted_cb_corner_lbc_arr_helper )
 {
 	vec2_s32& vert_adjusted_cb_top_corner_lbc
-		= adjusted_cb_corner_lbc_arr_helper.data_at(2);
+		= adjusted_cb_corner_lbc_arr_helper.at(2);
 	vec2_s32& vert_adjusted_cb_bot_corner_lbc
-		= adjusted_cb_corner_lbc_arr_helper.data_at(3);
+		= adjusted_cb_corner_lbc_arr_helper.at(3);
 	
 	vert_adjusted_cb_top_corner_lbc.x = vert_adjusted_cb_bot_corner_lbc.x
 		= ( cb_vert_side_x_coord_f24p8.floor_to_int() 
@@ -79,9 +79,9 @@ inline void temp_func_get_vert_adjusted_y
 	array_helper<vec2_s32>& adjusted_cb_corner_lbc_arr_helper )
 {
 	vec2_s32& vert_adjusted_cb_top_corner_lbc
-		= adjusted_cb_corner_lbc_arr_helper.data_at(2);
+		= adjusted_cb_corner_lbc_arr_helper.at(2);
 	vec2_s32& vert_adjusted_cb_bot_corner_lbc
-		= adjusted_cb_corner_lbc_arr_helper.data_at(3);
+		= adjusted_cb_corner_lbc_arr_helper.at(3);
 	
 	const fixed24p8& cb_top_y_coord_f24p8 = cb_corner_y_coords.x;
 	const fixed24p8& cb_bot_y_coord_f24p8 = cb_corner_y_coords.y;
@@ -104,11 +104,11 @@ void block_coll_result_rect_group::get_corner_stuff_old
 	( array_helper<block_coll_result*>& bcr_ptr_arr_helper, 
 	array_helper<u32>& bool_as_u32_arr_helper )
 {
-	block_coll_result*& top_corner_bcr = bcr_ptr_arr_helper.data_at(0);
-	block_coll_result*& bot_corner_bcr = bcr_ptr_arr_helper.data_at(1);
+	block_coll_result*& top_corner_bcr = bcr_ptr_arr_helper.at(0);
+	block_coll_result*& bot_corner_bcr = bcr_ptr_arr_helper.at(1);
 	
-	u32& top_corner_is_non_air = bool_as_u32_arr_helper.data_at(0);
-	u32& bot_corner_is_non_air = bool_as_u32_arr_helper.data_at(1);
+	u32& top_corner_is_non_air = bool_as_u32_arr_helper.at(0);
+	u32& bot_corner_is_non_air = bool_as_u32_arr_helper.at(1);
 	
 	
 	vec2_s32 local_top_corner = local_tl_corner(),
@@ -124,13 +124,13 @@ void block_coll_result_rect_group::get_corner_stuff_old
 	}
 	
 	
-	//top_corner_is_non_air = ( bcr_arr_2d_helper.data_at
+	//top_corner_is_non_air = ( bcr_arr_2d_helper.at
 	//	(local_top_corner).the_bbvt != bbvt_air );
-	//bot_corner_is_non_air = ( bcr_arr_2d_helper.data_at
+	//bot_corner_is_non_air = ( bcr_arr_2d_helper.at
 	//	(local_bot_corner).the_bbvt != bbvt_air );
 	
-	top_corner_bcr = &bcr_arr_2d_helper.data_at(local_top_corner);
-	bot_corner_bcr = &bcr_arr_2d_helper.data_at(local_bot_corner);
+	top_corner_bcr = &bcr_arr_2d_helper.at(local_top_corner);
+	bot_corner_bcr = &bcr_arr_2d_helper.at(local_bot_corner);
 	
 	top_corner_is_non_air = ( top_corner_bcr->the_bbvt != bbvt_air );
 	bot_corner_is_non_air = ( bot_corner_bcr->the_bbvt != bbvt_air );
@@ -148,22 +148,22 @@ void block_coll_result_rect_group::get_coll_box_related_stuff_old
 		( adjusted_cb_corner_lbc_arr, num_adjusted_corner_positions );
 	
 	vec2_s32& horiz_adjusted_cb_top_corner_lbc 
-		= adjusted_cb_corner_lbc_arr_helper.data_at(0);
+		= adjusted_cb_corner_lbc_arr_helper.at(0);
 	vec2_s32& horiz_adjusted_cb_bot_corner_lbc
-		= adjusted_cb_corner_lbc_arr_helper.data_at(1);
+		= adjusted_cb_corner_lbc_arr_helper.at(1);
 	vec2_s32& vert_adjusted_cb_top_corner_lbc
-		= adjusted_cb_corner_lbc_arr_helper.data_at(2);
+		= adjusted_cb_corner_lbc_arr_helper.at(2);
 	vec2_s32& vert_adjusted_cb_bot_corner_lbc
-		= adjusted_cb_corner_lbc_arr_helper.data_at(3);
+		= adjusted_cb_corner_lbc_arr_helper.at(3);
 	
 	block_coll_result*& horiz_adjusted_cb_top_corner_bcr
-		= bcr_ptr_arr_helper.data_at(2);
+		= bcr_ptr_arr_helper.at(2);
 	block_coll_result*& horiz_adjusted_cb_bot_corner_bcr
-		= bcr_ptr_arr_helper.data_at(3);
+		= bcr_ptr_arr_helper.at(3);
 	block_coll_result*& vert_adjusted_cb_top_corner_bcr
-		= bcr_ptr_arr_helper.data_at(4);
+		= bcr_ptr_arr_helper.at(4);
 	block_coll_result*& vert_adjusted_cb_bot_corner_bcr
-		= bcr_ptr_arr_helper.data_at(5);
+		= bcr_ptr_arr_helper.at(5);
 	
 	
 	const coll_box& the_coll_box = the_sprite.the_coll_box; 
@@ -262,13 +262,13 @@ void block_coll_result_rect_group::get_coll_box_related_stuff_old
 		if ( contains_local_block_y_coord
 			(horiz_adjusted_cb_top_corner_lbc.y) )
 		{
-			horiz_adjusted_cb_top_corner_bcr = &data_at
+			horiz_adjusted_cb_top_corner_bcr = &at
 				(horiz_adjusted_cb_top_corner_lbc);
 		}
 		if ( contains_local_block_y_coord
 			(horiz_adjusted_cb_bot_corner_lbc.y) )
 		{
-			horiz_adjusted_cb_bot_corner_bcr = &data_at
+			horiz_adjusted_cb_bot_corner_bcr = &at
 				(horiz_adjusted_cb_bot_corner_lbc);
 		}
 	}
@@ -278,13 +278,13 @@ void block_coll_result_rect_group::get_coll_box_related_stuff_old
 		if ( contains_local_block_y_coord
 			(vert_adjusted_cb_top_corner_lbc.y) )
 		{
-			vert_adjusted_cb_top_corner_bcr = &data_at
+			vert_adjusted_cb_top_corner_bcr = &at
 				(vert_adjusted_cb_top_corner_lbc);
 		}
 		if ( contains_local_block_y_coord
 			(vert_adjusted_cb_bot_corner_lbc.y) )
 		{
-			vert_adjusted_cb_bot_corner_bcr = &data_at
+			vert_adjusted_cb_bot_corner_bcr = &at
 				(vert_adjusted_cb_bot_corner_lbc);
 		}
 	}
@@ -295,13 +295,13 @@ void block_coll_result_rect_group::get_side_blocked_stuff_old
 	( array_helper<u32>& bool_as_u32_arr_helper )
 {
 	u32& vert_side_below_top_corner_is_blocked
-		= bool_as_u32_arr_helper.data_at(2);
+		= bool_as_u32_arr_helper.at(2);
 	u32& vert_side_above_bot_corner_is_blocked
-		= bool_as_u32_arr_helper.data_at(3);
+		= bool_as_u32_arr_helper.at(3);
 	u32& top_side_other_than_corner_is_blocked
-		= bool_as_u32_arr_helper.data_at(4);
+		= bool_as_u32_arr_helper.at(4);
 	u32& bot_side_other_than_corner_is_blocked
-		= bool_as_u32_arr_helper.data_at(5);
+		= bool_as_u32_arr_helper.at(5);
 	
 	//// This was done by the caller (or at least it should have been!)
 	//vert_side_below_top_corner_is_blocked 
@@ -334,7 +334,7 @@ void block_coll_result_rect_group::get_side_blocked_stuff_old
 	
 	//for ( s32 j=local_top()+1; j<real_height(); ++j )
 	//{
-	//	if ( data_at( local_vert_side_x, j ).the_bbvt != bbvt_air )
+	//	if ( at( local_vert_side_x, j ).the_bbvt != bbvt_air )
 	//	{
 	//		vert_side_below_top_corner_is_blocked = true;
 	//		break;
@@ -343,7 +343,7 @@ void block_coll_result_rect_group::get_side_blocked_stuff_old
 	//
 	//for ( s32 j=local_top(); j<real_height()-1; ++j )
 	//{
-	//	if ( data_at( local_vert_side_x, j ).the_bbvt != bbvt_air )
+	//	if ( at( local_vert_side_x, j ).the_bbvt != bbvt_air )
 	//	{
 	//		vert_side_above_bot_corner_is_blocked = true;
 	//		break;
@@ -356,7 +356,7 @@ void block_coll_result_rect_group::get_side_blocked_stuff_old
 		if ( !vert_side_below_top_corner_is_blocked 
 			&& j >= local_top() + 1 )
 		{
-			if ( data_at( local_vert_side_x, j ).the_bbvt != bbvt_air )
+			if ( at( local_vert_side_x, j ).the_bbvt != bbvt_air )
 			{
 				vert_side_below_top_corner_is_blocked = true;
 			}
@@ -365,7 +365,7 @@ void block_coll_result_rect_group::get_side_blocked_stuff_old
 		if ( !vert_side_above_bot_corner_is_blocked
 			&& j < real_height() - 1 )
 		{
-			if ( data_at( local_vert_side_x, j ).the_bbvt != bbvt_air )
+			if ( at( local_vert_side_x, j ).the_bbvt != bbvt_air )
 			{
 				vert_side_above_bot_corner_is_blocked = true;
 			}
@@ -383,7 +383,7 @@ void block_coll_result_rect_group::get_side_blocked_stuff_old
 	{
 		if (!top_side_other_than_corner_is_blocked)
 		{
-			if ( data_at( i, local_top() ).the_bbvt != bbvt_air )
+			if ( at( i, local_top() ).the_bbvt != bbvt_air )
 			{
 				top_side_other_than_corner_is_blocked = true;
 			}
@@ -391,7 +391,7 @@ void block_coll_result_rect_group::get_side_blocked_stuff_old
 		
 		if (!bot_side_other_than_corner_is_blocked)
 		{
-			if ( data_at( i, local_bot() ).the_bbvt != bbvt_air )
+			if ( at( i, local_bot() ).the_bbvt != bbvt_air )
 			{
 				bot_side_other_than_corner_is_blocked = true;
 			}
