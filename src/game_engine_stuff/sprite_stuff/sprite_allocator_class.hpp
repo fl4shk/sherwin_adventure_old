@@ -69,7 +69,7 @@ public:		// functions
 	}
 	
 protected:		// functions
-	inline 
+	//inline 
 	
 } __attribute__((_align4));
 
