@@ -1,19 +1,19 @@
-// This file is part of Sherwin's Adventure.
+// This file is part of GBA Project Template.
 // 
 // Copyright 2015-2016 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// GBA Project Template is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// GBA Project Template is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
-// with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
+// with GBA Project Template.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #ifndef debug_vars_hpp
@@ -159,6 +159,7 @@ public:		// functions
 class debug_arr_group
 {
 protected:		// static variables (raw debug arrays)
+//public:		// static variables (raw debug arrays)
 	struct raw_array_group
 	{
 		vu32 curr_index_arr[curr_index_arr_size];
@@ -212,47 +213,233 @@ public:		// functions
 	
 	static void clear_debug_vars();
 	
+	#define raw_write_debug_u32_and_inc( to_write ) \
+	debug_arr_group::the_raw_array_group.debug_u32_arr \
+		[debug_arr_group::the_raw_array_group.curr_index_arr \
+		[cdit_u32]++] = static_cast<u32>(to_write);
+	
+	#define raw_write_debug_s32_and_inc( to_write ) \
+	debug_arr_group::the_raw_array_group.debug_s32_arr \
+		[debug_arr_group::the_raw_array_group.curr_index_arr \
+		[cdit_s32]++] = static_cast<s32>(to_write);
+	
+	#define raw_write_debug_f24p8_and_inc( to_write ) \
+	debug_arr_group::the_raw_array_group.debug_f24p8_arr \
+		[debug_arr_group::the_raw_array_group.curr_index_arr \
+		[cdit_f24p8]++] = static_cast<fixed24p8>(to_write);
+	
+	#define raw_write_debug_f8p8_and_inc( to_write ) \
+	debug_arr_group::the_raw_array_group.debug_f8p8_arr \
+		[debug_arr_group::the_raw_array_group.curr_index_arr \
+		[cdit_f8p8]++] = static_cast<fixed8p8>(to_write);
+	
+	#define raw_write_debug_str_and_inc( to_write ) \
+	debug_arr_group::the_raw_array_group.debug_str_arr \
+		[debug_arr_group::the_raw_array_group.curr_index_arr \
+		[cdit_str]++] = to_write;
+	
 	static inline void write_u32_and_inc( u32 to_write )
 	{
-		//debug_u32_arr_helper.at(curr_index_arr_helper.at
-		//	(cdit_u32)++) = to_write;
-		debug_u32_arr()[curr_index_arr()[cdit_u32]++] = to_write;
+		////debug_u32_arr_helper.at(curr_index_arr_helper.at
+		////	(cdit_u32)++) = to_write;
+		//debug_u32_arr()[curr_index_arr()[cdit_u32]++] = to_write;
+		raw_write_debug_u32_and_inc(to_write);
 	}
 	static inline void write_s32_and_inc( s32 to_write )
 	{
-		//debug_s32_arr_helper.at(curr_index_arr_helper.at
-		//	(cdit_s32)++) = to_write;
-		debug_s32_arr()[curr_index_arr()[cdit_s32]++] = to_write;
+		////debug_s32_arr_helper.at(curr_index_arr_helper.at
+		////	(cdit_s32)++) = to_write;
+		//debug_s32_arr()[curr_index_arr()[cdit_s32]++] = to_write;
+		raw_write_debug_s32_and_inc(to_write);
 	}
 	static inline void write_f24p8_and_inc( const fixed24p8& to_write )
 	{
-		//debug_f24p8_arr_helper.at(curr_index_arr_helper.at
-		//	(cdit_f24p8)++) = to_write;
-		debug_f24p8_arr()[curr_index_arr()[cdit_f24p8]++] = to_write;
+		////debug_f24p8_arr_helper.at(curr_index_arr_helper.at
+		////	(cdit_f24p8)++) = to_write;
+		//debug_f24p8_arr()[curr_index_arr()[cdit_f24p8]++] = to_write;
+		raw_write_debug_f24p8_and_inc(to_write);
 	}
 	static inline void write_f8p8_and_inc( const fixed8p8& to_write )
 	{
-		//debug_f8p8_arr_helper.at(curr_index_arr_helper.at
-		//	(cdit_f8p8)++) = to_write;
-		debug_f8p8_arr()[curr_index_arr()[cdit_f8p8]++] = to_write;
+		////debug_f8p8_arr_helper.at(curr_index_arr_helper.at
+		////	(cdit_f8p8)++) = to_write;
+		//debug_f8p8_arr()[curr_index_arr()[cdit_f8p8]++] = to_write;
+		raw_write_debug_f8p8_and_inc(to_write);
 	}
 	
 	static inline void write_str_and_inc( const debug_str& to_write )
 	{
-		//debug_str_arr_helper.at(curr_index_arr_helper.at
-		//	(cdit_str)++) = to_write;
-		debug_str_arr()[curr_index_arr()[cdit_str]++] = to_write;
+		////debug_str_arr_helper.at(curr_index_arr_helper.at
+		////	(cdit_str)++) = to_write;
+		//debug_str_arr()[curr_index_arr()[cdit_str]++] = to_write;
+		raw_write_debug_str_and_inc(to_write);
 	}
 	
 	static inline void write_str_and_inc( const char* to_write )
 	{
-		//debug_str_arr_helper.at(curr_index_arr_helper.at
-		//	(cdit_str)++) = to_write;
-		debug_str_arr()[curr_index_arr()[cdit_str]++] = to_write;
+		////debug_str_arr_helper.at(curr_index_arr_helper.at
+		////	(cdit_str)++) = to_write;
+		//debug_str_arr()[curr_index_arr()[cdit_str]++] = to_write;
+		raw_write_debug_str_and_inc(to_write);
 	}
+	
+	
+	template< typename debug_arr_type, typename type >
+	friend inline void show_debug_values_group_backend
+		( debug_arr_type* debug_values_arr, vu32& curr_index, 
+		type to_show );
+	template< typename debug_arr_type, typename first_type, 
+		typename... remaining_types >
+	friend inline void show_debug_values_group_backend
+		( debug_arr_type* debug_values_arr, 
+		vu32& curr_index, first_type first_value, 
+		remaining_types... remaining_values );
+	
+	template< typename... all_the_types >
+	friend void show_debug_u32_group( all_the_types... all_the_values );
+	
+	template< typename... all_the_types >
+	friend void show_debug_s32_group( all_the_types... all_the_values );
+	
+	template< typename... all_the_types >
+	friend void show_debug_f24p8_group( all_the_types... all_the_values );
+	
+	template< typename... all_the_types >
+	friend void show_debug_f8p8_group( all_the_types... all_the_values );
+	
+	template< typename... all_the_types >
+	friend void show_debug_str_group( all_the_types... all_the_values );
 	
 } __attribute__((_align4));
 
+
+
+template< typename debug_arr_type, typename type >
+inline void show_debug_values_group_backend
+	( debug_arr_type* debug_values_arr, vu32& curr_index, type to_show )
+	__attribute__((always_inline));
+template< typename debug_arr_type, typename type >
+inline void show_debug_values_group_backend
+	( debug_arr_type* debug_values_arr, vu32& curr_index, type to_show )
+{
+	debug_values_arr[curr_index++] = to_show;
+}
+
+template< typename debug_arr_type, typename first_type, 
+	typename... remaining_types >
+inline void show_debug_values_group_backend
+	( debug_arr_type* debug_values_arr, vu32& curr_index, 
+	first_type first_value, remaining_types... remaining_values )
+	__attribute__((always_inline));
+template< typename debug_arr_type, typename first_type, 
+	typename... remaining_types >
+inline void show_debug_values_group_backend
+	( debug_arr_type* debug_values_arr, vu32& curr_index, 
+	first_type first_value, remaining_types... remaining_values )
+{
+	//asm_comment("first_value");
+	show_debug_values_group_backend( debug_values_arr, curr_index, 
+		first_value );
+	
+	//asm_comment("remaining_values...");
+	show_debug_values_group_backend( debug_values_arr, curr_index,
+		remaining_values... );
+}
+
+
+//template< typename... all_the_types >
+//void show_debug_u32_group( all_the_types... all_the_values )
+//	__attribute__((noinline));
+template< typename... all_the_types >
+void show_debug_u32_group( all_the_types... all_the_values )
+{
+	asm_comment("show_debug_u32_group()");
+	
+	auto* debug_u32_arr = debug_arr_group::the_raw_array_group
+		.debug_u32_arr;
+	
+	auto& curr_index = debug_arr_group::the_raw_array_group.curr_index_arr
+		[cdit_u32];
+	
+	show_debug_values_group_backend( debug_u32_arr, curr_index,
+		all_the_values... );
+}
+
+
+//template< typename... all_the_types >
+//void show_debug_s32_group( all_the_types... all_the_values )
+//	__attribute__((noinline));
+template< typename... all_the_types >
+void show_debug_s32_group( all_the_types... all_the_values )
+{
+	asm_comment("show_debug_s32_group()");
+	
+	auto* debug_s32_arr = debug_arr_group::the_raw_array_group
+		.debug_s32_arr;
+	
+	auto& curr_index = debug_arr_group::the_raw_array_group.curr_index_arr
+		[cdit_s32];
+	
+	show_debug_values_group_backend( debug_s32_arr, curr_index,
+		all_the_values... );
+}
+
+
+//template< typename... all_the_types >
+//void show_debug_f24p8_group( all_the_types... all_the_values )
+//	__attribute__((noinline));
+template< typename... all_the_types >
+void show_debug_f24p8_group( all_the_types... all_the_values )
+{
+	asm_comment("show_debug_f24p8_group()");
+	
+	auto* debug_f24p8_arr = debug_arr_group::the_raw_array_group
+		.debug_f24p8_arr;
+	
+	auto& curr_index = debug_arr_group::the_raw_array_group.curr_index_arr
+		[cdit_f24p8];
+	
+	show_debug_values_group_backend( debug_f24p8_arr, curr_index,
+		all_the_values... );
+}
+
+
+//template< typename... all_the_types >
+//void show_debug_f8p8_group( all_the_types... all_the_values )
+//	__attribute__((noinline));
+template< typename... all_the_types >
+void show_debug_f8p8_group( all_the_types... all_the_values )
+{
+	asm_comment("show_debug_f8p8_group()");
+	
+	auto* debug_f8p8_arr = debug_arr_group::the_raw_array_group
+		.debug_f8p8_arr;
+	
+	auto& curr_index = debug_arr_group::the_raw_array_group.curr_index_arr
+		[cdit_f8p8];
+	
+	show_debug_values_group_backend( debug_f8p8_arr, curr_index,
+		all_the_values... );
+}
+
+
+//template< typename... all_the_types >
+//void show_debug_str_group( all_the_types... all_the_values )
+//	__attribute__((noinline));
+template< typename... all_the_types >
+void show_debug_str_group( all_the_types... all_the_values )
+{
+	asm_comment("show_debug_str_group()");
+	
+	auto* debug_str_arr = debug_arr_group::the_raw_array_group
+		.debug_str_arr;
+	
+	auto& curr_index = debug_arr_group::the_raw_array_group.curr_index_arr
+		[cdit_str];
+	
+	show_debug_values_group_backend( debug_str_arr, curr_index,
+		all_the_values... );
+}
 
 
 #endif		// debug_vars_hpp
