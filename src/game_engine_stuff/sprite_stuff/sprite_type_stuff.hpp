@@ -78,7 +78,7 @@ enum sprite_type
 } __attribute__((_align4));
 
 // woo, an X-macro
-#define list_of_main_sprite_types(macro) \
+#define list_of_main_sprite_type_suffixes(macro) \
 \
 /* The Player */ \
 macro(player) \

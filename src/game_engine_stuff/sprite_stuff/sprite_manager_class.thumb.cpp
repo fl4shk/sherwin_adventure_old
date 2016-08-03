@@ -166,7 +166,7 @@ int sprite_manager::next_oam_index;
 //			name##_sprite(facing_left); \
 //	}
 //
-//list_of_main_sprite_types(generate_sprite_new_caller);
+//list_of_main_sprite_type_suffixes(generate_sprite_new_caller);
 //#undef generate_sprite_new_caller
 //
 //
@@ -175,7 +175,7 @@ int sprite_manager::next_oam_index;
 //void (*sprite_new_caller_funcptr_arr[st_count])( sprite*& the_sprite,
 //	sprite_allocator& the_sprite_allocator, bool facing_left )
 //	= { &default_sprite_new_caller, 
-//	list_of_main_sprite_types(generate_funcptr_arr_entry) };
+//	list_of_main_sprite_type_suffixes(generate_funcptr_arr_entry) };
 //#undef generate_funcptr_arr_entry
 //
 //
@@ -202,9 +202,15 @@ void sprite_manager::allocate_sprite( sprite*& the_sprite,
 	//	halt();
 	//}
 	
+	debug_arr_group::debug_u32_arr_helper.at(0) = the_sprite_type;
 	
 	switch (the_sprite_type)
 	{
+		case st_default:
+			the_sprite = new (the_sprite_allocator) sprite(facing_left);
+			asm_comment("st_default");
+			break;
+		
 		#define generate_case_statement(name) \
 		case st_##name:  \
 			the_sprite = new (the_sprite_allocator) \
@@ -212,7 +218,7 @@ void sprite_manager::allocate_sprite( sprite*& the_sprite,
 			asm_comment("st_" #name);
 			break;
 		
-		list_of_main_sprite_types(generate_case_statement)
+		list_of_main_sprite_type_suffixes(generate_case_statement)
 		#undef generate_case_statement
 		
 		default:
@@ -244,8 +250,15 @@ void sprite_manager::allocate_sprite( sprite*& the_sprite,
 	//	halt();
 	//}
 	
+	debug_arr_group::debug_u32_arr_helper.at(0) = the_sprite_type;
+	
 	switch (the_sprite_type)
 	{
+		case st_default:
+			the_sprite = new (the_sprite_allocator) sprite(facing_left);
+			asm_comment("st_default");
+			break;
+		
 		#define generate_case_statement(name) \
 		case st_##name:  \
 			the_sprite = new (the_sprite_allocator) \
@@ -253,7 +266,7 @@ void sprite_manager::allocate_sprite( sprite*& the_sprite,
 			asm_comment("st_" #name);
 			break;
 		
-		list_of_main_sprite_types(generate_case_statement)
+		list_of_main_sprite_type_suffixes(generate_case_statement)
 		#undef generate_case_statement
 		
 		default:

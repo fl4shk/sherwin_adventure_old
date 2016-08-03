@@ -1618,10 +1618,10 @@ game_manager::vblank_func	game_engine_stuff/game_manager_class.thumb.cpp	/^void 
 game_manager::wait_for_x_frames	game_engine_stuff/game_manager_class.hpp	/^	static inline void wait_for_x_frames( u32 x )$/;"	kind:f	class:game_manager	access:public	signature:( u32 x )
 game_manager_class_hpp	game_engine_stuff/game_manager_class.hpp	20;"	kind:d
 game_mode	game_engine_stuff/game_manager_class.hpp	/^enum game_mode$/;"	kind:g
-generate_case_statement	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	208;"	kind:d	file:
-generate_case_statement	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	216;"	kind:d	file:
-generate_case_statement	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	249;"	kind:d	file:
-generate_case_statement	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	257;"	kind:d	file:
+generate_case_statement	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	214;"	kind:d	file:
+generate_case_statement	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	222;"	kind:d	file:
+generate_case_statement	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	262;"	kind:d	file:
+generate_case_statement	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	270;"	kind:d	file:
 generate_pt	game_engine_stuff/coll_point_group_classes.thumb.cpp	212;"	kind:d	file:
 generate_pt	game_engine_stuff/coll_point_group_classes.thumb.cpp	35;"	kind:d	file:
 get_actual_num_sublevels	game_engine_stuff/level_stuff/level_class.hpp	/^	inline const u32 get_actual_num_sublevels() const$/;"	kind:f	class:level	access:public	signature:() const
@@ -2446,7 +2446,7 @@ level_class_hpp	game_engine_stuff/level_stuff/level_class.hpp	20;"	kind:d
 level_defines_hpp	game_engine_stuff/level_stuff/level_defines.hpp	20;"	kind:d
 list_of_block_stuff_classes	game_engine_stuff/block_stuff/block_stuff.hpp	149;"	kind:d
 list_of_left_slope_configurations	game_engine_stuff/block_stuff/block_stuff.hpp	238;"	kind:d
-list_of_main_sprite_types	game_engine_stuff/sprite_stuff/sprite_type_stuff.hpp	81;"	kind:d
+list_of_main_sprite_type_suffixes	game_engine_stuff/sprite_stuff/sprite_type_stuff.hpp	81;"	kind:d
 list_of_right_slope_configurations	game_engine_stuff/block_stuff/block_stuff.hpp	243;"	kind:d
 list_of_shared_bot_side_coll_point_names	game_engine_stuff/coll_point_extras.hpp	31;"	kind:d
 list_of_shared_bot_side_coll_point_names	game_engine_stuff/coll_point_group_classes.hpp	/^		list_of_shared_bot_side_coll_point_names(X)$/;"	kind:e	enum:coll_point_group_base::arr_index_16x16

@@ -52,7 +52,7 @@ VERBOSE_ASM_FLAG=
 
 
 
-#DEBUG=yeah do debug
+DEBUG=yeah do debug
 
 # Optimization levels
 #DEBUG_OPTIMIZATION_LEVEL=-O1
