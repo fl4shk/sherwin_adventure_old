@@ -202,20 +202,18 @@ void sprite_manager::allocate_sprite( sprite*& the_sprite,
 	//	halt();
 	//}
 	
-	debug_arr_group::debug_u32_arr_helper.at(0) = the_sprite_type;
-	
 	switch (the_sprite_type)
 	{
-		case st_default:
-			the_sprite = new (the_sprite_allocator) sprite(facing_left);
-			asm_comment("st_default");
-			break;
+		//case st_default:
+		//	the_sprite = new (the_sprite_allocator) sprite(facing_left);
+		//	asm_comment("st_default");
+		//	break;
 		
 		#define generate_case_statement(name) \
 		case st_##name:  \
 			the_sprite = new (the_sprite_allocator) \
 				name##_sprite(facing_left); \
-			asm_comment("st_" #name);
+			asm_comment("st_" #name); \
 			break;
 		
 		list_of_main_sprite_type_suffixes(generate_case_statement)
@@ -250,20 +248,18 @@ void sprite_manager::allocate_sprite( sprite*& the_sprite,
 	//	halt();
 	//}
 	
-	debug_arr_group::debug_u32_arr_helper.at(0) = the_sprite_type;
-	
 	switch (the_sprite_type)
 	{
-		case st_default:
-			the_sprite = new (the_sprite_allocator) sprite(facing_left);
-			asm_comment("st_default");
-			break;
+		//case st_default:
+		//	the_sprite = new (the_sprite_allocator) sprite(facing_left);
+		//	asm_comment("st_default");
+		//	break;
 		
 		#define generate_case_statement(name) \
 		case st_##name:  \
 			the_sprite = new (the_sprite_allocator) \
 				name##_sprite(facing_left); \
-			asm_comment("st_" #name);
+			asm_comment("st_" #name); \
 			break;
 		
 		list_of_main_sprite_type_suffixes(generate_case_statement)
