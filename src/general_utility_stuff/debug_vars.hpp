@@ -1,19 +1,19 @@
-// This file is part of GBA Project Template.
+// This file is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2016 by Andrew Clark (FL4SHK).
 // 
-// GBA Project Template is free software: you can redistribute it and/or
+// Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// GBA Project Template is distributed in the hope that it will be useful,
+// Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
-// with GBA Project Template.  If not, see <http://www.gnu.org/licenses/>.
+// with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #ifndef debug_vars_hpp
@@ -347,99 +347,43 @@ inline void show_debug_values_group_backend
 }
 
 
-//template< typename... all_the_types >
-//void show_debug_u32_group( all_the_types... all_the_values )
-//	__attribute__((noinline));
+#define generate_func_contents(suffix) \
+asm_comment("show_debug_" #suffix "_group()"); \
+show_debug_values_group_backend( debug_arr_group::the_raw_array_group \
+	.debug_##suffix##_arr, debug_arr_group::the_raw_array_group \
+	.curr_index_arr[cdit_##suffix], all_the_values... );
+
 template< typename... all_the_types >
 void show_debug_u32_group( all_the_types... all_the_values )
 {
-	asm_comment("show_debug_u32_group()");
-	
-	auto* debug_u32_arr = debug_arr_group::the_raw_array_group
-		.debug_u32_arr;
-	
-	auto& curr_index = debug_arr_group::the_raw_array_group.curr_index_arr
-		[cdit_u32];
-	
-	show_debug_values_group_backend( debug_u32_arr, curr_index,
-		all_the_values... );
+	generate_func_contents(u32);
 }
 
-
-//template< typename... all_the_types >
-//void show_debug_s32_group( all_the_types... all_the_values )
-//	__attribute__((noinline));
 template< typename... all_the_types >
 void show_debug_s32_group( all_the_types... all_the_values )
 {
-	asm_comment("show_debug_s32_group()");
-	
-	auto* debug_s32_arr = debug_arr_group::the_raw_array_group
-		.debug_s32_arr;
-	
-	auto& curr_index = debug_arr_group::the_raw_array_group.curr_index_arr
-		[cdit_s32];
-	
-	show_debug_values_group_backend( debug_s32_arr, curr_index,
-		all_the_values... );
+	generate_func_contents(s32);
 }
 
-
-//template< typename... all_the_types >
-//void show_debug_f24p8_group( all_the_types... all_the_values )
-//	__attribute__((noinline));
 template< typename... all_the_types >
 void show_debug_f24p8_group( all_the_types... all_the_values )
 {
-	asm_comment("show_debug_f24p8_group()");
-	
-	auto* debug_f24p8_arr = debug_arr_group::the_raw_array_group
-		.debug_f24p8_arr;
-	
-	auto& curr_index = debug_arr_group::the_raw_array_group.curr_index_arr
-		[cdit_f24p8];
-	
-	show_debug_values_group_backend( debug_f24p8_arr, curr_index,
-		all_the_values... );
+	generate_func_contents(f24p8);
 }
 
-
-//template< typename... all_the_types >
-//void show_debug_f8p8_group( all_the_types... all_the_values )
-//	__attribute__((noinline));
 template< typename... all_the_types >
 void show_debug_f8p8_group( all_the_types... all_the_values )
 {
-	asm_comment("show_debug_f8p8_group()");
-	
-	auto* debug_f8p8_arr = debug_arr_group::the_raw_array_group
-		.debug_f8p8_arr;
-	
-	auto& curr_index = debug_arr_group::the_raw_array_group.curr_index_arr
-		[cdit_f8p8];
-	
-	show_debug_values_group_backend( debug_f8p8_arr, curr_index,
-		all_the_values... );
+	generate_func_contents(f8p8);
 }
 
-
-//template< typename... all_the_types >
-//void show_debug_str_group( all_the_types... all_the_values )
-//	__attribute__((noinline));
 template< typename... all_the_types >
 void show_debug_str_group( all_the_types... all_the_values )
 {
-	asm_comment("show_debug_str_group()");
-	
-	auto* debug_str_arr = debug_arr_group::the_raw_array_group
-		.debug_str_arr;
-	
-	auto& curr_index = debug_arr_group::the_raw_array_group.curr_index_arr
-		[cdit_str];
-	
-	show_debug_values_group_backend( debug_str_arr, curr_index,
-		all_the_values... );
+	generate_func_contents(str);
 }
+
+#undef generate_func_contents
 
 
 #endif		// debug_vars_hpp

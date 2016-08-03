@@ -1,29 +1,29 @@
-// This file is part of GBA Project Template.
+// This file is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2016 by Andrew Clark (FL4SHK).
 // 
-// GBA Project Template is free software: you can redistribute it and/or
+// Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// GBA Project Template is distributed in the hope that it will be useful,
+// Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
-// with GBA Project Template.  If not, see <http://www.gnu.org/licenses/>.
+// with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #ifndef block_coll_result_group_classes_hpp
 #define block_coll_result_group_classes_hpp
 
-#include "range_funcs.hpp"
+#include "../general_utility_stuff/range_funcs.hpp"
 #include "block_stuff/block_stuff.hpp"
 
 #include "coll_box_class.hpp"
-#include "array_helper_class.hpp"
+#include "../general_utility_stuff/array_helper_class.hpp"
 
 #include "coll_point_group_classes.hpp"
 

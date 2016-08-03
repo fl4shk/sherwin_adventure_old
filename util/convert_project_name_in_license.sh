@@ -15,7 +15,7 @@ find . \( -path ./.git -o -path ./small_code_testing_things \
 	\) -prune \
 	\
 	-o -type f \
-	-exec sed -i 's/Sherwin'\''s Adventure/GBA Project Template/g' {} +
+	-exec sed -i 's/GBA Project Template/Sherwin'\''s Adventure/g' {} +
 	#-print
 
 

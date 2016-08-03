@@ -16,10 +16,16 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef day_sky_and_night_sky_block_classes_hpp
-#define day_sky_and_night_sky_block_classes_hpp
+#include "halt_stuff.hpp"
 
+#include "game_manager_class.hpp"
 
-
-
-#endif		// day_sky_and_night_sky_block_classes_hpp
+void halt()
+{
+	game_manager::curr_game_mode = gm_do_halt;
+	
+	for (;;)
+	{
+		bios_wait_for_vblank();
+	}
+}

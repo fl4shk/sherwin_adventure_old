@@ -1,19 +1,19 @@
-// This file is part of GBA Project Template.
+// This file is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2016 by Andrew Clark (FL4SHK).
 // 
-// GBA Project Template is free software: you can redistribute it and/or
+// Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// GBA Project Template is distributed in the hope that it will be useful,
+// Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
-// with GBA Project Template.  If not, see <http://www.gnu.org/licenses/>.
+// with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #ifndef hud_manager_class_hpp
@@ -21,7 +21,7 @@
 
 #include "../gba_specific_stuff/gfx_reg_stuff.hpp"
 #include "../gba_specific_stuff/bios_function_wrappers.hpp"
-#include "array_2d_helper_class.hpp"
+#include "../general_utility_stuff/array_2d_helper_class.hpp"
 #include "gfx_manager_class.hpp"
 
 class hud_manager

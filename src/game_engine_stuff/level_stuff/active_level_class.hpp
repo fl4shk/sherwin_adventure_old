@@ -1,19 +1,19 @@
-// This file is part of GBA Project Template.
+// This file is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2016 by Andrew Clark (FL4SHK).
 // 
-// GBA Project Template is free software: you can redistribute it and/or
+// Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// GBA Project Template is distributed in the hope that it will be useful,
+// Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
-// with GBA Project Template.  If not, see <http://www.gnu.org/licenses/>.
+// with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #ifndef active_level_class_hpp
@@ -24,7 +24,7 @@
 
 #include "../sprite_stuff/sprite_type_stuff.hpp"
 //#include "../sa_stack_class.hpp"
-#include "../sa_list_class_stuff.hpp"
+#include "../../general_utility_stuff/sa_list_class_stuff.hpp"
 //#include "sprite_level_data_stuff.hpp"
 
 //#include "../array_helper_class.hpp"
@@ -34,14 +34,14 @@
 #include "level_defines.hpp"
 
 
+#include "level_class.hpp"
+#include "../../general_utility_stuff/range_funcs.hpp"
+
 
 class sprite;
 class sprite_init_param_group;
 class sublevel_pointer;
 class level;
-
-#include "level_class.hpp"
-#include "../range_funcs.hpp"
 
 // This is a class that contains the data used by active levels after they
 // have been loaded.  Only one level will ever be fully loaded at a time,

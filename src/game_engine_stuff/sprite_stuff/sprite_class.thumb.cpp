@@ -1,19 +1,19 @@
-// This file is part of GBA Project Template.
+// This file is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2016 by Andrew Clark (FL4SHK).
 // 
-// GBA Project Template is free software: you can redistribute it and/or
+// Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// GBA Project Template is distributed in the hope that it will be useful,
+// Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
-// with GBA Project Template.  If not, see <http://www.gnu.org/licenses/>.
+// with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #include "sprite_class.hpp"
@@ -22,7 +22,7 @@
 
 #include "sprite_allocator_class.hpp"
 
-#include "../misc_utility_funcs.hpp"
+#include "../../general_utility_stuff/misc_utility_funcs.hpp"
 
 #include "../level_stuff/active_level_class.hpp"
 
@@ -623,16 +623,6 @@ void sprite::get_basic_block_coll_results_16x16
 	block_coll_result lm_coll_result, rm_coll_result, mt_coll_result, 
 		mm_coll_result, mb_coll_result;
 	
-	//#define X(name) \
-	//	name##_coll_result.coord \
-	//		= active_level::get_block_coord_of_point \
-	//		(the_pt_group.get_pt_##name()); \
-	//	name##_coll_result.the_block \
-	//		= &active_level::the_block_at_coord \
-	//		(name##_coll_result.coord);
-	//list_of_shared_coll_point_names(X)
-	//#undef X
-	
 	#define X(name) \
 		name##_coll_result = block_coll_result(the_pt_group \
 			.get_pt_##name()); \
@@ -650,17 +640,6 @@ void sprite::get_basic_block_coll_results_16x32
 	block_coll_result& bm_coll_result, block_coll_result& br_coll_result )
 {
 	block_coll_result mt_coll_result, mm_coll_result, mb_coll_result;
-	
-	//#define X(name) \
-	//	name##_coll_result.coord \
-	//		= active_level::get_block_coord_of_point \
-	//		(the_pt_group.get_pt_##name()); \
-	//	name##_coll_result.the_block \
-	//		= &active_level::the_block_at_coord \
-	//		(name##_coll_result.coord);
-	//list_of_shared_coll_point_names(X)
-	//#undef X
-	
 	
 	#define X(name) \
 		name##_coll_result = block_coll_result(the_pt_group \
