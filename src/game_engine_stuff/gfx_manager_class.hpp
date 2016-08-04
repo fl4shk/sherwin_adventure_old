@@ -217,7 +217,7 @@ public:		// functions
 			bgofs_mirror[i].back_up();
 		}
 	}
-
+	
 	static void copy_bgofs_mirror_to_registers();
 	
 	
@@ -227,17 +227,6 @@ public:		// functions
 	static inline u32 get_metatile_number_of_block_type
 		( block_type the_block_type )
 	{
-		//if ( the_block_type < 0 
-		//	|| the_block_type >= block_type::bt_count )
-		//{
-		//	return block_stuff_array[bt_air]->get_metatile_number();
-		//}
-		//else
-		//{
-		//	return block_stuff_array[the_block_type]
-		//		->get_metatile_number();
-		//}
-		
 		return block_stuff_array[the_block_type]->get_metatile_number();
 	}
 	
@@ -259,16 +248,6 @@ public:		// functions
 	static inline u32 get_palette_number_of_block_type
 		( block_type the_block_type )
 	{
-		//if ( the_block_type < 0 
-		//	|| the_block_type >= block_type::bt_count )
-		//{
-		//	return block_stuff_array[bt_air]->get_palette_number();
-		//}
-		//else
-		//{
-		//	return block_stuff_array[the_block_type]->get_palette_number();
-		//}
-		
 		return block_stuff_array[the_block_type]->get_palette_number();
 	}
 	

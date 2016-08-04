@@ -146,6 +146,7 @@ void gfx_manager::copy_bg_pal_mirror_to_bg_pal_ram()
 {
 	memcpy32( bg_pal_ram, bg_pal_mirror, bg_pal_ram_size 
 		/ sizeof(u32) );
+	//arr_memcpy32( bg_pal_ram, bg_pal_mirror, bg_pal_ram_size );
 }
 
 
@@ -165,29 +166,26 @@ void gfx_manager::upload_bg_tiles_to_vram()
 		u32 metatile_number = get_metatile_number_of_block_type
 			( (block_type)i );
 		
-		//dma3_cpy( &( bg_tile_vram[graphics_slot * 16]), 
-		//	&( the_tiles 
-		//		[metatile_number * 16 * 4] ),
-		//	16 * 4, 0 );
-		
-		//memcpy32( &(bg_tile_vram[graphics_slot * 16]),
-		//	&(the_tiles[metatile_number * 16 * 4]),
-		//	16 * 4 / sizeof(u16) );
-		
 		memcpy32( &(bg_tile_vram_as_tiles[graphics_slot]),
 			
 			&((reinterpret_cast<const tile*>(the_block_gfxTiles))
 			[metatile_number * num_tiles_in_ss_16x16]),
 			
 			sizeof(tile) * num_tiles_in_ss_16x16 / sizeof (u32) );
+		
+		//arr_memcpy32( &(bg_tile_vram_as_tiles[graphics_slot]),
+		//	
+		//	&((reinterpret_cast<const tile*>(the_block_gfxTiles))
+		//	[metatile_number * num_tiles_in_ss_16x16]),
+		//	
+		//	sizeof(tile) * num_tiles_in_ss_16x16 );
 	}
 	
-	//memcpy32( &(bg_tile_vram_as_tiles[hud_vram_as_tiles_start_offset]),
-	//	text_8x16_gfxTiles, 
-	//	text_8x16_gfxTilesLen / sizeof(u32) );
 	memcpy32( &(bg_tile_vram_as_tiles[hud_vram_as_tiles_start_offset]),
 		text_8x8_thick_gfxTiles,
 		text_8x8_thick_gfxTilesLen / sizeof(u32) );
+	//arr_memcpy32( &(bg_tile_vram_as_tiles[hud_vram_as_tiles_start_offset]),
+	//	text_8x8_thick_gfxTiles, text_8x8_thick_gfxTilesLen );
 }
 
 
@@ -206,10 +204,6 @@ void gfx_manager::upload_sprite_palettes_to_target( vu16* target )
 	memcpy32( &(target[sps_powerup * num_colors_per_palette]), 
 		the_powerup_gfxPal, the_powerup_gfxPalLen / sizeof(u32) );
 	
-	//// The block-like sprites' palettes
-	//memcpy32( &(target[sps_block_like_0 * num_colors_per_palette]),
-	//	the_block_like_sprites_gfxPal, the_block_like_sprites_gfxPalLen 
-	//	/ sizeof(u32) );
 	
 	// The door sprites' palettes
 	memcpy32( &(target[sps_door * num_colors_per_palette]), 
@@ -229,6 +223,7 @@ void gfx_manager::copy_obj_pal_mirror_to_obj_pal_ram()
 {
 	memcpy32( obj_pal_ram, obj_pal_mirror, obj_pal_ram_size 
 		/ sizeof(u32) );
+	//arr_memcpy32( obj_pal_ram, obj_pal_mirror, obj_pal_ram_size );
 }
 
 
@@ -255,6 +250,15 @@ void gfx_manager::upload_sprite_tiles_to_vram( sprite& the_sprite )
 		//sizeof(tile) * num_tiles_in_ss_32x32 / sizeof(u32) );
 		sizeof(tile) * the_sprite.get_num_active_gfx_tiles() 
 		/ sizeof(u32) );
+	
+	//arr_memcpy32( &(((tile*)obj_tile_vram)
+	//	[the_sprite.get_vram_chunk_index() * num_tiles_in_ss_32x32]),
+	//	
+	//	&(the_sprite.get_tile_arr()
+	//		[the_sprite.get_curr_relative_tile_slot()]),
+	//	
+	//	//sizeof(tile) * num_tiles_in_ss_32x32 / sizeof(u32) );
+	//	sizeof(tile) * the_sprite.get_num_active_gfx_tiles() );
 }
 
 
@@ -525,6 +529,7 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 	
 	
 	bios_wait_for_vblank();
+	
 	// Just in case the conversion wasn't complete
 	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
@@ -618,6 +623,7 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 	// Fading iteration
 	for ( u32 i=0; i<num_steps; ++i )
 	{
+		asm_comment("Before BG palette loop");
 		// For each BG palette
 		//for ( u32 j=0; j<the_block_gfxPalLen / sizeof(u16); ++j )
 		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
@@ -661,6 +667,7 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 				curr_blue.round_to_int() );
 		}
 		
+		asm_comment("Before OBJ palette loop");
 		// For each OBJ palette
 		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
@@ -694,6 +701,7 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 				curr_blue.round_to_int() );
 		}
 		
+		asm_comment("Before wait_for_x_frames()");
 		game_manager::wait_for_x_frames(num_frames_to_wait_per_iter);
 	}
 	

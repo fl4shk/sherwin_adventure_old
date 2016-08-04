@@ -41,12 +41,21 @@ fixed24p8 f24p8_div_by_u16( const fixed24p8& num, u16 den )
 class fixed24p8
 {
 public:		// variables
-	static const u32 shift = 8;
-	static const u32 frac_mask = 0xff;
+	static constexpr u32 shift = 8;
+	static constexpr u32 frac_mask = ( 1 << shift ) - 1;
 	
 	s32 data;
 	
 public:		// functions
+	static constexpr inline u32 get_shift()
+	{
+		return shift;
+	}
+	static constexpr inline u32 get_frac_mask()
+	{
+		return frac_mask;
+	}
+	
 	// This function does TRUE rounding
 	inline s32 round_to_int() const;
 	
@@ -64,7 +73,7 @@ public:		// functions
 	
 	inline fixed24p8 with_zero_frac_bits() const;
 	
-	inline u8 get_frac_bits() const;
+	inline u32 get_frac_bits() const;
 	
 	inline operator fixed8p8() const;
 	
@@ -201,7 +210,7 @@ inline fixed24p8 fixed24p8::with_zero_frac_bits() const
 	return positive_n_value;
 }
 
-inline u8 fixed24p8::get_frac_bits() const
+inline u32 fixed24p8::get_frac_bits() const
 {
 	//if ( data < 0 )
 	//{
@@ -287,15 +296,24 @@ inline bool fixed24p8::operator >= ( const fixed24p8& to_cmp ) const
 class fixed8p8
 {
 public:		// variables
-	static const u32 shift = 8;
-	static const u32 frac_mask = 0xff;
+	static constexpr u32 shift = 8;
+	static constexpr u32 frac_mask = ( 1 << shift ) - 1;
 	
 	s16 data;
 	
 public:		// functions
+	static constexpr inline u32 get_shift()
+	{
+		return shift;
+	}
+	static constexpr inline u32 get_frac_mask()
+	{
+		return frac_mask;
+	}
+	
 	inline s16 round_to_int() const;
 	inline s16 floor_to_int() const;
-	inline u8 get_frac_bits() const;
+	inline u32 get_frac_bits() const;
 	
 	inline operator fixed24p8() const;
 	
@@ -348,7 +366,7 @@ inline s16 fixed8p8::floor_to_int() const
 	//return ret;
 }
 
-inline u8 fixed8p8::get_frac_bits() const
+inline u32 fixed8p8::get_frac_bits() const
 {
 	//if ( data < 0 )
 	//{
@@ -513,52 +531,185 @@ inline fixed8p8 operator - ( const fixed8p8& a )
 //fixed8p8 make_f8p8( s8 whole_part, u8 frac_part=0 ) 
 //	__attribute__((_iwram_code));
 
-inline fixed24p8 make_f24p8( s32 whole_part, u8 frac_part=0 )
+
+
+
+template< typename underlying_type, u32 shift >
+class fixedpt_num_packed
 {
-	s32 temp_data, ret_data;
+public:		// typedefs
+	typedef fixedpt_num_packed< underlying_type, shift > 
+		specific_fixedpt_type;
+	
+public:		// variables
+	static constexpr u32 frac_mask = ( 1 << shift ) - 1;
+	static constexpr u32 underlying_type_is_signed 
+		= ( underlying_type(-1) < underlying_type(0) );
+	
+	underlying_type data;
+	
+public:		// functions
+	
+	static constexpr inline u32 get_shift()
+	{
+		return shift;
+	}
+	static constexpr inline u32 get_frac_mask()
+	{
+		return frac_mask;
+	}
+	static constexpr inline u32 get_underlying_type_is_signed()
+	{
+		return underlying_type_is_signed;
+	}
+	
+	
+	
+	inline underlying_type round_to_int() const
+	{
+		return (underlying_type)( ( data + ( 1 << ( get_shift() - 1 ) ) ) 
+			>> get_shift() );
+	}
+	inline underlying_type floor_to_int() const
+	{
+		return (underlying_type)( data >> get_shift() );
+	}
+	inline u32 get_frac_bits() const
+	{
+		return (u8)( custom_abs(data) & get_frac_mask() );
+	}
+	
+	inline specific_fixedpt_type operator + 
+		( const specific_fixedpt_type& to_add ) const
+	{
+		return (specific_fixedpt_type){ data + to_add.data };
+	}
+	inline specific_fixedpt_type operator - 
+		( const specific_fixedpt_type& to_sub ) const
+	{
+		return (specific_fixedpt_type){ data - to_sub.data };
+	}
+	
+	
+	inline specific_fixedpt_type& operator = 
+		( const specific_fixedpt_type& to_copy )
+	{
+		data = to_copy.data;
+	}
+	inline void operator += ( const specific_fixedpt_type& to_add )
+	{
+		data += to_add.data;
+	}
+	inline void operator -= ( const specific_fixedpt_type& to_sub )
+	{
+		data -= to_sub.data;
+	}
+	
+	
+	// Comparison operator overloads
+	#define list_of_comparison_operators(macro) \
+		macro(==) macro(!=) macro(<) macro(>) macro(<=) macro(>=)
+	
+	#define generate_comparison_operator_overload(specific_operator) \
+	inline bool operator specific_operator \
+		( const specific_fixedpt_type& to_cmp ) const \
+	{ \
+		return ( data specific_operator to_cmp.data ); \
+	};
+	
+	list_of_comparison_operators(generate_comparison_operator_overload)
+	
+	#undef list_of_comparison_operators
+	#undef generate_comparison_operator_overload
+	
+	
+	
+} __attribute__((_packed));
+
+typedef fixedpt_num_packed< u16, 4 > fixedu12p4_packed;
+typedef fixedpt_num_packed< s16, 4 > fixeds12p4_packed;
+typedef fixedpt_num_packed< s16, 4 > fixeds8p8_packed;
+
+
+
+template< typename specific_fixedpt_type >
+inline specific_fixedpt_type make_signed_fixedpt_num( s32 whole_part, 
+	u32 frac_part=0 )
+{
+	static constexpr u32 shift = specific_fixedpt_type::get_shift();
+	static constexpr u32 frac_mask 
+		= specific_fixedpt_type::get_frac_mask();
+	
+	//s32 temp_data, ret_data;
+	decltype(specific_fixedpt_type::data) temp_data, ret_data;
+	
 	
 	if ( whole_part < 0 )
 	{
-		temp_data = (-whole_part) << fixed24p8::shift;
-		temp_data |= frac_part;
+		temp_data = (-whole_part) << shift;
+		temp_data |= ( frac_part & frac_mask );
 		
 		ret_data = -temp_data;
 	}
 	else
 	{
-		temp_data = whole_part << fixed24p8::shift;
-		temp_data |= frac_part;
+		temp_data = whole_part << shift;
+		temp_data |= ( frac_part & frac_mask );
 		
 		ret_data = temp_data;
 	}
 	
-	return (fixed24p8){ ret_data };
+	//return reinterpret_cast<specific_fixedpt_type>({ ret_data });
+	return (specific_fixedpt_type){ ret_data };
 }
 
 
-inline fixed8p8 make_f8p8( s8 whole_part, u8 frac_part=0 )
+template< typename specific_fixedpt_type >
+inline specific_fixedpt_type make_unsigned_fixedpt_num( u32 whole_part, 
+	u32 frac_part=0 )
 {
-	s16 temp_data, ret_data;
+	static constexpr u32 shift = specific_fixedpt_type::get_shift();
+	static constexpr u32 frac_mask 
+		= specific_fixedpt_type::get_frac_mask();
 	
-	if ( whole_part < 0 )
-	{
-		temp_data = (-whole_part) << fixed8p8::shift;
-		temp_data |= frac_part;
-		
-		ret_data = -temp_data;
-	}
-	else
-	{
-		temp_data = whole_part << fixed8p8::shift;
-		temp_data |= frac_part;
-		
-		ret_data = temp_data;
-	}
+	decltype(specific_fixedpt_type::data) ret_data;
 	
-	return { ret_data };
+	
+	ret_data = whole_part << shift;
+	ret_data |= ( frac_part & frac_mask );
+	
+	//return reinterpret_cast<specific_fixedpt_type>({ ret_data });
+	return (specific_fixedpt_type){ ret_data };
 }
 
 
+inline fixed24p8 make_f24p8( s32 whole_part, u32 frac_part=0 )
+{
+	return make_signed_fixedpt_num<fixed24p8>( whole_part, frac_part );
+}
+inline fixed8p8 make_f8p8( s32 whole_part, u32 frac_part=0 )
+{
+	return make_signed_fixedpt_num<fixed8p8>( whole_part, frac_part );
+}
 
+inline fixedu12p4_packed make_fu12p4_packed( u32 whole_part, 
+	u32 frac_part=0 )
+{
+	return make_unsigned_fixedpt_num<fixedu12p4_packed>( whole_part, 
+		frac_part );
+}
+inline fixeds12p4_packed make_fs12p4_packed( s32 whole_part, 
+	u32 frac_part=0 )
+{
+	return make_signed_fixedpt_num<fixeds12p4_packed>( whole_part, 
+		frac_part );
+}
+
+inline fixeds8p8_packed make_fs8p8_packed( s32 whole_part, 
+	u32 frac_part=0 )
+{
+	return make_signed_fixedpt_num<fixeds8p8_packed>( whole_part, 
+		frac_part );
+}
 
 #endif		// fixed_classes_hpp

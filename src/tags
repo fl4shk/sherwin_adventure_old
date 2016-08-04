@@ -46,6 +46,7 @@ Y	game_engine_stuff/coll_point_group_classes.thumb.cpp	214;"	kind:d	file:
 Y	game_engine_stuff/coll_point_group_classes.thumb.cpp	39;"	kind:d	file:
 __key_state	gba_specific_stuff/button_stuff.thumb.cpp	/^volatile prev_curr_pair<vu16> __key_state __attribute__((_iwram)) $/;"	kind:v
 __sync_synchronize	gba_specific_stuff/asm_funcs.thumb.cpp	/^void __sync_synchronize()$/;"	kind:f	signature:()
+_align2	gba_specific_stuff/attribute_defines.hpp	48;"	kind:d
 _align4	gba_specific_stuff/attribute_defines.hpp	47;"	kind:d
 _bss	gba_specific_stuff/attribute_defines.hpp	34;"	kind:d
 _ewram	gba_specific_stuff/attribute_defines.hpp	29;"	kind:d
@@ -53,7 +54,7 @@ _ewram_code	gba_specific_stuff/attribute_defines.hpp	40;"	kind:d
 _iwram	gba_specific_stuff/attribute_defines.hpp	30;"	kind:d
 _iwram_bss	gba_specific_stuff/attribute_defines.hpp	35;"	kind:d
 _iwram_code	gba_specific_stuff/attribute_defines.hpp	41;"	kind:d
-_packed	gba_specific_stuff/attribute_defines.hpp	52;"	kind:d
+_packed	gba_specific_stuff/attribute_defines.hpp	53;"	kind:d
 _sram	gba_specific_stuff/attribute_defines.hpp	36;"	kind:d
 accel_x	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	fixed24p8 accel_x;$/;"	kind:m	class:sprite	access:public
 active_level	game_engine_stuff/level_stuff/active_level_class.hpp	/^class active_level$/;"	kind:c
@@ -154,7 +155,7 @@ alignas4	game_engine_stuff/sprite_stuff/snow_golem_sprite_class.hpp	/^	} alignas
 alignas4	game_engine_stuff/sprite_stuff/snow_golem_sprite_class.hpp	/^	} alignas4;$/;"	kind:m	class:snow_golem_sprite	typeref:enum:snow_golem_sprite::udata_index	access:public
 alignas4	game_engine_stuff/sprite_stuff/waffle_sprite_class.hpp	/^		sdi_move_timer, } alignas4;$/;"	kind:m	class:waffle_sprite	typeref:enum:waffle_sprite::sdata_index	access:public
 alignas4	game_engine_stuff/sprite_stuff/waffle_sprite_class.hpp	/^	enum udata_index { udi_initial_pos_was_set, } alignas4;$/;"	kind:m	class:waffle_sprite	typeref:enum:waffle_sprite::udata_index	access:public
-alignas4	gba_specific_stuff/attribute_defines.hpp	55;"	kind:d
+alignas4	gba_specific_stuff/attribute_defines.hpp	56;"	kind:d
 allocate_sprite	game_engine_stuff/sprite_stuff/sprite_allocator_class.hpp	/^	void* allocate_sprite() __attribute__((_iwram_code,returns_nonnull));$/;"	kind:p	class:sprite_allocator	access:public	signature:()
 allocate_sprite	game_engine_stuff/sprite_stuff/sprite_allocator_class.thumb.cpp	/^void* sprite_allocator::allocate_sprite()$/;"	kind:f	class:sprite_allocator	signature:()
 allocate_sprite	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void allocate_sprite( sprite*& the_sprite, $/;"	kind:p	class:sprite_manager	access:public	signature:( sprite*& the_sprite, sprite_allocator& the_sprite_allocator, sprite_type the_sprite_type, bool facing_left )
@@ -778,6 +779,7 @@ chocolate_muffin_sprite::the_relative_metatile_slot	game_engine_stuff/sprite_stu
 chocolate_muffin_sprite::tile_arr	game_engine_stuff/sprite_stuff/muffin_sprite_classes.hpp	/^	static constexpr tile* tile_arr = const_cast<tile*>$/;"	kind:m	class:chocolate_muffin_sprite	access:public
 clamped_rgb15_component_add	gba_specific_stuff/gfx_reg_stuff.hpp	/^inline void clamped_rgb15_component_add( s32& component, s32 amount_to_add, $/;"	kind:f	signature:( s32& component, s32 amount_to_add, s32 component_max_value=rgb15_component_max_val )
 clamped_rgb15_f24p8_component_add	gba_specific_stuff/gfx_reg_stuff.hpp	/^inline void clamped_rgb15_f24p8_component_add( fixed24p8& component,$/;"	kind:f	signature:( fixed24p8& component, const fixed24p8& amount_to_add, const fixed24p8& target_value )
+clamped_rgb15_f8p8_component_add	gba_specific_stuff/gfx_reg_stuff.hpp	/^inline void clamped_rgb15_f8p8_component_add( fixed8p8& component,$/;"	kind:f	signature:( fixed8p8& component, const fixed8p8& amount_to_add, const fixed8p8& target_value )
 clear	general_utility_stuff/debug_vars.hpp	/^	inline void clear()$/;"	kind:f	class:debug_str	access:public	signature:()
 clear_and_set_bits	general_utility_stuff/misc_bitwise_funcs.hpp	/^inline void clear_and_set_bits( type& to_change, u32 clear_mask,$/;"	kind:f	signature:( type& to_change, u32 clear_mask, u32 set_mask )
 clear_bits	general_utility_stuff/misc_bitwise_funcs.hpp	/^inline void clear_bits( type& to_clear, u32 mask )$/;"	kind:f	signature:( type& to_clear, u32 mask )
@@ -931,6 +933,7 @@ data	gba_specific_stuff/gfx_reg_stuff.hpp	/^	u32 data[arrsize];$/;"	kind:m	struc
 data	gba_specific_stuff/gfx_reg_stuff.hpp	/^	u32 data[arrsize];$/;"	kind:m	struct:tile8	access:public
 data	general_utility_stuff/fixed_classes.hpp	/^	s16 data;$/;"	kind:m	class:fixed8p8	access:public
 data	general_utility_stuff/fixed_classes.hpp	/^	s32 data;$/;"	kind:m	class:fixed24p8	access:public
+data	general_utility_stuff/fixed_classes.hpp	/^	underlying_type data;$/;"	kind:m	class:fixedpt_num_packed	access:public
 data16	general_utility_stuff/misc_types.hpp	/^		u16 data16 [2];$/;"	kind:m	struct:byte_group_32::__anon2	access:public
 data16	general_utility_stuff/misc_types.hpp	/^		u16 data16 [4];$/;"	kind:m	struct:byte_group_64::__anon5	access:public
 data16	general_utility_stuff/misc_types.hpp	/^	u16 data16;$/;"	kind:m	union:byte_group_16	access:public
@@ -1403,9 +1406,11 @@ fixed24p8	general_utility_stuff/fixed_classes.hpp	/^class fixed24p8$/;"	kind:c
 fixed24p8::data	general_utility_stuff/fixed_classes.hpp	/^	s32 data;$/;"	kind:m	class:fixed24p8	access:public
 fixed24p8::floor_to_int	general_utility_stuff/fixed_classes.hpp	/^	inline s32 floor_to_int() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
 fixed24p8::floor_to_int	general_utility_stuff/fixed_classes.hpp	/^inline s32 fixed24p8::floor_to_int() const$/;"	kind:f	class:fixed24p8	signature:() const
-fixed24p8::frac_mask	general_utility_stuff/fixed_classes.hpp	/^	static const u32 frac_mask = 0xff;$/;"	kind:m	class:fixed24p8	access:public
-fixed24p8::get_frac_bits	general_utility_stuff/fixed_classes.hpp	/^	inline u8 get_frac_bits() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
-fixed24p8::get_frac_bits	general_utility_stuff/fixed_classes.hpp	/^inline u8 fixed24p8::get_frac_bits() const$/;"	kind:f	class:fixed24p8	signature:() const
+fixed24p8::frac_mask	general_utility_stuff/fixed_classes.hpp	/^	static constexpr u32 frac_mask = ( 1 << shift ) - 1;$/;"	kind:m	class:fixed24p8	access:public
+fixed24p8::get_frac_bits	general_utility_stuff/fixed_classes.hpp	/^	inline u32 get_frac_bits() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
+fixed24p8::get_frac_bits	general_utility_stuff/fixed_classes.hpp	/^inline u32 fixed24p8::get_frac_bits() const$/;"	kind:f	class:fixed24p8	signature:() const
+fixed24p8::get_frac_mask	general_utility_stuff/fixed_classes.hpp	/^	static constexpr inline u32 get_frac_mask()$/;"	kind:f	class:fixed24p8	access:public	signature:()
+fixed24p8::get_shift	general_utility_stuff/fixed_classes.hpp	/^	static constexpr inline u32 get_shift()$/;"	kind:f	class:fixed24p8	access:public	signature:()
 fixed24p8::guaranteed_f24p8_by_f8p8_multiplication	general_utility_stuff/fixed_classes.arm.cpp	/^fixed24p8 fixed24p8::guaranteed_f24p8_by_f8p8_multiplication$/;"	kind:f	class:fixed24p8	signature:( const fixed8p8& to_mul )
 fixed24p8::guaranteed_f24p8_by_f8p8_multiplication	general_utility_stuff/fixed_classes.hpp	/^	fixed24p8 guaranteed_f24p8_by_f8p8_multiplication$/;"	kind:p	class:fixed24p8	access:public	signature:( const fixed8p8& to_mul )
 fixed24p8::operator !=	general_utility_stuff/fixed_classes.hpp	/^	inline bool operator != ( const fixed24p8& to_cmp ) const;$/;"	kind:p	class:fixed24p8	access:public	signature:( const fixed24p8& to_cmp ) const
@@ -1442,7 +1447,7 @@ fixed24p8::operator fixed8p8	general_utility_stuff/fixed_classes.hpp	/^	inline o
 fixed24p8::operator fixed8p8	general_utility_stuff/fixed_classes.hpp	/^inline fixed24p8::operator fixed8p8 () const$/;"	kind:f	class:fixed24p8	signature:() const
 fixed24p8::round_to_int	general_utility_stuff/fixed_classes.hpp	/^	inline s32 round_to_int() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
 fixed24p8::round_to_int	general_utility_stuff/fixed_classes.hpp	/^inline s32 fixed24p8::round_to_int() const$/;"	kind:f	class:fixed24p8	signature:() const
-fixed24p8::shift	general_utility_stuff/fixed_classes.hpp	/^	static const u32 shift = 8;$/;"	kind:m	class:fixed24p8	access:public
+fixed24p8::shift	general_utility_stuff/fixed_classes.hpp	/^	static constexpr u32 shift = 8;$/;"	kind:m	class:fixed24p8	access:public
 fixed24p8::to_int_for_on_screen	general_utility_stuff/fixed_classes.hpp	/^	inline s32 to_int_for_on_screen() const$/;"	kind:f	class:fixed24p8	access:public	signature:() const
 fixed24p8::with_zero_frac_bits	general_utility_stuff/fixed_classes.hpp	/^	inline fixed24p8 with_zero_frac_bits() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
 fixed24p8::with_zero_frac_bits	general_utility_stuff/fixed_classes.hpp	/^inline fixed24p8 fixed24p8::with_zero_frac_bits() const$/;"	kind:f	class:fixed24p8	signature:() const
@@ -1450,9 +1455,11 @@ fixed8p8	general_utility_stuff/fixed_classes.hpp	/^class fixed8p8$/;"	kind:c
 fixed8p8::data	general_utility_stuff/fixed_classes.hpp	/^	s16 data;$/;"	kind:m	class:fixed8p8	access:public
 fixed8p8::floor_to_int	general_utility_stuff/fixed_classes.hpp	/^	inline s16 floor_to_int() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
 fixed8p8::floor_to_int	general_utility_stuff/fixed_classes.hpp	/^inline s16 fixed8p8::floor_to_int() const$/;"	kind:f	class:fixed8p8	signature:() const
-fixed8p8::frac_mask	general_utility_stuff/fixed_classes.hpp	/^	static const u32 frac_mask = 0xff;$/;"	kind:m	class:fixed8p8	access:public
-fixed8p8::get_frac_bits	general_utility_stuff/fixed_classes.hpp	/^	inline u8 get_frac_bits() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
-fixed8p8::get_frac_bits	general_utility_stuff/fixed_classes.hpp	/^inline u8 fixed8p8::get_frac_bits() const$/;"	kind:f	class:fixed8p8	signature:() const
+fixed8p8::frac_mask	general_utility_stuff/fixed_classes.hpp	/^	static constexpr u32 frac_mask = ( 1 << shift ) - 1;$/;"	kind:m	class:fixed8p8	access:public
+fixed8p8::get_frac_bits	general_utility_stuff/fixed_classes.hpp	/^	inline u32 get_frac_bits() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
+fixed8p8::get_frac_bits	general_utility_stuff/fixed_classes.hpp	/^inline u32 fixed8p8::get_frac_bits() const$/;"	kind:f	class:fixed8p8	signature:() const
+fixed8p8::get_frac_mask	general_utility_stuff/fixed_classes.hpp	/^	static constexpr inline u32 get_frac_mask()$/;"	kind:f	class:fixed8p8	access:public	signature:()
+fixed8p8::get_shift	general_utility_stuff/fixed_classes.hpp	/^	static constexpr inline u32 get_shift()$/;"	kind:f	class:fixed8p8	access:public	signature:()
 fixed8p8::operator !=	general_utility_stuff/fixed_classes.hpp	/^	inline bool operator != ( const fixed8p8& to_cmp ) const;$/;"	kind:p	class:fixed8p8	access:public	signature:( const fixed8p8& to_cmp ) const
 fixed8p8::operator !=	general_utility_stuff/fixed_classes.hpp	/^inline bool fixed8p8::operator != ( const fixed8p8& to_cmp ) const$/;"	kind:f	class:fixed8p8	signature:( const fixed8p8& to_cmp ) const
 fixed8p8::operator +	general_utility_stuff/fixed_classes.hpp	/^	inline fixed8p8 operator + ( const fixed8p8& to_add ) const;$/;"	kind:p	class:fixed8p8	access:public	signature:( const fixed8p8& to_add ) const
@@ -1479,14 +1486,35 @@ fixed8p8::operator fixed24p8	general_utility_stuff/fixed_classes.hpp	/^	inline o
 fixed8p8::operator fixed24p8	general_utility_stuff/fixed_classes.hpp	/^inline fixed8p8::operator fixed24p8() const$/;"	kind:f	class:fixed8p8	signature:() const
 fixed8p8::round_to_int	general_utility_stuff/fixed_classes.hpp	/^	inline s16 round_to_int() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
 fixed8p8::round_to_int	general_utility_stuff/fixed_classes.hpp	/^inline s16 fixed8p8::round_to_int() const$/;"	kind:f	class:fixed8p8	signature:() const
-fixed8p8::shift	general_utility_stuff/fixed_classes.hpp	/^	static const u32 shift = 8;$/;"	kind:m	class:fixed8p8	access:public
+fixed8p8::shift	general_utility_stuff/fixed_classes.hpp	/^	static constexpr u32 shift = 8;$/;"	kind:m	class:fixed8p8	access:public
 fixed_classes_hpp	general_utility_stuff/fixed_classes.hpp	20;"	kind:d
+fixedpt_num_packed	general_utility_stuff/fixed_classes.hpp	/^class fixedpt_num_packed$/;"	kind:c
+fixedpt_num_packed::data	general_utility_stuff/fixed_classes.hpp	/^	underlying_type data;$/;"	kind:m	class:fixedpt_num_packed	access:public
+fixedpt_num_packed::floor_to_int	general_utility_stuff/fixed_classes.hpp	/^	inline underlying_type floor_to_int() const$/;"	kind:f	class:fixedpt_num_packed	access:public	signature:() const
+fixedpt_num_packed::frac_mask	general_utility_stuff/fixed_classes.hpp	/^	static constexpr u32 frac_mask = ( 1 << shift ) - 1;$/;"	kind:m	class:fixedpt_num_packed	access:public
+fixedpt_num_packed::get_frac_bits	general_utility_stuff/fixed_classes.hpp	/^	inline u32 get_frac_bits() const$/;"	kind:f	class:fixedpt_num_packed	access:public	signature:() const
+fixedpt_num_packed::get_frac_mask	general_utility_stuff/fixed_classes.hpp	/^	static constexpr inline u32 get_frac_mask()$/;"	kind:f	class:fixedpt_num_packed	access:public	signature:()
+fixedpt_num_packed::get_shift	general_utility_stuff/fixed_classes.hpp	/^	static constexpr inline u32 get_shift()$/;"	kind:f	class:fixedpt_num_packed	access:public	signature:()
+fixedpt_num_packed::get_underlying_type_is_signed	general_utility_stuff/fixed_classes.hpp	/^	static constexpr inline u32 get_underlying_type_is_signed()$/;"	kind:f	class:fixedpt_num_packed	access:public	signature:()
+fixedpt_num_packed::operator +	general_utility_stuff/fixed_classes.hpp	/^	inline specific_fixedpt_type operator + $/;"	kind:f	class:fixedpt_num_packed	access:public	signature:( const specific_fixedpt_type& to_add ) const
+fixedpt_num_packed::operator +=	general_utility_stuff/fixed_classes.hpp	/^	inline void operator += ( const specific_fixedpt_type& to_add )$/;"	kind:f	class:fixedpt_num_packed	access:public	signature:( const specific_fixedpt_type& to_add )
+fixedpt_num_packed::operator -	general_utility_stuff/fixed_classes.hpp	/^	inline specific_fixedpt_type operator - $/;"	kind:f	class:fixedpt_num_packed	access:public	signature:( const specific_fixedpt_type& to_sub ) const
+fixedpt_num_packed::operator -=	general_utility_stuff/fixed_classes.hpp	/^	inline void operator -= ( const specific_fixedpt_type& to_sub )$/;"	kind:f	class:fixedpt_num_packed	access:public	signature:( const specific_fixedpt_type& to_sub )
+fixedpt_num_packed::operator =	general_utility_stuff/fixed_classes.hpp	/^	inline specific_fixedpt_type& operator = $/;"	kind:f	class:fixedpt_num_packed	access:public	signature:( const specific_fixedpt_type& to_copy )
+fixedpt_num_packed::round_to_int	general_utility_stuff/fixed_classes.hpp	/^	inline underlying_type round_to_int() const$/;"	kind:f	class:fixedpt_num_packed	access:public	signature:() const
+fixedpt_num_packed::specific_fixedpt_type	general_utility_stuff/fixed_classes.hpp	/^		specific_fixedpt_type;$/;"	kind:t	class:fixedpt_num_packed	access:public
+fixedpt_num_packed::underlying_type_is_signed	general_utility_stuff/fixed_classes.hpp	/^	static constexpr u32 underlying_type_is_signed $/;"	kind:m	class:fixedpt_num_packed	access:public
+fixeds12p4_packed	general_utility_stuff/fixed_classes.hpp	/^typedef fixedpt_num_packed< s16, 4 > fixeds12p4_packed;$/;"	kind:t
+fixeds8p8_packed	general_utility_stuff/fixed_classes.hpp	/^typedef fixedpt_num_packed< s16, 4 > fixeds8p8_packed;$/;"	kind:t
+fixedu12p4_packed	general_utility_stuff/fixed_classes.hpp	/^typedef fixedpt_num_packed< u16, 4 > fixedu12p4_packed;$/;"	kind:t
 floor_to_int	general_utility_stuff/fixed_classes.hpp	/^	inline s16 floor_to_int() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
 floor_to_int	general_utility_stuff/fixed_classes.hpp	/^	inline s32 floor_to_int() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
+floor_to_int	general_utility_stuff/fixed_classes.hpp	/^	inline underlying_type floor_to_int() const$/;"	kind:f	class:fixedpt_num_packed	access:public	signature:() const
 floor_to_int	general_utility_stuff/fixed_classes.hpp	/^inline s16 fixed8p8::floor_to_int() const$/;"	kind:f	class:fixed8p8	signature:() const
 floor_to_int	general_utility_stuff/fixed_classes.hpp	/^inline s32 fixed24p8::floor_to_int() const$/;"	kind:f	class:fixed24p8	signature:() const
-frac_mask	general_utility_stuff/fixed_classes.hpp	/^	static const u32 frac_mask = 0xff;$/;"	kind:m	class:fixed24p8	access:public
-frac_mask	general_utility_stuff/fixed_classes.hpp	/^	static const u32 frac_mask = 0xff;$/;"	kind:m	class:fixed8p8	access:public
+frac_mask	general_utility_stuff/fixed_classes.hpp	/^	static constexpr u32 frac_mask = ( 1 << shift ) - 1;$/;"	kind:m	class:fixed24p8	access:public
+frac_mask	general_utility_stuff/fixed_classes.hpp	/^	static constexpr u32 frac_mask = ( 1 << shift ) - 1;$/;"	kind:m	class:fixed8p8	access:public
+frac_mask	general_utility_stuff/fixed_classes.hpp	/^	static constexpr u32 frac_mask = ( 1 << shift ) - 1;$/;"	kind:m	class:fixedpt_num_packed	access:public
 frame	game_engine_stuff/sprite_stuff/player_pickaxe_sprite_class.hpp	/^	enum frame$/;"	kind:g	class:player_pickaxe_sprite	access:public
 frame	game_engine_stuff/sprite_stuff/player_sprite_class.hpp	/^	enum frame$/;"	kind:g	class:player_sprite	access:public
 frame	game_engine_stuff/sprite_stuff/snow_golem_sprite_class.hpp	/^	enum frame$/;"	kind:g	class:snow_golem_sprite	access:public
@@ -1622,6 +1650,8 @@ generate_case_statement	game_engine_stuff/sprite_stuff/sprite_manager_class.thum
 generate_case_statement	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	222;"	kind:d	file:
 generate_case_statement	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	260;"	kind:d	file:
 generate_case_statement	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.cpp	268;"	kind:d	file:
+generate_comparison_operator_overload	general_utility_stuff/fixed_classes.hpp	613;"	kind:d
+generate_comparison_operator_overload	general_utility_stuff/fixed_classes.hpp	623;"	kind:d
 generate_func_contents	general_utility_stuff/debug_vars.hpp	350;"	kind:d
 generate_func_contents	general_utility_stuff/debug_vars.hpp	386;"	kind:d
 generate_pt	game_engine_stuff/coll_point_group_classes.thumb.cpp	212;"	kind:d	file:
@@ -1693,10 +1723,14 @@ get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/sprite_class.thumb.cp
 get_curr_relative_tile_slot	game_engine_stuff/sprite_stuff/waffle_sprite_class.hpp	/^	inline const u32 get_curr_relative_tile_slot()$/;"	kind:f	class:waffle_sprite	access:public	signature:()
 get_curr_sublevel_ptr	game_engine_stuff/level_stuff/active_level_class.hpp	/^	static inline const sublevel_pointer& get_curr_sublevel_ptr()$/;"	kind:f	class:active_level	access:public	signature:()
 get_curr_tile_slot	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline const u32 get_curr_tile_slot()$/;"	kind:f	class:sprite	access:public	signature:()
-get_frac_bits	general_utility_stuff/fixed_classes.hpp	/^	inline u8 get_frac_bits() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
-get_frac_bits	general_utility_stuff/fixed_classes.hpp	/^	inline u8 get_frac_bits() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
-get_frac_bits	general_utility_stuff/fixed_classes.hpp	/^inline u8 fixed24p8::get_frac_bits() const$/;"	kind:f	class:fixed24p8	signature:() const
-get_frac_bits	general_utility_stuff/fixed_classes.hpp	/^inline u8 fixed8p8::get_frac_bits() const$/;"	kind:f	class:fixed8p8	signature:() const
+get_frac_bits	general_utility_stuff/fixed_classes.hpp	/^	inline u32 get_frac_bits() const$/;"	kind:f	class:fixedpt_num_packed	access:public	signature:() const
+get_frac_bits	general_utility_stuff/fixed_classes.hpp	/^	inline u32 get_frac_bits() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
+get_frac_bits	general_utility_stuff/fixed_classes.hpp	/^	inline u32 get_frac_bits() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
+get_frac_bits	general_utility_stuff/fixed_classes.hpp	/^inline u32 fixed24p8::get_frac_bits() const$/;"	kind:f	class:fixed24p8	signature:() const
+get_frac_bits	general_utility_stuff/fixed_classes.hpp	/^inline u32 fixed8p8::get_frac_bits() const$/;"	kind:f	class:fixed8p8	signature:() const
+get_frac_mask	general_utility_stuff/fixed_classes.hpp	/^	static constexpr inline u32 get_frac_mask()$/;"	kind:f	class:fixed24p8	access:public	signature:()
+get_frac_mask	general_utility_stuff/fixed_classes.hpp	/^	static constexpr inline u32 get_frac_mask()$/;"	kind:f	class:fixed8p8	access:public	signature:()
+get_frac_mask	general_utility_stuff/fixed_classes.hpp	/^	static constexpr inline u32 get_frac_mask()$/;"	kind:f	class:fixedpt_num_packed	access:public	signature:()
 get_front_node_index	general_utility_stuff/sa_list_class_stuff.hpp	/^	inline const s32 get_front_node_index() const$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:() const
 get_front_node_index	general_utility_stuff/sa_list_class_stuff.hpp	/^	inline s32& get_front_node_index()$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:()
 get_graphics_slot_of_block_type	game_engine_stuff/gfx_manager_class.hpp	/^	static inline const u32 get_graphics_slot_of_block_type $/;"	kind:f	class:gfx_manager	access:public	signature:( block_type the_block_type )
@@ -1927,6 +1961,9 @@ get_shape_size_as_vec2	gba_specific_stuff/oam_entry_classes.hpp	/^	vec2_u32 get_
 get_shape_size_as_vec2	gba_specific_stuff/oam_entry_classes.thumb.cpp	/^vec2_u32 oam_entry::get_shape_size_as_vec2() const$/;"	kind:f	class:oam_entry	signature:() const
 get_shape_size_as_vec2_raw	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	vec2_u32 get_shape_size_as_vec2_raw() const;$/;"	kind:p	class:sprite	access:protected	signature:() const
 get_shape_size_as_vec2_raw	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^vec2_u32 sprite::get_shape_size_as_vec2_raw() const$/;"	kind:f	class:sprite	signature:() const
+get_shift	general_utility_stuff/fixed_classes.hpp	/^	static constexpr inline u32 get_shift()$/;"	kind:f	class:fixed24p8	access:public	signature:()
+get_shift	general_utility_stuff/fixed_classes.hpp	/^	static constexpr inline u32 get_shift()$/;"	kind:f	class:fixed8p8	access:public	signature:()
+get_shift	general_utility_stuff/fixed_classes.hpp	/^	static constexpr inline u32 get_shift()$/;"	kind:f	class:fixedpt_num_packed	access:public	signature:()
 get_side_blocked_stuff_old	game_engine_stuff/block_coll_result_group_classes.arm.cpp	/^void block_coll_result_rect_group::get_side_blocked_stuff_old$/;"	kind:f	class:block_coll_result_rect_group	signature:( array_helper<u32>& bool_as_u32_arr_helper )
 get_side_blocked_stuff_old	game_engine_stuff/block_coll_result_group_classes.hpp	/^	void get_side_blocked_stuff_old$/;"	kind:p	class:block_coll_result_rect_group	access:public	signature:( array_helper<u32>& bool_as_u32_arr_helper )
 get_size	general_utility_stuff/array_2d_helper_class.hpp	/^	u32 get_size() const$/;"	kind:f	class:array_2d_helper	access:public	signature:() const
@@ -1988,6 +2025,7 @@ get_total_num_nodes	general_utility_stuff/sa_list_class_stuff.hpp	/^	inline cons
 get_total_num_nodes	general_utility_stuff/sa_list_class_stuff.hpp	/^	inline u32 get_total_num_nodes() const$/;"	kind:f	class:externally_allocated_sa_list	access:public	signature:() const
 get_type_size	general_utility_stuff/sa_stack_classes.hpp	/^	inline const u32 get_type_size() const$/;"	kind:f	class:sa_pod_stack_backend	access:public	signature:() const
 get_uncmp_bd_size	game_engine_stuff/level_stuff/sublevel_class.hpp	/^	inline constexpr u32 get_uncmp_bd_size() const$/;"	kind:f	class:sublevel	access:public	signature:() const
+get_underlying_type_is_signed	general_utility_stuff/fixed_classes.hpp	/^	static constexpr inline u32 get_underlying_type_is_signed()$/;"	kind:f	class:fixedpt_num_packed	access:public	signature:()
 get_vflip_status	gba_specific_stuff/oam_entry_classes.hpp	/^	u32 get_vflip_status() const$/;"	kind:f	class:oam_entry	access:public	signature:() const
 get_vram_chunk_index	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline u32 get_vram_chunk_index() const$/;"	kind:f	class:sprite	access:public	signature:() const
 get_x_center	game_engine_stuff/coll_box_class.hpp	/^	inline fixed24p8 get_x_center() const$/;"	kind:f	class:coll_box	access:public	signature:() const
@@ -2448,6 +2486,8 @@ level::the_sublevels	game_engine_stuff/level_stuff/level_class.hpp	/^	array< sub
 level_class_hpp	game_engine_stuff/level_stuff/level_class.hpp	20;"	kind:d
 level_defines_hpp	game_engine_stuff/level_stuff/level_defines.hpp	20;"	kind:d
 list_of_block_stuff_classes	game_engine_stuff/block_stuff/block_stuff.hpp	149;"	kind:d
+list_of_comparison_operators	general_utility_stuff/fixed_classes.hpp	610;"	kind:d
+list_of_comparison_operators	general_utility_stuff/fixed_classes.hpp	622;"	kind:d
 list_of_left_slope_configurations	game_engine_stuff/block_stuff/block_stuff.hpp	238;"	kind:d
 list_of_main_sprite_type_suffixes	game_engine_stuff/sprite_stuff/sprite_type_stuff.hpp	81;"	kind:d
 list_of_right_slope_configurations	game_engine_stuff/block_stuff/block_stuff.hpp	243;"	kind:d
@@ -2516,9 +2556,14 @@ m3_plot	gba_specific_stuff/gfx_reg_stuff.hpp	/^inline void m3_plot( u32 x, u32 y
 m4_plot	gba_specific_stuff/gfx_reg_stuff.hpp	/^inline void m4_plot( s32 x, s32 y, u32 color_id, u32 page )$/;"	kind:f	signature:( s32 x, s32 y, u32 color_id, u32 page )
 m4_plot_basic	gba_specific_stuff/gfx_reg_stuff.hpp	/^inline void m4_plot_basic( u32 x, u32 y, u16 two_color_ids, u32 page = 0 )$/;"	kind:f	signature:( u32 x, u32 y, u16 two_color_ids, u32 page = 0 )
 main	main.thumb.cpp	/^int main()$/;"	kind:f	signature:()
-make_f24p8	general_utility_stuff/fixed_classes.hpp	/^inline fixed24p8 make_f24p8( s32 whole_part, u8 frac_part=0 )$/;"	kind:f	signature:( s32 whole_part, u8 frac_part=0 )
-make_f8p8	general_utility_stuff/fixed_classes.hpp	/^inline fixed8p8 make_f8p8( s8 whole_part, u8 frac_part=0 )$/;"	kind:f	signature:( s8 whole_part, u8 frac_part=0 )
+make_f24p8	general_utility_stuff/fixed_classes.hpp	/^inline fixed24p8 make_f24p8( s32 whole_part, u32 frac_part=0 )$/;"	kind:f	signature:( s32 whole_part, u32 frac_part=0 )
+make_f8p8	general_utility_stuff/fixed_classes.hpp	/^inline fixed8p8 make_f8p8( s32 whole_part, u32 frac_part=0 )$/;"	kind:f	signature:( s32 whole_part, u32 frac_part=0 )
+make_fs12p4_packed	general_utility_stuff/fixed_classes.hpp	/^inline fixeds12p4_packed make_fs12p4_packed( s32 whole_part, $/;"	kind:f	signature:( s32 whole_part, u32 frac_part=0 )
+make_fs8p8_packed	general_utility_stuff/fixed_classes.hpp	/^inline fixeds8p8_packed make_fs8p8_packed( s32 whole_part, $/;"	kind:f	signature:( s32 whole_part, u32 frac_part=0 )
+make_fu12p4_packed	general_utility_stuff/fixed_classes.hpp	/^inline fixedu12p4_packed make_fu12p4_packed( u32 whole_part, $/;"	kind:f	signature:( u32 whole_part, u32 frac_part=0 )
 make_rgb15	gba_specific_stuff/gfx_reg_stuff.hpp	/^inline u16 make_rgb15( u32 red, u32 green, u32 blue )$/;"	kind:f	signature:( u32 red, u32 green, u32 blue )
+make_signed_fixedpt_num	general_utility_stuff/fixed_classes.hpp	/^inline specific_fixedpt_type make_signed_fixedpt_num( s32 whole_part, $/;"	kind:f	signature:( s32 whole_part, u32 frac_part=0 )
+make_unsigned_fixedpt_num	general_utility_stuff/fixed_classes.hpp	/^inline specific_fixedpt_type make_unsigned_fixedpt_num( u32 whole_part, $/;"	kind:f	signature:( u32 whole_part, u32 frac_part=0 )
 max2	general_utility_stuff/misc_utility_funcs.hpp	/^inline const type& max2( const type& arg_0, const type& arg_1 )$/;"	kind:f	signature:( const type& arg_0, const type& arg_1 )
 max3	general_utility_stuff/misc_utility_funcs.hpp	/^inline const type& max3( const type& arg_0, const type& arg_1, $/;"	kind:f	signature:( const type& arg_0, const type& arg_1, const type& arg_2 )
 max_hp	game_engine_stuff/sprite_stuff/player_sprite_class.hpp	/^	static s32 max_hp;$/;"	kind:m	class:player_sprite	access:public
@@ -2896,6 +2941,7 @@ operator *=	general_utility_stuff/fixed_classes.hpp	/^inline void fixed24p8::ope
 operator *=	general_utility_stuff/vec2_class.hpp	/^	inline void operator *= ( const type& scale )$/;"	kind:f	class:vec2	access:public	signature:( const type& scale )
 operator +	general_utility_stuff/fixed_classes.hpp	/^	inline fixed24p8 operator + ( const fixed24p8& to_add ) const;$/;"	kind:p	class:fixed24p8	access:public	signature:( const fixed24p8& to_add ) const
 operator +	general_utility_stuff/fixed_classes.hpp	/^	inline fixed8p8 operator + ( const fixed8p8& to_add ) const;$/;"	kind:p	class:fixed8p8	access:public	signature:( const fixed8p8& to_add ) const
+operator +	general_utility_stuff/fixed_classes.hpp	/^	inline specific_fixedpt_type operator + $/;"	kind:f	class:fixedpt_num_packed	access:public	signature:( const specific_fixedpt_type& to_add ) const
 operator +	general_utility_stuff/fixed_classes.hpp	/^inline fixed24p8 fixed24p8::operator + ( const fixed24p8& to_add ) const$/;"	kind:f	class:fixed24p8	signature:( const fixed24p8& to_add ) const
 operator +	general_utility_stuff/fixed_classes.hpp	/^inline fixed24p8 operator + ( const fixed8p8& a, const fixed24p8& b )$/;"	kind:f	signature:( const fixed8p8& a, const fixed24p8& b )
 operator +	general_utility_stuff/fixed_classes.hpp	/^inline fixed8p8 fixed8p8::operator + ( const fixed8p8& to_add ) const$/;"	kind:f	class:fixed8p8	signature:( const fixed8p8& to_add ) const
@@ -2905,6 +2951,7 @@ operator +	general_utility_stuff/vec2_class.hpp	/^	inline vec2<type> operator + 
 operator +	general_utility_stuff/vec2_class.hpp	/^inline vec2_f24p8 operator + ( const vec2_f8p8&a, const vec2_f24p8& b )$/;"	kind:f	signature:( const vec2_f8p8&a, const vec2_f24p8& b )
 operator +=	general_utility_stuff/fixed_classes.hpp	/^	inline void operator += ( const fixed24p8& to_add );$/;"	kind:p	class:fixed24p8	access:public	signature:( const fixed24p8& to_add )
 operator +=	general_utility_stuff/fixed_classes.hpp	/^	inline void operator += ( const fixed8p8& to_add );$/;"	kind:p	class:fixed8p8	access:public	signature:( const fixed8p8& to_add )
+operator +=	general_utility_stuff/fixed_classes.hpp	/^	inline void operator += ( const specific_fixedpt_type& to_add )$/;"	kind:f	class:fixedpt_num_packed	access:public	signature:( const specific_fixedpt_type& to_add )
 operator +=	general_utility_stuff/fixed_classes.hpp	/^inline void fixed24p8::operator += ( const fixed24p8& to_add )$/;"	kind:f	class:fixed24p8	signature:( const fixed24p8& to_add )
 operator +=	general_utility_stuff/fixed_classes.hpp	/^inline void fixed8p8::operator += ( const fixed8p8& to_add )$/;"	kind:f	class:fixed8p8	signature:( const fixed8p8& to_add )
 operator +=	general_utility_stuff/vec2_class.hpp	/^	inline void operator += ( const vec2<fixed24p8>& to_add )$/;"	kind:f	class:vec2	access:public	signature:( const vec2<fixed24p8>& to_add )
@@ -2912,6 +2959,7 @@ operator +=	general_utility_stuff/vec2_class.hpp	/^	inline void operator += ( co
 operator +=	general_utility_stuff/vec2_class.hpp	/^	inline void operator += ( const vec2<type>& to_add )$/;"	kind:f	class:vec2	access:public	signature:( const vec2<type>& to_add )
 operator -	general_utility_stuff/fixed_classes.hpp	/^	inline fixed24p8 operator - ( const fixed24p8& to_sub ) const;$/;"	kind:p	class:fixed24p8	access:public	signature:( const fixed24p8& to_sub ) const
 operator -	general_utility_stuff/fixed_classes.hpp	/^	inline fixed8p8 operator - ( const fixed8p8& to_sub ) const;$/;"	kind:p	class:fixed8p8	access:public	signature:( const fixed8p8& to_sub ) const
+operator -	general_utility_stuff/fixed_classes.hpp	/^	inline specific_fixedpt_type operator - $/;"	kind:f	class:fixedpt_num_packed	access:public	signature:( const specific_fixedpt_type& to_sub ) const
 operator -	general_utility_stuff/fixed_classes.hpp	/^inline fixed24p8 fixed24p8::operator - ( const fixed24p8& to_sub ) const$/;"	kind:f	class:fixed24p8	signature:( const fixed24p8& to_sub ) const
 operator -	general_utility_stuff/fixed_classes.hpp	/^inline fixed24p8 operator - ( const fixed24p8& a )$/;"	kind:f	signature:( const fixed24p8& a )
 operator -	general_utility_stuff/fixed_classes.hpp	/^inline fixed24p8 operator - ( const fixed8p8& a, const fixed24p8& b )$/;"	kind:f	signature:( const fixed8p8& a, const fixed24p8& b )
@@ -2923,6 +2971,7 @@ operator -	general_utility_stuff/vec2_class.hpp	/^	inline vec2<type> operator - 
 operator -	general_utility_stuff/vec2_class.hpp	/^inline vec2_f24p8 operator - ( const vec2_f8p8&a, const vec2_f24p8& b )$/;"	kind:f	signature:( const vec2_f8p8&a, const vec2_f24p8& b )
 operator -=	general_utility_stuff/fixed_classes.hpp	/^	inline void operator -= ( const fixed24p8& to_sub );$/;"	kind:p	class:fixed24p8	access:public	signature:( const fixed24p8& to_sub )
 operator -=	general_utility_stuff/fixed_classes.hpp	/^	inline void operator -= ( const fixed8p8& to_sub );$/;"	kind:p	class:fixed8p8	access:public	signature:( const fixed8p8& to_sub )
+operator -=	general_utility_stuff/fixed_classes.hpp	/^	inline void operator -= ( const specific_fixedpt_type& to_sub )$/;"	kind:f	class:fixedpt_num_packed	access:public	signature:( const specific_fixedpt_type& to_sub )
 operator -=	general_utility_stuff/fixed_classes.hpp	/^inline void fixed24p8::operator -= ( const fixed24p8& to_sub )$/;"	kind:f	class:fixed24p8	signature:( const fixed24p8& to_sub )
 operator -=	general_utility_stuff/fixed_classes.hpp	/^inline void fixed8p8::operator -= ( const fixed8p8& to_sub )$/;"	kind:f	class:fixed8p8	signature:( const fixed8p8& to_sub )
 operator -=	general_utility_stuff/vec2_class.hpp	/^	inline void operator -= ( const vec2<fixed24p8>& to_sub )$/;"	kind:f	class:vec2	access:public	signature:( const vec2<fixed24p8>& to_sub )
@@ -2951,6 +3000,7 @@ operator =	general_utility_stuff/debug_vars.thumb.cpp	/^debug_str& debug_str::op
 operator =	general_utility_stuff/debug_vars.thumb.cpp	/^debug_str& debug_str::operator = ( const debug_str& to_copy )$/;"	kind:f	class:debug_str	signature:( const debug_str& to_copy )
 operator =	general_utility_stuff/fixed_classes.hpp	/^	inline fixed24p8& operator = ( const fixed24p8& to_copy );$/;"	kind:p	class:fixed24p8	access:public	signature:( const fixed24p8& to_copy )
 operator =	general_utility_stuff/fixed_classes.hpp	/^	inline fixed8p8& operator = ( const fixed8p8& to_copy );$/;"	kind:p	class:fixed8p8	access:public	signature:( const fixed8p8& to_copy )
+operator =	general_utility_stuff/fixed_classes.hpp	/^	inline specific_fixedpt_type& operator = $/;"	kind:f	class:fixedpt_num_packed	access:public	signature:( const specific_fixedpt_type& to_copy )
 operator =	general_utility_stuff/fixed_classes.hpp	/^inline fixed24p8& fixed24p8::operator = ( const fixed24p8& to_copy )$/;"	kind:f	class:fixed24p8	signature:( const fixed24p8& to_copy )
 operator =	general_utility_stuff/fixed_classes.hpp	/^inline fixed8p8& fixed8p8::operator = ( const fixed8p8& to_copy )$/;"	kind:f	class:fixed8p8	signature:( const fixed8p8& to_copy )
 operator =	general_utility_stuff/vec2_class.hpp	/^	inline vec2<fixed24p8>& operator = ( const vec2<fixed24p8>& to_copy )$/;"	kind:f	class:vec2	access:public	signature:( const vec2<fixed24p8>& to_copy )
@@ -3413,6 +3463,7 @@ right	game_engine_stuff/block_coll_result_group_classes.hpp	/^	inline s32 right(
 right	game_engine_stuff/coll_box_class.hpp	/^	inline fixed24p8 right() const$/;"	kind:f	class:coll_box	access:public	signature:() const
 round_to_int	general_utility_stuff/fixed_classes.hpp	/^	inline s16 round_to_int() const;$/;"	kind:p	class:fixed8p8	access:public	signature:() const
 round_to_int	general_utility_stuff/fixed_classes.hpp	/^	inline s32 round_to_int() const;$/;"	kind:p	class:fixed24p8	access:public	signature:() const
+round_to_int	general_utility_stuff/fixed_classes.hpp	/^	inline underlying_type round_to_int() const$/;"	kind:f	class:fixedpt_num_packed	access:public	signature:() const
 round_to_int	general_utility_stuff/fixed_classes.hpp	/^inline s16 fixed8p8::round_to_int() const$/;"	kind:f	class:fixed8p8	signature:() const
 round_to_int	general_utility_stuff/fixed_classes.hpp	/^inline s32 fixed24p8::round_to_int() const$/;"	kind:f	class:fixed24p8	signature:() const
 run_accel_x_abs_val	game_engine_stuff/sprite_stuff/player_sprite_class.hpp	/^	static constexpr fixed24p8 run_accel_x_abs_val = {0x08};$/;"	kind:m	class:player_sprite	access:public
@@ -3609,8 +3660,8 @@ shared_constructor_code_part_3	game_engine_stuff/sprite_stuff/sprite_class.hpp	/
 shared_constructor_code_part_3	game_engine_stuff/sprite_stuff/sprite_class.thumb.cpp	/^void sprite::shared_constructor_code_part_3()$/;"	kind:f	class:sprite	signature:()
 sherwin_gfxPalLen	gfx/sherwin_gfx.h	23;"	kind:d
 sherwin_gfxTilesLen	gfx/sherwin_gfx.h	20;"	kind:d
-shift	general_utility_stuff/fixed_classes.hpp	/^	static const u32 shift = 8;$/;"	kind:m	class:fixed24p8	access:public
-shift	general_utility_stuff/fixed_classes.hpp	/^	static const u32 shift = 8;$/;"	kind:m	class:fixed8p8	access:public
+shift	general_utility_stuff/fixed_classes.hpp	/^	static constexpr u32 shift = 8;$/;"	kind:m	class:fixed24p8	access:public
+shift	general_utility_stuff/fixed_classes.hpp	/^	static constexpr u32 shift = 8;$/;"	kind:m	class:fixed8p8	access:public
 show_debug_f24p8_group	general_utility_stuff/debug_vars.hpp	/^	friend void show_debug_f24p8_group( all_the_types... all_the_values );$/;"	kind:p	class:debug_arr_group	access:friend	signature:( all_the_types.... all_the_values )
 show_debug_f24p8_group	general_utility_stuff/debug_vars.hpp	/^void show_debug_f24p8_group( all_the_types... all_the_values )$/;"	kind:f	signature:( all_the_types.... all_the_values )
 show_debug_f8p8_group	general_utility_stuff/debug_vars.hpp	/^	friend void show_debug_f8p8_group( all_the_types... all_the_values );$/;"	kind:p	class:debug_arr_group	access:friend	signature:( all_the_types.... all_the_values )
@@ -3719,6 +3770,7 @@ spawn_a_sprite_basic	game_engine_stuff/sprite_stuff/sprite_manager_class.thumb.c
 spawn_sprites_if_needed	game_engine_stuff/sprite_stuff/sprite_manager_class.arm.cpp	/^void sprite_manager::spawn_sprites_if_needed$/;"	kind:f	class:sprite_manager	signature:( const prev_curr_pair<bg_point>& camera_pos_pc_pair )
 spawn_sprites_if_needed	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void spawn_sprites_if_needed$/;"	kind:p	class:sprite_manager	access:public	signature:( const prev_curr_pair<bg_point>& camera_pos_pc_pair )
 spawn_state	game_engine_stuff/level_stuff/sprite_level_data_stuff.hpp	/^	sprite_spawn_state spawn_state;$/;"	kind:m	class:sprite_init_param_group	access:public
+specific_fixedpt_type	general_utility_stuff/fixed_classes.hpp	/^		specific_fixedpt_type;$/;"	kind:t	class:fixedpt_num_packed	access:public
 specific_sa_stack	general_utility_stuff/sa_stack_classes.hpp	/^	typedef sa_stack< int, size > specific_sa_stack;$/;"	kind:t	class:old_sa_free_list	access:public
 sprite	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline sprite( u32 s_vram_chunk_index )$/;"	kind:f	class:sprite	access:public	signature:( u32 s_vram_chunk_index )
 sprite	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	sprite( bool facing_left );$/;"	kind:p	class:sprite	access:public	signature:( bool facing_left )
@@ -4430,6 +4482,7 @@ udi_curr_frame_slot	game_engine_stuff/sprite_stuff/player_pickaxe_sprite_class.h
 udi_curr_frame_slot	game_engine_stuff/sprite_stuff/snow_golem_sprite_class.hpp	/^		udi_curr_frame_slot,$/;"	kind:e	enum:snow_golem_sprite::udata_index
 udi_frame_stuff_initalized	game_engine_stuff/sprite_stuff/snow_golem_sprite_class.hpp	/^		udi_frame_stuff_initalized,$/;"	kind:e	enum:snow_golem_sprite::udata_index
 udi_initial_pos_was_set	game_engine_stuff/sprite_stuff/waffle_sprite_class.hpp	/^	enum udata_index { udi_initial_pos_was_set, } alignas4;$/;"	kind:e	enum:waffle_sprite::udata_index
+underlying_type_is_signed	general_utility_stuff/fixed_classes.hpp	/^	static constexpr u32 underlying_type_is_signed $/;"	kind:m	class:fixedpt_num_packed	access:public
 update_all_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.arm.cpp	/^void sprite_manager::update_all_sprites$/;"	kind:f	class:sprite_manager	signature:( const vec2_u32& the_sublevel_size_2d, prev_curr_pair<bg_point>& camera_pos_pc_pair )
 update_all_sprites	game_engine_stuff/sprite_stuff/sprite_manager_class.hpp	/^	static void update_all_sprites( const vec2_u32& the_sublevel_size_2d,$/;"	kind:p	class:sprite_manager	access:public	signature:( const vec2_u32& the_sublevel_size_2d, prev_curr_pair<bg_point>& camera_pos_pc_pair )
 update_f24p8_positions	game_engine_stuff/sprite_stuff/sprite_class.hpp	/^	inline void update_f24p8_positions()$/;"	kind:f	class:sprite	access:public	signature:()

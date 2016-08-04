@@ -56,6 +56,14 @@ static const u32 test_str_size = ( sizeof(test_str) / sizeof(char) ) - 1;
 
 int main()
 {
+	//show_debug_u32_group( fixedu12p4::get_underlying_type_is_signed(),
+	//	fixeds12p4::get_underlying_type_is_signed(),
+	//	sizeof(fixedu12p4), sizeof(fixeds12p4) );
+	
+	show_debug_s32_group( make_f24p8( -3, 5 ).data, 
+		make_f8p8( -3, 5 ).data, make_fu12p4_packed( 10, 12 ).data, 
+		make_fs12p4_packed( -3, 5 ).data );
+	
 	//arr_memfill8( (u8*)ewram_test_arr, '#', ewram_test_arr_size );
 	//memset( ewram_test_arr, '#', ewram_test_arr_size );
 	//memset( ewram_test_arr, '#', 4 );
@@ -68,6 +76,7 @@ int main()
 	//slower_memcpy( &ewram_test_arr[1], test_str, 5 );
 	
 	//memcpy( &ewram_test_arr[1]
+	
 	
 	
 	
