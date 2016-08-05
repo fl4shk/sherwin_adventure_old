@@ -68,23 +68,22 @@ int main()
 		game_manager::sram_const_init_str, 
 		game_manager::sram_init_str_size );
 	
-	//asm_comment("Before first show_debug_s32_group() call");
-	show_debug_s32_group
-		( fixedu12p4_packed::get_underlying_type_is_signed(),
-		fixeds12p4_packed::get_underlying_type_is_signed(),
-		fixeds8p8_packed::get_underlying_type_is_signed(),
-		sizeof(fixedu12p4_packed), 
-		sizeof(fixeds12p4_packed),
-		sizeof(fixeds8p8_packed) );
 	
+	//asm_comment("Before first show_debug_s32_group() call");
+	//show_debug_s32_group
+	//	( fixedu12p4_packed::get_underlying_type_is_signed(),
+	//	fixeds12p4_packed::get_underlying_type_is_signed(),
+	//	fixeds8p8_packed::get_underlying_type_is_signed(),
+	//	sizeof(fixedu12p4_packed), 
+	//	sizeof(fixeds12p4_packed),
+	//	sizeof(fixeds8p8_packed) );
+	//
 	//asm_comment("Before second show_debug_s32_group() call");
 	//show_debug_s32_group( make_f24p8( -3, 5 ).data, 
 	//	make_f8p8( -3, 5 ).data, 
 	//	make_fu12p4_packed( 10, 12 ).data, 
 	//	make_fs12p4_packed( -3, 5 ).data, 
 	//	make_fs8p8_packed( 124, 200 ).data );
-	show_debug_s32_group( make_f24p8( -3, 5 ).data, 
-		(s32)make_f8p8( -3, 5 ).data );
 	
 	
 	//arr_memfill8( (u8*)ewram_test_arr, '#', ewram_test_arr_size );
@@ -100,7 +99,7 @@ int main()
 	
 	//memcpy( &ewram_test_arr[1]
 	
-	halt();
+	//halt();
 	
 	
 	

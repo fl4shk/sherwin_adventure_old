@@ -60,13 +60,27 @@ void clear_debug_vars() __attribute__((_iwram_code));
 */
 
 
-#define list_of_debug__suffixes(macro) \
+#define list_of_debug_suffixes(macro) \
 	macro(u32) macro(s32) macro(f24p8) macro(f8p8) macro(str)
 
-#define list_of_debug_types_and_suffixes(macro) \
-	macro( vu32, u32 ) macro( vs32, s32 ) \
-	macro( fixed24p8, f24p8 ) macro( fixed8p8, f8p8 ) \
+#define macro_for_debug_u32_type_and_suffix(macro) \
+	macro( u32, u32 )
+#define macro_for_debug_s32_type_and_suffix(macro) \
+	macro( s32, s32 )
+#define macro_for_debug_fixed24p8_type_and_suffix(macro) \
+	macro( fixed24p8, f24p8 )
+#define macro_for_debug_fixed8p8_type_and_suffix(macro) \
+	macro( fixed8p8, f8p8 )
+#define macro_for_debug_str_type_and_suffix(macro) \
 	macro( debug_str, str )
+
+
+#define list_of_debug_types_and_suffixes(macro) \
+	macro_for_debug_u32_type_and_suffix(macro) \
+	macro_for_debug_s32_type_and_suffix(macro) \
+	macro_for_debug_fixed24p8_type_and_suffix(macro) \
+	macro_for_debug_fixed8p8_type_and_suffix(macro) \
+	macro_for_debug_str_type_and_suffix(macro)
 
 enum curr_debug_index_type
 {
@@ -205,8 +219,8 @@ public:		// static variables (array_helpers)
 	
 	static array_helper<debug_str> debug_str_arr_helper;
 	
-protected:		// functions
-//public:		// functions
+//protected:		// functions
+public:		// functions
 	
 	static inline vu32* curr_index_arr()
 	{
@@ -291,25 +305,6 @@ public:		// functions
 	}
 	
 	
-	template< typename... all_the_types >
-	friend void show_debug_u32_group
-		( const all_the_types&... all_the_values );
-	
-	template< typename... all_the_types >
-	friend void show_debug_s32_group( 
-		const all_the_types&... all_the_values );
-	
-	template< typename... all_the_types >
-	friend void show_debug_f24p8_group(  
-		const all_the_types&... all_the_values );
-	
-	template< typename... all_the_types >
-	friend void show_debug_f8p8_group
-		( const all_the_types&... all_the_values );
-	
-	template< typename... all_the_types >
-	friend void show_debug_str_group
-		( const all_the_types&... all_the_values );
 	
 } __attribute__((_align4));
 
@@ -326,7 +321,7 @@ template< typename debug_arr_type, typename type >
 void show_debug_values_group_backend( debug_arr_type* debug_values_arr, 
 	vu32& curr_index, const u32 total_num_args, const type* all_values_arr )
 {
-	asm_comment("show_debug_values_group_backend()");
+	//asm_comment("show_debug_values_group_backend()");
 	
 	//asm_comment("Before old_curr_index");
 	const u32 old_curr_index = curr_index;
@@ -345,60 +340,52 @@ void show_debug_values_group_backend( debug_arr_type* debug_values_arr,
 		debug_values_arr[old_curr_index + i] = all_values_arr[i];
 	}
 	
+	//asm_comment("end of show_debug_values_group_backend()");
 }
 
 
 
 // type is the actual type, and suffix is the type's suffix.  Sometimes,
 // type == suffix, especially with generic types.
-#define generate_func_contents( type, suffix )
-
+#define generate_func_contents( type, suffix ) \
+asm_comment("show_debug_" #suffix "_group()" ); \
+static constexpr size_t total_num_args = sizeof...(all_the_values); \
+type all_values_arr[total_num_args]; \
+assign_to_array( all_values_arr, all_the_values... ); \
+show_debug_values_group_backend \
+	( debug_arr_group::debug_##suffix##_arr(), \
+	debug_arr_group::curr_index_arr()[cdit_##suffix], total_num_args, \
+	all_values_arr );
 
 template< typename... all_the_types >
-void show_debug_u32_group( const all_the_types&... all_the_values )
+inline void show_debug_u32_group( const all_the_types&... all_the_values )
 {
-	//generate_func_contents( u32, u32 );
+	macro_for_debug_u32_type_and_suffix(generate_func_contents);
 }
 
 
-
-
 template< typename... all_the_types >
-void show_debug_s32_group( const all_the_types&... all_the_values ) 
-	__attribute__((noinline));
-template< typename... all_the_types >
-void show_debug_s32_group( const all_the_types&... all_the_values )
+inline void show_debug_s32_group( const all_the_types&... all_the_values )
 {
-	//generate_func_contents( s32, s32 );
-	asm_comment("show_debug_s32_group()");
-	static constexpr u32 total_num_args = sizeof...(all_the_values);
-	
-	s32 all_values_arr[total_num_args];
-	assign_to_array< s32, total_num_args >( all_values_arr, 
-		all_the_values... );
-	
-	show_debug_values_group_backend
-		( debug_arr_group::debug_s32_arr(),
-		debug_arr_group::curr_index_arr()[cdit_s32], total_num_args,
-		all_values_arr );
+	macro_for_debug_s32_type_and_suffix(generate_func_contents);
 }
 
 template< typename... all_the_types >
-void show_debug_f24p8_group( const all_the_types&... all_the_values )
+inline void show_debug_f24p8_group( const all_the_types&... all_the_values )
 {
-	//generate_func_contents( fixed24p8, f24p8 );
+	macro_for_debug_fixed24p8_type_and_suffix(generate_func_contents);
 }
 
 template< typename... all_the_types >
-void show_debug_f8p8_group( const all_the_types&... all_the_values )
+inline void show_debug_f8p8_group( const all_the_types&... all_the_values )
 {
-	//generate_func_contents( fixed8p8, f8p8 );
+	macro_for_debug_fixed8p8_type_and_suffix(generate_func_contents);
 }
 
 template< typename... all_the_types >
-void show_debug_str_group( const all_the_types&... all_the_values )
+inline void show_debug_str_group( const all_the_types&... all_the_values )
 {
-	//generate_func_contents( debug_str, str );
+	macro_for_debug_str_type_and_suffix(generate_func_contents);
 }
 
 
