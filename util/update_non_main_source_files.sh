@@ -33,7 +33,7 @@ quit_if_script_missing "$first_script"
 quit_if_script_missing "$second_script"
 
 
-most_rsync_args=$("$first_script")
+most_rsync_args=$($first_script)
 
 
 #rsync -avh --progress --dry-run --existing "$1"/src .
