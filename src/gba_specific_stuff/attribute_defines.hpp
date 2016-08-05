@@ -45,7 +45,6 @@
 
 // Some #defines for aligning structs/classes
 #define _align4 aligned(4)
-#define _align2 aligned(2)
 
 
 // A #define for making sure that structs/classes have the exact size of
