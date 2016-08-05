@@ -628,7 +628,7 @@ public:		// functions
 
 typedef fixedpt_num_packed< u16, 4 > fixedu12p4_packed;
 typedef fixedpt_num_packed< s16, 4 > fixeds12p4_packed;
-typedef fixedpt_num_packed< s16, 4 > fixeds8p8_packed;
+typedef fixedpt_num_packed< s16, 8 > fixeds8p8_packed;
 
 
 

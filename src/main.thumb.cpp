@@ -41,6 +41,8 @@
 #include "game_engine_stuff/game_manager_class.hpp"
 #include "game_engine_stuff/gfx_manager_class.hpp"
 
+#include "game_engine_stuff/halt_stuff.hpp"
+
 
 
 // This is an assembly function.  It doesn't do very much.
@@ -56,13 +58,34 @@ static const u32 test_str_size = ( sizeof(test_str) / sizeof(char) ) - 1;
 
 int main()
 {
-	//show_debug_u32_group( fixedu12p4::get_underlying_type_is_signed(),
-	//	fixeds12p4::get_underlying_type_is_signed(),
-	//	sizeof(fixedu12p4), sizeof(fixeds12p4) );
+	irq_init();
 	
+	// This will eventually be used to identify whether save data has been
+	// created.  As of right now, there is no need for save data, but that
+	// will change in the future.  It is likely that 64 kiB of save data
+	// will be more than enough.
+	memcpy8( game_manager::sram_init_str,
+		game_manager::sram_const_init_str, 
+		game_manager::sram_init_str_size );
+	
+	//asm_comment("Before first show_debug_s32_group() call");
+	show_debug_s32_group
+		( fixedu12p4_packed::get_underlying_type_is_signed(),
+		fixeds12p4_packed::get_underlying_type_is_signed(),
+		fixeds8p8_packed::get_underlying_type_is_signed(),
+		sizeof(fixedu12p4_packed), 
+		sizeof(fixeds12p4_packed),
+		sizeof(fixeds8p8_packed) );
+	
+	//asm_comment("Before second show_debug_s32_group() call");
+	//show_debug_s32_group( make_f24p8( -3, 5 ).data, 
+	//	make_f8p8( -3, 5 ).data, 
+	//	make_fu12p4_packed( 10, 12 ).data, 
+	//	make_fs12p4_packed( -3, 5 ).data, 
+	//	make_fs8p8_packed( 124, 200 ).data );
 	show_debug_s32_group( make_f24p8( -3, 5 ).data, 
-		make_f8p8( -3, 5 ).data, make_fu12p4_packed( 10, 12 ).data, 
-		make_fs12p4_packed( -3, 5 ).data );
+		(s32)make_f8p8( -3, 5 ).data );
+	
 	
 	//arr_memfill8( (u8*)ewram_test_arr, '#', ewram_test_arr_size );
 	//memset( ewram_test_arr, '#', ewram_test_arr_size );
@@ -77,19 +100,10 @@ int main()
 	
 	//memcpy( &ewram_test_arr[1]
 	
+	halt();
 	
 	
 	
-	
-	// This will eventually be used to identify whether save data has been
-	// created.  As of right now, there is no need for save data, but that
-	// will change in the future.  It is likely that 64 kiB of save data
-	// will be more than enough.
-	memcpy8( game_manager::sram_init_str,
-		game_manager::sram_const_init_str, 
-		game_manager::sram_init_str_size );
-	
-	irq_init();
 	
 	game_manager::title_screen_func();
 	

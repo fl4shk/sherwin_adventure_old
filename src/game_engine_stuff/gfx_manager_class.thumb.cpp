@@ -292,7 +292,7 @@ void gfx_manager::fade_out_to_black( u32 num_steps,
 			- bg_fade_curr_red_arr[i] ) / (u16)num_steps;
 		green_step_amount = ( make_f24p8(target_green)
 			- bg_fade_curr_green_arr[i] ) / (u16)num_steps;
-		blue_step_amount = ( make_f24p8(target_green)
+		blue_step_amount = ( make_f24p8(target_blue)
 			- bg_fade_curr_blue_arr[i] ) / (u16)num_steps;
 	}
 	
@@ -323,7 +323,7 @@ void gfx_manager::fade_out_to_black( u32 num_steps,
 			- obj_fade_curr_red_arr[i] ) / (u16)num_steps;
 		green_step_amount = ( make_f24p8(target_green)
 			- obj_fade_curr_green_arr[i] ) / (u16)num_steps;
-		blue_step_amount = ( make_f24p8(target_green)
+		blue_step_amount = ( make_f24p8(target_blue)
 			- obj_fade_curr_blue_arr[i] ) / (u16)num_steps;
 	}
 	
@@ -428,7 +428,7 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 			- bg_fade_curr_red_arr[i] ) / (u16)num_steps;
 		green_step_amount = ( make_f24p8(target_green)
 			- bg_fade_curr_green_arr[i] ) / (u16)num_steps;
-		blue_step_amount = ( make_f24p8(target_green)
+		blue_step_amount = ( make_f24p8(target_blue)
 			- bg_fade_curr_blue_arr[i] ) / (u16)num_steps;
 	}
 	
@@ -459,7 +459,7 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 			- obj_fade_curr_red_arr[i] ) / (u16)num_steps;
 		green_step_amount = ( make_f24p8(target_green)
 			- obj_fade_curr_green_arr[i] ) / (u16)num_steps;
-		blue_step_amount = ( make_f24p8(target_green)
+		blue_step_amount = ( make_f24p8(target_blue)
 			- obj_fade_curr_blue_arr[i] ) / (u16)num_steps;
 	}
 	
@@ -585,7 +585,7 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 			- bg_fade_curr_red_arr[i] ) / (u16)num_steps;
 		green_step_amount = ( make_f24p8(target_green)
 			- bg_fade_curr_green_arr[i] ) / (u16)num_steps;
-		blue_step_amount = ( make_f24p8(target_green)
+		blue_step_amount = ( make_f24p8(target_blue)
 			- bg_fade_curr_blue_arr[i] ) / (u16)num_steps;
 	}
 	
@@ -616,7 +616,7 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 			- obj_fade_curr_red_arr[i] ) / (u16)num_steps;
 		green_step_amount = ( make_f24p8(target_green)
 			- obj_fade_curr_green_arr[i] ) / (u16)num_steps;
-		blue_step_amount = ( make_f24p8(target_green)
+		blue_step_amount = ( make_f24p8(target_blue)
 			- obj_fade_curr_blue_arr[i] ) / (u16)num_steps;
 	}
 	

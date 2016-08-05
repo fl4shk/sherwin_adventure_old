@@ -42,40 +42,6 @@ class sprite;
 #include "../gfx_manager_class.hpp"
 
 
-// Adding, removing, or changing sprite types
-enum sprite_type
-{
-	// The Default Sprite (also used for when there is no sprite in the
-	// slot).
-	st_default,
-	
-	// The Player
-	st_player,
-	
-	// Powerup Sprites
-	st_waffle,
-	
-	st_muffin,
-	st_fire_muffin,
-	st_ice_muffin,
-	st_chocolate_muffin,
-	
-	//// Block-like Sprites
-	//st_warp_block,
-	// Warp Sprites
-	st_door,
-	
-	// Enemy Sprites
-	st_snow_golem,
-	
-	// Secondary Sprites
-	st_player_pickaxe,
-	
-	// st_count is the amount of sprite types.  It is automatically updated
-	// by the compiler.
-	st_count,
-	
-} __attribute__((_align4));
 
 // woo, an X-macro
 #define list_of_main_sprite_type_suffixes(macro) \
@@ -103,11 +69,33 @@ macro(snow_golem) \
 macro(player_pickaxe)
 
 
+// Adding, removing, or changing sprite types
+enum sprite_type
+{
+	// The Default Sprite (also used for when there is no sprite in the
+	// slot).
+	st_default,
+	
+	#define generate_enum_entry(suffix) \
+	st_##suffix,
+	
+	list_of_main_sprite_type_suffixes(generate_enum_entry)
+	#undef generate_enum_entry
+	
+	// st_count is the amount of sprite types.  It is automatically updated
+	// by the compiler.
+	st_count,
+	
+} alignas4;
+
+
+
 inline bool sprite_type_exists( sprite_type the_sprite_type )
 {
 	return ( the_sprite_type >= st_default && the_sprite_type < st_count );
 }
 
+// So, what's this for again?
 inline bool sprite_type_is_derived( sprite_type the_sprite_type )
 {
 	return ( the_sprite_type > st_default && the_sprite_type < st_count );

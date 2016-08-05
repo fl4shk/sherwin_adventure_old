@@ -110,5 +110,38 @@ inline type custom_abs( const type& val )
 	}
 }
 
+template< typename type, u32 index, u32 total_num_args >
+inline void assign_to_array_backend( type* all_values_arr, 
+	const type& to_copy )
+{
+	all_values_arr[index] = to_copy;
+}
+
+template< typename type, u32 index, u32 total_num_args, 
+	typename... remaining_types >
+inline void assign_to_array_backend( type* all_values_arr, 
+	const type& first_value, 
+	remaining_types... remaining_values )
+{
+	assign_to_array_backend< type, index, total_num_args >( all_values_arr, 
+		first_value );
+	
+	if ( index + 1 < total_num_args )
+	{
+		assign_to_array_backend< type, index + 1, total_num_args >
+			( all_values_arr, remaining_values... );
+	}
+}
+
+template< typename type, u32 total_num_args, typename... remaining_types >
+inline void assign_to_array( type* all_values_arr, const type& first_value,
+	remaining_types... remaining_values )
+{
+	assign_to_array_backend< type, 0, total_num_args >( all_values_arr,
+		first_value, remaining_values... );
+}
+
+
+
 
 #endif		// misc_utility_funcs_hpp

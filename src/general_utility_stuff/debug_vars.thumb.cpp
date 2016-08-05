@@ -52,29 +52,6 @@ void clear_debug_vars()
 }
 */
 
-debug_str::debug_str() : real_size(0)
-{
-	//memfill32( arr, 0, max_size / sizeof(u32) );
-	//arr_memfill32( arr, 0, max_size );
-	clear();
-}
-
-debug_str::debug_str( u32 n_real_size ) : real_size(n_real_size)
-{
-	set_real_size(n_real_size);
-	//memfill32( arr, 0, max_size / sizeof(u32) );
-	//arr_memfill32( arr, 0, max_size );
-	clear();
-}
-debug_str::debug_str( const debug_str& to_copy )
-{
-	operator = (to_copy);
-}
-debug_str::debug_str( const char* to_copy )
-{
-	operator = (to_copy);
-}
-
 debug_str& debug_str::operator = ( const debug_str& to_copy )
 {
 	set_real_size(to_copy.get_real_size());
@@ -161,7 +138,5 @@ void debug_arr_group::clear_debug_vars()
 	memfill32( &the_raw_array_group, 0, sizeof(raw_array_group) 
 		/ sizeof(u32) );
 }
-
-
 
 
