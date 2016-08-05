@@ -112,28 +112,28 @@ inline type custom_abs( const type& val )
 
 
 template< typename type, size_t index >
-inline void assign_to_array_backend( type* all_values_arr, 
+inline void copy_to_array_backend( type* all_values_arr, 
 	const type& to_copy )
 {
-	//asm_comment("assign_to_array_backend() single value");
+	//asm_comment("copy_to_array_backend() single value");
 	all_values_arr[index] = to_copy;
 }
 
 template< typename type, size_t index, typename... remaining_types >
-inline void assign_to_array_backend( type* all_values_arr, 
-	const type& first_value, remaining_types... remaining_values )
+inline void copy_to_array_backend( type* all_values_arr, 
+	const type& first_value, const remaining_types&... remaining_values )
 {
-	assign_to_array_backend< type, index >( all_values_arr, first_value );
+	copy_to_array_backend< type, index >( all_values_arr, first_value );
 	
-	assign_to_array_backend< type, index + 1 >( all_values_arr, 
+	copy_to_array_backend< type, index + 1 >( all_values_arr, 
 		remaining_values... );
 }
 
 template< typename type, typename... all_the_types >
-inline void assign_to_array( type* all_values_arr, 
-	all_the_types...  all_the_values )
+inline void copy_to_array( type* all_values_arr, 
+	const all_the_types&...  all_the_values )
 {
-	assign_to_array_backend< type, 0 >( all_values_arr,
+	copy_to_array_backend< type, 0 >( all_values_arr,
 		all_the_values... );
 }
 

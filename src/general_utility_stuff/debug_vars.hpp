@@ -351,7 +351,7 @@ void show_debug_values_group_backend( debug_arr_type* debug_values_arr,
 asm_comment("show_debug_" #suffix "_group()" ); \
 static constexpr size_t total_num_args = sizeof...(all_the_values); \
 type all_values_arr[total_num_args]; \
-assign_to_array( all_values_arr, all_the_values... ); \
+copy_to_array( all_values_arr, all_the_values... ); \
 show_debug_values_group_backend \
 	( debug_arr_group::debug_##suffix##_arr(), \
 	debug_arr_group::curr_index_arr()[cdit_##suffix], total_num_args, \
