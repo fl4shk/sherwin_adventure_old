@@ -22,7 +22,7 @@
 class eyes_block_stuff : public block_base_stuff
 {
 public:		// enums
-	enum persistent_data_state { is_eyes, is_bt_dud } alignas4;
+	enum persistent_data_state { is_eyes, is_bt_dud } alignas_regular;
 	
 public:		// variables
 	static const u32 metatile_number = 3;

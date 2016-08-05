@@ -86,7 +86,7 @@ enum sprite_type
 	// by the compiler.
 	st_count,
 	
-} alignas4;
+} alignas_regular;
 
 
 

@@ -23,7 +23,7 @@ class wood_block_stuff : public block_base_stuff
 {
 public:		// enums
 	enum subclass_persistent_data_state { is_wood, is_bt_dud } 
-		alignas4;
+		alignas_regular;
 	
 public:		// variables
 	static const u32 metatile_number = 2;

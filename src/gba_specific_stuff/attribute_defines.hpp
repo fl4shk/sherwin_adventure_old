@@ -52,7 +52,7 @@
 #define _packed packed
 
 
-#define alignas4 alignas(4)
+#define alignas_regular alignas(4)
 
 
 #endif		// attribute_defines_hpp
