@@ -38,10 +38,10 @@ most_rsync_args=$($first_script)
 
 #rsync -avh --progress --dry-run --existing "$1"/src .
 #rsync -avh --progress --dry-run --existing "$1"/src .
-$(bash -c "rsync -avuh --progress --existing \
+bash -c "rsync -avuh --progress --existing \
 	--exclude=\"$second_script\" \
 	$most_rsync_args \
-	\"$1\"/ .")
+	\"$1\"/ ."
 
 echo "Running \"$second_script\""
 $($second_script)
