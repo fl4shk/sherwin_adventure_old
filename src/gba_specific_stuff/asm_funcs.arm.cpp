@@ -152,11 +152,17 @@ void* memset( void* dst, int c, size_t n )
 	
 	auto write_bytes_raw = [to_write]( u8* local_dst, u32 local_n ) -> void
 	{
-		for ( s32 i=local_n-1; i>=0; --i )
-		{
-			//local_dst[i] = local_src[i];
-			local_dst[i] = (u8)to_write;
-		}
+		//for ( s32 i=local_n-1; i>=0; --i )
+		//{
+		//	//local_dst[i] = local_src[i];
+		//	local_dst[i] = (u8)to_write;
+		//}
+		
+		// With the above code (and not memfill8), write_bytes_raw() caused
+		// GCC, at -O3, to generate calls to memset from within memset!
+		// Thus, I have replaced the above slightly more optimized loop
+		// with a call to memfill8.
+		memfill8( local_dst, to_write, local_n );
 	};
 	
 	
