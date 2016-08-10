@@ -1,19 +1,19 @@
-// This file is part of Sherwin's Adventure.
+// This file is part of GBA Project Template.
 // 
 // Copyright 2015-2016 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// GBA Project Template is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// GBA Project Template is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
-// with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
+// with GBA Project Template.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #ifndef debug_vars_hpp
@@ -191,11 +191,17 @@ public:		// functions
 } __attribute__((_align4));
 
 
+extern vu32 (& curr_index_arr)[curr_index_arr_size];
+extern vu32 (& debug_u32_arr)[debug_u32_arr_size];
+extern vs32 (& debug_s32_arr)[debug_s32_arr_size];
+extern fixed24p8 (& debug_f24p8_arr)[debug_f24p8_arr_size];
+extern fixed8p8 (& debug_f8p8_arr)[debug_f8p8_arr_size];
+extern debug_str (& debug_str_arr)[debug_str_arr_size];
 
 class debug_arr_group
 {
-protected:		// static variables (raw debug arrays)
-//public:		// static variables (raw debug arrays)
+//protected:		// static variables (raw debug arrays)
+public:		// static variables (raw debug arrays)
 	struct raw_array_group
 	{
 		vu32 curr_index_arr[curr_index_arr_size];
@@ -307,7 +313,6 @@ public:		// functions
 	
 	
 } __attribute__((_align4));
-
 
 
 

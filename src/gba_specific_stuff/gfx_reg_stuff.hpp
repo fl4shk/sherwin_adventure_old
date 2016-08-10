@@ -1,19 +1,19 @@
-// This file is part of Sherwin's Adventure.
+// This file is part of GBA Project Template.
 // 
 // Copyright 2015-2016 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// GBA Project Template is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// GBA Project Template is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
-// with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
+// with GBA Project Template.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #ifndef gfx_reg_stuff_hpp
@@ -85,7 +85,7 @@ typedef vec2_f24p8 bg_point;
 // tiles per column.
 static constexpr u32 screenblock_size = 0x400;
 static constexpr u32 screenblock_xsize = 0x20, screenblock_ysize = 0x20;
-static const vec2_u32 screenblock_size_2d( screenblock_xsize, 
+static constexpr vec2_u32 screenblock_size_2d( screenblock_xsize, 
 	screenblock_ysize );
 typedef scr_entry screenblock[screenblock_size];
 
@@ -146,15 +146,16 @@ static const u32 num_colors_per_palette = 16;
 #define reg_dispstat *((vu16*)(mem_io + 0x0004))
 #define reg_vcount *((vu16*)(mem_io + 0x0006))
 
-// LCD I/O BG Control Registers
-#define reg_bgcnt ((vu16*)(mem_io + 0x0008))
-#define reg_bg0cnt ( reg_bgcnt[0] )
-#define reg_bg1cnt ( reg_bgcnt[1] )
-#define reg_bg2cnt ( reg_bgcnt[2] )
-#define reg_bg3cnt ( reg_bgcnt[3] )
+// LCD I/O BG Control Registers (W)
+#define reg_bgcnt_arr ((vu16*)(mem_io + 0x0008))
+#define reg_bg0cnt ( reg_bgcnt_arr[0] )
+#define reg_bg1cnt ( reg_bgcnt_arr[1] )
+#define reg_bg2cnt ( reg_bgcnt_arr[2] )
+#define reg_bg3cnt ( reg_bgcnt_arr[3] )
 
 // LCD I/O BG Scrolling Registers
 //#define reg_bgofs ((bg_point*)(mem_io + 0x0010))
+// Pretty cool how I can use my vec2_s16 class for this
 #define reg_bgofs ((vec2_s16*)(mem_io + 0x0010))
 
 #define reg_bghofs_n(n) *((vu16*)(mem_io + 0x0010 + 0x04 * n))
@@ -329,7 +330,7 @@ static const u32 num_pixels_per_block_dim = 16;
 #define bgcnt_8bpp ( 0x1 << 0x7 )
 #define bgcnt_bpp_mask ( (u16)(0x0080) )
 
-//Screen Base Block
+// Screen Base Block
 #define bgcnt_sbb( n ) ( ( n & 0x1f ) << 0x8 )
 #define bgcnt_sbb_mask ( (u16)(0x1f00) )
 
@@ -472,20 +473,20 @@ inline void clamped_rgb15_f24p8_component_add( fixed24p8& component,
 	}
 }
 
-inline void clamped_rgb15_f8p8_component_add( fixed8p8& component,
-	const fixed8p8& amount_to_add, const fixed8p8& target_value )
-{
-	component += amount_to_add;
-	
-	if ( amount_to_add > (fixed8p8){0} && component > target_value )
-	{
-		component = target_value;
-	}
-	else if ( amount_to_add < (fixed8p8){0} && component < target_value )
-	{
-		component = target_value;
-	}
-}
+//inline void clamped_rgb15_f8p8_component_add( fixed8p8& component,
+//	const fixed8p8& amount_to_add, const fixed8p8& target_value )
+//{
+//	component += amount_to_add;
+//	
+//	if ( amount_to_add > (fixed8p8){0} && component > target_value )
+//	{
+//		component = target_value;
+//	}
+//	else if ( amount_to_add < (fixed8p8){0} && component < target_value )
+//	{
+//		component = target_value;
+//	}
+//}
 
 
 

@@ -1,19 +1,19 @@
-// This file is part of Sherwin's Adventure.
+// This file is part of GBA Project Template.
 // 
 // Copyright 2015-2016 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// GBA Project Template is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// GBA Project Template is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
-// with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
+// with GBA Project Template.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #ifndef sa_stack_class_hpp
@@ -30,11 +30,16 @@ using std::array;
 
 
 
-#define arr_index_macro( the_type_size, index_to_array_of_types ) \
+#define arr_byte_index_macro( the_type_size, index_to_array_of_types ) \
 	the_type_size * index_to_array_of_types
 
-#define arr_size_macro( type, the_num_arr_elems ) \
-	arr_index_macro( sizeof(type), the_num_arr_elems )
+#define arr_byte_size_macro( type, the_num_arr_elems ) \
+	arr_byte_index_macro( sizeof(type), the_num_arr_elems )
+template< typename type >
+inline size_t arr_byte_size( size_t the_num_arr_elems )
+{
+	return ( sizeof(type) * the_num_arr_elems );
+}
 
 
 // A backend to a statically allocated stack of plain old data 
@@ -346,10 +351,12 @@ protected:		// variables
 	//template< typename type > friend class sa_list_backend;
 	//template< typename type, u32 total_num_nodes > friend class
 	//	externally_allocated_sa_list;
+	template< typename type, u32 total_num_nodes > 
+		friend class regular_sa_list_base;
 	template< typename type, u32 total_num_nodes, u32 num_lists >
 		friend class sa_array_of_lists;
 	
-public:		// variables
+protected:		// variables
 	//array< int, size > the_array;
 	array< s16, size > the_array __attribute__((_align4));
 	u32 next_index;

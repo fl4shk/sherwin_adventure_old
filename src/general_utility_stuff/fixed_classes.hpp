@@ -1,19 +1,19 @@
-// This file is part of Sherwin's Adventure.
+// This file is part of GBA Project Template.
 // 
 // Copyright 2015-2016 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// GBA Project Template is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// GBA Project Template is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
-// with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
+// with GBA Project Template.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #ifndef fixed_classes_hpp
@@ -44,7 +44,7 @@ public:		// variables
 	static constexpr u32 shift = 8;
 	static constexpr u32 frac_mask = ( 1 << shift ) - 1;
 	
-	s32 data;
+	s32 data = 0;
 	
 public:		// functions
 	static constexpr inline u32 get_shift()
@@ -299,7 +299,7 @@ public:		// variables
 	static constexpr u32 shift = 8;
 	static constexpr u32 frac_mask = ( 1 << shift ) - 1;
 	
-	s16 data;
+	s16 data = 0;
 	
 public:		// functions
 	static constexpr inline u32 get_shift()
@@ -543,8 +543,10 @@ public:		// typedefs
 	
 public:		// variables
 	static constexpr u32 frac_mask = ( 1 << shift ) - 1;
-	static constexpr u32 underlying_type_is_signed 
-		= ( underlying_type(-1) < underlying_type(0) );
+	//static constexpr u32 underlying_type_is_signed 
+	//	= ( underlying_type(-1) < underlying_type(0) );
+	static constexpr u32 underlying_type_is_signed
+		= type_is_signed<underlying_type>();
 	
 	underlying_type data;
 	

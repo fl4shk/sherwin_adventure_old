@@ -5,7 +5,7 @@
 MUSIC_DIRS=src/audio
 
 # THUMB Mode C++ Code
-CXX_DIRS=$(CURDIR) src src/game_engine_stuff src/game_engine_stuff/block_stuff src/game_engine_stuff/level_stuff src/game_engine_stuff/sprite_stuff src/gba_specific_stuff src/test_level src/audio src/gfx
+CXX_DIRS=$(CURDIR) src src/borrowed_stuff src/general_utility_stuff src/game_engine_stuff src/game_engine_stuff/block_stuff src/game_engine_stuff/level_stuff src/game_engine_stuff/sprite_stuff src/gba_specific_stuff src/test_level src/audio src/gfx
 
 # ARM Mode C++ Code
 ARM_CXX_DIRS=$(CXX_DIRS)
@@ -54,18 +54,19 @@ VERBOSE_ASM_FLAG=
 
 
 
-#DEBUG=yeah do debug
+DEBUG=yeah do debug
 
 # Optimization levels
 #DEBUG_OPTIMIZATION_LEVEL=-O1
-DEBUG_OPTIMIZATION_LEVEL=-Og
+#DEBUG_OPTIMIZATION_LEVEL=-Og
 #DEBUG_OPTIMIZATION_LEVEL=-O2
+DEBUG_OPTIMIZATION_LEVEL=-O3
 
-REGULAR_OPTIMIZATION_LEVEL=-O2
-#REGULAR_OPTIMIZATION_LEVEL=-O3
+#REGULAR_OPTIMIZATION_LEVEL=-O2
+REGULAR_OPTIMIZATION_LEVEL=-O3
 
 GLOBAL_BASE_FLAGS:=-mcpu=arm7tdmi -mtune=arm7tdmi -I$(DEVKITPRO)/libgba/include -nostartfiles \
-	-fno-exceptions -fno-rtti 
+	-fno-rtti -ffast-math
 
 ifdef DEBUG
 	##DEBUG_FLAGS=-gdwarf-2 -ggdb -gstrict-dwarf -g

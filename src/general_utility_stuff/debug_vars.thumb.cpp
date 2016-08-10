@@ -1,19 +1,19 @@
-// This file is part of Sherwin's Adventure.
+// This file is part of GBA Project Template.
 // 
 // Copyright 2015-2016 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// GBA Project Template is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// GBA Project Template is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
-// with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
+// with GBA Project Template.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #include "debug_vars.hpp"
@@ -87,6 +87,18 @@ debug_str& debug_str::operator = ( const char* to_copy )
 	return *this;
 }
 
+vu32 (& curr_index_arr)[curr_index_arr_size]
+	= debug_arr_group::the_raw_array_group.curr_index_arr;
+vu32 (& debug_u32_arr)[debug_u32_arr_size]
+	= debug_arr_group::the_raw_array_group.debug_u32_arr;
+vs32 (& debug_s32_arr)[debug_s32_arr_size]
+	= debug_arr_group::the_raw_array_group.debug_s32_arr;
+fixed24p8 (& debug_f24p8_arr)[debug_f24p8_arr_size]
+	= debug_arr_group::the_raw_array_group.debug_f24p8_arr;
+fixed8p8 (& debug_f8p8_arr)[debug_f8p8_arr_size]
+	= debug_arr_group::the_raw_array_group.debug_f8p8_arr;
+debug_str (& debug_str_arr)[debug_str_arr_size]
+	= debug_arr_group::the_raw_array_group.debug_str_arr;
 
 
 // static variables (raw debug arrays)
@@ -135,8 +147,10 @@ void debug_arr_group::clear_debug_vars()
 	//memfill32( debug_str_arr(), 0, debug_str_arr_helper.get_size() 
 	//	* sizeof(debug_str) / sizeof(u32) );
 	
-	memfill32( &the_raw_array_group, 0, sizeof(raw_array_group) 
-		/ sizeof(u32) );
+	//memfill32( &the_raw_array_group, 0, sizeof(raw_array_group) 
+	//	/ sizeof(u32) );
+	
+	memset( &the_raw_array_group, 0, sizeof(raw_array_group) );
 }
 
 
