@@ -17,8 +17,9 @@
 # You should have received a copy of the GNU General Public License along
 # with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
+#"--exclude=\".gitignore\""
+
 ret=( "--exclude=\"README.md\""
-	"--exclude=\".gitignore\""
 	"--exclude=\".gdb_history\""
 	"--exclude=\".git\""
 	"--exclude=\"objs\""
@@ -32,7 +33,8 @@ ret=( "--exclude=\"README.md\""
 	"--exclude=\"tags\""
 	"--exclude=\"*types_*.taghl\""
 	"--exclude=\".*.swp\""
-	"--exclude=\".*.swo\"" )
+	"--exclude=\".*.swo\"" 
+	"--exclude=\"util/convert_project_name_in_license.sh\"" )
 
 echo ${ret[@]}
 
