@@ -1,9 +1,13 @@
-*.swp
 deps/*
 objs/*
 objs_dis/*
 asmouts/*
 preprocs/*
+deps_debug/*
+objs_debug/*
+objs_dis_debug/*
+asmouts_debug/*
+preprocs_debug/*
 small_code_testing_things/*
 *.elf
 *.gba
@@ -15,3 +19,5 @@ disassembly*.armasm
 *.sav*
 *.ss*
 *.gdb_history*
+*.swp
+*.swo
