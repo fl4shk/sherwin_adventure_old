@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 Andrew Clark (FL4SHK).
+// Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -30,14 +30,13 @@ template< typename type >
 class array_helper
 {
 public:			// variables
-	type* the_array;
+	type* the_array = NULL;
 	
 protected:		// variables
-	u32 size;
+	u32 size = 0;
 	
 public:			// functions
 	array_helper()
-		: the_array(NULL), size(0)
 	{
 	}
 	
@@ -58,10 +57,12 @@ public:			// functions
 	}
 	
 	
-	void operator = ( const array_helper<type>& to_copy )
+	array_helper<type>& operator = ( const array_helper<type>& to_copy )
 	{
 		the_array = to_copy.the_array;
 		size = to_copy.size;
+		
+		return *this;
 	}
 	
 	

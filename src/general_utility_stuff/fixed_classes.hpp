@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 Andrew Clark (FL4SHK).
+// Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -31,9 +31,9 @@ class fixed8p8;
 //extern fixed24p8 f24p8_div_by_f8p8( const fixed24p8& num, 
 //	const fixed8p8& den ) __attribute__((_iwram_code));
 fixed24p8 f24p8_div_by_f8p8( const fixed24p8& num, const fixed8p8& den ) 
-	__attribute__((_iwram_code));
+	__attribute__((_iwram_code,_target_arm));
 fixed24p8 f24p8_div_by_u16( const fixed24p8& num, u16 den )
-	__attribute__((_iwram_code));
+	__attribute__((_iwram_code,_target_arm));
 
 
 // Underlying type is s32, with 8 fraction bits
@@ -87,7 +87,7 @@ public:		// functions
 	//inline fixed24p8 operator * ( const fixed24p8& to_mul ) const;
 	inline fixed24p8 operator * ( const fixed8p8& to_mul ) const;
 	fixed24p8 guaranteed_f24p8_by_f8p8_multiplication
-		( const fixed8p8& to_mul ) __attribute__((_iwram_code));
+		( const fixed8p8& to_mul ) __attribute__((_iwram_code,_target_arm));
 	inline fixed24p8 operator / ( const fixed8p8& den ) const
 	{
 		return f24p8_div_by_f8p8( (fixed24p8){data}, den );
@@ -437,7 +437,7 @@ inline bool fixed8p8::operator >= ( const fixed8p8& to_cmp ) const
 
 
 
-inline fixed24p8::operator fixed8p8 () const
+inline fixed24p8::operator fixed8p8() const
 {
 	if ( data < 0 )
 	{

@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 Andrew Clark (FL4SHK).
+// Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -26,12 +26,14 @@
 
 #include <utility>
 
+static constexpr size_t vec2_index_for_x = 0, vec2_index_for_y = 1;
+
 template< typename type >
 class vec2
 {
-public:		// constants
-	static constexpr size_t the_index_for_x = 0, the_index_for_y = 1;
-	
+//public:		// constants
+//	static constexpr size_t the_index_for_x = 0, the_index_for_y = 1;
+//	
 public:		// variables
 	type x, y;
 	
@@ -146,11 +148,11 @@ public:		// functions
 	
 	inline type& operator [] ( size_t index )
 	{
-		if ( index == the_index_for_x )
+		if ( index == vec2_index_for_x )
 		{
 			return x;
 		}
-		else //if ( index != the_index_for_x )
+		else //if ( index != vec2_index_for_x )
 		{
 			return y;
 		}
@@ -158,11 +160,11 @@ public:		// functions
 	
 	inline const type& operator [] ( size_t index ) const
 	{
-		if ( index == the_index_for_x )
+		if ( index == vec2_index_for_x )
 		{
 			return x;
 		}
-		else //if ( index != the_index_for_x )
+		else //if ( index != vec2_index_for_x )
 		{
 			return y;
 		}
@@ -187,9 +189,6 @@ typedef vec2<u64> vec2_u64; typedef vec2<s64> vec2_s64;
 
 
 #define generate_specific_vec2_class_contents( specific_type ) \
-public:		/* constants */ \
-	static constexpr size_t the_index_for_x = 0, the_index_for_y = 1; \
-	\
 public:		/* variables */ \
 	specific_type x, y; \
 	\
@@ -283,11 +282,11 @@ public:		/* functions */ \
 	\
 	inline specific_type& operator [] ( size_t index ) \
 	{ \
-		if ( index == the_index_for_x ) \
+		if ( index == vec2_index_for_x ) \
 		{ \
 			return x; \
 		} \
-		else /* if ( index != the_index_for_x ) */ \
+		else /* if ( index != vec2_index_for_x ) */ \
 		{ \
 			return y; \
 		} \
@@ -295,11 +294,11 @@ public:		/* functions */ \
 	\
 	inline const specific_type& operator [] ( size_t index ) const \
 	{ \
-		if ( index == the_index_for_x ) \
+		if ( index == vec2_index_for_x ) \
 		{ \
 			return x; \
 		} \
-		else /* if ( index != the_index_for_x ) */ \
+		else /* if ( index != vec2_index_for_x ) */ \
 		{ \
 			return y; \
 		} \
@@ -357,7 +356,8 @@ inline vec2<type> custom_abs( const vec2<type>& val )
 }
 
 
-// These are not actually hacks because they contain plain old data.
+// These are not actually hacks because the specific vec2's contain plain
+// old data.
 inline vec2_s16& copy_vec2_s16_via_ptr( vec2_s16& to_assign, 
 	const vec2_s16& to_copy )
 {

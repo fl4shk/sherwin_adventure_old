@@ -72,6 +72,19 @@ public:		// variables
 	
 public:		// functions
 	
+	
+	inline bool operator == ( const sprite_init_param_group& other ) const
+	{
+		return ( ( initial_block_grid_x_coord 
+			== other.initial_block_grid_x_coord )
+			&& ( initial_block_grid_y_coord 
+			== other.initial_block_grid_y_coord ) );
+	}
+	inline bool operator != ( const sprite_init_param_group& other ) const
+	{
+		return !( *this == other );
+	}
+	
 	// This function is included so that an std::forward_list of
 	// sprite_init_param_group's can be sorted in ascending order by the
 	// std::forward_list::sort() method.  The sorting is to be done based
@@ -98,6 +111,38 @@ public:		// functions
 		
 		return ( initial_block_grid_y_coord 
 			< other.initial_block_grid_y_coord );
+	}
+	
+	inline bool operator > ( const sprite_init_param_group& other ) const
+	{
+		if ( initial_block_grid_x_coord 
+			> other.initial_block_grid_x_coord)
+		{
+			return true;
+		}
+		else if ( initial_block_grid_x_coord
+			< other.initial_block_grid_x_coord )
+		{
+			return false;
+		}
+		//else if ( initial_block_grid_x_coord 
+		//	== other.initial_block_grid_x_coord )
+		//{
+		//	return ( initial_block_grid_y_coord 
+		//		< other.initial_block_grid_y_coord );
+		//}
+		
+		return ( initial_block_grid_y_coord 
+			> other.initial_block_grid_y_coord );
+	}
+	
+	inline bool operator <= ( const sprite_init_param_group& other ) const
+	{
+		return ( (*this) < other || (*this) == other );
+	}
+	inline bool operator >= ( const sprite_init_param_group& other ) const
+	{
+		return ( (*this) > other || (*this) == other );
 	}
 	
 	

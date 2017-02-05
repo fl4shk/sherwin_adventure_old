@@ -52,7 +52,7 @@ public:		// functions
 		u32 pos_x, u32 pos_y ) __attribute__((_iwram_code, __noinline__));
 	
 	static void update_hud_in_screenblock_mirror_2d();
-		__attribute__((_iwram_code));
+		__attribute__((_iwram_code,_target_arm));
 	
 	static void copy_hud_from_array_2d_helper_to_vram();
 	

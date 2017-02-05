@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 Andrew Clark (FL4SHK).
+// Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -40,6 +40,22 @@
 #define _ewram_code section(".ewram_code")
 #define _iwram_code section(".iwram_code")
 
+
+// Generate ARM-mode code instead of THUMB-mode code
+#define _target_arm target("arm")
+
+// There's a bug that I encountered in GCC (as of 5.3.0) that causes the
+// section attribute to be ignored when dealing with template functions.
+// By slightly changing linkscript.ld, I was able to trick ld into placing
+// template functions with the "hot" attribute into IWRAM.  This has got to
+// be a hack of some sort.
+
+// When using an optimization level less than -O2, the .text.hot section
+// does not seem to be generated.  Perhaps there's some -f... flag (or
+// flags) that would cause the .text.hot to be generated at less than -O2.
+#define _text_hot_section hot
+//#define _text_hot_section_forced hot,optimize("O3")
+
 /* ---- End of #defines for Sections ---- */
 
 
@@ -52,6 +68,7 @@
 #define _packed packed
 
 
+// This is for C++'s built-in alignment, which finally exists!
 #define alignas_regular alignas(4)
 
 

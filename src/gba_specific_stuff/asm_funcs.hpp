@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 Andrew Clark (FL4SHK).
+// Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -22,7 +22,7 @@
 #include "../general_utility_stuff/misc_types.hpp"
 #include "attribute_defines.hpp"
 
-#define asm_comment(stuff) \
+#define asm_comment( stuff ) \
 	asm volatile( "@ ---" stuff " ---" )
 
 #include <array>
@@ -33,17 +33,14 @@ extern "C"
 // These two functions should now be much faster, and I can feel free to
 // allocate more stuffs on the stack!
 void* memcpy( void* dst, const void* src, size_t n )
-	__attribute__((_iwram_code));
+	__attribute__((_iwram_code,_target_arm));
 void* memset( void* dst, int c, size_t n )
-	__attribute__((_iwram_code));
+	__attribute__((_iwram_code,_target_arm));
 
 
 // This function is used by crt0.s
 void* slower_memcpy( void* dst, const void* src, size_t n );
 
-
-// lut_udiv should actually take a u16 dem, not a u32 dem
-extern u64 lut_udiv( u32 num, u32 dem );
 
 // memcpy32 is from TONC
 extern void memcpy32( void* dst, const void* src, u32 wordcount );
@@ -140,7 +137,7 @@ inline void arr_memcpy32( std::array< type, size >& dst, const void* src )
 template< typename type, size_t size >
 inline void arr_memfill32( std::array< type, size >& dst, u32 src )
 {
-	arr_memfill32<type>( dst.data(), src, size );
+	arr_memfill32<type>( static_cast<type*>(dst.data()), src, size );
 }
 
 
@@ -162,6 +159,7 @@ inline void arr_memfill8( std::array< type, size >& dst, u32 src )
 }
 
 
+
 template< typename dst_type, typename src_type, size_t size >
 inline void* arr_memcpy( std::array< dst_type, size >& dst, 
 	std::array< src_type, size >& src )
@@ -178,6 +176,69 @@ inline void* arr_memset( std::array< type, size >& dst, u32 src )
 {
 	return arr_memset<type>( dst.data(), src, size );
 }
+
+
+
+
+// Some inline template functions intended for use with SRAM
+template< typename type >
+inline void single_memcpy8( u8* dst, const type& to_write )
+{
+	memcpy8( dst, &to_write, sizeof(type) );
+}
+
+template< typename type >
+inline void single_write_as_bytes( u8* dst, const type& to_write )
+{
+	const u8* src = reinterpret_cast<const u8*>(&to_write);
+	
+	for ( s32 i=sizeof(type)-1; i>=0; --i )
+	{
+		dst[i] = src[i];
+	}
+}
+
+
+template< typename type >
+inline void single_memcpy8( u8* dst_start, size_t type_offset, 
+	const type& to_write )
+{
+	u8* dst = &(dst_start[type_offset * sizeof(type)]);
+	
+	memcpy8( dst, &to_write, sizeof(type) );
+}
+
+template< typename type >
+inline void single_write_as_bytes( u8* dst_start, size_t type_offset, 
+	const type& to_write )
+{
+	u8* dst = &(dst_start[type_offset * sizeof(type)]);
+	const u8* src = reinterpret_cast<const u8*>(&to_write);
+	
+	for ( s32 i=sizeof(type)-1; i>=0; --i )
+	{
+		dst[i] = src[i];
+	}
+}
+
+
+template< typename type >
+inline void struct_memcpy32( type& dst, const type& src )
+{
+	memcpy32( &dst, &src, sizeof(type) / sizeof(u32) );
+}
+template< typename type >
+inline void struct_memcpy8( type& dst, const type& src )
+{
+	memcpy8( &dst, &src, sizeof(type) );
+}
+template< typename type >
+inline void* struct_memcpy( type& dst, const type& src )
+{
+	return memcpy( &dst, &src, sizeof(type) );
+}
+
+
 
 
 

@@ -1,6 +1,6 @@
 @ This file is part of Sherwin's Adventure.
 @ 
-@ Copyright 2015-2017 Andrew Clark (FL4SHK).
+@ Copyright 2015-2017 by Andrew Clark (FL4SHK).
 @ 
 @ Sherwin's Adventure is free software: you can redistribute it and/or
 @ modify it under the terms of the GNU General Public License as published
@@ -156,6 +156,17 @@ next:
 	long_call_via_r4_fata_type_2
 	
 	
+.L_copy_text_hot_code_to_iwram:
+	ldr r0, =text_hot_iwram_start
+	ldr r1, =text_hot_rom_start
+	
+	ldr r2, =text_hot_section_size
+	@cmp r2, #0x0
+	@ble .L_done_copying_text_hot_to_iwram
+	long_call_via_r4_fata_type_2
+	
+.L_done_copying_text_hot_to_iwram:
+	
 	
 	@ Clear the .bss section (Fill with 0x00)
 .L_clear_bss:
@@ -248,17 +259,11 @@ next:
 	ldr r0, =__init_array_start
 	ldr r1, =__init_array_load
 	ldr r2, =__init_array_end
-	
 	sub r2, r2, r0
-	@lsr r2, #0x02
-	
-	
-	@@ldr r4, =memcpy
-	@mov lr, pc
-	@bx r4
 	long_call_via_r4_fata_type_2
 	
 	
+.L_call_the__libc_init_array:
 	@@ Call the global C++ constructors
 	@ldr r4, =__libc_init_array
 	@mov lr, pc
@@ -282,14 +287,14 @@ next:
 
 .section ".rodata"
 .align 2
-.global div_table
-div_table:  
-	.incbin "lookup_tables/table_for_1_divided_by_x_where_x_is_a_16-bit_unsigned_integer_greater_than_or_equal_to_2_--_also_each_value_in_the_table_is_a_32-bit_fixed_point_number_where_all_32_bits_are_fractional_bits.bin"
+.global udiv_table
+udiv_table:  
+	.incbin "lookup_tables/unsigned_one_slash_x_lut_65536_entries_of_0p32.bin"
 
 
-@ For kicks, I am throwing in the size of the division table (in bytes).
-.equ div_table_size, . - div_table
-
+.global sdiv_table
+sdiv_table:  
+	.incbin "lookup_tables/signed_one_slash_x_lut_65536_entries_of_0p32.bin"
 
 @ A lookup table for sine where there are 512 degrees in a circle and
 @ where the values stored in the LUT are of the fixed-point format 4.12 
@@ -310,8 +315,8 @@ _blx_r3_stub:
 
 
 
-@.section ".asm_text","ax",%progbits
-.text
+.section ".asm_text","ax",%progbits
+@.text
 .align 2
 .do_thumb
 .thumb_func

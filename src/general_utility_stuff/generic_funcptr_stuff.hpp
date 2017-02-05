@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 Andrew Clark (FL4SHK).
+// Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -32,7 +32,14 @@
 typedef void (*generic_void_1arg_fp)( void* );
 typedef void (*generic_void_2arg_fp)( void*, void* );
 typedef void (*generic_void_3arg_fp)( void*, void*, void* );
+typedef void (*generic_void_4arg_fp)( void*, void*, void*, void* );
 typedef u32 (*generic_u32_2arg_fp)( void*, void* );
+
+
+// This is for function pointers to pass to qsort()
+typedef int (*qscmp_fp)( const void*, const void* );
+
+
 
 typedef void* (*generic_void_ptr_1arg_fp)( void* );
 typedef s16* (*generic_s16_ptr_1arg_fp)( void* );
@@ -56,54 +63,94 @@ list_of_types_to_make_ptr_typedefs_for(generate_ptr_typedef)
 
 
 template< typename type >
-inline auto get_generic_void_1arg_fp( void (*to_cast)( type* ) )
+inline generic_void_1arg_fp get_generic_void_1arg_fp
+	( void (*to_cast)( type* ) )
 {
 	return reinterpret_cast<generic_void_1arg_fp>(to_cast);
 }
-
-
 template< typename type_1, typename type_2 >
-inline auto get_generic_void_2arg_fp
+inline generic_void_2arg_fp get_generic_void_2arg_fp
 	( void (*to_cast)( type_1*, type_2* ) )
 {
 	return reinterpret_cast<generic_void_2arg_fp>(to_cast);
 }
-
-
 template< typename type_1, typename type_2, typename type_3 >
-inline auto get_generic_void_3arg_fp
+inline generic_void_3arg_fp get_generic_void_3arg_fp
 	( void (*to_cast)( type_1*, type_2*, type_3* ) )
 {
 	return reinterpret_cast<generic_void_3arg_fp>(to_cast);
 }
+template< typename type_1, typename type_2, typename type_3, 
+	typename type_4 >
+inline generic_void_4arg_fp get_generic_void_4arg_fp
+	( void (*to_cast)( type_1*, type_2*, type_3*, type_4* ) )
+{
+	return reinterpret_cast<generic_void_4arg_fp>(to_cast);
+}
+
+
+
+
+// Make things even more generic
+template< typename ret_type, typename type_1 >
+inline auto get_other_1arg_fp( ret_type (*to_cast)( type_1* ) )
+{
+	return reinterpret_cast<ret_type (*)( void* )>(to_cast);
+}
+
+template< typename ret_type, typename type_1, typename type_2 >
+inline auto get_other_2arg_fp( ret_type (*to_cast)( type_1*, type_2* ) )
+{
+	return reinterpret_cast<ret_type (*)( void*, void* )>(to_cast);
+}
+
+
+template< typename ret_type, typename type_1 >
+inline auto get_other_1arg_fp( ret_type (*to_cast)( const type_1* ) )
+{
+	return reinterpret_cast<ret_type (*)( const void* )>(to_cast);
+}
+
+template< typename ret_type, typename type_1, typename type_2 >
+inline auto get_other_2arg_fp
+	( ret_type (*to_cast)( const type_1*, const type_2* ) )
+{
+	return reinterpret_cast<ret_type (*)( const void*, const void* )>
+		(to_cast);
+}
+
+
 
 template< typename type_1, typename type_2 >
-inline auto get_generic_u32_2arg_fp
-	( u32 (*to_cast)( type_1*, type_2* ) )
+inline auto get_generic_u32_2arg_fp( u32 (*to_cast)( type_1*, type_2* ) )
 {
-	return reinterpret_cast<generic_u32_2arg_fp>(to_cast);
+	return get_other_2arg_fp(to_cast);
 }
 
 template< typename type >
-inline auto get_generic_void_ptr_1arg_fp
-	( void_ptr (*to_cast)( type* ) )
+inline auto get_qscmp_fp( int (*to_cast)( const type*, const type* ) )
 {
-	return reinterpret_cast<generic_void_ptr_1arg_fp>(to_cast);
+	return get_other_2arg_fp(to_cast);
+}
+
+template< typename type >
+inline auto get_generic_void_ptr_1arg_fp( void_ptr (*to_cast)( type* ) )
+{
+	return get_other_1arg_fp(to_cast);
 }
 
 template< typename type >
 inline auto get_generic_s16_ptr_1arg_fp( s16_ptr (*to_cast)( type* ) )
 {
-	return reinterpret_cast<generic_s16_ptr_1arg_fp>(to_cast);
+	return get_other_1arg_fp(to_cast);
 }
 
 template< typename type >
 inline auto get_generic_vec2_s16_ptr_1arg_fp
 	( vec2_s16_ptr (*to_cast)( type* ) )
 {
-	return reinterpret_cast<generic_vec2_s16_ptr_1arg_fp>(to_cast);
+	return get_other_1arg_fp(to_cast);
 }
-
 
 
 
@@ -218,7 +265,6 @@ inline u32 generic_less( const type& a, const type& b )
 		[]( const type* a2, const type* b2 ) -> u32
 		{ return ( (*a2) < (*b2) ); } );
 }
-
 
 
 

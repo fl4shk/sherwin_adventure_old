@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 Andrew Clark (FL4SHK).
+// Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -27,6 +27,18 @@
 #include <array>
 using std::array;
 
+//#include "sa_list_class_stuff.hpp"
+//#include "extended_sa_list_class_stuff.hpp"
+
+namespace sa_list_stuff
+{
+
+template< typename type, u32 total_num_nodes > 
+	class regular_list_base;
+template< typename type, u32 total_num_nodes, u32 num_lists >
+	class sa_array_of_lists;
+
+} // end of namespace sa_list_stuff
 
 
 
@@ -46,31 +58,32 @@ inline size_t arr_byte_size( size_t the_num_arr_elems )
 class sa_pod_stack_backend
 {
 protected:		// variables
-	u8* ptr_to_the_array_u8;
-	u32* ptr_to_next_index;
+	u8* the_array_u8;
+	u32* next_index_ptr;
 	u32 type_size, num_elems;
 	
 public:		// functions
 	sa_pod_stack_backend();
-	sa_pod_stack_backend( u8* s_ptr_to_the_array_u8, 
-		u32* s_ptr_to_next_index, u32 s_type_size, u32 s_num_elems );
+	sa_pod_stack_backend( u8* s_the_array_u8, u32* s_next_index_ptr, 
+		u32 s_type_size, u32 s_num_elems );
+	sa_pod_stack_backend( const sa_pod_stack_backend& to_copy );
 	
 	inline u8* get_the_array_u8()
 	{
-		return ptr_to_the_array_u8;
+		return the_array_u8;
 	}
 	inline const u8* get_the_array_u8() const
 	{
-		return ptr_to_the_array_u8;
+		return the_array_u8;
 	}
 	
 	inline u32& get_next_index()
 	{
-		return *ptr_to_next_index;
+		return *next_index_ptr;
 	}
 	inline const u32 get_next_index() const
 	{
-		return *ptr_to_next_index;
+		return *next_index_ptr;
 	}
 	
 	inline const u32 get_type_size() const
@@ -97,7 +110,11 @@ public:		// functions
 		write_to_the_array_u8( to_push_u8, get_next_index()++ );
 	}
 	
-	virtual void pop();
+	//virtual void pop();
+	inline void pop()
+	{
+		--get_next_index();
+	}
 	
 protected:		// functions
 	void write_to_the_array_u8( const u8* to_write_u8, u32 non_u8_index );
@@ -116,10 +133,11 @@ public:		// constants
 	
 public:		// functions
 	sa_free_list_backend();
-	sa_free_list_backend( u8* s_ptr_to_the_array_u8, 
-		u32* s_ptr_to_next_index, u32 s_num_elems );
-	sa_free_list_backend( s16* s_ptr_to_the_array, 
-		u32* s_ptr_to_next_index, u32 s_num_elems );
+	sa_free_list_backend( u8* s_the_array_u8, 
+		u32* s_next_index_ptr, u32 s_num_elems );
+	sa_free_list_backend( s16* s_the_array, 
+		u32* s_next_index_ptr, u32 s_num_elems );
+	sa_free_list_backend( const sa_free_list_backend& to_copy );
 	
 	void init();
 	
@@ -153,12 +171,12 @@ public:		// functions
 	{
 		get_the_array()[get_next_index()++] = (s16)to_push;
 	}
-	inline void pop() override
-	{
-		get_the_array()[get_next_index()-1] = -1;
-		
-		sa_pod_stack_backend::pop();
-	}
+	//inline void pop() override
+	//{
+	//	get_the_array()[get_next_index()-1] = -1;
+	//	
+	//	sa_pod_stack_backend::pop();
+	//}
 	
 	inline s16& peek_top()
 	{
@@ -169,6 +187,17 @@ public:		// functions
 		return get_the_array()[get_next_index()-1];
 	}
 	
+	
+	// A wrapper function just in case it's ever forgotten what to do.
+	inline s16& peek_top_and_pop()
+	{
+		s16& ret = peek_top();
+		
+		pop();
+		
+		return ret;
+	}
+	
 } __attribute__((_align4));
 
 
@@ -176,33 +205,33 @@ public:		// functions
 
 
 // A backend to a more generic statically allocated stack which is used
-// because it reduces the number of template parameters
+// because it reduces the number of template parameters.
 template< typename type >
 class sa_stack_backend
 {
 public:		// variables
-	//type* ptr_to_the_array;
+	//type* the_array;
 	//u32 num_elems;
 	array_helper<type> the_array_helper;
-	u32* ptr_to_next_index;
+	u32* next_index_ptr;
 	
 public:		// functions
-	sa_stack_backend() : the_array_helper(), ptr_to_next_index(NULL)
+	sa_stack_backend() : the_array_helper(), next_index_ptr(NULL)
 	{
 	}
 	
-	sa_stack_backend( type* s_ptr_to_the_array, u32 s_num_elems, 
-		u32* s_ptr_to_next_index ) 
-		: the_array_helper( s_ptr_to_the_array, s_num_elems ), 
-		ptr_to_next_index(s_ptr_to_next_index)
+	sa_stack_backend( type* s_the_array, u32 s_num_elems, 
+		u32* s_next_index_ptr ) 
+		: the_array_helper( s_the_array, s_num_elems ), 
+		next_index_ptr(s_next_index_ptr)
 	{
 	}
 	
-	void init( type* s_ptr_to_the_array, u32 s_num_elems, 
-		u32* s_ptr_to_next_index )
+	void init( type* s_the_array, u32 s_num_elems, 
+		u32* s_next_index_ptr )
 	{
-		the_array_helper.init( s_ptr_to_the_array, s_num_elems );
-		ptr_to_next_index = s_ptr_to_next_index;
+		the_array_helper.init( s_the_array, s_num_elems );
+		next_index_ptr = s_next_index_ptr;
 	}
 	
 	type* get_the_array()
@@ -216,11 +245,11 @@ public:		// functions
 	
 	inline u32& get_next_index()
 	{
-		return *ptr_to_next_index;
+		return *next_index_ptr;
 	}
 	inline const u32 get_next_index() const
 	{
-		return *ptr_to_next_index;
+		return *next_index_ptr;
 	}
 	
 	inline u32 get_size() const
@@ -352,9 +381,9 @@ protected:		// variables
 	//template< typename type, u32 total_num_nodes > friend class
 	//	externally_allocated_sa_list;
 	template< typename type, u32 total_num_nodes > 
-		friend class regular_sa_list_base;
+		friend class sa_list_stuff::regular_list_base;
 	template< typename type, u32 total_num_nodes, u32 num_lists >
-		friend class sa_array_of_lists;
+		friend class sa_list_stuff::sa_array_of_lists;
 	
 protected:		// variables
 	//array< int, size > the_array;
@@ -372,6 +401,18 @@ public:		// functions
 		//	push(i);
 		//}
 	}
+	inline sa_free_list( const sa_free_list<size>& to_copy )
+		: the_sa_free_list_backend( the_array.data(), &next_index,
+		get_size() )
+	{
+		arr_memcpy( the_array, to_copy.the_array );
+	}
+	
+	//inline sa_free_list<size>& operator = 
+	//	( const sa_free_list<size>& to_copy )
+	//{
+	//	the_sa_free_list_backend
+	//}
 	
 	inline u32& get_next_index()
 	{

@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 Andrew Clark (FL4SHK).
+// Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -22,14 +22,16 @@
 #include "misc_types.hpp"
 #include "../gba_specific_stuff/attribute_defines.hpp"
 
+#include <utility>
+
 template < typename type >
 class vec2;
 
 // This is a small class for the purposes of holding the states of
 // "previous" and "current" pairs.  It is primarily intended for use with
 // SMALL types, such as vec2's, built-in types, and so on and so forth.
-template < typename type >
-struct prev_curr_pair
+template< typename type >
+class prev_curr_pair
 {
 public:		// variables
 	type prev, curr;
@@ -43,8 +45,13 @@ public:		// functions
 	
 	inline void back_up_and_update( const type& n_curr )
 	{
-		prev = curr;
+		prev = std::move(curr);
 		curr = n_curr;
+	}
+	inline void back_up_and_update( type&& n_curr )
+	{
+		prev = std::move(curr);
+		curr = std::move(n_curr);
 	}
 	
 	inline bool has_changed() const

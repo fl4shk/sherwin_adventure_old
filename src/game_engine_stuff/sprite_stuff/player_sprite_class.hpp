@@ -188,29 +188,20 @@ public:		// variables
 	
 	
 	// Physics/logic constants
-	static constexpr fixed24p8 jump_vel = {-0x400};
-	//static constexpr fixed24p8 jump_vel = {-0x300};
-	static constexpr fixed24p8 jump_grav_acc = {0x1b};
+	static const fixed24p8 jump_vel;
+	static const fixed24p8 jump_grav_acc;
 	
-	//static constexpr s32 max_jump_hold_timer = 16;
-	//static constexpr s32 max_jump_hold_timer = 20;
-	static constexpr s32 max_jump_hold_timer = 24;
-	static constexpr s32 walk_frame_timer_end = 5;
-	static constexpr s32 run_frame_timer_end = 3;
+	static const s32 max_jump_hold_timer;
+	static const s32 walk_frame_timer_end;
+	static const s32 run_frame_timer_end;
 	
-	//static constexpr s32 pickaxe_swing_frame_timer_end = 4;
-	//static constexpr s32 pickaxe_swing_frame_timer_end = 2;
-	static constexpr s32 pickaxe_swing_start_frame_timer_end = 10;
-	static constexpr s32 pickaxe_swing_frame_timer_end = 1;
-	static constexpr s32 pickaxe_swing_final_frame_timer_end = 10;
+	static const s32 pickaxe_swing_start_frame_timer_end;
+	static const s32 pickaxe_swing_frame_timer_end;
+	static const s32 pickaxe_swing_final_frame_timer_end;
 	
-	static constexpr fixed24p8 walk_speed = {0x100};
-	//static constexpr fixed24p8 max_run_speed = {0x200};
-	//static constexpr fixed24p8 max_run_speed = {0x300};
-	//static constexpr fixed24p8 max_run_speed = {0x380};
-	static constexpr fixed24p8 max_run_speed = {0x300};
-	//static constexpr fixed24p8 run_accel_x_abs_val = {0x40};
-	static constexpr fixed24p8 run_accel_x_abs_val = {0x08};
+	static const fixed24p8 walk_speed;
+	static const fixed24p8 max_run_speed;
+	static const fixed24p8 run_accel_x_abs_val;
 	
 	// 0.5 seconds
 	static constexpr s32 initial_invin_frame_timer = 30;

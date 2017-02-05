@@ -50,32 +50,21 @@ protected:		// variables
 	
 public:		// constants
 	
-	static constexpr fixed24p8 cpg_on_slope_threshold_abs = {0x400};
+	static const fixed24p8 cpg_on_slope_threshold_abs;
 	
 	// coll_point_group threshold
-	static constexpr vec2_f24p8 cpg_16x32_threshold_abs = { {0x400}, 
-		{0x480} };
+	static const vec2_f24p8 cpg_16x32_threshold_abs;
 	
-	//static constexpr fixed24p8 grav_acc = {0x80};
-	//static constexpr fixed24p8 grav_acc = {0x40};
-	//static constexpr fixed24p8 grav_acc = {0x60};
-	static constexpr fixed24p8 grav_acc = {0x50};
-	//static constexpr fixed24p8 max_y_vel = {0x400};
-	static constexpr fixed24p8 max_y_vel = {0x300};
-	//static constexpr fixed24p8 max_y_vel = {0x280};
+	static const fixed24p8 grav_acc;
+	static const fixed24p8 max_y_vel;
 	
 	
-	static constexpr sprite_type the_const_sprite_type = st_default;
-	static constexpr sprite_palette_slot the_palette_slot = sps_player;
-	//static constexpr u32 the_relative_metatile_slot = 7,
-	//	num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
+	static const sprite_type the_const_sprite_type;
+	static const sprite_palette_slot the_palette_slot;
 	
-	static constexpr u32 the_relative_metatile_slot = 0,
-		num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
-	
-	static constexpr tile* tile_arr = const_cast<tile*>
-		(reinterpret_cast<const tile*>(sherwin_gfxTiles));
-	
+	static const u32 the_relative_metatile_slot,
+		num_active_gfx_tiles;
+	static const tile* tile_arr;
 	static const oam_entry::shape_size the_initial_shape_size;
 	
 	static const vec2_f24p8 the_initial_coll_box_size,

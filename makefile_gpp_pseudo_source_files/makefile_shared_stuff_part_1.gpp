@@ -1,0 +1,82 @@
+ALWAYS_DEBUG_SUFFIX:=_debug
+
+
+# Comment out or un-comment out the next line to enable profiling stuff to
+# be generated
+#PROFILE:=yeah do profile
+
+ifdef PROFILE
+	PROFILE_FLAGS:=-pg
+endif
+
+
+# Comment out or un-comment out the next line to enable debugging stuff to
+# be generated
+DEBUG:=yeah do debug
+
+# Optimization levels
+DEBUG_OPTIMIZATION_LEVEL:=-O0
+#DEBUG_OPTIMIZATION_LEVEL:=-Og
+#DEBUG_OPTIMIZATION_LEVEL:=-O3
+
+#REGULAR_OPTIMIZATION_LEVEL:=-O1
+REGULAR_OPTIMIZATION_LEVEL:=-O3
+
+
+ifdef DEBUG
+	EXTRA_DEBUG_FLAGS:=-g 
+	##DEBUG_FLAGS:=-gdwarf-2 -ggdb -gstrict-dwarf $(EXTRA_DEBUG_FLAGS)
+	DEBUG_FLAGS:=-gdwarf-3 $(EXTRA_DEBUG_FLAGS)
+	
+	OPTIMIZATION_LEVEL:=$(DEBUG_OPTIMIZATION_LEVEL)
+	
+	# Only do profiling stuff when debugging stuff is enabled
+	EXTRA_LD_FLAGS:=$(PROFILE_FLAGS) $(DEBUG_FLAGS)
+	
+	DEBUG_SUFFIX:=$(ALWAYS_DEBUG_SUFFIX)
+else
+	OPTIMIZATION_LEVEL:=$(REGULAR_OPTIMIZATION_LEVEL)
+endif
+
+
+# This is likely specific to *nix... but then again, the entire makefile is
+# probably specific to *nix!
+PROJ:=$(shell basename $(CURDIR))$(DEBUG_SUFFIX)
+
+VERBOSE_ASM_FLAG:=
+#VERBOSE_ASM_FLAG:=-fverbose-asm
+
+
+
+# Compilers, assemblers, and the linker
+CXX:=$(COMP_PREFIX)g++
+AS:=$(COMP_PREFIX)as
+#LD:=$(COMP_PREFIX)ld
+LD:=$(COMP_PREFIX)g++
+#LD:=$(COMP_PREFIX)gcc
+OBJDUMP:=$(COMP_PREFIX)objdump
+OBJCOPY:=$(COMP_PREFIX)objcopy
+
+# The linker script
+LD_SCRIPT:=linkscript.ld
+
+
+
+GLOBAL_BASE_FLAGS:=-mcpu=arm7tdmi -mtune=arm7tdmi \\
+	-I$(DEVKITPRO)/libgba/include -nostartfiles \\
+	-fno-rtti -ffast-math $(OPTIMIZATION_LEVEL) \\
+	$(EXTRA_DEBUG_FLAGS)
+
+
+# Thumb/ARM compiler flags
+THUMB_BASE_FLAGS:=$(GLOBAL_BASE_FLAGS) -mthumb -mthumb-interwork
+#ARM_BASE_FLAGS:=$(GLOBAL_BASE_FLAGS) -marm -mthumb-interwork
+
+# Eventually I'll use -std=c++17
+# Ah screw it, I'm switching now.
+CXX_FLAGS:=-std=c++17 $(THUMB_BASE_FLAGS) -D __thumb__  -Wall
+#ARM_CXX_FLAGS:=-std=c++17 $(ARM_BASE_FLAGS) -Wall
+S_FLAGS:=-mcpu=arm7tdmi -mthumb -mthumb-interwork
+
+
+

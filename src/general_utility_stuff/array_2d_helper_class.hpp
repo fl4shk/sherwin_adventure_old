@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 Andrew Clark (FL4SHK).
+// Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -30,17 +30,20 @@ template< typename type >
 class array_2d_helper
 {
 protected:		// variables
-	vec2_u32 size_2d;
-	u32 size;
+	vec2_u32 size_2d = { 0, 0 };
+	u32 size = 0;
 	
 public:			// variables
-	type* the_array;
+	type* the_array = NULL;
 	
 public:			// functions
-	array_2d_helper() : size_2d({ 0, 0 }), size(0), the_array(0)
+	//array_2d_helper() : size_2d({ 0, 0 }), size(0), the_array(0)
+	//{
+	//}
+	inline array_2d_helper()
 	{
 	}
-	array_2d_helper( type* s_the_array, const vec2_u32& s_size_2d )
+	inline array_2d_helper( type* s_the_array, const vec2_u32& s_size_2d )
 		: size_2d(s_size_2d), size( s_size_2d.x * s_size_2d.y ),
 		the_array(s_the_array)
 	{
@@ -53,8 +56,8 @@ public:			// functions
 		the_array = s_the_array;
 	}
 	
-	array_2d_helper<type>& operator 
-		= ( const array_2d_helper<type>& to_copy )
+	array_2d_helper<type>& operator = 
+		( const array_2d_helper<type>& to_copy )
 	{
 		size_2d = to_copy.size_2d;
 		size = to_copy.size;

@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 Andrew Clark (FL4SHK).
+// Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -135,14 +135,14 @@ public:		// and constants
 public:		// functions
 	inline debug_str() : real_size(0)
 	{
-		clear();
+		clear_arr();
 	}
 	inline debug_str( u32 n_real_size )
 	{
 		set_real_size(n_real_size);
 		//memfill32( arr, 0, max_size / sizeof(u32) );
 		//arr_memfill32( arr, 0, max_size );
-		clear();
+		clear_arr();
 	}
 	inline debug_str( const debug_str& to_copy )
 	{
@@ -173,11 +173,16 @@ public:		// functions
 		}
 	}
 	
-	inline void clear()
+	inline void clear_arr()
 	{
 		//arr_memfill32( arr, 0, max_size );
 		//arr_memset( arr, 0, max_size );
 		arr_memset( arr, 0 );
+	}
+	inline void total_clear()
+	{
+		real_size = 0;
+		clear_arr();
 	}
 	
 	inline void clear_unused_portion()
@@ -191,9 +196,9 @@ public:		// functions
 } __attribute__((_align4));
 
 
-extern vu32 (& curr_index_arr)[curr_index_arr_size];
-extern vu32 (& debug_u32_arr)[debug_u32_arr_size];
-extern vs32 (& debug_s32_arr)[debug_s32_arr_size];
+extern u32 (& curr_index_arr)[curr_index_arr_size];
+extern u32 (& debug_u32_arr)[debug_u32_arr_size];
+extern s32 (& debug_s32_arr)[debug_s32_arr_size];
 extern fixed24p8 (& debug_f24p8_arr)[debug_f24p8_arr_size];
 extern fixed8p8 (& debug_f8p8_arr)[debug_f8p8_arr_size];
 extern debug_str (& debug_str_arr)[debug_str_arr_size];
@@ -204,10 +209,10 @@ class debug_arr_group
 public:		// static variables (raw debug arrays)
 	struct raw_array_group
 	{
-		vu32 curr_index_arr[curr_index_arr_size];
+		u32 curr_index_arr[curr_index_arr_size];
 		
-		vu32 debug_u32_arr[debug_u32_arr_size];
-		vs32 debug_s32_arr[debug_s32_arr_size];
+		u32 debug_u32_arr[debug_u32_arr_size];
+		s32 debug_s32_arr[debug_s32_arr_size];
 		fixed24p8 debug_f24p8_arr[debug_f24p8_arr_size];
 		fixed8p8 debug_f8p8_arr[debug_f8p8_arr_size];
 		
@@ -215,11 +220,18 @@ public:		// static variables (raw debug arrays)
 	} __attribute__((_align4));
 	static raw_array_group the_raw_array_group;
 	
-public:		// static variables (array_helpers)
-	static array_helper<vu32> curr_index_arr_helper;
 	
-	static array_helper<vu32> debug_u32_arr_helper;
-	static array_helper<vs32> debug_s32_arr_helper;
+	// The main reason this exists is to give something to write to so that
+	// a breakpoint can be sure to be hit in GDB.  It's a  bit unfortunate
+	// that I had to resort to something like this due to it being
+	// inflexible, but oh well.
+	static u32 gdb_breakpoint_helper;
+	
+public:		// static variables (array_helpers)
+	static array_helper<u32> curr_index_arr_helper;
+	
+	static array_helper<u32> debug_u32_arr_helper;
+	static array_helper<s32> debug_s32_arr_helper;
 	static array_helper<fixed24p8> debug_f24p8_arr_helper;
 	static array_helper<fixed8p8> debug_f8p8_arr_helper;
 	
@@ -228,16 +240,16 @@ public:		// static variables (array_helpers)
 //protected:		// functions
 public:		// functions
 	
-	static inline vu32* curr_index_arr()
+	static inline u32* curr_index_arr()
 	{
 		return the_raw_array_group.curr_index_arr;
 	}
 	
-	static inline vu32* debug_u32_arr() 
+	static inline u32* debug_u32_arr() 
 	{
 		return the_raw_array_group.debug_u32_arr;
 	}
-	static inline vs32* debug_s32_arr()
+	static inline s32* debug_s32_arr()
 	{
 		return the_raw_array_group.debug_s32_arr;
 	}
@@ -259,29 +271,28 @@ public:		// functions
 	static void clear_debug_vars();
 	
 	#define raw_write_debug_u32_and_inc( to_write ) \
-	debug_arr_group::the_raw_array_group.debug_u32_arr \
-		[debug_arr_group::the_raw_array_group.curr_index_arr \
-		[cdit_u32]++] = static_cast<u32>(to_write);
+	debug_arr_group::debug_u32_arr() \
+		[debug_arr_group::curr_index_arr()[cdit_u32]++] \
+		= static_cast<u32>(to_write);
 	
 	#define raw_write_debug_s32_and_inc( to_write ) \
-	debug_arr_group::the_raw_array_group.debug_s32_arr \
-		[debug_arr_group::the_raw_array_group.curr_index_arr \
-		[cdit_s32]++] = static_cast<s32>(to_write);
+	debug_arr_group::debug_s32_arr() \
+		[debug_arr_group::curr_index_arr()[cdit_s32]++] \
+		= static_cast<s32>(to_write);
 	
 	#define raw_write_debug_f24p8_and_inc( to_write ) \
-	debug_arr_group::the_raw_array_group.debug_f24p8_arr \
-		[debug_arr_group::the_raw_array_group.curr_index_arr \
-		[cdit_f24p8]++] = static_cast<fixed24p8>(to_write);
+	debug_arr_group::debug_f24p8_arr() \
+		[debug_arr_group::curr_index_arr()[cdit_f24p8]++] \
+		= static_cast<fixed24p8>(to_write);
 	
 	#define raw_write_debug_f8p8_and_inc( to_write ) \
-	debug_arr_group::the_raw_array_group.debug_f8p8_arr \
-		[debug_arr_group::the_raw_array_group.curr_index_arr \
-		[cdit_f8p8]++] = static_cast<fixed8p8>(to_write);
+	debug_arr_group::debug_f8p8_arr() \
+		[debug_arr_group::curr_index_arr()[cdit_f8p8]++] \
+		= static_cast<fixed8p8>(to_write);
 	
 	#define raw_write_debug_str_and_inc( to_write ) \
-	debug_arr_group::the_raw_array_group.debug_str_arr \
-		[debug_arr_group::the_raw_array_group.curr_index_arr \
-		[cdit_str]++] = to_write;
+	debug_arr_group::debug_str_arr() \
+		[debug_arr_group::curr_index_arr()[cdit_str]++] = to_write;
 	
 	static inline void write_u32_and_inc( u32 to_write )
 	{
@@ -320,11 +331,11 @@ public:		// functions
 
 //template< typename debug_arr_type, typename type >
 //void show_debug_values_group_backend( debug_arr_type* debug_values_arr, 
-//	vu32& curr_index, const u32 total_num_args, type* all_values_arr ) 
+//	u32& curr_index, const u32 total_num_args, type* all_values_arr ) 
 //	__attribute__((noinline));
 template< typename debug_arr_type, typename type >
 void show_debug_values_group_backend( debug_arr_type* debug_values_arr, 
-	vu32& curr_index, const u32 total_num_args, const type* all_values_arr )
+	u32& curr_index, const u32 total_num_args, const type* all_values_arr )
 {
 	//asm_comment("show_debug_values_group_backend()");
 	

@@ -31,9 +31,9 @@
 class coll_box;
 
 int coll_box_intersects_now( const coll_box&a, const coll_box& b )
-	__attribute__((_iwram_code));
+	__attribute__((_iwram_code,_target_arm));
 int coll_box_intersects_now_2( const coll_box& a, const coll_box& b )
-	__attribute__((_iwram_code));
+	__attribute__((_iwram_code,_target_arm));
 
 
 class coll_box

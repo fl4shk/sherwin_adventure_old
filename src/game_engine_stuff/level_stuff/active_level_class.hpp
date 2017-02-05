@@ -102,7 +102,7 @@ public:		// static variables
 	//	horiz_sublevel_xsize > horiz_sublevel_sprite_ipg_lists
 	//	__attribute__((_ewram));
 	
-	static sa_array_of_lists< sprite_init_param_group,
+	static sa_list_stuff::sa_array_of_lists< sprite_init_param_group,
 		max_num_sprite_ipgs_per_sublevel, horiz_sublevel_xsize > 
 		horiz_sublevel_sprite_ipg_lists __attribute__((_ewram));
 	

@@ -267,13 +267,16 @@ public:		// functions
 	
 	void get_corner_stuff_old
 		( array_helper<block_coll_result*>& bcr_ptr_arr_helper, 
-		array_helper<u32>& bool_as_u32_arr_helper );
+		array_helper<u32>& bool_as_u32_arr_helper )
+		__attribute__((_target_arm));
 	
 	void get_coll_box_related_stuff_old( const sprite& the_sprite,
-		array_helper<block_coll_result*>& bcr_ptr_arr_helper );
+		array_helper<block_coll_result*>& bcr_ptr_arr_helper )
+		__attribute__((_target_arm));
 	
 	void get_side_blocked_stuff_old
-		( array_helper<u32>& bool_as_u32_arr_helper );
+		( array_helper<u32>& bool_as_u32_arr_helper )
+		__attribute__((_target_arm));
 	
 protected:		// functions
 	inline void init_bcr_arr_2d_helper()

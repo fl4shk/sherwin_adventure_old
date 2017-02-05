@@ -34,11 +34,15 @@ SECTIONS
 	.text :
 	{
 		CREATE_OBJECT_SYMBOLS
-		*(.text .text.* .gnu.linkonce.t.*)
+		/*
+			*(.text .text.* .gnu.linkonce.t.*)
+		*/
+		
+		*(.text .gnu.linkonce.t.*)
+		
 		*(.plt)
 		*(.gnu_warning)
 		*(.glue_7t) *(.glue_7)
-		
 		
 		. = ALIGN(4);
 		
@@ -56,9 +60,33 @@ SECTIONS
 		
 		*(.init)
 		*(.fini)
+		
+		. = ALIGN(4);
 	} >rom
 	
 	text_section_size = SIZEOF(.text);
+	
+	.text_hot :
+	{
+		text_hot_rom_start = LOADADDR(.text_hot);
+		text_hot_iwram_start = .;
+		
+		*(.text.hot*);
+		
+		. = ALIGN(4);
+	} >iwram AT >rom
+	
+	text_hot_section_size = SIZEOF(.text_hot);
+	
+	/* 
+		*(.text.*) is put AFTER *(.text.hot*) so that the .text_hot section
+		goes into IWRAM
+	*/
+	.text_extra :
+	{
+		*(.text.*)
+		. = ALIGN(4);
+	} >rom
 	
 	
 	
@@ -111,7 +139,7 @@ SECTIONS
 	
 	iwram_data_section_size = SIZEOF(.iwram_data);
 	
-	/* Code to be copied to IWRAM */
+	/* Non .text.hot* Code to be copied to IWRAM */
 	.iwram_code :
 	{
 		/* The start of code to be copied to IWRAM*/
@@ -137,6 +165,7 @@ SECTIONS
 		
 		maxmod_code_iwram_start = .;
 		
+		/* MaxMOD's code goes into the ".iwram" section */
 		*(.iwram);
 		
 		maxmod_code_iwram_end = .;
@@ -161,7 +190,9 @@ SECTIONS
 	iwram_bss_section_size = SIZEOF(.iwram_bss);
 	
 	total_iwram_var_size = iwram_data_section_size + iwram_bss_section_size;
-	total_iwram_code_size = iwram_code_section_size + maxmod_code_section_size;
+	
+    total_iwram_code_size = text_hot_section_size + iwram_code_section_size + maxmod_code_section_size;
+	/* total_iwram_code_size = iwram_code_section_size + * maxmod_code_section_size; */
 	total_iwram_usage = total_iwram_var_size + total_iwram_code_size;
 	
 	.ewram_code :

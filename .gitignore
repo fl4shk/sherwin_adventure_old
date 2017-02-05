@@ -1,3 +1,5 @@
+*.swp
+*.swo
 deps/*
 objs/*
 objs_dis/*
@@ -9,8 +11,21 @@ objs_dis_debug/*
 asmouts_debug/*
 preprocs_debug/*
 small_code_testing_things/*
+util/*/deps/*
+util/*/objs/*
+util/*/objs_dis/*
+util/*/asmouts/*
+util/*/preprocs/*
+util/*/deps_debug/*
+util/*/objs_debug/*
+util/*/objs_dis_debug/*
+util/*/asmouts_debug/*
+util/*/preprocs_debug/*
 *.elf
 *.gba
+util/*/*.elf
+util/*/*.bin
+util/*/*.hexdump
 disassembly_all_2.armasm
 symbols.txt
 linker_map.txt
@@ -19,5 +34,7 @@ disassembly*.armasm
 *.sav*
 *.ss*
 *.gdb_history*
-*.swp
-*.swo
+tags
+types_*.taghl
+makefile_temp
+*.txt.ignore
