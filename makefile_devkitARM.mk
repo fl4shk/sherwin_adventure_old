@@ -47,13 +47,10 @@ DEBUG:=yeah do debug
 # Optimization levels
 DEBUG_OPTIMIZATION_LEVEL:=-O0
 #DEBUG_OPTIMIZATION_LEVEL:=-Og
-#DEBUG_OPTIMIZATION_LEVEL:=-O1
-#DEBUG_OPTIMIZATION_LEVEL:=-O2
 #DEBUG_OPTIMIZATION_LEVEL:=-O3
 
 #REGULAR_OPTIMIZATION_LEVEL:=-O1
-REGULAR_OPTIMIZATION_LEVEL:=-O2
-#REGULAR_OPTIMIZATION_LEVEL:=-O3
+REGULAR_OPTIMIZATION_LEVEL:=-O3
 
 
 ifdef DEBUG
@@ -107,7 +104,7 @@ THUMB_BASE_FLAGS:=$(GLOBAL_BASE_FLAGS) -mthumb -mthumb-interwork
 
 # Eventually I'll use -std=c++17
 # Ah screw it, I'm switching now.
-CXX_FLAGS:=-std=c++17 $(THUMB_BASE_FLAGS) -D __thumb__  -Wall
+CXX_FLAGS:=-std=c++17 $(THUMB_BASE_FLAGS) -Wall
 #ARM_CXX_FLAGS:=-std=c++17 $(ARM_BASE_FLAGS) -Wall
 S_FLAGS:=-mcpu=arm7tdmi -mthumb -mthumb-interwork
 
