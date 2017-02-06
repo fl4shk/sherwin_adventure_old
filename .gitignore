@@ -36,5 +36,7 @@ disassembly*.armasm
 *.gdb_history*
 tags
 types_*.taghl
+*/tags
+*/types_*.taghl
 makefile_temp
 *.txt.ignore
