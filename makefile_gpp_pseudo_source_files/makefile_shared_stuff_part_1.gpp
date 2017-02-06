@@ -1,5 +1,4 @@
-///*
- This file is part of Sherwin's Adventure.
+///* This file is part of Sherwin's Adventure.
  
  Copyright 2015-2017 Andrew Clark (FL4SHK).
  
@@ -14,10 +13,7 @@
  General Public License for more details.
  
  You should have received a copy of the GNU General Public License along
- with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
-*///
-
-
+ with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.  *///
 ALWAYS_DEBUG_SUFFIX:=_debug
 
 

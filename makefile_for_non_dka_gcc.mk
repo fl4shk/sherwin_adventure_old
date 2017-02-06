@@ -1,5 +1,23 @@
+# This file is part of Sherwin's Adventure.
+#  
+# Copyright 2015-2017 Andrew Clark (FL4SHK).
+# 
+# Sherwin's Adventure is free software: you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or (at
+# your option) any later version.
+# 
+# Sherwin's Adventure is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License along
+# with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
+
+
 # In both this makefile (makefile_devkitARM.mk) and the makefile for
-# updated GCC (makefile_for_updated_gcc.mk), the contents after the
+# updated GCC (makefile_for_non_dka_gcc.mk), the contents after the
 # creation of the LD_FLAGS variable are supposed to be the same.
 
 
@@ -26,8 +44,6 @@ S_DIRS:=$(CXX_DIRS)
 # This compiler prefix is ARM-specific
 #COMP_PREFIX:=$(DEVKITARM)/bin/arm-none-eabi-
 COMP_PREFIX:=arm-none-eabi-
-
-
 
 
 
@@ -124,8 +140,6 @@ COMMON_LD_FLAGS:=-mthumb --specs=nosys.specs -lgcc -lc -lstdc++ -L$(DEVKITPRO)/l
 
 #LD_FLAGS:=--specs=nosys.specs -nostartfiles -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lmm $(DEBUG_FLAGS)
 #LD_FLAGS:=--specs=nosys.specs -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lmm $(DEBUG_FLAGS)
-
-
 
 
 
