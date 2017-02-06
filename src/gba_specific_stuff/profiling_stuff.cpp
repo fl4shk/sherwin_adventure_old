@@ -44,6 +44,8 @@ u32 temp_debug_arr_for_new[temp_debug_arr_size];
 u32 temp_debug_arr_for_delete[temp_debug_arr_size];
 u32 temp_debug_arr_for_malloc[temp_debug_arr_size];
 u32 temp_debug_arr_for_free[temp_debug_arr_size];
+u32 temp_debug_arr_for_nano_malloc[temp_debug_arr_size];
+u32 temp_debug_arr_for_nano_free[temp_debug_arr_size];
 int* temp_debug_arr_of_pointers[temp_debug_arr_size];
 
 //int* temp_debug_pointer;
@@ -87,7 +89,6 @@ void profile_dynamic_allocations( size_t num_elems )
 		
 		temp_debug_arr_for_free[i] = profile_stop();
 	}
-	
 }
 
 

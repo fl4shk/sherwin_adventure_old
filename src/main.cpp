@@ -62,8 +62,8 @@ int real_main();
 
 int main()
 {
-	return second_main();
-	//return real_main();
+	//return second_main();
+	return real_main();
 }
 
 int second_main()
