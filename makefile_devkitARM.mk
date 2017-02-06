@@ -17,7 +17,7 @@
 
 
 # In both this makefile (makefile_devkitARM.mk) and the makefile for
-# updated GCC (makefile_for_updated_gcc.mk), the contents after the
+# updated GCC (makefile_for_non_dka_gcc.mk), the contents after the
 # creation of the LD_FLAGS variable are supposed to be the same.
 
 
