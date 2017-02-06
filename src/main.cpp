@@ -26,6 +26,7 @@
 #include "gba_specific_stuff/dma_stuff.hpp"
 //#include "gba_specific_stuff/sound_reg_stuff.hpp"
 #include "gba_specific_stuff/timer_stuff.hpp"
+#include "gba_specific_stuff/profiling_stuff.hpp"
 
 
 #include "general_utility_stuff/fixed_classes.hpp"
@@ -56,7 +57,22 @@ static const char test_str[] = "Birds2";
 static const u32 test_str_size = ( sizeof(test_str) / sizeof(char) ) - 1;
 
 
+int second_main();
+int real_main();
+
 int main()
+{
+	return second_main();
+	//return real_main();
+}
+
+int second_main()
+{
+	profile_dynamic_allocations(20);
+	return 0;
+}
+
+int real_main()
 {
 	irq_init();
 	

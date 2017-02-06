@@ -65,8 +65,8 @@ inline void show_profile_stop()
 
 
 // Profile new, delete, new[], delete[], malloc, and free.
-//void profile_dynamic_allocations( size_t num_elems )
-//	__attribute__((_iwram_code));
+void profile_dynamic_allocations( size_t num_elems )
+	__attribute__((_iwram_code,_target_arm));
 
 
 #endif		// profiling_stuff_hpp
