@@ -1,3 +1,6 @@
+
+
+
 # In both this makefile (makefile_devkitARM.mk) and the makefile for
 # updated GCC (makefile_for_updated_gcc.mk), the contents after the
 # creation of the LD_FLAGS variable are supposed to be the same.
@@ -26,6 +29,9 @@ S_DIRS:=$(CXX_DIRS)
 # This compiler prefix is ARM-specific
 COMP_PREFIX:=$(DEVKITARM)/bin/arm-none-eabi-
 #COMP_PREFIX:=arm-none-eabi-
+
+
+
 
 
 ALWAYS_DEBUG_SUFFIX:=_debug
@@ -114,12 +120,16 @@ S_FLAGS:=-mcpu=arm7tdmi -mthumb -mthumb-interwork
 
 
 # Linker flags
-COMMON_LD_FLAGS:=--specs=nosys.specs -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ `$(CXX) -print-file-name=thumb/libgcc.a` `$(CXX) -print-file-name=thumb/libc.a` `$(CXX) -print-file-name=thumb/libstdc++.a` -lmm
+COMMON_LD_FLAGS:=-mthumb --specs=nosys.specs -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm
+#COMMON_LD_FLAGS:=--specs=nosys.specs -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ `$(CXX) -print-file-name=thumb/libgcc.a` `$(CXX) -print-file-name=thumb/libc.a` `$(CXX) -print-file-name=thumb/libstdc++.a` -lmm
 #COMMON_LD_FLAGS:=--specs=nosys.specs -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lmm 
 ## This is the LD_FLAGS for devkitARM
 #LD_FLAGS:=$(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm $(DEBUG_FLAGS)
 ##LD_FLAGS:=$(EXTRA_LD_FLAGS) -g -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm $(DEBUG_FLAGS) 
 ##LD_FLAGS:=$(EXTRA_LD_FLAGS) -g -L$(DEVKITPRO)/libgba/lib -nostartfiles -T $(LD_SCRIPT) -Wl,--entry=_start2 -lmm $(DEBUG_FLAGS) 
+
+
+
 
 
 

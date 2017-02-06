@@ -161,7 +161,7 @@ SECTIONS
 	{
 		. = ALIGN(4);
 		/* The start of some MaxMOD code to be copied to IWRAM*/
-		some_maxmod_code_rom_start = LOADADDR(.maxmod_code);
+		some_maxmod_code_rom_start = LOADADDR(.some_maxmod_code);
 		
 		some_maxmod_code_iwram_start = .;
 		
