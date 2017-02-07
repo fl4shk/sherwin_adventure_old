@@ -24,9 +24,33 @@
 
 // Graphics stuff
 
-const vec2_f24p8 door_sprite::the_initial_coll_box_size
-	= { {14 << fixed24p8::shift}, {32 << fixed24p8::shift} },
-	door_sprite::the_initial_cb_pos_offset = { {1}, {0} };
+const sprite_const_params door_sprite::the_const_params
+= {
+	// the_const_sprite_type
+	st_door, 
+	
+	// the_palette_slot
+	sps_door, 
+	
+	// the_relative_metatile_slot
+	0,
+	
+	// num_active_gfx_tiles
+	gfx_manager::num_tiles_in_ss_16x32,
+	
+	// tile_arr 
+	const_cast<tile*>(reinterpret_cast<const tile*>(the_door_gfxTiles)),
+	
+	// the_initial_shape_size
+	oam_entry::ss_16x32,
+	
+	// the_initial_coll_box_size
+	{ {14 << fixed24p8::shift}, {32 << fixed24p8::shift} }, 
+	
+	// the_initial_cb_pos_offset
+	{ {1}, {0} },
+};
+
 
 void door_sprite::shared_constructor_code_part_2( bool facing_left )
 {

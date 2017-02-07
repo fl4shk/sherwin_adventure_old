@@ -31,16 +31,10 @@ public:		// enums
 		sdi_move_timer, } alignas_regular;
 	
 public:		// variables
-	static constexpr sprite_type the_const_sprite_type = st_waffle;
-	static constexpr sprite_palette_slot the_palette_slot = sps_powerup;
-	static constexpr u32 the_relative_metatile_slot = 0, 
-		num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
+	static const sprite_const_params the_const_params;
 	
 	static constexpr u32 move_timer_start = 128;
 	
-	//static const ();
-	static constexpr tile* tile_arr = const_cast<tile*>
-		(reinterpret_cast<const tile*>(the_powerup_gfxTiles));
 	
 public:		// functions
 	inline waffle_sprite( bool facing_left )
@@ -50,35 +44,12 @@ public:		// functions
 		shared_constructor_code_part_3();
 	}
 	
-	//virtual void shared_constructor_code( bool facing_left );
-	inline virtual const sprite_type get_const_sprite_type() const
-	{
-		return the_const_sprite_type;
-	}
+	void update_part_2();
 	
-	
-	virtual void update_part_2();
-	
-	// Graphics stuff
-	//virtual void gfx_update();
-	
-	inline virtual const sprite_palette_slot get_palette_slot()
+	inline virtual const sprite_const_params& get_const_params() const
 	{
-		return the_palette_slot;
+		return the_const_params;
 	}
-	inline const u32 get_curr_relative_tile_slot()
-	{
-		return the_relative_metatile_slot * num_active_gfx_tiles;
-	}
-	inline virtual const u32 get_num_active_gfx_tiles()
-	{
-		return num_active_gfx_tiles;
-	}
-	inline virtual const tile* get_tile_arr() const
-	{
-		return tile_arr;
-	}
-	
 	
 	// Physics and collision stuff
 	inline virtual void block_collision_stuff()

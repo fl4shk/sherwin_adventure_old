@@ -19,40 +19,77 @@
 #include "sprite_type_stuff.hpp"
 #include "sprite_type_includes.hpp"
 
-// Graphics stuff
-//void muffin_sprite::gfx_update()
-//{
-//	the_oam_entry.set_tile_number 
-//		( get_curr_tile_slot() );
-//	the_oam_entry.set_pal_number 
-//		( get_palette_slot() );
-//}
+const sprite_const_params muffin_sprite::the_const_params
+= {
+	// the_const_sprite_type
+	st_muffin, 
+	
+	// the_palette_slot
+	sps_powerup, 
+	
+	// the_relative_metatile_slot
+	1,
+	
+	// num_active_gfx_tiles
+	gfx_manager::num_tiles_in_ss_16x16,
+	
+	// tile_arr 
+	const_cast<tile*>(reinterpret_cast<const tile*>(the_powerup_gfxTiles)),
+};
 
 
-// Graphics stuff
-//void fire_muffin_sprite::gfx_update()
-//{
-//	the_oam_entry.set_tile_number 
-//		( get_curr_tile_slot() );
-//	the_oam_entry.set_pal_number 
-//		( get_palette_slot() );
-//}
+const sprite_const_params fire_muffin_sprite::the_const_params
+= {
+	// the_const_sprite_type
+	st_fire_muffin, 
+	
+	// the_palette_slot
+	muffin_sprite::the_const_params.the_palette_slot, 
+	
+	// the_relative_metatile_slot
+	2,
+	
+	// num_active_gfx_tiles
+	muffin_sprite::the_const_params.num_active_gfx_tiles,
+	
+	// tile_arr 
+	muffin_sprite::the_const_params.tile_arr,
+};
 
-// Graphics stuff
-//void ice_muffin_sprite::gfx_update()
-//{
-//	the_oam_entry.set_tile_number 
-//		( get_curr_tile_slot() );
-//	the_oam_entry.set_pal_number 
-//		( get_palette_slot() );
-//}
+
+const sprite_const_params ice_muffin_sprite::the_const_params
+= {
+	// the_const_sprite_type
+	st_ice_muffin, 
+	
+	// the_palette_slot
+	muffin_sprite::the_const_params.the_palette_slot, 
+	
+	// the_relative_metatile_slot
+	3,
+	
+	// num_active_gfx_tiles
+	muffin_sprite::the_const_params.num_active_gfx_tiles,
+	
+	// tile_arr 
+	muffin_sprite::the_const_params.tile_arr,
+};
 
 
-// Graphics stuff
-//void chocolate_muffin_sprite::gfx_update()
-//{
-//	the_oam_entry.set_tile_number 
-//		( get_curr_tile_slot() );
-//	the_oam_entry.set_pal_number 
-//		( get_palette_slot() );
-//}
+const sprite_const_params chocolate_muffin_sprite::the_const_params
+= {
+	// the_const_sprite_type
+	st_chocolate_muffin, 
+	
+	// the_palette_slot
+	muffin_sprite::the_const_params.the_palette_slot, 
+	
+	// the_relative_metatile_slot
+	4,
+	
+	// num_active_gfx_tiles
+	muffin_sprite::the_const_params.num_active_gfx_tiles,
+	
+	// tile_arr 
+	muffin_sprite::the_const_params.tile_arr,
+};

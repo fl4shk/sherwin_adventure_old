@@ -24,6 +24,23 @@
 #include "../level_stuff/active_level_manager_class.hpp"
 #include "sprite_manager_class.hpp"
 
+const sprite_const_params waffle_sprite::the_const_params
+= {
+	// the_const_sprite_type
+	st_waffle, 
+	
+	// the_palette_slot
+	sps_powerup, 
+	
+	// the_relative_metatile_slot
+	0,
+	
+	// num_active_gfx_tiles
+	sprite::the_const_params.num_active_gfx_tiles,
+	
+	// tile_arr 
+	const_cast<tile*>(reinterpret_cast<const tile*>(the_powerup_gfxTiles)),
+};
 
 
 void waffle_sprite::update_part_2()

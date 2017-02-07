@@ -32,12 +32,33 @@ const player_pickaxe_sprite::frame
 };
 
 
-
-
-const vec2_f24p8 player_pickaxe_sprite::the_initial_coll_box_size
-	= { {15 << fixed24p8::shift}, {15 << fixed24p8::shift} },
-	player_pickaxe_sprite::the_initial_cb_pos_offset 
-	= { {0 << fixed24p8::shift}, {0 << fixed24p8::shift} };
+const sprite_const_params player_pickaxe_sprite::the_const_params
+= {
+	// the_const_sprite_type
+	st_player_pickaxe, 
+	
+	// the_palette_slot
+	sps_secondary_0, 
+	
+	// the_relative_metatile_slot (not used by this class)
+	0,
+	
+	// num_active_gfx_tiles
+	gfx_manager::num_tiles_in_ss_16x16,
+	
+	// tile_arr 
+	const_cast<tile*>(reinterpret_cast<const tile*>
+		(the_16x16_secondary_sprites_gfxTiles)),
+	
+	// the_initial_shape_size
+	oam_entry::ss_16x16,
+	
+	// the_initial_coll_box_size
+	{ {15 << fixed24p8::shift}, {15 << fixed24p8::shift} },
+	
+	// the_initial_cb_pos_offset
+	{ {0 << fixed24p8::shift}, {0 << fixed24p8::shift} },
+};
 
 
 void player_pickaxe_sprite::update_part_1()
@@ -50,7 +71,7 @@ void player_pickaxe_sprite::update_part_1()
 const u32 player_pickaxe_sprite::get_curr_relative_tile_slot()
 {
 	return frame_slot_to_frame_arr[misc_data_u[udi_curr_frame_slot]] 
-		* num_active_gfx_tiles;
+		* get_num_active_gfx_tiles();
 }
 
 

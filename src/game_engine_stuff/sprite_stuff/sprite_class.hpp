@@ -28,6 +28,48 @@
 
 class sprite_allocator;
 
+
+// Not all of these parameters are used by every type of sprite
+class sprite_const_params
+{
+public:		// variables
+	sprite_type the_const_sprite_type = st_default;
+	sprite_palette_slot the_palette_slot = sps_player;
+	u32 the_relative_metatile_slot = 0, 
+		num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
+	tile* tile_arr = const_cast<tile*>(reinterpret_cast<const tile*>
+		(sherwin_gfxTiles));
+	oam_entry::shape_size the_initial_shape_size = oam_entry::ss_16x16;
+	vec2_f24p8 the_initial_coll_box_size = { {14 << fixed24p8::shift}, 
+		{14 << fixed24p8::shift} };
+	
+	vec2_f24p8 the_initial_cb_pos_offset = { {1 << fixed24p8::shift}, 
+		{1 << fixed24p8::shift} };
+	
+	
+	// This is used to correct the initial in-level position for sprites
+	// that are normally considered to be of a certain size but that use
+	// larger graphics for some frames.  An example of this is the
+	// st_player sprite_type, which is normally considered to be a 16x32
+	// sprite but uses 32x32 graphics in some cases, like during the
+	// pickaxe swing animation.
+	vec2_f24p8 the_initial_in_level_pos_offset
+		= { {0 << fixed24p8::shift}, {0 << fixed24p8::shift} };
+} __attribute__((_align4));
+
+////
+//class sprite_volatile_members
+//{
+//public:		// variables
+//	
+//} __attribute__((_align4));
+
+//class sprite_physics_members
+//{
+//public:		// variables
+//	
+//} __attribute__((_align4));
+
 class sprite
 {
 protected:		// variables
@@ -58,25 +100,20 @@ public:		// constants
 	static const fixed24p8 grav_acc;
 	static const fixed24p8 max_y_vel;
 	
+	static const sprite_const_params the_const_params;
 	
-	static const sprite_type the_const_sprite_type;
-	static const sprite_palette_slot the_palette_slot;
-	
-	static const u32 the_relative_metatile_slot,
-		num_active_gfx_tiles;
-	static const tile* tile_arr;
-	static const oam_entry::shape_size the_initial_shape_size;
-	
-	static const vec2_f24p8 the_initial_coll_box_size,
-		the_initial_cb_pos_offset;
-	
-	// This is used to correct the initial in-level position for sprites
-	// that are normally considered to be of a certain size but that use
-	// larger graphics for some frames.  An example of this is the
-	// st_player sprite_type, which is normally considered to be a 16x32
-	// sprite but uses 32x32 graphics in some cases, like during the
-	// pickaxe swing animation.
-	static const vec2_f24p8 the_initial_in_level_pos_offset;
+	//static const sprite_type the_const_sprite_type;
+	//static const sprite_palette_slot the_palette_slot;
+	//
+	//static const u32 the_relative_metatile_slot,
+	//	num_active_gfx_tiles;
+	//static const tile* tile_arr;
+	//static const oam_entry::shape_size the_initial_shape_size;
+	//
+	//static const vec2_f24p8 the_initial_coll_box_size,
+	//	the_initial_cb_pos_offset;
+	//
+	//static const vec2_f24p8 the_initial_in_level_pos_offset;
 	
 public:		// variables
 	
@@ -442,14 +479,19 @@ public:		// functions
 	
 	//void block_collision_stuff() __attribute__((_iwram_code));
 	
+	inline virtual const sprite_const_params& get_const_params() const
+	{
+		return the_const_params;
+	}
+	
 	inline virtual const sprite_type get_const_sprite_type() const
 	{
-		return the_const_sprite_type;
+		return get_const_params().the_const_sprite_type;
 	}
 	
 	inline virtual const tile* get_tile_arr() const
 	{
-		return tile_arr;
+		return get_const_params().tile_arr;
 	}
 	
 	inline virtual void set_initial_shape_size()
@@ -459,7 +501,7 @@ public:		// functions
 	inline virtual const oam_entry::shape_size get_the_initial_shape_size() 
 		const
 	{
-		return the_initial_shape_size;
+		return get_const_params().the_initial_shape_size;
 	}
 	
 	inline virtual void set_initial_coll_box_stuff()
@@ -470,17 +512,17 @@ public:		// functions
 	
 	inline virtual const vec2_f24p8& get_the_initial_coll_box_size() const
 	{
-		return the_initial_coll_box_size;
+		return get_const_params().the_initial_coll_box_size;
 	}
 	inline virtual const vec2_f24p8& get_the_initial_cb_pos_offset() const
 	{
-		return the_initial_cb_pos_offset;
+		return get_const_params().the_initial_cb_pos_offset;
 	}
 	
 	inline virtual const vec2_f24p8& get_the_initial_in_level_pos_offset()
 		const
 	{
-		return the_initial_in_level_pos_offset;
+		return get_const_params().the_initial_in_level_pos_offset;
 	}
 	
 	
@@ -538,7 +580,7 @@ public:		// functions
 	virtual const u32 get_curr_relative_tile_slot();
 	inline virtual const u32 get_num_active_gfx_tiles()
 	{
-		return num_active_gfx_tiles;
+		return get_const_params().num_active_gfx_tiles;
 	}
 	
 	// Physics and collision stuff

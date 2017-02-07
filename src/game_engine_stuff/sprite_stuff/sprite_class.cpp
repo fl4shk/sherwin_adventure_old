@@ -31,16 +31,36 @@
 
 #include "../level_stuff/sublevel_class.hpp"
 
-const oam_entry::shape_size sprite::the_initial_shape_size 
-	= oam_entry::ss_16x16;
 
-const vec2_f24p8 sprite::the_initial_coll_box_size
-	= { {14 << fixed24p8::shift}, {14 << fixed24p8::shift} },
-sprite::the_initial_cb_pos_offset 
-	= { {1 << fixed24p8::shift}, {1 << fixed24p8::shift} };
-
-const vec2_f24p8 sprite::the_initial_in_level_pos_offset
-	= { {0 << fixed24p8::shift}, {0 << fixed24p8::shift} };
+const sprite_const_params sprite::the_const_params;
+//= {
+//	// the_const_sprite_type
+//	st_default, 
+//	
+//	// the_palette_slot
+//	sps_player, 
+//	
+//	// the_relative_metatile_slot
+//	0,
+//	
+//	// num_active_gfx_tiles
+//	gfx_manager::num_tiles_in_ss_16x16, 
+//	
+//	// tile_arr 
+//	const_cast<tile*>(reinterpret_cast<const tile*>(sherwin_gfxTiles)), 
+//	
+//	// the_initial_shape_size
+//	oam_entry::ss_16x16,
+//	
+//	// the_initial_coll_box_size
+//	{ {14 << fixed24p8::shift}, {14 << fixed24p8::shift} }, 
+//	
+//	// the_initial_cb_pos_offset
+//	{ {1 << fixed24p8::shift}, {1 << fixed24p8::shift} },
+//	
+//	// the_initial_in_level_pos_offset
+//	{ {0 << fixed24p8::shift}, {0 << fixed24p8::shift} },
+//};
 
 const fixed24p8 sprite::cpg_on_slope_threshold_abs = {0x400};
 
@@ -57,16 +77,6 @@ const fixed24p8 sprite::max_y_vel = {0x300};
 //const fixed24p8 sprite::max_y_vel = {0x280};
 
 
-const sprite_type sprite::the_const_sprite_type = st_default;
-const sprite_palette_slot sprite::the_palette_slot = sps_player;
-//const u32 sprite::the_relative_metatile_slot = 7,
-//	sprite::num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
-
-const u32 sprite::the_relative_metatile_slot = 0,
-	sprite::num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
-
-const tile* sprite::tile_arr = const_cast<tile*>
-	(reinterpret_cast<const tile*>(sherwin_gfxTiles));
 
 vec2_f24p8 sprite::prev_prev_on_screen_pos; 
 prev_curr_pair<vec2_f24p8> sprite::on_screen_pos;
@@ -601,11 +611,12 @@ void sprite::update_part_3
 // sprites may use different palettes depending on their state.
 const sprite_palette_slot sprite::get_palette_slot()
 {
-	return the_palette_slot;
+	return get_const_params().the_palette_slot;
 }
 const u32 sprite::get_curr_relative_tile_slot()
 {
-	return the_relative_metatile_slot * num_active_gfx_tiles;
+	return get_const_params().the_relative_metatile_slot 
+		* get_num_active_gfx_tiles();
 }
 
 

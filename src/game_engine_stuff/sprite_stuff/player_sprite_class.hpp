@@ -215,25 +215,26 @@ public:		// variables
 		[frame_slot_to_frame_arr_size];
 	
 	
-	static constexpr sprite_type the_const_sprite_type = st_player;
-	static constexpr sprite_palette_slot the_palette_slot = sps_player;
-	
-	static constexpr u32 num_active_gfx_tiles 
-		= gfx_manager::num_tiles_in_ss_16x32;
-	
-	static constexpr tile* tile_arr = const_cast<tile*>
-		(reinterpret_cast<const tile*>(sherwin_gfxTiles));
-	
-	static const oam_entry::shape_size the_initial_shape_size 
-		= oam_entry::ss_16x32;
-	
-	static const vec2_f24p8 the_initial_coll_box_size,
-		the_initial_cb_pos_offset;
-	
-	// This is used to correct the initial in-level position for sprites
-	// that are normally considered to be of a certain size but that use
-	// larger graphics for some frames.
-	static const vec2_f24p8 the_initial_in_level_pos_offset;
+	static const sprite_const_params the_const_params;
+	//static constexpr sprite_type the_const_sprite_type = st_player;
+	//static constexpr sprite_palette_slot the_palette_slot = sps_player;
+	//
+	//static constexpr u32 num_active_gfx_tiles 
+	//	= gfx_manager::num_tiles_in_ss_16x32;
+	//
+	//static constexpr tile* tile_arr = const_cast<tile*>
+	//	(reinterpret_cast<const tile*>(sherwin_gfxTiles));
+	//
+	//static const oam_entry::shape_size the_initial_shape_size 
+	//	= oam_entry::ss_16x32;
+	//
+	//static const vec2_f24p8 the_initial_coll_box_size,
+	//	the_initial_cb_pos_offset;
+	//
+	//// This is used to correct the initial in-level position for sprites
+	//// that are normally considered to be of a certain size but that use
+	//// larger graphics for some frames.
+	//static const vec2_f24p8 the_initial_in_level_pos_offset;
 	
 	
 public:		// functions
@@ -261,10 +262,15 @@ public:		// functions
 	
 	virtual void shared_constructor_code_part_3();
 	
-	inline virtual const sprite_type get_const_sprite_type() const
+	inline virtual const sprite_const_params& get_const_params() const
 	{
-		return the_const_sprite_type;
+		return the_const_params;
 	}
+	
+	//inline virtual const sprite_type get_const_sprite_type() const
+	//{
+	//	return the_const_sprite_type;
+	//}
 	
 	//virtual void gfx_update();
 	
@@ -278,42 +284,8 @@ public:		// functions
 	// Graphics stuff
 	//virtual const u32 get_curr_tile_slot();
 	
-	inline virtual const sprite_palette_slot get_palette_slot()
-	{
-		return the_palette_slot;
-	}
 	virtual const u32 get_curr_relative_tile_slot();
 	
-	inline virtual const u32 get_num_active_gfx_tiles()
-	{
-		return num_active_gfx_tiles;
-	}
-	
-	inline virtual const tile* get_tile_arr() const
-	{
-		return tile_arr;
-	}
-	
-	inline virtual const oam_entry::shape_size get_the_initial_shape_size() 
-		const
-	{
-		return the_initial_shape_size;
-	}
-	
-	inline virtual const vec2_f24p8& get_the_initial_coll_box_size() const
-	{
-		return the_initial_coll_box_size;
-	}
-	inline virtual const vec2_f24p8& get_the_initial_cb_pos_offset() const
-	{
-		return the_initial_cb_pos_offset;
-	}
-	
-	inline virtual const vec2_f24p8& get_the_initial_in_level_pos_offset()
-		const
-	{
-		return the_initial_in_level_pos_offset;
-	}
 	
 	
 	// Physics and collision stuff

@@ -35,11 +35,35 @@ const snow_golem_sprite::frame snow_golem_sprite::frame_slot_to_frame_arr
 	frm_throw_0, frm_throw_1, frm_throw_2
 };
 
-// This needs to be better fit to snow golem enemies.
-const vec2_f24p8 snow_golem_sprite::the_initial_coll_box_size 
-	= { {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },
-	snow_golem_sprite::the_initial_cb_pos_offset 
-	= { {2 << fixed24p8::shift }, {3 << fixed24p8::shift } };
+const sprite_const_params snow_golem_sprite::the_const_params
+= {
+	// the_const_sprite_type
+	st_snow_golem, 
+	
+	// the_palette_slot
+	sps_enemy_0, 
+	
+	// the_relative_metatile_slot (not used by this class)
+	0,
+	
+	// num_active_gfx_tiles
+	gfx_manager::num_tiles_in_ss_16x32,
+	
+	// tile_arr 
+	const_cast<tile*>(reinterpret_cast<const tile*>
+		(the_golem_enemy_gfxTiles)),
+	
+	// the_initial_shape_size
+	oam_entry::ss_16x32,
+	
+	// This needs to be better fit to snow golem enemies.
+	// the_initial_coll_box_size
+	{ {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },
+	
+	// the_initial_cb_pos_offset
+	{ {2 << fixed24p8::shift }, {3 << fixed24p8::shift } },
+};
+
 
 
 void snow_golem_sprite::update_part_2()
@@ -88,7 +112,8 @@ const u32 snow_golem_sprite::get_curr_relative_tile_slot()
 	
 	// Temporary!
 	u32& curr_frame_slot = misc_data_u[udi_curr_frame_slot];
-	return frame_slot_to_frame_arr[curr_frame_slot] * num_active_gfx_tiles;
+	return frame_slot_to_frame_arr[curr_frame_slot] 
+		* get_num_active_gfx_tiles();
 }
 
 

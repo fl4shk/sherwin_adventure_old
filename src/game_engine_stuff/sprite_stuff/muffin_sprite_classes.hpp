@@ -25,13 +25,7 @@
 class muffin_sprite : public sprite
 {
 public:		// variables
-	static constexpr sprite_type the_const_sprite_type = st_muffin;
-	static constexpr sprite_palette_slot the_palette_slot = sps_powerup;
-	static constexpr u32 the_relative_metatile_slot = 1, 
-		num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
-	
-	static constexpr tile* tile_arr = const_cast<tile*>
-		(reinterpret_cast<const tile*>(the_powerup_gfxTiles));
+	static const sprite_const_params the_const_params;
 	
 public:		// functions
 	inline muffin_sprite( bool facing_left )
@@ -41,51 +35,17 @@ public:		// functions
 		shared_constructor_code_part_3();
 	}
 	
-	//virtual void init( bool facing_right=false );
-	inline virtual const sprite_type get_const_sprite_type() const
+	inline virtual const sprite_const_params& get_const_params() const
 	{
-		return the_const_sprite_type;
+		return the_const_params;
 	}
-	
-	// Graphics stuff
-	//virtual void gfx_update();
-	
-	inline virtual const sprite_palette_slot get_palette_slot()
-	{
-		return the_palette_slot;
-	}
-	inline virtual const u32 get_curr_relative_tile_slot()
-	{
-		return the_relative_metatile_slot * num_active_gfx_tiles;
-	}
-	inline virtual const u32 get_num_active_gfx_tiles()
-	{
-		return num_active_gfx_tiles;
-	}
-	
-	inline virtual const tile* get_tile_arr() const
-	{
-		return tile_arr;
-	}
-	
-	// Physics and collision stuff
-	//// All muffin powerups are not affected by gravity, and they don't
-	//// move.
-	//virtual void block_collision_stuff();
-	
 	
 } __attribute__((_align4));
 
 class fire_muffin_sprite : public sprite
 {
 public:		// variables
-	static constexpr sprite_type the_const_sprite_type = st_fire_muffin;
-	static constexpr sprite_palette_slot the_palette_slot = sps_powerup;
-	static constexpr u32 the_relative_metatile_slot = 2, 
-		num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
-	
-	static constexpr tile* tile_arr = const_cast<tile*>
-		(reinterpret_cast<const tile*>(the_powerup_gfxTiles));
+	static const sprite_const_params the_const_params;
 	
 public:		// functions
 	inline fire_muffin_sprite( bool facing_left )
@@ -95,37 +55,10 @@ public:		// functions
 		shared_constructor_code_part_3();
 	}
 	
-	//virtual void init( bool facing_right=false );
-	inline virtual const sprite_type get_const_sprite_type() const
+	inline virtual const sprite_const_params& get_const_params() const
 	{
-		return the_const_sprite_type;
+		return the_const_params;
 	}
-	
-	// Graphics stuff
-	//virtual void gfx_update();
-	
-	inline virtual const sprite_palette_slot get_palette_slot()
-	{
-		return the_palette_slot;
-	}
-	inline virtual const u32 get_curr_relative_tile_slot()
-	{
-		return the_relative_metatile_slot * num_active_gfx_tiles;
-	}
-	inline virtual const u32 get_num_active_gfx_tiles()
-	{
-		return num_active_gfx_tiles;
-	}
-	inline virtual const tile* get_tile_arr() const
-	{
-		return tile_arr;
-	}
-	
-	// Physics and collision stuff
-	//// All muffin powerups are not affected by gravity, and they don't
-	//// move.
-	//virtual void block_collision_stuff();
-	
 	
 } __attribute__((_align4));
 
@@ -133,13 +66,7 @@ public:		// functions
 class ice_muffin_sprite : public sprite
 {
 public:		// variables
-	static constexpr sprite_type the_const_sprite_type = st_ice_muffin;
-	static constexpr sprite_palette_slot the_palette_slot = sps_powerup;
-	static constexpr u32 the_relative_metatile_slot = 3, 
-		num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
-	
-	static constexpr tile* tile_arr = const_cast<tile*>
-		(reinterpret_cast<const tile*>(the_powerup_gfxTiles));
+	static const sprite_const_params the_const_params;
 	
 public:		// functions
 	inline ice_muffin_sprite( bool facing_left )
@@ -149,50 +76,17 @@ public:		// functions
 		shared_constructor_code_part_3();
 	}
 	
-	//virtual void init( bool facing_right=false );
-	inline virtual const sprite_type get_const_sprite_type() const
+	inline virtual const sprite_const_params& get_const_params() const
 	{
-		return the_const_sprite_type;
+		return the_const_params;
 	}
-	
-	// Graphics stuff
-	//virtual void gfx_update();
-	
-	inline virtual const sprite_palette_slot get_palette_slot()
-	{
-		return the_palette_slot;
-	}
-	inline virtual const u32 get_curr_relative_tile_slot()
-	{
-		return the_relative_metatile_slot * num_active_gfx_tiles;
-	}
-	inline virtual const u32 get_num_active_gfx_tiles()
-	{
-		return num_active_gfx_tiles;
-	}
-	inline virtual const tile* get_tile_arr() const
-	{
-		return tile_arr;
-	}
-	
-	// Physics and collision stuff
-	//// All muffin powerups are not affected by gravity, and they don't
-	//// move.
-	//virtual void block_collision_stuff();
 	
 } __attribute__((_align4));
 
 class chocolate_muffin_sprite : public sprite
 {
 public:		// variables
-	static constexpr sprite_type the_const_sprite_type 
-		= st_chocolate_muffin;
-	static constexpr sprite_palette_slot the_palette_slot = sps_powerup;
-	static constexpr u32 the_relative_metatile_slot = 4, 
-		num_active_gfx_tiles = gfx_manager::num_tiles_in_ss_16x16;
-	
-	static constexpr tile* tile_arr = const_cast<tile*>
-		(reinterpret_cast<const tile*>(the_powerup_gfxTiles));
+	static const sprite_const_params the_const_params;
 	
 public:		// functions
 	inline chocolate_muffin_sprite( bool facing_left )
@@ -202,36 +96,10 @@ public:		// functions
 		shared_constructor_code_part_3();
 	}
 	
-	//virtual void init( bool facing_right=false );
-	inline virtual const sprite_type get_const_sprite_type() const
+	inline virtual const sprite_const_params& get_const_params() const
 	{
-		return the_const_sprite_type;
+		return the_const_params;
 	}
-	
-	// Graphics stuff
-	//virtual void gfx_update();
-	
-	inline virtual const sprite_palette_slot get_palette_slot()
-	{
-		return the_palette_slot;
-	}
-	inline virtual const u32 get_curr_relative_tile_slot()
-	{
-		return the_relative_metatile_slot * num_active_gfx_tiles;
-	}
-	inline virtual const u32 get_num_active_gfx_tiles()
-	{
-		return num_active_gfx_tiles;
-	}
-	inline virtual const tile* get_tile_arr() const
-	{
-		return tile_arr;
-	}
-	
-	// Physics and collision stuff
-	//// All muffin powerups are not affected by gravity, and they don't
-	//// move.
-	//virtual void block_collision_stuff();
 	
 } __attribute__((_align4));
 

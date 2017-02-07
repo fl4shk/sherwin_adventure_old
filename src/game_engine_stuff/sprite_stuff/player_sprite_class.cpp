@@ -134,35 +134,64 @@ const player_sprite::frame player_sprite::frame_slot_to_frame_arr
 	frm_weapon_swing_ground_moving_5_row_2,
 };
 
+const sprite_const_params player_sprite::the_const_params
+= {
+	// the_const_sprite_type
+	st_player, 
+	
+	// the_palette_slot
+	sps_player, 
+	
+	// the_relative_metatile_slot (not used by the player_sprite class)
+	0,
+	
+	// num_active_gfx_tiles
+	gfx_manager::num_tiles_in_ss_16x32,
+	
+	// tile_arr 
+	const_cast<tile*>(reinterpret_cast<const tile*>(sherwin_gfxTiles)),
+	
+	// the_initial_shape_size
+	oam_entry::ss_16x32,
+	
+	// the_initial_coll_box_size
+	{ {11 << fixed24p8::shift }, {28 << fixed24p8::shift } },
+	
+	// the_initial_cb_pos_offset
+	{ {2 << fixed24p8::shift }, {4 << fixed24p8::shift } },
+	
+	// the_initial_in_level_pos_offset
+	{ {0 << fixed24p8::shift}, {0 << fixed24p8::shift} }
+};
 
 
+////const vec2_f24p8 player_sprite::the_initial_coll_box_size 
+////	= { {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },
+////	player_sprite::the_initial_cb_pos_offset 
+////	= { {2 << fixed24p8::shift }, {3 << fixed24p8::shift } };
+////const vec2_f24p8 player_sprite::the_initial_coll_box_size 
+////	= { {12 << fixed24p8::shift }, {27 << fixed24p8::shift } },
+////	player_sprite::the_initial_cb_pos_offset 
+////	= { {2 << fixed24p8::shift }, {5 << fixed24p8::shift } };
+////const vec2_f24p8 player_sprite::the_initial_coll_box_size 
+////	= { {12 << fixed24p8::shift }, {28 << fixed24p8::shift } },
+////	player_sprite::the_initial_cb_pos_offset 
+////	= { {2 << fixed24p8::shift }, {4 << fixed24p8::shift } };
 //const vec2_f24p8 player_sprite::the_initial_coll_box_size 
-//	= { {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },
-//	player_sprite::the_initial_cb_pos_offset 
-//	= { {2 << fixed24p8::shift }, {3 << fixed24p8::shift } };
-//const vec2_f24p8 player_sprite::the_initial_coll_box_size 
-//	= { {12 << fixed24p8::shift }, {27 << fixed24p8::shift } },
-//	player_sprite::the_initial_cb_pos_offset 
-//	= { {2 << fixed24p8::shift }, {5 << fixed24p8::shift } };
-//const vec2_f24p8 player_sprite::the_initial_coll_box_size 
-//	= { {12 << fixed24p8::shift }, {28 << fixed24p8::shift } },
+//	= { {11 << fixed24p8::shift }, {28 << fixed24p8::shift } },
 //	player_sprite::the_initial_cb_pos_offset 
 //	= { {2 << fixed24p8::shift }, {4 << fixed24p8::shift } };
-const vec2_f24p8 player_sprite::the_initial_coll_box_size 
-	= { {11 << fixed24p8::shift }, {28 << fixed24p8::shift } },
-	player_sprite::the_initial_cb_pos_offset 
-	= { {2 << fixed24p8::shift }, {4 << fixed24p8::shift } };
-
-const vec2_f24p8 player_sprite::the_initial_in_level_pos_offset
-	= { {0 << fixed24p8::shift}, {0 << fixed24p8::shift} };
-
-//const vec2_f24p8 player_sprite::the_initial_coll_box_size 
-//	= { {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },
-//	player_sprite::the_initial_cb_pos_offset 
-//	= { {( 2 + 8 ) << fixed24p8::shift }, {3 << fixed24p8::shift } };
 //
 //const vec2_f24p8 player_sprite::the_initial_in_level_pos_offset
-//	= { {8 << fixed24p8::shift}, {0 << fixed24p8::shift} };
+//	= { {0 << fixed24p8::shift}, {0 << fixed24p8::shift} };
+//
+////const vec2_f24p8 player_sprite::the_initial_coll_box_size 
+////	= { {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },
+////	player_sprite::the_initial_cb_pos_offset 
+////	= { {( 2 + 8 ) << fixed24p8::shift }, {3 << fixed24p8::shift } };
+////
+////const vec2_f24p8 player_sprite::the_initial_in_level_pos_offset
+////	= { {8 << fixed24p8::shift}, {0 << fixed24p8::shift} };
 
 player_sprite::player_sprite( const vec2_f24p8& s_in_level_pos, 
 	const vec2_u32& the_level_size_2d, 
@@ -667,12 +696,12 @@ void player_sprite::update_frames_and_frame_timers()
 		//{
 		//	return frame_slot_to_frame_arr
 		//		[active_pickaxe_swing_frame_slot] 
-		//		* num_active_gfx_tiles;
+		//		* get_num_active_gfx_tiles();
 		//}
 		//else //if (!swinging_pickaxe)
 		//{
 		//	return frame_slot_to_frame_arr[active_walk_frame_slot]
-		//		* num_active_gfx_tiles;
+		//		* get_num_active_gfx_tiles();
 		//}
 	}
 	
@@ -978,7 +1007,7 @@ const u32 player_sprite::get_curr_relative_tile_slot()
 			case 3:
 				//the_oam_entry.hide_non_affine();
 				return frame_slot_to_frame_arr[frm_slot_invisible]
-					* num_active_gfx_tiles;
+					* get_num_active_gfx_tiles();
 				break;
 			
 			case 4:
@@ -1001,7 +1030,7 @@ const u32 player_sprite::get_curr_relative_tile_slot()
 			if ( vel.x == (fixed24p8){0} )
 			{
 				return frame_slot_to_frame_arr[frm_slot_walk_0]
-					* num_active_gfx_tiles;
+					* get_num_active_gfx_tiles();
 			}
 			
 			// Walking speed or not-max running speed
@@ -1012,7 +1041,7 @@ const u32 player_sprite::get_curr_relative_tile_slot()
 				&& vel_x_abs < max_run_speed )
 			{
 				return frame_slot_to_frame_arr[active_walk_frame_slot] 
-					* num_active_gfx_tiles;
+					* get_num_active_gfx_tiles();
 			}
 			
 			// Max running speed
@@ -1022,7 +1051,7 @@ const u32 player_sprite::get_curr_relative_tile_slot()
 			else if ( vel_x_abs == max_run_speed )
 			{
 				return frame_slot_to_frame_arr[active_walk_frame_slot] 
-					* num_active_gfx_tiles;
+					* get_num_active_gfx_tiles();
 			}
 			
 			else
@@ -1032,13 +1061,13 @@ const u32 player_sprite::get_curr_relative_tile_slot()
 				walk_frame_timer = 0;
 				active_walk_frame_slot = frm_slot_walk_3;
 				return frame_slot_to_frame_arr[active_walk_frame_slot] 
-					* num_active_gfx_tiles;
+					* get_num_active_gfx_tiles();
 			}
 		}
 		else //if (!get_curr_on_ground())
 		{
 			return frame_slot_to_frame_arr[frm_slot_walk_2] 
-				* num_active_gfx_tiles;
+				* get_num_active_gfx_tiles();
 		}
 	}
 	else //if (swinging_pickaxe)
@@ -1060,35 +1089,39 @@ const u32 player_sprite::get_curr_relative_tile_slot()
 					{ \
 						return frame_slot_to_frame_arr \
 							[frm_slot_weapon_swing_ground_still_ \
-							## number] * num_active_gfx_tiles; \
+							## number] \
+							* get_num_active_gfx_tiles(); \
 					} \
 					else if ( active_walk_frame_slot \
 						== frm_slot_walk_0 ) \
 					{ \
 						return frame_slot_to_frame_arr \
 							[frm_slot_weapon_swing_ground_moving_ \
-							## number ## _row_0] * num_active_gfx_tiles; \
+							## number ## _row_0] \
+							* get_num_active_gfx_tiles(); \
 					} \
 					else if ( active_walk_frame_slot == frm_slot_walk_1 \
 						|| active_walk_frame_slot == frm_slot_walk_3 ) \
 					{ \
 						return frame_slot_to_frame_arr \
 							[frm_slot_weapon_swing_ground_moving_ \
-							## number ## _row_1] * num_active_gfx_tiles; \
+							## number ## _row_1] \
+							* get_num_active_gfx_tiles(); \
 					} \
 					else if ( active_walk_frame_slot \
 						== frm_slot_walk_2 ) \
 					{ \
 						return frame_slot_to_frame_arr \
 							[frm_slot_weapon_swing_ground_moving_ \
-							## number ## _row_2] * num_active_gfx_tiles; \
+							## number ## _row_2] \
+							* get_num_active_gfx_tiles(); \
 					} \
 				} \
 				else /*if (!get_curr_on_ground())*/ \
 				{ \
 					return frame_slot_to_frame_arr \
 						[frm_slot_weapon_swing_air_##number] \
-						* num_active_gfx_tiles; \
+						* get_num_active_gfx_tiles(); \
 				} \
 				\
 				break;
