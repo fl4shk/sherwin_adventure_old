@@ -25,7 +25,7 @@
 #include "coll_box_class.hpp"
 #include "../general_utility_stuff/array_helper_class.hpp"
 
-#include "coll_point_group_classes.hpp"
+//#include "coll_point_group_classes.hpp"
 
 class block_coll_result
 {

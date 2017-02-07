@@ -218,7 +218,7 @@ void player_sprite::shared_constructor_code_part_2
 	//in_level_pos = s_in_level_pos - get_the_initial_in_level_pos_offset();
 	set_curr_in_level_pos( s_in_level_pos 
 		- get_the_initial_in_level_pos_offset() );
-
+	
 	
 	update_f24p8_positions();
 	update_on_screen_pos(camera_pos_pc_pair);
