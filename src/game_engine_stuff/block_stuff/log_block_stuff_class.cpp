@@ -19,18 +19,19 @@
 #include "../level_stuff/active_level_class.hpp"
 #include "../../general_utility_stuff/misc_types.hpp"
 
-const u32 log_block_stuff::get_metatile_number()
-{
-	return metatile_number;
-}
-const u32 log_block_stuff::get_palette_number()
-{
-	return palette_number;
-}
-const u32 log_block_stuff::get_metatile_graphics_slot()
-{
-	return metatile_graphics_slot;
-}
+const block_stuff_const_params
+	log_block_stuff::the_const_params
+= {
+	// metatile_number
+	1,
+	
+	// palette_number
+	0,
+	
+	// metatile_graphics_slot
+	1,
+};
+
 void log_block_stuff::strongly_hit_response( block& the_block, 
 	const vec2_s32& coord )
 {

@@ -19,6 +19,9 @@
 #include "../level_stuff/active_level_class.hpp"
 #include "../../general_utility_stuff/misc_types.hpp"
 
+const block_stuff_const_params block_base_stuff::the_const_params;
+
+
 // Slope height masks
 
 // 45 degree angle slope height mask
@@ -48,21 +51,27 @@ const u32 block_base_stuff::slope_n32_p16_short_height_mask
 	= { 7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0 };
 
 
+
+const block_stuff_const_params& block_base_stuff::get_const_params() const
+{
+	return the_const_params;
+}
+
 const u32 block_base_stuff::get_metatile_number()
 {
-	return metatile_number;
+	return get_const_params().metatile_number;
 }
 const u32 block_base_stuff::get_palette_number()
 {
-	return palette_number;
+	return get_const_params().palette_number;
 }
 const u32 block_base_stuff::get_metatile_graphics_slot()
 {
-	return metatile_graphics_slot;
+	return get_const_params().metatile_graphics_slot;
 }
 block_behavior_type block_base_stuff::get_behavior_type()
 {
-	return behavior_type;
+	return get_const_params().behavior_type;
 }
 
 // Dummy function to be implemented by classes that inherit from this one,

@@ -19,13 +19,25 @@
 #ifndef block_base_stuff_class_hpp
 #define block_base_stuff_class_hpp
 
+class block_stuff_const_params
+{
+public:		// variables
+	u32 metatile_number = 0;
+	u32 palette_number = 0;
+	u32 metatile_graphics_slot = metatile_number;
+	block_behavior_type behavior_type = bbvt_solid;
+	
+} __attribute__((_align4));
+
+
 class block_base_stuff
 {
 public:		// variables
-	static const u32 metatile_number = 0;
-	static const u32 palette_number = 0;
-	static const u32 metatile_graphics_slot = metatile_number;
-	static constexpr block_behavior_type behavior_type = bbvt_solid;
+	static const block_stuff_const_params the_const_params;
+	//static const u32 metatile_number = 0;
+	//static const u32 palette_number = 0;
+	//static const u32 metatile_graphics_slot = metatile_number;
+	//static constexpr block_behavior_type behavior_type = bbvt_solid;
 	
 	// Slope stuff
 	static constexpr u32 height_mask_size = num_pixels_per_block_row;
@@ -48,6 +60,7 @@ public:		// variables
 	static const u32 slope_n32_p16_short_height_mask[height_mask_size];
 	
 public:		// functions
+	virtual const block_stuff_const_params& get_const_params() const;
 	virtual const u32 get_metatile_number();
 	virtual const u32 get_palette_number();
 	virtual const u32 get_metatile_graphics_slot();

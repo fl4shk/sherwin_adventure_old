@@ -21,18 +21,20 @@
 
 class eyes_block_stuff : public block_base_stuff
 {
+public:		// variables
+	static const block_stuff_const_params the_const_params;
+	//static const u32 metatile_number = 3;
+	//static const u32 palette_number = 0;
+	//static const u32 metatile_graphics_slot = metatile_number;
+	
 public:		// enums
 	enum persistent_data_state { is_eyes, is_bt_dud } alignas_regular;
 	
-public:		// variables
-	static const u32 metatile_number = 3;
-	static const u32 palette_number = 0;
-	static const u32 metatile_graphics_slot = metatile_number;
-	
 public:		// functions
-	virtual const u32 get_metatile_number();
-	virtual const u32 get_palette_number();
-	virtual const u32 get_metatile_graphics_slot();
+	inline virtual const block_stuff_const_params& get_const_params() const
+	{
+		return the_const_params;
+	}
 	virtual void strongly_hit_response( block& the_block, 
 		const vec2_s32& coord );
 	

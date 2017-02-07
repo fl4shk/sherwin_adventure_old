@@ -21,18 +21,18 @@
 #include "../sprite_stuff/sprite_manager_class.hpp"
 
 
-const u32 eyes_block_stuff::get_metatile_number()
-{
-	return metatile_number;
-}
-const u32 eyes_block_stuff::get_palette_number()
-{
-	return palette_number;
-}
-const u32 eyes_block_stuff::get_metatile_graphics_slot()
-{
-	return metatile_graphics_slot;
-}
+const block_stuff_const_params
+	eyes_block_stuff::the_const_params
+= {
+	// metatile_number
+	3,
+	
+	// palette_number
+	0,
+	
+	// metatile_graphics_slot
+	3,
+};
 
 void eyes_block_stuff::strongly_hit_response( block& the_block, 
 	const vec2_s32& coord )
@@ -173,5 +173,6 @@ void eyes_block_with_st_chocolate_muffin_stuff::strongly_hit_response
 		[active_level::the_current_active_sublevel_index]
 		[the_block.persistent_data_index] = eyes_block_stuff::is_bt_dud;
 }
+
 
 

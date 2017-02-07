@@ -20,18 +20,18 @@
 #include "../../general_utility_stuff/misc_types.hpp"
 #include "../sprite_stuff/sprite_manager_class.hpp"
 
-const u32 wood_block_stuff::get_metatile_number()
-{
-	return metatile_number;
-}
-const u32 wood_block_stuff::get_palette_number()
-{
-	return palette_number;
-}
-const u32 wood_block_stuff::get_metatile_graphics_slot()
-{
-	return metatile_graphics_slot;
-}
+const block_stuff_const_params
+	wood_block_stuff::the_const_params
+= {
+	// metatile_number
+	2,
+	
+	// palette_number
+	0,
+	
+	// metatile_graphics_slot
+	2,
+};
 void wood_block_stuff::strongly_hit_response( block& the_block, 
 	const vec2_s32& coord )
 {
@@ -215,4 +215,5 @@ void wood_block_with_st_chocolate_muffin_stuff
 		the_block.type = bt_dud;
 	}
 }
+
 

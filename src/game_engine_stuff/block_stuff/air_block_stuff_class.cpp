@@ -19,23 +19,24 @@
 #include "../level_stuff/active_level_class.hpp"
 #include "../../general_utility_stuff/misc_types.hpp"
 
-const u32 air_block_stuff::get_metatile_number()
-{
-	return metatile_number;
-}
-const u32 air_block_stuff::get_palette_number()
-{
-	return palette_number;
-}
-const u32 air_block_stuff::get_metatile_graphics_slot()
-{
-	return metatile_graphics_slot;
-}
-block_behavior_type air_block_stuff::get_behavior_type()
-{
-	return behavior_type;
-}
+const block_stuff_const_params
+	air_block_stuff::the_const_params
+= {
+	// metatile_number
+	0,
+	
+	// palette_number
+	0,
+	
+	// metatile_graphics_slot
+	0,
+	
+	// behavior_type 
+	bbvt_air,
+};
+
 void air_block_stuff::strongly_hit_response( block& the_block, 
 	const vec2_s32& coord )
 {
 }
+
