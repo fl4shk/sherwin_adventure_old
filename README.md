@@ -8,7 +8,7 @@ This is a GBA homebrew platformer game that is not yet finished.
 *custom*). The default makefile uses devkitARM to build this project.
   1.  Alternatively, any other **arm-none-eabi-** prefixed GCC and Binutils
   can be used; its location just has to be specified in the host OS's
-  **PATH** environment variable.  To build this project with updated
+  **PATH** environment variable.  To build this project with some other
   arm-none-eabi- prefixed GCC and Binutils, use
   **makefile_for_non_dka_gcc.mk** as the makefile.
 2.  **gbafix**, which is *part of devkitARM*.
@@ -30,5 +30,6 @@ even when non-devkitARM GCC is used.
 #Optional Dependencies
 1.  The [Tiled map editor](https://github.com/bjorn/tiled)
 2.  [The author's Tiled level converter tool](https://github.com/fl4shk/tiled_level_converter)
-3.  **Usenti** (used for graphics creation/editing), run in Wine by the author.
+3.  **Usenti** (used for graphics creation/editing), run in Wine by the
+author.
 
