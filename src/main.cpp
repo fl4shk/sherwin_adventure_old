@@ -119,36 +119,27 @@ int main()
 //volatile u32 very_temp;
 int second_main()
 {
-	//profile_dynamic_allocations(20);
+	profile_dynamic_allocations(20);
 	
 	
-	//horiz_coll_lseg a( vec2_s32( 10, 20 ), make_f24p8(10) );
-	//horiz_coll_lseg b( vec2_s32( 20, 20 ), make_f24p8(1) );
+	horiz_coll_lseg a( vec2_s32( 10, 20 ), make_f24p8(10) );
+	horiz_coll_lseg b( vec2_s32( 20, 20 ), make_f24p8(1) );
+	
+	vert_coll_lseg c( vec2_s32( 10, 20 ), make_f24p8(50) );
+	show_debug_u32_group( a.intersects(b), a.intersects(c), 
+		c.intersects(a) );
+	
+	
+	////const fixed24p8 a = make_f24p8( 20, 0x80 ),
+	////	b = make_f24p8( 8, 0x4a );
 	//
-	//vert_coll_lseg c( vec2_s32( 10, 20 ), make_f24p8(50) );
-	//show_debug_u32_group( a.intersects(b), a.intersects(c), 
-	//	c.intersects(a) );
-	
-	//show_debug_u32_group
-	
-	//show_debug_f24p8_group( make_f24p8( 20, 0x80 ) 
-	//	/ make_f24p8( 8, 0x4a ) );
-	
-	const fixed24p8 a = make_f24p8( 20, 0x80 ),
-		b = make_f24p8( 8, 0x4a );
-	
-	debug_arr_group::clear_debug_vars();
-	
-	for ( size_t i=0; i<20; ++i )
-	{
-		profile_start();
-		const fixed24p8 c = a / b;
-		show_profile_stop();
-		//very_temp = profile_stop();
-		show_debug_s32_group(c.data);
-	}
-	
-	
+	//const fixed24p8 a = make_f24p8( 0x200, 0x80 ),
+	//	b = make_f24p8( 0x100, 0x4a );
+	//
+	//profile_start();
+	//const fixed24p8 c = a / b;
+	//show_profile_stop();
+	//show_debug_s32_group(c.data);
 	
 	
 	return 0;

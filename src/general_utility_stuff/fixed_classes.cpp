@@ -67,8 +67,8 @@ fixed24p8 f24p8_div_by_f24p8( const fixed24p8& num, const fixed24p8& den )
 	if ( custom_abs(den.data) & 0xffff0000 )
 	{
 		//const s32 ret_data = num.data / den.data;
-		const s64 ret_data = ( ( ( static_cast<s64>(num.data) << 32 ) 
-			/ den.data ) >> 32 );
+		const s64 ret_data = ( (s64)( (s64)( (s64)(num.data) << 8 ) 
+			/ (s64)den.data ) );
 		
 		return {ret_data};
 	}
