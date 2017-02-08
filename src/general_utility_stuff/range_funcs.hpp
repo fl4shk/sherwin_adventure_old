@@ -32,6 +32,15 @@ inline bool in_range( type range_start_inclusive, type range_end_exclusive,
 		&& to_check < range_end_exclusive );
 }
 
+
+template< typename type >
+inline bool in_range_inclusive( type range_start_inclusive, 
+	type range_end_inclusive, type to_check )
+{
+	return ( to_check >= range_start_inclusive 
+		&& to_check <= range_end_inclusive );
+}
+
 template< typename type >
 inline bool vec2_in_range( vec2<type> range_start_inclusive, 
 	vec2<type> range_end_exclusive, vec2<type> to_check )

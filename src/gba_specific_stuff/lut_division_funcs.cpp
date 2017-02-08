@@ -18,8 +18,6 @@
 
 #include "lut_division_funcs.hpp"
 
-extern const u32 udiv_table[];
-extern const s32 sdiv_table[];
 
 
 u64 unsafe_lut_udiv( u32 numerator, u16 divisor )

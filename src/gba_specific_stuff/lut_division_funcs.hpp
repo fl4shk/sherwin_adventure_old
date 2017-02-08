@@ -32,4 +32,7 @@ s64 safe_lut_sdiv( s32 numerator, s16 divisor, int& valid )
 	__attribute__((_iwram_code,_target_arm));
 
 
+extern const u32 udiv_table[];
+extern const s32 sdiv_table[];
+
 #endif		// lut_division_funcs_hpp

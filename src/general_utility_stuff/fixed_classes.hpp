@@ -32,6 +32,8 @@ class fixed8p8;
 //	const fixed8p8& den ) __attribute__((_iwram_code));
 fixed24p8 f24p8_div_by_f8p8( const fixed24p8& num, const fixed8p8& den ) 
 	__attribute__((_iwram_code,_target_arm));
+fixed24p8 f24p8_div_by_f24p8( const fixed24p8& num, const fixed24p8& den ) 
+	__attribute__((_iwram_code,_target_arm));
 fixed24p8 f24p8_div_by_u16( const fixed24p8& num, u16 den )
 	__attribute__((_iwram_code,_target_arm));
 
@@ -85,12 +87,17 @@ public:		// functions
 	inline fixed24p8 operator - ( const fixed24p8& to_sub ) const;
 	
 	//inline fixed24p8 operator * ( const fixed24p8& to_mul ) const;
-	inline fixed24p8 operator * ( const fixed8p8& to_mul ) const;
-	fixed24p8 guaranteed_f24p8_by_f8p8_multiplication
-		( const fixed8p8& to_mul ) __attribute__((_iwram_code,_target_arm));
+	fixed24p8 operator * ( const fixed24p8& to_mul ) const
+		__attribute__((_iwram_code,_target_arm));
+	inline fixed24p8 guaranteed_f24p8_by_f8p8_multiplication
+		( const fixed8p8& to_mul ) const;
 	inline fixed24p8 operator / ( const fixed8p8& den ) const
 	{
 		return f24p8_div_by_f8p8( (fixed24p8){data}, den );
+	}
+	inline fixed24p8 operator / ( const fixed24p8& den ) const
+	{
+		return f24p8_div_by_f24p8( (fixed24p8){data}, den );
 	}
 	
 	//inline fixed24p8 operator * ( u32 den ) const
@@ -106,22 +113,27 @@ public:		// functions
 	inline fixed24p8& operator = ( const fixed24p8& to_copy );
 	//inline fixed24p8& operator = ( s32 to_copy );
 	
-	inline void operator += ( const fixed24p8& to_add );
-	inline void operator -= ( const fixed24p8& to_sub );
-	//inline void operator *= ( const fixed24p8& to_mul );
-	inline void operator *= ( const fixed8p8& to_mul );
-	inline void operator /= ( const fixed8p8& den )
+	inline fixed24p8& operator += ( const fixed24p8& to_add );
+	inline fixed24p8& operator -= ( const fixed24p8& to_sub );
+	inline fixed24p8& operator *= ( const fixed24p8& to_mul )
+	{
+		*this = *this * to_mul;
+		return *this;
+	}
+	inline fixed24p8& operator /= ( const fixed8p8& den )
 	{
 		data = f24p8_div_by_f8p8( (fixed24p8){data}, den ).data;
+		return *this;
 	}
 	
 	//inline void operator *= ( u32 den )
 	//{
 	//	data *= den;
 	//}
-	inline void operator /= ( u16 den )
+	inline fixed24p8& operator /= ( u16 den )
 	{
 		data = f24p8_div_by_u16( (fixed24p8){data}, den ).data;
+		return *this;
 	}
 	
 	
@@ -236,8 +248,6 @@ inline fixed24p8 fixed24p8::operator - ( const fixed24p8& to_sub ) const
 	return { (s32)(data - to_sub.data) };
 }
 
-
-
 inline fixed24p8& fixed24p8::operator = ( const fixed24p8& to_copy )
 {
 	data = to_copy.data;
@@ -250,13 +260,15 @@ inline fixed24p8& fixed24p8::operator = ( const fixed24p8& to_copy )
 //	return *this;
 //}
 
-inline void fixed24p8::operator += ( const fixed24p8& to_add )
+inline fixed24p8& fixed24p8::operator += ( const fixed24p8& to_add )
 {
 	data += to_add.data;
+	return *this;
 }
-inline void fixed24p8::operator -= ( const fixed24p8& to_sub )
+inline fixed24p8& fixed24p8::operator -= ( const fixed24p8& to_sub )
 {
 	data -= to_sub.data;
+	return *this;
 }
 
 
@@ -323,8 +335,8 @@ public:		// functions
 	
 	
 	inline fixed8p8& operator = ( const fixed8p8& to_copy );
-	inline void operator += ( const fixed8p8& to_add );
-	inline void operator -= ( const fixed8p8& to_sub );
+	inline fixed8p8& operator += ( const fixed8p8& to_add );
+	inline fixed8p8& operator -= ( const fixed8p8& to_sub );
 	
 	
 	// Comparison operator overloads
@@ -393,19 +405,28 @@ inline fixed8p8 fixed8p8::operator - ( const fixed8p8& to_sub ) const
 	return { (s16)(data - to_sub.data) };
 }
 
+inline fixed24p8 fixed24p8::guaranteed_f24p8_by_f8p8_multiplication
+	( const fixed8p8& to_mul ) const
+{
+	return ( (*this) * static_cast<fixed24p8>(to_mul) );
+}
+
+
 
 inline fixed8p8& fixed8p8::operator = ( const fixed8p8& to_copy )
 {
 	data = to_copy.data;
 	return *this;
 }
-inline void fixed8p8::operator += ( const fixed8p8& to_add )
+inline fixed8p8& fixed8p8::operator += ( const fixed8p8& to_add )
 {
 	data += to_add.data;
+	return *this;
 }
-inline void fixed8p8::operator -= ( const fixed8p8& to_sub )
+inline fixed8p8& fixed8p8::operator -= ( const fixed8p8& to_sub )
 {
 	data -= to_sub.data;
+	return *this;
 }
 
 // Comparison operator overloads
@@ -461,17 +482,17 @@ inline fixed8p8::operator fixed24p8() const
 
 
 
-// Fixed point multiplication, with accuracy loss.  Don't do too many of
-// these in a row because errors multiply.
-inline fixed24p8 operator * ( const fixed8p8& a, const fixed8p8& b )
-{
-	fixed24p8 ret;
-	
-	ret.data = a.data * b.data;
-	ret.data >>= fixed24p8::shift;
-	
-	return ret;
-}
+//// Fixed point multiplication, with accuracy loss.  Don't do too many of
+//// these in a row because errors multiply.
+//inline fixed24p8 operator * ( const fixed8p8& a, const fixed8p8& b )
+//{
+//	fixed24p8 ret;
+//	
+//	ret.data = a.data * b.data;
+//	ret.data >>= fixed24p8::shift;
+//	
+//	return ret;
+//}
 
 
 
@@ -486,25 +507,26 @@ inline fixed24p8 operator - ( const fixed8p8& a, const fixed24p8& b )
 }
 
 
-inline void fixed24p8::operator *= ( const fixed8p8& to_mul )
-{
-	data *=  to_mul.data;
-	data >>= fixed24p8::shift;
-}
+//inline fixed24p8& fixed24p8::operator *= ( const fixed8p8& to_mul )
+//{
+//	data *= to_mul.data;
+//	data >>= fixed24p8::shift;
+//	return *this;
+//}
 
 
 
-// Fixed point multiplication, with accuracy loss.  Don't do too many of
-// these in a row because errors multiply.
-inline fixed24p8 fixed24p8::operator * ( const fixed8p8& to_mul ) const
-{
-	fixed24p8 ret;
-	
-	ret.data = data * to_mul.data;
-	ret.data >>= fixed24p8::shift;
-	
-	return ret;
-}
+//// Fixed point multiplication, with accuracy loss.  Don't do too many of
+//// these in a row because errors multiply.
+//inline fixed24p8 fixed24p8::operator * ( const fixed8p8& to_mul ) const
+//{
+//	fixed24p8 ret;
+//	
+//	ret.data = data * to_mul.data;
+//	ret.data >>= fixed24p8::shift;
+//	
+//	return ret;
+//}
 
 
 
@@ -597,14 +619,19 @@ public:		// functions
 		( const specific_fixedpt_type& to_copy )
 	{
 		data = to_copy.data;
+		return *this;
 	}
-	inline void operator += ( const specific_fixedpt_type& to_add )
+	inline specific_fixedpt_type& operator += 
+		( const specific_fixedpt_type& to_add )
 	{
 		data += to_add.data;
+		return *this;
 	}
-	inline void operator -= ( const specific_fixedpt_type& to_sub )
+	inline specific_fixedpt_type& operator -= 
+		( const specific_fixedpt_type& to_sub )
 	{
 		data -= to_sub.data;
+		return *this;
 	}
 	
 	

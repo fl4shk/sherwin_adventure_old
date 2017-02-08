@@ -43,7 +43,7 @@
 #include "game_engine_stuff/gfx_manager_class.hpp"
 
 #include "game_engine_stuff/halt_stuff.hpp"
-
+#include "game_engine_stuff/coll_lseg_classes.hpp"
 
 
 // This is an assembly function.  It doesn't do very much.
@@ -56,19 +56,101 @@ u8 ewram_test_arr[ewram_test_arr_size] __attribute__((_ewram));
 static const char test_str[] = "Birds2";
 static const u32 test_str_size = ( sizeof(test_str) / sizeof(char) ) - 1;
 
+//static const size_t sram_test_arr_size = 2000;
+//u8 sram_test_arr[sram_test_arr_size] __attribute__((_sram));
 
-int second_main();
+
+int second_main() __attribute__((_iwram_code,_target_arm));
 int real_main();
 
 int main()
 {
-	//return second_main();
-	return real_main();
+	return second_main();
+	//return real_main();
 }
 
+//fixed24p8 f24p8_div_by_f8p8( const fixed24p8& num, const fixed8p8& den )
+//{
+//	if ( den.data == 0 || den.data == 1 )
+//	{
+//		return {num.data};
+//	}
+//	
+//	//s32 ret_data;
+//	//
+//	//bool numerator_is_negative = ( num.data < 0 );
+//	//bool denominator_is_negative = ( den.data < 0 );
+//	//
+//	//s32 temp_1, temp_2;
+//	//
+//	//if ( numerator_is_negative )
+//	//{
+//	//	temp_1 = -num.data;
+//	//}
+//	//else
+//	//{
+//	//	temp_1 = num.data;
+//	//}
+//	//
+//	//if ( denominator_is_negative )
+//	//{
+//	//	temp_2 = -den.data;
+//	//}
+//	//else
+//	//{
+//	//	temp_2 = den.data;
+//	//}
+//	//
+//	//u64 udiv_output = lut_udiv( temp_1, temp_2 );
+//	//
+//	////ret_data = ( udiv_output >> 24 ) * ( numerator_is_negative ? -1 : 1 )
+//	////	* ( denominator_is_negative ? -1 : 1 );
+//	//
+//	//ret_data = ( udiv_output >> 24 ) * ( numerator_is_negative ? -1 : 1 )
+//	//	* ( denominator_is_negative ? -1 : 1 );
+//	
+//	s64 sdiv_output = unsafe_lut_sdiv( num.data, den.data );
+//	
+//	s32 ret_data = ( sdiv_output >> 24 );
+//	
+//	return {ret_data};
+//}
+
+//volatile u32 very_temp;
 int second_main()
 {
-	profile_dynamic_allocations(20);
+	//profile_dynamic_allocations(20);
+	
+	
+	//horiz_coll_lseg a( vec2_s32( 10, 20 ), make_f24p8(10) );
+	//horiz_coll_lseg b( vec2_s32( 20, 20 ), make_f24p8(1) );
+	//
+	//vert_coll_lseg c( vec2_s32( 10, 20 ), make_f24p8(50) );
+	//show_debug_u32_group( a.intersects(b), a.intersects(c), 
+	//	c.intersects(a) );
+	
+	//show_debug_u32_group
+	
+	//show_debug_f24p8_group( make_f24p8( 20, 0x80 ) 
+	//	/ make_f24p8( 8, 0x4a ) );
+	
+	const fixed24p8 a = make_f24p8( 20, 0x80 ),
+		b = make_f24p8( 8, 0x4a );
+	
+	debug_arr_group::clear_debug_vars();
+	
+	for ( size_t i=0; i<20; ++i )
+	{
+		profile_start();
+		const fixed24p8 c = a / b;
+		show_profile_stop();
+		//very_temp = profile_stop();
+		show_debug_s32_group(c.data);
+	}
+	
+	
+	
+	
 	return 0;
 }
 

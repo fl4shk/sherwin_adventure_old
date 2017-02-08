@@ -15,12 +15,10 @@
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
-
 #include "fixed_classes.hpp"
 #include "../gba_specific_stuff/lut_division_funcs.hpp"
 
-fixed24p8 fixed24p8::guaranteed_f24p8_by_f8p8_multiplication
-	( const fixed8p8& to_mul )
+fixed24p8 fixed24p8::operator * ( const fixed24p8& to_mul ) const
 {
 	fixed24p8 ret;
 	
@@ -34,6 +32,20 @@ fixed24p8 fixed24p8::guaranteed_f24p8_by_f8p8_multiplication
 }
 
 
+inline fixed24p8 unsafe_f24p8_div_by_f8p8( const fixed24p8& num, 
+	const fixed8p8& den )
+{
+	const s64 temp = static_cast<s64>(num.data);
+	const s32 one_slash_den = sdiv_table[den.data];
+	const s64 temp_2 = static_cast<s64>(one_slash_den);
+	const s64 temp_3 = ( temp * temp_2 );
+	//s64 temp_3 = unsafe_lut_sdiv( num.data, den.data );
+	
+	const s32 ret_data = ( temp_3 >> 24 );
+	
+	return {ret_data};
+}
+
 
 fixed24p8 f24p8_div_by_f8p8( const fixed24p8& num, const fixed8p8& den )
 {
@@ -42,44 +54,26 @@ fixed24p8 f24p8_div_by_f8p8( const fixed24p8& num, const fixed8p8& den )
 		return {num.data};
 	}
 	
-	//s32 ret_data;
-	//
-	//bool numerator_is_negative = ( num.data < 0 );
-	//bool denominator_is_negative = ( den.data < 0 );
-	//
-	//s32 temp_1, temp_2;
-	//
-	//if ( numerator_is_negative )
-	//{
-	//	temp_1 = -num.data;
-	//}
-	//else
-	//{
-	//	temp_1 = num.data;
-	//}
-	//
-	//if ( denominator_is_negative )
-	//{
-	//	temp_2 = -den.data;
-	//}
-	//else
-	//{
-	//	temp_2 = den.data;
-	//}
-	//
-	//u64 udiv_output = lut_udiv( temp_1, temp_2 );
-	//
-	////ret_data = ( udiv_output >> 24 ) * ( numerator_is_negative ? -1 : 1 )
-	////	* ( denominator_is_negative ? -1 : 1 );
-	//
-	//ret_data = ( udiv_output >> 24 ) * ( numerator_is_negative ? -1 : 1 )
-	//	* ( denominator_is_negative ? -1 : 1 );
+	return unsafe_f24p8_div_by_f8p8( num, den );
+}
+
+fixed24p8 f24p8_div_by_f24p8( const fixed24p8& num, const fixed24p8& den )
+{
+	if ( den.data == 0 || den.data == 1 )
+	{
+		return {num.data};
+	}
 	
-	s64 sdiv_output = unsafe_lut_sdiv( num.data, den.data );
+	if ( custom_abs(den.data) & 0xffff0000 )
+	{
+		//const s32 ret_data = num.data / den.data;
+		const s64 ret_data = ( ( ( static_cast<s64>(num.data) << 32 ) 
+			/ den.data ) >> 32 );
+		
+		return {ret_data};
+	}
 	
-	s32 ret_data = ( sdiv_output >> 24 );
-	
-	return {ret_data};
+	return unsafe_f24p8_div_by_f8p8( num, den );
 }
 
 fixed24p8 f24p8_div_by_u16( const fixed24p8& num, u16 den )
