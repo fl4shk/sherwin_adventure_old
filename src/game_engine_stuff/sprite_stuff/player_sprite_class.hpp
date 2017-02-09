@@ -148,9 +148,9 @@ public:		// enums
 		frm_slot_weapon_swing_air_4,
 		frm_slot_weapon_swing_air_5,
 		
-		// frm_slot_count is the amount of frame_slot's.  It is
+		// lim_frm_slot is the amount of frame_slot's.  It is
 		// automatically updated by the compiler.
-		frm_slot_count,
+		lim_frm_slot,
 	} alignas_regular;
 	
 	
@@ -210,7 +210,7 @@ public:		// variables
 	
 	// A constant array that is intended to be indexed with a frame_slot,
 	// such that a frame_slot can be mapped to a frame. 
-	static constexpr u32 frame_slot_to_frame_arr_size = frm_slot_count;
+	static constexpr u32 frame_slot_to_frame_arr_size = lim_frm_slot;
 	static const frame frame_slot_to_frame_arr
 		[frame_slot_to_frame_arr_size];
 	
@@ -291,14 +291,14 @@ public:		// functions
 	// Physics and collision stuff
 	virtual void block_collision_stuff();
 	
-	virtual void block_coll_response_top_16x16_old
-		( const block_coll_result& tl_coll_result, 
-		const block_coll_result& tm_coll_result,
-		const block_coll_result& tr_coll_result );
-	virtual void block_coll_response_top_16x32_old
-		( const block_coll_result& tl_coll_result, 
-		const block_coll_result& tm_coll_result,
-		const block_coll_result& tr_coll_result );
+	//virtual void block_coll_response_top_16x16_old
+	//	( const block_coll_result& tl_coll_result, 
+	//	const block_coll_result& tm_coll_result,
+	//	const block_coll_result& tr_coll_result );
+	//virtual void block_coll_response_top_16x32_old
+	//	( const block_coll_result& tl_coll_result, 
+	//	const block_coll_result& tm_coll_result,
+	//	const block_coll_result& tr_coll_result );
 	
 	virtual void handle_jumping_stuff( u32 is_jump_key_hit, 
 		u32 is_jump_key_held ) __attribute__((_iwram_code));

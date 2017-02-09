@@ -82,9 +82,9 @@ enum sprite_type
 	list_of_main_sprite_type_suffixes(generate_enum_entry)
 	#undef generate_enum_entry
 	
-	// st_count is the amount of sprite types.  It is automatically updated
+	// lim_st is the amount of sprite types.  It is automatically updated
 	// by the compiler.
-	st_count,
+	lim_st,
 	
 } alignas_regular;
 
@@ -92,13 +92,13 @@ enum sprite_type
 
 inline bool sprite_type_exists( sprite_type the_sprite_type )
 {
-	return ( the_sprite_type >= st_default && the_sprite_type < st_count );
+	return ( the_sprite_type >= st_default && the_sprite_type < lim_st );
 }
 
 // So, what's this for again?
 inline bool sprite_type_is_derived( sprite_type the_sprite_type )
 {
-	return ( the_sprite_type > st_default && the_sprite_type < st_count );
+	return ( the_sprite_type > st_default && the_sprite_type < lim_st );
 }
 
 

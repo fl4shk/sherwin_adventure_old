@@ -205,9 +205,9 @@ public:		// functions
 	
 	//static inline void initialize_block_data_array()
 	//{
-	//	curr_free_block_slot = bt_count;
+	//	curr_free_block_slot = lim_bt;
 	//	
-	//	for ( u32 i=0; i<bt_count; ++i )
+	//	for ( u32 i=0; i<lim_bt; ++i )
 	//	{
 	//		block_data_array[(block_type)i].type = (block_type)i;
 	//	}

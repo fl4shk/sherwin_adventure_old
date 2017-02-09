@@ -30,6 +30,7 @@
 #include "../../gba_specific_stuff/button_stuff.hpp"
 
 #include "../level_stuff/sublevel_class.hpp"
+#include "../coll_lseg_classes.hpp"
 
 
 const sprite_const_params sprite::the_const_params;
@@ -507,53 +508,52 @@ void sprite::block_coll_response_bot_16x16
 void sprite::block_coll_response_left_16x32
 	( const block_coll_result_rect_group& the_bcr_rect_group )
 {
-	push_out_of_left_block(the_bcr_rect_group);
-	
-	
-	// Don't let the sprite speed up while in the air and horizontally
-	// colliding with a block.
-	if ( !get_curr_on_ground() && vel.x < (fixed24p8){0x00} )
-	{
-		vel.x = {0x00};
-	}
+	//push_out_of_left_block(the_bcr_rect_group);
+	//
+	//
+	//// Don't let the sprite speed up while in the air and horizontally
+	//// colliding with a block.
+	//if ( !get_curr_on_ground() && vel.x < (fixed24p8){0x00} )
+	//{
+	//	vel.x = {0x00};
+	//}
 }
 void sprite::block_coll_response_right_16x32
 	( const block_coll_result_rect_group& the_bcr_rect_group )
 {
-	block_coll_result_rect_group
-	push_out_of_right_block(the_bcr_rect_group);
-	
-	// Don't let the sprite speed up while in the air and horizontally
-	// colliding with a block.
-	if ( !get_curr_on_ground() && vel.x > (fixed24p8){0x00} )
-	{
-		vel.x = {0x00};
-	}
+	//push_out_of_right_block(the_bcr_rect_group);
+	//
+	//// Don't let the sprite speed up while in the air and horizontally
+	//// colliding with a block.
+	//if ( !get_curr_on_ground() && vel.x > (fixed24p8){0x00} )
+	//{
+	//	vel.x = {0x00};
+	//}
 }
 void sprite::block_coll_response_top_16x32
 	( const block_coll_result_rect_group& the_bcr_rect_group )
 {
-	set_curr_in_level_pos_y( make_f24p8( ( the_bcr_rect_group.top() + 1 ) 
-		* num_pixels_per_block_dim ) - cb_pos_offset.y );
-	push_out_of_top_block(the_bcr_rect_group);
-	
-	if ( vel.y < (fixed24p8){0x00} )
-	{
-		vel.y = {0x00};
-	}
-	is_jumping = false;
+	//set_curr_in_level_pos_y( make_f24p8( ( the_bcr_rect_group.top() + 1 ) 
+	//	* num_pixels_per_block_dim ) - cb_pos_offset.y );
+	//push_out_of_top_block(the_bcr_rect_group);
+	//
+	//if ( vel.y < (fixed24p8){0x00} )
+	//{
+	//	vel.y = {0x00};
+	//}
+	//is_jumping = false;
 }
 void sprite::block_coll_response_bot_16x32
 	( const block_coll_result_rect_group& the_bcr_rect_group )
 {
-	if ( vel.y >= (fixed24p8){0} )
-	{
-		push_out_of_bot_block(the_bcr_rect_group);
-		
-		vel.y = {0x00};
-		set_curr_on_ground(true);
-		is_jumping = false;
-	}
+	//if ( vel.y >= (fixed24p8){0} )
+	//{
+	//	push_out_of_bot_block(the_bcr_rect_group);
+	//	
+	//	vel.y = {0x00};
+	//	set_curr_on_ground(true);
+	//	is_jumping = false;
+	//}
 }
 
 void sprite::apply_gravity()
@@ -588,6 +588,69 @@ void sprite::block_collision_stuff_16x16()
 }
 void sprite::block_collision_stuff_16x32()
 {
+	block_coll_result_rect_group bcrrg( the_coll_box, false, false );
+	
+	// "hs" means "horizontal sensor"
+	// "og" means "on ground"
+	const fixed24p8 pos_y_for_top_hs_og = the_coll_box.get_y_center()
+		- make_f24p8(4);
+	const fixed24p8 pos_y_for_bot_hs_og = the_coll_box.get_y_center()
+		+ make_f24p8(4);
+	
+	
+	const horiz_coll_lseg left_top_hs_og
+		( vec2_f24p8( the_coll_box.left(), pos_y_for_top_hs_og ), 
+		the_coll_box.half_width() );
+	const horiz_coll_lseg right_top_hs_og
+		( vec2_f24p8( the_coll_box.get_x_center(), pos_y_for_top_hs_og ), 
+		the_coll_box.half_width() );
+	
+	const horiz_coll_lseg left_bot_hs_og
+		( vec2_f24p8( the_coll_box.left(), pos_y_for_bot_hs_og ), 
+		the_coll_box.half_width() );
+	const horiz_coll_lseg right_bot_hs_og
+		( vec2_f24p8( the_coll_box.get_x_center(), pos_y_for_bot_hs_og ), 
+		the_coll_box.half_width() );
+	
+	
+	// "ia" means "in air"
+	const fixed24p8 pos_y_for_top_hs_ia = the_coll_box.top();
+	const fixed24p8 pos_y_for_mid_hs_ia = the_coll_box.get_y_center();
+	
+	const horiz_coll_lseg left_top_hs_ia
+		( vec2_f24p8( the_coll_box.left(), pos_y_for_top_hs_ia ), 
+		the_coll_box.half_width() );
+	const horiz_coll_lseg right_top_hs_ia
+		( vec2_f24p8( the_coll_box.get_x_center(), pos_y_for_top_hs_ia ), 
+		the_coll_box.half_width() );
+	
+	const horiz_coll_lseg left_mid_hs_ia
+		( vec2_f24p8( the_coll_box.left(), pos_y_for_mid_hs_ia ), 
+		the_coll_box.half_width() );
+	const horiz_coll_lseg right_mid_hs_ia
+		( vec2_f24p8( the_coll_box.get_x_center(), pos_y_for_mid_hs_ia ), 
+		the_coll_box.half_width() );
+	
+	
+	// "vs" means "vertical sensor"
+	const fixed24p8 pos_x_for_left_vs = the_coll_box.left() 
+		+ make_f24p8(1);
+	const fixed24p8 pos_x_for_right_vs = the_coll_box.right()
+		- make_f24p8(1);
+	const fixed24p8 vs_height = make_f24p8(num_pixels_per_block_dim);
+	
+	const fixed24p8 pos_y_for_top_vs_ia = the_coll_box.top() - vs_height
+		+ make_f24p8(1);
+	const fixed24p8 pos_y_for_bot_vs = the_coll_box.bot()
+		- make_f24p8(1);
+	
+	const vert_coll_lseg bot_left_vs
+		( vec2_f24p8( pos_x_for_left_vs, pos_y_for_bot_vs ),
+		vs_height );
+	const vert_coll_lseg bot_right_vs
+		( vec2_f24p8( pos_x_for_right_vs, pos_y_for_bot_vs ),
+		vs_height );
+	
 	
 }
 void sprite::block_collision_stuff_32x16()

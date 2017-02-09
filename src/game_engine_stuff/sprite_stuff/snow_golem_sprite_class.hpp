@@ -48,9 +48,9 @@ public:		// enums
 		frm_slot_throw_1, 
 		frm_slot_throw_2, 
 		
-		// frm_slot_count is the amount of frame_slot's.  It is
+		// lim_frm_slot is the amount of frame_slot's.  It is
 		// automatically updated by the compiler.
-		frm_slot_count,
+		lim_frm_slot,
 	} alignas_regular;
 	
 	// These are used to access misc_data_u and misc_data_s
@@ -75,7 +75,7 @@ public:		// variables
 	
 	// A constant array that is intended to be indexed with a frame_slot,
 	// such that a frame_slot can be mapped to a frame.
-	static constexpr u32 frame_slot_to_frame_arr_size = frm_slot_count;
+	static constexpr u32 frame_slot_to_frame_arr_size = lim_frm_slot;
 	static const frame frame_slot_to_frame_arr
 		[frame_slot_to_frame_arr_size];
 	

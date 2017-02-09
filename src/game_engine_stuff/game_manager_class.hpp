@@ -50,9 +50,9 @@ enum game_mode
 	// When a bug is automatically detected.
 	gm_do_halt,
 	
-	// gm_count is the amount of game modes.  It is automatically updated
+	// lim_gm is the amount of game modes.  It is automatically updated
 	// by the compiler.
-	gm_count,
+	lim_gm,
 	
 } __attribute__((_align4));
 

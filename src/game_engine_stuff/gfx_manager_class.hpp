@@ -54,7 +54,7 @@ enum bg_palette_slot_in_level
 	// This is the number of --used-- BG palette slots when in a level,
 	// and it is automatically updated by the compiler.  This might count
 	// as a simple hack since it basically abuses the way enums work.
-	bgps_in_level_count,
+	lim_bgps_in_level,
 	
 } __attribute__((_align4));
 
@@ -100,7 +100,7 @@ enum sprite_palette_slot
 	// This is the number of --used-- sprite palette slots when in a level,
 	// and it is automatically updated by the compiler.  This might count
 	// as a simple hack since it basically abuses the way enums work.
-	sps_count,
+	lim_sps,
 } __attribute__((_align4));
 
 
@@ -278,7 +278,7 @@ public:		// functions
 	static inline void init_hud_vram_as_tiles_start_offset()
 	{
 		hud_vram_as_tiles_start_offset = 0;
-		for ( u32 i=0; i<block_type::bt_count; ++i )
+		for ( u32 i=0; i<block_type::lim_bt; ++i )
 		{
 			u32 graphics_slot = get_graphics_slot_of_block_type 
 				( (block_type)i );

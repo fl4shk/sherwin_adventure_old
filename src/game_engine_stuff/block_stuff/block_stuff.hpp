@@ -104,9 +104,9 @@ enum block_type
 	bt_grass_in_slope_right,
 	
 	
-	// bt_count is the amount of block types.  It is automatically updated
+	// lim_bt is the amount of block types.  It is automatically updated
 	// by the compiler.
-	bt_count,
+	lim_bt,
 	
 } alignas_regular;
 
@@ -139,9 +139,9 @@ enum block_behavior_type
 	bbvt_slope_n32_p16_short,
 	
 	
-	// bbvt_count is the amount of block behavior types.  It is
+	// lim_bbvt is the amount of block behavior types.  It is
 	// automatically updated by the compiler.
-	bbvt_count,
+	lim_bbvt,
 	
 	
 } alignas_regular;
@@ -258,9 +258,9 @@ macro(p32_p16_tall)
 //	bg1bt_night_sky,
 //	
 //	
-//	// bg1bt_count is the amount of block types.  It is automatically
+//	// bg1lim_bt is the amount of block types.  It is automatically
 //	// updated by the compiler.
-//	bg1bt_count,
+//	bg1lim_bt,
 //} __attribute__((_align4));
 
 
@@ -268,7 +268,7 @@ class block;
 
 #include "block_base_stuff_class.hpp"
 
-extern std::array< block_base_stuff*, bt_count > block_stuff_array
+extern std::array< block_base_stuff*, lim_bt > block_stuff_array
 	__attribute__((_ewram));
 
 #include "air_block_stuff_class.hpp"
@@ -304,7 +304,7 @@ public:		// functions
 
 inline bool block_type_exists( block_type the_block_type )
 {
-	return ( the_block_type >= bt_air && the_block_type < bt_count );
+	return ( the_block_type >= bt_air && the_block_type < lim_bt );
 }
 
 inline block_behavior_type get_behavior_type_of_block_type

@@ -71,6 +71,19 @@ public:		// functions
 		return pos.y + size.y;
 	}
 	
+	inline fixed24p8 half_width() const
+	{
+		return (fixed24p8){ size.x.data >> 1 };
+	}
+	inline fixed24p8 half_height() const
+	{
+		return (fixed24p8){ size.y.data >> 1 };
+	}
+	inline vec2_f24p8 half_size() const
+	{
+		return vec2_f24p8( half_width(), half_height() );
+	}
+	
 	inline fixed24p8 get_x_center() const
 	{
 		s32 ret_data;

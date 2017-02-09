@@ -19,6 +19,7 @@
 #ifndef block_coll_result_group_classes_hpp
 #define block_coll_result_group_classes_hpp
 
+//#include "coll_lseg_classes.hpp"
 #include "../general_utility_stuff/range_funcs.hpp"
 #include "block_stuff/block_stuff.hpp"
 
@@ -26,6 +27,9 @@
 #include "../general_utility_stuff/array_helper_class.hpp"
 
 //#include "coll_point_group_classes.hpp"
+
+class horiz_coll_lseg;
+class vert_coll_lseg;
 
 class block_coll_result
 {
@@ -76,7 +80,7 @@ public:		// functions
 
 class sprite;
 
-class bcr_ptr_line;
+//class bcr_ptr_line;
 
 
 class block_coll_result_rect_group
@@ -265,18 +269,18 @@ public:		// functions
 	}
 	
 	
-	void get_corner_stuff_old
-		( array_helper<block_coll_result*>& bcr_ptr_arr_helper, 
-		array_helper<u32>& bool_as_u32_arr_helper )
-		__attribute__((_target_arm));
-	
-	void get_coll_box_related_stuff_old( const sprite& the_sprite,
-		array_helper<block_coll_result*>& bcr_ptr_arr_helper )
-		__attribute__((_target_arm));
-	
-	void get_side_blocked_stuff_old
-		( array_helper<u32>& bool_as_u32_arr_helper )
-		__attribute__((_target_arm));
+	//void get_corner_stuff_old
+	//	( array_helper<block_coll_result*>& bcr_ptr_arr_helper, 
+	//	array_helper<u32>& bool_as_u32_arr_helper )
+	//	__attribute__((_target_arm));
+	//
+	//void get_coll_box_related_stuff_old( const sprite& the_sprite,
+	//	array_helper<block_coll_result*>& bcr_ptr_arr_helper )
+	//	__attribute__((_target_arm));
+	//
+	//void get_side_blocked_stuff_old
+	//	( array_helper<u32>& bool_as_u32_arr_helper )
+	//	__attribute__((_target_arm));
 	
 protected:		// functions
 	inline void init_bcr_arr_2d_helper()
@@ -288,59 +292,55 @@ protected:		// functions
 	
 } __attribute__((_align4));
 
-// A class for a group 
-class bcr_ptrs_for_points_group
-{
-public:		// variables
-	
-	
-public:		// functions
-	
-	
-} __attribute__((_align4));
-
-
-// A line (i.e. row or column) of pointers to block_coll_result's.
-class bcr_ptr_line
+class bcr_line_group
 {
 public:		// constants
-	static constexpr u32 max_size 
-		= block_coll_result_rect_group::max_size_2d.x;
+	// This size is arbitrary, but intended to be large enough to work with
+	static constexpr size_t max_size = 6;
 	
 protected:		// variables
-	block_coll_result* ptr_arr_helper_data[max_size];
+	block_coll_result bcr_arr_helper_data[max_size];
 	
 	// The real size of the row or column of pointers to
 	// block_coll_result's
-	s32 real_size;
+	s32 real_size = max_size;
 	
-	// The local position that was passed to the bcr_ptr_line
-	vec2_s32 local_param_pos;
+	// The (block coordinates) position of the left or top that was passed
+	// to the bcr_line_group
+	vec2_s32 start_pos = vec2_s32( 0, 0 );
 	
-	// Whether this bcr_ptr_line represents a column (false) or a row
+	// Whether this bcr_line_group represents a column (false) or a row
 	// (true)
-	u32 is_horiz;
+	u32 is_horiz = false;
 	
 public:		// variables
-	array_helper<block_coll_result*> ptr_arr_helper;
+	array_helper<block_coll_result> bcr_arr_helper;
 	
 public:		// functions
-	inline bcr_ptr_line() : real_size(max_size), local_param_pos( 0, 0 ), 
-		is_horiz(false)
+	inline bcr_line_group()
 	{
-		init_ptr_arr_helper();
+		init_bcr_arr_helper();
 	}
-	bcr_ptr_line( block_coll_result_rect_group& the_bcr_group,
-		const vec2_s32& s_local_param_pos, u32 s_is_horiz );
+	inline bcr_line_group( const horiz_coll_lseg& the_coll_lseg )
+	{
+		init(the_coll_lseg);
+	}
+	inline bcr_line_group( const vert_coll_lseg& the_coll_lseg )
+	{
+		init(the_coll_lseg);
+	}
+	
+	void init( const horiz_coll_lseg& the_coll_lseg );
+	void init( const vert_coll_lseg& the_coll_lseg );
 	
 	
-	inline block_coll_result*& operator () ( u32 index )
+	inline block_coll_result& operator () ( u32 index )
 	{
 		return at(index);
 	}
-	inline block_coll_result*& at( u32 index )
+	inline block_coll_result& at( u32 index )
 	{
-		return ptr_arr_helper.at(index);
+		return bcr_arr_helper.at(index);
 	}
 	
 	inline s32 get_real_size() const
@@ -348,9 +348,9 @@ public:		// functions
 		return real_size;
 	}
 	
-	inline const vec2_s32& get_local_param_pos() const
+	inline const vec2_s32& get_start_pos() const
 	{
-		return local_param_pos;
+		return start_pos;
 	}
 	
 	inline bool get_is_horiz() const
@@ -365,20 +365,106 @@ public:		// functions
 	
 	
 protected:		// functions
-	//inline void clear_ptr_arr_helper_data()
-	//{
-	//	for ( u32 i=0; i<max_size; ++i )
-	//	{
-	//		ptr_arr_helper_data[i] = NULL;
-	//	}
-	//}
-	inline void init_ptr_arr_helper()
+	inline void init_bcr_arr_helper()
 	{
-		ptr_arr_helper.init( ptr_arr_helper_data, real_size );
+		bcr_arr_helper.init( bcr_arr_helper_data, real_size );
 	}
 	
 	
 } __attribute__((_align4));
+
+
+//// A class for a group 
+//class bcr_ptrs_for_points_group
+//{
+//public:		// variables
+//	
+//	
+//public:		// functions
+//	
+//	
+//} __attribute__((_align4));
+//
+//
+//// A line (i.e. row or column) of pointers to block_coll_result's.
+//class bcr_ptr_line
+//{
+//public:		// constants
+//	static constexpr u32 max_size 
+//		= block_coll_result_rect_group::max_size_2d.x;
+//	
+//protected:		// variables
+//	block_coll_result* ptr_arr_helper_data[max_size];
+//	
+//	// The real size of the row or column of pointers to
+//	// block_coll_result's
+//	s32 real_size;
+//	
+//	// The local position that was passed to the bcr_ptr_line
+//	vec2_s32 local_param_pos;
+//	
+//	// Whether this bcr_ptr_line represents a column (false) or a row
+//	// (true)
+//	u32 is_horiz;
+//	
+//public:		// variables
+//	array_helper<block_coll_result*> ptr_arr_helper;
+//	
+//public:		// functions
+//	inline bcr_ptr_line() : real_size(max_size), local_param_pos( 0, 0 ), 
+//		is_horiz(false)
+//	{
+//		init_ptr_arr_helper();
+//	}
+//	bcr_ptr_line( block_coll_result_rect_group& the_bcr_group,
+//		const vec2_s32& s_local_param_pos, u32 s_is_horiz );
+//	
+//	
+//	inline block_coll_result*& operator () ( u32 index )
+//	{
+//		return at(index);
+//	}
+//	inline block_coll_result*& at( u32 index )
+//	{
+//		return ptr_arr_helper.at(index);
+//	}
+//	
+//	inline s32 get_real_size() const
+//	{
+//		return real_size;
+//	}
+//	
+//	inline const vec2_s32& get_local_param_pos() const
+//	{
+//		return local_param_pos;
+//	}
+//	
+//	inline bool get_is_horiz() const
+//	{
+//		return is_horiz;
+//	}
+//	inline bool get_is_vert() const
+//	{
+//		return !is_horiz;
+//	}
+//	
+//	
+//	
+//protected:		// functions
+//	//inline void clear_ptr_arr_helper_data()
+//	//{
+//	//	for ( u32 i=0; i<max_size; ++i )
+//	//	{
+//	//		ptr_arr_helper_data[i] = NULL;
+//	//	}
+//	//}
+//	inline void init_ptr_arr_helper()
+//	{
+//		ptr_arr_helper.init( ptr_arr_helper_data, real_size );
+//	}
+//	
+//	
+//} __attribute__((_align4));
 
 
 

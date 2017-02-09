@@ -24,7 +24,7 @@ oam_entry oam_mirror[oam_mirror_size];
 //oam_entry_affine* const oam_mirror_aff = (oam_entry_affine*)oam_mirror ;
 
 
-const vec2_u32 oam_entry::ss_to_vec2_arr[ss_count]
+const vec2_u32 oam_entry::ss_to_vec2_arr[lim_ss]
 = {
 	// Square shapes
 	{ 8, 8 }, { 16, 16 }, { 32, 32 }, { 64, 64 },
@@ -36,7 +36,7 @@ const vec2_u32 oam_entry::ss_to_vec2_arr[ss_count]
 	{ 8, 16 }, { 8, 32 }, { 16, 32 }, { 32, 64 },
 };
 
-const vec2_u32 oam_entry::ss_enum_to_ss_attrs_arr[ss_count]
+const vec2_u32 oam_entry::ss_enum_to_ss_attrs_arr[lim_ss]
 = {
 	// Square shapes
 	{ obj_attr0_shape_square, obj_attr1_size_0 }, 
@@ -75,7 +75,7 @@ void oam_entry::set_shape_size( oam_entry::shape_size n_shape_size )
 {
 	u32 temp_attr0 = attr0, temp_attr1 = attr1;
 	
-	if ( n_shape_size < 0 || n_shape_size >= ss_count )
+	if ( n_shape_size < 0 || n_shape_size >= lim_ss )
 	{
 		const vec2_u32& ss_attrs_vec2 = ss_enum_to_ss_attrs_arr[0];
 		

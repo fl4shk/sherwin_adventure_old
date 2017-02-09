@@ -26,10 +26,10 @@
 //#include "../sprite_stuff/player_sprite_class.hpp"
 
 
-u32 active_level_manager::converted_block_tile_ids_0[bt_count],
-	active_level_manager::converted_block_tile_ids_1[bt_count],
-	active_level_manager::converted_block_tile_ids_2[bt_count],
-	active_level_manager::converted_block_tile_ids_3[bt_count];
+u32 active_level_manager::converted_block_tile_ids_0[lim_bt],
+	active_level_manager::converted_block_tile_ids_1[lim_bt],
+	active_level_manager::converted_block_tile_ids_2[lim_bt],
+	active_level_manager::converted_block_tile_ids_3[lim_bt];
 
 scr_entry active_level_manager::horiz_sublevel_tile_at_basic( u32 tile_x, 
 	u32 tile_y )
@@ -278,7 +278,7 @@ void active_level_manager::update_sublevel_in_screenblock_mirror_2d()
 	
 	
 	// Create a list of 8x8 tile IDs for each block_type
-	for ( u32 i=0; i<bt_count; ++i )
+	for ( u32 i=0; i<lim_bt; ++i )
 	{
 		block_type the_block_type = (block_type)i;
 		

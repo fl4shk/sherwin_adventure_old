@@ -93,7 +93,7 @@ void snow_golem_sprite::update_part_2()
 		frame_change_timer = frame_change_timer_start;
 		++curr_frame_slot;
 		
-		if ( curr_frame_slot >= frm_slot_count )
+		if ( curr_frame_slot >= lim_frm_slot )
 		{
 			curr_frame_slot = 0;
 		}

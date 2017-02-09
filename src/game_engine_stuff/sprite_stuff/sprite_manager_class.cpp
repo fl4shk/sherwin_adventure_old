@@ -174,7 +174,7 @@ int sprite_manager::next_oam_index;
 //
 //#define generate_funcptr_arr_entry(name) &name##_sprite_new_caller, 
 //
-//void (*sprite_new_caller_funcptr_arr[st_count])( sprite*& the_sprite,
+//void (*sprite_new_caller_funcptr_arr[lim_st])( sprite*& the_sprite,
 //	sprite_allocator& the_sprite_allocator, bool facing_left )
 //	= { &default_sprite_new_caller, 
 //	list_of_main_sprite_type_suffixes(generate_funcptr_arr_entry) };

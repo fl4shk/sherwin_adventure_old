@@ -90,11 +90,11 @@ enum curr_debug_index_type
 	cdit_f8p8,
 	cdit_str,
 	
-	cdit_count
+	lim_cdit
 };
 
 
-static constexpr u32 curr_index_arr_size = cdit_count;
+static constexpr u32 curr_index_arr_size = lim_cdit;
 
 // 4 * 32 * 4 = 512 bytes eaten up by the non-string debug arrays.
 static constexpr u32 debug_u32_arr_size = 32;

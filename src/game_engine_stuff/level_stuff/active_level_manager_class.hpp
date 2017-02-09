@@ -42,10 +42,10 @@ class active_level_manager
 {
 public:		// variables
 	
-	static u32 converted_block_tile_ids_0[bt_count],
-		converted_block_tile_ids_1[bt_count],
-		converted_block_tile_ids_2[bt_count],
-		converted_block_tile_ids_3[bt_count];
+	static u32 converted_block_tile_ids_0[lim_bt],
+		converted_block_tile_ids_1[lim_bt],
+		converted_block_tile_ids_2[lim_bt],
+		converted_block_tile_ids_3[lim_bt];
 	
 	
 public:		// functions

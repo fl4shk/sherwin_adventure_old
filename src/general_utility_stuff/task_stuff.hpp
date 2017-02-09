@@ -35,7 +35,7 @@ enum class task_priority : s32
 	tp_6,
 	tp_7,
 	
-	tp_count,
+	lim_tp,
 } alignas_regular;
 
 
@@ -53,7 +53,7 @@ inline task_priority operator - ( task_priority the_tp,
 inline task_priority clamp_task_prio( task_priority to_clamp )
 {
 	return clamp_to_range<task_priority>( task_priority::tp_0, 
-		task_priority::tp_count, to_clamp );
+		task_priority::lim_tp, to_clamp );
 }
 
 class task

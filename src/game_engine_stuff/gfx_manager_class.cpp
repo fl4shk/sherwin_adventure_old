@@ -159,7 +159,7 @@ void gfx_manager::upload_bg_tiles_to_vram()
 	// whenever multiple block_types share the same graphics_slot.  An
 	// example of this is how each variation of bt_eyes shares the same
 	// graphics slot.
-	for ( u32 i=0; i<block_type::bt_count; ++i )
+	for ( u32 i=0; i<block_type::lim_bt; ++i )
 	{
 		u32 graphics_slot = get_graphics_slot_of_block_type 
 			( (block_type)i );

@@ -22,52 +22,51 @@
 
 #include "../general_utility_stuff/fixed_classes.hpp"
 #include "../general_utility_stuff/vec2_class.hpp"
-#include <array>
+#include "block_coll_result_group_classes.hpp"
 
 class horiz_coll_lseg;
 class vert_coll_lseg;
 
 
-class generic_coll_lseg
-{
-public:		// variables
-	static constexpr size_t num_end_points = 2;
-	std::array< vec2_f24p8, num_end_points > end_points;
-	
-public:		// functions
-	inline generic_coll_lseg()
-	{
-	}
-	inline generic_coll_lseg( const vec2_f24p8& s_end_pt_0, 
-		const vec2_f24p8& s_end_pt_1 ) : end_points{ s_end_pt_0, 
-		s_end_pt_1 }
-	{
-	}
-	inline generic_coll_lseg( const generic_coll_lseg& to_copy )
-	{
-		*this = to_copy;
-	}
-	
-	inline generic_coll_lseg& operator = 
-		( const generic_coll_lseg& to_copy )
-	{
-		end_points = to_copy.end_points;
-		
-		return *this;
-	}
-	
-	bool intersects( const generic_coll_lseg& to_check, 
-		vec2_f24p8* ret=NULL ) const __attribute__((_iwram_code));
-	
-} __attribute__((_align4));
+//class generic_coll_lseg
+//{
+//public:		// variables
+//	static constexpr size_t num_end_points = 2;
+//	std::array< vec2_f24p8, num_end_points > end_points;
+//	
+//public:		// functions
+//	inline generic_coll_lseg()
+//	{
+//	}
+//	inline generic_coll_lseg( const vec2_f24p8& s_end_pt_0, 
+//		const vec2_f24p8& s_end_pt_1 ) : end_points{ s_end_pt_0, 
+//		s_end_pt_1 }
+//	{
+//	}
+//	inline generic_coll_lseg( const generic_coll_lseg& to_copy )
+//	{
+//		*this = to_copy;
+//	}
+//	
+//	inline generic_coll_lseg& operator = 
+//		( const generic_coll_lseg& to_copy )
+//	{
+//		end_points = to_copy.end_points;
+//		
+//		return *this;
+//	}
+//	
+//	bool intersects( const generic_coll_lseg& to_check, 
+//		vec2_f24p8* ret=NULL ) const __attribute__((_iwram_code));
+//	
+//} __attribute__((_align4));
 
 
 class coll_lseg_extras
 {
 protected:		// functions
 	static bool collinear_lsegs_intersect( const fixed24p8& a_0, 
-		const fixed24p8& a_1, const fixed24p8& b_0, const fixed24p8& b_1 )
-		__attribute__((_iwram_code));
+		const fixed24p8& a_1, const fixed24p8& b_0, const fixed24p8& b_1 );
 	
 	friend class horiz_coll_lseg;
 	friend class vert_coll_lseg;
@@ -142,7 +141,7 @@ public:		// functions
 		
 		return false;
 	}
-	inline bool intersects( const vert_coll_lseg& to_check ) const;
+	//inline bool intersects( const vert_coll_lseg& to_check ) const;
 	
 } __attribute__((_align4));
 
@@ -201,10 +200,10 @@ public:		// functions
 		return top_pt() + vec2_f24p8( make_f24p8(0), length() );
 	}
 	
-	inline bool intersects( const horiz_coll_lseg& to_check ) const
-	{
-		return to_check.intersects(*this);
-	}
+	//inline bool intersects( const horiz_coll_lseg& to_check ) const
+	//{
+	//	return to_check.intersects(*this);
+	//}
 	inline bool intersects( const vert_coll_lseg& to_check ) const
 	{
 		if ( top_pt().x == to_check.top_pt().x )
@@ -220,12 +219,50 @@ public:		// functions
 
 
 
-inline bool horiz_coll_lseg::intersects( const vert_coll_lseg& to_check ) 
-	const
+//inline bool horiz_coll_lseg::intersects( const vert_coll_lseg& to_check ) 
+//	const
+//{
+//	return generic_coll_lseg( left_pt(), right_pt() ).intersects
+//		( generic_coll_lseg( to_check.top_pt(), to_check.bot_pt() ) );
+//}
+
+
+class coll_lseg_group_base
 {
-	return generic_coll_lseg( left_pt(), right_pt() ).intersects
-		( generic_coll_lseg( to_check.top_pt(), to_check.bot_pt() ) );
-}
+public:		// variables
+	array_helper<bcr_line_group> horiz_bcr_lg_arr_helper,
+		vert_bcr_lg_arr_helper;
+	array_helper<horiz_coll_lseg> horiz_clseg_arr_helper;
+	array_helper<vert_coll_lseg> vert_clseg_arr_helper;
+	
+public:		// functions
+	
+	
+} __attribute__((_align4));
+
+
+//class coll_lseg_group_16x16 : public coll_lseg_group_base
+//{
+//protected:		// variables
+//	static constexpr size_t
+//	bcr_line_group
+//	
+//public:		// functions
+//	
+//} __attribute__((_align4));
+
+class coll_lseg_group_16x32 : public coll_lseg_group_base
+{
+public:		// enums
+	
+	
+protected:		// variables
+	bool in_air;
+	
+public:		// functions
+	
+} __attribute__((_align4));
+
 
 
 #endif		// coll_lseg_classes_hpp
