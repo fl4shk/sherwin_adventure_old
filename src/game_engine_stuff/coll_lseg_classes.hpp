@@ -230,12 +230,34 @@ public:		// functions
 class coll_lseg_group_base
 {
 public:		// variables
-	array_helper<bcr_line_group> horiz_bcr_lg_arr_helper,
-		vert_bcr_lg_arr_helper;
-	array_helper<horiz_coll_lseg> horiz_clseg_arr_helper;
-	array_helper<vert_coll_lseg> vert_clseg_arr_helper;
+	array_helper<bcr_lseg_group> horiz_bcr_lseg_groups,
+		vert_bcr_lseg_groups;
+	array_helper<horiz_coll_lseg> horiz_clseg_groups;
+	array_helper<vert_coll_lseg> vert_clseg_groups;
+	
+protected:		// variables
+	u32 internal_on_ground;
+	
+protected:		// functions
+	// This constructor ONLY sets the array_helpers themselves; it DOES NOT
+	// touch the arrays being wrapped.
+	coll_lseg_group_base( bcr_lseg_group* s_horiz_bcr_lg_arr, 
+		bcr_lseg_group* s_vert_bcr_lg_arr, 
+		horiz_coll_lseg* s_horiz_clseg_arr, 
+		vert_coll_lseg* s_vert_clseg_arr, 
+		size_t s_num_horiz_lsegs, size_t s_num_vert_lsegs, 
+		u32 s_on_ground );
+	
+	// This function should be called only by derived classes, and ONLY
+	// AFTER setting up internal_horiz_clseg_arr and
+	// internal_vert_clseg_arr
+	void init_bcr_lseg_groups_themselves();
 	
 public:		// functions
+	inline const u32 get_on_ground() const
+	{
+		return internal_on_ground;
+	}
 	
 	
 } __attribute__((_align4));
@@ -243,23 +265,57 @@ public:		// functions
 
 //class coll_lseg_group_16x16 : public coll_lseg_group_base
 //{
-//protected:		// variables
-//	static constexpr size_t
-//	bcr_line_group
-//	
-//public:		// functions
-//	
 //} __attribute__((_align4));
 
 class coll_lseg_group_16x32 : public coll_lseg_group_base
 {
 public:		// enums
 	
+	enum horiz_index
+	{
+		hi_left_top,
+		hi_right_top,
+		
+		hi_left_bot,
+		hi_right_bot,
+		
+		
+		
+		lim_hi,
+	};
 	
-protected:		// variables
-	bool in_air;
+	enum vert_index
+	{
+		vi_top_left,
+		vi_top_right,
+		
+		vi_bot_left,
+		vi_bot_mid,
+		vi_bot_right,
+		
+		
+		
+		lim_vi,
+	};
+	
+protected:		// variables and constants
+	static constexpr size_t internal_num_horiz_lsegs = lim_hi,
+		internal_num_vert_lsegs = lim_vi;
+	bcr_lseg_group internal_horiz_bcr_lg_arr[internal_num_horiz_lsegs];
+	bcr_lseg_group internal_vert_bcr_lg_arr[internal_num_vert_lsegs];
+	horiz_coll_lseg internal_horiz_clseg_arr[internal_num_horiz_lsegs];
+	vert_coll_lseg internal_vert_clseg_arr[internal_num_vert_lsegs];
+	
+	
+	// Offsets from s_coll_box.get_y_center()
+	static const fixed24p8 offset_y_for_top_hs_og;
+	static const fixed24p8 offset_y_for_bot_hs_og;
+	
 	
 public:		// functions
+	coll_lseg_group_16x32( const coll_box& s_coll_box, u32 s_on_ground );
+	
+protected:		// functions
 	
 } __attribute__((_align4));
 

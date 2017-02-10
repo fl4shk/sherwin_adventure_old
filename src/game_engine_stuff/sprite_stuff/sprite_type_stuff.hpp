@@ -86,7 +86,7 @@ enum sprite_type
 	// by the compiler.
 	lim_st,
 	
-} alignas_regular;
+} _alignas_regular;
 
 
 

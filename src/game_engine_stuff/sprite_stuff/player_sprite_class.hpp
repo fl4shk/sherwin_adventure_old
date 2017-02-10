@@ -78,7 +78,7 @@ public:		// enums
 		frm_weapon_swing_ground_moving_3_row_2,
 		frm_weapon_swing_ground_moving_4_row_2,
 		frm_weapon_swing_ground_moving_5_row_2,
-	} alignas_regular;
+	} _alignas_regular;
 	
 	// This enum allows multiple frame_slot's to be represented by the same
 	// frame, which is used, for example, in the walking animation.  Also,
@@ -151,7 +151,7 @@ public:		// enums
 		// lim_frm_slot is the amount of frame_slot's.  It is
 		// automatically updated by the compiler.
 		lim_frm_slot,
-	} alignas_regular;
+	} _alignas_regular;
 	
 	
 	// These are used to access misc_data_u and misc_data_s
@@ -159,12 +159,12 @@ public:		// enums
 	{ 
 		udi_active_walk_frame_slot, 
 		udi_active_pickaxe_swing_frame_slot,
-	} alignas_regular;
+	} _alignas_regular;
 	enum sdata_index
 	{
 		sdi_walk_frame_timer, 
 		sdi_pickaxe_swing_frame_timer,
-	} alignas_regular;
+	} _alignas_regular;
 	
 	
 public:		// variables

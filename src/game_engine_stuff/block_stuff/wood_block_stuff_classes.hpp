@@ -29,7 +29,7 @@ public:		// variables
 
 public:		// enums
 	enum subclass_persistent_data_state { is_wood, is_bt_dud } 
-		alignas_regular;
+		_alignas_regular;
 	
 	
 public:		// functions

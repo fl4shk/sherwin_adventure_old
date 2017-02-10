@@ -69,7 +69,7 @@
 
 
 // This is for C++'s built-in alignment, which finally exists!
-#define alignas_regular alignas(4)
+#define _alignas_regular alignas(4)
 
 
 #endif		// attribute_defines_hpp

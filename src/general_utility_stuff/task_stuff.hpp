@@ -36,7 +36,7 @@ enum class task_priority : s32
 	tp_7,
 	
 	lim_tp,
-} alignas_regular;
+} _alignas_regular;
 
 
 inline task_priority operator - ( task_priority the_tp, 

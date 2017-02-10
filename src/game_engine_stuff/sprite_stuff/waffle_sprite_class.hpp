@@ -26,9 +26,9 @@ class waffle_sprite : public sprite
 {
 public:		// enums
 	// These are used to access misc_data_u and misc_data_s
-	enum udata_index { udi_initial_pos_was_set, } alignas_regular;
+	enum udata_index { udi_initial_pos_was_set, } _alignas_regular;
 	enum sdata_index { sdi_initial_pos_x, sdi_initial_pos_y, 
-		sdi_move_timer, } alignas_regular;
+		sdi_move_timer, } _alignas_regular;
 	
 public:		// variables
 	static const sprite_const_params the_const_params;

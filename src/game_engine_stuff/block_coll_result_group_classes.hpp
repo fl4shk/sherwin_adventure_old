@@ -292,7 +292,7 @@ protected:		// functions
 	
 } __attribute__((_align4));
 
-class bcr_line_group
+class bcr_lseg_group
 {
 public:		// constants
 	// This size is arbitrary, but intended to be large enough to work with
@@ -306,10 +306,10 @@ protected:		// variables
 	s32 real_size = max_size;
 	
 	// The (block coordinates) position of the left or top that was passed
-	// to the bcr_line_group
+	// to the bcr_lseg_group
 	vec2_s32 start_pos = vec2_s32( 0, 0 );
 	
-	// Whether this bcr_line_group represents a column (false) or a row
+	// Whether this bcr_lseg_group represents a column (false) or a row
 	// (true)
 	u32 is_horiz = false;
 	
@@ -317,15 +317,15 @@ public:		// variables
 	array_helper<block_coll_result> bcr_arr_helper;
 	
 public:		// functions
-	inline bcr_line_group()
+	inline bcr_lseg_group()
 	{
 		init_bcr_arr_helper();
 	}
-	inline bcr_line_group( const horiz_coll_lseg& the_coll_lseg )
+	inline bcr_lseg_group( const horiz_coll_lseg& the_coll_lseg )
 	{
 		init(the_coll_lseg);
 	}
-	inline bcr_line_group( const vert_coll_lseg& the_coll_lseg )
+	inline bcr_lseg_group( const vert_coll_lseg& the_coll_lseg )
 	{
 		init(the_coll_lseg);
 	}

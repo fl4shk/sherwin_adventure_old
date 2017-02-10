@@ -43,7 +43,8 @@ public:			// functions
 	inline array_2d_helper()
 	{
 	}
-	inline array_2d_helper( type* s_the_array, const vec2_u32& s_size_2d )
+	inline array_2d_helper( type* s_the_array, 
+		const vec2_u32& s_size_2d )
 		: size_2d(s_size_2d), size( s_size_2d.x * s_size_2d.y ),
 		the_array(s_the_array)
 	{

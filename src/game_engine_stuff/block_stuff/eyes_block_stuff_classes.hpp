@@ -28,7 +28,7 @@ public:		// variables
 	//static const u32 metatile_graphics_slot = metatile_number;
 	
 public:		// enums
-	enum persistent_data_state { is_eyes, is_bt_dud } alignas_regular;
+	enum persistent_data_state { is_eyes, is_bt_dud } _alignas_regular;
 	
 public:		// functions
 	inline virtual const block_stuff_const_params& get_const_params() const

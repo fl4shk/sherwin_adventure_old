@@ -232,7 +232,7 @@ public:		// classes
 			it_head,
 			it_tail,
 			
-		} alignas_regular;
+		} _alignas_regular;
 		
 	protected:  // variables
 		circ_buf_helper *const cbuf_helper_ptr;
