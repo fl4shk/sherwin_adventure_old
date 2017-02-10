@@ -155,6 +155,27 @@ SECTIONS
 	iwram_code_section_size = SIZEOF(.iwram_code);
 	
 	
+	/* MaxMOD puts SOME code in the .iwram segment, so it will be treated as
+	such here also */
+	.some_maxmod_code :
+	{
+		. = ALIGN(4);
+		/* The start of some MaxMOD code to be copied to IWRAM*/
+		some_maxmod_code_rom_start = LOADADDR(.some_maxmod_code);
+		
+		some_maxmod_code_iwram_start = .;
+		
+		/* Some of MaxMOD's code goes into the ".iwram" section */
+		*(.iwram);
+		
+		some_maxmod_code_iwram_end = .;
+		
+		. = ALIGN(4);
+		
+	} >iwram AT >rom
+	
+	some_maxmod_code_section_size = SIZEOF(.some_maxmod_code);
+	
 	/* Uninitialized variables that go into IWRAM*/
 	.iwram_bss :
 	{
@@ -170,7 +191,8 @@ SECTIONS
 	
 	total_iwram_var_size = iwram_data_section_size + iwram_bss_section_size;
 	
-	total_iwram_code_size = text_hot_section_size + iwram_code_section_size;
+    total_iwram_code_size = text_hot_section_size + iwram_code_section_size + some_maxmod_code_section_size;
+	/* total_iwram_code_size = iwram_code_section_size + * some_maxmod_code_section_size; */
 	total_iwram_usage = total_iwram_var_size + total_iwram_code_size;
 	
 	.ewram_code :

@@ -137,6 +137,14 @@ next:
 	
 	
 	
+	@ Copy Some of the MaxMOD code to IWRAM
+	ldr r0, =some_maxmod_code_iwram_start	@ destination
+	ldr r1, =some_maxmod_code_rom_start		@ source
+	@ldr r2, =some_maxmod_code_size			@ \ word count
+	@lsr r2, #0x02						@ /
+	
+	ldr r2, =some_maxmod_code_section_size			@ byte count
+	
 	@@@ r4 still contains the address of memcpy32 in IWRAM (horray for stack
 	@@@ manipulation)
 	
