@@ -25,6 +25,7 @@
 
 #include "coll_box_class.hpp"
 #include "../general_utility_stuff/array_helper_class.hpp"
+#include "level_stuff/active_level_class.hpp"
 
 //#include "coll_point_group_classes.hpp"
 
@@ -43,6 +44,8 @@ public:		// variables
 public:		// functions
 	inline block_coll_result()
 	{
+		the_block = &active_level::blank_block;
+		the_bbvt = bbvt_air;
 	}
 	//inline block_coll_result()
 	//{
@@ -330,6 +333,7 @@ public:		// functions
 		init(the_coll_lseg);
 	}
 	
+	void init();
 	void init( const horiz_coll_lseg& the_coll_lseg );
 	void init( const vert_coll_lseg& the_coll_lseg );
 	
@@ -338,10 +342,55 @@ public:		// functions
 	{
 		return at(index);
 	}
+	inline const block_coll_result& operator () ( u32 index ) const
+	{
+		return at(index);
+	}
+	
 	inline block_coll_result& at( u32 index )
 	{
 		return bcr_arr_helper.at(index);
 	}
+	inline const block_coll_result& at( u32 index ) const
+	{
+		return bcr_arr_helper.at(index);
+	}
+	
+	inline block_coll_result& horiz_left()
+	{
+		return at(0);
+	}
+	inline block_coll_result& horiz_right()
+	{
+		return at(get_end_pos_offset());
+	}
+	inline block_coll_result& vert_top()
+	{
+		return at(0);
+	}
+	inline block_coll_result& vert_bot()
+	{
+		return at(get_end_pos_offset());
+	}
+	
+	
+	inline const block_coll_result& horiz_left() const
+	{
+		return at(0);
+	}
+	inline const block_coll_result& horiz_right() const
+	{
+		return at(get_end_pos_offset());
+	}
+	inline const block_coll_result& vert_top() const
+	{
+		return at(0);
+	}
+	inline const block_coll_result& vert_bot() const
+	{
+		return at(get_end_pos_offset());
+	}
+	
 	
 	inline s32 get_real_size() const
 	{
@@ -351,6 +400,31 @@ public:		// functions
 	inline const vec2_s32& get_start_pos() const
 	{
 		return start_pos;
+	}
+	inline const vec2_s32 get_horiz_end_pos() const
+	{
+		return get_start_pos() + vec2_s32( get_end_pos_offset(), 0 );
+	}
+	inline const vec2_s32 get_vert_end_pos() const
+	{
+		return get_start_pos() + vec2_s32( 0, get_end_pos_offset() );
+	}
+	
+	inline const s32 horiz_left_pos() const
+	{
+		return get_start_pos().x;
+	}
+	inline const s32 horiz_right_pos() const
+	{
+		return horiz_left_pos() + get_end_pos_offset();
+	}
+	inline const s32 vert_top_pos() const
+	{
+		return get_start_pos().y;
+	}
+	inline const s32 vert_bot_pos() const
+	{
+		return vert_top_pos() + get_end_pos_offset();
 	}
 	
 	inline bool get_is_horiz() const
@@ -368,6 +442,10 @@ protected:		// functions
 	inline void init_bcr_arr_helper()
 	{
 		bcr_arr_helper.init( bcr_arr_helper_data, real_size );
+	}
+	inline const s32 get_end_pos_offset() const
+	{
+		return get_real_size() - 1;
 	}
 	
 	

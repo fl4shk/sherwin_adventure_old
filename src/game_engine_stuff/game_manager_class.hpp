@@ -24,10 +24,8 @@
 #include "../gba_specific_stuff/button_stuff.hpp"
 #include "../general_utility_stuff/debug_vars.hpp"
 
-#include "maxmod.h"
-
-
 #include "gfx_manager_class.hpp"
+#include "maxmod.h"
 
 
 enum game_mode
@@ -115,7 +113,9 @@ public:		// functions
 	
 	
 	//static void vblank_func() __attribute__(( _iwram_code, __noinline__ ));
-	static void vblank_func() __attribute__((_iwram_code));
+	//static void vblank_func() __attribute__((_iwram_code));
+	static void vblank_func() __attribute__((_iwram_code,_target_arm));
+	//static void vblank_func();
 	
 	//static void title_screen_func() __attribute__((__noinline__));
 	static void title_screen_func();

@@ -227,49 +227,15 @@ public:		// functions
 //}
 
 
-class coll_lseg_group_base
-{
-public:		// variables
-	array_helper<bcr_lseg_group> horiz_bcr_lseg_groups,
-		vert_bcr_lseg_groups;
-	array_helper<horiz_coll_lseg> horiz_clseg_groups;
-	array_helper<vert_coll_lseg> vert_clseg_groups;
-	
-protected:		// variables
-	u32 internal_on_ground;
-	
-protected:		// functions
-	// This constructor ONLY sets the array_helpers themselves; it DOES NOT
-	// touch the arrays being wrapped.
-	coll_lseg_group_base( bcr_lseg_group* s_horiz_bcr_lg_arr, 
-		bcr_lseg_group* s_vert_bcr_lg_arr, 
-		horiz_coll_lseg* s_horiz_clseg_arr, 
-		vert_coll_lseg* s_vert_clseg_arr, 
-		size_t s_num_horiz_lsegs, size_t s_num_vert_lsegs, 
-		u32 s_on_ground );
-	
-	// This function should be called only by derived classes, and ONLY
-	// AFTER setting up internal_horiz_clseg_arr and
-	// internal_vert_clseg_arr
-	void init_bcr_lseg_groups_themselves();
-	
-public:		// functions
-	inline const u32 get_on_ground() const
-	{
-		return internal_on_ground;
-	}
-	
-	
-} __attribute__((_align4));
 
 
-//class coll_lseg_group_16x16 : public coll_lseg_group_base
+//class coll_lseg_group_16x16
 //{
 //} __attribute__((_align4));
 
-class coll_lseg_group_16x32 : public coll_lseg_group_base
+class coll_lseg_group_16x32
 {
-public:		// enums
+protected:		// enums
 	
 	enum horiz_index
 	{
@@ -301,21 +267,255 @@ public:		// enums
 protected:		// variables and constants
 	static constexpr size_t internal_num_horiz_lsegs = lim_hi,
 		internal_num_vert_lsegs = lim_vi;
-	bcr_lseg_group internal_horiz_bcr_lg_arr[internal_num_horiz_lsegs];
-	bcr_lseg_group internal_vert_bcr_lg_arr[internal_num_vert_lsegs];
-	horiz_coll_lseg internal_horiz_clseg_arr[internal_num_horiz_lsegs];
-	vert_coll_lseg internal_vert_clseg_arr[internal_num_vert_lsegs];
+	bcr_lseg_group horiz_bcr_lseg_groups[internal_num_horiz_lsegs];
+	bcr_lseg_group vert_bcr_lseg_groups[internal_num_vert_lsegs];
+	horiz_coll_lseg horiz_clseg_groups[internal_num_horiz_lsegs];
+	vert_coll_lseg vert_clseg_groups[internal_num_vert_lsegs];
+	
+	u32 internal_on_ground = false;
 	
 	
-	// Offsets from s_coll_box.get_y_center()
 	static const fixed24p8 offset_y_for_top_hs_og;
 	static const fixed24p8 offset_y_for_bot_hs_og;
 	
+	static const fixed24p8 offset_x_for_left_vs;
+	static const fixed24p8 offset_x_for_right_vs;
+	
+	static const fixed24p8 vs_height_og;
+	static const fixed24p8 vs_height_ia;
+	
+	static const fixed24p8 offset_y_for_top_vs_ia;
+	static const fixed24p8 offset_y_for_bot_vs;
+	
 	
 public:		// functions
+	inline coll_lseg_group_16x32()
+	{
+	}
 	coll_lseg_group_16x32( const coll_box& s_coll_box, u32 s_on_ground );
+	void init( const coll_box& s_coll_box, u32 s_on_ground );
+	
+	inline const u32 get_on_ground() const
+	{
+		return internal_on_ground;
+	}
+	
+	// horizontal bcr_lseg_group getters (on ground)
+	inline const bcr_lseg_group& get_horiz_bcrlg_left_top_og() const
+	{
+		return horiz_bcr_lseg_groups[hi_left_top];
+	}
+	inline const bcr_lseg_group& get_horiz_bcrlg_right_top_og() const
+	{
+		return horiz_bcr_lseg_groups[hi_right_top];
+	}
+	inline const bcr_lseg_group& get_horiz_bcrlg_left_bot_og() const
+	{
+		return horiz_bcr_lseg_groups[hi_left_bot];
+	}
+	inline const bcr_lseg_group& get_horiz_bcrlg_right_bot_og() const
+	{
+		return horiz_bcr_lseg_groups[hi_right_bot];
+	}
+	
+	// vertical bcr_lseg_group getters (on ground)
+	inline const bcr_lseg_group& get_vert_bcrlg_bot_left_og() const
+	{
+		return vert_bcr_lseg_groups[vi_bot_left];
+	}
+	inline const bcr_lseg_group& get_vert_bcrlg_bot_mid_og() const
+	{
+		return vert_bcr_lseg_groups[vi_bot_mid];
+	}
+	inline const bcr_lseg_group& get_vert_bcrlg_bot_right_og() const
+	{
+		return vert_bcr_lseg_groups[vi_bot_right];
+	}
+	
+	// horizontal bcr_lseg_group getters (in air)
+	inline const bcr_lseg_group& get_horiz_bcrlg_left_top_ia() const
+	{
+		return horiz_bcr_lseg_groups[hi_left_top];
+	}
+	inline const bcr_lseg_group& get_horiz_bcrlg_right_top_ia() const
+	{
+		return horiz_bcr_lseg_groups[hi_right_top];
+	}
+	inline const bcr_lseg_group& get_horiz_bcrlg_left_mid_ia() const
+	{
+		return horiz_bcr_lseg_groups[hi_left_bot];
+	}
+	inline const bcr_lseg_group& get_horiz_bcrlg_right_mid_ia() const
+	{
+		return horiz_bcr_lseg_groups[hi_right_bot];
+	}
+	
+	// vertical bcr_lseg_group getters (in air)
+	inline const bcr_lseg_group& get_vert_bcrlg_top_left_ia() const
+	{
+		return vert_bcr_lseg_groups[vi_top_left];
+	}
+	inline const bcr_lseg_group& get_vert_bcrlg_top_right_ia() const
+	{
+		return vert_bcr_lseg_groups[vi_top_right];
+	}
+	inline const bcr_lseg_group& get_vert_bcrlg_bot_left_ia() const
+	{
+		return vert_bcr_lseg_groups[vi_bot_left];
+	}
+	inline const bcr_lseg_group& get_vert_bcrlg_bot_mid_ia() const
+	{
+		return vert_bcr_lseg_groups[vi_bot_mid];
+	}
+	inline const bcr_lseg_group& get_vert_bcrlg_bot_right_ia() const
+	{
+		return vert_bcr_lseg_groups[vi_bot_right];
+	}
+	
+	
+	
+	// horiz_coll_lseg getters (on ground)
+	inline const horiz_coll_lseg& get_horiz_clg_left_top_og() const
+	{
+		return horiz_clseg_groups[hi_left_top];
+	}
+	inline const horiz_coll_lseg& get_horiz_clg_right_top_og() const
+	{
+		return horiz_clseg_groups[hi_right_top];
+	}
+	inline const horiz_coll_lseg& get_horiz_clg_left_bot_og() const
+	{
+		return horiz_clseg_groups[hi_left_bot];
+	}
+	inline const horiz_coll_lseg& get_horiz_clg_right_bot_og() const
+	{
+		return horiz_clseg_groups[hi_right_bot];
+	}
+	
+	
+	// vert_coll_lseg getters (on ground)
+	inline const vert_coll_lseg& get_vert_clg_bot_left_og() const
+	{
+		return vert_clseg_groups[vi_bot_left];
+	}
+	inline const vert_coll_lseg& get_vert_clg_bot_mid_og() const
+	{
+		return vert_clseg_groups[vi_bot_mid];
+	}
+	inline const vert_coll_lseg& get_vert_clg_bot_right_og() const
+	{
+		return vert_clseg_groups[vi_bot_right];
+	}
+	
+	
+	// horiz_coll_lseg getters (in air)
+	inline const horiz_coll_lseg& get_horiz_clg_left_top_ia() const
+	{
+		return horiz_clseg_groups[hi_left_top];
+	}
+	inline const horiz_coll_lseg& get_horiz_clg_right_top_ia() const
+	{
+		return horiz_clseg_groups[hi_right_top];
+	}
+	inline const horiz_coll_lseg& get_horiz_clg_left_mid_ia() const
+	{
+		return horiz_clseg_groups[hi_left_bot];
+	}
+	inline const horiz_coll_lseg& get_horiz_clg_right_mid_ia() const
+	{
+		return horiz_clseg_groups[hi_right_bot];
+	}
+	
+	// vert_coll_lseg getters (in air)
+	inline const vert_coll_lseg& get_vert_clg_top_left_ia() const
+	{
+		return vert_clseg_groups[vi_top_left];
+	}
+	inline const vert_coll_lseg& get_vert_clg_top_right_ia() const
+	{
+		return vert_clseg_groups[vi_top_right];
+	}
+	inline const vert_coll_lseg& get_vert_clg_bot_left_ia() const
+	{
+		return vert_clseg_groups[vi_bot_left];
+	}
+	inline const vert_coll_lseg& get_vert_clg_bot_mid_ia() const
+	{
+		return vert_clseg_groups[vi_bot_mid];
+	}
+	inline const vert_coll_lseg& get_vert_clg_bot_right_ia() const
+	{
+		return vert_clseg_groups[vi_bot_right];
+	}
+	
 	
 protected:		// functions
+	// "hs" means "horizontal sensor"
+	// "og" means "on ground"
+	static const fixed24p8 get_pos_y_for_top_hs_og
+		( const coll_box& s_coll_box );
+		
+	static const fixed24p8 get_pos_y_for_bot_hs_og
+		( const coll_box& s_coll_box );
+	
+	static const horiz_coll_lseg get_left_top_hs_og
+		( const coll_box& s_coll_box ) ;
+	static const horiz_coll_lseg get_right_top_hs_og
+		( const coll_box& s_coll_box );
+	
+	static const horiz_coll_lseg get_left_bot_hs_og
+		( const coll_box& s_coll_box ) ;
+	static const horiz_coll_lseg get_right_bot_hs_og
+		( const coll_box& s_coll_box );
+	
+	// "ia" means "in air"
+	static const fixed24p8 get_pos_y_for_top_hs_ia
+		( const coll_box& s_coll_box );
+	static const fixed24p8 get_pos_y_for_mid_hs_ia
+		( const coll_box& s_coll_box );
+	
+	static const horiz_coll_lseg get_left_top_hs_ia
+		( const coll_box& s_coll_box );
+	static const horiz_coll_lseg get_right_top_hs_ia
+		( const coll_box& s_coll_box );
+	
+	static const horiz_coll_lseg get_left_mid_hs_ia
+		( const coll_box& s_coll_box );
+	static const horiz_coll_lseg get_right_mid_hs_ia
+		( const coll_box& s_coll_box );
+	
+	// "vs" means "vertical sensor"
+	static const fixed24p8 get_pos_x_for_left_vs
+		( const coll_box& s_coll_box );
+	static const fixed24p8 get_pos_x_for_mid_vs
+		( const coll_box& s_coll_box );
+	static const fixed24p8 get_pos_x_for_right_vs
+		( const coll_box& s_coll_box );
+	
+	static const fixed24p8 get_pos_y_for_top_vs_ia
+		( const coll_box& s_coll_box );
+	static const fixed24p8 get_pos_y_for_bot_vs
+		( const coll_box& s_coll_box );
+	
+	
+	static const vert_coll_lseg get_bot_left_vs_og
+		( const coll_box& s_coll_box );
+	static const vert_coll_lseg get_bot_mid_vs_og
+		( const coll_box& s_coll_box );
+	static const vert_coll_lseg get_bot_right_vs_og
+		( const coll_box& s_coll_box );
+	
+	static const vert_coll_lseg get_bot_left_vs_ia
+		( const coll_box& s_coll_box );
+	static const vert_coll_lseg get_bot_mid_vs_ia
+		( const coll_box& s_coll_box );
+	static const vert_coll_lseg get_bot_right_vs_ia
+		( const coll_box& s_coll_box );
+	
+	static const vert_coll_lseg get_top_left_vs_ia
+		( const coll_box& s_coll_box );
+	static const vert_coll_lseg get_top_right_vs_ia
+		( const coll_box& s_coll_box );
 	
 } __attribute__((_align4));
 

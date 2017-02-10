@@ -604,51 +604,55 @@ protected:		// functions
 	vec2_u32 get_shape_size_as_vec2_raw() const;
 	
 	virtual void block_coll_response_left_16x16
-		( const block_coll_result_rect_group& the_bcr_rect_group );
+		( const bcr_lseg_group& the_bcr_lseg_grp );
 	virtual void block_coll_response_right_16x16
-		( const block_coll_result_rect_group& the_bcr_rect_group );
+		( const bcr_lseg_group& the_bcr_lseg_grp );
 	virtual void block_coll_response_top_16x16
-		( const block_coll_result_rect_group& the_bcr_rect_group );
+		( const bcr_lseg_group& the_bcr_lseg_grp );
 	virtual void block_coll_response_bot_16x16
-		( const block_coll_result_rect_group& the_bcr_rect_group );
+		( const bcr_lseg_group& the_bcr_lseg_grp );
 	
 	
 	virtual void block_coll_response_left_16x32
-		( const block_coll_result_rect_group& the_bcr_rect_group );
+		( const bcr_lseg_group& the_bcr_lseg_grp );
 	virtual void block_coll_response_right_16x32
-		( const block_coll_result_rect_group& the_bcr_rect_group );
+		( const bcr_lseg_group& the_bcr_lseg_grp );
 	virtual void block_coll_response_top_16x32
-		( const block_coll_result_rect_group& the_bcr_rect_group );
+		( const bcr_lseg_group& the_bcr_lseg_grp );
 	virtual void block_coll_response_bot_16x32
-		( const block_coll_result_rect_group& the_bcr_rect_group );
+		( const bcr_lseg_group& the_bcr_lseg_grp );
 	
 	
 	
 	// Finally, some inline functions (probably) every sprite can use in
 	// their block_coll_response.*() functions
 	inline void push_out_of_left_block
-		( const block_coll_result_rect_group& the_bcr_rect_group )
+		( const bcr_lseg_group& the_bcr_lseg_grp )
 	{
-		set_curr_in_level_pos_x( make_f24p8( ( the_bcr_rect_group.left() 
-			+ 1 ) * num_pixels_per_block_dim ) - cb_pos_offset.x );
+		set_curr_in_level_pos_x( make_f24p8
+			( ( the_bcr_lseg_grp.horiz_left_pos() + 1 ) 
+			* num_pixels_per_block_dim ) - cb_pos_offset.x );
 	}
 	inline void push_out_of_right_block
-		( const block_coll_result_rect_group& the_bcr_rect_group )
+		( const bcr_lseg_group& the_bcr_lseg_grp )
 	{
-		set_curr_in_level_pos_x( make_f24p8( the_bcr_rect_group.right()
+		set_curr_in_level_pos_x( make_f24p8
+			( the_bcr_lseg_grp.horiz_right_pos()
 			* num_pixels_per_block_dim ) - the_coll_box.size.x 
 			- cb_pos_offset.x );
 	}
 	inline void push_out_of_top_block
-		( const block_coll_result_rect_group& the_bcr_rect_group )
+		( const bcr_lseg_group& the_bcr_lseg_grp )
 	{
-		set_curr_in_level_pos_y( make_f24p8( ( the_bcr_rect_group.top() 
-			+ 1 ) * num_pixels_per_block_dim ) - cb_pos_offset.y );
+		set_curr_in_level_pos_y( make_f24p8
+			( ( the_bcr_lseg_grp.vert_top_pos() + 1 ) 
+			* num_pixels_per_block_dim ) - cb_pos_offset.y );
 	}
 	inline void push_out_of_bot_block
-		( const block_coll_result_rect_group& the_bcr_rect_group )
+		( const bcr_lseg_group& the_bcr_lseg_grp )
 	{
-		set_curr_in_level_pos_y( make_f24p8( the_bcr_rect_group.bot()
+		set_curr_in_level_pos_y( make_f24p8
+			( the_bcr_lseg_grp.vert_bot_pos() 
 			* num_pixels_per_block_dim ) 
 			- make_f24p8(get_shape_size_as_vec2().y) );
 	}

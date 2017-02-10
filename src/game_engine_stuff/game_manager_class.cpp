@@ -200,6 +200,9 @@ void game_manager::title_screen_func()
 			mmInitDefault( (mm_addr)practice_17_bin, 8 );
 			mmSetVBlankHandler(reinterpret_cast<void*>(vblank_func));
 			
+			//irqSet( irq_vblank, (u32)vblank_func );
+			//irqEnable(irq_vblank);
+			
 			reinit_the_game();
 			break;
 		}

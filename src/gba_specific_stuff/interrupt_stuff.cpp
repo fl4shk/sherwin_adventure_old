@@ -18,13 +18,11 @@
 
 #include "interrupt_stuff.hpp"
 #include "gfx_reg_stuff.hpp"
-
 #include "maxmod.h"
+
 
 #include "../general_utility_stuff/debug_vars.hpp"
 
-
-extern "C" void maxmod_vblank_updater_func();
 
 extern "C"
 {

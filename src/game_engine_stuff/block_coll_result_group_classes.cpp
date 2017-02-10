@@ -134,6 +134,7 @@ void bcr_lseg_group::init( const horiz_coll_lseg& the_coll_lseg )
 	{
 		at(i) = block_coll_result( get_start_pos() + vec2_s32( i, 0 ) );
 	}
+	
 }
 void bcr_lseg_group::init( const vert_coll_lseg& the_coll_lseg )
 {
@@ -151,6 +152,7 @@ void bcr_lseg_group::init( const vert_coll_lseg& the_coll_lseg )
 	{
 		at(i) = block_coll_result( get_start_pos() + vec2_s32( 0, i ) );
 	}
+	
 }
 
 

@@ -83,7 +83,7 @@ LD_SCRIPT:=linkscript.ld
 
 GLOBAL_BASE_FLAGS:=-mcpu=arm7tdmi -mtune=arm7tdmi \\
 	-I$(DEVKITPRO)/libgba/include -nostartfiles \\
-	-fno-rtti -ffast-math $(OPTIMIZATION_LEVEL) \\
+	-fno-rtti -ffast-math -fno-threadsafe-statics $(OPTIMIZATION_LEVEL) \\
 	$(EXTRA_DEBUG_FLAGS)
 
 

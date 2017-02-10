@@ -133,7 +133,7 @@ void waffle_sprite::block_coll_response_right_16x16_old
 
 
 void waffle_sprite::block_coll_response_left_16x16
-	( const block_coll_result_rect_group& the_bcr_rect_group )
+	( const bcr_lseg_group& the_bcr_lseg_grp )
 {
 	s32& move_timer = misc_data_s[sdi_move_timer];
 	
@@ -142,7 +142,7 @@ void waffle_sprite::block_coll_response_left_16x16
 	////	- cb_pos_offset.x;
 	//set_curr_in_level_pos_x( make_f24p8( ( lt_coll_result.coord.x + 1 ) 
 	//	* 16 ) - cb_pos_offset.x );
-	push_out_of_left_block(the_bcr_rect_group);
+	push_out_of_left_block(the_bcr_lseg_grp);
 	
 	move_timer = move_timer_start;
 	
@@ -150,7 +150,7 @@ void waffle_sprite::block_coll_response_left_16x16
 }
 
 void waffle_sprite::block_coll_response_right_16x16
-	( const block_coll_result_rect_group& the_bcr_rect_group )
+	( const bcr_lseg_group& the_bcr_lseg_grp )
 {
 	s32& move_timer = misc_data_s[sdi_move_timer];
 	
@@ -159,7 +159,7 @@ void waffle_sprite::block_coll_response_right_16x16
 	////	//- make_f24p8(get_shape_size_as_vec2().x);
 	//set_curr_in_level_pos_x( make_f24p8( rt_coll_result.coord.x * 16 )
 	//	- the_coll_box.size.x - cb_pos_offset.x );
-	push_out_of_right_block(the_bcr_rect_group);
+	push_out_of_right_block(the_bcr_lseg_grp);
 	
 	
 	move_timer = move_timer_start;
