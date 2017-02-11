@@ -28,6 +28,7 @@
 
 class sprite_allocator;
 
+extern const size_t clseg_grp_16x32_size;
 
 // Not all of these parameters are used by every type of sprite
 class sprite_const_params

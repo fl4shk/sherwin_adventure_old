@@ -576,6 +576,8 @@ void sprite::sprite_interaction_reponse( sprite& the_other_sprite,
 }
 
 //coll_lseg_group_16x32 clseg_grp __attribute__((_ewram));
+const size_t clseg_grp_16x32_size = sizeof(coll_lseg_group_16x32);
+
 
 void sprite::block_collision_stuff_16x16()
 {
@@ -590,28 +592,36 @@ void sprite::block_collision_stuff_16x32()
 	coll_lseg_group_16x32 clseg_grp;
 	
 	set_curr_on_ground(true);
+	vel.y = (fixed24p8){0};
 	clseg_grp.init( the_coll_box, get_curr_on_ground() );
 	
 	if ( get_curr_on_ground() )
 	{
-		if ( bbvt_is_fully_solid(clseg_grp.get_horiz_bcrlg_left_top_og()
+		if ( ( bbvt_is_fully_solid(clseg_grp.get_horiz_bcrlg_left_top_og()
 			.horiz_left().get_bbvt())
 			|| bbvt_is_fully_solid(clseg_grp.get_horiz_bcrlg_left_bot_og()
 			.horiz_left().get_bbvt()) )
+			&& !( bbvt_is_fully_solid(clseg_grp
+			.get_horiz_bcrlg_right_top_og().horiz_right().get_bbvt())
+			|| bbvt_is_fully_solid(clseg_grp
+			.get_horiz_bcrlg_right_bot_og().horiz_right().get_bbvt()) ) )
 		{
-			debug_arr_group::write_str_and_inc("left side solid");
 			block_coll_response_left_16x32(clseg_grp
 				.get_horiz_bcrlg_left_top_og());
 		}
 		
-		//if ( bbvt_is_fully_solid(clseg_grp.get_horiz_bcrlg_right_top_og()
-		//	.horiz_right().get_bbvt())
-		//	|| bbvt_is_fully_solid(clseg_grp.get_horiz_bcrlg_right_bot_og()
-		//	.horiz_right().get_bbvt()) )
-		//{
-		//	block_coll_response_right_16x32(clseg_grp
-		//		.get_horiz_bcrlg_right_top_og());
-		//}
+		else if ( !( bbvt_is_fully_solid(clseg_grp
+			.get_horiz_bcrlg_left_top_og().horiz_left().get_bbvt())
+			|| bbvt_is_fully_solid(clseg_grp.get_horiz_bcrlg_left_bot_og()
+			.horiz_left().get_bbvt()) )
+			&& ( bbvt_is_fully_solid(clseg_grp
+			.get_horiz_bcrlg_right_top_og().horiz_right().get_bbvt())
+			|| bbvt_is_fully_solid(clseg_grp
+			.get_horiz_bcrlg_right_bot_og().horiz_right().get_bbvt()) ) )
+		{
+			block_coll_response_right_16x32(clseg_grp
+				.get_horiz_bcrlg_right_top_og());
+		}
 		
 	}
 	else // if ( !get_curr_on_ground() )

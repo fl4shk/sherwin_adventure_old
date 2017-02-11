@@ -114,7 +114,6 @@ void game_manager::vblank_func()
 				::copy_sublevel_from_array_2d_helper_to_vram();
 			sprite_manager::upload_tiles_of_active_sprites_to_vram();
 			
-			hud_manager::update_hud_in_screenblock_mirror_2d();
 			hud_manager::copy_hud_from_array_2d_helper_to_vram();
 			break;
 		
@@ -283,6 +282,8 @@ void game_manager::reinit_the_game()
 	bios_wait_for_vblank();
 	
 	gfx_manager::fade_out_to_white(1);
+	hud_manager::update_hud_in_screenblock_mirror_2d();
+	hud_manager::copy_hud_from_array_2d_helper_to_vram();
 	
 	// Disable forced blank
 	clear_bits( reg_dispcnt, dcnt_blank_mask );

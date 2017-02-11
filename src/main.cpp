@@ -44,6 +44,7 @@
 
 #include "game_engine_stuff/halt_stuff.hpp"
 #include "game_engine_stuff/coll_lseg_classes.hpp"
+#include "game_engine_stuff/hud_manager_class.hpp"
 
 
 // This is an assembly function.  It doesn't do very much.
@@ -59,18 +60,27 @@ static const u32 test_str_size = ( sizeof(test_str) / sizeof(char) ) - 1;
 //static const size_t sram_test_arr_size = 2000;
 //u8 sram_test_arr[sram_test_arr_size] __attribute__((_sram));
 
+extern const size_t clseg_grp_16x32_size;
+volatile size_t very_temp;
+static constexpr size_t test_buf_size = 20;
+char test_buf[test_buf_size];
 
-int second_main();
+int main_2();
 int real_main();
+
 
 int main()
 {
-	//return second_main();
+	//setlocale( LC_ALL, "" );
+	//very_temp = clseg_grp_16x32_size;
+	//return main_2();
 	return real_main();
+	//snprintf( test_buf, test_buf_size, "%s", "asdf" );
+	
 }
 
 //volatile u32 very_temp;
-int second_main()
+int main_2()
 {
 	//profile_dynamic_allocations(20);
 	
@@ -233,6 +243,7 @@ int real_main()
 		//	test_level.get_size_2d() );
 		active_level_manager::update_sublevel_in_screenblock_mirror_2d();
 		
+		hud_manager::update_hud_in_screenblock_mirror_2d();
 		bios_wait_for_vblank();
 		//game_manager::vblank_func();
 		

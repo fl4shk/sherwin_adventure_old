@@ -98,7 +98,7 @@ void hud_manager::plot_char_8x8_to_screenblock_mirror( u32 the_char,
 	
 	bg1_screenblock_mirror_2d.at( pos_x, pos_y )
 		= ( gfx_manager::hud_vram_as_tiles_start_offset
-		+ ( char_to_plottable_char_arr[(char)the_char] - ' ' ) )
+		+ ( char_to_plottable_char_arr[ the_char & 0x7f ] - ' ' ) )
 		| se_palbank(bgps_in_level_hud);
 }
 
@@ -126,11 +126,11 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 	}
 	
 	
-	const u32 player_hp_str_max_size = 5;
-	char player_hp_str[player_hp_str_max_size];
-	u32 player_hp_str_curr_size = 0;
+	//u32 player_hp_str_curr_size = 0;
 	
-	char temp_buf[player_hp_str_max_size];
+	//char temp_buf[player_hp_str_max_size];
+	static constexpr u32 player_hp_str_max_size = 5;
+	char player_hp_str[player_hp_str_max_size];
 	
 	for ( u32 i=0; i<player_hp_str_max_size; ++i )
 	{
@@ -142,28 +142,30 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 		? 0 : player_sprite::remaining_hp;
 	//s32 to_convert = 10;
 	
-	for (;;)
-	{
-		for ( u32 i=0; i<player_hp_str_max_size; ++i )
-		{
-			temp_buf[i] = '\0';
-		}
-		
-		u32 rem = to_convert % 10;
-		to_convert /= 10;
-		//player_hp_str = (char)( '0' + rem ) + player_hp_str;
-		
-		temp_buf[0] = (char)( '0' + rem );
-		strcat( temp_buf, player_hp_str ); 
-		strcpy( player_hp_str, temp_buf );
-		
-		++player_hp_str_curr_size;
-		
-		if ( to_convert == 0 )
-		{
-			break;
-		}
-	}
+	//for (;;)
+	//{
+	//	for ( u32 i=0; i<player_hp_str_max_size; ++i )
+	//	{
+	//		temp_buf[i] = '\0';
+	//	}
+	//	
+	//	u32 rem = to_convert % 10;
+	//	to_convert /= 10;
+	//	//player_hp_str = (char)( '0' + rem ) + player_hp_str;
+	//	
+	//	temp_buf[0] = (char)( '0' + rem );
+	//	strcat( temp_buf, player_hp_str ); 
+	//	strcpy( player_hp_str, temp_buf );
+	//	
+	//	++player_hp_str_curr_size;
+	//	
+	//	if ( to_convert == 0 )
+	//	{
+	//		break;
+	//	}
+	//}
+	snprintf( player_hp_str, player_hp_str_max_size, "%i", to_convert );
+	
 	
 	//for ( u32 i=0; i<player_hp_str_curr_size; ++i )
 	for ( u32 i=0; i<player_hp_str_max_size; ++i )

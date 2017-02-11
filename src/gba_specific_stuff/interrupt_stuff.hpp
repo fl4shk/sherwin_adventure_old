@@ -132,7 +132,7 @@ extern "C"
 
 void irq_init();
 
-void irq_dummy();
+void irq_dummy() __attribute__((_iwram_code));
 
 
 void isr_main() __attribute__((_iwram_code,_target_arm));

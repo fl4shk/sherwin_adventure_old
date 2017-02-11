@@ -51,7 +51,8 @@ public:		// functions
 	static void plot_char_8x8_to_screenblock_mirror( u32 the_char,
 		u32 pos_x, u32 pos_y ) __attribute__((_iwram_code, __noinline__));
 	
-	static void update_hud_in_screenblock_mirror_2d();
+	
+	static void update_hud_in_screenblock_mirror_2d()
 		__attribute__((_iwram_code,_target_arm));
 	
 	static void copy_hud_from_array_2d_helper_to_vram();
