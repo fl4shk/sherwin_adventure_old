@@ -101,12 +101,12 @@ const fixed24p8 coll_lseg_group_16x32::offset_x_for_right_vs
 const fixed24p8 coll_lseg_group_16x32::vs_height_og
 	= make_f24p8(num_pixels_per_block_dim);
 const fixed24p8 coll_lseg_group_16x32::vs_height_ia
-	= make_f24p8(1);
+	= make_f24p8(2);
 
 const fixed24p8 coll_lseg_group_16x32::offset_y_for_top_vs_ia
-	= make_f24p8(1);
+	= make_f24p8(3);
 const fixed24p8 coll_lseg_group_16x32::offset_y_for_bot_vs
-	= make_f24p8(-1);
+	= make_f24p8(-3);
 
 
 coll_lseg_group_16x32::coll_lseg_group_16x32( const coll_box& s_coll_box,

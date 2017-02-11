@@ -636,38 +636,41 @@ protected:		// functions
 		( const bcr_lseg_group& the_bcr_lseg_grp )
 	{
 		set_curr_in_level_pos_x( make_f24p8
-			( ( the_bcr_lseg_grp.horiz_left_pos() + 1 ) 
-			* num_pixels_per_block_dim ) - cb_pos_offset.x );
+			( conv_pix_crd_to_blk_crd( the_bcr_lseg_grp.horiz_left_pos() 
+			+ 1 ) ) - cb_pos_offset.x );
 	}
 	inline void push_out_of_right_block
 		( const bcr_lseg_group& the_bcr_lseg_grp )
 	{
 		set_curr_in_level_pos_x( make_f24p8
-			( the_bcr_lseg_grp.horiz_right_pos()
-			* num_pixels_per_block_dim ) - the_coll_box.size.x 
-			- cb_pos_offset.x );
+			( conv_pix_crd_to_blk_crd(the_bcr_lseg_grp.horiz_right_pos()) )
+			- the_coll_box.size.x - cb_pos_offset.x );
 	}
 	inline void push_out_of_top_block
 		( const bcr_lseg_group& the_bcr_lseg_grp )
 	{
 		set_curr_in_level_pos_y( make_f24p8
-			( ( the_bcr_lseg_grp.vert_top_pos() + 1 ) 
-			* num_pixels_per_block_dim ) - cb_pos_offset.y );
+			( conv_pix_crd_to_blk_crd( the_bcr_lseg_grp.vert_top_pos() 
+			+ 1 ) ) - cb_pos_offset.y );
 	}
 	inline void push_out_of_bot_block
 		( const bcr_lseg_group& the_bcr_lseg_grp )
 	{
 		set_curr_in_level_pos_y( make_f24p8
-			( the_bcr_lseg_grp.vert_bot_pos() 
-			* num_pixels_per_block_dim ) 
+			( conv_pix_crd_to_blk_crd(the_bcr_lseg_grp.vert_bot_pos()) )
 			- make_f24p8(get_shape_size_as_vec2().y) );
+	}
+	inline s32 conv_slp_height_val_to_offset( s32 tallest_height_val )
+		const
+	{
+		return ( num_pixels_per_block_dim - tallest_height_val );
 	}
 	inline void push_out_of_bot_slope_block
 		( s32 tallest_height_val, const vec2_s32& pos )
 	{
 		set_curr_in_level_pos_y( make_f24p8
-			( ( pos.y * num_pixels_per_block_dim )
-			+ ( num_pixels_per_block_dim - tallest_height_val ) )
+			( ( conv_pix_crd_to_blk_crd(pos.y)
+			+ conv_slp_height_val_to_offset(tallest_height_val) ) )
 			- make_f24p8(get_shape_size_as_vec2().y) );
 	}
 	
@@ -677,6 +680,9 @@ protected:		// functions
 		__attribute__((_iwram_code,_target_arm));
 	virtual void block_collision_stuff_16x32() 
 		__attribute__((_iwram_code,_target_arm));
+	
+	// block_collision_stuff_32x16() will likely never be used because it's
+	// less believable for one of those to not rotate when on a slope
 	virtual void block_collision_stuff_32x16();
 	virtual void block_collision_stuff_32x32()
 		__attribute__((_iwram_code,_target_arm));
