@@ -240,9 +240,9 @@ protected:		// enums
 	enum horiz_index
 	{
 		hi_left_top,
-		hi_right_top,
-		
 		hi_left_bot,
+		
+		hi_right_top,
 		hi_right_bot,
 		
 		
@@ -264,13 +264,54 @@ protected:		// enums
 		lim_vi,
 	};
 	
+public:		// classes
+	class horiz_coll_tuple
+	{
+	public:		// variables
+		bcr_lseg_group bcrlg;
+		horiz_coll_lseg clseg;
+	} __attribute__((_align4));
+	
+	
+	class vert_coll_tuple
+	{
+	public:		// variables
+		bcr_lseg_group bcrlg;
+		vert_coll_lseg clseg;
+	} __attribute__((_align4));
+	
+public:		// constants
+	static constexpr u32 the_hi_left_top_og = hi_left_top;
+	static constexpr u32 the_hi_left_bot_og = hi_left_bot;
+	static constexpr u32 the_hi_right_top_og = hi_right_top;
+	static constexpr u32 the_hi_right_bot_og = hi_right_bot;
+	
+	static constexpr u32 the_vi_bot_left_og = vi_bot_left;
+	static constexpr u32 the_vi_bot_mid_og = vi_bot_mid;
+	static constexpr u32 the_vi_bot_right_og = vi_bot_right;
+	
+	
+	static constexpr u32 the_hi_left_top_ia = hi_left_top;
+	static constexpr u32 the_hi_left_mid_ia = hi_left_bot;
+	static constexpr u32 the_hi_right_top_ia = hi_right_top;
+	static constexpr u32 the_hi_right_mid_ia = hi_right_bot;
+	
+	static constexpr u32 the_vi_top_left_ia = vi_top_left;
+	static constexpr u32 the_vi_top_right_ia = vi_top_right;
+	static constexpr u32 the_vi_bot_left_ia = vi_bot_left;
+	static constexpr u32 the_vi_bot_mid_ia = vi_bot_mid;
+	static constexpr u32 the_vi_bot_right_ia = vi_bot_right;
+	
+	static constexpr size_t num_horiz_ctups = lim_hi,
+		num_vert_ctups = lim_vi;
+	
 protected:		// variables and constants
-	static constexpr size_t internal_num_horiz_lsegs = lim_hi,
-		internal_num_vert_lsegs = lim_vi;
-	bcr_lseg_group horiz_bcr_lseg_groups[internal_num_horiz_lsegs];
-	bcr_lseg_group vert_bcr_lseg_groups[internal_num_vert_lsegs];
-	horiz_coll_lseg horiz_clseg_groups[internal_num_horiz_lsegs];
-	vert_coll_lseg vert_clseg_groups[internal_num_vert_lsegs];
+	//bcr_lseg_group horiz_bcr_lseg_groups[num_horiz_ctups];
+	//bcr_lseg_group vert_bcr_lseg_groups[num_vert_ctups];
+	//horiz_coll_lseg horiz_clseg_groups[num_horiz_ctups];
+	//vert_coll_lseg vert_clseg_groups[num_vert_ctups];
+	horiz_coll_tuple horiz_ctups[num_horiz_ctups];
+	vert_coll_tuple vert_ctups[num_vert_ctups];
 	
 	u32 internal_on_ground = false;
 	
@@ -287,7 +328,6 @@ protected:		// variables and constants
 	static const fixed24p8 offset_y_for_top_vs_ia;
 	static const fixed24p8 offset_y_for_bot_vs;
 	
-	
 public:		// functions
 	inline coll_lseg_group_16x32()
 	{
@@ -295,158 +335,22 @@ public:		// functions
 	coll_lseg_group_16x32( const coll_box& s_coll_box, u32 s_on_ground );
 	void init( const coll_box& s_coll_box, u32 s_on_ground );
 	
+	
 	inline const u32 get_on_ground() const
 	{
 		return internal_on_ground;
 	}
 	
 	// horizontal bcr_lseg_group getters (on ground)
-	inline const bcr_lseg_group& get_horiz_bcrlg_left_top_og() const
+	inline const horiz_coll_tuple& get_horiz_ctup( u32 index ) const
 	{
-		return horiz_bcr_lseg_groups[hi_left_top];
+		return horiz_ctups[index];
 	}
-	inline const bcr_lseg_group& get_horiz_bcrlg_right_top_og() const
+	inline const vert_coll_tuple& get_vert_ctup( u32 index ) const
 	{
-		return horiz_bcr_lseg_groups[hi_right_top];
-	}
-	inline const bcr_lseg_group& get_horiz_bcrlg_left_bot_og() const
-	{
-		return horiz_bcr_lseg_groups[hi_left_bot];
-	}
-	inline const bcr_lseg_group& get_horiz_bcrlg_right_bot_og() const
-	{
-		return horiz_bcr_lseg_groups[hi_right_bot];
+		return vert_ctups[index];
 	}
 	
-	// vertical bcr_lseg_group getters (on ground)
-	inline const bcr_lseg_group& get_vert_bcrlg_bot_left_og() const
-	{
-		return vert_bcr_lseg_groups[vi_bot_left];
-	}
-	inline const bcr_lseg_group& get_vert_bcrlg_bot_mid_og() const
-	{
-		return vert_bcr_lseg_groups[vi_bot_mid];
-	}
-	inline const bcr_lseg_group& get_vert_bcrlg_bot_right_og() const
-	{
-		return vert_bcr_lseg_groups[vi_bot_right];
-	}
-	
-	// horizontal bcr_lseg_group getters (in air)
-	inline const bcr_lseg_group& get_horiz_bcrlg_left_top_ia() const
-	{
-		return horiz_bcr_lseg_groups[hi_left_top];
-	}
-	inline const bcr_lseg_group& get_horiz_bcrlg_right_top_ia() const
-	{
-		return horiz_bcr_lseg_groups[hi_right_top];
-	}
-	inline const bcr_lseg_group& get_horiz_bcrlg_left_mid_ia() const
-	{
-		return horiz_bcr_lseg_groups[hi_left_bot];
-	}
-	inline const bcr_lseg_group& get_horiz_bcrlg_right_mid_ia() const
-	{
-		return horiz_bcr_lseg_groups[hi_right_bot];
-	}
-	
-	// vertical bcr_lseg_group getters (in air)
-	inline const bcr_lseg_group& get_vert_bcrlg_top_left_ia() const
-	{
-		return vert_bcr_lseg_groups[vi_top_left];
-	}
-	inline const bcr_lseg_group& get_vert_bcrlg_top_right_ia() const
-	{
-		return vert_bcr_lseg_groups[vi_top_right];
-	}
-	inline const bcr_lseg_group& get_vert_bcrlg_bot_left_ia() const
-	{
-		return vert_bcr_lseg_groups[vi_bot_left];
-	}
-	inline const bcr_lseg_group& get_vert_bcrlg_bot_mid_ia() const
-	{
-		return vert_bcr_lseg_groups[vi_bot_mid];
-	}
-	inline const bcr_lseg_group& get_vert_bcrlg_bot_right_ia() const
-	{
-		return vert_bcr_lseg_groups[vi_bot_right];
-	}
-	
-	
-	
-	// horiz_coll_lseg getters (on ground)
-	inline const horiz_coll_lseg& get_horiz_clg_left_top_og() const
-	{
-		return horiz_clseg_groups[hi_left_top];
-	}
-	inline const horiz_coll_lseg& get_horiz_clg_right_top_og() const
-	{
-		return horiz_clseg_groups[hi_right_top];
-	}
-	inline const horiz_coll_lseg& get_horiz_clg_left_bot_og() const
-	{
-		return horiz_clseg_groups[hi_left_bot];
-	}
-	inline const horiz_coll_lseg& get_horiz_clg_right_bot_og() const
-	{
-		return horiz_clseg_groups[hi_right_bot];
-	}
-	
-	
-	// vert_coll_lseg getters (on ground)
-	inline const vert_coll_lseg& get_vert_clg_bot_left_og() const
-	{
-		return vert_clseg_groups[vi_bot_left];
-	}
-	inline const vert_coll_lseg& get_vert_clg_bot_mid_og() const
-	{
-		return vert_clseg_groups[vi_bot_mid];
-	}
-	inline const vert_coll_lseg& get_vert_clg_bot_right_og() const
-	{
-		return vert_clseg_groups[vi_bot_right];
-	}
-	
-	
-	// horiz_coll_lseg getters (in air)
-	inline const horiz_coll_lseg& get_horiz_clg_left_top_ia() const
-	{
-		return horiz_clseg_groups[hi_left_top];
-	}
-	inline const horiz_coll_lseg& get_horiz_clg_right_top_ia() const
-	{
-		return horiz_clseg_groups[hi_right_top];
-	}
-	inline const horiz_coll_lseg& get_horiz_clg_left_mid_ia() const
-	{
-		return horiz_clseg_groups[hi_left_bot];
-	}
-	inline const horiz_coll_lseg& get_horiz_clg_right_mid_ia() const
-	{
-		return horiz_clseg_groups[hi_right_bot];
-	}
-	
-	// vert_coll_lseg getters (in air)
-	inline const vert_coll_lseg& get_vert_clg_top_left_ia() const
-	{
-		return vert_clseg_groups[vi_top_left];
-	}
-	inline const vert_coll_lseg& get_vert_clg_top_right_ia() const
-	{
-		return vert_clseg_groups[vi_top_right];
-	}
-	inline const vert_coll_lseg& get_vert_clg_bot_left_ia() const
-	{
-		return vert_clseg_groups[vi_bot_left];
-	}
-	inline const vert_coll_lseg& get_vert_clg_bot_mid_ia() const
-	{
-		return vert_clseg_groups[vi_bot_mid];
-	}
-	inline const vert_coll_lseg& get_vert_clg_bot_right_ia() const
-	{
-		return vert_clseg_groups[vi_bot_right];
-	}
 	
 	
 protected:		// functions
@@ -459,12 +363,12 @@ protected:		// functions
 		( const coll_box& s_coll_box );
 	
 	static const horiz_coll_lseg get_left_top_hs_og
-		( const coll_box& s_coll_box ) ;
+		( const coll_box& s_coll_box );
 	static const horiz_coll_lseg get_right_top_hs_og
 		( const coll_box& s_coll_box );
 	
 	static const horiz_coll_lseg get_left_bot_hs_og
-		( const coll_box& s_coll_box ) ;
+		( const coll_box& s_coll_box );
 	static const horiz_coll_lseg get_right_bot_hs_og
 		( const coll_box& s_coll_box );
 	

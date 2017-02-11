@@ -118,9 +118,9 @@ public:		// functions
 	//static void vblank_func();
 	
 	//static void title_screen_func() __attribute__((__noinline__));
-	static void title_screen_func();
+	static void title_screen_func() __attribute__((_iwram_code));
 	
-	static void reinit_the_game();
+	static void reinit_the_game() __attribute__((_iwram_code));
 	
 	
 	

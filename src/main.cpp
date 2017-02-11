@@ -71,7 +71,6 @@ int real_main();
 
 int main()
 {
-	//setlocale( LC_ALL, "" );
 	//very_temp = clseg_grp_16x32_size;
 	//return main_2();
 	return real_main();
@@ -248,6 +247,7 @@ int real_main()
 		//game_manager::vblank_func();
 		
 	}
+	
 	
 	
 	return 0;

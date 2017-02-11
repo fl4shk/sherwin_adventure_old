@@ -589,48 +589,100 @@ void sprite::block_collision_stuff_16x32()
 	//	get_curr_on_ground() ) __attribute__((_ewram));
 	//static coll_lseg_group_16x32 clseg_grp __attribute__((_ewram));
 	
-	coll_lseg_group_16x32 clseg_grp;
+	//coll_lseg_group_16x32 clseg_grp;
+	//
+	//set_curr_on_ground(true);
+	//vel.y = (fixed24p8){0};
+	//clseg_grp.init( the_coll_box, get_curr_on_ground() );
 	
-	set_curr_on_ground(true);
-	vel.y = (fixed24p8){0};
-	clseg_grp.init( the_coll_box, get_curr_on_ground() );
-	
-	if ( get_curr_on_ground() )
-	{
-		if ( ( bbvt_is_fully_solid(clseg_grp.get_horiz_bcrlg_left_top_og()
-			.horiz_left().get_bbvt())
-			|| bbvt_is_fully_solid(clseg_grp.get_horiz_bcrlg_left_bot_og()
-			.horiz_left().get_bbvt()) )
-			&& !( bbvt_is_fully_solid(clseg_grp
-			.get_horiz_bcrlg_right_top_og().horiz_right().get_bbvt())
-			|| bbvt_is_fully_solid(clseg_grp
-			.get_horiz_bcrlg_right_bot_og().horiz_right().get_bbvt()) ) )
-		{
-			block_coll_response_left_16x32(clseg_grp
-				.get_horiz_bcrlg_left_top_og());
-		}
-		
-		else if ( !( bbvt_is_fully_solid(clseg_grp
-			.get_horiz_bcrlg_left_top_og().horiz_left().get_bbvt())
-			|| bbvt_is_fully_solid(clseg_grp.get_horiz_bcrlg_left_bot_og()
-			.horiz_left().get_bbvt()) )
-			&& ( bbvt_is_fully_solid(clseg_grp
-			.get_horiz_bcrlg_right_top_og().horiz_right().get_bbvt())
-			|| bbvt_is_fully_solid(clseg_grp
-			.get_horiz_bcrlg_right_bot_og().horiz_right().get_bbvt()) ) )
-		{
-			block_coll_response_right_16x32(clseg_grp
-				.get_horiz_bcrlg_right_top_og());
-		}
-		
-	}
-	else // if ( !get_curr_on_ground() )
-	{
-		
-	}
-	
-	////vel.x.data += clg_16x32_size;
-	//vel += clseg_grp.horiz_clseg_groups[clseg_grp.hi_left_top].left_pt();
+	//const block_coll_result* horiz_fs_buf[clseg_grp.num_horiz_ctups];
+	//
+	//const block_coll_result* vert_fs_buf[clseg_grp.num_vert_ctups];
+	//const block_coll_result* vert_slp_buf[clseg_grp.num_vert_ctups];
+	//
+	//if ( get_curr_on_ground() )
+	//{
+	//	bool left_side_fully_solid_og = false, 
+	//		right_side_fully_solid_og = false,
+	//		bot_side_fully_solid_og = false,
+	//		bot_side_slope_og = false;
+	//	
+	//	s32 i = clseg_grp.the_hi_right_bot_og;
+	//	
+	//	for ( ; i>=clseg_grp.the_hi_right_top_og; --i )
+	//	{
+	//		horiz_fs_buf[i] = clseg_grp.get_horiz_ctup(i).bcrlg
+	//			.any_bbvt_is_fully_solid();
+	//		
+	//		if (horiz_fs_buf[i])
+	//		{
+	//			right_side_fully_solid_og = true;
+	//		}
+	//	}
+	//	
+	//	for ( ; i>=clseg_grp.the_hi_left_top_og; --i )
+	//	{
+	//		horiz_fs_buf[i] = clseg_grp.get_horiz_ctup(i).bcrlg
+	//			.any_bbvt_is_fully_solid();
+	//		
+	//		if (horiz_fs_buf[i])
+	//		{
+	//			left_side_fully_solid_og = true;
+	//		}
+	//	}
+	//	
+	//	for ( i=clseg_grp.the_vi_bot_right_og; 
+	//		i>=clseg_grp.the_vi_bot_left_og;
+	//		--i )
+	//	{
+	//		vert_fs_buf[i] = clseg_grp.get_vert_ctup(i).bcrlg
+	//			.any_bbvt_is_fully_solid();
+	//		vert_slp_buf[i] = clseg_grp.get_vert_ctup(i).bcrlg
+	//			.any_bbvt_is_slope();
+	//		
+	//		if (vert_fs_buf[i])
+	//		{
+	//			bot_side_fully_solid_og = true;
+	//		}
+	//		if (vert_slp_buf[i])
+	//		{
+	//			bot_side_slope_og = true;
+	//		}
+	//	}
+	//	
+	//	
+	//	
+	//	if ( left_side_fully_solid_og
+	//		&& !right_side_fully_solid_og )
+	//	{
+	//		block_coll_response_left_16x32(clseg_grp.get_horiz_ctup
+	//			(clseg_grp.the_hi_left_top_og).bcrlg);
+	//	}
+	//	
+	//	else if ( !left_side_fully_solid_og
+	//		&& right_side_fully_solid_og )
+	//	{
+	//		block_coll_response_right_16x32(clseg_grp.get_horiz_ctup
+	//			(clseg_grp.the_hi_right_top_og).bcrlg);
+	//	}
+	//	
+	//	if ( !bot_side_fully_solid_og
+	//		&& !get_curr_on_slope() )
+	//	{
+	//		set_curr_on_ground(false);
+	//	}
+	//	else if ( get_curr_on_slope() )
+	//	{
+	//		
+	//	}
+	//}
+	//else // if ( !get_curr_on_ground() )
+	//{
+	//	
+	//}
+	//
+	//////vel.x.data += clg_16x32_size;
+	////vel += clseg_grp.horiz_clseg_groups[clseg_grp.hi_left_top].left_pt();
 }
 void sprite::block_collision_stuff_32x16()
 {

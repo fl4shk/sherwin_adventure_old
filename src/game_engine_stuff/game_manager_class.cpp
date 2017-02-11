@@ -82,7 +82,10 @@ void game_manager::vblank_func()
 	if ( curr_game_mode != gm_title_screen 
 		&& curr_game_mode != gm_initializing_the_game )
 	{
-		mmFrame();
+		if (mmActive())
+		{
+			mmFrame();
+		}
 	}
 	
 	switch ( curr_game_mode )
@@ -106,7 +109,7 @@ void game_manager::vblank_func()
 		
 		// When in a sublevel.
 		case gm_in_sublevel:
-			//gfx_manager::copy_bgofs_mirror_to_registers();
+			gfx_manager::copy_bgofs_mirror_to_registers();
 			gfx_manager::upload_bg_tiles_to_vram();
 			copy_oam_mirror_to_oam();
 			
@@ -191,16 +194,13 @@ void game_manager::title_screen_func()
 		// Start the game if the Start button is hit
 		if ( key_hit(key_start) )
 		{
-			irqSet( irq_vblank, (u32)mmVBlank );
-			irqEnable(irq_vblank);
 			
-			// Don't call mmInitDefault more than once.  It uses malloc(),
-			// and it apparently MaxMOD doesn't ever call free().
-			mmInitDefault( (mm_addr)practice_17_bin, 8 );
-			mmSetVBlankHandler(reinterpret_cast<void*>(vblank_func));
 			
 			//irqSet( irq_vblank, (u32)vblank_func );
 			//irqEnable(irq_vblank);
+			
+			irqSet( irq_vblank, (u32)irq_dummy );
+			irqEnable(irq_vblank);
 			
 			reinit_the_game();
 			break;
@@ -275,21 +275,27 @@ void game_manager::reinit_the_game()
 	sprite_manager::next_oam_index = 0; 
 	active_level_manager::load_level(&test_level);
 	
-	// Also, start playing music when the game is started.
-	mmStart( MOD_PRACTICE_17, MM_PLAY_LOOP );
 	
-	// An extra bios_wait_for_vblank() so that 
-	bios_wait_for_vblank();
 	
 	gfx_manager::fade_out_to_white(1);
 	hud_manager::update_hud_in_screenblock_mirror_2d();
 	hud_manager::copy_hud_from_array_2d_helper_to_vram();
 	
+	irqSet( irq_vblank, (u32)mmVBlank );
+	irqEnable(irq_vblank);
+	// Don't call mmInitDefault more than once.  It uses malloc(),
+	// and it apparently MaxMOD doesn't ever call free().
+	mmInitDefault( (mm_addr)practice_17_bin, 8 );
+	mmSetVBlankHandler(reinterpret_cast<void*>(vblank_func));
+	// Also, start playing music when the game is started.
+	mmStart( MOD_PRACTICE_17, MM_PLAY_LOOP );
+	
+	//bios_wait_for_vblank();
 	// Disable forced blank
 	clear_bits( reg_dispcnt, dcnt_blank_mask );
 	
-	gfx_manager::fade_in(15);
 	
+	gfx_manager::fade_in(15);
 	bios_wait_for_vblank();
 	
 	//curr_game_mode = gm_in_sublevel;

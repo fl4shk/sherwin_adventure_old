@@ -337,6 +337,10 @@ public:		// functions
 	void init( const horiz_coll_lseg& the_coll_lseg );
 	void init( const vert_coll_lseg& the_coll_lseg );
 	
+	const block_coll_result* any_bbvt_is_fully_solid() const 
+		__attribute__((_iwram_code,_target_arm));
+	const block_coll_result* any_bbvt_is_slope() const 
+		__attribute__((_iwram_code,_target_arm));
 	
 	inline block_coll_result& operator () ( u32 index )
 	{
@@ -390,6 +394,7 @@ public:		// functions
 	{
 		return at(get_end_pos_offset());
 	}
+	
 	
 	
 	inline s32 get_real_size() const

@@ -130,7 +130,8 @@ void bcr_lseg_group::init( const horiz_coll_lseg& the_coll_lseg )
 	
 	init_bcr_arr_helper();
 	
-	for ( s32 i=0; i<get_real_size(); ++i )
+	//for ( s32 i=0; i<get_real_size(); ++i )
+	for ( s32 i=get_real_size()-1; i>=0; --i )
 	{
 		at(i) = block_coll_result( get_start_pos() + vec2_s32( i, 0 ) );
 	}
@@ -148,11 +149,40 @@ void bcr_lseg_group::init( const vert_coll_lseg& the_coll_lseg )
 	
 	init_bcr_arr_helper();
 	
-	for ( s32 i=0; i<get_real_size(); ++i )
+	//for ( s32 i=0; i<get_real_size(); ++i )
+	for ( s32 i=get_real_size()-1; i>=0; --i )
 	{
 		at(i) = block_coll_result( get_start_pos() + vec2_s32( 0, i ) );
 	}
 	
+}
+
+const block_coll_result* bcr_lseg_group::any_bbvt_is_fully_solid() 
+	const
+{
+	// Make the loop slightly speedier by iterating backwards
+	for ( s32 i=get_real_size()-1; i>=0; --i )
+	{
+		if ( bbvt_is_fully_solid(bcr_arr_helper[i].get_bbvt()) )
+		{
+			return &(bcr_arr_helper[i]);
+		}
+	}
+	
+	return NULL;
+}
+const block_coll_result* bcr_lseg_group::any_bbvt_is_slope() const
+{
+	// Make the loop slightly speedier by iterating backwards
+	for ( s32 i=get_real_size()-1; i>=0; --i )
+	{
+		if ( bbvt_is_slope(bcr_arr_helper[i].get_bbvt()) )
+		{
+			return &(bcr_arr_helper[i]);
+		}
+	}
+	
+	return NULL;
 }
 
 

@@ -122,36 +122,52 @@ void coll_lseg_group_16x32::init( const coll_box& s_coll_box,
 	
 	if ( get_on_ground() )
 	{
-		horiz_clseg_groups[hi_left_top] = get_left_top_hs_og(s_coll_box);
-		horiz_clseg_groups[hi_right_top] = get_right_top_hs_og(s_coll_box);
-		horiz_clseg_groups[hi_left_bot] = get_left_bot_hs_og(s_coll_box);
-		horiz_clseg_groups[hi_right_bot] = get_right_bot_hs_og(s_coll_box);
+		horiz_ctups[the_hi_left_top_og].clseg 
+			= get_left_top_hs_og(s_coll_box);
+		horiz_ctups[the_hi_left_bot_og].clseg 
+			= get_left_bot_hs_og(s_coll_box);
+		horiz_ctups[the_hi_right_top_og].clseg 
+			= get_right_top_hs_og(s_coll_box);
+		horiz_ctups[the_hi_right_bot_og].clseg 
+			= get_right_bot_hs_og(s_coll_box);
 		
-		vert_clseg_groups[vi_bot_left] = get_bot_left_vs_og(s_coll_box);
-		vert_clseg_groups[vi_bot_mid] = get_bot_mid_vs_og(s_coll_box);
-		vert_clseg_groups[vi_bot_right] = get_bot_right_vs_og(s_coll_box);
+		vert_ctups[the_vi_bot_left_og].clseg 
+			= get_bot_left_vs_og(s_coll_box);
+		vert_ctups[the_vi_bot_mid_og].clseg 
+			= get_bot_mid_vs_og(s_coll_box);
+		vert_ctups[the_vi_bot_right_og].clseg 
+			= get_bot_right_vs_og(s_coll_box);
 	}
 	else // if ( !get_on_ground() )
 	{
-		horiz_clseg_groups[hi_left_top] = get_left_top_hs_ia(s_coll_box);
-		horiz_clseg_groups[hi_right_top] = get_right_top_hs_ia(s_coll_box);
-		horiz_clseg_groups[hi_left_bot] = get_left_mid_hs_ia(s_coll_box);
-		horiz_clseg_groups[hi_right_bot] = get_right_mid_hs_ia(s_coll_box);
+		horiz_ctups[the_hi_left_top_ia].clseg 
+			= get_left_top_hs_ia(s_coll_box);
+		horiz_ctups[the_hi_left_mid_ia].clseg 
+			= get_left_mid_hs_ia(s_coll_box);
+		horiz_ctups[the_hi_right_top_ia].clseg 
+			= get_right_top_hs_ia(s_coll_box);
+		horiz_ctups[the_hi_right_mid_ia].clseg 
+			= get_right_mid_hs_ia(s_coll_box);
 		
-		vert_clseg_groups[vi_top_left] = get_top_left_vs_ia(s_coll_box);
-		vert_clseg_groups[vi_top_right] = get_top_right_vs_ia(s_coll_box);
-		vert_clseg_groups[vi_bot_left] = get_bot_left_vs_ia(s_coll_box);
-		vert_clseg_groups[vi_bot_mid] = get_bot_mid_vs_ia(s_coll_box);
-		vert_clseg_groups[vi_bot_right] = get_bot_right_vs_ia(s_coll_box);
+		vert_ctups[the_vi_top_left_ia].clseg 
+			= get_top_left_vs_ia(s_coll_box);
+		vert_ctups[the_vi_top_right_ia].clseg 
+			= get_top_right_vs_ia(s_coll_box);
+		vert_ctups[the_vi_bot_left_ia].clseg 
+			= get_bot_left_vs_ia(s_coll_box);
+		vert_ctups[the_vi_bot_mid_ia].clseg 
+			= get_bot_mid_vs_ia(s_coll_box);
+		vert_ctups[the_vi_bot_right_ia].clseg 
+			= get_bot_right_vs_ia(s_coll_box);
 	}
 	
-	for ( size_t i=0; i<internal_num_horiz_lsegs; ++i )
+	for ( size_t i=0; i<num_horiz_ctups; ++i )
 	{
-		horiz_bcr_lseg_groups[i].init(horiz_clseg_groups[i]);
+		horiz_ctups[i].bcrlg.init(horiz_ctups[i].clseg);
 	}
-	for ( size_t i=0; i<internal_num_vert_lsegs; ++i )
+	for ( size_t i=0; i<num_vert_ctups; ++i )
 	{
-		vert_bcr_lseg_groups[i].init(vert_clseg_groups[i]);
+		vert_ctups[i].bcrlg.init(vert_ctups[i].clseg);
 	}
 	
 	
@@ -175,7 +191,7 @@ const horiz_coll_lseg coll_lseg_group_16x32::get_left_top_hs_og
 {
 	return horiz_coll_lseg( vec2_f24p8( s_coll_box.left(), 
 		get_pos_y_for_top_hs_og(s_coll_box) ), 
-		s_coll_box.half_width() ) ;
+		s_coll_box.half_width() );
 }
 const horiz_coll_lseg coll_lseg_group_16x32::get_right_top_hs_og
 	( const coll_box& s_coll_box )

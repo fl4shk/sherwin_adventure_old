@@ -46,14 +46,18 @@ public:		// functions
 	// For some reason, NOT having these two functions marked as
 	// __noinline__ causes problems.
 	//static void plot_char_8x16_to_screenblock_mirror( u32 the_char, 
-	//	u32 pos_x, u32 pos_y ) __attribute__((_iwram_code, __noinline__));
+	//	u32 pos_x, u32 pos_y ) __attribute__((_iwram_code,__noinline__));
 	
 	static void plot_char_8x8_to_screenblock_mirror( u32 the_char,
-		u32 pos_x, u32 pos_y ) __attribute__((_iwram_code, __noinline__));
+		u32 pos_x, u32 pos_y ) __attribute__((_iwram_code,__noinline__));
+	
+	//static void plot_horiz_str_8x8_to_screenblock_mirror( const char* str,
+	//	u32 str_size, u32& plot_x, u32& plot_y )
+	//	__attribute__((_iwram_code));
 	
 	
 	static void update_hud_in_screenblock_mirror_2d()
-		__attribute__((_iwram_code,_target_arm));
+		__attribute__((_iwram_code));
 	
 	static void copy_hud_from_array_2d_helper_to_vram();
 	

@@ -300,47 +300,8 @@ public:		// functions
 	static void despawn_sprites_if_needed
 		( const bg_point& camera_pos ) __attribute__((_iwram_code));
 	
-	static inline void upload_tiles_of_active_sprites_to_vram()
-	{
-		// Clear the first 32x32-pixel VRAM chunk.  This prevents unused
-		// OAM indices from displaying any graphics.  Perhaps this should
-		// be optimized to use only a single 8x8-pixel VRAM chunk.
-		memfill32( &(((tile*)obj_tile_vram)[0]), 0, sizeof(tile)
-			* gfx_manager::num_tiles_in_ss_32x32 / sizeof(u32) );
-		
-		gfx_manager::upload_sprite_tiles_to_vram(*the_player);
-		
-		auto for_loop_contents = [&]( sprite* spr ) -> void
-		{
-			//// These two if statements probably accomplish the same goal,
-			//// which is why one of them is commented out
-			////if ( spr.get_vram_chunk_index() != 0 )
-			//if ( spr.the_sprite_type != st_default )
-			//{
-			//	gfx_manager::upload_sprite_tiles_to_vram(spr);
-			//}
-			
-			if ( spr != NULL && spr->the_sprite_type != st_default )
-			{
-				gfx_manager::upload_sprite_tiles_to_vram(*spr);
-			}
-		};
-		
-		for ( sprite* spr : sprite_manager::the_player_secondary_sprites )
-		{
-			for_loop_contents(spr);
-		}
-		
-		for ( sprite* spr : sprite_manager::the_sprites )
-		{
-			for_loop_contents(spr);
-		}
-		
-		for ( sprite* spr : sprite_manager::the_secondary_sprites )
-		{
-			for_loop_contents(spr);
-		}
-	}
+	static void upload_tiles_of_active_sprites_to_vram()
+		__attribute__((_iwram_code));
 	
 	// This function is one of the most intensive, so it is an ARM function
 	// that goes in IWRAM.
