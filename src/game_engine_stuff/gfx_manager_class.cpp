@@ -482,13 +482,13 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 			
 			clamped_rgb15_f24p8_component_add( curr_red, 
 				red_step_amount, (fixed24p8){ rgb15_component_max_val 
-				<< fixed24p8::shift } );
+				<< fixed24p8::get_shift() } );
 			clamped_rgb15_f24p8_component_add( curr_green, 
 				green_step_amount, (fixed24p8){ rgb15_component_max_val
-				<< fixed24p8::shift } );
+				<< fixed24p8::get_shift() } );
 			clamped_rgb15_f24p8_component_add( curr_blue, 
 				blue_step_amount, (fixed24p8){ rgb15_component_max_val
-				<< fixed24p8::shift } );
+				<< fixed24p8::get_shift() } );
 			
 			bg_pal_ram[j] = make_rgb15( curr_red.round_to_int(),
 				curr_green.round_to_int(),
@@ -511,13 +511,13 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 			
 			clamped_rgb15_f24p8_component_add( curr_red, 
 				red_step_amount, (fixed24p8){ rgb15_component_max_val
-				<< fixed24p8::shift } );
+				<< fixed24p8::get_shift() } );
 			clamped_rgb15_f24p8_component_add( curr_green, 
 				green_step_amount, (fixed24p8){ rgb15_component_max_val
-				<< fixed24p8::shift } );
+				<< fixed24p8::get_shift() } );
 			clamped_rgb15_f24p8_component_add( curr_blue, 
 				blue_step_amount, (fixed24p8){ rgb15_component_max_val
-				<< fixed24p8::shift } );
+				<< fixed24p8::get_shift() } );
 			
 			obj_pal_ram[j] = make_rgb15( curr_red.round_to_int(),
 				curr_green.round_to_int(),
@@ -642,18 +642,18 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 			// Don't need make_f24p8() for these because color component
 			// values are guaranteed to be positive.
 			//fixed24p8 target_red = { (s32)rgb15_get_red_component
-			//	(the_block_gfxPal[j]) << fixed24p8::shift };
+			//	(the_block_gfxPal[j]) << fixed24p8::get_shift() };
 			//fixed24p8 target_green = { (s32)rgb15_get_green_component
-			//	(the_block_gfxPal[j]) << fixed24p8::shift };
+			//	(the_block_gfxPal[j]) << fixed24p8::get_shift() };
 			//fixed24p8 target_blue = { (s32)rgb15_get_blue_component
-			//	(the_block_gfxPal[j]) << fixed24p8::shift };
+			//	(the_block_gfxPal[j]) << fixed24p8::get_shift() };
 			
 			fixed24p8 target_red = { (s32)rgb15_get_red_component
-				(bg_pal_mirror[j]) << fixed24p8::shift };
+				(bg_pal_mirror[j]) << fixed24p8::get_shift() };
 			fixed24p8 target_green = { (s32)rgb15_get_green_component
-				(bg_pal_mirror[j]) << fixed24p8::shift };
+				(bg_pal_mirror[j]) << fixed24p8::get_shift() };
 			fixed24p8 target_blue = { (s32)rgb15_get_blue_component
-				(bg_pal_mirror[j]) << fixed24p8::shift };
+				(bg_pal_mirror[j]) << fixed24p8::get_shift() };
 			
 			clamped_rgb15_f24p8_component_add( curr_red, 
 				red_step_amount, target_red );
@@ -683,11 +683,11 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 				= obj_fade_blue_step_amount_arr[j];
 			
 			fixed24p8 target_red = { (s32)rgb15_get_red_component
-				(obj_pal_mirror[j]) << fixed24p8::shift };
+				(obj_pal_mirror[j]) << fixed24p8::get_shift() };
 			fixed24p8 target_green = { (s32)rgb15_get_green_component
-				(obj_pal_mirror[j]) << fixed24p8::shift };
+				(obj_pal_mirror[j]) << fixed24p8::get_shift() };
 			fixed24p8 target_blue = { (s32)rgb15_get_blue_component
-				(obj_pal_mirror[j]) << fixed24p8::shift };
+				(obj_pal_mirror[j]) << fixed24p8::get_shift() };
 			
 			clamped_rgb15_f24p8_component_add( curr_red, 
 				red_step_amount, target_red );

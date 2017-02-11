@@ -21,6 +21,38 @@
 
 const block_stuff_const_params block_base_stuff::the_const_params;
 
+const u32 * const block_base_stuff::height_mask_ptr_arr[lim_bbvt]
+	= { reinterpret_cast<const u32 * const>
+		(&(air_height_mask[0])), 
+	reinterpret_cast<const u32 * const>
+		(&(solid_height_mask[0])), 
+	reinterpret_cast<const u32 * const>
+		(&(slope_p16_p16_height_mask[0])),
+	reinterpret_cast<const u32 * const>
+		(&(slope_n16_p16_height_mask[0])), 
+	reinterpret_cast<const u32 * const>
+		(&(slope_p32_p16_short_height_mask[0])),
+	reinterpret_cast<const u32 * const>
+		(&(slope_p32_p16_tall_height_mask[0])), 
+	reinterpret_cast<const u32 * const>
+		(&(slope_n32_p16_tall_height_mask[0])),
+	reinterpret_cast<const u32 * const>
+		(&(slope_n32_p16_short_height_mask[0])) };
+
+const u32 block_base_stuff::air_height_mask[height_mask_size]
+	= { 0, 0, 0, 0, 
+		0, 0, 0, 0,
+		0, 0, 0, 0,
+		0, 0, 0, 0 };
+const u32 block_base_stuff::solid_height_mask[height_mask_size]
+	= { num_pixels_per_block_dim, num_pixels_per_block_dim, 
+		num_pixels_per_block_dim, num_pixels_per_block_dim, 
+		num_pixels_per_block_dim, num_pixels_per_block_dim, 
+		num_pixels_per_block_dim, num_pixels_per_block_dim,
+		num_pixels_per_block_dim, num_pixels_per_block_dim, 
+		num_pixels_per_block_dim, num_pixels_per_block_dim,
+		num_pixels_per_block_dim, num_pixels_per_block_dim, 
+		num_pixels_per_block_dim, num_pixels_per_block_dim };
 
 // Slope height masks
 

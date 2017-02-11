@@ -23,7 +23,7 @@
 // Graphics stuff
 
 const vec2_f24p8 door_sprite_stuff::the_initial_coll_box_size
-	= { {14 << fixed24p8::shift}, {32 << fixed24p8::shift} },
+	= { {14 << fixed24p8::get_shift()}, {32 << fixed24p8::get_shift()} },
 	door_sprite_stuff::the_initial_cb_pos_offset = { {1}, {0} };
 
 void door_sprite_stuff::init( sprite& the_door, bool facing_left )

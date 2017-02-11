@@ -109,9 +109,9 @@ void game_manager::vblank_func()
 		
 		// When in a sublevel.
 		case gm_in_sublevel:
+			copy_oam_mirror_to_oam();
 			gfx_manager::copy_bgofs_mirror_to_registers();
 			gfx_manager::upload_bg_tiles_to_vram();
-			copy_oam_mirror_to_oam();
 			
 			active_level_manager
 				::copy_sublevel_from_array_2d_helper_to_vram();

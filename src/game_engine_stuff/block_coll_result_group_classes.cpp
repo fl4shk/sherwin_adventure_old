@@ -133,7 +133,7 @@ void bcr_lseg_group::init( const horiz_coll_lseg& the_coll_lseg )
 	//for ( s32 i=0; i<get_real_size(); ++i )
 	for ( s32 i=get_real_size()-1; i>=0; --i )
 	{
-		at(i) = block_coll_result( get_start_pos() + vec2_s32( i, 0 ) );
+		at(i) = block_coll_result( get_start_pos() + get_horiz_offset(i) );
 	}
 	
 }
@@ -152,32 +152,46 @@ void bcr_lseg_group::init( const vert_coll_lseg& the_coll_lseg )
 	//for ( s32 i=0; i<get_real_size(); ++i )
 	for ( s32 i=get_real_size()-1; i>=0; --i )
 	{
-		at(i) = block_coll_result( get_start_pos() + vec2_s32( 0, i ) );
+		at(i) = block_coll_result( get_start_pos() + get_vert_offset(i) );
 	}
 	
 }
 
-const block_coll_result* bcr_lseg_group::any_bbvt_is_fully_solid() 
-	const
+block_coll_result* bcr_lseg_group::horiz_any_bbvt_is_fully_solid
+	( vec2_s32& pos )
 {
-	// Make the loop slightly speedier by iterating backwards
-	for ( s32 i=get_real_size()-1; i>=0; --i )
+	for ( s32 i=0; i<get_real_size(); ++i )
 	{
 		if ( bbvt_is_fully_solid(bcr_arr_helper[i].get_bbvt()) )
 		{
+			pos = get_start_pos() + get_horiz_offset(i);
 			return &(bcr_arr_helper[i]);
 		}
 	}
 	
 	return NULL;
 }
-const block_coll_result* bcr_lseg_group::any_bbvt_is_slope() const
+block_coll_result* bcr_lseg_group::vert_any_bbvt_is_fully_solid
+	( vec2_s32& pos )
 {
-	// Make the loop slightly speedier by iterating backwards
-	for ( s32 i=get_real_size()-1; i>=0; --i )
+	for ( s32 i=0; i<get_real_size(); ++i )
+	{
+		if ( bbvt_is_fully_solid(bcr_arr_helper[i].get_bbvt()) )
+		{
+			pos = get_start_pos() + get_vert_offset(i);
+			return &(bcr_arr_helper[i]);
+		}
+	}
+	
+	return NULL;
+}
+block_coll_result* bcr_lseg_group::vert_any_bbvt_is_slope( vec2_s32& pos )
+{
+	for ( s32 i=0; i<get_real_size(); ++i )
 	{
 		if ( bbvt_is_slope(bcr_arr_helper[i].get_bbvt()) )
 		{
+			pos = get_start_pos() + get_vert_offset(i);
 			return &(bcr_arr_helper[i]);
 		}
 	}

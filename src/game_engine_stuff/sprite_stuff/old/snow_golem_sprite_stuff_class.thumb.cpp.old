@@ -36,9 +36,9 @@ const snow_golem_sprite_stuff::frame
 
 // This needs to be better fit to snow golem enemies.
 const vec2_f24p8 snow_golem_sprite_stuff::the_initial_coll_box_size 
-	= { {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },
+	= { {12 << fixed24p8::get_shift() }, {29 << fixed24p8::get_shift() } },
 	snow_golem_sprite_stuff::the_initial_cb_pos_offset 
-	= { {2 << fixed24p8::shift }, {3 << fixed24p8::shift } };
+	= { {2 << fixed24p8::get_shift() }, {3 << fixed24p8::get_shift() } };
 
 
 void snow_golem_sprite_stuff::update_part_1( sprite& the_enemy )

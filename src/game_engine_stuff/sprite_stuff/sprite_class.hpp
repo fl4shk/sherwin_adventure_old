@@ -41,11 +41,11 @@ public:		// variables
 	tile* tile_arr = const_cast<tile*>(reinterpret_cast<const tile*>
 		(sherwin_gfxTiles));
 	oam_entry::shape_size the_initial_shape_size = oam_entry::ss_16x16;
-	vec2_f24p8 the_initial_coll_box_size = { {14 << fixed24p8::shift}, 
-		{14 << fixed24p8::shift} };
+	vec2_f24p8 the_initial_coll_box_size = { {14 << fixed24p8::get_shift()}, 
+		{14 << fixed24p8::get_shift()} };
 	
-	vec2_f24p8 the_initial_cb_pos_offset = { {1 << fixed24p8::shift}, 
-		{1 << fixed24p8::shift} };
+	vec2_f24p8 the_initial_cb_pos_offset = { {1 << fixed24p8::get_shift()}, 
+		{1 << fixed24p8::get_shift()} };
 	
 	
 	// This is used to correct the initial in-level position for sprites
@@ -55,7 +55,7 @@ public:		// variables
 	// sprite but uses 32x32 graphics in some cases, like during the
 	// pickaxe swing animation.
 	vec2_f24p8 the_initial_in_level_pos_offset
-		= { {0 << fixed24p8::shift}, {0 << fixed24p8::shift} };
+		= { {0 << fixed24p8::get_shift()}, {0 << fixed24p8::get_shift()} };
 } __attribute__((_align4));
 
 ////
@@ -210,6 +210,8 @@ public:		// variables
 	static vec2_s32 on_screen_pos_s32_diff_abs;
 	static vec2_f24p8 camera_pos_diff_abs;
 	static vec2_s32 camera_pos_s32_diff_abs;
+	
+	//static prev_curr_pair<s32> tallest_height_val;
 	
 public:		// functions
 	
@@ -612,6 +614,7 @@ protected:		// functions
 		( const bcr_lseg_group& the_bcr_lseg_grp );
 	virtual void block_coll_response_bot_16x16
 		( const bcr_lseg_group& the_bcr_lseg_grp );
+	//virtual void block_coll_response_bot_slope_16x16();
 	
 	
 	virtual void block_coll_response_left_16x32
@@ -622,6 +625,8 @@ protected:		// functions
 		( const bcr_lseg_group& the_bcr_lseg_grp );
 	virtual void block_coll_response_bot_16x32
 		( const bcr_lseg_group& the_bcr_lseg_grp );
+	virtual void block_coll_response_bot_slope_16x32
+		( s32 tallest_height_val, const vec2_s32& pos );
 	
 	
 	
@@ -657,13 +662,24 @@ protected:		// functions
 			* num_pixels_per_block_dim ) 
 			- make_f24p8(get_shape_size_as_vec2().y) );
 	}
+	inline void push_out_of_bot_slope_block
+		( s32 tallest_height_val, const vec2_s32& pos )
+	{
+		set_curr_in_level_pos_y( make_f24p8
+			( ( pos.y * num_pixels_per_block_dim )
+			+ ( num_pixels_per_block_dim - tallest_height_val ) )
+			- make_f24p8(get_shape_size_as_vec2().y) );
+	}
 	
 	
 	// Regular block collision stuff
-	virtual void block_collision_stuff_16x16();
-	virtual void block_collision_stuff_16x32();
+	virtual void block_collision_stuff_16x16()
+		__attribute__((_iwram_code,_target_arm));
+	virtual void block_collision_stuff_16x32() 
+		__attribute__((_iwram_code,_target_arm));
 	virtual void block_collision_stuff_32x16();
-	virtual void block_collision_stuff_32x32();
+	virtual void block_collision_stuff_32x32()
+		__attribute__((_iwram_code,_target_arm));
 	
 	// Block collision stuff with just strongly hit response 
 	//virtual void block_collision_stuff_strongly_hit_stuff_only_16x16();

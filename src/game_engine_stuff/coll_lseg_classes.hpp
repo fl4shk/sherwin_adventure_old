@@ -341,7 +341,6 @@ public:		// functions
 		return internal_on_ground;
 	}
 	
-	// horizontal bcr_lseg_group getters (on ground)
 	inline const horiz_coll_tuple& get_horiz_ctup( u32 index ) const
 	{
 		return horiz_ctups[index];
@@ -351,6 +350,14 @@ public:		// functions
 		return vert_ctups[index];
 	}
 	
+	inline horiz_coll_tuple& get_horiz_ctup( u32 index )
+	{
+		return horiz_ctups[index];
+	}
+	inline vert_coll_tuple& get_vert_ctup( u32 index )
+	{
+		return vert_ctups[index];
+	}
 	
 	
 protected:		// functions

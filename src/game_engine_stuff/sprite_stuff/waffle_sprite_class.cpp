@@ -67,13 +67,13 @@ void waffle_sprite::update_part_2()
 		// Facing left
 		if ( the_oam_entry.get_hflip_status() )
 		{
-			vel.x.data = -( 1 << fixed24p8::shift );
+			vel.x.data = -( 1 << fixed24p8::get_shift() );
 		}
 		
 		// Facing right
 		else
 		{
-			vel.x.data = 1 << fixed24p8::shift;
+			vel.x.data = 1 << fixed24p8::get_shift();
 		}
 		
 	}

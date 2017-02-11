@@ -23,7 +23,7 @@ fixed24p8 fixed24p8::operator * ( const fixed24p8& to_mul ) const
 	fixed24p8 ret;
 	
 	s64 ret_data_s64 = (s64)data * (s64)to_mul.data;
-	ret_data_s64 >>= fixed24p8::shift;
+	ret_data_s64 >>= fixed24p8::get_shift();
 	
 	ret.data = (s32)ret_data_s64;
 	

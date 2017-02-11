@@ -27,12 +27,12 @@ const oam_entry::shape_size sprite_base_stuff::the_initial_shape_size
 	= oam_entry::ss_16x16;
 
 const vec2_f24p8 sprite_base_stuff::the_initial_coll_box_size
-	= { {14 << fixed24p8::shift}, {14 << fixed24p8::shift} },
+	= { {14 << fixed24p8::get_shift()}, {14 << fixed24p8::get_shift()} },
 	sprite_base_stuff::the_initial_cb_pos_offset 
-	= { {1 << fixed24p8::shift}, {1 << fixed24p8::shift} };
+	= { {1 << fixed24p8::get_shift()}, {1 << fixed24p8::get_shift()} };
 
 const vec2_f24p8 sprite_base_stuff::the_initial_in_level_pos_offset
-	= { {0 << fixed24p8::shift}, {0 << fixed24p8::shift} };
+	= { {0 << fixed24p8::get_shift()}, {0 << fixed24p8::get_shift()} };
 
 void sprite_base_stuff::init( sprite& the_sprite, bool facing_left )
 {

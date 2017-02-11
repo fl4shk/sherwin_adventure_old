@@ -155,43 +155,43 @@ const sprite_const_params player_sprite::the_const_params
 	oam_entry::ss_16x32,
 	
 	// the_initial_coll_box_size
-	{ {11 << fixed24p8::shift }, {28 << fixed24p8::shift } },
+	{ {11 << fixed24p8::get_shift() }, {28 << fixed24p8::get_shift() } },
 	
 	// the_initial_cb_pos_offset
-	{ {2 << fixed24p8::shift }, {4 << fixed24p8::shift } },
+	{ {2 << fixed24p8::get_shift() }, {4 << fixed24p8::get_shift() } },
 	
 	// the_initial_in_level_pos_offset
-	{ {0 << fixed24p8::shift}, {0 << fixed24p8::shift} }
+	{ {0 << fixed24p8::get_shift()}, {0 << fixed24p8::get_shift()} }
 };
 
 
 ////const vec2_f24p8 player_sprite::the_initial_coll_box_size 
-////	= { {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },
+////	= { {12 << fixed24p8::get_shift() }, {29 << fixed24p8::get_shift() } },
 ////	player_sprite::the_initial_cb_pos_offset 
-////	= { {2 << fixed24p8::shift }, {3 << fixed24p8::shift } };
+////	= { {2 << fixed24p8::get_shift() }, {3 << fixed24p8::get_shift() } };
 ////const vec2_f24p8 player_sprite::the_initial_coll_box_size 
-////	= { {12 << fixed24p8::shift }, {27 << fixed24p8::shift } },
+////	= { {12 << fixed24p8::get_shift() }, {27 << fixed24p8::get_shift() } },
 ////	player_sprite::the_initial_cb_pos_offset 
-////	= { {2 << fixed24p8::shift }, {5 << fixed24p8::shift } };
+////	= { {2 << fixed24p8::get_shift() }, {5 << fixed24p8::get_shift() } };
 ////const vec2_f24p8 player_sprite::the_initial_coll_box_size 
-////	= { {12 << fixed24p8::shift }, {28 << fixed24p8::shift } },
+////	= { {12 << fixed24p8::get_shift() }, {28 << fixed24p8::get_shift() } },
 ////	player_sprite::the_initial_cb_pos_offset 
-////	= { {2 << fixed24p8::shift }, {4 << fixed24p8::shift } };
+////	= { {2 << fixed24p8::get_shift() }, {4 << fixed24p8::get_shift() } };
 //const vec2_f24p8 player_sprite::the_initial_coll_box_size 
-//	= { {11 << fixed24p8::shift }, {28 << fixed24p8::shift } },
+//	= { {11 << fixed24p8::get_shift() }, {28 << fixed24p8::get_shift() } },
 //	player_sprite::the_initial_cb_pos_offset 
-//	= { {2 << fixed24p8::shift }, {4 << fixed24p8::shift } };
+//	= { {2 << fixed24p8::get_shift() }, {4 << fixed24p8::get_shift() } };
 //
 //const vec2_f24p8 player_sprite::the_initial_in_level_pos_offset
-//	= { {0 << fixed24p8::shift}, {0 << fixed24p8::shift} };
+//	= { {0 << fixed24p8::get_shift()}, {0 << fixed24p8::get_shift()} };
 //
 ////const vec2_f24p8 player_sprite::the_initial_coll_box_size 
-////	= { {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },
+////	= { {12 << fixed24p8::get_shift() }, {29 << fixed24p8::get_shift() } },
 ////	player_sprite::the_initial_cb_pos_offset 
-////	= { {( 2 + 8 ) << fixed24p8::shift }, {3 << fixed24p8::shift } };
+////	= { {( 2 + 8 ) << fixed24p8::get_shift() }, {3 << fixed24p8::get_shift() } };
 ////
 ////const vec2_f24p8 player_sprite::the_initial_in_level_pos_offset
-////	= { {8 << fixed24p8::shift}, {0 << fixed24p8::shift} };
+////	= { {8 << fixed24p8::get_shift()}, {0 << fixed24p8::get_shift()} };
 
 player_sprite::player_sprite( const vec2_f24p8& s_in_level_pos, 
 	const vec2_u32& the_level_size_2d, 
@@ -241,14 +241,14 @@ void player_sprite::shared_constructor_code_part_3()
 	
 	// This is for slope testing stuffs
 	//set_shape_size(oam_entry::ss_16x16);
-	////the_coll_box.size = { 12 << fixed24p8::shift,
-	////	13 << fixed24p8::shift };
-	////cb_pos_offset = { 2 << fixed24p8::shift,
-	////	3 << fixed24p8::shift };
-	//the_coll_box.size = { 16 << fixed24p8::shift,
-	//	16 << fixed24p8::shift };
-	//cb_pos_offset = { 0 << fixed24p8::shift,
-	//	0 << fixed24p8::shift };
+	////the_coll_box.size = { 12 << fixed24p8::get_shift(),
+	////	13 << fixed24p8::get_shift() };
+	////cb_pos_offset = { 2 << fixed24p8::get_shift(),
+	////	3 << fixed24p8::get_shift() };
+	//the_coll_box.size = { 16 << fixed24p8::get_shift(),
+	//	16 << fixed24p8::get_shift() };
+	//cb_pos_offset = { 0 << fixed24p8::get_shift(),
+	//	0 << fixed24p8::get_shift() };
 	
 	swinging_pickaxe = false;
 	pickaxe_sprite_slot = -1;

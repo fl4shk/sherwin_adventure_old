@@ -337,9 +337,11 @@ public:		// functions
 	void init( const horiz_coll_lseg& the_coll_lseg );
 	void init( const vert_coll_lseg& the_coll_lseg );
 	
-	const block_coll_result* any_bbvt_is_fully_solid() const 
+	block_coll_result* horiz_any_bbvt_is_fully_solid( vec2_s32& pos )
 		__attribute__((_iwram_code,_target_arm));
-	const block_coll_result* any_bbvt_is_slope() const 
+	block_coll_result* vert_any_bbvt_is_fully_solid( vec2_s32& pos )
+		__attribute__((_iwram_code,_target_arm));
+	block_coll_result* vert_any_bbvt_is_slope( vec2_s32& pos )
 		__attribute__((_iwram_code,_target_arm));
 	
 	inline block_coll_result& operator () ( u32 index )
@@ -408,11 +410,20 @@ public:		// functions
 	}
 	inline const vec2_s32 get_horiz_end_pos() const
 	{
-		return get_start_pos() + vec2_s32( get_end_pos_offset(), 0 );
+		return get_start_pos() + get_horiz_offset(get_end_pos_offset());
 	}
 	inline const vec2_s32 get_vert_end_pos() const
 	{
-		return get_start_pos() + vec2_s32( 0, get_end_pos_offset() );
+		return get_start_pos() + get_vert_offset(get_end_pos_offset());
+	}
+	
+	inline const vec2_s32 get_horiz_offset( s32 i ) const
+	{
+		return vec2_s32( i, 0 );
+	}
+	inline const vec2_s32 get_vert_offset( s32 i ) const
+	{
+		return vec2_s32( 0, i );
 	}
 	
 	inline const s32 horiz_left_pos() const

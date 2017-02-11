@@ -74,55 +74,55 @@ const char hud_manager::char_to_plottable_char_arr
 //		+ 1 ) | se_palbank(bgps_in_level_hud);
 //}
 
-void hud_manager::plot_char_8x8_to_screenblock_mirror( u32 the_char,
-	u32 pos_x, u32 pos_y )
-{
-	//// Don't plot ASCII control codes.
-	//if ( the_char < ' ' )
-	//{
-	//	return;
-	//}
-	
-	//// Plot ASCII control codes as ' '.
-	//if ( the_char < ' ' )
-	//{
-	//	bg1_screenblock_mirror_2d.at( pos_x, pos_y )
-	//		= gfx_manager::hud_vram_as_tiles_start_offset
-	//		| se_palbank(bgps_in_level_hud);
-	//	return;
-	//}
-	//
-	//bg1_screenblock_mirror_2d.at( pos_x, pos_y )
-	//	= gfx_manager::hud_vram_as_tiles_start_offset
-	//	+ ( (char)the_char - ' ' ) | se_palbank(bgps_in_level_hud);
-	
-	bg1_screenblock_mirror_2d.at( pos_x, pos_y )
-		= ( gfx_manager::hud_vram_as_tiles_start_offset
-		+ ( char_to_plottable_char_arr[(u32)((u8)the_char)] - ' ' ) )
-		| se_palbank(bgps_in_level_hud);
-}
-
-//void hud_manager::plot_horiz_str_8x8_to_screenblock_mirror
-//	( const char* str, u32 str_size, u32& plot_x, u32& plot_y )
+//void hud_manager::plot_char_8x8_to_screenblock_mirror( u32 the_char,
+//	u32 pos_x, u32 pos_y )
 //{
+//	//// Don't plot ASCII control codes.
+//	//if ( the_char < ' ' )
+//	//{
+//	//	return;
+//	//}
 //	
-//	for ( u32 i=0; i<str_size; ++i )
-//	{
-//		if ( plot_x >= screenblock_xsize )
-//		{
-//			plot_x = 0;
-//			++plot_y;
-//		}
-//		
-//		bg1_screenblock_mirror_2d.at( plot_x, plot_y )
-//			= ( gfx_manager::hud_vram_as_tiles_start_offset
-//			+ ( char_to_plottable_char_arr[(u32)(str[i])] - ' ' ) )
-//			| se_palbank(bgps_in_level_hud);
-//		
-//		++plot_x;
-//	}
+//	//// Plot ASCII control codes as ' '.
+//	//if ( the_char < ' ' )
+//	//{
+//	//	bg1_screenblock_mirror_2d.at( pos_x, pos_y )
+//	//		= gfx_manager::hud_vram_as_tiles_start_offset
+//	//		| se_palbank(bgps_in_level_hud);
+//	//	return;
+//	//}
+//	//
+//	//bg1_screenblock_mirror_2d.at( pos_x, pos_y )
+//	//	= gfx_manager::hud_vram_as_tiles_start_offset
+//	//	+ ( (char)the_char - ' ' ) | se_palbank(bgps_in_level_hud);
 //	
+//	bg1_screenblock_mirror_2d.at( pos_x, pos_y )
+//		= ( gfx_manager::hud_vram_as_tiles_start_offset
+//		+ ( char_to_plottable_char_arr[(u32)((u8)the_char)] - ' ' ) )
+//		| se_palbank(bgps_in_level_hud);
 //}
+
+void hud_manager::plot_horiz_str_8x8_to_screenblock_mirror
+	( const char* str, u32 str_size, u32& plot_x, u32& plot_y )
+{
+	
+	for ( u32 i=0; i<str_size; ++i )
+	{
+		if ( plot_x >= screenblock_xsize )
+		{
+			plot_x = 0;
+			++plot_y;
+		}
+		
+		bg1_screenblock_mirror_2d.at( plot_x, plot_y )
+			= ( gfx_manager::hud_vram_as_tiles_start_offset
+			+ ( char_to_plottable_char_arr[(u32)(str[i])] - ' ' ) )
+			| se_palbank(bgps_in_level_hud);
+		
+		++plot_x;
+	}
+	
+}
 
 
 void hud_manager::update_hud_in_screenblock_mirror_2d()
@@ -144,26 +144,26 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 	u32 plot_y = 0;
 	
 	
-	for ( u32 i=0; i<sherwin_str_size; ++i )
+	//for ( u32 i=0; i<sherwin_str_size; ++i )
+	//{
+	//	plot_char_8x8_to_screenblock_mirror( sherwin_str[i], plot_x, 0 );
+	//	++plot_x;
+	//}
+	
+	plot_horiz_str_8x8_to_screenblock_mirror( sherwin_str,
+		sherwin_str_size, plot_x, plot_y );
+	
+	
+	//u32 some_number_str_curr_size = 0;
+	
+	static constexpr u32 some_number_str_max_size = 5;
+	char some_number_str[some_number_str_max_size];
+	
+	//char temp_buf[some_number_str_max_size];
+	
+	for ( u32 i=0; i<some_number_str_max_size; ++i )
 	{
-		plot_char_8x8_to_screenblock_mirror( sherwin_str[i], plot_x, 0 );
-		++plot_x;
-	}
-	
-	//plot_horiz_str_8x8_to_screenblock_mirror( sherwin_str,
-	//	sherwin_str_size, plot_x, plot_y );
-	
-	
-	u32 player_hp_str_curr_size = 0;
-	
-	static constexpr u32 player_hp_str_max_size = 5;
-	char player_hp_str[player_hp_str_max_size];
-	
-	char temp_buf[player_hp_str_max_size];
-	
-	for ( u32 i=0; i<player_hp_str_max_size; ++i )
-	{
-		player_hp_str[i] = '\0';
+		some_number_str[i] = '\0';
 	}
 	
 	
@@ -171,39 +171,51 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 		? 0 : player_sprite::remaining_hp;
 	//s32 to_convert = 10;
 	
-	for (;;)
-	{
-		for ( u32 i=0; i<player_hp_str_max_size; ++i )
-		{
-			temp_buf[i] = '\0';
-		}
-		
-		u32 rem = to_convert % 10;
-		to_convert /= 10;
-		//player_hp_str = (char)( '0' + rem ) + player_hp_str;
-		
-		temp_buf[0] = (char)( '0' + rem );
-		strcat( temp_buf, player_hp_str ); 
-		strcpy( player_hp_str, temp_buf );
-		
-		++player_hp_str_curr_size;
-		
-		if ( to_convert == 0 )
-		{
-			break;
-		}
-	}
+	//for (;;)
+	//{
+	//	for ( u32 i=0; i<some_number_str_max_size; ++i )
+	//	{
+	//		temp_buf[i] = '\0';
+	//	}
+	//	
+	//	u32 rem = to_convert % 10;
+	//	to_convert /= 10;
+	//	//some_number_str = (char)( '0' + rem ) + some_number_str;
+	//	
+	//	temp_buf[0] = (char)( '0' + rem );
+	//	strcat( temp_buf, some_number_str ); 
+	//	strcpy( some_number_str, temp_buf );
+	//	
+	//	++some_number_str_curr_size;
+	//	
+	//	if ( to_convert == 0 )
+	//	{
+	//		break;
+	//	}
+	//}
+	
+	u32 some_number_str_curr_size = snprintf( some_number_str, 
+		some_number_str_max_size, "%il", to_convert );
 	
 	
-	//for ( u32 i=0; i<player_hp_str_curr_size; ++i )
-	for ( u32 i=0; i<player_hp_str_max_size; ++i )
-	{
-		plot_char_8x8_to_screenblock_mirror( player_hp_str[i], plot_x, 0 );
-		++plot_x;
-	}
-	//plot_horiz_str_8x8_to_screenblock_mirror( player_hp_str,
-	//	player_hp_str_max_size, plot_x, plot_y );
+	////for ( u32 i=0; i<some_number_str_curr_size; ++i )
+	//for ( u32 i=0; i<some_number_str_max_size; ++i )
+	//{
+	//	plot_char_8x8_to_screenblock_mirror( some_number_str[i], plot_x, 0 );
+	//	++plot_x;
+	//}
+	plot_horiz_str_8x8_to_screenblock_mirror( some_number_str,
+		some_number_str_curr_size, plot_x, plot_y );
 	
+	plot_x -= some_number_str_curr_size;
+	++plot_y;
+	
+	
+	//some_number_str_curr_size = snprintf( some_number_str,
+	//	some_number_str_max_size, "%il", sprite::tallest_height_val.curr );
+	//
+	//plot_horiz_str_8x8_to_screenblock_mirror( some_number_str,
+	//	some_number_str_curr_size, plot_x, plot_y );
 }
 
 

@@ -45,7 +45,7 @@ const sprite_const_params door_sprite::the_const_params
 	oam_entry::ss_16x32,
 	
 	// the_initial_coll_box_size
-	{ {14 << fixed24p8::shift}, {32 << fixed24p8::shift} }, 
+	{ {14 << fixed24p8::get_shift()}, {32 << fixed24p8::get_shift()} }, 
 	
 	// the_initial_cb_pos_offset
 	{ {1}, {0} },

@@ -58,10 +58,10 @@ const sprite_const_params snow_golem_sprite::the_const_params
 	
 	// This needs to be better fit to snow golem enemies.
 	// the_initial_coll_box_size
-	{ {12 << fixed24p8::shift }, {29 << fixed24p8::shift } },
+	{ {12 << fixed24p8::get_shift() }, {29 << fixed24p8::get_shift() } },
 	
 	// the_initial_cb_pos_offset
-	{ {2 << fixed24p8::shift }, {3 << fixed24p8::shift } },
+	{ {2 << fixed24p8::get_shift() }, {3 << fixed24p8::get_shift() } },
 };
 
 

@@ -63,7 +63,7 @@ vec2_f24p8 sprite::on_screen_pos_diff_abs;
 vec2_s32 sprite::on_screen_pos_s32_diff_abs;
 vec2_f24p8 sprite::camera_pos_diff_abs;
 vec2_s32 sprite::camera_pos_s32_diff_abs;
-
+//prev_curr_pair<s32> sprite::tallest_height_val;
 
 
 sprite::sprite()
@@ -550,6 +550,19 @@ void sprite::block_coll_response_bot_16x32
 		is_jumping = false;
 	}
 }
+void sprite::block_coll_response_bot_slope_16x32
+	(  s32 tallest_height_val, const vec2_s32& pos )
+{
+	if ( vel.y >= (fixed24p8){0} )
+	{
+		push_out_of_bot_slope_block( tallest_height_val, pos );
+		
+		vel.y = {0x00};
+		set_curr_on_ground(true);
+		set_curr_on_slope(true);
+		is_jumping = false;
+	}
+}
 
 void sprite::apply_gravity()
 {
@@ -590,99 +603,176 @@ void sprite::block_collision_stuff_16x32()
 	//static coll_lseg_group_16x32 clseg_grp __attribute__((_ewram));
 	
 	//coll_lseg_group_16x32 clseg_grp;
-	//
-	//set_curr_on_ground(true);
-	//vel.y = (fixed24p8){0};
-	//clseg_grp.init( the_coll_box, get_curr_on_ground() );
 	
-	//const block_coll_result* horiz_fs_buf[clseg_grp.num_horiz_ctups];
-	//
-	//const block_coll_result* vert_fs_buf[clseg_grp.num_vert_ctups];
-	//const block_coll_result* vert_slp_buf[clseg_grp.num_vert_ctups];
-	//
-	//if ( get_curr_on_ground() )
-	//{
-	//	bool left_side_fully_solid_og = false, 
-	//		right_side_fully_solid_og = false,
-	//		bot_side_fully_solid_og = false,
-	//		bot_side_slope_og = false;
-	//	
-	//	s32 i = clseg_grp.the_hi_right_bot_og;
-	//	
-	//	for ( ; i>=clseg_grp.the_hi_right_top_og; --i )
-	//	{
-	//		horiz_fs_buf[i] = clseg_grp.get_horiz_ctup(i).bcrlg
-	//			.any_bbvt_is_fully_solid();
-	//		
-	//		if (horiz_fs_buf[i])
-	//		{
-	//			right_side_fully_solid_og = true;
-	//		}
-	//	}
-	//	
-	//	for ( ; i>=clseg_grp.the_hi_left_top_og; --i )
-	//	{
-	//		horiz_fs_buf[i] = clseg_grp.get_horiz_ctup(i).bcrlg
-	//			.any_bbvt_is_fully_solid();
-	//		
-	//		if (horiz_fs_buf[i])
-	//		{
-	//			left_side_fully_solid_og = true;
-	//		}
-	//	}
-	//	
-	//	for ( i=clseg_grp.the_vi_bot_right_og; 
-	//		i>=clseg_grp.the_vi_bot_left_og;
-	//		--i )
-	//	{
-	//		vert_fs_buf[i] = clseg_grp.get_vert_ctup(i).bcrlg
-	//			.any_bbvt_is_fully_solid();
-	//		vert_slp_buf[i] = clseg_grp.get_vert_ctup(i).bcrlg
-	//			.any_bbvt_is_slope();
-	//		
-	//		if (vert_fs_buf[i])
-	//		{
-	//			bot_side_fully_solid_og = true;
-	//		}
-	//		if (vert_slp_buf[i])
-	//		{
-	//			bot_side_slope_og = true;
-	//		}
-	//	}
-	//	
-	//	
-	//	
-	//	if ( left_side_fully_solid_og
-	//		&& !right_side_fully_solid_og )
-	//	{
-	//		block_coll_response_left_16x32(clseg_grp.get_horiz_ctup
-	//			(clseg_grp.the_hi_left_top_og).bcrlg);
-	//	}
-	//	
-	//	else if ( !left_side_fully_solid_og
-	//		&& right_side_fully_solid_og )
-	//	{
-	//		block_coll_response_right_16x32(clseg_grp.get_horiz_ctup
-	//			(clseg_grp.the_hi_right_top_og).bcrlg);
-	//	}
-	//	
-	//	if ( !bot_side_fully_solid_og
-	//		&& !get_curr_on_slope() )
-	//	{
-	//		set_curr_on_ground(false);
-	//	}
-	//	else if ( get_curr_on_slope() )
-	//	{
-	//		
-	//	}
-	//}
-	//else // if ( !get_curr_on_ground() )
-	//{
-	//	
-	//}
-	//
-	//////vel.x.data += clg_16x32_size;
-	////vel += clseg_grp.horiz_clseg_groups[clseg_grp.hi_left_top].left_pt();
+	// Don't forget to remove these two lines!
+	set_curr_on_ground(true);
+	vel.y = (fixed24p8){0};
+	
+	//clseg_grp.init( the_coll_box, get_curr_on_ground() );
+	coll_lseg_group_16x32 clseg_grp( the_coll_box, get_curr_on_ground() );
+	
+	block_coll_result* horiz_fs_ret_buf[clseg_grp.num_horiz_ctups];
+	block_coll_result* vert_fs_ret_buf[clseg_grp.num_vert_ctups];
+	block_coll_result* vert_slp_ret_buf[clseg_grp.num_vert_ctups];
+	
+	vec2_s32 horiz_fs_pos_buf[clseg_grp.num_horiz_ctups];
+	vec2_s32 vert_fs_pos_buf[clseg_grp.num_vert_ctups];
+	vec2_s32 vert_slp_pos_buf[clseg_grp.num_vert_ctups];
+	
+	if ( get_curr_on_ground() )
+	{
+		s32 left_side_fully_solid_og = false, 
+			right_side_fully_solid_og = false,
+			bot_side_fully_solid_og = false,
+			bot_side_slope_og = false;
+		
+		
+		for ( u32 i=clseg_grp.the_hi_left_top_og; 
+			i<=clseg_grp.the_hi_left_bot_og; 
+			++i )
+		{
+			horiz_fs_ret_buf[i] = clseg_grp.get_horiz_ctup(i).bcrlg
+				.horiz_any_bbvt_is_fully_solid(horiz_fs_pos_buf[i]);
+			
+			if (horiz_fs_ret_buf[i])
+			{
+				left_side_fully_solid_og = true;
+			}
+		}
+		
+		for ( u32 i=clseg_grp.the_hi_right_top_og;
+			i<=clseg_grp.the_hi_right_bot_og;
+			++i )
+		{
+			horiz_fs_ret_buf[i] = clseg_grp.get_horiz_ctup(i).bcrlg
+				.horiz_any_bbvt_is_fully_solid(horiz_fs_pos_buf[i]);
+			
+			if (horiz_fs_ret_buf[i])
+			{
+				right_side_fully_solid_og = true;
+			}
+		}
+		
+		for ( u32 i=clseg_grp.the_vi_bot_left_og; 
+			i<=clseg_grp.the_vi_bot_right_og;
+			++i )
+		{
+			vert_fs_ret_buf[i] = clseg_grp.get_vert_ctup(i).bcrlg
+				.vert_any_bbvt_is_fully_solid(vert_fs_pos_buf[i]);
+			vert_slp_ret_buf[i] = clseg_grp.get_vert_ctup(i).bcrlg
+				.vert_any_bbvt_is_slope(vert_slp_pos_buf[i]);
+			
+			if (vert_fs_ret_buf[i])
+			{
+				bot_side_fully_solid_og = true;
+			}
+			if (vert_slp_ret_buf[i])
+			{
+				bot_side_slope_og = true;
+			}
+		}
+		
+		
+		
+		
+		// (Temporarily (?)) permit walking through the vertical side of
+		// slopes
+		if ( left_side_fully_solid_og
+			&& !right_side_fully_solid_og )
+		{
+			block_coll_response_left_16x32(clseg_grp.get_horiz_ctup
+				(clseg_grp.the_hi_left_top_og).bcrlg);
+		}
+		
+		else if ( !left_side_fully_solid_og
+			&& right_side_fully_solid_og )
+		{
+			block_coll_response_right_16x32(clseg_grp.get_horiz_ctup
+				(clseg_grp.the_hi_right_top_og).bcrlg);
+		}
+		
+		// Handle slopes in a special way
+		if (bot_side_slope_og)
+		{
+			set_curr_on_slope(true);
+			
+			//tallest_height_val.back_up();
+			//tallest_height_val.curr = -1;
+			s32 tallest_height_val = -1;
+			s32 thv_vs_index = -1;
+			//decltype(clseg_grp)::vert_coll_tuple* thv_vert_sensor_ptr 
+			//	= NULL;
+			
+			for ( u32 i=clseg_grp.the_vi_bot_left_og;
+				i<clseg_grp.the_vi_bot_right_og;
+				++i )
+			{
+				if (vert_slp_ret_buf[i])
+				{
+					const u32 temp_height_val 
+						= (block_base_stuff::height_mask_ptr_arr
+						[vert_slp_ret_buf[i]->the_bbvt])
+						[( clseg_grp.get_vert_ctup(i).clseg.top_pt().x
+						.floor_to_int() ) % num_pixels_per_block_dim ];
+					//tallest_height_val
+					//show_debug_u32_group(temp);
+					
+					//if ( tallest_height_val.curr < static_cast<s32>(temp) )
+					//{
+					//	tallest_height_val.curr = temp;
+					//}
+					
+					if ( tallest_height_val 
+						< static_cast<s32>(temp_height_val) )
+					{
+						tallest_height_val = temp_height_val;
+						thv_vs_index = i;
+						//thv_vert_sensor_ptr = &clseg_grp.get_vert_ctup(i);
+					}
+				}
+			}
+			
+			//if (thv_vert_sensor_ptr)
+			if ( thv_vs_index != -1 )
+			{
+				//const decltype(clseg_grp)::vert_coll_tuple& thv_vert_sensor
+				//	= *thv_vert_sensor_ptr;
+				
+				//set_curr_on_ground(true);
+				//block_coll_response_bot_slope_16x32( thv_vert_sensor.bcrlg,
+				//	tallest_height_val, vert_slp_pos_buf[thv_vs_index] );
+				block_coll_response_bot_slope_16x32( tallest_height_val, 
+					vert_slp_pos_buf[thv_vs_index] );
+			}
+			
+		}
+		else
+		{
+			set_curr_on_slope(false);
+			
+			// The sprite is now in air if there are no relevant blocks
+			// intersected by the vertical sensors
+			if (!bot_side_fully_solid_og)
+			{
+				// This needs to be turned back on eventually
+				//set_curr_on_ground(false);
+			}
+			//else // if (bot_side_fully_solid_og)
+			//{
+			//	block_coll_response_bot_16x32(clseg_grp.get_vert_ctup
+			//		(clseg_grp.the_vi_bot_left_og).bcrlg);
+			//}
+		}
+	}
+	else // if ( !get_curr_on_ground() )
+	{
+		// Don't forget to remove the code at the top of this function that
+		// sets on_ground.curr to true every time!
+		
+	}
+	
+	////vel.x.data += clg_16x32_size;
+	//vel += clseg_grp.horiz_clseg_groups[clseg_grp.hi_left_top].left_pt();
 }
 void sprite::block_collision_stuff_32x16()
 {

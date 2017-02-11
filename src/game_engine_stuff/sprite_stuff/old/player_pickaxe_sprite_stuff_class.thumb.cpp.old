@@ -33,9 +33,9 @@ const player_pickaxe_sprite_stuff::frame
 
 
 const vec2_f24p8 player_pickaxe_sprite_stuff::the_initial_coll_box_size
-	= { {15 << fixed24p8::shift}, {15 << fixed24p8::shift} },
+	= { {15 << fixed24p8::get_shift()}, {15 << fixed24p8::get_shift()} },
 	player_pickaxe_sprite_stuff::the_initial_cb_pos_offset 
-	= { {0 << fixed24p8::shift}, {0 << fixed24p8::shift} };
+	= { {0 << fixed24p8::get_shift()}, {0 << fixed24p8::get_shift()} };
 
 
 void player_pickaxe_sprite_stuff::update_part_1( sprite& the_pickaxe )

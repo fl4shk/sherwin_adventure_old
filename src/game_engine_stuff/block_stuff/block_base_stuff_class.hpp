@@ -42,6 +42,11 @@ public:		// variables
 	// Slope stuff
 	static constexpr u32 height_mask_size = num_pixels_per_block_row;
 	
+	static const u32 * const height_mask_ptr_arr[lim_bbvt];
+	
+	static const u32 air_height_mask[height_mask_size];
+	static const u32 solid_height_mask[height_mask_size];
+	
 	// 45 degree angle slope height mask
 	static const u32 slope_p16_p16_height_mask[height_mask_size];
 	
@@ -59,6 +64,7 @@ public:		// variables
 	
 	static const u32 slope_n32_p16_short_height_mask[height_mask_size];
 	
+	
 public:		// functions
 	virtual const block_stuff_const_params& get_const_params() const;
 	virtual const u32 get_metatile_number();
@@ -71,6 +77,7 @@ public:		// functions
 	
 	virtual void finish_initializing_using_persistent_data
 		( block& the_block );
+	
 	
 } __attribute__((_align4));
 

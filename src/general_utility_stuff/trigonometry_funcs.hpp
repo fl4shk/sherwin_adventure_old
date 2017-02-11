@@ -57,13 +57,13 @@ inline s32 lut_cos( u32 theta )
 inline fixed24p8 lut_sin_f24p8( u32 theta )
 {
 	return (fixed24p8){ lut_sin(theta) 
-		>> ( trig_lut_fixed_shift - fixed24p8::shift ) };
+		>> ( trig_lut_fixed_shift - fixed24p8::get_shift() ) };
 }
 
 inline fixed24p8 lut_cos_f24p8( u32 theta )
 {
 	return (fixed24p8){ lut_cos(theta) 
-		>> ( trig_lut_fixed_shift - fixed24p8::shift ) };
+		>> ( trig_lut_fixed_shift - fixed24p8::get_shift() ) };
 }
 
 

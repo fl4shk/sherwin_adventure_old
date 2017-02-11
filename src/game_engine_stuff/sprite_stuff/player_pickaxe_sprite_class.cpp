@@ -54,10 +54,10 @@ const sprite_const_params player_pickaxe_sprite::the_const_params
 	oam_entry::ss_16x16,
 	
 	// the_initial_coll_box_size
-	{ {15 << fixed24p8::shift}, {15 << fixed24p8::shift} },
+	{ {15 << fixed24p8::get_shift()}, {15 << fixed24p8::get_shift()} },
 	
 	// the_initial_cb_pos_offset
-	{ {0 << fixed24p8::shift}, {0 << fixed24p8::shift} },
+	{ {0 << fixed24p8::get_shift()}, {0 << fixed24p8::get_shift()} },
 };
 
 

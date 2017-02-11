@@ -38,24 +38,25 @@ fixed24p8 f24p8_div_by_u16( const fixed24p8& num, u16 den )
 	__attribute__((_iwram_code,_target_arm));
 
 
+static constexpr u32 f24p8_shift = 8;
+static constexpr u32 f24p8_frac_mask = ( 1 << f24p8_shift ) - 1;
+
 // Underlying type is s32, with 8 fraction bits
 // This will be the most often used fixed-point type in my GBA stuff
 class fixed24p8
 {
 public:		// variables
-	static constexpr u32 shift = 8;
-	static constexpr u32 frac_mask = ( 1 << shift ) - 1;
 	
 	s32 data = 0;
 	
 public:		// functions
 	static constexpr inline u32 get_shift()
 	{
-		return shift;
+		return f24p8_shift;
 	}
 	static constexpr inline u32 get_frac_mask()
 	{
-		return frac_mask;
+		return f24p8_frac_mask;
 	}
 	
 	// This function does TRUE rounding
@@ -159,21 +160,21 @@ inline fixed24p8 custom_abs( const fixed24p8& val )
 
 inline s32 fixed24p8::round_to_int() const
 {
-	return (s32)( ( data + ( 1 << ( shift - 1 ) ) ) >> shift );
+	return (s32)( ( data + ( 1 << ( get_shift() - 1 ) ) ) >> get_shift() );
 }
 
 inline s32 fixed24p8::floor_to_int() const
 {
 	//if ( data < 0 )
 	//{
-	//	return (s32)( ( data + ( 1 << shift ) - 1 ) >> shift );
+	//	return (s32)( ( data + ( 1 << get_shift() ) - 1 ) >> get_shift() );
 	//}
 	//else
 	{
-		return (s32)( data >> shift );
+		return (s32)( data >> get_shift() );
 	}
 	
-	//s32 ret = custom_abs(data) >> shift;
+	//s32 ret = custom_abs(data) >> get_shift();
 	//
 	//if ( data < 0 )
 	//{
@@ -211,8 +212,8 @@ inline fixed24p8 fixed24p8::with_zero_frac_bits() const
 {
 	fixed24p8 positive_n_value = custom_abs(*this);
 	
-	positive_n_value.data >>= shift;
-	positive_n_value.data <<= shift;
+	positive_n_value.data >>= get_shift();
+	positive_n_value.data <<= get_shift();
 	
 	if ( data < 0 )
 	{
@@ -234,7 +235,7 @@ inline u32 fixed24p8::get_frac_bits() const
 	//	return (u8)( data & frac_mask );
 	//}
 	
-	return (u8)( custom_abs(data) & frac_mask );
+	return (u8)( custom_abs(data) & get_frac_mask() );
 }
 
 
@@ -489,7 +490,7 @@ inline fixed8p8::operator fixed24p8() const
 //	fixed24p8 ret;
 //	
 //	ret.data = a.data * b.data;
-//	ret.data >>= fixed24p8::shift;
+//	ret.data >>= fixed24p8::get_shift();
 //	
 //	return ret;
 //}
@@ -510,7 +511,7 @@ inline fixed24p8 operator - ( const fixed8p8& a, const fixed24p8& b )
 //inline fixed24p8& fixed24p8::operator *= ( const fixed8p8& to_mul )
 //{
 //	data *= to_mul.data;
-//	data >>= fixed24p8::shift;
+//	data >>= fixed24p8::get_shift();
 //	return *this;
 //}
 
@@ -523,7 +524,7 @@ inline fixed24p8 operator - ( const fixed8p8& a, const fixed24p8& b )
 //	fixed24p8 ret;
 //	
 //	ret.data = data * to_mul.data;
-//	ret.data >>= fixed24p8::shift;
+//	ret.data >>= fixed24p8::get_shift();
 //	
 //	return ret;
 //}

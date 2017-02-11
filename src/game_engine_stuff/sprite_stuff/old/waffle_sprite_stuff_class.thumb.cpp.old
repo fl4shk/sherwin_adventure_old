@@ -48,13 +48,13 @@ void waffle_sprite_stuff::update_part_1( sprite& the_powerup )
 		// Facing left
 		if ( the_powerup.the_oam_entry.get_hflip_status() )
 		{
-			the_powerup.vel.x.data = -( 1 << fixed24p8::shift );
+			the_powerup.vel.x.data = -( 1 << fixed24p8::get_shift() );
 		}
 		
 		// Facing right
 		else
 		{
-			the_powerup.vel.x.data = 1 << fixed24p8::shift;
+			the_powerup.vel.x.data = 1 << fixed24p8::get_shift();
 		}
 		
 	}
