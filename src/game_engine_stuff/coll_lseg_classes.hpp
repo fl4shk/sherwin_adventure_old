@@ -233,6 +233,8 @@ public:		// functions
 //{
 //} __attribute__((_align4));
 
+// Collision Line Segment Group for collision boxes that are smaller than
+// 16x32 but larger than 16x16
 class coll_lseg_group_16x32
 {
 protected:		// enums
@@ -250,18 +252,24 @@ protected:		// enums
 		lim_hi,
 	};
 	
-	enum vert_index
+	enum vert_index_top
 	{
 		vi_top_left,
 		vi_top_right,
 		
+		
+		lim_vi_top,
+	};
+	
+	enum vert_index_bot
+	{
 		vi_bot_left,
 		vi_bot_mid,
 		vi_bot_right,
 		
 		
 		
-		lim_vi,
+		lim_vi_bot,
 	};
 	
 public:		// classes
@@ -281,29 +289,31 @@ public:		// classes
 	} __attribute__((_align4));
 	
 public:		// index constants
-	static constexpr u32 the_hi_left_top_og = hi_left_top;
-	static constexpr u32 the_hi_left_bot_og = hi_left_bot;
-	static constexpr u32 the_hi_right_top_og = hi_right_top;
-	static constexpr u32 the_hi_right_bot_og = hi_right_bot;
+	static constexpr u32 hi_left_top_og = hi_left_top;
+	static constexpr u32 hi_left_bot_og = hi_left_bot;
+	static constexpr u32 hi_right_top_og = hi_right_top;
+	static constexpr u32 hi_right_bot_og = hi_right_bot;
 	
-	static constexpr u32 the_vi_bot_left_og = vi_bot_left;
-	static constexpr u32 the_vi_bot_mid_og = vi_bot_mid;
-	static constexpr u32 the_vi_bot_right_og = vi_bot_right;
+	static constexpr u32 vi_bot_left_og = vi_bot_left;
+	static constexpr u32 vi_bot_mid_og = vi_bot_mid;
+	static constexpr u32 vi_bot_right_og = vi_bot_right;
 	
 	
-	static constexpr u32 the_hi_left_top_ia = hi_left_top;
-	static constexpr u32 the_hi_left_mid_ia = hi_left_bot;
-	static constexpr u32 the_hi_right_top_ia = hi_right_top;
-	static constexpr u32 the_hi_right_mid_ia = hi_right_bot;
+	static constexpr u32 hi_left_top_ia = hi_left_top;
+	static constexpr u32 hi_left_mid_ia = hi_left_bot;
+	static constexpr u32 hi_right_top_ia = hi_right_top;
+	static constexpr u32 hi_right_mid_ia = hi_right_bot;
 	
-	static constexpr u32 the_vi_top_left_ia = vi_top_left;
-	static constexpr u32 the_vi_top_right_ia = vi_top_right;
-	static constexpr u32 the_vi_bot_left_ia = vi_bot_left;
-	static constexpr u32 the_vi_bot_mid_ia = vi_bot_mid;
-	static constexpr u32 the_vi_bot_right_ia = vi_bot_right;
+	
+	static constexpr u32 vi_top_left_ia = vi_top_left;
+	static constexpr u32 vi_top_right_ia = vi_top_right;
+	
+	static constexpr u32 vi_bot_left_ia = vi_bot_left;
+	static constexpr u32 vi_bot_mid_ia = vi_bot_mid;
+	static constexpr u32 vi_bot_right_ia = vi_bot_right;
 	
 	static constexpr size_t num_horiz_ctups = lim_hi,
-		num_vert_ctups = lim_vi;
+		num_vert_top_ctups = lim_vi_top, num_vert_bot_ctups = lim_vi_bot;
 	
 protected:		// variables and constants
 	//bcr_lseg_group horiz_bcr_lseg_groups[num_horiz_ctups];
@@ -311,7 +321,8 @@ protected:		// variables and constants
 	//horiz_coll_lseg horiz_clseg_groups[num_horiz_ctups];
 	//vert_coll_lseg vert_clseg_groups[num_vert_ctups];
 	horiz_coll_tuple horiz_ctups[num_horiz_ctups];
-	vert_coll_tuple vert_ctups[num_vert_ctups];
+	vert_coll_tuple vert_top_ctups[num_vert_top_ctups];
+	vert_coll_tuple vert_bot_ctups[num_vert_bot_ctups];
 	
 	u32 internal_on_ground = false;
 	
@@ -346,18 +357,26 @@ public:		// functions
 	{
 		return horiz_ctups[index];
 	}
-	inline const vert_coll_tuple& get_vert_ctup( u32 index ) const
+	inline const vert_coll_tuple& get_vert_top_ctup( u32 index ) const
 	{
-		return vert_ctups[index];
+		return vert_top_ctups[index];
+	}
+	inline const vert_coll_tuple& get_vert_bot_ctup( u32 index ) const
+	{
+		return vert_bot_ctups[index];
 	}
 	
 	inline horiz_coll_tuple& get_horiz_ctup( u32 index )
 	{
 		return horiz_ctups[index];
 	}
-	inline vert_coll_tuple& get_vert_ctup( u32 index )
+	inline vert_coll_tuple& get_vert_top_ctup( u32 index )
 	{
-		return vert_ctups[index];
+		return vert_top_ctups[index];
+	}
+	inline vert_coll_tuple& get_vert_bot_ctup( u32 index )
+	{
+		return vert_bot_ctups[index];
 	}
 	
 	

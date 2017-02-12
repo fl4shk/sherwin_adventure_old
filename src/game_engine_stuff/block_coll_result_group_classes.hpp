@@ -299,7 +299,7 @@ class bcr_lseg_group
 {
 public:		// constants
 	// This size is arbitrary, but intended to be large enough to work with
-	static constexpr size_t max_size = 6;
+	static constexpr size_t max_size = 3;
 	
 protected:		// variables
 	block_coll_result bcr_arr_helper_data[max_size];
