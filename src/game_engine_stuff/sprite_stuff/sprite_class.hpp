@@ -211,7 +211,7 @@ public:		// variables
 	static vec2_f24p8 camera_pos_diff_abs;
 	static vec2_s32 camera_pos_s32_diff_abs;
 	
-	//static prev_curr_pair<s32> tallest_height_val;
+	//static prev_curr_pair<s32> height_val;
 	
 public:		// functions
 	
@@ -625,8 +625,8 @@ protected:		// functions
 		( const bcr_lseg_group& the_bcr_lseg_grp );
 	virtual void block_coll_response_bot_16x32
 		( const bcr_lseg_group& the_bcr_lseg_grp );
-	virtual void block_coll_response_bot_slope_16x32
-		( s32 tallest_height_val, const vec2_s32& pos );
+	virtual void block_coll_response_bot_slope_16x32( s32 height_val, 
+		s32 blk_crd_y_pos );
 	
 	
 	
@@ -660,12 +660,12 @@ protected:		// functions
 			( conv_pix_crd_to_blk_crd(the_bcr_lseg_grp.vert_bot_pos()) )
 			- make_f24p8(get_shape_size_as_vec2().y) );
 	}
-	inline void push_out_of_bot_slope_block
-		( s32 tallest_height_val, const vec2_s32& pos )
+	inline void push_out_of_bot_slope_block( s32 height_val, 
+		s32 blk_crd_y_pos )
 	{
 		set_curr_in_level_pos_y( make_f24p8
-			( ( conv_pix_crd_to_blk_crd(pos.y)
-			+ conv_slp_height_val_to_offset(tallest_height_val) ) )
+			( ( conv_pix_crd_to_blk_crd(blk_crd_y_pos)
+			+ conv_slp_height_val_to_offset(height_val) ) )
 			- make_f24p8(get_shape_size_as_vec2().y) );
 	}
 	

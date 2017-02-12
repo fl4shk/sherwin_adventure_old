@@ -280,7 +280,7 @@ public:		// classes
 		vert_coll_lseg clseg;
 	} __attribute__((_align4));
 	
-public:		// constants
+public:		// index constants
 	static constexpr u32 the_hi_left_top_og = hi_left_top;
 	static constexpr u32 the_hi_left_bot_og = hi_left_bot;
 	static constexpr u32 the_hi_right_top_og = hi_right_top;

@@ -223,8 +223,8 @@ inline const type conv_pix_crd_to_blk_local_crd( type to_convert )
 template< typename type >
 inline const type conv_slp_height_val_to_offset( type tallest_height_val )
 {
-	return static_cast<type>( static_cast<type>(num_pixels_per_block_dim) 
-		- tallest_height_val );
+	return static_cast<type>(num_pixels_per_block_dim) 
+		- tallest_height_val;
 }
 
 /* ---- Display Register Value Defines ---- */

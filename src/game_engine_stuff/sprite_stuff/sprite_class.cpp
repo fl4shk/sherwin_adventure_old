@@ -551,12 +551,12 @@ void sprite::block_coll_response_bot_16x32
 		is_jumping = false;
 	}
 }
-void sprite::block_coll_response_bot_slope_16x32
-	(  s32 tallest_height_val, const vec2_s32& pos )
+void sprite::block_coll_response_bot_slope_16x32( s32 height_val, 
+	s32 blk_crd_y_pos )
 {
 	if ( vel.y >= (fixed24p8){0} )
 	{
-		push_out_of_bot_slope_block( tallest_height_val, pos );
+		push_out_of_bot_slope_block( height_val, blk_crd_y_pos );
 		
 		vel.y = {0x00};
 		set_curr_on_ground(true);
@@ -681,6 +681,26 @@ void sprite::block_collision_stuff_16x32()
 			(vs_index).clseg.top_pt().x.floor_to_int() );
 	};
 	
+	auto get_slope_bcr = [&]( u32 vs_index ) -> block_coll_result*
+	{
+		return vert_slp_ret_buf[vs_index];
+	};
+	
+	auto get_slope_height_val = [&]( u32 vs_index, 
+		const u32 height_mask_index ) -> s32
+	{
+		return (block_base_stuff::height_mask_ptr_arr[get_slope_bcr
+			(vs_index)->the_bbvt])[height_mask_index];
+	};
+	
+	auto get_slope_height_val_with_bbvt = [&]
+		( block_behavior_type some_bbvt, const u32 height_mask_index ) 
+		-> s32
+	{
+		return (block_base_stuff::height_mask_ptr_arr[some_bbvt])
+			[height_mask_index];
+	};
+	
 	if ( get_curr_on_ground() )
 	{
 		bool left_side_fully_solid_og = false, 
@@ -720,25 +740,25 @@ void sprite::block_collision_stuff_16x32()
 		{
 			set_curr_on_slope(true);
 			
-			s32 tallest_height_val = -1;
-			//// thv_vs_index is based on both the <position of the block>
-			//// that was detected and <tallest_height_val>
-			//s32 thv_vs_index = -1;
+			s32 height_val = -1;
+			//// hv_vs_index is based on both the <position of the block>
+			//// that was detected and <height_val>
+			//s32 hv_vs_index = -1;
 			
-			//thv_vs_index = -1;
+			//hv_vs_index = -1;
 			
 			
-			////block_coll_result* thv_vs_bcr = NULL;
-			//vec2_s32* thv_vs_pos = NULL;
-			//bool thv_vs_touches_fully_solid = false;
+			////block_coll_result* hv_vs_bcr = NULL;
+			//vec2_s32* hv_vs_pos = NULL;
+			//bool hv_vs_touches_fully_solid = false;
 			
-			block_coll_result* curr_bcr = NULL;
-			vec2_s32* curr_pos = NULL;
-			bool curr_bcr_is_fully_solid = false;
+			//block_coll_result* curr_bcr = NULL;
+			//vec2_s32* curr_pos = NULL;
+			//bool curr_bcr_is_fully_solid = false;
 			
-			vec2_s32 thv_vs_pos;
+			//vec2_s32 hv_vs_pos;
+			s32 hv_vs_blk_crd_y_pos;
 			
-			//u32 const * height_mask_index_ptr = NULL;
 			
 			
 			//const u32 left_height_mask_index 
@@ -753,11 +773,64 @@ void sprite::block_collision_stuff_16x32()
 			//	(clseg_grp.the_vi_bot_right_og).clseg.top_pt().x
 			//	.floor_to_int() );
 			
-			const u32 height_mask_index_arr[clseg_grp.num_vert_ctups]
-				= { 0, 0, 
-				get_height_mask_index(clseg_grp.the_vi_bot_left_og), 
-				get_height_mask_index(clseg_grp.the_vi_bot_mid_og),
-				get_height_mask_index(clseg_grp.the_vi_bot_right_og) };
+			//const u32 height_mask_index_arr[clseg_grp.num_vert_ctups]
+			//	= { 0, 0, 
+			//	get_height_mask_index(clseg_grp.the_vi_bot_left_og), 
+			//	get_height_mask_index(clseg_grp.the_vi_bot_mid_og),
+			//	get_height_mask_index(clseg_grp.the_vi_bot_right_og) };
+			
+			const bool vs_bot_left_intersects_slp
+				= ( vert_slp_ret_buf[clseg_grp.the_vi_bot_left_og]
+				!= NULL );
+			const bool vs_bot_mid_intersects_slp
+				= ( vert_slp_ret_buf[clseg_grp.the_vi_bot_mid_og]
+				!= NULL );
+			const bool vs_bot_right_intersects_slp
+				= ( vert_slp_ret_buf[clseg_grp.the_vi_bot_right_og]
+				!= NULL );
+			
+			const u32 left_height_mask_index 
+				= get_height_mask_index(clseg_grp.the_vi_bot_left_og);
+			const u32 mid_height_mask_index 
+				= get_height_mask_index(clseg_grp.the_vi_bot_mid_og);
+			const u32 right_height_mask_index 
+				= get_height_mask_index(clseg_grp.the_vi_bot_right_og);
+			
+			s32 left_height_val = -1, right_height_val = -1;
+			
+			const block_coll_result* left_slope_bcr = get_slope_bcr
+				(clseg_grp.the_vi_bot_left_og);
+			const block_coll_result* right_slope_bcr = get_slope_bcr
+				(clseg_grp.the_vi_bot_right_og);
+			
+			const vec2_s32& left_pos
+				= vert_slp_pos_buf[clseg_grp.the_vi_bot_left_og];
+			const vec2_s32& mid_pos
+				= vert_slp_pos_buf[clseg_grp.the_vi_bot_mid_og];
+			const vec2_s32& right_pos
+				= vert_slp_pos_buf[clseg_grp.the_vi_bot_right_og];
+			
+			if (vs_bot_left_intersects_slp)
+			{
+				left_height_val = get_slope_height_val
+					( clseg_grp.the_vi_bot_left_og,
+					left_height_mask_index );
+			}
+			if (vs_bot_mid_intersects_slp)
+			{
+				height_val = get_slope_height_val
+					( clseg_grp.the_vi_bot_mid_og,
+					mid_height_mask_index );
+				hv_vs_blk_crd_y_pos = mid_pos.y;
+			}
+			if (vs_bot_right_intersects_slp)
+			{
+				right_height_val = get_slope_height_val
+					( clseg_grp.the_vi_bot_right_og,
+					right_height_mask_index );
+			}
+			
+			
 			
 			//height_mask_index_ptr = &left_height_mask_index;
 			
@@ -768,6 +841,82 @@ void sprite::block_collision_stuff_16x32()
 			//	= (block_base_stuff::height_mask_ptr_arr
 			//	[curr_bcr->the_bbvt])[*height_mask_index_ptr];
 			
+			
+			// Still use the height mask from the slope block that WOULD
+			// have been intersected by the middle sensor if the slope was
+			// continuous
+			if ( !vs_bot_mid_intersects_slp
+				&& !vert_fs_ret_buf[clseg_grp.the_vi_bot_mid_og] )
+			{
+				block_behavior_type left_bbvt, right_bbvt;
+				s32 left_blk_crd_y_pos_offset, right_blk_crd_y_pos_offset;
+				
+				auto left_response = [&]() -> void
+				{
+					if ( get_right_following_slope_bbvt( left_slope_bcr
+						->get_bbvt(), left_bbvt, 
+						left_blk_crd_y_pos_offset ) )
+					{
+						height_val = get_slope_height_val_with_bbvt
+							( left_bbvt, mid_height_mask_index );
+						hv_vs_blk_crd_y_pos = left_pos.y 
+							+ left_blk_crd_y_pos_offset;
+					}
+				};
+				
+				auto right_response = [&]() -> void
+				{
+					if ( get_left_following_slope_bbvt( right_slope_bcr
+						->get_bbvt(), right_bbvt, 
+						right_blk_crd_y_pos_offset ) )
+					{
+						height_val = get_slope_height_val_with_bbvt
+							( right_bbvt, mid_height_mask_index );
+						hv_vs_blk_crd_y_pos = right_pos.y 
+							+ right_blk_crd_y_pos_offset;
+					}
+				};
+				
+				// Figure out the tallest total height value, which
+				// includes the block's position
+				if ( vs_bot_left_intersects_slp 
+					&& !vs_bot_right_intersects_slp )
+				{
+					left_response();
+				}
+				
+				else if ( !vs_bot_left_intersects_slp 
+					&& vs_bot_right_intersects_slp )
+				{
+					right_response();
+				}
+				
+				// Use the tallest height value there is, including the y
+				// position of the slope bcr
+				else // if ( vs_bot_left_intersects_slp
+					// && vs_bot_right_intersects_slp )
+				{
+					if ( left_pos.y < right_pos.y )
+					{
+						left_response();
+					}
+					else if ( left_pos.y > right_pos.y )
+					{
+						right_response();
+					}
+					else // if ( left_pos.y == right_pos.y )
+					{
+						if ( left_height_val > right_height_val )
+						{
+							left_response();
+						}
+						else // if ( left_height_val <= right_height_val )
+						{
+							right_response();
+						}
+					}
+				}
+			}
 			
 			
 			
@@ -811,68 +960,67 @@ void sprite::block_collision_stuff_16x32()
 			//			= (block_base_stuff::height_mask_ptr_arr
 			//			[curr_bcr->the_bbvt])[height_mask_index];
 			//		
-			//		//if ( thv_vs_index == -1 )
-			//		if (!thv_vs_pos)
+			//		//if ( hv_vs_index == -1 )
+			//		if (!hv_vs_pos)
 			//		{
-			//			tallest_height_val = temp_height_val;
-			//			//thv_vs_index = i;
-			//			//thv_vs_bcr = curr_bcr;
-			//			thv_vs_pos = curr_pos;
-			//			thv_vs_touches_fully_solid 
+			//			height_val = temp_height_val;
+			//			//hv_vs_index = i;
+			//			//hv_vs_bcr = curr_bcr;
+			//			hv_vs_pos = curr_pos;
+			//			hv_vs_touches_fully_solid 
 			//				= curr_bcr_is_fully_solid;
 			//		}
-			//		//else if ( vert_slp_pos_buf[thv_vs_index].y
-			//		//	< vert_slp_pos_buf[i].y )
-			//		else if ( thv_vs_pos->y < curr_pos->y )
+			//		//else if ( vert_slp_pos_buf[hv_vs_index].y
+			//		//	> vert_slp_pos_buf[i].y )
+			//		else if ( hv_vs_pos->y > curr_pos->y )
 			//		{
-			//			tallest_height_val = temp_height_val;
-			//			//thv_vs_index = i;
-			//			//thv_vs_bcr = curr_bcr;
-			//			thv_vs_pos = curr_pos;
-			//			thv_vs_touches_fully_solid 
+			//			height_val = temp_height_val;
+			//			//hv_vs_index = i;
+			//			//hv_vs_bcr = curr_bcr;
+			//			hv_vs_pos = curr_pos;
+			//			hv_vs_touches_fully_solid 
 			//				= curr_bcr_is_fully_solid;
 			//		}
 			//		
-			//		//else if ( vert_slp_pos_buf[thv_vs_index].y
+			//		//else if ( vert_slp_pos_buf[hv_vs_index].y
 			//		//	== vert_slp_pos_buf[i].y )
-			//		else if ( thv_vs_pos->y == curr_pos->y )
+			//		else if ( hv_vs_pos->y == curr_pos->y )
 			//		{
-			//			if ( tallest_height_val
+			//			if ( height_val
 			//				< static_cast<s32>(temp_height_val) )
 			//			{
-			//				tallest_height_val = temp_height_val;
-			//				//thv_vs_index = i;
-			//				//thv_vs_bcr = curr_bcr;
-			//				thv_vs_pos = curr_pos;
-			//				thv_vs_touches_fully_solid 
+			//				height_val = temp_height_val;
+			//				//hv_vs_index = i;
+			//				//hv_vs_bcr = curr_bcr;
+			//				hv_vs_pos = curr_pos;
+			//				hv_vs_touches_fully_solid 
 			//					= curr_bcr_is_fully_solid;
 			//			}
 			//		}
 			//	}
 			//}
 			
-			//if ( thv_vs_index != -1 )
-			//if (thv_vs_pos)
-			//if (height_mask_index_ptr)
-			if ( tallest_height_val != -1 )
+			//if ( hv_vs_index != -1 )
+			//if (hv_vs_pos)
+			if ( height_val != -1 )
 			{
 				//block_coll_response_bot_slope_16x32
-				//	( tallest_height_val, 
-				//	vert_slp_pos_buf[thv_vs_index] );
+				//	( height_val, 
+				//	vert_slp_pos_buf[hv_vs_index] );
 				//block_coll_response_bot_slope_16x32
-				//	( tallest_height_val, *thv_vs_pos );
-				block_coll_response_bot_slope_16x32
-					( tallest_height_val, thv_vs_pos );
+				//	( height_val, *hv_vs_pos );
+				block_coll_response_bot_slope_16x32( height_val, 
+					hv_vs_blk_crd_y_pos );
 				
 				
 				//// This isn't the answer!
-				//if (!thv_vs_touches_fully_solid)
+				//if (!hv_vs_touches_fully_solid)
 				//{
 				//	//block_coll_response_bot_slope_16x32
-				//	//	( tallest_height_val, 
-				//	//	vert_slp_pos_buf[thv_vs_index] );
+				//	//	( height_val, 
+				//	//	vert_slp_pos_buf[hv_vs_index] );
 				//	block_coll_response_bot_slope_16x32
-				//		( tallest_height_val, *thv_vs_pos );
+				//		( height_val, *hv_vs_pos );
 				//}
 				//else
 				//{
