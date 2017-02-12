@@ -322,7 +322,8 @@ protected:		// variables and constants
 	static const fixed24p8 offset_x_for_left_vs;
 	static const fixed24p8 offset_x_for_right_vs;
 	
-	static const fixed24p8 vs_height_og;
+	static const fixed24p8 vs_height_non_bot_mid_og;
+	static const fixed24p8 vs_height_bot_mid_og;
 	static const fixed24p8 vs_height_ia;
 	
 	static const fixed24p8 offset_y_for_top_vs_ia;

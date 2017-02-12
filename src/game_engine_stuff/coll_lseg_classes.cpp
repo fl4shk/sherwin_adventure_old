@@ -98,8 +98,15 @@ const fixed24p8 coll_lseg_group_16x32::offset_x_for_left_vs
 const fixed24p8 coll_lseg_group_16x32::offset_x_for_right_vs
 	= make_f24p8(-1);
 
-const fixed24p8 coll_lseg_group_16x32::vs_height_og
+const fixed24p8 coll_lseg_group_16x32::vs_height_non_bot_mid_og
 	= make_f24p8(num_pixels_per_block_dim);
+//const fixed24p8 coll_lseg_group_16x32::vs_height_bot_mid_og
+//	= custom_abs(coll_lseg_group_16x32::offset_y_for_bot_vs)
+//	- make_f24p8(1);
+//const fixed24p8 coll_lseg_group_16x32::vs_height_bot_mid_og
+//	= make_f24p8(2);
+const fixed24p8 coll_lseg_group_16x32::vs_height_bot_mid_og
+	= vs_height_non_bot_mid_og;
 
 // In-air vertical sensors stretch two pixels vertically outside
 // the_coll_box (and thus are 6 pixels tall including the part of the
@@ -110,7 +117,7 @@ const fixed24p8 coll_lseg_group_16x32::vs_height_ia
 const fixed24p8 coll_lseg_group_16x32::offset_y_for_top_vs_ia
 	= make_f24p8(4);
 const fixed24p8 coll_lseg_group_16x32::offset_y_for_bot_vs
-	= make_f24p8(-4);
+	= make_f24p8(-8);
 
 
 coll_lseg_group_16x32::coll_lseg_group_16x32( const coll_box& s_coll_box,
@@ -297,19 +304,19 @@ const vert_coll_lseg coll_lseg_group_16x32::get_bot_left_vs_og
 	( const coll_box& s_coll_box )
 {
 	return vert_coll_lseg( vec2_f24p8( get_pos_x_for_left_vs(s_coll_box), 
-		get_pos_y_for_bot_vs(s_coll_box) ), vs_height_og );
+		get_pos_y_for_bot_vs(s_coll_box) ), vs_height_non_bot_mid_og );
 }
 const vert_coll_lseg coll_lseg_group_16x32::get_bot_mid_vs_og
 	( const coll_box& s_coll_box )
 {
 	return vert_coll_lseg( vec2_f24p8( get_pos_x_for_mid_vs(s_coll_box),
-		get_pos_y_for_bot_vs(s_coll_box) ), vs_height_og );
+		get_pos_y_for_bot_vs(s_coll_box) ), vs_height_bot_mid_og );
 }
 const vert_coll_lseg coll_lseg_group_16x32::get_bot_right_vs_og
 	( const coll_box& s_coll_box )
 {
 	return vert_coll_lseg( vec2_f24p8( get_pos_x_for_right_vs(s_coll_box), 
-		get_pos_y_for_bot_vs(s_coll_box) ), vs_height_og );
+		get_pos_y_for_bot_vs(s_coll_box) ), vs_height_non_bot_mid_og );
 }
 
 
