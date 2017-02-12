@@ -660,11 +660,6 @@ protected:		// functions
 			( conv_pix_crd_to_blk_crd(the_bcr_lseg_grp.vert_bot_pos()) )
 			- make_f24p8(get_shape_size_as_vec2().y) );
 	}
-	inline s32 conv_slp_height_val_to_offset( s32 tallest_height_val )
-		const
-	{
-		return ( num_pixels_per_block_dim - tallest_height_val );
-	}
 	inline void push_out_of_bot_slope_block
 		( s32 tallest_height_val, const vec2_s32& pos )
 	{

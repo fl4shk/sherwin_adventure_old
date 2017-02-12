@@ -77,3 +77,110 @@ bool bbvt_is_right_slope( block_behavior_type behavior_type )
 }
 
 
+
+bool get_left_following_slope_bbvt( block_behavior_type any_slope_bbvt_in, 
+	block_behavior_type& some_slope_bbvt_out, s32& blk_crd_y_pos_offset )
+{
+	if (!bbvt_is_slope(any_slope_bbvt_in))
+	{
+		return false;
+	}
+	
+	switch (any_slope_bbvt_in)
+	{
+		// 45 degree angle slope (up and to the right)
+		case bbvt_slope_p16_p16:
+			some_slope_bbvt_out = bbvt_slope_p16_p16;
+			blk_crd_y_pos_offset = 1;
+			break;;
+		
+		// 135 degree angle slope (up and to the left)
+		case bbvt_slope_n16_p16:
+			some_slope_bbvt_out = bbvt_slope_n16_p16;
+			blk_crd_y_pos_offset = -1;
+			break;;
+		
+		// Approximately 26.57 degrees angle slope, with two blocks (up and
+		// to the right)
+		case bbvt_slope_p32_p16_short:
+			some_slope_bbvt_out = bbvt_slope_p32_p16_tall;
+			blk_crd_y_pos_offset = 1;
+			break;
+		
+		case bbvt_slope_p32_p16_tall:
+			some_slope_bbvt_out = bbvt_slope_p32_p16_short;
+			blk_crd_y_pos_offset = 0;
+			break;
+		
+		
+		// Approximately 153.43 degrees angle slope, with two blocks (up
+		// and to the left)
+		case bbvt_slope_n32_p16_tall:
+			some_slope_bbvt_out = bbvt_slope_n32_p16_short;
+			blk_crd_y_pos_offset = -1;
+			break;
+		
+		case bbvt_slope_n32_p16_short:
+			some_slope_bbvt_out = bbvt_slope_n32_p16_short;
+			blk_crd_y_pos_offset = 0;
+			break;
+		
+		default:
+			return false;
+	}
+	
+	return true;
+}
+bool get_right_following_slope_bbvt( block_behavior_type any_slope_bbvt_in, 
+	block_behavior_type& some_slope_bbvt_out, s32& blk_crd_y_pos_offset )
+{
+	if (!bbvt_is_slope(any_slope_bbvt_in))
+	{
+		return false;
+	}
+	
+	switch (any_slope_bbvt_in)
+	{
+		// 45 degree angle slope (up and to the right)
+		case bbvt_slope_p16_p16:
+			some_slope_bbvt_out = bbvt_slope_p16_p16;
+			blk_crd_y_pos_offset = -1;
+			break;;
+		
+		// 135 degree angle slope (up and to the left)
+		case bbvt_slope_n16_p16:
+			some_slope_bbvt_out = bbvt_slope_n16_p16;
+			blk_crd_y_pos_offset = 1;
+			break;;
+		
+		// Approximately 26.57 degrees angle slope, with two blocks (up and
+		// to the right)
+		case bbvt_slope_p32_p16_short:
+			some_slope_bbvt_out = bbvt_slope_p32_p16_tall;
+			blk_crd_y_pos_offset = 0;
+			break;
+		
+		case bbvt_slope_p32_p16_tall:
+			some_slope_bbvt_out = bbvt_slope_p32_p16_short;
+			blk_crd_y_pos_offset = -1;
+			break;
+		
+		
+		// Approximately 153.43 degrees angle slope, with two blocks (up
+		// and to the left)
+		case bbvt_slope_n32_p16_tall:
+			some_slope_bbvt_out = bbvt_slope_n32_p16_short;
+			blk_crd_y_pos_offset = -1;
+			break;
+		
+		case bbvt_slope_n32_p16_short:
+			some_slope_bbvt_out = bbvt_slope_n32_p16_short;
+			blk_crd_y_pos_offset = 0;
+			break;
+		
+		default:
+			return false;
+	}
+	
+	return true;
+}

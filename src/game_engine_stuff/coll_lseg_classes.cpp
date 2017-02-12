@@ -100,13 +100,17 @@ const fixed24p8 coll_lseg_group_16x32::offset_x_for_right_vs
 
 const fixed24p8 coll_lseg_group_16x32::vs_height_og
 	= make_f24p8(num_pixels_per_block_dim);
+
+// In-air vertical sensors stretch two pixels vertically outside
+// the_coll_box (and thus are 6 pixels tall including the part of the
+// vertical sensor that is inside the_coll_box)
 const fixed24p8 coll_lseg_group_16x32::vs_height_ia
-	= make_f24p8(2);
+	= coll_lseg_group_16x32::offset_y_for_top_vs_ia + make_f24p8(2);
 
 const fixed24p8 coll_lseg_group_16x32::offset_y_for_top_vs_ia
-	= make_f24p8(3);
+	= make_f24p8(4);
 const fixed24p8 coll_lseg_group_16x32::offset_y_for_bot_vs
-	= make_f24p8(-3);
+	= make_f24p8(-4);
 
 
 coll_lseg_group_16x32::coll_lseg_group_16x32( const coll_box& s_coll_box,
