@@ -301,9 +301,10 @@ public:		// constants
 	// This size is arbitrary, but intended to be large enough to work with
 	static constexpr size_t max_size = 3;
 	
-protected:		// variables
-	block_coll_result bcr_arr_helper_data[max_size];
+public:		// variables
+	block_coll_result bcr_arr[max_size];
 	
+protected:		// variables
 	// The real size of the row or column of pointers to
 	// block_coll_result's
 	s32 real_size = max_size;
@@ -316,13 +317,9 @@ protected:		// variables
 	// (true)
 	u32 is_horiz = false;
 	
-public:		// variables
-	array_helper<block_coll_result> bcr_arr_helper;
-	
 public:		// functions
 	inline bcr_lseg_group()
 	{
-		init_bcr_arr_helper();
 	}
 	inline bcr_lseg_group( const horiz_coll_lseg& the_coll_lseg )
 	{
@@ -333,7 +330,6 @@ public:		// functions
 		init(the_coll_lseg);
 	}
 	
-	void init();
 	void init( const horiz_coll_lseg& the_coll_lseg );
 	void init( const vert_coll_lseg& the_coll_lseg );
 	
@@ -355,11 +351,11 @@ public:		// functions
 	
 	inline block_coll_result& at( u32 index )
 	{
-		return bcr_arr_helper.at(index);
+		return bcr_arr[index];
 	}
 	inline const block_coll_result& at( u32 index ) const
 	{
-		return bcr_arr_helper.at(index);
+		return bcr_arr[index];
 	}
 	
 	inline block_coll_result& horiz_left()
@@ -455,10 +451,6 @@ public:		// functions
 	
 	
 protected:		// functions
-	inline void init_bcr_arr_helper()
-	{
-		bcr_arr_helper.init( bcr_arr_helper_data, real_size );
-	}
 	inline const s32 get_end_pos_offset() const
 	{
 		return get_real_size() - 1;

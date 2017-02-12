@@ -113,8 +113,6 @@ block_coll_result_rect_group& block_coll_result_rect_group::operator =
 	moving_left = to_copy.moving_left;
 	moving_right = to_copy.moving_right;
 	
-	init_bcr_arr_2d_helper();
-	
 	return *this;
 }
 
@@ -127,8 +125,6 @@ void bcr_lseg_group::init( const horiz_coll_lseg& the_coll_lseg )
 	real_size = end_pos.x - start_pos.x + 1;
 	is_horiz = true;
 	
-	
-	init_bcr_arr_helper();
 	
 	//for ( s32 i=0; i<get_real_size(); ++i )
 	for ( s32 i=get_real_size()-1; i>=0; --i )
@@ -147,8 +143,6 @@ void bcr_lseg_group::init( const vert_coll_lseg& the_coll_lseg )
 	is_horiz = false;
 	
 	
-	init_bcr_arr_helper();
-	
 	//for ( s32 i=0; i<get_real_size(); ++i )
 	for ( s32 i=get_real_size()-1; i>=0; --i )
 	{
@@ -162,10 +156,10 @@ block_coll_result* bcr_lseg_group::horiz_any_bbvt_is_fully_solid
 {
 	for ( s32 i=0; i<get_real_size(); ++i )
 	{
-		if ( bbvt_is_fully_solid(bcr_arr_helper[i].get_bbvt()) )
+		if ( bbvt_is_fully_solid(at(i).get_bbvt()) )
 		{
 			pos = get_start_pos() + get_horiz_offset(i);
-			return &(bcr_arr_helper[i]);
+			return &(at(i));
 		}
 	}
 	
@@ -176,10 +170,10 @@ block_coll_result* bcr_lseg_group::vert_any_bbvt_is_fully_solid
 {
 	for ( s32 i=0; i<get_real_size(); ++i )
 	{
-		if ( bbvt_is_fully_solid(bcr_arr_helper[i].get_bbvt()) )
+		if ( bbvt_is_fully_solid(at(i).get_bbvt()) )
 		{
 			pos = get_start_pos() + get_vert_offset(i);
-			return &(bcr_arr_helper[i]);
+			return &(at(i));
 		}
 	}
 	
@@ -189,10 +183,10 @@ block_coll_result* bcr_lseg_group::vert_any_bbvt_is_slope( vec2_s32& pos )
 {
 	for ( s32 i=0; i<get_real_size(); ++i )
 	{
-		if ( bbvt_is_slope(bcr_arr_helper[i].get_bbvt()) )
+		if ( bbvt_is_slope(at(i).get_bbvt()) )
 		{
 			pos = get_start_pos() + get_vert_offset(i);
-			return &(bcr_arr_helper[i]);
+			return &(at(i));
 		}
 	}
 	

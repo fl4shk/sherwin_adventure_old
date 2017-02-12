@@ -237,7 +237,7 @@ public:		// functions
 // 16x32 but larger than 16x16
 class coll_lseg_group_16x32
 {
-protected:		// enums
+public:		// enums
 	
 	enum horiz_index
 	{
@@ -261,10 +261,11 @@ protected:		// enums
 		lim_vi_top,
 	};
 	
+public:		// enums
 	enum vert_index_bot
 	{
-		vi_bot_left,
 		vi_bot_mid,
+		vi_bot_left,
 		vi_bot_right,
 		
 		
@@ -294,9 +295,9 @@ public:		// index constants
 	static constexpr u32 hi_right_top_og = hi_right_top;
 	static constexpr u32 hi_right_bot_og = hi_right_bot;
 	
-	static constexpr u32 vi_bot_left_og = vi_bot_left;
-	static constexpr u32 vi_bot_mid_og = vi_bot_mid;
-	static constexpr u32 vi_bot_right_og = vi_bot_right;
+	//static constexpr u32 vi_bot_left_og = vi_bot_left;
+	//static constexpr u32 vi_bot_mid_og = vi_bot_mid;
+	//static constexpr u32 vi_bot_right_og = vi_bot_right;
 	
 	
 	static constexpr u32 hi_left_top_ia = hi_left_top;
@@ -308,9 +309,9 @@ public:		// index constants
 	static constexpr u32 vi_top_left_ia = vi_top_left;
 	static constexpr u32 vi_top_right_ia = vi_top_right;
 	
-	static constexpr u32 vi_bot_left_ia = vi_bot_left;
-	static constexpr u32 vi_bot_mid_ia = vi_bot_mid;
-	static constexpr u32 vi_bot_right_ia = vi_bot_right;
+	//static constexpr u32 vi_bot_left_ia = vi_bot_left;
+	//static constexpr u32 vi_bot_mid_ia = vi_bot_mid;
+	//static constexpr u32 vi_bot_right_ia = vi_bot_right;
 	
 	static constexpr size_t num_horiz_ctups = lim_hi,
 		num_vert_top_ctups = lim_vi_top, num_vert_bot_ctups = lim_vi_bot;

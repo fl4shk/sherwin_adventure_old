@@ -71,7 +71,7 @@ int real_main();
 
 int main()
 {
-	very_temp = clseg_grp_16x32_size;
+	//very_temp = clseg_grp_16x32_size;
 	//return main_2();
 	return real_main();
 	//snprintf( test_buf, test_buf_size, "%s", "asdf" );

@@ -91,12 +91,12 @@ bool coll_lseg_extras::collinear_lsegs_intersect
 const fixed24p8 coll_lseg_group_16x32::offset_y_for_top_hs_og
 	= make_f24p8(-4);
 const fixed24p8 coll_lseg_group_16x32::offset_y_for_bot_hs_og
-	= make_f24p8(4);
+	= (fixed24p8){-coll_lseg_group_16x32::offset_y_for_top_hs_og.data};
 
 const fixed24p8 coll_lseg_group_16x32::offset_x_for_left_vs
-	= make_f24p8(1);
+	= make_f24p8(3);
 const fixed24p8 coll_lseg_group_16x32::offset_x_for_right_vs
-	= make_f24p8(-1);
+	= (fixed24p8){-coll_lseg_group_16x32::offset_x_for_left_vs.data};
 
 const fixed24p8 coll_lseg_group_16x32::vs_height_non_bot_mid_og
 	= make_f24p8(num_pixels_per_block_dim);
@@ -116,8 +116,10 @@ const fixed24p8 coll_lseg_group_16x32::vs_height_ia
 
 const fixed24p8 coll_lseg_group_16x32::offset_y_for_top_vs_ia
 	= make_f24p8(4);
+//const fixed24p8 coll_lseg_group_16x32::offset_y_for_bot_vs
+//	= make_f24p8(-4);
 const fixed24p8 coll_lseg_group_16x32::offset_y_for_bot_vs
-	= make_f24p8(-8);
+	= (fixed24p8){-coll_lseg_group_16x32::offset_y_for_top_vs_ia.data};
 
 
 coll_lseg_group_16x32::coll_lseg_group_16x32( const coll_box& s_coll_box,
@@ -142,11 +144,11 @@ void coll_lseg_group_16x32::init( const coll_box& s_coll_box,
 		horiz_ctups[hi_right_bot_og].clseg 
 			= get_right_bot_hs_og(s_coll_box);
 		
-		vert_bot_ctups[vi_bot_left_og].clseg 
+		vert_bot_ctups[vi_bot_left].clseg 
 			= get_bot_left_vs_og(s_coll_box);
-		vert_bot_ctups[vi_bot_mid_og].clseg 
+		vert_bot_ctups[vi_bot_mid].clseg 
 			= get_bot_mid_vs_og(s_coll_box);
-		vert_bot_ctups[vi_bot_right_og].clseg 
+		vert_bot_ctups[vi_bot_right].clseg 
 			= get_bot_right_vs_og(s_coll_box);
 	}
 	else // if ( !get_on_ground() )
@@ -165,11 +167,11 @@ void coll_lseg_group_16x32::init( const coll_box& s_coll_box,
 		vert_top_ctups[vi_top_right_ia].clseg 
 			= get_top_right_vs_ia(s_coll_box);
 		
-		vert_bot_ctups[vi_bot_left_ia].clseg 
+		vert_bot_ctups[vi_bot_left].clseg 
 			= get_bot_left_vs_ia(s_coll_box);
-		vert_bot_ctups[vi_bot_mid_ia].clseg 
+		vert_bot_ctups[vi_bot_mid].clseg 
 			= get_bot_mid_vs_ia(s_coll_box);
-		vert_bot_ctups[vi_bot_right_ia].clseg 
+		vert_bot_ctups[vi_bot_right].clseg 
 			= get_bot_right_vs_ia(s_coll_box);
 	}
 	

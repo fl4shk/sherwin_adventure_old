@@ -605,9 +605,9 @@ void sprite::block_collision_stuff_16x32()
 	
 	//coll_lseg_group_16x32 clseg_grp;
 	
-	// Don't forget to remove these two lines!
-	set_curr_on_ground(true);
-	vel.y = (fixed24p8){0};
+	//// Don't forget to remove these two lines!
+	//set_curr_on_ground(true);
+	//vel.y = (fixed24p8){0};
 	
 	//clseg_grp.init( the_coll_box, get_curr_on_ground() );
 	coll_lseg_group_16x32 clseg_grp( the_coll_box, get_curr_on_ground() );
@@ -621,14 +621,6 @@ void sprite::block_collision_stuff_16x32()
 		= decltype(clseg_grp)::hi_right_top_og;
 	static constexpr u32 hi_right_bot_og 
 		= decltype(clseg_grp)::hi_right_bot_og;
-	
-	static constexpr u32 vi_bot_left_og 
-		= decltype(clseg_grp)::vi_bot_left_og;
-	static constexpr u32 vi_bot_mid_og 
-		= decltype(clseg_grp)::vi_bot_mid_og;
-	static constexpr u32 vi_bot_right_og 
-		= decltype(clseg_grp)::vi_bot_right_og;
-	
 	
 	static constexpr u32 hi_left_top_ia 
 		= decltype(clseg_grp)::hi_left_top_ia;
@@ -645,13 +637,6 @@ void sprite::block_collision_stuff_16x32()
 	static constexpr u32 vi_top_right_ia 
 		= decltype(clseg_grp)::vi_top_right_ia;
 	
-	static constexpr u32 vi_bot_left_ia 
-		= decltype(clseg_grp)::vi_bot_left_ia;
-	static constexpr u32 vi_bot_mid_ia 
-		= decltype(clseg_grp)::vi_bot_mid_ia;
-	static constexpr u32 vi_bot_right_ia 
-		= decltype(clseg_grp)::vi_bot_right_ia;
-	
 	static constexpr size_t num_horiz_ctups 
 		= decltype(clseg_grp)::num_horiz_ctups;
 	static constexpr size_t num_vert_top_ctups 
@@ -660,13 +645,21 @@ void sprite::block_collision_stuff_16x32()
 		= decltype(clseg_grp)::num_vert_bot_ctups;
 	
 	
+	static constexpr u32 vi_bot_left = decltype(clseg_grp)::vi_bot_left;
+	static constexpr u32 vi_bot_mid = decltype(clseg_grp)::vi_bot_mid;
+	static constexpr u32 vi_bot_right = decltype(clseg_grp)::vi_bot_right;
+	
+	
+	
 	block_coll_result* horiz_fs_ret_buf[num_horiz_ctups];
 	block_coll_result* vert_top_fs_ret_buf[num_vert_top_ctups];
+	block_coll_result* vert_top_slp_ret_buf[num_vert_top_ctups];
 	block_coll_result* vert_bot_fs_ret_buf[num_vert_bot_ctups];
 	block_coll_result* vert_bot_slp_ret_buf[num_vert_bot_ctups];
 	
 	vec2_s32 horiz_fs_pos_buf[num_horiz_ctups];
 	vec2_s32 vert_top_fs_pos_buf[num_vert_top_ctups];
+	vec2_s32 vert_top_slp_pos_buf[num_vert_top_ctups];
 	vec2_s32 vert_bot_fs_pos_buf[num_vert_bot_ctups];
 	vec2_s32 vert_bot_slp_pos_buf[num_vert_bot_ctups];
 	
@@ -690,27 +683,32 @@ void sprite::block_collision_stuff_16x32()
 		}
 	};
 	
-	auto iterate_vert_top = [&]( const u32 first, const u32 last, 
-		bool& some_top_side_fully_solid ) 
-		-> void
+	auto iterate_vert_top = [&]( bool& some_top_side_fully_solid, 
+		bool& some_top_side_slope ) -> void
 	{
-		for ( u32 i=first; i<=last; ++i )
+		for ( u32 i=vi_top_left_ia; i<=vi_top_right_ia; ++i )
 		{
 			vert_top_fs_ret_buf[i] = clseg_grp.get_vert_top_ctup(i).bcrlg
 				.vert_any_bbvt_is_fully_solid(vert_top_fs_pos_buf[i]);
+			vert_top_slp_ret_buf[i] = clseg_grp.get_vert_top_ctup(i).bcrlg
+				.vert_any_bbvt_is_slope(vert_top_slp_pos_buf[i]);
 			
 			if (vert_top_fs_ret_buf[i])
 			{
 				some_top_side_fully_solid = true;
 			}
+			if (vert_top_slp_ret_buf[i])
+			{
+				some_top_side_slope = true;
+			}
 		}
 	};
 	
-	auto iterate_vert_bot = [&]( const u32 first, const u32 last, 
-		bool& some_bot_side_fully_solid, bool& some_bot_side_slope ) 
-		-> void
+	auto iterate_vert_bot = [&]( bool& some_bot_side_fully_solid, 
+		bool& some_bot_side_slope ) -> void
 	{
-		for ( u32 i=first; i<=last; ++i )
+		u32 i;
+		for ( i=vi_bot_mid; i<vi_bot_left; ++i )
 		{
 			vert_bot_fs_ret_buf[i] = clseg_grp.get_vert_bot_ctup(i).bcrlg
 				.vert_any_bbvt_is_fully_solid(vert_bot_fs_pos_buf[i]);
@@ -721,6 +719,16 @@ void sprite::block_collision_stuff_16x32()
 			{
 				some_bot_side_fully_solid = true;
 			}
+			if (vert_bot_slp_ret_buf[i])
+			{
+				some_bot_side_slope = true;
+			}
+		}
+		for ( ; i<=vi_bot_right; ++i )
+		{
+			vert_bot_slp_ret_buf[i] = clseg_grp.get_vert_bot_ctup(i).bcrlg
+				.vert_any_bbvt_is_slope(vert_bot_slp_pos_buf[i]);
+			
 			if (vert_bot_slp_ret_buf[i])
 			{
 				some_bot_side_slope = true;
@@ -754,6 +762,182 @@ void sprite::block_collision_stuff_16x32()
 			[height_mask_index];
 	};
 	
+	auto exec_bot_collision_stuff = [&]
+		( const bool some_bot_side_fully_solid,
+		const bool some_bot_side_slope ) -> void
+	{
+		// Handle slopes in a special way
+		if (some_bot_side_slope)
+		{
+			s32 height_val = -1;
+			s32 hv_vs_blk_crd_y_pos = 9001;
+			
+			const bool vs_bot_mid_intersects_fs
+				= ( vert_bot_fs_ret_buf[vi_bot_mid] != NULL );
+			
+			const u32 height_mask_index_buf[num_vert_bot_ctups]
+				= { get_height_mask_index(vi_bot_mid),
+				get_height_mask_index(vi_bot_left),
+				get_height_mask_index(vi_bot_right) };
+			
+			
+			const vec2_s32& mid_pos = vert_bot_slp_pos_buf[vi_bot_mid];
+			const vec2_s32& left_pos = vert_bot_slp_pos_buf[vi_bot_left];
+			const vec2_s32& right_pos = vert_bot_slp_pos_buf[vi_bot_right];
+			
+			
+			if (vert_bot_slp_ret_buf[vi_bot_mid])
+			{
+				height_val = get_slope_height_val( vi_bot_mid,
+					height_mask_index_buf[vi_bot_mid] );
+				hv_vs_blk_crd_y_pos = mid_pos.y;
+			}
+			else // if (!vert_bot_slp_ret_buf[vi_bot_mid])
+			{
+				if (!vs_bot_mid_intersects_fs)
+				{
+					// Still use the height mask from the slope block that
+					// WOULD have been intersected by the middle sensor if
+					// the slope was continuous
+					
+					block_behavior_type temp_bbvt;
+					s32 temp_blk_crd_y_pos_offset;
+					
+					auto left_slope_response = [&]() -> void
+					{
+						// The main trick:  force usage of the bottom
+						// MIDDLE vertical sensor's level coordinates x
+						// position, and also use the specific height mask
+						// that would be EXPECTED to be used if the slope
+						// were continuous
+						if ( get_right_following_slope_bbvt
+							( get_slope_bcr(vi_bot_left)->get_bbvt(), 
+							temp_bbvt, temp_blk_crd_y_pos_offset ) )
+						{
+							height_val = get_slope_height_val_with_bbvt
+								( temp_bbvt, 
+								height_mask_index_buf[vi_bot_mid] );
+							hv_vs_blk_crd_y_pos = left_pos.y 
+								+ temp_blk_crd_y_pos_offset;
+						}
+					};
+					
+					auto right_slope_response = [&]() -> void
+					{
+						// The main trick:  force usage of the bottom
+						// MIDDLE vertical sensor's level coordinates x
+						// position, and also use the specific height mask
+						// that would be EXPECTED to be used if the slope
+						// were continuous
+						if ( get_left_following_slope_bbvt
+							( get_slope_bcr(vi_bot_right)->get_bbvt(), 
+							temp_bbvt, temp_blk_crd_y_pos_offset ) )
+						{
+							height_val = get_slope_height_val_with_bbvt
+								( temp_bbvt,
+								height_mask_index_buf[vi_bot_mid] );
+							hv_vs_blk_crd_y_pos = right_pos.y 
+								+ temp_blk_crd_y_pos_offset;
+						}
+					};
+					
+					// Figure out the tallest total height value, which
+					// includes the block's position
+					if ( vert_bot_slp_ret_buf[vi_bot_left] 
+						&& !vert_bot_slp_ret_buf[vi_bot_right] )
+					{
+						left_slope_response();
+					}
+					
+					else if ( !vert_bot_slp_ret_buf[vi_bot_left]
+						&& vert_bot_slp_ret_buf[vi_bot_right] )
+					{
+						right_slope_response();
+					}
+					
+					// Use the tallest height value there is, including the
+					// y position of the slope bcr
+					else // if ( vert_bot_slp_ret_buf[vi_bot_left]
+						// && vert_bot_slp_ret_buf[vi_bot_right] )
+					{
+						// Prioritize block y positions (use ones that are
+						// technically at a LOWER y position (though that
+						// appear to be at a HIGHER y position))
+						if ( left_pos.y < right_pos.y )
+						{
+							left_slope_response();
+						}
+						else if ( left_pos.y > right_pos.y )
+						{
+							right_slope_response();
+						}
+						
+						// If the y positions are equal, then clearly the
+						// plain old height value should be used for
+						// comparison
+						else // if ( left_pos.y == right_pos.y )
+						{
+							// Slightly wasteful
+							s32 height_val_buf[num_vert_bot_ctups] 
+								= { -1, -1, -1 };
+							for ( u32 i=vi_bot_left; i<=vi_bot_right; ++i )
+							{
+								if (vert_bot_slp_ret_buf[i])
+								{
+									height_val_buf[i] 
+										= get_slope_height_val( i,
+										height_mask_index_buf[i] );
+								}
+							}
+							
+							if ( height_val_buf[vi_bot_left] 
+								> height_val_buf[vi_bot_right] )
+							{
+								left_slope_response();
+							}
+							else // if ( height_val_buf[vi_bot_left] 
+								// <= height_val_buf[vi_bot_right]  )
+							{
+								right_slope_response();
+							}
+						}
+					}
+				}
+				else // if (vs_bot_mid_intersects_fs)
+				{
+					// This calls set_curr_on_ground(true)
+					block_coll_response_bot_16x32(clseg_grp
+						.get_vert_bot_ctup(vi_bot_left).bcrlg);
+				}
+			}
+			
+			if ( height_val != -1 )
+			{
+				// This calls set_curr_on_ground(true)
+				block_coll_response_bot_slope_16x32( height_val, 
+					hv_vs_blk_crd_y_pos );
+			}
+		}
+		else
+		{
+			set_curr_on_slope(false);
+			
+			// The sprite is now in air if there are no relevant blocks
+			// intersected by the vertical sensors
+			if (!some_bot_side_fully_solid)
+			{
+				//// This needs to be turned back on eventually
+				set_curr_on_ground(false);
+			}
+			else // if (some_bot_side_fully_solid)
+			{
+				// This calls set_curr_on_ground(true)
+				block_coll_response_bot_16x32(clseg_grp.get_vert_bot_ctup
+					(vi_bot_left).bcrlg);
+			}
+		}
+	};
+	
 	if ( get_curr_on_ground() )
 	{
 		bool left_side_fully_solid_og = false, 
@@ -767,8 +951,7 @@ void sprite::block_collision_stuff_16x32()
 		iterate_horiz( hi_right_top_og, hi_right_bot_og, 
 			right_side_fully_solid_og );
 		
-		iterate_vert_bot( vi_bot_left_og, vi_bot_right_og, 
-			bot_side_fully_solid_og, bot_side_slope_og );
+		iterate_vert_bot( bot_side_fully_solid_og, bot_side_slope_og );
 		
 		
 		// (Temporarily (?)) permit walking through the vertical side of
@@ -785,197 +968,55 @@ void sprite::block_collision_stuff_16x32()
 				(hi_right_top_og).bcrlg);
 		}
 		
-		// Handle slopes in a special way
-		if (bot_side_slope_og)
-		{
-			set_curr_on_slope(true);
-			
-			s32 height_val = -1;
-			s32 hv_vs_blk_crd_y_pos = 9000;
-			
-			const bool vs_bot_left_intersects_slp
-				= ( vert_bot_slp_ret_buf[vi_bot_left_og]
-				!= NULL );
-			const bool vs_bot_mid_intersects_slp
-				= ( vert_bot_slp_ret_buf[vi_bot_mid_og]
-				!= NULL );
-			const bool vs_bot_right_intersects_slp
-				= ( vert_bot_slp_ret_buf[vi_bot_right_og]
-				!= NULL );
-			
-			const bool vs_bot_left_intersects_fs
-				= ( vert_bot_fs_ret_buf[vi_bot_left_og]
-				!= NULL );
-			const bool vs_bot_mid_intersects_fs
-				= ( vert_bot_fs_ret_buf[vi_bot_mid_og]
-				!= NULL );
-			const bool vs_bot_right_intersects_fs
-				= ( vert_bot_fs_ret_buf[vi_bot_right_og]
-				!= NULL );
-			
-			const u32 left_height_mask_index 
-				= get_height_mask_index(vi_bot_left_og);
-			const u32 mid_height_mask_index 
-				= get_height_mask_index(vi_bot_mid_og);
-			const u32 right_height_mask_index 
-				= get_height_mask_index(vi_bot_right_og);
-			
-			s32 left_height_val = -1, right_height_val = -1;
-			
-			const block_coll_result* left_slope_bcr = get_slope_bcr
-				(vi_bot_left_og);
-			const block_coll_result* right_slope_bcr = get_slope_bcr
-				(vi_bot_right_og);
-			
-			const vec2_s32& left_pos
-				= vert_bot_slp_pos_buf[vi_bot_left_og];
-			const vec2_s32& mid_pos
-				= vert_bot_slp_pos_buf[vi_bot_mid_og];
-			const vec2_s32& right_pos
-				= vert_bot_slp_pos_buf[vi_bot_right_og];
-			
-			if (vs_bot_left_intersects_slp)
-			{
-				left_height_val = get_slope_height_val( vi_bot_left_og,
-					left_height_mask_index );
-			}
-			if (vs_bot_mid_intersects_slp)
-			{
-				height_val = get_slope_height_val( vi_bot_mid_og,
-					mid_height_mask_index );
-				hv_vs_blk_crd_y_pos = mid_pos.y;
-			}
-			if (vs_bot_right_intersects_slp)
-			{
-				right_height_val = get_slope_height_val( vi_bot_right_og,
-					right_height_mask_index );
-			}
-			
-			
-			if (!vs_bot_mid_intersects_slp)
-			{
-				if (!vs_bot_mid_intersects_fs)
-				{
-					// Still use the height mask from the slope block that
-					// WOULD have been intersected by the middle sensor if
-					// the slope was continuous
-					
-					//block_behavior_type left_bbvt, right_bbvt;
-					//s32 left_blk_crd_y_pos_offset, 
-					//	right_blk_crd_y_pos_offset;
-					
-					block_behavior_type temp_bbvt;
-					s32 temp_blk_crd_y_pos_offset;
-					
-					auto left_slope_response = [&]() -> void
-					{
-						// The dirty little trick 
-						if ( get_right_following_slope_bbvt
-							( left_slope_bcr->get_bbvt(), temp_bbvt, 
-							temp_blk_crd_y_pos_offset ) )
-						{
-							height_val = get_slope_height_val_with_bbvt
-								( temp_bbvt, mid_height_mask_index );
-							hv_vs_blk_crd_y_pos = left_pos.y 
-								+ temp_blk_crd_y_pos_offset;
-						}
-					};
-					
-					auto right_slope_response = [&]() -> void
-					{
-						if ( get_left_following_slope_bbvt
-							( right_slope_bcr->get_bbvt(), temp_bbvt, 
-							temp_blk_crd_y_pos_offset ) )
-						{
-							height_val = get_slope_height_val_with_bbvt
-								( temp_bbvt, mid_height_mask_index );
-							hv_vs_blk_crd_y_pos = right_pos.y 
-								+ temp_blk_crd_y_pos_offset;
-						}
-					};
-					
-					// Figure out the tallest total height value, which
-					// includes the block's position
-					if ( vs_bot_left_intersects_slp 
-						&& !vs_bot_right_intersects_slp )
-					{
-						left_slope_response();
-					}
-					
-					else if ( !vs_bot_left_intersects_slp 
-						&& vs_bot_right_intersects_slp )
-					{
-						right_slope_response();
-					}
-					
-					// Use the tallest height value there is, including the
-					// y position of the slope bcr
-					else // if ( vs_bot_left_intersects_slp
-						// && vs_bot_right_intersects_slp )
-					{
-						// Check if y positions differ first
-						if ( left_pos.y < right_pos.y )
-						{
-							left_slope_response();
-						}
-						else if ( left_pos.y > right_pos.y )
-						{
-							right_slope_response();
-						}
-						
-						// If the y positions are equal, then check the
-						// height values
-						else // if ( left_pos.y == right_pos.y )
-						{
-							if ( left_height_val > right_height_val )
-							{
-								left_slope_response();
-							}
-							else // if ( left_height_val 
-								// <= right_height_val )
-							{
-								right_slope_response();
-							}
-						}
-					}
-				}
-				else // if (vs_bot_mid_intersects_fs)
-				{
-					block_coll_response_bot_16x32(clseg_grp
-						.get_vert_bot_ctup(vi_bot_left_og).bcrlg);
-				}
-			}
-			
-			if ( height_val != -1 )
-			{
-				block_coll_response_bot_slope_16x32( height_val, 
-					hv_vs_blk_crd_y_pos );
-			}
-			
-		}
-		else
-		{
-			set_curr_on_slope(false);
-			
-			// The sprite is now in air if there are no relevant blocks
-			// intersected by the vertical sensors
-			if (!bot_side_fully_solid_og)
-			{
-				// This needs to be turned back on eventually
-				//set_curr_on_ground(false);
-			}
-			//else // if (bot_side_fully_solid_og)
-			//{
-			//	block_coll_response_bot_16x32(clseg_grp.get_vert_ctup
-			//		(vi_bot_left_og).bcrlg);
-			//}
-		}
+		exec_bot_collision_stuff( bot_side_fully_solid_og,
+			bot_side_slope_og );
 	}
 	else // if ( !get_curr_on_ground() )
 	{
 		// Don't forget to remove the code at the top of this function that
 		// sets on_ground.curr to true every time!
 		
+		bool left_side_fully_solid_ia = false, 
+			right_side_fully_solid_ia = false,
+			top_side_fully_solid_ia = false,
+			top_side_slope_ia = false,
+			bot_side_fully_solid_ia = false,
+			bot_side_slope_ia = false;
+		
+		
+		iterate_horiz( hi_left_top_ia, hi_left_mid_ia, 
+			left_side_fully_solid_ia );
+		iterate_horiz( hi_right_top_ia, hi_right_mid_ia, 
+			right_side_fully_solid_ia );
+		iterate_vert_top( top_side_fully_solid_ia, top_side_slope_ia );
+		
+		iterate_vert_bot( bot_side_fully_solid_ia, bot_side_slope_ia );
+		
+		
+		// (Temporarily (?)) permit walking through the vertical side of
+		// slopes
+		if ( left_side_fully_solid_ia && !right_side_fully_solid_ia )
+		{
+			block_coll_response_left_16x32(clseg_grp.get_horiz_ctup
+				(hi_left_top_ia).bcrlg);
+		}
+		
+		else if ( !left_side_fully_solid_ia && right_side_fully_solid_ia )
+		{
+			block_coll_response_right_16x32(clseg_grp.get_horiz_ctup
+				(hi_right_top_ia).bcrlg);
+		}
+		
+		if ( top_side_fully_solid_ia || top_side_slope_ia )
+		{
+			block_coll_response_top_16x32(clseg_grp.get_vert_top_ctup
+				(vi_top_left_ia).bcrlg);
+		}
+		//else
+		{
+			exec_bot_collision_stuff( bot_side_fully_solid_ia,
+				bot_side_slope_ia );
+		}
 	}
 	
 	////vel.x.data += clg_16x32_size;
