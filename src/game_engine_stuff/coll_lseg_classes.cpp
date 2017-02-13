@@ -122,6 +122,10 @@ const fixed24p8 coll_lseg_group_16x32::vs_height_top
 	= coll_lseg_group_16x32::offset_y_for_top_vs + make_f24p8(2);
 const fixed24p8 coll_lseg_group_16x32::vs_height_bot_ia
 	= coll_lseg_group_16x32::offset_y_for_top_vs + make_f24p8(1);
+//const fixed24p8 coll_lseg_group_16x32::vs_height_bot_ia
+//	= coll_lseg_group_16x32::offset_y_for_top_vs + make_f24p8(4);
+//const fixed24p8 coll_lseg_group_16x32::vs_height_bot_ia
+//	= coll_lseg_group_16x32::offset_y_for_top_vs + make_f24p8(8);
 
 const fixed24p8 coll_lseg_group_16x32::offset_y_for_top_vs
 	= make_f24p8(4);

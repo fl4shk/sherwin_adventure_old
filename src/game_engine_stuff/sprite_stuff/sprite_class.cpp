@@ -747,6 +747,26 @@ void sprite::block_collision_stuff_16x32()
 			[height_mask_index];
 	};
 	
+	auto assign_slope_height_val_and_y_pos = [&]
+		( s32& height_val, s32& hv_vs_blk_crd_y_pos, 
+		const s32 temp_height_val, const vec2_s32& pos,
+		const s32 some_offset ) -> void
+	{
+		
+		const s32 temp_pix_crd_y_pos 
+			= conv_blk_crd_to_pix_crd(pos.y)
+			+ conv_slp_height_val_to_offset(temp_height_val);
+		
+		// Prevent instantly teleporting downwards when in the air
+		if ( get_curr_on_ground() 
+			|| clseg_grp.get_vert_bot_ctup(vi_bot_mid).clseg
+			.bot_pt().y >= make_f24p8(temp_pix_crd_y_pos) )
+		{
+			height_val = temp_height_val;
+			hv_vs_blk_crd_y_pos = pos.y + some_offset;
+		}
+	};
+	
 	auto exec_bot_collision_stuff = [&]
 		( const bool some_bot_side_fully_solid,
 		const bool some_bot_side_slope ) -> void
@@ -769,18 +789,32 @@ void sprite::block_collision_stuff_16x32()
 			const vec2_s32& mid_pos = vert_bot_slp_pos_buf[vi_bot_mid];
 			const vec2_s32& left_pos = vert_bot_slp_pos_buf[vi_bot_left];
 			const vec2_s32& right_pos = vert_bot_slp_pos_buf[vi_bot_right];
-			
+			//conv_blk_crd_to_pix_crd
 			
 			if (vert_bot_slp_ret_buf[vi_bot_mid])
 			{
-				height_val = get_slope_height_val( vi_bot_mid,
-					height_mask_index_buf[vi_bot_mid] );
-				hv_vs_blk_crd_y_pos = mid_pos.y;
+				const s32 temp_height_val = get_slope_height_val
+					( vi_bot_mid, height_mask_index_buf[vi_bot_mid] );
+				
+				assign_slope_height_val_and_y_pos( height_val, 
+					hv_vs_blk_crd_y_pos, temp_height_val, mid_pos, 0 );
 			}
 			else // if (!vert_bot_slp_ret_buf[vi_bot_mid])
 			{
 				if (!vs_bot_mid_intersects_fs)
 				{
+					// Slightly wasteful
+					s32 height_val_buf[num_vert_bot_ctups] 
+						= { -1, -1, -1 };
+					for ( u32 i=vi_bot_left; i<=vi_bot_right; ++i )
+					{
+						if (vert_bot_slp_ret_buf[i])
+						{
+							height_val_buf[i] = get_slope_height_val( i,
+								height_mask_index_buf[i] );
+						}
+					}
+					
 					// Still use the height mask from the slope block that
 					// WOULD have been intersected by the middle sensor if
 					// the slope was continuous
@@ -799,11 +833,14 @@ void sprite::block_collision_stuff_16x32()
 							( get_slope_bcr(vi_bot_left)->get_bbvt(), 
 							temp_bbvt, temp_blk_crd_y_pos_offset ) )
 						{
-							height_val = get_slope_height_val_with_bbvt
-								( temp_bbvt, 
+							const s32 temp_height_val 
+								= get_slope_height_val_with_bbvt
+								( temp_bbvt,
 								height_mask_index_buf[vi_bot_mid] );
-							hv_vs_blk_crd_y_pos = left_pos.y 
-								+ temp_blk_crd_y_pos_offset;
+							
+							assign_slope_height_val_and_y_pos( height_val, 
+								hv_vs_blk_crd_y_pos, temp_height_val, 
+								left_pos, temp_blk_crd_y_pos_offset );
 						}
 					};
 					
@@ -818,11 +855,14 @@ void sprite::block_collision_stuff_16x32()
 							( get_slope_bcr(vi_bot_right)->get_bbvt(), 
 							temp_bbvt, temp_blk_crd_y_pos_offset ) )
 						{
-							height_val = get_slope_height_val_with_bbvt
+							const s32 temp_height_val 
+								= get_slope_height_val_with_bbvt
 								( temp_bbvt,
 								height_mask_index_buf[vi_bot_mid] );
-							hv_vs_blk_crd_y_pos = right_pos.y 
-								+ temp_blk_crd_y_pos_offset;
+							
+							assign_slope_height_val_and_y_pos( height_val, 
+								hv_vs_blk_crd_y_pos, temp_height_val, 
+								right_pos, temp_blk_crd_y_pos_offset );
 						}
 					};
 					
@@ -862,19 +902,6 @@ void sprite::block_collision_stuff_16x32()
 						// comparison
 						else // if ( left_pos.y == right_pos.y )
 						{
-							// Slightly wasteful
-							s32 height_val_buf[num_vert_bot_ctups] 
-								= { -1, -1, -1 };
-							for ( u32 i=vi_bot_left; i<=vi_bot_right; ++i )
-							{
-								if (vert_bot_slp_ret_buf[i])
-								{
-									height_val_buf[i] 
-										= get_slope_height_val( i,
-										height_mask_index_buf[i] );
-								}
-							}
-							
 							if ( height_val_buf[vi_bot_left] 
 								> height_val_buf[vi_bot_right] )
 							{

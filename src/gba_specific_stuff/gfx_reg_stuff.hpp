@@ -209,7 +209,7 @@ static const u32 num_pixels_per_block_col = 16;
 static const u32 num_pixels_per_block_dim = 16;
 
 template< typename type >
-inline const type conv_pix_crd_to_blk_crd( type to_convert )
+inline const type conv_blk_crd_to_pix_crd( type to_convert )
 {
 	return to_convert * static_cast<type>(num_pixels_per_block_dim);
 }
@@ -218,6 +218,12 @@ template< typename type >
 inline const type conv_pix_crd_to_blk_local_crd( type to_convert )
 {
 	return to_convert % static_cast<type>(num_pixels_per_block_dim);
+}
+
+template< typename type >
+inline const type conv_pix_crd_to_blk_crd( type to_convert )
+{
+	return to_convert / static_cast<type>(num_pixels_per_block_dim);
 }
 
 template< typename type >

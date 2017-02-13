@@ -636,35 +636,35 @@ protected:		// functions
 		( const bcr_lseg_group& the_bcr_lseg_grp )
 	{
 		set_curr_in_level_pos_x( make_f24p8
-			( conv_pix_crd_to_blk_crd( the_bcr_lseg_grp.horiz_left_pos() 
+			( conv_blk_crd_to_pix_crd( the_bcr_lseg_grp.horiz_left_pos() 
 			+ 1 ) ) - cb_pos_offset.x );
 	}
 	inline void push_out_of_right_block
 		( const bcr_lseg_group& the_bcr_lseg_grp )
 	{
 		set_curr_in_level_pos_x( make_f24p8
-			( conv_pix_crd_to_blk_crd(the_bcr_lseg_grp.horiz_right_pos()) )
+			( conv_blk_crd_to_pix_crd(the_bcr_lseg_grp.horiz_right_pos()) )
 			- the_coll_box.size.x - cb_pos_offset.x );
 	}
 	inline void push_out_of_top_block
 		( const bcr_lseg_group& the_bcr_lseg_grp )
 	{
 		set_curr_in_level_pos_y( make_f24p8
-			( conv_pix_crd_to_blk_crd( the_bcr_lseg_grp.vert_top_pos() 
+			( conv_blk_crd_to_pix_crd( the_bcr_lseg_grp.vert_top_pos() 
 			+ 1 ) ) - cb_pos_offset.y );
 	}
 	inline void push_out_of_bot_block
 		( const bcr_lseg_group& the_bcr_lseg_grp )
 	{
 		set_curr_in_level_pos_y( make_f24p8
-			( conv_pix_crd_to_blk_crd(the_bcr_lseg_grp.vert_bot_pos()) )
+			( conv_blk_crd_to_pix_crd(the_bcr_lseg_grp.vert_bot_pos()) )
 			- make_f24p8(get_shape_size_as_vec2().y) );
 	}
 	inline void push_out_of_bot_slope_block( s32 height_val, 
 		s32 blk_crd_y_pos )
 	{
 		set_curr_in_level_pos_y( make_f24p8
-			( ( conv_pix_crd_to_blk_crd(blk_crd_y_pos)
+			( ( conv_blk_crd_to_pix_crd(blk_crd_y_pos)
 			+ conv_slp_height_val_to_offset(height_val) ) )
 			- make_f24p8(get_shape_size_as_vec2().y) );
 	}
