@@ -30,7 +30,7 @@
 #include "../../gba_specific_stuff/button_stuff.hpp"
 
 #include "../level_stuff/sublevel_class.hpp"
-#include "../coll_lseg_classes.hpp"
+#include "../coll_lseg_group_classes.hpp"
 
 //s32 thv_vs_index;
 
@@ -613,26 +613,20 @@ void sprite::block_collision_stuff_16x32()
 	coll_lseg_group_16x32 clseg_grp( the_coll_box, get_curr_on_ground() );
 	
 	
-	static constexpr u32 hi_left_top 
-		= decltype(clseg_grp)::hi_left_top;
-	static constexpr u32 hi_left_bot 
-		= decltype(clseg_grp)::hi_left_bot;
-	static constexpr u32 hi_right_top 
-		= decltype(clseg_grp)::hi_right_top;
-	static constexpr u32 hi_right_bot 
-		= decltype(clseg_grp)::hi_right_bot;
+	static const u32 hi_left_top = clseg_grp.get_hi_left_top();
+	static const u32 hi_left_bot = clseg_grp.get_hi_left_bot();
+	static const u32 hi_right_top = clseg_grp.get_hi_right_top();
+	static const u32 hi_right_bot = clseg_grp.get_hi_right_bot();
 	
-	static constexpr u32 vi_top_left
-		= decltype(clseg_grp)::vi_top_left;
-	static constexpr u32 vi_top_right 
-		= decltype(clseg_grp)::vi_top_right;
+	static const u32 vi_top_left = clseg_grp.get_vi_top_left();
+	static const u32 vi_top_right = clseg_grp.get_vi_top_right();
 	
-	static constexpr size_t num_horiz_ctups 
-		= decltype(clseg_grp)::num_horiz_ctups;
-	static constexpr size_t num_vert_top_ctups 
-		= decltype(clseg_grp)::num_vert_top_ctups;
-	static constexpr size_t num_vert_bot_ctups 
-		= decltype(clseg_grp)::num_vert_bot_ctups;
+	static const size_t num_horiz_ctups 
+		= clseg_grp.get_num_horiz_ctups();
+	static const size_t num_vert_top_ctups 
+		= clseg_grp.get_num_vert_top_ctups();
+	static const size_t num_vert_bot_ctups 
+		= clseg_grp.get_num_vert_bot_ctups();
 	
 	
 	static constexpr u32 vi_bot_left = decltype(clseg_grp)::vi_bot_left;
