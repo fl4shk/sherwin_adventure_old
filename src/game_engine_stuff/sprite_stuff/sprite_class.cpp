@@ -613,24 +613,14 @@ void sprite::block_collision_stuff_16x32()
 	coll_lseg_group_16x32 clseg_grp( the_coll_box, get_curr_on_ground() );
 	
 	
-	static constexpr u32 hi_left_top_og 
-		= decltype(clseg_grp)::hi_left_top_og;
-	static constexpr u32 hi_left_bot_og 
-		= decltype(clseg_grp)::hi_left_bot_og;
-	static constexpr u32 hi_right_top_og 
-		= decltype(clseg_grp)::hi_right_top_og;
-	static constexpr u32 hi_right_bot_og 
-		= decltype(clseg_grp)::hi_right_bot_og;
-	
-	static constexpr u32 hi_left_top_ia 
-		= decltype(clseg_grp)::hi_left_top_ia;
-	static constexpr u32 hi_left_mid_ia 
-		= decltype(clseg_grp)::hi_left_mid_ia;
-	static constexpr u32 hi_right_top_ia 
-		= decltype(clseg_grp)::hi_right_top_ia;
-	static constexpr u32 hi_right_mid_ia 
-		= decltype(clseg_grp)::hi_right_mid_ia;
-	
+	static constexpr u32 hi_left_top 
+		= decltype(clseg_grp)::hi_left_top;
+	static constexpr u32 hi_left_bot 
+		= decltype(clseg_grp)::hi_left_bot;
+	static constexpr u32 hi_right_top 
+		= decltype(clseg_grp)::hi_right_top;
+	static constexpr u32 hi_right_bot 
+		= decltype(clseg_grp)::hi_right_bot;
 	
 	static constexpr u32 vi_top_left_ia 
 		= decltype(clseg_grp)::vi_top_left_ia;
@@ -662,11 +652,6 @@ void sprite::block_collision_stuff_16x32()
 	vec2_s32 vert_top_slp_pos_buf[num_vert_top_ctups];
 	vec2_s32 vert_bot_fs_pos_buf[num_vert_bot_ctups];
 	vec2_s32 vert_bot_slp_pos_buf[num_vert_bot_ctups];
-	
-	//// "smallest" as in the lowest actual integer value, which
-	//// corresponds to VISIBLY higher y positions than "larger" actual
-	//// integer values of y positions
-	//s32 smallest_vert_slp_pos_index = -1;
 	
 	auto iterate_horiz = [&]( const u32 first, const u32 last,
 		bool& some_horiz_side_fully_solid ) -> void
@@ -946,9 +931,9 @@ void sprite::block_collision_stuff_16x32()
 			bot_side_slope_og = false;
 		
 		
-		iterate_horiz( hi_left_top_og, hi_left_bot_og, 
+		iterate_horiz( hi_left_top, hi_left_bot, 
 			left_side_fully_solid_og );
-		iterate_horiz( hi_right_top_og, hi_right_bot_og, 
+		iterate_horiz( hi_right_top, hi_right_bot, 
 			right_side_fully_solid_og );
 		
 		iterate_vert_bot( bot_side_fully_solid_og, bot_side_slope_og );
@@ -959,13 +944,13 @@ void sprite::block_collision_stuff_16x32()
 		if ( left_side_fully_solid_og && !right_side_fully_solid_og )
 		{
 			block_coll_response_left_16x32(clseg_grp.get_horiz_ctup
-				(hi_left_top_og).bcrlg);
+				(hi_left_top).bcrlg);
 		}
 		
 		else if ( !left_side_fully_solid_og && right_side_fully_solid_og )
 		{
 			block_coll_response_right_16x32(clseg_grp.get_horiz_ctup
-				(hi_right_top_og).bcrlg);
+				(hi_right_top).bcrlg);
 		}
 		
 		exec_bot_collision_stuff( bot_side_fully_solid_og,
@@ -984,9 +969,9 @@ void sprite::block_collision_stuff_16x32()
 			bot_side_slope_ia = false;
 		
 		
-		iterate_horiz( hi_left_top_ia, hi_left_mid_ia, 
+		iterate_horiz( hi_left_top, hi_left_bot, 
 			left_side_fully_solid_ia );
-		iterate_horiz( hi_right_top_ia, hi_right_mid_ia, 
+		iterate_horiz( hi_right_top, hi_right_bot, 
 			right_side_fully_solid_ia );
 		iterate_vert_top( top_side_fully_solid_ia, top_side_slope_ia );
 		
@@ -998,13 +983,13 @@ void sprite::block_collision_stuff_16x32()
 		if ( left_side_fully_solid_ia && !right_side_fully_solid_ia )
 		{
 			block_coll_response_left_16x32(clseg_grp.get_horiz_ctup
-				(hi_left_top_ia).bcrlg);
+				(hi_left_top).bcrlg);
 		}
 		
 		else if ( !left_side_fully_solid_ia && right_side_fully_solid_ia )
 		{
 			block_coll_response_right_16x32(clseg_grp.get_horiz_ctup
-				(hi_right_top_ia).bcrlg);
+				(hi_right_top).bcrlg);
 		}
 		
 		if ( top_side_fully_solid_ia || top_side_slope_ia )

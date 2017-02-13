@@ -87,14 +87,22 @@ bool coll_lseg_extras::collinear_lsegs_intersect
 }
 
 
+//const fixed24p8 coll_lseg_group_16x32::offset_x_for_any_hs_left
+//	= make_f24p8(2);
+const fixed24p8 coll_lseg_group_16x32::offset_x_for_any_hs_left
+	= make_f24p8(0);
+const fixed24p8 coll_lseg_group_16x32::offset_x_for_any_hs_right
+	= make_f24p8(-coll_lseg_group_16x32::offset_x_for_any_hs_left.data);
 
-const fixed24p8 coll_lseg_group_16x32::offset_y_for_top_hs_og
+const fixed24p8 coll_lseg_group_16x32::offset_y_for_top_hs
 	= make_f24p8(-4);
-const fixed24p8 coll_lseg_group_16x32::offset_y_for_bot_hs_og
-	= (fixed24p8){-coll_lseg_group_16x32::offset_y_for_top_hs_og.data};
+const fixed24p8 coll_lseg_group_16x32::offset_y_for_bot_hs
+	= (fixed24p8){-coll_lseg_group_16x32::offset_y_for_top_hs.data};
 
+//const fixed24p8 coll_lseg_group_16x32::offset_x_for_left_vs
+//	= make_f24p8(3);
 const fixed24p8 coll_lseg_group_16x32::offset_x_for_left_vs
-	= make_f24p8(3);
+	= make_f24p8(4);
 const fixed24p8 coll_lseg_group_16x32::offset_x_for_right_vs
 	= (fixed24p8){-coll_lseg_group_16x32::offset_x_for_left_vs.data};
 
@@ -108,11 +116,11 @@ const fixed24p8 coll_lseg_group_16x32::vs_height_non_bot_mid_og
 const fixed24p8 coll_lseg_group_16x32::vs_height_bot_mid_og
 	= vs_height_non_bot_mid_og;
 
-// In-air vertical sensors stretch two pixels vertically outside
-// the_coll_box (and thus are 6 pixels tall including the part of the
-// vertical sensor that is inside the_coll_box)
+// In-air vertical sensors stretch a small number of pixels vertically
+// outside the_coll_box (and thus are 5 pixels tall including the part of
+// the vertical sensor that is inside the_coll_box)
 const fixed24p8 coll_lseg_group_16x32::vs_height_ia
-	= coll_lseg_group_16x32::offset_y_for_top_vs_ia + make_f24p8(2);
+	= coll_lseg_group_16x32::offset_y_for_top_vs_ia + make_f24p8(1);
 
 const fixed24p8 coll_lseg_group_16x32::offset_y_for_top_vs_ia
 	= make_f24p8(4);
@@ -135,14 +143,14 @@ void coll_lseg_group_16x32::init( const coll_box& s_coll_box,
 	
 	if ( get_on_ground() )
 	{
-		horiz_ctups[hi_left_top_og].clseg 
-			= get_left_top_hs_og(s_coll_box);
-		horiz_ctups[hi_left_bot_og].clseg 
-			= get_left_bot_hs_og(s_coll_box);
-		horiz_ctups[hi_right_top_og].clseg 
-			= get_right_top_hs_og(s_coll_box);
-		horiz_ctups[hi_right_bot_og].clseg 
-			= get_right_bot_hs_og(s_coll_box);
+		horiz_ctups[hi_left_top].clseg 
+			= get_left_top_hs(s_coll_box);
+		horiz_ctups[hi_left_bot].clseg 
+			= get_left_bot_hs(s_coll_box);
+		horiz_ctups[hi_right_top].clseg 
+			= get_right_top_hs(s_coll_box);
+		horiz_ctups[hi_right_bot].clseg 
+			= get_right_bot_hs(s_coll_box);
 		
 		vert_bot_ctups[vi_bot_left].clseg 
 			= get_bot_left_vs_og(s_coll_box);
@@ -153,14 +161,14 @@ void coll_lseg_group_16x32::init( const coll_box& s_coll_box,
 	}
 	else // if ( !get_on_ground() )
 	{
-		horiz_ctups[hi_left_top_ia].clseg 
-			= get_left_top_hs_ia(s_coll_box);
-		horiz_ctups[hi_left_mid_ia].clseg 
-			= get_left_mid_hs_ia(s_coll_box);
-		horiz_ctups[hi_right_top_ia].clseg 
-			= get_right_top_hs_ia(s_coll_box);
-		horiz_ctups[hi_right_mid_ia].clseg 
-			= get_right_mid_hs_ia(s_coll_box);
+		horiz_ctups[hi_left_top].clseg 
+			= get_left_top_hs(s_coll_box);
+		horiz_ctups[hi_left_bot].clseg 
+			= get_left_bot_hs(s_coll_box);
+		horiz_ctups[hi_right_top].clseg 
+			= get_right_top_hs(s_coll_box);
+		horiz_ctups[hi_right_bot].clseg 
+			= get_right_bot_hs(s_coll_box);
 		
 		vert_top_ctups[vi_top_left_ia].clseg 
 			= get_top_left_vs_ia(s_coll_box);
@@ -191,93 +199,64 @@ void coll_lseg_group_16x32::init( const coll_box& s_coll_box,
 	
 }
 
+
+const fixed24p8 coll_lseg_group_16x32::get_pos_x_for_left_hs
+	( const coll_box& s_coll_box )
+{
+	return s_coll_box.left() + offset_x_for_any_hs_left;
+}
+const fixed24p8 coll_lseg_group_16x32::get_pos_x_for_right_hs
+	( const coll_box& s_coll_box )
+{
+	return s_coll_box.get_x_center() + offset_x_for_any_hs_right;
+}
+
+
 // "hs" means "horizontal sensor"
 // "og" means "on ground"
-const fixed24p8 coll_lseg_group_16x32::get_pos_y_for_top_hs_og
+const fixed24p8 coll_lseg_group_16x32::get_pos_y_for_top_hs
 	( const coll_box& s_coll_box )
 {
-	return s_coll_box.get_y_center() + offset_y_for_top_hs_og;
+	return s_coll_box.get_y_center() + offset_y_for_top_hs;
 }
-const fixed24p8 coll_lseg_group_16x32::get_pos_y_for_bot_hs_og
+const fixed24p8 coll_lseg_group_16x32::get_pos_y_for_bot_hs
 	( const coll_box& s_coll_box )
 {
-	return s_coll_box.get_y_center() + offset_y_for_bot_hs_og;
-}
-
-const horiz_coll_lseg coll_lseg_group_16x32::get_left_top_hs_og
-	( const coll_box& s_coll_box )
-{
-	return horiz_coll_lseg( vec2_f24p8( s_coll_box.left(), 
-		get_pos_y_for_top_hs_og(s_coll_box) ), 
-		s_coll_box.half_width() );
-}
-const horiz_coll_lseg coll_lseg_group_16x32::get_right_top_hs_og
-	( const coll_box& s_coll_box )
-{
-	return horiz_coll_lseg( vec2_f24p8( s_coll_box.get_x_center(), 
-		get_pos_y_for_top_hs_og(s_coll_box) ), 
-		s_coll_box.half_width() );
+	return s_coll_box.get_y_center() + offset_y_for_bot_hs;
 }
 
-const horiz_coll_lseg coll_lseg_group_16x32::get_left_bot_hs_og
+const horiz_coll_lseg coll_lseg_group_16x32::get_left_top_hs
 	( const coll_box& s_coll_box )
 {
-	return horiz_coll_lseg( vec2_f24p8( s_coll_box.left(), 
-		get_pos_y_for_bot_hs_og(s_coll_box) ), 
+	return horiz_coll_lseg( vec2_f24p8( get_pos_x_for_left_hs(s_coll_box),
+		get_pos_y_for_top_hs(s_coll_box) ), 
 		s_coll_box.half_width() );
 }
-const horiz_coll_lseg coll_lseg_group_16x32::get_right_bot_hs_og
+const horiz_coll_lseg coll_lseg_group_16x32::get_right_top_hs
 	( const coll_box& s_coll_box )
 {
-	return horiz_coll_lseg( vec2_f24p8( s_coll_box.get_x_center(), 
-		get_pos_y_for_bot_hs_og(s_coll_box) ), 
+	return horiz_coll_lseg( vec2_f24p8( get_pos_x_for_right_hs(s_coll_box),
+		get_pos_y_for_top_hs(s_coll_box) ), 
+		s_coll_box.half_width() );
+}
+
+const horiz_coll_lseg coll_lseg_group_16x32::get_left_bot_hs
+	( const coll_box& s_coll_box )
+{
+	return horiz_coll_lseg( vec2_f24p8( get_pos_x_for_left_hs(s_coll_box),
+		get_pos_y_for_bot_hs(s_coll_box) ), 
+		s_coll_box.half_width() );
+}
+const horiz_coll_lseg coll_lseg_group_16x32::get_right_bot_hs
+	( const coll_box& s_coll_box )
+{
+	return horiz_coll_lseg( vec2_f24p8( get_pos_x_for_right_hs(s_coll_box),
+		get_pos_y_for_bot_hs(s_coll_box) ), 
 		s_coll_box.half_width() );
 }
 
 
 // "ia" means "in air"
-const fixed24p8 coll_lseg_group_16x32::get_pos_y_for_top_hs_ia
-	( const coll_box& s_coll_box )
-{
-	return s_coll_box.top();
-}
-const fixed24p8 coll_lseg_group_16x32::get_pos_y_for_mid_hs_ia
-	( const coll_box& s_coll_box )
-{
-	return s_coll_box.get_y_center();
-}
-
-const horiz_coll_lseg coll_lseg_group_16x32::get_left_top_hs_ia
-	( const coll_box& s_coll_box )
-{
-	return horiz_coll_lseg( vec2_f24p8( s_coll_box.left(), 
-		get_pos_y_for_top_hs_ia(s_coll_box) ), 
-		s_coll_box.half_width() );
-}
-const horiz_coll_lseg coll_lseg_group_16x32::get_right_top_hs_ia
-	( const coll_box& s_coll_box )
-{
-	return horiz_coll_lseg( vec2_f24p8( s_coll_box.get_x_center(), 
-		get_pos_y_for_top_hs_ia(s_coll_box) ), 
-		s_coll_box.half_width() );
-}
-
-const horiz_coll_lseg coll_lseg_group_16x32::get_left_mid_hs_ia
-	( const coll_box& s_coll_box )
-{
-	return horiz_coll_lseg( vec2_f24p8( s_coll_box.left(), 
-		get_pos_y_for_mid_hs_ia(s_coll_box) ), 
-		s_coll_box.half_width() );
-}
-const horiz_coll_lseg coll_lseg_group_16x32::get_right_mid_hs_ia
-	( const coll_box& s_coll_box )
-{
-	return horiz_coll_lseg( vec2_f24p8( s_coll_box.get_x_center(), 
-		get_pos_y_for_mid_hs_ia(s_coll_box) ), 
-		s_coll_box.half_width() );
-}
-
-
 // "vs" means "vertical sensor"
 const fixed24p8 coll_lseg_group_16x32::get_pos_x_for_left_vs
 	( const coll_box& s_coll_box )

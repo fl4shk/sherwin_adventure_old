@@ -261,7 +261,6 @@ public:		// enums
 		lim_vi_top,
 	};
 	
-public:		// enums
 	enum vert_index_bot
 	{
 		vi_bot_mid,
@@ -290,20 +289,20 @@ public:		// classes
 	} __attribute__((_align4));
 	
 public:		// index constants
-	static constexpr u32 hi_left_top_og = hi_left_top;
-	static constexpr u32 hi_left_bot_og = hi_left_bot;
-	static constexpr u32 hi_right_top_og = hi_right_top;
-	static constexpr u32 hi_right_bot_og = hi_right_bot;
+	//static constexpr u32 hi_left_top_og = hi_left_top;
+	//static constexpr u32 hi_left_bot_og = hi_left_bot;
+	//static constexpr u32 hi_right_top_og = hi_right_top;
+	//static constexpr u32 hi_right_bot_og = hi_right_bot;
 	
 	//static constexpr u32 vi_bot_left_og = vi_bot_left;
 	//static constexpr u32 vi_bot_mid_og = vi_bot_mid;
 	//static constexpr u32 vi_bot_right_og = vi_bot_right;
 	
 	
-	static constexpr u32 hi_left_top_ia = hi_left_top;
-	static constexpr u32 hi_left_mid_ia = hi_left_bot;
-	static constexpr u32 hi_right_top_ia = hi_right_top;
-	static constexpr u32 hi_right_mid_ia = hi_right_bot;
+	//static constexpr u32 hi_left_top_ia = hi_left_top;
+	//static constexpr u32 hi_left_bot_ia = hi_left_bot;
+	//static constexpr u32 hi_right_top_ia = hi_right_top;
+	//static constexpr u32 hi_right_bot_ia = hi_right_bot;
 	
 	
 	static constexpr u32 vi_top_left_ia = vi_top_left;
@@ -327,9 +326,11 @@ protected:		// variables and constants
 	
 	u32 internal_on_ground = false;
 	
+	static const fixed24p8 offset_x_for_any_hs_left;
+	static const fixed24p8 offset_x_for_any_hs_right;
 	
-	static const fixed24p8 offset_y_for_top_hs_og;
-	static const fixed24p8 offset_y_for_bot_hs_og;
+	static const fixed24p8 offset_y_for_top_hs;
+	static const fixed24p8 offset_y_for_bot_hs;
 	
 	static const fixed24p8 offset_x_for_left_vs;
 	static const fixed24p8 offset_x_for_right_vs;
@@ -382,40 +383,30 @@ public:		// functions
 	
 	
 protected:		// functions
+	static const fixed24p8 get_pos_x_for_left_hs
+		( const coll_box& s_coll_box );
+	static const fixed24p8 get_pos_x_for_right_hs
+		( const coll_box& s_coll_box );
+	
 	// "hs" means "horizontal sensor"
 	// "og" means "on ground"
-	static const fixed24p8 get_pos_y_for_top_hs_og
+	static const fixed24p8 get_pos_y_for_top_hs
 		( const coll_box& s_coll_box );
 		
-	static const fixed24p8 get_pos_y_for_bot_hs_og
+	static const fixed24p8 get_pos_y_for_bot_hs
 		( const coll_box& s_coll_box );
 	
-	static const horiz_coll_lseg get_left_top_hs_og
+	static const horiz_coll_lseg get_left_top_hs
 		( const coll_box& s_coll_box );
-	static const horiz_coll_lseg get_right_top_hs_og
+	static const horiz_coll_lseg get_right_top_hs
 		( const coll_box& s_coll_box );
 	
-	static const horiz_coll_lseg get_left_bot_hs_og
+	static const horiz_coll_lseg get_left_bot_hs
 		( const coll_box& s_coll_box );
-	static const horiz_coll_lseg get_right_bot_hs_og
+	static const horiz_coll_lseg get_right_bot_hs
 		( const coll_box& s_coll_box );
 	
 	// "ia" means "in air"
-	static const fixed24p8 get_pos_y_for_top_hs_ia
-		( const coll_box& s_coll_box );
-	static const fixed24p8 get_pos_y_for_mid_hs_ia
-		( const coll_box& s_coll_box );
-	
-	static const horiz_coll_lseg get_left_top_hs_ia
-		( const coll_box& s_coll_box );
-	static const horiz_coll_lseg get_right_top_hs_ia
-		( const coll_box& s_coll_box );
-	
-	static const horiz_coll_lseg get_left_mid_hs_ia
-		( const coll_box& s_coll_box );
-	static const horiz_coll_lseg get_right_mid_hs_ia
-		( const coll_box& s_coll_box );
-	
 	// "vs" means "vertical sensor"
 	static const fixed24p8 get_pos_x_for_left_vs
 		( const coll_box& s_coll_box );
