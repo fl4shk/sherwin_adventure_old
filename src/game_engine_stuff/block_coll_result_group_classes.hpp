@@ -51,11 +51,27 @@ public:		// functions
 	//{
 	//	memset( this, 0, sizeof(*this) );
 	//}
-	block_coll_result( const vec2_s32& s_coord );
-	block_coll_result( const vec2_f24p8& s_coord_f24p8 );
+	inline block_coll_result( const vec2_s32& s_blk_coord )
+	{
+		init(s_blk_coord);
+	}
+	inline block_coll_result( const vec2_f24p8& s_coord_f24p8 )
+	{
+		init(s_coord_f24p8);
+	}
 	inline block_coll_result( const block_coll_result& to_copy )
 	{
 		*this = to_copy;
+	}
+	
+	inline void init( const vec2_s32& s_blk_coord )
+	{
+		the_block = &active_level::the_block_at_coord(s_blk_coord);
+		the_bbvt = get_behavior_type_of_block_type(get_block_type());
+	}
+	inline void init( const vec2_f24p8& s_coord_f24p8 )
+	{
+		init(active_level::get_block_coord_of_point(s_coord_f24p8));
 	}
 	
 	//inline block_coll_result& operator = 
@@ -330,8 +346,10 @@ public:		// functions
 		init(the_coll_lseg);
 	}
 	
-	void init( const horiz_coll_lseg& the_coll_lseg );
-	void init( const vert_coll_lseg& the_coll_lseg );
+	void init( const horiz_coll_lseg& the_coll_lseg )
+		__attribute__((_iwram_code,_target_arm));
+	void init( const vert_coll_lseg& the_coll_lseg )
+		__attribute__((_iwram_code,_target_arm));
 	
 	block_coll_result* horiz_any_bbvt_is_fully_solid( vec2_s32& pos )
 		__attribute__((_iwram_code,_target_arm));

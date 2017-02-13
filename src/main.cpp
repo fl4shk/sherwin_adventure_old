@@ -66,7 +66,7 @@ static constexpr size_t test_buf_size = 20;
 char test_buf[test_buf_size];
 
 int main_2();
-int real_main();
+int real_main() __attribute__((_iwram_code));
 
 
 int main()
@@ -206,7 +206,8 @@ int real_main()
 		
 		
 		// This is temporary
-		if ( key_hit_or_held(key_l) )
+		//if ( key_hit_or_held(key_l) )
+		if ( key_hit(key_l) )
 		{
 			sprite_manager::spawn_a_sprite_basic( st_waffle,
 				the_player.in_level_pos.curr, gfx_manager::bgofs_mirror[0],

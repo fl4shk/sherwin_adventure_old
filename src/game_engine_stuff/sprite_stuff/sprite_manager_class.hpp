@@ -296,18 +296,18 @@ public:		// functions
 	
 	static void spawn_sprites_if_needed
 		( const prev_curr_pair<bg_point>& camera_pos_pc_pair ) 
-		__attribute__((_iwram_code,_target_arm));
+		__attribute__((_iwram_code));
 	static void despawn_sprites_if_needed( const bg_point& camera_pos ) 
-		__attribute__((_iwram_code,_target_arm));
+		__attribute__((_iwram_code));
 	
 	static void upload_tiles_of_active_sprites_to_vram()
-		__attribute__((_iwram_code,_target_arm));
+		__attribute__((_iwram_code));
 	
 	// This function is one of the most intensive, so it is an ARM function
 	// that goes in IWRAM.
 	static void update_all_sprites( const vec2_u32& the_sublevel_size_2d,
 		prev_curr_pair<bg_point>& camera_pos_pc_pair ) 
-		__attribute__((_iwram_code,_target_arm));
+		__attribute__((_iwram_code));
 	
 } __attribute__((_align4));
 

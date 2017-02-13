@@ -24,17 +24,6 @@
 #include "coll_lseg_classes.hpp"
 
 
-block_coll_result::block_coll_result( const vec2_s32& s_coord )
-{
-	the_block = &active_level::the_block_at_coord(s_coord);
-	the_bbvt = get_behavior_type_of_block_type(get_block_type());
-}
-block_coll_result::block_coll_result( const vec2_f24p8& s_coord_f24p8 )
-	: block_coll_result(active_level::get_block_coord_of_point
-	(s_coord_f24p8))
-{
-}
-
 u32 block_coll_result_rect_group::temp_debug_thing;
 
 block_coll_result_rect_group::block_coll_result_rect_group() 

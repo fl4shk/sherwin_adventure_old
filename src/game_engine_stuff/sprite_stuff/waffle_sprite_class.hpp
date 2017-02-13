@@ -59,19 +59,19 @@ public:		// functions
 	
 	
 protected:		// functions
-	virtual void block_coll_response_left_16x16_old
+	virtual void block_coll_response_left_old
 		( const block_coll_result& lt_coll_result, 
 		const block_coll_result& lb_coll_result );
 	
-	virtual void block_coll_response_right_16x16_old
+	virtual void block_coll_response_right_old
 		( const block_coll_result& rt_coll_result,
 		const block_coll_result& rb_coll_result );
 	
 	
-	virtual void block_coll_response_left_16x16
-		( const bcr_lseg_group& the_bcr_lseg_grp );
-	virtual void block_coll_response_right_16x16
-		( const bcr_lseg_group& the_bcr_lseg_grp );
+	virtual void block_coll_response_left
+		( const spr_blk_coll_group_base::horiz_coll_tuple& hs );
+	virtual void block_coll_response_right
+		( const spr_blk_coll_group_base::horiz_coll_tuple& hs );
 	
 } __attribute__((_align4));
 

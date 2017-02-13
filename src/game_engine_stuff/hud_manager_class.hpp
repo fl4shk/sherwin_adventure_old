@@ -53,11 +53,11 @@ public:		// functions
 	
 	static void plot_horiz_str_8x8_to_screenblock_mirror( const char* str,
 		u32 str_size, u32& plot_x, u32& plot_y );
-		//__attribute__((_iwram_code));
+		__attribute__((_iwram_code));
 	
 	
 	static void update_hud_in_screenblock_mirror_2d();
-		//__attribute__((_iwram_code));
+		__attribute__((_iwram_code));
 	
 	static void copy_hud_from_array_2d_helper_to_vram();
 	

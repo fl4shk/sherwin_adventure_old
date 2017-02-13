@@ -25,6 +25,7 @@
 #include "../../gfx/sherwin_gfx.h"
 
 #include "../block_coll_result_group_classes.hpp"
+#include "../spr_blk_coll_group_classes.hpp"
 
 class sprite_allocator;
 
@@ -70,6 +71,9 @@ public:		// variables
 //public:		// variables
 //	
 //} __attribute__((_align4));
+
+class spr_blk_coll_group_base;
+//class spr_blk_coll_group_base::horiz_coll_tuple;
 
 class sprite
 {
@@ -606,52 +610,57 @@ public:		// functions
 protected:		// functions
 	vec2_u32 get_shape_size_as_vec2_raw() const;
 	
-	virtual void block_coll_response_left_16x16
-		( const bcr_lseg_group& the_bcr_lseg_grp );
-	virtual void block_coll_response_right_16x16
-		( const bcr_lseg_group& the_bcr_lseg_grp );
-	virtual void block_coll_response_top_16x16
-		( const bcr_lseg_group& the_bcr_lseg_grp );
-	virtual void block_coll_response_bot_16x16
-		( const bcr_lseg_group& the_bcr_lseg_grp );
-	//virtual void block_coll_response_bot_slope_16x16();
 	
-	
-	virtual void block_coll_response_left_16x32
+	//virtual void block_coll_response_left
+	//	( const bcr_lseg_group& the_bcr_lseg_grp );
+	//virtual void block_coll_response_right
+	//	( const bcr_lseg_group& the_bcr_lseg_grp );
+	virtual void block_coll_response_left
+		( const spr_blk_coll_group_base::horiz_coll_tuple& hs );
+	virtual void block_coll_response_right
+		( const spr_blk_coll_group_base::horiz_coll_tuple& hs );
+	virtual void block_coll_response_top
+		( const spr_blk_coll_group_base::vert_top_coll_tuple& vs );
+	virtual void block_coll_response_bot
 		( const bcr_lseg_group& the_bcr_lseg_grp );
-	virtual void block_coll_response_right_16x32
-		( const bcr_lseg_group& the_bcr_lseg_grp );
-	virtual void block_coll_response_top_16x32
-		( const bcr_lseg_group& the_bcr_lseg_grp );
-	virtual void block_coll_response_bot_16x32
-		( const bcr_lseg_group& the_bcr_lseg_grp );
-	virtual void block_coll_response_bot_slope_16x32( s32 height_val, 
+	virtual void block_coll_response_bot_slope( s32 height_val, 
 		s32 blk_crd_y_pos );
 	
 	
 	
 	// Finally, some inline functions (probably) every sprite can use in
 	// their block_coll_response.*() functions
+	//inline void push_out_of_left_block
+	//	( const bcr_lseg_group& the_bcr_lseg_grp )
+	//{
+	//	set_curr_in_level_pos_x( make_f24p8
+	//		( conv_blk_crd_to_pix_crd( the_bcr_lseg_grp.horiz_left_pos() 
+	//		+ 1 ) ) - cb_pos_offset.x );
+	//}
+	//inline void push_out_of_right_block
+	//	( const bcr_lseg_group& the_bcr_lseg_grp )
+	//{
+	//	set_curr_in_level_pos_x( make_f24p8
+	//		( conv_blk_crd_to_pix_crd(the_bcr_lseg_grp.horiz_right_pos()) )
+	//		- the_coll_box.size.x - cb_pos_offset.x );
+	//}
 	inline void push_out_of_left_block
-		( const bcr_lseg_group& the_bcr_lseg_grp )
+		( const vec2_s32& blk_crd_pos )
 	{
-		set_curr_in_level_pos_x( make_f24p8
-			( conv_blk_crd_to_pix_crd( the_bcr_lseg_grp.horiz_left_pos() 
-			+ 1 ) ) - cb_pos_offset.x );
+		set_curr_in_level_pos_x( make_f24p8( conv_blk_crd_to_pix_crd
+			( blk_crd_pos.x + 1 ) ) - cb_pos_offset.x );
 	}
 	inline void push_out_of_right_block
-		( const bcr_lseg_group& the_bcr_lseg_grp )
+		( const vec2_s32& blk_crd_pos )
 	{
-		set_curr_in_level_pos_x( make_f24p8
-			( conv_blk_crd_to_pix_crd(the_bcr_lseg_grp.horiz_right_pos()) )
-			- the_coll_box.size.x - cb_pos_offset.x );
+		set_curr_in_level_pos_x( make_f24p8( conv_blk_crd_to_pix_crd
+			(blk_crd_pos.x) ) - the_coll_box.size.x - cb_pos_offset.x );
 	}
 	inline void push_out_of_top_block
-		( const bcr_lseg_group& the_bcr_lseg_grp )
+		( const vec2_s32& blk_crd_pos )
 	{
-		set_curr_in_level_pos_y( make_f24p8
-			( conv_blk_crd_to_pix_crd( the_bcr_lseg_grp.vert_top_pos() 
-			+ 1 ) ) - cb_pos_offset.y );
+		set_curr_in_level_pos_y( make_f24p8( conv_blk_crd_to_pix_crd
+			( blk_crd_pos.y + 1 ) ) - cb_pos_offset.y );
 	}
 	inline void push_out_of_bot_block
 		( const bcr_lseg_group& the_bcr_lseg_grp )
@@ -671,16 +680,16 @@ protected:		// functions
 	
 	
 	// Regular block collision stuff
-	virtual void block_collision_stuff_16x16()
+	virtual void generic_block_collision_stuff
+		( spr_blk_coll_group_base& clseg_grp )
 		__attribute__((_iwram_code,_target_arm));
-	virtual void block_collision_stuff_16x32() 
-		__attribute__((_iwram_code,_target_arm));
+	virtual void block_collision_stuff_16x16();
+	virtual void block_collision_stuff_16x32();
 	
 	// block_collision_stuff_32x16() will likely never be used because it's
 	// less believable for one of those to not rotate when on a slope
 	virtual void block_collision_stuff_32x16();
-	virtual void block_collision_stuff_32x32()
-		__attribute__((_iwram_code,_target_arm));
+	virtual void block_collision_stuff_32x32();
 	
 	// Block collision stuff with just strongly hit response 
 	//virtual void block_collision_stuff_strongly_hit_stuff_only_16x16();
