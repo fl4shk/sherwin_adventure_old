@@ -59,6 +59,9 @@ const fixed24p8 spr_blk_coll_group_base::vs_height_bot_ia
 	= custom_abs(spr_blk_coll_group_base::offset_y_for_bot_vs) 
 	+ make_f24p8(1);
 //const fixed24p8 spr_blk_coll_group_base::vs_height_bot_ia
+//	= custom_abs(spr_blk_coll_group_base::offset_y_for_bot_vs) 
+//	- make_f24p8(1);
+//const fixed24p8 spr_blk_coll_group_base::vs_height_bot_ia
 //	= spr_blk_coll_group_base::offset_y_for_top_vs + make_f24p8(4);
 //const fixed24p8 spr_blk_coll_group_base::vs_height_bot_ia
 //	= spr_blk_coll_group_base::offset_y_for_top_vs + make_f24p8(8);
@@ -67,6 +70,8 @@ const fixed24p8 spr_blk_coll_group_base::vs_height_bot_ia
 //	= make_f24p8(4);
 const fixed24p8 spr_blk_coll_group_base::offset_y_for_bot_vs
 	= make_f24p8(-4);
+//const fixed24p8 spr_blk_coll_group_base::offset_y_for_bot_vs
+//	= make_f24p8(-2);
 //const fixed24p8 spr_blk_coll_group_base::offset_y_for_bot_vs
 //	= (fixed24p8){-spr_blk_coll_group_base::offset_y_for_top_vs.data};
 
@@ -83,6 +88,10 @@ void spr_blk_coll_group_base::init_static_vars( const coll_box& s_coll_box )
 	static const fixed24p8 offset_y_for_bot_hs 
 		= (fixed24p8){ ( s_coll_box.size.y.data / 4 )
 		+ ( s_coll_box.size.y.data / 16 ) };
+	//static const fixed24p8 offset_y_for_bot_hs 
+	//	= (fixed24p8){ ( s_coll_box.size.y.data / 4 )
+	//	+ ( s_coll_box.size.y.data / 8 )
+	//	+ ( s_coll_box.size.y.data / 16 ) };
 	static const fixed24p8 offset_y_for_top_hs 
 		= (fixed24p8){-offset_y_for_bot_hs.data};
 	
@@ -99,6 +108,18 @@ void spr_blk_coll_group_base::init_static_vars( const coll_box& s_coll_box )
 	
 	static const fixed24p8 offset_x_for_left_vs
 		= (fixed24p8){ s_coll_box.size.x.data / 4 };
+	//static const fixed24p8 offset_x_for_left_vs
+	//	= (fixed24p8){ ( s_coll_box.size.x.data / 8 ) 
+	//	+ ( s_coll_box.size.x.data / 16 ) };
+	//static const fixed24p8 offset_x_for_left_vs
+	//	= (fixed24p8){ ( s_coll_box.size.x.data / 8 ) };
+	//static const fixed24p8 offset_x_for_left_vs
+	//	= (fixed24p8){ ( s_coll_box.size.x.data / 4 )
+	//	+ ( s_coll_box.size.x.data / 8 ) };
+	//static const fixed24p8 offset_x_for_left_vs
+	//	= (fixed24p8){ ( s_coll_box.size.x.data / 4 )
+	//	+ ( s_coll_box.size.x.data / 8 )
+	//	+ ( s_coll_box.size.x.data / 16 ) };
 	static const fixed24p8 offset_x_for_right_vs
 		= (fixed24p8){-offset_x_for_left_vs.data};
 	
@@ -115,8 +136,8 @@ void spr_blk_coll_group_base::init_static_vars( const coll_box& s_coll_box )
 	
 	//pos_y_for_top_vs = s_coll_box.top() + offset_y_for_top_vs
 	//	- vs_height_top;
-	blk_crd_pos_y_for_top_vs = conv_pix_crd_to_blk_crd(s_coll_box.top()
-		.floor_to_int());
+	blk_crd_pos_y_for_top_vs = conv_pix_crd_to_blk_crd( s_coll_box.top()
+		.floor_to_int() + 1 );
 	pos_y_for_bot_vs = s_coll_box.bot() + offset_y_for_bot_vs;
 }
 
@@ -358,11 +379,11 @@ void spr_blk_coll_group_16x16::init( const coll_box& s_coll_box,
 	init_static_vars(s_coll_box);
 	
 	horiz_ctups[hi_left_top].blk_crd_pos = get_left_top_hs_blk_crd_pos();
-	//horiz_ctups[hi_left_mid].blk_crd_pos = get_left_mid_hs_blk_crd_pos();
+	horiz_ctups[hi_left_mid].blk_crd_pos = get_left_mid_hs_blk_crd_pos();
 	horiz_ctups[hi_left_bot].blk_crd_pos = get_left_bot_hs_blk_crd_pos();
 	
 	horiz_ctups[hi_right_top].blk_crd_pos = get_right_top_hs_blk_crd_pos();
-	//horiz_ctups[hi_right_mid].blk_crd_pos = get_right_mid_hs_blk_crd_pos();
+	horiz_ctups[hi_right_mid].blk_crd_pos = get_right_mid_hs_blk_crd_pos();
 	horiz_ctups[hi_right_bot].blk_crd_pos = get_right_bot_hs_blk_crd_pos();
 	
 	vert_top_ctups[vi_top_left].blk_crd_pos 

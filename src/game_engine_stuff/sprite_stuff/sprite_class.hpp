@@ -660,7 +660,7 @@ protected:		// functions
 		( const vec2_s32& blk_crd_pos )
 	{
 		set_curr_in_level_pos_y( make_f24p8( conv_blk_crd_to_pix_crd
-			( blk_crd_pos.y + 1 ) ) - cb_pos_offset.y );
+			( blk_crd_pos.y + 1 ) + 1 ) - cb_pos_offset.y );
 	}
 	inline void push_out_of_bot_block
 		( const bcr_lseg_group& the_bcr_lseg_grp )

@@ -700,7 +700,7 @@ void sprite::generic_block_collision_stuff
 		// Prevent instantly teleporting downwards when in the air
 		if ( get_curr_on_ground() 
 			|| clseg_grp.get_vert_bot_ctup(vi_bot_mid).clseg
-			.bot_pt().y >= make_f24p8(temp_pix_crd_y_pos) )
+			.bot_pt().y >= ( make_f24p8( temp_pix_crd_y_pos + 1 ) ) )
 		{
 			height_val = temp_height_val;
 			hv_vs_blk_crd_y_pos = pos.y + some_offset;

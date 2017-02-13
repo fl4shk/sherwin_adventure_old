@@ -209,11 +209,11 @@ protected:		// enums
 	enum horiz_index
 	{
 		hi_left_top,
-		//hi_left_mid,
+		hi_left_mid,
 		hi_left_bot,
 		
 		hi_right_top,
-		//hi_right_mid,
+		hi_right_mid,
 		hi_right_bot,
 		
 		
