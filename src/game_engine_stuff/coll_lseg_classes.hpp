@@ -305,8 +305,8 @@ public:		// index constants
 	//static constexpr u32 hi_right_bot_ia = hi_right_bot;
 	
 	
-	static constexpr u32 vi_top_left_ia = vi_top_left;
-	static constexpr u32 vi_top_right_ia = vi_top_right;
+	//static constexpr u32 vi_top_left_ia = vi_top_left;
+	//static constexpr u32 vi_top_right_ia = vi_top_right;
 	
 	//static constexpr u32 vi_bot_left_ia = vi_bot_left;
 	//static constexpr u32 vi_bot_mid_ia = vi_bot_mid;
@@ -337,9 +337,10 @@ protected:		// variables and constants
 	
 	static const fixed24p8 vs_height_non_bot_mid_og;
 	static const fixed24p8 vs_height_bot_mid_og;
-	static const fixed24p8 vs_height_ia;
+	static const fixed24p8 vs_height_top;
+	static const fixed24p8 vs_height_bot_ia;
 	
-	static const fixed24p8 offset_y_for_top_vs_ia;
+	static const fixed24p8 offset_y_for_top_vs;
 	static const fixed24p8 offset_y_for_bot_vs;
 	
 public:		// functions
@@ -415,7 +416,7 @@ protected:		// functions
 	static const fixed24p8 get_pos_x_for_right_vs
 		( const coll_box& s_coll_box );
 	
-	static const fixed24p8 get_pos_y_for_top_vs_ia
+	static const fixed24p8 get_pos_y_for_top_vs
 		( const coll_box& s_coll_box );
 	static const fixed24p8 get_pos_y_for_bot_vs
 		( const coll_box& s_coll_box );
@@ -435,9 +436,9 @@ protected:		// functions
 	static const vert_coll_lseg get_bot_right_vs_ia
 		( const coll_box& s_coll_box );
 	
-	static const vert_coll_lseg get_top_left_vs_ia
+	static const vert_coll_lseg get_top_left_vs
 		( const coll_box& s_coll_box );
-	static const vert_coll_lseg get_top_right_vs_ia
+	static const vert_coll_lseg get_top_right_vs
 		( const coll_box& s_coll_box );
 	
 } __attribute__((_align4));

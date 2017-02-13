@@ -622,10 +622,10 @@ void sprite::block_collision_stuff_16x32()
 	static constexpr u32 hi_right_bot 
 		= decltype(clseg_grp)::hi_right_bot;
 	
-	static constexpr u32 vi_top_left_ia 
-		= decltype(clseg_grp)::vi_top_left_ia;
-	static constexpr u32 vi_top_right_ia 
-		= decltype(clseg_grp)::vi_top_right_ia;
+	static constexpr u32 vi_top_left
+		= decltype(clseg_grp)::vi_top_left;
+	static constexpr u32 vi_top_right 
+		= decltype(clseg_grp)::vi_top_right;
 	
 	static constexpr size_t num_horiz_ctups 
 		= decltype(clseg_grp)::num_horiz_ctups;
@@ -671,7 +671,7 @@ void sprite::block_collision_stuff_16x32()
 	auto iterate_vert_top = [&]( bool& some_top_side_fully_solid, 
 		bool& some_top_side_slope ) -> void
 	{
-		for ( u32 i=vi_top_left_ia; i<=vi_top_right_ia; ++i )
+		for ( u32 i=vi_top_left; i<=vi_top_right; ++i )
 		{
 			vert_top_fs_ret_buf[i] = clseg_grp.get_vert_top_ctup(i).bcrlg
 				.vert_any_bbvt_is_fully_solid(vert_top_fs_pos_buf[i]);
@@ -927,6 +927,8 @@ void sprite::block_collision_stuff_16x32()
 	{
 		bool left_side_fully_solid_og = false, 
 			right_side_fully_solid_og = false,
+			top_side_fully_solid_og = false,
+			top_side_slope_og = false,
 			bot_side_fully_solid_og = false,
 			bot_side_slope_og = false;
 		
@@ -935,9 +937,15 @@ void sprite::block_collision_stuff_16x32()
 			left_side_fully_solid_og );
 		iterate_horiz( hi_right_top, hi_right_bot, 
 			right_side_fully_solid_og );
+		iterate_vert_top( top_side_fully_solid_og, top_side_slope_og );
 		
 		iterate_vert_bot( bot_side_fully_solid_og, bot_side_slope_og );
 		
+		if ( top_side_fully_solid_og || top_side_slope_og )
+		{
+			block_coll_response_top_16x32(clseg_grp.get_vert_top_ctup
+				(vi_top_left).bcrlg);
+		}
 		
 		// (Temporarily (?)) permit walking through the vertical side of
 		// slopes
@@ -978,6 +986,12 @@ void sprite::block_collision_stuff_16x32()
 		iterate_vert_bot( bot_side_fully_solid_ia, bot_side_slope_ia );
 		
 		
+		if ( top_side_fully_solid_ia || top_side_slope_ia )
+		{
+			block_coll_response_top_16x32(clseg_grp.get_vert_top_ctup
+				(vi_top_left).bcrlg);
+		}
+		
 		// (Temporarily (?)) permit walking through the vertical side of
 		// slopes
 		if ( left_side_fully_solid_ia && !right_side_fully_solid_ia )
@@ -992,16 +1006,8 @@ void sprite::block_collision_stuff_16x32()
 				(hi_right_top).bcrlg);
 		}
 		
-		if ( top_side_fully_solid_ia || top_side_slope_ia )
-		{
-			block_coll_response_top_16x32(clseg_grp.get_vert_top_ctup
-				(vi_top_left_ia).bcrlg);
-		}
-		//else
-		{
-			exec_bot_collision_stuff( bot_side_fully_solid_ia,
-				bot_side_slope_ia );
-		}
+		exec_bot_collision_stuff( bot_side_fully_solid_ia,
+			bot_side_slope_ia );
 	}
 	
 	////vel.x.data += clg_16x32_size;

@@ -116,18 +116,19 @@ const fixed24p8 coll_lseg_group_16x32::vs_height_non_bot_mid_og
 const fixed24p8 coll_lseg_group_16x32::vs_height_bot_mid_og
 	= vs_height_non_bot_mid_og;
 
-// In-air vertical sensors stretch a small number of pixels vertically
-// outside the_coll_box (and thus are 5 pixels tall including the part of
-// the vertical sensor that is inside the_coll_box)
-const fixed24p8 coll_lseg_group_16x32::vs_height_ia
-	= coll_lseg_group_16x32::offset_y_for_top_vs_ia + make_f24p8(1);
+// In-air top vertical sensors stretch a small number of pixels vertically
+// outside the_coll_box
+const fixed24p8 coll_lseg_group_16x32::vs_height_top
+	= coll_lseg_group_16x32::offset_y_for_top_vs + make_f24p8(2);
+const fixed24p8 coll_lseg_group_16x32::vs_height_bot_ia
+	= coll_lseg_group_16x32::offset_y_for_top_vs + make_f24p8(1);
 
-const fixed24p8 coll_lseg_group_16x32::offset_y_for_top_vs_ia
+const fixed24p8 coll_lseg_group_16x32::offset_y_for_top_vs
 	= make_f24p8(4);
 //const fixed24p8 coll_lseg_group_16x32::offset_y_for_bot_vs
 //	= make_f24p8(-4);
 const fixed24p8 coll_lseg_group_16x32::offset_y_for_bot_vs
-	= (fixed24p8){-coll_lseg_group_16x32::offset_y_for_top_vs_ia.data};
+	= (fixed24p8){-coll_lseg_group_16x32::offset_y_for_top_vs.data};
 
 
 coll_lseg_group_16x32::coll_lseg_group_16x32( const coll_box& s_coll_box,
@@ -152,6 +153,11 @@ void coll_lseg_group_16x32::init( const coll_box& s_coll_box,
 		horiz_ctups[hi_right_bot].clseg 
 			= get_right_bot_hs(s_coll_box);
 		
+		vert_top_ctups[vi_top_left].clseg 
+			= get_top_left_vs(s_coll_box);
+		vert_top_ctups[vi_top_right].clseg 
+			= get_top_right_vs(s_coll_box);
+		
 		vert_bot_ctups[vi_bot_left].clseg 
 			= get_bot_left_vs_og(s_coll_box);
 		vert_bot_ctups[vi_bot_mid].clseg 
@@ -170,10 +176,10 @@ void coll_lseg_group_16x32::init( const coll_box& s_coll_box,
 		horiz_ctups[hi_right_bot].clseg 
 			= get_right_bot_hs(s_coll_box);
 		
-		vert_top_ctups[vi_top_left_ia].clseg 
-			= get_top_left_vs_ia(s_coll_box);
-		vert_top_ctups[vi_top_right_ia].clseg 
-			= get_top_right_vs_ia(s_coll_box);
+		vert_top_ctups[vi_top_left].clseg 
+			= get_top_left_vs(s_coll_box);
+		vert_top_ctups[vi_top_right].clseg 
+			= get_top_right_vs(s_coll_box);
 		
 		vert_bot_ctups[vi_bot_left].clseg 
 			= get_bot_left_vs_ia(s_coll_box);
@@ -274,10 +280,10 @@ const fixed24p8 coll_lseg_group_16x32::get_pos_x_for_right_vs
 	return s_coll_box.right() + offset_x_for_right_vs;
 }
 
-const fixed24p8 coll_lseg_group_16x32::get_pos_y_for_top_vs_ia
+const fixed24p8 coll_lseg_group_16x32::get_pos_y_for_top_vs
 	( const coll_box& s_coll_box )
 {
-	return s_coll_box.top() - vs_height_ia + offset_y_for_top_vs_ia;
+	return s_coll_box.top() - vs_height_top + offset_y_for_top_vs;
 }
 const fixed24p8 coll_lseg_group_16x32::get_pos_y_for_bot_vs
 	( const coll_box& s_coll_box )
@@ -310,33 +316,33 @@ const vert_coll_lseg coll_lseg_group_16x32::get_bot_left_vs_ia
 	( const coll_box& s_coll_box )
 {
 	return vert_coll_lseg( vec2_f24p8( get_pos_x_for_left_vs(s_coll_box), 
-		get_pos_y_for_bot_vs(s_coll_box) ), vs_height_ia );
+		get_pos_y_for_bot_vs(s_coll_box) ), vs_height_bot_ia );
 }
 const vert_coll_lseg coll_lseg_group_16x32::get_bot_mid_vs_ia
 	( const coll_box& s_coll_box )
 {
 	return vert_coll_lseg( vec2_f24p8( get_pos_x_for_mid_vs(s_coll_box),
-		get_pos_y_for_bot_vs(s_coll_box) ), vs_height_ia );
+		get_pos_y_for_bot_vs(s_coll_box) ), vs_height_bot_ia );
 }
 const vert_coll_lseg coll_lseg_group_16x32::get_bot_right_vs_ia
 	( const coll_box& s_coll_box )
 {
 	return vert_coll_lseg( vec2_f24p8( get_pos_x_for_right_vs(s_coll_box), 
-		get_pos_y_for_bot_vs(s_coll_box) ), vs_height_ia );
+		get_pos_y_for_bot_vs(s_coll_box) ), vs_height_bot_ia );
 }
 
 
 
-const vert_coll_lseg coll_lseg_group_16x32::get_top_left_vs_ia
+const vert_coll_lseg coll_lseg_group_16x32::get_top_left_vs
 	( const coll_box& s_coll_box )
 {
 	return vert_coll_lseg( vec2_f24p8( get_pos_x_for_left_vs(s_coll_box),
-		get_pos_y_for_top_vs_ia(s_coll_box) ), vs_height_ia );
+		get_pos_y_for_top_vs(s_coll_box) ), vs_height_top );
 }
-const vert_coll_lseg coll_lseg_group_16x32::get_top_right_vs_ia
+const vert_coll_lseg coll_lseg_group_16x32::get_top_right_vs
 	( const coll_box& s_coll_box )
 {
 	return vert_coll_lseg( vec2_f24p8( get_pos_x_for_right_vs(s_coll_box),
-		get_pos_y_for_top_vs_ia(s_coll_box) ), vs_height_ia );
+		get_pos_y_for_top_vs(s_coll_box) ), vs_height_top );
 }
 

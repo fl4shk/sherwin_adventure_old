@@ -1221,6 +1221,8 @@ void player_sprite::handle_jumping_stuff( u32 is_jump_key_hit,
 		vel.y = jump_vel;
 		//jump_hold_timer = max_jump_hold_timer;
 		is_jumping = true;
+		set_curr_on_ground(false);
+		set_curr_on_slope(false);
 	}
 	else if (!get_curr_on_ground())
 	{
