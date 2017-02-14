@@ -921,7 +921,6 @@ void sprite::generic_block_collision_stuff
 			left_side_fully_solid_og );
 		iterate_horiz( hi_right_top, hi_right_bot, 
 			right_side_fully_solid_og );
-		iterate_vert_top( top_side_fully_solid_og, top_side_slope_og );
 		
 		iterate_vert_bot( bot_side_fully_solid_og, bot_side_slope_og );
 		
@@ -986,10 +985,15 @@ void sprite::generic_block_collision_stuff
 				(hi_right_top));
 		}
 		
-		if ( top_side_fully_solid_ia || top_side_slope_ia )
+		if ( top_side_fully_solid_ia || ( top_side_slope_ia 
+			&& !bot_side_slope_ia ) )
 		{
-			block_coll_response_top(clseg_grp.get_vert_top_ctup
-				(vi_top_left));
+			//if ( !clseg_grp.get_size_is_tiny().y 
+			//	|| !get_prev_on_ground() )
+			{
+				block_coll_response_top(clseg_grp.get_vert_top_ctup
+					(vi_top_left));
+			}
 		}
 		
 		exec_bot_collision_stuff( bot_side_fully_solid_ia,

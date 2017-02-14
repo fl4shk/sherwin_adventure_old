@@ -417,23 +417,32 @@ void spr_blk_coll_group_16x16::init_static_vars
 		( ( s_coll_box.get_y_center() + offset_y_for_bot_hs )
 		.floor_to_int() );
 	
-	static const fixed24p8 offset_x_for_left_vs
-		= (fixed24p8){ s_coll_box.size.x.data / 4 };
-	//static const fixed24p8 offset_x_for_left_vs
-	//	= (fixed24p8){ ( s_coll_box.size.x.data / 4 )
-	//	- ( s_coll_box.size.x.data / 8 ) };
-	//static const fixed24p8 offset_x_for_left_vs
-	//	= (fixed24p8){ ( s_coll_box.size.x.data / 8 ) 
-	//	+ ( s_coll_box.size.x.data / 16 ) };
-	//static const fixed24p8 offset_x_for_left_vs
-	//	= (fixed24p8){ ( s_coll_box.size.x.data / 8 ) };
-	//static const fixed24p8 offset_x_for_left_vs
-	//	= (fixed24p8){ ( s_coll_box.size.x.data / 4 )
-	//	+ ( s_coll_box.size.x.data / 8 ) };
-	//static const fixed24p8 offset_x_for_left_vs
-	//	= (fixed24p8){ ( s_coll_box.size.x.data / 4 )
-	//	+ ( s_coll_box.size.x.data / 8 )
-	//	+ ( s_coll_box.size.x.data / 16 ) };
+	fixed24p8 offset_x_for_left_vs;
+	
+	if ( get_size_is_tiny().x )
+	{
+		offset_x_for_left_vs = (fixed24p8){ s_coll_box.half_width().data
+			- ( s_coll_box.size.x.data / 16 ) };
+	}
+	else
+	{
+		offset_x_for_left_vs = (fixed24p8){ s_coll_box.size.x.data / 4 };
+		//offset_x_for_left_vs 
+		//	= (fixed24p8){ ( s_coll_box.size.x.data / 4 )
+		//	- ( s_coll_box.size.x.data / 8 ) };
+		//offset_x_for_left_vs 
+		//	= (fixed24p8){ ( s_coll_box.size.x.data / 8 ) 
+		//	+ ( s_coll_box.size.x.data / 16 ) };
+		//offset_x_for_left_vs 
+		//	= (fixed24p8){ ( s_coll_box.size.x.data / 8 ) };
+		//offset_x_for_left_vs 
+		//	= (fixed24p8){ ( s_coll_box.size.x.data / 4 )
+		//	+ ( s_coll_box.size.x.data / 8 ) };
+		//offset_x_for_left_vs 
+		//	= (fixed24p8){ ( s_coll_box.size.x.data / 4 )
+		//	+ ( s_coll_box.size.x.data / 8 )
+		//	+ ( s_coll_box.size.x.data / 16 ) };
+	}
 	static const fixed24p8 offset_x_for_right_vs
 		= (fixed24p8){-offset_x_for_left_vs.data};
 	
