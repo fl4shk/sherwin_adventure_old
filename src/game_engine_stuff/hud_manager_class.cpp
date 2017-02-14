@@ -207,15 +207,31 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 	plot_horiz_str_8x8_to_screenblock_mirror( some_number_str,
 		some_number_str_curr_size, plot_x, plot_y );
 	
-	plot_x -= some_number_str_curr_size;
-	++plot_y;
+	auto print_num_debug = [&]( const u32 some_num ) -> void
+	{
+		plot_x -= some_number_str_curr_size;
+		++plot_y;
+		some_number_str_curr_size = snprintf( some_number_str,
+			some_number_str_max_size, "%xl", some_num );
+		plot_horiz_str_8x8_to_screenblock_mirror( some_number_str,
+			some_number_str_curr_size, plot_x, plot_y );
+	};
 	
 	
-	//some_number_str_curr_size = snprintf( some_number_str,
-	//	some_number_str_max_size, "%il", sprite::tallest_height_val.curr );
-	//
-	//plot_horiz_str_8x8_to_screenblock_mirror( some_number_str,
-	//	some_number_str_curr_size, plot_x, plot_y );
+	////print_num_debug(sprite::tallest_height_val.curr);
+	//print_num_debug(sprite_manager::the_allocatable_player->the_oam_entry
+	//	.attr0);
+	//print_num_debug(sprite_manager::the_allocatable_player->the_oam_entry
+	//	.attr0);
+	//print_num_debug(debug_s32_arr[0]);
+	
+	//print_num_debug(sprite_manager::the_allocatable_player->the_oam_entry
+	//	.attr1);
+	//print_num_debug(sprite_manager::the_allocatable_player->the_oam_entry
+	//	.get_tile_number());
+	//print_num_debug(debug_s32_arr[1]);
+	
+	//print_num_debug(sprite_manager::the_player_oam_index);
 }
 
 

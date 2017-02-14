@@ -61,7 +61,7 @@ endif
 
 # Comment out or un-comment out the next line to enable debugging stuff to
 # be generated
-#DEBUG:=yeah do debug
+DEBUG:=yeah do debug
 
 # Optimization levels
 #DEBUG_OPTIMIZATION_LEVEL:=-O0

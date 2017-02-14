@@ -73,8 +73,10 @@ public:		// wrapper functions
 	
 	void set_y_coord( s32 n_y_coord )
 	{
-		clear_and_set_bits( attr0, obj_attr0_y_coord_mask,
-			obj_attr0_y_coord(n_y_coord) );
+		//clear_and_set_bits( attr0, obj_attr0_y_coord_mask,
+		//	obj_attr0_y_coord(n_y_coord) );
+		clear_bits( attr0, obj_attr0_y_coord_mask );
+		set_bits( attr0, obj_attr0_y_coord(n_y_coord) );
 	}
 	
 	s32 get_x_coord() const
@@ -85,8 +87,10 @@ public:		// wrapper functions
 	
 	void set_x_coord( s32 n_x_coord )
 	{
-		clear_and_set_bits( attr1, obj_attr1_x_coord_mask,
-			obj_attr1_x_coord(n_x_coord) );
+		//clear_and_set_bits( attr1, obj_attr1_x_coord_mask,
+		//	obj_attr1_x_coord(n_x_coord) );
+		clear_bits( attr1, obj_attr1_x_coord_mask );
+		set_bits( attr1, obj_attr1_x_coord(n_x_coord) );
 	}
 	
 	void enable_hflip()

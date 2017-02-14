@@ -209,8 +209,14 @@ int real_main()
 		//if ( key_hit_or_held(key_l) )
 		if ( key_hit(key_l) )
 		{
+			//sprite_manager::spawn_a_sprite_basic( st_waffle,
+			//	the_player.in_level_pos.curr, gfx_manager::bgofs_mirror[0],
+			//	(bool)the_player.the_oam_entry.get_hflip_status() );
 			sprite_manager::spawn_a_sprite_basic( st_waffle,
-				the_player.in_level_pos.curr, gfx_manager::bgofs_mirror[0],
+				the_player.in_level_pos.curr +
+				vec2_f24p8( make_f24p8(0), 
+				make_f24p8( the_player.get_shape_size_as_vec2().y / 2 ) ), 
+				gfx_manager::bgofs_mirror[0],
 				(bool)the_player.the_oam_entry.get_hflip_status() );
 		}
 		

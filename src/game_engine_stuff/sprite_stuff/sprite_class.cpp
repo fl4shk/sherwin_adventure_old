@@ -229,8 +229,19 @@ void sprite::update_on_screen_pos
 	s16 temp_x = temp_on_screen_pos.x.to_int_for_on_screen();
 	s16 temp_y = temp_on_screen_pos.y.to_int_for_on_screen();
 	
+	//if ( the_sprite_type == st_player )
+	//{
+	//	show_debug_s32_group( the_oam_entry.get_x_coord(),
+	//		the_oam_entry.get_y_coord() );
+	//}
 	the_oam_entry.set_x_coord(temp_x);
 	the_oam_entry.set_y_coord(temp_y);
+	
+	if ( the_sprite_type == st_player )
+	{
+		show_debug_s32_group( the_oam_entry.get_x_coord(),
+			the_oam_entry.get_y_coord() );
+	}
 	
 	
 	// Check whether the sprite is on screen.
@@ -567,14 +578,14 @@ void sprite::generic_block_collision_stuff
 	
 	
 	//block_coll_result horiz_fs_ret_buf[num_horiz_ctups];
-	block_coll_result* vert_top_fs_ret_buf[num_vert_top_ctups];
-	block_coll_result* vert_top_slp_ret_buf[num_vert_top_ctups];
+	//block_coll_result* vert_top_fs_ret_buf[num_vert_top_ctups];
+	//block_coll_result* vert_top_slp_ret_buf[num_vert_top_ctups];
 	block_coll_result* vert_bot_fs_ret_buf[num_vert_bot_ctups];
 	block_coll_result* vert_bot_slp_ret_buf[num_vert_bot_ctups];
 	
 	//vec2_s32 horiz_fs_pos_buf[num_horiz_ctups];
-	vec2_s32 vert_top_fs_pos_buf[num_vert_top_ctups];
-	vec2_s32 vert_top_slp_pos_buf[num_vert_top_ctups];
+	//vec2_s32 vert_top_fs_pos_buf[num_vert_top_ctups];
+	//vec2_s32 vert_top_slp_pos_buf[num_vert_top_ctups];
 	vec2_s32 vert_bot_fs_pos_buf[num_vert_bot_ctups];
 	vec2_s32 vert_bot_slp_pos_buf[num_vert_bot_ctups];
 	
@@ -709,7 +720,7 @@ void sprite::generic_block_collision_stuff
 	
 	auto exec_bot_collision_stuff = [&]
 		( const bool some_bot_side_fully_solid,
-		const bool some_bot_side_slope ) -> void
+		const bool some_bot_side_slope ) -> bool
 	{
 		// Handle slopes in a special way
 		if (some_bot_side_slope)
@@ -860,6 +871,7 @@ void sprite::generic_block_collision_stuff
 					// This calls set_curr_on_ground(true)
 					block_coll_response_bot(clseg_grp
 						.get_vert_bot_ctup(vi_bot_left).bcrlg);
+					return true;
 				}
 			}
 			
@@ -868,6 +880,7 @@ void sprite::generic_block_collision_stuff
 				// This calls set_curr_on_ground(true)
 				block_coll_response_bot_slope( height_val, 
 					hv_vs_blk_crd_y_pos );
+				return true;
 			}
 		}
 		else
@@ -880,14 +893,18 @@ void sprite::generic_block_collision_stuff
 			{
 				//// This needs to be turned back on eventually
 				set_curr_on_ground(false);
+				return false;
 			}
 			else // if (some_bot_side_fully_solid)
 			{
 				// This calls set_curr_on_ground(true)
 				block_coll_response_bot(clseg_grp.get_vert_bot_ctup
 					(vi_bot_left).bcrlg);
+				return true;
 			}
 		}
+		
+		return false;
 	};
 	
 	if ( get_curr_on_ground() )

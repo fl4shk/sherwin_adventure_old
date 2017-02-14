@@ -346,13 +346,13 @@ public:		// functions
 		init(the_coll_lseg);
 	}
 	
-	void init( const horiz_coll_lseg& the_coll_lseg )
-		__attribute__((_iwram_code,_target_arm));
+	void init( const horiz_coll_lseg& the_coll_lseg );
+		//__attribute__((_iwram_code,_target_arm));
 	void init( const vert_coll_lseg& the_coll_lseg )
 		__attribute__((_iwram_code,_target_arm));
 	
-	block_coll_result* horiz_any_bbvt_is_fully_solid( vec2_s32& pos )
-		__attribute__((_iwram_code,_target_arm));
+	block_coll_result* horiz_any_bbvt_is_fully_solid( vec2_s32& pos );
+		//__attribute__((_iwram_code,_target_arm));
 	block_coll_result* vert_any_bbvt_is_fully_solid( vec2_s32& pos )
 		__attribute__((_iwram_code,_target_arm));
 	block_coll_result* vert_any_bbvt_is_slope( vec2_s32& pos )
@@ -478,97 +478,6 @@ protected:		// functions
 } __attribute__((_align4));
 
 
-//// A class for a group 
-//class bcr_ptrs_for_points_group
-//{
-//public:		// variables
-//	
-//	
-//public:		// functions
-//	
-//	
-//} __attribute__((_align4));
-//
-//
-//// A line (i.e. row or column) of pointers to block_coll_result's.
-//class bcr_ptr_line
-//{
-//public:		// constants
-//	static constexpr u32 max_size 
-//		= block_coll_result_rect_group::max_size_2d.x;
-//	
-//protected:		// variables
-//	block_coll_result* ptr_arr_helper_data[max_size];
-//	
-//	// The real size of the row or column of pointers to
-//	// block_coll_result's
-//	s32 real_size;
-//	
-//	// The local position that was passed to the bcr_ptr_line
-//	vec2_s32 local_param_pos;
-//	
-//	// Whether this bcr_ptr_line represents a column (false) or a row
-//	// (true)
-//	u32 is_horiz;
-//	
-//public:		// variables
-//	array_helper<block_coll_result*> ptr_arr_helper;
-//	
-//public:		// functions
-//	inline bcr_ptr_line() : real_size(max_size), local_param_pos( 0, 0 ), 
-//		is_horiz(false)
-//	{
-//		init_ptr_arr_helper();
-//	}
-//	bcr_ptr_line( block_coll_result_rect_group& the_bcr_group,
-//		const vec2_s32& s_local_param_pos, u32 s_is_horiz );
-//	
-//	
-//	inline block_coll_result*& operator () ( u32 index )
-//	{
-//		return at(index);
-//	}
-//	inline block_coll_result*& at( u32 index )
-//	{
-//		return ptr_arr_helper.at(index);
-//	}
-//	
-//	inline s32 get_real_size() const
-//	{
-//		return real_size;
-//	}
-//	
-//	inline const vec2_s32& get_local_param_pos() const
-//	{
-//		return local_param_pos;
-//	}
-//	
-//	inline bool get_is_horiz() const
-//	{
-//		return is_horiz;
-//	}
-//	inline bool get_is_vert() const
-//	{
-//		return !is_horiz;
-//	}
-//	
-//	
-//	
-//protected:		// functions
-//	//inline void clear_ptr_arr_helper_data()
-//	//{
-//	//	for ( u32 i=0; i<max_size; ++i )
-//	//	{
-//	//		ptr_arr_helper_data[i] = NULL;
-//	//	}
-//	//}
-//	inline void init_ptr_arr_helper()
-//	{
-//		ptr_arr_helper.init( ptr_arr_helper_data, real_size );
-//	}
-//	
-//	
-//} __attribute__((_align4));
 
 
 
