@@ -50,18 +50,18 @@ const sprite_const_params player_sprite::the_const_params
 	const_cast<tile*>(reinterpret_cast<const tile*>(sherwin_gfxTiles)),
 	
 	// the_initial_shape_size
-	//oam_entry::ss_16x32,
+	oam_entry::ss_16x32,
 	//oam_entry::ss_16x16,
-	oam_entry::ss_8x8,
+	//oam_entry::ss_8x8,
 	
 	// the_initial_coll_box_size
-	//{ {11 << fixed24p8::get_shift() }, {28 << fixed24p8::get_shift() } },
+	{ {11 << fixed24p8::get_shift() }, {28 << fixed24p8::get_shift() } },
 	//{ {11 << fixed24p8::get_shift() }, {14 << fixed24p8::get_shift() } },
-	{ {8 << fixed24p8::get_shift() }, {8 << fixed24p8::get_shift() } },
+	//{ {8 << fixed24p8::get_shift() }, {8 << fixed24p8::get_shift() } },
 	
 	// the_initial_cb_pos_offset
-	//{ {2 << fixed24p8::get_shift() }, {4 << fixed24p8::get_shift() } },
-	{ {0}, {0} },
+	{ {2 << fixed24p8::get_shift() }, {4 << fixed24p8::get_shift() } },
+	//{ {0}, {0} },
 	
 	// the_initial_in_level_pos_offset
 	{ {0 << fixed24p8::get_shift()}, {0 << fixed24p8::get_shift()} }
@@ -1148,6 +1148,7 @@ const u32 player_sprite::get_curr_relative_tile_slot()
 		
 	}
 	
+	return 9001;
 }
 
 
@@ -1158,7 +1159,7 @@ void player_sprite::block_collision_stuff()
 	// Assume the_player can only be one of two sizes
 	if ( the_coll_box.size.x >= make_f24p8(0)
 		&& the_coll_box.size.x <= make_f24p8(16)
-		&& the_coll_box.size.y > make_f24p8(16 )
+		&& the_coll_box.size.y > make_f24p8(16)
 		&& the_coll_box.size.y <= make_f24p8(32) )
 	{
 		block_collision_stuff_16x32();

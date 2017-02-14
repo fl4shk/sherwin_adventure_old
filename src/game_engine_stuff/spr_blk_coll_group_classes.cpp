@@ -469,7 +469,10 @@ void spr_blk_coll_group_16x16::init_static_vars
 	pos_y_for_bot_vs = s_coll_box.bot() + offset_y_for_bot_vs;
 	
 	
-	vs_height_bot_ia = custom_abs(offset_y_for_bot_vs) + make_f24p8(1);
+	//vs_height_bot_ia = custom_abs(offset_y_for_bot_vs) + make_f24p8(1);
+	//vs_height_bot_ia = custom_abs(offset_y_for_bot_vs);
+	//vs_height_bot_ia = custom_abs(offset
+	vs_height_bot_ia = (fixed24p8){custom_abs(offset_y_for_bot_vs.data)};
 }
 
 
@@ -694,5 +697,7 @@ void spr_blk_coll_group_16x32::init_static_vars
 	pos_y_for_bot_vs = s_coll_box.bot() + offset_y_for_bot_vs;
 	
 	
-	vs_height_bot_ia = custom_abs(offset_y_for_bot_vs) + make_f24p8(1);
+	//vs_height_bot_ia = custom_abs(offset_y_for_bot_vs) + make_f24p8(1);
+	//vs_height_bot_ia = custom_abs(offset_y_for_bot_vs);
+	vs_height_bot_ia = (fixed24p8){custom_abs(offset_y_for_bot_vs.data)};
 }

@@ -212,7 +212,7 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 		plot_x -= some_number_str_curr_size;
 		++plot_y;
 		some_number_str_curr_size = snprintf( some_number_str,
-			some_number_str_max_size, "%xl", some_num );
+			some_number_str_max_size, "%i", some_num );
 		plot_horiz_str_8x8_to_screenblock_mirror( some_number_str,
 			some_number_str_curr_size, plot_x, plot_y );
 	};
@@ -232,6 +232,19 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 	//print_num_debug(debug_s32_arr[1]);
 	
 	//print_num_debug(sprite_manager::the_player_oam_index);
+	//print_num_debug(sprite_manager::the_allocatable_player
+	//	->get_prev_on_ground());
+	//print_num_debug(sprite_manager::the_allocatable_player
+	//	->get_curr_on_ground());
+	//print_num_debug(sprite_manager::the_allocatable_player
+	//	->get_prev_on_slope());
+	//print_num_debug(sprite_manager::the_allocatable_player
+	//	->get_curr_on_slope());
+	
+	print_num_debug(debug_s32_arr[0]);
+	print_num_debug(debug_s32_arr[1]);
+	print_num_debug(debug_s32_arr[2]);
+	print_num_debug(debug_s32_arr[3]);
 }
 
 
