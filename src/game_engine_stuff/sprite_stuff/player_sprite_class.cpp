@@ -43,25 +43,23 @@ const sprite_const_params player_sprite::the_const_params
 	
 	// num_active_gfx_tiles
 	gfx_manager::num_tiles_in_ss_16x32,
-	//gfx_manager::num_tiles_in_ss_16x16,
-	//gfx_manager::num_tiles_in_ss_8x8,
 	
 	// tile_arr 
 	const_cast<tile*>(reinterpret_cast<const tile*>(sherwin_gfxTiles)),
 	
 	// the_initial_shape_size
-	oam_entry::ss_16x32,
-	//oam_entry::ss_16x16,
+	//oam_entry::ss_16x32,
+	oam_entry::ss_16x16,
 	//oam_entry::ss_8x8,
 	
 	// the_initial_coll_box_size
-	{ {11 << fixed24p8::get_shift() }, {28 << fixed24p8::get_shift() } },
-	//{ {11 << fixed24p8::get_shift() }, {14 << fixed24p8::get_shift() } },
+	//{ {11 << fixed24p8::get_shift() }, {28 << fixed24p8::get_shift() } },
+	{ {11 << fixed24p8::get_shift() }, {14 << fixed24p8::get_shift() } },
 	//{ {8 << fixed24p8::get_shift() }, {8 << fixed24p8::get_shift() } },
 	
 	// the_initial_cb_pos_offset
-	{ {2 << fixed24p8::get_shift() }, {4 << fixed24p8::get_shift() } },
-	//{ {0}, {0} },
+	//{ {2 << fixed24p8::get_shift() }, {4 << fixed24p8::get_shift() } },
+	{ {0}, {0} },
 	
 	// the_initial_in_level_pos_offset
 	{ {0 << fixed24p8::get_shift()}, {0 << fixed24p8::get_shift()} }

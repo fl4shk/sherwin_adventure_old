@@ -159,12 +159,13 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 	static constexpr u32 some_number_str_max_size = 5;
 	char some_number_str[some_number_str_max_size];
 	
-	//char temp_buf[some_number_str_max_size];
+	char temp_buf[some_number_str_max_size];
 	
-	for ( u32 i=0; i<some_number_str_max_size; ++i )
-	{
-		some_number_str[i] = '\0';
-	}
+	//for ( u32 i=0; i<some_number_str_max_size; ++i )
+	//{
+	//	some_number_str[i] = '\0';
+	//	temp_buf[i] = '\0';
+	//}
 	
 	
 	s32 to_convert = ( player_sprite::remaining_hp < 0 )
@@ -207,12 +208,37 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 	plot_horiz_str_8x8_to_screenblock_mirror( some_number_str,
 		some_number_str_curr_size, plot_x, plot_y );
 	
-	auto print_num_debug = [&]( const u32 some_num ) -> void
+	auto print_num_debug = [&]( u32 some_num ) -> void
 	{
 		plot_x -= some_number_str_curr_size;
 		++plot_y;
+		//some_number_str_curr_size = 0;
 		some_number_str_curr_size = snprintf( some_number_str,
 			some_number_str_max_size, "%i", some_num );
+		
+		//for (;;)
+		//{
+		//	for ( u32 i=0; i<some_number_str_max_size; ++i )
+		//	{
+		//		temp_buf[i] = '\0';
+		//	}
+		//	
+		//	u32 rem = some_num % 10;
+		//	some_num /= 10;
+		//	//some_number_str = (char)( '0' + rem ) + some_number_str;
+		//	
+		//	temp_buf[0] = (char)( '0' + rem );
+		//	strcat( temp_buf, some_number_str ); 
+		//	strcpy( some_number_str, temp_buf );
+		//	
+		//	++some_number_str_curr_size;
+		//	
+		//	if ( some_num == 0 )
+		//	{
+		//		break;
+		//	}
+		//}
+		
 		plot_horiz_str_8x8_to_screenblock_mirror( some_number_str,
 			some_number_str_curr_size, plot_x, plot_y );
 	};
@@ -241,10 +267,11 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 	//print_num_debug(sprite_manager::the_allocatable_player
 	//	->get_curr_on_slope());
 	
-	print_num_debug(debug_s32_arr[0]);
-	print_num_debug(debug_s32_arr[1]);
-	print_num_debug(debug_s32_arr[2]);
-	print_num_debug(debug_s32_arr[3]);
+	//print_num_debug(debug_s32_arr[0]);
+	//print_num_debug(debug_s32_arr[1]);
+	//print_num_debug(debug_s32_arr[2]);
+	//print_num_debug(debug_s32_arr[3]);
+	print_num_debug(sprite_manager::num_active_sprites);
 }
 
 

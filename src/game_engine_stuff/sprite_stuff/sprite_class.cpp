@@ -709,12 +709,12 @@ void sprite::generic_block_collision_stuff
 		const s32 temp_pix_crd_y_pos = conv_blk_crd_to_pix_crd( pos.y + 1 )
 			- temp_height_val;
 		
-		if (!get_curr_on_ground())
-		{
-			show_debug_s32_group(temp_pix_crd_y_pos);
-			show_debug_s32_group(clseg_grp.get_vert_bot_ctup(vi_bot_mid)
-				.clseg.bot_pt().y.floor_to_int());
-		}
+		//if (!get_curr_on_ground())
+		//{
+		//	show_debug_s32_group(temp_pix_crd_y_pos);
+		//	show_debug_s32_group(clseg_grp.get_vert_bot_ctup(vi_bot_mid)
+		//		.clseg.bot_pt().y.floor_to_int());
+		//}
 		
 		// Prevent instantly teleporting downwards when in the air
 		//if ( get_curr_on_ground() 
@@ -960,11 +960,12 @@ void sprite::generic_block_collision_stuff
 				(hi_right_top));
 		}
 		
-		if ( top_side_fully_solid_og || top_side_slope_og )
-		{
-			block_coll_response_top(clseg_grp.get_vert_top_ctup
-				(vi_top_left));
-		}
+		//iterate_vert_top( top_side_fully_solid_og, top_side_slope_og );
+		//if ( top_side_fully_solid_og || top_side_slope_og )
+		//{
+		//	block_coll_response_top(clseg_grp.get_vert_top_ctup
+		//		(vi_top_left));
+		//}
 		
 		exec_bot_collision_stuff( bot_side_fully_solid_og,
 			bot_side_slope_og );
@@ -1006,8 +1007,8 @@ void sprite::generic_block_collision_stuff
 				(hi_right_top));
 		}
 		
-		if ( ( top_side_fully_solid_ia && !bot_side_fully_solid_ia ) 
-			|| ( top_side_slope_ia && !bot_side_slope_ia ) )
+		if ( ( top_side_fully_solid_ia ) || ( top_side_slope_ia 
+			&& !bot_side_slope_ia ) )
 		{
 			//if ( !clseg_grp.get_size_is_tiny().y 
 			//	|| !get_prev_on_ground() )

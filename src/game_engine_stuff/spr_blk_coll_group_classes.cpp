@@ -258,11 +258,17 @@ void spr_blk_coll_group_16x16::init( const coll_box& s_coll_box,
 	
 	horiz_ctups[hi_left_top].blk_crd_pos = get_left_top_hs_blk_crd_pos();
 	horiz_ctups[hi_left_mid].blk_crd_pos = get_left_mid_hs_blk_crd_pos();
-	horiz_ctups[hi_left_bot].blk_crd_pos = get_left_bot_hs_blk_crd_pos();
 	
 	horiz_ctups[hi_right_top].blk_crd_pos = get_right_top_hs_blk_crd_pos();
 	horiz_ctups[hi_right_mid].blk_crd_pos = get_right_mid_hs_blk_crd_pos();
-	horiz_ctups[hi_right_bot].blk_crd_pos = get_right_bot_hs_blk_crd_pos();
+	
+	if ( !get_size_is_tiny().x || get_on_ground() )
+	{
+		horiz_ctups[hi_left_bot].blk_crd_pos 
+			= get_left_bot_hs_blk_crd_pos();
+		horiz_ctups[hi_right_bot].blk_crd_pos 
+			= get_right_bot_hs_blk_crd_pos();
+	}
 	
 	vert_top_ctups[vi_top_left].blk_crd_pos 
 		= get_top_left_vs_blk_crd_pos();
@@ -328,11 +334,11 @@ const size_t spr_blk_coll_group_16x16::get_hi_left_top() const
 }
 const size_t spr_blk_coll_group_16x16::get_hi_left_bot() const
 {
-	if ( get_size_is_tiny().x )
+	if ( get_size_is_tiny().x || get_on_ground() )
 	{
 		return hi_left_mid;
 	}
-	else // if ( !get_size_is_tiny().x )
+	else // if ( !( get_size_is_tiny().x || get_on_ground() ) )
 	{
 		return hi_left_bot;
 	}
@@ -343,11 +349,11 @@ const size_t spr_blk_coll_group_16x16::get_hi_right_top() const
 }
 const size_t spr_blk_coll_group_16x16::get_hi_right_bot() const
 {
-	if ( get_size_is_tiny().x )
+	if ( get_size_is_tiny().x || get_on_ground() )
 	{
 		return hi_right_mid;
 	}
-	else // if ( !get_size_is_tiny().x )
+	else // if ( !( get_size_is_tiny().x || get_on_ground() ) )
 	{
 		return hi_right_bot;
 	}
@@ -491,11 +497,17 @@ void spr_blk_coll_group_16x32::init( const coll_box& s_coll_box,
 	
 	horiz_ctups[hi_left_top].blk_crd_pos = get_left_top_hs_blk_crd_pos();
 	horiz_ctups[hi_left_mid].blk_crd_pos = get_left_mid_hs_blk_crd_pos();
-	horiz_ctups[hi_left_bot].blk_crd_pos = get_left_bot_hs_blk_crd_pos();
 	
 	horiz_ctups[hi_right_top].blk_crd_pos = get_right_top_hs_blk_crd_pos();
 	horiz_ctups[hi_right_mid].blk_crd_pos = get_right_mid_hs_blk_crd_pos();
-	horiz_ctups[hi_right_bot].blk_crd_pos = get_right_bot_hs_blk_crd_pos();
+	
+	if ( !get_size_is_tiny().x || get_on_ground() )
+	{
+		horiz_ctups[hi_left_bot].blk_crd_pos 
+			= get_left_bot_hs_blk_crd_pos();
+		horiz_ctups[hi_right_bot].blk_crd_pos 
+			= get_right_bot_hs_blk_crd_pos();
+	}
 	
 	vert_top_ctups[vi_top_left].blk_crd_pos 
 		= get_top_left_vs_blk_crd_pos();
@@ -564,11 +576,11 @@ const size_t spr_blk_coll_group_16x32::get_hi_left_top() const
 }
 const size_t spr_blk_coll_group_16x32::get_hi_left_bot() const
 {
-	if ( get_size_is_tiny().x )
+	if ( get_size_is_tiny().x || get_on_ground() )
 	{
 		return hi_left_mid;
 	}
-	else // if ( !get_size_is_tiny().x )
+	else // if ( !( get_size_is_tiny().x || get_on_ground() ) )
 	{
 		return hi_left_bot;
 	}
@@ -579,11 +591,11 @@ const size_t spr_blk_coll_group_16x32::get_hi_right_top() const
 }
 const size_t spr_blk_coll_group_16x32::get_hi_right_bot() const
 {
-	if ( get_size_is_tiny().x )
+	if ( get_size_is_tiny().x || get_on_ground() )
 	{
 		return hi_right_mid;
 	}
-	else // if ( !get_size_is_tiny().x )
+	else // if ( !( get_size_is_tiny().x || get_on_ground() ) )
 	{
 		return hi_right_bot;
 	}
@@ -612,14 +624,14 @@ void spr_blk_coll_group_16x32::init_static_vars
 	{
 		size_is_tiny.x = false;
 	}
-	if ( s_coll_box.size.y.floor_to_int() <= 8 )
-	{
-		size_is_tiny.y = true;
-	}
-	else
-	{
-		size_is_tiny.y = false;
-	}
+	//if ( s_coll_box.size.y.floor_to_int() <= 8 )
+	//{
+	//	size_is_tiny.y = true;
+	//}
+	//else
+	//{
+	//	size_is_tiny.y = false;
+	//}
 	
 	blk_crd_pos_x_for_left_hs = conv_pix_crd_to_blk_crd(s_coll_box.left()
 		.floor_to_int());
