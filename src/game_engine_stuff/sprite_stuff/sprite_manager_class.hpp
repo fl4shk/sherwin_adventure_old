@@ -43,9 +43,9 @@ public:		// variables
 	
 	static constexpr u32 max_num_player_sprites = 1;
 	
-	static constexpr u32 max_num_regular_sprites = 40;
+	//static constexpr u32 max_num_regular_sprites = 40;
 	//static constexpr u32 max_num_regular_sprites = 30;
-	//static constexpr u32 max_num_regular_sprites = 20;
+	static constexpr u32 max_num_regular_sprites = 20;
 	
 	
 	

@@ -67,6 +67,10 @@ public:		// functions
 	{
 		return the_sa_free_list_backend.peek_top();
 	}
+	//inline const s32 peek_next_index() const
+	//{
+	//	return the_sa_free_list_backend.peek_next();
+	//}
 	
 protected:		// functions
 	//inline 

@@ -186,6 +186,14 @@ public:		// functions
 	{
 		return get_the_array()[get_next_index()-1];
 	}
+	inline s16& peek_next()
+	{
+		return get_the_array()[get_next_index()];
+	}
+	inline const s32 peek_next() const
+	{
+		return get_the_array()[get_next_index()];
+	}
 	
 	
 	// A wrapper function just in case it's ever forgotten what to do.
@@ -277,6 +285,15 @@ public:		// functions
 		return get_the_array()[get_next_index()-1];
 	}
 	
+	inline type peek_next()
+	{
+		return get_the_array()[get_next_index()];
+	}
+	inline const type peek_next() const
+	{
+		return get_the_array()[get_next_index()];
+	}
+	
 } __attribute__((_align4));
 
 
@@ -341,6 +358,17 @@ public:		// functions
 	{
 		//return the_array[next_index-1];
 		return the_sa_stack_backend.peek_top();
+	}
+	
+	inline type peek_next()
+	{
+		//return the_array[next_index];
+		return the_sa_stack_backend.peek_next();
+	}
+	inline const type peek_next() const
+	{
+		//return the_array[next_index];
+		return the_sa_stack_backend.peek_next();
 	}
 	
 	
@@ -455,6 +483,17 @@ public:		// functions
 	{
 		//return the_array[next_index-1];
 		return the_sa_free_list_backend.peek_top();
+	}
+	
+	inline int peek_next()
+	{
+		//return the_array[next_index];
+		return the_sa_free_list_backend.peek_next();
+	}
+	inline const int peek_next() const
+	{
+		//return the_array[next_index];
+		return the_sa_free_list_backend.peek_next();
 	}
 	
 	

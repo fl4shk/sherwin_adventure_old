@@ -352,8 +352,10 @@ s32 sprite_manager::spawn_a_player_secondary_sprite_basic
 		halt();
 	}
 	
+	//const s32 next_sprite_index = the_player_secondary_sprites_allocator
+	//	.peek_top_index();
 	const s32 next_sprite_index = the_player_secondary_sprites_allocator
-		.peek_top_index();
+		.peek_top_index() + 1;
 	
 	if ( !in_range<s32>( (s32)0, (s32)the_player_secondary_sprites.size(), 
 		next_sprite_index ) )
@@ -406,8 +408,10 @@ s32 sprite_manager::spawn_a_secondary_sprite_basic
 		return -1;
 	}
 	
+	//const s32 next_sprite_index = the_secondary_sprites_allocator
+	//	.peek_top_index();
 	const s32 next_sprite_index = the_secondary_sprites_allocator
-		.peek_top_index();
+		.peek_top_index() + 1;
 	
 	if ( !in_range<s32>( (s32)0, (s32)the_secondary_sprites.size(), 
 		next_sprite_index ) )
@@ -463,7 +467,9 @@ s32 sprite_manager::spawn_a_sprite_basic( sprite_type the_sprite_type,
 		return -1;
 	}
 	
-	const s32 next_sprite_index = the_sprites_allocator.peek_top_index();
+	//const s32 next_sprite_index = the_sprites_allocator.peek_top_index();
+	const s32 next_sprite_index = the_sprites_allocator.peek_top_index()
+		+ 1;
 	
 	if ( !in_range<s32>( (s32)0, (s32)the_sprites.size(), 
 		next_sprite_index ) )
@@ -478,6 +484,14 @@ s32 sprite_manager::spawn_a_sprite_basic( sprite_type the_sprite_type,
 	reinit_sprite_by_spawning( the_sprites[next_sprite_index], 
 		the_sprites_allocator, the_sprite_type, s_in_level_pos,
 		camera_pos_pc_pair, facing_left );
+	
+	//allocate_sprite
+	
+	//sprite* temp_spr;
+	//allocate_sprite( temp_spr, the_sprites_allocator, the_sprite_type,
+	//	s_in_level_pos, camera_pos_pc_pair, facing_left );
+	
+	
 	
 	return next_sprite_index;
 }
@@ -1136,6 +1150,8 @@ void sprite_manager::spawn_sprites_if_needed
 				}
 				
 				next_sprite_index = the_sprites_allocator.peek_top_index();
+				//next_sprite_index = the_sprites_allocator
+				//	.peek_next_index();
 				
 				//the_sprites[next_sprite_index].reinit_with_sprite_ipg
 				//	(&sprite_ipg);
