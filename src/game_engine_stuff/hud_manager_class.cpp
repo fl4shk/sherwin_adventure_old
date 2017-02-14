@@ -135,6 +135,9 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 			sizeof(bg1_screenblock_mirror) / sizeof(u32) );
 	}
 	
+	//memfill32( bg1_screenblock_mirror, 0,
+	//	sizeof(bg1_screenblock_mirror) / sizeof(u32) );
+	
 	
 	static const char sherwin_str[] = "SHERWIN:";
 	//static const u32 sherwin_str_size = sizeof(sherwin_str) - 1;
@@ -213,6 +216,10 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 		plot_x -= some_number_str_curr_size;
 		++plot_y;
 		//some_number_str_curr_size = 0;
+		for ( u32 i=0; i<some_number_str_max_size; ++i )
+		{
+			some_number_str[i] = '\0';
+		}
 		some_number_str_curr_size = snprintf( some_number_str,
 			some_number_str_max_size, "%i", some_num );
 		
@@ -239,8 +246,10 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 		//	}
 		//}
 		
+		//plot_horiz_str_8x8_to_screenblock_mirror( some_number_str,
+		//	some_number_str_curr_size, plot_x, plot_y );
 		plot_horiz_str_8x8_to_screenblock_mirror( some_number_str,
-			some_number_str_curr_size, plot_x, plot_y );
+			some_number_str_max_size, plot_x, plot_y );
 	};
 	
 	
