@@ -92,6 +92,7 @@ void sprite_allocator::deallocate_sprite( sprite*& the_sprite )
 	if ( the_sprite == NULL )
 	{
 		//debug_arr_group::write_str_and_inc("SadsSprNULL");
+		//halt();
 		return;
 	}
 	

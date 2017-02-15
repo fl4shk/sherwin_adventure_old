@@ -352,10 +352,10 @@ s32 sprite_manager::spawn_a_player_secondary_sprite_basic
 		halt();
 	}
 	
-	//const s32 next_sprite_index = the_player_secondary_sprites_allocator
-	//	.peek_top_index();
 	const s32 next_sprite_index = the_player_secondary_sprites_allocator
-		.peek_top_index() + 1;
+		.peek_top_index();
+	//const s32 next_sprite_index = the_player_secondary_sprites_allocator
+	//	.peek_top_index() + 1;
 	
 	if ( !in_range<s32>( (s32)0, (s32)the_player_secondary_sprites.size(), 
 		next_sprite_index ) )
@@ -408,10 +408,10 @@ s32 sprite_manager::spawn_a_secondary_sprite_basic
 		return -1;
 	}
 	
-	//const s32 next_sprite_index = the_secondary_sprites_allocator
-	//	.peek_top_index();
 	const s32 next_sprite_index = the_secondary_sprites_allocator
-		.peek_top_index() + 1;
+		.peek_top_index();
+	//const s32 next_sprite_index = the_secondary_sprites_allocator
+	//	.peek_top_index() + 1;
 	
 	if ( !in_range<s32>( (s32)0, (s32)the_secondary_sprites.size(), 
 		next_sprite_index ) )
@@ -467,14 +467,19 @@ s32 sprite_manager::spawn_a_sprite_basic( sprite_type the_sprite_type,
 		return -1;
 	}
 	
-	//const s32 next_sprite_index = the_sprites_allocator.peek_top_index();
-	const s32 next_sprite_index = the_sprites_allocator.peek_top_index()
-		+ 1;
+	const s32 next_sprite_index = the_sprites_allocator.peek_top_index();
 	
 	if ( !in_range<s32>( (s32)0, (s32)the_sprites.size(), 
 		next_sprite_index ) )
 	{
 		debug_arr_group::write_str_and_inc("NextIndexOoR");
+		halt();
+	}
+	
+	if ( the_sprites[next_sprite_index] != NULL )
+	{
+		show_debug_s32_group(next_sprite_index);
+		debug_arr_group::write_str_and_inc("SprNotNull");
 		halt();
 	}
 	
@@ -723,8 +728,9 @@ void sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
 void sprite_manager::initial_sprite_spawning_shared_code
 	( prev_curr_pair<bg_point>& camera_pos_pc_pair )
 {
-	//auto which_spr = the_sprites.begin();
-	auto which_spr_ptr = the_sprites.begin();
+	////auto which_spr = the_sprites.begin();
+	//auto which_spr_ptr = the_sprites.begin();
+	s32 next_sprite_index = -1;
 	
 	//u32 curr_ptr_slot = 0;
 	//sprite* which_spr = the_sprites[0];
@@ -805,19 +811,32 @@ void sprite_manager::initial_sprite_spawning_shared_code
 			//	break;
 			//}
 			
-			while ( (*which_spr_ptr) != NULL && which_spr_ptr
-				!= the_sprites.end() )
-			{
-				++which_spr_ptr;
-			}
 			
-			reinit_sprite_with_sprite_ipg( *which_spr_ptr,
-				the_sprites_allocator, &sprite_ipg );
+			// This was the source of some spawning bugs because it didn't
+			// use the elsewhere used sprite index allocation method
+			////while ( (*which_spr_ptr) != NULL && which_spr_ptr
+			////	!= the_sprites.end() )
+			////{
+			////	++which_spr_ptr;
+			////}
+			//
+			////reinit_sprite_with_sprite_ipg( *which_spr_ptr,
+			////	the_sprites_allocator, &sprite_ipg );
+			//
+			////if ( which_spr_ptr == the_sprites.end() )
+			////{
+			////	break;
+			////}
 			
-			if ( which_spr_ptr == the_sprites.end() )
+			if (!the_sprites_allocator.can_pop_index())
 			{
 				break;
 			}
+			
+			next_sprite_index = the_sprites_allocator.peek_top_index();
+			
+			reinit_sprite_with_sprite_ipg( the_sprites[next_sprite_index],
+				the_sprites_allocator, &sprite_ipg );
 		}
 		
 		//if ( which_spr == the_sprites.end() )
@@ -825,7 +844,12 @@ void sprite_manager::initial_sprite_spawning_shared_code
 		//	break;
 		//}
 		
-		if ( which_spr_ptr == the_sprites.end() )
+		//if ( which_spr_ptr == the_sprites.end() )
+		//{
+		//	break;
+		//}
+		
+		if (!the_sprites_allocator.can_pop_index())
 		{
 			break;
 		}
@@ -1150,8 +1174,6 @@ void sprite_manager::spawn_sprites_if_needed
 				}
 				
 				next_sprite_index = the_sprites_allocator.peek_top_index();
-				//next_sprite_index = the_sprites_allocator
-				//	.peek_next_index();
 				
 				//the_sprites[next_sprite_index].reinit_with_sprite_ipg
 				//	(&sprite_ipg);

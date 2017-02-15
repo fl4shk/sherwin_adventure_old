@@ -181,19 +181,21 @@ public:		// functions
 	inline s16& peek_top()
 	{
 		return get_the_array()[get_next_index()-1];
+		//return get_the_array()[get_next_index()];
 	}
 	inline const s32 peek_top() const
 	{
 		return get_the_array()[get_next_index()-1];
+		//return get_the_array()[get_next_index()];
 	}
-	inline s16& peek_next()
-	{
-		return get_the_array()[get_next_index()];
-	}
-	inline const s32 peek_next() const
-	{
-		return get_the_array()[get_next_index()];
-	}
+	//inline s16& peek_next()
+	//{
+	//	return get_the_array()[get_next_index()-2];
+	//}
+	//inline const s32 peek_next() const
+	//{
+	//	return get_the_array()[get_next_index()-2];
+	//}
 	
 	
 	// A wrapper function just in case it's ever forgotten what to do.
@@ -285,14 +287,14 @@ public:		// functions
 		return get_the_array()[get_next_index()-1];
 	}
 	
-	inline type peek_next()
-	{
-		return get_the_array()[get_next_index()];
-	}
-	inline const type peek_next() const
-	{
-		return get_the_array()[get_next_index()];
-	}
+	//inline type peek_next()
+	//{
+	//	return get_the_array()[get_next_index()-2];
+	//}
+	//inline const type peek_next() const
+	//{
+	//	return get_the_array()[get_next_index()-2];
+	//}
 	
 } __attribute__((_align4));
 
@@ -360,16 +362,16 @@ public:		// functions
 		return the_sa_stack_backend.peek_top();
 	}
 	
-	inline type peek_next()
-	{
-		//return the_array[next_index];
-		return the_sa_stack_backend.peek_next();
-	}
-	inline const type peek_next() const
-	{
-		//return the_array[next_index];
-		return the_sa_stack_backend.peek_next();
-	}
+	//inline type peek_next()
+	//{
+	//	//return the_array[next_index];
+	//	return the_sa_stack_backend.peek_next();
+	//}
+	//inline const type peek_next() const
+	//{
+	//	//return the_array[next_index];
+	//	return the_sa_stack_backend.peek_next();
+	//}
 	
 	
 } __attribute__((_align4));
@@ -485,16 +487,16 @@ public:		// functions
 		return the_sa_free_list_backend.peek_top();
 	}
 	
-	inline int peek_next()
-	{
-		//return the_array[next_index];
-		return the_sa_free_list_backend.peek_next();
-	}
-	inline const int peek_next() const
-	{
-		//return the_array[next_index];
-		return the_sa_free_list_backend.peek_next();
-	}
+	//inline int peek_next()
+	//{
+	//	//return the_array[next_index];
+	//	return the_sa_free_list_backend.peek_next();
+	//}
+	//inline const int peek_next() const
+	//{
+	//	//return the_array[next_index];
+	//	return the_sa_free_list_backend.peek_next();
+	//}
 	
 	
 } __attribute__((_align4));
