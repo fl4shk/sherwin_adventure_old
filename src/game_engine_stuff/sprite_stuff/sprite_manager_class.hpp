@@ -69,45 +69,45 @@ public:		// variables
 	
 	//// An array of player secondary sprites to allocate from
 	//static std::array< sprite, max_num_player_secondary_sprites > 
-	//	the_allocatable_player_secondary_sprites;
+	//	the_player_secondary_sprites;
 	//
 	//// An array of secondary sprites to allocate from, other than the ones
 	//// used by the_player 
 	//static std::array< sprite, max_num_secondary_sprites > 
-	//	the_allocatable_secondary_sprites;
+	//	the_secondary_sprites;
 	//
 	//// The array of REGULAR active sprites, not counting the_player.
 	//static std::array< sprite, max_num_regular_sprites > 
-	//	the_allocatable_sprites;
+	//	the_sprites;
 	
 	
 	
 	// This is for speeding up 
-	static s16 the_allocatable_player_secondary_sprites_free_list_arr
+	static s16 the_player_secondary_sprites_free_list_arr
 		[max_num_player_secondary_sprites];
-	static s16 the_allocatable_secondary_sprites_free_list_arr
+	static s16 the_secondary_sprites_free_list_arr
 		[max_num_secondary_sprites];
-	static s16 the_allocatable_player_free_list_arr
+	static s16 the_player_free_list_arr
 		[max_num_player_sprites];
-	static s16 the_allocatable_sprites_free_list_arr
+	static s16 the_sprites_free_list_arr
 		[max_num_regular_sprites];
 	
 	
 	// Temporarily use regular arrays to make debugging easier.
 	// An array of player secondary sprites to allocate from
-	static sprite the_allocatable_player_secondary_sprites
+	static sprite the_player_secondary_sprites
 		[max_num_player_secondary_sprites];
 	
 	// An array of secondary sprites to allocate from, other than the ones
 	// used by the_player 
-	static sprite the_allocatable_secondary_sprites
+	static sprite the_secondary_sprites
 		[max_num_secondary_sprites];
 	
 	// An array of a single player to allocate from
 	static sprite the_allocatable_player[max_num_player_sprites];
 	
 	// The array of REGULAR active sprites, not counting the_player.
-	static sprite the_allocatable_sprites[max_num_regular_sprites];
+	static sprite the_sprites[max_num_regular_sprites];
 	
 	
 	
@@ -234,7 +234,7 @@ public:		// functions
 	
 	// This function initializes the vram_chunk_index of each sprite in
 	// the_sprites.
-	static inline void init_the_allocatable_sprite_arrays()
+	static inline void init_the_sprite_arrays()
 	{
 		//u32 vram_chunk_index = 1;
 		//
@@ -246,7 +246,7 @@ public:		// functions
 		// Secondary sprites "claimed" by the_player.
 		for ( u32 i=0; i<max_num_player_secondary_sprites; ++i )
 		{
-			the_allocatable_player_secondary_sprites[i]
+			the_player_secondary_sprites[i]
 				.set_vram_chunk_index( i 
 				+ the_player_secondary_sprites_starting_vram_chunk_index );
 		}
@@ -254,14 +254,14 @@ public:		// functions
 		// Other secondary sprites
 		for ( u32 i=0; i<max_num_secondary_sprites; ++i )
 		{
-			the_allocatable_secondary_sprites[i].set_vram_chunk_index( i
+			the_secondary_sprites[i].set_vram_chunk_index( i
 				+ the_secondary_sprites_starting_vram_chunk_index );
 		}
 		
 		// Regular sprites
 		for ( u32 i=0; i<max_num_regular_sprites; ++i )
 		{
-			the_allocatable_sprites[i].set_vram_chunk_index( i 
+			the_sprites[i].set_vram_chunk_index( i 
 				+ the_active_sprites_starting_vram_chunk_index );
 		}
 		

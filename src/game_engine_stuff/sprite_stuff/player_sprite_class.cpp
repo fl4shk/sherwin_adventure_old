@@ -729,7 +729,7 @@ void player_sprite::update_the_pickaxe()
 	//	[pickaxe_sprite_slot];
 	
 	sprite* the_pickaxe_ptr = &(sprite_manager
-		::the_allocatable_player_secondary_sprites[pickaxe_sprite_slot]);
+		::the_player_secondary_sprites[pickaxe_sprite_slot]);
 	//sprite& the_pickaxe = *the_pickaxe_ptr;
 	u32& the_pickaxe_frame_slot = the_pickaxe_ptr->misc_data_u
 		[player_pickaxe_sprite::udi_curr_frame_slot];

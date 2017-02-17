@@ -46,82 +46,82 @@ sprite* sprite_manager::the_player;
 
 //// An array of player secondary sprites to allocate from
 //std::array< sprite, sprite_manager::max_num_player_secondary_sprites > 
-//	sprite_manager::the_allocatable_player_secondary_sprites;
+//	sprite_manager::the_player_secondary_sprites;
 //
 //// An array of secondary sprites to allocate from, other than the ones
 //// used by the_player 
 //std::array< sprite, sprite_manager::max_num_secondary_sprites > 
-//	sprite_manager::the_allocatable_secondary_sprites;
+//	sprite_manager::the_secondary_sprites;
 //
 //// The array of REGULAR active sprites, not counting the_player.
 //std::array< sprite, sprite_manager::max_num_regular_sprites > 
-//	sprite_manager::the_allocatable_sprites;
+//	sprite_manager::the_sprites;
 
 //sprite_allocator sprite_manager::the_player_secondary_sprites_allocator
 //	( array_helper<sprite>
-//	( sprite_manager::the_allocatable_player_secondary_sprites.data(), 
-//	sprite_manager::the_allocatable_player_secondary_sprites.size() ) );
+//	( sprite_manager::the_player_secondary_sprites.data(), 
+//	sprite_manager::the_player_secondary_sprites.size() ) );
 //
 //sprite_allocator sprite_manager::the_secondary_sprites_allocator
 //	( array_helper<sprite>
-//	( sprite_manager::the_allocatable_secondary_sprites.data(), 
-//	sprite_manager::the_allocatable_secondary_sprites.size() ) );
+//	( sprite_manager::the_secondary_sprites.data(), 
+//	sprite_manager::the_secondary_sprites.size() ) );
 //
 //sprite_allocator sprite_manager::the_sprites_allocator
-//	( array_helper<sprite>( sprite_manager::the_allocatable_sprites.data(),
-//	sprite_manager::the_allocatable_sprites.size() ) );
+//	( array_helper<sprite>( sprite_manager::the_sprites.data(),
+//	sprite_manager::the_sprites.size() ) );
 
 
 // Temporarily use regular arrays to make debugging easier.
 // An array of player secondary sprites to allocate from
-sprite sprite_manager::the_allocatable_player_secondary_sprites
+sprite sprite_manager::the_player_secondary_sprites
 	[sprite_manager::max_num_player_secondary_sprites];
 
 // An array of secondary sprites to allocate from, other than the ones
 // used by the_player 
-sprite sprite_manager::the_allocatable_secondary_sprites
+sprite sprite_manager::the_secondary_sprites
 	[sprite_manager::max_num_secondary_sprites];
 
 sprite sprite_manager::the_allocatable_player
 	[sprite_manager::max_num_player_sprites];
 
 // The array of REGULAR active sprites, not counting the_player.
-sprite sprite_manager::the_allocatable_sprites
+sprite sprite_manager::the_sprites
 	[sprite_manager::max_num_regular_sprites];
 
 
 
-s16 sprite_manager::the_allocatable_player_secondary_sprites_free_list_arr
+s16 sprite_manager::the_player_secondary_sprites_free_list_arr
 	[max_num_player_secondary_sprites];
-s16 sprite_manager::the_allocatable_secondary_sprites_free_list_arr
+s16 sprite_manager::the_secondary_sprites_free_list_arr
 	[max_num_secondary_sprites];
-s16 sprite_manager::the_allocatable_player_free_list_arr
+s16 sprite_manager::the_player_free_list_arr
 	[max_num_player_sprites];
-s16 sprite_manager::the_allocatable_sprites_free_list_arr
+s16 sprite_manager::the_sprites_free_list_arr
 	[max_num_regular_sprites];
 
 
 // The sprite allocators
 sprite_allocator sprite_manager::the_player_secondary_sprites_allocator
-	( the_allocatable_player_secondary_sprites_free_list_arr,
+	( the_player_secondary_sprites_free_list_arr,
 	array_helper<sprite>
-	( sprite_manager::the_allocatable_player_secondary_sprites, 
+	( sprite_manager::the_player_secondary_sprites, 
 	sprite_manager::max_num_player_secondary_sprites ) );
 
 sprite_allocator sprite_manager::the_secondary_sprites_allocator
-	( the_allocatable_secondary_sprites_free_list_arr,
+	( the_secondary_sprites_free_list_arr,
 	array_helper<sprite>
-	( sprite_manager::the_allocatable_secondary_sprites, 
+	( sprite_manager::the_secondary_sprites, 
 	sprite_manager::max_num_secondary_sprites ) );
 
 sprite_allocator sprite_manager::the_player_sprite_allocator
-	( the_allocatable_player_free_list_arr,
+	( the_player_free_list_arr,
 	array_helper<sprite>( sprite_manager::the_allocatable_player,
 	sprite_manager::max_num_player_sprites ) );
 
 sprite_allocator sprite_manager::the_sprites_allocator
-	( the_allocatable_sprites_free_list_arr,
-	array_helper<sprite>( sprite_manager::the_allocatable_sprites,
+	( the_sprites_free_list_arr,
+	array_helper<sprite>( sprite_manager::the_sprites,
 	sprite_manager::max_num_regular_sprites ) );
 
 
@@ -396,7 +396,7 @@ s32 sprite_manager::spawn_a_player_secondary_sprite_basic
 	//	the_sprite_type, s_in_level_pos, camera_pos_pc_pair, 
 	//	facing_left ); 
 	reinit_sprite_by_spawning
-		( the_allocatable_player_secondary_sprites[next_sprite_index], 
+		( the_player_secondary_sprites[next_sprite_index], 
 		the_player_secondary_sprites_allocator, the_sprite_type, 
 		s_in_level_pos, camera_pos_pc_pair, facing_left ); 
 	
@@ -459,7 +459,7 @@ s32 sprite_manager::spawn_a_secondary_sprite_basic
 	//	the_secondary_sprites_allocator, the_sprite_type, s_in_level_pos, 
 	//	camera_pos_pc_pair, facing_left );
 	reinit_sprite_by_spawning
-		( the_allocatable_secondary_sprites[next_sprite_index], 
+		( the_secondary_sprites[next_sprite_index], 
 		the_secondary_sprites_allocator, the_sprite_type, s_in_level_pos, 
 		camera_pos_pc_pair, facing_left );
 	
@@ -515,7 +515,7 @@ s32 sprite_manager::spawn_a_sprite_basic( sprite_type the_sprite_type,
 	}
 	
 	//if ( the_sprites[next_sprite_index] != NULL )
-	if ( the_allocatable_sprites[next_sprite_index].the_sprite_type
+	if ( the_sprites[next_sprite_index].the_sprite_type
 		!= st_default )
 	{
 		show_debug_s32_group(next_sprite_index);
@@ -530,7 +530,7 @@ s32 sprite_manager::spawn_a_sprite_basic( sprite_type the_sprite_type,
 	//reinit_sprite_by_spawning( the_sprites[next_sprite_index], 
 	//	the_sprites_allocator, the_sprite_type, s_in_level_pos,
 	//	camera_pos_pc_pair, facing_left );
-	reinit_sprite_by_spawning( the_allocatable_sprites[next_sprite_index], 
+	reinit_sprite_by_spawning( the_sprites[next_sprite_index], 
 		the_sprites_allocator, the_sprite_type, s_in_level_pos,
 		camera_pos_pc_pair, facing_left );
 	
@@ -587,22 +587,22 @@ void sprite_manager::clear_the_sprite_arrays()
 	//	/ sizeof(u32) );
 	//
 	//
-	////memfill32( the_allocatable_player_secondary_sprites.data(), 0,
-	////	the_allocatable_player_secondary_sprites.size() 
+	////memfill32( the_player_secondary_sprites.data(), 0,
+	////	the_player_secondary_sprites.size() 
 	////	* sizeof(sprite) / sizeof(u32) );
-	////memfill32( the_allocatable_secondary_sprites.data(), 0,
-	////	the_allocatable_secondary_sprites.size() * sizeof(sprite) 
+	////memfill32( the_secondary_sprites.data(), 0,
+	////	the_secondary_sprites.size() * sizeof(sprite) 
 	////	/ sizeof(u32) );
-	////memfill32( the_allocatable_sprites.data(), 0, 
-	////	the_allocatable_sprites.size() * sizeof(sprite) 
+	////memfill32( the_sprites.data(), 0, 
+	////	the_sprites.size() * sizeof(sprite) 
 	////	/ sizeof(u32) );
 	//
 	//
-	//memfill32( the_allocatable_player_secondary_sprites, 0,
+	//memfill32( the_player_secondary_sprites, 0,
 	//	max_num_player_secondary_sprites * sizeof(sprite) / sizeof(u32) );
-	//memfill32( the_allocatable_secondary_sprites, 0,
+	//memfill32( the_secondary_sprites, 0,
 	//	max_num_secondary_sprites * sizeof(sprite) / sizeof(u32) );
-	//memfill32( the_allocatable_sprites, 0, max_num_regular_sprites 
+	//memfill32( the_sprites, 0, max_num_regular_sprites 
 	//	* sizeof(sprite) / sizeof(u32) );
 	
 	for ( u32 i=0; i<max_num_player_secondary_sprites; ++i )
@@ -615,7 +615,7 @@ void sprite_manager::clear_the_sprite_arrays()
 		//}
 		
 		the_player_secondary_sprites_allocator.deallocate_sprite
-			(the_allocatable_player_secondary_sprites[i]);
+			(the_player_secondary_sprites[i]);
 	}
 	
 	for ( u32 i=0; i<max_num_secondary_sprites; ++i )
@@ -627,7 +627,7 @@ void sprite_manager::clear_the_sprite_arrays()
 		//	the_secondary_sprites[i] = NULL;
 		//}
 		the_secondary_sprites_allocator.deallocate_sprite
-			(the_allocatable_secondary_sprites[i]);
+			(the_secondary_sprites[i]);
 	}
 	
 	for ( u32 i=0; i<max_num_regular_sprites; ++i )
@@ -638,7 +638,7 @@ void sprite_manager::clear_the_sprite_arrays()
 		//	the_sprites[i] = NULL;
 		//}
 		the_sprites_allocator.deallocate_sprite
-			(the_allocatable_sprites[i]);
+			(the_sprites[i]);
 	}
 	
 	
@@ -648,11 +648,11 @@ void sprite_manager::clear_the_sprite_arrays()
 	//arr_memfill32( the_sprites, 0 );
 	
 	
-	//arr_memfill32( the_allocatable_player_secondary_sprites, 0,
+	//arr_memfill32( the_player_secondary_sprites, 0,
 	//	max_num_player_secondary_sprites );
-	//arr_memfill32( the_allocatable_secondary_sprites, 0,
+	//arr_memfill32( the_secondary_sprites, 0,
 	//	max_num_secondary_sprites );
-	//arr_memfill32( the_allocatable_sprites, 0, max_num_regular_sprites );
+	//arr_memfill32( the_sprites, 0, max_num_regular_sprites );
 	
 	
 	
@@ -743,7 +743,7 @@ void sprite_manager::initial_sprite_spawning_at_start_of_level
 		camera_pos_pc_pair );
 	
 	//init_the_sprite_arrays();
-	init_the_allocatable_sprite_arrays();
+	init_the_sprite_arrays();
 	
 	//next_debug_u32 = (vu32)(player_ipg);
 	//next_debug_u32 = player_ipg->type;
@@ -782,7 +782,7 @@ void sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
 		camera_pos_pc_pair );
 	
 	//init_the_sprite_arrays();
-	init_the_allocatable_sprite_arrays();
+	init_the_sprite_arrays();
 	
 	//next_debug_u32 = (vu32)(player_ipg);
 	//next_debug_u32 = player_ipg->type;
@@ -905,7 +905,7 @@ void sprite_manager::initial_sprite_spawning_shared_code
 			//reinit_sprite_with_sprite_ipg( the_sprites[next_sprite_index],
 			//	the_sprites_allocator, &sprite_ipg );
 			reinit_sprite_with_sprite_ipg
-				( the_allocatable_sprites[next_sprite_index],
+				( the_sprites[next_sprite_index],
 				the_sprites_allocator, &sprite_ipg );
 		}
 		
@@ -930,7 +930,7 @@ void sprite_manager::initial_sprite_spawning_shared_code
 	next_oam_index = the_active_sprites_starting_oam_index;
 	
 	// Run each active sprite's update_part_1() function.
-	for ( sprite& spr : the_allocatable_sprites )
+	for ( sprite& spr : the_sprites )
 	{
 		if ( spr.the_sprite_type != st_default )
 		{
@@ -941,7 +941,7 @@ void sprite_manager::initial_sprite_spawning_shared_code
 	}
 	
 	// Run each active sprite's update_part_2() function.
-	for ( sprite& spr : the_allocatable_sprites )
+	for ( sprite& spr : the_sprites )
 	{
 		if ( spr.the_sprite_type != st_default )
 		{
@@ -951,7 +951,7 @@ void sprite_manager::initial_sprite_spawning_shared_code
 	}
 	
 	// Run each active sprite's update_part_3() function.
-	for ( sprite& spr : the_allocatable_sprites )
+	for ( sprite& spr : the_sprites )
 	{
 		if ( spr.the_sprite_type != st_default )
 		{
@@ -1035,18 +1035,18 @@ void sprite_manager::find_all_active_sprites()
 	
 	// Find all the currently-active secondary sprites "claimed" by
 	// the_player.
-	find_active_sprites( the_allocatable_player_secondary_sprites,
+	find_active_sprites( the_player_secondary_sprites,
 		the_active_player_secondary_sprites.data(),
 		max_num_player_secondary_sprites,
 		num_active_player_secondary_sprites );
 	
 	// Find all the currently-active secondary sprites.
-	find_active_sprites( the_allocatable_secondary_sprites, 
+	find_active_sprites( the_secondary_sprites, 
 		the_active_secondary_sprites.data(), max_num_secondary_sprites, 
 		num_active_secondary_sprites );
 	
 	// Find all the currently-active sprites.
-	find_active_sprites( the_allocatable_sprites, 
+	find_active_sprites( the_sprites, 
 		the_active_sprites.data(), max_num_regular_sprites, 
 		num_active_sprites );
 	
@@ -1195,7 +1195,7 @@ void sprite_manager::spawn_sprites_if_needed
 				//	[next_sprite_index], the_sprites_allocator, 
 				//	&sprite_ipg );
 				reinit_sprite_with_sprite_ipg
-					( the_allocatable_sprites[next_sprite_index], 
+					( the_sprites[next_sprite_index], 
 					the_sprites_allocator, &sprite_ipg );
 			}
 			
@@ -1278,7 +1278,7 @@ void sprite_manager::spawn_sprites_if_needed
 				//	[next_sprite_index], the_sprites_allocator, 
 				//	&sprite_ipg );
 				reinit_sprite_with_sprite_ipg
-					( the_allocatable_sprites[next_sprite_index], 
+					( the_sprites[next_sprite_index], 
 					the_sprites_allocator, &sprite_ipg );
 			}
 			

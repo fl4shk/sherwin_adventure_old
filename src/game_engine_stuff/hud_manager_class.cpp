@@ -254,26 +254,26 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 	
 	
 	////print_num_debug(sprite::tallest_height_val.curr);
-	//print_num_debug(sprite_manager::the_allocatable_player->the_oam_entry
+	//print_num_debug(sprite_manager::the_player->the_oam_entry
 	//	.attr0);
-	//print_num_debug(sprite_manager::the_allocatable_player->the_oam_entry
+	//print_num_debug(sprite_manager::the_player->the_oam_entry
 	//	.attr0);
 	//print_num_debug(debug_s32_arr[0]);
 	
-	//print_num_debug(sprite_manager::the_allocatable_player->the_oam_entry
+	//print_num_debug(sprite_manager::the_player->the_oam_entry
 	//	.attr1);
-	//print_num_debug(sprite_manager::the_allocatable_player->the_oam_entry
+	//print_num_debug(sprite_manager::the_player->the_oam_entry
 	//	.get_tile_number());
 	//print_num_debug(debug_s32_arr[1]);
 	
 	//print_num_debug(sprite_manager::the_player_oam_index);
-	//print_num_debug(sprite_manager::the_allocatable_player
+	//print_num_debug(sprite_manager::the_player
 	//	->get_prev_on_ground());
-	//print_num_debug(sprite_manager::the_allocatable_player
+	//print_num_debug(sprite_manager::the_player
 	//	->get_curr_on_ground());
-	//print_num_debug(sprite_manager::the_allocatable_player
+	//print_num_debug(sprite_manager::the_player
 	//	->get_prev_on_slope());
-	//print_num_debug(sprite_manager::the_allocatable_player
+	//print_num_debug(sprite_manager::the_player
 	//	->get_curr_on_slope());
 	
 	//print_num_debug(debug_s32_arr[0]);
