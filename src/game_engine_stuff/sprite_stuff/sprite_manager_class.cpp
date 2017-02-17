@@ -186,9 +186,9 @@ int sprite_manager::next_oam_index;
 //{
 //}
 
-void sprite_manager::allocate_sprite( sprite*& the_sprite, 
-	sprite_allocator& the_sprite_allocator, 
-	sprite_type the_sprite_type, bool facing_left )
+sprite* sprite_manager::allocate_sprite
+	( sprite_allocator& the_sprite_allocator, sprite_type the_sprite_type, 
+	bool facing_left )
 {
 	//if ( sprite_type_exists(the_sprite_type) )
 	//{
@@ -203,6 +203,8 @@ void sprite_manager::allocate_sprite( sprite*& the_sprite,
 	//	debug_arr_group::write_str_and_inc("BadSprType0");
 	//	halt();
 	//}
+	
+	sprite* the_sprite = NULL;
 	
 	switch (the_sprite_type)
 	{
@@ -228,10 +230,12 @@ void sprite_manager::allocate_sprite( sprite*& the_sprite,
 	}
 	
 	the_sprite->shared_constructor_code_part_2(facing_left);
+	
+	return the_sprite;
 }
 
-void sprite_manager::allocate_sprite( sprite*& the_sprite, 
-	sprite_allocator& the_sprite_allocator, sprite_type the_sprite_type, 
+sprite* sprite_manager::allocate_sprite
+	( sprite_allocator& the_sprite_allocator, sprite_type the_sprite_type, 
 	const vec2_f24p8& s_in_level_pos, 
 	const prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
 {
@@ -249,6 +253,8 @@ void sprite_manager::allocate_sprite( sprite*& the_sprite,
 	//	debug_arr_group::write_str_and_inc("BadSprType1");
 	//	halt();
 	//}
+	
+	sprite* the_sprite = NULL;
 	
 	switch (the_sprite_type)
 	{
@@ -276,53 +282,62 @@ void sprite_manager::allocate_sprite( sprite*& the_sprite,
 	the_sprite->shared_constructor_code_part_2( s_in_level_pos, 
 		camera_pos_pc_pair, facing_left );
 	
+	return the_sprite;
 }
 
-void sprite_manager::reinit_sprite_with_sprite_ipg( sprite*& the_sprite, 
+sprite* sprite_manager::reinit_sprite_with_sprite_ipg( sprite& the_sprite, 
 	sprite_allocator& the_sprite_allocator, 
 	sprite_init_param_group* s_the_sprite_ipg )
 {
 	//u32 old_vram_chunk_index = the_sprite->get_vram_chunk_index();
 	
-	if ( the_sprite != NULL )
-	{
-		the_sprite_allocator.deallocate_sprite(*the_sprite);
-		the_sprite = NULL;
-	}
+	//if ( the_sprite != NULL )
+	//{
+	//	the_sprite_allocator.deallocate_sprite(*the_sprite);
+	//	the_sprite = NULL;
+	//}
+	the_sprite_allocator.deallocate_sprite(the_sprite);
 	
 	
 	if ( s_the_sprite_ipg->spawn_state == sss_not_active )
 	{
-		allocate_sprite( the_sprite, the_sprite_allocator, 
+		//allocate_sprite( the_sprite, the_sprite_allocator, 
+		//	s_the_sprite_ipg->type, !s_the_sprite_ipg->facing_right );
+		sprite* spr_ptr = allocate_sprite( the_sprite_allocator, 
 			s_the_sprite_ipg->type, !s_the_sprite_ipg->facing_right );
 		
 		vec2_f24p8 s_in_level_pos( make_f24p8( s_the_sprite_ipg
 			->initial_block_grid_x_coord * 16 ), make_f24p8
 			( s_the_sprite_ipg->initial_block_grid_y_coord * 16 ) );
 		
-		the_sprite->the_sprite_ipg = s_the_sprite_ipg;
-		the_sprite->the_sprite_ipg->spawn_state = sss_active;
+		spr_ptr->the_sprite_ipg = s_the_sprite_ipg;
+		spr_ptr->the_sprite_ipg->spawn_state = sss_active;
 		
-		the_sprite->set_curr_in_level_pos(s_in_level_pos);
+		spr_ptr->set_curr_in_level_pos(s_in_level_pos);
 		
+		return spr_ptr;
 	}
+	
+	return NULL;
 }
 
 
 
-void sprite_manager::reinit_sprite_by_spawning( sprite*& the_sprite, 
+sprite* sprite_manager::reinit_sprite_by_spawning( sprite& the_sprite, 
 	sprite_allocator& the_sprite_allocator, sprite_type s_the_sprite_type, 
 	const vec2_f24p8& s_in_level_pos, 
-	const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
-	bool facing_left )
+	const prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
 {
-	if ( the_sprite != NULL )
-	{
-		the_sprite_allocator.deallocate_sprite(*the_sprite);
-		the_sprite = NULL;
-	}
+	//if ( the_sprite != NULL )
+	//{
+	//	the_sprite_allocator.deallocate_sprite(*the_sprite);
+	//	the_sprite = NULL;
+	//}
+	the_sprite_allocator.deallocate_sprite(the_sprite);
 	
-	allocate_sprite( the_sprite, the_sprite_allocator, s_the_sprite_type,
+	//allocate_sprite( the_sprite, the_sprite_allocator, s_the_sprite_type,
+	//	s_in_level_pos, camera_pos_pc_pair, facing_left );
+	return allocate_sprite( the_sprite_allocator, s_the_sprite_type,
 		s_in_level_pos, camera_pos_pc_pair, facing_left );
 }
 
@@ -374,9 +389,14 @@ s32 sprite_manager::spawn_a_player_secondary_sprite_basic
 	
 	//the_player_secondary_sprites[next_sprite_index].reinit_by_spawning
 	//	( the_sprite_type, s_in_level_pos, camera_pos, facing_left );
-	reinit_sprite_by_spawning( the_player_secondary_sprites
-		[next_sprite_index], the_player_secondary_sprites_allocator, 
-		the_sprite_type, s_in_level_pos, camera_pos_pc_pair, facing_left ); 
+	//reinit_sprite_by_spawning( the_player_secondary_sprites
+	//	[next_sprite_index], the_player_secondary_sprites_allocator, 
+	//	the_sprite_type, s_in_level_pos, camera_pos_pc_pair, 
+	//	facing_left ); 
+	reinit_sprite_by_spawning
+		( the_allocatable_player_secondary_sprites[next_sprite_index], 
+		the_player_secondary_sprites_allocator, the_sprite_type, 
+		s_in_level_pos, camera_pos_pc_pair, facing_left ); 
 	
 	
 	return next_sprite_index;
@@ -431,7 +451,11 @@ s32 sprite_manager::spawn_a_secondary_sprite_basic
 	//the_secondary_sprites[next_sprite_index].reinit_by_spawning
 	//	( the_sprite_type, s_in_level_pos, camera_pos, facing_left );
 	
-	reinit_sprite_by_spawning( the_secondary_sprites[next_sprite_index],
+	//reinit_sprite_by_spawning( the_secondary_sprites[next_sprite_index],
+	//	the_secondary_sprites_allocator, the_sprite_type, s_in_level_pos, 
+	//	camera_pos_pc_pair, facing_left );
+	reinit_sprite_by_spawning
+		( the_allocatable_secondary_sprites[next_sprite_index], 
 		the_secondary_sprites_allocator, the_sprite_type, s_in_level_pos, 
 		camera_pos_pc_pair, facing_left );
 	
@@ -494,7 +518,10 @@ s32 sprite_manager::spawn_a_sprite_basic( sprite_type the_sprite_type,
 	//the_sprites[next_sprite_index].reinit_by_spawning( the_sprite_type,
 	//	s_in_level_pos, camera_pos, facing_left );
 	
-	reinit_sprite_by_spawning( the_sprites[next_sprite_index], 
+	//reinit_sprite_by_spawning( the_sprites[next_sprite_index], 
+	//	the_sprites_allocator, the_sprite_type, s_in_level_pos,
+	//	camera_pos_pc_pair, facing_left );
+	reinit_sprite_by_spawning( the_allocatable_sprites[next_sprite_index], 
 		the_sprites_allocator, the_sprite_type, s_in_level_pos,
 		camera_pos_pc_pair, facing_left );
 	
@@ -571,31 +598,38 @@ void sprite_manager::clear_the_sprite_arrays()
 	
 	for ( u32 i=0; i<max_num_player_secondary_sprites; ++i )
 	{
-		if ( the_player_secondary_sprites[i] != NULL )
-		{
-			the_player_secondary_sprites_allocator.deallocate_sprite
-				(*the_player_secondary_sprites[i]);
-			the_player_secondary_sprites[i] = NULL;
-		}
+		//if ( the_player_secondary_sprites[i] != NULL )
+		//{
+		//	the_player_secondary_sprites_allocator.deallocate_sprite
+		//		(*the_player_secondary_sprites[i]);
+		//	the_player_secondary_sprites[i] = NULL;
+		//}
+		
+		the_player_secondary_sprites_allocator.deallocate_sprite
+			(the_allocatable_player_secondary_sprites[i]);
 	}
 	
 	for ( u32 i=0; i<max_num_secondary_sprites; ++i )
 	{
-		if ( the_secondary_sprites[i] != NULL )
-		{
-			the_secondary_sprites_allocator.deallocate_sprite
-				(*the_secondary_sprites[i]);
-			the_secondary_sprites[i] = NULL;
-		}
+		//if ( the_secondary_sprites[i] != NULL )
+		//{
+		//	the_secondary_sprites_allocator.deallocate_sprite
+		//		(*the_secondary_sprites[i]);
+		//	the_secondary_sprites[i] = NULL;
+		//}
+		the_secondary_sprites_allocator.deallocate_sprite
+			(the_allocatable_secondary_sprites[i]);
 	}
 	
 	for ( u32 i=0; i<max_num_regular_sprites; ++i )
 	{
-		if ( the_sprites[i] != NULL )
-		{
-			the_sprites_allocator.deallocate_sprite(*the_sprites[i]);
-			the_sprites[i] = NULL;
-		}
+		//if ( the_sprites[i] != NULL )
+		//{
+		//	the_sprites_allocator.deallocate_sprite(*the_sprites[i]);
+		//	the_sprites[i] = NULL;
+		//}
+		the_sprites_allocator.deallocate_sprite
+			(the_allocatable_sprites[i]);
 	}
 	
 	
@@ -859,7 +893,10 @@ void sprite_manager::initial_sprite_spawning_shared_code
 			
 			next_sprite_index = the_sprites_allocator.peek_top_index();
 			
-			reinit_sprite_with_sprite_ipg( the_sprites[next_sprite_index],
+			//reinit_sprite_with_sprite_ipg( the_sprites[next_sprite_index],
+			//	the_sprites_allocator, &sprite_ipg );
+			reinit_sprite_with_sprite_ipg
+				( the_allocatable_sprites[next_sprite_index],
 				the_sprites_allocator, &sprite_ipg );
 		}
 		
@@ -1148,9 +1185,12 @@ void sprite_manager::spawn_sprites_if_needed
 				//the_sprites[next_sprite_index].reinit_with_sprite_ipg
 				//	(&sprite_ipg);
 				
-				reinit_sprite_with_sprite_ipg( the_sprites
-					[next_sprite_index], the_sprites_allocator, 
-					&sprite_ipg );
+				//reinit_sprite_with_sprite_ipg( the_sprites
+				//	[next_sprite_index], the_sprites_allocator, 
+				//	&sprite_ipg );
+				reinit_sprite_with_sprite_ipg
+					( the_allocatable_sprites[next_sprite_index], 
+					the_sprites_allocator, &sprite_ipg );
 			}
 			
 			// If there isn't a free sprite slot, then stop trying to spawn
@@ -1228,9 +1268,12 @@ void sprite_manager::spawn_sprites_if_needed
 				//the_sprites[next_sprite_index].reinit_with_sprite_ipg
 				//	(&sprite_ipg);
 				
-				reinit_sprite_with_sprite_ipg( the_sprites
-					[next_sprite_index], the_sprites_allocator, 
-					&sprite_ipg );
+				//reinit_sprite_with_sprite_ipg( the_sprites
+				//	[next_sprite_index], the_sprites_allocator, 
+				//	&sprite_ipg );
+				reinit_sprite_with_sprite_ipg
+					( the_allocatable_sprites[next_sprite_index], 
+					the_sprites_allocator, &sprite_ipg );
 			}
 			
 			// If there isn't a free sprite slot, then stop trying to spawn
@@ -1302,48 +1345,53 @@ void sprite_manager::despawn_sprites_if_needed
 	
 	
 	//for ( sprite*& spr : the_active_player_secondary_sprites )
-	for ( u32 i=0; i<the_player_secondary_sprites.size(); ++i )
+	//for ( u32 i=0; i<the_player_secondary_sprites.size(); ++i )
+	for ( u32 i=0; i<num_active_player_secondary_sprites; ++i )
 	{
-		sprite*& spr_ptr = the_player_secondary_sprites[i];
+		sprite*& spr_ptr = the_active_player_secondary_sprites[i];
 		
 		if (spr_ptr)
 		{
 			sprite& spr = *spr_ptr;
 			for_loop_contents( spr, 
 				the_player_secondary_sprites_allocator );
-			spr_ptr = NULL;
+			//spr_ptr = NULL;
 		}
 	}
 	
 	//for ( sprite*& spr : the_active_secondary_sprites )
-	for ( u32 i=0; i<the_secondary_sprites.size(); ++i )
+	//for ( u32 i=0; i<the_secondary_sprites.size(); ++i )
+	for ( u32 i=0; i<num_active_secondary_sprites; ++i )
 	{
-		sprite*& spr_ptr = the_secondary_sprites[i];
+		sprite*& spr_ptr = the_active_secondary_sprites[i];
 		
 		if (spr_ptr)
 		{
 			sprite& spr = *spr_ptr;
 			for_loop_contents( spr, the_secondary_sprites_allocator );
-			spr_ptr = NULL;
+			//spr_ptr = NULL;
 		}
 	}
 	
 	//for ( sprite*& spr : the_active_sprites )
-	for ( u32 i=0; i<the_sprites.size(); ++i )
+	//for ( u32 i=0; i<the_sprites.size(); ++i )
+	for ( u32 i=0; i<num_active_sprites; ++i )
 	{
-		sprite*& spr_ptr = the_sprites[i];
+		sprite*& spr_ptr = the_active_sprites[i];
 		
 		if (spr_ptr)
 		{
 			sprite& spr = *spr_ptr;
 			for_loop_contents( spr, the_sprites_allocator );
-			spr_ptr = NULL;
+			//spr_ptr = NULL;
 		}
 	}
 }
 
 void sprite_manager::upload_tiles_of_active_sprites_to_vram()
 {
+	find_all_active_sprites();
+	
 	// Clear the first 32x32-pixel VRAM chunk.  This prevents unused
 	// OAM indices from displaying any graphics.  Perhaps this should
 	// be optimized to use only a single 8x8-pixel VRAM chunk.
@@ -1368,28 +1416,46 @@ void sprite_manager::upload_tiles_of_active_sprites_to_vram()
 		}
 	};
 	
+	//// For some reason range-based for loops and the lambda function don't
+	//// play well together.  I don't know if this is a GCC bug or a
+	//// misunderstanding on my part (could be both).
+	////for ( sprite* spr : the_player_secondary_sprites )
+	//for ( size_t i=0; i<the_player_secondary_sprites.size(); ++i )
+	//{
+	//	for_loop_contents(the_player_secondary_sprites.at(i));
+	//}
+	//
+	////for ( sprite* spr : the_sprites )
+	//for ( size_t i=0; i<the_sprites.size(); ++i )
+	//{
+	//	for_loop_contents(the_sprites.at(i));
+	//}
+	//
+	////for ( * spr : the_secondary_sprites )
+	//for ( size_t i=0; i<the_secondary_sprites.size(); ++i )
+	//{
+	//	for_loop_contents(the_secondary_sprites.at(i));
+	//}
+	
 	// For some reason range-based for loops and the lambda function don't
 	// play well together.  I don't know if this is a GCC bug or a
 	// misunderstanding on my part (could be both).
-	//for ( sprite* spr : sprite_manager::the_player_secondary_sprites )
-	for ( size_t i=0; 
-		i<sprite_manager::the_player_secondary_sprites.size();
-		++i )
+	//for ( sprite* spr : the_player_secondary_sprites )
+	for ( size_t i=0; i<num_active_player_secondary_sprites; ++i )
 	{
-		for_loop_contents(sprite_manager::the_player_secondary_sprites
-			.at(i));
+		for_loop_contents(the_active_player_secondary_sprites.at(i));
 	}
 	
-	//for ( sprite* spr : sprite_manager::the_sprites )
-	for ( size_t i=0; i<sprite_manager::the_sprites.size(); ++i )
+	//for ( sprite* spr : the_sprites )
+	for ( size_t i=0; i<num_active_sprites; ++i )
 	{
-		for_loop_contents(sprite_manager::the_sprites.at(i));
+		for_loop_contents(the_active_sprites.at(i));
 	}
 	
-	//for ( * spr : sprite_manager::the_secondary_sprites )
-	for ( size_t i=0; i<sprite_manager::the_secondary_sprites.size(); ++i )
+	//for ( * spr : the_secondary_sprites )
+	for ( size_t i=0; i<num_active_secondary_sprites; ++i )
 	{
-		for_loop_contents(sprite_manager::the_secondary_sprites.at(i));
+		for_loop_contents(the_active_secondary_sprites.at(i));
 	}
 }
 

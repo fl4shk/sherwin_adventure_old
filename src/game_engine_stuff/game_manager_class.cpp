@@ -290,6 +290,8 @@ void game_manager::reinit_the_game()
 	// Also, start playing music when the game is started.
 	mmStart( MOD_PRACTICE_17, MM_PLAY_LOOP );
 	
+	sprite_manager::upload_tiles_of_active_sprites_to_vram();
+	
 	//bios_wait_for_vblank();
 	// Disable forced blank
 	clear_bits( reg_dispcnt, dcnt_blank_mask );
