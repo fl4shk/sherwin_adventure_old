@@ -455,7 +455,8 @@ void player_sprite::update_part_3
 	update_frames_and_frame_timers();
 	
 	
-	for ( sprite* spr : sprite_manager::the_sprites )
+	//for ( sprite* spr : sprite_manager::the_sprites )
+	for ( sprite* spr : sprite_manager::the_active_sprites )
 	{
 		sprite_interaction_reponse( *spr, camera_pos_pc_pair,
 			the_sublevel_size_2d );
@@ -724,8 +725,11 @@ void player_sprite::update_the_pickaxe()
 	
 	// These should totally should be replaced by getter functions
 	
-	sprite*& the_pickaxe_ptr = sprite_manager::the_player_secondary_sprites
-		[pickaxe_sprite_slot];
+	//sprite*& the_pickaxe_ptr = sprite_manager::the_player_secondary_sprites
+	//	[pickaxe_sprite_slot];
+	
+	sprite* the_pickaxe_ptr = &(sprite_manager
+		::the_allocatable_player_secondary_sprites[pickaxe_sprite_slot]);
 	//sprite& the_pickaxe = *the_pickaxe_ptr;
 	u32& the_pickaxe_frame_slot = the_pickaxe_ptr->misc_data_u
 		[player_pickaxe_sprite::udi_curr_frame_slot];
@@ -749,7 +753,7 @@ void player_sprite::update_the_pickaxe()
 		
 		pickaxe_sprite_slot = -1;
 	}
-	else //if (swinging_pickaxe)
+	else if ( /* swinging_pickaxe && */ the_pickaxe_ptr )
 	{
 		u32 active_pickaxe_swing_frame_slot = misc_data_u
 			[udi_active_pickaxe_swing_frame_slot];

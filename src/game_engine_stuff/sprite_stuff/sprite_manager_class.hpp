@@ -49,21 +49,21 @@ public:		// variables
 	
 	
 	
-	// The array of pointers to secondary active sprites that are "claimed"
-	// by the_player.
-	static std::array< sprite*, max_num_player_secondary_sprites >
-		the_player_secondary_sprites;
-	
-	// The array of pointers to secondary active sprites, not counting
-	// those "claimed" by the_player.
-	static std::array< sprite*, max_num_secondary_sprites > 
-		the_secondary_sprites;
+	//// The array of pointers to secondary active sprites that are "claimed"
+	//// by the_player.
+	//static std::array< sprite*, max_num_player_secondary_sprites >
+	//	the_player_secondary_sprites;
+	//
+	//// The array of pointers to secondary active sprites, not counting
+	//// those "claimed" by the_player.
+	//static std::array< sprite*, max_num_secondary_sprites > 
+	//	the_secondary_sprites;
 	
 	static sprite* the_player;
 	
-	// The array of pointers to REGULAR active sprites, not counting
-	// the_player.
-	static std::array< sprite*, max_num_regular_sprites > the_sprites;
+	//// The array of pointers to REGULAR active sprites, not counting
+	//// the_player.
+	//static std::array< sprite*, max_num_regular_sprites > the_sprites;
 	
 	
 	

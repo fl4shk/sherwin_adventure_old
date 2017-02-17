@@ -31,16 +31,16 @@
 #include "../halt_stuff.hpp"
 
 
-std::array< sprite*, sprite_manager::max_num_player_secondary_sprites >
-	sprite_manager::the_player_secondary_sprites;
-
-std::array< sprite*, sprite_manager::max_num_secondary_sprites >
-	sprite_manager::the_secondary_sprites;
+//std::array< sprite*, sprite_manager::max_num_player_secondary_sprites >
+//	sprite_manager::the_player_secondary_sprites;
+//
+//std::array< sprite*, sprite_manager::max_num_secondary_sprites >
+//	sprite_manager::the_secondary_sprites;
 
 sprite* sprite_manager::the_player;
 
-std::array< sprite*, sprite_manager::max_num_regular_sprites > 
-	sprite_manager::the_sprites;
+//std::array< sprite*, sprite_manager::max_num_regular_sprites > 
+//	sprite_manager::the_sprites;
 
 
 
@@ -380,7 +380,9 @@ s32 sprite_manager::spawn_a_player_secondary_sprite_basic
 	//const s32 next_sprite_index = the_player_secondary_sprites_allocator
 	//	.peek_top_index() + 1;
 	
-	if ( !in_range<s32>( (s32)0, (s32)the_player_secondary_sprites.size(), 
+	//if ( !in_range<s32>( (s32)0, (s32)the_player_secondary_sprites.size(), 
+	//	next_sprite_index ) )
+	if ( !in_range<s32>( (s32)0, (s32)max_num_player_secondary_sprites, 
 		next_sprite_index ) )
 	{
 		debug_arr_group::write_str_and_inc("NextIndexOoR");
@@ -441,7 +443,9 @@ s32 sprite_manager::spawn_a_secondary_sprite_basic
 	//const s32 next_sprite_index = the_secondary_sprites_allocator
 	//	.peek_top_index() + 1;
 	
-	if ( !in_range<s32>( (s32)0, (s32)the_secondary_sprites.size(), 
+	//if ( !in_range<s32>( (s32)0, (s32)the_secondary_sprites.size(), 
+	//	next_sprite_index ) )
+	if ( !in_range<s32>( (s32)0, (s32)max_num_secondary_sprites, 
 		next_sprite_index ) )
 	{
 		debug_arr_group::write_str_and_inc("NextIndexOoR");
@@ -501,17 +505,22 @@ s32 sprite_manager::spawn_a_sprite_basic( sprite_type the_sprite_type,
 	
 	const s32 next_sprite_index = the_sprites_allocator.peek_top_index();
 	
-	if ( !in_range<s32>( (s32)0, (s32)the_sprites.size(), 
+	//if ( !in_range<s32>( (s32)0, (s32)the_sprites.size(), 
+	//	next_sprite_index ) )
+	if ( !in_range<s32>( (s32)0, (s32)max_num_regular_sprites, 
 		next_sprite_index ) )
 	{
 		debug_arr_group::write_str_and_inc("NextIndexOoR");
 		halt();
 	}
 	
-	if ( the_sprites[next_sprite_index] != NULL )
+	//if ( the_sprites[next_sprite_index] != NULL )
+	if ( the_allocatable_sprites[next_sprite_index].the_sprite_type
+		!= st_default )
 	{
 		show_debug_s32_group(next_sprite_index);
-		debug_arr_group::write_str_and_inc("SprNotNull");
+		//debug_arr_group::write_str_and_inc("SprNotNull");
+		debug_arr_group::write_str_and_inc("SprInUse");
 		halt();
 	}
 	
@@ -921,38 +930,35 @@ void sprite_manager::initial_sprite_spawning_shared_code
 	next_oam_index = the_active_sprites_starting_oam_index;
 	
 	// Run each active sprite's update_part_1() function.
-	for ( sprite*& the_spr : the_sprites )
+	for ( sprite& spr : the_allocatable_sprites )
 	{
-		//if ( the_spr->the_sprite_type != st_default )
-		if (the_spr)
+		if ( spr.the_sprite_type != st_default )
 		{
-			//sprite_stuff_array[the_spr->the_sprite_type]
-			//	->update_part_1(*the_spr);
-			the_spr->update_part_1();
+			//sprite_stuff_array[spr->sprite_type]
+			//	->update_part_1(*spr);
+			spr.update_part_1();
 		}
 	}
 	
 	// Run each active sprite's update_part_2() function.
-	for ( sprite*& the_spr : the_sprites )
+	for ( sprite& spr : the_allocatable_sprites )
 	{
-		//if ( the_spr->the_sprite_type != st_default )
-		if (the_spr)
+		if ( spr.the_sprite_type != st_default )
 		{
-			//sprite_stuff_array[the_spr->the_sprite_type]->update_part_2();
-			the_spr->update_part_2();
+			//sprite_stuff_array[spr->sprite_type]->update_part_2();
+			spr.update_part_2();
 		}
 	}
 	
 	// Run each active sprite's update_part_3() function.
-	for ( sprite*& the_spr : the_sprites )
+	for ( sprite& spr : the_allocatable_sprites )
 	{
-		//if ( the_spr->the_sprite_type != st_default )
-		if (the_spr)
+		if ( spr.the_sprite_type != st_default )
 		{
-			//sprite_stuff_array[the_spr->the_sprite_type]->update_part_3
-			//	( *the_spr, gfx_manager::bgofs_mirror[0].curr, 
+			//sprite_stuff_array[spr->sprite_type]->update_part_3
+			//	( *spr, gfx_manager::bgofs_mirror[0].curr, 
 			//	next_oam_index );
-			the_spr->update_part_3( camera_pos_pc_pair, next_oam_index );
+			spr.update_part_3( camera_pos_pc_pair, next_oam_index );
 		}
 	}
 }
@@ -1031,17 +1037,17 @@ void sprite_manager::find_all_active_sprites()
 	// the_player.
 	find_active_sprites( the_allocatable_player_secondary_sprites,
 		the_active_player_secondary_sprites.data(),
-		the_player_secondary_sprites.size(),
+		max_num_player_secondary_sprites,
 		num_active_player_secondary_sprites );
 	
 	// Find all the currently-active secondary sprites.
 	find_active_sprites( the_allocatable_secondary_sprites, 
-		the_active_secondary_sprites.data(), the_secondary_sprites.size(), 
+		the_active_secondary_sprites.data(), max_num_secondary_sprites, 
 		num_active_secondary_sprites );
 	
 	// Find all the currently-active sprites.
 	find_active_sprites( the_allocatable_sprites, 
-		the_active_sprites.data(), the_sprites.size(), 
+		the_active_sprites.data(), max_num_regular_sprites, 
 		num_active_sprites );
 	
 }
