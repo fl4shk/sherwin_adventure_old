@@ -24,7 +24,7 @@
 
 #include "../halt_stuff.hpp"
 
-sprite_allocator::sprite_allocator( int* the_sa_free_list_backend_array, 
+sprite_allocator::sprite_allocator( s16* the_sa_free_list_backend_array, 
 	sprite* s_the_array, u32 s_size )
 	: array_helper<sprite>( s_the_array, s_size ),
 	the_sa_free_list_backend_curr_index(0),
@@ -32,7 +32,7 @@ sprite_allocator::sprite_allocator( int* the_sa_free_list_backend_array,
 	&the_sa_free_list_backend_curr_index, s_size )
 {
 }
-sprite_allocator::sprite_allocator( int* the_sa_free_list_backend_array,
+sprite_allocator::sprite_allocator( s16* the_sa_free_list_backend_array,
 	const array_helper<sprite>& s_allocatable_sprite_arr )
 	: array_helper<sprite>(s_allocatable_sprite_arr),
 	the_sa_free_list_backend_curr_index(0),
@@ -85,6 +85,9 @@ void* sprite_allocator::allocate_sprite()
 	halt();
 	
 	//return NULL;
+	for (;;)
+	{
+	}
 }
 
 void sprite_allocator::deallocate_sprite( sprite*& the_sprite )

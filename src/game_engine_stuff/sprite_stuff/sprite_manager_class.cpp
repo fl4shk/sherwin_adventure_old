@@ -91,13 +91,13 @@ sprite sprite_manager::the_allocatable_sprites
 
 
 
-int sprite_manager::the_allocatable_player_secondary_sprites_free_list_arr
+s16 sprite_manager::the_allocatable_player_secondary_sprites_free_list_arr
 	[max_num_player_secondary_sprites];
-int sprite_manager::the_allocatable_secondary_sprites_free_list_arr
+s16 sprite_manager::the_allocatable_secondary_sprites_free_list_arr
 	[max_num_secondary_sprites];
-int sprite_manager::the_allocatable_player_free_list_arr
+s16 sprite_manager::the_allocatable_player_free_list_arr
 	[max_num_player_sprites];
-int sprite_manager::the_allocatable_sprites_free_list_arr
+s16 sprite_manager::the_allocatable_sprites_free_list_arr
 	[max_num_regular_sprites];
 
 

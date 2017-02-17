@@ -83,13 +83,13 @@ public:		// variables
 	
 	
 	// This is for speeding up 
-	static int the_allocatable_player_secondary_sprites_free_list_arr
+	static s16 the_allocatable_player_secondary_sprites_free_list_arr
 		[max_num_player_secondary_sprites];
-	static int the_allocatable_secondary_sprites_free_list_arr
+	static s16 the_allocatable_secondary_sprites_free_list_arr
 		[max_num_secondary_sprites];
-	static int the_allocatable_player_free_list_arr
+	static s16 the_allocatable_player_free_list_arr
 		[max_num_player_sprites];
-	static int the_allocatable_sprites_free_list_arr
+	static s16 the_allocatable_sprites_free_list_arr
 		[max_num_regular_sprites];
 	
 	
