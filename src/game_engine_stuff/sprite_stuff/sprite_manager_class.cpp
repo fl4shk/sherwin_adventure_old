@@ -1269,30 +1269,31 @@ void sprite_manager::despawn_sprites_if_needed
 	//camera_pos_f24p8.y = make_f24p8(camera_pos.y);
 	
 	
-	auto for_loop_contents = [&]( sprite*& spr, 
+	auto for_loop_contents = [&]( sprite& spr, 
 		sprite_allocator& the_sprite_allocator ) -> void
 	{
-		if ( spr != NULL )
+		//if ( spr != NULL )
+		if ( spr.the_sprite_type != st_default )
 		{
-			//fixed24p8 spr_on_screen_pos_x = spr->in_level_pos.x 
+			//fixed24p8 spr_on_screen_pos_x = spr.in_level_pos.x 
 			//	- camera_pos.x;
-			fixed24p8 spr_on_screen_pos_x = spr->get_curr_in_level_pos().x 
+			fixed24p8 spr_on_screen_pos_x = spr.get_curr_in_level_pos().x 
 				- camera_pos.x;
 			
 			if ( !( spr_on_screen_pos_x.data >= max_left
 				&& spr_on_screen_pos_x.data <= max_right ) )
 			{
-				// I might eventually create spr->despawn() so that
+				// I might eventually create spr.despawn() so that
 				// sprites can control HOW they despawn
-				//spr->despawn();
+				//spr.despawn();
 				
-				if ( spr->the_sprite_ipg != NULL )
+				if ( spr.the_sprite_ipg != NULL )
 				{
-					spr->the_sprite_ipg->spawn_state = sss_not_active;
+					spr.the_sprite_ipg->spawn_state = sss_not_active;
 				}
 				
-				the_sprite_allocator.deallocate_sprite(*spr);
-				spr = NULL;
+				the_sprite_allocator.deallocate_sprite(spr);
+				//spr = NULL;
 				//spr = NULL;
 			}
 			
@@ -1303,25 +1304,41 @@ void sprite_manager::despawn_sprites_if_needed
 	//for ( sprite*& spr : the_active_player_secondary_sprites )
 	for ( u32 i=0; i<the_player_secondary_sprites.size(); ++i )
 	{
-		sprite*& spr = the_player_secondary_sprites[i];
+		sprite*& spr_ptr = the_player_secondary_sprites[i];
 		
-		for_loop_contents( spr, the_player_secondary_sprites_allocator );
+		if (spr_ptr)
+		{
+			sprite& spr = *spr_ptr;
+			for_loop_contents( spr, 
+				the_player_secondary_sprites_allocator );
+			spr_ptr = NULL;
+		}
 	}
 	
 	//for ( sprite*& spr : the_active_secondary_sprites )
 	for ( u32 i=0; i<the_secondary_sprites.size(); ++i )
 	{
-		sprite*& spr = the_secondary_sprites[i];
+		sprite*& spr_ptr = the_secondary_sprites[i];
 		
-		for_loop_contents( spr, the_secondary_sprites_allocator );
+		if (spr_ptr)
+		{
+			sprite& spr = *spr_ptr;
+			for_loop_contents( spr, the_secondary_sprites_allocator );
+			spr_ptr = NULL;
+		}
 	}
 	
 	//for ( sprite*& spr : the_active_sprites )
 	for ( u32 i=0; i<the_sprites.size(); ++i )
 	{
-		sprite*& spr = the_sprites[i];
+		sprite*& spr_ptr = the_sprites[i];
 		
-		for_loop_contents( spr, the_sprites_allocator );
+		if (spr_ptr)
+		{
+			sprite& spr = *spr_ptr;
+			for_loop_contents( spr, the_sprites_allocator );
+			spr_ptr = NULL;
+		}
 	}
 }
 
