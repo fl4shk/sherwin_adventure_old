@@ -90,11 +90,18 @@ void* sprite_allocator::allocate_sprite()
 	}
 }
 
-void sprite_allocator::deallocate_sprite( sprite*& the_sprite )
+void sprite_allocator::deallocate_sprite( sprite& the_sprite )
 {
-	if ( the_sprite == NULL )
+	//if ( the_sprite == NULL )
+	//{
+	//	//debug_arr_group::write_str_and_inc("SadsSprNULL");
+	//	//halt();
+	//	return;
+	//}
+	
+	if ( the_sprite.the_sprite_type == st_default )
 	{
-		//debug_arr_group::write_str_and_inc("SadsSprNULL");
+		//debug_arr_group::write_str_and_inc("SadsSprStDefault");
 		//halt();
 		return;
 	}
@@ -106,32 +113,32 @@ void sprite_allocator::deallocate_sprite( sprite*& the_sprite )
 	}
 	
 	
-	the_sprite->the_sprite_type = st_default;
+	the_sprite.the_sprite_type = st_default;
 	
 	
 	// Some sprites are spawned in from something other than the level data
 	// and DON'T HAVE a the_sprite_ipg
-	if (the_sprite->the_sprite_ipg)
+	if (the_sprite.the_sprite_ipg)
 	{
-		if ( the_sprite->the_sprite_ipg->spawn_state == sss_active )
+		if ( the_sprite.the_sprite_ipg->spawn_state == sss_active )
 		{
-			the_sprite->the_sprite_ipg->spawn_state = sss_not_active;
+			the_sprite.the_sprite_ipg->spawn_state = sss_not_active;
 		}
-		the_sprite->the_sprite_ipg = NULL;
+		the_sprite.the_sprite_ipg = NULL;
 	}
 	
-	//u32 old_vram_chunk_index = the_sprite->get_vram_chunk_index();
+	//u32 old_vram_chunk_index = the_sprite.get_vram_chunk_index();
 	//
 	//*the_sprite = sprite();
-	//the_sprite->shared_constructor_code();
-	//*the_sprite = sprite(the_sprite->get_vram_chunk_index());
+	//the_sprite.shared_constructor_code();
+	//*the_sprite = sprite(the_sprite.get_vram_chunk_index());
 	
 	
-	the_sa_free_list_backend.push(the_sprite->the_arr_index);
-	the_sprite->the_arr_index = -1;
+	the_sa_free_list_backend.push(the_sprite.the_arr_index);
+	the_sprite.the_arr_index = -1;
 	
 	
-	the_sprite = NULL;
+	//the_sprite = NULL;
 	
 	//for ( u32 i=0; i<get_size(); ++i )
 	//{

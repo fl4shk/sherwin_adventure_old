@@ -284,7 +284,11 @@ void sprite_manager::reinit_sprite_with_sprite_ipg( sprite*& the_sprite,
 {
 	//u32 old_vram_chunk_index = the_sprite->get_vram_chunk_index();
 	
-	the_sprite_allocator.deallocate_sprite(the_sprite);
+	if ( the_sprite != NULL )
+	{
+		the_sprite_allocator.deallocate_sprite(*the_sprite);
+		the_sprite = NULL;
+	}
 	
 	
 	if ( s_the_sprite_ipg->spawn_state == sss_not_active )
@@ -312,7 +316,11 @@ void sprite_manager::reinit_sprite_by_spawning( sprite*& the_sprite,
 	const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
 	bool facing_left )
 {
-	the_sprite_allocator.deallocate_sprite(the_sprite);
+	if ( the_sprite != NULL )
+	{
+		the_sprite_allocator.deallocate_sprite(*the_sprite);
+		the_sprite = NULL;
+	}
 	
 	allocate_sprite( the_sprite, the_sprite_allocator, s_the_sprite_type,
 		s_in_level_pos, camera_pos_pc_pair, facing_left );
@@ -510,7 +518,11 @@ void sprite_manager::init_the_player ( const vec2_f24p8& s_in_level_pos,
 	const vec2_u32& the_sublevel_size_2d, 
 	prev_curr_pair<bg_point>& camera_pos_pc_pair )
 {
-	the_player_sprite_allocator.deallocate_sprite(the_player);
+	if ( the_player != NULL )
+	{
+		the_player_sprite_allocator.deallocate_sprite(*the_player);
+		the_player = NULL;
+	}
 	
 	the_player = new (the_player_sprite_allocator) player_sprite
 		( s_in_level_pos, the_sublevel_size_2d, camera_pos_pc_pair, 
@@ -559,26 +571,38 @@ void sprite_manager::clear_the_sprite_arrays()
 	
 	for ( u32 i=0; i<max_num_player_secondary_sprites; ++i )
 	{
-		the_player_secondary_sprites_allocator.deallocate_sprite
-			(the_player_secondary_sprites[i]);
+		if ( the_player_secondary_sprites[i] != NULL )
+		{
+			the_player_secondary_sprites_allocator.deallocate_sprite
+				(*the_player_secondary_sprites[i]);
+			the_player_secondary_sprites[i] = NULL;
+		}
 	}
 	
 	for ( u32 i=0; i<max_num_secondary_sprites; ++i )
 	{
-		the_secondary_sprites_allocator.deallocate_sprite
-			(the_secondary_sprites[i]);
+		if ( the_secondary_sprites[i] != NULL )
+		{
+			the_secondary_sprites_allocator.deallocate_sprite
+				(*the_secondary_sprites[i]);
+			the_secondary_sprites[i] = NULL;
+		}
 	}
 	
 	for ( u32 i=0; i<max_num_regular_sprites; ++i )
 	{
-		the_sprites_allocator.deallocate_sprite(the_sprites[i]);
+		if ( the_sprites[i] != NULL )
+		{
+			the_sprites_allocator.deallocate_sprite(*the_sprites[i]);
+			the_sprites[i] = NULL;
+		}
 	}
 	
 	
-	// Clear the arrays of pointers
-	arr_memfill32( the_player_secondary_sprites, 0 );
-	arr_memfill32( the_secondary_sprites, 0 );
-	arr_memfill32( the_sprites, 0 );
+	//// Clear the arrays of pointers
+	//arr_memfill32( the_player_secondary_sprites, 0 );
+	//arr_memfill32( the_secondary_sprites, 0 );
+	//arr_memfill32( the_sprites, 0 );
 	
 	
 	//arr_memfill32( the_allocatable_player_secondary_sprites, 0,
@@ -1241,7 +1265,8 @@ void sprite_manager::despawn_sprites_if_needed
 					spr->the_sprite_ipg->spawn_state = sss_not_active;
 				}
 				
-				the_sprite_allocator.deallocate_sprite(spr);
+				the_sprite_allocator.deallocate_sprite(*spr);
+				spr = NULL;
 				//spr = NULL;
 			}
 			

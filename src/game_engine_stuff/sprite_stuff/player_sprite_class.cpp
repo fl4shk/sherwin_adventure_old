@@ -735,8 +735,11 @@ void player_sprite::update_the_pickaxe()
 		//// Despawn the pickaxe if the_player is no longer swinging it.
 		//the_pickaxe.the_sprite_type = st_default;
 		
+		//sprite_manager::the_player_secondary_sprites_allocator
+		//	.deallocate_sprite(the_pickaxe_ptr);
 		sprite_manager::the_player_secondary_sprites_allocator
-			.deallocate_sprite(the_pickaxe_ptr);
+			.deallocate_sprite(the_pickaxe);
+		the_pickaxe_ptr = NULL;
 		
 		pickaxe_sprite_slot = -1;
 	}

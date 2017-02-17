@@ -51,7 +51,7 @@ public:		// functions
 	//void* allocate_sprite() __attribute__((cold,returns_nonnull));
 	//void deallocate_sprite( sprite*& the_sprite ) __attribute__((cold));
 	void* allocate_sprite() __attribute__((_iwram_code,returns_nonnull));
-	void deallocate_sprite( sprite*& the_sprite )
+	void deallocate_sprite( sprite& the_sprite )
 		__attribute__((_iwram_code));
 	
 	
