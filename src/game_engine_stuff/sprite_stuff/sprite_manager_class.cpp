@@ -943,7 +943,7 @@ void sprite_manager::find_all_active_sprites()
 	//	}
 	//};
 	
-	auto find_active_sprites = []( sprite** sprite_ptr_arr, 
+	auto find_active_sprites = []( sprite* sprite_arr, 
 		sprite** active_sprites_arr, const u32 sprites_arr_size, 
 		u32& num_active_sprites_in_category ) -> void
 	{
@@ -958,32 +958,54 @@ void sprite_manager::find_all_active_sprites()
 			//		= &the_spr;
 			//}
 			
-			sprite* the_spr_ptr = sprite_ptr_arr[i];
+			//sprite* the_spr_ptr = sprite_ptr_arr[i];
+			sprite& the_spr = sprite_arr[i];
 			
-			if ( the_spr_ptr != NULL )
+			//if ( the_spr_ptr != NULL )
+			//{
+			//	active_sprites_arr[num_active_sprites_in_category++]
+			//		= the_spr_ptr;
+			//}
+			if ( the_spr.the_sprite_type != st_default )
 			{
 				active_sprites_arr[num_active_sprites_in_category++]
-					= the_spr_ptr;
+					= &the_spr;
 			}
 		}
 	};
 	
+	//// Find all the currently-active secondary sprites "claimed" by
+	//// the_player.
+	//find_active_sprites( the_player_secondary_sprites.data(),
+	//	the_active_player_secondary_sprites.data(),
+	//	the_player_secondary_sprites.size(),
+	//	num_active_player_secondary_sprites );
+	//
+	//// Find all the currently-active secondary sprites.
+	//find_active_sprites( the_secondary_sprites.data(), 
+	//	the_active_secondary_sprites.data(), the_secondary_sprites.size(), 
+	//	num_active_secondary_sprites );
+	//
+	//// Find all the currently-active sprites.
+	//find_active_sprites( the_sprites.data(), the_active_sprites.data(), 
+	//	the_sprites.size(), num_active_sprites );
+	
 	// Find all the currently-active secondary sprites "claimed" by
 	// the_player.
-	find_active_sprites( the_player_secondary_sprites.data(),
+	find_active_sprites( the_allocatable_player_secondary_sprites,
 		the_active_player_secondary_sprites.data(),
 		the_player_secondary_sprites.size(),
 		num_active_player_secondary_sprites );
 	
 	// Find all the currently-active secondary sprites.
-	find_active_sprites( the_secondary_sprites.data(), 
+	find_active_sprites( the_allocatable_secondary_sprites, 
 		the_active_secondary_sprites.data(), the_secondary_sprites.size(), 
 		num_active_secondary_sprites );
 	
 	// Find all the currently-active sprites.
-	find_active_sprites( the_sprites.data(), the_active_sprites.data(), 
-		the_sprites.size(), num_active_sprites );
-	
+	find_active_sprites( the_allocatable_sprites, 
+		the_active_sprites.data(), the_sprites.size(), 
+		num_active_sprites );
 	
 }
 
@@ -996,10 +1018,14 @@ void sprite_manager::spawn_sprites_if_needed
 	//camera_block_grid_pos_x.prev = camera_pos_pc_pair.prev.x >> 4;
 	//camera_block_grid_pos_x.curr = camera_pos_pc_pair.curr.x >> 4;
 	
-	camera_block_grid_pos_x.prev = camera_pos_pc_pair.prev.x.round_to_int() 
-		>> 4;
-	camera_block_grid_pos_x.curr = camera_pos_pc_pair.curr.x.round_to_int() 
-		>> 4;
+	//camera_block_grid_pos_x.prev = camera_pos_pc_pair.prev.x
+	//	.round_to_int() >> 4;
+	//camera_block_grid_pos_x.curr = camera_pos_pc_pair.curr.x
+	//	.round_to_int() >> 4;
+	camera_block_grid_pos_x.prev = conv_pix_crd_to_blk_crd
+		(camera_pos_pc_pair.prev.x.round_to_int());
+	camera_block_grid_pos_x.curr = conv_pix_crd_to_blk_crd
+		(camera_pos_pc_pair.curr.x.round_to_int());
 	
 	
 	// "cm_dir" is short for "camera_movement_direction".
