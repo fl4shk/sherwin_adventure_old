@@ -162,7 +162,7 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 	static constexpr u32 some_number_str_max_size = 5;
 	char some_number_str[some_number_str_max_size];
 	
-	char temp_buf[some_number_str_max_size];
+	//char temp_buf[some_number_str_max_size];
 	
 	//for ( u32 i=0; i<some_number_str_max_size; ++i )
 	//{
@@ -199,7 +199,7 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 	//}
 	
 	u32 some_number_str_curr_size = snprintf( some_number_str, 
-		some_number_str_max_size, "%il", to_convert );
+		some_number_str_max_size, "%i", to_convert );
 	
 	
 	////for ( u32 i=0; i<some_number_str_curr_size; ++i )
@@ -208,12 +208,15 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 	//	plot_char_8x8_to_screenblock_mirror( some_number_str[i], plot_x, 0 );
 	//	++plot_x;
 	//}
+	//plot_horiz_str_8x8_to_screenblock_mirror( some_number_str,
+	//	some_number_str_curr_size, plot_x, plot_y );
 	plot_horiz_str_8x8_to_screenblock_mirror( some_number_str,
-		some_number_str_curr_size, plot_x, plot_y );
+		some_number_str_max_size, plot_x, plot_y );
 	
 	auto print_num_debug = [&]( u32 some_num ) -> void
 	{
-		plot_x -= some_number_str_curr_size;
+		//plot_x -= some_number_str_curr_size;
+		plot_x -= some_number_str_max_size;
 		++plot_y;
 		//some_number_str_curr_size = 0;
 		for ( u32 i=0; i<some_number_str_max_size; ++i )

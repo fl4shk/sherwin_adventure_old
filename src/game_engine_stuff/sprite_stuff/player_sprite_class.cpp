@@ -467,6 +467,17 @@ void player_sprite::update_part_3
 		}
 	}
 	
+	for ( sprite* spr : sprite_manager::the_active_pseudo_bg_sprites )
+	{
+		sprite_interaction_reponse( *spr, camera_pos_pc_pair,
+			the_sublevel_size_2d );
+		
+		if ( warped_to_other_sublevel_this_frame )
+		{
+			break;
+		}
+	}
+	
 	update_on_screen_pos(camera_pos_pc_pair);
 	
 	if ( warped_this_frame && !warped_to_other_sublevel_this_frame )

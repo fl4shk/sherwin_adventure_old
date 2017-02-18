@@ -47,6 +47,8 @@ public:		// variables
 	//static constexpr u32 max_num_regular_sprites = 30;
 	static constexpr u32 max_num_regular_sprites = 20;
 	
+	static constexpr u32 max_num_pseudo_bg_sprites = 10;
+	
 	
 	
 	//// The array of pointers to secondary active sprites that are "claimed"
@@ -82,7 +84,7 @@ public:		// variables
 	
 	
 	
-	// This is for speeding up 
+	// This is for speeding up allocation and deallocation
 	static s16 the_player_secondary_sprites_free_list_arr
 		[max_num_player_secondary_sprites];
 	static s16 the_secondary_sprites_free_list_arr
@@ -91,6 +93,8 @@ public:		// variables
 		[max_num_player_sprites];
 	static s16 the_sprites_free_list_arr
 		[max_num_regular_sprites];
+	static s16 the_pseudo_bg_sprites_free_list_arr
+		[max_num_pseudo_bg_sprites];
 	
 	
 	// Temporarily use regular arrays to make debugging easier.
@@ -109,23 +113,29 @@ public:		// variables
 	// The array of REGULAR active sprites, not counting the_player.
 	static sprite the_sprites[max_num_regular_sprites];
 	
+	// The array of pseudo-background sprites, which are ONLY checked for
+	// intersection with the_player (and possibly player secondary sprites)
+	static sprite the_pseudo_bg_sprites[max_num_pseudo_bg_sprites];
+	
 	
 	
 	
 	// The sprite_allocators
 	static sprite_allocator the_player_secondary_sprites_allocator,
 		the_secondary_sprites_allocator, the_player_sprite_allocator, 
-		the_sprites_allocator;
+		the_sprites_allocator, the_pseudo_bg_sprites_allocator;
 	
 	// Active sprites
 	static u32 num_active_player_secondary_sprites, num_active_sprites, 
-		num_active_secondary_sprites;
-	static std::array< sprite*, max_num_player_secondary_sprites>
+		num_active_secondary_sprites, num_active_pseudo_bg_sprites;
+	static std::array< sprite*, max_num_player_secondary_sprites >
 		the_active_player_secondary_sprites __attribute__((_iwram));
-	static std::array< sprite*, max_num_secondary_sprites>
+	static std::array< sprite*, max_num_secondary_sprites >
 		the_active_secondary_sprites __attribute__((_iwram));
-	static std::array< sprite*, max_num_regular_sprites> 
+	static std::array< sprite*, max_num_regular_sprites > 
 		the_active_sprites __attribute__((_iwram));
+	static std::array< sprite*, max_num_pseudo_bg_sprites > 
+		the_active_pseudo_bg_sprites __attribute__((_iwram));
 	
 	
 	//static constexpr u32 the_player_vram_chunk_index = 1;
@@ -153,6 +163,11 @@ public:		// variables
 	static constexpr u32 the_active_sprites_starting_vram_chunk_index
 		= the_player_vram_chunk_index + 1;
 	
+	static constexpr u32 
+		the_pseudo_bg_sprites_starting_vram_chunk_index
+		= the_active_sprites_starting_vram_chunk_index 
+		+ max_num_regular_sprites;
+	
 	
 	
 	
@@ -168,6 +183,9 @@ public:		// variables
 	
 	static constexpr u32 the_active_sprites_starting_oam_index
 		= the_active_sprites_starting_vram_chunk_index;
+	
+	static constexpr u32 the_pseudo_bg_sprites_starting_oam_index
+		= the_pseudo_bg_sprites_starting_vram_chunk_index;
 	
 	
 	static int next_oam_index;
@@ -265,6 +283,12 @@ public:		// functions
 				+ the_active_sprites_starting_vram_chunk_index );
 		}
 		
+		// Regular sprites
+		for ( u32 i=0; i<max_num_pseudo_bg_sprites; ++i )
+		{
+			the_pseudo_bg_sprites[i].set_vram_chunk_index( i 
+				+ the_pseudo_bg_sprites_starting_vram_chunk_index );
+		}
 		
 	}
 	

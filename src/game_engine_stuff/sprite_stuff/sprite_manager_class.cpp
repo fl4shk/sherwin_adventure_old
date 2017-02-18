@@ -89,6 +89,11 @@ sprite sprite_manager::the_allocatable_player
 sprite sprite_manager::the_sprites
 	[sprite_manager::max_num_regular_sprites];
 
+// The array of pseudo-background sprites, which are ONLY checked for
+// intersection with the_player (and possibly player secondary sprites)
+sprite sprite_manager::the_pseudo_bg_sprites
+	[sprite_manager::max_num_pseudo_bg_sprites];
+
 
 
 s16 sprite_manager::the_player_secondary_sprites_free_list_arr
@@ -99,6 +104,8 @@ s16 sprite_manager::the_player_free_list_arr
 	[max_num_player_sprites];
 s16 sprite_manager::the_sprites_free_list_arr
 	[max_num_regular_sprites];
+s16 sprite_manager::the_pseudo_bg_sprites_free_list_arr
+	[max_num_pseudo_bg_sprites];
 
 
 // The sprite allocators
@@ -124,19 +131,28 @@ sprite_allocator sprite_manager::the_sprites_allocator
 	array_helper<sprite>( sprite_manager::the_sprites,
 	sprite_manager::max_num_regular_sprites ) );
 
+sprite_allocator sprite_manager::the_pseudo_bg_sprites_allocator
+	( the_pseudo_bg_sprites_free_list_arr,
+	array_helper<sprite>
+	( sprite_manager::the_pseudo_bg_sprites, 
+	sprite_manager::max_num_pseudo_bg_sprites ) );
+
 
 
 
 // Active sprites
 u32 sprite_manager::num_active_player_secondary_sprites, 
 	sprite_manager::num_active_sprites, 
-	sprite_manager::num_active_secondary_sprites;
+	sprite_manager::num_active_secondary_sprites,
+	sprite_manager::num_active_pseudo_bg_sprites;
 std::array< sprite*, sprite_manager::max_num_player_secondary_sprites>
 	sprite_manager::the_active_player_secondary_sprites;
 std::array< sprite*, sprite_manager::max_num_secondary_sprites>
 	sprite_manager::the_active_secondary_sprites;
 std::array< sprite*, sprite_manager::max_num_regular_sprites>
 	sprite_manager::the_active_sprites;
+std::array< sprite*, sprite_manager::max_num_pseudo_bg_sprites>
+	sprite_manager::the_active_pseudo_bg_sprites;
 
 
 int sprite_manager::next_oam_index;
@@ -515,8 +531,7 @@ s32 sprite_manager::spawn_a_sprite_basic( sprite_type the_sprite_type,
 	}
 	
 	//if ( the_sprites[next_sprite_index] != NULL )
-	if ( the_sprites[next_sprite_index].the_sprite_type
-		!= st_default )
+	if ( the_sprites[next_sprite_index].the_sprite_type != st_default )
 	{
 		show_debug_s32_group(next_sprite_index);
 		//debug_arr_group::write_str_and_inc("SprNotNull");
@@ -637,8 +652,19 @@ void sprite_manager::clear_the_sprite_arrays()
 		//	the_sprites_allocator.deallocate_sprite(*the_sprites[i]);
 		//	the_sprites[i] = NULL;
 		//}
-		the_sprites_allocator.deallocate_sprite
-			(the_sprites[i]);
+		the_sprites_allocator.deallocate_sprite(the_sprites[i]);
+	}
+	
+	for ( u32 i=0; i<max_num_pseudo_bg_sprites; ++i )
+	{
+		//if ( the_pseudo_bg_sprites[i] != NULL )
+		//{
+		//	the_pseudo_bg_sprites_allocator.deallocate_sprite
+		//		(*the_pseudo_bg_sprites[i]);
+		//	the_pseudo_bg_sprites[i] = NULL;
+		//}
+		the_pseudo_bg_sprites_allocator.deallocate_sprite
+			(the_pseudo_bg_sprites[i]);
 	}
 	
 	
@@ -830,17 +856,19 @@ void sprite_manager::initial_sprite_spawning_shared_code
 	for ( auto& which_list : active_level::horiz_sublevel_sprite_ipg_lists
 		.ea_list_array )
 	{
+		sprite_init_param_group* sprite_ipg = NULL;
 		//for ( sprite_init_param_group& sprite_ipg : which_list )
 		for ( int i=which_list.get_front_index();
 			i!=-1;
 			i=which_list.get_node_at(i).next_index() )
 		{
-			sprite_init_param_group& sprite_ipg = which_list.get_node_at(i)
-				.data;
+			sprite_ipg = &which_list.get_node_at(i).data;
 			
 			vec2_u32 spr_block_grid_coord;
-			spr_block_grid_coord.x = sprite_ipg.initial_block_grid_x_coord;
-			spr_block_grid_coord.y = sprite_ipg.initial_block_grid_y_coord;
+			spr_block_grid_coord.x = sprite_ipg
+				->initial_block_grid_x_coord;
+			spr_block_grid_coord.y = sprite_ipg
+				->initial_block_grid_y_coord;
 			
 			vec2_f24p8 spr_in_level_pos;
 			spr_in_level_pos.x = make_f24p8( spr_block_grid_coord.x * 16 );
@@ -858,7 +886,8 @@ void sprite_manager::initial_sprite_spawning_shared_code
 			// Perhaps eventually sprites should be spawned and despawned
 			// if they are VERTICALLY off-screen.
 			if ( !( spr_on_screen_pos.x.data >= 0 
-				&& spr_on_screen_pos.x.data <= ( screen_width << 8 ) ) )
+				&& spr_on_screen_pos.x.data 
+				<= ( (s32)screen_width << 8 ) ) )
 			{
 				continue;
 			}
@@ -895,31 +924,53 @@ void sprite_manager::initial_sprite_spawning_shared_code
 			////	break;
 			////}
 			
-			if (!the_sprites_allocator.can_pop_index())
+			// If there isn't a free sprite slot, then stop trying to
+			// spawn sprites.
+			if ( !the_sprites_allocator.can_pop_index()
+				&& !the_pseudo_bg_sprites_allocator.can_pop_index() )
 			{
 				break;
 			}
 			
-			next_sprite_index = the_sprites_allocator.peek_top_index();
-			
-			//reinit_sprite_with_sprite_ipg( the_sprites[next_sprite_index],
-			//	the_sprites_allocator, &sprite_ipg );
-			reinit_sprite_with_sprite_ipg
-				( the_sprites[next_sprite_index],
-				the_sprites_allocator, &sprite_ipg );
+			if ( !sprite_type_is_pseudo_bg(sprite_ipg->type) )
+			{
+				if (!the_sprites_allocator.can_pop_index())
+				{
+					continue;
+				}
+				
+				next_sprite_index = the_sprites_allocator.peek_top_index();
+				
+				//reinit_sprite_with_sprite_ipg
+				//	( the_sprites[next_sprite_index],
+				//	the_sprites_allocator, &sprite_ipg );
+				reinit_sprite_with_sprite_ipg
+					( the_sprites[next_sprite_index],
+					the_sprites_allocator, sprite_ipg );
+			}
+			else // if ( sprite_type_is_pseudo_bg(sprite_ipg->type) )
+			{
+				if (!the_pseudo_bg_sprites_allocator.can_pop_index())
+				{
+					continue;
+				}
+				
+				next_sprite_index = the_pseudo_bg_sprites_allocator
+					.peek_top_index();
+				
+				//reinit_sprite_with_sprite_ipg
+				//	( the_pseudo_bg_sprites[next_sprite_index],
+				//	the_pseudo_bg_sprites_allocator, &sprite_ipg );
+				reinit_sprite_with_sprite_ipg
+					( the_pseudo_bg_sprites[next_sprite_index],
+					the_pseudo_bg_sprites_allocator, sprite_ipg );
+			}
 		}
 		
-		//if ( which_spr == the_sprites.end() )
-		//{
-		//	break;
-		//}
-		
-		//if ( which_spr_ptr == the_sprites.end() )
-		//{
-		//	break;
-		//}
-		
-		if (!the_sprites_allocator.can_pop_index())
+		// If there isn't a free sprite slot, then stop trying to
+		// spawn sprites.
+		if ( !the_sprites_allocator.can_pop_index()
+			&& !the_pseudo_bg_sprites_allocator.can_pop_index() )
 		{
 			break;
 		}
@@ -934,8 +985,13 @@ void sprite_manager::initial_sprite_spawning_shared_code
 	{
 		if ( spr.the_sprite_type != st_default )
 		{
-			//sprite_stuff_array[spr->sprite_type]
-			//	->update_part_1(*spr);
+			spr.update_part_1();
+		}
+	}
+	for ( sprite& spr : the_pseudo_bg_sprites )
+	{
+		if ( spr.the_sprite_type != st_default )
+		{
 			spr.update_part_1();
 		}
 	}
@@ -945,7 +1001,13 @@ void sprite_manager::initial_sprite_spawning_shared_code
 	{
 		if ( spr.the_sprite_type != st_default )
 		{
-			//sprite_stuff_array[spr->sprite_type]->update_part_2();
+			spr.update_part_2();
+		}
+	}
+	for ( sprite& spr : the_pseudo_bg_sprites )
+	{
+		if ( spr.the_sprite_type != st_default )
+		{
 			spr.update_part_2();
 		}
 	}
@@ -955,9 +1017,13 @@ void sprite_manager::initial_sprite_spawning_shared_code
 	{
 		if ( spr.the_sprite_type != st_default )
 		{
-			//sprite_stuff_array[spr->sprite_type]->update_part_3
-			//	( *spr, gfx_manager::bgofs_mirror[0].curr, 
-			//	next_oam_index );
+			spr.update_part_3( camera_pos_pc_pair, next_oam_index );
+		}
+	}
+	for ( sprite& spr : the_pseudo_bg_sprites )
+	{
+		if ( spr.the_sprite_type != st_default )
+		{
 			spr.update_part_3( camera_pos_pc_pair, next_oam_index );
 		}
 	}
@@ -970,6 +1036,7 @@ void sprite_manager::find_all_active_sprites()
 	arr_memfill32( the_active_player_secondary_sprites, 0 );
 	arr_memfill32( the_active_secondary_sprites, 0 );
 	arr_memfill32( the_active_sprites, 0 );
+	arr_memfill32( the_active_pseudo_bg_sprites, 0 );
 	
 	//auto find_active_sprites = []( sprite* sprites_arr, 
 	//	sprite** active_sprites_arr, const u32 sprites_arr_size, 
@@ -1050,6 +1117,9 @@ void sprite_manager::find_all_active_sprites()
 		the_active_sprites.data(), max_num_regular_sprites, 
 		num_active_sprites );
 	
+	find_active_sprites( the_pseudo_bg_sprites, 
+		the_active_pseudo_bg_sprites.data(), max_num_pseudo_bg_sprites, 
+		num_active_pseudo_bg_sprites );
 }
 
 void sprite_manager::spawn_sprites_if_needed
@@ -1152,6 +1222,8 @@ void sprite_manager::spawn_sprites_if_needed
 			auto& curr_sprite_ipg_list = active_level
 				::horiz_sublevel_sprite_ipg_lists.ea_list_array[i];
 			
+			sprite_init_param_group* sprite_ipg = NULL;
+			
 			// Spawn sprites from the top of the column to the bottom of
 			// the column.
 			//for ( sprite_init_param_group& sprite_ipg 
@@ -1160,8 +1232,9 @@ void sprite_manager::spawn_sprites_if_needed
 				j!=-1;
 				j=curr_sprite_ipg_list.get_node_at(j).next_index() )
 			{
-				sprite_init_param_group& sprite_ipg = curr_sprite_ipg_list
-					.get_node_at(j).data;
+				//sprite_init_param_group& sprite_ipg = curr_sprite_ipg_list
+				//	.get_node_at(j).data;
+				sprite_ipg = &curr_sprite_ipg_list.get_node_at(j).data;
 				
 				//// Find the lowest FREE sprite slot, if any.
 				////while ( ( the_sprites[next_sprite_index].the_sprite_type 
@@ -1176,40 +1249,49 @@ void sprite_manager::spawn_sprites_if_needed
 				
 				// If there isn't a free sprite slot, then stop trying to
 				// spawn sprites.
-				//if ( next_sprite_index == the_sprites.size() )
-				//{
-				//	break;
-				//}
-				if (!the_sprites_allocator.can_pop_index())
+				if ( !the_sprites_allocator.can_pop_index()
+					&& !the_pseudo_bg_sprites_allocator.can_pop_index() )
 				{
 					break;
 				}
 				
-				next_sprite_index = the_sprites_allocator.peek_top_index();
-				
-				
-				//the_sprites[next_sprite_index].reinit_with_sprite_ipg
-				//	(&sprite_ipg);
-				
-				//reinit_sprite_with_sprite_ipg( the_sprites
-				//	[next_sprite_index], the_sprites_allocator, 
-				//	&sprite_ipg );
-				reinit_sprite_with_sprite_ipg
-					( the_sprites[next_sprite_index], 
-					the_sprites_allocator, &sprite_ipg );
+				if ( !sprite_type_is_pseudo_bg(sprite_ipg->type) )
+				{
+					if (!the_sprites_allocator.can_pop_index())
+					{
+						continue;
+					}
+					
+					next_sprite_index = the_sprites_allocator
+						.peek_top_index();
+					
+					reinit_sprite_with_sprite_ipg
+						( the_sprites[next_sprite_index], 
+						the_sprites_allocator, sprite_ipg );
+				}
+				else // if ( sprite_type_is_pseudo_bg(sprite_ipg->type) )
+				{
+					if (!the_pseudo_bg_sprites_allocator.can_pop_index())
+					{
+						continue;
+					}
+					
+					next_sprite_index = the_pseudo_bg_sprites_allocator
+						.peek_top_index();
+					
+					reinit_sprite_with_sprite_ipg
+						( the_pseudo_bg_sprites[next_sprite_index], 
+						the_pseudo_bg_sprites_allocator, sprite_ipg );
+				}
 			}
 			
-			// If there isn't a free sprite slot, then stop trying to spawn
-			// sprites.
-			//if ( next_sprite_index == the_sprites.size() )
-			//{
-			//	break;
-			//}
-			if (!the_sprites_allocator.can_pop_index())
+			// If there isn't a free sprite slot, then stop trying to
+			// spawn sprites.
+			if ( !the_sprites_allocator.can_pop_index()
+				&& !the_pseudo_bg_sprites_allocator.can_pop_index() )
 			{
 				break;
 			}
-			
 		}
 	}
 	
@@ -1237,6 +1319,8 @@ void sprite_manager::spawn_sprites_if_needed
 			auto& curr_sprite_ipg_list = active_level
 				::horiz_sublevel_sprite_ipg_lists.ea_list_array[i];
 			
+			sprite_init_param_group* sprite_ipg = NULL;
+			
 			// Spawn sprites from the top of the column to the bottom of
 			// the column.
 			//for ( sprite_init_param_group& sprite_ipg 
@@ -1245,8 +1329,9 @@ void sprite_manager::spawn_sprites_if_needed
 				j!=-1;
 				j=curr_sprite_ipg_list.get_node_at(j).next_index() )
 			{
-				sprite_init_param_group& sprite_ipg = curr_sprite_ipg_list
-					.get_node_at(j).data;
+				//sprite_init_param_group& sprite_ipg = curr_sprite_ipg_list
+				//	.get_node_at(j).data;
+				sprite_ipg = &curr_sprite_ipg_list.get_node_at(j).data;
 				
 				//// Find the lowest FREE sprite slot, if any.
 				////while ( ( the_sprites[next_sprite_index].the_sprite_type 
@@ -1260,35 +1345,47 @@ void sprite_manager::spawn_sprites_if_needed
 				
 				// If there isn't a free sprite slot, then stop trying to
 				// spawn sprites.
-				//if ( next_sprite_index == the_sprites.size() )
-				//{
-				//	break;
-				//}
-				if (!the_sprites_allocator.can_pop_index())
+				if ( !the_sprites_allocator.can_pop_index()
+					&& !the_pseudo_bg_sprites_allocator.can_pop_index() )
 				{
 					break;
 				}
 				
-				next_sprite_index = the_sprites_allocator.peek_top_index();
+				if ( !sprite_type_is_pseudo_bg(sprite_ipg->type) )
+				{
+					if (!the_sprites_allocator.can_pop_index())
+					{
+						continue;
+					}
+					
+					next_sprite_index = the_sprites_allocator
+						.peek_top_index();
+					
+					reinit_sprite_with_sprite_ipg
+						( the_sprites[next_sprite_index], 
+						the_sprites_allocator, sprite_ipg );
+				}
 				
-				//the_sprites[next_sprite_index].reinit_with_sprite_ipg
-				//	(&sprite_ipg);
-				
-				//reinit_sprite_with_sprite_ipg( the_sprites
-				//	[next_sprite_index], the_sprites_allocator, 
-				//	&sprite_ipg );
-				reinit_sprite_with_sprite_ipg
-					( the_sprites[next_sprite_index], 
-					the_sprites_allocator, &sprite_ipg );
+				else // if ( sprite_type_is_pseudo_bg(sprite_ipg->type) )
+				{
+					if (!the_pseudo_bg_sprites_allocator.can_pop_index())
+					{
+						continue;
+					}
+					
+					next_sprite_index = the_pseudo_bg_sprites_allocator
+						.peek_top_index();
+					
+					reinit_sprite_with_sprite_ipg
+						( the_pseudo_bg_sprites[next_sprite_index], 
+						the_pseudo_bg_sprites_allocator, sprite_ipg );
+				}
 			}
 			
-			// If there isn't a free sprite slot, then stop trying to spawn
-			// sprites.
-			//if ( next_sprite_index == the_sprites.size() )
-			//{
-			//	break;
-			//}
-			if (!the_sprites_allocator.can_pop_index())
+			// If there isn't a free sprite slot, then stop trying to
+			// spawn sprites.
+			if ( !the_sprites_allocator.can_pop_index()
+				&& !the_pseudo_bg_sprites_allocator.can_pop_index() )
 			{
 				break;
 			}
@@ -1392,6 +1489,20 @@ void sprite_manager::despawn_sprites_if_needed
 			//spr_ptr = NULL;
 		}
 	}
+	
+	//for ( sprite*& spr : the_active_pseudo_bg_sprites )
+	//for ( u32 i=0; i<the_pseudo_bg_sprites.size(); ++i )
+	for ( u32 i=0; i<num_active_pseudo_bg_sprites; ++i )
+	{
+		sprite*& spr_ptr = the_active_pseudo_bg_sprites[i];
+		
+		if (spr_ptr)
+		{
+			sprite& spr = *spr_ptr;
+			for_loop_contents( spr, the_pseudo_bg_sprites_allocator );
+			//spr_ptr = NULL;
+		}
+	}
 }
 
 void sprite_manager::upload_tiles_of_active_sprites_to_vram()
@@ -1463,6 +1574,12 @@ void sprite_manager::upload_tiles_of_active_sprites_to_vram()
 	{
 		for_loop_contents(the_active_secondary_sprites.at(i));
 	}
+	
+	//for ( * spr : the_pseudo_bg_sprites )
+	for ( size_t i=0; i<num_active_pseudo_bg_sprites; ++i )
+	{
+		for_loop_contents(the_active_pseudo_bg_sprites.at(i));
+	}
 }
 
 
@@ -1502,6 +1619,10 @@ void sprite_manager::update_all_sprites
 	update_part_1_for_active_sprites( num_active_secondary_sprites,
 		the_active_secondary_sprites.data() );
 	
+	// Update the currently-active pseudo_bg sprites.
+	update_part_1_for_active_sprites( num_active_pseudo_bg_sprites,
+		the_active_pseudo_bg_sprites.data() );
+	
 	// Update the currently-active sprites.
 	update_part_1_for_active_sprites( num_active_sprites,
 		the_active_sprites.data() );
@@ -1536,6 +1657,9 @@ void sprite_manager::update_all_sprites
 	update_part_2_for_active_sprites( num_active_sprites,
 		the_active_sprites.data() );
 	
+	// Update the currently-active pseudo_bg sprites.
+	update_part_2_for_active_sprites( num_active_pseudo_bg_sprites,
+		the_active_pseudo_bg_sprites.data() );
 	
 	
 	//sprite_stuff_array[the_player.the_sprite_type]->update_part_2
@@ -1564,11 +1688,11 @@ void sprite_manager::update_all_sprites
 	{
 		sprite& the_spr = *(the_active_player_secondary_sprites[i]);
 		
-		// I am pretty sure this isn't a necessary sanity check
-		if ( the_spr.the_sprite_type == st_default )
-		{
-			continue;
-		}
+		//// I am pretty sure this isn't a necessary sanity check
+		//if ( the_spr.the_sprite_type == st_default )
+		//{
+		//	continue;
+		//}
 		
 		// Update the sprite
 		//sprite_stuff_array[the_spr.the_sprite_type]->update_part_3
@@ -1592,11 +1716,11 @@ void sprite_manager::update_all_sprites
 	{
 		sprite& the_spr = *(the_active_secondary_sprites[i]);
 		
-		// I am pretty sure this isn't a necessary sanity check
-		if ( the_spr.the_sprite_type == st_default )
-		{
-			continue;
-		}
+		//// I am pretty sure this isn't a necessary sanity check
+		//if ( the_spr.the_sprite_type == st_default )
+		//{
+		//	continue;
+		//}
 		
 		// Update the sprite
 		//sprite_stuff_array[the_spr.the_sprite_type]->update_part_3
@@ -1612,6 +1736,32 @@ void sprite_manager::update_all_sprites
 		
 	}
 	
+	// Secondary sprites
+	next_oam_index = the_pseudo_bg_sprites_starting_oam_index;
+	
+	for ( u32 i=0; i<num_active_pseudo_bg_sprites; ++i )
+	{
+		sprite& the_spr = *(the_active_pseudo_bg_sprites[i]);
+		
+		//// I am pretty sure this isn't a necessary sanity check
+		//if ( the_spr.the_sprite_type == st_default )
+		//{
+		//	continue;
+		//}
+		
+		// Update the sprite
+		//sprite_stuff_array[the_spr.the_sprite_type]->update_part_3
+		//	( the_spr, camera_pos_pc_pair.curr, next_oam_index );
+		the_spr.update_part_3( camera_pos_pc_pair, next_oam_index );
+		
+		//for ( u32 j=0; j<num_active_sprites; ++j )
+		//{
+		//	sprite& the_other_spr = *(the_active_sprites[j]);
+		//	
+		//	two_sprites_coll_box_test_thing( the_spr, the_other_spr );
+		//}
+		
+	}
 	
 	// Regular sprites
 	next_oam_index = the_active_sprites_starting_oam_index;
@@ -1620,11 +1770,11 @@ void sprite_manager::update_all_sprites
 	{
 		sprite& the_spr = *(the_active_sprites[i]);
 		
-		// I am pretty sure this isn't a necessary sanity check
-		if ( the_spr.the_sprite_type == st_default )
-		{
-			continue;
-		}
+		//// I am pretty sure this isn't a necessary sanity check
+		//if ( the_spr.the_sprite_type == st_default )
+		//{
+		//	continue;
+		//}
 		
 		// Update the sprite
 		//sprite_stuff_array[the_spr.the_sprite_type]->update_part_3
