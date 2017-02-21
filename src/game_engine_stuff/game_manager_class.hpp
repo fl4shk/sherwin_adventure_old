@@ -113,8 +113,8 @@ public:		// functions
 	
 	
 	//static void vblank_func() __attribute__(( _iwram_code, __noinline__ ));
-	//static void vblank_func() __attribute__((_iwram_code));
-	static void vblank_func() __attribute__((_iwram_code,_target_arm));
+	static void vblank_func() __attribute__((_iwram_code));
+	//static void vblank_func() __attribute__((_iwram_code,_target_arm));
 	//static void vblank_func();
 	
 	//static void title_screen_func() __attribute__((__noinline__));

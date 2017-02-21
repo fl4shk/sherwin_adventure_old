@@ -104,14 +104,14 @@ public:		// variables
 	
 	// An array of secondary sprites to allocate from, other than the ones
 	// used by the_player 
-	static sprite the_secondary_sprites
-		[max_num_secondary_sprites];
+	static sprite the_secondary_sprites[max_num_secondary_sprites];
 	
 	// An array of a single player to allocate from
 	static sprite the_allocatable_player[max_num_player_sprites];
 	
 	// The array of REGULAR active sprites, not counting the_player.
-	static sprite the_sprites[max_num_regular_sprites];
+	static sprite the_sprites[max_num_regular_sprites]
+		__attribute__((_iwram));
 	
 	// The array of pseudo-background sprites, which are ONLY checked for
 	// intersection with the_player (and possibly player secondary sprites)
@@ -129,13 +129,13 @@ public:		// variables
 	static u32 num_active_player_secondary_sprites, num_active_sprites, 
 		num_active_secondary_sprites, num_active_pseudo_bg_sprites;
 	static std::array< sprite*, max_num_player_secondary_sprites >
-		the_active_player_secondary_sprites __attribute__((_iwram));
+		the_active_player_secondary_sprites __attribute__((_ewram));
 	static std::array< sprite*, max_num_secondary_sprites >
-		the_active_secondary_sprites __attribute__((_iwram));
+		the_active_secondary_sprites __attribute__((_ewram));
 	static std::array< sprite*, max_num_regular_sprites > 
 		the_active_sprites __attribute__((_iwram));
 	static std::array< sprite*, max_num_pseudo_bg_sprites > 
-		the_active_pseudo_bg_sprites __attribute__((_iwram));
+		the_active_pseudo_bg_sprites __attribute__((_ewram));
 	
 	
 	//static constexpr u32 the_player_vram_chunk_index = 1;
@@ -316,8 +316,8 @@ public:		// functions
 	// particular sublevel without CHANGING sublevels, sprites need to be
 	// spawned, which can be an intensive operation.
 	static void initial_sprite_spawning_shared_code
-		( prev_curr_pair<bg_point>& camera_pos ) 
-		__attribute__((_iwram_code));
+		( prev_curr_pair<bg_point>& camera_pos );
+		//__attribute__((_iwram_code));
 	
 	
 	static void initial_sprite_spawning_from_sublevel_data_old
@@ -331,8 +331,8 @@ public:		// functions
 	static void despawn_sprites_if_needed( const bg_point& camera_pos ) 
 		__attribute__((_iwram_code));
 	
-	static void upload_tiles_of_active_sprites_to_vram()
-		__attribute__((_iwram_code));
+	static void upload_tiles_of_active_sprites_to_vram();
+		//__attribute__((_iwram_code));
 	
 	// This function is one of the most intensive, so it is an ARM function
 	// that goes in IWRAM.

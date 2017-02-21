@@ -33,20 +33,21 @@ DEBUG:=yeah do debug
 # Optimization levels
 #DEBUG_OPTIMIZATION_LEVEL:=-O0
 #DEBUG_OPTIMIZATION_LEVEL:=-O1
-DEBUG_OPTIMIZATION_LEVEL:=-Og
-#DEBUG_OPTIMIZATION_LEVEL:=-Os
+DEBUG_OPTIMIZATION_LEVEL:=-Og ///* 
+#DEBUG_OPTIMIZATION_LEVEL:=-Os *///
 #DEBUG_OPTIMIZATION_LEVEL:=-O2
 #DEBUG_OPTIMIZATION_LEVEL:=-O3
 
-#REGULAR_OPTIMIZATION_LEVEL:=-O1
-#REGULAR_OPTIMIZATION_LEVEL:=-Os
+#REGULAR_OPTIMIZATION_LEVEL:=-O1 ///* 
+#REGULAR_OPTIMIZATION_LEVEL:=-Os *///
 REGULAR_OPTIMIZATION_LEVEL:=-O2
 #REGULAR_OPTIMIZATION_LEVEL:=-O3
 
 
 ifdef DEBUG
-	EXTRA_DEBUG_FLAGS:=-g 
+	EXTRA_DEBUG_FLAGS:=-g ///* 
 	##DEBUG_FLAGS:=-gdwarf-2 -ggdb -gstrict-dwarf $(EXTRA_DEBUG_FLAGS)
+	*///
 	DEBUG_FLAGS:=-gdwarf-3 $(EXTRA_DEBUG_FLAGS)
 	
 	OPTIMIZATION_LEVEL:=$(DEBUG_OPTIMIZATION_LEVEL)
@@ -71,10 +72,10 @@ VERBOSE_ASM_FLAG:=
 
 # Compilers, assemblers, and the linker
 CXX:=$(COMP_PREFIX)g++
-AS:=$(COMP_PREFIX)as
-#LD:=$(COMP_PREFIX)ld
-LD:=$(COMP_PREFIX)g++
-#LD:=$(COMP_PREFIX)gcc
+AS:=$(COMP_PREFIX)as ///* 
+#LD:=$(COMP_PREFIX)ld *///
+LD:=$(COMP_PREFIX)g++ ///* 
+#LD:=$(COMP_PREFIX)gcc *///
 OBJDUMP:=$(COMP_PREFIX)objdump
 OBJCOPY:=$(COMP_PREFIX)objcopy
 
@@ -91,12 +92,10 @@ GLOBAL_BASE_FLAGS:=-mcpu=arm7tdmi -mtune=arm7tdmi \\
 
 # Thumb/ARM compiler flags
 THUMB_BASE_FLAGS:=$(GLOBAL_BASE_FLAGS) -mthumb -mthumb-interwork
-#ARM_BASE_FLAGS:=$(GLOBAL_BASE_FLAGS) -marm -mthumb-interwork
 
 # Eventually I'll use -std=c++17
 # Ah screw it, I'm switching now.
 CXX_FLAGS:=-std=c++17 $(THUMB_BASE_FLAGS) -Wall
-#ARM_CXX_FLAGS:=-std=c++17 $(ARM_BASE_FLAGS) -Wall
 S_FLAGS:=-mcpu=arm7tdmi -mthumb -mthumb-interwork
 
 

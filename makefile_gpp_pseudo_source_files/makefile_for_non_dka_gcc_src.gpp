@@ -25,24 +25,11 @@
 # Edit these variables if more directories are needed.
 # Separate each entry by spaces.
 
-# Directories containing music files in .bin form
-MUSIC_DIRS:=src/audio
-
-# C++ Code
-CXX_DIRS:=$(CURDIR) src src/borrowed_stuff src/general_utility_stuff src/game_engine_stuff src/game_engine_stuff/block_stuff src/game_engine_stuff/level_stuff src/game_engine_stuff/sprite_stuff src/gba_specific_stuff src/test_level src/audio src/gfx
-
-## ARM Mode C++ Code
-#ARM_CXX_DIRS:=$(CXX_DIRS)
-
-# ARM or THUMB Mode ASM Code
-S_DIRS:=$(CXX_DIRS)
+#include "makefile_shared_source_directories.gpp"
 
 
-# End of source directory variables
-
-
-# This compiler prefix is ARM-specific
-#COMP_PREFIX:=$(DEVKITARM)/bin/arm-none-eabi-
+# This compiler prefix is ARM-specific ///* 
+#COMP_PREFIX:=$(DEVKITARM)/bin/arm-none-eabi- *///
 COMP_PREFIX:=arm-none-eabi-
 
 
@@ -51,13 +38,14 @@ COMP_PREFIX:=arm-none-eabi-
 
 
 # Linker flags
-# This is the LD_FLAGS for non-devkitARM GCC
+///* # This is the LD_FLAGS for non-devkitARM GCC *///
 COMMON_LD_FLAGS:=-mthumb --specs=nosys.specs -lgcc -lc -lstdc++ -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lmm
-#COMMON_LD_FLAGS:=--specs=nosys.specs -lgcc -lc -lstdc++ -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 `$(CXX) -print-file-name=thumb/libgcc.a` `$(CXX) -print-file-name=thumb/libc.a` `$(CXX) -print-file-name=thumb/libstdc++.a` -lmm
+///* #COMMON_LD_FLAGS:=--specs=nosys.specs -lgcc -lc -lstdc++ -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 `$(CXX) -print-file-name=thumb/libgcc.a` `$(CXX) -print-file-name=thumb/libc.a` `$(CXX) -print-file-name=thumb/libstdc++.a` -lmm
 #LD_FLAGS:=--specs=nosys.specs -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` $(DEBUG_FLAGS) -g-lmm
 
 #LD_FLAGS:=--specs=nosys.specs -nostartfiles -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` $(DEBUG_FLAGS)-lmm
 #LD_FLAGS:=--specs=nosys.specs -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` $(DEBUG_FLAGS)-lmm
+*///
 
 
 

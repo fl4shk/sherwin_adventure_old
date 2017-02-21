@@ -66,7 +66,8 @@ static constexpr size_t test_buf_size = 20;
 char test_buf[test_buf_size];
 
 int main_2();
-int real_main() __attribute__((_iwram_code));
+//int real_main() __attribute__((_iwram_code));
+int real_main();
 
 
 int main()

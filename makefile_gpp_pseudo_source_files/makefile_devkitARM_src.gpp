@@ -25,25 +25,12 @@
 # Edit these variables if more directories are needed.
 # Separate each entry by spaces.
 
-# Directories containing music files in .bin form
-MUSIC_DIRS:=src/audio
-
-# C++ Code
-CXX_DIRS:=$(CURDIR) src src/borrowed_stuff src/general_utility_stuff src/game_engine_stuff src/game_engine_stuff/block_stuff src/game_engine_stuff/level_stuff src/game_engine_stuff/sprite_stuff src/gba_specific_stuff src/test_level src/audio src/gfx
-
-## ARM Mode C++ Code
-#ARM_CXX_DIRS:=$(CXX_DIRS)
-
-# ARM or THUMB Mode ASM Code
-S_DIRS:=$(CXX_DIRS)
-
-
-# End of source directory variables
+#include "makefile_shared_source_directories.gpp"
 
 
 # This compiler prefix is ARM-specific
-COMP_PREFIX:=$(DEVKITARM)/bin/arm-none-eabi-
-#COMP_PREFIX:=arm-none-eabi-
+COMP_PREFIX:=$(DEVKITARM)/bin/arm-none-eabi-///* 
+#COMP_PREFIX:=arm-none-eabi- *///
 
 
 #include "makefile_shared_stuff_part_1.gpp"
@@ -52,12 +39,13 @@ COMP_PREFIX:=$(DEVKITARM)/bin/arm-none-eabi-
 
 # Linker flags
 COMMON_LD_FLAGS:=-mthumb --specs=nosys.specs -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm
-#COMMON_LD_FLAGS:=--specs=nosys.specs -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ `$(CXX) -print-file-name=thumb/libgcc.a` `$(CXX) -print-file-name=thumb/libc.a` `$(CXX) -print-file-name=thumb/libstdc++.a` -lmm
+///* #COMMON_LD_FLAGS:=--specs=nosys.specs -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ `$(CXX) -print-file-name=thumb/libgcc.a` `$(CXX) -print-file-name=thumb/libc.a` `$(CXX) -print-file-name=thumb/libstdc++.a` -lmm
 #COMMON_LD_FLAGS:=--specs=nosys.specs -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` -lmm
 ## This is the LD_FLAGS for devkitARM
 #LD_FLAGS:=$(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ $(DEBUG_FLAGS) -lmm
 ##LD_FLAGS:=$(EXTRA_LD_FLAGS) -g -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ $(DEBUG_FLAGS) -lmm
 ##LD_FLAGS:=$(EXTRA_LD_FLAGS) -g -L$(DEVKITPRO)/libgba/lib -nostartfiles -T $(LD_SCRIPT) -Wl,--entry=_start2 $(DEBUG_FLAGS) -lmm
+*///
 
 
 

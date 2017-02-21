@@ -347,16 +347,16 @@ public:		// functions
 	}
 	
 	void init( const horiz_coll_lseg& the_coll_lseg );
-		//__attribute__((_iwram_code,_target_arm));
+		//__attribute__((_iwram_code));
 	void init( const vert_coll_lseg& the_coll_lseg )
-		__attribute__((_iwram_code,_target_arm));
+		__attribute__((_iwram_code));
 	
 	block_coll_result* horiz_any_bbvt_is_fully_solid( vec2_s32& pos );
-		//__attribute__((_iwram_code,_target_arm));
+		//__attribute__((_iwram_code));
 	block_coll_result* vert_any_bbvt_is_fully_solid( vec2_s32& pos )
-		__attribute__((_iwram_code,_target_arm));
+		__attribute__((_iwram_code));
 	block_coll_result* vert_any_bbvt_is_slope( vec2_s32& pos )
-		__attribute__((_iwram_code,_target_arm));
+		__attribute__((_iwram_code));
 	
 	inline block_coll_result& operator () ( u32 index )
 	{
