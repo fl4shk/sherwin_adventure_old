@@ -21,7 +21,7 @@
 
 #include "../../gba_specific_stuff/attribute_defines.hpp"
 #include "../../general_utility_stuff/misc_types.hpp"
-#include "../../general_utility_stuff/array_2d_helper_class.hpp"
+#include "../../general_utility_stuff/array_2d_helper_classes.hpp"
 #include "../../gba_specific_stuff/gfx_reg_stuff.hpp"
 
 #include <array>

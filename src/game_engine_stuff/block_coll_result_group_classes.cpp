@@ -31,15 +31,15 @@ block_coll_result_rect_group::block_coll_result_rect_group()
 	moving_right(false)
 {
 	//asm_comment("constructor type 1");
-	//memset( bcr_arr_2d_helper_data, 0, sizeof(bcr_arr_2d_helper_data) );
+	//memset( bcr_arr_csz_2d_helper_data, 0, sizeof(bcr_arr_csz_2d_helper_data) );
 	
-	//arr_memfill32( bcr_arr_2d_helper_data, 0, max_size );
+	//arr_memfill32( bcr_arr_csz_2d_helper_data, 0, max_size );
 	//start_pos = vec2_s32( 0, 0 );
 	//real_size_2d = vec2_s32( 1, 1 );
 	//
 	//moving_left = moving_right = false;
 	
-	init_bcr_arr_2d_helper();
+	init_bcr_arr_csz_2d_helper();
 	
 	for ( s32 j=0; j<real_height(); ++j )
 	{
@@ -55,9 +55,9 @@ block_coll_result_rect_group::block_coll_result_rect_group
 	( const coll_box& the_coll_box, u32 s_moving_left, u32 s_moving_right )
 {
 	//asm_comment("constructor type 2");
-	//memset( bcr_arr_2d_helper_data, 0, sizeof(bcr_arr_2d_helper_data) );
+	//memset( bcr_arr_csz_2d_helper_data, 0, sizeof(bcr_arr_csz_2d_helper_data) );
 	
-	//arr_memfill32( bcr_arr_2d_helper_data, 0, max_size );
+	//arr_memfill32( bcr_arr_csz_2d_helper_data, 0, max_size );
 	
 	start_pos = active_level::get_block_coord_of_point( vec2_f24p8
 		( the_coll_box.left(), the_coll_box.top() ) );
@@ -68,7 +68,7 @@ block_coll_result_rect_group::block_coll_result_rect_group
 	moving_left = s_moving_left;
 	moving_right = s_moving_right;
 	
-	init_bcr_arr_2d_helper();
+	init_bcr_arr_csz_2d_helper();
 	
 	for ( s32 j=0; j<real_height(); ++j )
 	{
@@ -92,8 +92,8 @@ block_coll_result_rect_group::block_coll_result_rect_group
 block_coll_result_rect_group& block_coll_result_rect_group::operator = 
 	( const block_coll_result_rect_group& to_copy )
 {
-	arr_memcpy32( (block_coll_result*)bcr_arr_2d_helper_data, 
-		to_copy.bcr_arr_2d_helper_data, max_size );
+	arr_memcpy32( (block_coll_result*)bcr_arr_csz_2d_helper_data, 
+		to_copy.bcr_arr_csz_2d_helper_data, max_size );
 	
 	start_pos = to_copy.start_pos;
 	

@@ -322,7 +322,7 @@ void active_level_manager::update_sublevel_in_screenblock_mirror_2d()
 	
 }
 
-void active_level_manager::copy_sublevel_from_array_2d_helper_to_vram()
+void active_level_manager::copy_sublevel_from_array_csz_2d_helper_to_vram()
 	//( array_2d_helper<scr_entry>& screenblock_in_vram_2d,
 	//array_2d_helper<scr_entry>& screenblock_mirror_2d )
 {

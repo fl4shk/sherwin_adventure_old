@@ -115,7 +115,7 @@ public:		// constants
 	static constexpr u32 max_size = max_size_2d.x * max_size_2d.y;
 	
 protected:		// variables
-	block_coll_result bcr_arr_2d_helper_data[max_size];
+	block_coll_result bcr_arr_csz_2d_helper_data[max_size];
 	
 	vec2_s32 start_pos;
 	
@@ -126,7 +126,9 @@ protected:		// variables
 	static u32 temp_debug_thing;
 	
 public:		// variables
-	array_2d_helper<block_coll_result> bcr_arr_2d_helper;
+	//array_2d_helper<block_coll_result> bcr_arr_csz_2d_helper;
+	array_csz_2d_helper< block_coll_result, max_size_2d.x, max_size_2d.y >
+		bcr_arr_csz_2d_helper;
 	
 	
 public:		// functions
@@ -155,15 +157,15 @@ public:		// functions
 	
 	inline block_coll_result& at( u32 local_x, u32 local_y )
 	{
-		return bcr_arr_2d_helper.at( local_x, local_y );
+		return bcr_arr_csz_2d_helper.at( local_x, local_y );
 	}
 	inline block_coll_result& at( const vec2_u32& local_coord )
 	{
-		return bcr_arr_2d_helper.at(local_coord);
+		return bcr_arr_csz_2d_helper.at(local_coord);
 	}
 	inline block_coll_result& at( const vec2_s32& local_coord )
 	{
-		return bcr_arr_2d_helper.at(local_coord);
+		return bcr_arr_csz_2d_helper.at(local_coord);
 	}
 	
 	
@@ -194,7 +196,7 @@ public:		// functions
 	// Global coordinates
 	inline s32 left() const
 	{
-		//return bcr_arr_2d_helper_data[0].coord.x;
+		//return bcr_arr_csz_2d_helper_data[0].coord.x;
 		return start_pos.x;
 	}
 	inline s32 right() const
@@ -205,7 +207,7 @@ public:		// functions
 	
 	inline s32 top() const
 	{
-		//return bcr_arr_2d_helper_data[0].coord.y;
+		//return bcr_arr_csz_2d_helper_data[0].coord.y;
 		return start_pos.y;
 	}
 	inline s32 bot() const
@@ -302,10 +304,11 @@ public:		// functions
 	//	__attribute__((_target_arm));
 	
 protected:		// functions
-	inline void init_bcr_arr_2d_helper()
+	inline void init_bcr_arr_csz_2d_helper()
 	{
-		bcr_arr_2d_helper.init( bcr_arr_2d_helper_data, 
-			vec2_u32( real_width(), real_height() ) );
+		//bcr_arr_csz_2d_helper.init( bcr_arr_csz_2d_helper_data, 
+		//	vec2_u32( real_width(), real_height() ) );
+		bcr_arr_csz_2d_helper.init(bcr_arr_csz_2d_helper_data);
 	}
 	
 	

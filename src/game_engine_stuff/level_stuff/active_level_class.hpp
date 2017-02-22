@@ -85,10 +85,11 @@ public:		// static variables
 	static const vec2_u32 horiz_sublevel_size_2d;
 	
 	
-	// horiz_sublevel_block_data_2d is an array_2d_helper that wraps the
-	// access to block_data_array for horizontal sublevels.  Support for
-	// vertical sublevels MIGHT come later.
-	static array_2d_helper<block> horiz_sublevel_block_data_2d;
+	// horiz_sublevel_block_data_2d is an array_csz_2d_helper that wraps
+	// the access to block_data_array for horizontal sublevels.  Support
+	// for vertical sublevels MIGHT come later.
+	static array_csz_2d_helper< block, horiz_sublevel_xsize, 
+		horiz_sublevel_ysize > horiz_sublevel_block_data_2d;
 	
 	
 	
@@ -112,10 +113,12 @@ public:		// static variables
 	
 	
 	// bg0_screenblock_2d is in VRAM.
-	static array_2d_helper<scr_entry> bg0_screenblock_2d;
+	static array_csz_2d_helper< scr_entry, screenblock_xsize,
+		screenblock_ysize > bg0_screenblock_2d;
 	
 	// bg0_screenblock_mirror_2d is in EWRAM.
-	static array_2d_helper<scr_entry> bg0_screenblock_mirror_2d;
+	static array_csz_2d_helper< scr_entry, screenblock_xsize,
+		screenblock_ysize > bg0_screenblock_mirror_2d;
 	
 	
 	//// the_current_sublevel_ptr will later be replaced with a "regular"

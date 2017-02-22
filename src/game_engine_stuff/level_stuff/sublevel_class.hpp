@@ -19,7 +19,7 @@
 #ifndef sublevel_class_hpp
 #define sublevel_class_hpp
 
-#include "../../general_utility_stuff/array_2d_helper_class.hpp"
+#include "../../general_utility_stuff/array_2d_helper_classes.hpp"
 #include "../../general_utility_stuff/array_helper_class.hpp"
 #include "../sprite_stuff/sprite_type_stuff.hpp"
 #include "../block_stuff/block_stuff.hpp"

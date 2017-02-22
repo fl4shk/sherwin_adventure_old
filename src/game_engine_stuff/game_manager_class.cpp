@@ -114,10 +114,10 @@ void game_manager::vblank_func()
 			gfx_manager::upload_bg_tiles_to_vram();
 			
 			active_level_manager
-				::copy_sublevel_from_array_2d_helper_to_vram();
+				::copy_sublevel_from_array_csz_2d_helper_to_vram();
 			sprite_manager::upload_tiles_of_active_sprites_to_vram();
 			
-			hud_manager::copy_hud_from_array_2d_helper_to_vram();
+			hud_manager::copy_hud_from_array_csz_2d_helper_to_vram();
 			break;
 		
 		// If a bug was automatically detected (this should never be the
@@ -177,7 +177,7 @@ void game_manager::title_screen_func()
 	// This is sort of a hack.
 	bios_do_lz77_uncomp_wram( title_screenMap, 
 		active_level::bg0_screenblock_mirror );
-	active_level_manager::copy_sublevel_from_array_2d_helper_to_vram();
+	active_level_manager::copy_sublevel_from_array_csz_2d_helper_to_vram();
 	
 	
 	// Disable forced blank
@@ -279,7 +279,7 @@ void game_manager::reinit_the_game()
 	
 	gfx_manager::fade_out_to_white(1);
 	hud_manager::update_hud_in_screenblock_mirror_2d();
-	hud_manager::copy_hud_from_array_2d_helper_to_vram();
+	hud_manager::copy_hud_from_array_csz_2d_helper_to_vram();
 	
 	irqSet( irq_vblank, (u32)mmVBlank );
 	irqEnable(irq_vblank);

@@ -32,10 +32,10 @@ bool hud_manager::hud_was_generated;
 
 scr_entry hud_manager::bg1_screenblock_mirror[screenblock_size];
 
-array_2d_helper<scr_entry> hud_manager::bg1_screenblock_2d
-	( se_ram[bg1_sbb], screenblock_size_2d );
-array_2d_helper<scr_entry> hud_manager::bg1_screenblock_mirror_2d 
-	( bg1_screenblock_mirror, screenblock_size_2d );
+array_csz_2d_helper< scr_entry, screenblock_xsize, screenblock_ysize > 
+	hud_manager::bg1_screenblock_2d(se_ram[bg1_sbb]);
+array_csz_2d_helper< scr_entry, screenblock_xsize, screenblock_ysize > 
+	hud_manager::bg1_screenblock_mirror_2d(bg1_screenblock_mirror);
 
 const char hud_manager::char_to_plottable_char_arr
 	[char_to_plottable_char_arr_size]
@@ -288,7 +288,7 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 
 
 
-void hud_manager::copy_hud_from_array_2d_helper_to_vram()
+void hud_manager::copy_hud_from_array_csz_2d_helper_to_vram()
 {
 	memcpy32( hud_manager::bg1_screenblock_2d.the_array,
 		hud_manager::bg1_screenblock_mirror_2d.the_array,

@@ -21,7 +21,7 @@
 
 #include "../gba_specific_stuff/gfx_reg_stuff.hpp"
 #include "../gba_specific_stuff/bios_function_wrappers.hpp"
-#include "../general_utility_stuff/array_2d_helper_class.hpp"
+#include "../general_utility_stuff/array_2d_helper_classes.hpp"
 #include "gfx_manager_class.hpp"
 
 class hud_manager
@@ -33,10 +33,12 @@ public:		// variables
 		__attribute__((_ewram));
 	
 	// bg1_screenblock_2d is in VRAM.
-	static array_2d_helper<scr_entry> bg1_screenblock_2d;
+	static array_csz_2d_helper< scr_entry, screenblock_xsize,
+		screenblock_ysize > bg1_screenblock_2d;
 	
 	// bg1_screenblock_mirror_2d is in EWRAM.
-	static array_2d_helper<scr_entry> bg1_screenblock_mirror_2d;
+	static array_csz_2d_helper< scr_entry, screenblock_xsize, 
+		screenblock_ysize > bg1_screenblock_mirror_2d;
 	
 	static constexpr u32 char_to_plottable_char_arr_size = 0x100;
 	static const char char_to_plottable_char_arr
@@ -59,7 +61,7 @@ public:		// functions
 	static void update_hud_in_screenblock_mirror_2d();
 		__attribute__((_iwram_code));
 	
-	static void copy_hud_from_array_2d_helper_to_vram();
+	static void copy_hud_from_array_csz_2d_helper_to_vram();
 	
 } __attribute__((_align4));
 

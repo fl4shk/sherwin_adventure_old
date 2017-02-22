@@ -31,7 +31,7 @@
 
 #include "general_utility_stuff/fixed_classes.hpp"
 #include "general_utility_stuff/trigonometry_funcs.hpp"
-#include "general_utility_stuff/array_2d_helper_class.hpp"
+#include "general_utility_stuff/array_2d_helper_classes.hpp"
 #include "general_utility_stuff/debug_vars.hpp"
 
 #include "game_engine_stuff/level_stuff/active_level_class.hpp"

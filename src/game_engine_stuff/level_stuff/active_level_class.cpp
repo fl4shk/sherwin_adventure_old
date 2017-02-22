@@ -36,9 +36,12 @@ u16 active_level::persistent_block_data_arrays[max_num_sublevels]
 	[persistent_block_data_array_size]; //__attribute__((_ewram));
 
 
-array_2d_helper<block> active_level::horiz_sublevel_block_data_2d 
-	( active_level::block_data_array, 
-	active_level::horiz_sublevel_size_2d );
+//array_2d_helper<block> active_level::horiz_sublevel_block_data_2d 
+//	( active_level::block_data_array, 
+//	active_level::horiz_sublevel_size_2d );
+array_csz_2d_helper< block, active_level::horiz_sublevel_xsize,
+	active_level::horiz_sublevel_ysize > 
+	active_level::horiz_sublevel_block_data_2d(block_data_array);
 
 
 //std::array< std::forward_list<sprite_init_param_group>, 
@@ -61,10 +64,10 @@ scr_entry active_level::bg0_screenblock_mirror[screenblock_size];
 
 
 
-array_2d_helper<scr_entry> active_level::bg0_screenblock_2d
-	( se_ram[bg0_sbb], screenblock_size_2d );
-array_2d_helper<scr_entry> active_level::bg0_screenblock_mirror_2d 
-	( bg0_screenblock_mirror, screenblock_size_2d );
+array_csz_2d_helper< scr_entry, screenblock_xsize, screenblock_ysize > 
+	active_level::bg0_screenblock_2d(se_ram[bg0_sbb]);
+array_csz_2d_helper< scr_entry, screenblock_xsize, screenblock_ysize > 
+	active_level::bg0_screenblock_mirror_2d(bg0_screenblock_mirror);
 
 const level* active_level::the_current_level_ptr;
 u32 active_level::the_current_active_sublevel_index;

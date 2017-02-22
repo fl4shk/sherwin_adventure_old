@@ -22,7 +22,7 @@
 
 #include "../../gba_specific_stuff/gfx_reg_stuff.hpp"
 #include "../../gba_specific_stuff/bios_function_wrappers.hpp"
-#include "../../general_utility_stuff/array_2d_helper_class.hpp"
+#include "../../general_utility_stuff/array_2d_helper_classes.hpp"
 #include "../block_stuff/block_stuff.hpp"
 #include "active_level_class.hpp"
 #include "../sprite_stuff/sprite_manager_class.hpp"
@@ -57,16 +57,16 @@ public:		// functions
 	
 	
 	
-	static inline u32 sublevel_width_in_tiles 
-		( array_2d_helper<u16>& the_block_ids_2d )
-	{
-		return the_block_ids_2d.width() * 2;
-	}
-	static inline u32 sublevel_height_in_tiles 
-		( array_2d_helper<u16>& the_block_ids_2d )
-	{
-		return the_block_ids_2d.height() * 2;
-	}
+	//static inline u32 sublevel_width_in_tiles 
+	//	( array_2d_helper<u16>& the_block_ids_2d )
+	//{
+	//	return the_block_ids_2d.width() * 2;
+	//}
+	//static inline u32 sublevel_height_in_tiles 
+	//	( array_2d_helper<u16>& the_block_ids_2d )
+	//{
+	//	return the_block_ids_2d.height() * 2;
+	//}
 	
 	static inline u32 sublevel_width_in_tiles 
 		( const vec2_u32& sublevel_size_in_blocks_2d )
@@ -87,8 +87,8 @@ public:		// functions
 	static void update_sublevel_in_screenblock_mirror_2d()
 		__attribute__((_iwram_code,_target_arm));
 	
-	static void copy_sublevel_from_array_2d_helper_to_vram()
-		__attribute__((_iwram_code,_target_arm));
+	static void copy_sublevel_from_array_csz_2d_helper_to_vram();
+		//__attribute__((_iwram_code,_target_arm));
 	
 	
 	
