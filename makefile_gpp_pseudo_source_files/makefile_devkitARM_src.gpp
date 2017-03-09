@@ -32,10 +32,8 @@
 COMP_PREFIX:=$(DEVKITARM)/bin/arm-none-eabi-///* 
 #COMP_PREFIX:=arm-none-eabi- *///
 
-
-#include "makefile_shared_stuff_part_1.gpp"
-
-
+# The linker script
+LD_SCRIPT:=linkscript.ld
 
 # Linker flags
 COMMON_LD_FLAGS:=-mthumb --specs=nosys.specs -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm
@@ -46,6 +44,12 @@ COMMON_LD_FLAGS:=-mthumb --specs=nosys.specs -L$(DEVKITPRO)/libgba/lib -T $(LD_S
 ##LD_FLAGS:=$(EXTRA_LD_FLAGS) -g -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ $(DEBUG_FLAGS) -lmm
 ##LD_FLAGS:=$(EXTRA_LD_FLAGS) -g -L$(DEVKITPRO)/libgba/lib -nostartfiles -T $(LD_SCRIPT) -Wl,--entry=_start2 $(DEBUG_FLAGS) -lmm
 *///
+
+
+#include "makefile_shared_stuff_part_1.gpp"
+
+
+
 
 
 

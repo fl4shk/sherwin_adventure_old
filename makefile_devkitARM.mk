@@ -26,8 +26,6 @@
 # Separate each entry by spaces.
 
 
- 
- 
 # Directories containing music files in .bin form
 MUSIC_DIRS:=src/audio
 
@@ -44,18 +42,16 @@ S_DIRS:=$(CXX_DIRS)
 # This compiler prefix is ARM-specific
 COMP_PREFIX:=$(DEVKITARM)/bin/arm-none-eabi-
 
+# The linker script
+LD_SCRIPT:=linkscript.ld
+
+# Linker flags
+COMMON_LD_FLAGS:=-mthumb --specs=nosys.specs -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm
+
+
 
 
 ALWAYS_DEBUG_SUFFIX:=_debug
-
-
-# Comment out or un-comment out the next line to enable profiling stuff to
-# be generated
-#PROFILE:=yeah do profile
-
-ifdef PROFILE
-	PROFILE_FLAGS:=-pg
-endif
 
 
 # Comment out or un-comment out the next line to enable debugging stuff to
@@ -72,6 +68,21 @@ DEBUG_OPTIMIZATION_LEVEL:=-Og
 #REGULAR_OPTIMIZATION_LEVEL:=-O1 
 REGULAR_OPTIMIZATION_LEVEL:=-O2
 #REGULAR_OPTIMIZATION_LEVEL:=-O3
+
+
+# Compilers, assemblers, and the linker
+CXX:=$(COMP_PREFIX)g++
+AS:=$(COMP_PREFIX)as 
+LD:=$(COMP_PREFIX)g++ 
+OBJDUMP:=$(COMP_PREFIX)objdump
+OBJCOPY:=$(COMP_PREFIX)objcopy
+
+# CXX_FLAGS and GLOBAL_BASE_FLAGS are appended to later
+CXX_FLAGS:=-std=c++17 -Wall $(THUMB_BASE_FLAGS) 
+S_FLAGS:=-mcpu=arm7tdmi -mthumb -mthumb-interwork
+GLOBAL_BASE_FLAGS:=-mcpu=arm7tdmi -mtune=arm7tdmi \
+	-I$(DEVKITPRO)/libgba/include -nostartfiles \
+	-fno-rtti -ffast-math -fno-threadsafe-statics
 
 
 ifdef DEBUG
@@ -97,40 +108,19 @@ VERBOSE_ASM_FLAG:=
 #VERBOSE_ASM_FLAG:=-fverbose-asm
 
 
-
-# Compilers, assemblers, and the linker
-CXX:=$(COMP_PREFIX)g++
-AS:=$(COMP_PREFIX)as 
-LD:=$(COMP_PREFIX)g++ 
-OBJDUMP:=$(COMP_PREFIX)objdump
-OBJCOPY:=$(COMP_PREFIX)objcopy
-
-# The linker script
-LD_SCRIPT:=linkscript.ld
-
-
-
-GLOBAL_BASE_FLAGS:=-mcpu=arm7tdmi -mtune=arm7tdmi \
-	-I$(DEVKITPRO)/libgba/include -nostartfiles \
-	-fno-rtti -ffast-math -fno-threadsafe-statics $(OPTIMIZATION_LEVEL) \
-	$(EXTRA_DEBUG_FLAGS)
+# The final GLOBAL_BASE_FLAGS
+GLOBAL_BASE_FLAGS:=$(GLOBAL_BASE_FLAGS) $(OPTIMIZATION_LEVEL)  $(EXTRA_DEBUG_FLAGS)
 
 
 # Thumb/ARM compiler flags
 THUMB_BASE_FLAGS:=$(GLOBAL_BASE_FLAGS) -mthumb -mthumb-interwork
 
-# Eventually I'll use -std=c++17
-# Ah screw it, I'm switching now.
-CXX_FLAGS:=-std=c++17 $(THUMB_BASE_FLAGS) -Wall
-S_FLAGS:=-mcpu=arm7tdmi -mthumb -mthumb-interwork
+# The final CXX_FLAGS
+CXX_FLAGS:=$(CXX_FLAGS) $(THUMB_BASE_FLAGS) 
 
 
 
 
-
-
-# Linker flags
-COMMON_LD_FLAGS:=-mthumb --specs=nosys.specs -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) -Wl,--entry=_start2 -lgcc -lc -lstdc++ -lmm
 
 
 

@@ -14,8 +14,6 @@
  
  You should have received a copy of the GNU General Public License along
  with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.  *///
- 
- 
 # Directories containing music files in .bin form
 MUSIC_DIRS:=src/audio
 

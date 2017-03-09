@@ -32,10 +32,8 @@
 #COMP_PREFIX:=$(DEVKITARM)/bin/arm-none-eabi- *///
 COMP_PREFIX:=arm-none-eabi-
 
-
-#include "makefile_shared_stuff_part_1.gpp"
-
-
+# The linker script
+LD_SCRIPT:=linkscript.ld
 
 # Linker flags
 ///* # This is the LD_FLAGS for non-devkitARM GCC *///
@@ -46,6 +44,12 @@ COMMON_LD_FLAGS:=-mthumb --specs=nosys.specs -lgcc -lc -lstdc++ -L$(DEVKITPRO)/l
 #LD_FLAGS:=--specs=nosys.specs -nostartfiles -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` $(DEBUG_FLAGS)-lmm
 #LD_FLAGS:=--specs=nosys.specs -lgcc -lc -lstdc++ $(EXTRA_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib -T $(LD_SCRIPT) `$(CC) -print-file-name=thumb/libgcc.a` `$(CC) -print-file-name=thumb/libc.a` `$(CC) -print-file-name=thumb/libstdc++.a` $(DEBUG_FLAGS)-lmm
 *///
+
+
+#include "makefile_shared_stuff_part_1.gpp"
+
+
+
 
 
 
