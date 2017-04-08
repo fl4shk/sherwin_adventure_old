@@ -34,6 +34,9 @@
 #include <functional>
 
 
+// FL4SHK Note on April 8, 2017:  
+// WHY did I bother making this so unnecessarily complicated?
+// Reminder to myself:  DON'T do that!
 namespace sa_list_stuff
 {
 
@@ -110,32 +113,6 @@ public:		// functions
 } __attribute__((_align4));
 
 
-//class ndai_dyn_arr
-//{
-//protected:		// variables
-//	node_data_and_index* arr;
-//	
-//public:		// functions
-//	ndai_dyn_arr( size_t s_size )
-//	{
-//		arr = new node_data_and_index[s_size];
-//	}
-//	~ndai_dyn_arr()
-//	{
-//		delete [] arr;
-//	}
-//	
-//	inline node_data_and_index* get_arr()
-//	{
-//		return arr;
-//	}
-//	
-//	inline node_data_and_index& operator [] ( size_t index )
-//	{
-//		return get_arr()[index];
-//	}
-//	
-//} __attribute__((_align4));
 
 typedef dyn_arr<node_data_and_index> ndai_dyn_arr;
 
@@ -144,15 +121,8 @@ typedef dyn_arr<node_data_and_index> ndai_dyn_arr;
 template< typename type >
 class node
 {
-//public:		// constants
-//	static constexpr size_t vec2_index_for_next_index 
-//		= node_contents::vec2_index_for_next_index,
-//	vec2_index_for_prev_index 
-//		= node_contents::vec2_index_for_prev_index;
-	
 public:		// variables
 	type data __attribute__((_align4)) = type();
-	//vec2_s32 index_pair = { -1, -1 };
 	vec2_s16 index_pair = { -1, -1 };
 	
 public:		// functions
@@ -160,12 +130,6 @@ public:		// functions
 	{
 	}
 	
-	//inline node()
-	//{
-	//	data = type();
-	//	next_index = -1;
-	//	prev_index = -1;
-	//}
 	
 	template< typename type_in_vec2 >
 	inline node( const type& data_to_copy, 
@@ -219,8 +183,6 @@ protected:		// variables
 	// The maximum size of the_array, the number of used elements in the
 	// array, and the TRUE start and end indices of the_array.
 	size_t max_size = 0, real_size = 0, head = 0, tail = 0;
-	
-	//friend class iterator;
 	
 public:		// classes
 	class iterator
@@ -549,13 +511,6 @@ public:		// functions
 		*this = to_copy;
 	}
 	
-	//inline extras_fp_group& operator = ( const extras_fp_group& to_copy )
-	//{
-	//	struct_memcpy( *this, to_copy );
-	//	
-	//	return *this;
-	//}
-	
 	
 	inline generic_void_2arg_fp get_specific_type_copy_fp() const
 	{
@@ -860,12 +815,6 @@ public:		// functions to not point to
 		}
 	}
 	
-	//static void subarr_merge( node_data_and_index* left_subarr, 
-	//	const size_t left_subarr_size, node_data_and_index* right_subarr,
-	//	const size_t right_subarr_size, node_data_and_index* out_subarr )
-	//{
-	//	
-	//}
 	
 } __attribute__((_align4));
 
@@ -1552,91 +1501,6 @@ public:		// functions
 		the_list_backend.fully_deallocate_via_unlink();
 	}
 	
-	//s32 push_front_old( const type& to_push )
-	//{
-	//	// If there's nothing in the list
-	//	if ( get_front_index() == -1 )
-	//	{
-	//		get_front_index() = get_free_list_backend()
-	//			.peek_top();
-	//		get_free_list_backend().pop();
-	//		
-	//		front().data = to_push;
-	//		
-	//		// These two operations are for good measure, and they might
-	//		// not actually be necessary.
-	//		front().next_index() = -1;
-	//		front().prev_index() = -1;
-	//	}
-	//	// If there's at least one element in the list
-	//	else
-	//	{
-	//		s32 old_front_index = get_front_index();
-	//		get_front_index() = get_free_list_backend()
-	//			.peek_top();
-	//		get_free_list_backend().pop();
-	//		
-	//		get_node_at(old_front_index).prev_index() 
-	//			= get_front_index();
-	//		
-	//		front().data = to_push;
-	//		front().next_index() = old_front_index;
-	//		
-	//		// This operation is for good measure, and it might not
-	//		// actually be necessary.
-	//		front().prev_index() = -1;
-	//	}
-	//	
-	//	return get_front_index();
-	//}
-	
-	
-	
-	//s32 push_front_old_2( const type& to_push ) __attribute__((noinline))
-	//{
-	//	s32& the_front_index = get_front_index();
-	//	s32 old_front_index = the_front_index;
-	//	
-	//	sa_free_list_backend& the_free_list_backend 
-	//		= get_free_list_backend();
-	//	
-	//	the_front_index = the_free_list_backend.peek_top();
-	//	the_free_list_backend.pop();
-	//	
-	//	
-	//	//asm_comment("Before get_node_at(the_front_index)");
-	//	
-	//	node<type>& the_front_node 
-	//		= get_node_at(the_front_index);
-	//	
-	//	//asm_comment("After get_node_at(the_front_index)");
-	//	
-	//	
-	//	s32 new_next_index = -1;
-	//	
-	//	// If there's nothing in the list
-	//	//if ( the_front_index < 0 )
-	//	//if ( old_front_index < 0 )
-	//	//{
-	//	//	
-	//	//}
-	//	//// If there's at least one element in the list
-	//	//else
-	//	if ( old_front_index >= 0 )
-	//	{
-	//		new_next_index = old_front_index;
-	//		
-	//		get_node_at(old_front_index).prev_index()
-	//			= the_front_index;
-	//	}
-	//	
-	//	
-	//	the_front_node.data = to_push;
-	//	the_front_node.next_index() = new_next_index;
-	//	the_front_node.prev_index() = -1;
-	//	
-	//	return the_front_index;
-	//}
 	
 	inline s32 push_front( const type& to_push )
 	{
@@ -1665,90 +1529,6 @@ public:		// functions
 		return the_list_backend.pop_back_basic();
 	}
 	
-	//s32 insert_before_old( s32 index, const type& to_insert )
-	//{
-	//	s32 old_prev_index = get_node_at(index)
-	//		.prev_index();
-	//	//s32 old_next_index = get_node_at(index)
-	//	//	.next_index();
-	//	
-	//	// If index == front_index
-	//	//if ( old_prev_index == -1 )
-	//	if ( index == get_front_index() )
-	//	{
-	//		return push_front(to_insert);
-	//	}
-	//	else
-	//	{
-	//		//s32 new_index = get_free_list_backend().pop();
-	//		s32 new_index = get_free_list_backend().peek_top();
-	//		get_free_list_backend().pop();
-	//		
-	//		get_node_at(old_prev_index).next_index()
-	//			= new_index;
-	//		
-	//		get_node_at(new_index).data = to_insert;
-	//		get_node_at(new_index).prev_index() 
-	//			= old_prev_index;
-	//		get_node_at(new_index).next_index()
-	//			= index;
-	//		
-	//		get_node_at(index).prev_index() 
-	//			= new_index;
-	//		
-	//		return new_index;
-	//	}
-	//	
-	//	//return index;
-	//	//return new_index;
-	//}
-	
-	//s32 insert_before_old_2( s32 index, const type& to_insert )
-	//	__attribute__((noinline))
-	//{
-	//	//s32 old_prev_index = get_node_at(index)
-	//	//	.prev_index();
-	//	////s32 old_next_index = get_node_at(index)
-	//	////	.next_index()
-	//	
-	//	// If index == front_index
-	//	//if ( old_prev_index == -1 )
-	//	if ( index == get_front_index() )
-	//	{
-	//		return push_front(to_insert);
-	//	}
-	//	else
-	//	{
-	//		node<type>& node_at_index 
-	//			= get_node_at(index);
-	//		
-	//		const s32 old_prev_index 
-	//			= node_at_index.prev_index();
-	//		
-	//		const s32 new_index = get_free_list_backend()
-	//			.peek_top();
-	//		get_free_list_backend().pop();
-	//		
-	//		
-	//		node<type>& node_at_new_index
-	//			= get_node_at(new_index);
-	//		
-	//		
-	//		get_node_at(old_prev_index).next_index()
-	//			= new_index;
-	//		
-	//		node_at_new_index.data = to_insert;
-	//		node_at_new_index.next_index() = index;
-	//		node_at_new_index.prev_index() = old_prev_index;
-	//		
-	//		node_at_index.prev_index() = new_index;
-	//		
-	//		return new_index;
-	//	}
-	//	
-	//	//return index;
-	//	//return new_index;
-	//}
 	inline s32 insert_before( s32 index, const type& to_insert )
 	{
 		return the_list_backend.insert_before( index, &to_insert );
@@ -1760,89 +1540,7 @@ public:		// functions
 	}
 	
 	
-	//s32 insert_after_old( s32 index, const type& to_insert )
-	//{
-	//	//s32 old_prev_index = get_node_at(index)
-	//	//	.prev_index();
-	//	s32 old_next_index = get_node_at(index)
-	//		.next_index();
-	//	
-	//	//s32 new_index = get_free_list_backend().pop();
-	//	s32 new_index = get_free_list_backend().peek_top();
-	//	get_free_list_backend().pop();
-	//	
-	//	// Special code is used for inserting an element at the end of the
-	//	// list.
-	//	if ( old_next_index == -1 )
-	//	{
-	//		get_node_at(index).next_index() = new_index;
-	//		
-	//		get_node_at(new_index).data = to_insert;
-	//		get_node_at(new_index).next_index() = -1;
-	//		get_node_at(new_index).prev_index() = index;
-	//	}
-	//	else
-	//	{
-	//		get_node_at(old_next_index).prev_index()
-	//			= new_index;
-	//		
-	//		get_node_at(index).next_index() = new_index;
-	//		
-	//		get_node_at(new_index).data = to_insert;
-	//		get_node_at(new_index).next_index() 
-	//			= old_next_index;
-	//		get_node_at(new_index).prev_index() = index;
-	//	}
-	//	
-	//	//return index;
-	//	return new_index;
-	//}
 	
-	//s32 insert_after_old_2( s32 index, const type& to_insert )
-	//	__attribute__((noinline))
-	//{
-	//	////s32 old_prev_index = get_node_at(index)
-	//	////	.prev_index();
-	//	//s32 old_next_index = get_node_at(index)
-	//	//	.next_index();
-	//	node<type>& node_at_index = get_node_at(index);
-	//	const s32 old_next_index = node_at_index
-	//		.next_index();
-	//	
-	//	//s32 new_index = get_free_list_backend().pop();
-	//	const s32 new_index = get_free_list_backend().peek_top();
-	//	get_free_list_backend().pop();
-	//	
-	//	
-	//	node_at_index.next_index() = new_index;
-	//	
-	//	node<type>& node_at_new_index 
-	//		= get_node_at(new_index);
-	//	
-	//	s32 new_next_index = -1;
-	//	
-	//	// Special code is used for inserting an element at the end of the
-	//	// list.
-	//	//if ( old_next_index < 0 )
-	//	//{
-	//	//	
-	//	//}
-	//	//else
-	//	if ( old_next_index >= 0 )
-	//	{
-	//		get_node_at(old_next_index).prev_index() 
-	//			= new_index;
-	//		new_next_index = old_next_index;
-	//	}
-	//	
-	//	node_at_new_index.data = to_insert;
-	//	node_at_new_index.next_index() = new_next_index;
-	//	node_at_new_index.prev_index() = index;
-	//	
-	//	
-	//	//return index;
-	//	return new_index;
-	//}
 	inline s32 insert_after( s32 index, const type& to_insert )
 	{
 		return the_list_backend.insert_after( index, &to_insert );
@@ -1864,8 +1562,8 @@ public:		// functions
 	
 	
 	s32 insertion_sort_old_2() 
-		__attribute__((_text_hot_section,noinline))
-		//__attribute__((noinline))
+		//__attribute__((_text_hot_section,noinline))
+		__attribute__((noinline))
 	{
 		s32& the_front_index = get_front_index();
 		
@@ -1879,10 +1577,6 @@ public:		// functions
 			return the_front_index;
 		}
 		
-		//s32 temp_front_index = -1;
-		//list_backend<type> sorted_list( &temp_front_index, 
-		//	node_array, the_free_list_backend_ptr, 
-		//	total_num_nodes );
 		externally_allocated_list<type> sorted_list( node_array, 
 			the_free_list_backend_ptr, get_total_num_nodes() );
 		
@@ -2342,10 +2036,6 @@ template< typename type, u32 total_num_nodes, u32 num_lists >
 class sa_array_of_lists
 {
 public:		// variables
-	//array< externally_allocated_sa_list< type, total_num_nodes >, 
-	//	num_lists > the_array;
-	//array< node<type>, total_num_nodes > node_array;
-	
 	externally_allocated_list<type> ea_list_array[num_lists];
 	node<type> node_array[total_num_nodes];
 	
@@ -2355,23 +2045,8 @@ public:		// functions
 	
 	inline sa_array_of_lists()
 	{
-		//for ( auto& the_list : easa_list_array )
-		//{
-		//	the_list.set_node_array(node_array.data());
-		//	the_list.set_ptr_to_the_free_list(&the_free_list);
-		//	the_list.init_the_list_backend();
-		//}
-		
-		//for ( s32 i=(s32)get_node_array_size()-1; i>=0; --i )
-		//{
-		//	node_array[i] = node<type>();
-		//}
-		
 		for ( s32 i=(s32)get_array_size()-1; i>=0; --i )
 		{
-			//the_array[i].set_node_array(node_array);
-			//the_array[i].set_ptr_to_the_free_list(&the_free_list);
-			//the_array[i].init_the_list_backend();
 			ea_list_array[i].init( node_array,
 				&the_free_list.the_sa_free_list_backend, 
 				get_total_num_nodes() );
