@@ -20,7 +20,7 @@
 #define muffin_sprite_classes_hpp
 
 
-#include "../../gfx/the_powerup_gfx.h"
+#include "../../../gfx/the_powerup_gfx.h"
 
 class muffin_sprite : public sprite
 {

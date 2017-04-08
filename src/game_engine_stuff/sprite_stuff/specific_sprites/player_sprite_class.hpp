@@ -19,10 +19,10 @@
 #ifndef player_sprite_class_hpp
 #define player_sprite_class_hpp
 
-#include "sprite_class.hpp"
-#include "../gfx_manager_class.hpp"
+#include "../sprite_class.hpp"
+#include "../../gfx_manager_class.hpp"
 
-#include "../../gfx/sherwin_gfx.h"
+#include "../../../gfx/sherwin_gfx.h"
 
 class player_sprite : public sprite
 {

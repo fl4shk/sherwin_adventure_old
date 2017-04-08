@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include "sprite_type_stuff.hpp"
-#include "sprite_type_includes.hpp"
+#include "../sprite_type_stuff.hpp"
+#include "../sprite_type_includes.hpp"
 
 const sprite_const_params muffin_sprite::the_const_params
 = {

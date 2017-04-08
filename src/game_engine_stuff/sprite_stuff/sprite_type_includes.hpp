@@ -24,20 +24,20 @@
 #include "sprite_class.hpp"
 
 // The Player
-#include "player_sprite_class.hpp"
+#include "specific_sprites/player_sprite_class.hpp"
 
 // Powerup Sprites
-#include "waffle_sprite_class.hpp"
-#include "muffin_sprite_classes.hpp"
+#include "specific_sprites/waffle_sprite_class.hpp"
+#include "specific_sprites/muffin_sprite_classes.hpp"
 
 // Warp Sprites
-#include "door_sprite_class.hpp"
+#include "specific_sprites/door_sprite_class.hpp"
 
 // Enemy Sprites
-#include "snow_golem_sprite_class.hpp"
+#include "specific_sprites/snow_golem_sprite_class.hpp"
 
 // Secondary Sprites
-#include "player_pickaxe_sprite_class.hpp"
+#include "specific_sprites/player_pickaxe_sprite_class.hpp"
 
 
 #endif		// sprite_type_includes_hpp

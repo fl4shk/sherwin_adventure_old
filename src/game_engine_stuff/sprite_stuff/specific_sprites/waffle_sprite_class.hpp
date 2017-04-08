@@ -19,7 +19,7 @@
 #ifndef waffle_sprite_class_hpp
 #define waffle_sprite_class_hpp
 
-#include "../../gfx/the_powerup_gfx.h"
+#include "../../../gfx/the_powerup_gfx.h"
 
 
 class waffle_sprite : public sprite

@@ -19,7 +19,7 @@
 #ifndef door_sprite_stuff_class_hpp
 #define door_sprite_stuff_class_hpp
 
-#include "../../gfx/the_door_gfx.h"
+#include "../../../gfx/the_door_gfx.h"
 
 
 class sprite;

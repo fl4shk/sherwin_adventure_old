@@ -16,11 +16,11 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include "sprite_type_stuff.hpp"
-#include "sprite_type_includes.hpp"
-#include "sprite_class.hpp"
+#include "../sprite_type_stuff.hpp"
+#include "../sprite_type_includes.hpp"
+#include "../sprite_class.hpp"
 
-#include "sprite_manager_class.hpp"
+#include "../sprite_manager_class.hpp"
 
 
 // Graphics constants

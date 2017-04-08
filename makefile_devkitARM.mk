@@ -30,7 +30,11 @@
 MUSIC_DIRS:=src/audio
 
 # ARM or THUMB Mode C++ Code
-CXX_DIRS:=$(CURDIR) src src/borrowed_stuff src/general_utility_stuff src/game_engine_stuff src/game_engine_stuff/block_stuff src/game_engine_stuff/level_stuff src/game_engine_stuff/sprite_stuff src/gba_specific_stuff src/test_level src/audio src/gfx
+CXX_DIRS:=$(CURDIR) src src/borrowed_stuff src/general_utility_stuff \
+	src/game_engine_stuff src/game_engine_stuff/block_stuff \
+	src/game_engine_stuff/level_stuff src/game_engine_stuff/sprite_stuff \
+	src/game_engine_stuff/sprite_stuff/specific_sprites \
+	src/gba_specific_stuff src/test_level src/audio src/gfx \
 
 # ARM or THUMB Mode ASM Code
 S_DIRS:=$(CXX_DIRS)

@@ -16,47 +16,61 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef player_pickaxe_sprite_class_hpp
-#define player_pickaxe_sprite_class_hpp
+#ifndef snow_golem_sprite_class_hpp
+#define snow_golem_sprite_class_hpp
 
+#include "../../../gfx/the_golem_enemy_gfx.h"
 
-#include "../../gfx/the_16x16_secondary_sprites_gfx.h"
-
-class player_pickaxe_sprite : public sprite
+class snow_golem_sprite : public sprite
 {
 public:		// enums
 	// "Global" graphics frames
 	enum frame
 	{
-		frm_angle_0 = 0,
-		frm_angle_23 = 1, 
-		frm_angle_45 = 2,
-		frm_angle_90 = 3,
-	} alignas(4);
+		// Standing frame
+		frm_stand = 0, 
+		
+		// Snowball throwing frames
+		frm_throw_0 = 1, 
+		frm_throw_1 = 2,
+		frm_throw_2 = 3,
+	} _alignas_regular;
 	
 	// This enum allows multiple frame_slot's to be represented by the same
 	// frame.
 	enum frame_slot
 	{
-		frm_slot_angle_0,
-		frm_slot_angle_23, 
-		frm_slot_angle_45,
-		frm_slot_angle_90,
+		// Standing
+		frm_slot_stand,
+		
+		// Throwing a snowball
+		frm_slot_throw_0,
+		frm_slot_throw_1, 
+		frm_slot_throw_2, 
 		
 		// lim_frm_slot is the amount of frame_slot's.  It is
 		// automatically updated by the compiler.
 		lim_frm_slot,
-	} alignas(4);
-	
+	} _alignas_regular;
 	
 	// These are used to access misc_data_u and misc_data_s
 	enum udata_index
 	{
-		udi_curr_frame_slot
-	} alignas(4);
+		udi_frame_stuff_initalized,
+		
+		udi_curr_frame_slot,
+	} _alignas_regular;
 	
+	enum sdata_index
+	{
+		sdi_frame_change_timer,
+	} _alignas_regular;
 	
 public:		// variables
+	
+	static constexpr u32 frame_change_timer_start = 10;
+	
+	
 	// Graphics constants
 	
 	// A constant array that is intended to be indexed with a frame_slot,
@@ -69,16 +83,17 @@ public:		// variables
 	
 	
 public:		// functions
-	inline player_pickaxe_sprite( bool facing_left )
+	inline snow_golem_sprite( bool facing_left )
 	{
 		shared_constructor_code_part_1();
 		shared_constructor_code_part_2(facing_left);
 		shared_constructor_code_part_3();
 	}
 	
-	virtual void update_part_1();
 	
-	//virtual void update_part_2( bg_point& camera_pos,
+	
+	virtual void update_part_2();
+	//virtual void update_part_3( bg_point& camera_pos,
 	//	const vec2_u32& the_level_size_2d ) __attribute__((_iwram_code));
 	
 	inline virtual const sprite_const_params& get_const_params() const
@@ -86,35 +101,13 @@ public:		// functions
 		return the_const_params;
 	}
 	
+	
 	// Graphics stuff
 	//virtual const u32 get_curr_tile_slot();
-	
 	virtual const u32 get_curr_relative_tile_slot();
 	
-	
-	// Physics and collision stuff
-	virtual void block_collision_stuff() __attribute__((_iwram_code));
-	
-	
-protected:		// functions
-	
-	virtual void block_coll_response_left_16x16_old
-		( const block_coll_result& lt_coll_result, 
-		const block_coll_result& lb_coll_result );
-	virtual void block_coll_response_top_16x16_old
-		( const block_coll_result& tl_coll_result,
-		const block_coll_result& tm_coll_result,
-		const block_coll_result& tr_coll_result );
-	virtual void block_coll_response_right_16x16_old
-		( const block_coll_result& rt_coll_result,
-		const block_coll_result& rb_coll_result );
-	virtual void non_slope_block_coll_response_bot_16x16_old
-		( const block_coll_result& bl_coll_result,
-		const block_coll_result& bm_coll_result, 
-		const block_coll_result& br_coll_result );
-	
-	
+
 } __attribute__((_align4));
 
 
-#endif		// player_pickaxe_sprite_class_hpp
+#endif		// snow_golem_sprite_class_hpp

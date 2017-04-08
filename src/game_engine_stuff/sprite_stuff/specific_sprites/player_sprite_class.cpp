@@ -16,19 +16,19 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include "sprite_type_stuff.hpp"
-#include "sprite_type_includes.hpp"
+#include "../sprite_type_stuff.hpp"
+#include "../sprite_type_includes.hpp"
 
-#include "sprite_class.hpp"
+#include "../sprite_class.hpp"
 
-#include "../../gba_specific_stuff/button_stuff.hpp"
-#include "../../gba_specific_stuff/interrupt_stuff.hpp"
-#include "../level_stuff/active_level_manager_class.hpp"
-#include "sprite_manager_class.hpp"
+#include "../../../gba_specific_stuff/button_stuff.hpp"
+#include "../../../gba_specific_stuff/interrupt_stuff.hpp"
+#include "../../level_stuff/active_level_manager_class.hpp"
+#include "../sprite_manager_class.hpp"
 
-#include "../gfx_manager_class.hpp"
+#include "../../gfx_manager_class.hpp"
 
-#include "sprite_allocator_class.hpp"
+#include "../sprite_allocator_class.hpp"
 
 const sprite_const_params player_sprite::the_const_params
 = {
