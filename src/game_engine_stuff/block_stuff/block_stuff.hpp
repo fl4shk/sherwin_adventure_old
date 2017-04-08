@@ -273,14 +273,14 @@ class block;
 extern std::array< block_base_stuff*, lim_bt > block_stuff_array
 	__attribute__((_ewram));
 
-#include "air_block_stuff_class.hpp"
-#include "log_block_stuff_class.hpp"
-#include "wood_block_stuff_classes.hpp"
-#include "eyes_block_stuff_classes.hpp"
-#include "exclam_block_stuff_classes.hpp"
-#include "dud_block_stuff_class.hpp"
-#include "grass_and_dirt_block_stuff_classes.hpp"
-#include "day_sky_and_night_sky_block_classes.hpp"
+#include "specific_blocks/air_block_stuff_class.hpp"
+#include "specific_blocks/log_block_stuff_class.hpp"
+#include "specific_blocks/wood_block_stuff_classes.hpp"
+#include "specific_blocks/eyes_block_stuff_classes.hpp"
+#include "specific_blocks/exclam_block_stuff_classes.hpp"
+#include "specific_blocks/dud_block_stuff_class.hpp"
+#include "specific_blocks/grass_and_dirt_block_stuff_classes.hpp"
+#include "specific_blocks/day_sky_and_night_sky_block_stuff_classes.hpp"
 
 
 #define X(name) extern name the_##name __attribute__((_ewram));
