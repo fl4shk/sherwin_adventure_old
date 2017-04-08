@@ -503,9 +503,9 @@ public:		// functions
 	
 	inline virtual void set_initial_shape_size()
 	{
-		set_shape_size(get_the_initial_shape_size());
+		set_shape_size(get_initial_shape_size());
 	}
-	inline virtual const oam_entry::shape_size get_the_initial_shape_size() 
+	inline virtual const oam_entry::shape_size get_initial_shape_size() 
 		const
 	{
 		return get_const_params().the_initial_shape_size;
@@ -513,20 +513,20 @@ public:		// functions
 	
 	inline virtual void set_initial_coll_box_stuff()
 	{
-		the_coll_box.size = get_the_initial_coll_box_size();
-		cb_pos_offset = get_the_initial_cb_pos_offset();
+		the_coll_box.size = get_initial_coll_box_size();
+		cb_pos_offset = get_initial_cb_pos_offset();
 	}
 	
-	inline virtual const vec2_f24p8& get_the_initial_coll_box_size() const
+	inline virtual const vec2_f24p8& get_initial_coll_box_size() const
 	{
 		return get_const_params().the_initial_coll_box_size;
 	}
-	inline virtual const vec2_f24p8& get_the_initial_cb_pos_offset() const
+	inline virtual const vec2_f24p8& get_initial_cb_pos_offset() const
 	{
 		return get_const_params().the_initial_cb_pos_offset;
 	}
 	
-	inline virtual const vec2_f24p8& get_the_initial_in_level_pos_offset()
+	inline virtual const vec2_f24p8& get_initial_in_level_pos_offset()
 		const
 	{
 		return get_const_params().the_initial_in_level_pos_offset;

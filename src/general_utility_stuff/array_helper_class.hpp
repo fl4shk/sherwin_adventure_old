@@ -66,7 +66,7 @@ public:			// functions
 	}
 	
 	
-	const type* get_the_array() const
+	const type* get_array() const
 	{
 		return the_array;
 	}

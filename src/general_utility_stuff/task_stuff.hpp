@@ -75,11 +75,11 @@ public:		// functions
 	{
 	}
 	
-	inline task_priority get_the_task_prio() const
+	inline task_priority get_task_prio() const
 	{
 		return the_task_prio;
 	}
-	inline void set_the_task_prio( task_priority n_the_task_prio )
+	inline void set_task_prio( task_priority n_the_task_prio )
 	{
 		the_task_prio = clamp_task_prio(n_the_task_prio);
 	}

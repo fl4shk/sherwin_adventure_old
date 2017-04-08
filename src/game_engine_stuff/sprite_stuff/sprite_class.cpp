@@ -145,9 +145,9 @@ void sprite::shared_constructor_code_part_2
 {
 	shared_constructor_code_part_2(facing_left);
 	//in_level_pos.curr = s_in_level_pos 
-	//	- get_the_initial_in_level_pos_offset();
+	//	- get_initial_in_level_pos_offset();
 	set_curr_in_level_pos( s_in_level_pos 
-		- get_the_initial_in_level_pos_offset() );
+		- get_initial_in_level_pos_offset() );
 	
 	update_f24p8_positions();
 	update_on_screen_pos(camera_pos_pc_pair);
@@ -161,9 +161,9 @@ void sprite::shared_constructor_code_part_2
 	prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
 {
 	shared_constructor_code_part_2(facing_left);
-	//in_level_pos = s_in_level_pos - get_the_initial_in_level_pos_offset();
+	//in_level_pos = s_in_level_pos - get_initial_in_level_pos_offset();
 	set_curr_in_level_pos( s_in_level_pos 
-		- get_the_initial_in_level_pos_offset() );
+		- get_initial_in_level_pos_offset() );
 	
 	
 	update_f24p8_positions();

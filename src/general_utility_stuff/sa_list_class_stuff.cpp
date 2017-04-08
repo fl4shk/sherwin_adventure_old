@@ -81,10 +81,10 @@ void list_backend::internal_func_allocate_and_assign_to_node
 	// doesn't add it to the list.
 	
 	
-	index = get_the_free_list_backend().peek_top_and_pop();
+	index = get_free_list_backend().peek_top_and_pop();
 	
-	//index = get_the_free_list_backend().peek_top();
-	//get_the_free_list_backend().pop();
+	//index = get_free_list_backend().peek_top();
+	//get_free_list_backend().pop();
 	node = get_node_contents_at(index);
 	
 	assign_to_node_data( node, n_data, can_move_value );
@@ -101,11 +101,11 @@ void list_backend::internal_func_allocate_and_assign_to_node
 //	s32 old_front_index = the_front_index;
 //	
 //	//sa_free_list_backend& the_free_list_backend 
-//	//	= get_the_free_list_backend();
+//	//	= get_free_list_backend();
 //	
 //	//the_front_index = the_free_list_backend.peek_top();
 //	//the_free_list_backend.pop();
-//	the_front_index = get_the_free_list_backend().peek_top_and_pop();
+//	the_front_index = get_free_list_backend().peek_top_and_pop();
 //	
 //	
 //	//node<type>& the_front_node 
@@ -183,7 +183,7 @@ s32 list_backend::internal_func_move_unlinked_node_to_front
 	s32 old_front_index = the_front_index;
 	
 	//sa_free_list_backend& the_free_list_backend 
-	//	= get_the_free_list_backend();
+	//	= get_free_list_backend();
 	//
 	//the_front_index = the_free_list_backend.peek_top();
 	//the_free_list_backend.pop();
@@ -236,11 +236,11 @@ s32 list_backend::internal_func_move_unlinked_node_to_front
 //	s32 old_front_index = the_front_index;
 //	
 //	////sa_free_list_backend& the_free_list_backend 
-//	////	= get_the_free_list_backend();
+//	////	= get_free_list_backend();
 //	//
 //	////the_front_index = the_free_list_backend.peek_top();
 //	////the_free_list_backend.pop();
-//	//the_front_index = get_the_free_list_backend().peek_top_and_pop();
+//	//the_front_index = get_free_list_backend().peek_top_and_pop();
 //	
 //	the_front_index = to_move_index;
 //	
@@ -304,10 +304,10 @@ s32 list_backend::internal_func_move_unlinked_node_to_front
 //		
 //		const s32 old_prev_index = node_at_index.prev_index();
 //		
-//		//const s32 new_index = get_the_free_list_backend()
+//		//const s32 new_index = get_free_list_backend()
 //		//	.peek_top();
-//		//get_the_free_list_backend().pop();
-//		const s32 new_index = get_the_free_list_backend()
+//		//get_free_list_backend().pop();
+//		const s32 new_index = get_free_list_backend()
 //			.peek_top_and_pop();
 //		
 //		
@@ -389,10 +389,10 @@ s32 list_backend::internal_func_move_unlinked_node_before
 //	const s32 old_next_index = node_at_index.next_index();
 //	
 //	
-//	////s32 new_index = get_the_free_list_backend().pop();
-//	//const s32 new_index = get_the_free_list_backend().peek_top();
-//	//get_the_free_list_backend().pop();
-//	const s32 new_index = get_the_free_list_backend().peek_top_and_pop();
+//	////s32 new_index = get_free_list_backend().pop();
+//	//const s32 new_index = get_free_list_backend().peek_top();
+//	//get_free_list_backend().pop();
+//	const s32 new_index = get_free_list_backend().peek_top_and_pop();
 //	
 //	
 //	node_at_index.next_index() = new_index;
@@ -442,7 +442,7 @@ s32 list_backend::internal_func_move_unlinked_node_after
 	s16& node_to_move_after_next_index = node_to_move_after.next_index();
 	const s32 old_next_index = node_to_move_after_next_index;
 	
-	//const s32 new_index = get_the_free_list_backend().peek_top_and_pop();
+	//const s32 new_index = get_free_list_backend().peek_top_and_pop();
 	//node_at_index.next_index() = new_index;
 	node_to_move_after_next_index = to_move_index;
 	
@@ -521,7 +521,7 @@ s32 list_backend::internal_func_move_unlinked_node_after
 //	//node_at_index = node<type>();
 //	
 //	
-//	get_the_free_list_backend().push(index);
+//	get_free_list_backend().push(index);
 //	
 //	if ( index == old_front_index && index != old_back_index )
 //	{
@@ -619,7 +619,7 @@ void* list_backend::internal_func_unlink_at( s32 index,
 	
 	
 	
-	//get_the_free_list_backend().push(index);
+	//get_free_list_backend().push(index);
 	
 	if ( index == old_front_index && index != old_back_index )
 	{
@@ -1202,7 +1202,7 @@ s32 list_backend::merge_sort_via_array()
 			}
 			
 			//subarr_insertion_sort( subarr_offset, subarr_size );
-			get_the_extras_fp_group().get_subarr_insertion_sort_fp()
+			get_extras_fp_group().get_subarr_insertion_sort_fp()
 				( arr_a, subarr_offset, subarr_size );
 			
 		}

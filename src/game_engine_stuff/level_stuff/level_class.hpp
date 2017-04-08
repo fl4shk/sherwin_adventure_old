@@ -244,7 +244,7 @@ public:		// functions
 		return actual_num_sublevels;
 	}
 	
-	inline const sublevel_pointer* get_the_sublevels() const
+	inline const sublevel_pointer* get_sublevels() const
 	{
 		return the_sublevels.data();
 	}

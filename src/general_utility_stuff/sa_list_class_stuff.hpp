@@ -256,7 +256,7 @@ public:		// classes
 		{
 			return pos;
 		}
-		inline index_type get_the_index_type() const
+		inline index_type get_index_type() const
 		{
 			return the_index_type;
 		}
@@ -297,7 +297,7 @@ public:		// classes
 				return false;
 			}
 			
-			if ( get_the_index_type() != other.get_the_index_type() )
+			if ( get_index_type() != other.get_index_type() )
 			{
 				return true;
 			}
@@ -335,7 +335,7 @@ public:		// classes
 				const size_t updated_pos = get_corrected_other_pos
 					( get_pos() + 1 );
 				
-				if ( get_the_index_type() == index_type::it_head )
+				if ( get_index_type() == index_type::it_head )
 				{
 					the_index_type = index_type::it_other;
 					pos = updated_pos; 
@@ -931,12 +931,12 @@ protected:		// functions
 	inline void init( list_backend& to_copy )
 	{
 		init( to_copy.get_node_array(), 
-			to_copy.get_the_free_list_backend_ptr(),
+			to_copy.get_free_list_backend_ptr(),
 			to_copy.get_total_num_nodes(), 
 			to_copy.get_specific_type_size(),
 			to_copy.get_whole_node_size(), 
 			
-			to_copy.get_the_extras_fp_group() );
+			to_copy.get_extras_fp_group() );
 	}
 	
 	
@@ -975,22 +975,22 @@ protected:		// functions
 		return node_array;
 	}
 	
-	inline sa_free_list_backend* get_the_free_list_backend_ptr()
+	inline sa_free_list_backend* get_free_list_backend_ptr()
 	{
 		return the_free_list_backend_ptr;
 	}
-	inline const sa_free_list_backend* get_the_free_list_backend_ptr()
+	inline const sa_free_list_backend* get_free_list_backend_ptr()
 		const
 	{
 		return the_free_list_backend_ptr;
 	}
-	inline sa_free_list_backend& get_the_free_list_backend()
+	inline sa_free_list_backend& get_free_list_backend()
 	{
-		return *get_the_free_list_backend_ptr();
+		return *get_free_list_backend_ptr();
 	}
-	inline const sa_free_list_backend& get_the_free_list_backend() const
+	inline const sa_free_list_backend& get_free_list_backend() const
 	{
-		return *get_the_free_list_backend_ptr();
+		return *get_free_list_backend_ptr();
 	}
 	
 	inline u32 get_total_num_nodes() const
@@ -1006,7 +1006,7 @@ protected:		// functions
 		return whole_node_size;
 	}
 	
-	inline const extras_fp_group& get_the_extras_fp_group()
+	inline const extras_fp_group& get_extras_fp_group()
 	{
 		return the_extras_fp_group;
 	}
@@ -1045,12 +1045,12 @@ protected:		// functions
 	
 	inline void* get_node_data_at( uintptr_t addr )
 	{
-		return get_the_extras_fp_group().get_get_node_data_fp()
+		return get_extras_fp_group().get_get_node_data_fp()
 			(reinterpret_cast<void*>(addr));
 	}
 	inline vec2_s16* get_index_pair_at( uintptr_t addr )
 	{
-		return get_the_extras_fp_group().get_get_index_pair_fp()
+		return get_extras_fp_group().get_get_index_pair_fp()
 			(reinterpret_cast<void*>(addr));
 	}
 	inline s16& get_next_index_at( uintptr_t addr )
@@ -1073,7 +1073,7 @@ protected:		// functions
 		
 		node_contents ret;
 		
-		get_the_extras_fp_group().get_conv_node_to_contents_fp()( &ret, 
+		get_extras_fp_group().get_conv_node_to_contents_fp()( &ret, 
 			reinterpret_cast<void*>(node_addr) );
 		
 		return ret;
@@ -1084,13 +1084,13 @@ protected:		// functions
 	inline void copy_node_data( void* dst_node_data, 
 		const void* src_node_data )
 	{
-		get_the_extras_fp_group().get_specific_type_copy_fp()
+		get_extras_fp_group().get_specific_type_copy_fp()
 			( dst_node_data, const_cast<void*>(src_node_data) );
 	}
 	inline void move_node_data( void* dst_node_data, 
 		const void* src_node_data )
 	{
-		get_the_extras_fp_group().get_specific_type_move_fp()
+		get_extras_fp_group().get_specific_type_move_fp()
 			( dst_node_data, const_cast<void*>(src_node_data) );
 	}
 	
@@ -1122,31 +1122,31 @@ protected:		// functions
 	inline void call_specific_type_swap_func( void* node_a_data, 
 		void* node_b_data )
 	{
-		get_the_extras_fp_group().get_specific_type_swap_fp()
+		get_extras_fp_group().get_specific_type_swap_fp()
 			( node_a_data, node_b_data );
 	}
 	inline u32 call_specific_type_less_func( void* node_a_data, 
 		void* node_b_data )
 	{
-		return get_the_extras_fp_group().get_specific_type_less_fp()
+		return get_extras_fp_group().get_specific_type_less_fp()
 			( node_a_data, node_b_data );
 	}
 	inline u32 call_specific_type_greater_func( void* node_a_data, 
 		void* node_b_data )
 	{
-		return get_the_extras_fp_group().get_specific_type_greater_fp()
+		return get_extras_fp_group().get_specific_type_greater_fp()
 			( node_a_data, node_b_data );
 	}
 	inline int call_specific_type_qscmp_func( const void* node_a_data,
 		const void* node_b_data )
 	{
-		return get_the_extras_fp_group().get_specific_type_qscmp_fp()
+		return get_extras_fp_group().get_specific_type_qscmp_fp()
 			( node_a_data, node_b_data );
 	}
 	
 	inline void call_insertion_sort_inner_loop_func( s32& index_low )
 	{
-		get_the_extras_fp_group().get_insertion_sort_inner_loop_fp()
+		get_extras_fp_group().get_insertion_sort_inner_loop_fp()
 			( get_node_array(), &index_low );
 	}
 	
@@ -1347,14 +1347,14 @@ protected:		// functions
 	// when using this function!
 	inline void* unlink_at_with_dealloc( s32 index )
 	{
-		get_the_free_list_backend().push(index);
+		get_free_list_backend().push(index);
 		
 		return internal_func_unlink_at(index);
 	}
 	
 	inline void erase_at( s32 index )
 	{
-		get_the_extras_fp_group().get_specific_type_reset_fp()
+		get_extras_fp_group().get_specific_type_reset_fp()
 			(unlink_at_with_dealloc(index));
 	}
 	
@@ -1504,11 +1504,11 @@ public:		// functions
 		return node_array;
 	}
 	
-	inline sa_free_list_backend& get_the_free_list_backend()
+	inline sa_free_list_backend& get_free_list_backend()
 	{
 		return *the_free_list_backend_ptr;
 	}
-	inline const sa_free_list_backend& get_the_free_list_backend() const
+	inline const sa_free_list_backend& get_free_list_backend() const
 	{
 		return *the_free_list_backend_ptr;
 	}
@@ -1557,9 +1557,9 @@ public:		// functions
 	//	// If there's nothing in the list
 	//	if ( get_front_index() == -1 )
 	//	{
-	//		get_front_index() = get_the_free_list_backend()
+	//		get_front_index() = get_free_list_backend()
 	//			.peek_top();
-	//		get_the_free_list_backend().pop();
+	//		get_free_list_backend().pop();
 	//		
 	//		front().data = to_push;
 	//		
@@ -1572,9 +1572,9 @@ public:		// functions
 	//	else
 	//	{
 	//		s32 old_front_index = get_front_index();
-	//		get_front_index() = get_the_free_list_backend()
+	//		get_front_index() = get_free_list_backend()
 	//			.peek_top();
-	//		get_the_free_list_backend().pop();
+	//		get_free_list_backend().pop();
 	//		
 	//		get_node_at(old_front_index).prev_index() 
 	//			= get_front_index();
@@ -1598,7 +1598,7 @@ public:		// functions
 	//	s32 old_front_index = the_front_index;
 	//	
 	//	sa_free_list_backend& the_free_list_backend 
-	//		= get_the_free_list_backend();
+	//		= get_free_list_backend();
 	//	
 	//	the_front_index = the_free_list_backend.peek_top();
 	//	the_free_list_backend.pop();
@@ -1680,9 +1680,9 @@ public:		// functions
 	//	}
 	//	else
 	//	{
-	//		//s32 new_index = get_the_free_list_backend().pop();
-	//		s32 new_index = get_the_free_list_backend().peek_top();
-	//		get_the_free_list_backend().pop();
+	//		//s32 new_index = get_free_list_backend().pop();
+	//		s32 new_index = get_free_list_backend().peek_top();
+	//		get_free_list_backend().pop();
 	//		
 	//		get_node_at(old_prev_index).next_index()
 	//			= new_index;
@@ -1725,9 +1725,9 @@ public:		// functions
 	//		const s32 old_prev_index 
 	//			= node_at_index.prev_index();
 	//		
-	//		const s32 new_index = get_the_free_list_backend()
+	//		const s32 new_index = get_free_list_backend()
 	//			.peek_top();
-	//		get_the_free_list_backend().pop();
+	//		get_free_list_backend().pop();
 	//		
 	//		
 	//		node<type>& node_at_new_index
@@ -1767,9 +1767,9 @@ public:		// functions
 	//	s32 old_next_index = get_node_at(index)
 	//		.next_index();
 	//	
-	//	//s32 new_index = get_the_free_list_backend().pop();
-	//	s32 new_index = get_the_free_list_backend().peek_top();
-	//	get_the_free_list_backend().pop();
+	//	//s32 new_index = get_free_list_backend().pop();
+	//	s32 new_index = get_free_list_backend().peek_top();
+	//	get_free_list_backend().pop();
 	//	
 	//	// Special code is used for inserting an element at the end of the
 	//	// list.
@@ -1809,9 +1809,9 @@ public:		// functions
 	//	const s32 old_next_index = node_at_index
 	//		.next_index();
 	//	
-	//	//s32 new_index = get_the_free_list_backend().pop();
-	//	const s32 new_index = get_the_free_list_backend().peek_top();
-	//	get_the_free_list_backend().pop();
+	//	//s32 new_index = get_free_list_backend().pop();
+	//	const s32 new_index = get_free_list_backend().peek_top();
+	//	get_free_list_backend().pop();
 	//	
 	//	
 	//	node_at_index.next_index() = new_index;
@@ -1895,7 +1895,7 @@ public:		// functions
 			//i=get_node_at(i).next_index() )
 		{
 			
-			//get_the_free_list_backend().debug_prs32();
+			//get_free_list_backend().debug_prs32();
 			
 			s32 index_low = i;
 			
@@ -2367,7 +2367,7 @@ public:		// functions
 		//	node_array[i] = node<type>();
 		//}
 		
-		for ( s32 i=(s32)get_the_array_size()-1; i>=0; --i )
+		for ( s32 i=(s32)get_array_size()-1; i>=0; --i )
 		{
 			//the_array[i].set_node_array(node_array);
 			//the_array[i].set_ptr_to_the_free_list(&the_free_list);
@@ -2380,7 +2380,7 @@ public:		// functions
 		
 	}
 	
-	constexpr inline u32 get_the_array_size() const
+	constexpr inline u32 get_array_size() const
 	{
 		return get_num_lists();
 	}

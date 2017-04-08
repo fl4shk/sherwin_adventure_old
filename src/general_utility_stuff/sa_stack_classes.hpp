@@ -68,11 +68,11 @@ public:		// functions
 		u32 s_type_size, u32 s_num_elems );
 	sa_pod_stack_backend( const sa_pod_stack_backend& to_copy );
 	
-	inline u8* get_the_array_u8()
+	inline u8* get_array_u8()
 	{
 		return the_array_u8;
 	}
-	inline const u8* get_the_array_u8() const
+	inline const u8* get_array_u8() const
 	{
 		return the_array_u8;
 	}
@@ -141,60 +141,60 @@ public:		// functions
 	
 	void init();
 	
-	inline u32 get_the_const_type_size() const
+	inline u32 get_const_type_size() const
 	{
 		return the_const_type_size;
 	}
 	
-	//inline int* get_the_array()
+	//inline int* get_array()
 	//{
-	//	int* ret = (int*)get_the_array_u8();
+	//	int* ret = (int*)get_array_u8();
 	//	return ret;
 	//}
-	//inline const int* get_the_array() const
+	//inline const int* get_array() const
 	//{
-	//	int* ret = (int*)get_the_array_u8();
+	//	int* ret = (int*)get_array_u8();
 	//	return ret;
 	//}
-	inline s16* get_the_array()
+	inline s16* get_array()
 	{
-		s16* ret = (s16*)get_the_array_u8();
+		s16* ret = (s16*)get_array_u8();
 		return ret;
 	}
-	inline const s16* get_the_array() const
+	inline const s16* get_array() const
 	{
-		s16* ret = (s16*)get_the_array_u8();
+		s16* ret = (s16*)get_array_u8();
 		return ret;
 	}
 	
 	inline void push( s32 to_push )
 	{
-		get_the_array()[get_next_index()++] = (s16)to_push;
+		get_array()[get_next_index()++] = (s16)to_push;
 	}
 	//inline void pop() override
 	//{
-	//	get_the_array()[get_next_index()-1] = -1;
+	//	get_array()[get_next_index()-1] = -1;
 	//	
 	//	sa_pod_stack_backend::pop();
 	//}
 	
 	inline s16& peek_top()
 	{
-		return get_the_array()[get_next_index()-1];
-		//return get_the_array()[get_next_index()];
+		return get_array()[get_next_index()-1];
+		//return get_array()[get_next_index()];
 	}
 	inline const s32 peek_top() const
 	{
-		return get_the_array()[get_next_index()-1];
-		//return get_the_array()[get_next_index()];
+		return get_array()[get_next_index()-1];
+		//return get_array()[get_next_index()];
 	}
 	//inline s16& peek_next()
 	//{
-	//	return get_the_array()[get_next_index()-2];
+	//	return get_array()[get_next_index()-2];
 	//}
 	//inline const s32 peek_next() const
 	//{
-	//	return get_the_array()[get_next_index()-2];
+	//	return get_array()[get_next_index()-2];
 	//}
 	
 	
@@ -244,13 +244,13 @@ public:		// functions
 		next_index_ptr = s_next_index_ptr;
 	}
 	
-	type* get_the_array()
+	type* get_array()
 	{
 		return the_array_helper.the_array;
 	}
-	const type* get_the_array() const
+	const type* get_array() const
 	{
-		return the_array_helper.get_the_array();
+		return the_array_helper.get_array();
 	}
 	
 	inline u32& get_next_index()
@@ -270,7 +270,7 @@ public:		// functions
 	
 	void push( const type& to_push )
 	{
-		get_the_array()[get_next_index()++] = to_push;
+		get_array()[get_next_index()++] = to_push;
 	}
 	
 	void pop()
@@ -280,20 +280,20 @@ public:		// functions
 	
 	inline type peek_top()
 	{
-		return get_the_array()[get_next_index()-1];
+		return get_array()[get_next_index()-1];
 	}
 	inline const type peek_top() const
 	{
-		return get_the_array()[get_next_index()-1];
+		return get_array()[get_next_index()-1];
 	}
 	
 	//inline type peek_next()
 	//{
-	//	return get_the_array()[get_next_index()-2];
+	//	return get_array()[get_next_index()-2];
 	//}
 	//inline const type peek_next() const
 	//{
-	//	return get_the_array()[get_next_index()-2];
+	//	return get_array()[get_next_index()-2];
 	//}
 	
 } __attribute__((_align4));

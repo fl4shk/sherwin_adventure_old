@@ -194,7 +194,7 @@ public:		// functions
 	
 	static inline const sublevel_pointer& get_curr_sublevel_ptr()
 	{
-		return the_current_level_ptr->get_the_sublevels()
+		return the_current_level_ptr->get_sublevels()
 			[the_current_active_sublevel_index];
 	}
 	

@@ -83,11 +83,11 @@ protected:		// functions
 		return node_array;
 	}
 	
-	inline sa_free_list<total_num_nodes>& get_the_free_list()
+	inline sa_free_list<total_num_nodes>& get_free_list()
 	{
 		return the_free_list;
 	}
-	inline const sa_free_list<total_num_nodes>& get_the_free_list() const
+	inline const sa_free_list<total_num_nodes>& get_free_list() const
 	{
 		return the_free_list;
 	}
@@ -238,13 +238,13 @@ public:		// functions
 		return base::get_node_array();
 	}
 	
-	inline sa_free_list<total_num_nodes>& get_the_free_list()
+	inline sa_free_list<total_num_nodes>& get_free_list()
 	{
-		return base::get_the_free_list();
+		return base::get_free_list();
 	}
-	inline const sa_free_list<total_num_nodes>& get_the_free_list() const
+	inline const sa_free_list<total_num_nodes>& get_free_list() const
 	{
-		return base::get_the_free_list();
+		return base::get_free_list();
 	}
 	constexpr inline u32 get_node_array_size() const
 	{
@@ -394,13 +394,13 @@ public:		// functions
 		return base::get_node_array();
 	}
 	
-	inline sa_free_list<total_num_nodes>& get_the_free_list()
+	inline sa_free_list<total_num_nodes>& get_free_list()
 	{
-		return base::get_the_free_list();
+		return base::get_free_list();
 	}
-	inline const sa_free_list<total_num_nodes>& get_the_free_list() const
+	inline const sa_free_list<total_num_nodes>& get_free_list() const
 	{
-		return base::get_the_free_list();
+		return base::get_free_list();
 	}
 	constexpr inline u32 get_node_array_size() const
 	{

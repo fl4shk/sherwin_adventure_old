@@ -95,11 +95,11 @@
 //	}
 //	
 //	
-//	inline origin_corner get_the_origin_corner() const
+//	inline origin_corner get_origin_corner() const
 //	{
 //		return the_origin_corner;
 //	}
-//	inline void set_the_origin_corner( origin_corner n_the_origin_corner )
+//	inline void set_origin_corner( origin_corner n_the_origin_corner )
 //	{
 //		the_origin_corner = n_the_origin_corner;
 //	}
@@ -319,7 +319,7 @@ public:		// enums
 	
 protected:		// variables
 	// the_origin_corner is protected so that it can only be changed by
-	// set_the_origin_corner(), which updates origin_corner_pos as needed.
+	// set_origin_corner(), which updates origin_corner_pos as needed.
 	origin_corner the_origin_corner;
 	u32 angle_in_degrees;
 	
@@ -356,13 +356,13 @@ public:		// functions
 	}
 	
 	
-	inline origin_corner get_the_origin_corner() const
+	inline origin_corner get_origin_corner() const
 	{
 		return the_origin_corner;
 	}
 	
 	// This is needed so that origin_corner_pos can be properly updated
-	inline void set_the_origin_corner
+	inline void set_origin_corner
 		( origin_corner n_the_origin_corner )
 	{
 		the_origin_corner = n_the_origin_corner;

@@ -76,10 +76,10 @@ u32 active_level::the_current_active_sublevel_index;
 
 //const sublevel_pointer& active_level::get_curr_sublevel_ptr()
 //{
-//	return the_current_level_ptr->get_the_sublevels()
+//	return the_current_level_ptr->get_sublevels()
 //		[the_current_active_sublevel_index];
 //	//// temporary
-//	//return the_current_level_ptr->get_the_sublevels()[0];
+//	//return the_current_level_ptr->get_sublevels()[0];
 //}
 
 

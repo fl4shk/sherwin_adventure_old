@@ -102,7 +102,7 @@ public:		// functions
 	{
 		sprite_manager::init_horiz_sublevel_sprite_ipg_lists
 			( active_level::get_curr_sublevel_ptr()
-			.sprite_ipg_arr_arr_helper.get_the_array(),
+			.sprite_ipg_arr_arr_helper.get_array(),
 			active_level::get_curr_sublevel_ptr()
 			.sprite_ipg_arr_arr_helper.get_size() );
 	}

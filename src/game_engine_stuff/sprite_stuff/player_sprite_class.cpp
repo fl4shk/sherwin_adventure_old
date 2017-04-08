@@ -222,9 +222,9 @@ void player_sprite::shared_constructor_code_part_2
 {
 	sprite::shared_constructor_code_part_2(facing_left);
 	
-	//in_level_pos = s_in_level_pos - get_the_initial_in_level_pos_offset();
+	//in_level_pos = s_in_level_pos - get_initial_in_level_pos_offset();
 	set_curr_in_level_pos( s_in_level_pos 
-		- get_the_initial_in_level_pos_offset() );
+		- get_initial_in_level_pos_offset() );
 	
 	
 	update_f24p8_positions();
@@ -1329,7 +1329,7 @@ void player_sprite::sprite_interaction_reponse( sprite& the_other_sprite,
 				
 				const sublevel_entrance* the_dest_sle_ptr
 					= &( active_level::the_current_level_ptr
-					->get_the_sublevels()[the_other_sprite.the_sprite_ipg
+					->get_sublevels()[the_other_sprite.the_sprite_ipg
 					->extra_param_1]
 					.sublevel_entrance_arr_arr_helper.the_array
 					[the_other_sprite.the_sprite_ipg->extra_param_0] );
@@ -1347,13 +1347,13 @@ void player_sprite::sprite_interaction_reponse( sprite& the_other_sprite,
 				}
 				
 				//in_level_pos.x = the_dest_sle_ptr->in_level_pos.x 
-				//	- get_the_initial_in_level_pos_offset().x;
+				//	- get_initial_in_level_pos_offset().x;
 				//in_level_pos.y = the_dest_sle_ptr->in_level_pos.y
-				//	- get_the_initial_in_level_pos_offset().y;
+				//	- get_initial_in_level_pos_offset().y;
 				set_curr_in_level_pos_x( the_dest_sle_ptr->in_level_pos.x 
-					- get_the_initial_in_level_pos_offset().x );
+					- get_initial_in_level_pos_offset().x );
 				set_curr_in_level_pos_y( the_dest_sle_ptr->in_level_pos.y
-					- get_the_initial_in_level_pos_offset().y );
+					- get_initial_in_level_pos_offset().y );
 				
 				update_f24p8_positions();
 				update_on_screen_pos(camera_pos_pc_pair);

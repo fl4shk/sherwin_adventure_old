@@ -82,12 +82,12 @@ void door_sprite::shared_constructor_code_part_2( bool facing_left )
 //	//return active_level::the_current_sublevel_ptr_ptr
 //	//	->sublevel_entrance_arr_arr_helper.the_array
 //	//	[the_door.the_sprite_ipg->extra_param_0];
-//	//return active_level::the_current_level_ptr->get_the_sublevels()
+//	//return active_level::the_current_level_ptr->get_sublevels()
 //	//	[active_level::the_current_active_sublevel_index]
 //	//	->sublevel_entrance_arr_arr_helper.the_array
 //	//	[the_door.the_sprite_ipg->extra_param_0];
 //	
-//	return active_level::get_the_current_sublevel_ptr()
+//	return active_level::get_current_sublevel_ptr()
 //		.sublevel_entrance_arr_arr_helper.the_array
 //		[the_door.the_sprite_ipg->extra_param_0];
 //}
