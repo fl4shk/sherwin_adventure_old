@@ -189,7 +189,7 @@ $(CXX_ASMOUTS) : $(ASMOUTDIR)/%.s : %.cpp
 
 .PHONY : clean
 clean :
-	rm -rfv $(OBJDIR) $(DEPDIR) $(ASMOUTDIR) $(PREPROCDIR) $(PROJ) tags *.taghl gmon.out
+	rm -rfv $(OBJDIR) $(DEPDIR) $(ASMOUTDIR) $(PREPROCDIR) $(PROJ).elf $(PROJ).gba tags *.taghl gmon.out
 
 # Flags for make disassemble*
 DISASSEMBLE_FLAGS:=$(DISASSEMBLE_BASE_FLAGS) -C -d 
