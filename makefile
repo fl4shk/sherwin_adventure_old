@@ -1,1 +1,1 @@
-./makefile_devkitARM.mk
+makefile_gba.mk
