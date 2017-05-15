@@ -16,9 +16,9 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include "../level_stuff/active_level_class.hpp"
-#include "../../general_utility_stuff/misc_types.hpp"
-#include "../sprite_stuff/sprite_manager_class.hpp"
+#include "../../level_stuff/active_level_class.hpp"
+#include "../../../general_utility_stuff/misc_types.hpp"
+#include "../../sprite_stuff/sprite_manager_class.hpp"
 
 const block_stuff_const_params
 	wood_block_stuff::the_const_params

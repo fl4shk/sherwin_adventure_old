@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include "../level_stuff/active_level_class.hpp"
-#include "../../general_utility_stuff/misc_types.hpp"
+#include "../../level_stuff/active_level_class.hpp"
+#include "../../../general_utility_stuff/misc_types.hpp"
 
 const block_stuff_const_params
 	log_block_stuff::the_const_params

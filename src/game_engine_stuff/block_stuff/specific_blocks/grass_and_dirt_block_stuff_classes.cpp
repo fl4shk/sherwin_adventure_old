@@ -16,7 +16,7 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include "block_stuff.hpp"
+#include "../block_stuff.hpp"
 
 const block_stuff_const_params grass_single_block_stuff::the_const_params
 = {

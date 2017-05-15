@@ -3,6 +3,7 @@
 # Separate each entry by spaces.
 SHARED_SRC_DIRS:=src src/borrowed_stuff src/general_utility_stuff \
 	src/game_engine_stuff src/game_engine_stuff/block_stuff \
+	src/game_engine_stuff/block_stuff/specific_blocks \
 	src/game_engine_stuff/level_stuff src/game_engine_stuff/sprite_stuff \
 	src/game_engine_stuff/sprite_stuff/specific_sprites \
 	src/gba_specific_stuff src/test_level src/audio src/gfx
@@ -17,7 +18,8 @@ S_DIRS:=$(SHARED_SRC_DIRS)
 # be generated
 DEBUG:=yeah do debug
 
-DEBUG_OPTIMIZATION_LEVEL:=-O0
+#DEBUG_OPTIMIZATION_LEVEL:=-O0
+DEBUG_OPTIMIZATION_LEVEL:=-Og
 REGULAR_OPTIMIZATION_LEVEL:=-O2
 
 ALWAYS_DEBUG_SUFFIX:=_debug
