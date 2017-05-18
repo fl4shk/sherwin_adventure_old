@@ -146,6 +146,8 @@ public:		// variables and constants
 	// and accuracy reasons.
 	static constexpr u32 bg_fade_curr_component_arr_size 
 		= num_colors_in_8_palettes;
+	
+	// -- Switch to linear_memory_allocator --
 	static fixed24p8 bg_fade_curr_red_arr
 		[bg_fade_curr_component_arr_size] __attribute__((_ewram)),
 	bg_fade_curr_green_arr
@@ -155,6 +157,8 @@ public:		// variables and constants
 
 	static constexpr u32 obj_fade_curr_component_arr_size 
 		= num_colors_in_8_palettes;
+	
+	// -- Switch to linear_memory_allocator --
 	static fixed24p8 obj_fade_curr_red_arr
 		[obj_fade_curr_component_arr_size] __attribute__((_ewram)),
 	obj_fade_curr_green_arr
@@ -166,6 +170,8 @@ public:		// variables and constants
 	// Fade out/in step amounts.
 	static constexpr u32 bg_fade_step_amount_arr_size 
 		= num_colors_in_8_palettes;
+	
+	// -- Switch to linear_memory_allocator --
 	static fixed24p8 bg_fade_red_step_amount_arr
 		[bg_fade_step_amount_arr_size] __attribute__((_ewram)),
 	bg_fade_green_step_amount_arr
@@ -175,6 +181,8 @@ public:		// variables and constants
 	
 	static constexpr u32 obj_fade_step_amount_arr_size 
 		= num_colors_in_8_palettes;
+	
+	// -- Switch to linear_memory_allocator --
 	static fixed24p8 obj_fade_red_step_amount_arr
 		[obj_fade_step_amount_arr_size] __attribute__((_ewram)),
 	obj_fade_green_step_amount_arr
@@ -192,14 +200,17 @@ public:		// variables and constants
 	static constexpr u32 max_num_32x32_metatiles = 64;
 	
 	// BG palette stuff
+	// -- Switch to linear_memory_allocator --
 	static u16 bg_pal_mirror[bg_pal_ram_size_in_u16]
 		__attribute__((_ewram));
 	
 	// Sprite palette stuff
+	// -- Switch to linear_memory_allocator --
 	static u16 obj_pal_mirror[obj_pal_ram_size_in_u16] 
 		__attribute__((_ewram));
 	
 	// HUD stuff
+	// -- Switch to linear_memory_allocator --
 	static u32 hud_vram_as_tiles_start_offset __attribute__((_ewram));
 	
 public:		// functions

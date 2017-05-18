@@ -53,11 +53,14 @@ class level;
 class active_level
 {
 public:		// static variables
+	// -- Switch to linear_memory_allocator --
 	static block blank_block __attribute__((_ewram));
 	
 	// This will eat up 64 kiB of EWRAM.
 	//static constexpr u32 block_data_array_size = 0x4000;
 	static constexpr u32 block_data_array_size = 16384;
+	
+	// -- Switch to linear_memory_allocator --
 	static block block_data_array[block_data_array_size]
 		__attribute__((_ewram));
 	
@@ -68,6 +71,7 @@ public:		// static variables
 	// the sublevels within a level
 	static constexpr u32 max_num_sublevels = max_num_sublevels_per_level;
 	static constexpr u32 persistent_block_data_array_size = 2048;
+	// -- Switch to linear_memory_allocator --
 	static u16 persistent_block_data_arrays[max_num_sublevels]
 		[persistent_block_data_array_size] __attribute__((_ewram));
 	
@@ -103,11 +107,12 @@ public:		// static variables
 	//	horiz_sublevel_xsize > horiz_sublevel_sprite_ipg_lists
 	//	__attribute__((_ewram));
 	
+	// -- Switch to linear_memory_allocator --
 	static sa_list_stuff::sa_array_of_lists< sprite_init_param_group,
 		max_num_sprite_ipgs_per_sublevel, horiz_sublevel_xsize > 
 		horiz_sublevel_sprite_ipg_lists __attribute__((_ewram));
 	
-	// 
+	// -- Switch to linear_memory_allocator --
 	static scr_entry bg0_screenblock_mirror[screenblock_size] 
 		__attribute__((_ewram));
 	

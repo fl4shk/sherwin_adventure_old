@@ -42,6 +42,7 @@ class active_level_manager
 {
 public:		// variables
 	
+	// -- Switch to linear_memory_allocator --
 	static u32 converted_block_tile_ids_0[lim_bt],
 		converted_block_tile_ids_1[lim_bt],
 		converted_block_tile_ids_2[lim_bt],

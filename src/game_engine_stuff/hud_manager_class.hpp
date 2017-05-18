@@ -29,8 +29,11 @@ class hud_manager
 public:		// variables
 	static bool hud_was_generated __attribute__((_ewram));
 	
+	
+	// -- Switch to linear_memory_allocator --
 	static scr_entry bg1_screenblock_mirror[screenblock_size]
 		__attribute__((_ewram));
+	
 	
 	// bg1_screenblock_2d is in VRAM.
 	static array_csz_2d_helper< scr_entry, screenblock_xsize,

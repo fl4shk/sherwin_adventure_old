@@ -61,6 +61,7 @@ public:		// variables
 	//static std::array< sprite*, max_num_secondary_sprites > 
 	//	the_secondary_sprites;
 	
+	// -- Switch to linear_memory_allocator --
 	static sprite* the_player;
 	
 	//// The array of pointers to REGULAR active sprites, not counting
@@ -85,47 +86,59 @@ public:		// variables
 	
 	
 	// This is for speeding up allocation and deallocation
+	// -- Switch to linear_memory_allocator --
 	static s16 the_player_secondary_sprites_free_list_arr
 		[max_num_player_secondary_sprites];
+	// -- Switch to linear_memory_allocator --
 	static s16 the_secondary_sprites_free_list_arr
 		[max_num_secondary_sprites];
+	// -- Switch to linear_memory_allocator --
 	static s16 the_player_free_list_arr
 		[max_num_player_sprites];
+	// -- Switch to linear_memory_allocator --
 	static s16 the_sprites_free_list_arr
 		[max_num_regular_sprites];
+	// -- Switch to linear_memory_allocator --
 	static s16 the_pseudo_bg_sprites_free_list_arr
 		[max_num_pseudo_bg_sprites];
 	
 	
 	// Temporarily use regular arrays to make debugging easier.
 	// An array of player secondary sprites to allocate from
+	// -- Switch to linear_memory_allocator --
 	static sprite the_player_secondary_sprites
 		[max_num_player_secondary_sprites];
 	
 	// An array of secondary sprites to allocate from, other than the ones
 	// used by the_player 
+	// -- Switch to linear_memory_allocator --
 	static sprite the_secondary_sprites[max_num_secondary_sprites];
 	
 	// An array of a single player to allocate from
+	// -- Switch to linear_memory_allocator --
 	static sprite the_allocatable_player[max_num_player_sprites];
 	
 	// The array of REGULAR active sprites, not counting the_player.
+	// -- Switch to linear_memory_allocator --
 	static sprite the_sprites[max_num_regular_sprites]
 		__attribute__((_iwram));
 	
 	// The array of pseudo-background sprites, which are ONLY checked for
 	// intersection with the_player (and possibly player secondary sprites)
+	// -- Switch to linear_memory_allocator --
 	static sprite the_pseudo_bg_sprites[max_num_pseudo_bg_sprites];
 	
 	
 	
 	
 	// The sprite_allocators
+	// -- Switch to linear_memory_allocator --
 	static sprite_allocator the_player_secondary_sprites_allocator,
 		the_secondary_sprites_allocator, the_player_sprite_allocator, 
 		the_sprites_allocator, the_pseudo_bg_sprites_allocator;
 	
 	// Active sprites
+	// -- Switch to linear_memory_allocator --
 	static u32 num_active_player_secondary_sprites, num_active_sprites, 
 		num_active_secondary_sprites, num_active_pseudo_bg_sprites;
 	static std::array< sprite*, max_num_player_secondary_sprites >
