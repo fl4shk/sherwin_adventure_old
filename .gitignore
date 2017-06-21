@@ -1,5 +1,4 @@
-*.swp
-*.swo
+*.sw[po]
 deps/*
 objs/*
 objs_dis/*
@@ -26,11 +25,10 @@ util/*/preprocs_debug/*
 util/*/*.elf
 util/*/*.bin
 util/*/*.hexdump
-disassembly_all_2.armasm
+*.armasm
 symbols.txt
 linker_map.txt
 copyright_text_thing.txt
-disassembly*.armasm
 *.sav*
 *.ss*
 *.gdb_history*
