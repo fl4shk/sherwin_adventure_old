@@ -1,7 +1,7 @@
 #!/bin/bash
 
 orig="$1"
-converted=$(echo "$orig" | sed -r 's/(^|_)([a-z])/\U\2/g')
+converted=$(echo "$orig" | sed -e 's/\(.*\)/\U\1/')
 
 temp='s/'"$orig"'/'"$converted"'/g'
 
