@@ -1,9 +1,10 @@
 #!/bin/bash
 
 orig="$1"
+orig_modded='\<'"$orig"'\>'
 converted=$(echo "$orig" | sed -e 's/\(.*\)/\U\1/')
 
-temp='s/'"$orig"'/'"$converted"'/g'
+temp='s/'"$orig_modded"'/'"$converted"'/g'
 
 echo "Using this:  \"$temp\""
 
