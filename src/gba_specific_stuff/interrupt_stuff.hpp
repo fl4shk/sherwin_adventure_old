@@ -27,13 +27,13 @@
 
 
 // The Interrupt Enable Register (R/W)
-#define reg_ie *((vu16*)(MEM_IO + 0x0200))
+#define REG_IE *((vu16*)(MEM_IO + 0x0200))
 
 // The Interrupt Request Flags/IRQ Acknowledge Register (R/W)
-#define reg_if *((vu16*)(MEM_IO + 0x0202))
+#define REG_IF *((vu16*)(MEM_IO + 0x0202))
 
 // The Interrupt Master Enable Register (R/W)
-#define reg_ime *((vu32*)(MEM_IO + 0x0208))
+#define REG_IME *((vu32*)(MEM_IO + 0x0208))
 
 
 enum intr_type
@@ -58,27 +58,27 @@ enum intr_type
 
 
 /* ---- Defines FOR the flags of IE and IF ---- */
-#define irq_vblank ( 0x1 << intr_vblank )
-#define irq_hblank ( 0x1 << intr_hblank )
-#define irq_vcount ( 0x1 << intr_vcount )
+#define IRQ_VBLANK ( 0x1 << intr_vblank )
+#define IRQ_HBLANK ( 0x1 << intr_hblank )
+#define IRQ_VCOUNT ( 0x1 << intr_vcount )
 
-#define irq_timer0 ( 0x1 << intr_timer0 )
-#define irq_timer1 ( 0x1 << intr_timer1 )
-#define irq_timer2 ( 0x1 << intr_timer2 )
-#define irq_timer3 ( 0x1 << intr_timer3 )
+#define IRQ_TIMER0 ( 0x1 << intr_timer0 )
+#define IRQ_TIMER1 ( 0x1 << intr_timer1 )
+#define IRQ_TIMER2 ( 0x1 << intr_timer2 )
+#define IRQ_TIMER3 ( 0x1 << intr_timer3 )
 
-#define irq_com ( 0x1 << intr_com )
+#define IRQ_COM ( 0x1 << intr_com )
 
-#define irq_dma0 ( 0x1 << intr_dma0 )
-#define irq_dma1 ( 0x1 << intr_dma1 )
-#define irq_dma2 ( 0x1 << intr_dma2 )
-#define irq_dma3 ( 0x1 << intr_dma3 )
+#define IRQ_DMA0 ( 0x1 << intr_dma0 )
+#define IRQ_DMA1 ( 0x1 << intr_dma1 )
+#define IRQ_DMA2 ( 0x1 << intr_dma2 )
+#define IRQ_DMA3 ( 0x1 << intr_dma3 )
 
-#define irq_keypad ( 0x1 << intr_keypad )
+#define IRQ_KEYPAD ( 0x1 << intr_keypad )
 
-#define irq_gamepak ( 0x1 << intr_gamepak )
+#define IRQ_GAMEPAK ( 0x1 << intr_gamepak )
 
-#define irq_mask ( (u16)(0x3fff) )
+#define IRQ_MASK ( (u16)(0x3fff) )
 
 
 
@@ -91,12 +91,12 @@ enum intr_type
 /* ---- Inline Functions FOR IME ---- */
 inline void ime_disable()
 {
-	reg_ime = 0x0000;
+	REG_IME = 0x0000;
 }
 
 inline void ime_enable()
 {
-	reg_ime = 0x0001;
+	REG_IME = 0x0001;
 }
 /* ---- End of Inline Functions FOR IME ---- */
 
@@ -106,12 +106,12 @@ typedef void (*isr_funcptr)(void);
 
 // This is a pointer to the main ISR (an ARM mode function btw), which MUST
 // be set properly FOR interrupts to work!
-#define reg_isr_main *((volatile isr_funcptr*)(MEM_IWRAM + 0x7ffc))
+#define REG_ISR_MAIN *((volatile isr_funcptr*)(MEM_IWRAM + 0x7ffc))
 
 // Some BIOS calls require interrupts, which have to be acknowledged by
 // using this register (I still think it's weird that there are registers
 // in what I thought was IWRAM).
-#define reg_ifbios *((vu16*)(MEM_IWRAM + 0x7ff8))
+#define REG_IFBIOS *((vu16*)(MEM_IWRAM + 0x7ff8))
 
 
 
@@ -137,8 +137,8 @@ void irq_dummy() __attribute__((_IWRAM_CODE));
 
 void isr_main() __attribute__((_IWRAM_CODE,_TARGET_ARM));
 
-//#define isr_main_counter *((vu16*)(MEM_EWRAM + 0x8000))
-//#define isr_main_arr0 ((vu16*)(MEM_EWRAM + 0x8002))
+//#define ISR_MAIN_COUNTER *((vu16*)(MEM_EWRAM + 0x8000))
+//#define ISR_MAIN_ARR0 ((vu16*)(MEM_EWRAM + 0x8002))
 //static const u32 isr_main_arr0_size = 0x20;
 
 

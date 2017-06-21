@@ -771,8 +771,8 @@ void sprite_manager::initial_sprite_spawning_at_start_of_level
 	//init_the_sprite_arrays();
 	init_the_sprite_arrays();
 	
-	//next_debug_u32 = (vu32)(player_ipg);
-	//next_debug_u32 = player_ipg->type;
+	//NEXT_DEBUG_U32 = (vu32)(player_ipg);
+	//NEXT_DEBUG_U32 = player_ipg->type;
 	//nocash_soft_break();
 	
 	initial_sprite_spawning_shared_code(camera_pos_pc_pair);
@@ -810,8 +810,8 @@ void sprite_manager::initial_sprite_spawning_at_intra_sublevel_warp
 	//init_the_sprite_arrays();
 	init_the_sprite_arrays();
 	
-	//next_debug_u32 = (vu32)(player_ipg);
-	//next_debug_u32 = player_ipg->type;
+	//NEXT_DEBUG_U32 = (vu32)(player_ipg);
+	//NEXT_DEBUG_U32 = player_ipg->type;
 	//nocash_soft_break();
 	
 	initial_sprite_spawning_shared_code(camera_pos_pc_pair);

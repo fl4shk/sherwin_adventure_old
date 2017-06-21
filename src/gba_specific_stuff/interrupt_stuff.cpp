@@ -32,25 +32,25 @@ extern "C"
 	// This is FOR maxmod compatibility
 	void irqEnable( int mask )
 	{
-		//reg_ime = 0;
+		//REG_IME = 0;
 		ime_disable();
 		
-		if ( mask & irq_vblank )
+		if ( mask & IRQ_VBLANK )
 		{
 			REG_DISPSTAT |= DSTAT_VBL_IRQ;
 		}
-		if ( mask & irq_hblank )
+		if ( mask & IRQ_HBLANK )
 		{
 			REG_DISPSTAT |= DSTAT_HBL_IRQ;
 		}
-		if ( mask & irq_vcount )
+		if ( mask & IRQ_VCOUNT )
 		{
 			REG_DISPSTAT |= DSTAT_VCT_IRQ;
 		}
 		
-		reg_ie |= mask;
+		REG_IE |= mask;
 		
-		//reg_ime = 1;
+		//REG_IME = 1;
 		ime_enable();
 	}
 	
@@ -62,59 +62,59 @@ extern "C"
 		
 		switch ( mask )
 		{
-			case irq_vblank:
+			case IRQ_VBLANK:
 				isr_table[intr_vblank] = (void (*)())func_addr;
 				break;
 				
-			case irq_hblank:
+			case IRQ_HBLANK:
 				isr_table[intr_hblank] = (void (*)())func_addr;
 				break;
 				
-			case irq_vcount:
+			case IRQ_VCOUNT:
 				isr_table[intr_vcount] = (void (*)())func_addr;
 				break;
 				
-			case irq_timer0:
+			case IRQ_TIMER0:
 				isr_table[intr_timer0] = (void (*)())func_addr;
 				break;
 			
-			case irq_timer1:
+			case IRQ_TIMER1:
 				isr_table[intr_timer1] = (void (*)())func_addr;
 				break;
 			
-			case irq_timer2:
+			case IRQ_TIMER2:
 				isr_table[intr_timer2] = (void (*)())func_addr;
 				break;
 			
-			case irq_timer3:
+			case IRQ_TIMER3:
 				isr_table[intr_timer3] = (void (*)())func_addr;
 				break;
 			
-			case irq_com:
+			case IRQ_COM:
 				isr_table[intr_com] = (void (*)())func_addr;
 				break;
 			
-			case irq_dma0:
+			case IRQ_DMA0:
 				isr_table[intr_dma0] = (void (*)())func_addr;
 				break;
 			
-			case irq_dma1:
+			case IRQ_DMA1:
 				isr_table[intr_dma1] = (void (*)())func_addr;
 				break;
 			
-			case irq_dma2:
+			case IRQ_DMA2:
 				isr_table[intr_dma2] = (void (*)())func_addr;
 				break;
 			
-			case irq_dma3:
+			case IRQ_DMA3:
 				isr_table[intr_dma3] = (void (*)())func_addr;
 				break;
 			
-			case irq_keypad:
+			case IRQ_KEYPAD:
 				isr_table[intr_keypad] = (void (*)())func_addr;
 				break;
 			
-			case irq_gamepak:
+			case IRQ_GAMEPAK:
 				isr_table[intr_gamepak] = (void (*)())func_addr;
 				break;
 			
@@ -133,7 +133,7 @@ void irq_dummy()
 void irq_init()
 {
 	
-	// Clear reg_ime (FOR safety or something)
+	// Clear REG_IME (FOR safety or something)
 	ime_disable();
 	
 	FOR ( u32 i=0; i<intr_amount; ++i )
@@ -141,34 +141,34 @@ void irq_init()
 		isr_table[i] = &irq_dummy;
 	}
 	
-	// Clear reg_ie (FOR safety or something)
-	reg_ie &= ~(irq_mask);
+	// Clear REG_IE (FOR safety or something)
+	REG_IE &= ~(IRQ_MASK);
 	
 	
-	// Now we enable VBlank Interrupts in reg_ie
-	reg_ie |= irq_vblank;
+	// Now we enable VBlank Interrupts in REG_IE
+	REG_IE |= IRQ_VBLANK;
 	
 	// To do this, we also have to enable VBlank IRQs in REG_DISPSTAT
 	REG_DISPSTAT |= DSTAT_VBL_IRQ;
 	
-	//irqEnable(irq_vblank);
+	//irqEnable(IRQ_VBLANK);
 	
-	//irqSet( irq_vblank, mmVBlank );
-	//irqSet( irq_vblank, reinterpret_cast<isr_funcptr>
+	//irqSet( IRQ_VBLANK, mmVBlank );
+	//irqSet( IRQ_VBLANK, reinterpret_cast<isr_funcptr>
 	//	(&maxmod_vblank_updater_func) );
 	
-	//irqSet( irq_vblank, (u32)mmVBlank );
-	//irqEnable(irq_vblank);
+	//irqSet( IRQ_VBLANK, (u32)mmVBlank );
+	//irqEnable(IRQ_VBLANK);
 	//mmSetVBlankHandler( reinterpret_cast<void*>
 	//	(&maxmod_vblank_updater_func) );
 	
 	
 	// We will use isr_main() as the primary Interrupt Service Routine
 	
-	reg_isr_main = isr_main;
+	REG_ISR_MAIN = isr_main;
 	
 	
-	// Set reg_ime
+	// Set REG_IME
 	ime_enable();
 	
 }
@@ -181,24 +181,24 @@ void isr_main()
 {
 	// Before we leave this function, we have to acknowledge that VBlank
 	// IRQ was serviced.
-	if ( reg_if & irq_vblank )
+	if ( REG_IF & IRQ_VBLANK )
 	{
 		//mmFrame();
 		isr_table[intr_vblank]();
 		
 		// Acknowledge the VBlank interrupt.
-		reg_ifbios = irq_vblank;
-		reg_if = irq_vblank;
+		REG_IFBIOS = IRQ_VBLANK;
+		REG_IF = IRQ_VBLANK;
 	}
 	
 	
-	if ( reg_if & irq_timer0 )
+	if ( REG_IF & IRQ_TIMER0 )
 	{
 		isr_table[intr_timer0]();
 		
 		// Acknowledge the timer 0 interrupt.
-		reg_ifbios = irq_timer0;
-		reg_if = irq_timer0;
+		REG_IFBIOS = IRQ_TIMER0;
+		REG_IF = IRQ_TIMER0;
 	}
 }
 

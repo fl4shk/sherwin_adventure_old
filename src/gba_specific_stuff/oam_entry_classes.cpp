@@ -21,7 +21,7 @@
 
 // I'm tempted to put these two arrays in _IWRAM.
 oam_entry oam_mirror[oam_mirror_size];
-//oam_entry_affine* const oam_mirror_aff = (oam_entry_affine*)oam_mirror ;
+//oam_entry_affine* const OAM_MIRROR_AFF = (oam_entry_affine*)oam_mirror ;
 
 
 const vec2_u32 oam_entry::ss_to_vec2_arr[lim_ss]

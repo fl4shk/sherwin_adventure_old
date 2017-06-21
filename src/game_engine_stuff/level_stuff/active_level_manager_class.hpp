@@ -28,8 +28,8 @@
 #include "../sprite_stuff/sprite_manager_class.hpp"
 
 
-//#define bg0_sbb 31
-static constexpr u32 bg0_sbb = 28;
+//#define BG0_SBB 31
+static constexpr u32 BG0_SBB = 28;
 static constexpr u32 bg1_sbb = 29;
 static constexpr u32 bg2_sbb = 30;
 static constexpr u32 bg3_sbb = 31;

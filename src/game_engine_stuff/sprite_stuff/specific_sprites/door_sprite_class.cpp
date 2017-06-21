@@ -74,10 +74,10 @@ void door_sprite::shared_constructor_code_part_2( bool facing_left )
 //	// destination of the st_door, or at least, it's SUPPOSED to
 //	// contain the destination.
 //	
-//	//next_debug_f24p8.data = active_level::the_current_sublevel_ptr
+//	//NEXT_DEBUG_F24P8.data = active_level::the_current_sublevel_ptr
 //	//	.sublevel_entrance_arr_arr_helper.the_array
 //	//	[the_door.the_sprite_ipg->extra_param_0];
-//	//next_debug_f24p8.data = the_door.the_sprite_ipg->extra_param_0;
+//	//NEXT_DEBUG_F24P8.data = the_door.the_sprite_ipg->extra_param_0;
 //	
 //	//return active_level::the_current_sublevel_ptr_ptr
 //	//	->sublevel_entrance_arr_arr_helper.the_array

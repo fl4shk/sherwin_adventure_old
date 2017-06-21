@@ -291,7 +291,7 @@ void player_sprite::update_part_2()
 	
 	if (!swinging_pickaxe)
 	{
-		if ( key_hit(key_r) )
+		if ( key_hit(KEY_R) )
 		{
 			pickaxe_sprite_slot 
 				= sprite_manager::spawn_a_player_secondary_sprite_basic
@@ -306,7 +306,7 @@ void player_sprite::update_part_2()
 			
 		}
 		
-		//else //if (!key_hit(key_r))
+		//else //if (!key_hit(KEY_R))
 		//{
 		//	// Despawn the pickaxe if the_player is no longer swinging it.
 		//	sprite_manager::the_player_secondary_sprites
@@ -316,7 +316,7 @@ void player_sprite::update_part_2()
 		//}
 	}
 	
-	if ( key_hit(key_b) && get_curr_on_ground() )
+	if ( key_hit(KEY_B) && get_curr_on_ground() )
 	{
 		if (!run_toggle)
 		{
@@ -342,11 +342,11 @@ void player_sprite::update_part_2()
 	
 	fixed24p8 vel_x_abs = custom_abs(vel.x);
 	
-	if ( key_hit_or_held(key_left) && !key_hit_or_held(key_right) )
+	if ( key_hit_or_held(KEY_LEFT) && !key_hit_or_held(KEY_RIGHT) )
 	{
 		key_dir = -1;
 	}
-	else if ( key_hit_or_held(key_right) && !key_hit_or_held(key_left) )
+	else if ( key_hit_or_held(KEY_RIGHT) && !key_hit_or_held(KEY_LEFT) )
 	{
 		key_dir = 1;
 	}
@@ -421,7 +421,7 @@ void player_sprite::update_part_2()
 		}
 	}
 	
-	handle_jumping_stuff( key_hit(key_a), key_held(key_a) );
+	handle_jumping_stuff( key_hit(KEY_A), key_held(KEY_A) );
 	
 	
 	update_f24p8_positions();
@@ -1317,7 +1317,7 @@ void player_sprite::sprite_interaction_reponse( sprite& the_other_sprite,
 		// This should 
 		case st_door:
 			if ( coll_box_intersects_now( the_coll_box,
-				the_other_sprite.the_coll_box ) && key_hit(key_up) 
+				the_other_sprite.the_coll_box ) && key_hit(KEY_UP) 
 				&& !warped_this_frame )
 				//&& get_curr_on_ground() )
 			{

@@ -65,7 +65,7 @@ scr_entry active_level::bg0_screenblock_mirror[screenblock_size];
 
 
 array_csz_2d_helper< scr_entry, screenblock_xsize, screenblock_ysize > 
-	active_level::bg0_screenblock_2d(SE_RAM[bg0_sbb]);
+	active_level::bg0_screenblock_2d(SE_RAM[BG0_SBB]);
 array_csz_2d_helper< scr_entry, screenblock_xsize, screenblock_ysize > 
 	active_level::bg0_screenblock_mirror_2d(bg0_screenblock_mirror);
 

@@ -31,31 +31,31 @@ extern volatile prev_curr_pair<vu16> __key_state;
 
 
 // Current Key States
-#define reg_keyinput *((vu16*)(MEM_IO + 0x0130))
+#define REG_KEYINPUT *((vu16*)(MEM_IO + 0x0130))
 
 // Stuff FOR Key Interrupts
-#define reg_keycnt *((vu16*)(MEM_IO + 0x0132))
+#define REG_KEYCNT *((vu16*)(MEM_IO + 0x0132))
 
 
-#define key_a ( 0x1 << 0x0 )
-#define key_b ( 0x1 << 0x1 )
-#define key_select ( 0x1 << 0x2 )
-#define key_start ( 0x1 << 0x3 )
-#define key_right ( 0x1 << 0x4 )
-#define key_left ( 0x1 << 0x5 )
-#define key_up ( 0x1 << 0x6 )
-#define key_down ( 0x1 << 0x7 )
-#define key_r ( 0x1 << 0x8 )
-#define key_l ( 0x1 << 0x9 )
+#define KEY_A ( 0x1 << 0x0 )
+#define KEY_B ( 0x1 << 0x1 )
+#define KEY_SELECT ( 0x1 << 0x2 )
+#define KEY_START ( 0x1 << 0x3 )
+#define KEY_RIGHT ( 0x1 << 0x4 )
+#define KEY_LEFT ( 0x1 << 0x5 )
+#define KEY_UP ( 0x1 << 0x6 )
+#define KEY_DOWN ( 0x1 << 0x7 )
+#define KEY_R ( 0x1 << 0x8 )
+#define KEY_L ( 0x1 << 0x9 )
 
-#define key_mask 0x03ff
+#define KEY_MASK 0x03ff
 
 
 // Polling function
 inline void key_poll()
 {
 	__key_state.prev = __key_state.curr;
-	__key_state.curr = (~reg_keyinput) & key_mask;
+	__key_state.curr = (~REG_KEYINPUT) & KEY_MASK;
 }
 
 void key_test();

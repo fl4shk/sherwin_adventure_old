@@ -207,8 +207,8 @@ int real_main()
 		
 		
 		// This is temporary
-		//if ( key_hit_or_held(key_l) )
-		if ( key_hit(key_l) )
+		//if ( key_hit_or_held(KEY_L) )
+		if ( key_hit(KEY_L) )
 		{
 			//sprite_manager::spawn_a_sprite_basic( st_waffle,
 			//	the_player.in_level_pos.curr, gfx_manager::bgofs_mirror[0],
@@ -222,7 +222,7 @@ int real_main()
 		}
 		
 		
-		//if ( key_hit(key_select) )
+		//if ( key_hit(KEY_SELECT) )
 		//{
 		//	game_manager::fade_out_to_black(1);
 		//	
@@ -234,11 +234,11 @@ int real_main()
 		sprite_manager::spawn_sprites_if_needed
 			(gfx_manager::bgofs_mirror[0]);
 		
-		//if ( key_hit(key_l) )
+		//if ( key_hit(KEY_L) )
 		//{
 		//	--player_sprite_stuff::remaining_hp;
 		//}
-		//if ( key_hit(key_r) )
+		//if ( key_hit(KEY_R) )
 		//{
 		//	++player_sprite_stuff::remaining_hp;
 		//}

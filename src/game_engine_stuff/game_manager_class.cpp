@@ -136,7 +136,7 @@ void game_manager::title_screen_func()
 	curr_game_mode = gm_title_screen;
 	
 	irq_init();
-	//irqEnable(irq_vblank);
+	//irqEnable(IRQ_VBLANK);
 	
 	bios_wait_for_vblank();
 	
@@ -150,7 +150,7 @@ void game_manager::title_screen_func()
 	//	| DCNT_BG1_ON | DCNT_BG2_ON | DCNT_BG3_ON | DCNT_OBJ_ON;
 	
 	// Use screen base block 28 FOR BG0's Map
-	REG_BG0CNT = bgcnt_sbb(bg0_sbb);
+	REG_BG0CNT = bgcnt_sbb(BG0_SBB);
 	
 	REG_BG1CNT = bgcnt_sbb(bg1_sbb);
 	REG_BG2CNT = bgcnt_sbb(bg2_sbb);
@@ -192,15 +192,15 @@ void game_manager::title_screen_func()
 		key_poll();
 		
 		// Start the game if the Start button is hit
-		if ( key_hit(key_start) )
+		if ( key_hit(KEY_START) )
 		{
 			
 			
-			//irqSet( irq_vblank, (u32)vblank_func );
-			//irqEnable(irq_vblank);
+			//irqSet( IRQ_VBLANK, (u32)vblank_func );
+			//irqEnable(IRQ_VBLANK);
 			
-			irqSet( irq_vblank, (u32)irq_dummy );
-			irqEnable(irq_vblank);
+			irqSet( IRQ_VBLANK, (u32)irq_dummy );
+			irqEnable(IRQ_VBLANK);
 			
 			reinit_the_game();
 			break;
@@ -230,7 +230,7 @@ void game_manager::reinit_the_game()
 	//	| DCNT_BG1_ON | DCNT_BG2_ON | DCNT_BG3_ON | DCNT_OBJ_ON;
 	
 	// Use screen base block 28 FOR BG0's Map.
-	REG_BG0CNT = bgcnt_sbb(bg0_sbb) | bgcnt_prio(1);
+	REG_BG0CNT = bgcnt_sbb(BG0_SBB) | bgcnt_prio(1);
 	
 	// Give BG1 a higher display priority than BG0.
 	REG_BG1CNT = bgcnt_sbb(bg1_sbb) | bgcnt_prio(0);
@@ -281,8 +281,8 @@ void game_manager::reinit_the_game()
 	hud_manager::update_hud_in_screenblock_mirror_2d();
 	hud_manager::copy_hud_from_array_csz_2d_helper_to_vram();
 	
-	irqSet( irq_vblank, (u32)mmVBlank );
-	irqEnable(irq_vblank);
+	irqSet( IRQ_VBLANK, (u32)mmVBlank );
+	irqEnable(IRQ_VBLANK);
 	// Don't call mmInitDefault more than once.  It uses malloc(),
 	// and it apparently MaxMOD doesn't ever call free().
 	mmInitDefault( (mm_addr)practice_17_bin, 8 );

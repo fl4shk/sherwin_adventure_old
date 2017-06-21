@@ -78,7 +78,7 @@ void* sprite_allocator::allocate_sprite()
 	asm_comment("NoFreeSprite");
 	// No free sprite found, so at least put something in the debug vars.
 	// cout or printf would be nice here.
-	//next_debug_u32 = ( ( 'a' << 24 ) | ( 's' << 16 ) | ( 'p' << 8 )
+	//NEXT_DEBUG_U32 = ( ( 'a' << 24 ) | ( 's' << 16 ) | ( 'p' << 8 )
 	//	| ( 'r' << 0 ) );
 	
 	debug_arr_group::write_str_and_inc("NoFreeSprite");
@@ -156,7 +156,7 @@ void sprite_allocator::deallocate_sprite( sprite& the_sprite )
 	
 	//// No sprite found, so at least put something in the debug vars.
 	//// cout or printf would be nice here.
-	//next_debug_u32 = ( ( 'd' << 24 ) | ( 's' << 16 ) | ( 'p' << 8 )
+	//NEXT_DEBUG_U32 = ( ( 'd' << 24 ) | ( 's' << 16 ) | ( 'p' << 8 )
 	//	| ( 'r' << 0 ) );
 }
 

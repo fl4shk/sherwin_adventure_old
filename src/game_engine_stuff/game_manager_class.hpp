@@ -87,7 +87,7 @@ public:		// functions
 	// is down this frame but was not down on the previous frame.
 	static inline void pause_or_unpause_music()
 	{
-		if( key_hit(key_select) )
+		if( key_hit(KEY_SELECT) )
 		{
 			if ( mmActive() ) { mmPause(); }
 			else { mmResume(); }

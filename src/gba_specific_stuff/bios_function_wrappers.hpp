@@ -26,103 +26,103 @@
 
 /* ---- The BIOS Call Numbers ---- */
 // SoftReset
-#define bios_soft_reset 0x00
+#define BIOS_SOFT_RESET 0x00
 // RegisterRamReset
-#define bios_register_ram_reset 0x01
+#define BIOS_REGISTER_RAM_RESET 0x01
 // Halt
-#define bios_halt 0x02
+#define BIOS_HALT 0x02
 // Stop
-#define bios_stop 0x03
+#define BIOS_STOP 0x03
 // IntrWait
-#define bios_intr_wait 0x04
+#define BIOS_INTR_WAIT 0x04
 // VBlankIntrWait
-#define bios_vblank_intr_wait 0x05
+#define BIOS_VBLANK_INTR_WAIT 0x05
 // Div
-#define bios_div 0x06
+#define BIOS_DIV 0x06
 // DivArm
-#define bios_div_arm 0x07
+#define BIOS_DIV_ARM 0x07
 
 
 // Sqrt
-#define bios_sqrt 0x08
+#define BIOS_SQRT 0x08
 // ArcTan
-#define bios_arctan 0x09
+#define BIOS_ARCTAN 0x09
 // ArcTan2
-#define bios_arctan2 0x0a
+#define BIOS_ARCTAN2 0x0a
 // CPUSet
-#define bios_cpu_set 0x0b
+#define BIOS_CPU_SET 0x0b
 // CPUFastSet
-#define bios_cpu_fast_set 0x0c
+#define BIOS_CPU_FAST_SET 0x0c
 // BiosChecksum
-#define bios_bios_checksum 0x0d
+#define BIOS_BIOS_CHECKSUM 0x0d
 // BgAffineSet
-#define bios_bg_affine_set 0x0e
+#define BIOS_BG_AFFINE_SET 0x0e
 // ObjAffineSet
-#define bios_obj_affine_set 0x0f
+#define BIOS_OBJ_AFFINE_SET 0x0f
 
 
 
 // BitUnPack
-#define bios_bit_unpack 0x10
+#define BIOS_BIT_UNPACK 0x10
 // LZ77UnCompWRAM
-#define bios_lz77_uncomp_wram 0x11
+#define BIOS_LZ77_UNCOMP_WRAM 0x11
 // LZ77UnCompVRAM
-#define bios_lz77_uncomp_vram 0x12
+#define BIOS_LZ77_UNCOMP_VRAM 0x12
 // HuffUnComp
-#define bios_huff_uncomp 0x13
+#define BIOS_HUFF_UNCOMP 0x13
 // RLUnCompWRAM
-#define bios_rl_uncomp_wram 0x14
+#define BIOS_RL_UNCOMP_WRAM 0x14
 // RLUnCompVRAM
-#define bios_rl_uncomp_vram 0x15
+#define BIOS_RL_UNCOMP_VRAM 0x15
 // Diff8bitUnFilterWRAM
-#define bios_diff_8bit_unfilter_wram 0x16
+#define BIOS_DIFF_8BIT_UNFILTER_WRAM 0x16
 // Diff8bitUnFilterVRAM
-#define bios_diff_8bit_unfilter_vram 0x17
+#define BIOS_DIFF_8BIT_UNFILTER_VRAM 0x17
 
 
 
 // Diff16bitUnFilter
-#define bios_diff_16bit_unfilter 0x18
+#define BIOS_DIFF_16BIT_UNFILTER 0x18
 // SoundBiasChange
-#define bios_sound_bias_change 0x19
+#define BIOS_SOUND_BIAS_CHANGE 0x19
 // SoundDriverInit
-#define bios_sound_driver_init 0x1a
+#define BIOS_SOUND_DRIVER_INIT 0x1a
 // SoundDriverMain
-#define bios_sound_driver_main 0x1b
+#define BIOS_SOUND_DRIVER_MAIN 0x1b
 // SoundDriverMode
-#define bios_sound_driver_mode 0x1c
+#define BIOS_SOUND_DRIVER_MODE 0x1c
 // SoundDriverVSync
-#define bios_sound_driver_vsync 0x1d
+#define BIOS_SOUND_DRIVER_VSYNC 0x1d
 // SoundChannelClear
-#define bios_sound_channel_clear 0x1e
+#define BIOS_SOUND_CHANNEL_CLEAR 0x1e
 // MIDIKey2Freq
-#define bios_midi_key_2_freq 0x1f
+#define BIOS_MIDI_KEY_2_FREQ 0x1f
 
 
 // MusicPlayerOpen
-#define bios_music_player_open 0x20
+#define BIOS_MUSIC_PLAYER_OPEN 0x20
 // MusicPlayerStart
-#define bios_music_player_start 0x21
+#define BIOS_MUSIC_PLAYER_START 0x21
 // MusicPlayerStop
-#define bios_music_player_stop 0x22
+#define BIOS_MUSIC_PLAYER_STOP 0x22
 // MusicPlayerContinue
-#define bios_music_player_continue 0x23
+#define BIOS_MUSIC_PLAYER_CONTINUE 0x23
 // MusicPlayerFadeOut
-#define bios_music_player_fade_out 0x24
+#define BIOS_MUSIC_PLAYER_FADE_OUT 0x24
 // MultiBoot
-#define bios_multiboot 0x25
+#define BIOS_MULTIBOOT 0x25
 // HardReset
-#define bios_hard_reset 0x26
+#define BIOS_HARD_RESET 0x26
 // CustomHalt
-#define bios_custom_halt 0x27
+#define BIOS_CUSTOM_HALT 0x27
 
 
 // SoundDriverVSyncOff
-#define bios_sound_driver_vsync_off 0x28
+#define BIOS_SOUND_DRIVER_VSYNC_OFF 0x28
 // SoundDriverVSyncOn
-#define bios_sound_driver_vsync_on 0x29
+#define BIOS_SOUND_DRIVER_VSYNC_ON 0x29
 // GetJumpList
-#define bios_get_jump_list 0x2a
+#define BIOS_GET_JUMP_LIST 0x2a
 /* ---- End of The BIOS Call Numbers ---- */
 
 
@@ -257,7 +257,7 @@ inline u16 bios_do_sqrt( u32 r0_value )
 
 inline void bios_do_lz77_uncomp_wram( const void* src, void* dst )
 {
-	//bios_lz77_uncomp_wram
+	//BIOS_LZ77_UNCOMP_WRAM
 	
 	asm __volatile__
 	(
@@ -277,7 +277,7 @@ inline void bios_do_lz77_uncomp_wram( const void* src, volatile void* dst )
 
 inline void bios_do_lz77_uncomp_vram( const void* src, void* dst )
 {
-	//bios_lz77_uncomp_vram
+	//BIOS_LZ77_UNCOMP_VRAM
 	
 	asm __volatile__
 	(

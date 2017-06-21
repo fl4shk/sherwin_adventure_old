@@ -34,8 +34,8 @@ static const u32 oam_mirror_size = 128;
 static const u32 oam_mirror_aff_size = 32;
 
 extern oam_entry oam_mirror[oam_mirror_size];
-#define oam_mirror_aff ( (oam_entry_affine*)(oam_mirror) )
-//extern oam_entry_affine* const oam_mirror_aff;
+#define OAM_MIRROR_AFF ( (oam_entry_affine*)(oam_mirror) )
+//extern oam_entry_affine* const OAM_MIRROR_AFF;
 
 
 
