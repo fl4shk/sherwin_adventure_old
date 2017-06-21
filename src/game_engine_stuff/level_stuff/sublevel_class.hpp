@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -32,7 +32,7 @@ class sprite_init_param_group;
 // a class that contains pointers to either ASSEMBLY arrays or .bin files
 // (which would be mentioned in an assembly file)
 
-// This is a class FOR COMPRESSED sublevels in ROM
+// This is a class for COMPRESSED sublevels in ROM
 template< u32 cmp_block_data_size, u32 xsize, u32 ysize, 
 	u32 sprite_ipg_arr_size, u32 sublevel_entrance_arr_size >
 class sublevel
@@ -73,7 +73,7 @@ public:		// functions
 
 
 
-// A class FOR sublevel pointers is needed because C++ will not allow me to
+// A class for sublevel pointers is needed because C++ will not allow me to
 // have an array of pointers to sublevels that have different template
 // parameters.
 class sublevel_pointer

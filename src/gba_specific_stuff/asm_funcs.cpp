@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -21,7 +21,7 @@
 extern "C"
 {
 
-// Note that this won't work FOR copying to or from SRAM.
+// Note that this won't work for copying to or from SRAM.
 void* memcpy( void* dst, const void* src, size_t n )
 {
 	//memcpy8( dst, src, n );
@@ -35,7 +35,7 @@ void* memcpy( void* dst, const void* src, size_t n )
 	auto copy_bytes_raw = []( u8* local_dst, const u8* local_src, 
 		u32 local_n ) -> void
 	{
-		FOR ( s32 i=local_n-1; i>=0; --i )
+		for ( s32 i=local_n-1; i>=0; --i )
 		{
 			local_dst[i] = local_src[i];
 		}
@@ -71,8 +71,8 @@ void* memcpy( void* dst, const void* src, size_t n )
 			{
 				new_n -= num_unaligned_bytes;
 				
-				////FOR ( u32 i=0; i<num_unaligned_bytes; ++i )
-				//FOR ( s32 i=num_unaligned_bytes-1; i>=0; ++i )
+				////for ( u32 i=0; i<num_unaligned_bytes; ++i )
+				//for ( s32 i=num_unaligned_bytes-1; i>=0; ++i )
 				//{
 				//	((u8*)dst)[i] = ((u8*)src)[i];
 				//}
@@ -84,8 +84,8 @@ void* memcpy( void* dst, const void* src, size_t n )
 			{
 				new_n = 0;
 				
-				////FOR ( u32 i=0; i<n; ++i )
-				//FOR ( s32 i=n-1; i>=0; ++i )
+				////for ( u32 i=0; i<n; ++i )
+				//for ( s32 i=n-1; i>=0; ++i )
 				//{
 				//	((u8*)dst)[i] = ((u8*)src)[i];
 				//}
@@ -109,8 +109,8 @@ void* memcpy( void* dst, const void* src, size_t n )
 				new_src_residual_bytes_start = ( (u32)new_src ) 
 				+ ( num_words * sizeof(u32) );
 			
-			////FOR ( u32 i=0; i<num_residual_bytes; ++i )
-			//FOR ( s32 i=num_residual_bytes-1; i>=0; --i )
+			////for ( u32 i=0; i<num_residual_bytes; ++i )
+			//for ( s32 i=num_residual_bytes-1; i>=0; --i )
 			//{
 			//	((u8*)new_dst_residual_bytes_start)[i] 
 			//		= ((u8*)new_src_residual_bytes_start)[i];
@@ -128,7 +128,7 @@ void* memcpy( void* dst, const void* src, size_t n )
 	{
 		//memcpy8( dst, src, n );
 		
-		//FOR ( s32 i=n-1; i>=0; ++i )
+		//for ( s32 i=n-1; i>=0; ++i )
 		//{
 		//	((u8*)dst)[i] = ((u8*)src)[i];
 		//}
@@ -152,7 +152,7 @@ void* memset( void* dst, int c, size_t n )
 	
 	auto write_bytes_raw = [to_write]( u8* local_dst, u32 local_n ) -> void
 	{
-		//FOR ( s32 i=local_n-1; i>=0; --i )
+		//for ( s32 i=local_n-1; i>=0; --i )
 		//{
 		//	//local_dst[i] = local_src[i];
 		//	local_dst[i] = (u8)to_write;
@@ -185,8 +185,8 @@ void* memset( void* dst, int c, size_t n )
 		{
 			new_n -= num_unaligned_bytes;
 			
-			////FOR ( u32 i=0; i<num_unaligned_bytes; ++i )
-			//FOR ( s32 i=num_unaligned_bytes-1; i>=0; ++i )
+			////for ( u32 i=0; i<num_unaligned_bytes; ++i )
+			//for ( s32 i=num_unaligned_bytes-1; i>=0; ++i )
 			//{
 			//	((u8*)dst)[i] = (u8)to_write;
 			//}
@@ -196,8 +196,8 @@ void* memset( void* dst, int c, size_t n )
 		{
 			new_n = 0;
 			
-			////FOR ( u32 i=0; i<n; ++i )
-			//FOR ( s32 i=n-1; i>=0; ++i )
+			////for ( u32 i=0; i<n; ++i )
+			//for ( s32 i=n-1; i>=0; ++i )
 			//{
 			//	((u8*)dst)[i] = (u8)to_write;
 			//}
@@ -218,8 +218,8 @@ void* memset( void* dst, int c, size_t n )
 		const u32 dst_residual_bytes_start = ((u32)new_dst) + ( num_words
 			* sizeof(u32) );
 		
-		////FOR ( u32 i=0; i<num_residual_bytes; ++i )
-		//FOR ( s32 i=num_residual_bytes-1; i>=0; ++i )
+		////for ( u32 i=0; i<num_residual_bytes; ++i )
+		//for ( s32 i=num_residual_bytes-1; i>=0; ++i )
 		//{
 		//	((u8*)dst_residual_bytes_start)[i] = (u8)to_write;
 		//}
@@ -230,7 +230,7 @@ void* memset( void* dst, int c, size_t n )
 	return dst;
 }
 
-// Note that this won't work FOR copying to or from SRAM.
+// Note that this won't work for copying to or from SRAM.
 void* slower_memcpy( void* dst, const void* src, size_t n )
 {
 	//memcpy8( dst, src, n );
@@ -244,7 +244,7 @@ void* slower_memcpy( void* dst, const void* src, size_t n )
 	auto copy_bytes_raw = []( u8* local_dst, const u8* local_src, 
 		u32 local_n ) -> void
 	{
-		FOR ( s32 i=local_n-1; i>=0; --i )
+		for ( s32 i=local_n-1; i>=0; --i )
 		{
 			local_dst[i] = local_src[i];
 		}
@@ -252,7 +252,7 @@ void* slower_memcpy( void* dst, const void* src, size_t n )
 	auto copy_words_raw = []( u32* local_dst, const u32* local_src,
 		u32 local_num_words ) -> void
 	{
-		FOR ( s32 i=local_num_words-1; i>=0; --i )
+		for ( s32 i=local_num_words-1; i>=0; --i )
 		{
 			local_dst[i] = local_src[i];
 		}
@@ -288,8 +288,8 @@ void* slower_memcpy( void* dst, const void* src, size_t n )
 			{
 				new_n -= num_unaligned_bytes;
 				
-				////FOR ( u32 i=0; i<num_unaligned_bytes; ++i )
-				//FOR ( s32 i=num_unaligned_bytes-1; i>=0; --i )
+				////for ( u32 i=0; i<num_unaligned_bytes; ++i )
+				//for ( s32 i=num_unaligned_bytes-1; i>=0; --i )
 				//{
 				//	((u8*)dst)[i] = ((u8*)src)[i];
 				//}
@@ -301,8 +301,8 @@ void* slower_memcpy( void* dst, const void* src, size_t n )
 			{
 				new_n = 0;
 				
-				////FOR ( u32 i=0; i<n; ++i )
-				//FOR ( s32 i=n-1; i>=0; --i )
+				////for ( u32 i=0; i<n; ++i )
+				//for ( s32 i=n-1; i>=0; --i )
 				//{
 				//	((u8*)dst)[i] = ((u8*)src)[i];
 				//}
@@ -318,8 +318,8 @@ void* slower_memcpy( void* dst, const void* src, size_t n )
 		if (num_words)
 		{
 			//memcpy32( new_dst, new_src, num_words );
-			////FOR ( u32 i=0; i<num_words; ++i )
-			//FOR ( s32 i=num_words-1; i>=0; --i )
+			////for ( u32 i=0; i<num_words; ++i )
+			//for ( s32 i=num_words-1; i>=0; --i )
 			//{
 			//	((u32*)new_dst)[i] = ((u32*)new_src)[i];
 			//}
@@ -336,8 +336,8 @@ void* slower_memcpy( void* dst, const void* src, size_t n )
 				new_src_residual_bytes_start = ( (u32)new_src ) 
 				+ ( num_words * sizeof(u32) );
 			
-			////FOR ( u32 i=0; i<num_residual_bytes; ++i )
-			//FOR ( s32 i=num_residual_bytes-1; i>=0; --i )
+			////for ( u32 i=0; i<num_residual_bytes; ++i )
+			//for ( s32 i=num_residual_bytes-1; i>=0; --i )
 			//{
 			//	((u8*)new_dst_residual_bytes_start)[i] 
 			//		= ((u8*)new_src_residual_bytes_start)[i];
@@ -355,8 +355,8 @@ void* slower_memcpy( void* dst, const void* src, size_t n )
 	{
 		//memcpy8( dst, src, n );
 		asm_comment("memcpy8 replacement");
-		////FOR ( u32 i=0; i<n; ++i )
-		//FOR ( s32 i=n-1; i>=0; --i )
+		////for ( u32 i=0; i<n; ++i )
+		//for ( s32 i=n-1; i>=0; --i )
 		//{
 		//	((u8*)dst)[i] = ((u8*)src)[i];
 		//}
@@ -367,7 +367,7 @@ void* slower_memcpy( void* dst, const void* src, size_t n )
 	return dst;
 }
 
-// This is FOR updated ARM GCC when things like std::vector are used.
+// This is for updated ARM GCC when things like std::vector are used.
 void __sync_synchronize()
 {
 }

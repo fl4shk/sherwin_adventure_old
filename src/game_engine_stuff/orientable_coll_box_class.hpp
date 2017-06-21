@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -625,7 +625,7 @@ public:		// functions
 		return false;
 	}
 	
-	// The separating axis theorem is being used FOR this function.
+	// The separating axis theorem is being used for this function.
 	inline bool intersects_now( const orientable_coll_box& other )
 	{
 		static constexpr u32 num_corners = 4, num_edges = 4, num_axes = 4;
@@ -712,7 +712,7 @@ public:		// functions
 		{
 			min = max = axis.dot_prod(corners_arr.at(0));
 			
-			FOR ( u32 i=1; i<corners_arr.size(); ++i )
+			for ( u32 i=1; i<corners_arr.size(); ++i )
 			{
 				fixed24p8 p = axis.dot_prod(corners_arr.at(i));
 				
@@ -758,7 +758,7 @@ public:		// functions
 		};
 		
 		// loop over axes
-		FOR ( const vec2_f24p8& axis : axes )
+		for ( const vec2_f24p8& axis : axes )
 		{
 			fixed24p8 min, max, other_min, other_max;
 			
@@ -775,7 +775,7 @@ public:		// functions
 		}
 		
 		// loop over other_axes
-		FOR ( const vec2_f24p8& other_axis : other_axes )
+		for ( const vec2_f24p8& other_axis : other_axes )
 		{
 			fixed24p8 min, max, other_min, other_max;
 			

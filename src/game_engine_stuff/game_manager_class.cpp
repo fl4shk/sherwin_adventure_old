@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -149,7 +149,7 @@ void game_manager::title_screen_func()
 	//REG_DISPCNT = DCNT_MODE0 | DCNT_OBJ_1D | DCNT_BLANK_ON | DCNT_BG0_ON
 	//	| DCNT_BG1_ON | DCNT_BG2_ON | DCNT_BG3_ON | DCNT_OBJ_ON;
 	
-	// Use screen base block 28 FOR BG0's Map
+	// Use screen base block 28 for BG0's Map
 	REG_BG0CNT = bgcnt_sbb(BG0_SBB);
 	
 	REG_BG1CNT = bgcnt_sbb(bg1_sbb);
@@ -158,7 +158,7 @@ void game_manager::title_screen_func()
 	
 	
 	// Clear bgofs_mirror
-	FOR ( u32 i=0; i<3; ++i )
+	for ( u32 i=0; i<3; ++i )
 	{
 		gfx_manager::bgofs_mirror[i].curr.x 
 			= gfx_manager::bgofs_mirror[i].prev.x = {0};
@@ -185,7 +185,7 @@ void game_manager::title_screen_func()
 	
 	//memcpy8( test_sram_arr, (void *)debug_arr_u32, test_sram_arr_size );
 	
-	FOR (;;)
+	for (;;)
 	{
 		bios_wait_for_vblank();
 		
@@ -229,7 +229,7 @@ void game_manager::reinit_the_game()
 	//REG_DISPCNT = DCNT_MODE0 | DCNT_OBJ_1D | DCNT_BLANK_ON | DCNT_BG0_ON
 	//	| DCNT_BG1_ON | DCNT_BG2_ON | DCNT_BG3_ON | DCNT_OBJ_ON;
 	
-	// Use screen base block 28 FOR BG0's Map.
+	// Use screen base block 28 for BG0's Map.
 	REG_BG0CNT = bgcnt_sbb(BG0_SBB) | bgcnt_prio(1);
 	
 	// Give BG1 a higher display priority than BG0.
@@ -243,7 +243,7 @@ void game_manager::reinit_the_game()
 	//	(bt_eyes);
 	//u32 num_tiles_per_metatile = gfx_manager::num_tiles_in_ss_16x16;
 	//
-	//FOR ( u32 i=0; i<screenblock_size; ++i )
+	//for ( u32 i=0; i<screenblock_size; ++i )
 	//{
 	//	SE_RAM[bg1_sbb][i] 
 	//		= se_id( the_metatile_id * num_tiles_per_metatile )
@@ -252,7 +252,7 @@ void game_manager::reinit_the_game()
 	
 	//bios_wait_for_vblank();
 	
-	//FOR ( u32 i=0; i<screenblock_size; ++i )
+	//for ( u32 i=0; i<screenblock_size; ++i )
 	//{
 	//	SE_RAM[bg1_sbb][i] = bt_wood * 4;
 	//}

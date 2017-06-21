@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -47,9 +47,9 @@
 
 
 
-// Defines FOR reg_soundcnt_h
+// Defines for reg_soundcnt_h
 
-// 25% Volume FOR the GBC-compatible channels
+// 25% Volume for the GBC-compatible channels
 #define channel_gbc_vol_25				( 0x0 << 0 )
 // 50% Volume
 #define channel_gbc_vol_50				( 0x1 << 0 )
@@ -61,7 +61,7 @@
 
 // DMA Sound A Volume
 
-// 50% Volume FOR DMA Sound A
+// 50% Volume for DMA Sound A
 #define dma_sound_a_vol_50				( 0x0 << 2 )
 // 100% Volume
 #define dma_sound_a_vol_100				( 0x1 << 2 )
@@ -72,7 +72,7 @@
 
 // DMA Sound B Volume
 
-// 50% Volume FOR DMA Sound B
+// 50% Volume for DMA Sound B
 #define dma_sound_b_vol_50				( 0x0 << 3 )
 // 100% Volume
 #define dma_sound_b_vol_100				( 0x1 << 3 )
@@ -138,7 +138,7 @@
 
 
 
-// FIFO Master Switch FOR reg_soundcnt_x
+// FIFO Master Switch for reg_soundcnt_x
 #define sound_fifo_disable				( 0x0 << 7 )
 #define sound_fifo_enable				( 0x1 << 7 )
 

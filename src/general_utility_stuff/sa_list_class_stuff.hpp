@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -86,7 +86,7 @@ public:		// functions
 
 
 // Store only the original index of the node and a void pointer to its
-// data.  This is intended FOR use in array-based sorting algorithms that
+// data.  This is intended for use in array-based sorting algorithms that
 // only change how nodes are linked.
 class node_data_and_index
 {
@@ -228,7 +228,7 @@ public:		// classes
 			return !( *this != other );
 		}
 		
-		// Required FOR a range-based FOR loop
+		// Required for a range-based for loop
 		inline bool operator != ( const iterator& other ) const
 		{
 			//return ( pos != other.pos ) || ( ( pos == other.pos )
@@ -646,11 +646,11 @@ protected:		// functions to point to
 	
 	
 	// Instead of having the ENTIRE insertion_sort function be duplicated
-	// FOR EVERY externally_allocated_sa_list instantiation, only duplicate
+	// for EVERY externally_allocated_sa_list instantiation, only duplicate
 	// the inner loop.  This seems pretty good to me.
 	//
 	// Note:  old_il_cbuf_helper is a CIRCULAR BUFFER helper that allows
-	// keeping track of a FIXED NUMBER of indices to nodes FOR sorting
+	// keeping track of a FIXED NUMBER of indices to nodes for sorting
 	// purposes.
 	static void insertion_sort_inner_loop( node<type>* node_array, 
 		s32* index_low_ptr ) //__attribute__((_TEXT_HOT_SECTION))
@@ -662,7 +662,7 @@ protected:		// functions to point to
 		type* data_at_index_low = &(node_array[index_low].data);
 		
 		// Find the lowest value at or after i.
-		FOR ( s32 j=index_low;
+		for ( s32 j=index_low;
 			j!=-1; 
 			j=node_at_j->next_index() )
 		{
@@ -689,7 +689,7 @@ protected:		// functions to point to
 		size_t curr_offset = subarr_offset;
 		
 		
-		FOR ( size_t i=1; i<subarr_size; ++i )
+		for ( size_t i=1; i<subarr_size; ++i )
 		{
 			size_t j = ++curr_offset;
 			
@@ -711,7 +711,7 @@ protected:		// functions to point to
 	
 public:		// function pointer stuff
 	// This is the first time I've used an "auto" return type much, but it
-	// makes plenty of sense FOR this case.
+	// makes plenty of sense for this case.
 	static inline auto get_specific_type_copy_fp()
 	{
 		return get_generic_void_2arg_fp(&specific_type_copy);
@@ -802,7 +802,7 @@ public:		// functions to not point to
 		
 		size_t curr_offset = subarr_offset;
 		
-		FOR ( size_t i=1; i<subarr_size; ++i )
+		for ( size_t i=1; i<subarr_size; ++i )
 		{
 			size_t j = ++curr_offset;
 			
@@ -1201,7 +1201,7 @@ protected:		// functions
 	
 	
 	
-	// Some of the functions FOR internal use 
+	// Some of the functions for internal use 
 	s32 internal_func_move_unlinked_node_to_front( s32 to_move_index, 
 		node_contents& node_to_move );
 		//__attribute__((_IWRAM_CODE));
@@ -1289,7 +1289,7 @@ protected:		// functions
 	}
 	
 	
-	// End of functions FOR internal use.
+	// End of functions for internal use.
 	
 	// It is (slightly) faster to just unlink a node than it is to erase it
 	// because erase_at() ALSO resets the data of the node.  Use caution
@@ -1584,7 +1584,7 @@ public:		// functions
 		
 		s32 curr_index = temp_front_index;
 		
-		FOR ( s32 i=the_front_index;
+		for ( s32 i=the_front_index;
 			i!=-1;  )
 			//i=get_node_at(i).next_index() )
 		{
@@ -1596,7 +1596,7 @@ public:		// functions
 			node<type>* node_at_j;
 			
 			// Find the lowest value at or after i.
-			FOR ( s32 j=index_low;
+			for ( s32 j=index_low;
 				j!=-1; 
 				j=node_at_j->next_index() )
 			{
@@ -1678,7 +1678,7 @@ public:		// functions
 		static constexpr u32 prev_index_low_arr_size = 20;
 		s32 prev_index_low_arr[prev_index_low_arr_size];
 		
-		FOR ( s32 i=prev_index_low_arr_size-1; i>=0; --i )
+		for ( s32 i=prev_index_low_arr_size-1; i>=0; --i )
 		{
 			prev_index_low_arr[i] = 0;
 		}
@@ -1686,7 +1686,7 @@ public:		// functions
 		
 		s32 curr_index = temp_front_index;
 		
-		FOR ( s32 i=the_front_index;
+		for ( s32 i=the_front_index;
 			i!=-1; )
 			//i=get_node_at(i).next_index() )
 		{
@@ -1700,7 +1700,7 @@ public:		// functions
 			type* data_at_index_low = &get_node_at(index_low).data;
 			
 			// Find the lowest value at or after i.
-			FOR ( s32 j=index_low;
+			for ( s32 j=index_low;
 				j!=-1; 
 				j=node_at_j->next_index() )
 			{
@@ -1749,7 +1749,7 @@ public:		// functions
 			}
 			
 			
-			FOR ( u32 j=0; j<num_extra_low_indices; ++j )
+			for ( u32 j=0; j<num_extra_low_indices; ++j )
 			{
 				s32& curr_prev_index_low = prev_index_low_arr[j];
 				
@@ -1812,7 +1812,7 @@ protected:		// functions
 		
 		size_t i = 0, j = 0;
 		
-		FOR ( size_t k=0; k<out_subarr_size; ++k )
+		for ( size_t k=0; k<out_subarr_size; ++k )
 		{
 			if ( i >= left_subarr_size )
 			{
@@ -1876,7 +1876,7 @@ public:		// functions
 			size_t subarr_offset, subarr_size;
 			
 			// This is an insertion sort of PORTIONS of arr_a.
-			FOR ( subarr_offset=0;
+			for ( subarr_offset=0;
 				subarr_offset<real_num_nodes;
 				subarr_offset+=subarr_size )
 			{
@@ -1915,10 +1915,10 @@ public:		// functions
 		}
 		
 		// Avoid recursion
-		//FOR ( size_t subarr_size=first_subarr_size;
+		//for ( size_t subarr_size=first_subarr_size;
 		//	subarr_size<real_num_nodes;
 		//	subarr_size*=2 )
-		FOR ( size_t subarr_size=real_num_nodes;
+		for ( size_t subarr_size=real_num_nodes;
 			subarr_size>=last_subarr_size;
 			subarr_size/=2 )
 		{
@@ -1976,7 +1976,7 @@ public:		// functions
 			
 			get_merge_args( *main_arr_pc_pair.curr, 0 );
 			
-			FOR ( size_t i=0; i<real_num_nodes; i+=subarr_size*2 )
+			for ( size_t i=0; i<real_num_nodes; i+=subarr_size*2 )
 			{
 				internal_func_subarr_merge_2( left_subarr, 
 					left_subarr_size, right_subarr, right_subarr_size,
@@ -1991,7 +1991,7 @@ public:		// functions
 			
 			if (!do_swap)
 			{
-				FOR ( s32 i=real_num_nodes-1; i>=0; --i )
+				for ( s32 i=real_num_nodes-1; i>=0; --i )
 				{
 					arr_a[i] = work_arr[i];
 				}
@@ -2005,7 +2005,7 @@ public:		// functions
 		//		0, real_num_nodes );
 		//}
 		
-		FOR ( s32 i=real_num_nodes-1; i>=0; --i )
+		for ( s32 i=real_num_nodes-1; i>=0; --i )
 		{
 			//s32 curr_index = (*main_arr_pc_pair.prev)[i]
 			push_front((*main_arr_pc_pair.prev)[i]);
@@ -2030,8 +2030,8 @@ public:		// functions
 
 
 
-// This is a template class FOR a statically allocated array of modifiable
-// doubly-linked lists.  "sa" is short FOR "statically allocated".
+// This is a template class for a statically allocated array of modifiable
+// doubly-linked lists.  "sa" is short for "statically allocated".
 template< typename type, u32 total_num_nodes, u32 num_lists >
 class sa_array_of_lists
 {
@@ -2045,7 +2045,7 @@ public:		// functions
 	
 	inline sa_array_of_lists()
 	{
-		FOR ( s32 i=(s32)get_array_size()-1; i>=0; --i )
+		for ( s32 i=(s32)get_array_size()-1; i>=0; --i )
 		{
 			ea_list_array[i].init( node_array,
 				&the_free_list.the_sa_free_list_backend, 

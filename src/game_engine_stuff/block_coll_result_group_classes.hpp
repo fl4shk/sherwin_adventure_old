@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -108,7 +108,7 @@ public:		// constants
 	// The maximum number of blocks intersected by a sprite, per dimension.
 	// The value of ( 3, 3 ) corresponds to a 32x32 sprite.  Definitely
 	// change these two values (among other things) if there is every any
-	// infrastructure FOR sprites larger than 32x32 pixels.
+	// infrastructure for sprites larger than 32x32 pixels.
 	//const vec2_u32 block_coll_result_rect_group::shared_max_size_2d( 3, 3 );
 	static constexpr vec2_u32 max_size_2d = vec2_u32( 3, 3 );
 	//static constexpr vec2_u32 max_size_2d = vec2_u32( 80, 80 );

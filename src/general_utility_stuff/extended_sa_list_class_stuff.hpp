@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -24,7 +24,7 @@
 namespace sa_list_stuff
 {
 
-// This is a template class intended FOR use as a BASE CLASS FOR classes
+// This is a template class intended for use as a BASE CLASS for classes
 // that act as statically-allocated linked lists.  Since some (or possibly 
 // all) of the derived classes use only some of the non-constructor member
 // functions, 

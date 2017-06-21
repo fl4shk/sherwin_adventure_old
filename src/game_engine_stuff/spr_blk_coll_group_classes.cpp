@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -290,15 +290,15 @@ void spr_blk_coll_group_16x16::init( const coll_box& s_coll_box,
 		vert_bot_ctups[vi_bot_right].clseg = get_bot_right_vs_ia();
 	}
 	
-	FOR ( size_t i=0; i<get_num_horiz_ctups(); ++i )
+	for ( size_t i=0; i<get_num_horiz_ctups(); ++i )
 	{
 		get_horiz_ctup(i).bcr.init(get_horiz_ctup(i).blk_crd_pos);
 	}
-	FOR ( size_t i=0; i<get_num_vert_top_ctups(); ++i )
+	for ( size_t i=0; i<get_num_vert_top_ctups(); ++i )
 	{
 		get_vert_top_ctup(i).bcr.init(get_vert_top_ctup(i).blk_crd_pos);
 	}
-	FOR ( size_t i=0; i<get_num_vert_bot_ctups(); ++i )
+	for ( size_t i=0; i<get_num_vert_bot_ctups(); ++i )
 	{
 		get_vert_bot_ctup(i).bcrlg.init(get_vert_bot_ctup(i).clseg);
 	}
@@ -529,17 +529,17 @@ void spr_blk_coll_group_16x32::init( const coll_box& s_coll_box,
 		vert_bot_ctups[vi_bot_right].clseg = get_bot_right_vs_ia();
 	}
 	
-	FOR ( size_t i=0; i<get_num_horiz_ctups(); ++i )
+	for ( size_t i=0; i<get_num_horiz_ctups(); ++i )
 	{
 		//horiz_ctups[i].bcrlg.init(horiz_ctups[i].clseg);
 		get_horiz_ctup(i).bcr.init(get_horiz_ctup(i).blk_crd_pos);
 	}
-	FOR ( size_t i=0; i<get_num_vert_top_ctups(); ++i )
+	for ( size_t i=0; i<get_num_vert_top_ctups(); ++i )
 	{
 		//vert_top_ctups[i].bcrlg.init(vert_top_ctups[i].clseg);
 		get_vert_top_ctup(i).bcr.init(get_vert_top_ctup(i).blk_crd_pos);
 	}
-	FOR ( size_t i=0; i<get_num_vert_bot_ctups(); ++i )
+	for ( size_t i=0; i<get_num_vert_bot_ctups(); ++i )
 	{
 		//vert_bot_ctups[i].bcrlg.init(vert_bot_ctups[i].clseg);
 		get_vert_bot_ctup(i).bcrlg.init(get_vert_bot_ctup(i).clseg);

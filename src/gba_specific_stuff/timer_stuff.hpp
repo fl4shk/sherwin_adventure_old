@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -59,7 +59,7 @@
 
 // Count-up timing (Cascading).  When enabled, the prescaler value is
 // ignored, and instead the time is incremented each time when the PREVIOUS
-// Timer overflows.  This function can't be used FOR Timer 0, because Timer
+// Timer overflows.  This function can't be used for Timer 0, because Timer
 // 0 is the first timer.
 #define timer_cascade_disable		( 0x0 << 0x2 )
 #define timer_cascade_enable		( 0x1 << 0x2 )
@@ -81,7 +81,7 @@
 #define timer_stop_operate_mask		( 0x80 )
 
 
-// Here is an extra thing FOR 
+// Here is an extra thing for 
 constexpr inline u16 calc_timer_freq( float freq )
 {
 	//if ( freq > 0.0f )
@@ -91,7 +91,7 @@ constexpr inline u16 calc_timer_freq( float freq )
 	//return 0.0f;
 	
 	
-	// I REALLY don't know why I am not allowed to use an if-else chain FOR
+	// I REALLY don't know why I am not allowed to use an if-else chain for
 	// this.  It seems like an oversight in the design of C++, honestly.
 	return ( freq > 0.0f ) ? 0xffff - (u16)( 16.78e6f / freq )
 		: ( ( freq < 0.0f ) ? 0xffff - (u16)( 16.78e6 / (-freq) ) 

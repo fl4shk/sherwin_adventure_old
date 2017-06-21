@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -57,7 +57,7 @@ enum intr_type
 };
 
 
-/* ---- Defines FOR the flags of IE and IF ---- */
+/* ---- Defines for the flags of IE and IF ---- */
 #define IRQ_VBLANK ( 0x1 << intr_vblank )
 #define IRQ_HBLANK ( 0x1 << intr_hblank )
 #define IRQ_VCOUNT ( 0x1 << intr_vcount )
@@ -82,13 +82,13 @@ enum intr_type
 
 
 
-/* ---- End of Defines FOR the flags of IE and IF ---- */
+/* ---- End of Defines for the flags of IE and IF ---- */
 
 
 //static constexpr u32 num_interrupt_types = intr_amount;
 
 
-/* ---- Inline Functions FOR IME ---- */
+/* ---- Inline Functions for IME ---- */
 inline void ime_disable()
 {
 	REG_IME = 0x0000;
@@ -98,14 +98,14 @@ inline void ime_enable()
 {
 	REG_IME = 0x0001;
 }
-/* ---- End of Inline Functions FOR IME ---- */
+/* ---- End of Inline Functions for IME ---- */
 
 
-// Function Pointer FOR Interrupt Service Routines
+// Function Pointer for Interrupt Service Routines
 typedef void (*isr_funcptr)(void);
 
 // This is a pointer to the main ISR (an ARM mode function btw), which MUST
-// be set properly FOR interrupts to work!
+// be set properly for interrupts to work!
 #define REG_ISR_MAIN *((volatile isr_funcptr*)(MEM_IWRAM + 0x7ffc))
 
 // Some BIOS calls require interrupts, which have to be acknowledged by
@@ -115,7 +115,7 @@ typedef void (*isr_funcptr)(void);
 
 
 
-// These extern "C" functions are FOR maxmod compatibility.  They were
+// These extern "C" functions are for maxmod compatibility.  They were
 // written based on devkitARM's interrupt code, but using my own custom
 // "libgba" code instead.
 extern "C"

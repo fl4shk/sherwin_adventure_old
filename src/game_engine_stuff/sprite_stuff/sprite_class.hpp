@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -49,9 +49,9 @@ public:		// variables
 		{1 << fixed24p8::get_shift()} };
 	
 	
-	// This is used to correct the initial in-level position FOR sprites
+	// This is used to correct the initial in-level position for sprites
 	// that are normally considered to be of a certain size but that use
-	// larger graphics FOR some frames.  An example of this is the
+	// larger graphics for some frames.  An example of this is the
 	// st_player sprite_type, which is normally considered to be a 16x32
 	// sprite but uses 32x32 graphics in some cases, like during the
 	// pickaxe swing animation.
@@ -90,7 +90,7 @@ protected:		// variables
 	// set_vram_chunk_index() exists.
 	u32 vram_chunk_index;
 	
-	// These two things are used FOR FAST sprite allocation via a
+	// These two things are used for FAST sprite allocation via a
 	// sa_free_list_backend member variable in a sprite_allocator instance.
 	int the_arr_index;
 	friend class sprite_allocator;
@@ -130,7 +130,7 @@ public:		// variables
 	// the_sprite_ipg is a pointer to the level data of this sprite.  Even
 	// though the_sprite_ipg contains an initial sprite_type, it is
 	// normally the case that sprite_init_param_groups are stored in ROM,
-	// so attempting to change the_sprite_ipg->type would not work FOR the
+	// so attempting to change the_sprite_ipg->type would not work for the
 	// purposes of changing the sprite_type of sprites in different slots.
 	sprite_init_param_group* the_sprite_ipg;
 	
@@ -160,7 +160,7 @@ public:		// variables
 	
 	// the_coll_box's "pos" member variable is the in-level
 	// coordinate of the_coll_box.  Also, the_coll_box is
-	// only used FOR non-oriented sprites.
+	// only used for non-oriented sprites.
 	coll_box the_coll_box;
 	
 	// cb_pos_offset is the position of the coll_box relative to
@@ -173,7 +173,7 @@ public:		// variables
 	prev_curr_pair<bool> on_ground;
 	
 	
-	//// jump_hold_timer is used to keep track of FOR how much longer the
+	//// jump_hold_timer is used to keep track of for how much longer the
 	//// sprite can jump, if the sprite even does so.  This coul
 	//s32 jump_hold_timer;
 	
@@ -196,7 +196,7 @@ public:		// variables
 	s32 misc_data_s[misc_data_size];
 	
 	
-	// These are mainly FOR debugging.
+	// These are mainly for debugging.
 	//bool did_update_prev_on_screen_pos_this_frame;
 	//vec2_f24p8 prev_on_screen_pos, curr_on_screen_pos;
 	//prev_curr_pair<vec2_f24p8> on_screen_pos;
@@ -549,7 +549,7 @@ public:		// functions
 	}
 	
 
-	// This is used FOR calling back_up() on some prev_curr_pair instances
+	// This is used for calling back_up() on some prev_curr_pair instances
 	// The player_sprite class overrides this function (but still calls the
 	// original) so that the player_sprite class can set warped_this_frame
 	// to false.
@@ -687,7 +687,7 @@ protected:		// functions
 	virtual void block_collision_stuff_16x32();
 	
 	// block_collision_stuff_32x16() will likely never be used because it's
-	// less believable FOR one of those to not rotate when on a slope
+	// less believable for one of those to not rotate when on a slope
 	virtual void block_collision_stuff_32x16();
 	virtual void block_collision_stuff_32x32();
 	

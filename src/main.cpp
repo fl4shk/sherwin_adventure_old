@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -116,7 +116,7 @@ int real_main()
 	irq_init();
 	
 	// This will eventually be used to identify whether save data has been
-	// created.  As of right now, there is no need FOR save data, but that
+	// created.  As of right now, there is no need for save data, but that
 	// will change in the future.  It is likely that 64 kiB of save data
 	// will be more than enough.
 	memcpy8( game_manager::sram_init_str,
@@ -166,7 +166,7 @@ int real_main()
 	
 	
 	
-	FOR (;;)
+	for (;;)
 	{
 		gfx_manager::back_up_bgofs_mirror();
 		

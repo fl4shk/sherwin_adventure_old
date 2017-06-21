@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -32,7 +32,7 @@ extern const s16 sin_table[sin_table_size];
 
 static const u32 trig_lut_fixed_shift = 12;
 
-// NOTE:  theta's range is [0, 0xffff] FOR [0,2π), just like the BIOS
+// NOTE:  theta's range is [0, 0xffff] for [0,2π), just like the BIOS
 // functions.  Also, the returned value has a fixed-point shift of 12.
 
 // Look up a sine value

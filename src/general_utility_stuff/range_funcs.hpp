@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -22,7 +22,7 @@
 #include "vec2_class.hpp"
 
 
-// in_range and vec2_in_range are PRIMARILY intended FOR use with a range
+// in_range and vec2_in_range are PRIMARILY intended for use with a range
 // of 0 (inclusive) to size (exclusive)
 template< typename type >
 inline bool in_range( type range_start_inclusive, type range_end_exclusive, 

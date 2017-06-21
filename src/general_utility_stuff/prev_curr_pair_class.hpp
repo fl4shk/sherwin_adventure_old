@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -27,8 +27,8 @@
 template < typename type >
 class vec2;
 
-// This is a small class FOR the purposes of holding the states of
-// "previous" and "current" pairs.  It is primarily intended FOR use with
+// This is a small class for the purposes of holding the states of
+// "previous" and "current" pairs.  It is primarily intended for use with
 // SMALL types, such as vec2's, built-in types, and so on and so forth.
 template< typename type >
 class prev_curr_pair

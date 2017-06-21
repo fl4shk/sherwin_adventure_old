@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -99,7 +99,7 @@ enum block_type
 	bt_grass_slope_n32_p16_tall,
 	bt_grass_slope_n32_p16_short,
 	
-	// These two blocks are FOR decoration
+	// These two blocks are for decoration
 	bt_grass_in_slope_left,
 	bt_grass_in_slope_right,
 	
@@ -112,7 +112,7 @@ enum block_type
 
 // It's about time I added in something like this!  In MANY cases, there
 // are block_type's that have the SAME behavior, so this should also be
-// possible to use FOR jump tables (or switch statements)
+// possible to use for jump tables (or switch statements)
 enum block_behavior_type
 {
 	// The actually non-default block_behavior_type (most blocks are
@@ -220,7 +220,7 @@ macro(grass_slope_p32_p16_tall_block_stuff) \
 macro(grass_slope_n32_p16_tall_block_stuff) \
 macro(grass_slope_n32_p16_short_block_stuff) \
 \
-/* These two blocks are FOR decoration */ \
+/* These two blocks are for decoration */ \
 macro(grass_in_slope_left_block_stuff) \
 macro(grass_in_slope_right_block_stuff)
 
@@ -255,7 +255,7 @@ macro(p32_p16_tall)
 //	// Day Sky
 //	bg1bt_day_sky,
 //	
-//	// Night Sky block.  Also doubles as a go-to block FOR fading out or
+//	// Night Sky block.  Also doubles as a go-to block for fading out or
 //	// in.
 //	bg1bt_night_sky,
 //	
@@ -288,7 +288,7 @@ list_of_block_stuff_classes(X)
 #undef X
 
 
-// A class FOR unique block data.
+// A class for unique block data.
 class block
 {
 public:		// variables

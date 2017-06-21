@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -33,7 +33,7 @@ extern volatile prev_curr_pair<vu16> __key_state;
 // Current Key States
 #define REG_KEYINPUT *((vu16*)(MEM_IO + 0x0130))
 
-// Stuff FOR Key Interrupts
+// Stuff for Key Interrupts
 #define REG_KEYCNT *((vu16*)(MEM_IO + 0x0132))
 
 

@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -45,7 +45,7 @@ sprite_allocator::sprite_allocator( s16* the_sa_free_list_backend_array,
 void* sprite_allocator::allocate_sprite()
 {
 	//// This could definitely be faster
-	//FOR ( u32 i=0; i<get_size(); ++i )
+	//for ( u32 i=0; i<get_size(); ++i )
 	//{
 	//	sprite& curr_sprite = at(i);
 	//	
@@ -85,7 +85,7 @@ void* sprite_allocator::allocate_sprite()
 	halt();
 	
 	//return NULL;
-	FOR (;;)
+	for (;;)
 	{
 	}
 }
@@ -140,7 +140,7 @@ void sprite_allocator::deallocate_sprite( sprite& the_sprite )
 	
 	//the_sprite = NULL;
 	
-	//FOR ( u32 i=0; i<get_size(); ++i )
+	//for ( u32 i=0; i<get_size(); ++i )
 	//{
 	//	sprite& curr_sprite = at(i);
 	//	

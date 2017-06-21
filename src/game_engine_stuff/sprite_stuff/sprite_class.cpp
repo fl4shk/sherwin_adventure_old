@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -95,7 +95,7 @@ sprite::sprite( const vec2_f24p8& s_in_level_pos,
 
 void sprite::shared_constructor_code_part_1()
 {
-	// uh-oh, it looks like this overwrites the vtable pointer FOR the
+	// uh-oh, it looks like this overwrites the vtable pointer for the
 	// sprite!
 	//memfill32( this, 0, sizeof(sprite) / sizeof(u32) );
 	
@@ -592,7 +592,7 @@ void sprite::generic_block_collision_stuff
 	auto iterate_horiz = [&]( const u32 first, const u32 last,
 		bool& some_horiz_side_fully_solid ) -> void
 	{
-		FOR ( u32 i=first; i<=last; ++i )
+		for ( u32 i=first; i<=last; ++i )
 		{
 			//horiz_fs_ret_buf[i] = clseg_grp.get_horiz_ctup(i).bcrlg
 			//	.horiz_any_bbvt_is_fully_solid(horiz_fs_pos_buf[i]);
@@ -613,7 +613,7 @@ void sprite::generic_block_collision_stuff
 	auto iterate_vert_top = [&]( bool& some_top_side_fully_solid, 
 		bool& some_top_side_slope ) -> void
 	{
-		FOR ( u32 i=vi_top_left; i<=vi_top_right; ++i )
+		for ( u32 i=vi_top_left; i<=vi_top_right; ++i )
 		{
 			//vert_top_fs_ret_buf[i] = clseg_grp.get_vert_top_ctup(i).bcrlg
 			//	.vert_any_bbvt_is_fully_solid(vert_top_fs_pos_buf[i]);
@@ -646,7 +646,7 @@ void sprite::generic_block_collision_stuff
 		bool& some_bot_side_slope ) -> void
 	{
 		u32 i;
-		FOR ( i=vi_bot_mid; i<vi_bot_left; ++i )
+		for ( i=vi_bot_mid; i<vi_bot_left; ++i )
 		{
 			vert_bot_fs_ret_buf[i] = clseg_grp.get_vert_bot_ctup(i).bcrlg
 				.vert_any_bbvt_is_fully_solid(vert_bot_fs_pos_buf[i]);
@@ -662,7 +662,7 @@ void sprite::generic_block_collision_stuff
 				some_bot_side_slope = true;
 			}
 		}
-		FOR ( ; i<=vi_bot_right; ++i )
+		for ( ; i<=vi_bot_right; ++i )
 		{
 			vert_bot_slp_ret_buf[i] = clseg_grp.get_vert_bot_ctup(i).bcrlg
 				.vert_any_bbvt_is_slope(vert_bot_slp_pos_buf[i]);
@@ -768,7 +768,7 @@ void sprite::generic_block_collision_stuff
 					// Slightly wasteful
 					s32 height_val_buf[num_vert_bot_ctups] 
 						= { -1, -1, -1 };
-					FOR ( u32 i=vi_bot_left; i<=vi_bot_right; ++i )
+					for ( u32 i=vi_bot_left; i<=vi_bot_right; ++i )
 					{
 						if (vert_bot_slp_ret_buf[i])
 						{
@@ -870,7 +870,7 @@ void sprite::generic_block_collision_stuff
 						}
 						
 						// If the y positions are equal, then clearly the
-						// plain old height value should be used FOR
+						// plain old height value should be used for
 						// comparison
 						else // if ( left_pos.y == right_pos.y )
 						{
@@ -1048,7 +1048,7 @@ void sprite::block_collision_stuff_16x32()
 }
 
 // block_collision_stuff_32x16() will likely never be used because it's
-// less believable FOR one of those to not rotate when on a slope
+// less believable for one of those to not rotate when on a slope
 void sprite::block_collision_stuff_32x16()
 {
 	

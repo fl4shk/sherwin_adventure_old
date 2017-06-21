@@ -16,8 +16,8 @@
  *
  * THIS SOFTWARE IS PROVIDED BY ARM LTD ``AS IS'' AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
- * IN NO EVENT SHALL ARM LTD BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * MERCHANTABILITY AND FITNESS for A PARTICULAR PURPOSE ARE DISCLAIMED.
+ * IN NO EVENT SHALL ARM LTD BE LIABLE for ANY DIRECT, INDIRECT, INCIDENTAL,
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
  * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
  * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
@@ -154,7 +154,7 @@ typedef struct malloc_chunk
     /*          ------------------
      *   chunk->| size (4 bytes) |
      *          ------------------
-     *          | Padding FOR    |
+     *          | Padding for    |
      *          | alignment      |
      *          | holding neg    |
      *          | offset to size |
@@ -231,7 +231,7 @@ char * SBRK_START = NULL;
 /** Function sbrk_aligned
   * Algorithm:
   *   Use sbrk() to obtain more memory and ensure it is CHUNK_ALIGN aligned
-  *   Optimise FOR the case that it is already aligned - only ask FOR extra
+  *   Optimise for the case that it is already aligned - only ask for extra
   *   padding after we know we need it
   */
 static void* sbrk_aligned(RARG malloc_size_t s)
@@ -253,7 +253,7 @@ static void* sbrk_aligned(RARG malloc_size_t s)
     align_p = (char*)ALIGN_TO((unsigned long)p, CHUNK_ALIGN);
     if (align_p != p)
     {
-        /* p is not aligned, ask FOR a few more bytes so that we have s
+        /* p is not aligned, ask for a few more bytes so that we have s
          * bytes reserved from align_p. */
         p = (char*)_SBRK_R(RCALL align_p - p);
         if (p == (void *)-1)
@@ -325,7 +325,7 @@ void * nano_malloc(RARG malloc_size_t s)
         r=r->next;
     }
 
-    /* Failed to find a appropriate chunk. Ask FOR more memory */
+    /* Failed to find a appropriate chunk. Ask for more memory */
     if (r == NULL)
     {
         r = (chunk*)sbrk_aligned(RCALL alloc_size);
@@ -409,7 +409,7 @@ void nano_free (RARG void * free_p)
     }
 
     q = FREE_LIST;
-    /* Walk through the free list to find the place FOR insert. */
+    /* Walk through the free list to find the place for insert. */
     do
     {
         p = q;
@@ -531,7 +531,7 @@ struct mallinfo nano_mallinfo(RONEARG)
             total_size = (size_t) (sbrk_now - SBRK_START);
     }
 
-    FOR (pf = FREE_LIST; pf; pf = pf->next)
+    for (pf = FREE_LIST; pf; pf = pf->next)
         free_size += pf->size;
 
     CURRENT_MALLINFO.arena = total_size;
@@ -620,7 +620,7 @@ void * nano_memalign(RARG size_t align, size_t s)
         }
         else
         {
-            /* Padding is used. Need to set a jump offset FOR aligned pointer
+            /* Padding is used. Need to set a jump offset for aligned pointer
             * to get back to chunk head */
             assert(offset >= sizeof(int));
             *(int *)((char *)chunk_p + offset) = -offset;
@@ -631,7 +631,7 @@ void * nano_memalign(RARG size_t align, size_t s)
     if ((char *)chunk_p + size_allocated >
          (aligned_p + ma_size + MALLOC_MINCHUNK))
     {
-        /* allocated much more than what's required FOR padding, free
+        /* allocated much more than what's required for padding, free
          * tail part */
         chunk * tail_chunk = (chunk *)(aligned_p + ma_size);
         chunk_p->size = aligned_p + ma_size - (char *)chunk_p;

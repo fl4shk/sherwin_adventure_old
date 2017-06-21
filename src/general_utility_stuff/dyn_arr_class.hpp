@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -27,7 +27,7 @@
 
 
 
-// This is a class FOR dynamic arrays that can be resized but only by
+// This is a class for dynamic arrays that can be resized but only by
 // calling the resize() function.
 template< typename type >
 class dyn_arr
@@ -212,7 +212,7 @@ public:		// functions
 protected:		// functions
 	inline void copy_to_arr( type* to_copy, size_t the_size )
 	{
-		//// Optimization FOR trivially copyable types... eh screw it I'll
+		//// Optimization for trivially copyable types... eh screw it I'll
 		//// let the compiler do that if it wants.
 		//if ( std::is_trivially_copyable<type>::value )
 		//{
@@ -220,8 +220,8 @@ protected:		// functions
 		//}
 		//else
 		{
-			FOR ( s32 i=the_size-1; i>=0; --i )
-			//FOR ( size_t i=0; i<the_size; ++i )
+			for ( s32 i=the_size-1; i>=0; --i )
+			//for ( size_t i=0; i<the_size; ++i )
 			{
 				arr[i] = to_copy[i];
 			}

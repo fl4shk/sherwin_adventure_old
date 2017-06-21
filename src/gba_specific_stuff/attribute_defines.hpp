@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -20,23 +20,23 @@
 #define attribute_defines_hpp
 
 
-/* ---- #defines FOR Sections ---- */
+/* ---- #defines for Sections ---- */
 
 // Example:  __attribute__((_EWRAM))
 // Another example:  __attribute__(( _EWRAM, _ALIGN4 ))
 
-// #defines FOR putting INITIAILZED stuff in EWRAM and IWRAM
+// #defines for putting INITIAILZED stuff in EWRAM and IWRAM
 #define _EWRAM section(".data")
 #define _IWRAM section(".iwram_data")
 
-// #defines FOR UNITIALIZED global variables that go into EWRAM, IWRAM,
+// #defines for UNITIALIZED global variables that go into EWRAM, IWRAM,
 // and SRAM
 #define _BSS section(".bss")
 #define _IWRAM_BSS section(".iwram_bss")
 #define _SRAM section(".sram")
 
 
-// #defines FOR putting stuff in the code (sections FOR EWRAM and IWRAM)
+// #defines for putting stuff in the code (sections for EWRAM and IWRAM)
 #define _EWRAM_CODE section(".ewram_code")
 #define _IWRAM_CODE section(".iwram_code")
 
@@ -54,21 +54,21 @@
 // does not seem to be generated.  Perhaps there's some -f... flag (or
 // flags) that would cause the .text.hot to be generated at less than -O2.
 #define _TEXT_HOT_SECTION hot
-//#define _TEXT_HOT_SECTION_FORCED hot,optimize("O3")
+//#define _TEXT_HOT_SECTION_forCED hot,optimize("O3")
 
-/* ---- End of #defines FOR Sections ---- */
+/* ---- End of #defines for Sections ---- */
 
 
-// Some #defines FOR aligning structs/classes
+// Some #defines for aligning structs/classes
 #define _ALIGN4 aligned(4)
 
 
-// A #define FOR making sure that structs/classes have the exact size of
+// A #define for making sure that structs/classes have the exact size of
 // all their members combined (USE WITH CAUTION)
 #define _PACKED packed
 
 
-// This is FOR C++'s built-in alignment, which finally exists!
+// This is for C++'s built-in alignment, which finally exists!
 #define _ALIGNAS_REGULAR alignas(4)
 
 

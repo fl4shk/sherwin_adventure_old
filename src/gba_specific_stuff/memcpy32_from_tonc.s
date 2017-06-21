@@ -1,6 +1,6 @@
 @ NOTE:  This memcpy32 function was taken from this site:
 @ http://www.coranac.com/tonc/text/asm.htm I also JUST BARELY modified one
-@ directive of it to work with my linkscript.  Thank you, J Vijn, FOR this
+@ directive of it to work with my linkscript.  Thank you, J Vijn, for this
 @ function!
 
 

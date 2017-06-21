@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -95,7 +95,7 @@ typedef scr_entry screenblock[screenblock_size];
 
 
 
-// -- Defines FOR Screen Entries --
+// -- Defines for Screen Entries --
 
 // Tile Index of the SE
 #define se_id( n ) ( ( n ) & 0x3ff )
@@ -107,12 +107,12 @@ typedef scr_entry screenblock[screenblock_size];
 #define SE_VFLIP ( 0x2 << 0xa )
 #define SE_FLIP_MASK ( (u16)(0x0c00) )
 
-// SE Palette Bank FOR 16-color mode
+// SE Palette Bank for 16-color mode
 #define se_palbank( n ) ( ( ( n ) & 0xf ) << 0xc )
 #define SE_PALBANK_MASK ( (u16)(0xf000) )
 
 
-// -- End of Defines FOR Screen Entries --
+// -- End of Defines for Screen Entries --
 
 // ---- End of Screen-Entry Stuffs ----
 
@@ -155,7 +155,7 @@ static const u32 num_colors_per_palette = 16;
 
 // LCD I/O BG Scrolling Registers
 //#define REG_BGOFS ((bg_point*)(MEM_IO + 0x0010))
-// Pretty cool how I can use my vec2_s16 class FOR this
+// Pretty cool how I can use my vec2_s16 class for this
 #define REG_BGOFS ((vec2_s16*)(MEM_IO + 0x0010))
 
 #define reg_bghofs_n(n) *((vu16*)(MEM_IO + 0x0010 + 0x04 * n))
@@ -236,7 +236,7 @@ inline const type conv_slp_height_val_to_offset( type tallest_height_val )
 /* ---- Display Register Value Defines ---- */
 //  Bitwise OR these values together
 
-// Defines FOR REG_DISPCNT
+// Defines for REG_DISPCNT
 //   Video Mode (Select ONLY ONE)
 #define DCNT_MODE0 0x0000
 #define DCNT_MODE1 0x0001
@@ -305,7 +305,7 @@ inline const type conv_slp_height_val_to_offset( type tallest_height_val )
 
 
 
-/* ---- Defines FOR REG_DISPSTAT ---- */
+/* ---- Defines for REG_DISPSTAT ---- */
 
 //   VBlank status (Read Only)
 #define DSTAT_IN_VBL ( 0x0001 << 0x0 )
@@ -328,11 +328,11 @@ inline const type conv_slp_height_val_to_offset( type tallest_height_val )
 //   VCount trigger value
 #define dstat_vct(x) ( x << 0x8 )
 
-/* ---- End of Defines FOR REG_DISPSTAT ---- */
+/* ---- End of Defines for REG_DISPSTAT ---- */
 
 
 
-/* ---- Defines FOR reg_bgXcnt (X = 0, 1, 2, or 3) ---- */
+/* ---- Defines for reg_bgXcnt (X = 0, 1, 2, or 3) ---- */
 
 // BG Priority.  Higher Priority BGs are drawn FIRST.  If there are any
 // BGs with the same priority, then BG0 has the highest priority, and BG3
@@ -377,10 +377,10 @@ inline const type conv_slp_height_val_to_offset( type tallest_height_val )
 #define BGCNT_AFF_128X128 ( 0x3 << 0xe )
 #define BGCNT_AFF_MASK ( (u16)(0xc000) )
 
-/* ---- End of Defines FOR reg_bgXcnt ---- */
+/* ---- End of Defines for reg_bgXcnt ---- */
 
 
-/* ---- Defines FOR REG_BLDCNT ---- */
+/* ---- Defines for REG_BLDCNT ---- */
 
 // The (A) top layers
 #define BLDCNT_TOP_BG0 ( 0x0 << 0x0 )
@@ -407,26 +407,26 @@ inline const type conv_slp_height_val_to_offset( type tallest_height_val )
 #define BLDCNT_BOT_BACKDROP ( 0x5 << 0x8 )
 #define BLDCNT_BOT_MASK ( (u16)(0x1f00) )
 
-/* ---- End of Defines FOR REG_BLDCNT ---- */
+/* ---- End of Defines for REG_BLDCNT ---- */
 
 
-/* ---- Defines FOR REG_BLDALPHA ---- */
+/* ---- Defines for REG_BLDALPHA ---- */
 
-// Top blend weight.  Only used FOR normal blending.
+// Top blend weight.  Only used for normal blending.
 #define bldalpha_top( n ) ( n & 0x1f )
 
-// Bot blend weight.  Only used FOR normal blending.
+// Bot blend weight.  Only used for normal blending.
 #define bldalpha_bot( n ) ( ( n & 0x1f ) << 0x8 )
 
-/* ---- End of Defines FOR REG_BLDALPHA ---- */
+/* ---- End of Defines for REG_BLDALPHA ---- */
 
 
-/* ---- Defines FOR REG_BLDALPHA ---- */
+/* ---- Defines for REG_BLDALPHA ---- */
 
-// Top blend weight.  Only used FOR normal blending.
+// Top blend weight.  Only used for normal blending.
 #define bldy( n ) ( n & 0x1f )
 
-/* ---- End of Defines FOR REG_BLDALPHA ---- */
+/* ---- End of Defines for REG_BLDALPHA ---- */
 
 
 

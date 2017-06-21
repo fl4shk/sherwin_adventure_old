@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -161,7 +161,7 @@ const player_sprite::frame player_sprite::frame_slot_to_frame_arr
 	frm_weapon_swing_ground_moving_5_row_2,
 	
 	// Swinging a weapon, in the air (uses the same graphics as the
-	// ones FOR weapon swing, on the ground, but also moving, row 2).
+	// ones for weapon swing, on the ground, but also moving, row 2).
 	frm_weapon_swing_ground_moving_0_row_2,
 	frm_weapon_swing_ground_moving_1_row_2,
 	frm_weapon_swing_ground_moving_2_row_2,
@@ -246,7 +246,7 @@ void player_sprite::shared_constructor_code_part_3()
 	
 	//the_sprite_type = get_const_sprite_type();
 	
-	// This is FOR slope testing stuffs
+	// This is for slope testing stuffs
 	//set_shape_size(oam_entry::ss_16x16);
 	////the_coll_box.size = { 12 << fixed24p8::get_shift(),
 	////	13 << fixed24p8::get_shift() };
@@ -455,8 +455,8 @@ void player_sprite::update_part_3
 	update_frames_and_frame_timers();
 	
 	
-	//FOR ( sprite* spr : sprite_manager::the_sprites )
-	FOR ( sprite* spr : sprite_manager::the_active_sprites )
+	//for ( sprite* spr : sprite_manager::the_sprites )
+	for ( sprite* spr : sprite_manager::the_active_sprites )
 	{
 		sprite_interaction_reponse( *spr, camera_pos_pc_pair,
 			the_sublevel_size_2d );
@@ -467,7 +467,7 @@ void player_sprite::update_part_3
 		}
 	}
 	
-	FOR ( sprite* spr : sprite_manager::the_active_pseudo_bg_sprites )
+	for ( sprite* spr : sprite_manager::the_active_pseudo_bg_sprites )
 	{
 		sprite_interaction_reponse( *spr, camera_pos_pc_pair,
 			the_sublevel_size_2d );
@@ -799,7 +799,7 @@ void player_sprite::update_the_pickaxe()
 			}
 		}
 		
-		// There should really be arrays to load from FOR these!
+		// There should really be arrays to load from for these!
 		switch (active_pickaxe_swing_frame_slot)
 		{
 			case frm_slot_weapon_swing_ground_still_0:
@@ -1106,7 +1106,7 @@ const u32 player_sprite::get_curr_relative_tile_slot()
 		// This is so ugly
 		switch (active_pickaxe_swing_frame_slot)
 		{
-			// Yay, another use FOR X-macros!
+			// Yay, another use for X-macros!
 			#define list_of_weapon_swing_frame_slot_numbers(macro) \
 				macro(0) macro(1) macro(2) macro(3) macro(4) macro(5)
 			

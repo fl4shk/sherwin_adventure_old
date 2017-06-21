@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -106,7 +106,7 @@ void hud_manager::plot_horiz_str_8x8_to_screenblock_mirror
 	( const char* str, u32 str_size, u32& plot_x, u32& plot_y )
 {
 	
-	FOR ( u32 i=0; i<str_size; ++i )
+	for ( u32 i=0; i<str_size; ++i )
 	{
 		if ( plot_x >= screenblock_xsize )
 		{
@@ -147,7 +147,7 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 	u32 plot_y = 0;
 	
 	
-	//FOR ( u32 i=0; i<sherwin_str_size; ++i )
+	//for ( u32 i=0; i<sherwin_str_size; ++i )
 	//{
 	//	plot_char_8x8_to_screenblock_mirror( sherwin_str[i], plot_x, 0 );
 	//	++plot_x;
@@ -164,7 +164,7 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 	
 	//char temp_buf[some_number_str_max_size];
 	
-	//FOR ( u32 i=0; i<some_number_str_max_size; ++i )
+	//for ( u32 i=0; i<some_number_str_max_size; ++i )
 	//{
 	//	some_number_str[i] = '\0';
 	//	temp_buf[i] = '\0';
@@ -175,9 +175,9 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 		? 0 : player_sprite::remaining_hp;
 	//s32 to_convert = 10;
 	
-	//FOR (;;)
+	//for (;;)
 	//{
-	//	FOR ( u32 i=0; i<some_number_str_max_size; ++i )
+	//	for ( u32 i=0; i<some_number_str_max_size; ++i )
 	//	{
 	//		temp_buf[i] = '\0';
 	//	}
@@ -202,8 +202,8 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 		some_number_str_max_size, "%i", to_convert );
 	
 	
-	////FOR ( u32 i=0; i<some_number_str_curr_size; ++i )
-	//FOR ( u32 i=0; i<some_number_str_max_size; ++i )
+	////for ( u32 i=0; i<some_number_str_curr_size; ++i )
+	//for ( u32 i=0; i<some_number_str_max_size; ++i )
 	//{
 	//	plot_char_8x8_to_screenblock_mirror( some_number_str[i], plot_x, 0 );
 	//	++plot_x;
@@ -219,16 +219,16 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 		plot_x -= some_number_str_max_size;
 		++plot_y;
 		//some_number_str_curr_size = 0;
-		FOR ( u32 i=0; i<some_number_str_max_size; ++i )
+		for ( u32 i=0; i<some_number_str_max_size; ++i )
 		{
 			some_number_str[i] = '\0';
 		}
 		some_number_str_curr_size = snprintf( some_number_str,
 			some_number_str_max_size, "%i", some_num );
 		
-		//FOR (;;)
+		//for (;;)
 		//{
-		//	FOR ( u32 i=0; i<some_number_str_max_size; ++i )
+		//	for ( u32 i=0; i<some_number_str_max_size; ++i )
 		//	{
 		//		temp_buf[i] = '\0';
 		//	}

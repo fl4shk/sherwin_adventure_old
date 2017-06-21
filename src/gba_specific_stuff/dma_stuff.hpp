@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -58,7 +58,7 @@
 /* ---- End of DMA Registers ---- */
 
 
-/* ---- #defines FOR DMACNT Registers ---- */
+/* ---- #defines for DMACNT Registers ---- */
 // Number of 16-bit or 32-bit Transfers 
 #define dma_data_count( n ) ( n & 0xffff )
 #define DMA_DATA_COUNT_MASK ( (u32)(0x0000ffff) )
@@ -128,16 +128,16 @@
 #define DMA_IRQ_MASK ( (u32)(0x40000000) )
 
 
-// -- Enable the DMA Transfer FOR this Channel --
+// -- Enable the DMA Transfer for this Channel --
 #define DMA_ENABLE ( 0x1 << 0x1f )
-/* ---- End of #defines FOR DMACNT Registers ---- */
+/* ---- End of #defines for DMACNT Registers ---- */
 
 
-// Mirrors FOR the DMACNT registers
+// Mirrors for the DMACNT registers
 extern vu32 dma0cnt_mirror, dma1cnt_mirror, dma2cnt_mirror, dma3cnt_mirror;
 
 
-/* ---- Wrapper Functions FOR DMA Copies ---- */
+/* ---- Wrapper Functions for DMA Copies ---- */
 
 // These functions are extern "C" so that my assembly can access them
 extern "C"
@@ -157,7 +157,7 @@ void dma3_fill( volatile void* dst, vu32 src, u32 count );
 
 }
 
-/* ---- End of Wrapper Functions FOR DMA Copies ---- */
+/* ---- End of Wrapper Functions for DMA Copies ---- */
 
 
 

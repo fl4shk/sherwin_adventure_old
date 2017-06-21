@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -125,7 +125,7 @@ public:		// and constants
 	//// number of elements in arr.
 	
 	
-	// It is a very good idea FOR max_size to be a multiple of 4.  It makes
+	// It is a very good idea for max_size to be a multiple of 4.  It makes
 	// copying and clearing faster.
 	///static constexpr u32 max_size = 16;
 	static constexpr u32 max_size = 20;
@@ -187,7 +187,7 @@ public:		// functions
 	
 	inline void clear_unused_portion()
 	{
-		FOR ( u32 i=get_real_size(); i<max_size; ++i )
+		for ( u32 i=get_real_size(); i<max_size; ++i )
 		{
 			arr[i] = 0;
 		}
@@ -350,8 +350,8 @@ void show_debug_values_group_backend( debug_arr_type* debug_values_arr,
 	// generated.
 	curr_index = old_curr_index + total_num_args;
 	
-	//asm_comment("Before FOR loop");
-	FOR ( s32 i=total_num_args-1; i>=0; --i )
+	//asm_comment("Before for loop");
+	for ( s32 i=total_num_args-1; i>=0; --i )
 	{
 		debug_values_arr[old_curr_index + i] = all_values_arr[i];
 	}

@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -29,7 +29,7 @@ extern "C"
 	volatile isr_funcptr isr_table[intr_amount] __attribute__((_BSS));
 	
 	
-	// This is FOR maxmod compatibility
+	// This is for maxmod compatibility
 	void irqEnable( int mask )
 	{
 		//REG_IME = 0;
@@ -54,7 +54,7 @@ extern "C"
 		ime_enable();
 	}
 	
-	// This is also FOR maxmod compatibility, written somewhat differently
+	// This is also for maxmod compatibility, written somewhat differently
 	// from that used in libgba.
 	//void irqSet( int mask, isr_funcptr func )
 	void irqSet( int mask, u32 func_addr )
@@ -133,15 +133,15 @@ void irq_dummy()
 void irq_init()
 {
 	
-	// Clear REG_IME (FOR safety or something)
+	// Clear REG_IME (for safety or something)
 	ime_disable();
 	
-	FOR ( u32 i=0; i<intr_amount; ++i )
+	for ( u32 i=0; i<intr_amount; ++i )
 	{
 		isr_table[i] = &irq_dummy;
 	}
 	
-	// Clear REG_IE (FOR safety or something)
+	// Clear REG_IE (for safety or something)
 	REG_IE &= ~(IRQ_MASK);
 	
 	
@@ -175,7 +175,7 @@ void irq_init()
 
 
 // This function is currently only intended to service the VBlank
-// and Timer 0 interrupts.  I might add support FOR other interrupts later
+// and Timer 0 interrupts.  I might add support for other interrupts later
 // on, but there is currently no need.
 void isr_main()
 {

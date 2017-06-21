@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -34,11 +34,11 @@ class sprite;
 
 // There are a total of 16 BG palettes provided by the GBA hardware, each
 // with 15 colors (and one transparent "color").  This enum is intended to
-// be used FOR BG palette slots during these game modes:  gm_loading_level,
+// be used for BG palette slots during these game modes:  gm_loading_level,
 // gm_changing_sublevel, and gm_in_sublevel.
 enum bg_palette_slot_in_level
 {
-	// When in a level, blocks use palette slots 0, 1, 2, and 3 FOR now.
+	// When in a level, blocks use palette slots 0, 1, 2, and 3 for now.
 	// Perhaps in the future blocks will be able to use more than just
 	// these palette slots, what with there being 16 total BG palette
 	// slots.
@@ -65,7 +65,7 @@ enum bg_palette_slot_in_level
 
 // There are a total of 16 sprite palettes provided by the GBA hardware,
 // each with 15 colors (and one transparent "color").  This enum is
-// intended to be used FOR sprite palette slots during these game_mode's:
+// intended to be used for sprite palette slots during these game_mode's:
 // gm_loading_level, gm_changing_sublevel, and gm_in_sublevel.
 enum sprite_palette_slot
 {
@@ -85,7 +85,7 @@ enum sprite_palette_slot
 	
 	//// Enemy sprites use sprite palette slots 4, 5, and 6
 	// Enemy sprites use sprite palette slots 3, 4, and 5.  
-	// Perhaps there will eventually be a need FOR dynamic enemy palettes,
+	// Perhaps there will eventually be a need for dynamic enemy palettes,
 	// based on which types of enemies are in a particular level.  This
 	// would require some changes to the level class.
 	sps_enemy_0,
@@ -142,7 +142,7 @@ public:		// variables and constants
 	static prev_curr_pair<bg_point> bgofs_mirror[bgofs_mirror_size]
 		__attribute__((_IWRAM));
 	
-	// Current component arrays, stored in EWRAM as fixed24p8's FOR speed
+	// Current component arrays, stored in EWRAM as fixed24p8's for speed
 	// and accuracy reasons.
 	static constexpr u32 bg_fade_curr_component_arr_size 
 		= num_colors_in_8_palettes;
@@ -196,7 +196,7 @@ public:		// variables and constants
 	// 64 max sprites on screen at once should be plenty.  Sprite
 	// VRAM will be allocated in chunks of 32x32 pixels, or 8 tiles of 8x8
 	// pixels.  It's unlikely that any sprites larger than 32x32 would be
-	// needed.  Also, this is only the case FOR 4bpp graphics.
+	// needed.  Also, this is only the case for 4bpp graphics.
 	static constexpr u32 max_num_32x32_metatiles = 64;
 	
 	// BG palette stuff
@@ -222,7 +222,7 @@ public:		// functions
 		//bgofs_mirror[2].back_up();
 		//bgofs_mirror[3].back_up();
 		
-		FOR ( u32 i=0; i<bgofs_mirror_size; ++i )
+		for ( u32 i=0; i<bgofs_mirror_size; ++i )
 		{
 			prev_prev_bgofs_mirror[i] = bgofs_mirror[i].prev;
 			bgofs_mirror[i].back_up();
@@ -289,7 +289,7 @@ public:		// functions
 	static inline void init_hud_vram_as_tiles_start_offset()
 	{
 		hud_vram_as_tiles_start_offset = 0;
-		FOR ( u32 i=0; i<block_type::lim_bt; ++i )
+		for ( u32 i=0; i<block_type::lim_bt; ++i )
 		{
 			u32 graphics_slot = get_graphics_slot_of_block_type 
 				( (block_type)i );

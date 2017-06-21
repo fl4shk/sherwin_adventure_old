@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -21,7 +21,7 @@
 
 #include "coll_lseg_classes.hpp"
 
-// An abstract base class FOR a group of line segments FOR use with sprites
+// An abstract base class for a group of line segments for use with sprites
 // so that they can detect and respond to collisions with blocks
 class spr_blk_coll_group_base
 {
@@ -242,7 +242,7 @@ protected:		// functions
 // 
 
 
-// Sprite/Block Collision Group FOR collision boxes that are at most 16x16
+// Sprite/Block Collision Group for collision boxes that are at most 16x16
 // in size
 class spr_blk_coll_group_16x16 : public spr_blk_coll_group_base
 {
@@ -292,7 +292,7 @@ protected:		// functions
 	
 } __attribute__((_ALIGN4));
 
-// Sprite/Block Collision Group FOR collision boxes that are at most 16x32
+// Sprite/Block Collision Group for collision boxes that are at most 16x32
 // in size but larger than 16x16
 class spr_blk_coll_group_16x32 : public spr_blk_coll_group_base
 {

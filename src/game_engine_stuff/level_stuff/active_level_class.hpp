@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -90,8 +90,8 @@ public:		// static variables
 	
 	
 	// horiz_sublevel_block_data_2d is an array_csz_2d_helper that wraps
-	// the access to block_data_array FOR horizontal sublevels.  Support
-	// FOR vertical sublevels MIGHT come later.
+	// the access to block_data_array for horizontal sublevels.  Support
+	// for vertical sublevels MIGHT come later.
 	static array_csz_2d_helper< block, horiz_sublevel_xsize, 
 		horiz_sublevel_ysize > horiz_sublevel_block_data_2d;
 	
@@ -215,7 +215,7 @@ public:		// functions
 	//{
 	//	curr_free_block_slot = lim_bt;
 	//	
-	//	FOR ( u32 i=0; i<lim_bt; ++i )
+	//	for ( u32 i=0; i<lim_bt; ++i )
 	//	{
 	//		block_data_array[(block_type)i].type = (block_type)i;
 	//	}

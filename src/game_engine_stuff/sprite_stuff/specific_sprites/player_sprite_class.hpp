@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -81,7 +81,7 @@ public:		// enums
 	} _ALIGNAS_REGULAR;
 	
 	// This enum allows multiple frame_slot's to be represented by the same
-	// frame, which is used, FOR example, in the walking animation.  Also,
+	// frame, which is used, for example, in the walking animation.  Also,
 	// the reason this is necessary is that so which frame is currently
 	// active can be determined.  If two frames in the enum share a value,
 	// it is impossible to tell where in the walk cycle the player's
@@ -140,7 +140,7 @@ public:		// enums
 		frm_slot_weapon_swing_ground_moving_5_row_2,
 		
 		// Swinging a weapon, in the air (uses the same graphics as the
-		// ones FOR weapon swing, on the ground, but also moving, row 2).
+		// ones for weapon swing, on the ground, but also moving, row 2).
 		frm_slot_weapon_swing_air_0,
 		frm_slot_weapon_swing_air_1,
 		frm_slot_weapon_swing_air_2,
@@ -231,9 +231,9 @@ public:		// variables
 	//static const vec2_f24p8 the_initial_coll_box_size,
 	//	the_initial_cb_pos_offset;
 	//
-	//// This is used to correct the initial in-level position FOR sprites
+	//// This is used to correct the initial in-level position for sprites
 	//// that are normally considered to be of a certain size but that use
-	//// larger graphics FOR some frames.
+	//// larger graphics for some frames.
 	//static const vec2_f24p8 the_initial_in_level_pos_offset;
 	
 	

@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -386,7 +386,7 @@ public:		// typedefs
 public:		// functions
 	inline old_sa_free_list()
 	{
-		FOR ( int i=size-1; i>=0; --i )
+		for ( int i=size-1; i>=0; --i )
 		{
 			specific_sa_stack::push(i);
 		}
@@ -426,7 +426,7 @@ public:		// functions
 	{
 		//the_sa_free_list_backend.init();
 		
-		//FOR ( int i=get_size()-1; i>= 0; --i )
+		//for ( int i=get_size()-1; i>= 0; --i )
 		//{
 		//	push(i);
 		//}

@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -96,7 +96,7 @@ public:		// functions
 	
 	static inline void debug_infin_loop()
 	{
-		FOR (;;)
+		for (;;)
 		{
 			bios_wait_for_vblank();
 			//vblank_func();
@@ -105,7 +105,7 @@ public:		// functions
 	
 	static inline void wait_for_x_frames( u32 x )
 	{
-		FOR ( u32 i=0; i<x; ++i )
+		for ( u32 i=0; i<x; ++i )
 		{
 			bios_wait_for_vblank();
 		}

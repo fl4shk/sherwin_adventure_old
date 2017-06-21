@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -47,7 +47,7 @@
 bg_point gfx_manager::prev_prev_bgofs_mirror[bgofs_mirror_size];
 prev_curr_pair<bg_point> gfx_manager::bgofs_mirror[bgofs_mirror_size];
 
-// Current component arrays, stored in EWRAM as fixed24p8's FOR speed and
+// Current component arrays, stored in EWRAM as fixed24p8's for speed and
 // accuracy reasons.
 fixed24p8 gfx_manager::bg_fade_curr_red_arr
 	[bg_fade_curr_component_arr_size],
@@ -97,7 +97,7 @@ void gfx_manager::copy_bgofs_mirror_to_registers()
 	//REG_BGOFS[2] = bgofs_mirror[2].curr;
 	//REG_BGOFS[3] = bgofs_mirror[3].curr;
 	
-	FOR ( u32 i=0; i<4; ++i )
+	for ( u32 i=0; i<4; ++i )
 	{
 		REG_BGOFS[i].x = (s16)bgofs_mirror[i].curr.x.to_int_for_on_screen();
 		REG_BGOFS[i].y = (s16)bgofs_mirror[i].curr.y.to_int_for_on_screen();
@@ -159,7 +159,7 @@ void gfx_manager::upload_bg_tiles_to_vram()
 	// whenever multiple block_types share the same graphics_slot.  An
 	// example of this is how each variation of bt_eyes shares the same
 	// graphics slot.
-	FOR ( u32 i=0; i<block_type::lim_bt; ++i )
+	for ( u32 i=0; i<block_type::lim_bt; ++i )
 	{
 		u32 graphics_slot = get_graphics_slot_of_block_type 
 			( (block_type)i );
@@ -266,7 +266,7 @@ void gfx_manager::fade_out_to_black( u32 num_steps,
 	u32 num_frames_to_wait_per_iter )
 {
 	// Build the BG arrays of step amounts
-	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
 		s32 red_orig = rgb15_get_red_component(BG_PAL_RAM[i]);
 		s32 green_orig = rgb15_get_green_component(BG_PAL_RAM[i]);
@@ -280,7 +280,7 @@ void gfx_manager::fade_out_to_black( u32 num_steps,
 		bg_fade_curr_green_arr[i] = make_f24p8(green_orig);
 		bg_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
 		
-		// The target color is black, FOR the entire screen.
+		// The target color is black, for the entire screen.
 		fixed24p8& red_step_amount 
 			= bg_fade_red_step_amount_arr[i];
 		fixed24p8& green_step_amount 
@@ -297,7 +297,7 @@ void gfx_manager::fade_out_to_black( u32 num_steps,
 	}
 	
 	// Build the OBJ arrays of step amounts
-	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
 		s32 red_orig = rgb15_get_red_component(OBJ_PAL_RAM[i]);
 		s32 green_orig = rgb15_get_green_component(OBJ_PAL_RAM[i]);
@@ -311,7 +311,7 @@ void gfx_manager::fade_out_to_black( u32 num_steps,
 		obj_fade_curr_green_arr[i] = make_f24p8(green_orig);
 		obj_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
 		
-		// The target color is black, FOR the entire screen.
+		// The target color is black, for the entire screen.
 		fixed24p8& red_step_amount 
 			= obj_fade_red_step_amount_arr[i];
 		fixed24p8& green_step_amount 
@@ -328,10 +328,10 @@ void gfx_manager::fade_out_to_black( u32 num_steps,
 	}
 	
 	// Fading iteration
-	FOR ( u32 i=0; i<num_steps; ++i )
+	for ( u32 i=0; i<num_steps; ++i )
 	{
 		// For each BG palette
-		FOR ( u32 j=0; j<num_colors_in_8_palettes; ++j )
+		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
 			fixed24p8& curr_red = bg_fade_curr_red_arr[j];
 			fixed24p8& curr_green = bg_fade_curr_green_arr[j];
@@ -357,7 +357,7 @@ void gfx_manager::fade_out_to_black( u32 num_steps,
 		}
 		
 		// For each OBJ palette
-		FOR ( u32 j=0; j<num_colors_in_8_palettes; ++j )
+		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
 			fixed24p8& curr_red = obj_fade_curr_red_arr[j];
 			fixed24p8& curr_green = obj_fade_curr_green_arr[j];
@@ -387,11 +387,11 @@ void gfx_manager::fade_out_to_black( u32 num_steps,
 	
 	
 	// Just in case the conversion wasn't complete
-	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
 		BG_PAL_RAM[i] = 0;
 	}
-	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
 		OBJ_PAL_RAM[i] = 0;
 	}
@@ -402,7 +402,7 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 	u32 num_frames_to_wait_per_iter )
 {
 	// Build the BG arrays of step amounts
-	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
 		s32 red_orig = rgb15_get_red_component(BG_PAL_RAM[i]);
 		s32 green_orig = rgb15_get_green_component(BG_PAL_RAM[i]);
@@ -416,7 +416,7 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 		bg_fade_curr_green_arr[i] = make_f24p8(green_orig);
 		bg_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
 		
-		// The target color is white, FOR the entire screen.
+		// The target color is white, for the entire screen.
 		fixed24p8& red_step_amount 
 			= bg_fade_red_step_amount_arr[i];
 		fixed24p8& green_step_amount 
@@ -433,7 +433,7 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 	}
 	
 	// Build the OBJ arrays of step amounts
-	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
 		s32 red_orig = rgb15_get_red_component(OBJ_PAL_RAM[i]);
 		s32 green_orig = rgb15_get_green_component(OBJ_PAL_RAM[i]);
@@ -447,7 +447,7 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 		obj_fade_curr_green_arr[i] = make_f24p8(green_orig);
 		obj_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
 		
-		// The target color is white, FOR the entire screen.
+		// The target color is white, for the entire screen.
 		fixed24p8& red_step_amount 
 			= obj_fade_red_step_amount_arr[i];
 		fixed24p8& green_step_amount 
@@ -464,10 +464,10 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 	}
 	
 	// Fading iteration
-	FOR ( u32 i=0; i<num_steps; ++i )
+	for ( u32 i=0; i<num_steps; ++i )
 	{
 		// For each BG palette
-		FOR ( u32 j=0; j<num_colors_in_8_palettes; ++j )
+		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
 			fixed24p8& curr_red = bg_fade_curr_red_arr[j];
 			fixed24p8& curr_green = bg_fade_curr_green_arr[j];
@@ -496,7 +496,7 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 		}
 		
 		// For each OBJ palette
-		FOR ( u32 j=0; j<num_colors_in_8_palettes; ++j )
+		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
 			fixed24p8& curr_red = obj_fade_curr_red_arr[j];
 			fixed24p8& curr_green = obj_fade_curr_green_arr[j];
@@ -531,13 +531,13 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 	bios_wait_for_vblank();
 	
 	// Just in case the conversion wasn't complete
-	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
 		//BG_PAL_RAM[i] = make_rgb15( RGB15_COMPONENT_MAX_VAL,
 		//	RGB15_COMPONENT_MAX_VAL, RGB15_COMPONENT_MAX_VAL );
 		BG_PAL_RAM[i] = 0x7fff;
 	}
-	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
 		//OBJ_PAL_RAM[i] = make_rgb15( RGB15_COMPONENT_MAX_VAL,
 		//	RGB15_COMPONENT_MAX_VAL, RGB15_COMPONENT_MAX_VAL );
@@ -554,8 +554,8 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 	bios_wait_for_vblank();
 	
 	// Build the BG arrays of step amounts
-	//FOR ( u32 i=0; i<the_block_gfxPalLen / sizeof(u16); ++i )
-	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	//for ( u32 i=0; i<the_block_gfxPalLen / sizeof(u16); ++i )
+	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
 		s32 red_orig = rgb15_get_red_component(BG_PAL_RAM[i]);
 		s32 green_orig = rgb15_get_green_component(BG_PAL_RAM[i]);
@@ -573,7 +573,7 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 		bg_fade_curr_green_arr[i] = make_f24p8(green_orig);
 		bg_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
 		
-		// The target color is white, FOR the entire screen.
+		// The target color is white, for the entire screen.
 		fixed24p8& red_step_amount 
 			= bg_fade_red_step_amount_arr[i];
 		fixed24p8& green_step_amount 
@@ -590,7 +590,7 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 	}
 	
 	// Build the OBJ arrays of step amounts
-	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
 		s32 red_orig = rgb15_get_red_component(OBJ_PAL_RAM[i]);
 		s32 green_orig = rgb15_get_green_component(OBJ_PAL_RAM[i]);
@@ -604,7 +604,7 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 		obj_fade_curr_green_arr[i] = make_f24p8(green_orig);
 		obj_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
 		
-		// The target color is white, FOR the entire screen.
+		// The target color is white, for the entire screen.
 		fixed24p8& red_step_amount 
 			= obj_fade_red_step_amount_arr[i];
 		fixed24p8& green_step_amount 
@@ -621,12 +621,12 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 	}
 	
 	// Fading iteration
-	FOR ( u32 i=0; i<num_steps; ++i )
+	for ( u32 i=0; i<num_steps; ++i )
 	{
 		asm_comment("Before BG palette loop");
 		// For each BG palette
-		//FOR ( u32 j=0; j<the_block_gfxPalLen / sizeof(u16); ++j )
-		FOR ( u32 j=0; j<num_colors_in_8_palettes; ++j )
+		//for ( u32 j=0; j<the_block_gfxPalLen / sizeof(u16); ++j )
+		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
 			fixed24p8& curr_red = bg_fade_curr_red_arr[j];
 			fixed24p8& curr_green = bg_fade_curr_green_arr[j];
@@ -639,7 +639,7 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 			fixed24p8 blue_step_amount 
 				= bg_fade_blue_step_amount_arr[j];
 			
-			// Don't need make_f24p8() FOR these because color component
+			// Don't need make_f24p8() for these because color component
 			// values are guaranteed to be positive.
 			//fixed24p8 target_red = { (s32)rgb15_get_red_component
 			//	(the_block_gfxPal[j]) << fixed24p8::get_shift() };
@@ -669,7 +669,7 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 		
 		asm_comment("Before OBJ palette loop");
 		// For each OBJ palette
-		FOR ( u32 j=0; j<num_colors_in_8_palettes; ++j )
+		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
 			fixed24p8& curr_red = obj_fade_curr_red_arr[j];
 			fixed24p8& curr_green = obj_fade_curr_green_arr[j];

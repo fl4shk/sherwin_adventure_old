@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -22,11 +22,11 @@
 // Thursday, July 23, 2015 (9:35 PM EST) Note: I will use a top middle coll
 // point and a bottom middle coll point, starting tomorrow.  
 
-// The top middle coll point will be used FOR checking the type of block
+// The top middle coll point will be used for checking the type of block
 // that has been hit by a sprite that has jumped.  
 
 // The bottom middle coll point will be used
-// as the primary thing FOR checking if a sprite is on the ground.
+// as the primary thing for checking if a sprite is on the ground.
 
 
 // Friday, October 23, 2015 (12:10 PM CST) Lol, I forgot that the first

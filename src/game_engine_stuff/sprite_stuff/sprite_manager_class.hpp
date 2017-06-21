@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -85,7 +85,7 @@ public:		// variables
 	
 	
 	
-	// This is FOR speeding up allocation and deallocation
+	// This is for speeding up allocation and deallocation
 	// -- Switch to linear_memory_allocator --
 	static s16 the_player_secondary_sprites_free_list_arr
 		[max_num_player_secondary_sprites];
@@ -123,7 +123,7 @@ public:		// variables
 	static sprite the_sprites[max_num_regular_sprites]
 		__attribute__((_IWRAM));
 	
-	// The array of pseudo-background sprites, which are ONLY checked FOR
+	// The array of pseudo-background sprites, which are ONLY checked for
 	// intersection with the_player (and possibly player secondary sprites)
 	// -- Switch to linear_memory_allocator --
 	static sprite the_pseudo_bg_sprites[max_num_pseudo_bg_sprites];
@@ -269,13 +269,13 @@ public:		// functions
 	{
 		//u32 vram_chunk_index = 1;
 		//
-		//FOR ( sprite& spr : the_sprites )
+		//for ( sprite& spr : the_sprites )
 		//{
 		//	spr.set_vram_chunk_index(vram_chunk_index++);
 		//}
 		
 		// Secondary sprites "claimed" by the_player.
-		FOR ( u32 i=0; i<max_num_player_secondary_sprites; ++i )
+		for ( u32 i=0; i<max_num_player_secondary_sprites; ++i )
 		{
 			the_player_secondary_sprites[i]
 				.set_vram_chunk_index( i 
@@ -283,21 +283,21 @@ public:		// functions
 		}
 		
 		// Other secondary sprites
-		FOR ( u32 i=0; i<max_num_secondary_sprites; ++i )
+		for ( u32 i=0; i<max_num_secondary_sprites; ++i )
 		{
 			the_secondary_sprites[i].set_vram_chunk_index( i
 				+ the_secondary_sprites_starting_vram_chunk_index );
 		}
 		
 		// Regular sprites
-		FOR ( u32 i=0; i<max_num_regular_sprites; ++i )
+		for ( u32 i=0; i<max_num_regular_sprites; ++i )
 		{
 			the_sprites[i].set_vram_chunk_index( i 
 				+ the_active_sprites_starting_vram_chunk_index );
 		}
 		
 		// Regular sprites
-		FOR ( u32 i=0; i<max_num_pseudo_bg_sprites; ++i )
+		for ( u32 i=0; i<max_num_pseudo_bg_sprites; ++i )
 		{
 			the_pseudo_bg_sprites[i].set_vram_chunk_index( i 
 				+ the_pseudo_bg_sprites_starting_vram_chunk_index );

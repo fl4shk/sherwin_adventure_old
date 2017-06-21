@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -89,7 +89,7 @@ sprite sprite_manager::the_allocatable_player
 sprite sprite_manager::the_sprites
 	[sprite_manager::max_num_regular_sprites];
 
-// The array of pseudo-background sprites, which are ONLY checked FOR
+// The array of pseudo-background sprites, which are ONLY checked for
 // intersection with the_player (and possibly player secondary sprites)
 sprite sprite_manager::the_pseudo_bg_sprites
 	[sprite_manager::max_num_pseudo_bg_sprites];
@@ -366,7 +366,7 @@ s32 sprite_manager::spawn_a_player_secondary_sprite_basic
 	//
 	//// Find a free sprite slot.  This should really be done with an
 	//// sa_free_list.
-	//FOR ( ;
+	//for ( ;
 	//	next_sprite_index<the_player_secondary_sprites.size();
 	//	++next_sprite_index )
 	//{
@@ -428,7 +428,7 @@ s32 sprite_manager::spawn_a_secondary_sprite_basic
 	//
 	//// Find a free sprite slot.  This should really be done with an
 	//// sa_free_list.
-	//FOR ( ;
+	//for ( ;
 	//	next_sprite_index<the_secondary_sprites.size();
 	//	++next_sprite_index )
 	//{
@@ -495,7 +495,7 @@ s32 sprite_manager::spawn_a_sprite_basic( sprite_type the_sprite_type,
 	//
 	//// Find a free sprite slot.  This should really be done with an
 	//// sa_free_list.
-	//FOR ( ; next_sprite_index<the_sprites.size(); ++next_sprite_index )
+	//for ( ; next_sprite_index<the_sprites.size(); ++next_sprite_index )
 	//{
 	//	//if ( the_sprites[next_sprite_index].the_sprite_type == st_default )
 	//	if ( the_sprites[next_sprite_index] == NULL )
@@ -620,7 +620,7 @@ void sprite_manager::clear_the_sprite_arrays()
 	//memfill32( the_sprites, 0, max_num_regular_sprites 
 	//	* sizeof(sprite) / sizeof(u32) );
 	
-	FOR ( u32 i=0; i<max_num_player_secondary_sprites; ++i )
+	for ( u32 i=0; i<max_num_player_secondary_sprites; ++i )
 	{
 		//if ( the_player_secondary_sprites[i] != NULL )
 		//{
@@ -633,7 +633,7 @@ void sprite_manager::clear_the_sprite_arrays()
 			(the_player_secondary_sprites[i]);
 	}
 	
-	FOR ( u32 i=0; i<max_num_secondary_sprites; ++i )
+	for ( u32 i=0; i<max_num_secondary_sprites; ++i )
 	{
 		//if ( the_secondary_sprites[i] != NULL )
 		//{
@@ -645,7 +645,7 @@ void sprite_manager::clear_the_sprite_arrays()
 			(the_secondary_sprites[i]);
 	}
 	
-	FOR ( u32 i=0; i<max_num_regular_sprites; ++i )
+	for ( u32 i=0; i<max_num_regular_sprites; ++i )
 	{
 		//if ( the_sprites[i] != NULL )
 		//{
@@ -655,7 +655,7 @@ void sprite_manager::clear_the_sprite_arrays()
 		the_sprites_allocator.deallocate_sprite(the_sprites[i]);
 	}
 	
-	FOR ( u32 i=0; i<max_num_pseudo_bg_sprites; ++i )
+	for ( u32 i=0; i<max_num_pseudo_bg_sprites; ++i )
 	{
 		//if ( the_pseudo_bg_sprites[i] != NULL )
 		//{
@@ -688,13 +688,13 @@ void sprite_manager::init_horiz_sublevel_sprite_ipg_lists
 	( const sprite_init_param_group* the_ext_sprite_ipg_arr, 
 	u32 the_ext_sprite_ipg_arr_size )
 {
-	FOR ( auto& the_list : active_level::horiz_sublevel_sprite_ipg_lists
+	for ( auto& the_list : active_level::horiz_sublevel_sprite_ipg_lists
 		.ea_list_array )
 	{
 		the_list.fully_deallocate();
 	}
 	
-	FOR ( u32 i=0; i<the_ext_sprite_ipg_arr_size; ++i )
+	for ( u32 i=0; i<the_ext_sprite_ipg_arr_size; ++i )
 	{
 		if ( the_ext_sprite_ipg_arr[i].type != st_default )
 		{
@@ -704,13 +704,13 @@ void sprite_manager::init_horiz_sublevel_sprite_ipg_lists
 		}
 	}
 	
-	//FOR ( auto& the_list : active_level::horiz_sublevel_sprite_ipg_lists
+	//for ( auto& the_list : active_level::horiz_sublevel_sprite_ipg_lists
 	//	.the_array )
 	//{
 	//	the_list.fully_deallocate();
 	//}
 	
-	FOR ( auto& the_list : active_level::horiz_sublevel_sprite_ipg_lists
+	for ( auto& the_list : active_level::horiz_sublevel_sprite_ipg_lists
 		.ea_list_array )
 	{
 		the_list.insertion_sort();
@@ -731,7 +731,7 @@ void sprite_manager::init_horiz_sublevel_sprite_ipg_lists
 //	the_sprites[0].update_on_screen_pos(gfx_manager::bgofs_mirror[0].curr);
 //	the_sprites[0].copy_the_oam_entry_to_oam_mirror(1);
 //	
-//	FOR ( u32 i=1; i<the_sprites.size(); ++i )
+//	for ( u32 i=1; i<the_sprites.size(); ++i )
 //	{
 //		sprite& the_spr = the_sprites[i];
 //		sprite& the_prev_spr = the_sprites[i - 1];
@@ -851,14 +851,14 @@ void sprite_manager::initial_sprite_spawning_shared_code
 		.to_int_for_on_screen() >> 4 };
 	
 	
-	//FOR ( std::forward_list<sprite_init_param_group>& which_list
+	//for ( std::forward_list<sprite_init_param_group>& which_list
 	//	: active_level::horiz_sublevel_sprite_ipg_lists )
-	FOR ( auto& which_list : active_level::horiz_sublevel_sprite_ipg_lists
+	for ( auto& which_list : active_level::horiz_sublevel_sprite_ipg_lists
 		.ea_list_array )
 	{
 		sprite_init_param_group* sprite_ipg = NULL;
-		//FOR ( sprite_init_param_group& sprite_ipg : which_list )
-		FOR ( int i=which_list.get_front_index();
+		//for ( sprite_init_param_group& sprite_ipg : which_list )
+		for ( int i=which_list.get_front_index();
 			i!=-1;
 			i=which_list.get_node_at(i).next_index() )
 		{
@@ -981,14 +981,14 @@ void sprite_manager::initial_sprite_spawning_shared_code
 	next_oam_index = the_active_sprites_starting_oam_index;
 	
 	// Run each active sprite's update_part_1() function.
-	FOR ( sprite& spr : the_sprites )
+	for ( sprite& spr : the_sprites )
 	{
 		if ( spr.the_sprite_type != st_default )
 		{
 			spr.update_part_1();
 		}
 	}
-	FOR ( sprite& spr : the_pseudo_bg_sprites )
+	for ( sprite& spr : the_pseudo_bg_sprites )
 	{
 		if ( spr.the_sprite_type != st_default )
 		{
@@ -997,14 +997,14 @@ void sprite_manager::initial_sprite_spawning_shared_code
 	}
 	
 	// Run each active sprite's update_part_2() function.
-	FOR ( sprite& spr : the_sprites )
+	for ( sprite& spr : the_sprites )
 	{
 		if ( spr.the_sprite_type != st_default )
 		{
 			spr.update_part_2();
 		}
 	}
-	FOR ( sprite& spr : the_pseudo_bg_sprites )
+	for ( sprite& spr : the_pseudo_bg_sprites )
 	{
 		if ( spr.the_sprite_type != st_default )
 		{
@@ -1013,14 +1013,14 @@ void sprite_manager::initial_sprite_spawning_shared_code
 	}
 	
 	// Run each active sprite's update_part_3() function.
-	FOR ( sprite& spr : the_sprites )
+	for ( sprite& spr : the_sprites )
 	{
 		if ( spr.the_sprite_type != st_default )
 		{
 			spr.update_part_3( camera_pos_pc_pair, next_oam_index );
 		}
 	}
-	FOR ( sprite& spr : the_pseudo_bg_sprites )
+	for ( sprite& spr : the_pseudo_bg_sprites )
 	{
 		if ( spr.the_sprite_type != st_default )
 		{
@@ -1042,7 +1042,7 @@ void sprite_manager::find_all_active_sprites()
 	//	sprite** active_sprites_arr, const u32 sprites_arr_size, 
 	//	u32& num_active_sprites_in_category ) -> void
 	//{
-	//	FOR ( u32 i=0; i<sprites_arr_size; ++i )
+	//	for ( u32 i=0; i<sprites_arr_size; ++i )
 	//	{
 	//		sprite& the_spr = sprites_arr[i];
 	//		if ( the_spr.the_sprite_type != st_default )
@@ -1059,7 +1059,7 @@ void sprite_manager::find_all_active_sprites()
 	{
 		num_active_sprites_in_category = 0;
 		
-		FOR ( u32 i=0; i<sprites_arr_size; ++i )
+		for ( u32 i=0; i<sprites_arr_size; ++i )
 		{
 			//sprite& the_spr = sprites_arr[i];
 			//if ( the_spr.the_sprite_type != st_default )
@@ -1141,7 +1141,7 @@ void sprite_manager::spawn_sprites_if_needed
 		(camera_pos_pc_pair.curr.x.round_to_int());
 	
 	
-	// "cm_dir" is short FOR "camera_movement_direction".
+	// "cm_dir" is short for "camera_movement_direction".
 	int cm_dir;
 	
 	if ( camera_block_grid_pos_x.curr > camera_block_grid_pos_x.prev )
@@ -1178,7 +1178,7 @@ void sprite_manager::spawn_sprites_if_needed
 	//u32 next_sprite_index = 0;
 	//
 	//// Find a free sprite slot.
-	//FOR ( ; next_sprite_index<the_sprites.size(); ++next_sprite_index )
+	//for ( ; next_sprite_index<the_sprites.size(); ++next_sprite_index )
 	//{
 	//	//if ( the_sprites[next_sprite_index].the_sprite_type == st_default )
 	//	//{
@@ -1212,10 +1212,10 @@ void sprite_manager::spawn_sprites_if_needed
 		// Spawn whole columns of sprites at a time, regardless of whether
 		// they are are veritcally on screen.  This assumes that all
 		// sublevels are horizontal.
-		FOR ( s32 i=camera_block_grid_pos_x.prev;
+		for ( s32 i=camera_block_grid_pos_x.prev;
 			i<=camera_block_grid_pos_x.curr;
 			++i )
-		//FOR ( s32 i=camera_block_grid_pos_x.prev;
+		//for ( s32 i=camera_block_grid_pos_x.prev;
 		//	i<=camera_block_grid_pos_x.curr + 1;
 		//	++i )
 		{
@@ -1226,9 +1226,9 @@ void sprite_manager::spawn_sprites_if_needed
 			
 			// Spawn sprites from the top of the column to the bottom of
 			// the column.
-			//FOR ( sprite_init_param_group& sprite_ipg 
+			//for ( sprite_init_param_group& sprite_ipg 
 			//	: active_level::horiz_sublevel_sprite_ipg_lists[i] )
-			FOR ( int j=curr_sprite_ipg_list.get_front_index();
+			for ( int j=curr_sprite_ipg_list.get_front_index();
 				j!=-1;
 				j=curr_sprite_ipg_list.get_node_at(j).next_index() )
 			{
@@ -1301,13 +1301,13 @@ void sprite_manager::spawn_sprites_if_needed
 		// Spawn whole columns of sprites at a time, regardless of whether
 		// they are are veritcally on screen.  This assumes that all
 		// sublevels are horizontal.
-		//FOR ( s32 i=camera_block_grid_pos_x.prev + 5;
+		//for ( s32 i=camera_block_grid_pos_x.prev + 5;
 		//	i>=camera_block_grid_pos_x.curr - 1;
 		//	--i )
-		//FOR ( s32 i=camera_block_grid_pos_x.prev;
+		//for ( s32 i=camera_block_grid_pos_x.prev;
 		//	i>=camera_block_grid_pos_x.curr - 2;
 		//	--i )
-		FOR ( s32 i=camera_block_grid_pos_x.prev - 1;
+		for ( s32 i=camera_block_grid_pos_x.prev - 1;
 			i>=camera_block_grid_pos_x.curr - 2;
 			--i )
 		{
@@ -1323,9 +1323,9 @@ void sprite_manager::spawn_sprites_if_needed
 			
 			// Spawn sprites from the top of the column to the bottom of
 			// the column.
-			//FOR ( sprite_init_param_group& sprite_ipg 
+			//for ( sprite_init_param_group& sprite_ipg 
 			//	: active_level::horiz_sublevel_sprite_ipg_lists[i] )
-			FOR ( int j=curr_sprite_ipg_list.get_front_index();
+			for ( int j=curr_sprite_ipg_list.get_front_index();
 				j!=-1;
 				j=curr_sprite_ipg_list.get_node_at(j).next_index() )
 			{
@@ -1447,9 +1447,9 @@ void sprite_manager::despawn_sprites_if_needed
 	};
 	
 	
-	//FOR ( sprite*& spr : the_active_player_secondary_sprites )
-	//FOR ( u32 i=0; i<the_player_secondary_sprites.size(); ++i )
-	FOR ( u32 i=0; i<num_active_player_secondary_sprites; ++i )
+	//for ( sprite*& spr : the_active_player_secondary_sprites )
+	//for ( u32 i=0; i<the_player_secondary_sprites.size(); ++i )
+	for ( u32 i=0; i<num_active_player_secondary_sprites; ++i )
 	{
 		sprite*& spr_ptr = the_active_player_secondary_sprites[i];
 		
@@ -1462,9 +1462,9 @@ void sprite_manager::despawn_sprites_if_needed
 		}
 	}
 	
-	//FOR ( sprite*& spr : the_active_secondary_sprites )
-	//FOR ( u32 i=0; i<the_secondary_sprites.size(); ++i )
-	FOR ( u32 i=0; i<num_active_secondary_sprites; ++i )
+	//for ( sprite*& spr : the_active_secondary_sprites )
+	//for ( u32 i=0; i<the_secondary_sprites.size(); ++i )
+	for ( u32 i=0; i<num_active_secondary_sprites; ++i )
 	{
 		sprite*& spr_ptr = the_active_secondary_sprites[i];
 		
@@ -1476,9 +1476,9 @@ void sprite_manager::despawn_sprites_if_needed
 		}
 	}
 	
-	//FOR ( sprite*& spr : the_active_sprites )
-	//FOR ( u32 i=0; i<the_sprites.size(); ++i )
-	FOR ( u32 i=0; i<num_active_sprites; ++i )
+	//for ( sprite*& spr : the_active_sprites )
+	//for ( u32 i=0; i<the_sprites.size(); ++i )
+	for ( u32 i=0; i<num_active_sprites; ++i )
 	{
 		sprite*& spr_ptr = the_active_sprites[i];
 		
@@ -1490,9 +1490,9 @@ void sprite_manager::despawn_sprites_if_needed
 		}
 	}
 	
-	//FOR ( sprite*& spr : the_active_pseudo_bg_sprites )
-	//FOR ( u32 i=0; i<the_pseudo_bg_sprites.size(); ++i )
-	FOR ( u32 i=0; i<num_active_pseudo_bg_sprites; ++i )
+	//for ( sprite*& spr : the_active_pseudo_bg_sprites )
+	//for ( u32 i=0; i<the_pseudo_bg_sprites.size(); ++i )
+	for ( u32 i=0; i<num_active_pseudo_bg_sprites; ++i )
 	{
 		sprite*& spr_ptr = the_active_pseudo_bg_sprites[i];
 		
@@ -1533,50 +1533,50 @@ void sprite_manager::upload_tiles_of_active_sprites_to_vram()
 		}
 	};
 	
-	//// For some reason range-based FOR loops and the lambda function don't
+	//// For some reason range-based for loops and the lambda function don't
 	//// play well together.  I don't know if this is a GCC bug or a
 	//// misunderstanding on my part (could be both).
-	////FOR ( sprite* spr : the_player_secondary_sprites )
-	//FOR ( size_t i=0; i<the_player_secondary_sprites.size(); ++i )
+	////for ( sprite* spr : the_player_secondary_sprites )
+	//for ( size_t i=0; i<the_player_secondary_sprites.size(); ++i )
 	//{
 	//	for_loop_contents(the_player_secondary_sprites.at(i));
 	//}
 	//
-	////FOR ( sprite* spr : the_sprites )
-	//FOR ( size_t i=0; i<the_sprites.size(); ++i )
+	////for ( sprite* spr : the_sprites )
+	//for ( size_t i=0; i<the_sprites.size(); ++i )
 	//{
 	//	for_loop_contents(the_sprites.at(i));
 	//}
 	//
-	////FOR ( * spr : the_secondary_sprites )
-	//FOR ( size_t i=0; i<the_secondary_sprites.size(); ++i )
+	////for ( * spr : the_secondary_sprites )
+	//for ( size_t i=0; i<the_secondary_sprites.size(); ++i )
 	//{
 	//	for_loop_contents(the_secondary_sprites.at(i));
 	//}
 	
-	// For some reason range-based FOR loops and the lambda function don't
+	// For some reason range-based for loops and the lambda function don't
 	// play well together.  I don't know if this is a GCC bug or a
 	// misunderstanding on my part (could be both).
-	//FOR ( sprite* spr : the_player_secondary_sprites )
-	FOR ( size_t i=0; i<num_active_player_secondary_sprites; ++i )
+	//for ( sprite* spr : the_player_secondary_sprites )
+	for ( size_t i=0; i<num_active_player_secondary_sprites; ++i )
 	{
 		for_loop_contents(the_active_player_secondary_sprites.at(i));
 	}
 	
-	//FOR ( sprite* spr : the_sprites )
-	FOR ( size_t i=0; i<num_active_sprites; ++i )
+	//for ( sprite* spr : the_sprites )
+	for ( size_t i=0; i<num_active_sprites; ++i )
 	{
 		for_loop_contents(the_active_sprites.at(i));
 	}
 	
-	//FOR ( * spr : the_secondary_sprites )
-	FOR ( size_t i=0; i<num_active_secondary_sprites; ++i )
+	//for ( * spr : the_secondary_sprites )
+	for ( size_t i=0; i<num_active_secondary_sprites; ++i )
 	{
 		for_loop_contents(the_active_secondary_sprites.at(i));
 	}
 	
-	//FOR ( * spr : the_pseudo_bg_sprites )
-	FOR ( size_t i=0; i<num_active_pseudo_bg_sprites; ++i )
+	//for ( * spr : the_pseudo_bg_sprites )
+	for ( size_t i=0; i<num_active_pseudo_bg_sprites; ++i )
 	{
 		for_loop_contents(the_active_pseudo_bg_sprites.at(i));
 	}
@@ -1600,7 +1600,7 @@ void sprite_manager::update_all_sprites
 		= []( u32 num_active_sprites_in_category, 
 		sprite** active_sprites_arr ) -> void
 	{
-		FOR ( u32 i=0; i<num_active_sprites_in_category; ++i )
+		for ( u32 i=0; i<num_active_sprites_in_category; ++i )
 		{
 			sprite& the_spr = *(active_sprites_arr[i]);
 			//sprite_stuff_array[the_spr.the_sprite_type]
@@ -1634,7 +1634,7 @@ void sprite_manager::update_all_sprites
 		= []( u32 num_active_sprites_in_category, 
 		sprite** active_sprites_arr ) -> void
 	{
-		FOR ( u32 i=0; i<num_active_sprites_in_category; ++i )
+		for ( u32 i=0; i<num_active_sprites_in_category; ++i )
 		{
 			sprite& the_spr = *(active_sprites_arr[i]);
 			//sprite_stuff_array[the_spr.the_sprite_type]
@@ -1684,7 +1684,7 @@ void sprite_manager::update_all_sprites
 	// Secondary sprites "claimed" by the_player
 	next_oam_index = the_player_secondary_sprites_starting_oam_index;
 	
-	FOR ( u32 i=0; i<num_active_player_secondary_sprites; ++i )
+	for ( u32 i=0; i<num_active_player_secondary_sprites; ++i )
 	{
 		sprite& the_spr = *(the_active_player_secondary_sprites[i]);
 		
@@ -1699,7 +1699,7 @@ void sprite_manager::update_all_sprites
 		//	( the_spr, camera_pos_pc_pair.curr, next_oam_index );
 		the_spr.update_part_3( camera_pos_pc_pair, next_oam_index );
 		
-		FOR ( u32 j=0; j<num_active_sprites; ++j )
+		for ( u32 j=0; j<num_active_sprites; ++j )
 		{
 			sprite& the_other_spr = *(the_active_sprites[j]);
 			
@@ -1712,7 +1712,7 @@ void sprite_manager::update_all_sprites
 	// Other secondary sprites
 	next_oam_index = the_secondary_sprites_starting_oam_index;
 	
-	FOR ( u32 i=0; i<num_active_secondary_sprites; ++i )
+	for ( u32 i=0; i<num_active_secondary_sprites; ++i )
 	{
 		sprite& the_spr = *(the_active_secondary_sprites[i]);
 		
@@ -1727,7 +1727,7 @@ void sprite_manager::update_all_sprites
 		//	( the_spr, camera_pos_pc_pair.curr, next_oam_index );
 		the_spr.update_part_3( camera_pos_pc_pair, next_oam_index );
 		
-		FOR ( u32 j=0; j<num_active_sprites; ++j )
+		for ( u32 j=0; j<num_active_sprites; ++j )
 		{
 			sprite& the_other_spr = *(the_active_sprites[j]);
 			
@@ -1739,7 +1739,7 @@ void sprite_manager::update_all_sprites
 	// Secondary sprites
 	next_oam_index = the_pseudo_bg_sprites_starting_oam_index;
 	
-	FOR ( u32 i=0; i<num_active_pseudo_bg_sprites; ++i )
+	for ( u32 i=0; i<num_active_pseudo_bg_sprites; ++i )
 	{
 		sprite& the_spr = *(the_active_pseudo_bg_sprites[i]);
 		
@@ -1754,7 +1754,7 @@ void sprite_manager::update_all_sprites
 		//	( the_spr, camera_pos_pc_pair.curr, next_oam_index );
 		the_spr.update_part_3( camera_pos_pc_pair, next_oam_index );
 		
-		//FOR ( u32 j=0; j<num_active_sprites; ++j )
+		//for ( u32 j=0; j<num_active_sprites; ++j )
 		//{
 		//	sprite& the_other_spr = *(the_active_sprites[j]);
 		//	
@@ -1766,7 +1766,7 @@ void sprite_manager::update_all_sprites
 	// Regular sprites
 	next_oam_index = the_active_sprites_starting_oam_index;
 	
-	FOR ( u32 i=0; i<num_active_sprites; ++i )
+	for ( u32 i=0; i<num_active_sprites; ++i )
 	{
 		sprite& the_spr = *(the_active_sprites[i]);
 		
@@ -1783,7 +1783,7 @@ void sprite_manager::update_all_sprites
 		
 		if ( i == 0 )
 		{
-			FOR ( u32 j=1; j<num_active_sprites; ++j )
+			for ( u32 j=1; j<num_active_sprites; ++j )
 			{
 				sprite& the_other_spr = *(the_active_sprites[j]);
 				
@@ -1792,13 +1792,13 @@ void sprite_manager::update_all_sprites
 		}
 		else if ( i > 0 && i < num_active_sprites - 1 )
 		{
-			FOR ( u32 j=0; j<i; ++j )
+			for ( u32 j=0; j<i; ++j )
 			{
 				sprite& the_other_spr = *(the_active_sprites[j]);
 				
 				two_sprites_coll_box_test_thing( the_spr, the_other_spr );
 			}
-			FOR ( u32 j=i+1; j<num_active_sprites; ++j )
+			for ( u32 j=i+1; j<num_active_sprites; ++j )
 			{
 				sprite& the_other_spr = *(the_active_sprites[j]);
 				

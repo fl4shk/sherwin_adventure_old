@@ -9,8 +9,8 @@
 // 
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License FOR more details.
+// MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -36,9 +36,9 @@ enum sublevel_entrance_type
 } __attribute__((_ALIGN4));
 
 
-// There is probably no need FOR a sublevel_exit class because that
+// There is probably no need for a sublevel_exit class because that
 // information is supposed to be embedded in the sprite_init_param_group
-// sprite level data, FOR the relevant types of sprites.
+// sprite level data, for the relevant types of sprites.
 class sublevel_entrance
 {
 public:		// variables
