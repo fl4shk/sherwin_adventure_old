@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -31,9 +31,9 @@
 class coll_box;
 
 int coll_box_intersects_now( const coll_box& a, const coll_box& b )
-	__attribute__((_iwram_code,_target_arm));
+	__attribute__((_IWRAM_CODE,_TARGET_ARM));
 //int coll_box_intersects_now_2( const coll_box& a, const coll_box& b )
-//	__attribute__((_iwram_code,_target_arm));
+//	__attribute__((_IWRAM_CODE,_TARGET_ARM));
 int coll_box_intersects_now_2( const coll_box& a, const coll_box& b );
 
 
@@ -112,7 +112,7 @@ public:		// functions
 		return coll_box_intersects_now_2( *this, other );
 	}
 	
-	int contains( const vec2_f24p8& point ) __attribute__((_iwram_code));
+	int contains( const vec2_f24p8& point ) __attribute__((_IWRAM_CODE));
 	
 	// Note:  This function doesn't check whether right_x > left_x, nor
 	// whether bot_y > top_y.  That makes this function less safe than it
@@ -129,7 +129,7 @@ public:		// functions
 	
 	
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 

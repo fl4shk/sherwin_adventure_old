@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -53,7 +53,7 @@
 //{
 //public:		// enums
 //	enum origin_corner { oc_lt, oc_rt, oc_lb, oc_rb }
-//		__attribute__((_align4));
+//		__attribute__((_ALIGN4));
 //	
 //protected:		// variables
 //	origin_corner the_origin_corner;
@@ -308,14 +308,14 @@
 //		return false;
 //	}
 //	
-//} __attribute__((_align4));
+//} __attribute__((_ALIGN4));
 
 
 class orientable_coll_box
 {
 public:		// enums
 	enum origin_corner { oc_lt, oc_rt, oc_lb, oc_rb }
-		__attribute__((_align4));
+		__attribute__((_ALIGN4));
 	
 protected:		// variables
 	// the_origin_corner is protected so that it can only be changed by
@@ -625,7 +625,7 @@ public:		// functions
 		return false;
 	}
 	
-	// The separating axis theorem is being used for this function.
+	// The separating axis theorem is being used FOR this function.
 	inline bool intersects_now( const orientable_coll_box& other )
 	{
 		static constexpr u32 num_corners = 4, num_edges = 4, num_axes = 4;
@@ -712,7 +712,7 @@ public:		// functions
 		{
 			min = max = axis.dot_prod(corners_arr.at(0));
 			
-			for ( u32 i=1; i<corners_arr.size(); ++i )
+			FOR ( u32 i=1; i<corners_arr.size(); ++i )
 			{
 				fixed24p8 p = axis.dot_prod(corners_arr.at(i));
 				
@@ -758,7 +758,7 @@ public:		// functions
 		};
 		
 		// loop over axes
-		for ( const vec2_f24p8& axis : axes )
+		FOR ( const vec2_f24p8& axis : axes )
 		{
 			fixed24p8 min, max, other_min, other_max;
 			
@@ -775,7 +775,7 @@ public:		// functions
 		}
 		
 		// loop over other_axes
-		for ( const vec2_f24p8& other_axis : other_axes )
+		FOR ( const vec2_f24p8& other_axis : other_axes )
 		{
 			fixed24p8 min, max, other_min, other_max;
 			

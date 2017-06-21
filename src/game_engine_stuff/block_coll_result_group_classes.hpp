@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -37,9 +37,9 @@ class block_coll_result
 public:		// variables
 	//vec2_s32 coord;
 	//block_type type;
-	block* the_block __attribute__((_align4));
-	//block_behavior_type the_bbvt __attribute__((_align4));
-	u32 the_bbvt __attribute__((_align4));
+	block* the_block __attribute__((_ALIGN4));
+	//block_behavior_type the_bbvt __attribute__((_ALIGN4));
+	u32 the_bbvt __attribute__((_ALIGN4));
 	
 public:		// functions
 	inline block_coll_result()
@@ -93,7 +93,7 @@ public:		// functions
 		return (block_behavior_type)the_bbvt;
 	}
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 
@@ -108,7 +108,7 @@ public:		// constants
 	// The maximum number of blocks intersected by a sprite, per dimension.
 	// The value of ( 3, 3 ) corresponds to a 32x32 sprite.  Definitely
 	// change these two values (among other things) if there is every any
-	// infrastructure for sprites larger than 32x32 pixels.
+	// infrastructure FOR sprites larger than 32x32 pixels.
 	//const vec2_u32 block_coll_result_rect_group::shared_max_size_2d( 3, 3 );
 	static constexpr vec2_u32 max_size_2d = vec2_u32( 3, 3 );
 	//static constexpr vec2_u32 max_size_2d = vec2_u32( 80, 80 );
@@ -293,15 +293,15 @@ public:		// functions
 	//void get_corner_stuff_old
 	//	( array_helper<block_coll_result*>& bcr_ptr_arr_helper, 
 	//	array_helper<u32>& bool_as_u32_arr_helper )
-	//	__attribute__((_target_arm));
+	//	__attribute__((_TARGET_ARM));
 	//
 	//void get_coll_box_related_stuff_old( const sprite& the_sprite,
 	//	array_helper<block_coll_result*>& bcr_ptr_arr_helper )
-	//	__attribute__((_target_arm));
+	//	__attribute__((_TARGET_ARM));
 	//
 	//void get_side_blocked_stuff_old
 	//	( array_helper<u32>& bool_as_u32_arr_helper )
-	//	__attribute__((_target_arm));
+	//	__attribute__((_TARGET_ARM));
 	
 protected:		// functions
 	inline void init_bcr_arr_csz_2d_helper()
@@ -312,7 +312,7 @@ protected:		// functions
 	}
 	
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 class bcr_lseg_group
 {
@@ -350,16 +350,16 @@ public:		// functions
 	}
 	
 	void init( const horiz_coll_lseg& the_coll_lseg );
-		//__attribute__((_iwram_code));
+		//__attribute__((_IWRAM_CODE));
 	void init( const vert_coll_lseg& the_coll_lseg )
-		__attribute__((_iwram_code));
+		__attribute__((_IWRAM_CODE));
 	
 	block_coll_result* horiz_any_bbvt_is_fully_solid( vec2_s32& pos );
-		//__attribute__((_iwram_code));
+		//__attribute__((_IWRAM_CODE));
 	block_coll_result* vert_any_bbvt_is_fully_solid( vec2_s32& pos )
-		__attribute__((_iwram_code));
+		__attribute__((_IWRAM_CODE));
 	block_coll_result* vert_any_bbvt_is_slope( vec2_s32& pos )
-		__attribute__((_iwram_code));
+		__attribute__((_IWRAM_CODE));
 	
 	inline block_coll_result& operator () ( u32 index )
 	{
@@ -478,7 +478,7 @@ protected:		// functions
 	}
 	
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 

@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -54,7 +54,7 @@ class active_level
 {
 public:		// static variables
 	// -- Switch to linear_memory_allocator --
-	static block blank_block __attribute__((_ewram));
+	static block blank_block __attribute__((_EWRAM));
 	
 	// This will eat up 64 kiB of EWRAM.
 	//static constexpr u32 block_data_array_size = 0x4000;
@@ -62,7 +62,7 @@ public:		// static variables
 	
 	// -- Switch to linear_memory_allocator --
 	static block block_data_array[block_data_array_size]
-		__attribute__((_ewram));
+		__attribute__((_EWRAM));
 	
 	
 	// This will eat up 32 kiB of EWRAM.
@@ -73,7 +73,7 @@ public:		// static variables
 	static constexpr u32 persistent_block_data_array_size = 2048;
 	// -- Switch to linear_memory_allocator --
 	static u16 persistent_block_data_arrays[max_num_sublevels]
-		[persistent_block_data_array_size] __attribute__((_ewram));
+		[persistent_block_data_array_size] __attribute__((_EWRAM));
 	
 	
 	// Horizontal sublevels can have a maximum of 16 "screens" of 32 by 32
@@ -90,8 +90,8 @@ public:		// static variables
 	
 	
 	// horiz_sublevel_block_data_2d is an array_csz_2d_helper that wraps
-	// the access to block_data_array for horizontal sublevels.  Support
-	// for vertical sublevels MIGHT come later.
+	// the access to block_data_array FOR horizontal sublevels.  Support
+	// FOR vertical sublevels MIGHT come later.
 	static array_csz_2d_helper< block, horiz_sublevel_xsize, 
 		horiz_sublevel_ysize > horiz_sublevel_block_data_2d;
 	
@@ -105,16 +105,16 @@ public:		// static variables
 	// the spawned/despawned/dead status.
 	//static std::array< std::forward_list<sprite_init_param_group>,
 	//	horiz_sublevel_xsize > horiz_sublevel_sprite_ipg_lists
-	//	__attribute__((_ewram));
+	//	__attribute__((_EWRAM));
 	
 	// -- Switch to linear_memory_allocator --
 	static sa_list_stuff::sa_array_of_lists< sprite_init_param_group,
 		max_num_sprite_ipgs_per_sublevel, horiz_sublevel_xsize > 
-		horiz_sublevel_sprite_ipg_lists __attribute__((_ewram));
+		horiz_sublevel_sprite_ipg_lists __attribute__((_EWRAM));
 	
 	// -- Switch to linear_memory_allocator --
 	static scr_entry bg0_screenblock_mirror[screenblock_size] 
-		__attribute__((_ewram));
+		__attribute__((_EWRAM));
 	
 	
 	// bg0_screenblock_2d is in VRAM.
@@ -131,8 +131,8 @@ public:		// static variables
 	//// created which acts as an index to the array of sublevel_pointer's.
 	//static const sublevel_pointer* the_current_sublevel_ptr_ptr;
 	
-	static const level* the_current_level_ptr __attribute__((_iwram));
-	static u32 the_current_active_sublevel_index __attribute__((_iwram));
+	static const level* the_current_level_ptr __attribute__((_IWRAM));
+	static u32 the_current_active_sublevel_index __attribute__((_IWRAM));
 	
 	
 public:		// functions
@@ -215,13 +215,13 @@ public:		// functions
 	//{
 	//	curr_free_block_slot = lim_bt;
 	//	
-	//	for ( u32 i=0; i<lim_bt; ++i )
+	//	FOR ( u32 i=0; i<lim_bt; ++i )
 	//	{
 	//		block_data_array[(block_type)i].type = (block_type)i;
 	//	}
 	//}
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 

@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -34,7 +34,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 class grass_top_left_block_stuff : public block_base_stuff
 {
@@ -49,7 +49,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 class grass_top_middle_block_stuff : public block_base_stuff
 {
 public:		// variables
@@ -63,7 +63,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 class grass_top_right_block_stuff : public block_base_stuff
 {
 public:		// variables
@@ -77,7 +77,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 class dirt_middle_left_block_stuff : public block_base_stuff
@@ -93,7 +93,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 class dirt_middle_middle_block_stuff : public block_base_stuff
 {
 public:		// variables
@@ -107,7 +107,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 class dirt_middle_right_block_stuff : public block_base_stuff
 {
 public:		// variables
@@ -121,7 +121,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 class dirt_bottom_left_block_stuff : public block_base_stuff
 {
@@ -136,7 +136,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 class dirt_bottom_middle_block_stuff : public block_base_stuff
 {
 public:		// variables
@@ -150,7 +150,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 class dirt_bottom_right_block_stuff : public block_base_stuff
 {
 public:		// variables
@@ -164,7 +164,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 // Slopes
 class grass_slope_p16_p16_block_stuff : public block_base_stuff
@@ -182,7 +182,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 class grass_slope_n16_p16_block_stuff : public block_base_stuff
 {
 public:		// variables
@@ -198,7 +198,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 class grass_slope_p32_p16_short_block_stuff : public block_base_stuff
 {
@@ -215,7 +215,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 class grass_slope_p32_p16_tall_block_stuff : public block_base_stuff
 {
@@ -232,7 +232,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 class grass_slope_n32_p16_tall_block_stuff : public block_base_stuff
 {
@@ -249,7 +249,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 class grass_slope_n32_p16_short_block_stuff : public block_base_stuff
 {
 public:		// variables
@@ -265,7 +265,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 class grass_in_slope_left_block_stuff : public block_base_stuff
 {
@@ -280,7 +280,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 class grass_in_slope_right_block_stuff : public block_base_stuff
 {
 public:		// variables
@@ -294,7 +294,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 #endif		// grass_and_dirt_block_stuff_classes_hpp

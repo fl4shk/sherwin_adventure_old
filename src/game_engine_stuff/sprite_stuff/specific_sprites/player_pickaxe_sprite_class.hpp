@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -79,7 +79,7 @@ public:		// functions
 	virtual void update_part_1();
 	
 	//virtual void update_part_2( bg_point& camera_pos,
-	//	const vec2_u32& the_level_size_2d ) __attribute__((_iwram_code));
+	//	const vec2_u32& the_level_size_2d ) __attribute__((_IWRAM_CODE));
 	
 	inline virtual const sprite_const_params& get_const_params() const
 	{
@@ -93,7 +93,7 @@ public:		// functions
 	
 	
 	// Physics and collision stuff
-	virtual void block_collision_stuff() __attribute__((_iwram_code));
+	virtual void block_collision_stuff() __attribute__((_IWRAM_CODE));
 	
 	
 protected:		// functions
@@ -114,7 +114,7 @@ protected:		// functions
 		const block_coll_result& br_coll_result );
 	
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 #endif		// player_pickaxe_sprite_class_hpp

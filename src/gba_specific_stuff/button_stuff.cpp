@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -22,10 +22,10 @@
 
 
 // Global variables to hold the key state
-//vu16 __key_curr __attribute__((_ewram)) = 0,
-//	__key_prev __attribute__((_ewram)) = 0;
+//vu16 __key_curr __attribute__((_EWRAM)) = 0,
+//	__key_prev __attribute__((_EWRAM)) = 0;
 
-volatile prev_curr_pair<vu16> __key_state __attribute__((_iwram)) 
+volatile prev_curr_pair<vu16> __key_state __attribute__((_IWRAM)) 
 	= { 0, 0 };
 
 

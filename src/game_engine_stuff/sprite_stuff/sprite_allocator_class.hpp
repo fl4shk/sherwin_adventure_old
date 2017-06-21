@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -38,21 +38,21 @@ public:		// functions
 	sprite_allocator( s16* the_sa_free_list_backend_array,
 		const array_helper<sprite>& s_allocatable_sprite_arr );
 	
-	////void* allocate_sprite() __attribute__((_iwram_code,hot));
+	////void* allocate_sprite() __attribute__((_IWRAM_CODE,hot));
 	////void* allocate_sprite() __attribute__((hot));
 	////void* allocate_sprite();
-	////void* allocate_sprite() __attribute__((_iwram_code));
+	////void* allocate_sprite() __attribute__((_IWRAM_CODE));
 	////void deallocate_sprite( sprite*& the_sprite )
-	////	__attribute__((_iwram_code));
-	//void* allocate_sprite() __attribute__((_iwram_code,cold));
+	////	__attribute__((_IWRAM_CODE));
+	//void* allocate_sprite() __attribute__((_IWRAM_CODE,cold));
 	//void deallocate_sprite( sprite*& the_sprite )
-	//	__attribute__((_iwram_code,cold));
+	//	__attribute__((_IWRAM_CODE,cold));
 	
 	//void* allocate_sprite() __attribute__((cold,returns_nonnull));
 	//void deallocate_sprite( sprite*& the_sprite ) __attribute__((cold));
-	void* allocate_sprite() __attribute__((_iwram_code,returns_nonnull));
+	void* allocate_sprite() __attribute__((_IWRAM_CODE,returns_nonnull));
 	void deallocate_sprite( sprite& the_sprite )
-		__attribute__((_iwram_code));
+		__attribute__((_IWRAM_CODE));
 	
 	
 	inline bool can_push_index() const
@@ -75,6 +75,6 @@ public:		// functions
 protected:		// functions
 	//inline 
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 #endif		// sprite_allocator_class_hpp

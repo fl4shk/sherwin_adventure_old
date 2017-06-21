@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -57,9 +57,9 @@ class vert_coll_lseg;
 //	}
 //	
 //	bool intersects( const generic_coll_lseg& to_check, 
-//		vec2_f24p8* ret=NULL ) const __attribute__((_iwram_code));
+//		vec2_f24p8* ret=NULL ) const __attribute__((_IWRAM_CODE));
 //	
-//} __attribute__((_align4));
+//} __attribute__((_ALIGN4));
 
 
 class coll_lseg_extras
@@ -71,7 +71,7 @@ protected:		// functions
 	friend class horiz_coll_lseg;
 	friend class vert_coll_lseg;
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 
@@ -143,7 +143,7 @@ public:		// functions
 	}
 	//inline bool intersects( const vert_coll_lseg& to_check ) const;
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 class vert_coll_lseg
@@ -215,7 +215,7 @@ public:		// functions
 		return false;
 	}
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 

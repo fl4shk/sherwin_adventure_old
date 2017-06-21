@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -20,7 +20,7 @@
 #define sprite_type_includes_hpp
 
 
-// The Default Sprite (also used for when there is no sprite in the slot).
+// The Default Sprite (also used FOR when there is no sprite in the slot).
 #include "sprite_class.hpp"
 
 // The Player

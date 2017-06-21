@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -30,15 +30,15 @@ extern "C"
 void dma3_cpy( volatile void* dst, const void* src, u32 count, 
 	u32 mode = 1 )
 {
-	static const u32 chunk_size_arr[2] = { dma_16, dma_32 };
+	static const u32 chunk_size_arr[2] = { DMA_16, DMA_32 };
 	
 	// Store the addresses of src and dst
-	reg_dma3sad = (u32)(src);
-	reg_dma3dad = (u32)(dst);
+	REG_DMA3SAD = (u32)(src);
+	REG_DMA3DAD = (u32)(dst);
 	
-	//dma3cnt_mirror = dma_data_count(count) | dma_32;
+	//dma3cnt_mirror = dma_data_count(count) | DMA_32;
 	dma3cnt_mirror = dma_data_count(count) | chunk_size_arr[mode & 0x1];
-	reg_dma3cnt = dma3cnt_mirror | dma_enable;
+	REG_DMA3CNT = dma3cnt_mirror | DMA_ENABLE;
 	
 	
 	// We have to wait at least two cycles before we can access DMA
@@ -55,15 +55,15 @@ void dma3_cpy( volatile void* dst, const void* src, u32 count,
 void dma0_cpy( volatile void* dst, const void* src, u32 count, 
 	u32 mode = 1 )
 {
-	static const u32 chunk_size_arr[2] = { dma_16, dma_32 };
+	static const u32 chunk_size_arr[2] = { DMA_16, DMA_32 };
 	
 	// Store the addresses of src and dst
-	reg_dma0sad = (u32)(src);
-	reg_dma0dad = (u32)(dst);
+	REG_DMA0SAD = (u32)(src);
+	REG_DMA0DAD = (u32)(dst);
 	
-	//dma3cnt_mirror = dma_data_count(count) | dma_32;
+	//dma3cnt_mirror = dma_data_count(count) | DMA_32;
 	dma0cnt_mirror = dma_data_count(count) | chunk_size_arr[mode & 0x1];
-	reg_dma0cnt = dma0cnt_mirror | dma_enable;
+	REG_DMA0CNT = dma0cnt_mirror | DMA_ENABLE;
 	
 	
 	
@@ -84,11 +84,11 @@ void dma0_cpy( volatile void* dst, const void* src, u32 count,
 void dma3_fill( volatile void* dst, vu32 src, u32 count )
 {
 	// Store the addresses of src and dst
-	reg_dma3sad = (u32)((const void *)(&src));
-	reg_dma3dad = (u32)(dst);
+	REG_DMA3SAD = (u32)((const void *)(&src));
+	REG_DMA3DAD = (u32)(dst);
 	
-	dma3cnt_mirror = dma_data_count(count) | dma_src_fixed | dma_32;
-	reg_dma3cnt = dma3cnt_mirror | dma_enable;
+	dma3cnt_mirror = dma_data_count(count) | DMA_SRC_FIXED | DMA_32;
+	REG_DMA3CNT = dma3cnt_mirror | DMA_ENABLE;
 	
 	
 	

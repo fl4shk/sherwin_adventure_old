@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -26,9 +26,9 @@ class waffle_sprite : public sprite
 {
 public:		// enums
 	// These are used to access misc_data_u and misc_data_s
-	enum udata_index { udi_initial_pos_was_set, } _alignas_regular;
+	enum udata_index { udi_initial_pos_was_set, } _ALIGNAS_REGULAR;
 	enum sdata_index { sdi_initial_pos_x, sdi_initial_pos_y, 
-		sdi_move_timer, } _alignas_regular;
+		sdi_move_timer, } _ALIGNAS_REGULAR;
 	
 public:		// variables
 	static const sprite_const_params the_const_params;
@@ -73,7 +73,7 @@ protected:		// functions
 	virtual void block_coll_response_right
 		( const spr_blk_coll_group_base::horiz_coll_tuple& hs );
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 #endif		// waffle_sprite_class_hpp

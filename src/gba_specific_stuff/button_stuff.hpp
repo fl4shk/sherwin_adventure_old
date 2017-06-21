@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -31,10 +31,10 @@ extern volatile prev_curr_pair<vu16> __key_state;
 
 
 // Current Key States
-#define reg_keyinput *((vu16*)(mem_io + 0x0130))
+#define reg_keyinput *((vu16*)(MEM_IO + 0x0130))
 
-// Stuff for Key Interrupts
-#define reg_keycnt *((vu16*)(mem_io + 0x0132))
+// Stuff FOR Key Interrupts
+#define reg_keycnt *((vu16*)(MEM_IO + 0x0132))
 
 
 #define key_a ( 0x1 << 0x0 )
@@ -124,7 +124,7 @@ inline bool key_hit_or_held( u32 key )
 	return ( ( (bool)key_hit(key) ) || ( (bool)key_held(key) ) );
 }
 
-bool soft_reset_keys_down(); //__attribute__((_iwram_code));
+bool soft_reset_keys_down(); //__attribute__((_IWRAM_CODE));
 
 
 

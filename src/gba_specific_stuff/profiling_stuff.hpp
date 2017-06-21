@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -69,7 +69,7 @@ inline void show_profile_stop()
 
 // Profile new, delete, new[], delete[], malloc, and free.
 void profile_dynamic_allocations( size_t num_elems )
-	__attribute__((_iwram_code,_target_arm));
+	__attribute__((_IWRAM_CODE,_TARGET_ARM));
 
 
 #endif		// profiling_stuff_hpp

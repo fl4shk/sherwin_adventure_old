@@ -10,7 +10,7 @@
 @ Sherwin's Adventure is distributed in the hope that it will be useful,
 @ but WITHOUT ANY WARRANTY; without even the implied warranty of
 @ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-@ General Public License for more details.
+@ General Public License FOR more details.
 @ 
 @ You should have received a copy of the GNU General Public License along
 @ with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -145,11 +145,11 @@ next:
 	
 	ldr r2, =some_maxmod_code_section_size			@ byte count
 	
-	@@@ r4 still contains the address of memcpy32 in IWRAM (horray for stack
+	@@@ r4 still contains the address of memcpy32 in IWRAM (horray FOR stack
 	@@@ manipulation)
 	
 	
-	@ r4 still contains the address of memcpy in IWRAM (horray for stack
+	@ r4 still contains the address of memcpy in IWRAM (horray FOR stack
 	@ manipulation)
 	@mov lr, pc
 	@bx r4
@@ -296,7 +296,7 @@ udiv_table:
 sdiv_table:  
 	.incbin "lookup_tables/signed_one_slash_x_lut_65536_entries_of_0p32.bin"
 
-@ A lookup table for sine where there are 512 degrees in a circle and
+@ A lookup table FOR sine where there are 512 degrees in a circle and
 @ where the values stored in the LUT are of the fixed-point format 4.12 
 .global sin_table
 sin_table:

@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -51,17 +51,17 @@ typedef tile charblock[charblock_size];
 static const u32 charblock8_size = 0x100;
 typedef tile8 charblock8[charblock8_size];
 
-#define tile_ram		( (charblock*)(mem_vram) )
-#define tile8_ram		( (charblock8*)(mem_vram) )
+#define tile_ram		( (charblock*)(MEM_VRAM) )
+#define tile8_ram		( (charblock8*)(MEM_VRAM) )
 
 
-#define bg_tile_vram ( (vu16*)(tile_ram[0]) )
-#define bg_tile_vram_as_tiles ( (volatile tile*)(tile_ram[0]) )
+#define BG_TILE_VRAM ( (vu16*)(tile_ram[0]) )
+#define BG_TILE_VRAM_AS_TILES ( (volatile tile*)(tile_ram[0]) )
 
-// Do note that obj_tile_vram consists of TWO charblocks, or 1024 4bpp
+// Do note that OBJ_TILE_VRAM consists of TWO charblocks, or 1024 4bpp
 // tiles of 8x8 pixels (512 8bpp tiles of 8x8 pixels).
-#define obj_tile_vram ( (vu16*)(tile_ram[4]) )
-#define obj_tile_vram_as_tiles ( (volatile tile*)(tile_ram[4]) )
+#define OBJ_TILE_VRAM ( (vu16*)(tile_ram[4]) )
+#define OBJ_TILE_VRAM_AS_TILES ( (volatile tile*)(tile_ram[4]) )
 
 // ---- End of Character/Tile Stuffs ----
 
@@ -90,29 +90,29 @@ static constexpr vec2_u32 screenblock_size_2d( screenblock_xsize,
 typedef scr_entry screenblock[screenblock_size];
 
 
-// Screen-entry mapping: se_ram[y][x] is SBB y, entry x
-#define se_ram ((screenblock*)mem_vram)
+// Screen-entry mapping: SE_RAM[y][x] is SBB y, entry x
+#define SE_RAM ((screenblock*)MEM_VRAM)
 
 
 
-// -- Defines for Screen Entries --
+// -- Defines FOR Screen Entries --
 
 // Tile Index of the SE
 #define se_id( n ) ( ( n ) & 0x3ff )
-#define se_id_mask ( (u16)(0x03ff) )
+#define SE_ID_MASK ( (u16)(0x03ff) )
 
 // SE Flipping
-#define se_no_flip ( 0x0 << 0xa )
-#define se_hflip ( 0x1 << 0xa )
-#define se_vflip ( 0x2 << 0xa )
-#define se_flip_mask ( (u16)(0x0c00) )
+#define SE_NO_FLIP ( 0x0 << 0xa )
+#define SE_HFLIP ( 0x1 << 0xa )
+#define SE_VFLIP ( 0x2 << 0xa )
+#define SE_FLIP_MASK ( (u16)(0x0c00) )
 
-// SE Palette Bank for 16-color mode
+// SE Palette Bank FOR 16-color mode
 #define se_palbank( n ) ( ( ( n ) & 0xf ) << 0xc )
-#define se_palbank_mask ( (u16)(0xf000) )
+#define SE_PALBANK_MASK ( (u16)(0xf000) )
 
 
-// -- End of Defines for Screen Entries --
+// -- End of Defines FOR Screen Entries --
 
 // ---- End of Screen-Entry Stuffs ----
 
@@ -121,8 +121,8 @@ typedef scr_entry screenblock[screenblock_size];
 
 
 /* ---- Palette RAM Stuffs ---- */
-#define bg_pal_ram ((vu16*)(mem_bg_pal))
-#define obj_pal_ram ((vu16*)(mem_obj_pal))
+#define BG_PAL_RAM ((vu16*)(MEM_BG_PAL))
+#define OBJ_PAL_RAM ((vu16*)(MEM_OBJ_PAL))
 
 static const u32 pal_ram_size = 0x200;
 static const u32 bg_pal_ram_size = 0x200;
@@ -142,43 +142,43 @@ static const u32 num_colors_per_palette = 16;
 /* ---- Graphics-related Registers ---- */
 
 // Display Register Address Defines
-#define reg_dispcnt *((vu16*)(mem_io + 0x0000))
-#define reg_dispstat *((vu16*)(mem_io + 0x0004))
-#define reg_vcount *((vu16*)(mem_io + 0x0006))
+#define REG_DISPCNT *((vu16*)(MEM_IO + 0x0000))
+#define REG_DISPSTAT *((vu16*)(MEM_IO + 0x0004))
+#define REG_VCOUNT *((vu16*)(MEM_IO + 0x0006))
 
 // LCD I/O BG Control Registers (W)
-#define reg_bgcnt_arr ((vu16*)(mem_io + 0x0008))
-#define reg_bg0cnt ( reg_bgcnt_arr[0] )
-#define reg_bg1cnt ( reg_bgcnt_arr[1] )
-#define reg_bg2cnt ( reg_bgcnt_arr[2] )
-#define reg_bg3cnt ( reg_bgcnt_arr[3] )
+#define REG_BGCNT_ARR ((vu16*)(MEM_IO + 0x0008))
+#define REG_BG0CNT ( REG_BGCNT_ARR[0] )
+#define REG_BG1CNT ( REG_BGCNT_ARR[1] )
+#define REG_BG2CNT ( REG_BGCNT_ARR[2] )
+#define REG_BG3CNT ( REG_BGCNT_ARR[3] )
 
 // LCD I/O BG Scrolling Registers
-//#define reg_bgofs ((bg_point*)(mem_io + 0x0010))
-// Pretty cool how I can use my vec2_s16 class for this
-#define reg_bgofs ((vec2_s16*)(mem_io + 0x0010))
+//#define REG_BGOFS ((bg_point*)(MEM_IO + 0x0010))
+// Pretty cool how I can use my vec2_s16 class FOR this
+#define REG_BGOFS ((vec2_s16*)(MEM_IO + 0x0010))
 
-#define reg_bghofs_n(n) *((vu16*)(mem_io + 0x0010 + 0x04 * n))
-#define reg_bgvofs_n(n) *((vu16*)(mem_io + 0x0012 + 0x04 * n))
+#define reg_bghofs_n(n) *((vu16*)(MEM_IO + 0x0010 + 0x04 * n))
+#define reg_bgvofs_n(n) *((vu16*)(MEM_IO + 0x0012 + 0x04 * n))
 
 
 // Alpha Blending Registers
-#define reg_bldcnt *((vu16*)(mem_io + 0x0050))
-#define reg_bldalpha *((vu16*)(mem_io + 0x0052))
-#define reg_bldy *((vu16*)(mem_io + 0x0054))
+#define REG_BLDCNT *((vu16*)(MEM_IO + 0x0050))
+#define REG_BLDALPHA *((vu16*)(MEM_IO + 0x0052))
+#define REG_BLDY *((vu16*)(MEM_IO + 0x0054))
 
 
 /* ---- End of Graphics-related Registers ---- */
 
 
 // The width and height of the screen, in pixels
-//#define screen_width 240
-//#define screen_height 160
-static const u32 screen_width = 240;
-static const u32 screen_height = 160;
+//#define SCREEN_WIDTH 240
+//#define SCREEN_HEIGHT 160
+static const u32 SCREEN_WIDTH = 240;
+static const u32 SCREEN_HEIGHT = 160;
 
-//static const vec2_u32 screen_size_2d = { screen_width, screen_height };
-static const vec2_u32 screen_size_2d( screen_width, screen_height );
+//static const vec2_u32 screen_size_2d = { SCREEN_WIDTH, SCREEN_HEIGHT };
+static const vec2_u32 screen_size_2d( SCREEN_WIDTH, SCREEN_HEIGHT );
 
 // The width and height of the screen, in tiles
 static const u32 screen_width_in_tiles = 30;
@@ -236,239 +236,239 @@ inline const type conv_slp_height_val_to_offset( type tallest_height_val )
 /* ---- Display Register Value Defines ---- */
 //  Bitwise OR these values together
 
-// Defines for reg_dispcnt
+// Defines FOR REG_DISPCNT
 //   Video Mode (Select ONLY ONE)
-#define dcnt_mode0 0x0000
-#define dcnt_mode1 0x0001
-#define dcnt_mode2 0x0002
-#define dcnt_mode3 0x0003
-#define dcnt_mode4 0x0004
-#define dcnt_mode5 0x0005
-#define dcnt_mode_mask ( (u16)(0x0007) )
+#define DCNT_MODE0 0x0000
+#define DCNT_MODE1 0x0001
+#define DCNT_MODE2 0x0002
+#define DCNT_MODE3 0x0003
+#define DCNT_MODE4 0x0004
+#define DCNT_MODE5 0x0005
+#define DCNT_MODE_MASK ( (u16)(0x0007) )
 
 //   BG Mode 4 and 5 Page Flipping
-#define dcnt_page_0 ( 0x0000 << 0x4 )
-#define dcnt_page_1 ( 0x0001 << 0x4 )
-#define dcnt_page_mask ( (u16)(0x0010) )
+#define DCNT_PAGE_0 ( 0x0000 << 0x4 )
+#define DCNT_PAGE_1 ( 0x0001 << 0x4 )
+#define DCNT_PAGE_MASK ( (u16)(0x0010) )
 
 //   OBJ Character VRAM Mapping (Select ONLY ONE)
-#define dcnt_obj_2d ( 0x0000 << 0x6 )
-#define dcnt_obj_1d ( 0x0001 << 0x6 )
-#define dcnt_obj_dim_mask ( (u16)(0x0040) )
+#define DCNT_OBJ_2D ( 0x0000 << 0x6 )
+#define DCNT_OBJ_1D ( 0x0001 << 0x6 )
+#define DCNT_OBJ_DIM_MASK ( (u16)(0x0040) )
 
 //   Forced Blank (Select ONLY ONE)
-#define dcnt_blank_off ( 0x0000 << 0x7 )
-#define dcnt_blank_on ( 0x0001 << 0x7 )
-#define dcnt_blank_mask ( (u16)(0x0080) )
+#define DCNT_BLANK_OFF ( 0x0000 << 0x7 )
+#define DCNT_BLANK_ON ( 0x0001 << 0x7 )
+#define DCNT_BLANK_MASK ( (u16)(0x0080) )
 
 //   Screen Display BG0 (Select ONLY ONE)
-#define dcnt_bg0_off ( 0x0000 << 0x8 )
-#define dcnt_bg0_on ( 0x0001 << 0x8 )
-#define dcnt_bg0_onoff_mask ( (u16)(0x0100) )
+#define DCNT_BG0_OFF ( 0x0000 << 0x8 )
+#define DCNT_BG0_ON ( 0x0001 << 0x8 )
+#define DCNT_BG0_ONOFF_MASK ( (u16)(0x0100) )
 
 //   Screen Display BG1 (Select ONLY ONE)
-#define dcnt_bg1_off ( 0x0000 << 0x9 )
-#define dcnt_bg1_on ( 0x0001 << 0x9 )
-#define dcnt_bg1_onoff_mask ( (u16)(0x0200) )
+#define DCNT_BG1_OFF ( 0x0000 << 0x9 )
+#define DCNT_BG1_ON ( 0x0001 << 0x9 )
+#define DCNT_BG1_ONOFF_MASK ( (u16)(0x0200) )
 
 //   Screen Display BG2 (Select ONLY ONE)
-#define dcnt_bg2_off ( 0x0000 << 0xa )
-#define dcnt_bg2_on ( 0x0001 << 0xa )
-#define dcnt_bg2_onoff_mask ( (u16)(0x0400) )
+#define DCNT_BG2_OFF ( 0x0000 << 0xa )
+#define DCNT_BG2_ON ( 0x0001 << 0xa )
+#define DCNT_BG2_ONOFF_MASK ( (u16)(0x0400) )
 
 //   Screen Display BG3 (Select ONLY ONE)
-#define dcnt_bg3_off ( 0x0000 << 0xb )
-#define dcnt_bg3_on ( 0x0001 << 0xb )
-#define dcnt_bg3_onoff_mask ( (u16)(0x0800) )
+#define DCNT_BG3_OFF ( 0x0000 << 0xb )
+#define DCNT_BG3_ON ( 0x0001 << 0xb )
+#define DCNT_BG3_ONOFF_MASK ( (u16)(0x0800) )
 
 //   Screen Display OBJ (Select ONLY ONE)
-#define dcnt_obj_off ( 0x0000 << 0xc )
-#define dcnt_obj_on ( 0x0001 << 0xc )
-#define dcnt_obj_onoff_mask ( (u16)(0x1000) )
+#define DCNT_OBJ_OFF ( 0x0000 << 0xc )
+#define DCNT_OBJ_ON ( 0x0001 << 0xc )
+#define DCNT_OBJ_ONOFF_MASK ( (u16)(0x1000) )
 
 //   Window 0 Display (Select ONLY ONE)
-#define dcnt_win0_off ( 0x0000 << 0xd )
-#define dcnt_win0_on ( 0x0001 << 0xd )
-#define dcnt_win0_onoff_mask ( (u16)(0x2000) )
+#define DCNT_WIN0_OFF ( 0x0000 << 0xd )
+#define DCNT_WIN0_ON ( 0x0001 << 0xd )
+#define DCNT_WIN0_ONOFF_MASK ( (u16)(0x2000) )
 
 //   Window 1 Display (Select ONLY ONE)
-#define dcnt_win1_off ( 0x0000 << 0xe )
-#define dcnt_win1_on ( 0x0001 << 0xe )
-#define dcnt_win1_onoff_mask ( (u16)(0x4000) )
+#define DCNT_WIN1_OFF ( 0x0000 << 0xe )
+#define DCNT_WIN1_ON ( 0x0001 << 0xe )
+#define DCNT_WIN1_ONOFF_MASK ( (u16)(0x4000) )
 
 //   OBJ Window Display (Select ONLY ONE)
-#define dcnt_winobj_off ( 0x0000 << 0xf )
-#define dcnt_winobj_on ( 0x0001 << 0xf )
-#define dcnt_winobj_onoff_mask ( (u16)(0x8000) )
+#define DCNT_WINOBJ_OFF ( 0x0000 << 0xf )
+#define DCNT_WINOBJ_ON ( 0x0001 << 0xf )
+#define DCNT_WINOBJ_ONOFF_MASK ( (u16)(0x8000) )
 
 /* ---- End of Display Register Value Defines ---- */
 
 
 
-/* ---- Defines for reg_dispstat ---- */
+/* ---- Defines FOR REG_DISPSTAT ---- */
 
 //   VBlank status (Read Only)
-#define dstat_in_vbl ( 0x0001 << 0x0 )
+#define DSTAT_IN_VBL ( 0x0001 << 0x0 )
 
 //   HBlank status (Read Only)
-#define dstat_in_hbl ( 0x0001 << 0x1 )
+#define DSTAT_IN_HBL ( 0x0001 << 0x1 )
 
 //   VCount trigger status (Read Only ?)
-#define dstat_in_vct ( 0x0001 << 0x2 )
+#define DSTAT_IN_VCT ( 0x0001 << 0x2 )
 
 //   VBlank IRQ Enable
-#define dstat_vbl_irq ( 0x0001 << 0x3 )
+#define DSTAT_VBL_IRQ ( 0x0001 << 0x3 )
 
 //   HBlank IRQ Enable
-#define dstat_hbl_irq ( 0x0001 << 0x4 )
+#define DSTAT_HBL_IRQ ( 0x0001 << 0x4 )
 
 //   VCount IRQ Enable
-#define dstat_vct_irq ( 0x0001 << 0x5 )
+#define DSTAT_VCT_IRQ ( 0x0001 << 0x5 )
 
 //   VCount trigger value
 #define dstat_vct(x) ( x << 0x8 )
 
-/* ---- End of Defines for reg_dispstat ---- */
+/* ---- End of Defines FOR REG_DISPSTAT ---- */
 
 
 
-/* ---- Defines for reg_bgXcnt (X = 0, 1, 2, or 3) ---- */
+/* ---- Defines FOR reg_bgXcnt (X = 0, 1, 2, or 3) ---- */
 
 // BG Priority.  Higher Priority BGs are drawn FIRST.  If there are any
 // BGs with the same priority, then BG0 has the highest priority, and BG3
 // has the lowest.
 #define bgcnt_prio( n ) ( n & 0x1 )
-#define bgcnt_prio_mask ( (u16)(0x0001) )
+#define BGCNT_PRIO_MASK ( (u16)(0x0001) )
 
 // Character Base Block (Virtually Worthless)
 #define bgcnt_cbb( n ) ( ( n & 0x3 ) << 0x2 )
-#define bgcnt_cbb_mask ( (u16)(0x000c) )
+#define BGCNT_CBB_MASK ( (u16)(0x000c) )
 
 // Mosaic Flag (I don't think I'll use it)
-#define bgcnt_mosaic_off ( 0x0 << 0x6 )
-#define bgcnt_mosaic_on ( 0x1 << 0x6 )
-#define bgcnt_mosaic_mask ( (u16)(0x0040) )
+#define BGCNT_MOSAIC_OFF ( 0x0 << 0x6 )
+#define BGCNT_MOSAIC_ON ( 0x1 << 0x6 )
+#define BGCNT_MOSAIC_MASK ( (u16)(0x0040) )
 
 // Whether the BG is 4bpp or 8bpp (I'll probably be using 4bpp exclusively)
-#define bgcnt_4bpp ( 0x0 << 0x7 )
-#define bgcnt_8bpp ( 0x1 << 0x7 )
-#define bgcnt_bpp_mask ( (u16)(0x0080) )
+#define BGCNT_4BPP ( 0x0 << 0x7 )
+#define BGCNT_8BPP ( 0x1 << 0x7 )
+#define BGCNT_BPP_MASK ( (u16)(0x0080) )
 
 // Screen Base Block
 #define bgcnt_sbb( n ) ( ( n & 0x1f ) << 0x8 )
-#define bgcnt_sbb_mask ( (u16)(0x1f00) )
+#define BGCNT_SBB_MASK ( (u16)(0x1f00) )
 
 // Affine Wrapping
-#define bgcnt_wrap_off ( 0x0 << 0xd )
-#define bgcnt_wrap_on ( 0x1 << 0xd )
-#define bgcnt_wrap_mask ( (u16)(0x2000) )
+#define BGCNT_WRAP_OFF ( 0x0 << 0xd )
+#define BGCNT_WRAP_ON ( 0x1 << 0xd )
+#define BGCNT_WRAP_MASK ( (u16)(0x2000) )
 
 // Regular Background Size in Tiles
-#define bgcnt_reg_32x32 ( 0x0 << 0xe )
-#define bgcnt_reg_64x32 ( 0x1 << 0xe )
-#define bgcnt_reg_32x64 ( 0x2 << 0xe )
-#define bgcnt_reg_64x64 ( 0x3 << 0xe )
-#define bgcnt_reg_mask ( (u16)(0xc000) )
+#define BGCNT_REG_32X32 ( 0x0 << 0xe )
+#define BGCNT_REG_64X32 ( 0x1 << 0xe )
+#define BGCNT_REG_32X64 ( 0x2 << 0xe )
+#define BGCNT_REG_64X64 ( 0x3 << 0xe )
+#define BGCNT_REG_MASK ( (u16)(0xc000) )
 
 // Affine Background Size in Tiles
-#define bgcnt_aff_16x16 ( 0x0 << 0xe )
-#define bgcnt_aff_32x32 ( 0x1 << 0xe )
-#define bgcnt_aff_64x64 ( 0x2 << 0xe )
-#define bgcnt_aff_128x128 ( 0x3 << 0xe )
-#define bgcnt_aff_mask ( (u16)(0xc000) )
+#define BGCNT_AFF_16X16 ( 0x0 << 0xe )
+#define BGCNT_AFF_32X32 ( 0x1 << 0xe )
+#define BGCNT_AFF_64X64 ( 0x2 << 0xe )
+#define BGCNT_AFF_128X128 ( 0x3 << 0xe )
+#define BGCNT_AFF_MASK ( (u16)(0xc000) )
 
-/* ---- End of Defines for reg_bgXcnt ---- */
+/* ---- End of Defines FOR reg_bgXcnt ---- */
 
 
-/* ---- Defines for reg_bldcnt ---- */
+/* ---- Defines FOR REG_BLDCNT ---- */
 
 // The (A) top layers
-#define bldcnt_top_bg0 ( 0x0 << 0x0 )
-#define bldcnt_top_bg1 ( 0x1 << 0x0 )
-#define bldcnt_top_bg2 ( 0x2 << 0x0 )
-#define bldcnt_top_bg3 ( 0x3 << 0x0 )
-#define bldcnt_top_obj ( 0x4 << 0x0 )
-#define bldcnt_top_backdrop ( 0x5 << 0x0 )
-#define bldcnt_top_mask ( (u16)(0x001f) )
+#define BLDCNT_TOP_BG0 ( 0x0 << 0x0 )
+#define BLDCNT_TOP_BG1 ( 0x1 << 0x0 )
+#define BLDCNT_TOP_BG2 ( 0x2 << 0x0 )
+#define BLDCNT_TOP_BG3 ( 0x3 << 0x0 )
+#define BLDCNT_TOP_OBJ ( 0x4 << 0x0 )
+#define BLDCNT_TOP_BACKDROP ( 0x5 << 0x0 )
+#define BLDCNT_TOP_MASK ( (u16)(0x001f) )
 
 // The blending mode
-#define bldcnt_bld_off ( 0x0 << 0x6 )
-#define bldcnt_bld_normal ( 0x1 << 0x6 )
-#define bldcnt_bld_white ( 0x2 << 0x6 )
-#define bldcnt_bld_black ( 0x3 << 0x6 )
-#define bldcnt_bld_mask ( (u16)(0x00c0) )
+#define BLDCNT_BLD_OFF ( 0x0 << 0x6 )
+#define BLDCNT_BLD_NORMAL ( 0x1 << 0x6 )
+#define BLDCNT_BLD_WHITE ( 0x2 << 0x6 )
+#define BLDCNT_BLD_BLACK ( 0x3 << 0x6 )
+#define BLDCNT_BLD_MASK ( (u16)(0x00c0) )
 
 // The (B) bottom layers
-#define bldcnt_bot_bg0 ( 0x0 << 0x8 )
-#define bldcnt_bot_bg1 ( 0x1 << 0x8 )
-#define bldcnt_bot_bg2 ( 0x2 << 0x8 )
-#define bldcnt_bot_bg3 ( 0x3 << 0x8 )
-#define bldcnt_bot_obj ( 0x4 << 0x8 )
-#define bldcnt_bot_backdrop ( 0x5 << 0x8 )
-#define bldcnt_bot_mask ( (u16)(0x1f00) )
+#define BLDCNT_BOT_BG0 ( 0x0 << 0x8 )
+#define BLDCNT_BOT_BG1 ( 0x1 << 0x8 )
+#define BLDCNT_BOT_BG2 ( 0x2 << 0x8 )
+#define BLDCNT_BOT_BG3 ( 0x3 << 0x8 )
+#define BLDCNT_BOT_OBJ ( 0x4 << 0x8 )
+#define BLDCNT_BOT_BACKDROP ( 0x5 << 0x8 )
+#define BLDCNT_BOT_MASK ( (u16)(0x1f00) )
 
-/* ---- End of Defines for reg_bldcnt ---- */
+/* ---- End of Defines FOR REG_BLDCNT ---- */
 
 
-/* ---- Defines for reg_bldalpha ---- */
+/* ---- Defines FOR REG_BLDALPHA ---- */
 
-// Top blend weight.  Only used for normal blending.
+// Top blend weight.  Only used FOR normal blending.
 #define bldalpha_top( n ) ( n & 0x1f )
 
-// Bot blend weight.  Only used for normal blending.
+// Bot blend weight.  Only used FOR normal blending.
 #define bldalpha_bot( n ) ( ( n & 0x1f ) << 0x8 )
 
-/* ---- End of Defines for reg_bldalpha ---- */
+/* ---- End of Defines FOR REG_BLDALPHA ---- */
 
 
-/* ---- Defines for reg_bldalpha ---- */
+/* ---- Defines FOR REG_BLDALPHA ---- */
 
-// Top blend weight.  Only used for normal blending.
+// Top blend weight.  Only used FOR normal blending.
 #define bldy( n ) ( n & 0x1f )
 
-/* ---- End of Defines for reg_bldalpha ---- */
+/* ---- End of Defines FOR REG_BLDALPHA ---- */
 
 
 
 /* ---- Some misc. inline functions ---- */
 
-#define rgb15_red_shift ( 0x0 )
-#define rgb15_green_shift ( 0x5 )
-#define rgb15_blue_shift ( 0xa )
+#define RGB15_RED_SHIFT ( 0x0 )
+#define RGB15_GREEN_SHIFT ( 0x5 )
+#define RGB15_BLUE_SHIFT ( 0xa )
 
-#define rgb15_red_mask ( (u16)0x001f )
-#define rgb15_green_mask ( (u16)0x03e0 )
-#define rgb15_blue_mask ( (u16)0x7c00 )
+#define RGB15_RED_MASK ( (u16)0x001f )
+#define RGB15_GREEN_MASK ( (u16)0x03e0 )
+#define RGB15_BLUE_MASK ( (u16)0x7c00 )
 
-#define rgb15_component_max_val ( 0x1f )
+#define RGB15_COMPONENT_MAX_VAL ( 0x1f )
 
-#define rgb15_num_components ( 3 )
+#define RGB15_NUM_COMPONENTS ( 3 )
 
 
 
 
 inline u16 make_rgb15( u32 red, u32 green, u32 blue )
 {
-	return ( ( ( red & rgb15_component_max_val ) << rgb15_red_shift ) 
-		| ( ( green & rgb15_component_max_val ) << rgb15_green_shift ) 
-		| ( ( blue & rgb15_component_max_val ) << rgb15_blue_shift ) );
+	return ( ( ( red & RGB15_COMPONENT_MAX_VAL ) << RGB15_RED_SHIFT ) 
+		| ( ( green & RGB15_COMPONENT_MAX_VAL ) << RGB15_GREEN_SHIFT ) 
+		| ( ( blue & RGB15_COMPONENT_MAX_VAL ) << RGB15_BLUE_SHIFT ) );
 }
 
 inline u32 rgb15_get_red_component( u32 the_rgb15_val )
 {
-	return get_bits( the_rgb15_val, rgb15_red_mask, rgb15_red_shift );
+	return get_bits( the_rgb15_val, RGB15_RED_MASK, RGB15_RED_SHIFT );
 }
 inline u32 rgb15_get_green_component( u32 the_rgb15_val )
 {
-	return get_bits( the_rgb15_val, rgb15_green_mask, rgb15_green_shift );
+	return get_bits( the_rgb15_val, RGB15_GREEN_MASK, RGB15_GREEN_SHIFT );
 }
 inline u32 rgb15_get_blue_component( u32 the_rgb15_val )
 {
-	return get_bits( the_rgb15_val, rgb15_blue_mask, rgb15_blue_shift );
+	return get_bits( the_rgb15_val, RGB15_BLUE_MASK, RGB15_BLUE_SHIFT );
 }
 
 inline void clamped_rgb15_component_add( s32& component, s32 amount_to_add, 
-	s32 component_max_value=rgb15_component_max_val )
+	s32 component_max_value=RGB15_COMPONENT_MAX_VAL )
 {
 	component += amount_to_add;
 	
@@ -517,21 +517,21 @@ inline void clamped_rgb15_f24p8_component_add( fixed24p8& component,
 
 inline void m3_plot( u32 x, u32 y, u32 color )
 {
-	( (vu16*)(mem_vram) )[y * screen_width + x] = color;
+	( (vu16*)(MEM_VRAM) )[y * SCREEN_WIDTH + x] = color;
 }
 inline void m4_plot_basic( u32 x, u32 y, u16 two_color_ids, u32 page = 0 )
 {
 	// Plot to Page 0
 	if ( page == 0 )
 	{
-		( (vu16*)(mem_vram_page_0) )[y * screen_width + x] 
+		( (vu16*)(MEM_VRAM_PAGE_0) )[y * SCREEN_WIDTH + x] 
 			= two_color_ids;
 	}
 	
 	// Plot to Page 1
 	else
 	{
-		( (vu16*)(mem_vram_page_1) )[y * screen_width + x] 
+		( (vu16*)(MEM_VRAM_PAGE_1) )[y * SCREEN_WIDTH + x] 
 			= two_color_ids;
 	}
 }
@@ -541,8 +541,8 @@ inline void m4_plot_basic( u32 x, u32 y, u16 two_color_ids, u32 page = 0 )
 inline void m4_plot( s32 x, s32 y, u32 color_id, u32 page )
 {
 	
-	if ( !( x >= 0 && x <= (s32)screen_width 
-		&& y >= 0 && y <= (s32)screen_height ) )
+	if ( !( x >= 0 && x <= (s32)SCREEN_WIDTH 
+		&& y >= 0 && y <= (s32)SCREEN_HEIGHT ) )
 	{
 		return;
 	}
@@ -556,16 +556,16 @@ inline void m4_plot( s32 x, s32 y, u32 color_id, u32 page )
 	// Plot to Page 0
 	if ( page == 0 )
 	{
-		vram_area = (vu16*)(mem_vram_page_0);
+		vram_area = (vu16*)(MEM_VRAM_PAGE_0);
 	}
 	
 	// Plot to Page 1
 	else
 	{
-		vram_area = (vu16*)(mem_vram_page_1);
+		vram_area = (vu16*)(MEM_VRAM_PAGE_1);
 	}
 	
-	two_color_ids = vram_area[(y * screen_width + x) / sizeof(vu16)];
+	two_color_ids = vram_area[(y * SCREEN_WIDTH + x) / sizeof(vu16)];
 	
 	
 	// If x is odd, change the high byte
@@ -588,7 +588,7 @@ inline void m4_plot( s32 x, s32 y, u32 color_id, u32 page )
 		two_color_ids |= color_id_8bit;
 	}
 	
-	vram_area[(y * screen_width + x) / sizeof(vu16)] = two_color_ids;
+	vram_area[(y * SCREEN_WIDTH + x) / sizeof(vu16)] = two_color_ids;
 }
 
 

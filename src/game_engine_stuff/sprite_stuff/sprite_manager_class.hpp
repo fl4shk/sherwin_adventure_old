@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -85,7 +85,7 @@ public:		// variables
 	
 	
 	
-	// This is for speeding up allocation and deallocation
+	// This is FOR speeding up allocation and deallocation
 	// -- Switch to linear_memory_allocator --
 	static s16 the_player_secondary_sprites_free_list_arr
 		[max_num_player_secondary_sprites];
@@ -121,9 +121,9 @@ public:		// variables
 	// The array of REGULAR active sprites, not counting the_player.
 	// -- Switch to linear_memory_allocator --
 	static sprite the_sprites[max_num_regular_sprites]
-		__attribute__((_iwram));
+		__attribute__((_IWRAM));
 	
-	// The array of pseudo-background sprites, which are ONLY checked for
+	// The array of pseudo-background sprites, which are ONLY checked FOR
 	// intersection with the_player (and possibly player secondary sprites)
 	// -- Switch to linear_memory_allocator --
 	static sprite the_pseudo_bg_sprites[max_num_pseudo_bg_sprites];
@@ -142,13 +142,13 @@ public:		// variables
 	static u32 num_active_player_secondary_sprites, num_active_sprites, 
 		num_active_secondary_sprites, num_active_pseudo_bg_sprites;
 	static std::array< sprite*, max_num_player_secondary_sprites >
-		the_active_player_secondary_sprites __attribute__((_ewram));
+		the_active_player_secondary_sprites __attribute__((_EWRAM));
 	static std::array< sprite*, max_num_secondary_sprites >
-		the_active_secondary_sprites __attribute__((_ewram));
+		the_active_secondary_sprites __attribute__((_EWRAM));
 	static std::array< sprite*, max_num_regular_sprites > 
-		the_active_sprites __attribute__((_iwram));
+		the_active_sprites __attribute__((_IWRAM));
 	static std::array< sprite*, max_num_pseudo_bg_sprites > 
-		the_active_pseudo_bg_sprites __attribute__((_ewram));
+		the_active_pseudo_bg_sprites __attribute__((_EWRAM));
 	
 	
 	//static constexpr u32 the_player_vram_chunk_index = 1;
@@ -269,13 +269,13 @@ public:		// functions
 	{
 		//u32 vram_chunk_index = 1;
 		//
-		//for ( sprite& spr : the_sprites )
+		//FOR ( sprite& spr : the_sprites )
 		//{
 		//	spr.set_vram_chunk_index(vram_chunk_index++);
 		//}
 		
 		// Secondary sprites "claimed" by the_player.
-		for ( u32 i=0; i<max_num_player_secondary_sprites; ++i )
+		FOR ( u32 i=0; i<max_num_player_secondary_sprites; ++i )
 		{
 			the_player_secondary_sprites[i]
 				.set_vram_chunk_index( i 
@@ -283,21 +283,21 @@ public:		// functions
 		}
 		
 		// Other secondary sprites
-		for ( u32 i=0; i<max_num_secondary_sprites; ++i )
+		FOR ( u32 i=0; i<max_num_secondary_sprites; ++i )
 		{
 			the_secondary_sprites[i].set_vram_chunk_index( i
 				+ the_secondary_sprites_starting_vram_chunk_index );
 		}
 		
 		// Regular sprites
-		for ( u32 i=0; i<max_num_regular_sprites; ++i )
+		FOR ( u32 i=0; i<max_num_regular_sprites; ++i )
 		{
 			the_sprites[i].set_vram_chunk_index( i 
 				+ the_active_sprites_starting_vram_chunk_index );
 		}
 		
 		// Regular sprites
-		for ( u32 i=0; i<max_num_pseudo_bg_sprites; ++i )
+		FOR ( u32 i=0; i<max_num_pseudo_bg_sprites; ++i )
 		{
 			the_pseudo_bg_sprites[i].set_vram_chunk_index( i 
 				+ the_pseudo_bg_sprites_starting_vram_chunk_index );
@@ -330,30 +330,30 @@ public:		// functions
 	// spawned, which can be an intensive operation.
 	static void initial_sprite_spawning_shared_code
 		( prev_curr_pair<bg_point>& camera_pos );
-		//__attribute__((_iwram_code));
+		//__attribute__((_IWRAM_CODE));
 	
 	
 	static void initial_sprite_spawning_from_sublevel_data_old
 		( const bg_point& camera_pos );
 	
-	static void find_all_active_sprites() __attribute__((_iwram_code));
+	static void find_all_active_sprites() __attribute__((_IWRAM_CODE));
 	
 	static void spawn_sprites_if_needed
 		( const prev_curr_pair<bg_point>& camera_pos_pc_pair ) 
-		__attribute__((_iwram_code));
+		__attribute__((_IWRAM_CODE));
 	static void despawn_sprites_if_needed( const bg_point& camera_pos ) 
-		__attribute__((_iwram_code));
+		__attribute__((_IWRAM_CODE));
 	
 	static void upload_tiles_of_active_sprites_to_vram();
-		//__attribute__((_iwram_code));
+		//__attribute__((_IWRAM_CODE));
 	
 	// This function is one of the most intensive, so it is an ARM function
 	// that goes in IWRAM.
 	static void update_all_sprites( const vec2_u32& the_sublevel_size_2d,
 		prev_curr_pair<bg_point>& camera_pos_pc_pair ) 
-		__attribute__((_iwram_code));
+		__attribute__((_IWRAM_CODE));
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 

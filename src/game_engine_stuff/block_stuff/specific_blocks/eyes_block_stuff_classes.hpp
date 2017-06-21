@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -28,7 +28,7 @@ public:		// variables
 	//static const u32 metatile_graphics_slot = metatile_number;
 	
 public:		// enums
-	enum persistent_data_state { is_eyes, is_bt_dud } _alignas_regular;
+	enum persistent_data_state { is_eyes, is_bt_dud } _ALIGNAS_REGULAR;
 	
 public:		// functions
 	inline virtual const block_stuff_const_params& get_const_params() const
@@ -41,7 +41,7 @@ public:		// functions
 	virtual void finish_initializing_using_persistent_data
 		( block& the_block );
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 class eyes_block_with_st_waffle_stuff : public eyes_block_stuff
@@ -50,7 +50,7 @@ public:		// functions
 	virtual void strongly_hit_response( block& the_block, 
 		const vec2_s32& coord );
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 class eyes_block_with_st_muffin_stuff : public eyes_block_stuff
 {
@@ -58,7 +58,7 @@ public:		// functions
 	virtual void strongly_hit_response( block& the_block, 
 		const vec2_s32& coord );
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 class eyes_block_with_st_fire_muffin_stuff : public eyes_block_stuff
 {
@@ -66,7 +66,7 @@ public:		// functions
 	virtual void strongly_hit_response( block& the_block, 
 		const vec2_s32& coord );
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 class eyes_block_with_st_ice_muffin_stuff : public eyes_block_stuff
 {
@@ -74,7 +74,7 @@ public:		// functions
 	virtual void strongly_hit_response( block& the_block, 
 		const vec2_s32& coord );
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 class eyes_block_with_st_chocolate_muffin_stuff : public eyes_block_stuff
 {
@@ -82,7 +82,7 @@ public:		// functions
 	virtual void strongly_hit_response( block& the_block, 
 		const vec2_s32& coord );
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 #endif		// eyes_block_stuff_classes_hpp

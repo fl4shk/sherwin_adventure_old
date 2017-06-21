@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -27,7 +27,7 @@ public:		// variables
 	u32 metatile_graphics_slot = metatile_number;
 	block_behavior_type behavior_type = bbvt_solid;
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 class block_base_stuff
@@ -79,7 +79,7 @@ public:		// functions
 		( block& the_block );
 	
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 #endif		// block_base_stuff_class_hpp

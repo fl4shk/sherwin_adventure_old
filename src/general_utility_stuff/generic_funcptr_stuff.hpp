@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -28,7 +28,7 @@
 
 // These were originally intended to be used by the sa_list_backend and
 // externally_allocated_sa_list classes, but they are of course free to use
-// for other things.
+// FOR other things.
 typedef void (*generic_void_1arg_fp)( void* );
 typedef void (*generic_void_2arg_fp)( void*, void* );
 typedef void (*generic_void_3arg_fp)( void*, void*, void* );
@@ -36,7 +36,7 @@ typedef void (*generic_void_4arg_fp)( void*, void*, void*, void* );
 typedef u32 (*generic_u32_2arg_fp)( void*, void* );
 
 
-// This is for function pointers to pass to qsort()
+// This is FOR function pointers to pass to qsort()
 typedef int (*qscmp_fp)( const void*, const void* );
 
 
@@ -47,7 +47,7 @@ typedef s16* (*generic_s16_ptr_1arg_fp)( void* );
 typedef vec2_s16* (*generic_vec2_s16_ptr_1arg_fp)( void* );
 
 
-// This X macro is strictly used for working around what appears to be a
+// This X macro is strictly used FOR working around what appears to be a
 // bug in my text editor's ctags stuff.
 #define list_of_types_to_make_ptr_typedefs_for(macro) \
 	macro(void) macro(s16) macro(vec2_s16)

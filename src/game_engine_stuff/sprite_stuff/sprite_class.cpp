@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -95,7 +95,7 @@ sprite::sprite( const vec2_f24p8& s_in_level_pos,
 
 void sprite::shared_constructor_code_part_1()
 {
-	// uh-oh, it looks like this overwrites the vtable pointer for the
+	// uh-oh, it looks like this overwrites the vtable pointer FOR the
 	// sprite!
 	//memfill32( this, 0, sizeof(sprite) / sizeof(u32) );
 	
@@ -246,9 +246,9 @@ void sprite::update_on_screen_pos
 	
 	// Check whether the sprite is on screen.
 	if ( temp_on_screen_pos.x + offset.x >= (fixed24p8){0} 
-		&& temp_on_screen_pos.x <= make_f24p8(screen_width)
+		&& temp_on_screen_pos.x <= make_f24p8(SCREEN_WIDTH)
 		&& temp_on_screen_pos.y + offset.y >= (fixed24p8){0}
-		&& temp_on_screen_pos.y <= make_f24p8(screen_height) )
+		&& temp_on_screen_pos.y <= make_f24p8(SCREEN_HEIGHT) )
 	{
 		the_oam_entry.show_non_affine();
 	}
@@ -348,14 +348,14 @@ void sprite::camera_follow_basic
 void sprite::center_camera_almost( bg_point& camera_pos ) const
 {
 	//camera_pos.x = ( in_level_pos.x 
-	//	- (fixed24p8){ screen_width << 7 } ).floor_to_int();
+	//	- (fixed24p8){ SCREEN_WIDTH << 7 } ).floor_to_int();
 	//camera_pos.y = ( in_level_pos.y 
-	//	- (fixed24p8){ screen_height << 7 } ).floor_to_int();
+	//	- (fixed24p8){ SCREEN_HEIGHT << 7 } ).floor_to_int();
 	
 	camera_pos.x = get_curr_in_level_pos().x 
-		- (fixed24p8){ screen_width << 7 };
+		- (fixed24p8){ SCREEN_WIDTH << 7 };
 	camera_pos.y = get_curr_in_level_pos().y 
-		- (fixed24p8){ screen_height << 7 };
+		- (fixed24p8){ SCREEN_HEIGHT << 7 };
 }
 
 
@@ -547,7 +547,7 @@ void sprite::sprite_interaction_reponse( sprite& the_other_sprite,
 	
 }
 
-//spr_blk_coll_group_16x32 clseg_grp __attribute__((_ewram));
+//spr_blk_coll_group_16x32 clseg_grp __attribute__((_EWRAM));
 const size_t clseg_grp_16x32_size = sizeof(spr_blk_coll_group_16x32);
 
 
@@ -592,7 +592,7 @@ void sprite::generic_block_collision_stuff
 	auto iterate_horiz = [&]( const u32 first, const u32 last,
 		bool& some_horiz_side_fully_solid ) -> void
 	{
-		for ( u32 i=first; i<=last; ++i )
+		FOR ( u32 i=first; i<=last; ++i )
 		{
 			//horiz_fs_ret_buf[i] = clseg_grp.get_horiz_ctup(i).bcrlg
 			//	.horiz_any_bbvt_is_fully_solid(horiz_fs_pos_buf[i]);
@@ -613,7 +613,7 @@ void sprite::generic_block_collision_stuff
 	auto iterate_vert_top = [&]( bool& some_top_side_fully_solid, 
 		bool& some_top_side_slope ) -> void
 	{
-		for ( u32 i=vi_top_left; i<=vi_top_right; ++i )
+		FOR ( u32 i=vi_top_left; i<=vi_top_right; ++i )
 		{
 			//vert_top_fs_ret_buf[i] = clseg_grp.get_vert_top_ctup(i).bcrlg
 			//	.vert_any_bbvt_is_fully_solid(vert_top_fs_pos_buf[i]);
@@ -646,7 +646,7 @@ void sprite::generic_block_collision_stuff
 		bool& some_bot_side_slope ) -> void
 	{
 		u32 i;
-		for ( i=vi_bot_mid; i<vi_bot_left; ++i )
+		FOR ( i=vi_bot_mid; i<vi_bot_left; ++i )
 		{
 			vert_bot_fs_ret_buf[i] = clseg_grp.get_vert_bot_ctup(i).bcrlg
 				.vert_any_bbvt_is_fully_solid(vert_bot_fs_pos_buf[i]);
@@ -662,7 +662,7 @@ void sprite::generic_block_collision_stuff
 				some_bot_side_slope = true;
 			}
 		}
-		for ( ; i<=vi_bot_right; ++i )
+		FOR ( ; i<=vi_bot_right; ++i )
 		{
 			vert_bot_slp_ret_buf[i] = clseg_grp.get_vert_bot_ctup(i).bcrlg
 				.vert_any_bbvt_is_slope(vert_bot_slp_pos_buf[i]);
@@ -768,7 +768,7 @@ void sprite::generic_block_collision_stuff
 					// Slightly wasteful
 					s32 height_val_buf[num_vert_bot_ctups] 
 						= { -1, -1, -1 };
-					for ( u32 i=vi_bot_left; i<=vi_bot_right; ++i )
+					FOR ( u32 i=vi_bot_left; i<=vi_bot_right; ++i )
 					{
 						if (vert_bot_slp_ret_buf[i])
 						{
@@ -870,7 +870,7 @@ void sprite::generic_block_collision_stuff
 						}
 						
 						// If the y positions are equal, then clearly the
-						// plain old height value should be used for
+						// plain old height value should be used FOR
 						// comparison
 						else // if ( left_pos.y == right_pos.y )
 						{
@@ -1026,8 +1026,8 @@ void sprite::generic_block_collision_stuff
 	//vel += clseg_grp.horiz_clseg_groups[clseg_grp.hi_left_top].left_pt();
 }
 
-spr_blk_coll_group_16x16 temp_clseg_grp_16x16 __attribute__((_iwram));
-spr_blk_coll_group_16x32 temp_clseg_grp_16x32 __attribute__((_iwram));
+spr_blk_coll_group_16x16 temp_clseg_grp_16x16 __attribute__((_IWRAM));
+spr_blk_coll_group_16x32 temp_clseg_grp_16x32 __attribute__((_IWRAM));
 
 void sprite::block_collision_stuff_16x16()
 {
@@ -1048,7 +1048,7 @@ void sprite::block_collision_stuff_16x32()
 }
 
 // block_collision_stuff_32x16() will likely never be used because it's
-// less believable for one of those to not rotate when on a slope
+// less believable FOR one of those to not rotate when on a slope
 void sprite::block_collision_stuff_32x16()
 {
 	

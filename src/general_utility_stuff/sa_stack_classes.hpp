@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -119,7 +119,7 @@ public:		// functions
 protected:		// functions
 	void write_to_the_array_u8( const u8* to_write_u8, u32 non_u8_index );
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 
@@ -208,7 +208,7 @@ public:		// functions
 		return ret;
 	}
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 
@@ -296,7 +296,7 @@ public:		// functions
 	//	return get_array()[get_next_index()-2];
 	//}
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 
@@ -374,7 +374,7 @@ public:		// functions
 	//}
 	
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 template< u32 size >
@@ -386,7 +386,7 @@ public:		// typedefs
 public:		// functions
 	inline old_sa_free_list()
 	{
-		for ( int i=size-1; i>=0; --i )
+		FOR ( int i=size-1; i>=0; --i )
 		{
 			specific_sa_stack::push(i);
 		}
@@ -398,7 +398,7 @@ public:		// functions
 		--specific_sa_stack::next_index;
 	}
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 template< u32 size >
@@ -417,7 +417,7 @@ protected:		// variables
 	
 protected:		// variables
 	//array< int, size > the_array;
-	array< s16, size > the_array __attribute__((_align4));
+	array< s16, size > the_array __attribute__((_ALIGN4));
 	u32 next_index;
 	
 public:		// functions
@@ -426,7 +426,7 @@ public:		// functions
 	{
 		//the_sa_free_list_backend.init();
 		
-		//for ( int i=get_size()-1; i>= 0; --i )
+		//FOR ( int i=get_size()-1; i>= 0; --i )
 		//{
 		//	push(i);
 		//}
@@ -499,7 +499,7 @@ public:		// functions
 	//}
 	
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 

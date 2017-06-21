@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -26,10 +26,10 @@
 
 extern "C"
 {
-	volatile isr_funcptr isr_table[intr_amount] __attribute__((_bss));
+	volatile isr_funcptr isr_table[intr_amount] __attribute__((_BSS));
 	
 	
-	// This is for maxmod compatibility
+	// This is FOR maxmod compatibility
 	void irqEnable( int mask )
 	{
 		//reg_ime = 0;
@@ -37,15 +37,15 @@ extern "C"
 		
 		if ( mask & irq_vblank )
 		{
-			reg_dispstat |= dstat_vbl_irq;
+			REG_DISPSTAT |= DSTAT_VBL_IRQ;
 		}
 		if ( mask & irq_hblank )
 		{
-			reg_dispstat |= dstat_hbl_irq;
+			REG_DISPSTAT |= DSTAT_HBL_IRQ;
 		}
 		if ( mask & irq_vcount )
 		{
-			reg_dispstat |= dstat_vct_irq;
+			REG_DISPSTAT |= DSTAT_VCT_IRQ;
 		}
 		
 		reg_ie |= mask;
@@ -54,7 +54,7 @@ extern "C"
 		ime_enable();
 	}
 	
-	// This is also for maxmod compatibility, written somewhat differently
+	// This is also FOR maxmod compatibility, written somewhat differently
 	// from that used in libgba.
 	//void irqSet( int mask, isr_funcptr func )
 	void irqSet( int mask, u32 func_addr )
@@ -133,23 +133,23 @@ void irq_dummy()
 void irq_init()
 {
 	
-	// Clear reg_ime (for safety or something)
+	// Clear reg_ime (FOR safety or something)
 	ime_disable();
 	
-	for ( u32 i=0; i<intr_amount; ++i )
+	FOR ( u32 i=0; i<intr_amount; ++i )
 	{
 		isr_table[i] = &irq_dummy;
 	}
 	
-	// Clear reg_ie (for safety or something)
+	// Clear reg_ie (FOR safety or something)
 	reg_ie &= ~(irq_mask);
 	
 	
 	// Now we enable VBlank Interrupts in reg_ie
 	reg_ie |= irq_vblank;
 	
-	// To do this, we also have to enable VBlank IRQs in reg_dispstat
-	reg_dispstat |= dstat_vbl_irq;
+	// To do this, we also have to enable VBlank IRQs in REG_DISPSTAT
+	REG_DISPSTAT |= DSTAT_VBL_IRQ;
 	
 	//irqEnable(irq_vblank);
 	
@@ -175,7 +175,7 @@ void irq_init()
 
 
 // This function is currently only intended to service the VBlank
-// and Timer 0 interrupts.  I might add support for other interrupts later
+// and Timer 0 interrupts.  I might add support FOR other interrupts later
 // on, but there is currently no need.
 void isr_main()
 {

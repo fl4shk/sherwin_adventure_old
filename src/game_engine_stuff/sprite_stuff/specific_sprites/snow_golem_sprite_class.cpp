@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -76,7 +76,7 @@ void snow_golem_sprite::update_part_2()
 	s32& frame_change_timer = misc_data_s[sdi_frame_change_timer];
 	
 	// This could just as easily be done in the init() function, but that'd
-	// require re-implementing it for this class.
+	// require re-implementing it FOR this class.
 	if (!frame_stuff_initialized)
 	{
 		frame_stuff_initialized = 1;

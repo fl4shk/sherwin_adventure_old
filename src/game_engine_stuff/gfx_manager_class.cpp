@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -47,7 +47,7 @@
 bg_point gfx_manager::prev_prev_bgofs_mirror[bgofs_mirror_size];
 prev_curr_pair<bg_point> gfx_manager::bgofs_mirror[bgofs_mirror_size];
 
-// Current component arrays, stored in EWRAM as fixed24p8's for speed and
+// Current component arrays, stored in EWRAM as fixed24p8's FOR speed and
 // accuracy reasons.
 fixed24p8 gfx_manager::bg_fade_curr_red_arr
 	[bg_fade_curr_component_arr_size],
@@ -92,26 +92,26 @@ u32 gfx_manager::hud_vram_as_tiles_start_offset;
 
 void gfx_manager::copy_bgofs_mirror_to_registers()
 {
-	//reg_bgofs[0] = bgofs_mirror[0].curr;
-	//reg_bgofs[1] = bgofs_mirror[1].curr;
-	//reg_bgofs[2] = bgofs_mirror[2].curr;
-	//reg_bgofs[3] = bgofs_mirror[3].curr;
+	//REG_BGOFS[0] = bgofs_mirror[0].curr;
+	//REG_BGOFS[1] = bgofs_mirror[1].curr;
+	//REG_BGOFS[2] = bgofs_mirror[2].curr;
+	//REG_BGOFS[3] = bgofs_mirror[3].curr;
 	
-	for ( u32 i=0; i<4; ++i )
+	FOR ( u32 i=0; i<4; ++i )
 	{
-		reg_bgofs[i].x = (s16)bgofs_mirror[i].curr.x.to_int_for_on_screen();
-		reg_bgofs[i].y = (s16)bgofs_mirror[i].curr.y.to_int_for_on_screen();
+		REG_BGOFS[i].x = (s16)bgofs_mirror[i].curr.x.to_int_for_on_screen();
+		REG_BGOFS[i].y = (s16)bgofs_mirror[i].curr.y.to_int_for_on_screen();
 		
-		//reg_bgofs[i].x = ( (s32)bgofs_mirror[i].curr.x
+		//REG_BGOFS[i].x = ( (s32)bgofs_mirror[i].curr.x
 		//	.to_int_for_on_screen() ) & 0xffff;
-		//reg_bgofs[i].y = ( (s32)bgofs_mirror[i].curr.y
+		//REG_BGOFS[i].y = ( (s32)bgofs_mirror[i].curr.y
 		//	.to_int_for_on_screen() ) & 0xffff;
 		
-		//reg_bgofs[i].x = (s16)bgofs_mirror[i].curr.x.floor_to_int();
-		//reg_bgofs[i].y = (s16)bgofs_mirror[i].curr.y.floor_to_int();
+		//REG_BGOFS[i].x = (s16)bgofs_mirror[i].curr.x.floor_to_int();
+		//REG_BGOFS[i].y = (s16)bgofs_mirror[i].curr.y.floor_to_int();
 		
-		//reg_bgofs[i].x = bgofs_mirror[i].curr.x.floor_to_int() & 0xffff;
-		//reg_bgofs[i].y = bgofs_mirror[i].curr.y.floor_to_int() & 0xffff;
+		//REG_BGOFS[i].x = bgofs_mirror[i].curr.x.floor_to_int() & 0xffff;
+		//REG_BGOFS[i].y = bgofs_mirror[i].curr.y.floor_to_int() & 0xffff;
 	}
 }
 
@@ -144,9 +144,9 @@ void gfx_manager::upload_bg_palettes_to_target( vu16* target )
 
 void gfx_manager::copy_bg_pal_mirror_to_bg_pal_ram()
 {
-	memcpy32( bg_pal_ram, bg_pal_mirror, bg_pal_ram_size 
+	memcpy32( BG_PAL_RAM, bg_pal_mirror, bg_pal_ram_size 
 		/ sizeof(u32) );
-	//arr_memcpy32( bg_pal_ram, bg_pal_mirror, bg_pal_ram_size );
+	//arr_memcpy32( BG_PAL_RAM, bg_pal_mirror, bg_pal_ram_size );
 }
 
 
@@ -159,21 +159,21 @@ void gfx_manager::upload_bg_tiles_to_vram()
 	// whenever multiple block_types share the same graphics_slot.  An
 	// example of this is how each variation of bt_eyes shares the same
 	// graphics slot.
-	for ( u32 i=0; i<block_type::lim_bt; ++i )
+	FOR ( u32 i=0; i<block_type::lim_bt; ++i )
 	{
 		u32 graphics_slot = get_graphics_slot_of_block_type 
 			( (block_type)i );
 		u32 metatile_number = get_metatile_number_of_block_type
 			( (block_type)i );
 		
-		memcpy32( &(bg_tile_vram_as_tiles[graphics_slot]),
+		memcpy32( &(BG_TILE_VRAM_AS_TILES[graphics_slot]),
 			
 			&((reinterpret_cast<const tile*>(the_block_gfxTiles))
 			[metatile_number * num_tiles_in_ss_16x16]),
 			
 			sizeof(tile) * num_tiles_in_ss_16x16 / sizeof (u32) );
 		
-		//arr_memcpy32( &(bg_tile_vram_as_tiles[graphics_slot]),
+		//arr_memcpy32( &(BG_TILE_VRAM_AS_TILES[graphics_slot]),
 		//	
 		//	&((reinterpret_cast<const tile*>(the_block_gfxTiles))
 		//	[metatile_number * num_tiles_in_ss_16x16]),
@@ -181,10 +181,10 @@ void gfx_manager::upload_bg_tiles_to_vram()
 		//	sizeof(tile) * num_tiles_in_ss_16x16 );
 	}
 	
-	memcpy32( &(bg_tile_vram_as_tiles[hud_vram_as_tiles_start_offset]),
+	memcpy32( &(BG_TILE_VRAM_AS_TILES[hud_vram_as_tiles_start_offset]),
 		text_8x8_thick_gfxTiles,
 		text_8x8_thick_gfxTilesLen / sizeof(u32) );
-	//arr_memcpy32( &(bg_tile_vram_as_tiles[hud_vram_as_tiles_start_offset]),
+	//arr_memcpy32( &(BG_TILE_VRAM_AS_TILES[hud_vram_as_tiles_start_offset]),
 	//	text_8x8_thick_gfxTiles, text_8x8_thick_gfxTilesLen );
 }
 
@@ -221,9 +221,9 @@ void gfx_manager::upload_sprite_palettes_to_target( vu16* target )
 
 void gfx_manager::copy_obj_pal_mirror_to_obj_pal_ram()
 {
-	memcpy32( obj_pal_ram, obj_pal_mirror, obj_pal_ram_size 
+	memcpy32( OBJ_PAL_RAM, obj_pal_mirror, obj_pal_ram_size 
 		/ sizeof(u32) );
-	//arr_memcpy32( obj_pal_ram, obj_pal_mirror, obj_pal_ram_size );
+	//arr_memcpy32( OBJ_PAL_RAM, obj_pal_mirror, obj_pal_ram_size );
 }
 
 
@@ -236,12 +236,12 @@ void gfx_manager::upload_sprite_tiles_to_vram( sprite& the_sprite )
 	
 	//// This memfill32() call isn't strictly necessary, but it makes VRAM
 	//// look nicer in the VRAM viewer functionality of some emulators.
-	//memfill32( &(((tile*)obj_tile_vram)[the_sprite.get_vram_chunk_index()
+	//memfill32( &(((tile*)OBJ_TILE_VRAM)[the_sprite.get_vram_chunk_index()
 	//	* num_tiles_in_ss_32x32]), 0, sizeof(tile) * num_tiles_in_ss_32x32
 	//	/ sizeof(u32) );
 	
 	
-	memcpy32( &(((tile*)obj_tile_vram)[the_sprite.get_vram_chunk_index()
+	memcpy32( &(((tile*)OBJ_TILE_VRAM)[the_sprite.get_vram_chunk_index()
 			* num_tiles_in_ss_32x32]),
 		
 		&(the_sprite.get_tile_arr()
@@ -251,7 +251,7 @@ void gfx_manager::upload_sprite_tiles_to_vram( sprite& the_sprite )
 		sizeof(tile) * the_sprite.get_num_active_gfx_tiles() 
 		/ sizeof(u32) );
 	
-	//arr_memcpy32( &(((tile*)obj_tile_vram)
+	//arr_memcpy32( &(((tile*)OBJ_TILE_VRAM)
 	//	[the_sprite.get_vram_chunk_index() * num_tiles_in_ss_32x32]),
 	//	
 	//	&(the_sprite.get_tile_arr()
@@ -266,11 +266,11 @@ void gfx_manager::fade_out_to_black( u32 num_steps,
 	u32 num_frames_to_wait_per_iter )
 {
 	// Build the BG arrays of step amounts
-	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
-		s32 red_orig = rgb15_get_red_component(bg_pal_ram[i]);
-		s32 green_orig = rgb15_get_green_component(bg_pal_ram[i]);
-		s32 blue_orig = rgb15_get_blue_component(bg_pal_ram[i]);
+		s32 red_orig = rgb15_get_red_component(BG_PAL_RAM[i]);
+		s32 green_orig = rgb15_get_green_component(BG_PAL_RAM[i]);
+		s32 blue_orig = rgb15_get_blue_component(BG_PAL_RAM[i]);
 		
 		s32 target_red = 0;
 		s32 target_green = 0;
@@ -280,7 +280,7 @@ void gfx_manager::fade_out_to_black( u32 num_steps,
 		bg_fade_curr_green_arr[i] = make_f24p8(green_orig);
 		bg_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
 		
-		// The target color is black, for the entire screen.
+		// The target color is black, FOR the entire screen.
 		fixed24p8& red_step_amount 
 			= bg_fade_red_step_amount_arr[i];
 		fixed24p8& green_step_amount 
@@ -297,11 +297,11 @@ void gfx_manager::fade_out_to_black( u32 num_steps,
 	}
 	
 	// Build the OBJ arrays of step amounts
-	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
-		s32 red_orig = rgb15_get_red_component(obj_pal_ram[i]);
-		s32 green_orig = rgb15_get_green_component(obj_pal_ram[i]);
-		s32 blue_orig = rgb15_get_blue_component(obj_pal_ram[i]);
+		s32 red_orig = rgb15_get_red_component(OBJ_PAL_RAM[i]);
+		s32 green_orig = rgb15_get_green_component(OBJ_PAL_RAM[i]);
+		s32 blue_orig = rgb15_get_blue_component(OBJ_PAL_RAM[i]);
 		
 		s32 target_red = 0;
 		s32 target_green = 0;
@@ -311,7 +311,7 @@ void gfx_manager::fade_out_to_black( u32 num_steps,
 		obj_fade_curr_green_arr[i] = make_f24p8(green_orig);
 		obj_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
 		
-		// The target color is black, for the entire screen.
+		// The target color is black, FOR the entire screen.
 		fixed24p8& red_step_amount 
 			= obj_fade_red_step_amount_arr[i];
 		fixed24p8& green_step_amount 
@@ -328,10 +328,10 @@ void gfx_manager::fade_out_to_black( u32 num_steps,
 	}
 	
 	// Fading iteration
-	for ( u32 i=0; i<num_steps; ++i )
+	FOR ( u32 i=0; i<num_steps; ++i )
 	{
 		// For each BG palette
-		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
+		FOR ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
 			fixed24p8& curr_red = bg_fade_curr_red_arr[j];
 			fixed24p8& curr_green = bg_fade_curr_green_arr[j];
@@ -351,13 +351,13 @@ void gfx_manager::fade_out_to_black( u32 num_steps,
 			clamped_rgb15_f24p8_component_add( curr_blue, 
 				blue_step_amount, (fixed24p8){0} );
 			
-			bg_pal_ram[j] = make_rgb15( curr_red.round_to_int(),
+			BG_PAL_RAM[j] = make_rgb15( curr_red.round_to_int(),
 				curr_green.round_to_int(),
 				curr_blue.round_to_int() );
 		}
 		
 		// For each OBJ palette
-		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
+		FOR ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
 			fixed24p8& curr_red = obj_fade_curr_red_arr[j];
 			fixed24p8& curr_green = obj_fade_curr_green_arr[j];
@@ -377,7 +377,7 @@ void gfx_manager::fade_out_to_black( u32 num_steps,
 			clamped_rgb15_f24p8_component_add( curr_blue, 
 				blue_step_amount, (fixed24p8){0} );
 			
-			obj_pal_ram[j] = make_rgb15( curr_red.round_to_int(),
+			OBJ_PAL_RAM[j] = make_rgb15( curr_red.round_to_int(),
 				curr_green.round_to_int(),
 				curr_blue.round_to_int() );
 		}
@@ -387,13 +387,13 @@ void gfx_manager::fade_out_to_black( u32 num_steps,
 	
 	
 	// Just in case the conversion wasn't complete
-	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
-		bg_pal_ram[i] = 0;
+		BG_PAL_RAM[i] = 0;
 	}
-	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
-		obj_pal_ram[i] = 0;
+		OBJ_PAL_RAM[i] = 0;
 	}
 }
 
@@ -402,21 +402,21 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 	u32 num_frames_to_wait_per_iter )
 {
 	// Build the BG arrays of step amounts
-	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
-		s32 red_orig = rgb15_get_red_component(bg_pal_ram[i]);
-		s32 green_orig = rgb15_get_green_component(bg_pal_ram[i]);
-		s32 blue_orig = rgb15_get_blue_component(bg_pal_ram[i]);
+		s32 red_orig = rgb15_get_red_component(BG_PAL_RAM[i]);
+		s32 green_orig = rgb15_get_green_component(BG_PAL_RAM[i]);
+		s32 blue_orig = rgb15_get_blue_component(BG_PAL_RAM[i]);
 		
-		s32 target_red = rgb15_component_max_val;
-		s32 target_green = rgb15_component_max_val;
-		s32 target_blue = rgb15_component_max_val;
+		s32 target_red = RGB15_COMPONENT_MAX_VAL;
+		s32 target_green = RGB15_COMPONENT_MAX_VAL;
+		s32 target_blue = RGB15_COMPONENT_MAX_VAL;
 		
 		bg_fade_curr_red_arr[i] = make_f24p8(red_orig);
 		bg_fade_curr_green_arr[i] = make_f24p8(green_orig);
 		bg_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
 		
-		// The target color is white, for the entire screen.
+		// The target color is white, FOR the entire screen.
 		fixed24p8& red_step_amount 
 			= bg_fade_red_step_amount_arr[i];
 		fixed24p8& green_step_amount 
@@ -433,21 +433,21 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 	}
 	
 	// Build the OBJ arrays of step amounts
-	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
-		s32 red_orig = rgb15_get_red_component(obj_pal_ram[i]);
-		s32 green_orig = rgb15_get_green_component(obj_pal_ram[i]);
-		s32 blue_orig = rgb15_get_blue_component(obj_pal_ram[i]);
+		s32 red_orig = rgb15_get_red_component(OBJ_PAL_RAM[i]);
+		s32 green_orig = rgb15_get_green_component(OBJ_PAL_RAM[i]);
+		s32 blue_orig = rgb15_get_blue_component(OBJ_PAL_RAM[i]);
 		
-		s32 target_red = rgb15_component_max_val;
-		s32 target_green = rgb15_component_max_val;
-		s32 target_blue = rgb15_component_max_val;
+		s32 target_red = RGB15_COMPONENT_MAX_VAL;
+		s32 target_green = RGB15_COMPONENT_MAX_VAL;
+		s32 target_blue = RGB15_COMPONENT_MAX_VAL;
 		
 		obj_fade_curr_red_arr[i] = make_f24p8(red_orig);
 		obj_fade_curr_green_arr[i] = make_f24p8(green_orig);
 		obj_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
 		
-		// The target color is white, for the entire screen.
+		// The target color is white, FOR the entire screen.
 		fixed24p8& red_step_amount 
 			= obj_fade_red_step_amount_arr[i];
 		fixed24p8& green_step_amount 
@@ -464,10 +464,10 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 	}
 	
 	// Fading iteration
-	for ( u32 i=0; i<num_steps; ++i )
+	FOR ( u32 i=0; i<num_steps; ++i )
 	{
 		// For each BG palette
-		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
+		FOR ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
 			fixed24p8& curr_red = bg_fade_curr_red_arr[j];
 			fixed24p8& curr_green = bg_fade_curr_green_arr[j];
@@ -481,22 +481,22 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 				= bg_fade_blue_step_amount_arr[j];
 			
 			clamped_rgb15_f24p8_component_add( curr_red, 
-				red_step_amount, (fixed24p8){ rgb15_component_max_val 
+				red_step_amount, (fixed24p8){ RGB15_COMPONENT_MAX_VAL 
 				<< fixed24p8::get_shift() } );
 			clamped_rgb15_f24p8_component_add( curr_green, 
-				green_step_amount, (fixed24p8){ rgb15_component_max_val
+				green_step_amount, (fixed24p8){ RGB15_COMPONENT_MAX_VAL
 				<< fixed24p8::get_shift() } );
 			clamped_rgb15_f24p8_component_add( curr_blue, 
-				blue_step_amount, (fixed24p8){ rgb15_component_max_val
+				blue_step_amount, (fixed24p8){ RGB15_COMPONENT_MAX_VAL
 				<< fixed24p8::get_shift() } );
 			
-			bg_pal_ram[j] = make_rgb15( curr_red.round_to_int(),
+			BG_PAL_RAM[j] = make_rgb15( curr_red.round_to_int(),
 				curr_green.round_to_int(),
 				curr_blue.round_to_int() );
 		}
 		
 		// For each OBJ palette
-		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
+		FOR ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
 			fixed24p8& curr_red = obj_fade_curr_red_arr[j];
 			fixed24p8& curr_green = obj_fade_curr_green_arr[j];
@@ -510,16 +510,16 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 				= obj_fade_blue_step_amount_arr[j];
 			
 			clamped_rgb15_f24p8_component_add( curr_red, 
-				red_step_amount, (fixed24p8){ rgb15_component_max_val
+				red_step_amount, (fixed24p8){ RGB15_COMPONENT_MAX_VAL
 				<< fixed24p8::get_shift() } );
 			clamped_rgb15_f24p8_component_add( curr_green, 
-				green_step_amount, (fixed24p8){ rgb15_component_max_val
+				green_step_amount, (fixed24p8){ RGB15_COMPONENT_MAX_VAL
 				<< fixed24p8::get_shift() } );
 			clamped_rgb15_f24p8_component_add( curr_blue, 
-				blue_step_amount, (fixed24p8){ rgb15_component_max_val
+				blue_step_amount, (fixed24p8){ RGB15_COMPONENT_MAX_VAL
 				<< fixed24p8::get_shift() } );
 			
-			obj_pal_ram[j] = make_rgb15( curr_red.round_to_int(),
+			OBJ_PAL_RAM[j] = make_rgb15( curr_red.round_to_int(),
 				curr_green.round_to_int(),
 				curr_blue.round_to_int() );
 		}
@@ -531,17 +531,17 @@ void gfx_manager::fade_out_to_white( u32 num_steps,
 	bios_wait_for_vblank();
 	
 	// Just in case the conversion wasn't complete
-	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
-		//bg_pal_ram[i] = make_rgb15( rgb15_component_max_val,
-		//	rgb15_component_max_val, rgb15_component_max_val );
-		bg_pal_ram[i] = 0x7fff;
+		//BG_PAL_RAM[i] = make_rgb15( RGB15_COMPONENT_MAX_VAL,
+		//	RGB15_COMPONENT_MAX_VAL, RGB15_COMPONENT_MAX_VAL );
+		BG_PAL_RAM[i] = 0x7fff;
 	}
-	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
-		//obj_pal_ram[i] = make_rgb15( rgb15_component_max_val,
-		//	rgb15_component_max_val, rgb15_component_max_val );
-		obj_pal_ram[i] = 0x7fff;
+		//OBJ_PAL_RAM[i] = make_rgb15( RGB15_COMPONENT_MAX_VAL,
+		//	RGB15_COMPONENT_MAX_VAL, RGB15_COMPONENT_MAX_VAL );
+		OBJ_PAL_RAM[i] = 0x7fff;
 	}
 }
 
@@ -554,12 +554,12 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 	bios_wait_for_vblank();
 	
 	// Build the BG arrays of step amounts
-	//for ( u32 i=0; i<the_block_gfxPalLen / sizeof(u16); ++i )
-	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	//FOR ( u32 i=0; i<the_block_gfxPalLen / sizeof(u16); ++i )
+	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
-		s32 red_orig = rgb15_get_red_component(bg_pal_ram[i]);
-		s32 green_orig = rgb15_get_green_component(bg_pal_ram[i]);
-		s32 blue_orig = rgb15_get_blue_component(bg_pal_ram[i]);
+		s32 red_orig = rgb15_get_red_component(BG_PAL_RAM[i]);
+		s32 green_orig = rgb15_get_green_component(BG_PAL_RAM[i]);
+		s32 blue_orig = rgb15_get_blue_component(BG_PAL_RAM[i]);
 		
 		//s32 target_red = rgb15_get_red_component(the_block_gfxPal[i]);
 		//s32 target_green = rgb15_get_green_component(the_block_gfxPal[i]);
@@ -573,7 +573,7 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 		bg_fade_curr_green_arr[i] = make_f24p8(green_orig);
 		bg_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
 		
-		// The target color is white, for the entire screen.
+		// The target color is white, FOR the entire screen.
 		fixed24p8& red_step_amount 
 			= bg_fade_red_step_amount_arr[i];
 		fixed24p8& green_step_amount 
@@ -590,11 +590,11 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 	}
 	
 	// Build the OBJ arrays of step amounts
-	for ( u32 i=0; i<num_colors_in_8_palettes; ++i )
+	FOR ( u32 i=0; i<num_colors_in_8_palettes; ++i )
 	{
-		s32 red_orig = rgb15_get_red_component(obj_pal_ram[i]);
-		s32 green_orig = rgb15_get_green_component(obj_pal_ram[i]);
-		s32 blue_orig = rgb15_get_blue_component(obj_pal_ram[i]);
+		s32 red_orig = rgb15_get_red_component(OBJ_PAL_RAM[i]);
+		s32 green_orig = rgb15_get_green_component(OBJ_PAL_RAM[i]);
+		s32 blue_orig = rgb15_get_blue_component(OBJ_PAL_RAM[i]);
 		
 		s32 target_red = rgb15_get_red_component(obj_pal_mirror[i]);
 		s32 target_green = rgb15_get_green_component(obj_pal_mirror[i]);
@@ -604,7 +604,7 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 		obj_fade_curr_green_arr[i] = make_f24p8(green_orig);
 		obj_fade_curr_blue_arr[i] = make_f24p8(blue_orig);
 		
-		// The target color is white, for the entire screen.
+		// The target color is white, FOR the entire screen.
 		fixed24p8& red_step_amount 
 			= obj_fade_red_step_amount_arr[i];
 		fixed24p8& green_step_amount 
@@ -621,12 +621,12 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 	}
 	
 	// Fading iteration
-	for ( u32 i=0; i<num_steps; ++i )
+	FOR ( u32 i=0; i<num_steps; ++i )
 	{
 		asm_comment("Before BG palette loop");
 		// For each BG palette
-		//for ( u32 j=0; j<the_block_gfxPalLen / sizeof(u16); ++j )
-		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
+		//FOR ( u32 j=0; j<the_block_gfxPalLen / sizeof(u16); ++j )
+		FOR ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
 			fixed24p8& curr_red = bg_fade_curr_red_arr[j];
 			fixed24p8& curr_green = bg_fade_curr_green_arr[j];
@@ -639,7 +639,7 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 			fixed24p8 blue_step_amount 
 				= bg_fade_blue_step_amount_arr[j];
 			
-			// Don't need make_f24p8() for these because color component
+			// Don't need make_f24p8() FOR these because color component
 			// values are guaranteed to be positive.
 			//fixed24p8 target_red = { (s32)rgb15_get_red_component
 			//	(the_block_gfxPal[j]) << fixed24p8::get_shift() };
@@ -662,14 +662,14 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 			clamped_rgb15_f24p8_component_add( curr_blue, 
 				blue_step_amount, target_blue );
 			
-			bg_pal_ram[j] = make_rgb15( curr_red.round_to_int(),
+			BG_PAL_RAM[j] = make_rgb15( curr_red.round_to_int(),
 				curr_green.round_to_int(),
 				curr_blue.round_to_int() );
 		}
 		
 		asm_comment("Before OBJ palette loop");
 		// For each OBJ palette
-		for ( u32 j=0; j<num_colors_in_8_palettes; ++j )
+		FOR ( u32 j=0; j<num_colors_in_8_palettes; ++j )
 		{
 			fixed24p8& curr_red = obj_fade_curr_red_arr[j];
 			fixed24p8& curr_green = obj_fade_curr_green_arr[j];
@@ -696,7 +696,7 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 			clamped_rgb15_f24p8_component_add( curr_blue, 
 				blue_step_amount, target_blue );
 			
-			obj_pal_ram[j] = make_rgb15( curr_red.round_to_int(),
+			OBJ_PAL_RAM[j] = make_rgb15( curr_red.round_to_int(),
 				curr_green.round_to_int(),
 				curr_blue.round_to_int() );
 		}
@@ -708,8 +708,8 @@ void gfx_manager::fade_in( u32 num_steps, u32 num_frames_to_wait_per_iter )
 	
 	bios_wait_for_vblank();
 	// Just in case the conversion wasn't complete.
-	upload_bg_palettes_to_target(bg_pal_ram);
-	upload_sprite_palettes_to_target(obj_pal_ram);
+	upload_bg_palettes_to_target(BG_PAL_RAM);
+	upload_sprite_palettes_to_target(OBJ_PAL_RAM);
 	
 }
 

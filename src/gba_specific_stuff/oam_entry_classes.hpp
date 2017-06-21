@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -173,11 +173,11 @@ public:		// wrapper functions
 	
 	
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 
-// A class for OAM Affine stuffs
+// A class FOR OAM Affine stuffs
 // I could probably change every s16 member variable in this class to a
 // fixed8p8, since that's basically what it's supposed to be.
 class oam_entry_affine
@@ -201,15 +201,15 @@ public:		// variables
 public:		// functions
 	
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 
 inline void copy_oam_mirror_to_oam()
 {
-	//dma3_cpy( (vu16*)(mem_oam), oam_mirror, 
+	//dma3_cpy( (vu16*)(MEM_OAM), oam_mirror, 
 	//	( oam_mirror_size * sizeof(oam_entry) ) / sizeof(u16), 0 );
-	memcpy32( (void*)(mem_oam), oam_mirror,
+	memcpy32( (void*)(MEM_OAM), oam_mirror,
 		( oam_mirror_size * sizeof(oam_entry) ) / sizeof(u32) );
 }
 

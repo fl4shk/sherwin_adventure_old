@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -52,13 +52,13 @@ extern "C" int ewram_test_func();
 
 
 static const u32 ewram_test_arr_size = 10;
-u8 ewram_test_arr[ewram_test_arr_size] __attribute__((_ewram));
+u8 ewram_test_arr[ewram_test_arr_size] __attribute__((_EWRAM));
 
 static const char test_str[] = "Birds2";
 static const u32 test_str_size = ( sizeof(test_str) / sizeof(char) ) - 1;
 
 //static const size_t sram_test_arr_size = 2000;
-//u8 sram_test_arr[sram_test_arr_size] __attribute__((_sram));
+//u8 sram_test_arr[sram_test_arr_size] __attribute__((_SRAM));
 
 extern const size_t clseg_grp_16x32_size;
 volatile size_t very_temp;
@@ -66,7 +66,7 @@ static constexpr size_t test_buf_size = 20;
 char test_buf[test_buf_size];
 
 int main_2();
-//int real_main() __attribute__((_iwram_code));
+//int real_main() __attribute__((_IWRAM_CODE));
 int real_main();
 
 
@@ -116,7 +116,7 @@ int real_main()
 	irq_init();
 	
 	// This will eventually be used to identify whether save data has been
-	// created.  As of right now, there is no need for save data, but that
+	// created.  As of right now, there is no need FOR save data, but that
 	// will change in the future.  It is likely that 64 kiB of save data
 	// will be more than enough.
 	memcpy8( game_manager::sram_init_str,
@@ -166,7 +166,7 @@ int real_main()
 	
 	
 	
-	for (;;)
+	FOR (;;)
 	{
 		gfx_manager::back_up_bgofs_mirror();
 		

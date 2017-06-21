@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -403,7 +403,7 @@ s32 list_backend::internal_func_move_unlinked_node_before
 //	
 //	s32 new_next_index = -1;
 //	
-//	// Special code is used for inserting an element at the end of the
+//	// Special code is used FOR inserting an element at the end of the
 //	// list.
 //	if ( old_next_index < 0 )
 //	{
@@ -450,7 +450,7 @@ s32 list_backend::internal_func_move_unlinked_node_after
 	
 	s32 new_next_index = -1;
 	
-	// Special code is used for inserting an element at the end of the
+	// Special code is used FOR inserting an element at the end of the
 	// list.
 	if ( old_next_index < 0 )
 	{
@@ -723,7 +723,7 @@ s32 list_backend::insertion_sort()
 	
 	//s32 curr_index = temp_front_index;
 	
-	for ( s32 i=the_front_index;
+	FOR ( s32 i=the_front_index;
 		i!=-1; )
 		//i=get_next_index_at_index(i) )
 	{
@@ -816,7 +816,7 @@ s32 list_backend::insertion_sort()
 //	
 //	
 //	
-//	// These are for re-linking nodes after a merge.
+//	// These are FOR re-linking nodes after a merge.
 //	node_contents node_before_start, node_after_end;
 //	node_contents * node_before_start_ptr = NULL,
 //		* node_after_end_ptr = NULL;
@@ -894,7 +894,7 @@ s32 list_backend::insertion_sort()
 //		out_list.push_back( data_to_move, true );
 //	};
 //	
-//	//for ( size_t k = 0; k<args.get_out_size(); ++k )
+//	//FOR ( size_t k = 0; k<args.get_out_size(); ++k )
 //	while ( !( done_with_left && done_with_right ) )
 //	{
 //		if (done_with_left)
@@ -973,7 +973,7 @@ s32 list_backend::insertion_sort()
 //	
 //	size_t max_sublist_size_raw = 0;
 //	
-//	for ( s32 i=get_front_index(); i!=-1; i=get_next_index_at_index(i) )
+//	FOR ( s32 i=get_front_index(); i!=-1; i=get_next_index_at_index(i) )
 //	{
 //		++max_sublist_size_raw;
 //	}
@@ -984,7 +984,7 @@ s32 list_backend::insertion_sort()
 //	
 //	s32 n_left_head, n_left_tail, n_right_head, n_right_tail;
 //	
-//	for ( size_t sublist_size=1; 
+//	FOR ( size_t sublist_size=1; 
 //		sublist_size<max_sublist_size; 
 //		sublist_size*=2 )
 //	{
@@ -998,7 +998,7 @@ s32 list_backend::insertion_sort()
 //			
 //			s32 temp = 0;
 //			
-//			for ( size_t k=0; k<sublist_size-1; ++k )
+//			FOR ( size_t k=0; k<sublist_size-1; ++k )
 //			{
 //				temp = get_next_index_at_index(n_left_tail);
 //				
@@ -1018,7 +1018,7 @@ s32 list_backend::insertion_sort()
 //			n_right_head = get_next_index_at_index(n_left_tail);
 //			n_right_tail = n_right_head;
 //			
-//			for ( size_t k=0; k<sublist_size-1; ++k )
+//			FOR ( size_t k=0; k<sublist_size-1; ++k )
 //			{
 //				temp = get_next_index_at_index(n_right_tail);
 //				
@@ -1033,7 +1033,7 @@ s32 list_backend::insertion_sort()
 //		
 //		get_n_args(the_front_index);
 //		
-//		for ( size_t i=0; i<max_sublist_size; i+=sublist_size*2 )
+//		FOR ( size_t i=0; i<max_sublist_size; i+=sublist_size*2 )
 //		{
 //			args.init( n_left_head, n_left_tail, n_right_head, 
 //				n_right_tail );
@@ -1062,7 +1062,7 @@ void list_backend::internal_func_subarr_merge
 	
 	size_t i = 0, j = 0;
 	
-	for ( size_t k=0; k<out_subarr_size; ++k )
+	FOR ( size_t k=0; k<out_subarr_size; ++k )
 	{
 		if ( i >= left_subarr_size )
 		{
@@ -1119,7 +1119,7 @@ s32 list_backend::merge_sort_via_array()
 	//// The number of used nodes
 	//size_t real_num_nodes_raw = 0;
 	//
-	//for ( s32 i=old_front_index; 
+	//FOR ( s32 i=old_front_index; 
 	//	i!=-1;
 	//	i=get_next_index_at_index(i) )
 	//{
@@ -1136,9 +1136,9 @@ s32 list_backend::merge_sort_via_array()
 	//debug_arr_group::write_u32_and_inc(real_num_nodes);
 	
 	
-	// This is slower than filling arr_a in the previous for loop, but it
+	// This is slower than filling arr_a in the previous FOR loop, but it
 	// can use SIGNIFICANTLY less memory in the general case if the sa_list
-	// is not full.  This might be a good use case for an std::vector.
+	// is not full.  This might be a good use case FOR an std::vector.
 	ndai_dyn_arr arr_a(real_num_nodes), work_arr(real_num_nodes);
 	
 	
@@ -1146,7 +1146,7 @@ s32 list_backend::merge_sort_via_array()
 		size_t temp = 0;
 		node_contents temp_node;
 		
-		for ( s32 i=old_front_index; i!=-1; i=temp_node.next_index() )
+		FOR ( s32 i=old_front_index; i!=-1; i=temp_node.next_index() )
 		{
 			temp_node = get_node_contents_at(i);
 			
@@ -1168,7 +1168,7 @@ s32 list_backend::merge_sort_via_array()
 		//auto subarr_insertion_sort = [&]( size_t subarr_offset, 
 		//	const size_t subarr_size ) -> void
 		//{
-		//	for ( size_t i=1; i<subarr_size; ++i )
+		//	FOR ( size_t i=1; i<subarr_size; ++i )
 		//	{
 		//		size_t j = i + subarr_offset;
 		//		
@@ -1190,7 +1190,7 @@ s32 list_backend::merge_sort_via_array()
 		
 		size_t subarr_offset, subarr_size;
 		
-		for ( subarr_offset=0;
+		FOR ( subarr_offset=0;
 			subarr_offset<real_num_nodes;
 			subarr_offset+=subarr_size )
 		{
@@ -1234,7 +1234,7 @@ s32 list_backend::merge_sort_via_array()
 	}
 	
 	// Avoid recursion
-	for ( size_t subarr_size=first_subarr_size;
+	FOR ( size_t subarr_size=first_subarr_size;
 		subarr_size<=real_num_nodes;
 		subarr_size*=2 )
 	{
@@ -1292,7 +1292,7 @@ s32 list_backend::merge_sort_via_array()
 		//get_merge_args( arr_a, 0 );
 		get_merge_args( *main_arr_pc_pair.curr, 0 );
 		
-		for ( size_t i=0; i<real_num_nodes; i+=subarr_size*2 )
+		FOR ( size_t i=0; i<real_num_nodes; i+=subarr_size*2 )
 		{
 			//internal_func_subarr_merge( left_subarr, left_subarr_size,
 			//	right_subarr, right_subarr_size, &(work_arr[i]) );
@@ -1311,7 +1311,7 @@ s32 list_backend::merge_sort_via_array()
 		
 		if (!do_swap)
 		{
-			for ( s32 i=real_num_nodes-1; i>=0; --i )
+			FOR ( s32 i=real_num_nodes-1; i>=0; --i )
 			{
 				arr_a[i] = work_arr[i];
 			}
@@ -1333,8 +1333,8 @@ s32 list_backend::merge_sort_via_array()
 	//s32 curr_index;
 	//node_contents temp_node;
 	
-	//for ( u32 i=0; i<real_num_nodes; ++i )
-	for ( s32 i=real_num_nodes-1; i>=0; --i )
+	//FOR ( u32 i=0; i<real_num_nodes; ++i )
+	FOR ( s32 i=real_num_nodes-1; i>=0; --i )
 	{
 		//s32 curr_index = arr_a[i].index;
 		s32 curr_index = (*main_arr_pc_pair.prev)[i].index;
@@ -1351,12 +1351,12 @@ s32 list_backend::merge_sort_via_array()
 	//
 	//s32 i;
 	//
-	//for ( i=real_num_nodes-1; i>=0; --i )
+	//FOR ( i=real_num_nodes-1; i>=0; --i )
 	//{
 	//	//u8* buf = reinterpret_cast<u8*>(&arr_a[i].index);
 	//	
-	//	asm_comment("Inner for loop");
-	//	//for ( s32 j=sizeof(arr_a[i].index)-1; j>=0; --j )
+	//	asm_comment("Inner FOR loop");
+	//	//FOR ( s32 j=sizeof(arr_a[i].index)-1; j>=0; --j )
 	//	//{
 	//	//	temp_sram_buf[ ( i * sizeof(s32) ) + j ] = buf[j];
 	//	//}

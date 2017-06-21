@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -200,19 +200,19 @@ void active_level_manager::correct_bg0_scroll_mirror
 		//gfx_manager::bgofs_mirror[0].curr.x = ( sublevel_width_in_tiles
 		//	(sublevel_size_in_blocks_2d)
 		//	* num_pixels_per_tile_row_or_column )
-		//	- screen_width;
+		//	- SCREEN_WIDTH;
 		
 		if ( change_frac_bits )
 		{
 			gfx_manager::bgofs_mirror[0].curr.x = make_f24p8
 				( ( sublevel_width_in_tiles(sublevel_size_in_blocks_2d)
-				* num_pixels_per_tile_row_or_column ) - screen_width );
+				* num_pixels_per_tile_row_or_column ) - SCREEN_WIDTH );
 		}
 		else //if ( !change_frac_bits )
 		{
 			gfx_manager::bgofs_mirror[0].curr.x = make_f24p8
 				( ( sublevel_width_in_tiles(sublevel_size_in_blocks_2d)
-				* num_pixels_per_tile_row_or_column ) - screen_width,
+				* num_pixels_per_tile_row_or_column ) - SCREEN_WIDTH,
 				gfx_manager::bgofs_mirror[0].curr.x.get_frac_bits() );
 		}
 	}
@@ -241,19 +241,19 @@ void active_level_manager::correct_bg0_scroll_mirror
 		//gfx_manager::bgofs_mirror[0].curr.y = ( sublevel_height_in_tiles
 		//	(sublevel_size_in_blocks_2d)
 		//	* num_pixels_per_tile_row_or_column )
-		//	- screen_height;
+		//	- SCREEN_HEIGHT;
 		
 		if ( change_frac_bits )
 		{
 			gfx_manager::bgofs_mirror[0].curr.y = make_f24p8
 				( ( sublevel_height_in_tiles(sublevel_size_in_blocks_2d)
-				* num_pixels_per_tile_row_or_column ) - screen_height );
+				* num_pixels_per_tile_row_or_column ) - SCREEN_HEIGHT );
 		}
 		else //if ( !change_frac_bits )
 		{
 			gfx_manager::bgofs_mirror[0].curr.y = make_f24p8
 				( ( sublevel_height_in_tiles(sublevel_size_in_blocks_2d)
-				* num_pixels_per_tile_row_or_column ) - screen_height, 
+				* num_pixels_per_tile_row_or_column ) - SCREEN_HEIGHT, 
 				gfx_manager::bgofs_mirror[0].curr.y.get_frac_bits() );
 		}
 	}
@@ -277,8 +277,8 @@ void active_level_manager::update_sublevel_in_screenblock_mirror_2d()
 		.floor_to_int() >> 3;
 	
 	
-	// Create a list of 8x8 tile IDs for each block_type
-	for ( u32 i=0; i<lim_bt; ++i )
+	// Create a list of 8x8 tile IDs FOR each block_type
+	FOR ( u32 i=0; i<lim_bt; ++i )
 	{
 		block_type the_block_type = (block_type)i;
 		
@@ -306,9 +306,9 @@ void active_level_manager::update_sublevel_in_screenblock_mirror_2d()
 	}
 	
 	//
-	for ( u32 i=0; i<screen_width_in_tiles + 1; ++i )
+	FOR ( u32 i=0; i<screen_width_in_tiles + 1; ++i )
 	{
-		for ( u32 j=0; j<screen_height_in_tiles + 1; ++j )
+		FOR ( u32 j=0; j<screen_height_in_tiles + 1; ++j )
 		{
 			// Why exactly am I using un-named constants here?
 			active_level::bg0_screenblock_mirror_2d.at
@@ -340,7 +340,7 @@ void active_level_manager::copy_sublevel_from_array_csz_2d_helper_to_vram()
 //	u32 the_ext_sprite_ipg_arr_size )
 //{
 //	
-//	for ( u32 i=0; i<the_ext_sprite_ipg_arr_size; ++i )
+//	FOR ( u32 i=0; i<the_ext_sprite_ipg_arr_size; ++i )
 //	{
 //		if ( the_ext_sprite_ipg_arr[i].type != st_default 
 //			&& the_ext_sprite_ipg_arr[i].type != st_player )
@@ -352,7 +352,7 @@ void active_level_manager::copy_sublevel_from_array_csz_2d_helper_to_vram()
 //	}
 //	
 //	
-//	for ( auto iter = active_level::horiz_sublevel_sprite_ipg_lists.begin(); 
+//	FOR ( auto iter = active_level::horiz_sublevel_sprite_ipg_lists.begin(); 
 //		iter != active_level::horiz_sublevel_sprite_ipg_lists.end(); 
 //		++iter )
 //	{
@@ -381,7 +381,7 @@ void active_level_manager::load_level
 	
 	player_sprite::remaining_hp = player_sprite::max_hp;
 	
-	for ( u32 i=0; i<active_level::max_num_sublevels; ++i )
+	FOR ( u32 i=0; i<active_level::max_num_sublevels; ++i )
 	{
 		memfill32( active_level::persistent_block_data_arrays[i], 0, 
 			sizeof(active_level::persistent_block_data_arrays[i])
@@ -403,7 +403,7 @@ void active_level_manager::load_sublevel_basic( u32 n_sublevel_index )
 	bios_do_lz77_uncomp_wram( active_level::get_curr_sublevel_ptr()
 		.cmp_bd_arr_helper.the_array, active_level::block_data_array );
 	
-	for ( u32 i=0; i<active_level::block_data_array_size; ++i )
+	FOR ( u32 i=0; i<active_level::block_data_array_size; ++i )
 	{
 		block& the_block = active_level::block_data_array[i];
 		
@@ -442,7 +442,7 @@ void active_level_manager::load_sublevel_at_intra_sublevel_warp
 	bios_do_lz77_uncomp_wram( active_level::get_curr_sublevel_ptr()
 		.cmp_bd_arr_helper.the_array, active_level::block_data_array );
 	
-	for ( u32 i=0; i<active_level::block_data_array_size; ++i )
+	FOR ( u32 i=0; i<active_level::block_data_array_size; ++i )
 	{
 		block& the_block = active_level::block_data_array[i];
 		
@@ -462,7 +462,7 @@ void active_level_manager::load_sublevel_at_intra_sublevel_warp
 	bios_wait_for_vblank();
 	//game_manager::vblank_func();
 	
-	// Wait for about 0.25 seconds.
+	// Wait FOR about 0.25 seconds.
 	//wait_for_x_frames(15);
 	
 	gfx_manager::fade_in(15);

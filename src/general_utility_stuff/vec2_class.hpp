@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -185,7 +185,7 @@ public:		// functions
 		}
 	}
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 
@@ -346,13 +346,13 @@ template<>
 class vec2<fixed24p8>
 {
 generate_specific_vec2_class_contents(fixed24p8)
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 template<>
 class vec2<fixed8p8>
 {
 generate_specific_vec2_class_contents(fixed8p8)
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 typedef vec2<fixed24p8> vec2_f24p8;
 typedef vec2<fixed8p8> vec2_f8p8;

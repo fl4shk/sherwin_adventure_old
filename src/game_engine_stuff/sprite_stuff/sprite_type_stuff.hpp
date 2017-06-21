@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -68,7 +68,7 @@ macro(chocolate_muffin)
 
 
 
-// Pseudo-background sprites are ONLY checked for intersection with
+// Pseudo-background sprites are ONLY checked FOR intersection with
 // the_player (and possibly player secondary sprites)
 #define first_pseudo_bg_sprite_type_suffix( macro ) \
 macro(door)
@@ -123,7 +123,7 @@ list_of_player_secondary_sprite_type_suffixes(macro)
 // Adding, removing, or changing sprite types
 enum sprite_type
 {
-	// The Default Sprite (also used for when there is no sprite in the
+	// The Default Sprite (also used FOR when there is no sprite in the
 	// slot).
 	st_default,
 	
@@ -137,7 +137,7 @@ enum sprite_type
 	// by the compiler.
 	lim_st,
 	
-} _alignas_regular;
+} _ALIGNAS_REGULAR;
 
 
 #define generate_st_value(suffix) st_##suffix
@@ -183,7 +183,7 @@ inline bool sprite_type_exists( sprite_type the_sprite_type )
 	return ( the_sprite_type >= st_default && the_sprite_type < lim_st );
 }
 
-// So, what's this for again?
+// So, what's this FOR again?
 // Good question!
 inline bool sprite_type_is_derived( sprite_type the_sprite_type )
 {

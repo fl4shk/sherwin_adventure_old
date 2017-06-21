@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -40,7 +40,7 @@ void sa_pod_stack_backend::write_to_the_array_u8( const u8* to_write_u8,
 	u32 start_index_u8 = arr_byte_index_macro( get_type_size(), 
 		non_u8_index );
 	
-	for ( u32 i=0; i<get_type_size(); ++i )
+	FOR ( u32 i=0; i<get_type_size(); ++i )
 	{
 		get_array_u8()[start_index_u8 + i] = to_write_u8[i];
 	}
@@ -73,7 +73,7 @@ void sa_free_list_backend::init()
 	// This makes it so that the values initially stored in the array are
 	// decrementing in value, starting with the highest value of
 	// ( get_size() - 1 ) and ending with 0. 
-	for ( int i=get_size()-1; i>= 0; --i )
+	FOR ( int i=get_size()-1; i>= 0; --i )
 	{
 		push(i);
 	}

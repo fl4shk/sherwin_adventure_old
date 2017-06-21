@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -66,7 +66,7 @@ void game_manager::vblank_func()
 		
 		
 		// Enable forced blank
-		reg_dispcnt = dcnt_blank_on;
+		REG_DISPCNT = DCNT_BLANK_ON;
 		
 		return;
 	}
@@ -142,23 +142,23 @@ void game_manager::title_screen_func()
 	
 	// Use video Mode 0, use 1D object mapping, enable forced blank, 
 	// and display BG 0.
-	reg_dispcnt = dcnt_mode0 | dcnt_obj_1d | dcnt_blank_on | dcnt_bg0_on;
+	REG_DISPCNT = DCNT_MODE0 | DCNT_OBJ_1D | DCNT_BLANK_ON | DCNT_BG0_ON;
 	
 	//// Use video Mode 0, use 1D object mapping, enable forced blank, 
 	//// and display BG 0, BG 1, BG 2, and BG 3
-	//reg_dispcnt = dcnt_mode0 | dcnt_obj_1d | dcnt_blank_on | dcnt_bg0_on
-	//	| dcnt_bg1_on | dcnt_bg2_on | dcnt_bg3_on | dcnt_obj_on;
+	//REG_DISPCNT = DCNT_MODE0 | DCNT_OBJ_1D | DCNT_BLANK_ON | DCNT_BG0_ON
+	//	| DCNT_BG1_ON | DCNT_BG2_ON | DCNT_BG3_ON | DCNT_OBJ_ON;
 	
-	// Use screen base block 28 for BG0's Map
-	reg_bg0cnt = bgcnt_sbb(bg0_sbb);
+	// Use screen base block 28 FOR BG0's Map
+	REG_BG0CNT = bgcnt_sbb(bg0_sbb);
 	
-	reg_bg1cnt = bgcnt_sbb(bg1_sbb);
-	reg_bg2cnt = bgcnt_sbb(bg2_sbb);
-	reg_bg3cnt = bgcnt_sbb(bg3_sbb);
+	REG_BG1CNT = bgcnt_sbb(bg1_sbb);
+	REG_BG2CNT = bgcnt_sbb(bg2_sbb);
+	REG_BG3CNT = bgcnt_sbb(bg3_sbb);
 	
 	
 	// Clear bgofs_mirror
-	for ( u32 i=0; i<3; ++i )
+	FOR ( u32 i=0; i<3; ++i )
 	{
 		gfx_manager::bgofs_mirror[i].curr.x 
 			= gfx_manager::bgofs_mirror[i].prev.x = {0};
@@ -170,9 +170,9 @@ void game_manager::title_screen_func()
 	
 	
 	// Copy the title screen's tiles and tilemap to VRAM
-	bios_do_lz77_uncomp_vram( title_screenTiles, bg_tile_vram );
+	bios_do_lz77_uncomp_vram( title_screenTiles, BG_TILE_VRAM );
 	
-	gfx_manager::upload_bg_palettes_to_target(bg_pal_ram);
+	gfx_manager::upload_bg_palettes_to_target(BG_PAL_RAM);
 	
 	// This is sort of a hack.
 	bios_do_lz77_uncomp_wram( title_screenMap, 
@@ -181,11 +181,11 @@ void game_manager::title_screen_func()
 	
 	
 	// Disable forced blank
-	clear_bits( reg_dispcnt, dcnt_blank_mask );
+	clear_bits( REG_DISPCNT, DCNT_BLANK_MASK );
 	
 	//memcpy8( test_sram_arr, (void *)debug_arr_u32, test_sram_arr_size );
 	
-	for (;;)
+	FOR (;;)
 	{
 		bios_wait_for_vblank();
 		
@@ -221,21 +221,21 @@ void game_manager::reinit_the_game()
 	
 	// Use video Mode 0, use 1D object mapping, enable forced blank,
 	// display BG 0, BG 1, and objects.
-	reg_dispcnt = dcnt_mode0 | dcnt_obj_1d | dcnt_blank_on | dcnt_bg0_on
-		| dcnt_bg1_on | dcnt_obj_on;
+	REG_DISPCNT = DCNT_MODE0 | DCNT_OBJ_1D | DCNT_BLANK_ON | DCNT_BG0_ON
+		| DCNT_BG1_ON | DCNT_OBJ_ON;
 	
 	//// Use video Mode 0, use 1D object mapping, enable forced blank, 
 	//// and display BG 0, BG 1, BG 2, BG 3, and objects
-	//reg_dispcnt = dcnt_mode0 | dcnt_obj_1d | dcnt_blank_on | dcnt_bg0_on
-	//	| dcnt_bg1_on | dcnt_bg2_on | dcnt_bg3_on | dcnt_obj_on;
+	//REG_DISPCNT = DCNT_MODE0 | DCNT_OBJ_1D | DCNT_BLANK_ON | DCNT_BG0_ON
+	//	| DCNT_BG1_ON | DCNT_BG2_ON | DCNT_BG3_ON | DCNT_OBJ_ON;
 	
-	// Use screen base block 28 for BG0's Map.
-	reg_bg0cnt = bgcnt_sbb(bg0_sbb) | bgcnt_prio(1);
+	// Use screen base block 28 FOR BG0's Map.
+	REG_BG0CNT = bgcnt_sbb(bg0_sbb) | bgcnt_prio(1);
 	
 	// Give BG1 a higher display priority than BG0.
-	reg_bg1cnt = bgcnt_sbb(bg1_sbb) | bgcnt_prio(0);
-	reg_bg2cnt = bgcnt_sbb(bg2_sbb) | bgcnt_prio(1);
-	reg_bg3cnt = bgcnt_sbb(bg3_sbb) | bgcnt_prio(1);
+	REG_BG1CNT = bgcnt_sbb(bg1_sbb) | bgcnt_prio(0);
+	REG_BG2CNT = bgcnt_sbb(bg2_sbb) | bgcnt_prio(1);
+	REG_BG3CNT = bgcnt_sbb(bg3_sbb) | bgcnt_prio(1);
 	
 	//u32 the_metatile_id = gfx_manager::get_metatile_number_of_block_type
 	//	(bt_eyes);
@@ -243,28 +243,28 @@ void game_manager::reinit_the_game()
 	//	(bt_eyes);
 	//u32 num_tiles_per_metatile = gfx_manager::num_tiles_in_ss_16x16;
 	//
-	//for ( u32 i=0; i<screenblock_size; ++i )
+	//FOR ( u32 i=0; i<screenblock_size; ++i )
 	//{
-	//	se_ram[bg1_sbb][i] 
+	//	SE_RAM[bg1_sbb][i] 
 	//		= se_id( the_metatile_id * num_tiles_per_metatile )
 	//		| se_palbank(the_palette_id);
 	//}
 	
 	//bios_wait_for_vblank();
 	
-	//for ( u32 i=0; i<screenblock_size; ++i )
+	//FOR ( u32 i=0; i<screenblock_size; ++i )
 	//{
-	//	se_ram[bg1_sbb][i] = bt_wood * 4;
+	//	SE_RAM[bg1_sbb][i] = bt_wood * 4;
 	//}
 	
 	// Copy the sprite palettes to OBJ Palette RAM.
-	gfx_manager::upload_sprite_palettes_to_target(obj_pal_ram);
+	gfx_manager::upload_sprite_palettes_to_target(OBJ_PAL_RAM);
 	
 	//// Copy the sprite graphics to OBJ Video RAM.
 	//gfx_manager::upload_default_sprite_graphics();
 	
 	// Also, copy the_block_gfxPalLen to BG Palette RAM
-	gfx_manager::upload_bg_palettes_to_target(bg_pal_ram);
+	gfx_manager::upload_bg_palettes_to_target(BG_PAL_RAM);
 	
 	//bios_wait_for_vblank();
 	
@@ -294,7 +294,7 @@ void game_manager::reinit_the_game()
 	
 	//bios_wait_for_vblank();
 	// Disable forced blank
-	clear_bits( reg_dispcnt, dcnt_blank_mask );
+	clear_bits( REG_DISPCNT, DCNT_BLANK_MASK );
 	
 	
 	gfx_manager::fade_in(15);

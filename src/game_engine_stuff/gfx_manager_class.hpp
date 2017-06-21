@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -34,11 +34,11 @@ class sprite;
 
 // There are a total of 16 BG palettes provided by the GBA hardware, each
 // with 15 colors (and one transparent "color").  This enum is intended to
-// be used for BG palette slots during these game modes:  gm_loading_level,
+// be used FOR BG palette slots during these game modes:  gm_loading_level,
 // gm_changing_sublevel, and gm_in_sublevel.
 enum bg_palette_slot_in_level
 {
-	// When in a level, blocks use palette slots 0, 1, 2, and 3 for now.
+	// When in a level, blocks use palette slots 0, 1, 2, and 3 FOR now.
 	// Perhaps in the future blocks will be able to use more than just
 	// these palette slots, what with there being 16 total BG palette
 	// slots.
@@ -56,7 +56,7 @@ enum bg_palette_slot_in_level
 	// as a simple hack since it basically abuses the way enums work.
 	lim_bgps_in_level,
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 //enum bg_palette_slot_in_overworld
@@ -65,7 +65,7 @@ enum bg_palette_slot_in_level
 
 // There are a total of 16 sprite palettes provided by the GBA hardware,
 // each with 15 colors (and one transparent "color").  This enum is
-// intended to be used for sprite palette slots during these game_mode's:
+// intended to be used FOR sprite palette slots during these game_mode's:
 // gm_loading_level, gm_changing_sublevel, and gm_in_sublevel.
 enum sprite_palette_slot
 {
@@ -85,7 +85,7 @@ enum sprite_palette_slot
 	
 	//// Enemy sprites use sprite palette slots 4, 5, and 6
 	// Enemy sprites use sprite palette slots 3, 4, and 5.  
-	// Perhaps there will eventually be a need for dynamic enemy palettes,
+	// Perhaps there will eventually be a need FOR dynamic enemy palettes,
 	// based on which types of enemies are in a particular level.  This
 	// would require some changes to the level class.
 	sps_enemy_0,
@@ -101,7 +101,7 @@ enum sprite_palette_slot
 	// and it is automatically updated by the compiler.  This might count
 	// as a simple hack since it basically abuses the way enums work.
 	lim_sps,
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 class gfx_manager
@@ -138,33 +138,33 @@ public:		// variables and constants
 	static const u32 bgofs_mirror_size = 4;
 	
 	static bg_point prev_prev_bgofs_mirror[bgofs_mirror_size]
-		__attribute__((_iwram));
+		__attribute__((_IWRAM));
 	static prev_curr_pair<bg_point> bgofs_mirror[bgofs_mirror_size]
-		__attribute__((_iwram));
+		__attribute__((_IWRAM));
 	
-	// Current component arrays, stored in EWRAM as fixed24p8's for speed
+	// Current component arrays, stored in EWRAM as fixed24p8's FOR speed
 	// and accuracy reasons.
 	static constexpr u32 bg_fade_curr_component_arr_size 
 		= num_colors_in_8_palettes;
 	
 	// -- Switch to linear_memory_allocator --
 	static fixed24p8 bg_fade_curr_red_arr
-		[bg_fade_curr_component_arr_size] __attribute__((_ewram)),
+		[bg_fade_curr_component_arr_size] __attribute__((_EWRAM)),
 	bg_fade_curr_green_arr
-		[bg_fade_curr_component_arr_size] __attribute__((_ewram)),
+		[bg_fade_curr_component_arr_size] __attribute__((_EWRAM)),
 	bg_fade_curr_blue_arr
-		[bg_fade_curr_component_arr_size] __attribute__((_ewram));
+		[bg_fade_curr_component_arr_size] __attribute__((_EWRAM));
 
 	static constexpr u32 obj_fade_curr_component_arr_size 
 		= num_colors_in_8_palettes;
 	
 	// -- Switch to linear_memory_allocator --
 	static fixed24p8 obj_fade_curr_red_arr
-		[obj_fade_curr_component_arr_size] __attribute__((_ewram)),
+		[obj_fade_curr_component_arr_size] __attribute__((_EWRAM)),
 	obj_fade_curr_green_arr
-		[obj_fade_curr_component_arr_size] __attribute__((_ewram)),
+		[obj_fade_curr_component_arr_size] __attribute__((_EWRAM)),
 	obj_fade_curr_blue_arr
-		[obj_fade_curr_component_arr_size] __attribute__((_ewram));
+		[obj_fade_curr_component_arr_size] __attribute__((_EWRAM));
 	
 	
 	// Fade out/in step amounts.
@@ -173,22 +173,22 @@ public:		// variables and constants
 	
 	// -- Switch to linear_memory_allocator --
 	static fixed24p8 bg_fade_red_step_amount_arr
-		[bg_fade_step_amount_arr_size] __attribute__((_ewram)),
+		[bg_fade_step_amount_arr_size] __attribute__((_EWRAM)),
 	bg_fade_green_step_amount_arr
-		[bg_fade_step_amount_arr_size] __attribute__((_ewram)),
+		[bg_fade_step_amount_arr_size] __attribute__((_EWRAM)),
 	bg_fade_blue_step_amount_arr
-		[bg_fade_step_amount_arr_size] __attribute__((_ewram));
+		[bg_fade_step_amount_arr_size] __attribute__((_EWRAM));
 	
 	static constexpr u32 obj_fade_step_amount_arr_size 
 		= num_colors_in_8_palettes;
 	
 	// -- Switch to linear_memory_allocator --
 	static fixed24p8 obj_fade_red_step_amount_arr
-		[obj_fade_step_amount_arr_size] __attribute__((_ewram)),
+		[obj_fade_step_amount_arr_size] __attribute__((_EWRAM)),
 	obj_fade_green_step_amount_arr
-		[obj_fade_step_amount_arr_size] __attribute__((_ewram)),
+		[obj_fade_step_amount_arr_size] __attribute__((_EWRAM)),
 	obj_fade_blue_step_amount_arr
-		[obj_fade_step_amount_arr_size] __attribute__((_ewram));
+		[obj_fade_step_amount_arr_size] __attribute__((_EWRAM));
 	
 	
 	// Sprite VRAM allocation stuff
@@ -196,22 +196,22 @@ public:		// variables and constants
 	// 64 max sprites on screen at once should be plenty.  Sprite
 	// VRAM will be allocated in chunks of 32x32 pixels, or 8 tiles of 8x8
 	// pixels.  It's unlikely that any sprites larger than 32x32 would be
-	// needed.  Also, this is only the case for 4bpp graphics.
+	// needed.  Also, this is only the case FOR 4bpp graphics.
 	static constexpr u32 max_num_32x32_metatiles = 64;
 	
 	// BG palette stuff
 	// -- Switch to linear_memory_allocator --
 	static u16 bg_pal_mirror[bg_pal_ram_size_in_u16]
-		__attribute__((_ewram));
+		__attribute__((_EWRAM));
 	
 	// Sprite palette stuff
 	// -- Switch to linear_memory_allocator --
 	static u16 obj_pal_mirror[obj_pal_ram_size_in_u16] 
-		__attribute__((_ewram));
+		__attribute__((_EWRAM));
 	
 	// HUD stuff
 	// -- Switch to linear_memory_allocator --
-	static u32 hud_vram_as_tiles_start_offset __attribute__((_ewram));
+	static u32 hud_vram_as_tiles_start_offset __attribute__((_EWRAM));
 	
 public:		// functions
 	
@@ -222,7 +222,7 @@ public:		// functions
 		//bgofs_mirror[2].back_up();
 		//bgofs_mirror[3].back_up();
 		
-		for ( u32 i=0; i<bgofs_mirror_size; ++i )
+		FOR ( u32 i=0; i<bgofs_mirror_size; ++i )
 		{
 			prev_prev_bgofs_mirror[i] = bgofs_mirror[i].prev;
 			bgofs_mirror[i].back_up();
@@ -270,7 +270,7 @@ public:		// functions
 	
 	static void copy_bg_pal_mirror_to_bg_pal_ram();
 	
-	static void upload_bg_tiles_to_vram() __attribute__((_iwram_code));
+	static void upload_bg_tiles_to_vram() __attribute__((_IWRAM_CODE));
 	
 	
 	// Sprite graphics stuff
@@ -283,13 +283,13 @@ public:		// functions
 	
 	
 	static void upload_sprite_tiles_to_vram( sprite& the_sprite )
-		__attribute__((_iwram_code));
+		__attribute__((_IWRAM_CODE));
 	
 	// HUD stuff
 	static inline void init_hud_vram_as_tiles_start_offset()
 	{
 		hud_vram_as_tiles_start_offset = 0;
-		for ( u32 i=0; i<block_type::lim_bt; ++i )
+		FOR ( u32 i=0; i<block_type::lim_bt; ++i )
 		{
 			u32 graphics_slot = get_graphics_slot_of_block_type 
 				( (block_type)i );
@@ -305,18 +305,18 @@ public:		// functions
 	
 	// Fading stuff
 	static void fade_out_to_black( u32 num_steps, 
-		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_iwram_code));
+		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_IWRAM_CODE));
 	
 	static void fade_out_to_white( u32 num_steps, 
-		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_iwram_code));
+		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_IWRAM_CODE));
 	
 	static void fade_in( u32 num_steps, 
-		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_iwram_code));
+		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_IWRAM_CODE));
 	
 	
 	
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 

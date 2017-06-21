@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -19,7 +19,7 @@
 #include "attribute_defines.hpp"
 #include "oam_entry_classes.hpp"
 
-// I'm tempted to put these two arrays in _iwram.
+// I'm tempted to put these two arrays in _IWRAM.
 oam_entry oam_mirror[oam_mirror_size];
 //oam_entry_affine* const oam_mirror_aff = (oam_entry_affine*)oam_mirror ;
 

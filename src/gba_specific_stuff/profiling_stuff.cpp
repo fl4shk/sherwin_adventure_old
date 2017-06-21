@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -65,7 +65,7 @@ inline void deallocate_arr_with_free( type*& to_deallocate )
 
 void profile_dynamic_allocations( size_t num_elems )
 {
-	//for ( u32 i=0; i<temp_debug_arr_size; ++i )
+	//FOR ( u32 i=0; i<temp_debug_arr_size; ++i )
 	//{
 	//	profile_start();
 	//	
@@ -74,7 +74,7 @@ void profile_dynamic_allocations( size_t num_elems )
 	//	temp_debug_arr_for_new[i] = profile_stop();
 	//}
 	//
-	//for ( u32 i=0; i<temp_debug_arr_size; ++i )
+	//FOR ( u32 i=0; i<temp_debug_arr_size; ++i )
 	//{
 	//	profile_start();
 	//	
@@ -84,7 +84,7 @@ void profile_dynamic_allocations( size_t num_elems )
 	//}
 	//
 	//
-	//for ( u32 i=0; i<temp_debug_arr_size; ++i )
+	//FOR ( u32 i=0; i<temp_debug_arr_size; ++i )
 	//{
 	//	profile_start();
 	//	
@@ -94,7 +94,7 @@ void profile_dynamic_allocations( size_t num_elems )
 	//	temp_debug_arr_for_malloc[i] = profile_stop();
 	//}
 	//
-	//for ( u32 i=0; i<temp_debug_arr_size; ++i )
+	//FOR ( u32 i=0; i<temp_debug_arr_size; ++i )
 	//{
 	//	profile_start();
 	//	
@@ -103,7 +103,7 @@ void profile_dynamic_allocations( size_t num_elems )
 	//	temp_debug_arr_for_free[i] = profile_stop();
 	//}
 	//
-	////for ( u32 i=0; i<temp_debug_arr_size; ++i )
+	////FOR ( u32 i=0; i<temp_debug_arr_size; ++i )
 	////{
 	////	profile_start();
 	////	
@@ -113,7 +113,7 @@ void profile_dynamic_allocations( size_t num_elems )
 	////	temp_debug_arr_for_nano_malloc[i] = profile_stop();
 	////}
 	////
-	////for ( u32 i=0; i<temp_debug_arr_size; ++i )
+	////FOR ( u32 i=0; i<temp_debug_arr_size; ++i )
 	////{
 	////	profile_start();
 	////	

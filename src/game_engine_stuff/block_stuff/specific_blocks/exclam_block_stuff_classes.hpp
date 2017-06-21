@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -23,7 +23,7 @@ class exclam_block_stuff : public block_base_stuff
 {
 public:		// enums
 	enum persistent_data_state { is_exclam, is_bt_dud } 
-		__attribute__((_align4));
+		__attribute__((_ALIGN4));
 	
 public:		// variables
 	static const block_stuff_const_params the_const_params;
@@ -42,6 +42,6 @@ public:		// functions
 	virtual void finish_initializing_using_persistent_data
 		( block& the_block );
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 #endif		// exclam_block_stuff_classes_hpp

@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -41,9 +41,9 @@ block_coll_result_rect_group::block_coll_result_rect_group()
 	
 	init_bcr_arr_csz_2d_helper();
 	
-	for ( s32 j=0; j<real_height(); ++j )
+	FOR ( s32 j=0; j<real_height(); ++j )
 	{
-		for ( s32 i=0; i<real_width(); ++i )
+		FOR ( s32 i=0; i<real_width(); ++i )
 		{
 			at( i, j ) = block_coll_result( tl_corner() 
 				+ vec2_s32( i, j ) );
@@ -70,9 +70,9 @@ block_coll_result_rect_group::block_coll_result_rect_group
 	
 	init_bcr_arr_csz_2d_helper();
 	
-	for ( s32 j=0; j<real_height(); ++j )
+	FOR ( s32 j=0; j<real_height(); ++j )
 	{
-		for ( s32 i=0; i<real_width(); ++i )
+		FOR ( s32 i=0; i<real_width(); ++i )
 		{
 			at( i, j ) = block_coll_result( tl_corner() 
 				+ vec2_s32( i, j ) );
@@ -115,8 +115,8 @@ void bcr_lseg_group::init( const horiz_coll_lseg& the_coll_lseg )
 	is_horiz = true;
 	
 	
-	//for ( s32 i=0; i<get_real_size(); ++i )
-	for ( s32 i=get_real_size()-1; i>=0; --i )
+	//FOR ( s32 i=0; i<get_real_size(); ++i )
+	FOR ( s32 i=get_real_size()-1; i>=0; --i )
 	{
 		at(i) = block_coll_result( get_start_pos() + get_horiz_offset(i) );
 	}
@@ -132,8 +132,8 @@ void bcr_lseg_group::init( const vert_coll_lseg& the_coll_lseg )
 	is_horiz = false;
 	
 	
-	//for ( s32 i=0; i<get_real_size(); ++i )
-	for ( s32 i=get_real_size()-1; i>=0; --i )
+	//FOR ( s32 i=0; i<get_real_size(); ++i )
+	FOR ( s32 i=get_real_size()-1; i>=0; --i )
 	{
 		at(i) = block_coll_result( get_start_pos() + get_vert_offset(i) );
 	}
@@ -143,7 +143,7 @@ void bcr_lseg_group::init( const vert_coll_lseg& the_coll_lseg )
 block_coll_result* bcr_lseg_group::horiz_any_bbvt_is_fully_solid
 	( vec2_s32& pos )
 {
-	for ( s32 i=0; i<get_real_size(); ++i )
+	FOR ( s32 i=0; i<get_real_size(); ++i )
 	{
 		if ( bbvt_is_fully_solid(at(i).get_bbvt()) )
 		{
@@ -157,7 +157,7 @@ block_coll_result* bcr_lseg_group::horiz_any_bbvt_is_fully_solid
 block_coll_result* bcr_lseg_group::vert_any_bbvt_is_fully_solid
 	( vec2_s32& pos )
 {
-	for ( s32 i=0; i<get_real_size(); ++i )
+	FOR ( s32 i=0; i<get_real_size(); ++i )
 	{
 		if ( bbvt_is_fully_solid(at(i).get_bbvt()) )
 		{
@@ -170,7 +170,7 @@ block_coll_result* bcr_lseg_group::vert_any_bbvt_is_fully_solid
 }
 block_coll_result* bcr_lseg_group::vert_any_bbvt_is_slope( vec2_s32& pos )
 {
-	for ( s32 i=0; i<get_real_size(); ++i )
+	FOR ( s32 i=0; i<get_real_size(); ++i )
 	{
 		if ( bbvt_is_slope(at(i).get_bbvt()) )
 		{

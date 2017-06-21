@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -40,7 +40,7 @@ public:		// functions
 		return the_const_params;
 	}
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 class fire_muffin_sprite : public sprite
 {
@@ -60,7 +60,7 @@ public:		// functions
 		return the_const_params;
 	}
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 class ice_muffin_sprite : public sprite
@@ -81,7 +81,7 @@ public:		// functions
 		return the_const_params;
 	}
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 class chocolate_muffin_sprite : public sprite
 {
@@ -101,6 +101,6 @@ public:		// functions
 		return the_const_params;
 	}
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 #endif		// muffin_sprite_classes_hpp

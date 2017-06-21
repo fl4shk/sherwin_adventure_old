@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -27,12 +27,12 @@
 class hud_manager
 {
 public:		// variables
-	static bool hud_was_generated __attribute__((_ewram));
+	static bool hud_was_generated __attribute__((_EWRAM));
 	
 	
 	// -- Switch to linear_memory_allocator --
 	static scr_entry bg1_screenblock_mirror[screenblock_size]
-		__attribute__((_ewram));
+		__attribute__((_EWRAM));
 	
 	
 	// bg1_screenblock_2d is in VRAM.
@@ -51,22 +51,22 @@ public:		// functions
 	// For some reason, NOT having these two functions marked as
 	// __noinline__ causes problems.
 	//static void plot_char_8x16_to_screenblock_mirror( u32 the_char, 
-	//	u32 pos_x, u32 pos_y ) __attribute__((_iwram_code,__noinline__));
+	//	u32 pos_x, u32 pos_y ) __attribute__((_IWRAM_CODE,__noinline__));
 	
 	//static void plot_char_8x8_to_screenblock_mirror( u32 the_char,
-	//	u32 pos_x, u32 pos_y ) __attribute__((_iwram_code,__noinline__));
+	//	u32 pos_x, u32 pos_y ) __attribute__((_IWRAM_CODE,__noinline__));
 	
 	static void plot_horiz_str_8x8_to_screenblock_mirror( const char* str,
 		u32 str_size, u32& plot_x, u32& plot_y );
-		__attribute__((_iwram_code));
+		__attribute__((_IWRAM_CODE));
 	
 	
 	static void update_hud_in_screenblock_mirror_2d();
-		__attribute__((_iwram_code));
+		__attribute__((_IWRAM_CODE));
 	
 	static void copy_hud_from_array_csz_2d_helper_to_vram();
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 #endif		// hud_manager_class_hpp

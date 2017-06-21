@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -22,27 +22,27 @@
 #include "../general_utility_stuff/misc_types.hpp"
 
 
-#define mem_ewram 0x02000000
-#define mem_iwram 0x03000000
-#define mem_sram 0x0e000000
+#define MEM_EWRAM 0x02000000
+#define MEM_IWRAM 0x03000000
+#define MEM_SRAM 0x0e000000
 
 
-#define mem_io 0x04000000
-#define mem_pal_ram 0x05000000
-#define mem_vram 0x06000000
-#define mem_oam 0x07000000
+#define MEM_IO 0x04000000
+#define MEM_PAL_RAM 0x05000000
+#define MEM_VRAM 0x06000000
+#define MEM_OAM 0x07000000
 
 
-#define mem_vram_page_0 0x06000000
-#define mem_vram_page_1 0x0600a000
+#define MEM_VRAM_PAGE_0 0x06000000
+#define MEM_VRAM_PAGE_1 0x0600a000
 
 
 
 // The start of BG Palette RAM
-#define mem_bg_pal 0x05000000
+#define MEM_BG_PAL 0x05000000
 
 // The start of OBJ Palette RAM
-#define mem_obj_pal 0x05000200
+#define MEM_OBJ_PAL 0x05000200
 
 
 

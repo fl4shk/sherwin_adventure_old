@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -78,10 +78,10 @@ public:		// enums
 		frm_weapon_swing_ground_moving_3_row_2,
 		frm_weapon_swing_ground_moving_4_row_2,
 		frm_weapon_swing_ground_moving_5_row_2,
-	} _alignas_regular;
+	} _ALIGNAS_REGULAR;
 	
 	// This enum allows multiple frame_slot's to be represented by the same
-	// frame, which is used, for example, in the walking animation.  Also,
+	// frame, which is used, FOR example, in the walking animation.  Also,
 	// the reason this is necessary is that so which frame is currently
 	// active can be determined.  If two frames in the enum share a value,
 	// it is impossible to tell where in the walk cycle the player's
@@ -140,7 +140,7 @@ public:		// enums
 		frm_slot_weapon_swing_ground_moving_5_row_2,
 		
 		// Swinging a weapon, in the air (uses the same graphics as the
-		// ones for weapon swing, on the ground, but also moving, row 2).
+		// ones FOR weapon swing, on the ground, but also moving, row 2).
 		frm_slot_weapon_swing_air_0,
 		frm_slot_weapon_swing_air_1,
 		frm_slot_weapon_swing_air_2,
@@ -151,7 +151,7 @@ public:		// enums
 		// lim_frm_slot is the amount of frame_slot's.  It is
 		// automatically updated by the compiler.
 		lim_frm_slot,
-	} _alignas_regular;
+	} _ALIGNAS_REGULAR;
 	
 	
 	// These are used to access misc_data_u and misc_data_s
@@ -159,18 +159,18 @@ public:		// enums
 	{ 
 		udi_active_walk_frame_slot, 
 		udi_active_pickaxe_swing_frame_slot,
-	} _alignas_regular;
+	} _ALIGNAS_REGULAR;
 	enum sdata_index
 	{
 		sdi_walk_frame_timer, 
 		sdi_pickaxe_swing_frame_timer,
-	} _alignas_regular;
+	} _ALIGNAS_REGULAR;
 	
 	
 public:		// variables
 	// Static variables
 	
-	//static fixed24p8 speed __attribute__((_iwram));
+	//static fixed24p8 speed __attribute__((_IWRAM));
 	static bool use_16x16;
 	static bool run_toggle;
 	
@@ -231,9 +231,9 @@ public:		// variables
 	//static const vec2_f24p8 the_initial_coll_box_size,
 	//	the_initial_cb_pos_offset;
 	//
-	//// This is used to correct the initial in-level position for sprites
+	//// This is used to correct the initial in-level position FOR sprites
 	//// that are normally considered to be of a certain size but that use
-	//// larger graphics for some frames.
+	//// larger graphics FOR some frames.
 	//static const vec2_f24p8 the_initial_in_level_pos_offset;
 	
 	
@@ -301,7 +301,7 @@ public:		// functions
 	//	const block_coll_result& tr_coll_result );
 	
 	virtual void handle_jumping_stuff( u32 is_jump_key_hit, 
-		u32 is_jump_key_held ) __attribute__((_iwram_code));
+		u32 is_jump_key_held ) __attribute__((_IWRAM_CODE));
 	
 	
 	// Sprite-sprite interaction stuff
@@ -312,9 +312,9 @@ public:		// functions
 	
 protected:		// functions
 	//virtual void block_collision_stuff_16x16()
-	//	__attribute__((_iwram_code));
+	//	__attribute__((_IWRAM_CODE));
 	//virtual void block_collision_stuff_16x32()
-	//	__attribute__((_iwram_code));
+	//	__attribute__((_IWRAM_CODE));
 	
 	virtual void update_frames_and_frame_timers();
 	
@@ -322,7 +322,7 @@ protected:		// functions
 	
 	
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 

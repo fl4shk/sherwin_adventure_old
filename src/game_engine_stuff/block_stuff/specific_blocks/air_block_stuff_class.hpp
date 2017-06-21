@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -36,6 +36,6 @@ public:		// functions
 	virtual void strongly_hit_response( block& the_block, 
 		const vec2_s32& coord );
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 #endif		// air_block_stuff_class_hpp

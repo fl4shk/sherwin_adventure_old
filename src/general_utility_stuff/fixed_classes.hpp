@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -29,13 +29,13 @@ class fixed8p8;
 
 
 //extern fixed24p8 f24p8_div_by_f8p8( const fixed24p8& num, 
-//	const fixed8p8& den ) __attribute__((_iwram_code));
+//	const fixed8p8& den ) __attribute__((_IWRAM_CODE));
 fixed24p8 f24p8_div_by_f8p8( const fixed24p8& num, const fixed8p8& den ) 
-	__attribute__((_iwram_code,_target_arm));
+	__attribute__((_IWRAM_CODE,_TARGET_ARM));
 fixed24p8 f24p8_div_by_f24p8( const fixed24p8& num, const fixed24p8& den ) 
-	__attribute__((_iwram_code,_target_arm));
+	__attribute__((_IWRAM_CODE,_TARGET_ARM));
 fixed24p8 f24p8_div_by_u16( const fixed24p8& num, u16 den )
-	__attribute__((_iwram_code,_target_arm));
+	__attribute__((_IWRAM_CODE,_TARGET_ARM));
 
 
 static constexpr u32 f24p8_shift = 8;
@@ -89,7 +89,7 @@ public:		// functions
 	
 	//inline fixed24p8 operator * ( const fixed24p8& to_mul ) const;
 	fixed24p8 operator * ( const fixed24p8& to_mul ) const
-		__attribute__((_iwram_code,_target_arm));
+		__attribute__((_IWRAM_CODE,_TARGET_ARM));
 	inline fixed24p8 guaranteed_f24p8_by_f8p8_multiplication
 		( const fixed8p8& to_mul ) const;
 	inline fixed24p8 operator / ( const fixed8p8& den ) const
@@ -149,7 +149,7 @@ public:		// functions
 	inline bool operator >= ( const fixed24p8& to_cmp ) const;
 	
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 template<>
@@ -349,7 +349,7 @@ public:		// functions
 	inline bool operator >= ( const fixed8p8& to_cmp ) const;
 	
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 inline s16 fixed8p8::round_to_int() const
@@ -548,11 +548,11 @@ inline fixed8p8 operator - ( const fixed8p8& a )
 }
 
 //fixed24p8 make_f24p8( s32 whole_part, u8 frac_part=0 ) 
-//	__attribute__((_iwram_code));
+//	__attribute__((_IWRAM_CODE));
 //
 //
 //fixed8p8 make_f8p8( s8 whole_part, u8 frac_part=0 ) 
-//	__attribute__((_iwram_code));
+//	__attribute__((_IWRAM_CODE));
 
 
 
@@ -654,7 +654,7 @@ public:		// functions
 	
 	
 	
-} __attribute__((_packed));
+} __attribute__((_PACKED));
 
 typedef fixedpt_num_packed< u16, 4 > fixedu12p4_packed;
 typedef fixedpt_num_packed< s16, 4 > fixeds12p4_packed;

@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -34,7 +34,7 @@ public:		// enums
 		frm_throw_0 = 1, 
 		frm_throw_1 = 2,
 		frm_throw_2 = 3,
-	} _alignas_regular;
+	} _ALIGNAS_REGULAR;
 	
 	// This enum allows multiple frame_slot's to be represented by the same
 	// frame.
@@ -51,7 +51,7 @@ public:		// enums
 		// lim_frm_slot is the amount of frame_slot's.  It is
 		// automatically updated by the compiler.
 		lim_frm_slot,
-	} _alignas_regular;
+	} _ALIGNAS_REGULAR;
 	
 	// These are used to access misc_data_u and misc_data_s
 	enum udata_index
@@ -59,12 +59,12 @@ public:		// enums
 		udi_frame_stuff_initalized,
 		
 		udi_curr_frame_slot,
-	} _alignas_regular;
+	} _ALIGNAS_REGULAR;
 	
 	enum sdata_index
 	{
 		sdi_frame_change_timer,
-	} _alignas_regular;
+	} _ALIGNAS_REGULAR;
 	
 public:		// variables
 	
@@ -94,7 +94,7 @@ public:		// functions
 	
 	virtual void update_part_2();
 	//virtual void update_part_3( bg_point& camera_pos,
-	//	const vec2_u32& the_level_size_2d ) __attribute__((_iwram_code));
+	//	const vec2_u32& the_level_size_2d ) __attribute__((_IWRAM_CODE));
 	
 	inline virtual const sprite_const_params& get_const_params() const
 	{
@@ -107,7 +107,7 @@ public:		// functions
 	virtual const u32 get_curr_relative_tile_slot();
 	
 
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 #endif		// snow_golem_sprite_class_hpp

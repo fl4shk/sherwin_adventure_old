@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -29,7 +29,7 @@
 /*
 extern u32 curr_debug_s32_index, curr_debug_u32_index, 
 	curr_debug_f24p8_index, curr_debug_f8p8_index, 
-	curr_debug_st_result_index __attribute__((_iwram));
+	curr_debug_st_result_index __attribute__((_IWRAM));
 
 static const u32 debug_arr_s32_size = 32;
 extern vs32 debug_arr_s32[debug_arr_s32_size];
@@ -56,7 +56,7 @@ static const u32 debug_arr_f8p8_size = 32;
 extern fixed8p8 debug_arr_f8p8[debug_arr_f8p8_size];
 #define next_debug_f8p8 ( debug_arr_f8p8[curr_debug_f8p8_index++] )
 
-void clear_debug_vars() __attribute__((_iwram_code));
+void clear_debug_vars() __attribute__((_IWRAM_CODE));
 */
 
 
@@ -125,7 +125,7 @@ public:		// and constants
 	//// number of elements in arr.
 	
 	
-	// It is a very good idea for max_size to be a multiple of 4.  It makes
+	// It is a very good idea FOR max_size to be a multiple of 4.  It makes
 	// copying and clearing faster.
 	///static constexpr u32 max_size = 16;
 	static constexpr u32 max_size = 20;
@@ -187,13 +187,13 @@ public:		// functions
 	
 	inline void clear_unused_portion()
 	{
-		for ( u32 i=get_real_size(); i<max_size; ++i )
+		FOR ( u32 i=get_real_size(); i<max_size; ++i )
 		{
 			arr[i] = 0;
 		}
 	}
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 extern u32 (& curr_index_arr)[curr_index_arr_size];
@@ -217,7 +217,7 @@ public:		// static variables (raw debug arrays)
 		fixed8p8 debug_f8p8_arr[debug_f8p8_arr_size];
 		
 		debug_str debug_str_arr[debug_str_arr_size];
-	} __attribute__((_align4));
+	} __attribute__((_ALIGN4));
 	static raw_array_group the_raw_array_group;
 	
 	
@@ -323,7 +323,7 @@ public:		// functions
 	
 	
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 
@@ -350,8 +350,8 @@ void show_debug_values_group_backend( debug_arr_type* debug_values_arr,
 	// generated.
 	curr_index = old_curr_index + total_num_args;
 	
-	//asm_comment("Before for loop");
-	for ( s32 i=total_num_args-1; i>=0; --i )
+	//asm_comment("Before FOR loop");
+	FOR ( s32 i=total_num_args-1; i>=0; --i )
 	{
 		debug_values_arr[old_curr_index + i] = all_values_arr[i];
 	}

@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -23,13 +23,13 @@
 #include "attribute_defines.hpp"
 
 u64 unsafe_lut_udiv( u32 numerator, u16 divisor )
-	__attribute__((_iwram_code,_target_arm));
+	__attribute__((_IWRAM_CODE,_TARGET_ARM));
 s64 unsafe_lut_sdiv( s32 numerator, s16 divisor )
-	__attribute__((_iwram_code,_target_arm));
+	__attribute__((_IWRAM_CODE,_TARGET_ARM));
 u64 safe_lut_udiv( u32 numerator, u16 divisor, int& valid ) 
-	__attribute__((_iwram_code,_target_arm));
+	__attribute__((_IWRAM_CODE,_TARGET_ARM));
 s64 safe_lut_sdiv( s32 numerator, s16 divisor, int& valid ) 
-	__attribute__((_iwram_code,_target_arm));
+	__attribute__((_IWRAM_CODE,_TARGET_ARM));
 
 
 extern const u32 udiv_table[];

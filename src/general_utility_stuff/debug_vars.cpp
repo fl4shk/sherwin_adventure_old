@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -72,7 +72,7 @@ debug_str& debug_str::operator = ( const char* to_copy )
 	//arr_memfill32( arr, 0, max_size );
 	//clear();
 	
-	for ( real_size=0; real_size<max_size; ++real_size )
+	FOR ( real_size=0; real_size<max_size; ++real_size )
 	{
 		if ( to_copy[real_size] == '\0' )
 		{
@@ -126,7 +126,7 @@ array_helper<debug_str> debug_arr_group::debug_str_arr_helper
 void debug_arr_group::clear_debug_vars()
 {
 	////memfill32( curr_index_arr(), 0, lim_cdit / sizeof(u32) );
-	//for ( u32 i=0; i<curr_index_arr_helper.get_size(); ++i )
+	//FOR ( u32 i=0; i<curr_index_arr_helper.get_size(); ++i )
 	//{
 	//	curr_index_arr_helper.at(i) = 0;
 	//}
@@ -144,7 +144,7 @@ void debug_arr_group::clear_debug_vars()
 	//	+ ( debug_f8p8_arr_size * sizeof(fixed8p8) ) 
 	//	- (u32)(u32*)debug_u32_arr()) / sizeof(u32) );
 	//
-	//// Use a separate memfill32() call for the array of debug_strs, just in
+	//// Use a separate memfill32() call FOR the array of debug_strs, just in
 	//// case.
 	//memfill32( debug_str_arr(), 0, debug_str_arr_helper.get_size() 
 	//	* sizeof(debug_str) / sizeof(u32) );

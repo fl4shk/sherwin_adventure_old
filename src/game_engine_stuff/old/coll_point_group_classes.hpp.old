@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -57,7 +57,7 @@ public:		// enums
 		// automatically updated by the compiler.
 		arr_ind_16x16_count,
 		
-	} __attribute__((_align4));
+	} __attribute__((_ALIGN4));
 	
 	
 	// The reason an X-macro isn't used here is because ctags wouldn't be
@@ -85,7 +85,7 @@ public:		// enums
 		// automatically updated by the compiler.
 		arr_ind_16x32_count,
 		
-	} __attribute__((_align4));
+	} __attribute__((_ALIGN4));
 	
 	
 	// The reason an X-macro isn't used here is because ctags wouldn't be
@@ -113,7 +113,7 @@ public:		// enums
 		// automatically updated by the compiler.
 		arr_ind_32x16_count,
 		
-	} __attribute__((_align4));
+	} __attribute__((_ALIGN4));
 	
 public:		// variables
 	//// The maximum number of collision points, 32, is definitely more than
@@ -181,7 +181,7 @@ protected:		// functions
 		vec2_f24p8& pt_tm, vec2_f24p8& pt_bm );
 	
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 class coll_point_group_16x16 : public coll_point_group_base
 {
@@ -202,7 +202,7 @@ protected:		// functions
 		vec2_f24p8& pt_tr, vec2_f24p8& pt_br );
 	
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 class coll_point_group_16x32 : public coll_point_group_base
@@ -223,19 +223,19 @@ protected:		// functions
 		vec2_f24p8& pt_tr, vec2_f24p8& pt_br );
 	
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 //void generate_coll_point_group_16x16( const sprite& the_sprite, 
-//	coll_point_group& the_pt_group ) __attribute__((_iwram_code));
+//	coll_point_group& the_pt_group ) __attribute__((_IWRAM_CODE));
 //
 //void generate_coll_point_group_16x32( const sprite& the_sprite, 
-//	coll_point_group& the_pt_group ) __attribute__((_iwram_code));
+//	coll_point_group& the_pt_group ) __attribute__((_IWRAM_CODE));
 //
 //void generate_coll_point_group_32x16( const sprite& the_sprite, 
-//	coll_point_group& the_pt_group ) __attribute__((_iwram_code));
+//	coll_point_group& the_pt_group ) __attribute__((_IWRAM_CODE));
 //
 //void generate_coll_point_group_32x32( const sprite& the_sprite, 
-//	coll_point_group& the_pt_group ) __attribute__((_iwram_code));
+//	coll_point_group& the_pt_group ) __attribute__((_IWRAM_CODE));
 
 
 

@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -21,7 +21,7 @@
 
 #include "coll_lseg_classes.hpp"
 
-// An abstract base class for a group of line segments for use with sprites
+// An abstract base class FOR a group of line segments FOR use with sprites
 // so that they can detect and respond to collisions with blocks
 class spr_blk_coll_group_base
 {
@@ -60,7 +60,7 @@ public:		// classes
 		//horiz_coll_lseg clseg;
 		block_coll_result bcr;
 		vec2_s32 blk_crd_pos;
-	} __attribute__((_align4));
+	} __attribute__((_ALIGN4));
 	
 	// Top side uses this
 	class vert_top_coll_tuple : public horiz_coll_tuple
@@ -73,7 +73,7 @@ public:		// classes
 	public:		// variables
 		bcr_lseg_group bcrlg;
 		vert_coll_lseg clseg;
-	} __attribute__((_align4));
+	} __attribute__((_ALIGN4));
 	
 protected:		// variables and constants
 	static constexpr size_t num_horiz_ctups = lim_hi;
@@ -86,38 +86,38 @@ protected:		// variables and constants
 	//array_helper<vert_top_coll_tuple> vert_top_ctups;
 	//array_helper<vert_bot_coll_tuple> vert_bot_ctups;
 	static horiz_coll_tuple horiz_ctups[max_num_horiz_ctups]
-		__attribute__((_iwram));
+		__attribute__((_IWRAM));
 	static vert_top_coll_tuple vert_top_ctups[max_num_vert_top_ctups]
-		__attribute__((_iwram));
+		__attribute__((_IWRAM));
 	static vert_bot_coll_tuple vert_bot_ctups[max_num_vert_bot_ctups]
-		__attribute__((_iwram));
+		__attribute__((_IWRAM));
 	
-	static vec2<bool> size_is_tiny __attribute__((_iwram));
-	static bool internal_on_ground __attribute__((_iwram));
+	static vec2<bool> size_is_tiny __attribute__((_IWRAM));
+	static bool internal_on_ground __attribute__((_IWRAM));
 	
 	
-	static s32 blk_crd_pos_x_for_left_hs __attribute__((_iwram));
-	static s32 blk_crd_pos_x_for_right_hs __attribute__((_iwram));
+	static s32 blk_crd_pos_x_for_left_hs __attribute__((_IWRAM));
+	static s32 blk_crd_pos_x_for_right_hs __attribute__((_IWRAM));
 	
-	static s32 blk_crd_pos_y_for_top_hs __attribute__((_iwram));
-	static s32 blk_crd_pos_y_for_mid_hs __attribute__((_iwram));
-	static s32 blk_crd_pos_y_for_bot_hs __attribute__((_iwram));
+	static s32 blk_crd_pos_y_for_top_hs __attribute__((_IWRAM));
+	static s32 blk_crd_pos_y_for_mid_hs __attribute__((_IWRAM));
+	static s32 blk_crd_pos_y_for_bot_hs __attribute__((_IWRAM));
 	
-	//static fixed24p8 hs_width __attribute__((_iwram));
+	//static fixed24p8 hs_width __attribute__((_IWRAM));
 	
-	static fixed24p8 pos_x_for_left_vs __attribute__((_iwram));
-	static fixed24p8 pos_x_for_mid_vs __attribute__((_iwram));
-	static fixed24p8 pos_x_for_right_vs __attribute__((_iwram));
+	static fixed24p8 pos_x_for_left_vs __attribute__((_IWRAM));
+	static fixed24p8 pos_x_for_mid_vs __attribute__((_IWRAM));
+	static fixed24p8 pos_x_for_right_vs __attribute__((_IWRAM));
 	
-	static s32 blk_crd_pos_x_for_left_vs __attribute__((_iwram));
-	static s32 blk_crd_pos_x_for_mid_vs __attribute__((_iwram));
-	static s32 blk_crd_pos_x_for_right_vs __attribute__((_iwram));
+	static s32 blk_crd_pos_x_for_left_vs __attribute__((_IWRAM));
+	static s32 blk_crd_pos_x_for_mid_vs __attribute__((_IWRAM));
+	static s32 blk_crd_pos_x_for_right_vs __attribute__((_IWRAM));
 	
-	static s32 blk_crd_pos_y_for_top_vs __attribute__((_iwram));
-	static fixed24p8 pos_y_for_bot_vs __attribute__((_iwram));
+	static s32 blk_crd_pos_y_for_top_vs __attribute__((_IWRAM));
+	static fixed24p8 pos_y_for_bot_vs __attribute__((_IWRAM));
 	
-	static fixed24p8 vs_height_bot_ia __attribute__((_iwram));
-	static fixed24p8 offset_y_for_bot_vs __attribute__((_iwram));
+	static fixed24p8 vs_height_bot_ia __attribute__((_IWRAM));
+	static fixed24p8 offset_y_for_bot_vs __attribute__((_IWRAM));
 	
 	
 	//static const fixed24p8 offset_x_for_any_hs_left;
@@ -237,12 +237,12 @@ protected:		// functions
 	
 	
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 // 
 
 
-// Sprite/Block Collision Group for collision boxes that are at most 16x16
+// Sprite/Block Collision Group FOR collision boxes that are at most 16x16
 // in size
 class spr_blk_coll_group_16x16 : public spr_blk_coll_group_base
 {
@@ -269,7 +269,7 @@ public:		// functions
 	}
 	spr_blk_coll_group_16x16( const coll_box& s_coll_box, u32 s_on_ground );
 	void init( const coll_box& s_coll_box, u32 s_on_ground )
-		__attribute__((_iwram_code,_target_arm));
+		__attribute__((_IWRAM_CODE,_TARGET_ARM));
 	
 	//const size_t get_num_horiz_ctups() const;
 	const size_t get_num_vert_top_ctups() const;
@@ -287,12 +287,12 @@ public:		// functions
 protected:		// functions
 	//void init_arr_helpers();
 	static void init_static_vars( const coll_box& s_coll_box, 
-		bool s_on_ground ) __attribute__((_iwram_code,_target_arm));
+		bool s_on_ground ) __attribute__((_IWRAM_CODE,_TARGET_ARM));
 	
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
-// Sprite/Block Collision Group for collision boxes that are at most 16x32
+// Sprite/Block Collision Group FOR collision boxes that are at most 16x32
 // in size but larger than 16x16
 class spr_blk_coll_group_16x32 : public spr_blk_coll_group_base
 {
@@ -321,7 +321,7 @@ public:		// functions
 	}
 	spr_blk_coll_group_16x32( const coll_box& s_coll_box, u32 s_on_ground );
 	void init( const coll_box& s_coll_box, u32 s_on_ground )
-		__attribute__((_iwram_code,_target_arm));
+		__attribute__((_IWRAM_CODE,_TARGET_ARM));
 	
 	//const size_t get_num_horiz_ctups() const;
 	const size_t get_num_vert_top_ctups() const;
@@ -339,9 +339,9 @@ public:		// functions
 protected:		// functions
 	//void init_arr_helpers();
 	static void init_static_vars( const coll_box& s_coll_box, 
-		bool s_on_ground ) __attribute__((_iwram_code,_target_arm));
+		bool s_on_ground ) __attribute__((_IWRAM_CODE,_TARGET_ARM));
 	
-} __attribute__((_align4));
+} __attribute__((_ALIGN4));
 
 
 

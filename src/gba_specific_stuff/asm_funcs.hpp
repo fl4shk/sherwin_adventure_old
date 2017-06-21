@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -33,9 +33,9 @@ extern "C"
 // These two functions should now be much faster, and I can feel free to
 // allocate more stuffs on the stack!
 void* memcpy( void* dst, const void* src, size_t n )
-	__attribute__((_iwram_code,_target_arm));
+	__attribute__((_IWRAM_CODE,_TARGET_ARM));
 void* memset( void* dst, int c, size_t n )
-	__attribute__((_iwram_code,_target_arm));
+	__attribute__((_IWRAM_CODE,_TARGET_ARM));
 
 
 // This function is used by crt0.s
@@ -180,7 +180,7 @@ inline void* arr_memset( std::array< type, size >& dst, u32 src )
 
 
 
-// Some inline template functions intended for use with SRAM
+// Some inline template functions intended FOR use with SRAM
 template< typename type >
 inline void single_memcpy8( u8* dst, const type& to_write )
 {
@@ -192,7 +192,7 @@ inline void single_write_as_bytes( u8* dst, const type& to_write )
 {
 	const u8* src = reinterpret_cast<const u8*>(&to_write);
 	
-	for ( s32 i=sizeof(type)-1; i>=0; --i )
+	FOR ( s32 i=sizeof(type)-1; i>=0; --i )
 	{
 		dst[i] = src[i];
 	}
@@ -215,7 +215,7 @@ inline void single_write_as_bytes( u8* dst_start, size_t type_offset,
 	u8* dst = &(dst_start[type_offset * sizeof(type)]);
 	const u8* src = reinterpret_cast<const u8*>(&to_write);
 	
-	for ( s32 i=sizeof(type)-1; i>=0; --i )
+	FOR ( s32 i=sizeof(type)-1; i>=0; --i )
 	{
 		dst[i] = src[i];
 	}

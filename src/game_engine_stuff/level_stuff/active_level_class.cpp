@@ -10,7 +10,7 @@
 // Sherwin's Adventure is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
+// General Public License FOR more details.
 // 
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
@@ -29,11 +29,11 @@ const vec2_u32 active_level::horiz_sublevel_size_2d
 	( horiz_sublevel_xsize, horiz_sublevel_ysize );
 
 block active_level::block_data_array[block_data_array_size];
-//	__attribute__((_ewram));
+//	__attribute__((_EWRAM));
 
 
 u16 active_level::persistent_block_data_arrays[max_num_sublevels]
-	[persistent_block_data_array_size]; //__attribute__((_ewram));
+	[persistent_block_data_array_size]; //__attribute__((_EWRAM));
 
 
 //array_2d_helper<block> active_level::horiz_sublevel_block_data_2d 
@@ -47,12 +47,12 @@ array_csz_2d_helper< block, active_level::horiz_sublevel_xsize,
 //std::array< std::forward_list<sprite_init_param_group>, 
 //	active_level::horiz_sublevel_xsize > 
 //	active_level::horiz_sublevel_sprite_ipg_lists; 
-//	//__attribute__((_ewram));
+//	//__attribute__((_EWRAM));
 
 //std::array< std::array< sprite_init_param_group, horiz_sublevel_ysize >, 
 //	active_level::horiz_sublevel_xsize > 
 //	active_level::horiz_sublevel_sprite_ipg_lists; 
-//	//__attribute__((_ewram));
+//	//__attribute__((_EWRAM));
 
 sa_list_stuff::sa_array_of_lists< sprite_init_param_group, 
 	active_level::max_num_sprite_ipgs_per_sublevel,
@@ -65,7 +65,7 @@ scr_entry active_level::bg0_screenblock_mirror[screenblock_size];
 
 
 array_csz_2d_helper< scr_entry, screenblock_xsize, screenblock_ysize > 
-	active_level::bg0_screenblock_2d(se_ram[bg0_sbb]);
+	active_level::bg0_screenblock_2d(SE_RAM[bg0_sbb]);
 array_csz_2d_helper< scr_entry, screenblock_xsize, screenblock_ysize > 
 	active_level::bg0_screenblock_mirror_2d(bg0_screenblock_mirror);
 
