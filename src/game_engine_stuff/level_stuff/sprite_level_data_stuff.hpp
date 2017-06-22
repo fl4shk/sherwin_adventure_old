@@ -73,16 +73,16 @@ public:		// variables
 public:		// functions
 	
 	
-	inline bool operator == ( const SpriteInitParamGroup& other ) const
+	inline bool operator == (const SpriteInitParamGroup& other) const
 	{
-		return ( ( initial_block_grid_x_coord 
-			== other.initial_block_grid_x_coord )
-			&& ( initial_block_grid_y_coord 
-			== other.initial_block_grid_y_coord ) );
+		return ((initial_block_grid_x_coord 
+			== other.initial_block_grid_x_coord)
+			&& (initial_block_grid_y_coord 
+			== other.initial_block_grid_y_coord));
 	}
-	inline bool operator != ( const SpriteInitParamGroup& other ) const
+	inline bool operator != (const SpriteInitParamGroup& other) const
 	{
-		return !( *this == other );
+		return !(*this == other);
 	}
 	
 	// This function Is included So That an std::forward_list of
@@ -90,59 +90,59 @@ public:		// functions
 	// std::forward_list::sort() method.  The sorting Is To be done based
 	// on the initial_block_grid_x_coord parameter, followed by the
 	// initial_block_grid_y_coord parameter.
-	inline bool operator < ( const SpriteInitParamGroup& other ) const
+	inline bool operator < (const SpriteInitParamGroup& other) const
 	{
-		if ( initial_block_grid_x_coord 
+		if (initial_block_grid_x_coord 
 			< other.initial_block_grid_x_coord)
 		{
 			return true;
 		}
-		else if ( initial_block_grid_x_coord
-			> other.initial_block_grid_x_coord )
+		else if (initial_block_grid_x_coord
+			> other.initial_block_grid_x_coord)
 		{
 			return false;
 		}
-		//else if ( initial_block_grid_x_coord 
-		//	== other.initial_block_grid_x_coord )
+		//else if (initial_block_grid_x_coord 
+		//	== other.initial_block_grid_x_coord)
 		//{
-		//	return ( initial_block_grid_y_coord 
-		//		< other.initial_block_grid_y_coord );
+		//	return (initial_block_grid_y_coord 
+		//		< other.initial_block_grid_y_coord);
 		//}
 		
-		return ( initial_block_grid_y_coord 
-			< other.initial_block_grid_y_coord );
+		return (initial_block_grid_y_coord 
+			< other.initial_block_grid_y_coord);
 	}
 	
-	inline bool operator > ( const SpriteInitParamGroup& other ) const
+	inline bool operator > (const SpriteInitParamGroup& other) const
 	{
-		if ( initial_block_grid_x_coord 
+		if (initial_block_grid_x_coord 
 			> other.initial_block_grid_x_coord)
 		{
 			return true;
 		}
-		else if ( initial_block_grid_x_coord
-			< other.initial_block_grid_x_coord )
+		else if (initial_block_grid_x_coord
+			< other.initial_block_grid_x_coord)
 		{
 			return false;
 		}
-		//else if ( initial_block_grid_x_coord 
-		//	== other.initial_block_grid_x_coord )
+		//else if (initial_block_grid_x_coord 
+		//	== other.initial_block_grid_x_coord)
 		//{
-		//	return ( initial_block_grid_y_coord 
-		//		< other.initial_block_grid_y_coord );
+		//	return (initial_block_grid_y_coord 
+		//		< other.initial_block_grid_y_coord);
 		//}
 		
-		return ( initial_block_grid_y_coord 
-			> other.initial_block_grid_y_coord );
+		return (initial_block_grid_y_coord 
+			> other.initial_block_grid_y_coord);
 	}
 	
-	inline bool operator <= ( const SpriteInitParamGroup& other ) const
+	inline bool operator <= (const SpriteInitParamGroup& other) const
 	{
-		return ( (*this) < other || (*this) == other );
+		return ((*this) < other || (*this) == other);
 	}
-	inline bool operator >= ( const SpriteInitParamGroup& other ) const
+	inline bool operator >= (const SpriteInitParamGroup& other) const
 	{
-		return ( (*this) > other || (*this) == other );
+		return ((*this) > other || (*this) == other);
 	}
 	
 	

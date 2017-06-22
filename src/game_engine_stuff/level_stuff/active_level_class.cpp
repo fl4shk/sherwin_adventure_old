@@ -26,7 +26,7 @@
 Block ActiveLevel::blank_block;
 
 const vec2_u32 ActiveLevel::horiz_sublevel_size_2d
-	( horiz_sublevel_xsize, horiz_sublevel_ysize );
+	(horiz_sublevel_xsize, horiz_sublevel_ysize);
 
 Block ActiveLevel::block_data_array[block_data_array_size];
 //	__attribute__((_EWRAM));
@@ -37,8 +37,8 @@ u16 ActiveLevel::persistent_block_data_arrays[max_num_sublevels]
 
 
 //Array_2dHelper<Block> ActiveLevel::horiz_sublevel_block_data_2d 
-//	( ActiveLevel::block_data_array, 
-//	ActiveLevel::horiz_sublevel_size_2d );
+//	(ActiveLevel::block_data_array, 
+//	ActiveLevel::horiz_sublevel_size_2d);
 ArrayCsz_2dHelper< Block, ActiveLevel::horiz_sublevel_xsize,
 	ActiveLevel::horiz_sublevel_ysize > 
 	ActiveLevel::horiz_sublevel_block_data_2d(block_data_array);

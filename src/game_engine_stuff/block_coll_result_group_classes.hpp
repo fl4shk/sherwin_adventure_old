@@ -49,33 +49,33 @@ public:		// functions
 	}
 	//inline BlockCollResult()
 	//{
-	//	memset( this, 0, sizeof(*this) );
+	//	memset(this, 0, sizeof(*this));
 	//}
-	inline BlockCollResult( const vec2_s32& s_blk_coord )
+	inline BlockCollResult(const vec2_s32& s_blk_coord)
 	{
 		init(s_blk_coord);
 	}
-	inline BlockCollResult( const vec2_f24p8& s_coord_f24p8 )
+	inline BlockCollResult(const vec2_f24p8& s_coord_f24p8)
 	{
 		init(s_coord_f24p8);
 	}
-	inline BlockCollResult( const BlockCollResult& to_copy )
+	inline BlockCollResult(const BlockCollResult& to_copy)
 	{
 		*this = to_copy;
 	}
 	
-	inline void init( const vec2_s32& s_blk_coord )
+	inline void init(const vec2_s32& s_blk_coord)
 	{
 		the_block = &ActiveLevel::the_block_at_coord(s_blk_coord);
 		the_bbvt = get_behavior_type_of_block_type(get_block_type());
 	}
-	inline void init( const vec2_f24p8& s_coord_f24p8 )
+	inline void init(const vec2_f24p8& s_coord_f24p8)
 	{
 		init(ActiveLevel::get_block_coord_of_point(s_coord_f24p8));
 	}
 	
 	//inline BlockCollResult& operator = 
-	//	( const BlockCollResult& to_copy )
+	//	(const BlockCollResult& to_copy)
 	//{
 	//	coord = to_copy.coord;
 	//	the_block = to_copy.the_block;
@@ -106,12 +106,12 @@ class BlockCollResultRectGroup
 {
 public:		// constants
 	// The maximum number of blocks intersected by a Sprite, per dimension.
-	// The value of ( 3, 3 ) corresponds To a 32x32 Sprite.  Definitely
+	// The value of (3, 3) corresponds To a 32x32 Sprite.  Definitely
 	// change these two values (among other things) if there Is every any
 	// infrastructure for sprites larger than 32x32 pixels.
-	//const vec2_u32 BlockCollResultRectGroup::shared_max_size_2d( 3, 3 );
-	static constexpr vec2_u32 max_size_2d = vec2_u32( 3, 3 );
-	//static constexpr vec2_u32 max_size_2d = vec2_u32( 80, 80 );
+	//const vec2_u32 BlockCollResultRectGroup::shared_max_size_2d(3, 3);
+	static constexpr vec2_u32 max_size_2d = vec2_u32(3, 3);
+	//static constexpr vec2_u32 max_size_2d = vec2_u32(80, 80);
 	static constexpr u32 max_size = max_size_2d.x * max_size_2d.y;
 	
 protected:		// variables
@@ -133,37 +133,37 @@ public:		// variables
 	
 public:		// functions
 	BlockCollResultRectGroup();
-	BlockCollResultRectGroup( const CollBox& the_coll_box, 
-		u32 s_moving_left, u32 s_moving_right );
+	BlockCollResultRectGroup(const CollBox& the_coll_box, 
+		u32 s_moving_left, u32 s_moving_right);
 	BlockCollResultRectGroup
-		( const BlockCollResultRectGroup& to_copy );
+		(const BlockCollResultRectGroup& to_copy);
 	
 	BlockCollResultRectGroup& operator = 
-		( const BlockCollResultRectGroup& to_copy );
+		(const BlockCollResultRectGroup& to_copy);
 	
 	
-	inline BlockCollResult& operator () ( u32 local_x, u32 local_y )
+	inline BlockCollResult& operator () (u32 local_x, u32 local_y)
 	{
-		return at( local_x, local_y );
+		return at(local_x, local_y);
 	}
-	inline BlockCollResult& operator () ( const vec2_u32& local_coord )
+	inline BlockCollResult& operator () (const vec2_u32& local_coord)
 	{
 		return at(local_coord);
 	}
-	inline BlockCollResult& operator () ( const vec2_s32& local_coord )
+	inline BlockCollResult& operator () (const vec2_s32& local_coord)
 	{
 		return at(local_coord);
 	}
 	
-	inline BlockCollResult& at( u32 local_x, u32 local_y )
+	inline BlockCollResult& at(u32 local_x, u32 local_y)
 	{
-		return bcr_arr_csz_2d_helper.at( local_x, local_y );
+		return bcr_arr_csz_2d_helper.at(local_x, local_y);
 	}
-	inline BlockCollResult& at( const vec2_u32& local_coord )
+	inline BlockCollResult& at(const vec2_u32& local_coord)
 	{
 		return bcr_arr_csz_2d_helper.at(local_coord);
 	}
-	inline BlockCollResult& at( const vec2_s32& local_coord )
+	inline BlockCollResult& at(const vec2_s32& local_coord)
 	{
 		return bcr_arr_csz_2d_helper.at(local_coord);
 	}
@@ -219,19 +219,19 @@ public:		// functions
 	// Corners
 	inline vec2_s32 tl_corner() const
 	{
-		return vec2_s32( left(), top() );
+		return vec2_s32(left(), top());
 	}
 	inline vec2_s32 tr_corner() const
 	{
-		return vec2_s32( right(), top() );
+		return vec2_s32(right(), top());
 	}
 	inline vec2_s32 bl_corner() const
 	{
-		return vec2_s32( left(), bot() );
+		return vec2_s32(left(), bot());
 	}
 	inline vec2_s32 br_corner() const
 	{
-		return vec2_s32( right(), bot() );
+		return vec2_s32(right(), bot());
 	}
 	
 	
@@ -257,57 +257,57 @@ public:		// functions
 	// Corners
 	inline vec2_s32 local_tl_corner() const
 	{
-		return vec2_s32( local_left(), local_top() );
+		return vec2_s32(local_left(), local_top());
 	}
 	inline vec2_s32 local_tr_corner() const
 	{
-		return vec2_s32( local_right(), local_top() );
+		return vec2_s32(local_right(), local_top());
 	}
 	inline vec2_s32 local_bl_corner() const
 	{
-		return vec2_s32( local_left(), local_bot() );
+		return vec2_s32(local_left(), local_bot());
 	}
 	inline vec2_s32 local_br_corner() const
 	{
-		return vec2_s32( local_right(), local_bot() );
+		return vec2_s32(local_right(), local_bot());
 	}
 	
 	
-	inline bool contains_local_block_x_coord( s32 to_check ) const
+	inline bool contains_local_block_x_coord(s32 to_check) const
 	{
-		return in_range<s32>( 0, real_size_2d.x, to_check );
+		return in_range<s32>(0, real_size_2d.x, to_check);
 	}
-	inline bool contains_local_block_y_coord( s32 to_check ) const
+	inline bool contains_local_block_y_coord(s32 to_check) const
 	{
-		return in_range<s32>( 0, real_size_2d.y, to_check );
+		return in_range<s32>(0, real_size_2d.y, to_check);
 	}
-	inline bool contains_local_block_coord( const vec2_s32& to_check )
+	inline bool contains_local_block_coord(const vec2_s32& to_check)
 		const
 	{
-		//return vec2_in_range( vec2_s32( 0, 0 ), real_size_2d, to_check );
-		return ( contains_local_block_x_coord(to_check.x) 
-			&& contains_local_block_y_coord(to_check.y) );
+		//return vec2_in_range(vec2_s32(0, 0), real_size_2d, to_check);
+		return (contains_local_block_x_coord(to_check.x) 
+			&& contains_local_block_y_coord(to_check.y));
 	}
 	
 	
 	//void get_corner_stuff_old
-	//	( ArrayHelper<BlockCollResult*>& bcr_ptr_arr_helper, 
-	//	ArrayHelper<u32>& bool_as_u32_arr_helper )
+	//	(ArrayHelper<BlockCollResult*>& bcr_ptr_arr_helper, 
+	//	ArrayHelper<u32>& bool_as_u32_arr_helper)
 	//	__attribute__((_TARGET_ARM));
 	//
-	//void get_coll_box_related_stuff_old( const Sprite& the_sprite,
-	//	ArrayHelper<BlockCollResult*>& bcr_ptr_arr_helper )
+	//void get_coll_box_related_stuff_old(const Sprite& the_sprite,
+	//	ArrayHelper<BlockCollResult*>& bcr_ptr_arr_helper)
 	//	__attribute__((_TARGET_ARM));
 	//
 	//void get_side_blocked_stuff_old
-	//	( ArrayHelper<u32>& bool_as_u32_arr_helper )
+	//	(ArrayHelper<u32>& bool_as_u32_arr_helper)
 	//	__attribute__((_TARGET_ARM));
 	
 protected:		// functions
 	inline void init_bcr_arr_csz_2d_helper()
 	{
-		//bcr_arr_csz_2d_helper.init( bcr_arr_csz_2d_helper_data, 
-		//	vec2_u32( real_width(), real_height() ) );
+		//bcr_arr_csz_2d_helper.init(bcr_arr_csz_2d_helper_data, 
+		//	vec2_u32(real_width(), real_height()));
 		bcr_arr_csz_2d_helper.init(bcr_arr_csz_2d_helper_data);
 	}
 	
@@ -330,7 +330,7 @@ protected:		// variables
 	
 	// The (Block coordinates) position of the left or top That was passed
 	// To the BcrLsegGroup
-	vec2_s32 start_pos = vec2_s32( 0, 0 );
+	vec2_s32 start_pos = vec2_s32(0, 0);
 	
 	// Whether this BcrLsegGroup represents a column (false) or a row
 	// (true)
@@ -340,41 +340,41 @@ public:		// functions
 	inline BcrLsegGroup()
 	{
 	}
-	inline BcrLsegGroup( const HorizCollLseg& the_coll_lseg )
+	inline BcrLsegGroup(const HorizCollLseg& the_coll_lseg)
 	{
 		init(the_coll_lseg);
 	}
-	inline BcrLsegGroup( const VertCollLseg& the_coll_lseg )
+	inline BcrLsegGroup(const VertCollLseg& the_coll_lseg)
 	{
 		init(the_coll_lseg);
 	}
 	
-	void init( const HorizCollLseg& the_coll_lseg );
+	void init(const HorizCollLseg& the_coll_lseg);
 		//__attribute__((_IWRAM_CODE));
-	void init( const VertCollLseg& the_coll_lseg )
+	void init(const VertCollLseg& the_coll_lseg)
 		__attribute__((_IWRAM_CODE));
 	
-	BlockCollResult* horiz_any_bbvt_is_fully_solid( vec2_s32& pos );
+	BlockCollResult* horiz_any_bbvt_is_fully_solid(vec2_s32& pos);
 		//__attribute__((_IWRAM_CODE));
-	BlockCollResult* vert_any_bbvt_is_fully_solid( vec2_s32& pos )
+	BlockCollResult* vert_any_bbvt_is_fully_solid(vec2_s32& pos)
 		__attribute__((_IWRAM_CODE));
-	BlockCollResult* vert_any_bbvt_is_slope( vec2_s32& pos )
+	BlockCollResult* vert_any_bbvt_is_slope(vec2_s32& pos)
 		__attribute__((_IWRAM_CODE));
 	
-	inline BlockCollResult& operator () ( u32 index )
+	inline BlockCollResult& operator () (u32 index)
 	{
 		return at(index);
 	}
-	inline const BlockCollResult& operator () ( u32 index ) const
+	inline const BlockCollResult& operator () (u32 index) const
 	{
 		return at(index);
 	}
 	
-	inline BlockCollResult& at( u32 index )
+	inline BlockCollResult& at(u32 index)
 	{
 		return bcr_arr[index];
 	}
-	inline const BlockCollResult& at( u32 index ) const
+	inline const BlockCollResult& at(u32 index) const
 	{
 		return bcr_arr[index];
 	}
@@ -434,13 +434,13 @@ public:		// functions
 		return get_start_pos() + get_vert_offset(get_end_pos_offset());
 	}
 	
-	inline const vec2_s32 get_horiz_offset( s32 i ) const
+	inline const vec2_s32 get_horiz_offset(s32 i) const
 	{
-		return vec2_s32( i, 0 );
+		return vec2_s32(i, 0);
 	}
-	inline const vec2_s32 get_vert_offset( s32 i ) const
+	inline const vec2_s32 get_vert_offset(s32 i) const
 	{
-		return vec2_s32( 0, i );
+		return vec2_s32(0, i);
 	}
 	
 	inline const s32 horiz_left_pos() const

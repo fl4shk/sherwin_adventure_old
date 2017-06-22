@@ -20,28 +20,28 @@
 
 
 
-u64 unsafe_lut_udiv( u32 numerator, u16 divisor )
+u64 unsafe_lut_udiv(u32 numerator, u16 divisor)
 {
 	u64 temp = static_cast<u64>(numerator);
 	const u32 one_slash_divisor = udiv_table[divisor];
 	u64 temp_2 = static_cast<u64>(one_slash_divisor);
 	
-	return ( temp * temp_2 );
+	return (temp * temp_2);
 }
 
-s64 unsafe_lut_sdiv( s32 numerator, s16 divisor )
+s64 unsafe_lut_sdiv(s32 numerator, s16 divisor)
 {
 	s64 temp = static_cast<s64>(numerator);
 	const s32 one_slash_divisor = sdiv_table[divisor];
 	s64 temp_2 = static_cast<s64>(one_slash_divisor);
 	
-	return ( temp * temp_2 );
+	return (temp * temp_2);
 }
 
 
-u64 safe_lut_udiv( u32 numerator, u16 divisor, int& valid )
+u64 safe_lut_udiv(u32 numerator, u16 divisor, int& valid)
 {
-	if ( divisor == 0 )
+	if (divisor == 0)
 	{
 		valid = false;
 		return 0;
@@ -53,12 +53,12 @@ u64 safe_lut_udiv( u32 numerator, u16 divisor, int& valid )
 	u32 one_slash_divisor = udiv_table[divisor];
 	u64 temp_2 = static_cast<u64>(one_slash_divisor);
 	
-	return ( temp * temp_2 );
+	return (temp * temp_2);
 }
 
-s64 safe_lut_sdiv( s32 numerator, s16 divisor, int& valid )
+s64 safe_lut_sdiv(s32 numerator, s16 divisor, int& valid)
 {
-	if ( divisor == 0 )
+	if (divisor == 0)
 	{
 		valid = false;
 		return 0;
@@ -70,6 +70,6 @@ s64 safe_lut_sdiv( s32 numerator, s16 divisor, int& valid )
 	s32 one_slash_divisor = sdiv_table[divisor];
 	s64 temp_2 = static_cast<s64>(one_slash_divisor);
 	
-	return ( temp * temp_2 );
+	return (temp * temp_2);
 }
 

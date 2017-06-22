@@ -23,31 +23,31 @@
 #include <stdlib.h>
 
 //template< typename type >
-//void allocate_arr_with_malloc( type*& ret, size_t num_elems ) 
+//void allocate_arr_with_malloc(type*& ret, size_t num_elems) 
 //	__attribute__((noinline));
 
 
 template< typename type >
-inline void allocate_arr_with_malloc( type*& to_allocate, 
-	size_t num_elems ) 
+inline void allocate_arr_with_malloc(type*& to_allocate, 
+	size_t num_elems) 
 {
-	to_allocate = static_cast<type*>(malloc( num_elems * sizeof(type) ));
+	to_allocate = static_cast<type*>(malloc(num_elems * sizeof(type)));
 }
 template< typename type >
-inline void deallocate_arr_with_free( type*& to_deallocate )
+inline void deallocate_arr_with_free(type*& to_deallocate)
 {
 	free(to_deallocate);
 }
 
 //template< typename type >
-//inline void allocate_arr_with_nano_malloc( type*& to_allocate, 
-//	size_t num_elems ) 
+//inline void allocate_arr_with_nano_malloc(type*& to_allocate, 
+//	size_t num_elems) 
 //{
-//	to_allocate = static_cast<type*>(nano_malloc( num_elems 
-//		* sizeof(type) ));
+//	to_allocate = static_cast<type*>(nano_malloc(num_elems 
+//		* sizeof(type)));
 //}
 //template< typename type >
-//inline void deallocate_arr_with_nano_free( type*& to_deallocate )
+//inline void deallocate_arr_with_nano_free(type*& to_deallocate)
 //{
 //	nano_free(to_deallocate);
 //}
@@ -63,9 +63,9 @@ inline void deallocate_arr_with_free( type*& to_deallocate )
 
 //int* temp_debug_pointer;
 
-void profile_dynamic_allocations( size_t num_elems )
+void profile_dynamic_allocations(size_t num_elems)
 {
-	//for ( u32 i=0; i<temp_debug_arr_size; ++i )
+	//for (u32 i=0; i<temp_debug_arr_size; ++i)
 	//{
 	//	profile_start();
 	//	
@@ -74,7 +74,7 @@ void profile_dynamic_allocations( size_t num_elems )
 	//	temp_debug_arr_for_new[i] = profile_stop();
 	//}
 	//
-	//for ( u32 i=0; i<temp_debug_arr_size; ++i )
+	//for (u32 i=0; i<temp_debug_arr_size; ++i)
 	//{
 	//	profile_start();
 	//	
@@ -84,17 +84,17 @@ void profile_dynamic_allocations( size_t num_elems )
 	//}
 	//
 	//
-	//for ( u32 i=0; i<temp_debug_arr_size; ++i )
+	//for (u32 i=0; i<temp_debug_arr_size; ++i)
 	//{
 	//	profile_start();
 	//	
-	//	allocate_arr_with_malloc( temp_debug_arr_of_pointers[i], 
-	//		num_elems );
+	//	allocate_arr_with_malloc(temp_debug_arr_of_pointers[i], 
+	//		num_elems);
 	//	
 	//	temp_debug_arr_for_malloc[i] = profile_stop();
 	//}
 	//
-	//for ( u32 i=0; i<temp_debug_arr_size; ++i )
+	//for (u32 i=0; i<temp_debug_arr_size; ++i)
 	//{
 	//	profile_start();
 	//	
@@ -103,17 +103,17 @@ void profile_dynamic_allocations( size_t num_elems )
 	//	temp_debug_arr_for_free[i] = profile_stop();
 	//}
 	//
-	////for ( u32 i=0; i<temp_debug_arr_size; ++i )
+	////for (u32 i=0; i<temp_debug_arr_size; ++i)
 	////{
 	////	profile_start();
 	////	
-	////	allocate_arr_with_nano_malloc( temp_debug_arr_of_pointers[i], 
-	////		num_elems );
+	////	allocate_arr_with_nano_malloc(temp_debug_arr_of_pointers[i], 
+	////		num_elems);
 	////	
 	////	temp_debug_arr_for_nano_malloc[i] = profile_stop();
 	////}
 	////
-	////for ( u32 i=0; i<temp_debug_arr_size; ++i )
+	////for (u32 i=0; i<temp_debug_arr_size; ++i)
 	////{
 	////	profile_start();
 	////	

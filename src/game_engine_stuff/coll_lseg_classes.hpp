@@ -38,26 +38,26 @@ class VertCollLseg;
 //	inline GenericCollLseg()
 //	{
 //	}
-//	inline GenericCollLseg( const vec2_f24p8& s_end_pt_0, 
-//		const vec2_f24p8& s_end_pt_1 ) : end_points{ s_end_pt_0, 
+//	inline GenericCollLseg(const vec2_f24p8& s_end_pt_0, 
+//		const vec2_f24p8& s_end_pt_1) : end_points{ s_end_pt_0, 
 //		s_end_pt_1 }
 //	{
 //	}
-//	inline GenericCollLseg( const GenericCollLseg& to_copy )
+//	inline GenericCollLseg(const GenericCollLseg& to_copy)
 //	{
 //		*this = to_copy;
 //	}
 //	
 //	inline GenericCollLseg& operator = 
-//		( const GenericCollLseg& to_copy )
+//		(const GenericCollLseg& to_copy)
 //	{
 //		end_points = to_copy.end_points;
 //		
 //		return *this;
 //	}
 //	
-//	bool intersects( const GenericCollLseg& to_check, 
-//		vec2_f24p8* ret=NULL ) const __attribute__((_IWRAM_CODE));
+//	bool intersects(const GenericCollLseg& to_check, 
+//		vec2_f24p8* ret=NULL) const __attribute__((_IWRAM_CODE));
 //	
 //} __attribute__((_ALIGN4));
 
@@ -65,8 +65,8 @@ class VertCollLseg;
 class CollLsegExtras
 {
 protected:		// functions
-	static bool collinear_lsegs_intersect( const Fixed24p8& a_0, 
-		const Fixed24p8& a_1, const Fixed24p8& b_0, const Fixed24p8& b_1 );
+	static bool collinear_lsegs_intersect(const Fixed24p8& a_0, 
+		const Fixed24p8& a_1, const Fixed24p8& b_0, const Fixed24p8& b_1);
 	
 	friend class HorizCollLseg;
 	friend class VertCollLseg;
@@ -86,23 +86,23 @@ public:		// functions
 	inline HorizCollLseg()
 	{
 	}
-	inline HorizCollLseg( const vec2_f24p8& s_left_pt, 
-		const Fixed24p8& s_length ) : internal_left_pt(s_left_pt),
+	inline HorizCollLseg(const vec2_f24p8& s_left_pt, 
+		const Fixed24p8& s_length) : internal_left_pt(s_left_pt),
 		internal_length(s_length)
 	{
 	}
-	inline HorizCollLseg( const vec2_s32& s_left_pt, 
-		const Fixed24p8& s_length )
-		: internal_left_pt( make_f24p8(s_left_pt.x), 
-		make_f24p8(s_left_pt.y) ), internal_length(s_length)
+	inline HorizCollLseg(const vec2_s32& s_left_pt, 
+		const Fixed24p8& s_length)
+		: internal_left_pt(make_f24p8(s_left_pt.x), 
+		make_f24p8(s_left_pt.y)), internal_length(s_length)
 	{
 	}
-	inline HorizCollLseg( const HorizCollLseg& to_copy )
+	inline HorizCollLseg(const HorizCollLseg& to_copy)
 	{
 		*this = to_copy;
 	}
 	
-	inline HorizCollLseg& operator = ( const HorizCollLseg& to_copy )
+	inline HorizCollLseg& operator = (const HorizCollLseg& to_copy)
 	{
 		left_pt() = to_copy.left_pt();
 		length() = to_copy.length();
@@ -127,21 +127,21 @@ public:		// functions
 	}
 	inline const vec2_f24p8 right_pt() const
 	{
-		return left_pt() + vec2_f24p8( length(), make_f24p8(0) );
+		return left_pt() + vec2_f24p8(length(), make_f24p8(0));
 	}
 	
-	inline bool intersects( const HorizCollLseg& to_check ) const
+	inline bool intersects(const HorizCollLseg& to_check) const
 	{
-		if ( left_pt().y == to_check.left_pt().y )
+		if (left_pt().y == to_check.left_pt().y)
 		{
 			return CollLsegExtras::collinear_lsegs_intersect
-				( left_pt().x, right_pt().x, to_check.left_pt().x, 
-				to_check.right_pt().x );
+				(left_pt().x, right_pt().x, to_check.left_pt().x, 
+				to_check.right_pt().x);
 		}
 		
 		return false;
 	}
-	//inline bool intersects( const VertCollLseg& to_check ) const;
+	//inline bool intersects(const VertCollLseg& to_check) const;
 	
 } __attribute__((_ALIGN4));
 
@@ -156,23 +156,23 @@ public:		// functions
 	inline VertCollLseg()
 	{
 	}
-	inline VertCollLseg( const vec2_f24p8& s_top_pt, 
-		const Fixed24p8& s_length ) : internal_top_pt(s_top_pt),
+	inline VertCollLseg(const vec2_f24p8& s_top_pt, 
+		const Fixed24p8& s_length) : internal_top_pt(s_top_pt),
 		internal_length(s_length)
 	{
 	}
-	inline VertCollLseg( const vec2_s32& s_top_pt, 
-		const Fixed24p8& s_length )
-		: internal_top_pt( make_f24p8(s_top_pt.x), 
-		make_f24p8(s_top_pt.y) ), internal_length(s_length)
+	inline VertCollLseg(const vec2_s32& s_top_pt, 
+		const Fixed24p8& s_length)
+		: internal_top_pt(make_f24p8(s_top_pt.x), 
+		make_f24p8(s_top_pt.y)), internal_length(s_length)
 	{
 	}
-	inline VertCollLseg( const VertCollLseg& to_copy )
+	inline VertCollLseg(const VertCollLseg& to_copy)
 	{
 		*this = to_copy;
 	}
 	
-	inline VertCollLseg& operator = ( const VertCollLseg& to_copy )
+	inline VertCollLseg& operator = (const VertCollLseg& to_copy)
 	{
 		top_pt() = to_copy.top_pt();
 		length() = to_copy.length();
@@ -197,19 +197,19 @@ public:		// functions
 	}
 	inline const vec2_f24p8 bot_pt() const
 	{
-		return top_pt() + vec2_f24p8( make_f24p8(0), length() );
+		return top_pt() + vec2_f24p8(make_f24p8(0), length());
 	}
 	
-	//inline bool intersects( const HorizCollLseg& to_check ) const
+	//inline bool intersects(const HorizCollLseg& to_check) const
 	//{
 	//	return to_check.intersects(*this);
 	//}
-	inline bool intersects( const VertCollLseg& to_check ) const
+	inline bool intersects(const VertCollLseg& to_check) const
 	{
-		if ( top_pt().x == to_check.top_pt().x )
+		if (top_pt().x == to_check.top_pt().x)
 		{
-			return CollLsegExtras::collinear_lsegs_intersect( top_pt().x,
-				bot_pt().x, to_check.top_pt().x, to_check.bot_pt().x );
+			return CollLsegExtras::collinear_lsegs_intersect(top_pt().x,
+				bot_pt().x, to_check.top_pt().x, to_check.bot_pt().x);
 		}
 		
 		return false;
@@ -219,11 +219,11 @@ public:		// functions
 
 
 
-//inline bool HorizCollLseg::intersects( const VertCollLseg& to_check ) 
+//inline bool HorizCollLseg::intersects(const VertCollLseg& to_check) 
 //	const
 //{
-//	return GenericCollLseg( left_pt(), right_pt() ).intersects
-//		( GenericCollLseg( to_check.top_pt(), to_check.bot_pt() ) );
+//	return GenericCollLseg(left_pt(), right_pt()).intersects
+//		(GenericCollLseg(to_check.top_pt(), to_check.bot_pt()));
 //}
 
 

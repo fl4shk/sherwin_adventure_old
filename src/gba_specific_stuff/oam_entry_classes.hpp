@@ -34,7 +34,7 @@ static const u32 oam_mirror_size = 128;
 static const u32 oam_mirror_aff_size = 32;
 
 extern OamEntry oam_mirror[oam_mirror_size];
-#define OAM_MIRROR_AFF ( (OamEntryAffine*)(oam_mirror) )
+#define OAM_MIRROR_AFF ((OamEntryAffine*)(oam_mirror))
 //extern OamEntryAffine* const OAM_MIRROR_AFF;
 
 
@@ -67,108 +67,108 @@ public:		// wrapper functions
 	
 	s32 get_y_coord() const
 	{
-		return get_bits( attr0, obj_attr0_y_coord_mask, 
-			obj_attr0_y_coord_shift );
+		return get_bits(attr0, obj_attr0_y_coord_mask, 
+			obj_attr0_y_coord_shift);
 	}
 	
-	void set_y_coord( s32 n_y_coord )
+	void set_y_coord(s32 n_y_coord)
 	{
-		//clear_and_set_bits( attr0, obj_attr0_y_coord_mask,
-		//	OBJ_ATTR0_Y_COORD(n_y_coord) );
-		clear_bits( attr0, obj_attr0_y_coord_mask );
-		set_bits( attr0, OBJ_ATTR0_Y_COORD(n_y_coord) );
+		//clear_and_set_bits(attr0, obj_attr0_y_coord_mask,
+		//	OBJ_ATTR0_Y_COORD(n_y_coord));
+		clear_bits(attr0, obj_attr0_y_coord_mask);
+		set_bits(attr0, OBJ_ATTR0_Y_COORD(n_y_coord));
 	}
 	
 	s32 get_x_coord() const
 	{
-		return get_bits( attr1, obj_attr1_x_coord_mask,
-			obj_attr1_x_coord_shift );
+		return get_bits(attr1, obj_attr1_x_coord_mask,
+			obj_attr1_x_coord_shift);
 	}
 	
-	void set_x_coord( s32 n_x_coord )
+	void set_x_coord(s32 n_x_coord)
 	{
-		//clear_and_set_bits( attr1, obj_attr1_x_coord_mask,
-		//	OBJ_ATTR1_X_COORD(n_x_coord) );
-		clear_bits( attr1, obj_attr1_x_coord_mask );
-		set_bits( attr1, OBJ_ATTR1_X_COORD(n_x_coord) );
+		//clear_and_set_bits(attr1, obj_attr1_x_coord_mask,
+		//	OBJ_ATTR1_X_COORD(n_x_coord));
+		clear_bits(attr1, obj_attr1_x_coord_mask);
+		set_bits(attr1, OBJ_ATTR1_X_COORD(n_x_coord));
 	}
 	
 	void enable_hflip()
 	{
-		set_bits( attr1, obj_attr1_hflip_on );
+		set_bits(attr1, obj_attr1_hflip_on);
 	}
 	void disable_hflip()
 	{
-		clear_bits( attr1, obj_attr1_hflip_mask );
+		clear_bits(attr1, obj_attr1_hflip_mask);
 	}
 	u32 get_hflip_status() const
 	{
-		return get_bits( attr1, obj_attr1_hflip_mask, 
-			obj_attr1_hflip_shift );
+		return get_bits(attr1, obj_attr1_hflip_mask, 
+			obj_attr1_hflip_shift);
 	}
 	
 	
 	void enable_vflip()
 	{
-		set_bits( attr1, obj_attr1_vflip_on );
+		set_bits(attr1, obj_attr1_vflip_on);
 	}
 	void disable_vflip()
 	{
-		clear_bits( attr1, obj_attr1_vflip_mask );
+		clear_bits(attr1, obj_attr1_vflip_mask);
 	}
 	u32 get_vflip_status() const
 	{
-		return get_bits( attr1, obj_attr1_vflip_mask, 
-			obj_attr1_vflip_shift );
+		return get_bits(attr1, obj_attr1_vflip_mask, 
+			obj_attr1_vflip_shift);
 	}
 	
 	
 	
 	void show_non_affine()
 	{
-		clear_bits( attr0, 
-			( obj_attr0_affine_mask | obj_attr0_disable_mask ) );
+		clear_bits(attr0, 
+			(obj_attr0_affine_mask | obj_attr0_disable_mask));
 	}
 	
 	void hide_non_affine()
 	{
-		clear_bits( attr0, 
-			( obj_attr0_affine_mask | obj_attr0_disable_mask ) );
+		clear_bits(attr0, 
+			(obj_attr0_affine_mask | obj_attr0_disable_mask));
 		
-		set_bits( attr0, obj_attr0_disable_on );
+		set_bits(attr0, obj_attr0_disable_on);
 	}
 	
-	void set_tile_number( u32 n_tile_num )
+	void set_tile_number(u32 n_tile_num)
 	{
-		clear_and_set_bits( attr2, obj_attr2_tile_number_mask,
-			OBJ_ATTR2_TILE_NUMBER(n_tile_num) );
+		clear_and_set_bits(attr2, obj_attr2_tile_number_mask,
+			OBJ_ATTR2_TILE_NUMBER(n_tile_num));
 	}
 	
 	u32 get_tile_number() const
 	{
-		return get_bits( attr2, obj_attr2_tile_number_mask,
-			obj_attr2_tile_number_shift );
+		return get_bits(attr2, obj_attr2_tile_number_mask,
+			obj_attr2_tile_number_shift);
 	}
 	
-	void set_pal_number( u32 n_pal_num )
+	void set_pal_number(u32 n_pal_num)
 	{
-		clear_and_set_bits( attr2, obj_attr2_pal_num_mask,
-			OBJ_ATTR2_PAL_NUM(n_pal_num) );
+		clear_and_set_bits(attr2, obj_attr2_pal_num_mask,
+			OBJ_ATTR2_PAL_NUM(n_pal_num));
 	}
 	
 	u32 get_pal_number() const
 	{
-		return get_bits( attr2, obj_attr2_pal_num_mask,
-			obj_attr2_pal_num_shift );
+		return get_bits(attr2, obj_attr2_pal_num_mask,
+			obj_attr2_pal_num_shift);
 	}
 	
 	
 	
 	
-	void set_shape_size( shape_size n_shape_size );
+	void set_shape_size(shape_size n_shape_size);
 	shape_size get_shape_size() const;
 	
-	void set_shape_size_with_vec2( const vec2_u32& n_shape_size );
+	void set_shape_size_with_vec2(const vec2_u32& n_shape_size);
 	vec2_u32 get_shape_size_as_vec2() const;
 	
 	
@@ -207,15 +207,15 @@ public:		// functions
 
 inline void copy_oam_mirror_to_oam()
 {
-	//dma3_cpy( (vu16*)(MEM_OAM), oam_mirror, 
-	//	( oam_mirror_size * sizeof(OamEntry) ) / sizeof(u16), 0 );
-	memcpy32( (void*)(MEM_OAM), oam_mirror,
-		( oam_mirror_size * sizeof(OamEntry) ) / sizeof(u32) );
+	//dma3_cpy((vu16*)(MEM_OAM), oam_mirror, 
+	//	(oam_mirror_size * sizeof(OamEntry)) / sizeof(u16), 0);
+	memcpy32((void*)(MEM_OAM), oam_mirror,
+		(oam_mirror_size * sizeof(OamEntry)) / sizeof(u32));
 }
 
 inline void clear_oam_mirror()
 {
-	memfill32( oam_mirror, 0, sizeof(oam_mirror) / sizeof(u32) );
+	memfill32(oam_mirror, 0, sizeof(oam_mirror) / sizeof(u32));
 }
 
 

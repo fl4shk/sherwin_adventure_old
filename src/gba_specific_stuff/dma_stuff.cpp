@@ -25,10 +25,10 @@ extern "C"
 {
 
 // Copy generic data (in units of words or halfwords) using DMA3
-//inline void dma_cpy( volatile void* dst, const void* src, u32 count, 
-//	u32 mode = 1 )
-void dma3_cpy( volatile void* dst, const void* src, u32 count, 
-	u32 mode = 1 )
+//inline void dma_cpy(volatile void* dst, const void* src, u32 count, 
+//	u32 mode = 1)
+void dma3_cpy(volatile void* dst, const void* src, u32 count, 
+	u32 mode = 1)
 {
 	static const u32 chunk_size_arr[2] = { DMA_16, DMA_32 };
 	
@@ -52,8 +52,8 @@ void dma3_cpy( volatile void* dst, const void* src, u32 count,
 	
 }
 
-void dma0_cpy( volatile void* dst, const void* src, u32 count, 
-	u32 mode = 1 )
+void dma0_cpy(volatile void* dst, const void* src, u32 count, 
+	u32 mode = 1)
 {
 	static const u32 chunk_size_arr[2] = { DMA_16, DMA_32 };
 	
@@ -80,8 +80,8 @@ void dma0_cpy( volatile void* dst, const void* src, u32 count,
 
 
 // Fill the destination with a word using DMA3
-//inline void dma_fill( volatile void* dst, vu32 src, u32 count )
-void dma3_fill( volatile void* dst, vu32 src, u32 count )
+//inline void dma_fill(volatile void* dst, vu32 src, u32 count)
+void dma3_fill(volatile void* dst, vu32 src, u32 count)
 {
 	// Store the addresses of src and dst
 	REG_DMA3SAD = (u32)((const void *)(&src));

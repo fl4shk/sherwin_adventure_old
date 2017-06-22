@@ -22,13 +22,13 @@
 #include "../general_utility_stuff/misc_types.hpp"
 #include "attribute_defines.hpp"
 
-u64 unsafe_lut_udiv( u32 numerator, u16 divisor )
+u64 unsafe_lut_udiv(u32 numerator, u16 divisor)
 	__attribute__((_IWRAM_CODE,_TARGET_ARM));
-s64 unsafe_lut_sdiv( s32 numerator, s16 divisor )
+s64 unsafe_lut_sdiv(s32 numerator, s16 divisor)
 	__attribute__((_IWRAM_CODE,_TARGET_ARM));
-u64 safe_lut_udiv( u32 numerator, u16 divisor, int& valid ) 
+u64 safe_lut_udiv(u32 numerator, u16 divisor, int& valid) 
 	__attribute__((_IWRAM_CODE,_TARGET_ARM));
-s64 safe_lut_sdiv( s32 numerator, s16 divisor, int& valid ) 
+s64 safe_lut_sdiv(s32 numerator, s16 divisor, int& valid) 
 	__attribute__((_IWRAM_CODE,_TARGET_ARM));
 
 

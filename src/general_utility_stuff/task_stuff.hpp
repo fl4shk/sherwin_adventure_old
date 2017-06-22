@@ -39,21 +39,21 @@ enum class TaskPriority : s32
 } _ALIGNAS_REGULAR;
 
 
-inline TaskPriority operator - ( TaskPriority the_tp, 
-	TaskPriority to_sub )
+inline TaskPriority operator - (TaskPriority the_tp, 
+	TaskPriority to_sub)
 {
 	return the_tp - to_sub;
 }
-inline TaskPriority operator - ( TaskPriority the_tp, 
-	s32 to_sub )
+inline TaskPriority operator - (TaskPriority the_tp, 
+	s32 to_sub)
 {
 	return the_tp - to_sub;
 }
 
-inline TaskPriority clamp_task_prio( TaskPriority to_clamp )
+inline TaskPriority clamp_task_prio(TaskPriority to_clamp)
 {
-	return clamp_to_range<TaskPriority>( TaskPriority::tp_0, 
-		TaskPriority::lim_tp, to_clamp );
+	return clamp_to_range<TaskPriority>(TaskPriority::tp_0, 
+		TaskPriority::lim_tp, to_clamp);
 }
 
 class Task
@@ -69,7 +69,7 @@ public:		// functions
 	inline Task()
 	{
 	}
-	inline Task( TaskPriority s_the_task_prio, task_funcptr s_func ) 
+	inline Task(TaskPriority s_the_task_prio, task_funcptr s_func) 
 		: the_task_prio(clamp_task_prio(s_the_task_prio)),
 		func(s_func)
 	{
@@ -79,7 +79,7 @@ public:		// functions
 	{
 		return the_task_prio;
 	}
-	inline void set_task_prio( TaskPriority n_the_task_prio )
+	inline void set_task_prio(TaskPriority n_the_task_prio)
 	{
 		the_task_prio = clamp_task_prio(n_the_task_prio);
 	}
@@ -88,13 +88,13 @@ public:		// functions
 	// func stuff
 	inline bool has_func() const
 	{
-		return ( func != NULL );
+		return (func != NULL);
 	}
 	inline task_funcptr get_func() const
 	{
 		return func;
 	}
-	inline void set_func( task_funcptr s_func )
+	inline void set_func(task_funcptr s_func)
 	{
 		func = s_func;
 	}

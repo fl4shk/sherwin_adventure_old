@@ -10,7 +10,7 @@
 @
 @	Time-stamp: 2015-11-21, 17:29:12
 @	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
-@	( http://www.coranac.com/projects/#grit )
+@	(http://www.coranac.com/projects/#grit)
 @
 @=======================================================================
 

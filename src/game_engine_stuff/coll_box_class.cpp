@@ -20,32 +20,32 @@
 #include "../general_utility_stuff/debug_vars.hpp"
 
 
-//int coll_box_intersects_now( const CollBox& a, const CollBox& b )
+//int coll_box_intersects_now(const CollBox& a, const CollBox& b)
 //{
-//	//return !( ( b.left().data + 1 ) > ( a.right().data - 1 )
-//	//	|| ( b.right().data - 1 ) < ( a.left().data + 1 )
-//	//	|| ( b.top().data + 1 ) > ( a.bot().data - 1 )
-//	//	|| ( b.bot().data - 1 ) < ( a.top().data + 1 ) );
+//	//return !((b.left().data + 1) > (a.right().data - 1)
+//	//	|| (b.right().data - 1) < (a.left().data + 1)
+//	//	|| (b.top().data + 1) > (a.bot().data - 1)
+//	//	|| (b.bot().data - 1) < (a.top().data + 1));
 //	
-//	return !( b.left() > a.right()
+//	return !(b.left() > a.right()
 //		|| b.right() < a.left()
 //		|| b.top() > a.bot()
-//		|| b.bot() < a.top() );
+//		|| b.bot() < a.top());
 //}
 //
-//int coll_box_intersects_now_2( const CollBox& a, const CollBox& b )
+//int coll_box_intersects_now_2(const CollBox& a, const CollBox& b)
 //{
-//	return !( ( b.left().data + 1 ) >= ( a.right().data - 1 )
-//		|| ( b.right().data - 1 ) <= ( a.left().data + 1 )
-//		|| ( b.top().data + 1 ) >= ( a.bot().data - 1 )
-//		|| b.bot() <= a.top() );
+//	return !((b.left().data + 1) >= (a.right().data - 1)
+//		|| (b.right().data - 1) <= (a.left().data + 1)
+//		|| (b.top().data + 1) >= (a.bot().data - 1)
+//		|| b.bot() <= a.top());
 //}
 
 
-int CollBox::Contains( const vec2_f24p8& point )
+int CollBox::Contains(const vec2_f24p8& point)
 {
-	if ( point.x > left() && point.x < right() 
-		&& point.y > top() && point.y < bot() )
+	if (point.x > left() && point.x < right() 
+		&& point.y > top() && point.y < bot())
 	{
 		return true;
 	}
@@ -55,8 +55,8 @@ int CollBox::Contains( const vec2_f24p8& point )
 
 
 
-void CollBox::set_side_coords( Fixed24p8 left_x, Fixed24p8 right_x,
-	Fixed24p8 top_y, Fixed24p8 bot_y )
+void CollBox::set_side_coords(Fixed24p8 left_x, Fixed24p8 right_x,
+	Fixed24p8 top_y, Fixed24p8 bot_y)
 {
 	pos = { left_x, top_y };
 	size = { right_x - left_x, bot_y - top_y };
@@ -64,8 +64,8 @@ void CollBox::set_side_coords( Fixed24p8 left_x, Fixed24p8 right_x,
 
 
 
-void CollBox::get_corners( vec2_f24p8& lt_corner, vec2_f24p8& rt_corner, 
-	vec2_f24p8& rb_corner, vec2_f24p8& lb_corner )
+void CollBox::get_corners(vec2_f24p8& lt_corner, vec2_f24p8& rt_corner, 
+	vec2_f24p8& rb_corner, vec2_f24p8& lb_corner)
 {
 	lt_corner.x = lb_corner.x = left();
 	rt_corner.x = rb_corner.x = right();
@@ -77,8 +77,8 @@ void CollBox::get_corners( vec2_f24p8& lt_corner, vec2_f24p8& rt_corner,
 
 
 void CollBox::get_block_coords_intersected_by_corners 
-	( vec2_s32& lt_block_coord, vec2_s32& rt_block_coord,
-	vec2_s32& rb_block_coord, vec2_s32& lb_block_coord )
+	(vec2_s32& lt_block_coord, vec2_s32& rt_block_coord,
+	vec2_s32& rb_block_coord, vec2_s32& lb_block_coord)
 {
 	
 	lt_block_coord.x = lb_block_coord.x = left().round_to_int() >> 4;
@@ -91,23 +91,23 @@ void CollBox::get_block_coords_intersected_by_corners
 
 
 
-int coll_box_intersects_now( const CollBox& a, const CollBox& b )
+int coll_box_intersects_now(const CollBox& a, const CollBox& b)
 {
-	//return !( ( b.left().data + 1 ) > ( a.right().data - 1 )
-	//	|| ( b.right().data - 1 ) < ( a.left().data + 1 )
-	//	|| ( b.top().data + 1 ) > ( a.bot().data - 1 )
-	//	|| ( b.bot().data - 1 ) < ( a.top().data + 1 ) );
+	//return !((b.left().data + 1) > (a.right().data - 1)
+	//	|| (b.right().data - 1) < (a.left().data + 1)
+	//	|| (b.top().data + 1) > (a.bot().data - 1)
+	//	|| (b.bot().data - 1) < (a.top().data + 1));
 	
-	return !( b.left() > a.right()
+	return !(b.left() > a.right()
 		|| b.right() < a.left()
 		|| b.top() > a.bot()
-		|| b.bot() < a.top() );
+		|| b.bot() < a.top());
 }
 
-int coll_box_intersects_now_2( const CollBox& a, const CollBox& b )
+int coll_box_intersects_now_2(const CollBox& a, const CollBox& b)
 {
-	return !( ( b.left().data + 1 ) >= ( a.right().data - 1 )
-		|| ( b.right().data - 1 ) <= ( a.left().data + 1 )
-		|| ( b.top().data + 1 ) >= ( a.bot().data - 1 )
-		|| b.bot() <= a.top() );
+	return !((b.left().data + 1) >= (a.right().data - 1)
+		|| (b.right().data - 1) <= (a.left().data + 1)
+		|| (b.top().data + 1) >= (a.bot().data - 1)
+		|| b.bot() <= a.top());
 }

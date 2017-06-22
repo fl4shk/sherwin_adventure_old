@@ -88,12 +88,12 @@ void SnowGolemSprite::update_part_2()
 	
 	--frame_change_timer;
 	
-	if ( frame_change_timer < 0 )
+	if (frame_change_timer < 0)
 	{
 		frame_change_timer = frame_change_timer_start;
 		++curr_frame_slot;
 		
-		if ( curr_frame_slot >= lim_frm_slot )
+		if (curr_frame_slot >= lim_frm_slot)
 		{
 			curr_frame_slot = 0;
 		}

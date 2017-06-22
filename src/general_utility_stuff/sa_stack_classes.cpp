@@ -22,8 +22,8 @@ SaPodStackBackend::SaPodStackBackend() : the_array_u8(0),
 	next_index_ptr(0), type_size(0), num_elems(0)
 {
 }
-SaPodStackBackend::SaPodStackBackend( u8* s_the_array_u8, 
-	u32* s_next_index_ptr, u32 s_type_size, u32 s_num_elems )
+SaPodStackBackend::SaPodStackBackend(u8* s_the_array_u8, 
+	u32* s_next_index_ptr, u32 s_type_size, u32 s_num_elems)
 	: the_array_u8(s_the_array_u8), next_index_ptr(s_next_index_ptr), 
 	type_size(s_type_size), num_elems(s_num_elems)
 {
@@ -34,13 +34,13 @@ SaPodStackBackend::SaPodStackBackend( u8* s_the_array_u8,
 //	--get_next_index();
 //}
 
-void SaPodStackBackend::write_to_the_array_u8( const u8* to_write_u8,
-	u32 non_u8_index )
+void SaPodStackBackend::write_to_the_array_u8(const u8* to_write_u8,
+	u32 non_u8_index)
 {
-	u32 start_index_u8 = ARR_BYTE_INDEX_MACRO( get_type_size(), 
-		non_u8_index );
+	u32 start_index_u8 = ARR_BYTE_INDEX_MACRO(get_type_size(), 
+		non_u8_index);
 	
-	for ( u32 i=0; i<get_type_size(); ++i )
+	for (u32 i=0; i<get_type_size(); ++i)
 	{
 		get_array_u8()[start_index_u8 + i] = to_write_u8[i];
 	}
@@ -49,18 +49,18 @@ void SaPodStackBackend::write_to_the_array_u8( const u8* to_write_u8,
 SaFreeListBackend::SaFreeListBackend() : SaPodStackBackend()
 {
 }
-SaFreeListBackend::SaFreeListBackend( u8* s_the_array_u8, 
-	u32* s_next_index_ptr, u32 s_num_elems ) 
-	: SaPodStackBackend( s_the_array_u8, s_next_index_ptr,
-	get_const_type_size(), s_num_elems )
+SaFreeListBackend::SaFreeListBackend(u8* s_the_array_u8, 
+	u32* s_next_index_ptr, u32 s_num_elems) 
+	: SaPodStackBackend(s_the_array_u8, s_next_index_ptr,
+	get_const_type_size(), s_num_elems)
 {
 	init();
 }
 
-SaFreeListBackend::SaFreeListBackend( s16* s_the_array,
-	u32* s_next_index_ptr, u32 s_num_elems ) 
-	: SaPodStackBackend( (u8*)s_the_array, s_next_index_ptr,
-	get_const_type_size(), s_num_elems )
+SaFreeListBackend::SaFreeListBackend(s16* s_the_array,
+	u32* s_next_index_ptr, u32 s_num_elems) 
+	: SaPodStackBackend((u8*)s_the_array, s_next_index_ptr,
+	get_const_type_size(), s_num_elems)
 {
 	init();
 }
@@ -72,8 +72,8 @@ void SaFreeListBackend::init()
 	
 	// This makes it So That the values initially stored in the array are
 	// decrementing in value, starting with the highest value of
-	// ( get_size() - 1 ) and ending with 0. 
-	for ( int i=get_size()-1; i>= 0; --i )
+	// (get_size() - 1) and ending with 0. 
+	for (int i=get_size()-1; i>= 0; --i)
 	{
 		push(i);
 	}

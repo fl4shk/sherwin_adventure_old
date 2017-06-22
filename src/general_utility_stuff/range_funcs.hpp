@@ -25,43 +25,43 @@
 // in_range and vec2_in_range are PRIMARILY Intended for use with a range
 // of 0 (inclusive) To size (exclusive)
 template< typename type >
-inline bool in_range( type range_start_inclusive, type range_end_exclusive, 
-	type to_check )
+inline bool in_range(type range_start_inclusive, type range_end_exclusive, 
+	type to_check)
 {
-	return ( to_check >= range_start_inclusive 
-		&& to_check < range_end_exclusive );
+	return (to_check >= range_start_inclusive 
+		&& to_check < range_end_exclusive);
 }
 
 
 template< typename type >
-inline bool in_range_inclusive( type range_start_inclusive, 
-	type range_end_inclusive, type to_check )
+inline bool in_range_inclusive(type range_start_inclusive, 
+	type range_end_inclusive, type to_check)
 {
-	return ( to_check >= range_start_inclusive 
-		&& to_check <= range_end_inclusive );
+	return (to_check >= range_start_inclusive 
+		&& to_check <= range_end_inclusive);
 }
 
 template< typename type >
-inline bool vec2_in_range( Vec2<type> range_start_inclusive, 
-	Vec2<type> range_end_exclusive, Vec2<type> to_check )
+inline bool vec2_in_range(Vec2<type> range_start_inclusive, 
+	Vec2<type> range_end_exclusive, Vec2<type> to_check)
 {
-	return ( to_check.x >= range_start_inclusive.x 
+	return (to_check.x >= range_start_inclusive.x 
 		&& to_check.x < range_end_exclusive.x
 		&& to_check.y >= range_start_inclusive.y 
-		&& to_check.y < range_end_exclusive.y );
+		&& to_check.y < range_end_exclusive.y);
 }
 
 
 template< typename type >
-inline type clamp_to_range( type range_start_inclusive, 
-	type range_end_exclusive, type to_clamp )
+inline type clamp_to_range(type range_start_inclusive, 
+	type range_end_exclusive, type to_clamp)
 {
-	if ( to_clamp < range_start_inclusive )
+	if (to_clamp < range_start_inclusive)
 	{
 		//to_clamp = range_start_inclusive;
 		return range_start_inclusive;
 	}
-	else if ( to_clamp >= range_end_exclusive )
+	else if (to_clamp >= range_end_exclusive)
 	{
 		//to_clamp = range_end_exclusive - type(1);
 		return range_end_exclusive - (type)(1);

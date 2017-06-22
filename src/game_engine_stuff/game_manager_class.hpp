@@ -87,9 +87,9 @@ public:		// functions
 	// Is down this frame but was not down on the previous frame.
 	static inline void pause_or_unpause_music()
 	{
-		if( key_hit(KEY_SELECT) )
+		if(key_hit(KEY_SELECT))
 		{
-			if ( mmActive() ) { mmPause(); }
+			if (mmActive()) { mmPause(); }
 			else { mmResume(); }
 		}
 	}
@@ -103,16 +103,16 @@ public:		// functions
 		}
 	}
 	
-	static inline void wait_for_x_frames( u32 x )
+	static inline void wait_for_x_frames(u32 x)
 	{
-		for ( u32 i=0; i<x; ++i )
+		for (u32 i=0; i<x; ++i)
 		{
 			bios_wait_for_vblank();
 		}
 	}
 	
 	
-	//static void vblank_func() __attribute__(( _IWRAM_CODE, __noinline__ ));
+	//static void vblank_func() __attribute__((_IWRAM_CODE, __noinline__));
 	static void vblank_func() __attribute__((_IWRAM_CODE));
 	//static void vblank_func() __attribute__((_IWRAM_CODE,_TARGET_ARM));
 	//static void vblank_func();

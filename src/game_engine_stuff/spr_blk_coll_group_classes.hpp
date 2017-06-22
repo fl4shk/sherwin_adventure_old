@@ -137,28 +137,28 @@ protected:		// variables and constants
 	
 	
 public:		// functions
-	inline const HorizCollTuple& get_horiz_ctup( u32 index ) const
+	inline const HorizCollTuple& get_horiz_ctup(u32 index) const
 	{
 		return horiz_ctups[index];
 	}
-	inline const VertTopCollTuple& get_vert_top_ctup( u32 index ) const
+	inline const VertTopCollTuple& get_vert_top_ctup(u32 index) const
 	{
 		return vert_top_ctups[index];
 	}
-	inline const VertBotCollTuple& get_vert_bot_ctup( u32 index ) const
+	inline const VertBotCollTuple& get_vert_bot_ctup(u32 index) const
 	{
 		return vert_bot_ctups[index];
 	}
 	
-	inline HorizCollTuple& get_horiz_ctup( u32 index )
+	inline HorizCollTuple& get_horiz_ctup(u32 index)
 	{
 		return horiz_ctups[index];
 	}
-	inline VertTopCollTuple& get_vert_top_ctup( u32 index )
+	inline VertTopCollTuple& get_vert_top_ctup(u32 index)
 	{
 		return vert_top_ctups[index];
 	}
-	inline VertBotCollTuple& get_vert_bot_ctup( u32 index )
+	inline VertBotCollTuple& get_vert_bot_ctup(u32 index)
 	{
 		return vert_bot_ctups[index];
 	}
@@ -260,15 +260,15 @@ protected:		// enums
 	
 protected:		// variables and constants
 	static constexpr size_t num_vert_top_ctups = lim_vi_top;
-	static_assert( num_vert_top_ctups <= max_num_vert_top_ctups );
+	static_assert(num_vert_top_ctups <= max_num_vert_top_ctups);
 	
 public:		// functions
 	inline SprBlkCollGroup16x16()
 	{
 		//init_arr_helpers();
 	}
-	SprBlkCollGroup16x16( const CollBox& s_coll_box, u32 s_on_ground );
-	void init( const CollBox& s_coll_box, u32 s_on_ground )
+	SprBlkCollGroup16x16(const CollBox& s_coll_box, u32 s_on_ground);
+	void init(const CollBox& s_coll_box, u32 s_on_ground)
 		__attribute__((_IWRAM_CODE,_TARGET_ARM));
 	
 	//const size_t get_num_horiz_ctups() const;
@@ -286,8 +286,8 @@ public:		// functions
 	
 protected:		// functions
 	//void init_arr_helpers();
-	static void init_static_vars( const CollBox& s_coll_box, 
-		bool s_on_ground ) __attribute__((_IWRAM_CODE,_TARGET_ARM));
+	static void init_static_vars(const CollBox& s_coll_box, 
+		bool s_on_ground) __attribute__((_IWRAM_CODE,_TARGET_ARM));
 	
 	
 } __attribute__((_ALIGN4));
@@ -311,7 +311,7 @@ protected:		// enums
 	
 protected:		// variables and constants
 	static constexpr size_t num_vert_top_ctups = lim_vi_top;
-	static_assert( num_vert_top_ctups <= max_num_vert_top_ctups );
+	static_assert(num_vert_top_ctups <= max_num_vert_top_ctups);
 	
 	
 public:		// functions
@@ -319,8 +319,8 @@ public:		// functions
 	{
 		//init_arr_helpers();
 	}
-	SprBlkCollGroup16x32( const CollBox& s_coll_box, u32 s_on_ground );
-	void init( const CollBox& s_coll_box, u32 s_on_ground )
+	SprBlkCollGroup16x32(const CollBox& s_coll_box, u32 s_on_ground);
+	void init(const CollBox& s_coll_box, u32 s_on_ground)
 		__attribute__((_IWRAM_CODE,_TARGET_ARM));
 	
 	//const size_t get_num_horiz_ctups() const;
@@ -338,8 +338,8 @@ public:		// functions
 	
 protected:		// functions
 	//void init_arr_helpers();
-	static void init_static_vars( const CollBox& s_coll_box, 
-		bool s_on_ground ) __attribute__((_IWRAM_CODE,_TARGET_ARM));
+	static void init_static_vars(const CollBox& s_coll_box, 
+		bool s_on_ground) __attribute__((_IWRAM_CODE,_TARGET_ARM));
 	
 } __attribute__((_ALIGN4));
 

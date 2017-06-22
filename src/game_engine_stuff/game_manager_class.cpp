@@ -48,7 +48,7 @@ game_mode GameManager::curr_game_mode;
 void GameManager::vblank_func()
 {
 	// If a bug was automatically detected.
-	if ( curr_game_mode == gm_do_halt )
+	if (curr_game_mode == gm_do_halt)
 	{
 		// Stop the sound stuff
 		if (mmActive())
@@ -79,8 +79,8 @@ void GameManager::vblank_func()
 	key_poll();
 	//pause_or_unpause_music();
 	
-	if ( curr_game_mode != gm_title_screen 
-		&& curr_game_mode != gm_initializing_the_game )
+	if (curr_game_mode != gm_title_screen 
+		&& curr_game_mode != gm_initializing_the_game)
 	{
 		if (mmActive())
 		{
@@ -88,7 +88,7 @@ void GameManager::vblank_func()
 		}
 	}
 	
-	switch ( curr_game_mode )
+	switch (curr_game_mode)
 	{
 		// When on the title screen.
 		case gm_title_screen:
@@ -158,7 +158,7 @@ void GameManager::title_screen_func()
 	
 	
 	// Clear bgofs_mirror
-	for ( u32 i=0; i<3; ++i )
+	for (u32 i=0; i<3; ++i)
 	{
 		GfxManager::bgofs_mirror[i].curr.x 
 			= GfxManager::bgofs_mirror[i].prev.x = {0};
@@ -170,20 +170,20 @@ void GameManager::title_screen_func()
 	
 	
 	// Copy the title screen's tiles and tilemap To VRAM
-	bios_do_lz77_uncomp_vram( title_screenTiles, BG_TILE_VRAM );
+	bios_do_lz77_uncomp_vram(title_screenTiles, BG_TILE_VRAM);
 	
 	GfxManager::upload_bg_palettes_to_target(BG_PAL_RAM);
 	
 	// This Is sort of a hack.
-	bios_do_lz77_uncomp_wram( title_screenMap, 
-		ActiveLevel::bg0_screenblock_mirror );
+	bios_do_lz77_uncomp_wram(title_screenMap, 
+		ActiveLevel::bg0_screenblock_mirror);
 	ActiveLevelManager::copy_sublevel_from_array_csz_2d_helper_to_vram();
 	
 	
 	// Disable forced blank
-	clear_bits( REG_DISPCNT, DCNT_BLANK_MASK );
+	clear_bits(REG_DISPCNT, DCNT_BLANK_MASK);
 	
-	//memcpy8( test_sram_arr, (void *)debug_arr_u32, test_sram_arr_size );
+	//memcpy8(test_sram_arr, (void *)debug_arr_u32, test_sram_arr_size);
 	
 	for (;;)
 	{
@@ -192,14 +192,14 @@ void GameManager::title_screen_func()
 		key_poll();
 		
 		// Start the game if the Start button Is hit
-		if ( key_hit(KEY_START) )
+		if (key_hit(KEY_START))
 		{
 			
 			
-			//irqSet( IRQ_VBLANK, (u32)vblank_func );
+			//irqSet(IRQ_VBLANK, (u32)vblank_func);
 			//irqEnable(IRQ_VBLANK);
 			
-			irqSet( IRQ_VBLANK, (u32)irq_dummy );
+			irqSet(IRQ_VBLANK, (u32)irq_dummy);
 			irqEnable(IRQ_VBLANK);
 			
 			reinit_the_game();
@@ -243,16 +243,16 @@ void GameManager::reinit_the_game()
 	//	(bt_eyes);
 	//u32 num_tiles_per_metatile = GfxManager::num_tiles_in_ss_16x16;
 	//
-	//for ( u32 i=0; i<screenblock_size; ++i )
+	//for (u32 i=0; i<screenblock_size; ++i)
 	//{
 	//	SE_RAM[bg1_sbb][i] 
-	//		= SE_ID( the_metatile_id * num_tiles_per_metatile )
+	//		= SE_ID(the_metatile_id * num_tiles_per_metatile)
 	//		| SE_PALBANK(the_palette_id);
 	//}
 	
 	//bios_wait_for_vblank();
 	
-	//for ( u32 i=0; i<screenblock_size; ++i )
+	//for (u32 i=0; i<screenblock_size; ++i)
 	//{
 	//	SE_RAM[bg1_sbb][i] = bt_wood * 4;
 	//}
@@ -281,20 +281,20 @@ void GameManager::reinit_the_game()
 	HudManager::update_hud_in_screenblock_mirror_2d();
 	HudManager::copy_hud_from_array_csz_2d_helper_to_vram();
 	
-	irqSet( IRQ_VBLANK, (u32)mmVBlank );
+	irqSet(IRQ_VBLANK, (u32)mmVBlank);
 	irqEnable(IRQ_VBLANK);
 	// Don't call mmInitDefault more than once.  It uses malloc(),
 	// and it apparently MaxMOD doesn't ever call free().
-	mmInitDefault( (mm_addr)practice_17_bin, 8 );
+	mmInitDefault((mm_addr)practice_17_bin, 8);
 	mmSetVBlankHandler(reinterpret_cast<void*>(vblank_func));
 	// Also, start playing music when the game Is started.
-	mmStart( MOD_PRACTICE_17, MM_PLAY_LOOP );
+	mmStart(MOD_PRACTICE_17, MM_PLAY_LOOP);
 	
 	SpriteManager::upload_tiles_of_active_sprites_to_vram();
 	
 	//bios_wait_for_vblank();
 	// Disable forced blank
-	clear_bits( REG_DISPCNT, DCNT_BLANK_MASK );
+	clear_bits(REG_DISPCNT, DCNT_BLANK_MASK);
 	
 	
 	GfxManager::fade_in(15);

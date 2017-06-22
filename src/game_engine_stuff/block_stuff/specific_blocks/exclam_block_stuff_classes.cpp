@@ -33,8 +33,8 @@ const BlockStuffConstParams
 	4,
 };
 
-void ExclamBlockStuff::strongly_hit_response( Block& the_block, 
-	const vec2_s32& coord )
+void ExclamBlockStuff::strongly_hit_response(Block& the_block, 
+	const vec2_s32& coord)
 {
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
@@ -44,11 +44,11 @@ void ExclamBlockStuff::strongly_hit_response( Block& the_block,
 		[the_block.persistent_data_index] = is_bt_dud;
 }
 void ExclamBlockStuff::finish_initializing_using_persistent_data
-	( Block& the_block )
+	(Block& the_block)
 {
-	if ( ActiveLevel::persistent_block_data_arrays
+	if (ActiveLevel::persistent_block_data_arrays
 		[ActiveLevel::the_current_active_sublevel_index]
-		[the_block.persistent_data_index] == is_bt_dud )
+		[the_block.persistent_data_index] == is_bt_dud)
 	{
 		the_block.type = bt_dud;
 	}

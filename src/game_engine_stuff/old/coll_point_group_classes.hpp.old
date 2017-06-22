@@ -166,19 +166,19 @@ public:		// functions
 	//	{ return the_array[arr_ind_16x16_pt_mb]; }
 	
 protected:		// functions
-	void assign_vert_side_x_positions( const CollBox& the_coll_box, 
+	void assign_vert_side_x_positions(const CollBox& the_coll_box, 
 		vec2_f24p8& pt_lt, vec2_f24p8& pt_lm, vec2_f24p8& pt_lb, 
-		vec2_f24p8& pt_rt, vec2_f24p8& pt_rm, vec2_f24p8& pt_rb );
-	void assign_horiz_side_y_positions( const Sprite& the_sprite, 
+		vec2_f24p8& pt_rt, vec2_f24p8& pt_rm, vec2_f24p8& pt_rb);
+	void assign_horiz_side_y_positions(const Sprite& the_sprite, 
 		const CollBox& the_coll_box, vec2_f24p8& pt_tl, 
 		vec2_f24p8& pt_tm, vec2_f24p8& pt_tr, vec2_f24p8& pt_bl, 
-		vec2_f24p8& pt_bm, vec2_f24p8& pt_br );
+		vec2_f24p8& pt_bm, vec2_f24p8& pt_br);
 	
 	
-	void assign_vert_side_mid_y_positions( const CollBox& the_coll_box, 
-		vec2_f24p8& pt_lm, vec2_f24p8& pt_rm );
-	void assign_horiz_side_mid_x_positions( const CollBox& the_coll_box,
-		vec2_f24p8& pt_tm, vec2_f24p8& pt_bm );
+	void assign_vert_side_mid_y_positions(const CollBox& the_coll_box, 
+		vec2_f24p8& pt_lm, vec2_f24p8& pt_rm);
+	void assign_horiz_side_mid_x_positions(const CollBox& the_coll_box,
+		vec2_f24p8& pt_tm, vec2_f24p8& pt_bm);
 	
 	
 } __attribute__((_ALIGN4));
@@ -186,20 +186,20 @@ protected:		// functions
 class coll_point_group_16x16 : public coll_point_group_base
 {
 public:		// functions
-	coll_point_group_16x16( const Sprite& the_sprite );
+	coll_point_group_16x16(const Sprite& the_sprite);
 	
 	
 protected:		// functions
-	void assign_vert_side_top_y_positions( const CollBox& the_coll_box, 
-		vec2_f24p8& pt_lt, vec2_f24p8& pt_rt );
-	void assign_vert_side_bot_y_positions( const CollBox& the_coll_box, 
-		vec2_f24p8& pt_lb, vec2_f24p8& pt_rb );
+	void assign_vert_side_top_y_positions(const CollBox& the_coll_box, 
+		vec2_f24p8& pt_lt, vec2_f24p8& pt_rt);
+	void assign_vert_side_bot_y_positions(const CollBox& the_coll_box, 
+		vec2_f24p8& pt_lb, vec2_f24p8& pt_rb);
 	
 	
-	void assign_horiz_side_left_x_positions( const CollBox& the_coll_box, 
-		vec2_f24p8& pt_tl, vec2_f24p8& pt_bl );
-	void assign_horiz_side_right_x_positions( const CollBox& the_coll_box, 
-		vec2_f24p8& pt_tr, vec2_f24p8& pt_br );
+	void assign_horiz_side_left_x_positions(const CollBox& the_coll_box, 
+		vec2_f24p8& pt_tl, vec2_f24p8& pt_bl);
+	void assign_horiz_side_right_x_positions(const CollBox& the_coll_box, 
+		vec2_f24p8& pt_tr, vec2_f24p8& pt_br);
 	
 	
 } __attribute__((_ALIGN4));
@@ -208,34 +208,34 @@ protected:		// functions
 class coll_point_group_16x32 : public coll_point_group_base
 {
 public:		// functions
-	coll_point_group_16x32( const Sprite& the_sprite );
+	coll_point_group_16x32(const Sprite& the_sprite);
 	
 protected:		// functions
-	void assign_vert_side_top_y_positions( const CollBox& the_coll_box, 
-		vec2_f24p8& pt_lt, vec2_f24p8& pt_rt );
-	void assign_vert_side_bot_y_positions( const CollBox& the_coll_box, 
-		vec2_f24p8& pt_lb, vec2_f24p8& pt_rb );
+	void assign_vert_side_top_y_positions(const CollBox& the_coll_box, 
+		vec2_f24p8& pt_lt, vec2_f24p8& pt_rt);
+	void assign_vert_side_bot_y_positions(const CollBox& the_coll_box, 
+		vec2_f24p8& pt_lb, vec2_f24p8& pt_rb);
 	
 	
-	void assign_horiz_side_left_x_positions( const CollBox& the_coll_box, 
-		vec2_f24p8& pt_tl, vec2_f24p8& pt_bl );
-	void assign_horiz_side_right_x_positions( const CollBox& the_coll_box, 
-		vec2_f24p8& pt_tr, vec2_f24p8& pt_br );
+	void assign_horiz_side_left_x_positions(const CollBox& the_coll_box, 
+		vec2_f24p8& pt_tl, vec2_f24p8& pt_bl);
+	void assign_horiz_side_right_x_positions(const CollBox& the_coll_box, 
+		vec2_f24p8& pt_tr, vec2_f24p8& pt_br);
 	
 	
 } __attribute__((_ALIGN4));
 
-//void generate_coll_point_group_16x16( const Sprite& the_sprite, 
-//	coll_point_group& the_pt_group ) __attribute__((_IWRAM_CODE));
+//void generate_coll_point_group_16x16(const Sprite& the_sprite, 
+//	coll_point_group& the_pt_group) __attribute__((_IWRAM_CODE));
 //
-//void generate_coll_point_group_16x32( const Sprite& the_sprite, 
-//	coll_point_group& the_pt_group ) __attribute__((_IWRAM_CODE));
+//void generate_coll_point_group_16x32(const Sprite& the_sprite, 
+//	coll_point_group& the_pt_group) __attribute__((_IWRAM_CODE));
 //
-//void generate_coll_point_group_32x16( const Sprite& the_sprite, 
-//	coll_point_group& the_pt_group ) __attribute__((_IWRAM_CODE));
+//void generate_coll_point_group_32x16(const Sprite& the_sprite, 
+//	coll_point_group& the_pt_group) __attribute__((_IWRAM_CODE));
 //
-//void generate_coll_point_group_32x32( const Sprite& the_sprite, 
-//	coll_point_group& the_pt_group ) __attribute__((_IWRAM_CODE));
+//void generate_coll_point_group_32x32(const Sprite& the_sprite, 
+//	coll_point_group& the_pt_group) __attribute__((_IWRAM_CODE));
 
 
 

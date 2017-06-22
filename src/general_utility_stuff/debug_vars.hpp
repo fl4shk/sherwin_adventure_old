@@ -33,28 +33,28 @@ extern u32 curr_debug_s32_index, curr_debug_u32_index,
 
 static const u32 debug_arr_s32_size = 32;
 extern vs32 debug_arr_s32[debug_arr_s32_size];
-#define NEXT_DEBUG_S32 ( debug_arr_s32[curr_debug_s32_index++] )
-#define SHOW_DEBUG_STR_S32(str) ( memcpy8( &NEXT_DEBUG_S32, str, \
-	sizeof(s32) ) )
+#define NEXT_DEBUG_S32 (debug_arr_s32[curr_debug_s32_index++])
+#define SHOW_DEBUG_STR_S32(str) (memcpy8(&NEXT_DEBUG_S32, str, \
+	sizeof(s32)))
 
 
 static const u32 debug_arr_u32_size = 32;
 extern vu32 debug_arr_u32[debug_arr_u32_size];
-#define NEXT_DEBUG_U32 ( debug_arr_u32[curr_debug_u32_index++] )
-#define SHOW_DEBUG_STR_U32(str) ( memcpy8( &NEXT_DEBUG_U32, str, \
-	sizeof(s32) ) )
+#define NEXT_DEBUG_U32 (debug_arr_u32[curr_debug_u32_index++])
+#define SHOW_DEBUG_STR_U32(str) (memcpy8(&NEXT_DEBUG_U32, str, \
+	sizeof(s32)))
 
 
 static const u32 debug_arr_f24p8_size = 32;
 extern Fixed24p8 debug_arr_f24p8[debug_arr_f24p8_size];
-#define NEXT_DEBUG_F24P8 ( debug_arr_f24p8[curr_debug_f24p8_index++] )
-#define SHOW_DEBUG_STR_F24P8(str) ( memcpy8( &NEXT_DEBUG_F24P8, str, \
-	sizeof(Fixed24p8) ) )
+#define NEXT_DEBUG_F24P8 (debug_arr_f24p8[curr_debug_f24p8_index++])
+#define SHOW_DEBUG_STR_F24P8(str) (memcpy8(&NEXT_DEBUG_F24P8, str, \
+	sizeof(Fixed24p8)))
 
 
 static const u32 debug_arr_f8p8_size = 32;
 extern Fixed8p8 debug_arr_f8p8[debug_arr_f8p8_size];
-#define NEXT_DEBUG_F8P8 ( debug_arr_f8p8[curr_debug_f8p8_index++] )
+#define NEXT_DEBUG_F8P8 (debug_arr_f8p8[curr_debug_f8p8_index++])
 
 void clear_debug_vars() __attribute__((_IWRAM_CODE));
 */
@@ -64,15 +64,15 @@ void clear_debug_vars() __attribute__((_IWRAM_CODE));
 	macro(u32) macro(s32) macro(f24p8) macro(f8p8) macro(str)
 
 #define MACRO_FOR_DEBUG_U32_TYPE_AND_SUFFIX(macro) \
-	macro( u32, u32 )
+	macro(u32, u32)
 #define MACRO_FOR_DEBUG_S32_TYPE_AND_SUFFIX(macro) \
-	macro( s32, s32 )
+	macro(s32, s32)
 #define MACRO_FOR_DEBUG_FIXED24P8_TYPE_AND_SUFFIX(macro) \
-	macro( Fixed24p8, f24p8 )
+	macro(Fixed24p8, f24p8)
 #define MACRO_FOR_DEBUG_FIXED8P8_TYPE_AND_SUFFIX(macro) \
-	macro( Fixed8p8, f8p8 )
+	macro(Fixed8p8, f8p8)
 #define MACRO_FOR_DEBUG_STR_TYPE_AND_SUFFIX(macro) \
-	macro( DebugStr, str )
+	macro(DebugStr, str)
 
 
 #define LIST_OF_DEBUG_TYPES_AND_SUFFIXES(macro) \
@@ -108,8 +108,8 @@ static constexpr u32 debug_f8p8_arr_size = 32;
 // DebugArrGroup::debug_str_arr.
 static constexpr u32 debug_str_arr_size = 32;
 
-//// ( 16 + 4 ) * 32 = 640 bytes eaten up by debug_str_arr.
-// ( 20 + 4 ) * 32 = 768 bytes eaten up by debug_str_arr.
+//// (16 + 4) * 32 = 640 bytes eaten up by debug_str_arr.
+// (20 + 4) * 32 = 768 bytes eaten up by debug_str_arr.
 
 // Total of 20 + 512 + 640 = 1172 bytes (293 4-bytes-long words) eaten up
 // by debug vars (INCLUDING the array indices).  This Is certainly
@@ -137,33 +137,33 @@ public:		// functions
 	{
 		clear_arr();
 	}
-	inline DebugStr( u32 n_real_size )
+	inline DebugStr(u32 n_real_size)
 	{
 		set_real_size(n_real_size);
-		//memfill32( arr, 0, max_size / sizeof(u32) );
-		//arr_memfill32( arr, 0, max_size );
+		//memfill32(arr, 0, max_size / sizeof(u32));
+		//arr_memfill32(arr, 0, max_size);
 		clear_arr();
 	}
-	inline DebugStr( const DebugStr& to_copy )
+	inline DebugStr(const DebugStr& to_copy)
 	{
 		operator = (to_copy);
 	}
-	inline DebugStr( const char* to_copy )
+	inline DebugStr(const char* to_copy)
 	{
 		operator = (to_copy);
 	}
 	
-	DebugStr& operator = ( const DebugStr& to_copy );
-	DebugStr& operator = ( const char* to_copy );
+	DebugStr& operator = (const DebugStr& to_copy);
+	DebugStr& operator = (const char* to_copy);
 	
 	inline u32 get_real_size() const
 	{
 		return real_size;
 	}
 	
-	inline void set_real_size( u32 n_real_size )
+	inline void set_real_size(u32 n_real_size)
 	{
-		if ( n_real_size > max_size )
+		if (n_real_size > max_size)
 		{
 			real_size = max_size;
 		}
@@ -175,9 +175,9 @@ public:		// functions
 	
 	inline void clear_arr()
 	{
-		//arr_memfill32( arr, 0, max_size );
-		//arr_memset( arr, 0, max_size );
-		arr_memset( arr, 0 );
+		//arr_memfill32(arr, 0, max_size);
+		//arr_memset(arr, 0, max_size);
+		arr_memset(arr, 0);
 	}
 	inline void total_clear()
 	{
@@ -187,7 +187,7 @@ public:		// functions
 	
 	inline void clear_unused_portion()
 	{
-		for ( u32 i=get_real_size(); i<max_size; ++i )
+		for (u32 i=get_real_size(); i<max_size; ++i)
 		{
 			arr[i] = 0;
 		}
@@ -270,53 +270,53 @@ public:		// functions
 	
 	static void clear_debug_vars();
 	
-	#define RAW_WRITE_DEBUG_U32_AND_INC( to_write ) \
+	#define RAW_WRITE_DEBUG_U32_AND_INC(to_write) \
 	DebugArrGroup::debug_u32_arr() \
 		[DebugArrGroup::curr_index_arr()[cdit_u32]++] \
 		= static_cast<u32>(to_write);
 	
-	#define RAW_WRITE_DEBUG_S32_AND_INC( to_write ) \
+	#define RAW_WRITE_DEBUG_S32_AND_INC(to_write) \
 	DebugArrGroup::debug_s32_arr() \
 		[DebugArrGroup::curr_index_arr()[cdit_s32]++] \
 		= static_cast<s32>(to_write);
 	
-	#define RAW_WRITE_DEBUG_F24P8_AND_INC( to_write ) \
+	#define RAW_WRITE_DEBUG_F24P8_AND_INC(to_write) \
 	DebugArrGroup::debug_f24p8_arr() \
 		[DebugArrGroup::curr_index_arr()[cdit_f24p8]++] \
 		= static_cast<Fixed24p8>(to_write);
 	
-	#define RAW_WRITE_DEBUG_F8P8_AND_INC( to_write ) \
+	#define RAW_WRITE_DEBUG_F8P8_AND_INC(to_write) \
 	DebugArrGroup::debug_f8p8_arr() \
 		[DebugArrGroup::curr_index_arr()[cdit_f8p8]++] \
 		= static_cast<Fixed8p8>(to_write);
 	
-	#define RAW_WRITE_DEBUG_STR_AND_INC( to_write ) \
+	#define RAW_WRITE_DEBUG_STR_AND_INC(to_write) \
 	DebugArrGroup::debug_str_arr() \
 		[DebugArrGroup::curr_index_arr()[cdit_str]++] = to_write;
 	
-	static inline void write_u32_and_inc( u32 to_write )
+	static inline void write_u32_and_inc(u32 to_write)
 	{
 		RAW_WRITE_DEBUG_U32_AND_INC(to_write);
 	}
-	static inline void write_s32_and_inc( s32 to_write )
+	static inline void write_s32_and_inc(s32 to_write)
 	{
 		RAW_WRITE_DEBUG_S32_AND_INC(to_write);
 	}
-	static inline void write_f24p8_and_inc( const Fixed24p8& to_write )
+	static inline void write_f24p8_and_inc(const Fixed24p8& to_write)
 	{
 		RAW_WRITE_DEBUG_F24P8_AND_INC(to_write);
 	}
-	static inline void write_f8p8_and_inc( const Fixed8p8& to_write )
+	static inline void write_f8p8_and_inc(const Fixed8p8& to_write)
 	{
 		RAW_WRITE_DEBUG_F8P8_AND_INC(to_write);
 	}
 	
-	static inline void write_str_and_inc( const DebugStr& to_write )
+	static inline void write_str_and_inc(const DebugStr& to_write)
 	{
 		RAW_WRITE_DEBUG_STR_AND_INC(to_write);
 	}
 	
-	static inline void write_str_and_inc( const char* to_write )
+	static inline void write_str_and_inc(const char* to_write)
 	{
 		RAW_WRITE_DEBUG_STR_AND_INC(to_write);
 	}
@@ -330,12 +330,12 @@ public:		// functions
 
 
 //template< typename debug_arr_type, typename type >
-//void show_debug_values_group_backend( debug_arr_type* debug_values_arr, 
-//	u32& curr_index, const u32 total_num_args, type* all_values_arr ) 
+//void show_debug_values_group_backend(debug_arr_type* debug_values_arr, 
+//	u32& curr_index, const u32 total_num_args, type* all_values_arr) 
 //	__attribute__((noinline));
 template< typename debug_arr_type, typename type >
-void show_debug_values_group_backend( debug_arr_type* debug_values_arr, 
-	u32& curr_index, const u32 total_num_args, const type* all_values_arr )
+void show_debug_values_group_backend(debug_arr_type* debug_values_arr, 
+	u32& curr_index, const u32 total_num_args, const type* all_values_arr)
 {
 	//ASM_COMMENT("show_debug_values_group_backend()");
 	
@@ -351,7 +351,7 @@ void show_debug_values_group_backend( debug_arr_type* debug_values_arr,
 	curr_index = old_curr_index + total_num_args;
 	
 	//ASM_COMMENT("Before for loop");
-	for ( s32 i=total_num_args-1; i>=0; --i )
+	for (s32 i=total_num_args-1; i>=0; --i)
 	{
 		debug_values_arr[old_curr_index + i] = all_values_arr[i];
 	}
@@ -363,43 +363,43 @@ void show_debug_values_group_backend( debug_arr_type* debug_values_arr,
 
 // type Is the actual type, and suffix Is the type's suffix.  Sometimes,
 // type == suffix, especially with generic types.
-#define GENERATE_FUNC_CONTENTS( type, suffix ) \
-ASM_COMMENT("show_debug_" #suffix "_group()" ); \
+#define GENERATE_FUNC_CONTENTS(type, suffix) \
+ASM_COMMENT("show_debug_" #suffix "_group()"); \
 static constexpr size_t total_num_args = sizeof...(all_the_values); \
 type all_values_arr[total_num_args]; \
-copy_to_array( all_values_arr, all_the_values... ); \
+copy_to_array(all_values_arr, all_the_values...); \
 show_debug_values_group_backend \
-	( DebugArrGroup::debug_##suffix##_arr(), \
+	(DebugArrGroup::debug_##suffix##_arr(), \
 	DebugArrGroup::curr_index_arr()[cdit_##suffix], total_num_args, \
-	all_values_arr );
+	all_values_arr);
 
 template< typename... all_the_types >
-inline void show_debug_u32_group( const all_the_types&... all_the_values )
+inline void show_debug_u32_group(const all_the_types&... all_the_values)
 {
 	MACRO_FOR_DEBUG_U32_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);
 }
 
 
 template< typename... all_the_types >
-inline void show_debug_s32_group( const all_the_types&... all_the_values )
+inline void show_debug_s32_group(const all_the_types&... all_the_values)
 {
 	MACRO_FOR_DEBUG_S32_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);
 }
 
 template< typename... all_the_types >
-inline void show_debug_f24p8_group( const all_the_types&... all_the_values )
+inline void show_debug_f24p8_group(const all_the_types&... all_the_values)
 {
 	MACRO_FOR_DEBUG_FIXED24P8_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);
 }
 
 template< typename... all_the_types >
-inline void show_debug_f8p8_group( const all_the_types&... all_the_values )
+inline void show_debug_f8p8_group(const all_the_types&... all_the_values)
 {
 	MACRO_FOR_DEBUG_FIXED8P8_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);
 }
 
 template< typename... all_the_types >
-inline void show_debug_str_group( const all_the_types&... all_the_values )
+inline void show_debug_str_group(const all_the_types&... all_the_values)
 {
 	MACRO_FOR_DEBUG_STR_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);
 }

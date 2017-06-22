@@ -18,7 +18,7 @@
 #include "fixed_classes.hpp"
 #include "../gba_specific_stuff/lut_division_funcs.hpp"
 
-Fixed24p8 Fixed24p8::operator * ( const Fixed24p8& to_mul ) const
+Fixed24p8 Fixed24p8::operator * (const Fixed24p8& to_mul) const
 {
 	Fixed24p8 ret;
 	
@@ -32,64 +32,64 @@ Fixed24p8 Fixed24p8::operator * ( const Fixed24p8& to_mul ) const
 }
 
 
-inline Fixed24p8 unsafe_f24p8_div_by_f8p8( const Fixed24p8& num, 
-	const Fixed8p8& den )
+inline Fixed24p8 unsafe_f24p8_div_by_f8p8(const Fixed24p8& num, 
+	const Fixed8p8& den)
 {
 	const s64 temp = static_cast<s64>(num.data);
 	const s32 one_slash_den = sdiv_table[den.data];
 	const s64 temp_2 = static_cast<s64>(one_slash_den);
-	const s64 temp_3 = ( temp * temp_2 );
-	//s64 temp_3 = unsafe_lut_sdiv( num.data, den.data );
+	const s64 temp_3 = (temp * temp_2);
+	//s64 temp_3 = unsafe_lut_sdiv(num.data, den.data);
 	
-	const s32 ret_data = ( temp_3 >> 24 );
+	const s32 ret_data = (temp_3 >> 24);
 	
 	return {ret_data};
 }
 
 
-Fixed24p8 f24p8_div_by_f8p8( const Fixed24p8& num, const Fixed8p8& den )
+Fixed24p8 f24p8_div_by_f8p8(const Fixed24p8& num, const Fixed8p8& den)
 {
-	if ( den.data == 0 || den.data == 1 )
+	if (den.data == 0 || den.data == 1)
 	{
 		return {num.data};
 	}
 	
-	return unsafe_f24p8_div_by_f8p8( num, den );
+	return unsafe_f24p8_div_by_f8p8(num, den);
 }
 
-Fixed24p8 f24p8_div_by_f24p8( const Fixed24p8& num, const Fixed24p8& den )
+Fixed24p8 f24p8_div_by_f24p8(const Fixed24p8& num, const Fixed24p8& den)
 {
-	if ( den.data == 0 || den.data == 1 )
+	if (den.data == 0 || den.data == 1)
 	{
 		return {num.data};
 	}
 	
-	if ( custom_abs(den.data) & 0xffff0000 )
+	if (custom_abs(den.data) & 0xffff0000)
 	{
 		//const s32 ret_data = num.data / den.data;
-		const s64 ret_data = ( (s64)( (s64)( (s64)(num.data) << 8 ) 
-			/ (s64)den.data ) );
+		const s64 ret_data = ((s64)((s64)((s64)(num.data) << 8) 
+			/ (s64)den.data));
 		
 		return {ret_data};
 	}
 	
-	return unsafe_f24p8_div_by_f8p8( num, den );
+	return unsafe_f24p8_div_by_f8p8(num, den);
 }
 
-Fixed24p8 f24p8_div_by_u16( const Fixed24p8& num, u16 den )
+Fixed24p8 f24p8_div_by_u16(const Fixed24p8& num, u16 den)
 {
-	if ( den == 0 || den == 1 )
+	if (den == 0 || den == 1)
 	{
 		return {num.data};
 	}
 	
 	s32 ret_data;
 	
-	bool numerator_is_negative = ( num.data < 0 );
+	bool numerator_is_negative = (num.data < 0);
 	
 	s32 temp_1, temp_2 = den;
 	
-	if ( numerator_is_negative )
+	if (numerator_is_negative)
 	{
 		temp_1 = -num.data;
 	}
@@ -98,9 +98,9 @@ Fixed24p8 f24p8_div_by_u16( const Fixed24p8& num, u16 den )
 		temp_1 = num.data;
 	}
 	
-	u64 udiv_output = unsafe_lut_udiv( temp_1, (u32)temp_2 );
+	u64 udiv_output = unsafe_lut_udiv(temp_1, (u32)temp_2);
 	
-	ret_data = ( udiv_output >> 32 ) * ( numerator_is_negative ? -1 : 1 );
+	ret_data = (udiv_output >> 32) * (numerator_is_negative ? -1 : 1);
 	
 	return {ret_data};
 }

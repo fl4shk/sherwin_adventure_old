@@ -126,11 +126,11 @@
 /* ---- End of The BIOS Call Numbers ---- */
 
 
-//#if !defined ( __thumb__)
-#if defined ( __thumb__)
-#define SWI_CALL( x ) asm volatile("swi\t"#x ::: "r0","r1","r2","r3")
+//#if !defined (__thumb__)
+#if defined (__thumb__)
+#define SWI_CALL(x) asm volatile("swi\t"#x ::: "r0","r1","r2","r3")
 #else
-#define SWI_CALL( x ) asm volatile("swi\t"#x"<<16" ::: "r0","r1","r2","r3")
+#define SWI_CALL(x) asm volatile("swi\t"#x"<<16" ::: "r0","r1","r2","r3")
 #endif
 
 
@@ -150,7 +150,7 @@ inline void bios_do_soft_reset()
 	SWI_CALL(0x00);
 }
 
-inline void bios_do_register_ram_reset( u32 r0_value )
+inline void bios_do_register_ram_reset(u32 r0_value)
 {
 	asm __volatile__
 	(
@@ -176,13 +176,13 @@ inline void bios_wait_for_vblank()
 }
 
 
-inline s32 bios_do_div( s32 numerator, s32 denominator )
+inline s32 bios_do_div(s32 numerator, s32 denominator)
 {
 	//nocash_soft_break();
 	
 	s32 ret;
 	
-	if ( denominator == 0 )
+	if (denominator == 0)
 	{
 		ret = 0;
 	}
@@ -204,11 +204,11 @@ inline s32 bios_do_div( s32 numerator, s32 denominator )
 	
 }
 
-inline void bios_do_div( s32 numerator, s32 denominator, 
-	BiosDivResult& the_div_result )
+inline void bios_do_div(s32 numerator, s32 denominator, 
+	BiosDivResult& the_div_result)
 {
 	
-	if ( denominator == 0 )
+	if (denominator == 0)
 	{
 		the_div_result.quotient = 0;
 		the_div_result.remainder = 0;
@@ -237,7 +237,7 @@ inline void bios_do_div( s32 numerator, s32 denominator,
 
 
 
-inline u16 bios_do_sqrt( u32 r0_value )
+inline u16 bios_do_sqrt(u32 r0_value)
 {
 	u32 ret;
 	
@@ -255,7 +255,7 @@ inline u16 bios_do_sqrt( u32 r0_value )
 	
 }
 
-inline void bios_do_lz77_uncomp_wram( const void* src, void* dst )
+inline void bios_do_lz77_uncomp_wram(const void* src, void* dst)
 {
 	//BIOS_LZ77_UNCOMP_WRAM
 	
@@ -270,12 +270,12 @@ inline void bios_do_lz77_uncomp_wram( const void* src, void* dst )
 	);
 }
 
-inline void bios_do_lz77_uncomp_wram( const void* src, volatile void* dst )
+inline void bios_do_lz77_uncomp_wram(const void* src, volatile void* dst)
 {
-	bios_do_lz77_uncomp_wram( src, (void*)dst );
+	bios_do_lz77_uncomp_wram(src, (void*)dst);
 }
 
-inline void bios_do_lz77_uncomp_vram( const void* src, void* dst )
+inline void bios_do_lz77_uncomp_vram(const void* src, void* dst)
 {
 	//BIOS_LZ77_UNCOMP_VRAM
 	
@@ -290,9 +290,9 @@ inline void bios_do_lz77_uncomp_vram( const void* src, void* dst )
 	);
 }
 
-inline void bios_do_lz77_uncomp_vram( const void* src, volatile void* dst )
+inline void bios_do_lz77_uncomp_vram(const void* src, volatile void* dst)
 {
-	bios_do_lz77_uncomp_vram( src, (void*)dst );
+	bios_do_lz77_uncomp_vram(src, (void*)dst);
 }
 
 

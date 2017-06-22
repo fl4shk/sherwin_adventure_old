@@ -52,7 +52,7 @@ const SpriteConstParams DoorSprite::the_const_params
 };
 
 
-void DoorSprite::shared_constructor_code_part_2( bool facing_left )
+void DoorSprite::shared_constructor_code_part_2(bool facing_left)
 {
 	// Use the default initialization function first.
 	Sprite::shared_constructor_code_part_2(facing_left);
@@ -60,8 +60,8 @@ void DoorSprite::shared_constructor_code_part_2( bool facing_left )
 	// Door sprites should be thought of as part of the "background".
 	// Other sprites are supposed To appear in front of the Door sprites,
 	// no matter which OAM entries are involved.
-	clear_and_set_bits( the_oam_entry.attr2, obj_attr2_prio_mask, 
-		obj_attr2_prio_2 );
+	clear_and_set_bits(the_oam_entry.attr2, obj_attr2_prio_mask, 
+		obj_attr2_prio_2);
 }
 
 

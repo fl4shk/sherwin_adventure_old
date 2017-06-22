@@ -37,16 +37,16 @@ extern volatile PrevCurrPair<vu16> __key_state;
 #define REG_KEYCNT *((vu16*)(MEM_IO + 0x0132))
 
 
-#define KEY_A ( 0x1 << 0x0 )
-#define KEY_B ( 0x1 << 0x1 )
-#define KEY_SELECT ( 0x1 << 0x2 )
-#define KEY_START ( 0x1 << 0x3 )
-#define KEY_RIGHT ( 0x1 << 0x4 )
-#define KEY_LEFT ( 0x1 << 0x5 )
-#define KEY_UP ( 0x1 << 0x6 )
-#define KEY_DOWN ( 0x1 << 0x7 )
-#define KEY_R ( 0x1 << 0x8 )
-#define KEY_L ( 0x1 << 0x9 )
+#define KEY_A (0x1 << 0x0)
+#define KEY_B (0x1 << 0x1)
+#define KEY_SELECT (0x1 << 0x2)
+#define KEY_START (0x1 << 0x3)
+#define KEY_RIGHT (0x1 << 0x4)
+#define KEY_LEFT (0x1 << 0x5)
+#define KEY_UP (0x1 << 0x6)
+#define KEY_DOWN (0x1 << 0x7)
+#define KEY_R (0x1 << 0x8)
+#define KEY_L (0x1 << 0x9)
 
 #define KEY_MASK 0x03ff
 
@@ -71,22 +71,22 @@ inline u32 key_prev_state()
 	return __key_state.prev;
 }
 
-inline u32 key_is_down( u32 key )
+inline u32 key_is_down(u32 key)
 {
 	return __key_state.curr & key;
 }
 
-inline u32 key_is_up( u32 key )
+inline u32 key_is_up(u32 key)
 {
 	return (~__key_state.curr) & key;
 }
 
-inline u32 key_was_down( u32 key )
+inline u32 key_was_down(u32 key)
 {
 	return __key_state.prev & key;
 }
 
-inline u32 key_was_up( u32 key )
+inline u32 key_was_up(u32 key)
 {
 	return (~__key_state.prev) & key;
 }
@@ -96,32 +96,32 @@ inline u32 key_was_up( u32 key )
 // Transitional state checks
 
 // Key Is changing state.
-inline u32 key_transit( u32 key )
+inline u32 key_transit(u32 key)
 {
-	return ( __key_state.curr ^ __key_state.prev ) & key;
+	return (__key_state.curr ^ __key_state.prev) & key;
 }
 
 // Key Is held (down now and before).
-inline u32 key_held( u32 key )
+inline u32 key_held(u32 key)
 {
-	return ( __key_state.curr & __key_state.prev ) & key;
+	return (__key_state.curr & __key_state.prev) & key;
 }
 
 // Key Is being hit (down now, but not before).
-inline u32 key_hit( u32 key )
+inline u32 key_hit(u32 key)
 {
-	return ( __key_state.curr & (~__key_state.prev) ) & key;
+	return (__key_state.curr & (~__key_state.prev)) & key;
 }
 
 // Key Is being released (up now but down before)
-inline u32 key_released( u32 key )
+inline u32 key_released(u32 key)
 {
-	return ( (~__key_state.curr) & __key_state.prev ) & key;
+	return ((~__key_state.curr) & __key_state.prev) & key;
 }
 
-inline bool key_hit_or_held( u32 key )
+inline bool key_hit_or_held(u32 key)
 {
-	return ( ( (bool)key_hit(key) ) || ( (bool)key_held(key) ) );
+	return (((bool)key_hit(key)) || ((bool)key_held(key)));
 }
 
 bool soft_reset_keys_down(); //__attribute__((_IWRAM_CODE));

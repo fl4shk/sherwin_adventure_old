@@ -55,7 +55,7 @@ static const u32 ewram_test_arr_size = 10;
 u8 ewram_test_arr[ewram_test_arr_size] __attribute__((_EWRAM));
 
 static const char test_str[] = "Birds2";
-static const u32 test_str_size = ( sizeof(test_str) / sizeof(char) ) - 1;
+static const u32 test_str_size = (sizeof(test_str) / sizeof(char)) - 1;
 
 //static const size_t sram_test_arr_size = 2000;
 //u8 sram_test_arr[sram_test_arr_size] __attribute__((_SRAM));
@@ -75,7 +75,7 @@ int main()
 	//very_temp = clseg_grp_16x32_size;
 	//return main_2();
 	return real_main();
-	//snprintf( test_buf, test_buf_size, "%s", "asdf" );
+	//snprintf(test_buf, test_buf_size, "%s", "asdf");
 	
 }
 
@@ -85,22 +85,22 @@ int main_2()
 	//profile_dynamic_allocations(20);
 	
 	
-	//HorizCollLseg a( vec2_s32( 10, 20 ), make_f24p8(10) );
-	//HorizCollLseg b( vec2_s32( 20, 20 ), make_f24p8(1) );
+	//HorizCollLseg a(vec2_s32(10, 20), make_f24p8(10));
+	//HorizCollLseg b(vec2_s32(20, 20), make_f24p8(1));
 	//
-	//VertCollLseg c( vec2_s32( 10, 20 ), make_f24p8(50) );
-	//////show_debug_u32_group( a.intersects(b), a.intersects(c), 
-	//////	c.intersects(a) );
+	//VertCollLseg c(vec2_s32(10, 20), make_f24p8(50));
+	//////show_debug_u32_group(a.intersects(b), a.intersects(c), 
+	//////	c.intersects(a));
 	////profile_start();
 	//////very_temp = a.intersects(c);
 	////profile_stop();
 	
 	
-	const Fixed24p8 a = make_f24p8( 20, 0x80 ),
-		b = make_f24p8( 8, 0x4a );
+	const Fixed24p8 a = make_f24p8(20, 0x80),
+		b = make_f24p8(8, 0x4a);
 	
-	//const Fixed24p8 a = make_f24p8( 0x200, 0x80 ),
-	//	b = make_f24p8( 0x100, 0x4a );
+	//const Fixed24p8 a = make_f24p8(0x200, 0x80),
+	//	b = make_f24p8(0x100, 0x4a);
 	
 	profile_start();
 	const Fixed24p8 c = a / b;
@@ -119,40 +119,40 @@ int real_main()
 	// created.  As of right now, there Is no need for save data, but That
 	// will change in the future.  It Is likely That 64 kiB of save data
 	// will be more than enough.
-	memcpy8( GameManager::sram_init_str,
+	memcpy8(GameManager::sram_init_str,
 		GameManager::sram_const_init_str, 
-		GameManager::sram_init_str_size );
+		GameManager::sram_init_str_size);
 	
 	
 	//ASM_COMMENT("Before first show_debug_s32_group() call");
 	//show_debug_s32_group
-	//	( fixedu12p4_packed::get_underlying_type_is_signed(),
+	//	(fixedu12p4_packed::get_underlying_type_is_signed(),
 	//	fixeds12p4_packed::get_underlying_type_is_signed(),
 	//	fixeds8p8_packed::get_underlying_type_is_signed(),
 	//	sizeof(fixedu12p4_packed), 
 	//	sizeof(fixeds12p4_packed),
-	//	sizeof(fixeds8p8_packed) );
+	//	sizeof(fixeds8p8_packed));
 	//
 	//ASM_COMMENT("Before second show_debug_s32_group() call");
-	//show_debug_s32_group( make_f24p8( -3, 5 ).data, 
-	//	make_f8p8( -3, 5 ).data, 
-	//	make_fu12p4_packed( 10, 12 ).data, 
-	//	make_fs12p4_packed( -3, 5 ).data, 
-	//	make_fs8p8_packed( 124, 200 ).data );
+	//show_debug_s32_group(make_f24p8(-3, 5).data, 
+	//	make_f8p8(-3, 5).data, 
+	//	make_fu12p4_packed(10, 12).data, 
+	//	make_fs12p4_packed(-3, 5).data, 
+	//	make_fs8p8_packed(124, 200).data);
 	
 	
-	//arr_memfill8( (u8*)ewram_test_arr, '#', ewram_test_arr_size );
-	//memset( ewram_test_arr, '#', ewram_test_arr_size );
-	//memset( ewram_test_arr, '#', 4 );
+	//arr_memfill8((u8*)ewram_test_arr, '#', ewram_test_arr_size);
+	//memset(ewram_test_arr, '#', ewram_test_arr_size);
+	//memset(ewram_test_arr, '#', 4);
 	
 	//ewram_test_arr[0] = '9';
 	
 	
-	//memset( &ewram_test_arr[1], '3', 9 );
-	//memcpy( &ewram_test_arr[1], test_str, 5 );
-	//slower_memcpy( &ewram_test_arr[1], test_str, 5 );
+	//memset(&ewram_test_arr[1], '3', 9);
+	//memcpy(&ewram_test_arr[1], test_str, 5);
+	//slower_memcpy(&ewram_test_arr[1], test_str, 5);
 	
-	//memcpy( &ewram_test_arr[1]
+	//memcpy(&ewram_test_arr[1]
 	
 	//halt();
 	
@@ -179,7 +179,7 @@ int real_main()
 		// Key polling Is done in GameManager::vblank_func()
 		//key_poll();
 		
-		if ( soft_reset_keys_down() )
+		if (soft_reset_keys_down())
 		{
 			// Reset the game if A, B, Start, and Select are pressed
 			//bios_do_hard_reset();
@@ -201,28 +201,28 @@ int real_main()
 		
 		
 		SpriteManager::update_all_sprites
-			( ActiveLevel::get_curr_sublevel_ptr().get_size_2d(), 
-			GfxManager::bgofs_mirror[0] );
+			(ActiveLevel::get_curr_sublevel_ptr().get_size_2d(), 
+			GfxManager::bgofs_mirror[0]);
 		
 		
 		
 		// This Is temporary
-		//if ( key_hit_or_held(KEY_L) )
-		if ( key_hit(KEY_L) )
+		//if (key_hit_or_held(KEY_L))
+		if (key_hit(KEY_L))
 		{
-			//SpriteManager::spawn_a_sprite_basic( StWaffle,
+			//SpriteManager::spawn_a_sprite_basic(StWaffle,
 			//	the_player.in_level_pos.curr, GfxManager::bgofs_mirror[0],
-			//	(bool)the_player.the_oam_entry.get_hflip_status() );
-			SpriteManager::spawn_a_sprite_basic( StWaffle,
+			//	(bool)the_player.the_oam_entry.get_hflip_status());
+			SpriteManager::spawn_a_sprite_basic(StWaffle,
 				the_player.in_level_pos.curr +
-				vec2_f24p8( make_f24p8(0), 
-				make_f24p8( the_player.get_shape_size_as_vec2().y / 2 ) ), 
+				vec2_f24p8(make_f24p8(0), 
+				make_f24p8(the_player.get_shape_size_as_vec2().y / 2)), 
 				GfxManager::bgofs_mirror[0],
-				(bool)the_player.the_oam_entry.get_hflip_status() );
+				(bool)the_player.the_oam_entry.get_hflip_status());
 		}
 		
 		
-		//if ( key_hit(KEY_SELECT) )
+		//if (key_hit(KEY_SELECT))
 		//{
 		//	GameManager::fade_out_to_black(1);
 		//	
@@ -234,11 +234,11 @@ int real_main()
 		SpriteManager::spawn_sprites_if_needed
 			(GfxManager::bgofs_mirror[0]);
 		
-		//if ( key_hit(KEY_L) )
+		//if (key_hit(KEY_L))
 		//{
 		//	--player_sprite_stuff::remaining_hp;
 		//}
-		//if ( key_hit(KEY_R) )
+		//if (key_hit(KEY_R))
 		//{
 		//	++player_sprite_stuff::remaining_hp;
 		//}
@@ -246,8 +246,8 @@ int real_main()
 		
 		
 		//ActiveLevelManager::update_sublevel_in_screenblock_mirror_2d
-		//	( ActiveLevel::bg0_screenblock_mirror_2d, 
-		//	test_level.get_size_2d() );
+		//	(ActiveLevel::bg0_screenblock_mirror_2d, 
+		//	test_level.get_size_2d());
 		ActiveLevelManager::update_sublevel_in_screenblock_mirror_2d();
 		
 		HudManager::update_hud_in_screenblock_mirror_2d();

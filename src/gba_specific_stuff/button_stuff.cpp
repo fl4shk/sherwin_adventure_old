@@ -31,14 +31,14 @@ volatile PrevCurrPair<vu16> __key_state __attribute__((_IWRAM))
 
 bool soft_reset_keys_down()
 {
-	if ( ( key_hit(KEY_A) && key_hit_or_held(KEY_B) 
-		&& key_hit_or_held(KEY_SELECT) && key_hit_or_held(KEY_START) )
-		|| ( key_hit_or_held(KEY_A) && key_hit(KEY_B)
-		&& key_hit_or_held(KEY_SELECT) && key_hit_or_held(KEY_START) )
-		|| ( key_hit_or_held(KEY_A) && key_hit_or_held(KEY_B)
-		&& key_hit(KEY_SELECT) && key_hit_or_held(KEY_START) )
-		|| ( key_hit_or_held(KEY_A) && key_hit_or_held(KEY_B) 
-		&& key_hit_or_held(KEY_SELECT) && key_hit(KEY_START) ) )
+	if ((key_hit(KEY_A) && key_hit_or_held(KEY_B) 
+		&& key_hit_or_held(KEY_SELECT) && key_hit_or_held(KEY_START))
+		|| (key_hit_or_held(KEY_A) && key_hit(KEY_B)
+		&& key_hit_or_held(KEY_SELECT) && key_hit_or_held(KEY_START))
+		|| (key_hit_or_held(KEY_A) && key_hit_or_held(KEY_B)
+		&& key_hit(KEY_SELECT) && key_hit_or_held(KEY_START))
+		|| (key_hit_or_held(KEY_A) && key_hit_or_held(KEY_B) 
+		&& key_hit_or_held(KEY_SELECT) && key_hit(KEY_START)))
 	{
 		return true;
 	}

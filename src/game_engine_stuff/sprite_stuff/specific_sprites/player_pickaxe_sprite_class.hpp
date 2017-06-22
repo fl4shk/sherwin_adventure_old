@@ -69,7 +69,7 @@ public:		// variables
 	
 	
 public:		// functions
-	inline PlayerPickaxeSprite( bool facing_left )
+	inline PlayerPickaxeSprite(bool facing_left)
 	{
 		shared_constructor_code_part_1();
 		shared_constructor_code_part_2(facing_left);
@@ -78,8 +78,8 @@ public:		// functions
 	
 	virtual void update_part_1();
 	
-	//virtual void update_part_2( bg_point& camera_pos,
-	//	const vec2_u32& the_level_size_2d ) __attribute__((_IWRAM_CODE));
+	//virtual void update_part_2(bg_point& camera_pos,
+	//	const vec2_u32& the_level_size_2d) __attribute__((_IWRAM_CODE));
 	
 	inline virtual const SpriteConstParams& get_const_params() const
 	{
@@ -99,19 +99,19 @@ public:		// functions
 protected:		// functions
 	
 	virtual void block_coll_response_left_16x16_old
-		( const BlockCollResult& lt_coll_result, 
-		const BlockCollResult& lb_coll_result );
+		(const BlockCollResult& lt_coll_result, 
+		const BlockCollResult& lb_coll_result);
 	virtual void block_coll_response_top_16x16_old
-		( const BlockCollResult& tl_coll_result,
+		(const BlockCollResult& tl_coll_result,
 		const BlockCollResult& tm_coll_result,
-		const BlockCollResult& tr_coll_result );
+		const BlockCollResult& tr_coll_result);
 	virtual void block_coll_response_right_16x16_old
-		( const BlockCollResult& rt_coll_result,
-		const BlockCollResult& rb_coll_result );
+		(const BlockCollResult& rt_coll_result,
+		const BlockCollResult& rb_coll_result);
 	virtual void non_slope_block_coll_response_bot_16x16_old
-		( const BlockCollResult& bl_coll_result,
+		(const BlockCollResult& bl_coll_result,
 		const BlockCollResult& bm_coll_result, 
-		const BlockCollResult& br_coll_result );
+		const BlockCollResult& br_coll_result);
 	
 	
 } __attribute__((_ALIGN4));

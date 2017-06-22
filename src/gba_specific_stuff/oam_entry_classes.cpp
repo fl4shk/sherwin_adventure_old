@@ -71,33 +71,33 @@ const vec2_u32 OamEntry::ss_enum_to_ss_attrs_arr[lim_ss]
 //};
 
 
-void OamEntry::set_shape_size( OamEntry::shape_size n_shape_size )
+void OamEntry::set_shape_size(OamEntry::shape_size n_shape_size)
 {
 	u32 temp_attr0 = attr0, temp_attr1 = attr1;
 	
-	if ( n_shape_size < 0 || n_shape_size >= lim_ss )
+	if (n_shape_size < 0 || n_shape_size >= lim_ss)
 	{
 		const vec2_u32& ss_attrs_vec2 = ss_enum_to_ss_attrs_arr[0];
 		
-		clear_and_set_bits( temp_attr0, obj_attr0_shape_mask,
-			ss_attrs_vec2.x );
-		clear_and_set_bits( temp_attr1, obj_attr1_size_mask,
-			ss_attrs_vec2.y );
+		clear_and_set_bits(temp_attr0, obj_attr0_shape_mask,
+			ss_attrs_vec2.x);
+		clear_and_set_bits(temp_attr1, obj_attr1_size_mask,
+			ss_attrs_vec2.y);
 	}
 	else
 	{
 		const vec2_u32& ss_attrs_vec2 = ss_enum_to_ss_attrs_arr
 			[n_shape_size];
 		
-		clear_and_set_bits( temp_attr0, obj_attr0_shape_mask,
-			ss_attrs_vec2.x );
-		clear_and_set_bits( temp_attr1, obj_attr1_size_mask,
-			ss_attrs_vec2.y );
+		clear_and_set_bits(temp_attr0, obj_attr0_shape_mask,
+			ss_attrs_vec2.x);
+		clear_and_set_bits(temp_attr1, obj_attr1_size_mask,
+			ss_attrs_vec2.y);
 	}
 	
 	
-	attr0 = (u16)( temp_attr0 & 0xffff );
-	attr1 = (u16)( temp_attr1 & 0xffff );
+	attr0 = (u16)(temp_attr0 & 0xffff);
+	attr1 = (u16)(temp_attr1 & 0xffff);
 	
 }
 
@@ -105,14 +105,14 @@ void OamEntry::set_shape_size( OamEntry::shape_size n_shape_size )
 
 OamEntry::shape_size OamEntry::get_shape_size() const
 {
-	u32 attr0_shape_no_shift = get_bits( attr0, obj_attr0_shape_mask,
-		obj_attr0_shape_shift );
-	u32 attr1_size_no_shift = get_bits( attr1, obj_attr1_size_mask,
-		obj_attr1_size_shift );
+	u32 attr0_shape_no_shift = get_bits(attr0, obj_attr0_shape_mask,
+		obj_attr0_shape_shift);
+	u32 attr1_size_no_shift = get_bits(attr1, obj_attr1_size_mask,
+		obj_attr1_size_shift);
 	
 	// Error checking
-	if ( attr0_shape_no_shift >= num_attr0_shapes 
-		|| attr1_size_no_shift >= num_attr1_sizes )
+	if (attr0_shape_no_shift >= num_attr0_shapes 
+		|| attr1_size_no_shift >= num_attr1_sizes)
 	{
 		//return ss_attrs_no_shift_to_ss_enum_arr_2d[0][0];
 		return shape_size(0);
@@ -124,18 +124,18 @@ OamEntry::shape_size OamEntry::get_shape_size() const
 		
 		// Multiply by num_attr1_sizes because the expression becomes a
 		// single shift and an add instead of a shift and two adds.
-		return shape_size( attr0_shape_no_shift * num_attr1_sizes 
-			+ attr1_size_no_shift );
+		return shape_size(attr0_shape_no_shift * num_attr1_sizes 
+			+ attr1_size_no_shift);
 	}
 }
 
-void OamEntry::set_shape_size_with_vec2( const vec2_u32& n_shape_size )
+void OamEntry::set_shape_size_with_vec2(const vec2_u32& n_shape_size)
 {
-	switch ( n_shape_size.x )
+	switch (n_shape_size.x)
 	{
 		default:
 		case 8:
-			switch ( n_shape_size.y )
+			switch (n_shape_size.y)
 			{
 				default:
 				case 8:
@@ -150,7 +150,7 @@ void OamEntry::set_shape_size_with_vec2( const vec2_u32& n_shape_size )
 			}
 		
 		case 16:
-			switch ( n_shape_size.y )
+			switch (n_shape_size.y)
 			{
 				default:
 				case 16:
@@ -165,7 +165,7 @@ void OamEntry::set_shape_size_with_vec2( const vec2_u32& n_shape_size )
 			}
 		
 		case 32:
-			switch ( n_shape_size.y )
+			switch (n_shape_size.y)
 			{
 				default:
 				case 32:
@@ -183,7 +183,7 @@ void OamEntry::set_shape_size_with_vec2( const vec2_u32& n_shape_size )
 			}
 		
 		case 64:
-			switch ( n_shape_size.y )
+			switch (n_shape_size.y)
 			{
 				default:
 				case 64:

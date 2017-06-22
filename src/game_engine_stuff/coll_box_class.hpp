@@ -30,11 +30,11 @@
 
 class CollBox;
 
-int coll_box_intersects_now( const CollBox& a, const CollBox& b )
+int coll_box_intersects_now(const CollBox& a, const CollBox& b)
 	__attribute__((_IWRAM_CODE,_TARGET_ARM));
-//int coll_box_intersects_now_2( const CollBox& a, const CollBox& b )
+//int coll_box_intersects_now_2(const CollBox& a, const CollBox& b)
 //	__attribute__((_IWRAM_CODE,_TARGET_ARM));
-int coll_box_intersects_now_2( const CollBox& a, const CollBox& b );
+int coll_box_intersects_now_2(const CollBox& a, const CollBox& b);
 
 
 class CollBox
@@ -81,14 +81,14 @@ public:		// functions
 	}
 	inline vec2_f24p8 half_size() const
 	{
-		return vec2_f24p8( half_width(), half_height() );
+		return vec2_f24p8(half_width(), half_height());
 	}
 	
 	inline Fixed24p8 get_x_center() const
 	{
 		s32 ret_data;
 		
-		ret_data = pos.x.data + ( size.x.data >> 1 );
+		ret_data = pos.x.data + (size.x.data >> 1);
 		
 		return (Fixed24p8){ ret_data };
 	}
@@ -97,35 +97,35 @@ public:		// functions
 	{
 		s32 ret_data;
 		
-		ret_data = pos.y.data + ( size.y.data >> 1 );
+		ret_data = pos.y.data + (size.y.data >> 1);
 		
 		return (Fixed24p8){ ret_data };
 	}
 	
-	inline int intersects_now( const CollBox& other )
+	inline int intersects_now(const CollBox& other)
 	{
-		return coll_box_intersects_now( *this, other );
+		return coll_box_intersects_now(*this, other);
 	}
 	
-	inline int intersects_now_2( const CollBox& other )
+	inline int intersects_now_2(const CollBox& other)
 	{
-		return coll_box_intersects_now_2( *this, other );
+		return coll_box_intersects_now_2(*this, other);
 	}
 	
-	int Contains( const vec2_f24p8& point ) __attribute__((_IWRAM_CODE));
+	int Contains(const vec2_f24p8& point) __attribute__((_IWRAM_CODE));
 	
 	// Note:  This function doesn't check whether right_x > left_x, nor
 	// whether bot_y > top_y.  That makes this function less safe than it
 	// could have been.
-	void set_side_coords( Fixed24p8 left_x, Fixed24p8 right_x,
-		Fixed24p8 top_y, Fixed24p8 bot_y );
+	void set_side_coords(Fixed24p8 left_x, Fixed24p8 right_x,
+		Fixed24p8 top_y, Fixed24p8 bot_y);
 	
-	void get_corners( vec2_f24p8& lt_corner, vec2_f24p8& rt_corner, 
-		vec2_f24p8& rb_corner, vec2_f24p8& lb_corner );
+	void get_corners(vec2_f24p8& lt_corner, vec2_f24p8& rt_corner, 
+		vec2_f24p8& rb_corner, vec2_f24p8& lb_corner);
 	
 	void get_block_coords_intersected_by_corners 
-		( vec2_s32& lt_block_coord, vec2_s32& rt_block_coord,
-		vec2_s32& rb_block_coord, vec2_s32& lb_block_coord );
+		(vec2_s32& lt_block_coord, vec2_s32& rt_block_coord,
+		vec2_s32& rb_block_coord, vec2_s32& lb_block_coord);
 	
 	
 	

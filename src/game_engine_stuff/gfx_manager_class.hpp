@@ -108,29 +108,29 @@ class GfxManager
 {
 public:		// variables and constants
 	
-	static constexpr u32 num_tiles_in_ss_8x8 = ( 8 * 8 ) 
+	static constexpr u32 num_tiles_in_ss_8x8 = (8 * 8) 
 		/ num_pixels_per_tile;
-	static constexpr u32 num_tiles_in_ss_16x16 = ( 16 * 16 ) 
+	static constexpr u32 num_tiles_in_ss_16x16 = (16 * 16) 
 		/ num_pixels_per_tile;
-	static constexpr u32 num_tiles_in_ss_32x32 = ( 32 * 32 ) 
+	static constexpr u32 num_tiles_in_ss_32x32 = (32 * 32) 
 		/ num_pixels_per_tile;
-	static constexpr u32 num_tiles_in_ss_64x64 = ( 64 * 64 ) 
+	static constexpr u32 num_tiles_in_ss_64x64 = (64 * 64) 
 		/ num_pixels_per_tile;
-	static constexpr u32 num_tiles_in_ss_16x8 = ( 16 * 8 ) 
+	static constexpr u32 num_tiles_in_ss_16x8 = (16 * 8) 
 		/ num_pixels_per_tile;
-	static constexpr u32 num_tiles_in_ss_32x8 = ( 32 * 8 ) 
+	static constexpr u32 num_tiles_in_ss_32x8 = (32 * 8) 
 		/ num_pixels_per_tile;
-	static constexpr u32 num_tiles_in_ss_32x16 = ( 32 * 16 ) 
+	static constexpr u32 num_tiles_in_ss_32x16 = (32 * 16) 
 		/ num_pixels_per_tile;
-	static constexpr u32 num_tiles_in_ss_64x32 = ( 64 * 32 ) 
+	static constexpr u32 num_tiles_in_ss_64x32 = (64 * 32) 
 		/ num_pixels_per_tile;
-	static constexpr u32 num_tiles_in_ss_8x16 = ( 8 * 16 ) 
+	static constexpr u32 num_tiles_in_ss_8x16 = (8 * 16) 
 		/ num_pixels_per_tile;
-	static constexpr u32 num_tiles_in_ss_8x32 = ( 8 * 32 ) 
+	static constexpr u32 num_tiles_in_ss_8x32 = (8 * 32) 
 		/ num_pixels_per_tile;
-	static constexpr u32 num_tiles_in_ss_16x32 = ( 16 * 32 ) 
+	static constexpr u32 num_tiles_in_ss_16x32 = (16 * 32) 
 		/ num_pixels_per_tile;
-	static constexpr u32 num_tiles_in_ss_32x64 = ( 32 * 64 ) 
+	static constexpr u32 num_tiles_in_ss_32x64 = (32 * 64) 
 		/ num_pixels_per_tile;
 	
 	
@@ -222,7 +222,7 @@ public:		// functions
 		//bgofs_mirror[2].back_up();
 		//bgofs_mirror[3].back_up();
 		
-		for ( u32 i=0; i<bgofs_mirror_size; ++i )
+		for (u32 i=0; i<bgofs_mirror_size; ++i)
 		{
 			prev_prev_bgofs_mirror[i] = bgofs_mirror[i].prev;
 			bgofs_mirror[i].back_up();
@@ -234,9 +234,9 @@ public:		// functions
 	
 	// Block graphics stuff
 	//static inline u32 get_metatile_number_of_block_type
-	//	( block_type the_block_type ) __attribute__((always_inline));
+	//	(block_type the_block_type) __attribute__((always_inline));
 	static inline u32 get_metatile_number_of_block_type
-		( block_type the_block_type )
+		(block_type the_block_type)
 	{
 		return block_stuff_array[the_block_type]->get_metatile_number();
 	}
@@ -244,26 +244,26 @@ public:		// functions
 	
 	
 	//static inline const u32 get_graphics_slot_of_block_type 
-	//	( block_type the_block_type ) __attribute__((always_inline));
+	//	(block_type the_block_type) __attribute__((always_inline));
 	static inline const u32 get_graphics_slot_of_block_type 
-		( block_type the_block_type )
+		(block_type the_block_type)
 	{
 		// This assumes That EVERY Block uses 4 graphics slots in VRAM
-		//return ( the_block_type * 4 );
+		//return (the_block_type * 4);
 		return block_stuff_array[the_block_type]
 			->get_metatile_graphics_slot() * num_tiles_in_ss_16x16;
 	}
 	
 	//static inline u32 get_palette_number_of_block_type
-	//	( block_type the_block_type ) __attribute__((always_inline));
+	//	(block_type the_block_type) __attribute__((always_inline));
 	static inline u32 get_palette_number_of_block_type
-		( block_type the_block_type )
+		(block_type the_block_type)
 	{
 		return block_stuff_array[the_block_type]->get_palette_number();
 	}
 	
-	static void upload_bg_palettes_to_target( vu16* target );
-	static inline void upload_bg_palettes_to_target( u16* target )
+	static void upload_bg_palettes_to_target(vu16* target);
+	static inline void upload_bg_palettes_to_target(u16* target)
 	{
 		upload_bg_palettes_to_target((vu16*)target);
 	}
@@ -274,27 +274,27 @@ public:		// functions
 	
 	
 	// Sprite graphics stuff
-	static void upload_sprite_palettes_to_target( vu16* target ); 
-	static inline void upload_sprite_palettes_to_target( u16* target )
+	static void upload_sprite_palettes_to_target(vu16* target); 
+	static inline void upload_sprite_palettes_to_target(u16* target)
 	{
 		upload_sprite_palettes_to_target((vu16*)target);
 	}
 	static void copy_obj_pal_mirror_to_obj_pal_ram();
 	
 	
-	static void upload_sprite_tiles_to_vram( Sprite& the_sprite )
+	static void upload_sprite_tiles_to_vram(Sprite& the_sprite)
 		__attribute__((_IWRAM_CODE));
 	
 	// HUD stuff
 	static inline void init_hud_vram_as_tiles_start_offset()
 	{
 		hud_vram_as_tiles_start_offset = 0;
-		for ( u32 i=0; i<block_type::lim_bt; ++i )
+		for (u32 i=0; i<block_type::lim_bt; ++i)
 		{
 			u32 graphics_slot = get_graphics_slot_of_block_type 
-				( (block_type)i );
+				((block_type)i);
 			
-			if ( hud_vram_as_tiles_start_offset < graphics_slot )
+			if (hud_vram_as_tiles_start_offset < graphics_slot)
 			{
 				hud_vram_as_tiles_start_offset = graphics_slot;
 			}
@@ -304,14 +304,14 @@ public:		// functions
 	
 	
 	// Fading stuff
-	static void fade_out_to_black( u32 num_steps, 
-		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_IWRAM_CODE));
+	static void fade_out_to_black(u32 num_steps, 
+		u32 num_frames_to_wait_per_iter=1) __attribute__((_IWRAM_CODE));
 	
-	static void fade_out_to_white( u32 num_steps, 
-		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_IWRAM_CODE));
+	static void fade_out_to_white(u32 num_steps, 
+		u32 num_frames_to_wait_per_iter=1) __attribute__((_IWRAM_CODE));
 	
-	static void fade_in( u32 num_steps, 
-		u32 num_frames_to_wait_per_iter=1 ) __attribute__((_IWRAM_CODE));
+	static void fade_in(u32 num_steps, 
+		u32 num_frames_to_wait_per_iter=1) __attribute__((_IWRAM_CODE));
 	
 	
 	

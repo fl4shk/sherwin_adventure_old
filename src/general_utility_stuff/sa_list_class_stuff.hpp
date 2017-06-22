@@ -99,7 +99,7 @@ public:		// functions
 	{
 	}
 	
-	inline NodeDataAndIndex( void* s_data_ptr, s32 s_index ) 
+	inline NodeDataAndIndex(void* s_data_ptr, s32 s_index) 
 		: data_ptr(s_data_ptr), index(s_index)
 	{
 	}
@@ -132,8 +132,8 @@ public:		// functions
 	
 	
 	template< typename type_in_vec2 >
-	inline Node( const type& data_to_copy, 
-		Vec2<type_in_vec2> s_index_pair ) : data(data_to_copy)
+	inline Node(const type& data_to_copy, 
+		Vec2<type_in_vec2> s_index_pair) : data(data_to_copy)
 	{
 		next_index() = get_next_index_from_vec2(s_index_pair);
 		prev_index() = get_prev_index_from_vec2(s_index_pair);
@@ -154,14 +154,14 @@ public:		// functions
 protected:		// functions
 	template< typename type_in_vec2 >
 	static inline s16 get_next_index_from_vec2
-		( const Vec2<type_in_vec2>& n_index_pair )
+		(const Vec2<type_in_vec2>& n_index_pair)
 	{
 		return static_cast<s16>(n_index_pair
 			[NodeContents::vec2_index_for_next_index]);
 	}
 	template< typename type_in_vec2 >
 	static inline s16 get_prev_index_from_vec2
-		( const Vec2<type_in_vec2>& n_index_pair )
+		(const Vec2<type_in_vec2>& n_index_pair)
 	{
 		return static_cast<s16>(n_index_pair
 			[NodeContents::vec2_index_for_prev_index]);
@@ -202,9 +202,9 @@ public:		// classes
 		IndexType the_index_type;
 		
 	public:		// functions
-		inline Iterator( CircBufHelper* s_cbuf_helper_ptr, 
+		inline Iterator(CircBufHelper* s_cbuf_helper_ptr, 
 			size_t s_pos, 
-			IndexType s_the_index_type=IndexType::it_other ) 
+			IndexType s_the_index_type=IndexType::it_other) 
 			: cbuf_helper_ptr(s_cbuf_helper_ptr), pos(s_pos),
 			the_index_type(s_the_index_type)
 		{
@@ -223,18 +223,18 @@ public:		// classes
 			return the_index_type;
 		}
 		
-		inline bool operator == ( const Iterator& other ) const
+		inline bool operator == (const Iterator& other) const
 		{
-			return !( *this != other );
+			return !(*this != other);
 		}
 		
 		// Required for a range-based for loop
-		inline bool operator != ( const Iterator& other ) const
+		inline bool operator != (const Iterator& other) const
 		{
-			//return ( pos != other.pos ) || ( ( pos == other.pos )
-			//	&& ( get_is_head() != other.get_is_head() ) );
+			//return (pos != other.pos) || ((pos == other.pos)
+			//	&& (get_is_head() != other.get_is_head()));
 			
-			if ( get_pos() != other.get_pos() )
+			if (get_pos() != other.get_pos())
 			{
 				return true;
 			}
@@ -244,22 +244,22 @@ public:		// classes
 		
 	protected:		// functions
 		
-		inline bool same_pos_not_equals ( const Iterator& other ) const
+		inline bool same_pos_not_equals (const Iterator& other) const
 		{
 			// At this point, Is Is known That pos == other.pos
-			if ( get_cbuf_helper_ptr() != other.get_cbuf_helper_ptr() )
+			if (get_cbuf_helper_ptr() != other.get_cbuf_helper_ptr())
 			{
 				return true;
 			}
 			
 			// At this point, it Is known That pos == other.pos, and both
 			// iterators are from the same CircBufHelper.
-			if ( get_cbuf_helper_ptr()->get_real_size() == 0 )
+			if (get_cbuf_helper_ptr()->get_real_size() == 0)
 			{
 				return false;
 			}
 			
-			if ( get_index_type() != other.get_index_type() )
+			if (get_index_type() != other.get_index_type())
 			{
 				return true;
 			}
@@ -280,11 +280,11 @@ public:		// classes
 		
 		const Iterator& operator ++ ()
 		{
-			auto get_corrected_other_pos = [&]( const size_t other_pos ) 
+			auto get_corrected_other_pos = [&](const size_t other_pos) 
 				-> size_t
 			{
 				//get_pos() >= get_cbuf_helper_ptr()->get_max_size() 
-				if ( other_pos >= get_cbuf_helper_ptr()->get_max_size() )
+				if (other_pos >= get_cbuf_helper_ptr()->get_max_size())
 				{
 					return 0;
 				}
@@ -292,17 +292,17 @@ public:		// classes
 			};
 			
 			
-			if ( get_cbuf_helper_ptr()->get_real_size() > 1 )
+			if (get_cbuf_helper_ptr()->get_real_size() > 1)
 			{
 				const size_t updated_pos = get_corrected_other_pos
-					( get_pos() + 1 );
+					(get_pos() + 1);
 				
-				if ( get_index_type() == IndexType::it_head )
+				if (get_index_type() == IndexType::it_head)
 				{
 					the_index_type = IndexType::it_other;
 					pos = updated_pos; 
 				}
-				else if ( get_pos() == get_cbuf_helper_ptr()->get_tail() )
+				else if (get_pos() == get_cbuf_helper_ptr()->get_tail())
 				{
 					the_index_type = IndexType::it_tail;
 				}
@@ -314,7 +314,7 @@ public:		// classes
 			else
 			{
 				// PROPERLY handle iterators.
-				if ( get_cbuf_helper_ptr()->get_real_size() == 1 )
+				if (get_cbuf_helper_ptr()->get_real_size() == 1)
 				{
 					the_index_type = IndexType::it_tail;
 				}
@@ -331,7 +331,7 @@ public:		// classes
 	friend const s32 Iterator::operator * () const;
 	
 public:		// functions
-	CircBufHelper( s32* s_the_array, size_t s_max_size )
+	CircBufHelper(s32* s_the_array, size_t s_max_size)
 		: the_array(s_the_array), max_size(s_max_size)
 	{
 		//// Don't call reset() here since it's called by
@@ -339,7 +339,7 @@ public:		// functions
 		//reset();
 	}
 	
-	CircBufHelper& operator = ( const CircBufHelper& to_copy )
+	CircBufHelper& operator = (const CircBufHelper& to_copy)
 	{
 		the_array = to_copy.the_array;
 		max_size = to_copy.max_size;
@@ -350,7 +350,7 @@ public:		// functions
 	}
 	inline void reset()
 	{
-		arr_memfill32( the_array, -1, get_max_size() );
+		arr_memfill32(the_array, -1, get_max_size());
 		head = tail = 0;
 	}
 	
@@ -370,26 +370,26 @@ public:		// functions
 	{
 		return real_size;
 	}
-	inline s32 at( size_t offset ) const
+	inline s32 at(size_t offset) const
 	{
 		return the_array[offset];
 	}
 	
 	inline Iterator begin()
 	{
-		return Iterator( this, get_head(), Iterator::IndexType::it_head );
+		return Iterator(this, get_head(), Iterator::IndexType::it_head);
 	}
 	inline Iterator end()
 	{
-		return Iterator( this, get_tail(), Iterator::IndexType::it_tail );
+		return Iterator(this, get_tail(), Iterator::IndexType::it_tail);
 	}
 	
-	void push( s32 to_push )
+	void push(s32 to_push)
 	{
-		auto get_corrected_other_pos = [&]( const size_t other_pos ) 
+		auto get_corrected_other_pos = [&](const size_t other_pos) 
 			-> size_t
 		{
-			if ( other_pos >= get_max_size() )
+			if (other_pos >= get_max_size())
 			{
 				return 0;
 			}
@@ -398,12 +398,12 @@ public:		// functions
 		
 		
 		// Update real_size
-		if ( get_real_size() < get_max_size() )
+		if (get_real_size() < get_max_size())
 		{
 			++real_size;
 		}
 		
-		if ( get_real_size() == 1 )
+		if (get_real_size() == 1)
 		{
 			the_array[get_tail()] = to_push;
 			
@@ -414,7 +414,7 @@ public:		// functions
 		tail = get_corrected_other_pos(get_tail() + 1);
 		the_array[get_tail()] = to_push;
 		
-		if ( get_real_size() == get_max_size() )
+		if (get_real_size() == get_max_size())
 		{
 			head = get_corrected_other_pos(get_tail() + 1);
 		}
@@ -427,7 +427,7 @@ public:		// functions
 class ExtrasFpGroup
 {
 public:		// typedefs
-	typedef void (*sis_fp)( ndai_dyn_arr&, const size_t, const size_t );
+	typedef void (*sis_fp)(ndai_dyn_arr&, const size_t, const size_t);
 	
 public:		// function pointers
 	// Function pointers used by various functions in the ListBackend
@@ -462,10 +462,10 @@ public:		// function pointers
 	//public:		// functions
 	//	inline WrappedStaticAsserts()
 	//	{
-	//		static_assert( std::is_trivially_copyable<ExtrasFpGroup>
+	//		static_assert(std::is_trivially_copyable<ExtrasFpGroup>
 	//			::value,
 	//			"Can't use struct_memcpy() in ExtrasFpGroup::operator = "
-	//			"() !" );
+	//			"() !");
 	//	}
 	//} __attribute__((_ALIGN4));
 	
@@ -473,7 +473,7 @@ public:		// functions
 	inline ExtrasFpGroup()
 	{
 	}
-	inline ExtrasFpGroup( generic_void_2arg_fp s_specific_type_copy_fp,
+	inline ExtrasFpGroup(generic_void_2arg_fp s_specific_type_copy_fp,
 		generic_void_2arg_fp s_specific_type_move_fp,
 		generic_void_1arg_fp s_specific_type_reset_fp,
 		generic_void_2arg_fp s_specific_type_swap_fp,
@@ -486,7 +486,7 @@ public:		// functions
 		generic_vec2_s16_ptr_1arg_fp s_get_index_pair_fp,
 		generic_void_2arg_fp s_conv_node_to_contents_fp,
 		generic_void_2arg_fp s_insertion_sort_inner_loop_fp,
-		sis_fp s_subarr_insertion_sort_fp )
+		sis_fp s_subarr_insertion_sort_fp)
 	{
 		specific_type_copy_fp = s_specific_type_copy_fp;
 		specific_type_move_fp = s_specific_type_move_fp;
@@ -506,7 +506,7 @@ public:		// functions
 		subarr_insertion_sort_fp = s_subarr_insertion_sort_fp;
 	}
 	
-	inline ExtrasFpGroup( const ExtrasFpGroup& to_copy )
+	inline ExtrasFpGroup(const ExtrasFpGroup& to_copy)
 	{
 		*this = to_copy;
 	}
@@ -574,71 +574,71 @@ template< typename type >
 class ListExtras
 {
 protected:		// functions To point To
-	static void specific_type_copy( type* a, type* b )
+	static void specific_type_copy(type* a, type* b)
 		__attribute__((_TEXT_HOT_SECTION))
 	{
 		*a = *b;
 	}
-	static void specific_type_move( type* a, type* b )
+	static void specific_type_move(type* a, type* b)
 		__attribute__((_TEXT_HOT_SECTION))
 	{
 		*a = std::move(*b);
 	}
-	static void specific_type_reset( type* to_reset )
+	static void specific_type_reset(type* to_reset)
 		__attribute__((_TEXT_HOT_SECTION))
 	{
 		*to_reset = type();
 	}
-	static void specific_type_swap( type* a, type* b )
+	static void specific_type_swap(type* a, type* b)
 		__attribute__((_TEXT_HOT_SECTION))
 	{
 		//type temp = std::move(*a);
 		//*a = std::move(*b);
 		//*b = std::move(temp);
-		std::swap( *a, *b );
+		std::swap(*a, *b);
 	}
 	
-	static u32 specific_type_less( type* a, type* b )
+	static u32 specific_type_less(type* a, type* b)
 		__attribute__((_TEXT_HOT_SECTION))
 	{
-		return ( (*a) < (*b) );
+		return ((*a) < (*b));
 	}
-	static u32 specific_type_greater( type* a, type* b )
+	static u32 specific_type_greater(type* a, type* b)
 		__attribute__((_TEXT_HOT_SECTION))
 	{
-		return ( (*a) > (*b) );
+		return ((*a) > (*b));
 	}
 	
 	// qsort() comparison function
-	static int specific_type_qscmp( const type* a, const type* b )
+	static int specific_type_qscmp(const type* a, const type* b)
 		__attribute__((_TEXT_HOT_SECTION))
 	{
-		if ( (*a) < (*b) )
+		if ((*a) < (*b))
 		{
 			return -1;
 		}
-		else if ( (*a) == (*b) )
+		else if ((*a) == (*b))
 		{
 			return 0;
 		}
-		else // if ( (*a) > (*b) )
+		else // if ((*a) > (*b))
 		{
 			return 1;
 		}
 	}
 	
-	static void* get_node_data( Node<type>* to_get_from )
+	static void* get_node_data(Node<type>* to_get_from)
 		__attribute__((_TEXT_HOT_SECTION))
 	{
 		return &to_get_from->data;
 	}
-	static vec2_s16* get_sa_list_index_pair( Node<type>* to_get_from )
+	static vec2_s16* get_sa_list_index_pair(Node<type>* to_get_from)
 		__attribute__((_TEXT_HOT_SECTION))
 	{
 		return &to_get_from->index_pair;
 	}
-	static void conv_node_to_contents( NodeContents* ret,
-		Node<type>* to_convert ) __attribute__((_TEXT_HOT_SECTION))
+	static void conv_node_to_contents(NodeContents* ret,
+		Node<type>* to_convert) __attribute__((_TEXT_HOT_SECTION))
 	{
 		ret->data_ptr = &to_convert->data;
 		ret->index_pair_ptr = &to_convert->index_pair;
@@ -652,8 +652,8 @@ protected:		// functions To point To
 	// Note:  old_il_cbuf_helper Is a CIRCULAR BUFFER helper That allows
 	// keeping track of a FIXED NUMBER of indices To nodes for sorting
 	// purposes.
-	static void insertion_sort_inner_loop( Node<type>* node_array, 
-		s32* index_low_ptr ) //__attribute__((_TEXT_HOT_SECTION))
+	static void insertion_sort_inner_loop(Node<type>* node_array, 
+		s32* index_low_ptr) //__attribute__((_TEXT_HOT_SECTION))
 	{
 		Node<type>* node_at_j;
 		
@@ -662,16 +662,16 @@ protected:		// functions To point To
 		type* data_at_index_low = &(node_array[index_low].data);
 		
 		// Find the lowest value at or after i.
-		for ( s32 j=index_low;
+		for (s32 j=index_low;
 			j!=-1; 
-			j=node_at_j->next_index() )
+			j=node_at_j->next_index())
 		{
 			//node_at_j = &get_node_at(j);
 			node_at_j = &(node_array[j]);
 			
-			//if ( node_at_j->data 
-			//	< get_node_at(index_low).data )
-			if ( (node_at_j->data) < (*data_at_index_low) )
+			//if (node_at_j->data 
+			//	< get_node_at(index_low).data)
+			if ((node_at_j->data) < (*data_at_index_low))
 			{
 				index_low = j;
 				
@@ -682,19 +682,19 @@ protected:		// functions To point To
 	}
 	
 	
-	static void subarr_insertion_sort( ndai_dyn_arr& arr_a,
-		const size_t subarr_offset, const size_t subarr_size )
+	static void subarr_insertion_sort(ndai_dyn_arr& arr_a,
+		const size_t subarr_offset, const size_t subarr_size)
 		//__attribute__((_TEXT_HOT_SECTION))
 	{
 		size_t curr_offset = subarr_offset;
 		
 		
-		for ( size_t i=1; i<subarr_size; ++i )
+		for (size_t i=1; i<subarr_size; ++i)
 		{
 			size_t j = ++curr_offset;
 			
-			while ( j > 0 && *(type*)arr_a[j - 1].data_ptr
-				> *(type*)arr_a[j].data_ptr )
+			while (j > 0 && *(type*)arr_a[j - 1].data_ptr
+				> *(type*)arr_a[j].data_ptr)
 			{
 				type temp = std::move(*(type*)arr_a[j - 1].data_ptr);
 				
@@ -773,7 +773,7 @@ public:		// function pointer stuff
 	
 	static inline ExtrasFpGroup get_extras_fp_group()
 	{
-		return ExtrasFpGroup( get_specific_type_copy_fp(),
+		return ExtrasFpGroup(get_specific_type_copy_fp(),
 			get_specific_type_move_fp(),
 			get_specific_type_reset_fp(),
 			get_specific_type_swap_fp(),
@@ -786,29 +786,29 @@ public:		// function pointer stuff
 			get_get_index_pair_fp(),
 			get_conv_node_to_contents_fp(),
 			get_insertion_sort_inner_loop_fp(),
-			get_subarr_insertion_sort_fp() );
+			get_subarr_insertion_sort_fp());
 	}
 	
 	
 public:		// functions To not point To
-	static inline void subarr_insertion_sort( DynArr<type>& arr_a,
-		const size_t subarr_offset, const size_t subarr_size )
+	static inline void subarr_insertion_sort(DynArr<type>& arr_a,
+		const size_t subarr_offset, const size_t subarr_size)
 		__attribute__((always_inline))
 	{
-		//if ( subarr_offset + subarr_size >= real_num_nodes )
+		//if (subarr_offset + subarr_size >= real_num_nodes)
 		//{
 		//	subarr_size = real_num_nodes - subarr_offset;
 		//}
 		
 		size_t curr_offset = subarr_offset;
 		
-		for ( size_t i=1; i<subarr_size; ++i )
+		for (size_t i=1; i<subarr_size; ++i)
 		{
 			size_t j = ++curr_offset;
 			
-			while ( j > 0 && ( arr_a[j - 1] > arr_a[j] ) )
+			while (j > 0 && (arr_a[j - 1] > arr_a[j]))
 			{
-				std::swap( arr_a[j], arr_a[j - 1] );
+				std::swap(arr_a[j], arr_a[j - 1]);
 				
 				--j;
 			}
@@ -854,38 +854,38 @@ protected:		// functions
 	}
 	// Dang, I had no idea it'd be this nice To get types automatically
 	// this way.
-	inline ListBackend( void* s_node_array, 
+	inline ListBackend(void* s_node_array, 
 		SaFreeListBackend* s_the_free_list_backend_ptr,
 		u32 s_total_num_nodes, u32 s_specific_type_size,
 		u32 s_whole_node_size, 
 		
-		const ExtrasFpGroup& s_the_extras_fp_group )
+		const ExtrasFpGroup& s_the_extras_fp_group)
 	{
-		init( s_node_array, s_the_free_list_backend_ptr,
+		init(s_node_array, s_the_free_list_backend_ptr,
 			s_total_num_nodes, s_specific_type_size, s_whole_node_size,
-			s_the_extras_fp_group );
+			s_the_extras_fp_group);
 	}
-	inline ListBackend( ListBackend& to_copy )
+	inline ListBackend(ListBackend& to_copy)
 	{
 		init(to_copy);
 	}
 	
-	void init( void* n_node_array, 
+	void init(void* n_node_array, 
 		SaFreeListBackend* n_the_free_list_backend_ptr,
 		u32 n_total_num_nodes, u32 n_specific_type_size,
 		u32 n_whole_node_size, 
 		
-		const ExtrasFpGroup& n_the_extras_fp_group );
+		const ExtrasFpGroup& n_the_extras_fp_group);
 	
-	inline void init( ListBackend& to_copy )
+	inline void init(ListBackend& to_copy)
 	{
-		init( to_copy.get_node_array(), 
+		init(to_copy.get_node_array(), 
 			to_copy.get_free_list_backend_ptr(),
 			to_copy.get_total_num_nodes(), 
 			to_copy.get_specific_type_size(),
 			to_copy.get_whole_node_size(), 
 			
-			to_copy.get_extras_fp_group() );
+			to_copy.get_extras_fp_group());
 	}
 	
 	
@@ -962,10 +962,10 @@ protected:		// functions
 	
 	
 	
-	inline uintptr_t get_node_addr_at( s32 index ) const
+	inline uintptr_t get_node_addr_at(s32 index) const
 	{
 		return reinterpret_cast<uintptr_t>(get_node_array())
-			+ ARR_BYTE_INDEX_MACRO( whole_node_size, index );
+			+ ARR_BYTE_INDEX_MACRO(whole_node_size, index);
 	}
 	
 	
@@ -974,46 +974,46 @@ protected:		// functions
 	// most sense To use when their result Is the ONLY part of a Node That
 	// Is relevant, and in That case it Is still best To ONLY CALL them
 	// ONCE PER NODE.
-	inline void* get_node_data_at_index( s32 index )
+	inline void* get_node_data_at_index(s32 index)
 	{
 		return get_node_data_at(get_node_addr_at(index));
 	}
-	inline vec2_s16* get_index_pair_at_index( s32 index )
+	inline vec2_s16* get_index_pair_at_index(s32 index)
 	{
 		return get_index_pair_at(get_node_addr_at(index));
 	}
-	inline s16& get_next_index_at_index( s32 index )
+	inline s16& get_next_index_at_index(s32 index)
 	{
 		return get_next_index_at(get_node_addr_at(index));
 	}
-	inline s16& get_prev_index_at_index( s32 index )
+	inline s16& get_prev_index_at_index(s32 index)
 	{
 		return get_prev_index_at(get_node_addr_at(index));
 	}
 	
 	
-	inline void* get_node_data_at( uintptr_t addr )
+	inline void* get_node_data_at(uintptr_t addr)
 	{
 		return get_extras_fp_group().get_get_node_data_fp()
 			(reinterpret_cast<void*>(addr));
 	}
-	inline vec2_s16* get_index_pair_at( uintptr_t addr )
+	inline vec2_s16* get_index_pair_at(uintptr_t addr)
 	{
 		return get_extras_fp_group().get_get_index_pair_fp()
 			(reinterpret_cast<void*>(addr));
 	}
-	inline s16& get_next_index_at( uintptr_t addr )
+	inline s16& get_next_index_at(uintptr_t addr)
 	{
 		return ((*get_index_pair_at(addr))
 			[NodeContents::vec2_index_for_next_index]);
 	}
-	inline s16& get_prev_index_at( uintptr_t addr )
+	inline s16& get_prev_index_at(uintptr_t addr)
 	{
 		return ((*get_index_pair_at(addr))
 			[NodeContents::vec2_index_for_prev_index]);
 	}
 	
-	inline NodeContents get_node_contents_at( s32 index )
+	inline NodeContents get_node_contents_at(s32 index)
 	{
 		uintptr_t node_addr = get_node_addr_at(index);
 		
@@ -1022,81 +1022,81 @@ protected:		// functions
 		
 		NodeContents ret;
 		
-		get_extras_fp_group().get_conv_node_to_contents_fp()( &ret, 
-			reinterpret_cast<void*>(node_addr) );
+		get_extras_fp_group().get_conv_node_to_contents_fp()(&ret, 
+			reinterpret_cast<void*>(node_addr));
 		
 		return ret;
 	}
 	
 	
 	// Make sure To call this with Node DATA!
-	inline void copy_node_data( void* dst_node_data, 
-		const void* src_node_data )
+	inline void copy_node_data(void* dst_node_data, 
+		const void* src_node_data)
 	{
 		get_extras_fp_group().get_specific_type_copy_fp()
-			( dst_node_data, const_cast<void*>(src_node_data) );
+			(dst_node_data, const_cast<void*>(src_node_data));
 	}
-	inline void move_node_data( void* dst_node_data, 
-		const void* src_node_data )
+	inline void move_node_data(void* dst_node_data, 
+		const void* src_node_data)
 	{
 		get_extras_fp_group().get_specific_type_move_fp()
-			( dst_node_data, const_cast<void*>(src_node_data) );
+			(dst_node_data, const_cast<void*>(src_node_data));
 	}
 	
 	
-	inline void assign_to_node_data( NodeContents& dst_node_contents, 
-		const void* n_data, u32 can_move_value )
+	inline void assign_to_node_data(NodeContents& dst_node_contents, 
+		const void* n_data, u32 can_move_value)
 	{
 		if (!can_move_value)
 		{
-			copy_node_data( dst_node_contents.data_ptr, n_data );
+			copy_node_data(dst_node_contents.data_ptr, n_data);
 		}
 		else //if (can_move_value)
 		{
-			move_node_data( dst_node_contents.data_ptr, n_data );
+			move_node_data(dst_node_contents.data_ptr, n_data);
 		}
 	}
 	inline void assign_to_whole_node
-		( NodeContents& dst_node_contents, const void* n_data,
-		const vec2_s16& n_index_pair, u32 can_move_value )
+		(NodeContents& dst_node_contents, const void* n_data,
+		const vec2_s16& n_index_pair, u32 can_move_value)
 	{
-		assign_to_node_data( dst_node_contents, n_data, 
-			can_move_value );
-		copy_vec2_s16_via_ptr( *dst_node_contents.index_pair_ptr,
-			n_index_pair );
+		assign_to_node_data(dst_node_contents, n_data, 
+			can_move_value);
+		copy_vec2_s16_via_ptr(*dst_node_contents.index_pair_ptr,
+			n_index_pair);
 	}
 	
 	
 	// Make sure To call this with Node DATA!
-	inline void call_specific_type_swap_func( void* node_a_data, 
-		void* node_b_data )
+	inline void call_specific_type_swap_func(void* node_a_data, 
+		void* node_b_data)
 	{
 		get_extras_fp_group().get_specific_type_swap_fp()
-			( node_a_data, node_b_data );
+			(node_a_data, node_b_data);
 	}
-	inline u32 call_specific_type_less_func( void* node_a_data, 
-		void* node_b_data )
+	inline u32 call_specific_type_less_func(void* node_a_data, 
+		void* node_b_data)
 	{
 		return get_extras_fp_group().get_specific_type_less_fp()
-			( node_a_data, node_b_data );
+			(node_a_data, node_b_data);
 	}
-	inline u32 call_specific_type_greater_func( void* node_a_data, 
-		void* node_b_data )
+	inline u32 call_specific_type_greater_func(void* node_a_data, 
+		void* node_b_data)
 	{
 		return get_extras_fp_group().get_specific_type_greater_fp()
-			( node_a_data, node_b_data );
+			(node_a_data, node_b_data);
 	}
-	inline int call_specific_type_qscmp_func( const void* node_a_data,
-		const void* node_b_data )
+	inline int call_specific_type_qscmp_func(const void* node_a_data,
+		const void* node_b_data)
 	{
 		return get_extras_fp_group().get_specific_type_qscmp_fp()
-			( node_a_data, node_b_data );
+			(node_a_data, node_b_data);
 	}
 	
-	inline void call_insertion_sort_inner_loop_func( s32& index_low )
+	inline void call_insertion_sort_inner_loop_func(s32& index_low)
 	{
 		get_extras_fp_group().get_insertion_sort_inner_loop_fp()
-			( get_node_array(), &index_low );
+			(get_node_array(), &index_low);
 	}
 	
 	
@@ -1107,8 +1107,8 @@ protected:		// functions
 	
 	// This Is used by frontends To the internal_func_move_unlinked_node*
 	// functions
-	void internal_func_allocate_and_assign_to_node( s32& index, 
-		NodeContents& Node, const void* n_data, u32 can_move_value );
+	void internal_func_allocate_and_assign_to_node(s32& index, 
+		NodeContents& Node, const void* n_data, u32 can_move_value);
 		__attribute__((_IWRAM_CODE));
 	
 	
@@ -1117,61 +1117,61 @@ protected:		// functions
 	
 	//// This Is its own function because it's used by both push_front() and
 	//// push_back().
-	//inline s32 internal_func_push_front_unique_code( s32 to_push_index,
-	//	NodeContents node_to_push )
+	//inline s32 internal_func_push_front_unique_code(s32 to_push_index,
+	//	NodeContents node_to_push)
 	//{
 	//}
 	
 	// push_front() CAN affect back_index
-	inline s32 push_front( const void* to_push, u32 can_move_value=false )
+	inline s32 push_front(const void* to_push, u32 can_move_value=false)
 	{
 		s32 to_push_index;
 		NodeContents node_to_push;
 		
-		internal_func_allocate_and_assign_to_node( to_push_index,
-			node_to_push, to_push, can_move_value );
+		internal_func_allocate_and_assign_to_node(to_push_index,
+			node_to_push, to_push, can_move_value);
 		
-		return internal_func_move_unlinked_node_to_front( to_push_index,
-			node_to_push );
+		return internal_func_move_unlinked_node_to_front(to_push_index,
+			node_to_push);
 	}
 	
 	// push_back() ALWAYS affects back_index
-	inline s32 push_back( const void* to_push, u32 can_move_value=false )
+	inline s32 push_back(const void* to_push, u32 can_move_value=false)
 	{
 		s32 new_index;
 		NodeContents new_node;
-		internal_func_allocate_and_assign_to_node( new_index, new_node,
-			to_push, can_move_value );
+		internal_func_allocate_and_assign_to_node(new_index, new_node,
+			to_push, can_move_value);
 		
-		return internal_func_move_unlinked_node_to_back( new_index,
-			new_node );
+		return internal_func_move_unlinked_node_to_back(new_index,
+			new_node);
 	}
 	
 	// insert_before() won't affect back_index
-	inline s32 insert_before( s32 index, const void* to_insert,
-		u32 can_move_value=false )
+	inline s32 insert_before(s32 index, const void* to_insert,
+		u32 can_move_value=false)
 	{
 		s32 to_insert_index;
 		NodeContents node_to_insert;
 		
-		internal_func_allocate_and_assign_to_node( to_insert_index,
-			node_to_insert, to_insert, can_move_value );
+		internal_func_allocate_and_assign_to_node(to_insert_index,
+			node_to_insert, to_insert, can_move_value);
 		
-		return internal_func_move_unlinked_node_before( index,
-			to_insert_index, node_to_insert );
+		return internal_func_move_unlinked_node_before(index,
+			to_insert_index, node_to_insert);
 	}
 	// insert_after() CAN affect back_index
-	inline s32 insert_after( s32 index, const void* to_insert,
-		u32 can_move_value=false )
+	inline s32 insert_after(s32 index, const void* to_insert,
+		u32 can_move_value=false)
 	{
 		s32 to_insert_index;
 		NodeContents node_to_insert;
 		
-		internal_func_allocate_and_assign_to_node( to_insert_index,
-			node_to_insert, to_insert, can_move_value );
+		internal_func_allocate_and_assign_to_node(to_insert_index,
+			node_to_insert, to_insert, can_move_value);
 		
-		return internal_func_move_unlinked_node_after( index,
-			to_insert_index, node_to_insert );
+		return internal_func_move_unlinked_node_after(index,
+			to_insert_index, node_to_insert);
 	}
 	
 	
@@ -1194,40 +1194,40 @@ protected:		// functions
 		return the_back_index;
 	}
 	
-	//s32 insert_before( s32 index, const void* to_insert,
-	//	u32 can_move_value=false );
-	//s32 insert_after( s32 index, const void* to_insert,
-	//	u32 can_move_value=false );
+	//s32 insert_before(s32 index, const void* to_insert,
+	//	u32 can_move_value=false);
+	//s32 insert_after(s32 index, const void* to_insert,
+	//	u32 can_move_value=false);
 	
 	
 	
 	// Some of the functions for internal use 
-	s32 internal_func_move_unlinked_node_to_front( s32 to_move_index, 
-		NodeContents& node_to_move );
+	s32 internal_func_move_unlinked_node_to_front(s32 to_move_index, 
+		NodeContents& node_to_move);
 		//__attribute__((_IWRAM_CODE));
 		//__attribute__((noinline));
-	inline s32 internal_func_move_unlinked_node_to_back( s32 to_move_index,
-		NodeContents& node_to_move )
+	inline s32 internal_func_move_unlinked_node_to_back(s32 to_move_index,
+		NodeContents& node_to_move)
 	{
 		// If there's nothing in the list
-		if ( get_back_index() < 0 )
+		if (get_back_index() < 0)
 		{
 			return internal_func_move_unlinked_node_to_front
-				( to_move_index, node_to_move );
+				(to_move_index, node_to_move);
 		}
 		// If there's at least one element in the list
-		else // if ( get_back_index() >= 0 )
+		else // if (get_back_index() >= 0)
 		{
 			return internal_func_move_unlinked_node_after
-				( get_back_index(), to_move_index, node_to_move );
+				(get_back_index(), to_move_index, node_to_move);
 		}
 	}
-	s32 internal_func_move_unlinked_node_before( s32 to_move_before_index, 
-		s32 to_move_index, NodeContents& node_to_move );
+	s32 internal_func_move_unlinked_node_before(s32 to_move_before_index, 
+		s32 to_move_index, NodeContents& node_to_move);
 		//__attribute__((_IWRAM_CODE));
 		//__attribute__((noinline));
-	s32 internal_func_move_unlinked_node_after( s32 to_move_after_index, 
-		s32 to_move_index, NodeContents& node_to_move );
+	s32 internal_func_move_unlinked_node_after(s32 to_move_after_index, 
+		s32 to_move_index, NodeContents& node_to_move);
 		//__attribute__((_IWRAM_CODE));
 		//__attribute__((noinline));
 	
@@ -1235,57 +1235,57 @@ protected:		// functions
 	// Give slightly more flexibility, at the expense of a small amount of
 	// speed, To this function by allowing a pointer To the
 	// node_at_index be passed To it.
-	void* internal_func_unlink_at( s32 index, 
-		NodeContents* node_at_index_ptr=NULL );
+	void* internal_func_unlink_at(s32 index, 
+		NodeContents* node_at_index_ptr=NULL);
 		//__attribute__((_IWRAM_CODE));
 		//__attribute__((noinline));
 	
 	
-	//void internal_func_unlink_from_connected_index_at( s32 index, 
-	//	u32 index_to_vec2 ); 
+	//void internal_func_unlink_from_connected_index_at(s32 index, 
+	//	u32 index_to_vec2); 
 	//	//__attribute__((_IWRAM_CODE));
 	//
-	//inline void unlink_from_next_at( s32 index )
+	//inline void unlink_from_next_at(s32 index)
 	//{
-	//	internal_func_unlink_from_connected_index_at( index, 
-	//		NodeContents::vec2_index_for_next_index );
+	//	internal_func_unlink_from_connected_index_at(index, 
+	//		NodeContents::vec2_index_for_next_index);
 	//}
-	//inline void unlink_from_prev_at( s32 index )
+	//inline void unlink_from_prev_at(s32 index)
 	//{
-	//	internal_func_unlink_from_connected_index_at( index, 
-	//		NodeContents::vec2_index_for_prev_index );
+	//	internal_func_unlink_from_connected_index_at(index, 
+	//		NodeContents::vec2_index_for_prev_index);
 	//}
 	
 	
-	inline void move_linked_node_to_front( s32 to_move_index, 
-		NodeContents& node_to_move, ListBackend& dst )
+	inline void move_linked_node_to_front(s32 to_move_index, 
+		NodeContents& node_to_move, ListBackend& dst)
 	{
-		internal_func_unlink_at( to_move_index, &node_to_move );
-		dst.internal_func_move_unlinked_node_to_front( to_move_index, 
-			node_to_move );
+		internal_func_unlink_at(to_move_index, &node_to_move);
+		dst.internal_func_move_unlinked_node_to_front(to_move_index, 
+			node_to_move);
 	}
-	inline void move_linked_node_to_back( s32 to_move_index, 
-		NodeContents& node_to_move, ListBackend& dst )
+	inline void move_linked_node_to_back(s32 to_move_index, 
+		NodeContents& node_to_move, ListBackend& dst)
 	{
-		internal_func_unlink_at( to_move_index, &node_to_move );
-		dst.internal_func_move_unlinked_node_to_back( to_move_index, 
-			node_to_move );
+		internal_func_unlink_at(to_move_index, &node_to_move);
+		dst.internal_func_move_unlinked_node_to_back(to_move_index, 
+			node_to_move);
 	}
-	inline void move_linked_node_before( s32 to_move_before_index,
+	inline void move_linked_node_before(s32 to_move_before_index,
 		s32 to_move_index, NodeContents& node_to_move, 
-		ListBackend& dst )
+		ListBackend& dst)
 	{
-		internal_func_unlink_at( to_move_index, &node_to_move );
-		dst.internal_func_move_unlinked_node_before( to_move_before_index, 
-			to_move_index, node_to_move );
+		internal_func_unlink_at(to_move_index, &node_to_move);
+		dst.internal_func_move_unlinked_node_before(to_move_before_index, 
+			to_move_index, node_to_move);
 	}
-	inline void move_linked_node_after( s32 to_move_after_index,
+	inline void move_linked_node_after(s32 to_move_after_index,
 		s32 to_move_index, NodeContents& node_to_move, 
-		ListBackend& dst )
+		ListBackend& dst)
 	{
-		internal_func_unlink_at( to_move_index, &node_to_move );
-		dst.internal_func_move_unlinked_node_after( to_move_after_index, 
-			to_move_index, node_to_move );
+		internal_func_unlink_at(to_move_index, &node_to_move);
+		dst.internal_func_move_unlinked_node_after(to_move_after_index, 
+			to_move_index, node_to_move);
 	}
 	
 	
@@ -1294,14 +1294,14 @@ protected:		// functions
 	// It Is (slightly) faster To just unlink a Node than it Is To erase it
 	// because erase_at() ALSO resets the data of the Node.  Use caution
 	// when using this function!
-	inline void* unlink_at_with_dealloc( s32 index )
+	inline void* unlink_at_with_dealloc(s32 index)
 	{
 		get_free_list_backend().push(index);
 		
 		return internal_func_unlink_at(index);
 	}
 	
-	inline void erase_at( s32 index )
+	inline void erase_at(s32 index)
 	{
 		get_extras_fp_group().get_specific_type_reset_fp()
 			(unlink_at_with_dealloc(index));
@@ -1319,15 +1319,15 @@ protected:		// functions
 	//// These two functions are slowwwwwww because there Is too much list
 	//// traversal.  Thus, I have replaced them with an array of pointers
 	//// based method.
-	//s32 internal_func_merge( merge_args& args )
+	//s32 internal_func_merge(merge_args& args)
 	//	__attribute__((_IWRAM_CODE));
 	//s32 merge_sort() __attribute__((_IWRAM_CODE));
 	
 	
 	
-	void internal_func_subarr_merge( NodeDataAndIndex* left_subarr,
+	void internal_func_subarr_merge(NodeDataAndIndex* left_subarr,
 		const size_t left_subarr_size, NodeDataAndIndex* right_subarr, 
-		const size_t right_subarr_size, NodeDataAndIndex* out_subarr );
+		const size_t right_subarr_size, NodeDataAndIndex* out_subarr);
 		//__attribute__((_IWRAM_CODE));
 	
 	// Top-down merge sort using an array of NodeDataAndIndex's.
@@ -1366,12 +1366,12 @@ public:		// functions
 	{
 	}
 	inline ExternallyAllocatedList
-		( Node<type>* s_node_array, 
+		(Node<type>* s_node_array, 
 		SaFreeListBackend* s_the_free_list_backend_ptr,
-		u32 s_total_num_nodes )
+		u32 s_total_num_nodes)
 	{
-		init( s_node_array, s_the_free_list_backend_ptr,
-			s_total_num_nodes );
+		init(s_node_array, s_the_free_list_backend_ptr,
+			s_total_num_nodes);
 	}
 	
 	inline ~ExternallyAllocatedList()
@@ -1380,31 +1380,31 @@ public:		// functions
 	}
 	
 	
-	void init( Node<type>* n_node_array, 
+	void init(Node<type>* n_node_array, 
 		SaFreeListBackend* n_the_free_list_backend_ptr,
-		u32 n_total_num_nodes ) __attribute__((noinline))
+		u32 n_total_num_nodes) __attribute__((noinline))
 	{
 		node_array = n_node_array;
 		the_free_list_backend_ptr = n_the_free_list_backend_ptr;
 		total_num_nodes = n_total_num_nodes;
 		
-		the_list_backend.init( get_node_array(),
+		the_list_backend.init(get_node_array(),
 			the_free_list_backend_ptr, get_total_num_nodes(),
 			sizeof(type), sizeof(Node<type>),
-			extras_type::get_extras_fp_group() );
+			extras_type::get_extras_fp_group());
 		
-		//static auto specific_type_copy = []( type* a, type* b ) -> void 
+		//static auto specific_type_copy = [](type* a, type* b) -> void 
 		//	{ *a = *b; };
-		//static auto specific_type_move = []( type* a, type* b ) -> void
+		//static auto specific_type_move = [](type* a, type* b) -> void
 		//	{ *a = std::move(*b); };
-		//static auto specific_type_reset = []( type* a ) -> void
+		//static auto specific_type_reset = [](type* a) -> void
 		//	{ *a = type(); };
-		//static auto specific_type_less = []( type* a, type* b ) -> u32
+		//static auto specific_type_less = [](type* a, type* b) -> u32
 		//	{ return (*a) < (*b); };
 		//
 		//
 		//ASM_COMMENT("the_list_backend.init()");
-		//the_list_backend.init( get_node_array(),
+		//the_list_backend.init(get_node_array(),
 		//	the_free_list_backend_ptr, get_total_num_nodes(),
 		//	sizeof(type), sizeof(Node<type>),
 		//	
@@ -1415,7 +1415,7 @@ public:		// functions
 		//	
 		//	extras_type::get_get_node_data_fp(),
 		//	extras_type::get_get_index_pair_fp(),
-		//	extras_type::get_conv_node_to_contents_fp() );
+		//	extras_type::get_conv_node_to_contents_fp());
 	}
 	
 	inline size_t& get_size()
@@ -1469,7 +1469,7 @@ public:		// functions
 	
 	
 	
-	inline Node<type>& get_node_at( s32 index )
+	inline Node<type>& get_node_at(s32 index)
 	{
 		return get_node_array()[index];
 	}
@@ -1479,13 +1479,13 @@ public:		// functions
 	}
 	
 	inline Node<type>& get_next_node_after_index
-		( s32 index )
+		(s32 index)
 	{
 		return get_node_at(get_node_at(index)
 			.next_index());
 	}
 	inline Node<type>& get_prev_node_before_index
-		( s32 index )
+		(s32 index)
 	{
 		return get_node_at(get_node_at(index)
 			.prev_index());
@@ -1502,21 +1502,21 @@ public:		// functions
 	}
 	
 	
-	inline s32 push_front( const type& to_push )
+	inline s32 push_front(const type& to_push)
 	{
 		return the_list_backend.push_front(&to_push);
 	}
-	inline s32 push_front( type&& to_push )
+	inline s32 push_front(type&& to_push)
 	{
-		return the_list_backend.push_front( &to_push, true );
+		return the_list_backend.push_front(&to_push, true);
 	}
-	inline s32 push_back( const type& to_push )
+	inline s32 push_back(const type& to_push)
 	{
 		return the_list_backend.push_back(&to_push);
 	}
-	inline s32 push_back( type&& to_push )
+	inline s32 push_back(type&& to_push)
 	{
-		return the_list_backend.push_back( &to_push, true );
+		return the_list_backend.push_back(&to_push, true);
 	}
 	
 	
@@ -1529,32 +1529,32 @@ public:		// functions
 		return the_list_backend.pop_back_basic();
 	}
 	
-	inline s32 insert_before( s32 index, const type& to_insert )
+	inline s32 insert_before(s32 index, const type& to_insert)
 	{
-		return the_list_backend.insert_before( index, &to_insert );
+		return the_list_backend.insert_before(index, &to_insert);
 	}
-	inline s32 insert_before( s32 index, type&& to_insert )
+	inline s32 insert_before(s32 index, type&& to_insert)
 	{
-		return the_list_backend.insert_before( index, &to_insert,
-			true );
-	}
-	
-	
-	
-	inline s32 insert_after( s32 index, const type& to_insert )
-	{
-		return the_list_backend.insert_after( index, &to_insert );
-	}
-	inline s32 insert_after( s32 index, type&& to_insert )
-	{
-		return the_list_backend.insert_after( index, &to_insert, true );
+		return the_list_backend.insert_before(index, &to_insert,
+			true);
 	}
 	
-	inline void erase_at( s32 index )
+	
+	
+	inline s32 insert_after(s32 index, const type& to_insert)
+	{
+		return the_list_backend.insert_after(index, &to_insert);
+	}
+	inline s32 insert_after(s32 index, type&& to_insert)
+	{
+		return the_list_backend.insert_after(index, &to_insert, true);
+	}
+	
+	inline void erase_at(s32 index)
 	{
 		the_list_backend.erase_at(index);
 	}
-	inline type&& unlink_at_with_dealloc( s32 index )
+	inline type&& unlink_at_with_dealloc(s32 index)
 	{
 		return std::move(*static_cast<type*>
 			(the_list_backend.unlink_at_with_dealloc(index)));
@@ -1568,25 +1568,25 @@ public:		// functions
 		s32& the_front_index = get_front_index();
 		
 		// Don't do anything if this list has zero or one nodes.
-		if ( the_front_index < 0 )
+		if (the_front_index < 0)
 		{
 			return the_front_index;
 		}
-		if ( get_node_at(the_front_index).next_index() < 0 )
+		if (get_node_at(the_front_index).next_index() < 0)
 		{
 			return the_front_index;
 		}
 		
-		ExternallyAllocatedList<type> sorted_list( node_array, 
-			the_free_list_backend_ptr, get_total_num_nodes() );
+		ExternallyAllocatedList<type> sorted_list(node_array, 
+			the_free_list_backend_ptr, get_total_num_nodes());
 		
 		s32& temp_front_index = sorted_list.get_front_index();
 		
 		s32 curr_index = temp_front_index;
 		
-		for ( s32 i=the_front_index;
-			i!=-1;  )
-			//i=get_node_at(i).next_index() )
+		for (s32 i=the_front_index;
+			i!=-1; )
+			//i=get_node_at(i).next_index())
 		{
 			
 			//get_free_list_backend().debug_prs32();
@@ -1596,14 +1596,14 @@ public:		// functions
 			Node<type>* node_at_j;
 			
 			// Find the lowest value at or after i.
-			for ( s32 j=index_low;
+			for (s32 j=index_low;
 				j!=-1; 
-				j=node_at_j->next_index() )
+				j=node_at_j->next_index())
 			{
 				node_at_j = &get_node_at(j);
 				
-				if ( node_at_j->data 
-					< get_node_at(index_low).data )
+				if (node_at_j->data 
+					< get_node_at(index_low).data)
 				{
 					index_low = j;
 				}
@@ -1613,7 +1613,7 @@ public:		// functions
 			//const type data_to_move = node_at_index_low.data;
 			//type* data_to_move = &node_at_index_low.data;
 			
-			if ( i == index_low )
+			if (i == index_low)
 			{
 				i = node_at_index_low.next_index();
 			}
@@ -1621,15 +1621,15 @@ public:		// functions
 			//erase_at(index_low);
 			type&& data_to_move = unlink_at_with_dealloc(index_low);
 			
-			if ( temp_front_index < 0 )
+			if (temp_front_index < 0)
 			{
 				sorted_list.push_front(std::move(data_to_move));
 				curr_index = temp_front_index;
 			}
 			else
 			{
-				sorted_list.insert_after( curr_index, 
-					std::move(data_to_move) );
+				sorted_list.insert_after(curr_index, 
+					std::move(data_to_move));
 				curr_index = sorted_list.get_node_at(curr_index)
 					.next_index();
 			}
@@ -1655,22 +1655,22 @@ public:		// functions
 		s32& the_front_index = get_front_index();
 		
 		// Don't do anything if this list has zero or one nodes.
-		if ( the_front_index < 0 )
+		if (the_front_index < 0)
 		{
 			return the_front_index;
 		}
-		if ( get_node_at(the_front_index).next_index() < 0 )
+		if (get_node_at(the_front_index).next_index() < 0)
 		{
 			return the_front_index;
 		}
 		
 		
 		//s32 temp_front_index = -1;
-		//SaListBackend<type> sorted_list( &temp_front_index, 
+		//SaListBackend<type> sorted_list(&temp_front_index, 
 		//	node_array, ptr_to_the_free_list_backend, 
-		//	total_num_nodes );
-		ExternallyAllocatedList<type> sorted_list( node_array, 
-			the_free_list_backend_ptr, get_total_num_nodes() );
+		//	total_num_nodes);
+		ExternallyAllocatedList<type> sorted_list(node_array, 
+			the_free_list_backend_ptr, get_total_num_nodes());
 		
 		s32& temp_front_index = sorted_list.get_front_index();
 		
@@ -1678,7 +1678,7 @@ public:		// functions
 		static constexpr u32 prev_index_low_arr_size = 20;
 		s32 prev_index_low_arr[prev_index_low_arr_size];
 		
-		for ( s32 i=prev_index_low_arr_size-1; i>=0; --i )
+		for (s32 i=prev_index_low_arr_size-1; i>=0; --i)
 		{
 			prev_index_low_arr[i] = 0;
 		}
@@ -1686,9 +1686,9 @@ public:		// functions
 		
 		s32 curr_index = temp_front_index;
 		
-		for ( s32 i=the_front_index;
-			i!=-1; )
-			//i=get_node_at(i).next_index() )
+		for (s32 i=the_front_index;
+			i!=-1;)
+			//i=get_node_at(i).next_index())
 		{
 			u32 num_extra_low_indices = 0;
 			
@@ -1700,17 +1700,17 @@ public:		// functions
 			type* data_at_index_low = &get_node_at(index_low).data;
 			
 			// Find the lowest value at or after i.
-			for ( s32 j=index_low;
+			for (s32 j=index_low;
 				j!=-1; 
-				j=node_at_j->next_index() )
+				j=node_at_j->next_index())
 			{
 				node_at_j = &get_node_at(j);
 				
-				if ( node_at_j->data 
-					< *data_at_index_low )
+				if (node_at_j->data 
+					< *data_at_index_low)
 				{
-					if ( num_extra_low_indices + 1 
-						< prev_index_low_arr_size )
+					if (num_extra_low_indices + 1 
+						< prev_index_low_arr_size)
 					{
 						prev_index_low_arr[num_extra_low_indices++]
 							= index_low;
@@ -1727,7 +1727,7 @@ public:		// functions
 			//const type data_to_move = node_at_index_low.data;
 			//type&& data_to_move = node_at_index_low.data
 			
-			if ( i == index_low )
+			if (i == index_low)
 			{
 				i = node_at_index_low.next_index();
 			}
@@ -1735,28 +1735,28 @@ public:		// functions
 			//erase_at(index_low);
 			type&& data_to_move = unlink_at_with_dealloc(index_low);
 			
-			if ( temp_front_index < 0 )
+			if (temp_front_index < 0)
 			{
 				sorted_list.push_front(std::move(data_to_move));
 				curr_index = temp_front_index;
 			}
 			else
 			{
-				sorted_list.insert_after( curr_index, 
-					std::move(data_to_move) );
+				sorted_list.insert_after(curr_index, 
+					std::move(data_to_move));
 				curr_index = sorted_list.get_node_at(curr_index)
 					.next_index();
 			}
 			
 			
-			for ( u32 j=0; j<num_extra_low_indices; ++j )
+			for (u32 j=0; j<num_extra_low_indices; ++j)
 			{
 				s32& curr_prev_index_low = prev_index_low_arr[j];
 				
 				Node<type>& node_at_curr_prev_index_low 
 					= get_node_at(curr_prev_index_low);
 				
-				if ( i == curr_prev_index_low )
+				if (i == curr_prev_index_low)
 				{
 					i = node_at_curr_prev_index_low.next_index();
 				}
@@ -1764,15 +1764,15 @@ public:		// functions
 				type&& curr_data_to_move = unlink_at_with_dealloc
 					(curr_prev_index_low);
 				
-				//if ( temp_front_index < 0 )
+				//if (temp_front_index < 0)
 				//{
 				//	sorted_list.push_front(std::move(data_to_move));
 				//	curr_index = temp_front_index;
 				//}
 				//else
 				{
-					sorted_list.insert_after( curr_index, 
-						std::move(curr_data_to_move) );
+					sorted_list.insert_after(curr_index, 
+						std::move(curr_data_to_move));
 					curr_index = sorted_list.get_node_at
 						(curr_index).next_index();
 				}
@@ -1802,9 +1802,9 @@ public:		// functions
 	
 	
 protected:		// functions
-	inline void internal_func_subarr_merge_2( type* left_subarr,
+	inline void internal_func_subarr_merge_2(type* left_subarr,
 		const size_t left_subarr_size, type* right_subarr, 
-		const size_t right_subarr_size, type* out_subarr )
+		const size_t right_subarr_size, type* out_subarr)
 		__attribute__((always_inline))
 	{
 		const size_t out_subarr_size = left_subarr_size 
@@ -1812,21 +1812,21 @@ protected:		// functions
 		
 		size_t i = 0, j = 0;
 		
-		for ( size_t k=0; k<out_subarr_size; ++k )
+		for (size_t k=0; k<out_subarr_size; ++k)
 		{
-			if ( i >= left_subarr_size )
+			if (i >= left_subarr_size)
 			{
 				out_subarr[k] = right_subarr[j];
 				++j;
 			}
-			else if ( j >= right_subarr_size )
+			else if (j >= right_subarr_size)
 			{
 				out_subarr[k] = left_subarr[i];
 				++i;
 			}
-			else // if ( i < left_subarr_size && j < right_subarr_size )
+			else // if (i < left_subarr_size && j < right_subarr_size)
 			{
-				if ( left_subarr[i] < right_subarr[j] )
+				if (left_subarr[i] < right_subarr[j])
 				{
 					out_subarr[k] = left_subarr[i];
 					++i;
@@ -1855,7 +1855,7 @@ public:		// functions
 		{
 		
 		size_t temp = 0;
-		while ( the_front_index >= 0 )
+		while (the_front_index >= 0)
 		{
 			arr_a[temp++] = std::move(get_node_array()[the_front_index]
 				.data);
@@ -1869,26 +1869,26 @@ public:		// functions
 		static constexpr size_t last_subarr_size = 1;
 		
 		
-		if ( last_subarr_size > 1 )
+		if (last_subarr_size > 1)
 		{
 			ASM_COMMENT("last_subarr_size > 1; before");
 			
 			size_t subarr_offset, subarr_size;
 			
 			// This Is an insertion sort of PORTIONS of arr_a.
-			for ( subarr_offset=0;
+			for (subarr_offset=0;
 				subarr_offset<real_num_nodes;
-				subarr_offset+=subarr_size )
+				subarr_offset+=subarr_size)
 			{
 				subarr_size = last_subarr_size;
 				
-				if ( subarr_offset + subarr_size >= real_num_nodes )
+				if (subarr_offset + subarr_size >= real_num_nodes)
 				{
 					subarr_size = real_num_nodes - subarr_offset;
 				}
 				
-				extras_type::subarr_insertion_sort( arr_a, subarr_offset,
-					subarr_size );
+				extras_type::subarr_insertion_sort(arr_a, subarr_offset,
+					subarr_size);
 			}
 			
 			ASM_COMMENT("last_subarr_size > 1; after");
@@ -1915,12 +1915,12 @@ public:		// functions
 		}
 		
 		// Avoid recursion
-		//for ( size_t subarr_size=first_subarr_size;
+		//for (size_t subarr_size=first_subarr_size;
 		//	subarr_size<real_num_nodes;
-		//	subarr_size*=2 )
-		for ( size_t subarr_size=real_num_nodes;
+		//	subarr_size*=2)
+		for (size_t subarr_size=real_num_nodes;
 			subarr_size>=last_subarr_size;
-			subarr_size/=2 )
+			subarr_size/=2)
 		{
 			if (do_swap)
 			{
@@ -1938,8 +1938,8 @@ public:		// functions
 				}
 			}
 			
-			auto get_merge_args = [&]( DynArr<type>& specific_arr, 
-				size_t n_left_subarr_offset ) -> void
+			auto get_merge_args = [&](DynArr<type>& specific_arr, 
+				size_t n_left_subarr_offset) -> void
 			{
 				right_subarr_offset = 0;
 				right_subarr = NULL;
@@ -1951,8 +1951,8 @@ public:		// functions
 				left_subarr_size = subarr_size;
 				
 				
-				if ( left_subarr_offset + left_subarr_size 
-					>= real_num_nodes )
+				if (left_subarr_offset + left_subarr_size 
+					>= real_num_nodes)
 				{
 					left_subarr_size = real_num_nodes - left_subarr_offset;
 					return;
@@ -1964,8 +1964,8 @@ public:		// functions
 				right_subarr = &(specific_arr[right_subarr_offset]);
 				right_subarr_size = subarr_size;
 				
-				if ( right_subarr_offset + right_subarr_size 
-					>= real_num_nodes )
+				if (right_subarr_offset + right_subarr_size 
+					>= real_num_nodes)
 				{
 					right_subarr_size = real_num_nodes 
 						- right_subarr_offset;
@@ -1974,24 +1974,24 @@ public:		// functions
 				
 			};
 			
-			get_merge_args( *main_arr_pc_pair.curr, 0 );
+			get_merge_args(*main_arr_pc_pair.curr, 0);
 			
-			for ( size_t i=0; i<real_num_nodes; i+=subarr_size*2 )
+			for (size_t i=0; i<real_num_nodes; i+=subarr_size*2)
 			{
-				internal_func_subarr_merge_2( left_subarr, 
+				internal_func_subarr_merge_2(left_subarr, 
 					left_subarr_size, right_subarr, right_subarr_size,
-					&((*secondary_arr_pc_pair.curr)[i]) );
+					&((*secondary_arr_pc_pair.curr)[i]));
 				
-				//if ( i + ( subarr_size * 2 ) < real_num_nodes )
+				//if (i + (subarr_size * 2) < real_num_nodes)
 				{
-					get_merge_args( *main_arr_pc_pair.curr, 
-						i + ( subarr_size * 2 ) );
+					get_merge_args(*main_arr_pc_pair.curr, 
+						i + (subarr_size * 2));
 				}
 			}
 			
 			if (!do_swap)
 			{
-				for ( s32 i=real_num_nodes-1; i>=0; --i )
+				for (s32 i=real_num_nodes-1; i>=0; --i)
 				{
 					arr_a[i] = work_arr[i];
 				}
@@ -1999,19 +1999,19 @@ public:		// functions
 			
 		}
 		
-		//if ( last_subarr_size > 1 )
+		//if (last_subarr_size > 1)
 		//{
-		//	extras_type::subarr_insertion_sort( (*main_arr_pc_pair.prev), 
-		//		0, real_num_nodes );
+		//	extras_type::subarr_insertion_sort((*main_arr_pc_pair.prev), 
+		//		0, real_num_nodes);
 		//}
 		
-		for ( s32 i=real_num_nodes-1; i>=0; --i )
+		for (s32 i=real_num_nodes-1; i>=0; --i)
 		{
 			//s32 curr_index = (*main_arr_pc_pair.prev)[i]
 			push_front((*main_arr_pc_pair.prev)[i]);
 		}
 		
-		//if ( last_subarr_size > 1 )
+		//if (last_subarr_size > 1)
 		//{
 		//	insertion_sort();
 		//}
@@ -2045,11 +2045,11 @@ public:		// functions
 	
 	inline SaArrayOfLists()
 	{
-		for ( s32 i=(s32)get_array_size()-1; i>=0; --i )
+		for (s32 i=(s32)get_array_size()-1; i>=0; --i)
 		{
-			ea_list_array[i].init( node_array,
+			ea_list_array[i].init(node_array,
 				&the_free_list.the_sa_free_list_backend, 
-				get_total_num_nodes() );
+				get_total_num_nodes());
 		}
 		
 		

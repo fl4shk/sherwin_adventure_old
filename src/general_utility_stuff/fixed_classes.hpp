@@ -28,18 +28,18 @@ class Fixed24p8;
 class Fixed8p8;
 
 
-//extern Fixed24p8 f24p8_div_by_f8p8( const Fixed24p8& num, 
-//	const Fixed8p8& den ) __attribute__((_IWRAM_CODE));
-Fixed24p8 f24p8_div_by_f8p8( const Fixed24p8& num, const Fixed8p8& den ) 
+//extern Fixed24p8 f24p8_div_by_f8p8(const Fixed24p8& num, 
+//	const Fixed8p8& den) __attribute__((_IWRAM_CODE));
+Fixed24p8 f24p8_div_by_f8p8(const Fixed24p8& num, const Fixed8p8& den) 
 	__attribute__((_IWRAM_CODE,_TARGET_ARM));
-Fixed24p8 f24p8_div_by_f24p8( const Fixed24p8& num, const Fixed24p8& den ) 
+Fixed24p8 f24p8_div_by_f24p8(const Fixed24p8& num, const Fixed24p8& den) 
 	__attribute__((_IWRAM_CODE,_TARGET_ARM));
-Fixed24p8 f24p8_div_by_u16( const Fixed24p8& num, u16 den )
+Fixed24p8 f24p8_div_by_u16(const Fixed24p8& num, u16 den)
 	__attribute__((_IWRAM_CODE,_TARGET_ARM));
 
 
 static constexpr u32 f24p8_shift = 8;
-static constexpr u32 f24p8_frac_mask = ( 1 << f24p8_shift ) - 1;
+static constexpr u32 f24p8_frac_mask = (1 << f24p8_shift) - 1;
 
 // Underlying type Is s32, with 8 fraction bits
 // This will be the most often used fixed-point type in my GBA stuff
@@ -84,56 +84,56 @@ public:		// functions
 	// Arithmetic operator overloads
 	
 	
-	inline Fixed24p8 operator + ( const Fixed24p8& to_add ) const;
-	inline Fixed24p8 operator - ( const Fixed24p8& to_sub ) const;
+	inline Fixed24p8 operator + (const Fixed24p8& to_add) const;
+	inline Fixed24p8 operator - (const Fixed24p8& to_sub) const;
 	
-	//inline Fixed24p8 operator * ( const Fixed24p8& to_mul ) const;
-	Fixed24p8 operator * ( const Fixed24p8& to_mul ) const
+	//inline Fixed24p8 operator * (const Fixed24p8& to_mul) const;
+	Fixed24p8 operator * (const Fixed24p8& to_mul) const
 		__attribute__((_IWRAM_CODE,_TARGET_ARM));
 	inline Fixed24p8 guaranteed_f24p8_by_f8p8_multiplication
-		( const Fixed8p8& to_mul ) const;
-	inline Fixed24p8 operator / ( const Fixed8p8& den ) const
+		(const Fixed8p8& to_mul) const;
+	inline Fixed24p8 operator / (const Fixed8p8& den) const
 	{
-		return f24p8_div_by_f8p8( (Fixed24p8){data}, den );
+		return f24p8_div_by_f8p8((Fixed24p8){data}, den);
 	}
-	inline Fixed24p8 operator / ( const Fixed24p8& den ) const
+	inline Fixed24p8 operator / (const Fixed24p8& den) const
 	{
-		return f24p8_div_by_f24p8( (Fixed24p8){data}, den );
+		return f24p8_div_by_f24p8((Fixed24p8){data}, den);
 	}
 	
-	//inline Fixed24p8 operator * ( u32 den ) const
+	//inline Fixed24p8 operator * (u32 den) const
 	//{
 	//	return {data * den};
 	//}
-	inline Fixed24p8 operator / ( u16 den ) const
+	inline Fixed24p8 operator / (u16 den) const
 	{
-		return f24p8_div_by_u16( (Fixed24p8){data}, den );
+		return f24p8_div_by_u16((Fixed24p8){data}, den);
 	}
 	
 	
-	inline Fixed24p8& operator = ( const Fixed24p8& to_copy );
-	//inline Fixed24p8& operator = ( s32 to_copy );
+	inline Fixed24p8& operator = (const Fixed24p8& to_copy);
+	//inline Fixed24p8& operator = (s32 to_copy);
 	
-	inline Fixed24p8& operator += ( const Fixed24p8& to_add );
-	inline Fixed24p8& operator -= ( const Fixed24p8& to_sub );
-	inline Fixed24p8& operator *= ( const Fixed24p8& to_mul )
+	inline Fixed24p8& operator += (const Fixed24p8& to_add);
+	inline Fixed24p8& operator -= (const Fixed24p8& to_sub);
+	inline Fixed24p8& operator *= (const Fixed24p8& to_mul)
 	{
 		*this = *this * to_mul;
 		return *this;
 	}
-	inline Fixed24p8& operator /= ( const Fixed8p8& den )
+	inline Fixed24p8& operator /= (const Fixed8p8& den)
 	{
-		data = f24p8_div_by_f8p8( (Fixed24p8){data}, den ).data;
+		data = f24p8_div_by_f8p8((Fixed24p8){data}, den).data;
 		return *this;
 	}
 	
-	//inline void operator *= ( u32 den )
+	//inline void operator *= (u32 den)
 	//{
 	//	data *= den;
 	//}
-	inline Fixed24p8& operator /= ( u16 den )
+	inline Fixed24p8& operator /= (u16 den)
 	{
-		data = f24p8_div_by_u16( (Fixed24p8){data}, den ).data;
+		data = f24p8_div_by_u16((Fixed24p8){data}, den).data;
 		return *this;
 	}
 	
@@ -141,42 +141,42 @@ public:		// functions
 	
 	
 	// Comparison operator overloads
-	inline bool operator == ( const Fixed24p8& to_cmp ) const;
-	inline bool operator != ( const Fixed24p8& to_cmp ) const;
-	inline bool operator < ( const Fixed24p8& to_cmp ) const;
-	inline bool operator > ( const Fixed24p8& to_cmp ) const;
-	inline bool operator <= ( const Fixed24p8& to_cmp ) const;
-	inline bool operator >= ( const Fixed24p8& to_cmp ) const;
+	inline bool operator == (const Fixed24p8& to_cmp) const;
+	inline bool operator != (const Fixed24p8& to_cmp) const;
+	inline bool operator < (const Fixed24p8& to_cmp) const;
+	inline bool operator > (const Fixed24p8& to_cmp) const;
+	inline bool operator <= (const Fixed24p8& to_cmp) const;
+	inline bool operator >= (const Fixed24p8& to_cmp) const;
 	
 	
 } __attribute__((_ALIGN4));
 
 
 template<>
-inline Fixed24p8 custom_abs( const Fixed24p8& val )
+inline Fixed24p8 custom_abs(const Fixed24p8& val)
 {
 	return (Fixed24p8){custom_abs<s32>(val.data)};
 }
 
 inline s32 Fixed24p8::round_to_int() const
 {
-	return (s32)( ( data + ( 1 << ( get_shift() - 1 ) ) ) >> get_shift() );
+	return (s32)((data + (1 << (get_shift() - 1))) >> get_shift());
 }
 
 inline s32 Fixed24p8::floor_to_int() const
 {
-	//if ( data < 0 )
+	//if (data < 0)
 	//{
-	//	return (s32)( ( data + ( 1 << get_shift() ) - 1 ) >> get_shift() );
+	//	return (s32)((data + (1 << get_shift()) - 1) >> get_shift());
 	//}
 	//else
 	{
-		return (s32)( data >> get_shift() );
+		return (s32)(data >> get_shift());
 	}
 	
 	//s32 ret = custom_abs(data) >> get_shift();
 	//
-	//if ( data < 0 )
+	//if (data < 0)
 	//{
 	//	ret = -ret;
 	//}
@@ -186,7 +186,7 @@ inline s32 Fixed24p8::floor_to_int() const
 
 //inline s32 Fixed24p8::true_round_via_floor() const
 //{
-//	if ( get_frac_bits() >= 0x80 )
+//	if (get_frac_bits() >= 0x80)
 //	{
 //		return floor_to_int() + 1;
 //	}
@@ -198,9 +198,9 @@ inline s32 Fixed24p8::floor_to_int() const
 //
 //inline s16 Fixed24p8::true_round_via_floor_s16() const
 //{
-//	if ( get_frac_bits() >= 0x80 )
+//	if (get_frac_bits() >= 0x80)
 //	{
-//		return (s16)( floor_to_int() + 1 );
+//		return (s16)(floor_to_int() + 1);
 //	}
 //	else
 //	{
@@ -215,7 +215,7 @@ inline Fixed24p8 Fixed24p8::with_zero_frac_bits() const
 	positive_n_value.data >>= get_shift();
 	positive_n_value.data <<= get_shift();
 	
-	if ( data < 0 )
+	if (data < 0)
 	{
 		//n_value = -positive_n_value.data;
 		return (Fixed24p8){-positive_n_value.data};
@@ -225,48 +225,48 @@ inline Fixed24p8 Fixed24p8::with_zero_frac_bits() const
 
 inline u32 Fixed24p8::get_frac_bits() const
 {
-	//if ( data < 0 )
+	//if (data < 0)
 	//{
 	//	u32 temp1 = (u32)(-data);
-	//	return (u8)( temp1 & frac_mask );
+	//	return (u8)(temp1 & frac_mask);
 	//}
 	//else
 	//{
-	//	return (u8)( data & frac_mask );
+	//	return (u8)(data & frac_mask);
 	//}
 	
-	return (u8)( custom_abs(data) & get_frac_mask() );
+	return (u8)(custom_abs(data) & get_frac_mask());
 }
 
 
 
-inline Fixed24p8 Fixed24p8::operator + ( const Fixed24p8& to_add ) const
+inline Fixed24p8 Fixed24p8::operator + (const Fixed24p8& to_add) const
 {
 	return { (s32)(data + to_add.data) };
 }
-inline Fixed24p8 Fixed24p8::operator - ( const Fixed24p8& to_sub ) const
+inline Fixed24p8 Fixed24p8::operator - (const Fixed24p8& to_sub) const
 {
 	return { (s32)(data - to_sub.data) };
 }
 
-inline Fixed24p8& Fixed24p8::operator = ( const Fixed24p8& to_copy )
+inline Fixed24p8& Fixed24p8::operator = (const Fixed24p8& to_copy)
 {
 	data = to_copy.data;
 	return *this;
 }
 
-//inline Fixed24p8& Fixed24p8::operator = ( s32 to_copy )
+//inline Fixed24p8& Fixed24p8::operator = (s32 to_copy)
 //{
 //	data = to_copy;
 //	return *this;
 //}
 
-inline Fixed24p8& Fixed24p8::operator += ( const Fixed24p8& to_add )
+inline Fixed24p8& Fixed24p8::operator += (const Fixed24p8& to_add)
 {
 	data += to_add.data;
 	return *this;
 }
-inline Fixed24p8& Fixed24p8::operator -= ( const Fixed24p8& to_sub )
+inline Fixed24p8& Fixed24p8::operator -= (const Fixed24p8& to_sub)
 {
 	data -= to_sub.data;
 	return *this;
@@ -276,29 +276,29 @@ inline Fixed24p8& Fixed24p8::operator -= ( const Fixed24p8& to_sub )
 
 
 
-inline bool Fixed24p8::operator == ( const Fixed24p8& to_cmp ) const
+inline bool Fixed24p8::operator == (const Fixed24p8& to_cmp) const
 {
-	return ( data == to_cmp.data );
+	return (data == to_cmp.data);
 }
-inline bool Fixed24p8::operator != ( const Fixed24p8& to_cmp ) const
+inline bool Fixed24p8::operator != (const Fixed24p8& to_cmp) const
 {
-	return ( data != to_cmp.data );
+	return (data != to_cmp.data);
 }
-inline bool Fixed24p8::operator < ( const Fixed24p8& to_cmp ) const
+inline bool Fixed24p8::operator < (const Fixed24p8& to_cmp) const
 {
-	return ( data < to_cmp.data );
+	return (data < to_cmp.data);
 }
-inline bool Fixed24p8::operator > ( const Fixed24p8& to_cmp ) const
+inline bool Fixed24p8::operator > (const Fixed24p8& to_cmp) const
 {
-	return ( data > to_cmp.data );
+	return (data > to_cmp.data);
 }
-inline bool Fixed24p8::operator <= ( const Fixed24p8& to_cmp ) const
+inline bool Fixed24p8::operator <= (const Fixed24p8& to_cmp) const
 {
-	return ( data <= to_cmp.data );
+	return (data <= to_cmp.data);
 }
-inline bool Fixed24p8::operator >= ( const Fixed24p8& to_cmp ) const
+inline bool Fixed24p8::operator >= (const Fixed24p8& to_cmp) const
 {
-	return ( data >= to_cmp.data );
+	return (data >= to_cmp.data);
 }
 
 
@@ -310,7 +310,7 @@ class Fixed8p8
 {
 public:		// variables
 	static constexpr u32 shift = 8;
-	static constexpr u32 frac_mask = ( 1 << shift ) - 1;
+	static constexpr u32 frac_mask = (1 << shift) - 1;
 	
 	s16 data = 0;
 	
@@ -331,22 +331,22 @@ public:		// functions
 	inline operator Fixed24p8() const;
 	
 	
-	inline Fixed8p8 operator + ( const Fixed8p8& to_add ) const;
-	inline Fixed8p8 operator - ( const Fixed8p8& to_sub ) const;
+	inline Fixed8p8 operator + (const Fixed8p8& to_add) const;
+	inline Fixed8p8 operator - (const Fixed8p8& to_sub) const;
 	
 	
-	inline Fixed8p8& operator = ( const Fixed8p8& to_copy );
-	inline Fixed8p8& operator += ( const Fixed8p8& to_add );
-	inline Fixed8p8& operator -= ( const Fixed8p8& to_sub );
+	inline Fixed8p8& operator = (const Fixed8p8& to_copy);
+	inline Fixed8p8& operator += (const Fixed8p8& to_add);
+	inline Fixed8p8& operator -= (const Fixed8p8& to_sub);
 	
 	
 	// Comparison operator overloads
-	inline bool operator == ( const Fixed8p8& to_cmp ) const;
-	inline bool operator != ( const Fixed8p8& to_cmp ) const;
-	inline bool operator < ( const Fixed8p8& to_cmp ) const;
-	inline bool operator > ( const Fixed8p8& to_cmp ) const;
-	inline bool operator <= ( const Fixed8p8& to_cmp ) const;
-	inline bool operator >= ( const Fixed8p8& to_cmp ) const;
+	inline bool operator == (const Fixed8p8& to_cmp) const;
+	inline bool operator != (const Fixed8p8& to_cmp) const;
+	inline bool operator < (const Fixed8p8& to_cmp) const;
+	inline bool operator > (const Fixed8p8& to_cmp) const;
+	inline bool operator <= (const Fixed8p8& to_cmp) const;
+	inline bool operator >= (const Fixed8p8& to_cmp) const;
 	
 	
 } __attribute__((_ALIGN4));
@@ -354,24 +354,24 @@ public:		// functions
 
 inline s16 Fixed8p8::round_to_int() const
 {
-	return (s16)( ( data + ( 1 << ( shift - 1 ) ) ) >> shift );
+	return (s16)((data + (1 << (shift - 1))) >> shift);
 }
 
 inline s16 Fixed8p8::floor_to_int() const
 {
-	//if ( data < 0 )
+	//if (data < 0)
 	//{
-	//	return (s16)( ( data + ( 1 << shift ) - 1 ) >> shift );
+	//	return (s16)((data + (1 << shift) - 1) >> shift);
 	//}
 	//else
 	{
-		return (s16)( data >> shift );
+		return (s16)(data >> shift);
 	}
 	
 	
 	//s16 ret = custom_abs(data) >> shift;
 	//
-	//if ( data < 0 )
+	//if (data < 0)
 	//{
 	//	ret = -ret;
 	//}
@@ -381,79 +381,79 @@ inline s16 Fixed8p8::floor_to_int() const
 
 inline u32 Fixed8p8::get_frac_bits() const
 {
-	//if ( data < 0 )
+	//if (data < 0)
 	//{
 	//	u16 temp1 = (u16)(-data);
-	//	return (u8)( temp1 & frac_mask );
+	//	return (u8)(temp1 & frac_mask);
 	//}
 	//else
 	//{
-	//	return (u8)( data & frac_mask );
+	//	return (u8)(data & frac_mask);
 	//}
 	
-	return (u8)( custom_abs(data) & frac_mask );
+	return (u8)(custom_abs(data) & frac_mask);
 }
 
 
 
 
-inline Fixed8p8 Fixed8p8::operator + ( const Fixed8p8& to_add ) const
+inline Fixed8p8 Fixed8p8::operator + (const Fixed8p8& to_add) const
 {
 	return { (s16)(data + to_add.data) };
 }
-inline Fixed8p8 Fixed8p8::operator - ( const Fixed8p8& to_sub ) const
+inline Fixed8p8 Fixed8p8::operator - (const Fixed8p8& to_sub) const
 {
 	return { (s16)(data - to_sub.data) };
 }
 
 inline Fixed24p8 Fixed24p8::guaranteed_f24p8_by_f8p8_multiplication
-	( const Fixed8p8& to_mul ) const
+	(const Fixed8p8& to_mul) const
 {
-	return ( (*this) * static_cast<Fixed24p8>(to_mul) );
+	return ((*this) * static_cast<Fixed24p8>(to_mul));
 }
 
 
 
-inline Fixed8p8& Fixed8p8::operator = ( const Fixed8p8& to_copy )
+inline Fixed8p8& Fixed8p8::operator = (const Fixed8p8& to_copy)
 {
 	data = to_copy.data;
 	return *this;
 }
-inline Fixed8p8& Fixed8p8::operator += ( const Fixed8p8& to_add )
+inline Fixed8p8& Fixed8p8::operator += (const Fixed8p8& to_add)
 {
 	data += to_add.data;
 	return *this;
 }
-inline Fixed8p8& Fixed8p8::operator -= ( const Fixed8p8& to_sub )
+inline Fixed8p8& Fixed8p8::operator -= (const Fixed8p8& to_sub)
 {
 	data -= to_sub.data;
 	return *this;
 }
 
 // Comparison operator overloads
-inline bool Fixed8p8::operator == ( const Fixed8p8& to_cmp ) const
+inline bool Fixed8p8::operator == (const Fixed8p8& to_cmp) const
 {
-	return ( data == to_cmp.data );
+	return (data == to_cmp.data);
 }
-inline bool Fixed8p8::operator != ( const Fixed8p8& to_cmp ) const
+inline bool Fixed8p8::operator != (const Fixed8p8& to_cmp) const
 {
-	return ( data != to_cmp.data );
+	return (data != to_cmp.data);
 }
-inline bool Fixed8p8::operator < ( const Fixed8p8& to_cmp ) const
+inline bool Fixed8p8::operator < (const Fixed8p8& to_cmp) const
 {
-	return ( data < to_cmp.data );
+	return (data < to_cmp.data);
 }
-inline bool Fixed8p8::operator > ( const Fixed8p8& to_cmp ) const
+inline bool Fixed8p8::operator > (const Fixed8p8& to_cmp) const
 {
-	return ( data > to_cmp.data );
+	return (data > to_cmp.data);
 }
-inline bool Fixed8p8::operator <= ( const Fixed8p8& to_cmp ) const
+inline bool Fixed8p8::operator <= (const Fixed8p8& to_cmp) const
 {
-	return ( data <= to_cmp.data );
+	return (data <= to_cmp.data);
 }
-inline bool Fixed8p8::operator >= ( const Fixed8p8& to_cmp ) const
+inline bool Fixed8p8::operator >= (const Fixed8p8& to_cmp) const
 {
-	return ( data >= to_cmp.data );
+	return (data >= to_cmp.data);
 }
 
 
@@ -461,7 +461,7 @@ inline bool Fixed8p8::operator >= ( const Fixed8p8& to_cmp ) const
 
 inline Fixed24p8::operator Fixed8p8() const
 {
-	if ( data < 0 )
+	if (data < 0)
 	{
 		u32 temp1 = (u32)(-data);
 		u16 temp2 = temp1 & 0xffff;
@@ -469,7 +469,7 @@ inline Fixed24p8::operator Fixed8p8() const
 	}
 	else
 	{
-		return { (s16)( data & 0xffff ) };
+		return { (s16)(data & 0xffff) };
 	}
 }
 
@@ -485,7 +485,7 @@ inline Fixed8p8::operator Fixed24p8() const
 
 //// Fixed point multiplication, with accuracy loss.  Don't do too many of
 //// these in a row because errors multiply.
-//inline Fixed24p8 operator * ( const Fixed8p8& a, const Fixed8p8& b )
+//inline Fixed24p8 operator * (const Fixed8p8& a, const Fixed8p8& b)
 //{
 //	Fixed24p8 ret;
 //	
@@ -497,18 +497,18 @@ inline Fixed8p8::operator Fixed24p8() const
 
 
 
-inline Fixed24p8 operator + ( const Fixed8p8& a, const Fixed24p8& b )
+inline Fixed24p8 operator + (const Fixed8p8& a, const Fixed24p8& b)
 {
-	return ( ((Fixed24p8)a) + b );
+	return (((Fixed24p8)a) + b);
 }
 
-inline Fixed24p8 operator - ( const Fixed8p8& a, const Fixed24p8& b )
+inline Fixed24p8 operator - (const Fixed8p8& a, const Fixed24p8& b)
 {
-	return ( ((Fixed24p8)a) - b );
+	return (((Fixed24p8)a) - b);
 }
 
 
-//inline Fixed24p8& Fixed24p8::operator *= ( const Fixed8p8& to_mul )
+//inline Fixed24p8& Fixed24p8::operator *= (const Fixed8p8& to_mul)
 //{
 //	data *= to_mul.data;
 //	data >>= Fixed24p8::get_shift();
@@ -519,7 +519,7 @@ inline Fixed24p8 operator - ( const Fixed8p8& a, const Fixed24p8& b )
 
 //// Fixed point multiplication, with accuracy loss.  Don't do too many of
 //// these in a row because errors multiply.
-//inline Fixed24p8 Fixed24p8::operator * ( const Fixed8p8& to_mul ) const
+//inline Fixed24p8 Fixed24p8::operator * (const Fixed8p8& to_mul) const
 //{
 //	Fixed24p8 ret;
 //	
@@ -534,24 +534,24 @@ inline Fixed24p8 operator - ( const Fixed8p8& a, const Fixed24p8& b )
 
 
 
-inline Fixed24p8 operator - ( const Fixed24p8& a )
+inline Fixed24p8 operator - (const Fixed24p8& a)
 {
-	return ( (Fixed24p8){ -a.data } );
+	return ((Fixed24p8){ -a.data });
 }
 
-inline Fixed8p8 operator - ( const Fixed8p8& a )
+inline Fixed8p8 operator - (const Fixed8p8& a)
 {
-	//return ( (Fixed8p8){ -(s16)(a.data) } );
+	//return ((Fixed8p8){ -(s16)(a.data) });
 	s16 ret_data = -a.data;
 	
 	return (Fixed8p8){ret_data};
 }
 
-//Fixed24p8 make_f24p8( s32 whole_part, u8 frac_part=0 ) 
+//Fixed24p8 make_f24p8(s32 whole_part, u8 frac_part=0) 
 //	__attribute__((_IWRAM_CODE));
 //
 //
-//Fixed8p8 make_f8p8( s8 whole_part, u8 frac_part=0 ) 
+//Fixed8p8 make_f8p8(s8 whole_part, u8 frac_part=0) 
 //	__attribute__((_IWRAM_CODE));
 
 
@@ -565,9 +565,9 @@ public:		// typedefs
 		specific_fixedpt_type;
 	
 public:		// variables
-	static constexpr u32 frac_mask = ( 1 << shift ) - 1;
+	static constexpr u32 frac_mask = (1 << shift) - 1;
 	//static constexpr u32 underlying_type_is_signed 
-	//	= ( underlying_type(-1) < underlying_type(0) );
+	//	= (underlying_type(-1) < underlying_type(0));
 	static constexpr u32 underlying_type_is_signed
 		= type_is_signed<underlying_type>();
 	
@@ -592,44 +592,44 @@ public:		// functions
 	
 	inline underlying_type round_to_int() const
 	{
-		return (underlying_type)( ( data + ( 1 << ( get_shift() - 1 ) ) ) 
-			>> get_shift() );
+		return (underlying_type)((data + (1 << (get_shift() - 1))) 
+			>> get_shift());
 	}
 	inline underlying_type floor_to_int() const
 	{
-		return (underlying_type)( data >> get_shift() );
+		return (underlying_type)(data >> get_shift());
 	}
 	inline u32 get_frac_bits() const
 	{
-		return (u8)( custom_abs(data) & get_frac_mask() );
+		return (u8)(custom_abs(data) & get_frac_mask());
 	}
 	
 	inline specific_fixedpt_type operator + 
-		( const specific_fixedpt_type& to_add ) const
+		(const specific_fixedpt_type& to_add) const
 	{
 		return (specific_fixedpt_type){ data + to_add.data };
 	}
 	inline specific_fixedpt_type operator - 
-		( const specific_fixedpt_type& to_sub ) const
+		(const specific_fixedpt_type& to_sub) const
 	{
 		return (specific_fixedpt_type){ data - to_sub.data };
 	}
 	
 	
 	inline specific_fixedpt_type& operator = 
-		( const specific_fixedpt_type& to_copy )
+		(const specific_fixedpt_type& to_copy)
 	{
 		data = to_copy.data;
 		return *this;
 	}
 	inline specific_fixedpt_type& operator += 
-		( const specific_fixedpt_type& to_add )
+		(const specific_fixedpt_type& to_add)
 	{
 		data += to_add.data;
 		return *this;
 	}
 	inline specific_fixedpt_type& operator -= 
-		( const specific_fixedpt_type& to_sub )
+		(const specific_fixedpt_type& to_sub)
 	{
 		data -= to_sub.data;
 		return *this;
@@ -642,9 +642,9 @@ public:		// functions
 	
 	#define GENERATE_COMPARISON_OPERATOR_OVERLOAD(specific_operator) \
 	inline bool operator specific_operator \
-		( const specific_fixedpt_type& to_cmp ) const \
+		(const specific_fixedpt_type& to_cmp) const \
 	{ \
-		return ( data specific_operator to_cmp.data ); \
+		return (data specific_operator to_cmp.data); \
 	};
 	
 	LIST_OF_COMPARISON_OPERATORS(GENERATE_COMPARISON_OPERATOR_OVERLOAD)
@@ -663,8 +663,8 @@ typedef FixedptNumPacked< s16, 8 > fixeds8p8_packed;
 
 
 template< typename specific_fixedpt_type >
-inline specific_fixedpt_type make_signed_fixedpt_num( s32 whole_part, 
-	u32 frac_part=0 )
+inline specific_fixedpt_type make_signed_fixedpt_num(s32 whole_part, 
+	u32 frac_part=0)
 {
 	static constexpr u32 shift = specific_fixedpt_type::get_shift();
 	static constexpr u32 frac_mask 
@@ -674,17 +674,17 @@ inline specific_fixedpt_type make_signed_fixedpt_num( s32 whole_part,
 	decltype(specific_fixedpt_type::data) temp_data, ret_data;
 	
 	
-	if ( whole_part < 0 )
+	if (whole_part < 0)
 	{
 		temp_data = (-whole_part) << shift;
-		temp_data |= ( frac_part & frac_mask );
+		temp_data |= (frac_part & frac_mask);
 		
 		ret_data = -temp_data;
 	}
 	else
 	{
 		temp_data = whole_part << shift;
-		temp_data |= ( frac_part & frac_mask );
+		temp_data |= (frac_part & frac_mask);
 		
 		ret_data = temp_data;
 	}
@@ -695,8 +695,8 @@ inline specific_fixedpt_type make_signed_fixedpt_num( s32 whole_part,
 
 
 template< typename specific_fixedpt_type >
-inline specific_fixedpt_type make_unsigned_fixedpt_num( u32 whole_part, 
-	u32 frac_part=0 )
+inline specific_fixedpt_type make_unsigned_fixedpt_num(u32 whole_part, 
+	u32 frac_part=0)
 {
 	static constexpr u32 shift = specific_fixedpt_type::get_shift();
 	static constexpr u32 frac_mask 
@@ -706,40 +706,40 @@ inline specific_fixedpt_type make_unsigned_fixedpt_num( u32 whole_part,
 	
 	
 	ret_data = whole_part << shift;
-	ret_data |= ( frac_part & frac_mask );
+	ret_data |= (frac_part & frac_mask);
 	
 	//return reinterpret_cast<specific_fixedpt_type>({ ret_data });
 	return (specific_fixedpt_type){ ret_data };
 }
 
 
-inline Fixed24p8 make_f24p8( s32 whole_part, u32 frac_part=0 )
+inline Fixed24p8 make_f24p8(s32 whole_part, u32 frac_part=0)
 {
-	return make_signed_fixedpt_num<Fixed24p8>( whole_part, frac_part );
+	return make_signed_fixedpt_num<Fixed24p8>(whole_part, frac_part);
 }
-inline Fixed8p8 make_f8p8( s32 whole_part, u32 frac_part=0 )
+inline Fixed8p8 make_f8p8(s32 whole_part, u32 frac_part=0)
 {
-	return make_signed_fixedpt_num<Fixed8p8>( whole_part, frac_part );
-}
-
-inline fixedu12p4_packed make_fu12p4_packed( u32 whole_part, 
-	u32 frac_part=0 )
-{
-	return make_unsigned_fixedpt_num<fixedu12p4_packed>( whole_part, 
-		frac_part );
-}
-inline fixeds12p4_packed make_fs12p4_packed( s32 whole_part, 
-	u32 frac_part=0 )
-{
-	return make_signed_fixedpt_num<fixeds12p4_packed>( whole_part, 
-		frac_part );
+	return make_signed_fixedpt_num<Fixed8p8>(whole_part, frac_part);
 }
 
-inline fixeds8p8_packed make_fs8p8_packed( s32 whole_part, 
-	u32 frac_part=0 )
+inline fixedu12p4_packed make_fu12p4_packed(u32 whole_part, 
+	u32 frac_part=0)
 {
-	return make_signed_fixedpt_num<fixeds8p8_packed>( whole_part, 
-		frac_part );
+	return make_unsigned_fixedpt_num<fixedu12p4_packed>(whole_part, 
+		frac_part);
+}
+inline fixeds12p4_packed make_fs12p4_packed(s32 whole_part, 
+	u32 frac_part=0)
+{
+	return make_signed_fixedpt_num<fixeds12p4_packed>(whole_part, 
+		frac_part);
+}
+
+inline fixeds8p8_packed make_fs8p8_packed(s32 whole_part, 
+	u32 frac_part=0)
+{
+	return make_signed_fixedpt_num<fixeds8p8_packed>(whole_part, 
+		frac_part);
 }
 
 #endif		// fixed_classes_hpp

@@ -37,7 +37,7 @@ public:		// variables
 	
 	
 public:		// functions
-	inline WaffleSprite( bool facing_left )
+	inline WaffleSprite(bool facing_left)
 	{
 		shared_constructor_code_part_1();
 		shared_constructor_code_part_2(facing_left);
@@ -60,18 +60,18 @@ public:		// functions
 	
 protected:		// functions
 	virtual void block_coll_response_left_old
-		( const BlockCollResult& lt_coll_result, 
-		const BlockCollResult& lb_coll_result );
+		(const BlockCollResult& lt_coll_result, 
+		const BlockCollResult& lb_coll_result);
 	
 	virtual void block_coll_response_right_old
-		( const BlockCollResult& rt_coll_result,
-		const BlockCollResult& rb_coll_result );
+		(const BlockCollResult& rt_coll_result,
+		const BlockCollResult& rb_coll_result);
 	
 	
 	virtual void block_coll_response_left
-		( const SprBlkCollGroupBase::HorizCollTuple& hs );
+		(const SprBlkCollGroupBase::HorizCollTuple& hs);
 	virtual void block_coll_response_right
-		( const SprBlkCollGroupBase::HorizCollTuple& hs );
+		(const SprBlkCollGroupBase::HorizCollTuple& hs);
 	
 } __attribute__((_ALIGN4));
 

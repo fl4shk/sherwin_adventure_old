@@ -33,25 +33,25 @@ protected:		// variables
 	SaFreeListBackend the_sa_free_list_backend;
 	
 public:		// functions
-	SpriteAllocator( s16* the_sa_free_list_backend_array, 
-		Sprite* s_the_array, u32 s_size );
-	SpriteAllocator( s16* the_sa_free_list_backend_array,
-		const ArrayHelper<Sprite>& s_allocatable_sprite_arr );
+	SpriteAllocator(s16* the_sa_free_list_backend_array, 
+		Sprite* s_the_array, u32 s_size);
+	SpriteAllocator(s16* the_sa_free_list_backend_array,
+		const ArrayHelper<Sprite>& s_allocatable_sprite_arr);
 	
 	////void* allocate_sprite() __attribute__((_IWRAM_CODE,hot));
 	////void* allocate_sprite() __attribute__((hot));
 	////void* allocate_sprite();
 	////void* allocate_sprite() __attribute__((_IWRAM_CODE));
-	////void deallocate_sprite( Sprite*& the_sprite )
+	////void deallocate_sprite(Sprite*& the_sprite)
 	////	__attribute__((_IWRAM_CODE));
 	//void* allocate_sprite() __attribute__((_IWRAM_CODE,cold));
-	//void deallocate_sprite( Sprite*& the_sprite )
+	//void deallocate_sprite(Sprite*& the_sprite)
 	//	__attribute__((_IWRAM_CODE,cold));
 	
 	//void* allocate_sprite() __attribute__((cold,returns_nonnull));
-	//void deallocate_sprite( Sprite*& the_sprite ) __attribute__((cold));
+	//void deallocate_sprite(Sprite*& the_sprite) __attribute__((cold));
 	void* allocate_sprite() __attribute__((_IWRAM_CODE,returns_nonnull));
-	void deallocate_sprite( Sprite& the_sprite )
+	void deallocate_sprite(Sprite& the_sprite)
 		__attribute__((_IWRAM_CODE));
 	
 	

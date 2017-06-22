@@ -53,7 +53,7 @@ void WaffleSprite::update_part_2()
 	s32& initial_pos_y = misc_data_s[sdi_initial_pos_y];
 	s32& move_timer = misc_data_s[sdi_move_timer];
 	
-	if ( !initial_pos_was_set )
+	if (!initial_pos_was_set)
 	{
 		initial_pos_was_set = true;
 		
@@ -65,9 +65,9 @@ void WaffleSprite::update_part_2()
 		move_timer = move_timer_start;
 		
 		// Facing left
-		if ( the_oam_entry.get_hflip_status() )
+		if (the_oam_entry.get_hflip_status())
 		{
-			vel.x.data = -( 1 << Fixed24p8::get_shift() );
+			vel.x.data = -(1 << Fixed24p8::get_shift());
 		}
 		
 		// Facing right
@@ -78,7 +78,7 @@ void WaffleSprite::update_part_2()
 		
 	}
 	
-	if ( move_timer <= 0 )
+	if (move_timer <= 0)
 	{
 		move_timer = move_timer_start;
 		
@@ -95,16 +95,16 @@ void WaffleSprite::update_part_2()
 
 // Physics and collision stuff
 void WaffleSprite::block_coll_response_left_old
-	( const BlockCollResult& lt_coll_result,
-	const BlockCollResult& lb_coll_result )
+	(const BlockCollResult& lt_coll_result,
+	const BlockCollResult& lb_coll_result)
 {
 	s32& move_timer = misc_data_s[sdi_move_timer];
 	
 	
-	////in_level_pos.x = make_f24p8( ( lt_coll_result.coord.x + 1 ) * 16 )
+	////in_level_pos.x = make_f24p8((lt_coll_result.coord.x + 1) * 16)
 	////	- cb_pos_offset.x;
-	//set_curr_in_level_pos_x( make_f24p8( ( lt_coll_result.coord.x + 1 ) 
-	//	* 16 ) - cb_pos_offset.x );
+	//set_curr_in_level_pos_x(make_f24p8((lt_coll_result.coord.x + 1) 
+	//	* 16) - cb_pos_offset.x);
 	
 	move_timer = move_timer_start;
 	
@@ -113,16 +113,16 @@ void WaffleSprite::block_coll_response_left_old
 
 
 void WaffleSprite::block_coll_response_right_old
-	( const BlockCollResult& rt_coll_result,
-	const BlockCollResult& rb_coll_result )
+	(const BlockCollResult& rt_coll_result,
+	const BlockCollResult& rb_coll_result)
 {
 	s32& move_timer = misc_data_s[sdi_move_timer];
 	
-	////in_level_pos.x = make_f24p8( rt_coll_result.coord.x * 16 )
+	////in_level_pos.x = make_f24p8(rt_coll_result.coord.x * 16)
 	////	- the_coll_box.size.x - cb_pos_offset.x;
 	////	//- make_f24p8(get_shape_size_as_vec2().x);
-	//set_curr_in_level_pos_x( make_f24p8( rt_coll_result.coord.x * 16 )
-	//	- the_coll_box.size.x - cb_pos_offset.x );
+	//set_curr_in_level_pos_x(make_f24p8(rt_coll_result.coord.x * 16)
+	//	- the_coll_box.size.x - cb_pos_offset.x);
 	
 	
 	move_timer = move_timer_start;
@@ -133,15 +133,15 @@ void WaffleSprite::block_coll_response_right_old
 
 
 void WaffleSprite::block_coll_response_left
-	( const SprBlkCollGroupBase::HorizCollTuple& hs )
+	(const SprBlkCollGroupBase::HorizCollTuple& hs)
 {
 	s32& move_timer = misc_data_s[sdi_move_timer];
 	
 	
-	////in_level_pos.x = make_f24p8( ( lt_coll_result.coord.x + 1 ) * 16 )
+	////in_level_pos.x = make_f24p8((lt_coll_result.coord.x + 1) * 16)
 	////	- cb_pos_offset.x;
-	//set_curr_in_level_pos_x( make_f24p8( ( lt_coll_result.coord.x + 1 ) 
-	//	* 16 ) - cb_pos_offset.x );
+	//set_curr_in_level_pos_x(make_f24p8((lt_coll_result.coord.x + 1) 
+	//	* 16) - cb_pos_offset.x);
 	push_out_of_left_block(hs.blk_crd_pos);
 	
 	move_timer = move_timer_start;
@@ -150,15 +150,15 @@ void WaffleSprite::block_coll_response_left
 }
 
 void WaffleSprite::block_coll_response_right
-	( const SprBlkCollGroupBase::HorizCollTuple& hs )
+	(const SprBlkCollGroupBase::HorizCollTuple& hs)
 {
 	s32& move_timer = misc_data_s[sdi_move_timer];
 	
-	////in_level_pos.x = make_f24p8( rt_coll_result.coord.x * 16 )
+	////in_level_pos.x = make_f24p8(rt_coll_result.coord.x * 16)
 	////	- the_coll_box.size.x - cb_pos_offset.x;
 	////	//- make_f24p8(get_shape_size_as_vec2().x);
-	//set_curr_in_level_pos_x( make_f24p8( rt_coll_result.coord.x * 16 )
-	//	- the_coll_box.size.x - cb_pos_offset.x );
+	//set_curr_in_level_pos_x(make_f24p8(rt_coll_result.coord.x * 16)
+	//	- the_coll_box.size.x - cb_pos_offset.x);
 	push_out_of_right_block(hs.blk_crd_pos);
 	
 	

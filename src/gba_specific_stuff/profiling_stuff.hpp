@@ -48,8 +48,8 @@ inline u32 profile_stop()
 	// with Timer 2.
 	reg_tm2cnt = 0;
 	
-	const u32 ret = ( ( static_cast<u32>(reg_tm3data) << 16 ) 
-		| static_cast<u32>(reg_tm2data) );
+	const u32 ret = ((static_cast<u32>(reg_tm3data) << 16) 
+		| static_cast<u32>(reg_tm2data));
 	
 	
 	return ret;
@@ -68,7 +68,7 @@ inline void show_profile_stop()
 
 
 // Profile new, delete, new[], delete[], malloc, and free.
-void profile_dynamic_allocations( size_t num_elems )
+void profile_dynamic_allocations(size_t num_elems)
 	__attribute__((_IWRAM_CODE,_TARGET_ARM));
 
 

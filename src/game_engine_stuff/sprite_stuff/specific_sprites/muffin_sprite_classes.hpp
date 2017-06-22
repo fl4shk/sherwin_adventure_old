@@ -28,7 +28,7 @@ public:		// variables
 	static const SpriteConstParams the_const_params;
 	
 public:		// functions
-	inline MuffinSprite( bool facing_left )
+	inline MuffinSprite(bool facing_left)
 	{
 		shared_constructor_code_part_1();
 		shared_constructor_code_part_2(facing_left);
@@ -48,7 +48,7 @@ public:		// variables
 	static const SpriteConstParams the_const_params;
 	
 public:		// functions
-	inline FireMuffinSprite( bool facing_left )
+	inline FireMuffinSprite(bool facing_left)
 	{
 		shared_constructor_code_part_1();
 		shared_constructor_code_part_2(facing_left);
@@ -69,7 +69,7 @@ public:		// variables
 	static const SpriteConstParams the_const_params;
 	
 public:		// functions
-	inline IceMuffinSprite( bool facing_left )
+	inline IceMuffinSprite(bool facing_left)
 	{
 		shared_constructor_code_part_1();
 		shared_constructor_code_part_2(facing_left);
@@ -89,7 +89,7 @@ public:		// variables
 	static const SpriteConstParams the_const_params;
 	
 public:		// functions
-	inline ChocolateMuffinSprite( bool facing_left )
+	inline ChocolateMuffinSprite(bool facing_left)
 	{
 		shared_constructor_code_part_1();
 		shared_constructor_code_part_2(facing_left);

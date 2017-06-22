@@ -23,7 +23,7 @@
 /* ---- #defines for Sections ---- */
 
 // Example:  __attribute__((_EWRAM))
-// Another example:  __attribute__(( _EWRAM, _ALIGN4 ))
+// Another example:  __attribute__((_EWRAM, _ALIGN4))
 
 // #defines for putting INITIAILZED stuff in EWRAM and IWRAM
 #define _EWRAM section(".data")

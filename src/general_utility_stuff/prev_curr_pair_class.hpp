@@ -43,12 +43,12 @@ public:		// functions
 		prev = curr;
 	}
 	
-	inline void back_up_and_update( const type& n_curr )
+	inline void back_up_and_update(const type& n_curr)
 	{
 		prev = std::move(curr);
 		curr = n_curr;
 	}
-	inline void back_up_and_update( type&& n_curr )
+	inline void back_up_and_update(type&& n_curr)
 	{
 		prev = std::move(curr);
 		curr = std::move(n_curr);
@@ -56,12 +56,12 @@ public:		// functions
 	
 	inline bool has_changed() const
 	{
-		return ( prev != curr );
+		return (prev != curr);
 	}
 	
 	inline operator Vec2<type>() const
 	{
-		return Vec2<type>( prev, curr );
+		return Vec2<type>(prev, curr);
 	}
 	
 	

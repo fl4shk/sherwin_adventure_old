@@ -58,27 +58,27 @@ enum intr_type
 
 
 /* ---- Defines for the flags of IE and IF ---- */
-#define IRQ_VBLANK ( 0x1 << intr_vblank )
-#define IRQ_HBLANK ( 0x1 << intr_hblank )
-#define IRQ_VCOUNT ( 0x1 << intr_vcount )
+#define IRQ_VBLANK (0x1 << intr_vblank)
+#define IRQ_HBLANK (0x1 << intr_hblank)
+#define IRQ_VCOUNT (0x1 << intr_vcount)
 
-#define IRQ_TIMER0 ( 0x1 << intr_timer0 )
-#define IRQ_TIMER1 ( 0x1 << intr_timer1 )
-#define IRQ_TIMER2 ( 0x1 << intr_timer2 )
-#define IRQ_TIMER3 ( 0x1 << intr_timer3 )
+#define IRQ_TIMER0 (0x1 << intr_timer0)
+#define IRQ_TIMER1 (0x1 << intr_timer1)
+#define IRQ_TIMER2 (0x1 << intr_timer2)
+#define IRQ_TIMER3 (0x1 << intr_timer3)
 
-#define IRQ_COM ( 0x1 << intr_com )
+#define IRQ_COM (0x1 << intr_com)
 
-#define IRQ_DMA0 ( 0x1 << intr_dma0 )
-#define IRQ_DMA1 ( 0x1 << intr_dma1 )
-#define IRQ_DMA2 ( 0x1 << intr_dma2 )
-#define IRQ_DMA3 ( 0x1 << intr_dma3 )
+#define IRQ_DMA0 (0x1 << intr_dma0)
+#define IRQ_DMA1 (0x1 << intr_dma1)
+#define IRQ_DMA2 (0x1 << intr_dma2)
+#define IRQ_DMA3 (0x1 << intr_dma3)
 
-#define IRQ_KEYPAD ( 0x1 << intr_keypad )
+#define IRQ_KEYPAD (0x1 << intr_keypad)
 
-#define IRQ_GAMEPAK ( 0x1 << intr_gamepak )
+#define IRQ_GAMEPAK (0x1 << intr_gamepak)
 
-#define IRQ_MASK ( (u16)(0x3fff) )
+#define IRQ_MASK ((u16)(0x3fff))
 
 
 
@@ -123,10 +123,10 @@ extern "C"
 	// Also
 	extern volatile isr_funcptr isr_table[intr_amount];
 	
-	void irqEnable( int mask );
+	void irqEnable(int mask);
 	
-	//void irqSet( int mask, isr_funcptr func );
-	void irqSet( int mask, u32 func_addr );
+	//void irqSet(int mask, isr_funcptr func);
+	void irqSet(int mask, u32 func_addr);
 }
 
 

@@ -37,7 +37,7 @@ std::array< BlockBaseStuff*, lim_bt > block_stuff_array
 
 
 
-bool bbvt_is_left_slope( block_behavior_type behavior_type )
+bool bbvt_is_left_slope(block_behavior_type behavior_type)
 {
 	switch (behavior_type)
 	{
@@ -57,7 +57,7 @@ bool bbvt_is_left_slope( block_behavior_type behavior_type )
 }
 
 
-bool bbvt_is_right_slope( block_behavior_type behavior_type )
+bool bbvt_is_right_slope(block_behavior_type behavior_type)
 {
 	switch (behavior_type)
 	{
@@ -78,8 +78,8 @@ bool bbvt_is_right_slope( block_behavior_type behavior_type )
 
 
 
-bool get_left_following_slope_bbvt( block_behavior_type any_slope_bbvt_in, 
-	block_behavior_type& some_slope_bbvt_out, s32& blk_crd_y_pos_offset )
+bool get_left_following_slope_bbvt(block_behavior_type any_slope_bbvt_in, 
+	block_behavior_type& some_slope_bbvt_out, s32& blk_crd_y_pos_offset)
 {
 	switch (any_slope_bbvt_in)
 	{
@@ -126,8 +126,8 @@ bool get_left_following_slope_bbvt( block_behavior_type any_slope_bbvt_in,
 	
 	return true;
 }
-bool get_right_following_slope_bbvt( block_behavior_type any_slope_bbvt_in, 
-	block_behavior_type& some_slope_bbvt_out, s32& blk_crd_y_pos_offset )
+bool get_right_following_slope_bbvt(block_behavior_type any_slope_bbvt_in, 
+	block_behavior_type& some_slope_bbvt_out, s32& blk_crd_y_pos_offset)
 {
 	switch (any_slope_bbvt_in)
 	{

@@ -36,47 +36,47 @@ static const u32 trig_lut_fixed_shift = 12;
 // functions.  Also, the returned value has a fixed-point shift of 12.
 
 // Look up a sine value
-inline s32 lut_sin( u32 theta )
+inline s32 lut_sin(u32 theta)
 {
-	return sin_table[ ( theta >> 7 ) & 0x1ff ];
+	return sin_table[(theta >> 7) & 0x1ff];
 }
 
 // Look up a cosine value
-inline s32 lut_cos( u32 theta )
+inline s32 lut_cos(u32 theta)
 {
-	return sin_table[ ( ( theta >> 7 ) + 128 ) & 0x1ff ];
+	return sin_table[((theta >> 7) + 128) & 0x1ff];
 }
 
 
 //x = y = 20;
 //
-//x += ( 4 * lut_cos (theta) ) >> trig_lut_fixed_shift; 
-//y += ( 4 * lut_sin (theta) ) >> trig_lut_fixed_shift;
+//x += (4 * lut_cos (theta)) >> trig_lut_fixed_shift; 
+//y += (4 * lut_sin (theta)) >> trig_lut_fixed_shift;
 
 
-inline Fixed24p8 lut_sin_f24p8( u32 theta )
+inline Fixed24p8 lut_sin_f24p8(u32 theta)
 {
 	return (Fixed24p8){ lut_sin(theta) 
-		>> ( trig_lut_fixed_shift - Fixed24p8::get_shift() ) };
+		>> (trig_lut_fixed_shift - Fixed24p8::get_shift()) };
 }
 
-inline Fixed24p8 lut_cos_f24p8( u32 theta )
+inline Fixed24p8 lut_cos_f24p8(u32 theta)
 {
 	return (Fixed24p8){ lut_cos(theta) 
-		>> ( trig_lut_fixed_shift - Fixed24p8::get_shift() ) };
+		>> (trig_lut_fixed_shift - Fixed24p8::get_shift()) };
 }
 
 
-inline Fixed8p8 lut_sin_f8p8( u32 theta )
+inline Fixed8p8 lut_sin_f8p8(u32 theta)
 {
-	return (Fixed8p8){ (s16)( lut_sin(theta) 
-		>> ( trig_lut_fixed_shift - Fixed8p8::shift ) ) };
+	return (Fixed8p8){ (s16)(lut_sin(theta) 
+		>> (trig_lut_fixed_shift - Fixed8p8::shift)) };
 }
 
-inline Fixed8p8 lut_cos_f8p8( u32 theta )
+inline Fixed8p8 lut_cos_f8p8(u32 theta)
 {
-	return (Fixed8p8){ (s16)( lut_cos(theta) 
-		>> ( trig_lut_fixed_shift - Fixed8p8::shift ) ) };
+	return (Fixed8p8){ (s16)(lut_cos(theta) 
+		>> (trig_lut_fixed_shift - Fixed8p8::shift)) };
 }
 
 

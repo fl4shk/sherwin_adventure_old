@@ -27,55 +27,55 @@
 u32 BlockCollResultRectGroup::temp_debug_thing;
 
 BlockCollResultRectGroup::BlockCollResultRectGroup() 
-	: start_pos( 0, 0 ), real_size_2d( 1, 1 ), moving_left(false), 
+	: start_pos(0, 0), real_size_2d(1, 1), moving_left(false), 
 	moving_right(false)
 {
 	//ASM_COMMENT("constructor type 1");
-	//memset( bcr_arr_csz_2d_helper_data, 0, sizeof(bcr_arr_csz_2d_helper_data) );
+	//memset(bcr_arr_csz_2d_helper_data, 0, sizeof(bcr_arr_csz_2d_helper_data));
 	
-	//arr_memfill32( bcr_arr_csz_2d_helper_data, 0, max_size );
-	//start_pos = vec2_s32( 0, 0 );
-	//real_size_2d = vec2_s32( 1, 1 );
+	//arr_memfill32(bcr_arr_csz_2d_helper_data, 0, max_size);
+	//start_pos = vec2_s32(0, 0);
+	//real_size_2d = vec2_s32(1, 1);
 	//
 	//moving_left = moving_right = false;
 	
 	init_bcr_arr_csz_2d_helper();
 	
-	for ( s32 j=0; j<real_height(); ++j )
+	for (s32 j=0; j<real_height(); ++j)
 	{
-		for ( s32 i=0; i<real_width(); ++i )
+		for (s32 i=0; i<real_width(); ++i)
 		{
-			at( i, j ) = BlockCollResult( tl_corner() 
-				+ vec2_s32( i, j ) );
+			at(i, j) = BlockCollResult(tl_corner() 
+				+ vec2_s32(i, j));
 		}
 	}
 }
 
 BlockCollResultRectGroup::BlockCollResultRectGroup
-	( const CollBox& the_coll_box, u32 s_moving_left, u32 s_moving_right )
+	(const CollBox& the_coll_box, u32 s_moving_left, u32 s_moving_right)
 {
 	//ASM_COMMENT("constructor type 2");
-	//memset( bcr_arr_csz_2d_helper_data, 0, sizeof(bcr_arr_csz_2d_helper_data) );
+	//memset(bcr_arr_csz_2d_helper_data, 0, sizeof(bcr_arr_csz_2d_helper_data));
 	
-	//arr_memfill32( bcr_arr_csz_2d_helper_data, 0, max_size );
+	//arr_memfill32(bcr_arr_csz_2d_helper_data, 0, max_size);
 	
-	start_pos = ActiveLevel::get_block_coord_of_point( vec2_f24p8
-		( the_coll_box.left(), the_coll_box.top() ) );
+	start_pos = ActiveLevel::get_block_coord_of_point(vec2_f24p8
+		(the_coll_box.left(), the_coll_box.top()));
 	const vec2_s32 end_pos = ActiveLevel::get_block_coord_of_point
-		( vec2_f24p8( the_coll_box.right(), the_coll_box.bot() ) );
-	real_size_2d = end_pos - start_pos + vec2_s32( 1, 1 );
+		(vec2_f24p8(the_coll_box.right(), the_coll_box.bot()));
+	real_size_2d = end_pos - start_pos + vec2_s32(1, 1);
 	
 	moving_left = s_moving_left;
 	moving_right = s_moving_right;
 	
 	init_bcr_arr_csz_2d_helper();
 	
-	for ( s32 j=0; j<real_height(); ++j )
+	for (s32 j=0; j<real_height(); ++j)
 	{
-		for ( s32 i=0; i<real_width(); ++i )
+		for (s32 i=0; i<real_width(); ++i)
 		{
-			at( i, j ) = BlockCollResult( tl_corner() 
-				+ vec2_s32( i, j ) );
+			at(i, j) = BlockCollResult(tl_corner() 
+				+ vec2_s32(i, j));
 		}
 	}
 	
@@ -85,15 +85,15 @@ BlockCollResultRectGroup::BlockCollResultRectGroup
 
 
 BlockCollResultRectGroup::BlockCollResultRectGroup
-	( const BlockCollResultRectGroup& to_copy )
+	(const BlockCollResultRectGroup& to_copy)
 {
 	*this = to_copy;
 }
 BlockCollResultRectGroup& BlockCollResultRectGroup::operator = 
-	( const BlockCollResultRectGroup& to_copy )
+	(const BlockCollResultRectGroup& to_copy)
 {
-	arr_memcpy32( (BlockCollResult*)bcr_arr_csz_2d_helper_data, 
-		to_copy.bcr_arr_csz_2d_helper_data, max_size );
+	arr_memcpy32((BlockCollResult*)bcr_arr_csz_2d_helper_data, 
+		to_copy.bcr_arr_csz_2d_helper_data, max_size);
 	
 	start_pos = to_copy.start_pos;
 	
@@ -105,47 +105,47 @@ BlockCollResultRectGroup& BlockCollResultRectGroup::operator =
 	return *this;
 }
 
-void BcrLsegGroup::init( const HorizCollLseg& the_coll_lseg )
+void BcrLsegGroup::init(const HorizCollLseg& the_coll_lseg)
 {
 	start_pos = ActiveLevel::get_block_coord_of_point
-		( the_coll_lseg.left_pt() );
+		(the_coll_lseg.left_pt());
 	const vec2_s32 end_pos = ActiveLevel::get_block_coord_of_point
-		( the_coll_lseg.right_pt() );
+		(the_coll_lseg.right_pt());
 	real_size = end_pos.x - start_pos.x + 1;
 	is_horiz = true;
 	
 	
-	//for ( s32 i=0; i<get_real_size(); ++i )
-	for ( s32 i=get_real_size()-1; i>=0; --i )
+	//for (s32 i=0; i<get_real_size(); ++i)
+	for (s32 i=get_real_size()-1; i>=0; --i)
 	{
-		at(i) = BlockCollResult( get_start_pos() + get_horiz_offset(i) );
+		at(i) = BlockCollResult(get_start_pos() + get_horiz_offset(i));
 	}
 	
 }
-void BcrLsegGroup::init( const VertCollLseg& the_coll_lseg )
+void BcrLsegGroup::init(const VertCollLseg& the_coll_lseg)
 {
 	start_pos = ActiveLevel::get_block_coord_of_point
-		( the_coll_lseg.top_pt() );
+		(the_coll_lseg.top_pt());
 	const vec2_s32 end_pos = ActiveLevel::get_block_coord_of_point
-		( the_coll_lseg.bot_pt() );
+		(the_coll_lseg.bot_pt());
 	real_size = end_pos.y - start_pos.y + 1;
 	is_horiz = false;
 	
 	
-	//for ( s32 i=0; i<get_real_size(); ++i )
-	for ( s32 i=get_real_size()-1; i>=0; --i )
+	//for (s32 i=0; i<get_real_size(); ++i)
+	for (s32 i=get_real_size()-1; i>=0; --i)
 	{
-		at(i) = BlockCollResult( get_start_pos() + get_vert_offset(i) );
+		at(i) = BlockCollResult(get_start_pos() + get_vert_offset(i));
 	}
 	
 }
 
 BlockCollResult* BcrLsegGroup::horiz_any_bbvt_is_fully_solid
-	( vec2_s32& pos )
+	(vec2_s32& pos)
 {
-	for ( s32 i=0; i<get_real_size(); ++i )
+	for (s32 i=0; i<get_real_size(); ++i)
 	{
-		if ( bbvt_is_fully_solid(at(i).get_bbvt()) )
+		if (bbvt_is_fully_solid(at(i).get_bbvt()))
 		{
 			pos = get_start_pos() + get_horiz_offset(i);
 			return &(at(i));
@@ -155,11 +155,11 @@ BlockCollResult* BcrLsegGroup::horiz_any_bbvt_is_fully_solid
 	return NULL;
 }
 BlockCollResult* BcrLsegGroup::vert_any_bbvt_is_fully_solid
-	( vec2_s32& pos )
+	(vec2_s32& pos)
 {
-	for ( s32 i=0; i<get_real_size(); ++i )
+	for (s32 i=0; i<get_real_size(); ++i)
 	{
-		if ( bbvt_is_fully_solid(at(i).get_bbvt()) )
+		if (bbvt_is_fully_solid(at(i).get_bbvt()))
 		{
 			pos = get_start_pos() + get_vert_offset(i);
 			return &(at(i));
@@ -168,11 +168,11 @@ BlockCollResult* BcrLsegGroup::vert_any_bbvt_is_fully_solid
 	
 	return NULL;
 }
-BlockCollResult* BcrLsegGroup::vert_any_bbvt_is_slope( vec2_s32& pos )
+BlockCollResult* BcrLsegGroup::vert_any_bbvt_is_slope(vec2_s32& pos)
 {
-	for ( s32 i=0; i<get_real_size(); ++i )
+	for (s32 i=0; i<get_real_size(); ++i)
 	{
-		if ( bbvt_is_slope(at(i).get_bbvt()) )
+		if (bbvt_is_slope(at(i).get_bbvt()))
 		{
 			pos = get_start_pos() + get_vert_offset(i);
 			return &(at(i));

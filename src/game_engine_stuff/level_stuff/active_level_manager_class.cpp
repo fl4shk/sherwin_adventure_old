@@ -31,8 +31,8 @@ u32 ActiveLevelManager::converted_block_tile_ids_0[lim_bt],
 	ActiveLevelManager::converted_block_tile_ids_2[lim_bt],
 	ActiveLevelManager::converted_block_tile_ids_3[lim_bt];
 
-scr_entry ActiveLevelManager::horiz_sublevel_tile_at_basic( u32 tile_x, 
-	u32 tile_y )
+scr_entry ActiveLevelManager::horiz_sublevel_tile_at_basic(u32 tile_x, 
+	u32 tile_y)
 {
 	//return the_block_ids_2d
 	
@@ -45,15 +45,15 @@ scr_entry ActiveLevelManager::horiz_sublevel_tile_at_basic( u32 tile_x,
 	//offset_2d.y * size_2d.x + offset_2d.x
 	block_type the_block_type;
 	
-	if ( block_y * ActiveLevel::horiz_sublevel_block_data_2d.width() 
-		+ block_x > ActiveLevel::horiz_sublevel_block_data_2d.get_size() )
+	if (block_y * ActiveLevel::horiz_sublevel_block_data_2d.width() 
+		+ block_x > ActiveLevel::horiz_sublevel_block_data_2d.get_size())
 	{
 		the_block_type = bt_air;
 	}
 	else
 	{
 		the_block_type = ActiveLevel::horiz_sublevel_block_data_2d.at
-			( block_x, block_y ).get_block_type();
+			(block_x, block_y).get_block_type();
 	}
 	
 	
@@ -66,43 +66,43 @@ scr_entry ActiveLevelManager::horiz_sublevel_tile_at_basic( u32 tile_x,
 	
 	
 	// First inner row
-	if ( inner_block_y == 0 )
+	if (inner_block_y == 0)
 	{
-		if ( inner_block_x == 0 )
+		if (inner_block_x == 0)
 		{
-			return (u16)( ( SE_ID( the_metatile_id 
-				* num_tiles_per_metatile ) + 0 )
-				| SE_PALBANK(the_palette_id) );
+			return (u16)((SE_ID(the_metatile_id 
+				* num_tiles_per_metatile) + 0)
+				| SE_PALBANK(the_palette_id));
 		}
-		else //if ( inner_block_x == 1 )
+		else //if (inner_block_x == 1)
 		{
-			return (u16)( SE_ID ( ( the_metatile_id 
-				* num_tiles_per_metatile ) + 1 ) 
-				| SE_PALBANK(the_palette_id) );
+			return (u16)(SE_ID ((the_metatile_id 
+				* num_tiles_per_metatile) + 1) 
+				| SE_PALBANK(the_palette_id));
 		}
 	}
 	// Second inner row
-	else //if ( inner_block_y == 1 )
+	else //if (inner_block_y == 1)
 	{
-		if ( inner_block_x == 0 )
+		if (inner_block_x == 0)
 		{
-			return (u16)( SE_ID( ( the_metatile_id 
-				* num_tiles_per_metatile ) + 2 ) 
-				| SE_PALBANK(the_palette_id) );
+			return (u16)(SE_ID((the_metatile_id 
+				* num_tiles_per_metatile) + 2) 
+				| SE_PALBANK(the_palette_id));
 		}
-		else //if ( inner_block_x == 1 )
+		else //if (inner_block_x == 1)
 		{
-			return (u16)( SE_ID( ( the_metatile_id 
-				* num_tiles_per_metatile ) + 3 )
-				| SE_PALBANK(the_palette_id) );
+			return (u16)(SE_ID((the_metatile_id 
+				* num_tiles_per_metatile) + 3)
+				| SE_PALBANK(the_palette_id));
 		}
 	}
 	
 }
 
 
-scr_entry ActiveLevelManager::horiz_sublevel_tile_at( u32 tile_x, 
-	u32 tile_y )
+scr_entry ActiveLevelManager::horiz_sublevel_tile_at(u32 tile_x, 
+	u32 tile_y)
 {
 	u32 block_x = tile_x >> 0x1, block_y = tile_y >> 0x1;
 	
@@ -116,38 +116,38 @@ scr_entry ActiveLevelManager::horiz_sublevel_tile_at( u32 tile_x,
 	
 	block_type the_block_type;
 	
-	if ( block_data_array_offset < 0
+	if (block_data_array_offset < 0
 		|| block_data_array_offset 
-		> (s32)ActiveLevel::horiz_sublevel_size )
+		> (s32)ActiveLevel::horiz_sublevel_size)
 	{
 		the_block_type = bt_air;
 	}
 	else
 	{
-		//the_block_type = ActiveLevel::horiz_sublevel_block_data_2d.at( block_x,
-		//	block_y ).get_block_type();
+		//the_block_type = ActiveLevel::horiz_sublevel_block_data_2d.at(block_x,
+		//	block_y).get_block_type();
 		the_block_type = ActiveLevel::block_data_array
 			[block_data_array_offset].get_block_type();
 	}
 	
-	if ( inner_block_y == 0 )
+	if (inner_block_y == 0)
 	{
-		if ( inner_block_x == 0 )
+		if (inner_block_x == 0)
 		{
 			return converted_block_tile_ids_0[the_block_type];
 		}
-		else //if ( inner_block_x == 1 )
+		else //if (inner_block_x == 1)
 		{
 			return converted_block_tile_ids_1[the_block_type];
 		}
 	}
-	else //if ( inner_block_y == 1 )
+	else //if (inner_block_y == 1)
 	{
-		if ( inner_block_x == 0 )
+		if (inner_block_x == 0)
 		{
 			return converted_block_tile_ids_2[the_block_type];
 		}
-		else //if ( inner_block_x == 1 )
+		else //if (inner_block_x == 1)
 		{
 			return converted_block_tile_ids_3[the_block_type];
 		}
@@ -159,7 +159,7 @@ scr_entry ActiveLevelManager::horiz_sublevel_tile_at( u32 tile_x,
 
 
 void ActiveLevelManager::correct_bg0_scroll_mirror 
-	( const vec2_u32& sublevel_size_in_blocks_2d )
+	(const vec2_u32& sublevel_size_in_blocks_2d)
 {
 	//return;
 	
@@ -178,90 +178,90 @@ void ActiveLevelManager::correct_bg0_scroll_mirror
 	//bool change_frac_bits = false;
 	bool change_frac_bits = true;
 	
-	if ( sublevel_x_coord_tile < 0 )
+	if (sublevel_x_coord_tile < 0)
 	{
 		//GfxManager::bgofs_mirror[0].curr.x = 0;
 		
-		if ( change_frac_bits )
+		if (change_frac_bits)
 		{
 			GfxManager::bgofs_mirror[0].curr.x = {0};
 		}
-		else //if ( !change_frac_bits )
+		else //if (!change_frac_bits)
 		{
 			GfxManager::bgofs_mirror[0].curr.x.data 
 				= GfxManager::bgofs_mirror[0].curr.x.get_frac_bits();
 		}
 	}
 	
-	else if ( sublevel_x_coord_tile 
+	else if (sublevel_x_coord_tile 
 		> (s32)(sublevel_width_in_tiles(sublevel_size_in_blocks_2d) 
-		- screen_width_in_tiles - 1 ) )
+		- screen_width_in_tiles - 1))
 	{
-		//GfxManager::bgofs_mirror[0].curr.x = ( sublevel_width_in_tiles
+		//GfxManager::bgofs_mirror[0].curr.x = (sublevel_width_in_tiles
 		//	(sublevel_size_in_blocks_2d)
-		//	* num_pixels_per_tile_row_or_column )
+		//	* num_pixels_per_tile_row_or_column)
 		//	- SCREEN_WIDTH;
 		
-		if ( change_frac_bits )
+		if (change_frac_bits)
 		{
 			GfxManager::bgofs_mirror[0].curr.x = make_f24p8
-				( ( sublevel_width_in_tiles(sublevel_size_in_blocks_2d)
-				* num_pixels_per_tile_row_or_column ) - SCREEN_WIDTH );
+				((sublevel_width_in_tiles(sublevel_size_in_blocks_2d)
+				* num_pixels_per_tile_row_or_column) - SCREEN_WIDTH);
 		}
-		else //if ( !change_frac_bits )
+		else //if (!change_frac_bits)
 		{
 			GfxManager::bgofs_mirror[0].curr.x = make_f24p8
-				( ( sublevel_width_in_tiles(sublevel_size_in_blocks_2d)
-				* num_pixels_per_tile_row_or_column ) - SCREEN_WIDTH,
-				GfxManager::bgofs_mirror[0].curr.x.get_frac_bits() );
+				((sublevel_width_in_tiles(sublevel_size_in_blocks_2d)
+				* num_pixels_per_tile_row_or_column) - SCREEN_WIDTH,
+				GfxManager::bgofs_mirror[0].curr.x.get_frac_bits());
 		}
 	}
 	
 	
 	
-	if ( sublevel_y_coord_tile < 0 )
+	if (sublevel_y_coord_tile < 0)
 	{
 		//GfxManager::bgofs_mirror[0].curr.y = 0;
 		
-		if ( change_frac_bits )
+		if (change_frac_bits)
 		{
 			GfxManager::bgofs_mirror[0].curr.y = {0};
 		}
-		else //if ( !change_frac_bits )
+		else //if (!change_frac_bits)
 		{
 			GfxManager::bgofs_mirror[0].curr.y.data 
 				= GfxManager::bgofs_mirror[0].curr.y.get_frac_bits();
 		}
 	}
 	
-	else if ( sublevel_y_coord_tile 
+	else if (sublevel_y_coord_tile 
 		> (s32)(sublevel_height_in_tiles(sublevel_size_in_blocks_2d)
-		- screen_height_in_tiles -1 ) )
+		- screen_height_in_tiles -1))
 	{
-		//GfxManager::bgofs_mirror[0].curr.y = ( sublevel_height_in_tiles
+		//GfxManager::bgofs_mirror[0].curr.y = (sublevel_height_in_tiles
 		//	(sublevel_size_in_blocks_2d)
-		//	* num_pixels_per_tile_row_or_column )
+		//	* num_pixels_per_tile_row_or_column)
 		//	- SCREEN_HEIGHT;
 		
-		if ( change_frac_bits )
+		if (change_frac_bits)
 		{
 			GfxManager::bgofs_mirror[0].curr.y = make_f24p8
-				( ( sublevel_height_in_tiles(sublevel_size_in_blocks_2d)
-				* num_pixels_per_tile_row_or_column ) - SCREEN_HEIGHT );
+				((sublevel_height_in_tiles(sublevel_size_in_blocks_2d)
+				* num_pixels_per_tile_row_or_column) - SCREEN_HEIGHT);
 		}
-		else //if ( !change_frac_bits )
+		else //if (!change_frac_bits)
 		{
 			GfxManager::bgofs_mirror[0].curr.y = make_f24p8
-				( ( sublevel_height_in_tiles(sublevel_size_in_blocks_2d)
-				* num_pixels_per_tile_row_or_column ) - SCREEN_HEIGHT, 
-				GfxManager::bgofs_mirror[0].curr.y.get_frac_bits() );
+				((sublevel_height_in_tiles(sublevel_size_in_blocks_2d)
+				* num_pixels_per_tile_row_or_column) - SCREEN_HEIGHT, 
+				GfxManager::bgofs_mirror[0].curr.y.get_frac_bits());
 		}
 	}
 }
 
 void ActiveLevelManager::update_sublevel_in_screenblock_mirror_2d()
-	//( Array_2dHelper<scr_entry>& screenblock_mirror_2d,
-	//const vec2_u32& sublevel_size_in_blocks_2d )
+	//(Array_2dHelper<scr_entry>& screenblock_mirror_2d,
+	//const vec2_u32& sublevel_size_in_blocks_2d)
 {
 	
 	correct_bg0_scroll_mirror(ActiveLevel::get_curr_sublevel_ptr()
@@ -278,7 +278,7 @@ void ActiveLevelManager::update_sublevel_in_screenblock_mirror_2d()
 	
 	
 	// Create a list of 8x8 tile IDs for each block_type
-	for ( u32 i=0; i<lim_bt; ++i )
+	for (u32 i=0; i<lim_bt; ++i)
 	{
 		block_type the_block_type = (block_type)i;
 		
@@ -289,33 +289,33 @@ void ActiveLevelManager::update_sublevel_in_screenblock_mirror_2d()
 			(the_block_type);
 		
 		// Top-left 8x8 tile ID
-		converted_block_tile_ids_0[i] = ( ( the_metatile_id * 4 ) + 0 )
+		converted_block_tile_ids_0[i] = ((the_metatile_id * 4) + 0)
 			| SE_PALBANK(the_palette_id);
 		
 		// Top-right 8x8 tile ID
-		converted_block_tile_ids_1[i] = ( ( the_metatile_id * 4 ) + 1 )
+		converted_block_tile_ids_1[i] = ((the_metatile_id * 4) + 1)
 			| SE_PALBANK(the_palette_id);
 		
 		// Bottom-left 8x8 tile ID
-		converted_block_tile_ids_2[i] = ( ( the_metatile_id * 4 ) + 2 )
+		converted_block_tile_ids_2[i] = ((the_metatile_id * 4) + 2)
 			| SE_PALBANK(the_palette_id);
 		
 		// Bottom-right 8x8 tile ID
-		converted_block_tile_ids_3[i] = ( ( the_metatile_id * 4 ) + 3 )
+		converted_block_tile_ids_3[i] = ((the_metatile_id * 4) + 3)
 			| SE_PALBANK(the_palette_id);
 	}
 	
 	//
-	for ( u32 i=0; i<screen_width_in_tiles + 1; ++i )
+	for (u32 i=0; i<screen_width_in_tiles + 1; ++i)
 	{
-		for ( u32 j=0; j<screen_height_in_tiles + 1; ++j )
+		for (u32 j=0; j<screen_height_in_tiles + 1; ++j)
 		{
 			// Why exactly am I using un-named constants here?
 			ActiveLevel::bg0_screenblock_mirror_2d.at
-				( ( sublevel_x_coord_tile + i ) & 0x1f,
-				( sublevel_y_coord_tile + j ) & 0x1f )
-			= horiz_sublevel_tile_at( sublevel_x_coord_tile + i,
-				sublevel_y_coord_tile + j );
+				((sublevel_x_coord_tile + i) & 0x1f,
+				(sublevel_y_coord_tile + j) & 0x1f)
+			= horiz_sublevel_tile_at(sublevel_x_coord_tile + i,
+				sublevel_y_coord_tile + j);
 		}
 	}
 	
@@ -323,27 +323,27 @@ void ActiveLevelManager::update_sublevel_in_screenblock_mirror_2d()
 }
 
 void ActiveLevelManager::copy_sublevel_from_array_csz_2d_helper_to_vram()
-	//( Array_2dHelper<scr_entry>& screenblock_in_vram_2d,
-	//Array_2dHelper<scr_entry>& screenblock_mirror_2d )
+	//(Array_2dHelper<scr_entry>& screenblock_in_vram_2d,
+	//Array_2dHelper<scr_entry>& screenblock_mirror_2d)
 {
-	memcpy32( ActiveLevel::bg0_screenblock_2d.the_array, 
+	memcpy32(ActiveLevel::bg0_screenblock_2d.the_array, 
 		ActiveLevel::bg0_screenblock_mirror_2d.the_array,
 		sizeof(scr_entry) * ActiveLevel::bg0_screenblock_mirror_2d
-		.get_size() / sizeof(u32) ); 
+		.get_size() / sizeof(u32)); 
 }
 
 
 // This function has been moved To the SpriteManager class.  Also, it has
 // been updated.
 //void ActiveLevelManager::init_horiz_sublevel_sprite_ipg_lists 
-//	( const SpriteInitParamGroup* the_ext_sprite_ipg_arr, 
-//	u32 the_ext_sprite_ipg_arr_size )
+//	(const SpriteInitParamGroup* the_ext_sprite_ipg_arr, 
+//	u32 the_ext_sprite_ipg_arr_size)
 //{
 //	
-//	for ( u32 i=0; i<the_ext_sprite_ipg_arr_size; ++i )
+//	for (u32 i=0; i<the_ext_sprite_ipg_arr_size; ++i)
 //	{
-//		if ( the_ext_sprite_ipg_arr[i].type != StDefault 
-//			&& the_ext_sprite_ipg_arr[i].type != StPlayer )
+//		if (the_ext_sprite_ipg_arr[i].type != StDefault 
+//			&& the_ext_sprite_ipg_arr[i].type != StPlayer)
 //		{
 //			ActiveLevel::horiz_sublevel_sprite_ipg_lists 
 //				[the_ext_sprite_ipg_arr[i].initial_block_grid_x_coord]
@@ -352,11 +352,11 @@ void ActiveLevelManager::copy_sublevel_from_array_csz_2d_helper_to_vram()
 //	}
 //	
 //	
-//	for ( auto iter = ActiveLevel::horiz_sublevel_sprite_ipg_lists.begin(); 
+//	for (auto iter = ActiveLevel::horiz_sublevel_sprite_ipg_lists.begin(); 
 //		iter != ActiveLevel::horiz_sublevel_sprite_ipg_lists.end(); 
-//		++iter )
+//		++iter)
 //	{
-//		if ( !iter->empty() )
+//		if (!iter->empty())
 //		{
 //			iter->sort();
 //		}
@@ -369,7 +369,7 @@ void ActiveLevelManager::copy_sublevel_from_array_csz_2d_helper_to_vram()
 
 
 void ActiveLevelManager::load_level
-	( const Level* n_the_current_level_ptr )
+	(const Level* n_the_current_level_ptr)
 {
 	GameManager::curr_game_mode = gm_loading_level;
 	ActiveLevel::the_current_level_ptr = n_the_current_level_ptr;
@@ -381,17 +381,17 @@ void ActiveLevelManager::load_level
 	
 	PlayerSprite::remaining_hp = PlayerSprite::max_hp;
 	
-	for ( u32 i=0; i<ActiveLevel::max_num_sublevels; ++i )
+	for (u32 i=0; i<ActiveLevel::max_num_sublevels; ++i)
 	{
-		memfill32( ActiveLevel::persistent_block_data_arrays[i], 0, 
+		memfill32(ActiveLevel::persistent_block_data_arrays[i], 0, 
 			sizeof(ActiveLevel::persistent_block_data_arrays[i])
-			/ sizeof(u32) );
+			/ sizeof(u32));
 	}
 	
 	load_sublevel_basic(0);
 }
 
-void ActiveLevelManager::load_sublevel_basic( u32 n_sublevel_index )
+void ActiveLevelManager::load_sublevel_basic(u32 n_sublevel_index)
 {
 	GameManager::curr_game_mode = gm_changing_sublevel;
 	ActiveLevel::the_current_active_sublevel_index = n_sublevel_index;
@@ -400,10 +400,10 @@ void ActiveLevelManager::load_sublevel_basic( u32 n_sublevel_index )
 	init_horiz_sublevel_sprite_ipg_lists();
 	
 	// Decompress the Sublevel's Block data into block_data_array.
-	bios_do_lz77_uncomp_wram( ActiveLevel::get_curr_sublevel_ptr()
-		.cmp_bd_arr_helper.the_array, ActiveLevel::block_data_array );
+	bios_do_lz77_uncomp_wram(ActiveLevel::get_curr_sublevel_ptr()
+		.cmp_bd_arr_helper.the_array, ActiveLevel::block_data_array);
 	
-	for ( u32 i=0; i<ActiveLevel::block_data_array_size; ++i )
+	for (u32 i=0; i<ActiveLevel::block_data_array_size; ++i)
 	{
 		Block& the_block = ActiveLevel::block_data_array[i];
 		
@@ -424,7 +424,7 @@ void ActiveLevelManager::load_sublevel_basic( u32 n_sublevel_index )
 }
 
 void ActiveLevelManager::load_sublevel_at_intra_sublevel_warp
-	( u32 n_sublevel_index, u32 sublevel_entrance_index )
+	(u32 n_sublevel_index, u32 sublevel_entrance_index)
 {
 	GameManager::curr_game_mode = gm_changing_sublevel;
 	GfxManager::fade_out_to_black(15);
@@ -439,10 +439,10 @@ void ActiveLevelManager::load_sublevel_at_intra_sublevel_warp
 	init_horiz_sublevel_sprite_ipg_lists();
 	
 	// Decompress the Sublevel's Block data into block_data_array.
-	bios_do_lz77_uncomp_wram( ActiveLevel::get_curr_sublevel_ptr()
-		.cmp_bd_arr_helper.the_array, ActiveLevel::block_data_array );
+	bios_do_lz77_uncomp_wram(ActiveLevel::get_curr_sublevel_ptr()
+		.cmp_bd_arr_helper.the_array, ActiveLevel::block_data_array);
 	
-	for ( u32 i=0; i<ActiveLevel::block_data_array_size; ++i )
+	for (u32 i=0; i<ActiveLevel::block_data_array_size; ++i)
 	{
 		Block& the_block = ActiveLevel::block_data_array[i];
 		
@@ -454,7 +454,7 @@ void ActiveLevelManager::load_sublevel_at_intra_sublevel_warp
 	
 	
 	SpriteManager::initial_sprite_spawning_at_intra_sublevel_warp
-		( GfxManager::bgofs_mirror[0], sublevel_entrance_index );
+		(GfxManager::bgofs_mirror[0], sublevel_entrance_index);
 	update_sublevel_in_screenblock_mirror_2d();
 	
 	GameManager::curr_game_mode = gm_in_sublevel;

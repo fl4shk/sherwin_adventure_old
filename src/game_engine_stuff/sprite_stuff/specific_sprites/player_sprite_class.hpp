@@ -238,27 +238,27 @@ public:		// variables
 	
 	
 public:		// functions
-	inline PlayerSprite( bool facing_left=false )
+	inline PlayerSprite(bool facing_left=false)
 	{
 		shared_constructor_code_part_1();
 		Sprite::shared_constructor_code_part_2(facing_left);
 		shared_constructor_code_part_3();
 	}
-	//PlayerSprite( bool facing_left );
-	//PlayerSprite( const vec2_f24p8& s_in_level_pos, 
-	//	const PrevCurrPair<bg_point>& camera_pos, bool facing_left );
-	PlayerSprite( const vec2_f24p8& s_in_level_pos, 
+	//PlayerSprite(bool facing_left);
+	//PlayerSprite(const vec2_f24p8& s_in_level_pos, 
+	//	const PrevCurrPair<bg_point>& camera_pos, bool facing_left);
+	PlayerSprite(const vec2_f24p8& s_in_level_pos, 
 		const vec2_u32& the_level_size_2d, 
-		PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left );
+		PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left);
 	
 	
 	//virtual void shared_constructor_code_part_1();
-	//virtual void shared_constructor_code_part_2( bool facing_left=false );
+	//virtual void shared_constructor_code_part_2(bool facing_left=false);
 	virtual void shared_constructor_code_part_2
-		( const vec2_f24p8& s_in_level_pos, 
+		(const vec2_f24p8& s_in_level_pos, 
 		const vec2_u32& the_level_size_2d, 
 		PrevCurrPair<bg_point>& camera_pos_pc_pair,
-		bool facing_left=false );
+		bool facing_left=false);
 	
 	virtual void shared_constructor_code_part_3();
 	
@@ -277,8 +277,8 @@ public:		// functions
 	virtual void update_part_1();
 	virtual void update_part_2();
 	virtual void update_part_3
-		( PrevCurrPair<bg_point>& camera_pos_pc_pair,
-		const vec2_u32& the_sublevel_size_2d );
+		(PrevCurrPair<bg_point>& camera_pos_pc_pair,
+		const vec2_u32& the_sublevel_size_2d);
 	
 	
 	// Graphics stuff
@@ -292,22 +292,22 @@ public:		// functions
 	virtual void block_collision_stuff();
 	
 	//virtual void block_coll_response_top_16x16_old
-	//	( const BlockCollResult& tl_coll_result, 
+	//	(const BlockCollResult& tl_coll_result, 
 	//	const BlockCollResult& tm_coll_result,
-	//	const BlockCollResult& tr_coll_result );
+	//	const BlockCollResult& tr_coll_result);
 	//virtual void block_coll_response_top_16x32_old
-	//	( const BlockCollResult& tl_coll_result, 
+	//	(const BlockCollResult& tl_coll_result, 
 	//	const BlockCollResult& tm_coll_result,
-	//	const BlockCollResult& tr_coll_result );
+	//	const BlockCollResult& tr_coll_result);
 	
-	virtual void handle_jumping_stuff( u32 is_jump_key_hit, 
-		u32 is_jump_key_held ) __attribute__((_IWRAM_CODE));
+	virtual void handle_jumping_stuff(u32 is_jump_key_hit, 
+		u32 is_jump_key_held) __attribute__((_IWRAM_CODE));
 	
 	
 	// Sprite-Sprite interaction stuff
-	virtual void sprite_interaction_reponse( Sprite& the_other_sprite, 
+	virtual void sprite_interaction_reponse(Sprite& the_other_sprite, 
 		PrevCurrPair<bg_point>& camera_pos, 
-		const vec2_u32& the_level_size_2d );
+		const vec2_u32& the_level_size_2d);
 	
 	
 protected:		// functions

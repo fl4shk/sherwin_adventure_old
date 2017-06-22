@@ -30,20 +30,20 @@ extern "C"
 	
 	
 	// This Is for maxmod compatibility
-	void irqEnable( int mask )
+	void irqEnable(int mask)
 	{
 		//REG_IME = 0;
 		ime_disable();
 		
-		if ( mask & IRQ_VBLANK )
+		if (mask & IRQ_VBLANK)
 		{
 			REG_DISPSTAT |= DSTAT_VBL_IRQ;
 		}
-		if ( mask & IRQ_HBLANK )
+		if (mask & IRQ_HBLANK)
 		{
 			REG_DISPSTAT |= DSTAT_HBL_IRQ;
 		}
-		if ( mask & IRQ_VCOUNT )
+		if (mask & IRQ_VCOUNT)
 		{
 			REG_DISPSTAT |= DSTAT_VCT_IRQ;
 		}
@@ -56,11 +56,11 @@ extern "C"
 	
 	// This Is also for maxmod compatibility, written somewhat differently
 	// from That used in libgba.
-	//void irqSet( int mask, isr_funcptr func )
-	void irqSet( int mask, u32 func_addr )
+	//void irqSet(int mask, isr_funcptr func)
+	void irqSet(int mask, u32 func_addr)
 	{
 		
-		switch ( mask )
+		switch (mask)
 		{
 			case IRQ_VBLANK:
 				isr_table[intr_vblank] = (void (*)())func_addr;
@@ -136,7 +136,7 @@ void irq_init()
 	// Clear REG_IME (for safety or something)
 	ime_disable();
 	
-	for ( u32 i=0; i<intr_amount; ++i )
+	for (u32 i=0; i<intr_amount; ++i)
 	{
 		isr_table[i] = &irq_dummy;
 	}
@@ -153,14 +153,14 @@ void irq_init()
 	
 	//irqEnable(IRQ_VBLANK);
 	
-	//irqSet( IRQ_VBLANK, mmVBlank );
-	//irqSet( IRQ_VBLANK, reinterpret_cast<isr_funcptr>
-	//	(&maxmod_vblank_updater_func) );
+	//irqSet(IRQ_VBLANK, mmVBlank);
+	//irqSet(IRQ_VBLANK, reinterpret_cast<isr_funcptr>
+	//	(&maxmod_vblank_updater_func));
 	
-	//irqSet( IRQ_VBLANK, (u32)mmVBlank );
+	//irqSet(IRQ_VBLANK, (u32)mmVBlank);
 	//irqEnable(IRQ_VBLANK);
-	//mmSetVBlankHandler( reinterpret_cast<void*>
-	//	(&maxmod_vblank_updater_func) );
+	//mmSetVBlankHandler(reinterpret_cast<void*>
+	//	(&maxmod_vblank_updater_func));
 	
 	
 	// We will use isr_main() as the primary Interrupt Service Routine
@@ -181,7 +181,7 @@ void isr_main()
 {
 	// Before we leave this function, we have To acknowledge That VBlank
 	// IRQ was serviced.
-	if ( REG_IF & IRQ_VBLANK )
+	if (REG_IF & IRQ_VBLANK)
 	{
 		//mmFrame();
 		isr_table[intr_vblank]();
@@ -192,7 +192,7 @@ void isr_main()
 	}
 	
 	
-	if ( REG_IF & IRQ_TIMER0 )
+	if (REG_IF & IRQ_TIMER0)
 	{
 		isr_table[intr_timer0]();
 		

@@ -24,32 +24,32 @@
 
 #include "../halt_stuff.hpp"
 
-SpriteAllocator::SpriteAllocator( s16* the_sa_free_list_backend_array, 
-	Sprite* s_the_array, u32 s_size )
-	: ArrayHelper<Sprite>( s_the_array, s_size ),
+SpriteAllocator::SpriteAllocator(s16* the_sa_free_list_backend_array, 
+	Sprite* s_the_array, u32 s_size)
+	: ArrayHelper<Sprite>(s_the_array, s_size),
 	the_sa_free_list_backend_curr_index(0),
-	the_sa_free_list_backend( (s16*)the_sa_free_list_backend_array,
-	&the_sa_free_list_backend_curr_index, s_size )
+	the_sa_free_list_backend((s16*)the_sa_free_list_backend_array,
+	&the_sa_free_list_backend_curr_index, s_size)
 {
 }
-SpriteAllocator::SpriteAllocator( s16* the_sa_free_list_backend_array,
-	const ArrayHelper<Sprite>& s_allocatable_sprite_arr )
+SpriteAllocator::SpriteAllocator(s16* the_sa_free_list_backend_array,
+	const ArrayHelper<Sprite>& s_allocatable_sprite_arr)
 	: ArrayHelper<Sprite>(s_allocatable_sprite_arr),
 	the_sa_free_list_backend_curr_index(0),
-	the_sa_free_list_backend( (s16*)the_sa_free_list_backend_array,
+	the_sa_free_list_backend((s16*)the_sa_free_list_backend_array,
 	&the_sa_free_list_backend_curr_index, 
-	s_allocatable_sprite_arr.get_size() )
+	s_allocatable_sprite_arr.get_size())
 {
 }
 
 void* SpriteAllocator::allocate_sprite()
 {
 	//// This could definitely be faster
-	//for ( u32 i=0; i<get_size(); ++i )
+	//for (u32 i=0; i<get_size(); ++i)
 	//{
 	//	Sprite& curr_sprite = at(i);
 	//	
-	//	if ( curr_sprite.the_sprite_type == StDefault )
+	//	if (curr_sprite.the_sprite_type == StDefault)
 	//	{
 	//		return (void*)(&curr_sprite);
 	//	}
@@ -64,7 +64,7 @@ void* SpriteAllocator::allocate_sprite()
 		
 		the_sa_free_list_backend.pop();
 		
-		if ( ret.the_sprite_type != StDefault )
+		if (ret.the_sprite_type != StDefault)
 		{
 			ASM_COMMENT("BadSprite");
 			DebugArrGroup::write_str_and_inc("BadSprite");
@@ -78,8 +78,8 @@ void* SpriteAllocator::allocate_sprite()
 	ASM_COMMENT("NoFreeSprite");
 	// No free Sprite found, So at least put something in the debug vars.
 	// cout or printf would be nice here.
-	//NEXT_DEBUG_U32 = ( ( 'a' << 24 ) | ( 's' << 16 ) | ( 'p' << 8 )
-	//	| ( 'r' << 0 ) );
+	//NEXT_DEBUG_U32 = (('a' << 24) | ('s' << 16) | ('p' << 8)
+	//	| ('r' << 0));
 	
 	DebugArrGroup::write_str_and_inc("NoFreeSprite");
 	halt();
@@ -90,16 +90,16 @@ void* SpriteAllocator::allocate_sprite()
 	}
 }
 
-void SpriteAllocator::deallocate_sprite( Sprite& the_sprite )
+void SpriteAllocator::deallocate_sprite(Sprite& the_sprite)
 {
-	//if ( the_sprite == NULL )
+	//if (the_sprite == NULL)
 	//{
 	//	//DebugArrGroup::write_str_and_inc("SadsSprNULL");
 	//	//halt();
 	//	return;
 	//}
 	
-	if ( the_sprite.the_sprite_type == StDefault )
+	if (the_sprite.the_sprite_type == StDefault)
 	{
 		//DebugArrGroup::write_str_and_inc("SadsSprStDefault");
 		//halt();
@@ -120,7 +120,7 @@ void SpriteAllocator::deallocate_sprite( Sprite& the_sprite )
 	// and DON'T HAVE a the_sprite_ipg
 	if (the_sprite.the_sprite_ipg)
 	{
-		if ( the_sprite.the_sprite_ipg->spawn_state == sss_active )
+		if (the_sprite.the_sprite_ipg->spawn_state == sss_active)
 		{
 			the_sprite.the_sprite_ipg->spawn_state = sss_not_active;
 		}
@@ -140,11 +140,11 @@ void SpriteAllocator::deallocate_sprite( Sprite& the_sprite )
 	
 	//the_sprite = NULL;
 	
-	//for ( u32 i=0; i<get_size(); ++i )
+	//for (u32 i=0; i<get_size(); ++i)
 	//{
 	//	Sprite& curr_sprite = at(i);
 	//	
-	//	if ( *the_sprite == &curr_sprite )
+	//	if (*the_sprite == &curr_sprite)
 	//	{
 	//		the_sprite->~Sprite();
 	//		the_sprite = NULL;
@@ -156,8 +156,8 @@ void SpriteAllocator::deallocate_sprite( Sprite& the_sprite )
 	
 	//// No Sprite found, So at least put something in the debug vars.
 	//// cout or printf would be nice here.
-	//NEXT_DEBUG_U32 = ( ( 'd' << 24 ) | ( 's' << 16 ) | ( 'p' << 8 )
-	//	| ( 'r' << 0 ) );
+	//NEXT_DEBUG_U32 = (('d' << 24) | ('s' << 16) | ('p' << 8)
+	//	| ('r' << 0));
 }
 
 

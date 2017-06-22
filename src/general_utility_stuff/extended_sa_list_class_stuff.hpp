@@ -46,8 +46,8 @@ public:		// functions
 protected:		// functions
 	// This may be the first time I've ever made a constructor protected.
 	inline RegularListBase() : the_externally_allocated_list
-		( node_array, &the_free_list.the_sa_free_list_backend, 
-		get_total_num_nodes() ), front_index(the_externally_allocated_list
+		(node_array, &the_free_list.the_sa_free_list_backend, 
+		get_total_num_nodes()), front_index(the_externally_allocated_list
 		.get_front_index()), back_index(the_externally_allocated_list
 		.get_back_index())
 	{
@@ -100,7 +100,7 @@ protected:		// functions
 		return total_num_nodes;
 	}
 	
-	inline Node<type>& get_node_at( s32 index )
+	inline Node<type>& get_node_at(s32 index)
 	{
 		return get_node_array()[index];
 	}
@@ -120,20 +120,20 @@ protected:		// functions
 	}
 	
 	
-	inline s32 push_front( const type& to_push )
+	inline s32 push_front(const type& to_push)
 	{
 		return the_externally_allocated_list.push_front(to_push);
 	}
-	inline s32 push_front( type&& to_push )
+	inline s32 push_front(type&& to_push)
 	{
 		return the_externally_allocated_list.push_front
 			(std::move(to_push));
 	}
-	inline s32 push_back( const type& to_push )
+	inline s32 push_back(const type& to_push)
 	{
 		return the_externally_allocated_list.push_back(to_push);
 	}
-	inline s32 push_back( type&& to_push )
+	inline s32 push_back(type&& to_push)
 	{
 		return the_externally_allocated_list.push_back
 			(std::move(to_push));
@@ -149,31 +149,31 @@ protected:		// functions
 	}
 	
 	
-	inline s32 insert_before( s32 index, const type& to_insert )
+	inline s32 insert_before(s32 index, const type& to_insert)
 	{
-		return the_externally_allocated_list.insert_before( index,
-			to_insert );
+		return the_externally_allocated_list.insert_before(index,
+			to_insert);
 	}
-	inline s32 insert_before( s32 index, type&& to_insert )
+	inline s32 insert_before(s32 index, type&& to_insert)
 	{
-		return the_externally_allocated_list.insert_before( index,
-			std::move(to_insert) );
-	}
-	
-	
-	inline s32 insert_after( s32 index, const type& to_insert )
-	{
-		return the_externally_allocated_list.insert_after( index,
-			to_insert );
-	}
-	inline s32 insert_after( s32 index, type&& to_insert )
-	{
-		return the_externally_allocated_list.insert_after( index,
-			std::move(to_insert) );
+		return the_externally_allocated_list.insert_before(index,
+			std::move(to_insert));
 	}
 	
 	
-	inline void erase_at( s32 index )
+	inline s32 insert_after(s32 index, const type& to_insert)
+	{
+		return the_externally_allocated_list.insert_after(index,
+			to_insert);
+	}
+	inline s32 insert_after(s32 index, type&& to_insert)
+	{
+		return the_externally_allocated_list.insert_after(index,
+			std::move(to_insert));
+	}
+	
+	
+	inline void erase_at(s32 index)
 	{
 		the_externally_allocated_list.erase_at(index);
 	}
@@ -255,7 +255,7 @@ public:		// functions
 		return total_num_nodes;
 	}
 	
-	inline Node<type>& get_node_at( s32 index )
+	inline Node<type>& get_node_at(s32 index)
 	{
 		return base::get_node_at(index);
 	}
@@ -275,19 +275,19 @@ public:		// functions
 	}
 	
 	
-	inline s32 push_front( const type& to_push )
+	inline s32 push_front(const type& to_push)
 	{
 		return base::push_front(to_push);
 	}
-	inline s32 push_front( type&& to_push )
+	inline s32 push_front(type&& to_push)
 	{
 		return base::push_front(std::move(to_push));
 	}
-	inline s32 push_back( const type& to_push )
+	inline s32 push_back(const type& to_push)
 	{
 		return base::push_back(to_push);
 	}
-	inline s32 push_back( type&& to_push )
+	inline s32 push_back(type&& to_push)
 	{
 		return base::push_back(std::move(to_push));
 	}
@@ -302,31 +302,31 @@ public:		// functions
 	}
 	
 	
-	inline s32 insert_before( s32 index, const type& to_insert )
+	inline s32 insert_before(s32 index, const type& to_insert)
 	{
-		return base::insert_before( index,
-			to_insert );
+		return base::insert_before(index,
+			to_insert);
 	}
-	inline s32 insert_before( s32 index, type&& to_insert )
+	inline s32 insert_before(s32 index, type&& to_insert)
 	{
-		return base::insert_before( index,
-			std::move(to_insert) );
-	}
-	
-	
-	inline s32 insert_after( s32 index, const type& to_insert )
-	{
-		return base::insert_after( index,
-			to_insert );
-	}
-	inline s32 insert_after( s32 index, type&& to_insert )
-	{
-		return base::insert_after( index,
-			std::move(to_insert) );
+		return base::insert_before(index,
+			std::move(to_insert));
 	}
 	
 	
-	inline void erase_at( s32 index )
+	inline s32 insert_after(s32 index, const type& to_insert)
+	{
+		return base::insert_after(index,
+			to_insert);
+	}
+	inline s32 insert_after(s32 index, type&& to_insert)
+	{
+		return base::insert_after(index,
+			std::move(to_insert));
+	}
+	
+	
+	inline void erase_at(s32 index)
 	{
 		base::erase_at(index);
 	}
@@ -421,7 +421,7 @@ public:		// functions
 	}
 	
 	
-	inline Node<type>& get_node_at( s32 index )
+	inline Node<type>& get_node_at(s32 index)
 	{
 		return base::get_node_at(index);
 	}
@@ -431,19 +431,19 @@ public:		// functions
 		return base::front();
 	}
 	
-	inline s32 push_front( const type& to_push )
+	inline s32 push_front(const type& to_push)
 	{
 		return base::push_front(to_push);
 	}
-	inline s32 push_front( type&& to_push )
+	inline s32 push_front(type&& to_push)
 	{
 		return base::push_front(std::move(to_push));
 	}
-	inline s32 push_back( const type& to_push )
+	inline s32 push_back(const type& to_push)
 	{
 		return base::push_back(to_push);
 	}
-	inline s32 push_back( type&& to_push )
+	inline s32 push_back(type&& to_push)
 	{
 		return base::push_back(std::move(to_push));
 	}
@@ -457,14 +457,14 @@ public:		// functions
 		return base::pop_back_basic();
 	}
 	
-	inline s32 insert_and_sort( const type& to_insert )
+	inline s32 insert_and_sort(const type& to_insert)
 	{
 		push_front(to_insert);
 		
 		//return base::insertion_sort();
 		return merge_sort_via_array_2();
 	}
-	inline s32 insert_and_sort( type&& to_insert )
+	inline s32 insert_and_sort(type&& to_insert)
 	{
 		push_front(std::move(to_insert));
 		
@@ -475,7 +475,7 @@ public:		// functions
 	
 	// There Is no need To sort the list after erasing a single Node.  This
 	// Is because the list was already sorted To begin with.
-	inline void erase_at( s32 index )
+	inline void erase_at(s32 index)
 	{
 		base::erase_at(index);
 	}

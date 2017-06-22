@@ -32,14 +32,14 @@ public:		// variables
 	
 	
 public:		// functions
-	inline DoorSprite( bool facing_left )
+	inline DoorSprite(bool facing_left)
 	{
 		shared_constructor_code_part_1();
 		shared_constructor_code_part_2(facing_left);
 		shared_constructor_code_part_3();
 	}
 	
-	virtual void shared_constructor_code_part_2( bool facing_left );
+	virtual void shared_constructor_code_part_2(bool facing_left);
 	
 	inline virtual const SpriteConstParams& get_const_params() const
 	{

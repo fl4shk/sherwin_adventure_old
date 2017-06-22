@@ -32,7 +32,7 @@ const BlockStuffConstParams
 	1,
 };
 
-void LogBlockStuff::strongly_hit_response( Block& the_block, 
-	const vec2_s32& coord )
+void LogBlockStuff::strongly_hit_response(Block& the_block, 
+	const vec2_s32& coord)
 {
 }

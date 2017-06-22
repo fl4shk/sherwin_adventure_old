@@ -60,76 +60,76 @@
 
 /* ---- #defines for DMACNT Registers ---- */
 // Number of 16-bit or 32-bit Transfers 
-#define DMA_DATA_COUNT( n ) ( n & 0xffff )
-#define DMA_DATA_COUNT_MASK ( (u32)(0x0000ffff) )
+#define DMA_DATA_COUNT(n) (n & 0xffff)
+#define DMA_DATA_COUNT_MASK ((u32)(0x0000ffff))
 
 // -- Destination Adjustment --
 // Increment After Each Transfer (Default)
-#define DMA_DST_INC ( 0x0 << 0x15 )
+#define DMA_DST_INC (0x0 << 0x15)
 // Decrement After Each Transfer
-#define DMA_DST_DEC ( 0x1 << 0x15 )
+#define DMA_DST_DEC (0x1 << 0x15)
 // No Destination Adjustment (Address Is Fixed)
-#define DMA_DST_FIXED ( 0x2 << 0x15 )
+#define DMA_DST_FIXED (0x2 << 0x15)
 // Increment the Destination During Transfer, and Reset It
-#define DMA_DST_RELOAD ( 0x3 << 0x15 )
+#define DMA_DST_RELOAD (0x3 << 0x15)
 
-#define DMA_DST_MASK ( (u32)(0x00600000) )
+#define DMA_DST_MASK ((u32)(0x00600000))
 
 
 // -- Source Adjustment --
 // Increment After Each Transfer
-#define DMA_SRC_INC ( 0x0 << 0x17 )
+#define DMA_SRC_INC (0x0 << 0x17)
 // Decrement After Each Transfer
-#define DMA_SRC_DEC ( 0x1 << 0x17 )
+#define DMA_SRC_DEC (0x1 << 0x17)
 // No Source Adjustment (Address Is Fixed)
-#define DMA_SRC_FIXED ( 0x2 << 0x17 )
+#define DMA_SRC_FIXED (0x2 << 0x17)
 
-#define DMA_SRC_MASK ( (u32)(0x01800000) )
+#define DMA_SRC_MASK ((u32)(0x01800000))
 
 
 // -- Repeat Flag --
 // No Repeat at VBlank/HBlank (if set To those modes)
-#define DMA_REPEAT_OFF ( 0x0 << 0x19 )
+#define DMA_REPEAT_OFF (0x0 << 0x19)
 // Repeat the DMA at VBlank/HBlank (if set To those modes)
-#define DMA_REPEAT_ON ( 0x1 << 0x19 )
+#define DMA_REPEAT_ON (0x1 << 0x19)
 
-#define DMA_REPEAT_MASK ( (u32)(0x02000000) )
+#define DMA_REPEAT_MASK ((u32)(0x02000000))
 
 
 // -- Chunk Size (Copy by halfword or word) --
 // 16-bit Chunk Size
-#define DMA_16 ( 0x0 << 0x1a )
+#define DMA_16 (0x0 << 0x1a)
 // 32-bit Chunk Size
-#define DMA_32 ( 0x1 << 0x1a )
+#define DMA_32 (0x1 << 0x1a)
 
-#define DMA_CHUNK_SIZE_MASK ( (u32)(0x04000000) )
+#define DMA_CHUNK_SIZE_MASK ((u32)(0x04000000))
 
 
 // -- Timing Mode (When the Transfer Should Start) --
 // Start Immediately
-#define DMA_NOW ( 0x0 << 0x1c )
+#define DMA_NOW (0x0 << 0x1c)
 // Start at VBlank
-#define DMA_AT_VBLANK ( 0x1 << 0x1c )
+#define DMA_AT_VBLANK (0x1 << 0x1c)
 // Start at HBlank
-#define DMA_AT_HBLANK ( 0x2 << 0x1c )
+#define DMA_AT_HBLANK (0x2 << 0x1c)
 // Start at Refresh (Some Audio Stuffs)
-#define DMA_AT_REFRESH ( 0x3 << 0x1c )
-#define DMA12_FIFO ( 0x3 << 0x1c )
+#define DMA_AT_REFRESH (0x3 << 0x1c)
+#define DMA12_FIFO (0x3 << 0x1c)
 
-#define DMA_TIMING_MASK ( (u32)(0x30000000) )
+#define DMA_TIMING_MASK ((u32)(0x30000000))
 
 
 // -- Interrupt Request --
 // Don't Raise an Interrupt when Finished
-#define DMA_IRQ_OFF ( 0x0 << 0x1e )
+#define DMA_IRQ_OFF (0x0 << 0x1e)
 // Raise an Interrupt when Finished
-#define DMA_IRQ_ON ( 0x1 << 0x1e )
+#define DMA_IRQ_ON (0x1 << 0x1e)
 
-#define DMA_IRQ_MASK ( (u32)(0x40000000) )
+#define DMA_IRQ_MASK ((u32)(0x40000000))
 
 
 // -- Enable the DMA Transfer for this Channel --
-#define DMA_ENABLE ( 0x1 << 0x1f )
+#define DMA_ENABLE (0x1 << 0x1f)
 /* ---- End of #defines for DMACNT Registers ---- */
 
 
@@ -143,17 +143,17 @@ extern vu32 dma0cnt_mirror, dma1cnt_mirror, dma2cnt_mirror, dma3cnt_mirror;
 extern "C"
 {
 
-//void dma3_cpy( volatile void* dst, const void* src, u32 count, u32 mode )
+//void dma3_cpy(volatile void* dst, const void* src, u32 count, u32 mode)
 //__attribute__((noinline));
-void dma3_cpy( volatile void* dst, const void* src, u32 count, u32 mode );
+void dma3_cpy(volatile void* dst, const void* src, u32 count, u32 mode);
 
-void dma0_cpy( volatile void* dst, const void* src, u32 count, u32 mode );
+void dma0_cpy(volatile void* dst, const void* src, u32 count, u32 mode);
 
 
-//void dma3_fill( volatile void* dst, vu32 src, u32 count ) 
+//void dma3_fill(volatile void* dst, vu32 src, u32 count) 
 //	__attribute__((noinline));
 
-void dma3_fill( volatile void* dst, vu32 src, u32 count );
+void dma3_fill(volatile void* dst, vu32 src, u32 count);
 
 }
 

@@ -10,7 +10,7 @@
 //
 //	Time-stamp: 2016-01-21, 12:11:48
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
-//	( http://www.coranac.com/projects/#grit )
+//	(http://www.coranac.com/projects/#grit)
 //
 //======================================================================
 

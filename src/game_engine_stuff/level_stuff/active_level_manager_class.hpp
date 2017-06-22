@@ -51,38 +51,38 @@ public:		// variables
 	
 public:		// functions
 	
-	static scr_entry horiz_sublevel_tile_at_basic( u32 tile_x, 
-		u32 tile_y ) __attribute__((_IWRAM_CODE,_TARGET_ARM));
-	static scr_entry horiz_sublevel_tile_at( u32 tile_x, u32 tile_y )
+	static scr_entry horiz_sublevel_tile_at_basic(u32 tile_x, 
+		u32 tile_y) __attribute__((_IWRAM_CODE,_TARGET_ARM));
+	static scr_entry horiz_sublevel_tile_at(u32 tile_x, u32 tile_y)
 		__attribute__((_IWRAM_CODE,_TARGET_ARM));
 	
 	
 	
 	//static inline u32 sublevel_width_in_tiles 
-	//	( Array_2dHelper<u16>& the_block_ids_2d )
+	//	(Array_2dHelper<u16>& the_block_ids_2d)
 	//{
 	//	return the_block_ids_2d.width() * 2;
 	//}
 	//static inline u32 sublevel_height_in_tiles 
-	//	( Array_2dHelper<u16>& the_block_ids_2d )
+	//	(Array_2dHelper<u16>& the_block_ids_2d)
 	//{
 	//	return the_block_ids_2d.height() * 2;
 	//}
 	
 	static inline u32 sublevel_width_in_tiles 
-		( const vec2_u32& sublevel_size_in_blocks_2d )
+		(const vec2_u32& sublevel_size_in_blocks_2d)
 	{
 		return sublevel_size_in_blocks_2d.x * 2;
 	}
 	static inline u32 sublevel_height_in_tiles 
-		( const vec2_u32& sublevel_size_in_blocks_2d )
+		(const vec2_u32& sublevel_size_in_blocks_2d)
 	{
 		return sublevel_size_in_blocks_2d.y * 2;
 	}
 	
 	
 	static void correct_bg0_scroll_mirror 
-		( const vec2_u32& sublevel_size_in_blocks_2d )
+		(const vec2_u32& sublevel_size_in_blocks_2d)
 		__attribute__((_IWRAM_CODE,_TARGET_ARM));
 	
 	static void update_sublevel_in_screenblock_mirror_2d()
@@ -94,26 +94,26 @@ public:		// functions
 	
 	
 	//static void init_horiz_sublevel_sprite_ipg_lists
-	//	( const SpriteInitParamGroup* the_ext_sprite_ipg_arr, 
-	//	u32 the_ext_sprite_ipg_arr_size )
+	//	(const SpriteInitParamGroup* the_ext_sprite_ipg_arr, 
+	//	u32 the_ext_sprite_ipg_arr_size)
 	//	__attribute__((_IWRAM_CODE,_TARGET_ARM));
 	
 	
 	static inline void init_horiz_sublevel_sprite_ipg_lists()
 	{
 		SpriteManager::init_horiz_sublevel_sprite_ipg_lists
-			( ActiveLevel::get_curr_sublevel_ptr()
+			(ActiveLevel::get_curr_sublevel_ptr()
 			.sprite_ipg_arr_arr_helper.get_array(),
 			ActiveLevel::get_curr_sublevel_ptr()
-			.sprite_ipg_arr_arr_helper.get_size() );
+			.sprite_ipg_arr_arr_helper.get_size());
 	}
 	
-	static void load_level( const Level* n_the_current_level_ptr );
+	static void load_level(const Level* n_the_current_level_ptr);
 	
-	static void load_sublevel_basic( u32 n_sublevel_index );
+	static void load_sublevel_basic(u32 n_sublevel_index);
 	
 	static void load_sublevel_at_intra_sublevel_warp
-		( u32 n_sublevel_index, u32 sublevel_entrance_index );
+		(u32 n_sublevel_index, u32 sublevel_entrance_index);
 	
 } __attribute__((_ALIGN4));
 

@@ -32,8 +32,8 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-	virtual void strongly_hit_response( Block& the_block, 
-		const vec2_s32& coord ) __attribute__((_IWRAM_CODE));
+	virtual void strongly_hit_response(Block& the_block, 
+		const vec2_s32& coord) __attribute__((_IWRAM_CODE));
 	
 } __attribute__((_ALIGN4));
 

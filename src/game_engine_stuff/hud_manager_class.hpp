@@ -50,14 +50,14 @@ public:		// variables
 public:		// functions
 	// for some reason, NOT having these two functions marked as
 	// __noinline__ causes problems.
-	//static void plot_char_8x16_to_screenblock_mirror( u32 the_char, 
-	//	u32 pos_x, u32 pos_y ) __attribute__((_IWRAM_CODE,__noinline__));
+	//static void plot_char_8x16_to_screenblock_mirror(u32 the_char, 
+	//	u32 pos_x, u32 pos_y) __attribute__((_IWRAM_CODE,__noinline__));
 	
-	//static void plot_char_8x8_to_screenblock_mirror( u32 the_char,
-	//	u32 pos_x, u32 pos_y ) __attribute__((_IWRAM_CODE,__noinline__));
+	//static void plot_char_8x8_to_screenblock_mirror(u32 the_char,
+	//	u32 pos_x, u32 pos_y) __attribute__((_IWRAM_CODE,__noinline__));
 	
-	static void plot_horiz_str_8x8_to_screenblock_mirror( const char* str,
-		u32 str_size, u32& plot_x, u32& plot_y );
+	static void plot_horiz_str_8x8_to_screenblock_mirror(const char* str,
+		u32 str_size, u32& plot_x, u32& plot_y);
 		__attribute__((_IWRAM_CODE));
 	
 	

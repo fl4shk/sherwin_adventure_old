@@ -46,7 +46,7 @@ memcpy32:
 @ form of memcpy32 from TONC.
 
 @ This function fills memory using stmia
-@ === void memfill32( void* dst, u32 fillval, u32 wdcount ) ===
+@ === void memfill32(void* dst, u32 fillval, u32 wdcount) ===
 @ == Input Registers ==
 @ r0:  dst
 @ r1:  fillval

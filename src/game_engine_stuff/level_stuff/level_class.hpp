@@ -39,28 +39,28 @@ protected:		// variables
 	
 private:		// functions
 	
-	void init( SublevelPointer& some_sublevel_pointer )
+	void init(SublevelPointer& some_sublevel_pointer)
 	{
 		the_sublevels.at(actual_num_sublevels++) = some_sublevel_pointer;
 	}
 	
 	template< typename... rem_types >
-	void init( SublevelPointer& first, 
-		rem_types&... rem_sublevel_pointers )
+	void init(SublevelPointer& first, 
+		rem_types&... rem_sublevel_pointers)
 	{
 		init(first);
 		init(rem_sublevel_pointers...);
 	}
 	
 	
-	void init( SublevelPointer&& some_sublevel_pointer )
+	void init(SublevelPointer&& some_sublevel_pointer)
 	{
 		the_sublevels.at(actual_num_sublevels++) = some_sublevel_pointer;
 	}
 	
 	template< typename... rem_types >
-	void init( SublevelPointer&& first, 
-		rem_types&&... rem_sublevel_pointers )
+	void init(SublevelPointer&& first, 
+		rem_types&&... rem_sublevel_pointers)
 	{
 		init(std::move(first));
 		init(std::move(rem_sublevel_pointers...));
@@ -68,12 +68,12 @@ private:		// functions
 public:		// functions
 	
 	template< typename... arg_types >
-	Level( arg_types&... some_sublevel_pointers )
+	Level(arg_types&... some_sublevel_pointers)
 	{
 		init(some_sublevel_pointers...);
 	}
 	template< typename... arg_types >
-	Level( arg_types&&... some_sublevel_pointers )
+	Level(arg_types&&... some_sublevel_pointers)
 	{
 		init(some_sublevel_pointers...);
 	}

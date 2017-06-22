@@ -44,19 +44,19 @@ class Sprite;
 
 
 
-#define FIRST_PLAYER_SPRITE_TYPE_SUFFIX( macro ) \
+#define FIRST_PLAYER_SPRITE_TYPE_SUFFIX(macro) \
 macro(Player)
 
-#define LIST_OF_PLAYER_SPRITE_TYPE_SUFFIXES( macro ) \
+#define LIST_OF_PLAYER_SPRITE_TYPE_SUFFIXES(macro) \
 /* The Player */ \
 FIRST_PLAYER_SPRITE_TYPE_SUFFIX(macro) \
 
 
 
-#define FIRST_POWERUP_SPRITE_TYPE_SUFFIX( macro ) \
+#define FIRST_POWERUP_SPRITE_TYPE_SUFFIX(macro) \
 macro(Waffle)
 
-#define LIST_OF_POWERUP_SPRITE_TYPE_SUFFIXES( macro ) \
+#define LIST_OF_POWERUP_SPRITE_TYPE_SUFFIXES(macro) \
 /* Powerup Sprites */ \
 FIRST_POWERUP_SPRITE_TYPE_SUFFIX(macro) \
 \
@@ -70,10 +70,10 @@ macro(ChocolateMuffin)
 
 // Pseudo-background sprites are ONLY checked for intersection with
 // the_player (and possibly Player secondary sprites)
-#define FIRST_PSEUDO_BG_SPRITE_TYPE_SUFFIX( macro ) \
+#define FIRST_PSEUDO_BG_SPRITE_TYPE_SUFFIX(macro) \
 macro(Door)
 
-#define LIST_OF_PSEUDO_BG_SPRITE_TYPE_SUFFIXES( macro ) \
+#define LIST_OF_PSEUDO_BG_SPRITE_TYPE_SUFFIXES(macro) \
 /* // Block-like Sprites \
 st_warp_block, */ \
 /* Warp Sprites */ \
@@ -82,20 +82,20 @@ FIRST_PSEUDO_BG_SPRITE_TYPE_SUFFIX(macro)
 
 
 
-#define FIRST_ENEMY_SPRITE_TYPE_SUFFIX( macro ) \
+#define FIRST_ENEMY_SPRITE_TYPE_SUFFIX(macro) \
 macro(SnowGolem)
 
-#define LIST_OF_ENEMY_SPRITE_TYPE_SUFFIXES( macro ) \
+#define LIST_OF_ENEMY_SPRITE_TYPE_SUFFIXES(macro) \
 /* Enemy Sprites */ \
 FIRST_ENEMY_SPRITE_TYPE_SUFFIX(macro) \
 
 
 
 
-#define FIRST_PLAYER_SECONDARY_SPRITE_TYPE_SUFFIX( macro ) \
+#define FIRST_PLAYER_SECONDARY_SPRITE_TYPE_SUFFIX(macro) \
 macro(PlayerPickaxe)
 
-#define LIST_OF_PLAYER_SECONDARY_SPRITE_TYPE_SUFFIXES( macro ) \
+#define LIST_OF_PLAYER_SECONDARY_SPRITE_TYPE_SUFFIXES(macro) \
 /* Player Secondary Sprites */ \
 FIRST_PLAYER_SECONDARY_SPRITE_TYPE_SUFFIX(macro)
 
@@ -142,52 +142,52 @@ enum sprite_type
 
 #define GENERATE_ST_VALUE(suffix) St##suffix
 
-inline bool sprite_type_is_player( sprite_type the_sprite_type )
+inline bool sprite_type_is_player(sprite_type the_sprite_type)
 {
-	return in_range( FIRST_PLAYER_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
+	return in_range(FIRST_PLAYER_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
 		FIRST_POWERUP_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
-		the_sprite_type );
+		the_sprite_type);
 }
 
-inline bool sprite_type_is_powerup( sprite_type the_sprite_type )
+inline bool sprite_type_is_powerup(sprite_type the_sprite_type)
 {
-	return in_range( FIRST_POWERUP_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
+	return in_range(FIRST_POWERUP_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
 		FIRST_PSEUDO_BG_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
-		the_sprite_type );
+		the_sprite_type);
 }
 
-inline bool sprite_type_is_pseudo_bg( sprite_type the_sprite_type )
+inline bool sprite_type_is_pseudo_bg(sprite_type the_sprite_type)
 {
-	return in_range( FIRST_PSEUDO_BG_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
+	return in_range(FIRST_PSEUDO_BG_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
 		FIRST_ENEMY_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
-		the_sprite_type );
+		the_sprite_type);
 }
 
-inline bool sprite_type_is_enemy( sprite_type the_sprite_type )
+inline bool sprite_type_is_enemy(sprite_type the_sprite_type)
 {
-	return in_range( FIRST_ENEMY_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
+	return in_range(FIRST_ENEMY_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
 		FIRST_PLAYER_SECONDARY_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
-		the_sprite_type );
+		the_sprite_type);
 }
 
-inline bool sprite_type_is_player_secondary( sprite_type the_sprite_type )
+inline bool sprite_type_is_player_secondary(sprite_type the_sprite_type)
 {
 	return in_range
-		( FIRST_PLAYER_SECONDARY_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
-		LimSt, the_sprite_type );
+		(FIRST_PLAYER_SECONDARY_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
+		LimSt, the_sprite_type);
 }
 #undef GENERATE_ST_VALUE
 
-inline bool sprite_type_exists( sprite_type the_sprite_type )
+inline bool sprite_type_exists(sprite_type the_sprite_type)
 {
-	return ( the_sprite_type >= StDefault && the_sprite_type < LimSt );
+	return (the_sprite_type >= StDefault && the_sprite_type < LimSt);
 }
 
 // So, what's this for again?
 // Good question!
-inline bool sprite_type_is_derived( sprite_type the_sprite_type )
+inline bool sprite_type_is_derived(sprite_type the_sprite_type)
 {
-	return ( the_sprite_type > StDefault && the_sprite_type < LimSt );
+	return (the_sprite_type > StDefault && the_sprite_type < LimSt);
 }
 
 

@@ -29,22 +29,22 @@
 // These were originally Intended To be used by the SaListBackend and
 // externally_allocated_sa_list classes, but they are of course free To use
 // for other things.
-typedef void (*generic_void_1arg_fp)( void* );
-typedef void (*generic_void_2arg_fp)( void*, void* );
-typedef void (*generic_void_3arg_fp)( void*, void*, void* );
-typedef void (*generic_void_4arg_fp)( void*, void*, void*, void* );
-typedef u32 (*generic_u32_2arg_fp)( void*, void* );
+typedef void (*generic_void_1arg_fp)(void*);
+typedef void (*generic_void_2arg_fp)(void*, void*);
+typedef void (*generic_void_3arg_fp)(void*, void*, void*);
+typedef void (*generic_void_4arg_fp)(void*, void*, void*, void*);
+typedef u32 (*generic_u32_2arg_fp)(void*, void*);
 
 
 // This Is for function pointers To pass To qsort()
-typedef int (*qscmp_fp)( const void*, const void* );
+typedef int (*qscmp_fp)(const void*, const void*);
 
 
 
-typedef void* (*generic_void_ptr_1arg_fp)( void* );
-typedef s16* (*generic_s16_ptr_1arg_fp)( void* );
+typedef void* (*generic_void_ptr_1arg_fp)(void*);
+typedef s16* (*generic_s16_ptr_1arg_fp)(void*);
 
-typedef vec2_s16* (*generic_vec2_s16_ptr_1arg_fp)( void* );
+typedef vec2_s16* (*generic_vec2_s16_ptr_1arg_fp)(void*);
 
 
 // This X macro Is strictly used for working around what appears To be a
@@ -64,26 +64,26 @@ LIST_OF_TYPES_TO_MAKE_PTR_TYPEDEFS_FOR(GENERATE_PTR_TYPEDEF)
 
 template< typename type >
 inline generic_void_1arg_fp get_generic_void_1arg_fp
-	( void (*to_cast)( type* ) )
+	(void (*to_cast)(type*))
 {
 	return reinterpret_cast<generic_void_1arg_fp>(to_cast);
 }
 template< typename type_1, typename type_2 >
 inline generic_void_2arg_fp get_generic_void_2arg_fp
-	( void (*to_cast)( type_1*, type_2* ) )
+	(void (*to_cast)(type_1*, type_2*))
 {
 	return reinterpret_cast<generic_void_2arg_fp>(to_cast);
 }
 template< typename type_1, typename type_2, typename type_3 >
 inline generic_void_3arg_fp get_generic_void_3arg_fp
-	( void (*to_cast)( type_1*, type_2*, type_3* ) )
+	(void (*to_cast)(type_1*, type_2*, type_3*))
 {
 	return reinterpret_cast<generic_void_3arg_fp>(to_cast);
 }
 template< typename type_1, typename type_2, typename type_3, 
 	typename type_4 >
 inline generic_void_4arg_fp get_generic_void_4arg_fp
-	( void (*to_cast)( type_1*, type_2*, type_3*, type_4* ) )
+	(void (*to_cast)(type_1*, type_2*, type_3*, type_4*))
 {
 	return reinterpret_cast<generic_void_4arg_fp>(to_cast);
 }
@@ -93,61 +93,61 @@ inline generic_void_4arg_fp get_generic_void_4arg_fp
 
 // Make things even more generic
 template< typename ret_type, typename type_1 >
-inline auto get_other_1arg_fp( ret_type (*to_cast)( type_1* ) )
+inline auto get_other_1arg_fp(ret_type (*to_cast)(type_1*))
 {
-	return reinterpret_cast<ret_type (*)( void* )>(to_cast);
+	return reinterpret_cast<ret_type (*)(void*)>(to_cast);
 }
 
 template< typename ret_type, typename type_1, typename type_2 >
-inline auto get_other_2arg_fp( ret_type (*to_cast)( type_1*, type_2* ) )
+inline auto get_other_2arg_fp(ret_type (*to_cast)(type_1*, type_2*))
 {
-	return reinterpret_cast<ret_type (*)( void*, void* )>(to_cast);
+	return reinterpret_cast<ret_type (*)(void*, void*)>(to_cast);
 }
 
 
 template< typename ret_type, typename type_1 >
-inline auto get_other_1arg_fp( ret_type (*to_cast)( const type_1* ) )
+inline auto get_other_1arg_fp(ret_type (*to_cast)(const type_1*))
 {
-	return reinterpret_cast<ret_type (*)( const void* )>(to_cast);
+	return reinterpret_cast<ret_type (*)(const void*)>(to_cast);
 }
 
 template< typename ret_type, typename type_1, typename type_2 >
 inline auto get_other_2arg_fp
-	( ret_type (*to_cast)( const type_1*, const type_2* ) )
+	(ret_type (*to_cast)(const type_1*, const type_2*))
 {
-	return reinterpret_cast<ret_type (*)( const void*, const void* )>
+	return reinterpret_cast<ret_type (*)(const void*, const void*)>
 		(to_cast);
 }
 
 
 
 template< typename type_1, typename type_2 >
-inline auto get_generic_u32_2arg_fp( u32 (*to_cast)( type_1*, type_2* ) )
+inline auto get_generic_u32_2arg_fp(u32 (*to_cast)(type_1*, type_2*))
 {
 	return get_other_2arg_fp(to_cast);
 }
 
 template< typename type >
-inline auto get_qscmp_fp( int (*to_cast)( const type*, const type* ) )
+inline auto get_qscmp_fp(int (*to_cast)(const type*, const type*))
 {
 	return get_other_2arg_fp(to_cast);
 }
 
 template< typename type >
-inline auto get_generic_void_ptr_1arg_fp( void_ptr (*to_cast)( type* ) )
+inline auto get_generic_void_ptr_1arg_fp(void_ptr (*to_cast)(type*))
 {
 	return get_other_1arg_fp(to_cast);
 }
 
 template< typename type >
-inline auto get_generic_s16_ptr_1arg_fp( s16_ptr (*to_cast)( type* ) )
+inline auto get_generic_s16_ptr_1arg_fp(s16_ptr (*to_cast)(type*))
 {
 	return get_other_1arg_fp(to_cast);
 }
 
 template< typename type >
 inline auto get_generic_vec2_s16_ptr_1arg_fp
-	( vec2_s16_ptr (*to_cast)( type* ) )
+	(vec2_s16_ptr (*to_cast)(type*))
 {
 	return get_other_1arg_fp(to_cast);
 }
@@ -156,114 +156,114 @@ inline auto get_generic_vec2_s16_ptr_1arg_fp
 
 extern "C"
 {
-void generic_binary_func_shared_backend( void* a, void* b,
-	generic_void_2arg_fp the_fp );
+void generic_binary_func_shared_backend(void* a, void* b,
+	generic_void_2arg_fp the_fp);
 
-u32 generic_u32_func_shared_backend( void* a, void* b,
-	generic_u32_2arg_fp the_fp );
+u32 generic_u32_func_shared_backend(void* a, void* b,
+	generic_u32_2arg_fp the_fp);
 }
 
 
 template< typename type >
-inline void generic_binary_func_backend( type* a, type* b,
-	void (*the_fp)( type*, type* ) )
+inline void generic_binary_func_backend(type* a, type* b,
+	void (*the_fp)(type*, type*))
 {
 	generic_binary_func_shared_backend
-		( const_cast<type*>(a), const_cast<type*>(b), 
-		reinterpret_cast<generic_void_2arg_fp>(the_fp) );
+		(const_cast<type*>(a), const_cast<type*>(b), 
+		reinterpret_cast<generic_void_2arg_fp>(the_fp));
 }
 template< typename type >
-inline void generic_binary_func_backend( const type* a, type* b,
-	void (*the_fp)( const type*, type* ) )
+inline void generic_binary_func_backend(const type* a, type* b,
+	void (*the_fp)(const type*, type*))
 {
 	generic_binary_func_shared_backend
-		( const_cast<type*>(a), const_cast<type*>(b), 
-		reinterpret_cast<generic_void_2arg_fp>(the_fp) );
+		(const_cast<type*>(a), const_cast<type*>(b), 
+		reinterpret_cast<generic_void_2arg_fp>(the_fp));
 }
 template< typename type >
-inline void generic_binary_func_backend( type* a, const type* b,
-	void (*the_fp)( type*, const type* ) )
+inline void generic_binary_func_backend(type* a, const type* b,
+	void (*the_fp)(type*, const type*))
 {
 	generic_binary_func_shared_backend
-		( const_cast<type*>(a), const_cast<type*>(b),
-		reinterpret_cast<generic_void_2arg_fp>(the_fp) );
+		(const_cast<type*>(a), const_cast<type*>(b),
+		reinterpret_cast<generic_void_2arg_fp>(the_fp));
 }
 // Not sure I'll ever use this
 template< typename type >
-inline void generic_binary_func_backend( const type* a, const type* b,
-	void (*the_fp)( const type*, const type* ) )
+inline void generic_binary_func_backend(const type* a, const type* b,
+	void (*the_fp)(const type*, const type*))
 {
 	generic_binary_func_shared_backend
-		( const_cast<type*>(a), const_cast<type*>(b), 
-		reinterpret_cast<generic_void_2arg_fp>(the_fp) );
+		(const_cast<type*>(a), const_cast<type*>(b), 
+		reinterpret_cast<generic_void_2arg_fp>(the_fp));
 }
 
 
 template< typename type >
-inline u32 generic_u32_func_backend( type* a, type* b,
-	u32 (*the_fp)( type*, type* ) )
+inline u32 generic_u32_func_backend(type* a, type* b,
+	u32 (*the_fp)(type*, type*))
 {
 	return generic_u32_func_shared_backend
-		( const_cast<type*>(a), const_cast<type*>(b), 
-		reinterpret_cast<generic_u32_2arg_fp>(the_fp) );
+		(const_cast<type*>(a), const_cast<type*>(b), 
+		reinterpret_cast<generic_u32_2arg_fp>(the_fp));
 }
 template< typename type >
-inline u32 generic_u32_func_backend( const type* a, type* b,
-	u32 (*the_fp)( const type*, type* ) )
+inline u32 generic_u32_func_backend(const type* a, type* b,
+	u32 (*the_fp)(const type*, type*))
 {
 	return generic_u32_func_shared_backend
-		( const_cast<type*>(a), const_cast<type*>(b), 
-		reinterpret_cast<generic_u32_2arg_fp>(the_fp) );
+		(const_cast<type*>(a), const_cast<type*>(b), 
+		reinterpret_cast<generic_u32_2arg_fp>(the_fp));
 }
 template< typename type >
-inline u32 generic_u32_func_backend( type* a, const type* b,
-	u32 (*the_fp)( type*, const type* ) )
+inline u32 generic_u32_func_backend(type* a, const type* b,
+	u32 (*the_fp)(type*, const type*))
 {
 	return generic_u32_func_shared_backend
-		( const_cast<type*>(a), const_cast<type*>(b), 
-		reinterpret_cast<generic_u32_2arg_fp>(the_fp) );
+		(const_cast<type*>(a), const_cast<type*>(b), 
+		reinterpret_cast<generic_u32_2arg_fp>(the_fp));
 }
 template< typename type >
-inline u32 generic_u32_func_backend( const type* a, const type* b,
-	u32 (*the_fp)( const type*, const type* ) )
+inline u32 generic_u32_func_backend(const type* a, const type* b,
+	u32 (*the_fp)(const type*, const type*))
 {
 	return generic_u32_func_shared_backend
-		( const_cast<type*>(a), const_cast<type*>(b), 
-		reinterpret_cast<generic_u32_2arg_fp>(the_fp) );
+		(const_cast<type*>(a), const_cast<type*>(b), 
+		reinterpret_cast<generic_u32_2arg_fp>(the_fp));
 }
 
 
 
-//inline void generic_copy_func_backend( void* a, const void* b, 
-//	void (*copy_func)( void*, const void* ) )
+//inline void generic_copy_func_backend(void* a, const void* b, 
+//	void (*copy_func)(void*, const void*))
 //{
-//	generic_binary_func_backend( a, b, copy_func );
+//	generic_binary_func_backend(a, b, copy_func);
 //}
 
 
 
 template< typename type >
-inline void generic_copy( type& a, const type& b )
+inline void generic_copy(type& a, const type& b)
 {
-	generic_binary_func_backend<type>( &a, &b, 
-		[]( type* a2, const type* b2 ){ *a2 = *b2; } );
+	generic_binary_func_backend<type>(&a, &b, 
+		[](type* a2, const type* b2){ *a2 = *b2; });
 }
 
 
 template< typename type >
-inline void generic_move( type& a, type&& b )
+inline void generic_move(type& a, type&& b)
 {
-	generic_binary_func_backend<type>( &a, &b, 
-		[]( type* a2, type* b2 ){ *a2 = std::move(*b2); } );
+	generic_binary_func_backend<type>(&a, &b, 
+		[](type* a2, type* b2){ *a2 = std::move(*b2); });
 }
 
 
 template< typename type >
-inline u32 generic_less( const type& a, const type& b )
+inline u32 generic_less(const type& a, const type& b)
 {
-	return generic_u32_func_backend<type>( &a, &b, 
-		[]( const type* a2, const type* b2 ) -> u32
-		{ return ( (*a2) < (*b2) ); } );
+	return generic_u32_func_backend<type>(&a, &b, 
+		[](const type* a2, const type* b2) -> u32
+		{ return ((*a2) < (*b2)); });
 }
 
 

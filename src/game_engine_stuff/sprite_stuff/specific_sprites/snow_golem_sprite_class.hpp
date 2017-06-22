@@ -83,7 +83,7 @@ public:		// variables
 	
 	
 public:		// functions
-	inline SnowGolemSprite( bool facing_left )
+	inline SnowGolemSprite(bool facing_left)
 	{
 		shared_constructor_code_part_1();
 		shared_constructor_code_part_2(facing_left);
@@ -93,8 +93,8 @@ public:		// functions
 	
 	
 	virtual void update_part_2();
-	//virtual void update_part_3( bg_point& camera_pos,
-	//	const vec2_u32& the_level_size_2d ) __attribute__((_IWRAM_CODE));
+	//virtual void update_part_3(bg_point& camera_pos,
+	//	const vec2_u32& the_level_size_2d) __attribute__((_IWRAM_CODE));
 	
 	inline virtual const SpriteConstParams& get_const_params() const
 	{

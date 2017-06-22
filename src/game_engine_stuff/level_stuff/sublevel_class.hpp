@@ -61,7 +61,7 @@ public:		// functions
 	
 	inline constexpr vec2_u32 get_size_2d() const
 	{
-		return vec2_u32( xsize, ysize );
+		return vec2_u32(xsize, ysize);
 	}
 	
 	inline constexpr u32 get_sprite_ipg_arr_size() const
@@ -94,36 +94,36 @@ public:		// functions
 	
 	template< u32 cmp_block_data_size, u32 xsize, u32 ysize, 
 		u32 sprite_ipg_arr_size, u32 sublevel_entrance_arr_size >
-	inline SublevelPointer( const Sublevel< cmp_block_data_size, xsize, 
+	inline SublevelPointer(const Sublevel< cmp_block_data_size, xsize, 
 		ysize, sprite_ipg_arr_size, sublevel_entrance_arr_size >& 
-		the_sublevel )
+		the_sublevel)
 	{
 		size_2d = { xsize, ysize };
 		
-		cmp_bd_arr_helper.init( the_sublevel.cmp_block_data,
-			cmp_block_data_size );
-		sprite_ipg_arr_arr_helper.init( the_sublevel.sprite_ipg_arr,
-			sprite_ipg_arr_size );
+		cmp_bd_arr_helper.init(the_sublevel.cmp_block_data,
+			cmp_block_data_size);
+		sprite_ipg_arr_arr_helper.init(the_sublevel.sprite_ipg_arr,
+			sprite_ipg_arr_size);
 		sublevel_entrance_arr_arr_helper.init
-			( the_sublevel.sublevel_entrance_arr, 
-			sublevel_entrance_arr_size );
+			(the_sublevel.sublevel_entrance_arr, 
+			sublevel_entrance_arr_size);
 	}
 	
 	
 	template< u32 cmp_block_data_size, u32 xsize, u32 ysize, 
 		u32 sprite_ipg_arr_size, u32 sublevel_entrance_arr_size >
-	inline void init( const Sublevel< cmp_block_data_size, xsize, ysize,
-		sprite_ipg_arr_size, sublevel_entrance_arr_size >& the_sublevel )
+	inline void init(const Sublevel< cmp_block_data_size, xsize, ysize,
+		sprite_ipg_arr_size, sublevel_entrance_arr_size >& the_sublevel)
 	{
 		size_2d = { xsize, ysize };
 		
-		cmp_bd_arr_helper.init( the_sublevel.cmp_block_data,
-			cmp_block_data_size );
-		sprite_ipg_arr_arr_helper.init( the_sublevel.sprite_ipg_arr,
-			sprite_ipg_arr_size );
+		cmp_bd_arr_helper.init(the_sublevel.cmp_block_data,
+			cmp_block_data_size);
+		sprite_ipg_arr_arr_helper.init(the_sublevel.sprite_ipg_arr,
+			sprite_ipg_arr_size);
 		sublevel_entrance_arr_arr_helper.init
-			( the_sublevel.sublevel_entrance_arr,
-			sublevel_entrance_arr_size );
+			(the_sublevel.sublevel_entrance_arr,
+			sublevel_entrance_arr_size);
 	}
 	
 	inline const vec2_u32& get_size_2d() const

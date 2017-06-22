@@ -220,16 +220,16 @@ public:		// variables
 public:		// functions
 	
 	Sprite();
-	Sprite( bool facing_left );
-	Sprite( const vec2_f24p8& s_in_level_pos, 
+	Sprite(bool facing_left);
+	Sprite(const vec2_f24p8& s_in_level_pos, 
 		const PrevCurrPair<bg_point>& camera_pos_pc_pair, 
-		bool facing_left );
-	Sprite( const vec2_f24p8& s_in_level_pos, 
+		bool facing_left);
+	Sprite(const vec2_f24p8& s_in_level_pos, 
 		const vec2_u32& the_level_size_2d, 
-		PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left );
+		PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left);
 	
 	
-	inline Sprite( u32 s_vram_chunk_index )
+	inline Sprite(u32 s_vram_chunk_index)
 	{
 		Sprite();
 		
@@ -244,30 +244,30 @@ public:		// functions
 	
 	// Derived classes should override this function
 	// This Is the default form of shared_constructor_code().
-	virtual void shared_constructor_code_part_2( bool facing_left );
+	virtual void shared_constructor_code_part_2(bool facing_left);
 	
 	// This form of shared_constructor_code() might eventually become the
 	// default form of shared_constructor_code().
 	virtual void shared_constructor_code_part_2
-		( const vec2_f24p8& s_in_level_pos, 
+		(const vec2_f24p8& s_in_level_pos, 
 		const PrevCurrPair<bg_point>& camera_pos_pc_pair, 
-		bool facing_left );
+		bool facing_left);
 	
 	// This form of shared_constructor_code() Is primarily Intended To be
 	// used by the_player.
 	virtual void shared_constructor_code_part_2
-		( const vec2_f24p8& s_in_level_pos, 
+		(const vec2_f24p8& s_in_level_pos, 
 		const vec2_u32& the_level_size_2d, 
-		PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left );
+		PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left);
 	
 	virtual void shared_constructor_code_part_3();
 	
-	void* operator new( size_t size, 
-		SpriteAllocator& the_sprite_allocator )
+	void* operator new(size_t size, 
+		SpriteAllocator& the_sprite_allocator)
 		__attribute__((_IWRAM_CODE));
 	
-	//void operator delete( void* the_sprite, 
-	//	SpriteAllocator& the_sprite_allocator );
+	//void operator delete(void* the_sprite, 
+	//	SpriteAllocator& the_sprite_allocator);
 	
 	
 	inline const vec2_f24p8& get_prev_in_level_pos() const
@@ -297,17 +297,17 @@ public:		// functions
 	//}
 	
 	inline void set_curr_in_level_pos
-		( const vec2_f24p8& n_curr_in_level_pos )
+		(const vec2_f24p8& n_curr_in_level_pos)
 	{
 		in_level_pos.curr = n_curr_in_level_pos;
 	}
 	inline void set_curr_in_level_pos_x
-		( const Fixed24p8& n_curr_in_level_pos_x )
+		(const Fixed24p8& n_curr_in_level_pos_x)
 	{
 		in_level_pos.curr.x = n_curr_in_level_pos_x;
 	}
 	inline void set_curr_in_level_pos_y
-		( const Fixed24p8& n_curr_in_level_pos_y )
+		(const Fixed24p8& n_curr_in_level_pos_y)
 	{
 		in_level_pos.curr.y = n_curr_in_level_pos_y;
 	}
@@ -321,7 +321,7 @@ public:		// functions
 		return on_ground.curr;
 	}
 	
-	inline void set_curr_on_ground( bool n_curr_on_ground )
+	inline void set_curr_on_ground(bool n_curr_on_ground)
 	{
 		on_ground.curr = n_curr_on_ground;
 	}
@@ -336,7 +336,7 @@ public:		// functions
 		return on_slope.curr;
 	}
 	
-	inline void set_curr_on_slope( bool n_curr_on_slope )
+	inline void set_curr_on_slope(bool n_curr_on_slope)
 	{
 		on_slope.curr = n_curr_on_slope;
 	}
@@ -354,12 +354,12 @@ public:		// functions
 	{
 		return vram_chunk_index;
 	}
-	inline void set_vram_chunk_index( u32 n_vram_chunk_index )
+	inline void set_vram_chunk_index(u32 n_vram_chunk_index)
 	{
 		vram_chunk_index = n_vram_chunk_index;
 	}
 	
-	inline void set_shape_size( OamEntry::shape_size n_shape_size )
+	inline void set_shape_size(OamEntry::shape_size n_shape_size)
 	{
 		the_shape_size = n_shape_size;
 		the_oam_entry.set_shape_size(n_shape_size);
@@ -370,26 +370,26 @@ public:		// functions
 	{
 		vel.x += accel_x;
 		
-		if ( max_vel_x_abs_val != (Fixed24p8){0} )
+		if (max_vel_x_abs_val != (Fixed24p8){0})
 		{
-			if ( vel.x > max_vel_x_abs_val )
+			if (vel.x > max_vel_x_abs_val)
 			{
 				vel.x = max_vel_x_abs_val;
 			}
-			else if ( vel.x < -max_vel_x_abs_val )
+			else if (vel.x < -max_vel_x_abs_val)
 			{
 				vel.x = -max_vel_x_abs_val;
 			}
 		}
 		
 		//in_level_pos += vel;
-		set_curr_in_level_pos( get_curr_in_level_pos() + vel );
+		set_curr_in_level_pos(get_curr_in_level_pos() + vel);
 		//the_coll_box.pos = in_level_pos + cb_pos_offset;
 		the_coll_box.pos = get_curr_in_level_pos() + cb_pos_offset;
 	}
 	
 	
-	inline vec2_f24p8 get_on_screen_pos( const bg_point& camera_pos )
+	inline vec2_f24p8 get_on_screen_pos(const bg_point& camera_pos)
 		const
 	{
 		//vec2_f24p8 ret = in_level_pos - camera_pos;
@@ -399,42 +399,42 @@ public:		// functions
 		
 		//return get_curr_in_level_pos() - camera_pos;
 		
-		//return vec2_f24p8( make_f24p8( get_curr_in_level_pos().x
-		//	.floor_to_int() ), make_f24p8
-		//	( get_curr_in_level_pos().y.floor_to_int() ) ) 
+		//return vec2_f24p8(make_f24p8(get_curr_in_level_pos().x
+		//	.floor_to_int()), make_f24p8
+		//	(get_curr_in_level_pos().y.floor_to_int())) 
 		//	- camera_pos;
 		
-		//return get_curr_in_level_pos() - vec2_f24p8( make_f24p8
-		//	( camera_pos.x.round_to_int() ), 
-		//	make_f24p8( camera_pos.y.round_to_int() ) );
+		//return get_curr_in_level_pos() - vec2_f24p8(make_f24p8
+		//	(camera_pos.x.round_to_int()), 
+		//	make_f24p8(camera_pos.y.round_to_int()));
 		
-		//return vec2_f24p8( make_f24p8(get_curr_in_level_pos().x
+		//return vec2_f24p8(make_f24p8(get_curr_in_level_pos().x
 		//	.to_int_for_on_screen()), make_f24p8(get_curr_in_level_pos().y
-		//	.to_int_for_on_screen()) )
-		//	- vec2_f24p8( make_f24p8(camera_pos.x.to_int_for_on_screen()),
-		//	make_f24p8(camera_pos.y.to_int_for_on_screen()) );
+		//	.to_int_for_on_screen()))
+		//	- vec2_f24p8(make_f24p8(camera_pos.x.to_int_for_on_screen()),
+		//	make_f24p8(camera_pos.y.to_int_for_on_screen()));
 		
 		vec2_f24p8 ret(get_curr_in_level_pos());
 		
-		if ( get_curr_in_level_pos().x != get_prev_in_level_pos().x )
+		if (get_curr_in_level_pos().x != get_prev_in_level_pos().x)
 		{
 			//ret.x = get_curr_in_level_pos().x;
 			ret.x -= camera_pos.x;
 		}
-		else //if ( get_curr_in_level_pos().x 
-			//== get_prev_in_level_pos().x )
+		else //if (get_curr_in_level_pos().x 
+			//== get_prev_in_level_pos().x)
 		{
 			//ret.x = make_f24p8(get_curr_in_level_pos().x.floor_to_int());
 			ret.x -= make_f24p8(camera_pos.x.to_int_for_on_screen());
 		}
 		
-		if ( get_curr_in_level_pos().y != get_prev_in_level_pos().y )
+		if (get_curr_in_level_pos().y != get_prev_in_level_pos().y)
 		{
 			//ret.y = get_curr_in_level_pos().y;
 			ret.y -= camera_pos.y;
 		}
-		else //if ( get_curr_in_level_pos().y 
-			//== get_prev_in_level_pos().y )
+		else //if (get_curr_in_level_pos().y 
+			//== get_prev_in_level_pos().y)
 		{
 			//ret.y = make_f24p8(get_curr_in_level_pos().y.floor_to_int());
 			ret.y -= make_f24p8(camera_pos.y.to_int_for_on_screen());
@@ -446,9 +446,9 @@ public:		// functions
 	}
 	
 	void update_on_screen_pos
-		( const PrevCurrPair<bg_point>& camera_pos_pc_pair );
+		(const PrevCurrPair<bg_point>& camera_pos_pc_pair);
 	
-	//inline void update_full( const bg_point& camera_pos )
+	//inline void update_full(const bg_point& camera_pos)
 	//{
 	//	//in_level_pos += vel;
 	//	//the_coll_box.pos = in_level_pos + cb_pos_offset;
@@ -462,22 +462,22 @@ public:		// functions
 	//}
 	
 	void camera_follow_basic
-		( PrevCurrPair<bg_point>& camera_pos_pc_pair );
-	void center_camera_almost( bg_point& camera_pos ) const;
+		(PrevCurrPair<bg_point>& camera_pos_pc_pair);
+	void center_camera_almost(bg_point& camera_pos) const;
 	
 	
 	//inline void copy_the_oam_entry_to_oam_mirror 
-	//	( u32 slot_for_oam_mirror )
+	//	(u32 slot_for_oam_mirror)
 	//{
 	//	oam_mirror[slot_for_oam_mirror].attr0 = the_oam_entry.attr0;
 	//	oam_mirror[slot_for_oam_mirror].attr1 = the_oam_entry.attr1;
 	//	oam_mirror[slot_for_oam_mirror].attr2 = the_oam_entry.attr2;
 	//}
 	
-	//void copy_the_oam_entry_to_oam_mirror( u32 slot_for_oam_mirror )
+	//void copy_the_oam_entry_to_oam_mirror(u32 slot_for_oam_mirror)
 	//	__attribute__((_IWRAM_CODE));
 	
-	inline void copy_the_oam_entry_to_oam_mirror( u32 slot_for_oam_mirror )
+	inline void copy_the_oam_entry_to_oam_mirror(u32 slot_for_oam_mirror)
 	{
 		oam_mirror[slot_for_oam_mirror].attr0 = the_oam_entry.attr0;
 		oam_mirror[slot_for_oam_mirror].attr1 = the_oam_entry.attr1;
@@ -538,11 +538,11 @@ public:		// functions
 	inline void gfx_update()
 	{
 		//the_oam_entry.set_tile_number 
-		//	( get_curr_tile_slot_old() );
+		//	(get_curr_tile_slot_old());
 		
 		//the_oam_entry.set_tile_number
-		//	( get_vram_chunk_index() 
-		//	* GfxManager::num_tiles_in_ss_32x32 );
+		//	(get_vram_chunk_index() 
+		//	* GfxManager::num_tiles_in_ss_32x32);
 		the_oam_entry.set_tile_number(get_curr_tile_slot());
 		
 		the_oam_entry.set_pal_number(get_palette_slot());
@@ -562,14 +562,14 @@ public:		// functions
 	// update_part_3() used To be update_part_2()
 	// The PlayerSprite class Is the primary user of this function.
 	virtual void update_part_3
-		( PrevCurrPair<bg_point>& camera_pos_pc_pair,
-		const vec2_u32& the_level_size_2d );
+		(PrevCurrPair<bg_point>& camera_pos_pc_pair,
+		const vec2_u32& the_level_size_2d);
 	
 	// Sprites other than PlayerSprite use this function.  Some sprites
 	// won't need To override this specific version.
 	virtual void update_part_3
-		( const PrevCurrPair<bg_point>& camera_pos_pc_pair, 
-		int& next_oam_index );
+		(const PrevCurrPair<bg_point>& camera_pos_pc_pair, 
+		int& next_oam_index);
 	
 	
 	
@@ -594,17 +594,17 @@ public:		// functions
 	virtual void block_collision_stuff();
 	
 	virtual void apply_gravity();
-	virtual void handle_jumping_stuff( u32 is_jump_key_hit, 
-		u32 is_jump_key_held );
+	virtual void handle_jumping_stuff(u32 is_jump_key_hit, 
+		u32 is_jump_key_held);
 	
 	
 	// Sprite-Sprite interaction stuff
-	virtual void sprite_interaction_reponse( Sprite& the_other_sprite );
+	virtual void sprite_interaction_reponse(Sprite& the_other_sprite);
 	
 	// the_player Is the primary user of this function
-	virtual void sprite_interaction_reponse( Sprite& the_other_sprite, 
+	virtual void sprite_interaction_reponse(Sprite& the_other_sprite, 
 		PrevCurrPair<bg_point>& camera_pos_pc_pair, 
-		const vec2_u32& the_level_size_2d );
+		const vec2_u32& the_level_size_2d);
 	
 	
 protected:		// functions
@@ -612,76 +612,76 @@ protected:		// functions
 	
 	
 	//virtual void block_coll_response_left
-	//	( const BcrLsegGroup& the_bcr_lseg_grp );
+	//	(const BcrLsegGroup& the_bcr_lseg_grp);
 	//virtual void block_coll_response_right
-	//	( const BcrLsegGroup& the_bcr_lseg_grp );
+	//	(const BcrLsegGroup& the_bcr_lseg_grp);
 	virtual void block_coll_response_left
-		( const SprBlkCollGroupBase::HorizCollTuple& hs );
+		(const SprBlkCollGroupBase::HorizCollTuple& hs);
 	virtual void block_coll_response_right
-		( const SprBlkCollGroupBase::HorizCollTuple& hs );
+		(const SprBlkCollGroupBase::HorizCollTuple& hs);
 	virtual void block_coll_response_top
-		( const SprBlkCollGroupBase::VertTopCollTuple& vs );
+		(const SprBlkCollGroupBase::VertTopCollTuple& vs);
 	virtual void block_coll_response_bot
-		( const BcrLsegGroup& the_bcr_lseg_grp );
-	virtual void block_coll_response_bot_slope( s32 height_val, 
-		s32 blk_crd_y_pos );
+		(const BcrLsegGroup& the_bcr_lseg_grp);
+	virtual void block_coll_response_bot_slope(s32 height_val, 
+		s32 blk_crd_y_pos);
 	
 	
 	
 	// Finally, some inline functions (probably) every Sprite Can use in
 	// their block_coll_response.*() functions
 	//inline void push_out_of_left_block
-	//	( const BcrLsegGroup& the_bcr_lseg_grp )
+	//	(const BcrLsegGroup& the_bcr_lseg_grp)
 	//{
-	//	set_curr_in_level_pos_x( make_f24p8
-	//		( conv_blk_crd_to_pix_crd( the_bcr_lseg_grp.horiz_left_pos() 
-	//		+ 1 ) ) - cb_pos_offset.x );
+	//	set_curr_in_level_pos_x(make_f24p8
+	//		(conv_blk_crd_to_pix_crd(the_bcr_lseg_grp.horiz_left_pos() 
+	//		+ 1)) - cb_pos_offset.x);
 	//}
 	//inline void push_out_of_right_block
-	//	( const BcrLsegGroup& the_bcr_lseg_grp )
+	//	(const BcrLsegGroup& the_bcr_lseg_grp)
 	//{
-	//	set_curr_in_level_pos_x( make_f24p8
-	//		( conv_blk_crd_to_pix_crd(the_bcr_lseg_grp.horiz_right_pos()) )
-	//		- the_coll_box.size.x - cb_pos_offset.x );
+	//	set_curr_in_level_pos_x(make_f24p8
+	//		(conv_blk_crd_to_pix_crd(the_bcr_lseg_grp.horiz_right_pos()))
+	//		- the_coll_box.size.x - cb_pos_offset.x);
 	//}
 	inline void push_out_of_left_block
-		( const vec2_s32& blk_crd_pos )
+		(const vec2_s32& blk_crd_pos)
 	{
-		set_curr_in_level_pos_x( make_f24p8( conv_blk_crd_to_pix_crd
-			( blk_crd_pos.x + 1 ) ) - cb_pos_offset.x );
+		set_curr_in_level_pos_x(make_f24p8(conv_blk_crd_to_pix_crd
+			(blk_crd_pos.x + 1)) - cb_pos_offset.x);
 	}
 	inline void push_out_of_right_block
-		( const vec2_s32& blk_crd_pos )
+		(const vec2_s32& blk_crd_pos)
 	{
-		set_curr_in_level_pos_x( make_f24p8( conv_blk_crd_to_pix_crd
-			(blk_crd_pos.x) ) - the_coll_box.size.x - cb_pos_offset.x );
+		set_curr_in_level_pos_x(make_f24p8(conv_blk_crd_to_pix_crd
+			(blk_crd_pos.x)) - the_coll_box.size.x - cb_pos_offset.x);
 	}
 	inline void push_out_of_top_block
-		( const vec2_s32& blk_crd_pos )
+		(const vec2_s32& blk_crd_pos)
 	{
-		set_curr_in_level_pos_y( make_f24p8( conv_blk_crd_to_pix_crd
-			( blk_crd_pos.y + 1 ) + 1 ) - cb_pos_offset.y );
+		set_curr_in_level_pos_y(make_f24p8(conv_blk_crd_to_pix_crd
+			(blk_crd_pos.y + 1) + 1) - cb_pos_offset.y);
 	}
 	inline void push_out_of_bot_block
-		( const BcrLsegGroup& the_bcr_lseg_grp )
+		(const BcrLsegGroup& the_bcr_lseg_grp)
 	{
-		set_curr_in_level_pos_y( make_f24p8
-			( conv_blk_crd_to_pix_crd(the_bcr_lseg_grp.vert_bot_pos()) )
-			- make_f24p8(get_shape_size_as_vec2().y) );
+		set_curr_in_level_pos_y(make_f24p8
+			(conv_blk_crd_to_pix_crd(the_bcr_lseg_grp.vert_bot_pos()))
+			- make_f24p8(get_shape_size_as_vec2().y));
 	}
-	inline void push_out_of_bot_slope_block( s32 height_val, 
-		s32 blk_crd_y_pos )
+	inline void push_out_of_bot_slope_block(s32 height_val, 
+		s32 blk_crd_y_pos)
 	{
-		set_curr_in_level_pos_y( make_f24p8
-			( ( conv_blk_crd_to_pix_crd(blk_crd_y_pos)
-			+ conv_slp_height_val_to_offset(height_val) ) )
-			- make_f24p8(get_shape_size_as_vec2().y) );
+		set_curr_in_level_pos_y(make_f24p8
+			((conv_blk_crd_to_pix_crd(blk_crd_y_pos)
+			+ conv_slp_height_val_to_offset(height_val)))
+			- make_f24p8(get_shape_size_as_vec2().y));
 	}
 	
 	
 	// Regular Block collision stuff
 	virtual void generic_block_collision_stuff
-		( SprBlkCollGroupBase& clseg_grp )
+		(SprBlkCollGroupBase& clseg_grp)
 		__attribute__((_IWRAM_CODE,_TARGET_ARM));
 	virtual void block_collision_stuff_16x16();
 	virtual void block_collision_stuff_16x32();

@@ -136,25 +136,25 @@ public:		// static variables
 	
 	
 public:		// functions
-	static inline bool block_coord_is_valid( const vec2_s32& block_coord )
+	static inline bool block_coord_is_valid(const vec2_s32& block_coord)
 	{
-		//return ( block_coord.x >= 0 && block_coord.x 
+		//return (block_coord.x >= 0 && block_coord.x 
 		//	< (s32)get_curr_sublevel_ptr().get_size_2d().x
 		//	&& block_coord.y >= 0 && block_coord.y 
-		//	< (s32)get_curr_sublevel_ptr().get_size_2d().y );
+		//	< (s32)get_curr_sublevel_ptr().get_size_2d().y);
 		
 		const vec2_u32& curr_sublevel_ptr_size_2d = get_curr_sublevel_ptr()
 			.get_size_2d();
 		vec2_s32 curr_sublevel_ptr_size_2d_s32
-			( (s32)curr_sublevel_ptr_size_2d.x,
-			(s32)curr_sublevel_ptr_size_2d.y );
+			((s32)curr_sublevel_ptr_size_2d.x,
+			(s32)curr_sublevel_ptr_size_2d.y);
 		
-		return vec2_in_range( vec2_s32( 0, 0 ),
-			curr_sublevel_ptr_size_2d_s32, block_coord );
+		return vec2_in_range(vec2_s32(0, 0),
+			curr_sublevel_ptr_size_2d_s32, block_coord);
 	}
 	
 	// This function computes the Block coordinate of a point.
-	static inline vec2_s32 get_block_coord_of_point( const vec2_f24p8& pt )
+	static inline vec2_s32 get_block_coord_of_point(const vec2_f24p8& pt)
 	{
 		vec2_s32 ret;
 		
@@ -170,12 +170,12 @@ public:		// functions
 	}
 	
 	static inline block_type get_block_type_at_coord 
-		( const vec2_s32& block_coord )
+		(const vec2_s32& block_coord)
 	{
-		if ( block_coord_is_valid(block_coord) )
+		if (block_coord_is_valid(block_coord))
 		{
-			return horiz_sublevel_block_data_2d.at( block_coord.x,
-				block_coord.y ).get_block_type();
+			return horiz_sublevel_block_data_2d.at(block_coord.x,
+				block_coord.y).get_block_type();
 		}
 		else
 		{
@@ -184,12 +184,12 @@ public:		// functions
 	}
 	
 	static inline Block& the_block_at_coord 
-		( const vec2_s32& block_coord )
+		(const vec2_s32& block_coord)
 	{
-		if ( block_coord_is_valid(block_coord) )
+		if (block_coord_is_valid(block_coord))
 		{
-			return horiz_sublevel_block_data_2d.at( block_coord.x,
-				block_coord.y );
+			return horiz_sublevel_block_data_2d.at(block_coord.x,
+				block_coord.y);
 		}
 		else
 		{
@@ -208,14 +208,14 @@ public:		// functions
 	//static inline u32 get_curr_free_block_slot_and_alloc()
 	//{
 	//	++curr_free_block_slot;
-	//	return( curr_free_block_slot - 1 );
+	//	return(curr_free_block_slot - 1);
 	//}
 	
 	//static inline void initialize_block_data_array()
 	//{
 	//	curr_free_block_slot = lim_bt;
 	//	
-	//	for ( u32 i=0; i<lim_bt; ++i )
+	//	for (u32 i=0; i<lim_bt; ++i)
 	//	{
 	//		block_data_array[(block_type)i].type = (block_type)i;
 	//	}

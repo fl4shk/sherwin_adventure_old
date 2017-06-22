@@ -35,8 +35,8 @@ const BlockStuffConstParams
 	bbvt_air,
 };
 
-void AirBlockStuff::strongly_hit_response( Block& the_block, 
-	const vec2_s32& coord )
+void AirBlockStuff::strongly_hit_response(Block& the_block, 
+	const vec2_s32& coord)
 {
 }
 
