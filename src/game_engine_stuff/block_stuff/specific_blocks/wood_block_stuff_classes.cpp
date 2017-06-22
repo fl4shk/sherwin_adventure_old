@@ -67,7 +67,7 @@ void WoodBlockWithBtDudStuff
 void WoodBlockWithStWaffleStuff::strongly_hit_response
 	( Block& the_block, const vec2_s32& coord )
 {
-	constexpr sprite_type the_spawnable_sprite_type = st_waffle;
+	constexpr sprite_type the_spawnable_sprite_type = StWaffle;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
 	
@@ -98,7 +98,7 @@ void WoodBlockWithStWaffleStuff
 void WoodBlockWithStMuffinStuff::strongly_hit_response
 	( Block& the_block, const vec2_s32& coord )
 {
-	constexpr sprite_type the_spawnable_sprite_type = st_muffin;
+	constexpr sprite_type the_spawnable_sprite_type = StMuffin;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
 	
@@ -129,7 +129,7 @@ void WoodBlockWithStMuffinStuff
 void WoodBlockWithStFireMuffinStuff::strongly_hit_response
 	( Block& the_block, const vec2_s32& coord )
 {
-	constexpr sprite_type the_spawnable_sprite_type = st_fire_muffin;
+	constexpr sprite_type the_spawnable_sprite_type = StFireMuffin;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
 	
@@ -159,7 +159,7 @@ void WoodBlockWithStFireMuffinStuff
 void WoodBlockWithStIceMuffinStuff::strongly_hit_response
 	( Block& the_block, const vec2_s32& coord )
 {
-	constexpr sprite_type the_spawnable_sprite_type = st_ice_muffin;
+	constexpr sprite_type the_spawnable_sprite_type = StIceMuffin;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
 	
@@ -189,7 +189,7 @@ void WoodBlockWithStIceMuffinStuff
 void WoodBlockWithStChocolateMuffinStuff::strongly_hit_response
 	( Block& the_block, const vec2_s32& coord )
 {
-	constexpr sprite_type the_spawnable_sprite_type = st_chocolate_muffin;
+	constexpr sprite_type the_spawnable_sprite_type = StChocolateMuffin;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
 	

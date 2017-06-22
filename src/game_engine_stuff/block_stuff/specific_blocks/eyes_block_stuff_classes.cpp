@@ -60,7 +60,7 @@ void EyesBlockStuff::finish_initializing_using_persistent_data
 //void EyesBlockStuff::strongly_hit_response( Block& the_block, 
 //	const vec2_s32& coord )
 //{
-//	constexpr sprite_type the_spawnable_sprite_type = st_waffle;
+//	constexpr sprite_type the_spawnable_sprite_type = StWaffle;
 //	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type = bt_dud;
 //	
 //	vec2_s32 spawn_block_grid_coord = vec2_s32( coord.x, coord.y - 1 );
@@ -76,7 +76,7 @@ void EyesBlockStuff::finish_initializing_using_persistent_data
 void EyesBlockWithStWaffleStuff::strongly_hit_response
 	( Block& the_block, const vec2_s32& coord )
 {
-	constexpr sprite_type the_spawnable_sprite_type = st_waffle;
+	constexpr sprite_type the_spawnable_sprite_type = StWaffle;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
 	
@@ -97,7 +97,7 @@ void EyesBlockWithStWaffleStuff::strongly_hit_response
 void EyesBlockWithStMuffinStuff::strongly_hit_response
 	( Block& the_block, const vec2_s32& coord )
 {
-	constexpr sprite_type the_spawnable_sprite_type = st_muffin;
+	constexpr sprite_type the_spawnable_sprite_type = StMuffin;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
 	
@@ -117,7 +117,7 @@ void EyesBlockWithStMuffinStuff::strongly_hit_response
 void EyesBlockWithStFireMuffinStuff::strongly_hit_response
 	( Block& the_block, const vec2_s32& coord )
 {
-	constexpr sprite_type the_spawnable_sprite_type = st_fire_muffin;
+	constexpr sprite_type the_spawnable_sprite_type = StFireMuffin;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
 	
@@ -137,7 +137,7 @@ void EyesBlockWithStFireMuffinStuff::strongly_hit_response
 void EyesBlockWithStIceMuffinStuff::strongly_hit_response
 	( Block& the_block, const vec2_s32& coord )
 {
-	constexpr sprite_type the_spawnable_sprite_type = st_ice_muffin;
+	constexpr sprite_type the_spawnable_sprite_type = StIceMuffin;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
 	
@@ -157,7 +157,7 @@ void EyesBlockWithStIceMuffinStuff::strongly_hit_response
 void EyesBlockWithStChocolateMuffinStuff::strongly_hit_response
 	( Block& the_block, const vec2_s32& coord )
 {
-	constexpr sprite_type the_spawnable_sprite_type = st_chocolate_muffin;
+	constexpr sprite_type the_spawnable_sprite_type = StChocolateMuffin;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
 	

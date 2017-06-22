@@ -33,7 +33,7 @@
 const SpriteConstParams PlayerSprite::the_const_params
 = {
 	// the_const_sprite_type
-	st_player, 
+	StPlayer, 
 	
 	// the_palette_slot
 	sps_player, 
@@ -295,7 +295,7 @@ void PlayerSprite::update_part_2()
 		{
 			pickaxe_sprite_slot 
 				= SpriteManager::spawn_a_player_secondary_sprite_basic
-				( st_player_pickaxe, get_curr_in_level_pos(),
+				( StPlayerPickaxe, get_curr_in_level_pos(),
 				GfxManager::bgofs_mirror[0],
 				the_oam_entry.get_hflip_status() );
 			
@@ -310,7 +310,7 @@ void PlayerSprite::update_part_2()
 		//{
 		//	// Despawn the pickaxe if the_player Is no longer swinging it.
 		//	SpriteManager::the_player_secondary_sprites
-		//		[pickaxe_sprite_slot].the_sprite_type = st_default;
+		//		[pickaxe_sprite_slot].the_sprite_type = StDefault;
 		//	
 		//	pickaxe_sprite_slot = -1;
 		//}
@@ -748,7 +748,7 @@ void PlayerSprite::update_the_pickaxe()
 	if (!swinging_pickaxe)
 	{
 		//// Despawn the pickaxe if the_player Is no longer swinging it.
-		//the_pickaxe.the_sprite_type = st_default;
+		//the_pickaxe.the_sprite_type = StDefault;
 		
 		//SpriteManager::the_player_secondary_sprites_allocator
 		//	.deallocate_sprite(the_pickaxe_ptr);
@@ -1292,18 +1292,18 @@ void PlayerSprite::sprite_interaction_reponse( Sprite& the_other_sprite,
 {
 	switch ( the_other_sprite.the_sprite_type )
 	{
-		//case st_waffle:
-		case st_muffin:
-		case st_fire_muffin:
-		case st_ice_muffin:
-		case st_chocolate_muffin:
+		//case StWaffle:
+		case StMuffin:
+		case StFireMuffin:
+		case StIceMuffin:
+		case StChocolateMuffin:
 			
 			// This Is not proper despawning!
 			//if ( coll_box_intersects_now( the_coll_box,
 			//	the_other_sprite.the_coll_box ) )
 			//{
 			//	//nocash_soft_break();
-			//	the_other_sprite.the_sprite_type = st_default;
+			//	the_other_sprite.the_sprite_type = StDefault;
 			//	if ( the_other_sprite.the_sprite_ipg != NULL )
 			//	{
 			//		the_other_sprite.the_sprite_ipg->spawn_state 
@@ -1315,7 +1315,7 @@ void PlayerSprite::sprite_interaction_reponse( Sprite& the_other_sprite,
 			break;
 		
 		// This should 
-		case st_door:
+		case StDoor:
 			if ( coll_box_intersects_now( the_coll_box,
 				the_other_sprite.the_coll_box ) && key_hit(KEY_UP) 
 				&& !warped_this_frame )
@@ -1366,7 +1366,7 @@ void PlayerSprite::sprite_interaction_reponse( Sprite& the_other_sprite,
 			}
 			break;
 			
-		case st_snow_golem:
+		case StSnowGolem:
 			//if ( coll_box_intersects_now( the_coll_box,
 			//	the_other_sprite.the_coll_box ) 
 			//	&& invin_frame_timer == 0 )

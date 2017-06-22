@@ -492,7 +492,7 @@ const Sublevel< 1939, 64, 32, 1, 2 > test_level_sublevel_0
 	},
 	
 	{
-		{ st_door, 1, 29, false, 2, 1, 0, 0 },
+		{ StDoor, 1, 29, false, 2, 1, 0, 0 },
 	},
 	
 	{
@@ -998,10 +998,10 @@ const Sublevel< 1960, 64, 32, 4, 3 > test_level_sublevel_1
 	},
 	
 	{
-		{ st_door, 13, 18, false, 0, 2, 1, 0 },
-		{ st_door, 4, 29, false, 0, 2, 2, 0 },
-		{ st_door, 6, 29, false, 1, 2, 0, 0 },
-		{ st_fire_muffin, 9, 30, false, 0, 0, 0, 0 },
+		{ StDoor, 13, 18, false, 0, 2, 1, 0 },
+		{ StDoor, 4, 29, false, 0, 2, 2, 0 },
+		{ StDoor, 6, 29, false, 1, 2, 0, 0 },
+		{ StFireMuffin, 9, 30, false, 0, 0, 0, 0 },
 	},
 	
 	{
@@ -1506,10 +1506,10 @@ const Sublevel< 1951, 64, 32, 4, 4 > test_level_sublevel_2
 	},
 	
 	{
-		{ st_door, 1, 13, false, 2, 2, 0, 0 },
-		{ st_door, 62, 13, false, 0, 0, 1, 0 },
-		{ st_door, 1, 29, false, 0, 2, 2, 0 },
-		{ st_door, 51, 29, false, 1, 2, 3, 0 },
+		{ StDoor, 1, 13, false, 2, 2, 0, 0 },
+		{ StDoor, 62, 13, false, 0, 0, 1, 0 },
+		{ StDoor, 1, 29, false, 0, 2, 2, 0 },
+		{ StDoor, 51, 29, false, 1, 2, 3, 0 },
 	},
 	
 	{

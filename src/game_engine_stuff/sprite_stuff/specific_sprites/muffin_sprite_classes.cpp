@@ -22,7 +22,7 @@
 const SpriteConstParams MuffinSprite::the_const_params
 = {
 	// the_const_sprite_type
-	st_muffin, 
+	StMuffin, 
 	
 	// the_palette_slot
 	sps_powerup, 
@@ -41,7 +41,7 @@ const SpriteConstParams MuffinSprite::the_const_params
 const SpriteConstParams FireMuffinSprite::the_const_params
 = {
 	// the_const_sprite_type
-	st_fire_muffin, 
+	StFireMuffin, 
 	
 	// the_palette_slot
 	MuffinSprite::the_const_params.the_palette_slot, 
@@ -60,7 +60,7 @@ const SpriteConstParams FireMuffinSprite::the_const_params
 const SpriteConstParams IceMuffinSprite::the_const_params
 = {
 	// the_const_sprite_type
-	st_ice_muffin, 
+	StIceMuffin, 
 	
 	// the_palette_slot
 	MuffinSprite::the_const_params.the_palette_slot, 
@@ -79,7 +79,7 @@ const SpriteConstParams IceMuffinSprite::the_const_params
 const SpriteConstParams ChocolateMuffinSprite::the_const_params
 = {
 	// the_const_sprite_type
-	st_chocolate_muffin, 
+	StChocolateMuffin, 
 	
 	// the_palette_slot
 	MuffinSprite::the_const_params.the_palette_slot, 

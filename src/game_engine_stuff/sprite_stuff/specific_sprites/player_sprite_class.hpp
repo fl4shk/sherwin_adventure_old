@@ -216,7 +216,7 @@ public:		// variables
 	
 	
 	static const SpriteConstParams the_const_params;
-	//static constexpr sprite_type the_const_sprite_type = st_player;
+	//static constexpr sprite_type the_const_sprite_type = StPlayer;
 	//static constexpr sprite_palette_slot the_palette_slot = sps_player;
 	//
 	//static constexpr u32 num_active_gfx_tiles 

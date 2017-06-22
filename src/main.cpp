@@ -210,10 +210,10 @@ int real_main()
 		//if ( key_hit_or_held(KEY_L) )
 		if ( key_hit(KEY_L) )
 		{
-			//SpriteManager::spawn_a_sprite_basic( st_waffle,
+			//SpriteManager::spawn_a_sprite_basic( StWaffle,
 			//	the_player.in_level_pos.curr, GfxManager::bgofs_mirror[0],
 			//	(bool)the_player.the_oam_entry.get_hflip_status() );
-			SpriteManager::spawn_a_sprite_basic( st_Waffle,
+			SpriteManager::spawn_a_sprite_basic( StWaffle,
 				the_player.in_level_pos.curr +
 				vec2_f24p8( make_f24p8(0), 
 				make_f24p8( the_player.get_shape_size_as_vec2().y / 2 ) ), 

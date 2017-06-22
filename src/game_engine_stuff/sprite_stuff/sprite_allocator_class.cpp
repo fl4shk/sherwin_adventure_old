@@ -49,7 +49,7 @@ void* SpriteAllocator::allocate_sprite()
 	//{
 	//	Sprite& curr_sprite = at(i);
 	//	
-	//	if ( curr_sprite.the_sprite_type == st_default )
+	//	if ( curr_sprite.the_sprite_type == StDefault )
 	//	{
 	//		return (void*)(&curr_sprite);
 	//	}
@@ -64,7 +64,7 @@ void* SpriteAllocator::allocate_sprite()
 		
 		the_sa_free_list_backend.pop();
 		
-		if ( ret.the_sprite_type != st_default )
+		if ( ret.the_sprite_type != StDefault )
 		{
 			ASM_COMMENT("BadSprite");
 			DebugArrGroup::write_str_and_inc("BadSprite");
@@ -99,7 +99,7 @@ void SpriteAllocator::deallocate_sprite( Sprite& the_sprite )
 	//	return;
 	//}
 	
-	if ( the_sprite.the_sprite_type == st_default )
+	if ( the_sprite.the_sprite_type == StDefault )
 	{
 		//DebugArrGroup::write_str_and_inc("SadsSprStDefault");
 		//halt();
@@ -113,7 +113,7 @@ void SpriteAllocator::deallocate_sprite( Sprite& the_sprite )
 	}
 	
 	
-	the_sprite.the_sprite_type = st_default;
+	the_sprite.the_sprite_type = StDefault;
 	
 	
 	// Some sprites are spawned in from something other than the Level data

@@ -27,7 +27,7 @@
 const SpriteConstParams WaffleSprite::the_const_params
 = {
 	// the_const_sprite_type
-	st_waffle, 
+	StWaffle, 
 	
 	// the_palette_slot
 	sps_powerup, 

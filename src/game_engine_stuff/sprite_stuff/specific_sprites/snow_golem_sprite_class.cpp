@@ -38,7 +38,7 @@ const SnowGolemSprite::frame SnowGolemSprite::frame_slot_to_frame_arr
 const SpriteConstParams SnowGolemSprite::the_const_params
 = {
 	// the_const_sprite_type
-	st_snow_golem, 
+	StSnowGolem, 
 	
 	// the_palette_slot
 	sps_enemy_0, 

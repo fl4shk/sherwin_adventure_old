@@ -177,20 +177,20 @@ int SpriteManager::next_oam_index;
 //}
 //
 //#define GENERATE_SPRITE_NEW_CALLER(name) \
-//	void name##_sprite_new_caller( Sprite*& the_sprite, \
+//	void name##Sprite_new_caller( Sprite*& the_sprite, \
 //		SpriteAllocator& the_sprite_allocator, bool facing_left ) \
 //	{ \
 //		the_sprite = new (the_sprite_allocator) \
-//			name##_sprite(facing_left); \
+//			name##Sprite(facing_left); \
 //	}
 //
 //LIST_OF_MAIN_SPRITE_TYPE_SUFFIXES(GENERATE_SPRITE_NEW_CALLER);
 //#undef GENERATE_SPRITE_NEW_CALLER
 //
 //
-//#define GENERATE_FUNCPTR_ARR_ENTRY(name) &name##_sprite_new_caller, 
+//#define GENERATE_FUNCPTR_ARR_ENTRY(name) &name##Sprite_new_caller, 
 //
-//void (*sprite_new_caller_funcptr_arr[lim_st])( Sprite*& the_sprite,
+//void (*sprite_new_caller_funcptr_arr[LimSt])( Sprite*& the_sprite,
 //	SpriteAllocator& the_sprite_allocator, bool facing_left )
 //	= { &default_sprite_new_caller, 
 //	LIST_OF_MAIN_SPRITE_TYPE_SUFFIXES(GENERATE_FUNCPTR_ARR_ENTRY) };
@@ -224,15 +224,15 @@ Sprite* SpriteManager::allocate_sprite
 	
 	switch (the_sprite_type)
 	{
-		//case st_default:
+		//case StDefault:
 		//	the_sprite = new (the_sprite_allocator) Sprite(facing_left);
-		//	ASM_COMMENT("st_default");
+		//	ASM_COMMENT("StDefault");
 		//	break;
 		
 		#define GENERATE_CASE_STATEMENT(name) \
-		case st_##name:  \
+		case St##name:  \
 			the_sprite = new (the_sprite_allocator) \
-				name##_sprite(facing_left); \
+				name##Sprite(facing_left); \
 			ASM_COMMENT("st_" #name); \
 			break;
 		
@@ -274,15 +274,15 @@ Sprite* SpriteManager::allocate_sprite
 	
 	switch (the_sprite_type)
 	{
-		//case st_default:
+		//case StDefault:
 		//	the_sprite = new (the_sprite_allocator) Sprite(facing_left);
-		//	ASM_COMMENT("st_default");
+		//	ASM_COMMENT("StDefault");
 		//	break;
 		
 		#define GENERATE_CASE_STATEMENT(name) \
-		case st_##name:  \
+		case St##name:  \
 			the_sprite = new (the_sprite_allocator) \
-				name##_sprite(facing_left); \
+				name##Sprite(facing_left); \
 			ASM_COMMENT("st_" #name); \
 			break;
 		
@@ -371,7 +371,7 @@ s32 SpriteManager::spawn_a_player_secondary_sprite_basic
 	//	++next_sprite_index )
 	//{
 	//	//if ( the_player_secondary_sprites[next_sprite_index]
-	//	//	.the_sprite_type == st_default )
+	//	//	.the_sprite_type == StDefault )
 	//	if ( the_player_secondary_sprites[next_sprite_index] == NULL )
 	//	{
 	//		break;
@@ -433,7 +433,7 @@ s32 SpriteManager::spawn_a_secondary_sprite_basic
 	//	++next_sprite_index )
 	//{
 	//	//if ( the_secondary_sprites[next_sprite_index].the_sprite_type 
-	//	//	== st_default )
+	//	//	== StDefault )
 	//	if ( the_secondary_sprites[next_sprite_index] == NULL )
 	//	{
 	//		break;
@@ -497,7 +497,7 @@ s32 SpriteManager::spawn_a_sprite_basic( sprite_type the_sprite_type,
 	//// SaFreeList.
 	//for ( ; next_sprite_index<the_sprites.size(); ++next_sprite_index )
 	//{
-	//	//if ( the_sprites[next_sprite_index].the_sprite_type == st_default )
+	//	//if ( the_sprites[next_sprite_index].the_sprite_type == StDefault )
 	//	if ( the_sprites[next_sprite_index] == NULL )
 	//	{
 	//		break;
@@ -531,7 +531,7 @@ s32 SpriteManager::spawn_a_sprite_basic( sprite_type the_sprite_type,
 	}
 	
 	//if ( the_sprites[next_sprite_index] != NULL )
-	if ( the_sprites[next_sprite_index].the_sprite_type != st_default )
+	if ( the_sprites[next_sprite_index].the_sprite_type != StDefault )
 	{
 		show_debug_s32_group(next_sprite_index);
 		//DebugArrGroup::write_str_and_inc("SprNotNull");
@@ -581,7 +581,7 @@ void SpriteManager::init_the_player ( const vec2_f24p8& s_in_level_pos,
 	
 	the_player->set_vram_chunk_index(the_player_vram_chunk_index);
 	
-	//sprite_stuff_array[st_player]->init( the_player,
+	//sprite_stuff_array[StPlayer]->init( the_player,
 	//	s_in_level_pos, the_sublevel_size_2d, camera_pos );
 	//the_player->shared_constructor_code_part_2( s_in_level_pos,
 	//	the_sublevel_size_2d, camera_pos, false );
@@ -696,7 +696,7 @@ void SpriteManager::init_horiz_sublevel_sprite_ipg_lists
 	
 	for ( u32 i=0; i<the_ext_sprite_ipg_arr_size; ++i )
 	{
-		if ( the_ext_sprite_ipg_arr[i].type != st_default )
+		if ( the_ext_sprite_ipg_arr[i].type != StDefault )
 		{
 			ActiveLevel::horiz_sublevel_sprite_ipg_lists.ea_list_array
 				[the_ext_sprite_ipg_arr[i].initial_block_grid_x_coord]
@@ -723,7 +723,7 @@ void SpriteManager::init_horiz_sublevel_sprite_ipg_lists
 //void SpriteManager::some_sprite_init_thing()
 //{
 //	
-//	sprite_stuff_array[st_waffle]->init(the_sprites[0]);
+//	sprite_stuff_array[StWaffle]->init(the_sprites[0]);
 //	
 //	the_sprites[0].in_level_pos = the_player.in_level_pos;
 //	
@@ -736,7 +736,7 @@ void SpriteManager::init_horiz_sublevel_sprite_ipg_lists
 //		Sprite& the_spr = the_sprites[i];
 //		Sprite& the_prev_spr = the_sprites[i - 1];
 //		
-//		sprite_stuff_array[st_muffin]->init(the_spr);
+//		sprite_stuff_array[StMuffin]->init(the_spr);
 //		
 //		the_spr.in_level_pos = the_prev_spr.in_level_pos 
 //			+ vec2_s32( 0x1000, 0 );
@@ -894,7 +894,7 @@ void SpriteManager::initial_sprite_spawning_shared_code
 			
 			
 			
-			//while ( which_spr->the_sprite_type != st_default 
+			//while ( which_spr->the_sprite_type != StDefault 
 			//	&& which_spr != the_sprites.end() )
 			//{
 			//	++which_spr;
@@ -983,14 +983,14 @@ void SpriteManager::initial_sprite_spawning_shared_code
 	// Run each active Sprite's update_part_1() function.
 	for ( Sprite& spr : the_sprites )
 	{
-		if ( spr.the_sprite_type != st_default )
+		if ( spr.the_sprite_type != StDefault )
 		{
 			spr.update_part_1();
 		}
 	}
 	for ( Sprite& spr : the_pseudo_bg_sprites )
 	{
-		if ( spr.the_sprite_type != st_default )
+		if ( spr.the_sprite_type != StDefault )
 		{
 			spr.update_part_1();
 		}
@@ -999,14 +999,14 @@ void SpriteManager::initial_sprite_spawning_shared_code
 	// Run each active Sprite's update_part_2() function.
 	for ( Sprite& spr : the_sprites )
 	{
-		if ( spr.the_sprite_type != st_default )
+		if ( spr.the_sprite_type != StDefault )
 		{
 			spr.update_part_2();
 		}
 	}
 	for ( Sprite& spr : the_pseudo_bg_sprites )
 	{
-		if ( spr.the_sprite_type != st_default )
+		if ( spr.the_sprite_type != StDefault )
 		{
 			spr.update_part_2();
 		}
@@ -1015,14 +1015,14 @@ void SpriteManager::initial_sprite_spawning_shared_code
 	// Run each active Sprite's update_part_3() function.
 	for ( Sprite& spr : the_sprites )
 	{
-		if ( spr.the_sprite_type != st_default )
+		if ( spr.the_sprite_type != StDefault )
 		{
 			spr.update_part_3( camera_pos_pc_pair, next_oam_index );
 		}
 	}
 	for ( Sprite& spr : the_pseudo_bg_sprites )
 	{
-		if ( spr.the_sprite_type != st_default )
+		if ( spr.the_sprite_type != StDefault )
 		{
 			spr.update_part_3( camera_pos_pc_pair, next_oam_index );
 		}
@@ -1045,7 +1045,7 @@ void SpriteManager::find_all_active_sprites()
 	//	for ( u32 i=0; i<sprites_arr_size; ++i )
 	//	{
 	//		Sprite& the_spr = sprites_arr[i];
-	//		if ( the_spr.the_sprite_type != st_default )
+	//		if ( the_spr.the_sprite_type != StDefault )
 	//		{
 	//			active_sprites_arr[num_active_sprites_in_category++] 
 	//				= &the_spr;
@@ -1062,7 +1062,7 @@ void SpriteManager::find_all_active_sprites()
 		for ( u32 i=0; i<sprites_arr_size; ++i )
 		{
 			//Sprite& the_spr = sprites_arr[i];
-			//if ( the_spr.the_sprite_type != st_default )
+			//if ( the_spr.the_sprite_type != StDefault )
 			//{
 			//	active_sprites_arr[num_active_sprites_in_category++] 
 			//		= &the_spr;
@@ -1076,7 +1076,7 @@ void SpriteManager::find_all_active_sprites()
 			//	active_sprites_arr[num_active_sprites_in_category++]
 			//		= the_spr_ptr;
 			//}
-			if ( the_spr.the_sprite_type != st_default )
+			if ( the_spr.the_sprite_type != StDefault )
 			{
 				active_sprites_arr[num_active_sprites_in_category++]
 					= &the_spr;
@@ -1180,7 +1180,7 @@ void SpriteManager::spawn_sprites_if_needed
 	//// Find a free Sprite slot.
 	//for ( ; next_sprite_index<the_sprites.size(); ++next_sprite_index )
 	//{
-	//	//if ( the_sprites[next_sprite_index].the_sprite_type == st_default )
+	//	//if ( the_sprites[next_sprite_index].the_sprite_type == StDefault )
 	//	//{
 	//	//	break;
 	//	//}
@@ -1238,7 +1238,7 @@ void SpriteManager::spawn_sprites_if_needed
 				
 				//// Find the lowest FREE Sprite slot, if any.
 				////while ( ( the_sprites[next_sprite_index].the_sprite_type 
-				////	!= st_default )
+				////	!= StDefault )
 				////	&& ( next_sprite_index != the_sprites.size() ) )
 				//while ( ( the_sprites[next_sprite_index] != NULL )
 				//	&& ( next_sprite_index != the_sprites.size() ) )
@@ -1335,7 +1335,7 @@ void SpriteManager::spawn_sprites_if_needed
 				
 				//// Find the lowest FREE Sprite slot, if any.
 				////while ( ( the_sprites[next_sprite_index].the_sprite_type 
-				////	!= st_default )
+				////	!= StDefault )
 				////	&& ( next_sprite_index != the_sprites.size() ) )
 				//while ( ( the_sprites[next_sprite_index] != NULL )
 				//	&& ( next_sprite_index != the_sprites.size() ) )
@@ -1419,7 +1419,7 @@ void SpriteManager::despawn_sprites_if_needed
 		SpriteAllocator& the_sprite_allocator ) -> void
 	{
 		//if ( spr != NULL )
-		if ( spr.the_sprite_type != st_default )
+		if ( spr.the_sprite_type != StDefault )
 		{
 			//Fixed24p8 spr_on_screen_pos_x = spr.in_level_pos.x 
 			//	- camera_pos.x;
@@ -1522,12 +1522,12 @@ void SpriteManager::upload_tiles_of_active_sprites_to_vram()
 		//// These two if statements probably accomplish the same goal,
 		//// which Is why one of them Is commented out
 		////if ( spr.get_vram_chunk_index() != 0 )
-		//if ( spr.the_sprite_type != st_default )
+		//if ( spr.the_sprite_type != StDefault )
 		//{
 		//	GfxManager::upload_sprite_tiles_to_vram(spr);
 		//}
 		
-		if ( spr != NULL && spr->the_sprite_type != st_default )
+		if ( spr != NULL && spr->the_sprite_type != StDefault )
 		{
 			GfxManager::upload_sprite_tiles_to_vram(*spr);
 		}
@@ -1689,7 +1689,7 @@ void SpriteManager::update_all_sprites
 		Sprite& the_spr = *(the_active_player_secondary_sprites[i]);
 		
 		//// I am pretty sure this isn't a necessary sanity check
-		//if ( the_spr.the_sprite_type == st_default )
+		//if ( the_spr.the_sprite_type == StDefault )
 		//{
 		//	continue;
 		//}
@@ -1717,7 +1717,7 @@ void SpriteManager::update_all_sprites
 		Sprite& the_spr = *(the_active_secondary_sprites[i]);
 		
 		//// I am pretty sure this isn't a necessary sanity check
-		//if ( the_spr.the_sprite_type == st_default )
+		//if ( the_spr.the_sprite_type == StDefault )
 		//{
 		//	continue;
 		//}
@@ -1744,7 +1744,7 @@ void SpriteManager::update_all_sprites
 		Sprite& the_spr = *(the_active_pseudo_bg_sprites[i]);
 		
 		//// I am pretty sure this isn't a necessary sanity check
-		//if ( the_spr.the_sprite_type == st_default )
+		//if ( the_spr.the_sprite_type == StDefault )
 		//{
 		//	continue;
 		//}
@@ -1771,7 +1771,7 @@ void SpriteManager::update_all_sprites
 		Sprite& the_spr = *(the_active_sprites[i]);
 		
 		//// I am pretty sure this isn't a necessary sanity check
-		//if ( the_spr.the_sprite_type == st_default )
+		//if ( the_spr.the_sprite_type == StDefault )
 		//{
 		//	continue;
 		//}

@@ -27,7 +27,7 @@
 const SpriteConstParams DoorSprite::the_const_params
 = {
 	// the_const_sprite_type
-	st_door, 
+	StDoor, 
 	
 	// the_palette_slot
 	sps_door, 
@@ -71,7 +71,7 @@ void DoorSprite::shared_constructor_code_part_2( bool facing_left )
 //const SublevelEntrance& DoorSprite::get_dest_sle()
 //{
 //	// the_door.the_sprite_ipg->extra_param_0 Contains the
-//	// destination of the st_door, or at least, it's SUPPOSED To
+//	// destination of the StDoor, or at least, it's SUPPOSED To
 //	// contain the destination.
 //	
 //	//NEXT_DEBUG_F24P8.data = ActiveLevel::the_current_sublevel_ptr

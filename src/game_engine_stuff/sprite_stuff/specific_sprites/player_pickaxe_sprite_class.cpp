@@ -35,7 +35,7 @@ const PlayerPickaxeSprite::frame
 const SpriteConstParams PlayerPickaxeSprite::the_const_params
 = {
 	// the_const_sprite_type
-	st_player_pickaxe, 
+	StPlayerPickaxe, 
 	
 	// the_palette_slot
 	sps_secondary_0, 

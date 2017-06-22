@@ -342,8 +342,8 @@ void ActiveLevelManager::copy_sublevel_from_array_csz_2d_helper_to_vram()
 //	
 //	for ( u32 i=0; i<the_ext_sprite_ipg_arr_size; ++i )
 //	{
-//		if ( the_ext_sprite_ipg_arr[i].type != st_default 
-//			&& the_ext_sprite_ipg_arr[i].type != st_player )
+//		if ( the_ext_sprite_ipg_arr[i].type != StDefault 
+//			&& the_ext_sprite_ipg_arr[i].type != StPlayer )
 //		{
 //			ActiveLevel::horiz_sublevel_sprite_ipg_lists 
 //				[the_ext_sprite_ipg_arr[i].initial_block_grid_x_coord]

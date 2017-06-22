@@ -125,22 +125,22 @@ enum sprite_type
 {
 	// The Default Sprite (also used for when there Is no Sprite in the
 	// slot).
-	st_default,
+	StDefault,
 	
 	#define GENERATE_ENUM_ENTRY(suffix) \
-	st_##suffix,
+	St##suffix,
 	
 	LIST_OF_MAIN_SPRITE_TYPE_SUFFIXES(GENERATE_ENUM_ENTRY)
 	#undef GENERATE_ENUM_ENTRY
 	
-	// lim_st Is the amount of Sprite types.  It Is automatically updated
+	// LimSt Is the amount of Sprite types.  It Is automatically updated
 	// by the compiler.
-	lim_st,
+	LimSt,
 	
 } _ALIGNAS_REGULAR;
 
 
-#define GENERATE_ST_VALUE(suffix) st_##suffix
+#define GENERATE_ST_VALUE(suffix) St##suffix
 
 inline bool sprite_type_is_player( sprite_type the_sprite_type )
 {
@@ -174,20 +174,20 @@ inline bool sprite_type_is_player_secondary( sprite_type the_sprite_type )
 {
 	return in_range
 		( FIRST_PLAYER_SECONDARY_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
-		lim_st, the_sprite_type );
+		LimSt, the_sprite_type );
 }
 #undef GENERATE_ST_VALUE
 
 inline bool sprite_type_exists( sprite_type the_sprite_type )
 {
-	return ( the_sprite_type >= st_default && the_sprite_type < lim_st );
+	return ( the_sprite_type >= StDefault && the_sprite_type < LimSt );
 }
 
 // So, what's this for again?
 // Good question!
 inline bool sprite_type_is_derived( sprite_type the_sprite_type )
 {
-	return ( the_sprite_type > st_default && the_sprite_type < lim_st );
+	return ( the_sprite_type > StDefault && the_sprite_type < LimSt );
 }
 
 

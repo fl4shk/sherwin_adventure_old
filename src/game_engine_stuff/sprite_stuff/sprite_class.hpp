@@ -35,7 +35,7 @@ extern const size_t clseg_grp_16x32_size;
 class SpriteConstParams
 {
 public:		// variables
-	sprite_type the_const_sprite_type = st_default;
+	sprite_type the_const_sprite_type = StDefault;
 	sprite_palette_slot the_palette_slot = sps_player;
 	u32 the_relative_metatile_slot = 0, 
 		num_active_gfx_tiles = GfxManager::num_tiles_in_ss_16x16;
@@ -52,7 +52,7 @@ public:		// variables
 	// This Is used To correct the initial in-Level position for sprites
 	// That are normally considered To be of a certain size but That use
 	// larger graphics for some frames.  An example of this Is the
-	// st_player sprite_type, which Is normally considered To be a 16x32
+	// StPlayer sprite_type, which Is normally considered To be a 16x32
 	// Sprite but uses 32x32 graphics in some cases, like during the
 	// pickaxe swing animation.
 	vec2_f24p8 the_initial_in_level_pos_offset

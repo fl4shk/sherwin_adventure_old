@@ -229,7 +229,7 @@ void Sprite::update_on_screen_pos
 	s16 temp_x = temp_on_screen_pos.x.to_int_for_on_screen();
 	s16 temp_y = temp_on_screen_pos.y.to_int_for_on_screen();
 	
-	//if ( the_sprite_type == st_player )
+	//if ( the_sprite_type == StPlayer )
 	//{
 	//	show_debug_s32_group( the_oam_entry.get_x_coord(),
 	//		the_oam_entry.get_y_coord() );
@@ -237,7 +237,7 @@ void Sprite::update_on_screen_pos
 	the_oam_entry.set_x_coord(temp_x);
 	the_oam_entry.set_y_coord(temp_y);
 	
-	//if ( the_sprite_type == st_player )
+	//if ( the_sprite_type == StPlayer )
 	//{
 	//	show_debug_s32_group( the_oam_entry.get_x_coord(),
 	//		the_oam_entry.get_y_coord() );
