@@ -6,9 +6,9 @@
 
 //template< u32 cmp_block_data_size, u32 xsize, u32 ysize, 
 //	u32 sprite_ipg_arr_size, u32 sublevel_entrance_arr_size >
-//class sublevel;
+//class Sublevel;
 
-extern const sublevel< 1944, 64, 32, 13, 0 > test_level;
+extern const Sublevel< 1944, 64, 32, 13, 0 > test_level;
 
 
 #endif		// test_level_hpp

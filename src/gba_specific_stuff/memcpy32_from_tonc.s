@@ -1,6 +1,6 @@
 @ NOTE:  This memcpy32 function was taken from this site:
 @ http://www.coranac.com/tonc/text/asm.htm I also JUST BARELY modified one
-@ directive of it to work with my linkscript.  Thank you, J Vijn, for this
+@ directive of it To work with my linkscript.  Thank you, J Vijn, for this
 @ function!
 
 
@@ -17,7 +17,7 @@
 memcpy32:
 	@mov r11, r11
     and     r12, r2, #7     @ r12= residual word count
-    movs    r2, r2, lsr #3  @ r2=block count
+    movs    r2, r2, lsr #3  @ r2=Block count
     beq     .Lres_cpy32
     push    {r4-r10}
     @ Copy 32byte chunks with 8fold xxmia
@@ -42,7 +42,7 @@ memcpy32:
 
 
 
-@ On the other hand, this memfill32 function is a somewhat more modified
+@ On the other hand, this memfill32 function Is a somewhat more modified
 @ form of memcpy32 from TONC.
 
 @ This function fills memory using stmia
@@ -53,7 +53,7 @@ memcpy32:
 @ r2:  wdcount
 @ == Used Registers == 
 @ r1:  residual word count
-@ r2:  block count (32 bytes, or 8 words, per block)
+@ r2:  Block count (32 bytes, or 8 words, per Block)
 @ r3-r10: data buffer
 
 .section ".iwram_code","ax",%progbits
@@ -63,11 +63,11 @@ memcpy32:
 .global memfill32
 .type memfill32, %function
 memfill32:
-	@mov r11, r11				@ This is a no$gba soft breakpoint
+	@mov r11, r11				@ This Is a no$gba soft breakpoint
 	
 	mov r3, r1
 	and r1, r2, #0x07			@ r1 = residual word count
-	movs r2, r2, lsr #0x03		@ r2 = block count
+	movs r2, r2, lsr #0x03		@ r2 = Block count
 	beq .Lres_fill32
 	
 	push {r4-r10}

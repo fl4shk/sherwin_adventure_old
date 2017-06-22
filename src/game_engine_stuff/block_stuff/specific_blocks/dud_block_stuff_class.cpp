@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -20,8 +20,8 @@
 #include "../../../general_utility_stuff/misc_types.hpp"
 
 
-const block_stuff_const_params
-	dud_block_stuff::the_const_params
+const BlockStuffConstParams
+	DudBlockStuff::the_const_params
 = {
 	// metatile_number
 	5,
@@ -33,7 +33,7 @@ const block_stuff_const_params
 	5,
 };
 
-void dud_block_stuff::strongly_hit_response( block& the_block, 
+void DudBlockStuff::strongly_hit_response( Block& the_block, 
 	const vec2_s32& coord )
 {
 }

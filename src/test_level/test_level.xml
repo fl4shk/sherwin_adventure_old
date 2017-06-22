@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<level>
-	<sublevel width="64" height="32">
+<Level>
+	<Sublevel width="64" height="32">
 		<block_data>
 			1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -36,11 +36,11 @@
 			1,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,1,
 		</block_data>
 		<sprites>
-			<sprite type="7" ibg_x_coord="1" ibg_y_coord="29" facing_right="false" ep0="2" ep1="1" ep2="0" ep3="0" width="16" height="32" />
-			<sprite type="1" ibg_x_coord="3" ibg_y_coord="29" facing_right="false" ep0="0" ep1="0" ep2="0" ep3="0" width="16" height="32" />
+			<Sprite type="7" ibg_x_coord="1" ibg_y_coord="29" facing_right="false" ep0="2" ep1="1" ep2="0" ep3="0" width="16" height="32" />
+			<Sprite type="1" ibg_x_coord="3" ibg_y_coord="29" facing_right="false" ep0="0" ep1="0" ep2="0" ep3="0" width="16" height="32" />
 		</sprites>
-	</sublevel>
-	<sublevel width="64" height="32">
+	</Sublevel>
+	<Sublevel width="64" height="32">
 		<block_data>
 			1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -76,13 +76,13 @@
 			1,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,19,5,1,
 		</block_data>
 		<sprites>
-			<sprite type="7" ibg_x_coord="13" ibg_y_coord="18" facing_right="false" ep0="0" ep1="2" ep2="1" ep3="0" width="16" height="32" />
-			<sprite type="7" ibg_x_coord="4" ibg_y_coord="29" facing_right="false" ep0="0" ep1="2" ep2="2" ep3="0" width="16" height="32" />
-			<sprite type="7" ibg_x_coord="6" ibg_y_coord="29" facing_right="false" ep0="1" ep1="2" ep2="0" ep3="0" width="16" height="32" />
-			<sprite type="4" ibg_x_coord="9" ibg_y_coord="30" facing_right="false" ep0="0" ep1="0" ep2="0" ep3="0" width="16" height="16" />
+			<Sprite type="7" ibg_x_coord="13" ibg_y_coord="18" facing_right="false" ep0="0" ep1="2" ep2="1" ep3="0" width="16" height="32" />
+			<Sprite type="7" ibg_x_coord="4" ibg_y_coord="29" facing_right="false" ep0="0" ep1="2" ep2="2" ep3="0" width="16" height="32" />
+			<Sprite type="7" ibg_x_coord="6" ibg_y_coord="29" facing_right="false" ep0="1" ep1="2" ep2="0" ep3="0" width="16" height="32" />
+			<Sprite type="4" ibg_x_coord="9" ibg_y_coord="30" facing_right="false" ep0="0" ep1="0" ep2="0" ep3="0" width="16" height="16" />
 		</sprites>
-	</sublevel>
-	<sublevel width="64" height="32">
+	</Sublevel>
+	<Sublevel width="64" height="32">
 		<block_data>
 			1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -118,10 +118,10 @@
 			1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 		</block_data>
 		<sprites>
-			<sprite type="7" ibg_x_coord="1" ibg_y_coord="13" facing_right="false" ep0="2" ep1="2" ep2="0" ep3="0" width="16" height="32" />
-			<sprite type="7" ibg_x_coord="62" ibg_y_coord="13" facing_right="false" ep0="0" ep1="0" ep2="1" ep3="0" width="16" height="32" />
-			<sprite type="7" ibg_x_coord="1" ibg_y_coord="29" facing_right="false" ep0="0" ep1="2" ep2="2" ep3="0" width="16" height="32" />
-			<sprite type="7" ibg_x_coord="51" ibg_y_coord="29" facing_right="false" ep0="1" ep1="2" ep2="3" ep3="0" width="16" height="32" />
+			<Sprite type="7" ibg_x_coord="1" ibg_y_coord="13" facing_right="false" ep0="2" ep1="2" ep2="0" ep3="0" width="16" height="32" />
+			<Sprite type="7" ibg_x_coord="62" ibg_y_coord="13" facing_right="false" ep0="0" ep1="0" ep2="1" ep3="0" width="16" height="32" />
+			<Sprite type="7" ibg_x_coord="1" ibg_y_coord="29" facing_right="false" ep0="0" ep1="2" ep2="2" ep3="0" width="16" height="32" />
+			<Sprite type="7" ibg_x_coord="51" ibg_y_coord="29" facing_right="false" ep0="1" ep1="2" ep2="3" ep3="0" width="16" height="32" />
 		</sprites>
-	</sublevel>
-</level>
+	</Sublevel>
+</Level>

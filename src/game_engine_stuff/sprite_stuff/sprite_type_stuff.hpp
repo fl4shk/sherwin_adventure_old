@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -36,7 +36,7 @@
 #include "../../general_utility_stuff/debug_vars.hpp"
 #include "../../general_utility_stuff/range_funcs.hpp"
 
-class sprite;
+class Sprite;
 
 
 //#include "../gfx_manager_class.hpp"
@@ -44,139 +44,139 @@ class sprite;
 
 
 
-#define first_player_sprite_type_suffix( macro ) \
-macro(player)
+#define FIRST_PLAYER_SPRITE_TYPE_SUFFIX( macro ) \
+macro(Player)
 
-#define list_of_player_sprite_type_suffixes( macro ) \
+#define LIST_OF_PLAYER_SPRITE_TYPE_SUFFIXES( macro ) \
 /* The Player */ \
-first_player_sprite_type_suffix(macro) \
+FIRST_PLAYER_SPRITE_TYPE_SUFFIX(macro) \
 
 
 
-#define first_powerup_sprite_type_suffix( macro ) \
-macro(waffle)
+#define FIRST_POWERUP_SPRITE_TYPE_SUFFIX( macro ) \
+macro(Waffle)
 
-#define list_of_powerup_sprite_type_suffixes( macro ) \
+#define LIST_OF_POWERUP_SPRITE_TYPE_SUFFIXES( macro ) \
 /* Powerup Sprites */ \
-first_powerup_sprite_type_suffix(macro) \
+FIRST_POWERUP_SPRITE_TYPE_SUFFIX(macro) \
 \
-macro(muffin) \
-macro(fire_muffin) \
-macro(ice_muffin) \
-macro(chocolate_muffin)
+macro(Muffin) \
+macro(FireMuffin) \
+macro(IceMuffin) \
+macro(ChocolateMuffin)
 
 
 
 
 // Pseudo-background sprites are ONLY checked for intersection with
-// the_player (and possibly player secondary sprites)
-#define first_pseudo_bg_sprite_type_suffix( macro ) \
-macro(door)
+// the_player (and possibly Player secondary sprites)
+#define FIRST_PSEUDO_BG_SPRITE_TYPE_SUFFIX( macro ) \
+macro(Door)
 
-#define list_of_pseudo_bg_sprite_type_suffixes( macro ) \
+#define LIST_OF_PSEUDO_BG_SPRITE_TYPE_SUFFIXES( macro ) \
 /* // Block-like Sprites \
 st_warp_block, */ \
 /* Warp Sprites */ \
-first_pseudo_bg_sprite_type_suffix(macro)
+FIRST_PSEUDO_BG_SPRITE_TYPE_SUFFIX(macro)
 
 
 
 
-#define first_enemy_sprite_type_suffix( macro ) \
-macro(snow_golem)
+#define FIRST_ENEMY_SPRITE_TYPE_SUFFIX( macro ) \
+macro(SnowGolem)
 
-#define list_of_enemy_sprite_type_suffixes( macro ) \
+#define LIST_OF_ENEMY_SPRITE_TYPE_SUFFIXES( macro ) \
 /* Enemy Sprites */ \
-first_enemy_sprite_type_suffix(macro) \
+FIRST_ENEMY_SPRITE_TYPE_SUFFIX(macro) \
 
 
 
 
-#define first_player_secondary_sprite_type_suffix( macro ) \
-macro(player_pickaxe)
+#define FIRST_PLAYER_SECONDARY_SPRITE_TYPE_SUFFIX( macro ) \
+macro(PlayerPickaxe)
 
-#define list_of_player_secondary_sprite_type_suffixes( macro ) \
+#define LIST_OF_PLAYER_SECONDARY_SPRITE_TYPE_SUFFIXES( macro ) \
 /* Player Secondary Sprites */ \
-first_player_secondary_sprite_type_suffix(macro)
+FIRST_PLAYER_SECONDARY_SPRITE_TYPE_SUFFIX(macro)
 
 
 
 // woo, an X-macro
-#define list_of_main_sprite_type_suffixes(macro) \
+#define LIST_OF_MAIN_SPRITE_TYPE_SUFFIXES(macro) \
 \
 /* The Player */ \
-list_of_player_sprite_type_suffixes(macro) \
+LIST_OF_PLAYER_SPRITE_TYPE_SUFFIXES(macro) \
 \
 /* Powerup Sprites */ \
-list_of_powerup_sprite_type_suffixes(macro) \
+LIST_OF_POWERUP_SPRITE_TYPE_SUFFIXES(macro) \
 \
 /* Pseudo Background Sprites */ \
-list_of_pseudo_bg_sprite_type_suffixes(macro) \
+LIST_OF_PSEUDO_BG_SPRITE_TYPE_SUFFIXES(macro) \
 \
 /* Enemy Sprites */ \
-list_of_enemy_sprite_type_suffixes(macro) \
+LIST_OF_ENEMY_SPRITE_TYPE_SUFFIXES(macro) \
 \
 /* Player Secondary Sprites */ \
-list_of_player_secondary_sprite_type_suffixes(macro)
+LIST_OF_PLAYER_SECONDARY_SPRITE_TYPE_SUFFIXES(macro)
 
 
-// Adding, removing, or changing sprite types
+// Adding, removing, or changing Sprite types
 enum sprite_type
 {
-	// The Default Sprite (also used for when there is no sprite in the
+	// The Default Sprite (also used for when there Is no Sprite in the
 	// slot).
 	st_default,
 	
-	#define generate_enum_entry(suffix) \
+	#define GENERATE_ENUM_ENTRY(suffix) \
 	st_##suffix,
 	
-	list_of_main_sprite_type_suffixes(generate_enum_entry)
-	#undef generate_enum_entry
+	LIST_OF_MAIN_SPRITE_TYPE_SUFFIXES(GENERATE_ENUM_ENTRY)
+	#undef GENERATE_ENUM_ENTRY
 	
-	// lim_st is the amount of sprite types.  It is automatically updated
+	// lim_st Is the amount of Sprite types.  It Is automatically updated
 	// by the compiler.
 	lim_st,
 	
 } _ALIGNAS_REGULAR;
 
 
-#define generate_st_value(suffix) st_##suffix
+#define GENERATE_ST_VALUE(suffix) st_##suffix
 
 inline bool sprite_type_is_player( sprite_type the_sprite_type )
 {
-	return in_range( first_player_sprite_type_suffix(generate_st_value),
-		first_powerup_sprite_type_suffix(generate_st_value),
+	return in_range( FIRST_PLAYER_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
+		FIRST_POWERUP_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
 		the_sprite_type );
 }
 
 inline bool sprite_type_is_powerup( sprite_type the_sprite_type )
 {
-	return in_range( first_powerup_sprite_type_suffix(generate_st_value),
-		first_pseudo_bg_sprite_type_suffix(generate_st_value),
+	return in_range( FIRST_POWERUP_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
+		FIRST_PSEUDO_BG_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
 		the_sprite_type );
 }
 
 inline bool sprite_type_is_pseudo_bg( sprite_type the_sprite_type )
 {
-	return in_range( first_pseudo_bg_sprite_type_suffix(generate_st_value),
-		first_enemy_sprite_type_suffix(generate_st_value),
+	return in_range( FIRST_PSEUDO_BG_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
+		FIRST_ENEMY_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
 		the_sprite_type );
 }
 
 inline bool sprite_type_is_enemy( sprite_type the_sprite_type )
 {
-	return in_range( first_enemy_sprite_type_suffix(generate_st_value),
-		first_player_secondary_sprite_type_suffix(generate_st_value),
+	return in_range( FIRST_ENEMY_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
+		FIRST_PLAYER_SECONDARY_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
 		the_sprite_type );
 }
 
 inline bool sprite_type_is_player_secondary( sprite_type the_sprite_type )
 {
 	return in_range
-		( first_player_secondary_sprite_type_suffix(generate_st_value),
+		( FIRST_PLAYER_SECONDARY_SPRITE_TYPE_SUFFIX(GENERATE_ST_VALUE),
 		lim_st, the_sprite_type );
 }
-#undef generate_st_value
+#undef GENERATE_ST_VALUE
 
 inline bool sprite_type_exists( sprite_type the_sprite_type )
 {

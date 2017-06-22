@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -30,16 +30,16 @@ enum sublevel_entrance_type
 	
 	sle_from_door,
 	
-	// The number of sublevel_entrance_type's is automatically updated by
+	// The number of sublevel_entrance_type's Is automatically updated by
 	// the compiler via the lim_sle enum id.
 	lim_sle,
 } __attribute__((_ALIGN4));
 
 
-// There is probably no need for a sublevel_exit class because that
-// information is supposed to be embedded in the sprite_init_param_group
-// sprite level data, for the relevant types of sprites.
-class sublevel_entrance
+// There Is probably no need for a sublevel_exit class because That
+// information Is supposed To be embedded in the SpriteInitParamGroup
+// Sprite Level data, for the relevant types of sprites.
+class SublevelEntrance
 {
 public:		// variables
 	

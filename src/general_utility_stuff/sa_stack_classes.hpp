@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -30,23 +30,23 @@ using std::array;
 //#include "sa_list_class_stuff.hpp"
 //#include "extended_sa_list_class_stuff.hpp"
 
-namespace sa_list_stuff
+namespace SaListStuff
 {
 
 template< typename type, u32 total_num_nodes > 
-	class regular_list_base;
+	class RegularListBase;
 template< typename type, u32 total_num_nodes, u32 num_lists >
-	class sa_array_of_lists;
+	class SaArrayOfLists;
 
-} // end of namespace sa_list_stuff
+} // end of namespace SaListStuff
 
 
 
-#define arr_byte_index_macro( the_type_size, index_to_array_of_types ) \
+#define ARR_BYTE_INDEX_MACRO( the_type_size, index_to_array_of_types ) \
 	the_type_size * index_to_array_of_types
 
-#define arr_byte_size_macro( type, the_num_arr_elems ) \
-	arr_byte_index_macro( sizeof(type), the_num_arr_elems )
+#define ARR_BYTE_SIZE_MACRO( type, the_num_arr_elems ) \
+	ARR_BYTE_INDEX_MACRO( sizeof(type), the_num_arr_elems )
 template< typename type >
 inline size_t arr_byte_size( size_t the_num_arr_elems )
 {
@@ -54,8 +54,8 @@ inline size_t arr_byte_size( size_t the_num_arr_elems )
 }
 
 
-// A backend to a statically allocated stack of plain old data 
-class sa_pod_stack_backend
+// A backend To a statically allocated stack of plain old data 
+class SaPodStackBackend
 {
 protected:		// variables
 	u8* the_array_u8;
@@ -63,10 +63,10 @@ protected:		// variables
 	u32 type_size, num_elems;
 	
 public:		// functions
-	sa_pod_stack_backend();
-	sa_pod_stack_backend( u8* s_the_array_u8, u32* s_next_index_ptr, 
+	SaPodStackBackend();
+	SaPodStackBackend( u8* s_the_array_u8, u32* s_next_index_ptr, 
 		u32 s_type_size, u32 s_num_elems );
-	sa_pod_stack_backend( const sa_pod_stack_backend& to_copy );
+	SaPodStackBackend( const SaPodStackBackend& to_copy );
 	
 	inline u8* get_array_u8()
 	{
@@ -123,21 +123,21 @@ protected:		// functions
 
 
 
-// Since an sa_free_list uses plain old data (ints), it can use a backend
-// that is derived from the sa_pod_stack_backend class.
-class sa_free_list_backend : public sa_pod_stack_backend
+// Since an SaFreeList uses plain old data (ints), it Can use a backend
+// That Is derived from the SaPodStackBackend class.
+class SaFreeListBackend : public SaPodStackBackend
 {
 public:		// constants
 	//static constexpr u32 the_const_type_size = sizeof(int);
 	static constexpr u32 the_const_type_size = sizeof(int);
 	
 public:		// functions
-	sa_free_list_backend();
-	sa_free_list_backend( u8* s_the_array_u8, 
+	SaFreeListBackend();
+	SaFreeListBackend( u8* s_the_array_u8, 
 		u32* s_next_index_ptr, u32 s_num_elems );
-	sa_free_list_backend( s16* s_the_array, 
+	SaFreeListBackend( s16* s_the_array, 
 		u32* s_next_index_ptr, u32 s_num_elems );
-	sa_free_list_backend( const sa_free_list_backend& to_copy );
+	SaFreeListBackend( const SaFreeListBackend& to_copy );
 	
 	void init();
 	
@@ -175,7 +175,7 @@ public:		// functions
 	//{
 	//	get_array()[get_next_index()-1] = -1;
 	//	
-	//	sa_pod_stack_backend::pop();
+	//	SaPodStackBackend::pop();
 	//}
 	
 	inline s16& peek_top()
@@ -198,7 +198,7 @@ public:		// functions
 	//}
 	
 	
-	// A wrapper function just in case it's ever forgotten what to do.
+	// A wrapper function just in case it's ever forgotten what To do.
 	inline s16& peek_top_and_pop()
 	{
 		s16& ret = peek_top();
@@ -214,23 +214,23 @@ public:		// functions
 
 
 
-// A backend to a more generic statically allocated stack which is used
+// A backend To a more generic statically allocated stack which Is used
 // because it reduces the number of template parameters.
 template< typename type >
-class sa_stack_backend
+class SaStackBackend
 {
 public:		// variables
 	//type* the_array;
 	//u32 num_elems;
-	array_helper<type> the_array_helper;
+	ArrayHelper<type> the_array_helper;
 	u32* next_index_ptr;
 	
 public:		// functions
-	sa_stack_backend() : the_array_helper(), next_index_ptr(NULL)
+	SaStackBackend() : the_array_helper(), next_index_ptr(NULL)
 	{
 	}
 	
-	sa_stack_backend( type* s_the_array, u32 s_num_elems, 
+	SaStackBackend( type* s_the_array, u32 s_num_elems, 
 		u32* s_next_index_ptr ) 
 		: the_array_helper( s_the_array, s_num_elems ), 
 		next_index_ptr(s_next_index_ptr)
@@ -301,10 +301,10 @@ public:		// functions
 
 
 template< typename type, u32 size >
-class sa_stack
+class SaStack
 {
 protected:		// variables
-	sa_stack_backend<type> the_sa_stack_backend;
+	SaStackBackend<type> the_sa_stack_backend;
 	
 public:		// variables
 	//type the_array[size];
@@ -312,7 +312,7 @@ public:		// variables
 	u32 next_index;
 	
 public:		// functions
-	inline sa_stack() : the_sa_stack_backend( the_array.data(), get_size(), 
+	inline SaStack() : the_sa_stack_backend( the_array.data(), get_size(), 
 		&next_index ), next_index(0)
 	{
 		//memfill32( the_array.data(), type(), size * sizeof(type) );
@@ -378,13 +378,13 @@ public:		// functions
 
 
 template< u32 size >
-class old_sa_free_list : public sa_stack< int, size >
+class OldSaFreeList : public SaStack< int, size >
 {
 public:		// typedefs
-	typedef sa_stack< int, size > specific_sa_stack;
+	typedef SaStack< int, size > specific_sa_stack;
 	
 public:		// functions
-	inline old_sa_free_list()
+	inline OldSaFreeList()
 	{
 		for ( int i=size-1; i>=0; --i )
 		{
@@ -402,18 +402,18 @@ public:		// functions
 
 
 template< u32 size >
-class sa_free_list
+class SaFreeList
 {
 protected:		// variables
-	sa_free_list_backend the_sa_free_list_backend;
+	SaFreeListBackend the_sa_free_list_backend;
 	
-	//template< typename type > friend class sa_list_backend;
+	//template< typename type > friend class SaListBackend;
 	//template< typename type, u32 total_num_nodes > friend class
 	//	externally_allocated_sa_list;
 	template< typename type, u32 total_num_nodes > 
-		friend class sa_list_stuff::regular_list_base;
+		friend class SaListStuff::RegularListBase;
 	template< typename type, u32 total_num_nodes, u32 num_lists >
-		friend class sa_list_stuff::sa_array_of_lists;
+		friend class SaListStuff::SaArrayOfLists;
 	
 protected:		// variables
 	//array< int, size > the_array;
@@ -421,7 +421,7 @@ protected:		// variables
 	u32 next_index;
 	
 public:		// functions
-	inline sa_free_list() : the_sa_free_list_backend( the_array.data(), 
+	inline SaFreeList() : the_sa_free_list_backend( the_array.data(), 
 		&next_index, get_size() )
 	{
 		//the_sa_free_list_backend.init();
@@ -431,15 +431,15 @@ public:		// functions
 		//	push(i);
 		//}
 	}
-	inline sa_free_list( const sa_free_list<size>& to_copy )
+	inline SaFreeList( const SaFreeList<size>& to_copy )
 		: the_sa_free_list_backend( the_array.data(), &next_index,
 		get_size() )
 	{
 		arr_memcpy( the_array, to_copy.the_array );
 	}
 	
-	//inline sa_free_list<size>& operator = 
-	//	( const sa_free_list<size>& to_copy )
+	//inline SaFreeList<size>& operator = 
+	//	( const SaFreeList<size>& to_copy )
 	//{
 	//	the_sa_free_list_backend
 	//}

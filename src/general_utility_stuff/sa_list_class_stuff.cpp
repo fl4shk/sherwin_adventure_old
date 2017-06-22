@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -25,15 +25,15 @@ const size_t get_temp_sram_buf_size();
 extern u8 temp_sram_buf[];
 
 
-namespace sa_list_stuff
+namespace SaListStuff
 {
 
-void list_backend::init( void* n_node_array, 
-	sa_free_list_backend* n_the_free_list_backend_ptr,
+void ListBackend::init( void* n_node_array, 
+	SaFreeListBackend* n_the_free_list_backend_ptr,
 	u32 n_total_num_nodes, u32 n_specific_type_size,
 	u32 n_whole_node_size, 
 	
-	const extras_fp_group& n_the_extras_fp_group )
+	const ExtrasFpGroup& n_the_extras_fp_group )
 {
 	size = 0;
 	
@@ -47,7 +47,7 @@ void list_backend::init( void* n_node_array,
 	the_extras_fp_group = n_the_extras_fp_group;
 }
 
-void list_backend::fully_deallocate()
+void ListBackend::fully_deallocate()
 {
 	s32& the_front_index = get_front_index();
 	//while ( get_front_index() != -1 )
@@ -60,7 +60,7 @@ void list_backend::fully_deallocate()
 	//back_index = -1;
 }
 
-void list_backend::fully_deallocate_via_unlink()
+void ListBackend::fully_deallocate_via_unlink()
 {
 	s32& the_front_index = get_front_index();
 	//while ( get_front_index() != -1 )
@@ -73,26 +73,26 @@ void list_backend::fully_deallocate_via_unlink()
 	//back_index = -1;
 }
 
-void list_backend::internal_func_allocate_and_assign_to_node
-	( s32& index, node_contents& node, const void* n_data, 
+void ListBackend::internal_func_allocate_and_assign_to_node
+	( s32& index, NodeContents& Node, const void* n_data, 
 	u32 can_move_value )
 {
-	// Don't increment size here because allocating and assigning to a node
-	// doesn't add it to the list.
+	// Don't increment size here because allocating and assigning To a Node
+	// doesn't add it To the list.
 	
 	
 	index = get_free_list_backend().peek_top_and_pop();
 	
 	//index = get_free_list_backend().peek_top();
 	//get_free_list_backend().pop();
-	node = get_node_contents_at(index);
+	Node = get_node_contents_at(index);
 	
-	assign_to_node_data( node, n_data, can_move_value );
+	assign_to_node_data( Node, n_data, can_move_value );
 }
 
 
 //// push_front() CAN affect back_index
-//s32 list_backend::push_front( const void* to_push,
+//s32 ListBackend::push_front( const void* to_push,
 //	u32 can_move_value )
 //{
 //	++get_size();
@@ -100,7 +100,7 @@ void list_backend::internal_func_allocate_and_assign_to_node
 //	s32& the_front_index = get_front_index();
 //	s32 old_front_index = the_front_index;
 //	
-//	//sa_free_list_backend& the_free_list_backend 
+//	//SaFreeListBackend& the_free_list_backend 
 //	//	= get_free_list_backend();
 //	
 //	//the_front_index = the_free_list_backend.peek_top();
@@ -108,10 +108,10 @@ void list_backend::internal_func_allocate_and_assign_to_node
 //	the_front_index = get_free_list_backend().peek_top_and_pop();
 //	
 //	
-//	//node<type>& the_front_node 
+//	//Node<type>& the_front_node 
 //	//	= get_node_at(the_front_index);
 //	
-//	node_contents the_front_node = get_node_contents_at(the_front_index);
+//	NodeContents the_front_node = get_node_contents_at(the_front_index);
 //	
 //	s32 new_next_index = -1;
 //	
@@ -141,8 +141,8 @@ void list_backend::internal_func_allocate_and_assign_to_node
 //}
 
 
-//s32 list_backend::internal_func_move_unlinked_node_to_front
-//	( s32 to_move_index, node_contents& node_to_move )
+//s32 ListBackend::internal_func_move_unlinked_node_to_front
+//	( s32 to_move_index, NodeContents& node_to_move )
 //{
 //	++get_size();
 //	
@@ -174,22 +174,22 @@ void list_backend::internal_func_allocate_and_assign_to_node
 //}
 
 
-s32 list_backend::internal_func_move_unlinked_node_to_front
-	( s32 to_move_index, node_contents& node_to_move )
+s32 ListBackend::internal_func_move_unlinked_node_to_front
+	( s32 to_move_index, NodeContents& node_to_move )
 {
 	++get_size();
 	
 	s32& the_front_index = get_front_index();
 	s32 old_front_index = the_front_index;
 	
-	//sa_free_list_backend& the_free_list_backend 
+	//SaFreeListBackend& the_free_list_backend 
 	//	= get_free_list_backend();
 	//
 	//the_front_index = the_free_list_backend.peek_top();
 	//the_free_list_backend.pop();
 	
 	
-	//node<type>& the_front_node 
+	//Node<type>& the_front_node 
 	//	= get_node_at(the_front_index);
 	
 	the_front_index = to_move_index;
@@ -227,15 +227,15 @@ s32 list_backend::internal_func_move_unlinked_node_to_front
 }
 
 
-//s32 list_backend::internal_func_move_unlinked_node_to_front
-//	( s32 to_move_index, node_contents& node_to_move )
+//s32 ListBackend::internal_func_move_unlinked_node_to_front
+//	( s32 to_move_index, NodeContents& node_to_move )
 //{
 //	++get_size();
 //	
 //	s32& the_front_index = get_front_index();
 //	s32 old_front_index = the_front_index;
 //	
-//	////sa_free_list_backend& the_free_list_backend 
+//	////SaFreeListBackend& the_free_list_backend 
 //	////	= get_free_list_backend();
 //	//
 //	////the_front_index = the_free_list_backend.peek_top();
@@ -244,10 +244,10 @@ s32 list_backend::internal_func_move_unlinked_node_to_front
 //	
 //	the_front_index = to_move_index;
 //	
-//	//node<type>& the_front_node 
+//	//Node<type>& the_front_node 
 //	//	= get_node_at(the_front_index);
 //	
-//	node_contents the_front_node = get_node_contents_at(the_front_index);
+//	NodeContents the_front_node = get_node_contents_at(the_front_index);
 //	
 //	s32 new_next_index = -1;
 //	
@@ -280,7 +280,7 @@ s32 list_backend::internal_func_move_unlinked_node_to_front
 
 
 //// insert_before() won't affect back_index
-//s32 list_backend::insert_before( s32 index, const void* to_insert,
+//s32 ListBackend::insert_before( s32 index, const void* to_insert,
 //	u32 can_move_value )
 //{
 //	++get_size();
@@ -298,9 +298,9 @@ s32 list_backend::internal_func_move_unlinked_node_to_front
 //	}
 //	else
 //	{
-//		//node<type>& node_at_index 
+//		//Node<type>& node_at_index 
 //		//	= get_node_at(index);
-//		node_contents node_at_index = get_node_contents_at(index);
+//		NodeContents node_at_index = get_node_contents_at(index);
 //		
 //		const s32 old_prev_index = node_at_index.prev_index();
 //		
@@ -311,9 +311,9 @@ s32 list_backend::internal_func_move_unlinked_node_to_front
 //			.peek_top_and_pop();
 //		
 //		
-//		//node<type>& node_at_new_index
+//		//Node<type>& node_at_new_index
 //		//	= get_node_at(new_index);
-//		node_contents node_at_new_index = get_node_contents_at(new_index);
+//		NodeContents node_at_new_index = get_node_contents_at(new_index);
 //		
 //		
 //		//get_node_at(old_prev_index).next_index()
@@ -339,9 +339,9 @@ s32 list_backend::internal_func_move_unlinked_node_to_front
 //}
 
 
-s32 list_backend::internal_func_move_unlinked_node_before
+s32 ListBackend::internal_func_move_unlinked_node_before
 	( s32 to_move_before_index, s32 to_move_index, 
-	node_contents& node_to_move )
+	NodeContents& node_to_move )
 {
 	++get_size();
 	
@@ -354,7 +354,7 @@ s32 list_backend::internal_func_move_unlinked_node_before
 	}
 	
 	
-	node_contents node_to_move_before = get_node_contents_at
+	NodeContents node_to_move_before = get_node_contents_at
 		(to_move_before_index);
 	const s32 old_prev_index = node_to_move_before.prev_index();
 	
@@ -371,7 +371,7 @@ s32 list_backend::internal_func_move_unlinked_node_before
 
 
 //// insert_after() CAN affect back_index
-//s32 list_backend::insert_after( s32 index, const void* to_insert,
+//s32 ListBackend::insert_after( s32 index, const void* to_insert,
 //	u32 can_move_value )
 //{
 //	++get_size();
@@ -381,11 +381,11 @@ s32 list_backend::internal_func_move_unlinked_node_before
 //	//s32 old_next_index = get_node_at(index)
 //	//	.next_index();
 //	
-//	//node<type>& node_at_index = get_node_at(index);
+//	//Node<type>& node_at_index = get_node_at(index);
 //	//const s32 old_next_index = node_at_index
 //	//	.next_index();
 //	
-//	node_contents node_at_index = get_node_contents_at(index);
+//	NodeContents node_at_index = get_node_contents_at(index);
 //	const s32 old_next_index = node_at_index.next_index();
 //	
 //	
@@ -397,13 +397,13 @@ s32 list_backend::internal_func_move_unlinked_node_before
 //	
 //	node_at_index.next_index() = new_index;
 //	
-//	//node<type>& node_at_new_index 
+//	//Node<type>& node_at_new_index 
 //	//	= get_node_at(new_index);
-//	node_contents node_at_new_index = get_node_contents_at(new_index);
+//	NodeContents node_at_new_index = get_node_contents_at(new_index);
 //	
 //	s32 new_next_index = -1;
 //	
-//	// Special code is used for inserting an element at the end of the
+//	// Special code Is used for inserting an element at the end of the
 //	// list.
 //	if ( old_next_index < 0 )
 //	{
@@ -429,15 +429,15 @@ s32 list_backend::internal_func_move_unlinked_node_before
 //	return new_index;
 //}
 
-s32 list_backend::internal_func_move_unlinked_node_after
+s32 ListBackend::internal_func_move_unlinked_node_after
 	( s32 to_move_after_index, s32 to_move_index, 
-	node_contents& node_to_move )
+	NodeContents& node_to_move )
 {
 	++get_size();
 	
-	//node_contents node_at_index = get_node_contents_at(index);
+	//NodeContents node_at_index = get_node_contents_at(index);
 	//const s32 old_next_index = node_at_index.next_index();
-	node_contents node_to_move_after = get_node_contents_at
+	NodeContents node_to_move_after = get_node_contents_at
 		(to_move_after_index);
 	s16& node_to_move_after_next_index = node_to_move_after.next_index();
 	const s32 old_next_index = node_to_move_after_next_index;
@@ -446,11 +446,11 @@ s32 list_backend::internal_func_move_unlinked_node_after
 	//node_at_index.next_index() = new_index;
 	node_to_move_after_next_index = to_move_index;
 	
-	//node_contents node_at_new_index = get_node_contents_at(new_index);
+	//NodeContents node_at_new_index = get_node_contents_at(new_index);
 	
 	s32 new_next_index = -1;
 	
-	// Special code is used for inserting an element at the end of the
+	// Special code Is used for inserting an element at the end of the
 	// list.
 	if ( old_next_index < 0 )
 	{
@@ -478,7 +478,7 @@ s32 list_backend::internal_func_move_unlinked_node_after
 
 
 //// unlink_at_with_dealloc() CAN affect back_index
-//void* list_backend::unlink_at_with_dealloc( s32 index )
+//void* ListBackend::unlink_at_with_dealloc( s32 index )
 //{
 //	--get_size();
 //	
@@ -487,7 +487,7 @@ s32 list_backend::internal_func_move_unlinked_node_after
 //	//	old_next_index = get_node_at(index)
 //	//	.next_index();
 //	
-//	//node<type>& node_at_index = get_node_at(index);
+//	//Node<type>& node_at_index = get_node_at(index);
 //	//
 //	//const s32 old_prev_index = node_at_index
 //	//	.prev_index(),
@@ -503,13 +503,13 @@ s32 list_backend::internal_func_move_unlinked_node_after
 //	
 //	//vec2_s16& index_pair_at_index = *get_index_pair_at_index(index);
 //	
-//	node_contents node_at_index = get_node_contents_at(index);
+//	NodeContents node_at_index = get_node_contents_at(index);
 //	vec2_s16& index_pair_at_index = *node_at_index.index_pair_ptr;
 //	
 //	const s32 old_next_index = index_pair_at_index
-//		[node_contents::vec2_index_for_next_index],
+//		[NodeContents::vec2_index_for_next_index],
 //	old_prev_index = index_pair_at_index
-//		[node_contents::vec2_index_for_prev_index];
+//		[NodeContents::vec2_index_for_prev_index];
 //	
 //	index_pair_at_index = { -1, -1 };
 //	
@@ -518,7 +518,7 @@ s32 list_backend::internal_func_move_unlinked_node_after
 //	////node_at_index.data = type();
 //	////node_at_index.next_index() = -1;
 //	////node_at_index.prev_index() = -1;
-//	//node_at_index = node<type>();
+//	//node_at_index = Node<type>();
 //	
 //	
 //	get_free_list_backend().push(index);
@@ -549,7 +549,7 @@ s32 list_backend::internal_func_move_unlinked_node_after
 //	}
 //	else //if ( index != old_front_index && index != old_back_index )
 //	{
-//		//node<type>& old_prev_node 
+//		//Node<type>& old_prev_node 
 //		//	= get_node_at(old_prev_index);
 //		s16& the_next_index = get_next_index_at_index(old_prev_index);
 //		
@@ -574,14 +574,14 @@ s32 list_backend::internal_func_move_unlinked_node_after
 
 
 
-// This function is ever so slightly slower than it used to be, but it
+// This function Is ever So slightly slower than it used To be, but it
 // allows more flexiblity since some functions will call unlink_at (or
 // erase_at) instead of calling this function directly.  
 // 
-// Functions that call this one directly are still able to pass in a
-// pointer to the node_at_index.
-void* list_backend::internal_func_unlink_at( s32 index, 
-	node_contents* node_at_index_ptr )
+// Functions That call this one directly are still able To pass in a
+// pointer To the node_at_index.
+void* ListBackend::internal_func_unlink_at( s32 index, 
+	NodeContents* node_at_index_ptr )
 {
 	--get_size();
 	
@@ -592,9 +592,9 @@ void* list_backend::internal_func_unlink_at( s32 index,
 		old_back_index = the_back_index;
 	
 	
-	//node_contents node_at_index = get_node_contents_at(index);
-	node_contents local_node_at_index_raw;
-	node_contents* local_node_at_index_ptr;
+	//NodeContents node_at_index = get_node_contents_at(index);
+	NodeContents local_node_at_index_raw;
+	NodeContents* local_node_at_index_ptr;
 	
 	if ( node_at_index_ptr )
 	{
@@ -611,9 +611,9 @@ void* list_backend::internal_func_unlink_at( s32 index,
 		->index_pair_ptr;
 	
 	const s32 old_next_index = index_pair_at_index
-		[node_contents::vec2_index_for_next_index],
+		[NodeContents::vec2_index_for_next_index],
 	old_prev_index = index_pair_at_index
-		[node_contents::vec2_index_for_prev_index];
+		[NodeContents::vec2_index_for_prev_index];
 	
 	index_pair_at_index = { -1, -1 };
 	
@@ -663,7 +663,7 @@ void* list_backend::internal_func_unlink_at( s32 index,
 }
 
 
-//void list_backend::internal_func_unlink_from_connected_index_at
+//void ListBackend::internal_func_unlink_from_connected_index_at
 //	( s32 index, u32 index_to_vec2 )
 //{
 //	vec2_s16& index_pair_at_index = *get_index_pair_at_index(index);
@@ -671,7 +671,7 @@ void* list_backend::internal_func_unlink_at( s32 index,
 //	const s32 old_other_index = index_pair_at_index[index_to_vec2];
 //	
 //	
-//	// Check whether index is at the front or back of the list.
+//	// Check whether index Is at the front or back of the list.
 //	if ( old_other_index < 0 )
 //	{
 //		return;
@@ -689,10 +689,10 @@ void* list_backend::internal_func_unlink_at( s32 index,
 
 
 
-// This is not quite the same algorithm as insertion sort.  In fact, it is
-// possible to optimize it, using extra space, by exploiting the fact that
-// this algorithm SEARCHES forWARD to find ONLY ONE node to move.
-s32 list_backend::insertion_sort()
+// This Is not quite the same algorithm as insertion sort.  In fact, it Is
+// possible To optimize it, using extra space, by exploiting the fact That
+// this algorithm SEARCHES forWARD To find ONLY ONE Node To move.
+s32 ListBackend::insertion_sort()
 {
 	s32& the_front_index = get_front_index();
 	s32& the_back_index = get_back_index();
@@ -705,7 +705,7 @@ s32 list_backend::insertion_sort()
 	
 	
 	//if ( get_node_at(the_front_index).next_index() < 0 )
-	node_contents the_front_node = get_node_contents_at(the_front_index);
+	NodeContents the_front_node = get_node_contents_at(the_front_index);
 	
 	s32 front_node_next_index = the_front_node.next_index();
 	
@@ -715,7 +715,7 @@ s32 list_backend::insertion_sort()
 	}
 	
 	
-	list_backend sorted_list(*this);
+	ListBackend sorted_list(*this);
 	
 	s32& temp_front_index = sorted_list.get_front_index();
 	
@@ -731,7 +731,7 @@ s32 list_backend::insertion_sort()
 		
 		call_insertion_sort_inner_loop_func(index_low);
 		
-		node_contents node_at_index_low = get_node_contents_at(index_low);
+		NodeContents node_at_index_low = get_node_contents_at(index_low);
 		
 		if ( i == index_low )
 		{
@@ -751,7 +751,7 @@ s32 list_backend::insertion_sort()
 	get_size() = sorted_list.get_size();
 	
 	
-	// Prevent any nodes from being erased when sorted_list's destructor is
+	// Prevent any nodes from being erased when sorted_list's destructor Is
 	// called.
 	temp_front_index = -1;
 	
@@ -759,7 +759,7 @@ s32 list_backend::insertion_sort()
 	return the_front_index;
 }
 
-//s32 list_backend::insertion_sort()
+//s32 ListBackend::insertion_sort()
 //{
 //	return get_front_index();
 //}
@@ -769,12 +769,12 @@ s32 list_backend::insertion_sort()
 
 
 
-//// These two functions are slowwwwwww because there is too much list
+//// These two functions are slowwwwwww because there Is too much list
 //// traversal.  Thus, I have replaced them with an array of pointers based
 //// method.
-//s32 list_backend::internal_func_merge( merge_args& args )
+//s32 ListBackend::internal_func_merge( merge_args& args )
 //{
-//	list_backend out_list(*this);
+//	ListBackend out_list(*this);
 //	
 //	s32& the_front_index = get_front_index();
 //	s32& the_back_index = get_back_index();
@@ -789,15 +789,15 @@ s32 list_backend::insertion_sort()
 //		done_with_right = true;
 //	}
 //	
-//	node_contents left_node = args.get_left_node(this),
+//	NodeContents left_node = args.get_left_node(this),
 //		right_node;
 //	
-//	node_contents left_tail_node = args.get_left_tail_node(this), 
+//	NodeContents left_tail_node = args.get_left_tail_node(this), 
 //		right_tail_node;
 //	
 //	
 //	s32 actual_tail_index;
-//	node_contents* actual_tail_node_ptr = NULL;
+//	NodeContents* actual_tail_node_ptr = NULL;
 //	
 //	
 //	if (!right_list_blank)
@@ -817,14 +817,14 @@ s32 list_backend::insertion_sort()
 //	
 //	
 //	// These are for re-linking nodes after a merge.
-//	node_contents node_before_start, node_after_end;
-//	node_contents * node_before_start_ptr = NULL,
+//	NodeContents node_before_start, node_after_end;
+//	NodeContents * node_before_start_ptr = NULL,
 //		* node_after_end_ptr = NULL;
 //	
 //	
 //	
 //	
-//	// start and end refer to args' parameters, and front and back refer to
+//	// start and end refer To args' parameters, and front and back refer To
 //	// this's front_index and back_index.
 //	const bool old_start_index_is_front_index = ( args.get_left_head() 
 //		== the_front_index ),
@@ -833,8 +833,8 @@ s32 list_backend::insertion_sort()
 //	const s32 temp_index_before_start = left_node.prev_index(),
 //		temp_index_after_end = actual_tail_node_ptr->next_index();
 //	
-//	// If temp_index_before_start refers to nothing, don't point
-//	// node_before_start_ptr to node_before_start.
+//	// If temp_index_before_start refers To nothing, don't point
+//	// node_before_start_ptr To node_before_start.
 //	if ( temp_index_before_start >= 0 )
 //	{
 //		node_before_start = get_node_contents_at(temp_index_before_start);
@@ -920,28 +920,28 @@ s32 list_backend::insertion_sort()
 //	}
 //	
 //	
-//	// If there is a node before the left sublist's start node
+//	// If there Is a Node before the left sublist's start Node
 //	if (node_before_start_ptr)
 //	{
 //		node_before_start.next_index() = out_list.get_front_index();
 //		get_prev_index_at_index(out_list.get_front_index())
 //			= temp_index_before_start;
 //	}
-//	// If the left sublist's original head index is the front_index
+//	// If the left sublist's original head index Is the front_index
 //	else if (old_start_index_is_front_index)
 //	{
 //		the_front_index = out_list.get_front_index();
 //	}
 //	
 //	
-//	// If there is a node after the right sublist's end node
+//	// If there Is a Node after the right sublist's end Node
 //	if (node_after_end_ptr)
 //	{
 //		node_after_end.prev_index() = out_list.get_back_index();
 //		get_next_index_at_index(out_list.get_back_index())
 //			= temp_index_after_end;
 //	}
-//	// If the right sublist's original head index is the back_index
+//	// If the right sublist's original head index Is the back_index
 //	else if (old_end_index_is_back_index)
 //	{
 //		the_back_index = out_list.get_back_index();
@@ -953,7 +953,7 @@ s32 list_backend::insertion_sort()
 //}
 //
 //
-//s32 list_backend::merge_sort()
+//s32 ListBackend::merge_sort()
 //{
 //	s32& the_front_index = get_front_index();
 //	
@@ -1053,10 +1053,10 @@ s32 list_backend::insertion_sort()
 
 
 
-void list_backend::internal_func_subarr_merge
-	( node_data_and_index* left_subarr, const size_t left_subarr_size, 
-	node_data_and_index* right_subarr, const size_t right_subarr_size, 
-	node_data_and_index* out_subarr )
+void ListBackend::internal_func_subarr_merge
+	( NodeDataAndIndex* left_subarr, const size_t left_subarr_size, 
+	NodeDataAndIndex* right_subarr, const size_t right_subarr_size, 
+	NodeDataAndIndex* out_subarr )
 {
 	const size_t out_subarr_size = left_subarr_size + right_subarr_size;
 	
@@ -1095,7 +1095,7 @@ void list_backend::internal_func_subarr_merge
 
 
 // Top-down merge sort using an array of node_data_and_index_and_index's.
-s32 list_backend::merge_sort_via_array()
+s32 ListBackend::merge_sort_via_array()
 {
 	//memfill8( temp_sram_buf, 0, get_temp_sram_buf_size() );
 	
@@ -1109,10 +1109,10 @@ s32 list_backend::merge_sort_via_array()
 	//return the_front_index;
 	
 	
-	//std::unique_ptr<node_data_and_index[]> arr_a, work_arr;
+	//std::unique_ptr<NodeDataAndIndex[]> arr_a, work_arr;
 	
-	//arr_a.reset(new node_data_and_index[get_total_num_nodes()]);
-	//work_arr.reset(new node_data_and_index[get_total_num_nodes()]);
+	//arr_a.reset(new NodeDataAndIndex[get_total_num_nodes()]);
+	//work_arr.reset(new NodeDataAndIndex[get_total_num_nodes()]);
 	
 	
 	
@@ -1133,25 +1133,25 @@ s32 list_backend::merge_sort_via_array()
 	// The number of used nodes
 	const size_t real_num_nodes = get_size();
 	
-	//debug_arr_group::write_u32_and_inc(real_num_nodes);
+	//DebugArrGroup::write_u32_and_inc(real_num_nodes);
 	
 	
-	// This is slower than filling arr_a in the previous for loop, but it
-	// can use SIGNIFICANTLY less memory in the general case if the sa_list
-	// is not full.  This might be a good use case for an std::vector.
+	// This Is slower than filling arr_a in the previous for loop, but it
+	// Can use SIGNIFICANTLY less memory in the general case if the sa_list
+	// Is not full.  This might be a good use case for an std::vector.
 	ndai_dyn_arr arr_a(real_num_nodes), work_arr(real_num_nodes);
 	
 	
 	{
 		size_t temp = 0;
-		node_contents temp_node;
+		NodeContents temp_node;
 		
 		for ( s32 i=old_front_index; i!=-1; i=temp_node.next_index() )
 		{
 			temp_node = get_node_contents_at(i);
 			
 			//arr_a[temp] = get_node_at(i);
-			arr_a[temp] = node_data_and_index( temp_node.data_ptr, i );
+			arr_a[temp] = NodeDataAndIndex( temp_node.data_ptr, i );
 			
 			++temp;
 		}
@@ -1164,7 +1164,7 @@ s32 list_backend::merge_sort_via_array()
 	
 	if ( first_subarr_size > 1 )
 	{
-		//// This is an insertion sort of PORTIONS of arr_a.
+		//// This Is an insertion sort of PORTIONS of arr_a.
 		//auto subarr_insertion_sort = [&]( size_t subarr_offset, 
 		//	const size_t subarr_size ) -> void
 		//{
@@ -1207,7 +1207,7 @@ s32 list_backend::merge_sort_via_array()
 			
 		}
 		
-		//debug_arr_group::gdb_breakpoint_helper = 0;
+		//DebugArrGroup::gdb_breakpoint_helper = 0;
 	}
 	
 	
@@ -1216,14 +1216,14 @@ s32 list_backend::merge_sort_via_array()
 	//bool use_arr_a = false;
 	
 	size_t left_subarr_offset = 0, right_subarr_offset = 0;
-	node_data_and_index * left_subarr, * right_subarr;
+	NodeDataAndIndex * left_subarr, * right_subarr;
 	size_t left_subarr_size = 0, right_subarr_size = 0;
 	
 	
 	static constexpr bool do_swap = true;
 	
 	bool main_arr_is_arr_a = false;
-	prev_curr_pair<ndai_dyn_arr*> main_arr_pc_pair, secondary_arr_pc_pair;
+	PrevCurrPair<ndai_dyn_arr*> main_arr_pc_pair, secondary_arr_pc_pair;
 	
 	
 	//if (!do_swap)
@@ -1254,7 +1254,7 @@ s32 list_backend::merge_sort_via_array()
 			}
 		}
 		
-		//auto get_merge_args = [&]( node_data_and_index* n_left_subarr )
+		//auto get_merge_args = [&]( NodeDataAndIndex* n_left_subarr )
 		auto get_merge_args = [&]( ndai_dyn_arr& specific_arr, 
 			size_t n_left_subarr_offset ) -> void
 		{
@@ -1322,30 +1322,30 @@ s32 list_backend::merge_sort_via_array()
 	
 	while ( the_front_index >= 0 )
 	{
-		// Unlink every node so they can all be re-linked in sorted order.
-		// Part of the strategy here is to avoid allocating and
-		// deallocating node array indices.
+		// Unlink every Node So they Can all be re-linked in sorted order.
+		// Part of the strategy here Is To avoid allocating and
+		// deallocating Node array indices.
 		internal_func_unlink_at(the_front_index);
 	}
 	
 	
 	
 	//s32 curr_index;
-	//node_contents temp_node;
+	//NodeContents temp_node;
 	
 	//for ( u32 i=0; i<real_num_nodes; ++i )
 	for ( s32 i=real_num_nodes-1; i>=0; --i )
 	{
 		//s32 curr_index = arr_a[i].index;
 		s32 curr_index = (*main_arr_pc_pair.prev)[i].index;
-		node_contents temp_node = get_node_contents_at(curr_index);
+		NodeContents temp_node = get_node_contents_at(curr_index);
 		
 		//internal_func_move_unlinked_node_to_back( curr_index, temp_node );
 		internal_func_move_unlinked_node_to_front( curr_index, temp_node );
 	}
 	
 	
-	//asm_comment("SRAM thing");
+	//ASM_COMMENT("SRAM thing");
 	//
 	//{
 	//
@@ -1355,7 +1355,7 @@ s32 list_backend::merge_sort_via_array()
 	//{
 	//	//u8* buf = reinterpret_cast<u8*>(&arr_a[i].index);
 	//	
-	//	asm_comment("Inner for loop");
+	//	ASM_COMMENT("Inner for loop");
 	//	//for ( s32 j=sizeof(arr_a[i].index)-1; j>=0; --j )
 	//	//{
 	//	//	temp_sram_buf[ ( i * sizeof(s32) ) + j ] = buf[j];
@@ -1363,7 +1363,7 @@ s32 list_backend::merge_sort_via_array()
 	//	single_write_as_bytes( temp_sram_buf, i, arr_a[i].index );
 	//}
 	//
-	//asm_comment("Write \"done\"");
+	//ASM_COMMENT("Write \"done\"");
 	//
 	////temp_sram_buf[ ( real_num_nodes * sizeof(s32) ) + 0 ] = 'd';
 	////temp_sram_buf[ ( real_num_nodes * sizeof(s32) ) + 1 ] = 'o';
@@ -1375,11 +1375,11 @@ s32 list_backend::merge_sort_via_array()
 	//
 	//}
 	//
-	//asm_comment("SRAM thing done");
+	//ASM_COMMENT("SRAM thing done");
 	
 	return the_front_index;
 }
 
 
-} // end of namespace sa_list_stuff
+} // end of namespace SaListStuff
 

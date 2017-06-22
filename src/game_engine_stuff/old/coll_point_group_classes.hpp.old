@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -26,10 +26,10 @@
 
 #include "coll_box_class.hpp"
 
-class sprite;
+class Sprite;
 
 
-// This class is primarily used by the collision detection and response
+// This class Is primarily used by the collision detection and response
 // between sprites and blocks, or at least coll_boxes and blocks.
 class coll_point_group_base
 {
@@ -40,90 +40,90 @@ public:		// enums
 			arr_ind_16x16_pt_##name, 
 		
 		// Left side
-		list_of_shared_left_side_coll_point_names(X)
+		LIST_OF_SHARED_LEFT_SIDE_COLL_POINT_NAMES(X)
 		
 		// Right side
-		list_of_shared_right_side_coll_point_names(X)
+		LIST_OF_SHARED_RIGHT_SIDE_COLL_POINT_NAMES(X)
 		
 		// Top side
-		list_of_shared_top_side_coll_point_names(X)
+		LIST_OF_SHARED_TOP_SIDE_COLL_POINT_NAMES(X)
 		
 		// Bottom side
-		list_of_shared_bot_side_coll_point_names(X)
+		LIST_OF_SHARED_BOT_SIDE_COLL_POINT_NAMES(X)
 		
 		#undef X
 		
-		// arr_ind_16x16_count is the amount of arr_index_16x16's.  It is
+		// arr_ind_16x16_count Is the amount of arr_index_16x16's.  It Is
 		// automatically updated by the compiler.
 		arr_ind_16x16_count,
 		
 	} __attribute__((_ALIGN4));
 	
 	
-	// The reason an X-macro isn't used here is because ctags wouldn't be
-	// able to work with it.
+	// The reason an X-macro isn't used here Is because ctags wouldn't be
+	// able To work with it.
 	enum arr_index_16x32 
 	{
 		#define X(name) \
 			arr_ind_16x32_pt_##name, 
 		
 		// Left side
-		list_of_shared_left_side_coll_point_names(X)
+		LIST_OF_SHARED_LEFT_SIDE_COLL_POINT_NAMES(X)
 		
 		// Right side
-		list_of_shared_right_side_coll_point_names(X)
+		LIST_OF_SHARED_RIGHT_SIDE_COLL_POINT_NAMES(X)
 		
 		// Top side
-		list_of_shared_top_side_coll_point_names(X)
+		LIST_OF_SHARED_TOP_SIDE_COLL_POINT_NAMES(X)
 		
 		// Bottom side
-		list_of_shared_bot_side_coll_point_names(X)
+		LIST_OF_SHARED_BOT_SIDE_COLL_POINT_NAMES(X)
 		
 		#undef X
 		
-		// arr_ind_16x32_count is the amount of arr_index_16x32's.  It is
+		// arr_ind_16x32_count Is the amount of arr_index_16x32's.  It Is
 		// automatically updated by the compiler.
 		arr_ind_16x32_count,
 		
 	} __attribute__((_ALIGN4));
 	
 	
-	// The reason an X-macro isn't used here is because ctags wouldn't be
-	// able to work with it.
+	// The reason an X-macro isn't used here Is because ctags wouldn't be
+	// able To work with it.
 	enum arr_index_32x16 
 	{
 		#define X(name) \
 			arr_ind_32x16_pt_##name, 
 		
 		// Left side
-		list_of_shared_left_side_coll_point_names(X)
+		LIST_OF_SHARED_LEFT_SIDE_COLL_POINT_NAMES(X)
 		
 		// Right side
-		list_of_shared_right_side_coll_point_names(X)
+		LIST_OF_SHARED_RIGHT_SIDE_COLL_POINT_NAMES(X)
 		
 		// Top side
-		list_of_shared_top_side_coll_point_names(X)
+		LIST_OF_SHARED_TOP_SIDE_COLL_POINT_NAMES(X)
 		
 		// Bottom side
-		list_of_shared_bot_side_coll_point_names(X)
+		LIST_OF_SHARED_BOT_SIDE_COLL_POINT_NAMES(X)
 		
 		#undef X
 		
-		// arr_ind_32x16_count is the amount of arr_index_32x16's.  It is
+		// arr_ind_32x16_count Is the amount of arr_index_32x16's.  It Is
 		// automatically updated by the compiler.
 		arr_ind_32x16_count,
 		
 	} __attribute__((_ALIGN4));
 	
 public:		// variables
-	//// The maximum number of collision points, 32, is definitely more than
-	//// is necessary, but thus far there's not that much need to optimize
-	//// the number of collision points (also I'm too lazy to put effort into
-	//// doing so).
+	//// The maximum number of collision points, 32, Is definitely more than
+	//// Is necessary, but thus far there's not That much need To optimize
+	//// the number of collision points (also I'm too lazy To put effort into
+	//// doing So).
 	//static const u32 max_num_coll_points = 32;
 	
-	// Ignore that last comment.  I'm optimizing this now, mainly to save
-	// on stack space (though saving on space in other memory areas is good
+	// Ignore That last comment.  I'm optimizing this now, mainly To save
+	// on stack space (though saving on space in other memory areas Is good
 	// too).
 	static const u32 max_num_coll_points = 12;
 	vec2_f24p8 the_array[max_num_coll_points];
@@ -166,18 +166,18 @@ public:		// functions
 	//	{ return the_array[arr_ind_16x16_pt_mb]; }
 	
 protected:		// functions
-	void assign_vert_side_x_positions( const coll_box& the_coll_box, 
+	void assign_vert_side_x_positions( const CollBox& the_coll_box, 
 		vec2_f24p8& pt_lt, vec2_f24p8& pt_lm, vec2_f24p8& pt_lb, 
 		vec2_f24p8& pt_rt, vec2_f24p8& pt_rm, vec2_f24p8& pt_rb );
-	void assign_horiz_side_y_positions( const sprite& the_sprite, 
-		const coll_box& the_coll_box, vec2_f24p8& pt_tl, 
+	void assign_horiz_side_y_positions( const Sprite& the_sprite, 
+		const CollBox& the_coll_box, vec2_f24p8& pt_tl, 
 		vec2_f24p8& pt_tm, vec2_f24p8& pt_tr, vec2_f24p8& pt_bl, 
 		vec2_f24p8& pt_bm, vec2_f24p8& pt_br );
 	
 	
-	void assign_vert_side_mid_y_positions( const coll_box& the_coll_box, 
+	void assign_vert_side_mid_y_positions( const CollBox& the_coll_box, 
 		vec2_f24p8& pt_lm, vec2_f24p8& pt_rm );
-	void assign_horiz_side_mid_x_positions( const coll_box& the_coll_box,
+	void assign_horiz_side_mid_x_positions( const CollBox& the_coll_box,
 		vec2_f24p8& pt_tm, vec2_f24p8& pt_bm );
 	
 	
@@ -186,19 +186,19 @@ protected:		// functions
 class coll_point_group_16x16 : public coll_point_group_base
 {
 public:		// functions
-	coll_point_group_16x16( const sprite& the_sprite );
+	coll_point_group_16x16( const Sprite& the_sprite );
 	
 	
 protected:		// functions
-	void assign_vert_side_top_y_positions( const coll_box& the_coll_box, 
+	void assign_vert_side_top_y_positions( const CollBox& the_coll_box, 
 		vec2_f24p8& pt_lt, vec2_f24p8& pt_rt );
-	void assign_vert_side_bot_y_positions( const coll_box& the_coll_box, 
+	void assign_vert_side_bot_y_positions( const CollBox& the_coll_box, 
 		vec2_f24p8& pt_lb, vec2_f24p8& pt_rb );
 	
 	
-	void assign_horiz_side_left_x_positions( const coll_box& the_coll_box, 
+	void assign_horiz_side_left_x_positions( const CollBox& the_coll_box, 
 		vec2_f24p8& pt_tl, vec2_f24p8& pt_bl );
-	void assign_horiz_side_right_x_positions( const coll_box& the_coll_box, 
+	void assign_horiz_side_right_x_positions( const CollBox& the_coll_box, 
 		vec2_f24p8& pt_tr, vec2_f24p8& pt_br );
 	
 	
@@ -208,33 +208,33 @@ protected:		// functions
 class coll_point_group_16x32 : public coll_point_group_base
 {
 public:		// functions
-	coll_point_group_16x32( const sprite& the_sprite );
+	coll_point_group_16x32( const Sprite& the_sprite );
 	
 protected:		// functions
-	void assign_vert_side_top_y_positions( const coll_box& the_coll_box, 
+	void assign_vert_side_top_y_positions( const CollBox& the_coll_box, 
 		vec2_f24p8& pt_lt, vec2_f24p8& pt_rt );
-	void assign_vert_side_bot_y_positions( const coll_box& the_coll_box, 
+	void assign_vert_side_bot_y_positions( const CollBox& the_coll_box, 
 		vec2_f24p8& pt_lb, vec2_f24p8& pt_rb );
 	
 	
-	void assign_horiz_side_left_x_positions( const coll_box& the_coll_box, 
+	void assign_horiz_side_left_x_positions( const CollBox& the_coll_box, 
 		vec2_f24p8& pt_tl, vec2_f24p8& pt_bl );
-	void assign_horiz_side_right_x_positions( const coll_box& the_coll_box, 
+	void assign_horiz_side_right_x_positions( const CollBox& the_coll_box, 
 		vec2_f24p8& pt_tr, vec2_f24p8& pt_br );
 	
 	
 } __attribute__((_ALIGN4));
 
-//void generate_coll_point_group_16x16( const sprite& the_sprite, 
+//void generate_coll_point_group_16x16( const Sprite& the_sprite, 
 //	coll_point_group& the_pt_group ) __attribute__((_IWRAM_CODE));
 //
-//void generate_coll_point_group_16x32( const sprite& the_sprite, 
+//void generate_coll_point_group_16x32( const Sprite& the_sprite, 
 //	coll_point_group& the_pt_group ) __attribute__((_IWRAM_CODE));
 //
-//void generate_coll_point_group_32x16( const sprite& the_sprite, 
+//void generate_coll_point_group_32x16( const Sprite& the_sprite, 
 //	coll_point_group& the_pt_group ) __attribute__((_IWRAM_CODE));
 //
-//void generate_coll_point_group_32x32( const sprite& the_sprite, 
+//void generate_coll_point_group_32x32( const Sprite& the_sprite, 
 //	coll_point_group& the_pt_group ) __attribute__((_IWRAM_CODE));
 
 

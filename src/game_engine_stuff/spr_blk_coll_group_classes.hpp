@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -22,8 +22,8 @@
 #include "coll_lseg_classes.hpp"
 
 // An abstract base class for a group of line segments for use with sprites
-// so that they can detect and respond to collisions with blocks
-class spr_blk_coll_group_base
+// So That they Can detect and respond To collisions with blocks
+class SprBlkCollGroupBase
 {
 public:		// enums
 	enum horiz_index
@@ -53,26 +53,26 @@ public:		// enums
 	
 public:		// classes
 	// Left and right sides use this
-	class horiz_coll_tuple
+	class HorizCollTuple
 	{
 	public:		// variables
-		//bcr_lseg_group bcrlg;
-		//horiz_coll_lseg clseg;
-		block_coll_result bcr;
+		//BcrLsegGroup bcrlg;
+		//HorizCollLseg clseg;
+		BlockCollResult bcr;
 		vec2_s32 blk_crd_pos;
 	} __attribute__((_ALIGN4));
 	
 	// Top side uses this
-	class vert_top_coll_tuple : public horiz_coll_tuple
+	class VertTopCollTuple : public HorizCollTuple
 	{
 	};
 	
 	// Bottom side uses this
-	class vert_bot_coll_tuple
+	class VertBotCollTuple
 	{
 	public:		// variables
-		bcr_lseg_group bcrlg;
-		vert_coll_lseg clseg;
+		BcrLsegGroup bcrlg;
+		VertCollLseg clseg;
 	} __attribute__((_ALIGN4));
 	
 protected:		// variables and constants
@@ -82,17 +82,17 @@ protected:		// variables and constants
 	static constexpr size_t max_num_vert_top_ctups = num_vert_bot_ctups;
 	static constexpr size_t max_num_vert_bot_ctups = num_vert_bot_ctups;
 	
-	//array_helper<horiz_coll_tuple> horiz_ctups;
-	//array_helper<vert_top_coll_tuple> vert_top_ctups;
-	//array_helper<vert_bot_coll_tuple> vert_bot_ctups;
-	static horiz_coll_tuple horiz_ctups[max_num_horiz_ctups]
+	//ArrayHelper<HorizCollTuple> horiz_ctups;
+	//ArrayHelper<VertTopCollTuple> vert_top_ctups;
+	//ArrayHelper<VertBotCollTuple> vert_bot_ctups;
+	static HorizCollTuple horiz_ctups[max_num_horiz_ctups]
 		__attribute__((_IWRAM));
-	static vert_top_coll_tuple vert_top_ctups[max_num_vert_top_ctups]
+	static VertTopCollTuple vert_top_ctups[max_num_vert_top_ctups]
 		__attribute__((_IWRAM));
-	static vert_bot_coll_tuple vert_bot_ctups[max_num_vert_bot_ctups]
+	static VertBotCollTuple vert_bot_ctups[max_num_vert_bot_ctups]
 		__attribute__((_IWRAM));
 	
-	static vec2<bool> size_is_tiny __attribute__((_IWRAM));
+	static Vec2<bool> size_is_tiny __attribute__((_IWRAM));
 	static bool internal_on_ground __attribute__((_IWRAM));
 	
 	
@@ -103,67 +103,67 @@ protected:		// variables and constants
 	static s32 blk_crd_pos_y_for_mid_hs __attribute__((_IWRAM));
 	static s32 blk_crd_pos_y_for_bot_hs __attribute__((_IWRAM));
 	
-	//static fixed24p8 hs_width __attribute__((_IWRAM));
+	//static Fixed24p8 hs_width __attribute__((_IWRAM));
 	
-	static fixed24p8 pos_x_for_left_vs __attribute__((_IWRAM));
-	static fixed24p8 pos_x_for_mid_vs __attribute__((_IWRAM));
-	static fixed24p8 pos_x_for_right_vs __attribute__((_IWRAM));
+	static Fixed24p8 pos_x_for_left_vs __attribute__((_IWRAM));
+	static Fixed24p8 pos_x_for_mid_vs __attribute__((_IWRAM));
+	static Fixed24p8 pos_x_for_right_vs __attribute__((_IWRAM));
 	
 	static s32 blk_crd_pos_x_for_left_vs __attribute__((_IWRAM));
 	static s32 blk_crd_pos_x_for_mid_vs __attribute__((_IWRAM));
 	static s32 blk_crd_pos_x_for_right_vs __attribute__((_IWRAM));
 	
 	static s32 blk_crd_pos_y_for_top_vs __attribute__((_IWRAM));
-	static fixed24p8 pos_y_for_bot_vs __attribute__((_IWRAM));
+	static Fixed24p8 pos_y_for_bot_vs __attribute__((_IWRAM));
 	
-	static fixed24p8 vs_height_bot_ia __attribute__((_IWRAM));
-	static fixed24p8 offset_y_for_bot_vs __attribute__((_IWRAM));
+	static Fixed24p8 vs_height_bot_ia __attribute__((_IWRAM));
+	static Fixed24p8 offset_y_for_bot_vs __attribute__((_IWRAM));
 	
 	
-	//static const fixed24p8 offset_x_for_any_hs_left;
-	//static const fixed24p8 offset_x_for_any_hs_right;
+	//static const Fixed24p8 offset_x_for_any_hs_left;
+	//static const Fixed24p8 offset_x_for_any_hs_right;
 	
-	//static const fixed24p8 offset_x_for_left_vs;
-	//static const fixed24p8 offset_x_for_right_vs;
+	//static const Fixed24p8 offset_x_for_left_vs;
+	//static const Fixed24p8 offset_x_for_right_vs;
 	
-	static const fixed24p8 vs_height_non_bot_mid_og;
-	static const fixed24p8 vs_height_bot_mid_og;
-	//static const fixed24p8 vs_height_top;
-	//static const fixed24p8 vs_height_bot_ia;
+	static const Fixed24p8 vs_height_non_bot_mid_og;
+	static const Fixed24p8 vs_height_bot_mid_og;
+	//static const Fixed24p8 vs_height_top;
+	//static const Fixed24p8 vs_height_bot_ia;
 	
-	//static const fixed24p8 offset_y_for_top_vs;
-	//static const fixed24p8 offset_y_for_bot_vs;
+	//static const Fixed24p8 offset_y_for_top_vs;
+	//static const Fixed24p8 offset_y_for_bot_vs;
 	
 	
 	
 public:		// functions
-	inline const horiz_coll_tuple& get_horiz_ctup( u32 index ) const
+	inline const HorizCollTuple& get_horiz_ctup( u32 index ) const
 	{
 		return horiz_ctups[index];
 	}
-	inline const vert_top_coll_tuple& get_vert_top_ctup( u32 index ) const
+	inline const VertTopCollTuple& get_vert_top_ctup( u32 index ) const
 	{
 		return vert_top_ctups[index];
 	}
-	inline const vert_bot_coll_tuple& get_vert_bot_ctup( u32 index ) const
+	inline const VertBotCollTuple& get_vert_bot_ctup( u32 index ) const
 	{
 		return vert_bot_ctups[index];
 	}
 	
-	inline horiz_coll_tuple& get_horiz_ctup( u32 index )
+	inline HorizCollTuple& get_horiz_ctup( u32 index )
 	{
 		return horiz_ctups[index];
 	}
-	inline vert_top_coll_tuple& get_vert_top_ctup( u32 index )
+	inline VertTopCollTuple& get_vert_top_ctup( u32 index )
 	{
 		return vert_top_ctups[index];
 	}
-	inline vert_bot_coll_tuple& get_vert_bot_ctup( u32 index )
+	inline VertBotCollTuple& get_vert_bot_ctup( u32 index )
 	{
 		return vert_bot_ctups[index];
 	}
 	
-	static inline const vec2<bool>& get_size_is_tiny()
+	static inline const Vec2<bool>& get_size_is_tiny()
 	{
 		return size_is_tiny;
 	}
@@ -212,28 +212,28 @@ protected:		// functions
 	
 	// "ia" means "in air"
 	// "vs" means "vertical sensor"
-	static const fixed24p8 get_pos_x_for_left_vs();
-	static const fixed24p8 get_pos_x_for_mid_vs();
-	static const fixed24p8 get_pos_x_for_right_vs();
+	static const Fixed24p8 get_pos_x_for_left_vs();
+	static const Fixed24p8 get_pos_x_for_mid_vs();
+	static const Fixed24p8 get_pos_x_for_right_vs();
 	
 	static const s32 get_blk_crd_pos_x_for_left_vs();
 	static const s32 get_blk_crd_pos_x_for_mid_vs();
 	static const s32 get_blk_crd_pos_x_for_right_vs();
 	
 	static const s32 get_blk_crd_pos_y_for_top_vs();
-	static const fixed24p8 get_pos_y_for_bot_vs();
+	static const Fixed24p8 get_pos_y_for_bot_vs();
 	
 	static const vec2_s32 get_top_left_vs_blk_crd_pos();
 	static const vec2_s32 get_top_mid_vs_blk_crd_pos();
 	static const vec2_s32 get_top_right_vs_blk_crd_pos();
 	
-	static const vert_coll_lseg get_bot_left_vs_og();
-	static const vert_coll_lseg get_bot_mid_vs_og();
-	static const vert_coll_lseg get_bot_right_vs_og();
+	static const VertCollLseg get_bot_left_vs_og();
+	static const VertCollLseg get_bot_mid_vs_og();
+	static const VertCollLseg get_bot_right_vs_og();
 	
-	static const vert_coll_lseg get_bot_left_vs_ia();
-	static const vert_coll_lseg get_bot_mid_vs_ia();
-	static const vert_coll_lseg get_bot_right_vs_ia();
+	static const VertCollLseg get_bot_left_vs_ia();
+	static const VertCollLseg get_bot_mid_vs_ia();
+	static const VertCollLseg get_bot_right_vs_ia();
 	
 	
 	
@@ -242,9 +242,9 @@ protected:		// functions
 // 
 
 
-// Sprite/Block Collision Group for collision boxes that are at most 16x16
+// Sprite/Block Collision Group for collision boxes That are at most 16x16
 // in size
-class spr_blk_coll_group_16x16 : public spr_blk_coll_group_base
+class SprBlkCollGroup16x16 : public SprBlkCollGroupBase
 {
 //public:		// enums
 protected:		// enums
@@ -263,12 +263,12 @@ protected:		// variables and constants
 	static_assert( num_vert_top_ctups <= max_num_vert_top_ctups );
 	
 public:		// functions
-	inline spr_blk_coll_group_16x16()
+	inline SprBlkCollGroup16x16()
 	{
 		//init_arr_helpers();
 	}
-	spr_blk_coll_group_16x16( const coll_box& s_coll_box, u32 s_on_ground );
-	void init( const coll_box& s_coll_box, u32 s_on_ground )
+	SprBlkCollGroup16x16( const CollBox& s_coll_box, u32 s_on_ground );
+	void init( const CollBox& s_coll_box, u32 s_on_ground )
 		__attribute__((_IWRAM_CODE,_TARGET_ARM));
 	
 	//const size_t get_num_horiz_ctups() const;
@@ -286,15 +286,15 @@ public:		// functions
 	
 protected:		// functions
 	//void init_arr_helpers();
-	static void init_static_vars( const coll_box& s_coll_box, 
+	static void init_static_vars( const CollBox& s_coll_box, 
 		bool s_on_ground ) __attribute__((_IWRAM_CODE,_TARGET_ARM));
 	
 	
 } __attribute__((_ALIGN4));
 
-// Sprite/Block Collision Group for collision boxes that are at most 16x32
+// Sprite/Block Collision Group for collision boxes That are at most 16x32
 // in size but larger than 16x16
-class spr_blk_coll_group_16x32 : public spr_blk_coll_group_base
+class SprBlkCollGroup16x32 : public SprBlkCollGroupBase
 {
 //public:		// enums
 protected:		// enums
@@ -315,12 +315,12 @@ protected:		// variables and constants
 	
 	
 public:		// functions
-	inline spr_blk_coll_group_16x32()
+	inline SprBlkCollGroup16x32()
 	{
 		//init_arr_helpers();
 	}
-	spr_blk_coll_group_16x32( const coll_box& s_coll_box, u32 s_on_ground );
-	void init( const coll_box& s_coll_box, u32 s_on_ground )
+	SprBlkCollGroup16x32( const CollBox& s_coll_box, u32 s_on_ground );
+	void init( const CollBox& s_coll_box, u32 s_on_ground )
 		__attribute__((_IWRAM_CODE,_TARGET_ARM));
 	
 	//const size_t get_num_horiz_ctups() const;
@@ -338,7 +338,7 @@ public:		// functions
 	
 protected:		// functions
 	//void init_arr_helpers();
-	static void init_static_vars( const coll_box& s_coll_box, 
+	static void init_static_vars( const CollBox& s_coll_box, 
 		bool s_on_ground ) __attribute__((_IWRAM_CODE,_TARGET_ARM));
 	
 } __attribute__((_ALIGN4));

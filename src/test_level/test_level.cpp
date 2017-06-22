@@ -1,7 +1,7 @@
 #include "test_level.hpp"
 
 
-const sublevel< 1939, 64, 32, 1, 2 > test_level_sublevel_0
+const Sublevel< 1939, 64, 32, 1, 2 > test_level_sublevel_0
 = {
 	{
 		0x1000010, 0x10f, 0xf003f000, 0xf003f003,
@@ -502,7 +502,7 @@ const sublevel< 1939, 64, 32, 1, 2 > test_level_sublevel_0
 };
 
 
-const sublevel< 1960, 64, 32, 4, 3 > test_level_sublevel_1
+const Sublevel< 1960, 64, 32, 4, 3 > test_level_sublevel_1
 = {
 	{
 		0x1000010, 0x10f, 0xf003f000, 0xf003f003,
@@ -1012,7 +1012,7 @@ const sublevel< 1960, 64, 32, 4, 3 > test_level_sublevel_1
 };
 
 
-const sublevel< 1951, 64, 32, 4, 4 > test_level_sublevel_2
+const Sublevel< 1951, 64, 32, 4, 4 > test_level_sublevel_2
 = {
 	{
 		0x1000010, 0x10f, 0xf003f000, 0xf003f003,
@@ -1521,10 +1521,10 @@ const sublevel< 1951, 64, 32, 4, 4 > test_level_sublevel_2
 };
 
 
-const level test_level = level
-	( sublevel_pointer(test_level_sublevel_0),
-	sublevel_pointer(test_level_sublevel_1),
-	sublevel_pointer(test_level_sublevel_2) );
+const Level test_level = Level
+	( SublevelPointer(test_level_sublevel_0),
+	SublevelPointer(test_level_sublevel_1),
+	SublevelPointer(test_level_sublevel_2) );
 
 
 

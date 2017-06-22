@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -25,7 +25,7 @@
 // -- Object Attribute 0 Stuff --
 
 // Object Y-Coordinate
-#define obj_attr0_y_coord( n )			( n & 0x00ff )
+#define OBJ_ATTR0_Y_COORD( n )			( n & 0x00ff )
 
 #define obj_attr0_y_coord_mask			( 0x00ff )
 #define obj_attr0_y_coord_shift			( 0 )
@@ -100,14 +100,14 @@
 // -- Object Attribute 1 Stuff --
 
 // Object X-Coordinate
-#define obj_attr1_x_coord( n )			( n & 0x01ff )
+#define OBJ_ATTR1_X_COORD( n )			( n & 0x01ff )
 
 #define obj_attr1_x_coord_mask			( 0x01ff )
 #define obj_attr1_x_coord_shift			( 0 )
 
 
 // Object Affine Parameter Slot (When Affine Flag Set)
-#define obj_attr1_affine_param_slot( n)			( ( n & 0x1f ) << 9 )
+#define OBJ_ATTR1_AFFINE_PARAM_SLOT( n)			( ( n & 0x1f ) << 9 )
 
 #define obj_attr1_affine_param_slot_mask		( 0x3e00 )
 #define obj_attr1_affine_param_slot_shift		( 9 )
@@ -150,14 +150,14 @@
 // -- Object Attribute 2 Stuff --
 
 // Object Tile Number
-#define obj_attr2_tile_number( n )		( n & 0x03ff )
+#define OBJ_ATTR2_TILE_NUMBER( n )		( n & 0x03ff )
 
 #define obj_attr2_tile_number_mask		( 0x03ff )
 #define obj_attr2_tile_number_shift		( 0 )
 
 
-// Object Priority Relative to BG and Other Objects
-#define obj_attr2_prio( n )			( ( n & 0x3 ) << 10 )
+// Object Priority Relative To BG and Other Objects
+#define OBJ_ATTR2_PRIO( n )			( ( n & 0x3 ) << 10 )
 
 #define obj_attr2_prio_0				( 0x0 << 10 )
 #define obj_attr2_prio_1				( 0x1 << 10 )
@@ -169,7 +169,7 @@
 
 
 // Object Palette Number (Not used in 256 color/1 palette mode)
-#define obj_attr2_pal_num( n )			( ( n & 0xf ) << 12 )
+#define OBJ_ATTR2_PAL_NUM( n )			( ( n & 0xf ) << 12 )
 
 #define obj_attr2_pal_num_mask			( 0xf000 )
 #define obj_attr2_pal_num_shift			( 12 )

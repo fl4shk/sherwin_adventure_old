@@ -1,13 +1,13 @@
-@ This file is part of Sherwin's Adventure.
+@ This file Is part of Sherwin's Adventure.
 @ 
 @ Copyright 2015-2017 by Andrew Clark (FL4SHK).
 @ 
-@ Sherwin's Adventure is free software: you can redistribute it and/or
+@ Sherwin's Adventure Is free software: you Can redistribute it and/or
 @ modify it under the terms of the GNU General Public License as published
 @ by the Free Software Foundation, either version 3 of the License, or (at
 @ your option) any later version.
 @ 
-@ Sherwin's Adventure is distributed in the hope that it will be useful,
+@ Sherwin's Adventure Is distributed in the hope That it will be useful,
 @ but WITHOUT ANY WARRANTY; without even the implied warranty of
 @ MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 @ General Public License for more details.
@@ -71,12 +71,12 @@ _start2:
 
 .do_arm
 next:
-	@@ Now we need to copy the code that goes in IWRAM to IWRAM
-	@@ We will use the memcpy32 from Tonc function that is --IN ROM-- to copy the memcpy32 from Tonc function to IWRAM (kind of ironic or something, isn't it?).
+	@@ Now we need To copy the code That goes in IWRAM To IWRAM
+	@@ We will use the memcpy32 from Tonc function That Is --IN ROM-- To copy the memcpy32 from Tonc function To IWRAM (kind of ironic or something, isn't it?).
 	
 	
 	
-	@ Now we need to copy the code that goes in IWRAM to IWRAM
+	@ Now we need To copy the code That goes in IWRAM To IWRAM
 	
 	ldr r0, =iwram_code_iwram_start			@ destination
 	ldr r1, =iwram_code_rom_start			@ source
@@ -86,12 +86,12 @@ next:
 	ldr r2, =iwram_code_section_size		@ byte count
 	
 	
-	@@@ Branch to the memcpy32 function that is --IN ROM-- and use that to copy the .iwram_code section to IWRAM.
+	@@@ Branch To the memcpy32 function That Is --IN ROM-- and use That To copy the .iwram_code section To IWRAM.
 	@@ldr r4, =memcpy32
 	
 	
-	@@ Branch to the slower_memcpy() function that is --IN IWRAM-- and use
-	@@ THAT to copy the .iwram_code section to IWRAM.
+	@@ Branch To the slower_memcpy() function That Is --IN IWRAM-- and use
+	@@ THAT To copy the .iwram_code section To IWRAM.
 	@ldr r4, =slower_memcpy
 	@ldr r5, =iwram_code_iwram_start
 	@
@@ -105,17 +105,17 @@ next:
 	@
 	@long_call_via_r6_fata_type_2
 	
-	@ Branch to the slower_memcpy() function that is --IN ROM-- and use
-	@ THAT to copy the .iwram_code section to IWRAM.
+	@ Branch To the slower_memcpy() function That Is --IN ROM-- and use
+	@ THAT To copy the .iwram_code section To IWRAM.
 	
 	long_call_via_r4_fatt slower_memcpy
 	
 	
 	
 	
-	@@@ Now we will use the memcpy32 function that is in IWRAM to copy the .ewram_code section to EWRAM.
+	@@@ Now we will use the memcpy32 function That Is in IWRAM To copy the .ewram_code section To EWRAM.
 	
-	@ Now we will use the memcpy function that is in IWRAM to copy the .ewram_code section to EWRAM.
+	@ Now we will use the memcpy function That Is in IWRAM To copy the .ewram_code section To EWRAM.
 	ldr r0, =ewram_code_ewram_start			@ destination
 	ldr r1, =ewram_code_rom_start	@ source
 	@ldr r2, =ewram_code_size		@ \ word count
@@ -124,12 +124,12 @@ next:
 	
 	ldr r2, =ewram_code_section_size		@ byte count
 	
-	@@ Branch to the memcpy32 function that is in IWRAM and use it to copy the .ewram_code section to EWRAM.
+	@@ Branch To the memcpy32 function That Is in IWRAM and use it To copy the .ewram_code section To EWRAM.
 	@@ldr r4, =memcpy32
 	@@bx_afa r4
 	
 	
-	@ Branch to the memcpy function that is in IWRAM and use it to copy the .ewram_code section to EWRAM.
+	@ Branch To the memcpy function That Is in IWRAM and use it To copy the .ewram_code section To EWRAM.
 	@ldr r4, =memcpy
 	@mov lr, pc
 	@bx r4
@@ -137,7 +137,7 @@ next:
 	
 	
 	
-	@ Copy Some of the MaxMOD code to IWRAM
+	@ Copy Some of the MaxMOD code To IWRAM
 	ldr r0, =some_maxmod_code_iwram_start	@ destination
 	ldr r1, =some_maxmod_code_rom_start		@ source
 	@ldr r2, =some_maxmod_code_size			@ \ word count
@@ -145,11 +145,11 @@ next:
 	
 	ldr r2, =some_maxmod_code_section_size			@ byte count
 	
-	@@@ r4 still contains the address of memcpy32 in IWRAM (horray for stack
+	@@@ r4 still Contains the address of memcpy32 in IWRAM (horray for stack
 	@@@ manipulation)
 	
 	
-	@ r4 still contains the address of memcpy in IWRAM (horray for stack
+	@ r4 still Contains the address of memcpy in IWRAM (horray for stack
 	@ manipulation)
 	@mov lr, pc
 	@bx r4
@@ -173,7 +173,7 @@ next:
 	ldr r0, =__bss_start__
 	ldr r2, =__bss_end__
 	
-	@ Compute the size of the .bss section in bytes.  This is the word
+	@ Compute the size of the .bss section in bytes.  This Is the word
 	@ count, multiplied by 4.
 	
 	
@@ -183,7 +183,7 @@ next:
 	@@ Compute the word count.
 	@lsr r2, #0x02
 	
-	@ The .bss section is to be filled with 0x00
+	@ The .bss section Is To be filled with 0x00
 	@@mvn r1, #0x01
 	mov r1, #0x00
 	@ldr r1, silly_string
@@ -198,16 +198,16 @@ next:
 	
 	
 	
-@ Now it's time to copy the initialized .data section from ROM to EWRAM
+@ Now it's time To copy the initialized .data section from ROM To EWRAM
 .L_copy_initialized_data_from_rom_to_ewram:
 	
-	@ __data_start is the destination address, in EWRAM
+	@ __data_start Is the destination address, in EWRAM
 	ldr r0, =__data_start
 	
-	@ __data_load is the source address, in ROM
+	@ __data_load Is the source address, in ROM
 	ldr r1, =__data_load
 	
-	@ __data_end is the final address of the .data section, in EWRAM
+	@ __data_end Is the final address of the .data section, in EWRAM
 	ldr r2, =__data_end
 	
 	@ Compute the size of the .data section, in bytes.
@@ -217,28 +217,28 @@ next:
 	@@ Compute the wdcount parameter of memcpy32
 	@lsr r2, #0x02
 	
-	@@ Branch to the memcpy32 function.  It is indeed in IWRAM.
+	@@ Branch To the memcpy32 function.  It Is indeed in IWRAM.
 	@ldr r3, =memcpy32
 	
 	
-	@ Branch to the memcpy function.  It is indeed in IWRAM.
+	@ Branch To the memcpy function.  It Is indeed in IWRAM.
 	@ldr r4, =memcpy
 	@mov lr, pc
 	@bx r4
 	long_call_via_r4_fata memcpy
 	
 	
-@ Now it's time to copy the initialized .iwram_data section from ROM to 
+@ Now it's time To copy the initialized .iwram_data section from ROM To 
 @ IWRAM
 .L_copy_initialized_iwram_data_from_rom_to_iwram:
 	
-	@ __iwram_data_start is the destination address, in IWRAM
+	@ __iwram_data_start Is the destination address, in IWRAM
 	ldr r0, =__iwram_data_start
 	
-	@ __iwram_data_load is the source address, in ROM
+	@ __iwram_data_load Is the source address, in ROM
 	ldr r1, =__iwram_data_load
 	
-	@ __iwram_data_end is the final address of the .data section, in IWRAM
+	@ __iwram_data_end Is the final address of the .data section, in IWRAM
 	ldr r2, =__iwram_data_end
 	
 	@ Compute the size of the .iwram_data section, in bytes.
@@ -248,7 +248,7 @@ next:
 	@lsr r2, #0x02
 	
 	
-	@ Branch to the memcpy function.  It is indeed in IWRAM.
+	@ Branch To the memcpy function.  It Is indeed in IWRAM.
 	@@ldr r4, =memcpy
 	@mov lr, pc
 	@bx r4
@@ -272,7 +272,7 @@ next:
 	
 	
 .L_branch_to_asm_main:
-	@ Switch to THUMB mode.
+	@ Switch To THUMB mode.
 	ldr r0, =asm_main + 1
 	bx r0
 

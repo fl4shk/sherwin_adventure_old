@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -19,12 +19,12 @@
 #include "attribute_defines.hpp"
 #include "oam_entry_classes.hpp"
 
-// I'm tempted to put these two arrays in _IWRAM.
-oam_entry oam_mirror[oam_mirror_size];
-//oam_entry_affine* const OAM_MIRROR_AFF = (oam_entry_affine*)oam_mirror ;
+// I'm tempted To put these two arrays in _IWRAM.
+OamEntry oam_mirror[oam_mirror_size];
+//OamEntryAffine* const OAM_MIRROR_AFF = (OamEntryAffine*)oam_mirror ;
 
 
-const vec2_u32 oam_entry::ss_to_vec2_arr[lim_ss]
+const vec2_u32 OamEntry::ss_to_vec2_arr[lim_ss]
 = {
 	// Square shapes
 	{ 8, 8 }, { 16, 16 }, { 32, 32 }, { 64, 64 },
@@ -36,7 +36,7 @@ const vec2_u32 oam_entry::ss_to_vec2_arr[lim_ss]
 	{ 8, 16 }, { 8, 32 }, { 16, 32 }, { 32, 64 },
 };
 
-const vec2_u32 oam_entry::ss_enum_to_ss_attrs_arr[lim_ss]
+const vec2_u32 OamEntry::ss_enum_to_ss_attrs_arr[lim_ss]
 = {
 	// Square shapes
 	{ obj_attr0_shape_square, obj_attr1_size_0 }, 
@@ -57,7 +57,7 @@ const vec2_u32 oam_entry::ss_enum_to_ss_attrs_arr[lim_ss]
 	{ obj_attr0_shape_vertical, obj_attr1_size_3 },
 };
 
-//const oam_entry::shape_size oam_entry::ss_attrs_no_shift_to_ss_enum_arr_2d
+//const OamEntry::shape_size OamEntry::ss_attrs_no_shift_to_ss_enum_arr_2d
 //	[num_attr0_shapes][num_attr1_sizes]
 //= {
 //	// Square shapes
@@ -71,7 +71,7 @@ const vec2_u32 oam_entry::ss_enum_to_ss_attrs_arr[lim_ss]
 //};
 
 
-void oam_entry::set_shape_size( oam_entry::shape_size n_shape_size )
+void OamEntry::set_shape_size( OamEntry::shape_size n_shape_size )
 {
 	u32 temp_attr0 = attr0, temp_attr1 = attr1;
 	
@@ -103,7 +103,7 @@ void oam_entry::set_shape_size( oam_entry::shape_size n_shape_size )
 
 
 
-oam_entry::shape_size oam_entry::get_shape_size() const
+OamEntry::shape_size OamEntry::get_shape_size() const
 {
 	u32 attr0_shape_no_shift = get_bits( attr0, obj_attr0_shape_mask,
 		obj_attr0_shape_shift );
@@ -129,7 +129,7 @@ oam_entry::shape_size oam_entry::get_shape_size() const
 	}
 }
 
-void oam_entry::set_shape_size_with_vec2( const vec2_u32& n_shape_size )
+void OamEntry::set_shape_size_with_vec2( const vec2_u32& n_shape_size )
 {
 	switch ( n_shape_size.x )
 	{
@@ -198,7 +198,7 @@ void oam_entry::set_shape_size_with_vec2( const vec2_u32& n_shape_size )
 }
 
 
-vec2_u32 oam_entry::get_shape_size_as_vec2() const
+vec2_u32 OamEntry::get_shape_size_as_vec2() const
 {
 	return ss_to_vec2_arr[get_shape_size()];
 }

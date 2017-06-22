@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -24,7 +24,7 @@
 #include "../general_utility_stuff/gen_getter_setter_defines.hpp"
 #include "../gba_specific_stuff/attribute_defines.hpp"
 
-class ewram_allocator
+class EwramAllocator
 {
 public:		// constants
 	static constexpr size_t max_size = 0x38000;
@@ -36,12 +36,12 @@ private:		// variables
 	
 	
 private:		// functions
-	gen_setter_by_val(curr_index);
+	GEN_SETTER_BY_VAL(curr_index);
 	
-	gen_static_getter_by_ref(buf);
+	GEN_STATIC_GETTER_BY_REF(buf);
 	
 public:		// functions
-	inline ewram_allocator()
+	inline EwramAllocator()
 	{
 		reset();
 	}
@@ -51,7 +51,7 @@ public:		// functions
 	}
 	
 	
-	gen_getter_by_val(curr_index);
+	GEN_GETTER_BY_VAL(curr_index);
 	
 	
 } __attribute__((_ALIGN4));

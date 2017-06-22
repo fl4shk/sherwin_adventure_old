@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -24,13 +24,13 @@
 
 #include "../../../gfx/sherwin_gfx.h"
 
-class player_sprite : public sprite
+class PlayerSprite : public Sprite
 {
 public:		// enums
 	// "Global" graphics frames
 	enum frame
 	{
-		// Not a real frame, just a way to hide the player
+		// Not a real frame, just a way To hide the Player
 		frm_invisible, 
 		
 		// Standing frame
@@ -80,12 +80,12 @@ public:		// enums
 		frm_weapon_swing_ground_moving_5_row_2,
 	} _ALIGNAS_REGULAR;
 	
-	// This enum allows multiple frame_slot's to be represented by the same
-	// frame, which is used, for example, in the walking animation.  Also,
-	// the reason this is necessary is that so which frame is currently
-	// active can be determined.  If two frames in the enum share a value,
-	// it is impossible to tell where in the walk cycle the player's
-	// animation is.
+	// This enum allows multiple frame_slot's To be represented by the same
+	// frame, which Is used, for example, in the walking animation.  Also,
+	// the reason this Is necessary Is That So which frame Is currently
+	// active Can be determined.  If two frames in the enum share a value,
+	// it Is impossible To tell where in the walk cycle the Player's
+	// animation Is.
 	enum frame_slot
 	{
 		// Invisible
@@ -148,13 +148,13 @@ public:		// enums
 		frm_slot_weapon_swing_air_4,
 		frm_slot_weapon_swing_air_5,
 		
-		// lim_frm_slot is the amount of frame_slot's.  It is
+		// lim_frm_slot Is the amount of frame_slot's.  It Is
 		// automatically updated by the compiler.
 		lim_frm_slot,
 	} _ALIGNAS_REGULAR;
 	
 	
-	// These are used to access misc_data_u and misc_data_s
+	// These are used To access misc_data_u and misc_data_s
 	enum udata_index
 	{ 
 		udi_active_walk_frame_slot, 
@@ -170,7 +170,7 @@ public:		// enums
 public:		// variables
 	// Static variables
 	
-	//static fixed24p8 speed __attribute__((_IWRAM));
+	//static Fixed24p8 speed __attribute__((_IWRAM));
 	static bool use_16x16;
 	static bool run_toggle;
 	
@@ -188,8 +188,8 @@ public:		// variables
 	
 	
 	// Physics/logic constants
-	static const fixed24p8 jump_vel;
-	static const fixed24p8 jump_grav_acc;
+	static const Fixed24p8 jump_vel;
+	static const Fixed24p8 jump_grav_acc;
 	
 	static const s32 max_jump_hold_timer;
 	static const s32 walk_frame_timer_end;
@@ -199,57 +199,57 @@ public:		// variables
 	static const s32 pickaxe_swing_frame_timer_end;
 	static const s32 pickaxe_swing_final_frame_timer_end;
 	
-	static const fixed24p8 walk_speed;
-	static const fixed24p8 max_run_speed;
-	static const fixed24p8 run_accel_x_abs_val;
+	static const Fixed24p8 walk_speed;
+	static const Fixed24p8 max_run_speed;
+	static const Fixed24p8 run_accel_x_abs_val;
 	
 	// 0.5 seconds
 	static constexpr s32 initial_invin_frame_timer = 30;
 	
 	// Graphics constants
 	
-	// A constant array that is intended to be indexed with a frame_slot,
-	// such that a frame_slot can be mapped to a frame. 
+	// A constant array That Is Intended To be indexed with a frame_slot,
+	// such That a frame_slot Can be mapped To a frame. 
 	static constexpr u32 frame_slot_to_frame_arr_size = lim_frm_slot;
 	static const frame frame_slot_to_frame_arr
 		[frame_slot_to_frame_arr_size];
 	
 	
-	static const sprite_const_params the_const_params;
+	static const SpriteConstParams the_const_params;
 	//static constexpr sprite_type the_const_sprite_type = st_player;
 	//static constexpr sprite_palette_slot the_palette_slot = sps_player;
 	//
 	//static constexpr u32 num_active_gfx_tiles 
-	//	= gfx_manager::num_tiles_in_ss_16x32;
+	//	= GfxManager::num_tiles_in_ss_16x32;
 	//
 	//static constexpr tile* tile_arr = const_cast<tile*>
 	//	(reinterpret_cast<const tile*>(sherwin_gfxTiles));
 	//
-	//static const oam_entry::shape_size the_initial_shape_size 
-	//	= oam_entry::ss_16x32;
+	//static const OamEntry::shape_size the_initial_shape_size 
+	//	= OamEntry::ss_16x32;
 	//
 	//static const vec2_f24p8 the_initial_coll_box_size,
 	//	the_initial_cb_pos_offset;
 	//
-	//// This is used to correct the initial in-level position for sprites
-	//// that are normally considered to be of a certain size but that use
+	//// This Is used To correct the initial in-Level position for sprites
+	//// That are normally considered To be of a certain size but That use
 	//// larger graphics for some frames.
 	//static const vec2_f24p8 the_initial_in_level_pos_offset;
 	
 	
 public:		// functions
-	inline player_sprite( bool facing_left=false )
+	inline PlayerSprite( bool facing_left=false )
 	{
 		shared_constructor_code_part_1();
-		sprite::shared_constructor_code_part_2(facing_left);
+		Sprite::shared_constructor_code_part_2(facing_left);
 		shared_constructor_code_part_3();
 	}
-	//player_sprite( bool facing_left );
-	//player_sprite( const vec2_f24p8& s_in_level_pos, 
-	//	const prev_curr_pair<bg_point>& camera_pos, bool facing_left );
-	player_sprite( const vec2_f24p8& s_in_level_pos, 
+	//PlayerSprite( bool facing_left );
+	//PlayerSprite( const vec2_f24p8& s_in_level_pos, 
+	//	const PrevCurrPair<bg_point>& camera_pos, bool facing_left );
+	PlayerSprite( const vec2_f24p8& s_in_level_pos, 
 		const vec2_u32& the_level_size_2d, 
-		prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left );
+		PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left );
 	
 	
 	//virtual void shared_constructor_code_part_1();
@@ -257,12 +257,12 @@ public:		// functions
 	virtual void shared_constructor_code_part_2
 		( const vec2_f24p8& s_in_level_pos, 
 		const vec2_u32& the_level_size_2d, 
-		prev_curr_pair<bg_point>& camera_pos_pc_pair,
+		PrevCurrPair<bg_point>& camera_pos_pc_pair,
 		bool facing_left=false );
 	
 	virtual void shared_constructor_code_part_3();
 	
-	inline virtual const sprite_const_params& get_const_params() const
+	inline virtual const SpriteConstParams& get_const_params() const
 	{
 		return the_const_params;
 	}
@@ -277,7 +277,7 @@ public:		// functions
 	virtual void update_part_1();
 	virtual void update_part_2();
 	virtual void update_part_3
-		( prev_curr_pair<bg_point>& camera_pos_pc_pair,
+		( PrevCurrPair<bg_point>& camera_pos_pc_pair,
 		const vec2_u32& the_sublevel_size_2d );
 	
 	
@@ -292,21 +292,21 @@ public:		// functions
 	virtual void block_collision_stuff();
 	
 	//virtual void block_coll_response_top_16x16_old
-	//	( const block_coll_result& tl_coll_result, 
-	//	const block_coll_result& tm_coll_result,
-	//	const block_coll_result& tr_coll_result );
+	//	( const BlockCollResult& tl_coll_result, 
+	//	const BlockCollResult& tm_coll_result,
+	//	const BlockCollResult& tr_coll_result );
 	//virtual void block_coll_response_top_16x32_old
-	//	( const block_coll_result& tl_coll_result, 
-	//	const block_coll_result& tm_coll_result,
-	//	const block_coll_result& tr_coll_result );
+	//	( const BlockCollResult& tl_coll_result, 
+	//	const BlockCollResult& tm_coll_result,
+	//	const BlockCollResult& tr_coll_result );
 	
 	virtual void handle_jumping_stuff( u32 is_jump_key_hit, 
 		u32 is_jump_key_held ) __attribute__((_IWRAM_CODE));
 	
 	
-	// Sprite-sprite interaction stuff
-	virtual void sprite_interaction_reponse( sprite& the_other_sprite, 
-		prev_curr_pair<bg_point>& camera_pos, 
+	// Sprite-Sprite interaction stuff
+	virtual void sprite_interaction_reponse( Sprite& the_other_sprite, 
+		PrevCurrPair<bg_point>& camera_pos, 
 		const vec2_u32& the_level_size_2d );
 	
 	

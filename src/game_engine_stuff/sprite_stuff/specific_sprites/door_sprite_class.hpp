@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -22,17 +22,17 @@
 #include "../../../gfx/the_door_gfx.h"
 
 
-class sprite;
-class sublevel_entrance;
+class Sprite;
+class SublevelEntrance;
 
-class door_sprite : public sprite
+class DoorSprite : public Sprite
 {
 public:		// variables
-	static const sprite_const_params the_const_params;
+	static const SpriteConstParams the_const_params;
 	
 	
 public:		// functions
-	inline door_sprite( bool facing_left )
+	inline DoorSprite( bool facing_left )
 	{
 		shared_constructor_code_part_1();
 		shared_constructor_code_part_2(facing_left);
@@ -41,7 +41,7 @@ public:		// functions
 	
 	virtual void shared_constructor_code_part_2( bool facing_left );
 	
-	inline virtual const sprite_const_params& get_const_params() const
+	inline virtual const SpriteConstParams& get_const_params() const
 	{
 		return the_const_params;
 	}
@@ -51,11 +51,11 @@ public:		// functions
 	
 	
 	// Initial
-	//static const sublevel_entrance& get_dest_sle();
+	//static const SublevelEntrance& get_dest_sle();
 	
 	
 	// Physics and collision stuff
-	//// All door sprites are not affected by gravity, and they don't move.
+	//// All Door sprites are not affected by gravity, and they don't move.
 	//virtual void block_collision_stuff();
 	
 	

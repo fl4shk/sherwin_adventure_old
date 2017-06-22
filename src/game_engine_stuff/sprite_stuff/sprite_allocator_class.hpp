@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -24,34 +24,34 @@
 
 #include "../../general_utility_stuff/sa_stack_classes.hpp"
 
-class sprite;
+class Sprite;
 
-class sprite_allocator : public array_helper<sprite>
+class SpriteAllocator : public ArrayHelper<Sprite>
 {
 protected:		// variables
 	u32 the_sa_free_list_backend_curr_index;
-	sa_free_list_backend the_sa_free_list_backend;
+	SaFreeListBackend the_sa_free_list_backend;
 	
 public:		// functions
-	sprite_allocator( s16* the_sa_free_list_backend_array, 
-		sprite* s_the_array, u32 s_size );
-	sprite_allocator( s16* the_sa_free_list_backend_array,
-		const array_helper<sprite>& s_allocatable_sprite_arr );
+	SpriteAllocator( s16* the_sa_free_list_backend_array, 
+		Sprite* s_the_array, u32 s_size );
+	SpriteAllocator( s16* the_sa_free_list_backend_array,
+		const ArrayHelper<Sprite>& s_allocatable_sprite_arr );
 	
 	////void* allocate_sprite() __attribute__((_IWRAM_CODE,hot));
 	////void* allocate_sprite() __attribute__((hot));
 	////void* allocate_sprite();
 	////void* allocate_sprite() __attribute__((_IWRAM_CODE));
-	////void deallocate_sprite( sprite*& the_sprite )
+	////void deallocate_sprite( Sprite*& the_sprite )
 	////	__attribute__((_IWRAM_CODE));
 	//void* allocate_sprite() __attribute__((_IWRAM_CODE,cold));
-	//void deallocate_sprite( sprite*& the_sprite )
+	//void deallocate_sprite( Sprite*& the_sprite )
 	//	__attribute__((_IWRAM_CODE,cold));
 	
 	//void* allocate_sprite() __attribute__((cold,returns_nonnull));
-	//void deallocate_sprite( sprite*& the_sprite ) __attribute__((cold));
+	//void deallocate_sprite( Sprite*& the_sprite ) __attribute__((cold));
 	void* allocate_sprite() __attribute__((_IWRAM_CODE,returns_nonnull));
-	void deallocate_sprite( sprite& the_sprite )
+	void deallocate_sprite( Sprite& the_sprite )
 		__attribute__((_IWRAM_CODE));
 	
 	

@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -24,13 +24,13 @@
 #include "coll_lseg_classes.hpp"
 
 
-u32 block_coll_result_rect_group::temp_debug_thing;
+u32 BlockCollResultRectGroup::temp_debug_thing;
 
-block_coll_result_rect_group::block_coll_result_rect_group() 
+BlockCollResultRectGroup::BlockCollResultRectGroup() 
 	: start_pos( 0, 0 ), real_size_2d( 1, 1 ), moving_left(false), 
 	moving_right(false)
 {
-	//asm_comment("constructor type 1");
+	//ASM_COMMENT("constructor type 1");
 	//memset( bcr_arr_csz_2d_helper_data, 0, sizeof(bcr_arr_csz_2d_helper_data) );
 	
 	//arr_memfill32( bcr_arr_csz_2d_helper_data, 0, max_size );
@@ -45,23 +45,23 @@ block_coll_result_rect_group::block_coll_result_rect_group()
 	{
 		for ( s32 i=0; i<real_width(); ++i )
 		{
-			at( i, j ) = block_coll_result( tl_corner() 
+			at( i, j ) = BlockCollResult( tl_corner() 
 				+ vec2_s32( i, j ) );
 		}
 	}
 }
 
-block_coll_result_rect_group::block_coll_result_rect_group
-	( const coll_box& the_coll_box, u32 s_moving_left, u32 s_moving_right )
+BlockCollResultRectGroup::BlockCollResultRectGroup
+	( const CollBox& the_coll_box, u32 s_moving_left, u32 s_moving_right )
 {
-	//asm_comment("constructor type 2");
+	//ASM_COMMENT("constructor type 2");
 	//memset( bcr_arr_csz_2d_helper_data, 0, sizeof(bcr_arr_csz_2d_helper_data) );
 	
 	//arr_memfill32( bcr_arr_csz_2d_helper_data, 0, max_size );
 	
-	start_pos = active_level::get_block_coord_of_point( vec2_f24p8
+	start_pos = ActiveLevel::get_block_coord_of_point( vec2_f24p8
 		( the_coll_box.left(), the_coll_box.top() ) );
-	const vec2_s32 end_pos = active_level::get_block_coord_of_point
+	const vec2_s32 end_pos = ActiveLevel::get_block_coord_of_point
 		( vec2_f24p8( the_coll_box.right(), the_coll_box.bot() ) );
 	real_size_2d = end_pos - start_pos + vec2_s32( 1, 1 );
 	
@@ -74,7 +74,7 @@ block_coll_result_rect_group::block_coll_result_rect_group
 	{
 		for ( s32 i=0; i<real_width(); ++i )
 		{
-			at( i, j ) = block_coll_result( tl_corner() 
+			at( i, j ) = BlockCollResult( tl_corner() 
 				+ vec2_s32( i, j ) );
 		}
 	}
@@ -84,15 +84,15 @@ block_coll_result_rect_group::block_coll_result_rect_group
 
 
 
-block_coll_result_rect_group::block_coll_result_rect_group
-	( const block_coll_result_rect_group& to_copy )
+BlockCollResultRectGroup::BlockCollResultRectGroup
+	( const BlockCollResultRectGroup& to_copy )
 {
 	*this = to_copy;
 }
-block_coll_result_rect_group& block_coll_result_rect_group::operator = 
-	( const block_coll_result_rect_group& to_copy )
+BlockCollResultRectGroup& BlockCollResultRectGroup::operator = 
+	( const BlockCollResultRectGroup& to_copy )
 {
-	arr_memcpy32( (block_coll_result*)bcr_arr_csz_2d_helper_data, 
+	arr_memcpy32( (BlockCollResult*)bcr_arr_csz_2d_helper_data, 
 		to_copy.bcr_arr_csz_2d_helper_data, max_size );
 	
 	start_pos = to_copy.start_pos;
@@ -105,11 +105,11 @@ block_coll_result_rect_group& block_coll_result_rect_group::operator =
 	return *this;
 }
 
-void bcr_lseg_group::init( const horiz_coll_lseg& the_coll_lseg )
+void BcrLsegGroup::init( const HorizCollLseg& the_coll_lseg )
 {
-	start_pos = active_level::get_block_coord_of_point
+	start_pos = ActiveLevel::get_block_coord_of_point
 		( the_coll_lseg.left_pt() );
-	const vec2_s32 end_pos = active_level::get_block_coord_of_point
+	const vec2_s32 end_pos = ActiveLevel::get_block_coord_of_point
 		( the_coll_lseg.right_pt() );
 	real_size = end_pos.x - start_pos.x + 1;
 	is_horiz = true;
@@ -118,15 +118,15 @@ void bcr_lseg_group::init( const horiz_coll_lseg& the_coll_lseg )
 	//for ( s32 i=0; i<get_real_size(); ++i )
 	for ( s32 i=get_real_size()-1; i>=0; --i )
 	{
-		at(i) = block_coll_result( get_start_pos() + get_horiz_offset(i) );
+		at(i) = BlockCollResult( get_start_pos() + get_horiz_offset(i) );
 	}
 	
 }
-void bcr_lseg_group::init( const vert_coll_lseg& the_coll_lseg )
+void BcrLsegGroup::init( const VertCollLseg& the_coll_lseg )
 {
-	start_pos = active_level::get_block_coord_of_point
+	start_pos = ActiveLevel::get_block_coord_of_point
 		( the_coll_lseg.top_pt() );
-	const vec2_s32 end_pos = active_level::get_block_coord_of_point
+	const vec2_s32 end_pos = ActiveLevel::get_block_coord_of_point
 		( the_coll_lseg.bot_pt() );
 	real_size = end_pos.y - start_pos.y + 1;
 	is_horiz = false;
@@ -135,12 +135,12 @@ void bcr_lseg_group::init( const vert_coll_lseg& the_coll_lseg )
 	//for ( s32 i=0; i<get_real_size(); ++i )
 	for ( s32 i=get_real_size()-1; i>=0; --i )
 	{
-		at(i) = block_coll_result( get_start_pos() + get_vert_offset(i) );
+		at(i) = BlockCollResult( get_start_pos() + get_vert_offset(i) );
 	}
 	
 }
 
-block_coll_result* bcr_lseg_group::horiz_any_bbvt_is_fully_solid
+BlockCollResult* BcrLsegGroup::horiz_any_bbvt_is_fully_solid
 	( vec2_s32& pos )
 {
 	for ( s32 i=0; i<get_real_size(); ++i )
@@ -154,7 +154,7 @@ block_coll_result* bcr_lseg_group::horiz_any_bbvt_is_fully_solid
 	
 	return NULL;
 }
-block_coll_result* bcr_lseg_group::vert_any_bbvt_is_fully_solid
+BlockCollResult* BcrLsegGroup::vert_any_bbvt_is_fully_solid
 	( vec2_s32& pos )
 {
 	for ( s32 i=0; i<get_real_size(); ++i )
@@ -168,7 +168,7 @@ block_coll_result* bcr_lseg_group::vert_any_bbvt_is_fully_solid
 	
 	return NULL;
 }
-block_coll_result* bcr_lseg_group::vert_any_bbvt_is_slope( vec2_s32& pos )
+BlockCollResult* BcrLsegGroup::vert_any_bbvt_is_slope( vec2_s32& pos )
 {
 	for ( s32 i=0; i<get_real_size(); ++i )
 	{

@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -33,19 +33,19 @@
 //#include <stdlib.h>
 
 
-int game_manager::test_int_global;
+int GameManager::test_int_global;
 
-const char game_manager::sram_const_init_str[] = "Save data initialized.";
-const u32 game_manager::sram_init_str_size 
-	= sizeof(game_manager::sram_const_init_str) / sizeof(char);
+const char GameManager::sram_const_init_str[] = "Save data initialized.";
+const u32 GameManager::sram_init_str_size 
+	= sizeof(GameManager::sram_const_init_str) / sizeof(char);
 
-char game_manager::sram_init_str[game_manager::sram_init_str_size];
-u8 game_manager::test_sram_arr[game_manager::test_sram_arr_size];
+char GameManager::sram_init_str[GameManager::sram_init_str_size];
+u8 GameManager::test_sram_arr[GameManager::test_sram_arr_size];
 
-game_mode game_manager::curr_game_mode;
+game_mode GameManager::curr_game_mode;
 
 
-void game_manager::vblank_func()
+void GameManager::vblank_func()
 {
 	// If a bug was automatically detected.
 	if ( curr_game_mode == gm_do_halt )
@@ -72,7 +72,7 @@ void game_manager::vblank_func()
 	}
 	
 	
-	gfx_manager::copy_bgofs_mirror_to_registers();
+	GfxManager::copy_bgofs_mirror_to_registers();
 	
 	//mmFrame();
 	
@@ -98,30 +98,30 @@ void game_manager::vblank_func()
 		case gm_initializing_the_game:
 			break;
 		
-		// When loading a level.
+		// When loading a Level.
 		case gm_loading_level:
-			hud_manager::hud_was_generated = false;
+			HudManager::hud_was_generated = false;
 			break;
 		
-		// When changing from one sublevel to another.
+		// When changing from one Sublevel To another.
 		case gm_changing_sublevel:
 			break;
 		
-		// When in a sublevel.
+		// When in a Sublevel.
 		case gm_in_sublevel:
 			copy_oam_mirror_to_oam();
-			gfx_manager::copy_bgofs_mirror_to_registers();
-			gfx_manager::upload_bg_tiles_to_vram();
+			GfxManager::copy_bgofs_mirror_to_registers();
+			GfxManager::upload_bg_tiles_to_vram();
 			
-			active_level_manager
+			ActiveLevelManager
 				::copy_sublevel_from_array_csz_2d_helper_to_vram();
-			sprite_manager::upload_tiles_of_active_sprites_to_vram();
+			SpriteManager::upload_tiles_of_active_sprites_to_vram();
 			
-			hud_manager::copy_hud_from_array_csz_2d_helper_to_vram();
+			HudManager::copy_hud_from_array_csz_2d_helper_to_vram();
 			break;
 		
 		// If a bug was automatically detected (this should never be the
-		// case since gm_do_halt is handled at the start of this function).
+		// case since gm_do_halt Is handled at the start of this function).
 		case gm_do_halt:
 			break;
 		
@@ -131,7 +131,7 @@ void game_manager::vblank_func()
 }
 
 
-void game_manager::title_screen_func()
+void GameManager::title_screen_func()
 {
 	curr_game_mode = gm_title_screen;
 	
@@ -149,35 +149,35 @@ void game_manager::title_screen_func()
 	//REG_DISPCNT = DCNT_MODE0 | DCNT_OBJ_1D | DCNT_BLANK_ON | DCNT_BG0_ON
 	//	| DCNT_BG1_ON | DCNT_BG2_ON | DCNT_BG3_ON | DCNT_OBJ_ON;
 	
-	// Use screen base block 28 for BG0's Map
-	REG_BG0CNT = bgcnt_sbb(BG0_SBB);
+	// Use screen base Block 28 for BG0's Map
+	REG_BG0CNT = BGCNT_SBB(BG0_SBB);
 	
-	REG_BG1CNT = bgcnt_sbb(bg1_sbb);
-	REG_BG2CNT = bgcnt_sbb(bg2_sbb);
-	REG_BG3CNT = bgcnt_sbb(bg3_sbb);
+	REG_BG1CNT = BGCNT_SBB(bg1_sbb);
+	REG_BG2CNT = BGCNT_SBB(bg2_sbb);
+	REG_BG3CNT = BGCNT_SBB(bg3_sbb);
 	
 	
 	// Clear bgofs_mirror
 	for ( u32 i=0; i<3; ++i )
 	{
-		gfx_manager::bgofs_mirror[i].curr.x 
-			= gfx_manager::bgofs_mirror[i].prev.x = {0};
-		gfx_manager::bgofs_mirror[i].curr.y 
-			= gfx_manager::bgofs_mirror[i].prev.y = {0};
+		GfxManager::bgofs_mirror[i].curr.x 
+			= GfxManager::bgofs_mirror[i].prev.x = {0};
+		GfxManager::bgofs_mirror[i].curr.y 
+			= GfxManager::bgofs_mirror[i].prev.y = {0};
 	}
 	
-	gfx_manager::copy_bgofs_mirror_to_registers();
+	GfxManager::copy_bgofs_mirror_to_registers();
 	
 	
-	// Copy the title screen's tiles and tilemap to VRAM
+	// Copy the title screen's tiles and tilemap To VRAM
 	bios_do_lz77_uncomp_vram( title_screenTiles, BG_TILE_VRAM );
 	
-	gfx_manager::upload_bg_palettes_to_target(BG_PAL_RAM);
+	GfxManager::upload_bg_palettes_to_target(BG_PAL_RAM);
 	
-	// This is sort of a hack.
+	// This Is sort of a hack.
 	bios_do_lz77_uncomp_wram( title_screenMap, 
-		active_level::bg0_screenblock_mirror );
-	active_level_manager::copy_sublevel_from_array_csz_2d_helper_to_vram();
+		ActiveLevel::bg0_screenblock_mirror );
+	ActiveLevelManager::copy_sublevel_from_array_csz_2d_helper_to_vram();
 	
 	
 	// Disable forced blank
@@ -191,7 +191,7 @@ void game_manager::title_screen_func()
 		
 		key_poll();
 		
-		// Start the game if the Start button is hit
+		// Start the game if the Start button Is hit
 		if ( key_hit(KEY_START) )
 		{
 			
@@ -209,14 +209,14 @@ void game_manager::title_screen_func()
 	}
 }
 
-void game_manager::reinit_the_game()
+void GameManager::reinit_the_game()
 {
 	curr_game_mode = gm_initializing_the_game;
 	bios_wait_for_vblank();
 	
-	gfx_manager::fade_out_to_white(15);
+	GfxManager::fade_out_to_white(15);
 	
-	gfx_manager::init_hud_vram_as_tiles_start_offset();
+	GfxManager::init_hud_vram_as_tiles_start_offset();
 	
 	
 	// Use video Mode 0, use 1D object mapping, enable forced blank,
@@ -229,25 +229,25 @@ void game_manager::reinit_the_game()
 	//REG_DISPCNT = DCNT_MODE0 | DCNT_OBJ_1D | DCNT_BLANK_ON | DCNT_BG0_ON
 	//	| DCNT_BG1_ON | DCNT_BG2_ON | DCNT_BG3_ON | DCNT_OBJ_ON;
 	
-	// Use screen base block 28 for BG0's Map.
-	REG_BG0CNT = bgcnt_sbb(BG0_SBB) | bgcnt_prio(1);
+	// Use screen base Block 28 for BG0's Map.
+	REG_BG0CNT = BGCNT_SBB(BG0_SBB) | BGCNT_PRIO(1);
 	
 	// Give BG1 a higher display priority than BG0.
-	REG_BG1CNT = bgcnt_sbb(bg1_sbb) | bgcnt_prio(0);
-	REG_BG2CNT = bgcnt_sbb(bg2_sbb) | bgcnt_prio(1);
-	REG_BG3CNT = bgcnt_sbb(bg3_sbb) | bgcnt_prio(1);
+	REG_BG1CNT = BGCNT_SBB(bg1_sbb) | BGCNT_PRIO(0);
+	REG_BG2CNT = BGCNT_SBB(bg2_sbb) | BGCNT_PRIO(1);
+	REG_BG3CNT = BGCNT_SBB(bg3_sbb) | BGCNT_PRIO(1);
 	
-	//u32 the_metatile_id = gfx_manager::get_metatile_number_of_block_type
+	//u32 the_metatile_id = GfxManager::get_metatile_number_of_block_type
 	//	(bt_eyes);
-	//u32 the_palette_id = gfx_manager::get_palette_number_of_block_type
+	//u32 the_palette_id = GfxManager::get_palette_number_of_block_type
 	//	(bt_eyes);
-	//u32 num_tiles_per_metatile = gfx_manager::num_tiles_in_ss_16x16;
+	//u32 num_tiles_per_metatile = GfxManager::num_tiles_in_ss_16x16;
 	//
 	//for ( u32 i=0; i<screenblock_size; ++i )
 	//{
 	//	SE_RAM[bg1_sbb][i] 
-	//		= se_id( the_metatile_id * num_tiles_per_metatile )
-	//		| se_palbank(the_palette_id);
+	//		= SE_ID( the_metatile_id * num_tiles_per_metatile )
+	//		| SE_PALBANK(the_palette_id);
 	//}
 	
 	//bios_wait_for_vblank();
@@ -257,29 +257,29 @@ void game_manager::reinit_the_game()
 	//	SE_RAM[bg1_sbb][i] = bt_wood * 4;
 	//}
 	
-	// Copy the sprite palettes to OBJ Palette RAM.
-	gfx_manager::upload_sprite_palettes_to_target(OBJ_PAL_RAM);
+	// Copy the Sprite palettes To OBJ Palette RAM.
+	GfxManager::upload_sprite_palettes_to_target(OBJ_PAL_RAM);
 	
-	//// Copy the sprite graphics to OBJ Video RAM.
-	//gfx_manager::upload_default_sprite_graphics();
+	//// Copy the Sprite graphics To OBJ Video RAM.
+	//GfxManager::upload_default_sprite_graphics();
 	
-	// Also, copy the_block_gfxPalLen to BG Palette RAM
-	gfx_manager::upload_bg_palettes_to_target(BG_PAL_RAM);
-	
-	//bios_wait_for_vblank();
-	
-	// Finally, copy the_block_gfxTiles to BG VRAM, screenblock 0
-	gfx_manager::upload_bg_tiles_to_vram();
+	// Also, copy the_block_gfxPalLen To BG Palette RAM
+	GfxManager::upload_bg_palettes_to_target(BG_PAL_RAM);
 	
 	//bios_wait_for_vblank();
-	sprite_manager::next_oam_index = 0; 
-	active_level_manager::load_level(&test_level);
+	
+	// Finally, copy the_block_gfxTiles To BG VRAM, screenblock 0
+	GfxManager::upload_bg_tiles_to_vram();
+	
+	//bios_wait_for_vblank();
+	SpriteManager::next_oam_index = 0; 
+	ActiveLevelManager::load_level(&test_level);
 	
 	
 	
-	gfx_manager::fade_out_to_white(1);
-	hud_manager::update_hud_in_screenblock_mirror_2d();
-	hud_manager::copy_hud_from_array_csz_2d_helper_to_vram();
+	GfxManager::fade_out_to_white(1);
+	HudManager::update_hud_in_screenblock_mirror_2d();
+	HudManager::copy_hud_from_array_csz_2d_helper_to_vram();
 	
 	irqSet( IRQ_VBLANK, (u32)mmVBlank );
 	irqEnable(IRQ_VBLANK);
@@ -287,17 +287,17 @@ void game_manager::reinit_the_game()
 	// and it apparently MaxMOD doesn't ever call free().
 	mmInitDefault( (mm_addr)practice_17_bin, 8 );
 	mmSetVBlankHandler(reinterpret_cast<void*>(vblank_func));
-	// Also, start playing music when the game is started.
+	// Also, start playing music when the game Is started.
 	mmStart( MOD_PRACTICE_17, MM_PLAY_LOOP );
 	
-	sprite_manager::upload_tiles_of_active_sprites_to_vram();
+	SpriteManager::upload_tiles_of_active_sprites_to_vram();
 	
 	//bios_wait_for_vblank();
 	// Disable forced blank
 	clear_bits( REG_DISPCNT, DCNT_BLANK_MASK );
 	
 	
-	gfx_manager::fade_in(15);
+	GfxManager::fade_in(15);
 	bios_wait_for_vblank();
 	
 	//curr_game_mode = gm_in_sublevel;

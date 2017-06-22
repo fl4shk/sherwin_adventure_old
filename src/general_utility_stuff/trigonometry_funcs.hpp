@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -32,7 +32,7 @@ extern const s16 sin_table[sin_table_size];
 
 static const u32 trig_lut_fixed_shift = 12;
 
-// NOTE:  theta's range is [0, 0xffff] for [0,2π), just like the BIOS
+// NOTE:  theta's range Is [0, 0xffff] for [0,2π), just like the BIOS
 // functions.  Also, the returned value has a fixed-point shift of 12.
 
 // Look up a sine value
@@ -54,29 +54,29 @@ inline s32 lut_cos( u32 theta )
 //y += ( 4 * lut_sin (theta) ) >> trig_lut_fixed_shift;
 
 
-inline fixed24p8 lut_sin_f24p8( u32 theta )
+inline Fixed24p8 lut_sin_f24p8( u32 theta )
 {
-	return (fixed24p8){ lut_sin(theta) 
-		>> ( trig_lut_fixed_shift - fixed24p8::get_shift() ) };
+	return (Fixed24p8){ lut_sin(theta) 
+		>> ( trig_lut_fixed_shift - Fixed24p8::get_shift() ) };
 }
 
-inline fixed24p8 lut_cos_f24p8( u32 theta )
+inline Fixed24p8 lut_cos_f24p8( u32 theta )
 {
-	return (fixed24p8){ lut_cos(theta) 
-		>> ( trig_lut_fixed_shift - fixed24p8::get_shift() ) };
+	return (Fixed24p8){ lut_cos(theta) 
+		>> ( trig_lut_fixed_shift - Fixed24p8::get_shift() ) };
 }
 
 
-inline fixed8p8 lut_sin_f8p8( u32 theta )
+inline Fixed8p8 lut_sin_f8p8( u32 theta )
 {
-	return (fixed8p8){ (s16)( lut_sin(theta) 
-		>> ( trig_lut_fixed_shift - fixed8p8::shift ) ) };
+	return (Fixed8p8){ (s16)( lut_sin(theta) 
+		>> ( trig_lut_fixed_shift - Fixed8p8::shift ) ) };
 }
 
-inline fixed8p8 lut_cos_f8p8( u32 theta )
+inline Fixed8p8 lut_cos_f8p8( u32 theta )
 {
-	return (fixed8p8){ (s16)( lut_cos(theta) 
-		>> ( trig_lut_fixed_shift - fixed8p8::shift ) ) };
+	return (Fixed8p8){ (s16)( lut_cos(theta) 
+		>> ( trig_lut_fixed_shift - Fixed8p8::shift ) ) };
 }
 
 

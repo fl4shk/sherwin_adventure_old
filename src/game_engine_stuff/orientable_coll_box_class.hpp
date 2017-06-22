@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -27,7 +27,7 @@
 #include "trigonometry_funcs.hpp"
 
 
-//// The positive y axis is assumed to point downward, which is why the
+//// The positive y axis Is assumed To point downward, which Is why the
 //// sin() function calls have or don't have a negative sign.
 //inline void create_clockwise_rotation_mat2x2d
 //	( double angle_in_degrees )
@@ -49,7 +49,7 @@
 //	return ret;
 //}
 
-//class orientable_coll_box
+//class OrientableCollBox
 //{
 //public:		// enums
 //	enum origin_corner { oc_lt, oc_rt, oc_lb, oc_rb }
@@ -62,21 +62,21 @@
 //public:		// variables
 //	//static constexpr double max_angle = 90.0f;
 //	
-//	// regular_pos is the position of the top left corner of the
-//	// orientable_coll_box when it is neither rotated nor
+//	// regular_pos Is the position of the top left corner of the
+//	// OrientableCollBox when it Is neither rotated nor
 //	// reflected about an axis.
 //	vec2_f24p8 regular_pos;
 //	
 //	vec2_f24p8 size_2d;
 //	
 //public:		// functions
-//	inline orientable_coll_box() 
+//	inline OrientableCollBox() 
 //		: the_origin_corner(oc_lt), angle_in_degrees(0),
 //		regular_pos({ {0}, {0} }), size_2d({ {0}, {0} })
 //	{
 //	}
 //	
-//	inline orientable_coll_box
+//	inline OrientableCollBox
 //		( const vec2_f24p8& s_regular_pos, 
 //		const vec2_f24p8& s_size_2d ) : the_origin_corner(oc_lt),
 //		angle_in_degrees(0), regular_pos(s_regular_pos),
@@ -84,7 +84,7 @@
 //	{
 //	}
 //	
-//	inline orientable_coll_box
+//	inline OrientableCollBox
 //		( origin_corner s_the_origin_corner, u32 s_angle_in_degrees,
 //		const vec2_f24p8& s_regular_pos, const vec2_f24p8& s_size_2d )
 //	{
@@ -177,11 +177,11 @@
 //	}
 //	
 //	
-//	// Convert from world coords to local coords.
+//	// Convert from world coords To local coords.
 //	inline vec2_f24p8 convert_point_to_local_coords
 //		( const vec2_f24p8& point_in_world_coords ) const
 //	{
-//		// This subtraction is the key to allowing rotations about corners
+//		// This subtraction Is the key To allowing rotations about corners
 //		// other than the top-left corner.
 //		//vec2_f24p8 ret = { point_in_world_coords.x - regular_pos.x,
 //		//	point_in_world_coords.y - regular_pos.y };
@@ -192,19 +192,19 @@
 //		
 //		// Create a 2x2 rotation matrix.
 //		static constexpr u32 mat2x2_arr_size = 4;
-//		fixed8p8 the_rotation_mat2x2_arr[mat2x2_arr_size];
+//		Fixed8p8 the_rotation_mat2x2_arr[mat2x2_arr_size];
 //		
-//		fixed8p8& data_11 = the_rotation_mat2x2_arr[0];
-//		fixed8p8& data_12 = the_rotation_mat2x2_arr[1];
-//		fixed8p8& data_21 = the_rotation_mat2x2_arr[2];
-//		fixed8p8& data_22 = the_rotation_mat2x2_arr[3];
+//		Fixed8p8& data_11 = the_rotation_mat2x2_arr[0];
+//		Fixed8p8& data_12 = the_rotation_mat2x2_arr[1];
+//		Fixed8p8& data_21 = the_rotation_mat2x2_arr[2];
+//		Fixed8p8& data_22 = the_rotation_mat2x2_arr[3];
 //		
 //		data_11 = data_22 = lut_cos_f8p8(angle_in_degrees);
 //		data_12 = -lut_sin_f8p8(angle_in_degrees);
 //		data_21 = data_12;
 //		
 //		
-//		// Unfortunately, some precision is lost from these multiplication
+//		// Unfortunately, some precision Is lost from these multiplication
 //		// operations.
 //		
 //		//ret = the_rotation_mat2x2 * ret;
@@ -238,7 +238,7 @@
 //		return ret;
 //	}
 //	
-//	// Convert from local coords to world coords.
+//	// Convert from local coords To world coords.
 //	inline vec2_f24p8 convert_point_in_local_coords_to_world_coords
 //		( const vec2_f24p8& point_in_local_coords ) const
 //	{
@@ -265,12 +265,12 @@
 //		}
 //		
 //		static constexpr u32 mat2x2_arr_size = 4;
-//		fixed8p8 the_rotation_mat2x2_arr[mat2x2_arr_size];
+//		Fixed8p8 the_rotation_mat2x2_arr[mat2x2_arr_size];
 //		
-//		fixed8p8& data_11 = the_rotation_mat2x2_arr[0];
-//		fixed8p8& data_12 = the_rotation_mat2x2_arr[1];
-//		fixed8p8& data_21 = the_rotation_mat2x2_arr[2];
-//		fixed8p8& data_22 = the_rotation_mat2x2_arr[3];
+//		Fixed8p8& data_11 = the_rotation_mat2x2_arr[0];
+//		Fixed8p8& data_12 = the_rotation_mat2x2_arr[1];
+//		Fixed8p8& data_21 = the_rotation_mat2x2_arr[2];
+//		Fixed8p8& data_22 = the_rotation_mat2x2_arr[3];
 //		
 //		// cos(-x) = cos(x)
 //		data_11 = data_22 = lut_cos_f8p8(angle_in_degrees);
@@ -279,7 +279,7 @@
 //		data_12 = lut_sin_f8p8(angle_in_degrees);
 //		data_21 = -data_12;
 //		
-//		// Unfortunately, some precision is lost from these multiplication
+//		// Unfortunately, some precision Is lost from these multiplication
 //		// operations.
 //		//ret = the_rotation_mat2x2 * ret;
 //		ret.x = ret.x.guaranteed_f24p8_by_f8p8_multiplication(data_11) 
@@ -292,14 +292,14 @@
 //		return ret;
 //	}
 //	
-//	inline int contains( const vec2_f24p8& point_in_world_coords ) const
+//	inline int Contains( const vec2_f24p8& point_in_world_coords ) const
 //	{
 //		vec2_f24p8 point_in_local_coords = convert_point_to_local_coords
 //			(point_in_world_coords);
 //		
-//		if ( point_in_local_coords.x >= (fixed24p8){0}
+//		if ( point_in_local_coords.x >= (Fixed24p8){0}
 //			&& point_in_local_coords.x <= size_2d.x
-//			&& point_in_local_coords.y >= (fixed24p8){0}
+//			&& point_in_local_coords.y >= (Fixed24p8){0}
 //			&& point_in_local_coords.y <= size_2d.y )
 //		{
 //			return true;
@@ -311,14 +311,14 @@
 //} __attribute__((_ALIGN4));
 
 
-class orientable_coll_box
+class OrientableCollBox
 {
 public:		// enums
 	enum origin_corner { oc_lt, oc_rt, oc_lb, oc_rb }
 		__attribute__((_ALIGN4));
 	
 protected:		// variables
-	// the_origin_corner is protected so that it can only be changed by
+	// the_origin_corner Is protected So That it Can only be changed by
 	// set_origin_corner(), which updates origin_corner_pos as needed.
 	origin_corner the_origin_corner;
 	u32 angle_in_degrees;
@@ -326,27 +326,27 @@ protected:		// variables
 public:		// variables
 	//static constexpr double max_angle = 90.0f;
 	
-	// origin_corner_pos is the position of the origin corner of the
-	// orientable_coll_box when it is not rotated.
+	// origin_corner_pos Is the position of the origin corner of the
+	// OrientableCollBox when it Is not rotated.
 	vec2_f24p8 origin_corner_pos;
 	
 	vec2_f24p8 size_2d;
 	
 public:		// functions
-	inline orientable_coll_box() : the_origin_corner(oc_lt), 
+	inline OrientableCollBox() : the_origin_corner(oc_lt), 
 		angle_in_degrees(0), origin_corner_pos({ {0}, {0} }), 
 		size_2d({ {0}, {0} })
 	{
 	}
 	
-	inline orientable_coll_box( const vec2_f24p8& s_origin_corner_pos, 
+	inline OrientableCollBox( const vec2_f24p8& s_origin_corner_pos, 
 		const vec2_f24p8& s_size_2d ) : the_origin_corner(oc_lt),
 		angle_in_degrees(0), origin_corner_pos(s_origin_corner_pos),
 		size_2d(s_size_2d)
 	{
 	}
 	
-	inline orientable_coll_box( origin_corner s_the_origin_corner, 
+	inline OrientableCollBox( origin_corner s_the_origin_corner, 
 		u32 s_angle_in_degrees, const vec2_f24p8& s_origin_corner_pos, 
 		const vec2_f24p8& s_size_2d ):
 		the_origin_corner(s_the_origin_corner),
@@ -361,7 +361,7 @@ public:		// functions
 		return the_origin_corner;
 	}
 	
-	// This is needed so that origin_corner_pos can be properly updated
+	// This Is needed So That origin_corner_pos Can be properly updated
 	inline void set_origin_corner
 		( origin_corner n_the_origin_corner )
 	{
@@ -513,11 +513,11 @@ public:		// functions
 	}
 	
 	
-	// Convert from world coords to local coords.
+	// Convert from world coords To local coords.
 	inline vec2_f24p8 convert_point_to_local_coords
 		( const vec2_f24p8& point_in_world_coords ) const
 	{
-		// This subtraction is the key to allowing rotations about corners
+		// This subtraction Is the key To allowing rotations about corners
 		// other than the top-left corner.
 		//vec2_f24p8 ret = { point_in_world_coords.x - origin_corner_pos.x,
 		//	point_in_world_coords.y - origin_corner_pos.y };
@@ -533,12 +533,12 @@ public:		// functions
 		// Create a 2x2 rotation matrix.
 		
 		static constexpr u32 mat2x2_arr_size = 4;
-		fixed8p8 the_rotation_mat2x2_arr[mat2x2_arr_size];
+		Fixed8p8 the_rotation_mat2x2_arr[mat2x2_arr_size];
 		
-		fixed8p8& data_11 = the_rotation_mat2x2_arr[0];
-		fixed8p8& data_12 = the_rotation_mat2x2_arr[1];
-		fixed8p8& data_21 = the_rotation_mat2x2_arr[2];
-		fixed8p8& data_22 = the_rotation_mat2x2_arr[3];
+		Fixed8p8& data_11 = the_rotation_mat2x2_arr[0];
+		Fixed8p8& data_12 = the_rotation_mat2x2_arr[1];
+		Fixed8p8& data_21 = the_rotation_mat2x2_arr[2];
+		Fixed8p8& data_22 = the_rotation_mat2x2_arr[3];
 		
 		// cos(-x) = cos(x)
 		data_11 = data_22 = lut_cos_f8p8(angle_in_degrees);
@@ -547,7 +547,7 @@ public:		// functions
 		data_12 = lut_sin_f8p8(angle_in_degrees);
 		data_21 = -data_12;
 		
-		// Unfortunately, some precision is lost from these multiplication
+		// Unfortunately, some precision Is lost from these multiplication
 		// operations.
 		
 		//ret = the_rotation_mat2x2 * ret;
@@ -562,7 +562,7 @@ public:		// functions
 		return ret;
 	}
 	
-	// Convert from local coords to world coords.
+	// Convert from local coords To world coords.
 	inline vec2_f24p8 convert_point_from_local_coords_to_world_coords
 		( const vec2_f24p8& point_in_local_coords ) const
 	{
@@ -577,18 +577,18 @@ public:		// functions
 		
 		// Create a 2x2 rotation matrix.
 		static constexpr u32 mat2x2_arr_size = 4;
-		fixed8p8 the_rotation_mat2x2_arr[mat2x2_arr_size];
+		Fixed8p8 the_rotation_mat2x2_arr[mat2x2_arr_size];
 		
-		fixed8p8& data_11 = the_rotation_mat2x2_arr[0];
-		fixed8p8& data_12 = the_rotation_mat2x2_arr[1];
-		fixed8p8& data_21 = the_rotation_mat2x2_arr[2];
-		fixed8p8& data_22 = the_rotation_mat2x2_arr[3];
+		Fixed8p8& data_11 = the_rotation_mat2x2_arr[0];
+		Fixed8p8& data_12 = the_rotation_mat2x2_arr[1];
+		Fixed8p8& data_21 = the_rotation_mat2x2_arr[2];
+		Fixed8p8& data_22 = the_rotation_mat2x2_arr[3];
 		
 		data_11 = data_22 = lut_cos_f8p8(angle_in_degrees);
 		data_12 = -lut_sin_f8p8(angle_in_degrees);
 		data_21 = -data_12;
 		
-		// Unfortunately, some precision is lost from these multiplication
+		// Unfortunately, some precision Is lost from these multiplication
 		// operations.
 		//ret = the_rotation_mat2x2 * ret;
 		ret.x = ret.x.guaranteed_f24p8_by_f8p8_multiplication(data_11) 
@@ -604,7 +604,7 @@ public:		// functions
 	}
 	
 	
-	inline bool contains( const vec2_f24p8& point_in_world_coords ) const
+	inline bool Contains( const vec2_f24p8& point_in_world_coords ) const
 	{
 		vec2_f24p8 point_in_local_coords = convert_point_to_local_coords
 			(point_in_world_coords);
@@ -625,8 +625,8 @@ public:		// functions
 		return false;
 	}
 	
-	// The separating axis theorem is being used for this function.
-	inline bool intersects_now( const orientable_coll_box& other )
+	// The separating axis theorem Is being used for this function.
+	inline bool intersects_now( const OrientableCollBox& other )
 	{
 		static constexpr u32 num_corners = 4, num_edges = 4, num_axes = 4;
 		
@@ -704,17 +704,17 @@ public:		// functions
 		
 		
 		
-		// Note:  The axis must be normalized to get an accurate
+		// Note:  The axis must be normalized To get an accurate
 		// projection.
-		auto project = [&]( const vec2_f24p8& axis, fixed24p8& min, 
-			fixed24p8& max, 
+		auto project = [&]( const vec2_f24p8& axis, Fixed24p8& min, 
+			Fixed24p8& max, 
 			const array< vec2_f24p8, num_corners >& corners_arr ) -> void
 		{
 			min = max = axis.dot_prod(corners_arr.at(0));
 			
 			for ( u32 i=1; i<corners_arr.size(); ++i )
 			{
-				fixed24p8 p = axis.dot_prod(corners_arr.at(i));
+				Fixed24p8 p = axis.dot_prod(corners_arr.at(i));
 				
 				if ( p < min )
 				{
@@ -727,28 +727,28 @@ public:		// functions
 			}
 		};
 		
-		auto projections_overlap = [&]( fixed24p8 min, fixed24p8 max, 
-			fixed24p8 other_min, fixed24p8 other_max ) -> bool
+		auto projections_overlap = [&]( Fixed24p8 min, Fixed24p8 max, 
+			Fixed24p8 other_min, Fixed24p8 other_max ) -> bool
 		{
-			// First, check whether other_min is between min and max.
+			// First, check whether other_min Is between min and max.
 			if ( min <= other_min && other_min <= max )
 			{
 				return true;
 			}
 			
-			// Next, check whether other_max is between min and max.
+			// Next, check whether other_max Is between min and max.
 			if ( min <= other_max && other_max <= max )
 			{
 				return true;
 			}
 			
-			// Next, check whether min is between other_min and other_max.
+			// Next, check whether min Is between other_min and other_max.
 			if ( other_min <= min && min <= other_max )
 			{
 				return true;
 			}
 			
-			// Last, check whether max is between other_min and other_max.
+			// Last, check whether max Is between other_min and other_max.
 			if ( other_min <= max && max <= other_max )
 			{
 				return true;
@@ -760,7 +760,7 @@ public:		// functions
 		// loop over axes
 		for ( const vec2_f24p8& axis : axes )
 		{
-			fixed24p8 min, max, other_min, other_max;
+			Fixed24p8 min, max, other_min, other_max;
 			
 			// Project both rectangles onto the axis.
 			project( axis, min, max, corners );
@@ -777,7 +777,7 @@ public:		// functions
 		// loop over other_axes
 		for ( const vec2_f24p8& other_axis : other_axes )
 		{
-			fixed24p8 min, max, other_min, other_max;
+			Fixed24p8 min, max, other_min, other_max;
 			
 			// Project both rectangles onto the axis.
 			project( other_axis, min, max, corners );

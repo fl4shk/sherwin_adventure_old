@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -128,13 +128,13 @@
 
 //#if !defined ( __thumb__)
 #if defined ( __thumb__)
-#define swi_call( x ) asm volatile("swi\t"#x ::: "r0","r1","r2","r3")
+#define SWI_CALL( x ) asm volatile("swi\t"#x ::: "r0","r1","r2","r3")
 #else
-#define swi_call( x ) asm volatile("swi\t"#x"<<16" ::: "r0","r1","r2","r3")
+#define SWI_CALL( x ) asm volatile("swi\t"#x"<<16" ::: "r0","r1","r2","r3")
 #endif
 
 
-class bios_div_result
+class BiosDivResult
 {
 public:		// variables
 	s32 quotient;
@@ -147,7 +147,7 @@ public:		// variables
 
 inline void bios_do_soft_reset()
 {
-	swi_call(0x00);
+	SWI_CALL(0x00);
 }
 
 inline void bios_do_register_ram_reset( u32 r0_value )
@@ -172,7 +172,7 @@ inline void bios_do_full_soft_reset()
 
 inline void bios_wait_for_vblank()
 {
-	swi_call(0x05);
+	SWI_CALL(0x05);
 }
 
 
@@ -205,7 +205,7 @@ inline s32 bios_do_div( s32 numerator, s32 denominator )
 }
 
 inline void bios_do_div( s32 numerator, s32 denominator, 
-	bios_div_result& the_div_result )
+	BiosDivResult& the_div_result )
 {
 	
 	if ( denominator == 0 )
@@ -298,7 +298,7 @@ inline void bios_do_lz77_uncomp_vram( const void* src, volatile void* dst )
 
 inline void bios_do_hard_reset()
 {
-	swi_call(0x26);
+	SWI_CALL(0x26);
 }
 
 

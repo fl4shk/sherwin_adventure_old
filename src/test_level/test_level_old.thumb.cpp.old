@@ -2,7 +2,7 @@
 
 #include "../game_engine_stuff/level_stuff/sprite_level_data_stuff.hpp"
 
-const sublevel< 1944, 64, 32, 13, 0 > test_level
+const Sublevel< 1944, 64, 32, 13, 0 > test_level
 = {
 	{
 		0x1000010, 0x50f, 0xf003f000, 0xf003f003,

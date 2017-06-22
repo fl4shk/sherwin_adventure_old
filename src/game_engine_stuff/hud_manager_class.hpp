@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -24,23 +24,23 @@
 #include "../general_utility_stuff/array_2d_helper_classes.hpp"
 #include "gfx_manager_class.hpp"
 
-class hud_manager
+class HudManager
 {
 public:		// variables
 	static bool hud_was_generated __attribute__((_EWRAM));
 	
 	
-	// -- Switch to linear_memory_allocator --
+	// -- Switch To linear_memory_allocator --
 	static scr_entry bg1_screenblock_mirror[screenblock_size]
 		__attribute__((_EWRAM));
 	
 	
-	// bg1_screenblock_2d is in VRAM.
-	static array_csz_2d_helper< scr_entry, screenblock_xsize,
+	// bg1_screenblock_2d Is in VRAM.
+	static ArrayCsz_2dHelper< scr_entry, screenblock_xsize,
 		screenblock_ysize > bg1_screenblock_2d;
 	
-	// bg1_screenblock_mirror_2d is in EWRAM.
-	static array_csz_2d_helper< scr_entry, screenblock_xsize, 
+	// bg1_screenblock_mirror_2d Is in EWRAM.
+	static ArrayCsz_2dHelper< scr_entry, screenblock_xsize, 
 		screenblock_ysize > bg1_screenblock_mirror_2d;
 	
 	static constexpr u32 char_to_plottable_char_arr_size = 0x100;
@@ -48,7 +48,7 @@ public:		// variables
 		[char_to_plottable_char_arr_size];
 	
 public:		// functions
-	// For some reason, NOT having these two functions marked as
+	// for some reason, NOT having these two functions marked as
 	// __noinline__ causes problems.
 	//static void plot_char_8x16_to_screenblock_mirror( u32 the_char, 
 	//	u32 pos_x, u32 pos_y ) __attribute__((_IWRAM_CODE,__noinline__));

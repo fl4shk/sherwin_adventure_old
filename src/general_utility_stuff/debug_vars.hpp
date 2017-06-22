@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -34,53 +34,53 @@ extern u32 curr_debug_s32_index, curr_debug_u32_index,
 static const u32 debug_arr_s32_size = 32;
 extern vs32 debug_arr_s32[debug_arr_s32_size];
 #define NEXT_DEBUG_S32 ( debug_arr_s32[curr_debug_s32_index++] )
-#define show_debug_str_s32(str) ( memcpy8( &NEXT_DEBUG_S32, str, \
+#define SHOW_DEBUG_STR_S32(str) ( memcpy8( &NEXT_DEBUG_S32, str, \
 	sizeof(s32) ) )
 
 
 static const u32 debug_arr_u32_size = 32;
 extern vu32 debug_arr_u32[debug_arr_u32_size];
 #define NEXT_DEBUG_U32 ( debug_arr_u32[curr_debug_u32_index++] )
-#define show_debug_str_u32(str) ( memcpy8( &NEXT_DEBUG_U32, str, \
+#define SHOW_DEBUG_STR_U32(str) ( memcpy8( &NEXT_DEBUG_U32, str, \
 	sizeof(s32) ) )
 
 
 static const u32 debug_arr_f24p8_size = 32;
-extern fixed24p8 debug_arr_f24p8[debug_arr_f24p8_size];
+extern Fixed24p8 debug_arr_f24p8[debug_arr_f24p8_size];
 #define NEXT_DEBUG_F24P8 ( debug_arr_f24p8[curr_debug_f24p8_index++] )
-#define show_debug_str_f24p8(str) ( memcpy8( &NEXT_DEBUG_F24P8, str, \
-	sizeof(fixed24p8) ) )
+#define SHOW_DEBUG_STR_F24P8(str) ( memcpy8( &NEXT_DEBUG_F24P8, str, \
+	sizeof(Fixed24p8) ) )
 
 
 static const u32 debug_arr_f8p8_size = 32;
-extern fixed8p8 debug_arr_f8p8[debug_arr_f8p8_size];
+extern Fixed8p8 debug_arr_f8p8[debug_arr_f8p8_size];
 #define NEXT_DEBUG_F8P8 ( debug_arr_f8p8[curr_debug_f8p8_index++] )
 
 void clear_debug_vars() __attribute__((_IWRAM_CODE));
 */
 
 
-#define list_of_debug_suffixes(macro) \
+#define LIST_OF_DEBUG_SUFFIXES(macro) \
 	macro(u32) macro(s32) macro(f24p8) macro(f8p8) macro(str)
 
-#define macro_for_debug_u32_type_and_suffix(macro) \
+#define MACRO_FOR_DEBUG_U32_TYPE_AND_SUFFIX(macro) \
 	macro( u32, u32 )
-#define macro_for_debug_s32_type_and_suffix(macro) \
+#define MACRO_FOR_DEBUG_S32_TYPE_AND_SUFFIX(macro) \
 	macro( s32, s32 )
-#define macro_for_debug_fixed24p8_type_and_suffix(macro) \
-	macro( fixed24p8, f24p8 )
-#define macro_for_debug_fixed8p8_type_and_suffix(macro) \
-	macro( fixed8p8, f8p8 )
-#define macro_for_debug_str_type_and_suffix(macro) \
-	macro( debug_str, str )
+#define MACRO_FOR_DEBUG_FIXED24P8_TYPE_AND_SUFFIX(macro) \
+	macro( Fixed24p8, f24p8 )
+#define MACRO_FOR_DEBUG_FIXED8P8_TYPE_AND_SUFFIX(macro) \
+	macro( Fixed8p8, f8p8 )
+#define MACRO_FOR_DEBUG_STR_TYPE_AND_SUFFIX(macro) \
+	macro( DebugStr, str )
 
 
-#define list_of_debug_types_and_suffixes(macro) \
-	macro_for_debug_u32_type_and_suffix(macro) \
-	macro_for_debug_s32_type_and_suffix(macro) \
-	macro_for_debug_fixed24p8_type_and_suffix(macro) \
-	macro_for_debug_fixed8p8_type_and_suffix(macro) \
-	macro_for_debug_str_type_and_suffix(macro)
+#define LIST_OF_DEBUG_TYPES_AND_SUFFIXES(macro) \
+	MACRO_FOR_DEBUG_U32_TYPE_AND_SUFFIX(macro) \
+	MACRO_FOR_DEBUG_S32_TYPE_AND_SUFFIX(macro) \
+	MACRO_FOR_DEBUG_FIXED24P8_TYPE_AND_SUFFIX(macro) \
+	MACRO_FOR_DEBUG_FIXED8P8_TYPE_AND_SUFFIX(macro) \
+	MACRO_FOR_DEBUG_STR_TYPE_AND_SUFFIX(macro)
 
 enum curr_debug_index_type
 {
@@ -103,29 +103,29 @@ static constexpr u32 debug_f24p8_arr_size = 32;
 static constexpr u32 debug_f8p8_arr_size = 32;
 
 
-// Please make sure that debug_str_arr_size is a multiple of 4.
-// debug_str_arr_size is the number of debug_str elements in
-// debug_arr_group::debug_str_arr.
+// Please make sure That debug_str_arr_size Is a multiple of 4.
+// debug_str_arr_size Is the number of DebugStr elements in
+// DebugArrGroup::debug_str_arr.
 static constexpr u32 debug_str_arr_size = 32;
 
 //// ( 16 + 4 ) * 32 = 640 bytes eaten up by debug_str_arr.
 // ( 20 + 4 ) * 32 = 768 bytes eaten up by debug_str_arr.
 
 // Total of 20 + 512 + 640 = 1172 bytes (293 4-bytes-long words) eaten up
-// by debug vars (INCLUDING the array indices).  This is certainly
+// by debug vars (INCLUDING the array indices).  This Is certainly
 // wasteful....
 
-class debug_str
+class DebugStr
 {
 protected:		// variables
 	u32 real_size;
 	
 public:		// and constants
-	//// Please make sure that max_size is a multiple of 4.  max_size is the
+	//// Please make sure That max_size Is a multiple of 4.  max_size Is the
 	//// number of elements in arr.
 	
 	
-	// It is a very good idea for max_size to be a multiple of 4.  It makes
+	// It Is a very good idea for max_size To be a multiple of 4.  It makes
 	// copying and clearing faster.
 	///static constexpr u32 max_size = 16;
 	static constexpr u32 max_size = 20;
@@ -133,28 +133,28 @@ public:		// and constants
 	std::array< char, max_size > arr;
 	
 public:		// functions
-	inline debug_str() : real_size(0)
+	inline DebugStr() : real_size(0)
 	{
 		clear_arr();
 	}
-	inline debug_str( u32 n_real_size )
+	inline DebugStr( u32 n_real_size )
 	{
 		set_real_size(n_real_size);
 		//memfill32( arr, 0, max_size / sizeof(u32) );
 		//arr_memfill32( arr, 0, max_size );
 		clear_arr();
 	}
-	inline debug_str( const debug_str& to_copy )
+	inline DebugStr( const DebugStr& to_copy )
 	{
 		operator = (to_copy);
 	}
-	inline debug_str( const char* to_copy )
+	inline DebugStr( const char* to_copy )
 	{
 		operator = (to_copy);
 	}
 	
-	debug_str& operator = ( const debug_str& to_copy );
-	debug_str& operator = ( const char* to_copy );
+	DebugStr& operator = ( const DebugStr& to_copy );
+	DebugStr& operator = ( const char* to_copy );
 	
 	inline u32 get_real_size() const
 	{
@@ -199,11 +199,11 @@ public:		// functions
 extern u32 (& curr_index_arr)[curr_index_arr_size];
 extern u32 (& debug_u32_arr)[debug_u32_arr_size];
 extern s32 (& debug_s32_arr)[debug_s32_arr_size];
-extern fixed24p8 (& debug_f24p8_arr)[debug_f24p8_arr_size];
-extern fixed8p8 (& debug_f8p8_arr)[debug_f8p8_arr_size];
-extern debug_str (& debug_str_arr)[debug_str_arr_size];
+extern Fixed24p8 (& debug_f24p8_arr)[debug_f24p8_arr_size];
+extern Fixed8p8 (& debug_f8p8_arr)[debug_f8p8_arr_size];
+extern DebugStr (& debug_str_arr)[debug_str_arr_size];
 
-class debug_arr_group
+class DebugArrGroup
 {
 //protected:		// static variables (raw debug arrays)
 public:		// static variables (raw debug arrays)
@@ -213,29 +213,29 @@ public:		// static variables (raw debug arrays)
 		
 		u32 debug_u32_arr[debug_u32_arr_size];
 		s32 debug_s32_arr[debug_s32_arr_size];
-		fixed24p8 debug_f24p8_arr[debug_f24p8_arr_size];
-		fixed8p8 debug_f8p8_arr[debug_f8p8_arr_size];
+		Fixed24p8 debug_f24p8_arr[debug_f24p8_arr_size];
+		Fixed8p8 debug_f8p8_arr[debug_f8p8_arr_size];
 		
-		debug_str debug_str_arr[debug_str_arr_size];
+		DebugStr debug_str_arr[debug_str_arr_size];
 	} __attribute__((_ALIGN4));
 	static raw_array_group the_raw_array_group;
 	
 	
-	// The main reason this exists is to give something to write to so that
-	// a breakpoint can be sure to be hit in GDB.  It's a  bit unfortunate
-	// that I had to resort to something like this due to it being
+	// The main reason this Exists Is To give something To write To So That
+	// a breakpoint Can be sure To be hit in GDB.  It's a  bit unfortunate
+	// That I had To resort To something like this due To it being
 	// inflexible, but oh well.
 	static u32 gdb_breakpoint_helper;
 	
 public:		// static variables (array_helpers)
-	static array_helper<u32> curr_index_arr_helper;
+	static ArrayHelper<u32> curr_index_arr_helper;
 	
-	static array_helper<u32> debug_u32_arr_helper;
-	static array_helper<s32> debug_s32_arr_helper;
-	static array_helper<fixed24p8> debug_f24p8_arr_helper;
-	static array_helper<fixed8p8> debug_f8p8_arr_helper;
+	static ArrayHelper<u32> debug_u32_arr_helper;
+	static ArrayHelper<s32> debug_s32_arr_helper;
+	static ArrayHelper<Fixed24p8> debug_f24p8_arr_helper;
+	static ArrayHelper<Fixed8p8> debug_f8p8_arr_helper;
 	
-	static array_helper<debug_str> debug_str_arr_helper;
+	static ArrayHelper<DebugStr> debug_str_arr_helper;
 	
 //protected:		// functions
 public:		// functions
@@ -253,15 +253,15 @@ public:		// functions
 	{
 		return the_raw_array_group.debug_s32_arr;
 	}
-	static inline fixed24p8* debug_f24p8_arr()
+	static inline Fixed24p8* debug_f24p8_arr()
 	{
 		return the_raw_array_group.debug_f24p8_arr;
 	}
-	static inline fixed8p8* debug_f8p8_arr()
+	static inline Fixed8p8* debug_f8p8_arr()
 	{
 		return the_raw_array_group.debug_f8p8_arr;
 	}
-	static inline debug_str* debug_str_arr()
+	static inline DebugStr* debug_str_arr()
 	{
 		return the_raw_array_group.debug_str_arr;
 	}
@@ -270,55 +270,55 @@ public:		// functions
 	
 	static void clear_debug_vars();
 	
-	#define raw_write_debug_u32_and_inc( to_write ) \
-	debug_arr_group::debug_u32_arr() \
-		[debug_arr_group::curr_index_arr()[cdit_u32]++] \
+	#define RAW_WRITE_DEBUG_U32_AND_INC( to_write ) \
+	DebugArrGroup::debug_u32_arr() \
+		[DebugArrGroup::curr_index_arr()[cdit_u32]++] \
 		= static_cast<u32>(to_write);
 	
-	#define raw_write_debug_s32_and_inc( to_write ) \
-	debug_arr_group::debug_s32_arr() \
-		[debug_arr_group::curr_index_arr()[cdit_s32]++] \
+	#define RAW_WRITE_DEBUG_S32_AND_INC( to_write ) \
+	DebugArrGroup::debug_s32_arr() \
+		[DebugArrGroup::curr_index_arr()[cdit_s32]++] \
 		= static_cast<s32>(to_write);
 	
-	#define raw_write_debug_f24p8_and_inc( to_write ) \
-	debug_arr_group::debug_f24p8_arr() \
-		[debug_arr_group::curr_index_arr()[cdit_f24p8]++] \
-		= static_cast<fixed24p8>(to_write);
+	#define RAW_WRITE_DEBUG_F24P8_AND_INC( to_write ) \
+	DebugArrGroup::debug_f24p8_arr() \
+		[DebugArrGroup::curr_index_arr()[cdit_f24p8]++] \
+		= static_cast<Fixed24p8>(to_write);
 	
-	#define raw_write_debug_f8p8_and_inc( to_write ) \
-	debug_arr_group::debug_f8p8_arr() \
-		[debug_arr_group::curr_index_arr()[cdit_f8p8]++] \
-		= static_cast<fixed8p8>(to_write);
+	#define RAW_WRITE_DEBUG_F8P8_AND_INC( to_write ) \
+	DebugArrGroup::debug_f8p8_arr() \
+		[DebugArrGroup::curr_index_arr()[cdit_f8p8]++] \
+		= static_cast<Fixed8p8>(to_write);
 	
-	#define raw_write_debug_str_and_inc( to_write ) \
-	debug_arr_group::debug_str_arr() \
-		[debug_arr_group::curr_index_arr()[cdit_str]++] = to_write;
+	#define RAW_WRITE_DEBUG_STR_AND_INC( to_write ) \
+	DebugArrGroup::debug_str_arr() \
+		[DebugArrGroup::curr_index_arr()[cdit_str]++] = to_write;
 	
 	static inline void write_u32_and_inc( u32 to_write )
 	{
-		raw_write_debug_u32_and_inc(to_write);
+		RAW_WRITE_DEBUG_U32_AND_INC(to_write);
 	}
 	static inline void write_s32_and_inc( s32 to_write )
 	{
-		raw_write_debug_s32_and_inc(to_write);
+		RAW_WRITE_DEBUG_S32_AND_INC(to_write);
 	}
-	static inline void write_f24p8_and_inc( const fixed24p8& to_write )
+	static inline void write_f24p8_and_inc( const Fixed24p8& to_write )
 	{
-		raw_write_debug_f24p8_and_inc(to_write);
+		RAW_WRITE_DEBUG_F24P8_AND_INC(to_write);
 	}
-	static inline void write_f8p8_and_inc( const fixed8p8& to_write )
+	static inline void write_f8p8_and_inc( const Fixed8p8& to_write )
 	{
-		raw_write_debug_f8p8_and_inc(to_write);
+		RAW_WRITE_DEBUG_F8P8_AND_INC(to_write);
 	}
 	
-	static inline void write_str_and_inc( const debug_str& to_write )
+	static inline void write_str_and_inc( const DebugStr& to_write )
 	{
-		raw_write_debug_str_and_inc(to_write);
+		RAW_WRITE_DEBUG_STR_AND_INC(to_write);
 	}
 	
 	static inline void write_str_and_inc( const char* to_write )
 	{
-		raw_write_debug_str_and_inc(to_write);
+		RAW_WRITE_DEBUG_STR_AND_INC(to_write);
 	}
 	
 	
@@ -337,75 +337,75 @@ template< typename debug_arr_type, typename type >
 void show_debug_values_group_backend( debug_arr_type* debug_values_arr, 
 	u32& curr_index, const u32 total_num_args, const type* all_values_arr )
 {
-	//asm_comment("show_debug_values_group_backend()");
+	//ASM_COMMENT("show_debug_values_group_backend()");
 	
-	//asm_comment("Before old_curr_index");
+	//ASM_COMMENT("Before old_curr_index");
 	const u32 old_curr_index = curr_index;
 	
-	//asm_comment("Before curr_index = old_curr_index + total_num_args");
+	//ASM_COMMENT("Before curr_index = old_curr_index + total_num_args");
 	
 	//curr_index += total_num_args;
-	// Turns out that curr_index = old_curr_index + total_num_args is
-	// FASTER than curr_index += total_num_args with the code that gets
+	// Turns out That curr_index = old_curr_index + total_num_args Is
+	// FASTER than curr_index += total_num_args with the code That gets
 	// generated.
 	curr_index = old_curr_index + total_num_args;
 	
-	//asm_comment("Before for loop");
+	//ASM_COMMENT("Before for loop");
 	for ( s32 i=total_num_args-1; i>=0; --i )
 	{
 		debug_values_arr[old_curr_index + i] = all_values_arr[i];
 	}
 	
-	//asm_comment("end of show_debug_values_group_backend()");
+	//ASM_COMMENT("end of show_debug_values_group_backend()");
 }
 
 
 
-// type is the actual type, and suffix is the type's suffix.  Sometimes,
+// type Is the actual type, and suffix Is the type's suffix.  Sometimes,
 // type == suffix, especially with generic types.
-#define generate_func_contents( type, suffix ) \
-asm_comment("show_debug_" #suffix "_group()" ); \
+#define GENERATE_FUNC_CONTENTS( type, suffix ) \
+ASM_COMMENT("show_debug_" #suffix "_group()" ); \
 static constexpr size_t total_num_args = sizeof...(all_the_values); \
 type all_values_arr[total_num_args]; \
 copy_to_array( all_values_arr, all_the_values... ); \
 show_debug_values_group_backend \
-	( debug_arr_group::debug_##suffix##_arr(), \
-	debug_arr_group::curr_index_arr()[cdit_##suffix], total_num_args, \
+	( DebugArrGroup::debug_##suffix##_arr(), \
+	DebugArrGroup::curr_index_arr()[cdit_##suffix], total_num_args, \
 	all_values_arr );
 
 template< typename... all_the_types >
 inline void show_debug_u32_group( const all_the_types&... all_the_values )
 {
-	macro_for_debug_u32_type_and_suffix(generate_func_contents);
+	MACRO_FOR_DEBUG_U32_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);
 }
 
 
 template< typename... all_the_types >
 inline void show_debug_s32_group( const all_the_types&... all_the_values )
 {
-	macro_for_debug_s32_type_and_suffix(generate_func_contents);
+	MACRO_FOR_DEBUG_S32_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);
 }
 
 template< typename... all_the_types >
 inline void show_debug_f24p8_group( const all_the_types&... all_the_values )
 {
-	macro_for_debug_fixed24p8_type_and_suffix(generate_func_contents);
+	MACRO_FOR_DEBUG_FIXED24P8_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);
 }
 
 template< typename... all_the_types >
 inline void show_debug_f8p8_group( const all_the_types&... all_the_values )
 {
-	macro_for_debug_fixed8p8_type_and_suffix(generate_func_contents);
+	MACRO_FOR_DEBUG_FIXED8P8_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);
 }
 
 template< typename... all_the_types >
 inline void show_debug_str_group( const all_the_types&... all_the_values )
 {
-	macro_for_debug_str_type_and_suffix(generate_func_contents);
+	MACRO_FOR_DEBUG_STR_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);
 }
 
 
-#undef generate_func_contents
+#undef GENERATE_FUNC_CONTENTS
 
 
 #endif		// debug_vars_hpp

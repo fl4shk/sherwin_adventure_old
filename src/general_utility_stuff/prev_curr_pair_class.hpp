@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -25,13 +25,13 @@
 #include <utility>
 
 template < typename type >
-class vec2;
+class Vec2;
 
-// This is a small class for the purposes of holding the states of
-// "previous" and "current" pairs.  It is primarily intended for use with
-// SMALL types, such as vec2's, built-in types, and so on and so forth.
+// This Is a small class for the purposes of holding the states of
+// "previous" and "current" pairs.  It Is primarily Intended for use with
+// SMALL types, such as Vec2's, built-in types, and So on and So forth.
 template< typename type >
-class prev_curr_pair
+class PrevCurrPair
 {
 public:		// variables
 	type prev, curr;
@@ -59,9 +59,9 @@ public:		// functions
 		return ( prev != curr );
 	}
 	
-	inline operator vec2<type>() const
+	inline operator Vec2<type>() const
 	{
-		return vec2<type>( prev, curr );
+		return Vec2<type>( prev, curr );
 	}
 	
 	

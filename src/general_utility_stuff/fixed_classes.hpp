@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -24,26 +24,26 @@
 #include "../gba_specific_stuff/attribute_defines.hpp"
 #include "misc_utility_funcs.hpp"
 
-class fixed24p8;
-class fixed8p8;
+class Fixed24p8;
+class Fixed8p8;
 
 
-//extern fixed24p8 f24p8_div_by_f8p8( const fixed24p8& num, 
-//	const fixed8p8& den ) __attribute__((_IWRAM_CODE));
-fixed24p8 f24p8_div_by_f8p8( const fixed24p8& num, const fixed8p8& den ) 
+//extern Fixed24p8 f24p8_div_by_f8p8( const Fixed24p8& num, 
+//	const Fixed8p8& den ) __attribute__((_IWRAM_CODE));
+Fixed24p8 f24p8_div_by_f8p8( const Fixed24p8& num, const Fixed8p8& den ) 
 	__attribute__((_IWRAM_CODE,_TARGET_ARM));
-fixed24p8 f24p8_div_by_f24p8( const fixed24p8& num, const fixed24p8& den ) 
+Fixed24p8 f24p8_div_by_f24p8( const Fixed24p8& num, const Fixed24p8& den ) 
 	__attribute__((_IWRAM_CODE,_TARGET_ARM));
-fixed24p8 f24p8_div_by_u16( const fixed24p8& num, u16 den )
+Fixed24p8 f24p8_div_by_u16( const Fixed24p8& num, u16 den )
 	__attribute__((_IWRAM_CODE,_TARGET_ARM));
 
 
 static constexpr u32 f24p8_shift = 8;
 static constexpr u32 f24p8_frac_mask = ( 1 << f24p8_shift ) - 1;
 
-// Underlying type is s32, with 8 fraction bits
+// Underlying type Is s32, with 8 fraction bits
 // This will be the most often used fixed-point type in my GBA stuff
-class fixed24p8
+class Fixed24p8
 {
 public:		// variables
 	
@@ -74,56 +74,56 @@ public:		// functions
 		//return floor_to_int();
 	}
 	
-	inline fixed24p8 with_zero_frac_bits() const;
+	inline Fixed24p8 with_zero_frac_bits() const;
 	
 	inline u32 get_frac_bits() const;
 	
-	inline operator fixed8p8() const;
+	inline operator Fixed8p8() const;
 	
 	
 	// Arithmetic operator overloads
 	
 	
-	inline fixed24p8 operator + ( const fixed24p8& to_add ) const;
-	inline fixed24p8 operator - ( const fixed24p8& to_sub ) const;
+	inline Fixed24p8 operator + ( const Fixed24p8& to_add ) const;
+	inline Fixed24p8 operator - ( const Fixed24p8& to_sub ) const;
 	
-	//inline fixed24p8 operator * ( const fixed24p8& to_mul ) const;
-	fixed24p8 operator * ( const fixed24p8& to_mul ) const
+	//inline Fixed24p8 operator * ( const Fixed24p8& to_mul ) const;
+	Fixed24p8 operator * ( const Fixed24p8& to_mul ) const
 		__attribute__((_IWRAM_CODE,_TARGET_ARM));
-	inline fixed24p8 guaranteed_f24p8_by_f8p8_multiplication
-		( const fixed8p8& to_mul ) const;
-	inline fixed24p8 operator / ( const fixed8p8& den ) const
+	inline Fixed24p8 guaranteed_f24p8_by_f8p8_multiplication
+		( const Fixed8p8& to_mul ) const;
+	inline Fixed24p8 operator / ( const Fixed8p8& den ) const
 	{
-		return f24p8_div_by_f8p8( (fixed24p8){data}, den );
+		return f24p8_div_by_f8p8( (Fixed24p8){data}, den );
 	}
-	inline fixed24p8 operator / ( const fixed24p8& den ) const
+	inline Fixed24p8 operator / ( const Fixed24p8& den ) const
 	{
-		return f24p8_div_by_f24p8( (fixed24p8){data}, den );
+		return f24p8_div_by_f24p8( (Fixed24p8){data}, den );
 	}
 	
-	//inline fixed24p8 operator * ( u32 den ) const
+	//inline Fixed24p8 operator * ( u32 den ) const
 	//{
 	//	return {data * den};
 	//}
-	inline fixed24p8 operator / ( u16 den ) const
+	inline Fixed24p8 operator / ( u16 den ) const
 	{
-		return f24p8_div_by_u16( (fixed24p8){data}, den );
+		return f24p8_div_by_u16( (Fixed24p8){data}, den );
 	}
 	
 	
-	inline fixed24p8& operator = ( const fixed24p8& to_copy );
-	//inline fixed24p8& operator = ( s32 to_copy );
+	inline Fixed24p8& operator = ( const Fixed24p8& to_copy );
+	//inline Fixed24p8& operator = ( s32 to_copy );
 	
-	inline fixed24p8& operator += ( const fixed24p8& to_add );
-	inline fixed24p8& operator -= ( const fixed24p8& to_sub );
-	inline fixed24p8& operator *= ( const fixed24p8& to_mul )
+	inline Fixed24p8& operator += ( const Fixed24p8& to_add );
+	inline Fixed24p8& operator -= ( const Fixed24p8& to_sub );
+	inline Fixed24p8& operator *= ( const Fixed24p8& to_mul )
 	{
 		*this = *this * to_mul;
 		return *this;
 	}
-	inline fixed24p8& operator /= ( const fixed8p8& den )
+	inline Fixed24p8& operator /= ( const Fixed8p8& den )
 	{
-		data = f24p8_div_by_f8p8( (fixed24p8){data}, den ).data;
+		data = f24p8_div_by_f8p8( (Fixed24p8){data}, den ).data;
 		return *this;
 	}
 	
@@ -131,9 +131,9 @@ public:		// functions
 	//{
 	//	data *= den;
 	//}
-	inline fixed24p8& operator /= ( u16 den )
+	inline Fixed24p8& operator /= ( u16 den )
 	{
-		data = f24p8_div_by_u16( (fixed24p8){data}, den ).data;
+		data = f24p8_div_by_u16( (Fixed24p8){data}, den ).data;
 		return *this;
 	}
 	
@@ -141,29 +141,29 @@ public:		// functions
 	
 	
 	// Comparison operator overloads
-	inline bool operator == ( const fixed24p8& to_cmp ) const;
-	inline bool operator != ( const fixed24p8& to_cmp ) const;
-	inline bool operator < ( const fixed24p8& to_cmp ) const;
-	inline bool operator > ( const fixed24p8& to_cmp ) const;
-	inline bool operator <= ( const fixed24p8& to_cmp ) const;
-	inline bool operator >= ( const fixed24p8& to_cmp ) const;
+	inline bool operator == ( const Fixed24p8& to_cmp ) const;
+	inline bool operator != ( const Fixed24p8& to_cmp ) const;
+	inline bool operator < ( const Fixed24p8& to_cmp ) const;
+	inline bool operator > ( const Fixed24p8& to_cmp ) const;
+	inline bool operator <= ( const Fixed24p8& to_cmp ) const;
+	inline bool operator >= ( const Fixed24p8& to_cmp ) const;
 	
 	
 } __attribute__((_ALIGN4));
 
 
 template<>
-inline fixed24p8 custom_abs( const fixed24p8& val )
+inline Fixed24p8 custom_abs( const Fixed24p8& val )
 {
-	return (fixed24p8){custom_abs<s32>(val.data)};
+	return (Fixed24p8){custom_abs<s32>(val.data)};
 }
 
-inline s32 fixed24p8::round_to_int() const
+inline s32 Fixed24p8::round_to_int() const
 {
 	return (s32)( ( data + ( 1 << ( get_shift() - 1 ) ) ) >> get_shift() );
 }
 
-inline s32 fixed24p8::floor_to_int() const
+inline s32 Fixed24p8::floor_to_int() const
 {
 	//if ( data < 0 )
 	//{
@@ -184,7 +184,7 @@ inline s32 fixed24p8::floor_to_int() const
 	//return ret;
 }
 
-//inline s32 fixed24p8::true_round_via_floor() const
+//inline s32 Fixed24p8::true_round_via_floor() const
 //{
 //	if ( get_frac_bits() >= 0x80 )
 //	{
@@ -196,7 +196,7 @@ inline s32 fixed24p8::floor_to_int() const
 //	}
 //}
 //
-//inline s16 fixed24p8::true_round_via_floor_s16() const
+//inline s16 Fixed24p8::true_round_via_floor_s16() const
 //{
 //	if ( get_frac_bits() >= 0x80 )
 //	{
@@ -208,9 +208,9 @@ inline s32 fixed24p8::floor_to_int() const
 //	}
 //}
 
-inline fixed24p8 fixed24p8::with_zero_frac_bits() const
+inline Fixed24p8 Fixed24p8::with_zero_frac_bits() const
 {
-	fixed24p8 positive_n_value = custom_abs(*this);
+	Fixed24p8 positive_n_value = custom_abs(*this);
 	
 	positive_n_value.data >>= get_shift();
 	positive_n_value.data <<= get_shift();
@@ -218,12 +218,12 @@ inline fixed24p8 fixed24p8::with_zero_frac_bits() const
 	if ( data < 0 )
 	{
 		//n_value = -positive_n_value.data;
-		return (fixed24p8){-positive_n_value.data};
+		return (Fixed24p8){-positive_n_value.data};
 	}
 	return positive_n_value;
 }
 
-inline u32 fixed24p8::get_frac_bits() const
+inline u32 Fixed24p8::get_frac_bits() const
 {
 	//if ( data < 0 )
 	//{
@@ -240,33 +240,33 @@ inline u32 fixed24p8::get_frac_bits() const
 
 
 
-inline fixed24p8 fixed24p8::operator + ( const fixed24p8& to_add ) const
+inline Fixed24p8 Fixed24p8::operator + ( const Fixed24p8& to_add ) const
 {
 	return { (s32)(data + to_add.data) };
 }
-inline fixed24p8 fixed24p8::operator - ( const fixed24p8& to_sub ) const
+inline Fixed24p8 Fixed24p8::operator - ( const Fixed24p8& to_sub ) const
 {
 	return { (s32)(data - to_sub.data) };
 }
 
-inline fixed24p8& fixed24p8::operator = ( const fixed24p8& to_copy )
+inline Fixed24p8& Fixed24p8::operator = ( const Fixed24p8& to_copy )
 {
 	data = to_copy.data;
 	return *this;
 }
 
-//inline fixed24p8& fixed24p8::operator = ( s32 to_copy )
+//inline Fixed24p8& Fixed24p8::operator = ( s32 to_copy )
 //{
 //	data = to_copy;
 //	return *this;
 //}
 
-inline fixed24p8& fixed24p8::operator += ( const fixed24p8& to_add )
+inline Fixed24p8& Fixed24p8::operator += ( const Fixed24p8& to_add )
 {
 	data += to_add.data;
 	return *this;
 }
-inline fixed24p8& fixed24p8::operator -= ( const fixed24p8& to_sub )
+inline Fixed24p8& Fixed24p8::operator -= ( const Fixed24p8& to_sub )
 {
 	data -= to_sub.data;
 	return *this;
@@ -276,27 +276,27 @@ inline fixed24p8& fixed24p8::operator -= ( const fixed24p8& to_sub )
 
 
 
-inline bool fixed24p8::operator == ( const fixed24p8& to_cmp ) const
+inline bool Fixed24p8::operator == ( const Fixed24p8& to_cmp ) const
 {
 	return ( data == to_cmp.data );
 }
-inline bool fixed24p8::operator != ( const fixed24p8& to_cmp ) const
+inline bool Fixed24p8::operator != ( const Fixed24p8& to_cmp ) const
 {
 	return ( data != to_cmp.data );
 }
-inline bool fixed24p8::operator < ( const fixed24p8& to_cmp ) const
+inline bool Fixed24p8::operator < ( const Fixed24p8& to_cmp ) const
 {
 	return ( data < to_cmp.data );
 }
-inline bool fixed24p8::operator > ( const fixed24p8& to_cmp ) const
+inline bool Fixed24p8::operator > ( const Fixed24p8& to_cmp ) const
 {
 	return ( data > to_cmp.data );
 }
-inline bool fixed24p8::operator <= ( const fixed24p8& to_cmp ) const
+inline bool Fixed24p8::operator <= ( const Fixed24p8& to_cmp ) const
 {
 	return ( data <= to_cmp.data );
 }
-inline bool fixed24p8::operator >= ( const fixed24p8& to_cmp ) const
+inline bool Fixed24p8::operator >= ( const Fixed24p8& to_cmp ) const
 {
 	return ( data >= to_cmp.data );
 }
@@ -305,8 +305,8 @@ inline bool fixed24p8::operator >= ( const fixed24p8& to_cmp ) const
 
 
 
-// Underlying type is s16, with 8 fraction bits
-class fixed8p8
+// Underlying type Is s16, with 8 fraction bits
+class Fixed8p8
 {
 public:		// variables
 	static constexpr u32 shift = 8;
@@ -328,36 +328,36 @@ public:		// functions
 	inline s16 floor_to_int() const;
 	inline u32 get_frac_bits() const;
 	
-	inline operator fixed24p8() const;
+	inline operator Fixed24p8() const;
 	
 	
-	inline fixed8p8 operator + ( const fixed8p8& to_add ) const;
-	inline fixed8p8 operator - ( const fixed8p8& to_sub ) const;
+	inline Fixed8p8 operator + ( const Fixed8p8& to_add ) const;
+	inline Fixed8p8 operator - ( const Fixed8p8& to_sub ) const;
 	
 	
-	inline fixed8p8& operator = ( const fixed8p8& to_copy );
-	inline fixed8p8& operator += ( const fixed8p8& to_add );
-	inline fixed8p8& operator -= ( const fixed8p8& to_sub );
+	inline Fixed8p8& operator = ( const Fixed8p8& to_copy );
+	inline Fixed8p8& operator += ( const Fixed8p8& to_add );
+	inline Fixed8p8& operator -= ( const Fixed8p8& to_sub );
 	
 	
 	// Comparison operator overloads
-	inline bool operator == ( const fixed8p8& to_cmp ) const;
-	inline bool operator != ( const fixed8p8& to_cmp ) const;
-	inline bool operator < ( const fixed8p8& to_cmp ) const;
-	inline bool operator > ( const fixed8p8& to_cmp ) const;
-	inline bool operator <= ( const fixed8p8& to_cmp ) const;
-	inline bool operator >= ( const fixed8p8& to_cmp ) const;
+	inline bool operator == ( const Fixed8p8& to_cmp ) const;
+	inline bool operator != ( const Fixed8p8& to_cmp ) const;
+	inline bool operator < ( const Fixed8p8& to_cmp ) const;
+	inline bool operator > ( const Fixed8p8& to_cmp ) const;
+	inline bool operator <= ( const Fixed8p8& to_cmp ) const;
+	inline bool operator >= ( const Fixed8p8& to_cmp ) const;
 	
 	
 } __attribute__((_ALIGN4));
 
 
-inline s16 fixed8p8::round_to_int() const
+inline s16 Fixed8p8::round_to_int() const
 {
 	return (s16)( ( data + ( 1 << ( shift - 1 ) ) ) >> shift );
 }
 
-inline s16 fixed8p8::floor_to_int() const
+inline s16 Fixed8p8::floor_to_int() const
 {
 	//if ( data < 0 )
 	//{
@@ -379,7 +379,7 @@ inline s16 fixed8p8::floor_to_int() const
 	//return ret;
 }
 
-inline u32 fixed8p8::get_frac_bits() const
+inline u32 Fixed8p8::get_frac_bits() const
 {
 	//if ( data < 0 )
 	//{
@@ -397,61 +397,61 @@ inline u32 fixed8p8::get_frac_bits() const
 
 
 
-inline fixed8p8 fixed8p8::operator + ( const fixed8p8& to_add ) const
+inline Fixed8p8 Fixed8p8::operator + ( const Fixed8p8& to_add ) const
 {
 	return { (s16)(data + to_add.data) };
 }
-inline fixed8p8 fixed8p8::operator - ( const fixed8p8& to_sub ) const
+inline Fixed8p8 Fixed8p8::operator - ( const Fixed8p8& to_sub ) const
 {
 	return { (s16)(data - to_sub.data) };
 }
 
-inline fixed24p8 fixed24p8::guaranteed_f24p8_by_f8p8_multiplication
-	( const fixed8p8& to_mul ) const
+inline Fixed24p8 Fixed24p8::guaranteed_f24p8_by_f8p8_multiplication
+	( const Fixed8p8& to_mul ) const
 {
-	return ( (*this) * static_cast<fixed24p8>(to_mul) );
+	return ( (*this) * static_cast<Fixed24p8>(to_mul) );
 }
 
 
 
-inline fixed8p8& fixed8p8::operator = ( const fixed8p8& to_copy )
+inline Fixed8p8& Fixed8p8::operator = ( const Fixed8p8& to_copy )
 {
 	data = to_copy.data;
 	return *this;
 }
-inline fixed8p8& fixed8p8::operator += ( const fixed8p8& to_add )
+inline Fixed8p8& Fixed8p8::operator += ( const Fixed8p8& to_add )
 {
 	data += to_add.data;
 	return *this;
 }
-inline fixed8p8& fixed8p8::operator -= ( const fixed8p8& to_sub )
+inline Fixed8p8& Fixed8p8::operator -= ( const Fixed8p8& to_sub )
 {
 	data -= to_sub.data;
 	return *this;
 }
 
 // Comparison operator overloads
-inline bool fixed8p8::operator == ( const fixed8p8& to_cmp ) const
+inline bool Fixed8p8::operator == ( const Fixed8p8& to_cmp ) const
 {
 	return ( data == to_cmp.data );
 }
-inline bool fixed8p8::operator != ( const fixed8p8& to_cmp ) const
+inline bool Fixed8p8::operator != ( const Fixed8p8& to_cmp ) const
 {
 	return ( data != to_cmp.data );
 }
-inline bool fixed8p8::operator < ( const fixed8p8& to_cmp ) const
+inline bool Fixed8p8::operator < ( const Fixed8p8& to_cmp ) const
 {
 	return ( data < to_cmp.data );
 }
-inline bool fixed8p8::operator > ( const fixed8p8& to_cmp ) const
+inline bool Fixed8p8::operator > ( const Fixed8p8& to_cmp ) const
 {
 	return ( data > to_cmp.data );
 }
-inline bool fixed8p8::operator <= ( const fixed8p8& to_cmp ) const
+inline bool Fixed8p8::operator <= ( const Fixed8p8& to_cmp ) const
 {
 	return ( data <= to_cmp.data );
 }
-inline bool fixed8p8::operator >= ( const fixed8p8& to_cmp ) const
+inline bool Fixed8p8::operator >= ( const Fixed8p8& to_cmp ) const
 {
 	return ( data >= to_cmp.data );
 }
@@ -459,7 +459,7 @@ inline bool fixed8p8::operator >= ( const fixed8p8& to_cmp ) const
 
 
 
-inline fixed24p8::operator fixed8p8() const
+inline Fixed24p8::operator Fixed8p8() const
 {
 	if ( data < 0 )
 	{
@@ -474,7 +474,7 @@ inline fixed24p8::operator fixed8p8() const
 }
 
 
-inline fixed8p8::operator fixed24p8() const
+inline Fixed8p8::operator Fixed24p8() const
 {
 	return { (s32)data };
 }
@@ -485,33 +485,33 @@ inline fixed8p8::operator fixed24p8() const
 
 //// Fixed point multiplication, with accuracy loss.  Don't do too many of
 //// these in a row because errors multiply.
-//inline fixed24p8 operator * ( const fixed8p8& a, const fixed8p8& b )
+//inline Fixed24p8 operator * ( const Fixed8p8& a, const Fixed8p8& b )
 //{
-//	fixed24p8 ret;
+//	Fixed24p8 ret;
 //	
 //	ret.data = a.data * b.data;
-//	ret.data >>= fixed24p8::get_shift();
+//	ret.data >>= Fixed24p8::get_shift();
 //	
 //	return ret;
 //}
 
 
 
-inline fixed24p8 operator + ( const fixed8p8& a, const fixed24p8& b )
+inline Fixed24p8 operator + ( const Fixed8p8& a, const Fixed24p8& b )
 {
-	return ( ((fixed24p8)a) + b );
+	return ( ((Fixed24p8)a) + b );
 }
 
-inline fixed24p8 operator - ( const fixed8p8& a, const fixed24p8& b )
+inline Fixed24p8 operator - ( const Fixed8p8& a, const Fixed24p8& b )
 {
-	return ( ((fixed24p8)a) - b );
+	return ( ((Fixed24p8)a) - b );
 }
 
 
-//inline fixed24p8& fixed24p8::operator *= ( const fixed8p8& to_mul )
+//inline Fixed24p8& Fixed24p8::operator *= ( const Fixed8p8& to_mul )
 //{
 //	data *= to_mul.data;
-//	data >>= fixed24p8::get_shift();
+//	data >>= Fixed24p8::get_shift();
 //	return *this;
 //}
 
@@ -519,12 +519,12 @@ inline fixed24p8 operator - ( const fixed8p8& a, const fixed24p8& b )
 
 //// Fixed point multiplication, with accuracy loss.  Don't do too many of
 //// these in a row because errors multiply.
-//inline fixed24p8 fixed24p8::operator * ( const fixed8p8& to_mul ) const
+//inline Fixed24p8 Fixed24p8::operator * ( const Fixed8p8& to_mul ) const
 //{
-//	fixed24p8 ret;
+//	Fixed24p8 ret;
 //	
 //	ret.data = data * to_mul.data;
-//	ret.data >>= fixed24p8::get_shift();
+//	ret.data >>= Fixed24p8::get_shift();
 //	
 //	return ret;
 //}
@@ -534,34 +534,34 @@ inline fixed24p8 operator - ( const fixed8p8& a, const fixed24p8& b )
 
 
 
-inline fixed24p8 operator - ( const fixed24p8& a )
+inline Fixed24p8 operator - ( const Fixed24p8& a )
 {
-	return ( (fixed24p8){ -a.data } );
+	return ( (Fixed24p8){ -a.data } );
 }
 
-inline fixed8p8 operator - ( const fixed8p8& a )
+inline Fixed8p8 operator - ( const Fixed8p8& a )
 {
-	//return ( (fixed8p8){ -(s16)(a.data) } );
+	//return ( (Fixed8p8){ -(s16)(a.data) } );
 	s16 ret_data = -a.data;
 	
-	return (fixed8p8){ret_data};
+	return (Fixed8p8){ret_data};
 }
 
-//fixed24p8 make_f24p8( s32 whole_part, u8 frac_part=0 ) 
+//Fixed24p8 make_f24p8( s32 whole_part, u8 frac_part=0 ) 
 //	__attribute__((_IWRAM_CODE));
 //
 //
-//fixed8p8 make_f8p8( s8 whole_part, u8 frac_part=0 ) 
+//Fixed8p8 make_f8p8( s8 whole_part, u8 frac_part=0 ) 
 //	__attribute__((_IWRAM_CODE));
 
 
 
 
 template< typename underlying_type, u32 shift >
-class fixedpt_num_packed
+class FixedptNumPacked
 {
 public:		// typedefs
-	typedef fixedpt_num_packed< underlying_type, shift > 
+	typedef FixedptNumPacked< underlying_type, shift > 
 		specific_fixedpt_type;
 	
 public:		// variables
@@ -637,28 +637,28 @@ public:		// functions
 	
 	
 	// Comparison operator overloads
-	#define list_of_comparison_operators(macro) \
+	#define LIST_OF_COMPARISON_OPERATORS(macro) \
 		macro(==) macro(!=) macro(<) macro(>) macro(<=) macro(>=)
 	
-	#define generate_comparison_operator_overload(specific_operator) \
+	#define GENERATE_COMPARISON_OPERATOR_OVERLOAD(specific_operator) \
 	inline bool operator specific_operator \
 		( const specific_fixedpt_type& to_cmp ) const \
 	{ \
 		return ( data specific_operator to_cmp.data ); \
 	};
 	
-	list_of_comparison_operators(generate_comparison_operator_overload)
+	LIST_OF_COMPARISON_OPERATORS(GENERATE_COMPARISON_OPERATOR_OVERLOAD)
 	
-	#undef list_of_comparison_operators
-	#undef generate_comparison_operator_overload
+	#undef LIST_OF_COMPARISON_OPERATORS
+	#undef GENERATE_COMPARISON_OPERATOR_OVERLOAD
 	
 	
 	
 } __attribute__((_PACKED));
 
-typedef fixedpt_num_packed< u16, 4 > fixedu12p4_packed;
-typedef fixedpt_num_packed< s16, 4 > fixeds12p4_packed;
-typedef fixedpt_num_packed< s16, 8 > fixeds8p8_packed;
+typedef FixedptNumPacked< u16, 4 > fixedu12p4_packed;
+typedef FixedptNumPacked< s16, 4 > fixeds12p4_packed;
+typedef FixedptNumPacked< s16, 8 > fixeds8p8_packed;
 
 
 
@@ -713,13 +713,13 @@ inline specific_fixedpt_type make_unsigned_fixedpt_num( u32 whole_part,
 }
 
 
-inline fixed24p8 make_f24p8( s32 whole_part, u32 frac_part=0 )
+inline Fixed24p8 make_f24p8( s32 whole_part, u32 frac_part=0 )
 {
-	return make_signed_fixedpt_num<fixed24p8>( whole_part, frac_part );
+	return make_signed_fixedpt_num<Fixed24p8>( whole_part, frac_part );
 }
-inline fixed8p8 make_f8p8( s32 whole_part, u32 frac_part=0 )
+inline Fixed8p8 make_f8p8( s32 whole_part, u32 frac_part=0 )
 {
-	return make_signed_fixedpt_num<fixed8p8>( whole_part, frac_part );
+	return make_signed_fixedpt_num<Fixed8p8>( whole_part, frac_part );
 }
 
 inline fixedu12p4_packed make_fu12p4_packed( u32 whole_part, 

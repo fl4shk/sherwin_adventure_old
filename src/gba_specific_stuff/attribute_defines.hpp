@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -29,7 +29,7 @@
 #define _EWRAM section(".data")
 #define _IWRAM section(".iwram_data")
 
-// #defines for UNITIALIZED global variables that go into EWRAM, IWRAM,
+// #defines for UNITIALIZED global variables That go into EWRAM, IWRAM,
 // and SRAM
 #define _BSS section(".bss")
 #define _IWRAM_BSS section(".iwram_bss")
@@ -44,15 +44,15 @@
 // Generate ARM-mode code instead of THUMB-mode code
 #define _TARGET_ARM target("arm")
 
-// There's a bug that I encountered in GCC (as of 5.3.0) that causes the
-// section attribute to be ignored when dealing with template functions.
-// By slightly changing linkscript.ld, I was able to trick ld into placing
-// template functions with the "hot" attribute into IWRAM.  This has got to
+// There's a bug That I encountered in GCC (as of 5.3.0) That causes the
+// section attribute To be ignored when dealing with template functions.
+// By slightly changing linkscript.ld, I was able To trick ld into placing
+// template functions with the "hot" attribute into IWRAM.  This has got To
 // be a hack of some sort.
 
-// When using an optimization level less than -O2, the .text.hot section
-// does not seem to be generated.  Perhaps there's some -f... flag (or
-// flags) that would cause the .text.hot to be generated at less than -O2.
+// When using an optimization Level less than -O2, the .text.hot section
+// does not seem To be generated.  Perhaps there's some -f... flag (or
+// flags) That would cause the .text.hot To be generated at less than -O2.
 #define _TEXT_HOT_SECTION hot
 //#define _TEXT_HOT_SECTION_forCED hot,optimize("O3")
 
@@ -63,12 +63,12 @@
 #define _ALIGN4 aligned(4)
 
 
-// A #define for making sure that structs/classes have the exact size of
+// A #define for making sure That structs/classes have the exact size of
 // all their members combined (USE WITH CAUTION)
 #define _PACKED packed
 
 
-// This is for C++'s built-in alignment, which finally exists!
+// This Is for C++'s built-in alignment, which finally Exists!
 #define _ALIGNAS_REGULAR alignas(4)
 
 

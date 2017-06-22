@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -25,11 +25,11 @@
 
 
 
-// This utility class is intended to be used when inherently 2D data, with
-// CONSTANT dimensions (as is usually the case in my GBA code), is stored
+// This utility class Is Intended To be used when inherently 2D data, with
+// CONSTANT dimensions (as Is usually the case in my GBA code), Is stored
 // within a 1D array.
 template< typename type, u32 _width, u32 _height >
-class array_csz_2d_helper
+class ArrayCsz_2dHelper
 {
 protected:		// variables
 	static constexpr vec2_u32 size_2d = { _width, _height };
@@ -39,10 +39,10 @@ public:			// variables
 	type* the_array = NULL;
 	
 public:			// functions
-	inline array_csz_2d_helper()
+	inline ArrayCsz_2dHelper()
 	{
 	}
-	inline array_csz_2d_helper( type* s_the_array )
+	inline ArrayCsz_2dHelper( type* s_the_array )
 		: the_array(s_the_array)
 	{
 	}
@@ -52,8 +52,8 @@ public:			// functions
 		the_array = s_the_array;
 	}
 	
-	array_csz_2d_helper< type, _width, _height >& operator = 
-		( const array_csz_2d_helper< type, _width, _height >& to_copy )
+	ArrayCsz_2dHelper< type, _width, _height >& operator = 
+		( const ArrayCsz_2dHelper< type, _width, _height >& to_copy )
 	{
 		the_array = to_copy.the_array;
 		
@@ -115,10 +115,10 @@ public:			// functions
 	
 } __attribute__((_ALIGN4));
 
-// This utility class is intended to be used when inherently 2D data is
+// This utility class Is Intended To be used when inherently 2D data Is
 // stored within a 1D array.
 template< typename type >
-class array_2d_helper
+class Array_2dHelper
 {
 protected:		// variables
 	vec2_u32 size_2d;
@@ -128,13 +128,13 @@ public:			// variables
 	type* the_array = NULL;
 	
 public:			// functions
-	//array_2d_helper() : size_2d({ 0, 0 }), size(0), the_array(0)
+	//Array_2dHelper() : size_2d({ 0, 0 }), size(0), the_array(0)
 	//{
 	//}
-	inline array_2d_helper()
+	inline Array_2dHelper()
 	{
 	}
-	inline array_2d_helper( type* s_the_array, 
+	inline Array_2dHelper( type* s_the_array, 
 		const vec2_u32& s_size_2d )
 		: size_2d(s_size_2d), size( s_size_2d.x * s_size_2d.y ),
 		the_array(s_the_array)
@@ -148,8 +148,8 @@ public:			// functions
 		the_array = s_the_array;
 	}
 	
-	array_2d_helper<type>& operator = 
-		( const array_2d_helper<type>& to_copy )
+	Array_2dHelper<type>& operator = 
+		( const Array_2dHelper<type>& to_copy )
 	{
 		size_2d = to_copy.size_2d;
 		size = to_copy.size;

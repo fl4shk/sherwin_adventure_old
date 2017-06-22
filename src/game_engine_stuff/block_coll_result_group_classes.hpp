@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -29,53 +29,53 @@
 
 //#include "coll_point_group_classes.hpp"
 
-class horiz_coll_lseg;
-class vert_coll_lseg;
+class HorizCollLseg;
+class VertCollLseg;
 
-class block_coll_result
+class BlockCollResult
 {
 public:		// variables
 	//vec2_s32 coord;
 	//block_type type;
-	block* the_block __attribute__((_ALIGN4));
+	Block* the_block __attribute__((_ALIGN4));
 	//block_behavior_type the_bbvt __attribute__((_ALIGN4));
 	u32 the_bbvt __attribute__((_ALIGN4));
 	
 public:		// functions
-	inline block_coll_result()
+	inline BlockCollResult()
 	{
-		the_block = &active_level::blank_block;
+		the_block = &ActiveLevel::blank_block;
 		the_bbvt = bbvt_air;
 	}
-	//inline block_coll_result()
+	//inline BlockCollResult()
 	//{
 	//	memset( this, 0, sizeof(*this) );
 	//}
-	inline block_coll_result( const vec2_s32& s_blk_coord )
+	inline BlockCollResult( const vec2_s32& s_blk_coord )
 	{
 		init(s_blk_coord);
 	}
-	inline block_coll_result( const vec2_f24p8& s_coord_f24p8 )
+	inline BlockCollResult( const vec2_f24p8& s_coord_f24p8 )
 	{
 		init(s_coord_f24p8);
 	}
-	inline block_coll_result( const block_coll_result& to_copy )
+	inline BlockCollResult( const BlockCollResult& to_copy )
 	{
 		*this = to_copy;
 	}
 	
 	inline void init( const vec2_s32& s_blk_coord )
 	{
-		the_block = &active_level::the_block_at_coord(s_blk_coord);
+		the_block = &ActiveLevel::the_block_at_coord(s_blk_coord);
 		the_bbvt = get_behavior_type_of_block_type(get_block_type());
 	}
 	inline void init( const vec2_f24p8& s_coord_f24p8 )
 	{
-		init(active_level::get_block_coord_of_point(s_coord_f24p8));
+		init(ActiveLevel::get_block_coord_of_point(s_coord_f24p8));
 	}
 	
-	//inline block_coll_result& operator = 
-	//	( const block_coll_result& to_copy )
+	//inline BlockCollResult& operator = 
+	//	( const BlockCollResult& to_copy )
 	//{
 	//	coord = to_copy.coord;
 	//	the_block = to_copy.the_block;
@@ -97,25 +97,25 @@ public:		// functions
 
 
 
-class sprite;
+class Sprite;
 
-//class bcr_ptr_line;
+//class BcrPtrLine;
 
 
-class block_coll_result_rect_group
+class BlockCollResultRectGroup
 {
 public:		// constants
-	// The maximum number of blocks intersected by a sprite, per dimension.
-	// The value of ( 3, 3 ) corresponds to a 32x32 sprite.  Definitely
-	// change these two values (among other things) if there is every any
+	// The maximum number of blocks intersected by a Sprite, per dimension.
+	// The value of ( 3, 3 ) corresponds To a 32x32 Sprite.  Definitely
+	// change these two values (among other things) if there Is every any
 	// infrastructure for sprites larger than 32x32 pixels.
-	//const vec2_u32 block_coll_result_rect_group::shared_max_size_2d( 3, 3 );
+	//const vec2_u32 BlockCollResultRectGroup::shared_max_size_2d( 3, 3 );
 	static constexpr vec2_u32 max_size_2d = vec2_u32( 3, 3 );
 	//static constexpr vec2_u32 max_size_2d = vec2_u32( 80, 80 );
 	static constexpr u32 max_size = max_size_2d.x * max_size_2d.y;
 	
 protected:		// variables
-	block_coll_result bcr_arr_csz_2d_helper_data[max_size];
+	BlockCollResult bcr_arr_csz_2d_helper_data[max_size];
 	
 	vec2_s32 start_pos;
 	
@@ -126,44 +126,44 @@ protected:		// variables
 	static u32 temp_debug_thing;
 	
 public:		// variables
-	//array_2d_helper<block_coll_result> bcr_arr_csz_2d_helper;
-	array_csz_2d_helper< block_coll_result, max_size_2d.x, max_size_2d.y >
+	//Array_2dHelper<BlockCollResult> bcr_arr_csz_2d_helper;
+	ArrayCsz_2dHelper< BlockCollResult, max_size_2d.x, max_size_2d.y >
 		bcr_arr_csz_2d_helper;
 	
 	
 public:		// functions
-	block_coll_result_rect_group();
-	block_coll_result_rect_group( const coll_box& the_coll_box, 
+	BlockCollResultRectGroup();
+	BlockCollResultRectGroup( const CollBox& the_coll_box, 
 		u32 s_moving_left, u32 s_moving_right );
-	block_coll_result_rect_group
-		( const block_coll_result_rect_group& to_copy );
+	BlockCollResultRectGroup
+		( const BlockCollResultRectGroup& to_copy );
 	
-	block_coll_result_rect_group& operator = 
-		( const block_coll_result_rect_group& to_copy );
+	BlockCollResultRectGroup& operator = 
+		( const BlockCollResultRectGroup& to_copy );
 	
 	
-	inline block_coll_result& operator () ( u32 local_x, u32 local_y )
+	inline BlockCollResult& operator () ( u32 local_x, u32 local_y )
 	{
 		return at( local_x, local_y );
 	}
-	inline block_coll_result& operator () ( const vec2_u32& local_coord )
+	inline BlockCollResult& operator () ( const vec2_u32& local_coord )
 	{
 		return at(local_coord);
 	}
-	inline block_coll_result& operator () ( const vec2_s32& local_coord )
+	inline BlockCollResult& operator () ( const vec2_s32& local_coord )
 	{
 		return at(local_coord);
 	}
 	
-	inline block_coll_result& at( u32 local_x, u32 local_y )
+	inline BlockCollResult& at( u32 local_x, u32 local_y )
 	{
 		return bcr_arr_csz_2d_helper.at( local_x, local_y );
 	}
-	inline block_coll_result& at( const vec2_u32& local_coord )
+	inline BlockCollResult& at( const vec2_u32& local_coord )
 	{
 		return bcr_arr_csz_2d_helper.at(local_coord);
 	}
-	inline block_coll_result& at( const vec2_s32& local_coord )
+	inline BlockCollResult& at( const vec2_s32& local_coord )
 	{
 		return bcr_arr_csz_2d_helper.at(local_coord);
 	}
@@ -291,16 +291,16 @@ public:		// functions
 	
 	
 	//void get_corner_stuff_old
-	//	( array_helper<block_coll_result*>& bcr_ptr_arr_helper, 
-	//	array_helper<u32>& bool_as_u32_arr_helper )
+	//	( ArrayHelper<BlockCollResult*>& bcr_ptr_arr_helper, 
+	//	ArrayHelper<u32>& bool_as_u32_arr_helper )
 	//	__attribute__((_TARGET_ARM));
 	//
-	//void get_coll_box_related_stuff_old( const sprite& the_sprite,
-	//	array_helper<block_coll_result*>& bcr_ptr_arr_helper )
+	//void get_coll_box_related_stuff_old( const Sprite& the_sprite,
+	//	ArrayHelper<BlockCollResult*>& bcr_ptr_arr_helper )
 	//	__attribute__((_TARGET_ARM));
 	//
 	//void get_side_blocked_stuff_old
-	//	( array_helper<u32>& bool_as_u32_arr_helper )
+	//	( ArrayHelper<u32>& bool_as_u32_arr_helper )
 	//	__attribute__((_TARGET_ARM));
 	
 protected:		// functions
@@ -314,102 +314,102 @@ protected:		// functions
 	
 } __attribute__((_ALIGN4));
 
-class bcr_lseg_group
+class BcrLsegGroup
 {
 public:		// constants
-	// This size is arbitrary, but intended to be large enough to work with
+	// This size Is arbitrary, but Intended To be large enough To work with
 	static constexpr size_t max_size = 3;
 	
 public:		// variables
-	block_coll_result bcr_arr[max_size];
+	BlockCollResult bcr_arr[max_size];
 	
 protected:		// variables
-	// The real size of the row or column of pointers to
-	// block_coll_result's
+	// The real size of the row or column of pointers To
+	// BlockCollResult's
 	s32 real_size = max_size;
 	
-	// The (block coordinates) position of the left or top that was passed
-	// to the bcr_lseg_group
+	// The (Block coordinates) position of the left or top That was passed
+	// To the BcrLsegGroup
 	vec2_s32 start_pos = vec2_s32( 0, 0 );
 	
-	// Whether this bcr_lseg_group represents a column (false) or a row
+	// Whether this BcrLsegGroup represents a column (false) or a row
 	// (true)
 	u32 is_horiz = false;
 	
 public:		// functions
-	inline bcr_lseg_group()
+	inline BcrLsegGroup()
 	{
 	}
-	inline bcr_lseg_group( const horiz_coll_lseg& the_coll_lseg )
-	{
-		init(the_coll_lseg);
-	}
-	inline bcr_lseg_group( const vert_coll_lseg& the_coll_lseg )
+	inline BcrLsegGroup( const HorizCollLseg& the_coll_lseg )
 	{
 		init(the_coll_lseg);
 	}
+	inline BcrLsegGroup( const VertCollLseg& the_coll_lseg )
+	{
+		init(the_coll_lseg);
+	}
 	
-	void init( const horiz_coll_lseg& the_coll_lseg );
+	void init( const HorizCollLseg& the_coll_lseg );
 		//__attribute__((_IWRAM_CODE));
-	void init( const vert_coll_lseg& the_coll_lseg )
+	void init( const VertCollLseg& the_coll_lseg )
 		__attribute__((_IWRAM_CODE));
 	
-	block_coll_result* horiz_any_bbvt_is_fully_solid( vec2_s32& pos );
+	BlockCollResult* horiz_any_bbvt_is_fully_solid( vec2_s32& pos );
 		//__attribute__((_IWRAM_CODE));
-	block_coll_result* vert_any_bbvt_is_fully_solid( vec2_s32& pos )
+	BlockCollResult* vert_any_bbvt_is_fully_solid( vec2_s32& pos )
 		__attribute__((_IWRAM_CODE));
-	block_coll_result* vert_any_bbvt_is_slope( vec2_s32& pos )
+	BlockCollResult* vert_any_bbvt_is_slope( vec2_s32& pos )
 		__attribute__((_IWRAM_CODE));
 	
-	inline block_coll_result& operator () ( u32 index )
+	inline BlockCollResult& operator () ( u32 index )
 	{
 		return at(index);
 	}
-	inline const block_coll_result& operator () ( u32 index ) const
+	inline const BlockCollResult& operator () ( u32 index ) const
 	{
 		return at(index);
 	}
 	
-	inline block_coll_result& at( u32 index )
+	inline BlockCollResult& at( u32 index )
 	{
 		return bcr_arr[index];
 	}
-	inline const block_coll_result& at( u32 index ) const
+	inline const BlockCollResult& at( u32 index ) const
 	{
 		return bcr_arr[index];
 	}
 	
-	inline block_coll_result& horiz_left()
+	inline BlockCollResult& horiz_left()
 	{
 		return at(0);
 	}
-	inline block_coll_result& horiz_right()
+	inline BlockCollResult& horiz_right()
 	{
 		return at(get_end_pos_offset());
 	}
-	inline block_coll_result& vert_top()
+	inline BlockCollResult& vert_top()
 	{
 		return at(0);
 	}
-	inline block_coll_result& vert_bot()
+	inline BlockCollResult& vert_bot()
 	{
 		return at(get_end_pos_offset());
 	}
 	
 	
-	inline const block_coll_result& horiz_left() const
+	inline const BlockCollResult& horiz_left() const
 	{
 		return at(0);
 	}
-	inline const block_coll_result& horiz_right() const
+	inline const BlockCollResult& horiz_right() const
 	{
 		return at(get_end_pos_offset());
 	}
-	inline const block_coll_result& vert_top() const
+	inline const BlockCollResult& vert_top() const
 	{
 		return at(0);
 	}
-	inline const block_coll_result& vert_bot() const
+	inline const BlockCollResult& vert_bot() const
 	{
 		return at(get_end_pos_offset());
 	}

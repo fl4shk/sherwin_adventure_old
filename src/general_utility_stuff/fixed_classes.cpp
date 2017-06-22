@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -18,12 +18,12 @@
 #include "fixed_classes.hpp"
 #include "../gba_specific_stuff/lut_division_funcs.hpp"
 
-fixed24p8 fixed24p8::operator * ( const fixed24p8& to_mul ) const
+Fixed24p8 Fixed24p8::operator * ( const Fixed24p8& to_mul ) const
 {
-	fixed24p8 ret;
+	Fixed24p8 ret;
 	
 	s64 ret_data_s64 = (s64)data * (s64)to_mul.data;
-	ret_data_s64 >>= fixed24p8::get_shift();
+	ret_data_s64 >>= Fixed24p8::get_shift();
 	
 	ret.data = (s32)ret_data_s64;
 	
@@ -32,8 +32,8 @@ fixed24p8 fixed24p8::operator * ( const fixed24p8& to_mul ) const
 }
 
 
-inline fixed24p8 unsafe_f24p8_div_by_f8p8( const fixed24p8& num, 
-	const fixed8p8& den )
+inline Fixed24p8 unsafe_f24p8_div_by_f8p8( const Fixed24p8& num, 
+	const Fixed8p8& den )
 {
 	const s64 temp = static_cast<s64>(num.data);
 	const s32 one_slash_den = sdiv_table[den.data];
@@ -47,7 +47,7 @@ inline fixed24p8 unsafe_f24p8_div_by_f8p8( const fixed24p8& num,
 }
 
 
-fixed24p8 f24p8_div_by_f8p8( const fixed24p8& num, const fixed8p8& den )
+Fixed24p8 f24p8_div_by_f8p8( const Fixed24p8& num, const Fixed8p8& den )
 {
 	if ( den.data == 0 || den.data == 1 )
 	{
@@ -57,7 +57,7 @@ fixed24p8 f24p8_div_by_f8p8( const fixed24p8& num, const fixed8p8& den )
 	return unsafe_f24p8_div_by_f8p8( num, den );
 }
 
-fixed24p8 f24p8_div_by_f24p8( const fixed24p8& num, const fixed24p8& den )
+Fixed24p8 f24p8_div_by_f24p8( const Fixed24p8& num, const Fixed24p8& den )
 {
 	if ( den.data == 0 || den.data == 1 )
 	{
@@ -76,7 +76,7 @@ fixed24p8 f24p8_div_by_f24p8( const fixed24p8& num, const fixed24p8& den )
 	return unsafe_f24p8_div_by_f8p8( num, den );
 }
 
-fixed24p8 f24p8_div_by_u16( const fixed24p8& num, u16 den )
+Fixed24p8 f24p8_div_by_u16( const Fixed24p8& num, u16 den )
 {
 	if ( den == 0 || den == 1 )
 	{

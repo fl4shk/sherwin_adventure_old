@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -22,17 +22,17 @@
 // Thursday, July 23, 2015 (9:35 PM EST) Note: I will use a top middle coll
 // point and a bottom middle coll point, starting tomorrow.  
 
-// The top middle coll point will be used for checking the type of block
-// that has been hit by a sprite that has jumped.  
+// The top middle coll point will be used for checking the type of Block
+// That has been hit by a Sprite That has jumped.  
 
 // The bottom middle coll point will be used
-// as the primary thing for checking if a sprite is on the ground.
+// as the primary thing for checking if a Sprite Is on the ground.
 
 
-// Friday, October 23, 2015 (12:10 PM CST) Lol, I forgot that the first
+// Friday, October 23, 2015 (12:10 PM CST) Lol, I forgot That the first
 // comment was there.
 
-#define generate_pt(name) \
+#define GENERATE_PT(name) \
 	vec2_f24p8 & pt_##name = get_pt_##name();
 #define X(name) \
 	pt_##name.x =
@@ -41,71 +41,71 @@
 
 
 void coll_point_group_base::assign_vert_side_x_positions
-	( const coll_box& the_coll_box, vec2_f24p8& pt_lt, vec2_f24p8& pt_lm, 
+	( const CollBox& the_coll_box, vec2_f24p8& pt_lt, vec2_f24p8& pt_lm, 
 	vec2_f24p8& pt_lb, vec2_f24p8& pt_rt, vec2_f24p8& pt_rm, 
 	vec2_f24p8& pt_rb )
 {
 	//pt_lt.x = pt_lm.x = pt_lb.x = the_coll_box.left();
 	
 	//pt_rt.x = pt_rm.x = pt_rb.x = the_coll_box.right();
-	list_of_shared_left_side_coll_point_names(X)
+	LIST_OF_SHARED_LEFT_SIDE_COLL_POINT_NAMES(X)
 		the_coll_box.left();
 	
-	list_of_shared_right_side_coll_point_names(X)
+	LIST_OF_SHARED_RIGHT_SIDE_COLL_POINT_NAMES(X)
 		the_coll_box.right();
 	
 	//list_of_shared_middle_vert_line_coll_point_names(X)
-	//	the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
+	//	the_coll_box.left() + (Fixed24p8){ the_coll_box.size.x.data / 2 };
 	
 }
 void coll_point_group_base::assign_horiz_side_y_positions
-	( const sprite& the_sprite, const coll_box& the_coll_box, 
+	( const Sprite& the_sprite, const CollBox& the_coll_box, 
 	vec2_f24p8& pt_tl, vec2_f24p8& pt_tm, vec2_f24p8& pt_tr, 
 	vec2_f24p8& pt_bl, vec2_f24p8& pt_bm, vec2_f24p8& pt_br )
 {
-	list_of_shared_top_side_coll_point_names(Y)
+	LIST_OF_SHARED_TOP_SIDE_COLL_POINT_NAMES(Y)
 		the_coll_box.top();
 	
-	// This is a special case that covers walking down a slope.  However,
+	// This Is a special case That covers walking down a slope.  However,
 	// it would be good if I could make this not needed.
 	if ( the_sprite.get_curr_on_ground() 
-		&& the_sprite.vel.y >= (fixed24p8){0} )
+		&& the_sprite.vel.y >= (Fixed24p8){0} )
 	{
-		list_of_shared_bot_side_coll_point_names(Y)
-			the_coll_box.bot() + sprite::cpg_on_slope_threshold_abs;
-			//the_coll_box.bot() + (fixed24p8){0x400};
-			//the_coll_box.bot() + (fixed24p8){0x200};
-			//the_coll_box.bot() + (fixed24p8){0x300};
+		LIST_OF_SHARED_BOT_SIDE_COLL_POINT_NAMES(Y)
+			the_coll_box.bot() + Sprite::cpg_on_slope_threshold_abs;
+			//the_coll_box.bot() + (Fixed24p8){0x400};
+			//the_coll_box.bot() + (Fixed24p8){0x200};
+			//the_coll_box.bot() + (Fixed24p8){0x300};
 	}
 	else //if (!the_sprite.get_curr_on_ground())
 	{
-		list_of_shared_bot_side_coll_point_names(Y)
+		LIST_OF_SHARED_BOT_SIDE_COLL_POINT_NAMES(Y)
 			the_coll_box.bot();
 	}
 }
 
 
 void coll_point_group_base::assign_vert_side_mid_y_positions
-	( const coll_box& the_coll_box, vec2_f24p8& pt_lm, vec2_f24p8& pt_rm )
+	( const CollBox& the_coll_box, vec2_f24p8& pt_lm, vec2_f24p8& pt_rm )
 {
-	list_of_shared_vert_side_ypos_mid_coll_point_names(Y)
-		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 2 };
+	LIST_OF_SHARED_VERT_SIDE_YPOS_MID_COLL_POINT_NAMES(Y)
+		the_coll_box.top() + (Fixed24p8){ the_coll_box.size.y.data / 2 };
 }
 void coll_point_group_base::assign_horiz_side_mid_x_positions
-	( const coll_box& the_coll_box, vec2_f24p8& pt_tm, vec2_f24p8& pt_bm )
+	( const CollBox& the_coll_box, vec2_f24p8& pt_tm, vec2_f24p8& pt_bm )
 {
-	list_of_shared_horiz_side_xpos_mid_coll_point_names(X)
-		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 2 };
+	LIST_OF_SHARED_HORIZ_SIDE_XPOS_MID_COLL_POINT_NAMES(X)
+		the_coll_box.left() + (Fixed24p8){ the_coll_box.size.x.data / 2 };
 }
 
 
 
-coll_point_group_16x16::coll_point_group_16x16( const sprite& the_sprite )
+coll_point_group_16x16::coll_point_group_16x16( const Sprite& the_sprite )
 {
-	const coll_box& the_coll_box = the_sprite.the_coll_box;
+	const CollBox& the_coll_box = the_sprite.the_coll_box;
 	
 	// The collision points
-	list_of_shared_coll_point_names(generate_pt)
+	LIST_OF_SHARED_COLL_POINT_NAMES(GENERATE_PT)
 	
 	
 	// Left and Right
@@ -127,40 +127,40 @@ coll_point_group_16x16::coll_point_group_16x16( const sprite& the_sprite )
 }
 
 void coll_point_group_16x16::assign_vert_side_top_y_positions
-	( const coll_box& the_coll_box, vec2_f24p8& pt_lt, vec2_f24p8& pt_rt )
+	( const CollBox& the_coll_box, vec2_f24p8& pt_lt, vec2_f24p8& pt_rt )
 {
-	list_of_shared_vert_side_ypos_top_coll_point_names(Y) 
-		the_coll_box.top() + (fixed24p8){ the_coll_box.size.y.data / 4 };
+	LIST_OF_SHARED_VERT_SIDE_YPOS_TOP_COLL_POINT_NAMES(Y) 
+		the_coll_box.top() + (Fixed24p8){ the_coll_box.size.y.data / 4 };
 }
 void coll_point_group_16x16::assign_vert_side_bot_y_positions
-	( const coll_box& the_coll_box, vec2_f24p8& pt_lb, vec2_f24p8& pt_rb )
+	( const CollBox& the_coll_box, vec2_f24p8& pt_lb, vec2_f24p8& pt_rb )
 {
-	list_of_shared_vert_side_ypos_bot_coll_point_names(Y) 
-		the_coll_box.bot() - (fixed24p8){ the_coll_box.size.y.data / 4 };
+	LIST_OF_SHARED_VERT_SIDE_YPOS_BOT_COLL_POINT_NAMES(Y) 
+		the_coll_box.bot() - (Fixed24p8){ the_coll_box.size.y.data / 4 };
 }
 
 
 void coll_point_group_16x16::assign_horiz_side_left_x_positions
-	( const coll_box& the_coll_box, vec2_f24p8& pt_tl, vec2_f24p8& pt_bl )
+	( const CollBox& the_coll_box, vec2_f24p8& pt_tl, vec2_f24p8& pt_bl )
 {
-	list_of_shared_horiz_side_xpos_left_coll_point_names(X)
-		the_coll_box.left() + (fixed24p8){ the_coll_box.size.x.data / 4 };
+	LIST_OF_SHARED_HORIZ_SIDE_XPOS_LEFT_COLL_POINT_NAMES(X)
+		the_coll_box.left() + (Fixed24p8){ the_coll_box.size.x.data / 4 };
 }
 void coll_point_group_16x16::assign_horiz_side_right_x_positions
-	( const coll_box& the_coll_box, vec2_f24p8& pt_tr, vec2_f24p8& pt_br )
+	( const CollBox& the_coll_box, vec2_f24p8& pt_tr, vec2_f24p8& pt_br )
 {
-	list_of_shared_horiz_side_xpos_right_coll_point_names(X)
-		the_coll_box.right() - (fixed24p8){ the_coll_box.size.x.data / 4 };
+	LIST_OF_SHARED_HORIZ_SIDE_XPOS_RIGHT_COLL_POINT_NAMES(X)
+		the_coll_box.right() - (Fixed24p8){ the_coll_box.size.x.data / 4 };
 }
 
 
 
-coll_point_group_16x32::coll_point_group_16x32( const sprite& the_sprite )
+coll_point_group_16x32::coll_point_group_16x32( const Sprite& the_sprite )
 {
-	const coll_box& the_coll_box = the_sprite.the_coll_box;
+	const CollBox& the_coll_box = the_sprite.the_coll_box;
 	
 	// The collision_points
-	list_of_shared_coll_point_names(generate_pt)
+	LIST_OF_SHARED_COLL_POINT_NAMES(GENERATE_PT)
 	
 	// Left and Right
 	assign_vert_side_x_positions( the_coll_box, pt_lt, pt_lm, pt_lb, pt_rt, 
@@ -182,34 +182,34 @@ coll_point_group_16x32::coll_point_group_16x32( const sprite& the_sprite )
 }
 
 void coll_point_group_16x32::assign_vert_side_top_y_positions
-	( const coll_box& the_coll_box, vec2_f24p8& pt_lt, vec2_f24p8& pt_rt )
+	( const CollBox& the_coll_box, vec2_f24p8& pt_lt, vec2_f24p8& pt_rt )
 {
-	list_of_shared_vert_side_ypos_top_coll_point_names(Y)
-		the_coll_box.top() + sprite::cpg_16x32_threshold_abs.y;
+	LIST_OF_SHARED_VERT_SIDE_YPOS_TOP_COLL_POINT_NAMES(Y)
+		the_coll_box.top() + Sprite::cpg_16x32_threshold_abs.y;
 }
 void coll_point_group_16x32::assign_vert_side_bot_y_positions
-	( const coll_box& the_coll_box, vec2_f24p8& pt_lb, vec2_f24p8& pt_rb )
+	( const CollBox& the_coll_box, vec2_f24p8& pt_lb, vec2_f24p8& pt_rb )
 {
-	list_of_shared_vert_side_ypos_bot_coll_point_names(Y)
-		the_coll_box.bot() - sprite::cpg_16x32_threshold_abs.y;
+	LIST_OF_SHARED_VERT_SIDE_YPOS_BOT_COLL_POINT_NAMES(Y)
+		the_coll_box.bot() - Sprite::cpg_16x32_threshold_abs.y;
 }
 
 
 void coll_point_group_16x32::assign_horiz_side_left_x_positions
-	( const coll_box& the_coll_box, vec2_f24p8& pt_tl, vec2_f24p8& pt_bl )
+	( const CollBox& the_coll_box, vec2_f24p8& pt_tl, vec2_f24p8& pt_bl )
 {
-	list_of_shared_horiz_side_xpos_left_coll_point_names(X)
-		the_coll_box.left() + sprite::cpg_16x32_threshold_abs.x;
+	LIST_OF_SHARED_HORIZ_SIDE_XPOS_LEFT_COLL_POINT_NAMES(X)
+		the_coll_box.left() + Sprite::cpg_16x32_threshold_abs.x;
 }
 void coll_point_group_16x32::assign_horiz_side_right_x_positions
-	( const coll_box& the_coll_box, vec2_f24p8& pt_tr, vec2_f24p8& pt_br )
+	( const CollBox& the_coll_box, vec2_f24p8& pt_tr, vec2_f24p8& pt_br )
 {
-	list_of_shared_horiz_side_xpos_right_coll_point_names(X)
-		the_coll_box.right() - sprite::cpg_16x32_threshold_abs.x;
+	LIST_OF_SHARED_HORIZ_SIDE_XPOS_RIGHT_COLL_POINT_NAMES(X)
+		the_coll_box.right() - Sprite::cpg_16x32_threshold_abs.x;
 }
 
 
-#undef generate_pt
+#undef GENERATE_PT
 #undef X
 #undef Y
 

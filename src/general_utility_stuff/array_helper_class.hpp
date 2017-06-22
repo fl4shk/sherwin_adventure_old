@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -25,9 +25,9 @@
 #include "../gba_specific_stuff/attribute_defines.hpp"
 
 
-// This is a VERY thin wrapper class for working with 1D arrays
+// This Is a VERY thin wrapper class for working with 1D arrays
 template< typename type >
-class array_helper
+class ArrayHelper
 {
 public:			// variables
 	type* the_array = NULL;
@@ -36,16 +36,16 @@ protected:		// variables
 	size_t size = 0;
 	
 public:			// functions
-	array_helper()
+	ArrayHelper()
 	{
 	}
 	
-	array_helper( type* s_the_array, size_t s_size )
+	ArrayHelper( type* s_the_array, size_t s_size )
 		: the_array(s_the_array), size(s_size)
 	{
 	}
 	
-	array_helper( const array_helper<type>& to_copy )
+	ArrayHelper( const ArrayHelper<type>& to_copy )
 		: the_array(to_copy.the_array), size(to_copy.size)
 	{
 	}
@@ -57,7 +57,7 @@ public:			// functions
 	}
 	
 	
-	array_helper<type>& operator = ( const array_helper<type>& to_copy )
+	ArrayHelper<type>& operator = ( const ArrayHelper<type>& to_copy )
 	{
 		the_array = to_copy.the_array;
 		size = to_copy.size;

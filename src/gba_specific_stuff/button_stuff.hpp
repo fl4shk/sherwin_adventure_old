@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -24,10 +24,10 @@
 
 #include "../general_utility_stuff/prev_curr_pair_class.hpp"
 
-// This stuff is shamelessly taken from TONC.
+// This stuff Is shamelessly taken from TONC.
 //extern vu16 __key_curr, __key_prev;
 //extern vu16 __key_state.curr, __key_state.prev;
-extern volatile prev_curr_pair<vu16> __key_state;
+extern volatile PrevCurrPair<vu16> __key_state;
 
 
 // Current Key States
@@ -95,25 +95,25 @@ inline u32 key_was_up( u32 key )
 
 // Transitional state checks
 
-// Key is changing state.
+// Key Is changing state.
 inline u32 key_transit( u32 key )
 {
 	return ( __key_state.curr ^ __key_state.prev ) & key;
 }
 
-// Key is held (down now and before).
+// Key Is held (down now and before).
 inline u32 key_held( u32 key )
 {
 	return ( __key_state.curr & __key_state.prev ) & key;
 }
 
-// Key is being hit (down now, but not before).
+// Key Is being hit (down now, but not before).
 inline u32 key_hit( u32 key )
 {
 	return ( __key_state.curr & (~__key_state.prev) ) & key;
 }
 
-// Key is being released (up now but down before)
+// Key Is being released (up now but down before)
 inline u32 key_released( u32 key )
 {
 	return ( (~__key_state.curr) & __key_state.prev ) & key;

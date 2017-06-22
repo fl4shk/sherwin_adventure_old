@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -34,58 +34,58 @@
 
 //s32 thv_vs_index;
 
-const sprite_const_params sprite::the_const_params;
+const SpriteConstParams Sprite::the_const_params;
 
-const fixed24p8 sprite::cpg_on_slope_threshold_abs = {0x400};
+const Fixed24p8 Sprite::cpg_on_slope_threshold_abs = {0x400};
 
 // coll_point_group threshold
-const vec2_f24p8 sprite::cpg_16x32_threshold_abs = { {0x400}, 
+const vec2_f24p8 Sprite::cpg_16x32_threshold_abs = { {0x400}, 
 	{0x480} };
 
-//const fixed24p8 sprite::grav_acc = {0x80};
-//const fixed24p8 sprite::grav_acc = {0x40};
-//const fixed24p8 sprite::grav_acc = {0x60};
-const fixed24p8 sprite::grav_acc = {0x50};
-//const fixed24p8 sprite::max_y_vel = {0x400};
-const fixed24p8 sprite::max_y_vel = {0x300};
-//const fixed24p8 sprite::max_y_vel = {0x280};
+//const Fixed24p8 Sprite::grav_acc = {0x80};
+//const Fixed24p8 Sprite::grav_acc = {0x40};
+//const Fixed24p8 Sprite::grav_acc = {0x60};
+const Fixed24p8 Sprite::grav_acc = {0x50};
+//const Fixed24p8 Sprite::max_y_vel = {0x400};
+const Fixed24p8 Sprite::max_y_vel = {0x300};
+//const Fixed24p8 Sprite::max_y_vel = {0x280};
 
 
 
-vec2_f24p8 sprite::prev_prev_on_screen_pos; 
-prev_curr_pair<vec2_f24p8> sprite::on_screen_pos;
-vec2_s32 sprite::prev_prev_on_screen_pos_s32;
-prev_curr_pair<vec2_s32> sprite::on_screen_pos_s32;
-prev_curr_pair<vec2_s32> sprite::camera_pos_pc_pair_s32;
+vec2_f24p8 Sprite::prev_prev_on_screen_pos; 
+PrevCurrPair<vec2_f24p8> Sprite::on_screen_pos;
+vec2_s32 Sprite::prev_prev_on_screen_pos_s32;
+PrevCurrPair<vec2_s32> Sprite::on_screen_pos_s32;
+PrevCurrPair<vec2_s32> Sprite::camera_pos_pc_pair_s32;
 
-vec2<bool> sprite::temp_debug_thing;
+Vec2<bool> Sprite::temp_debug_thing;
 
-vec2_f24p8 sprite::on_screen_pos_diff_abs;
-vec2_s32 sprite::on_screen_pos_s32_diff_abs;
-vec2_f24p8 sprite::camera_pos_diff_abs;
-vec2_s32 sprite::camera_pos_s32_diff_abs;
-//prev_curr_pair<s32> sprite::tallest_height_val;
+vec2_f24p8 Sprite::on_screen_pos_diff_abs;
+vec2_s32 Sprite::on_screen_pos_s32_diff_abs;
+vec2_f24p8 Sprite::camera_pos_diff_abs;
+vec2_s32 Sprite::camera_pos_s32_diff_abs;
+//PrevCurrPair<s32> Sprite::tallest_height_val;
 
 
-sprite::sprite()
+Sprite::Sprite()
 {
 	shared_constructor_code_part_1();
 }
-sprite::sprite( bool facing_left )
+Sprite::Sprite( bool facing_left )
 {
 	shared_constructor_code_part_1();
 	shared_constructor_code_part_2(facing_left);
 }
-sprite::sprite( const vec2_f24p8& s_in_level_pos, 
-	const prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
+Sprite::Sprite( const vec2_f24p8& s_in_level_pos, 
+	const PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left )
 {
 	shared_constructor_code_part_1();
 	shared_constructor_code_part_2( s_in_level_pos, camera_pos_pc_pair, 
 		facing_left );
 }
-sprite::sprite( const vec2_f24p8& s_in_level_pos, 
+Sprite::Sprite( const vec2_f24p8& s_in_level_pos, 
 	const vec2_u32& the_level_size_2d, 
-	prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
+	PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left )
 {
 	shared_constructor_code_part_1();
 	shared_constructor_code_part_2( s_in_level_pos, the_level_size_2d, 
@@ -93,16 +93,16 @@ sprite::sprite( const vec2_f24p8& s_in_level_pos,
 }
 
 
-void sprite::shared_constructor_code_part_1()
+void Sprite::shared_constructor_code_part_1()
 {
 	// uh-oh, it looks like this overwrites the vtable pointer for the
-	// sprite!
-	//memfill32( this, 0, sizeof(sprite) / sizeof(u32) );
+	// Sprite!
+	//memfill32( this, 0, sizeof(Sprite) / sizeof(u32) );
 	
 	the_sprite_type = get_const_sprite_type();;
 	the_sprite_ipg = NULL;
 	
-	memfill32( &the_oam_entry, 0, sizeof(oam_entry) / sizeof(u32) );
+	memfill32( &the_oam_entry, 0, sizeof(OamEntry) / sizeof(u32) );
 	
 	
 	set_initial_shape_size();
@@ -112,10 +112,10 @@ void sprite::shared_constructor_code_part_1()
 	clear_and_set_bits( the_oam_entry.attr2, obj_attr2_prio_mask, 
 		obj_attr2_prio_1 );
 	
-	in_level_pos.prev = vec2_f24p8( (fixed24p8){0}, (fixed24p8){0} );
+	in_level_pos.prev = vec2_f24p8( (Fixed24p8){0}, (Fixed24p8){0} );
 	in_level_pos.curr = vel = in_level_pos.prev;
 	
-	max_vel_x_abs_val = accel_x = (fixed24p8){0};
+	max_vel_x_abs_val = accel_x = (Fixed24p8){0};
 	
 	set_initial_coll_box_stuff();
 	
@@ -130,7 +130,7 @@ void sprite::shared_constructor_code_part_1()
 	
 	update_f24p8_positions();
 }
-void sprite::shared_constructor_code_part_2( bool facing_left )
+void Sprite::shared_constructor_code_part_2( bool facing_left )
 {
 	if ( facing_left )
 	{
@@ -139,9 +139,9 @@ void sprite::shared_constructor_code_part_2( bool facing_left )
 }
 
 
-void sprite::shared_constructor_code_part_2
+void Sprite::shared_constructor_code_part_2
 	( const vec2_f24p8& s_in_level_pos, 
-	const prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
+	const PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left )
 {
 	shared_constructor_code_part_2(facing_left);
 	//in_level_pos.curr = s_in_level_pos 
@@ -154,11 +154,11 @@ void sprite::shared_constructor_code_part_2
 }
 
 
-// This form of shared_constructor_code() is primarily intended to be
+// This form of shared_constructor_code() Is primarily Intended To be
 // used by the_player.
-void sprite::shared_constructor_code_part_2
+void Sprite::shared_constructor_code_part_2
 	( const vec2_f24p8& s_in_level_pos, const vec2_u32& the_level_size_2d, 
-	prev_curr_pair<bg_point>& camera_pos_pc_pair, bool facing_left )
+	PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left )
 {
 	shared_constructor_code_part_2(facing_left);
 	//in_level_pos = s_in_level_pos - get_initial_in_level_pos_offset();
@@ -170,25 +170,25 @@ void sprite::shared_constructor_code_part_2
 	update_on_screen_pos(camera_pos_pc_pair);
 }
 
-void sprite::shared_constructor_code_part_3()
+void Sprite::shared_constructor_code_part_3()
 {
-	debug_arr_group::debug_f8p8_arr_helper.at(0) = make_f8p8(3);
+	DebugArrGroup::debug_f8p8_arr_helper.at(0) = make_f8p8(3);
 }
 
-void* sprite::operator new( size_t size, 
-	sprite_allocator& the_sprite_allocator )
+void* Sprite::operator new( size_t size, 
+	SpriteAllocator& the_sprite_allocator )
 {
 	return the_sprite_allocator.allocate_sprite();
 }
 
 
-//sprite::sprite( u32 s_vram_chunk_index, 
-//	sprite_init_param_group* s_the_sprite_ipg )
+//Sprite::Sprite( u32 s_vram_chunk_index, 
+//	SpriteInitParamGroup* s_the_sprite_ipg )
 //{
 //	switch ( s_the_sprite_ipg->spawn_state )
 //	{
 //		case sss_not_active:
-//			memfill32( this, 0, sizeof(sprite) / sizeof(u32) );
+//			memfill32( this, 0, sizeof(Sprite) / sizeof(u32) );
 //			
 //			the_sprite_ipg = s_the_sprite_ipg;
 //			the_sprite_ipg->spawn_state = sss_active;
@@ -215,8 +215,8 @@ void* sprite::operator new( size_t size,
 
 
 
-void sprite::update_on_screen_pos
-	( const prev_curr_pair<bg_point>& camera_pos_pc_pair )
+void Sprite::update_on_screen_pos
+	( const PrevCurrPair<bg_point>& camera_pos_pc_pair )
 {
 	vec2_f24p8 temp_on_screen_pos = get_on_screen_pos
 		(camera_pos_pc_pair.curr);
@@ -225,7 +225,7 @@ void sprite::update_on_screen_pos
 	vec2_f24p8 offset( make_f24p8(ss_vec2.x), make_f24p8(ss_vec2.y) );
 	
 	
-	//// Round to the nearest whole number.
+	//// Round To the nearest whole number.
 	s16 temp_x = temp_on_screen_pos.x.to_int_for_on_screen();
 	s16 temp_y = temp_on_screen_pos.y.to_int_for_on_screen();
 	
@@ -244,28 +244,28 @@ void sprite::update_on_screen_pos
 	//}
 	
 	
-	// Check whether the sprite is on screen.
-	if ( temp_on_screen_pos.x + offset.x >= (fixed24p8){0} 
+	// Check whether the Sprite Is on screen.
+	if ( temp_on_screen_pos.x + offset.x >= (Fixed24p8){0} 
 		&& temp_on_screen_pos.x <= make_f24p8(SCREEN_WIDTH)
-		&& temp_on_screen_pos.y + offset.y >= (fixed24p8){0}
+		&& temp_on_screen_pos.y + offset.y >= (Fixed24p8){0}
 		&& temp_on_screen_pos.y <= make_f24p8(SCREEN_HEIGHT) )
 	{
 		the_oam_entry.show_non_affine();
 	}
 	else
 	{
-		// Hide the sprite if it's not on screen
+		// Hide the Sprite if it's not on screen
 		the_oam_entry.hide_non_affine();
 	}
 }
 
 
-void sprite::camera_follow_basic
-	( prev_curr_pair<bg_point>& camera_pos_pc_pair )
+void Sprite::camera_follow_basic
+	( PrevCurrPair<bg_point>& camera_pos_pc_pair )
 {
 	bg_point& camera_pos = camera_pos_pc_pair.curr;
 	
-	const fixed24p8 
+	const Fixed24p8 
 		left_limit = make_f24p8(100), 
 		
 		right_limit = make_f24p8(140), 
@@ -280,13 +280,13 @@ void sprite::camera_follow_basic
 		//bottom_limit = make_f24p8(70);
 		//bottom_limit = make_f24p8(80);
 	
-	const fixed24p8 to_add_abs = make_f24p8(4);
+	const Fixed24p8 to_add_abs = make_f24p8(4);
 	
 	vec2_f24p8 temp_on_screen_pos = get_on_screen_pos(camera_pos);
 	vec2_f24p8 prev_on_screen_pos = get_prev_in_level_pos()
 		- camera_pos_pc_pair.prev;
 	
-	fixed24p8 on_screen_bottom_pos = temp_on_screen_pos.y 
+	Fixed24p8 on_screen_bottom_pos = temp_on_screen_pos.y 
 		+ make_f24p8(get_shape_size_as_vec2().y);
 	
 	
@@ -307,7 +307,7 @@ void sprite::camera_follow_basic
 	else if ( on_screen_bottom_pos >= bottom_limit 
 		&& !get_curr_on_slope() )
 	{
-		if ( vel.y >= (fixed24p8){0} )
+		if ( vel.y >= (Fixed24p8){0} )
 		{
 			add = true;
 			do_update_camera_pos_y = true;
@@ -345,23 +345,23 @@ void sprite::camera_follow_basic
 	
 }
 
-void sprite::center_camera_almost( bg_point& camera_pos ) const
+void Sprite::center_camera_almost( bg_point& camera_pos ) const
 {
 	//camera_pos.x = ( in_level_pos.x 
-	//	- (fixed24p8){ SCREEN_WIDTH << 7 } ).floor_to_int();
+	//	- (Fixed24p8){ SCREEN_WIDTH << 7 } ).floor_to_int();
 	//camera_pos.y = ( in_level_pos.y 
-	//	- (fixed24p8){ SCREEN_HEIGHT << 7 } ).floor_to_int();
+	//	- (Fixed24p8){ SCREEN_HEIGHT << 7 } ).floor_to_int();
 	
 	camera_pos.x = get_curr_in_level_pos().x 
-		- (fixed24p8){ SCREEN_WIDTH << 7 };
+		- (Fixed24p8){ SCREEN_WIDTH << 7 };
 	camera_pos.y = get_curr_in_level_pos().y 
-		- (fixed24p8){ SCREEN_HEIGHT << 7 };
+		- (Fixed24p8){ SCREEN_HEIGHT << 7 };
 }
 
 
 
 
-//void sprite::block_collision_stuff()
+//void Sprite::block_collision_stuff()
 //{
 //	sprite_stuff_array[the_sprite_type]->block_collision_stuff(*this);
 //}
@@ -369,12 +369,12 @@ void sprite::center_camera_almost( bg_point& camera_pos ) const
 
 
 
-vec2_u32 sprite::get_shape_size_as_vec2_raw() const
+vec2_u32 Sprite::get_shape_size_as_vec2_raw() const
 {
-	return oam_entry::ss_to_vec2_arr[the_shape_size];
+	return OamEntry::ss_to_vec2_arr[the_shape_size];
 } 
 
-void sprite::update_part_1()
+void Sprite::update_part_1()
 {
 	in_level_pos.back_up();
 	on_ground.back_up();
@@ -383,23 +383,23 @@ void sprite::update_part_1()
 	set_curr_on_slope(false);
 }
 
-void sprite::update_part_2()
+void Sprite::update_part_2()
 {
 	update_f24p8_positions();
 	block_collision_stuff();
 }
 
 
-// The player_sprite_stuff class is the primary user of this function.
-void sprite::update_part_3( prev_curr_pair<bg_point>& camera_pos_pc_pair, 
+// The player_sprite_stuff class Is the primary user of this function.
+void Sprite::update_part_3( PrevCurrPair<bg_point>& camera_pos_pc_pair, 
 	const vec2_u32& the_level_size_2d )
 {
 }
 
 
 
-void sprite::update_part_3
-	( const prev_curr_pair<bg_point>& camera_pos_pc_pair, 
+void Sprite::update_part_3
+	( const PrevCurrPair<bg_point>& camera_pos_pc_pair, 
 	int& next_oam_index )
 {
 	gfx_update();
@@ -411,22 +411,22 @@ void sprite::update_part_3
 }
 
 
-//const u32 sprite::get_curr_tile_slot_old()
+//const u32 Sprite::get_curr_tile_slot_old()
 //{
 //	return 
-//		( ( gfx_manager::sprite_palette_slot_first_vram_slot_list 
+//		( ( GfxManager::sprite_palette_slot_first_vram_slot_list 
 //		[get_palette_slot()] / sizeof(tile) * sizeof(u16) )
 //		+ get_curr_relative_tile_slot() );
 //}
 
 
-// The reason this function takes a sprite instance as a parameter is that
+// The reason this function takes a Sprite instance as a parameter Is That
 // sprites may use different palettes depending on their state.
-const sprite_palette_slot sprite::get_palette_slot()
+const sprite_palette_slot Sprite::get_palette_slot()
 {
 	return get_const_params().the_palette_slot;
 }
-const u32 sprite::get_curr_relative_tile_slot()
+const u32 Sprite::get_curr_relative_tile_slot()
 {
 	return get_const_params().the_relative_metatile_slot 
 		* get_num_active_gfx_tiles();
@@ -434,8 +434,8 @@ const u32 sprite::get_curr_relative_tile_slot()
 
 
 
-// This used to be a dummy function that child classes would implement.
-void sprite::block_collision_stuff()
+// This used To be a dummy function That child classes would implement.
+void Sprite::block_collision_stuff()
 {
 	//sprite_stuff_array[the_sprite_type]->block_collision_stuff(*this);
 	if ( the_coll_box.size.x >= make_f24p8(0)
@@ -452,9 +452,9 @@ void sprite::block_collision_stuff()
 }
 
 
-// This is a dummy function that child classes implement (probably just
+// This Is a dummy function That child classes implement (probably just
 // player_sprite_stuff).
-void sprite::handle_jumping_stuff( u32 is_jump_key_hit, 
+void Sprite::handle_jumping_stuff( u32 is_jump_key_hit, 
 	u32 is_jump_key_held )
 {
 }
@@ -462,45 +462,45 @@ void sprite::handle_jumping_stuff( u32 is_jump_key_hit,
 
 
 // 16x32 sprites
-void sprite::block_coll_response_left
-	( const spr_blk_coll_group_base::horiz_coll_tuple& hs )
+void Sprite::block_coll_response_left
+	( const SprBlkCollGroupBase::HorizCollTuple& hs )
 {
 	push_out_of_left_block(hs.blk_crd_pos);
 	
-	// Don't let the sprite speed up while in the air and horizontally
-	// colliding with a block.
-	if ( !get_curr_on_ground() && vel.x < (fixed24p8){0x00} )
+	// Don't let the Sprite speed up while in the air and horizontally
+	// colliding with a Block.
+	if ( !get_curr_on_ground() && vel.x < (Fixed24p8){0x00} )
 	{
 		vel.x = {0x00};
 	}
 }
-void sprite::block_coll_response_right
-	( const spr_blk_coll_group_base::horiz_coll_tuple& hs )
+void Sprite::block_coll_response_right
+	( const SprBlkCollGroupBase::HorizCollTuple& hs )
 {
 	push_out_of_right_block(hs.blk_crd_pos);
 	
-	// Don't let the sprite speed up while in the air and horizontally
-	// colliding with a block.
-	if ( !get_curr_on_ground() && vel.x > (fixed24p8){0x00} )
+	// Don't let the Sprite speed up while in the air and horizontally
+	// colliding with a Block.
+	if ( !get_curr_on_ground() && vel.x > (Fixed24p8){0x00} )
 	{
 		vel.x = {0x00};
 	}
 }
-void sprite::block_coll_response_top
-	( const spr_blk_coll_group_base::vert_top_coll_tuple& vs )
+void Sprite::block_coll_response_top
+	( const SprBlkCollGroupBase::VertTopCollTuple& vs )
 {
 	push_out_of_top_block(vs.blk_crd_pos);
 	
-	if ( vel.y < (fixed24p8){0x00} )
+	if ( vel.y < (Fixed24p8){0x00} )
 	{
 		vel.y = {0x00};
 	}
 	is_jumping = false;
 }
-void sprite::block_coll_response_bot
-	( const bcr_lseg_group& the_bcr_lseg_grp )
+void Sprite::block_coll_response_bot
+	( const BcrLsegGroup& the_bcr_lseg_grp )
 {
-	if ( vel.y >= (fixed24p8){0} )
+	if ( vel.y >= (Fixed24p8){0} )
 	{
 		push_out_of_bot_block(the_bcr_lseg_grp);
 		
@@ -509,10 +509,10 @@ void sprite::block_coll_response_bot
 		is_jumping = false;
 	}
 }
-void sprite::block_coll_response_bot_slope( s32 height_val, 
+void Sprite::block_coll_response_bot_slope( s32 height_val, 
 	s32 blk_crd_y_pos )
 {
-	if ( vel.y >= (fixed24p8){0} )
+	if ( vel.y >= (Fixed24p8){0} )
 	{
 		push_out_of_bot_slope_block( height_val, blk_crd_y_pos );
 		
@@ -523,7 +523,7 @@ void sprite::block_coll_response_bot_slope( s32 height_val,
 	}
 }
 
-void sprite::apply_gravity()
+void Sprite::apply_gravity()
 {
 	vel.y += grav_acc;
 	
@@ -533,26 +533,26 @@ void sprite::apply_gravity()
 	}
 }
 
-// Sprite-sprite interaction stuff
-void sprite::sprite_interaction_reponse( sprite& the_other_sprite )
+// Sprite-Sprite interaction stuff
+void Sprite::sprite_interaction_reponse( Sprite& the_other_sprite )
 {
 	
 }
 
-// the_player is the primary user of this function
-void sprite::sprite_interaction_reponse( sprite& the_other_sprite, 
-	prev_curr_pair<bg_point>& camera_pos_pc_pair, 
+// the_player Is the primary user of this function
+void Sprite::sprite_interaction_reponse( Sprite& the_other_sprite, 
+	PrevCurrPair<bg_point>& camera_pos_pc_pair, 
 	const vec2_u32& the_level_size_2d )
 {
 	
 }
 
-//spr_blk_coll_group_16x32 clseg_grp __attribute__((_EWRAM));
-const size_t clseg_grp_16x32_size = sizeof(spr_blk_coll_group_16x32);
+//SprBlkCollGroup16x32 clseg_grp __attribute__((_EWRAM));
+const size_t clseg_grp_16x32_size = sizeof(SprBlkCollGroup16x32);
 
 
-void sprite::generic_block_collision_stuff
-	( spr_blk_coll_group_base& clseg_grp )
+void Sprite::generic_block_collision_stuff
+	( SprBlkCollGroupBase& clseg_grp )
 {
 	static const size_t num_horiz_ctups 
 		= clseg_grp.get_num_horiz_ctups();
@@ -577,11 +577,11 @@ void sprite::generic_block_collision_stuff
 	
 	
 	
-	//block_coll_result horiz_fs_ret_buf[num_horiz_ctups];
-	//block_coll_result* vert_top_fs_ret_buf[num_vert_top_ctups];
-	//block_coll_result* vert_top_slp_ret_buf[num_vert_top_ctups];
-	block_coll_result* vert_bot_fs_ret_buf[num_vert_bot_ctups];
-	block_coll_result* vert_bot_slp_ret_buf[num_vert_bot_ctups];
+	//BlockCollResult horiz_fs_ret_buf[num_horiz_ctups];
+	//BlockCollResult* vert_top_fs_ret_buf[num_vert_top_ctups];
+	//BlockCollResult* vert_top_slp_ret_buf[num_vert_top_ctups];
+	BlockCollResult* vert_bot_fs_ret_buf[num_vert_bot_ctups];
+	BlockCollResult* vert_bot_slp_ret_buf[num_vert_bot_ctups];
 	
 	//vec2_s32 horiz_fs_pos_buf[num_horiz_ctups];
 	//vec2_s32 vert_top_fs_pos_buf[num_vert_top_ctups];
@@ -680,7 +680,7 @@ void sprite::generic_block_collision_stuff
 			(vs_index).clseg.top_pt().x.floor_to_int() );
 	};
 	
-	auto get_slope_bcr = [&]( u32 vs_index ) -> block_coll_result*
+	auto get_slope_bcr = [&]( u32 vs_index ) -> BlockCollResult*
 	{
 		return vert_bot_slp_ret_buf[vs_index];
 	};
@@ -688,7 +688,7 @@ void sprite::generic_block_collision_stuff
 	auto get_slope_height_val = [&]( u32 vs_index, 
 		const u32 height_mask_index ) -> s32
 	{
-		return (block_base_stuff::height_mask_ptr_arr[get_slope_bcr
+		return (BlockBaseStuff::height_mask_ptr_arr[get_slope_bcr
 			(vs_index)->the_bbvt])[height_mask_index];
 	};
 	
@@ -696,7 +696,7 @@ void sprite::generic_block_collision_stuff
 		( block_behavior_type some_bbvt, const u32 height_mask_index ) 
 		-> s32
 	{
-		return (block_base_stuff::height_mask_ptr_arr[some_bbvt])
+		return (BlockBaseStuff::height_mask_ptr_arr[some_bbvt])
 			[height_mask_index];
 	};
 	
@@ -777,7 +777,7 @@ void sprite::generic_block_collision_stuff
 						}
 					}
 					
-					// Still use the height mask from the slope block that
+					// Still use the height mask from the slope Block That
 					// WOULD have been intersected by the middle sensor if
 					// the slope was continuous
 					
@@ -787,9 +787,9 @@ void sprite::generic_block_collision_stuff
 					auto left_slope_response = [&]() -> void
 					{
 						// The main trick:  force usage of the bottom
-						// MIDDLE vertical sensor's level coordinates x
+						// MIDDLE vertical sensor's Level coordinates x
 						// position, and also use the specific height mask
-						// that would be EXPECTED to be used if the slope
+						// That would be EXPECTED To be used if the slope
 						// were continuous
 						if ( get_right_following_slope_bbvt
 							( get_slope_bcr(vi_bot_left)->get_bbvt(), 
@@ -814,9 +814,9 @@ void sprite::generic_block_collision_stuff
 					auto right_slope_response = [&]() -> void
 					{
 						// The main trick:  force usage of the bottom
-						// MIDDLE vertical sensor's level coordinates x
+						// MIDDLE vertical sensor's Level coordinates x
 						// position, and also use the specific height mask
-						// that would be EXPECTED to be used if the slope
+						// That would be EXPECTED To be used if the slope
 						// were continuous
 						if ( get_left_following_slope_bbvt
 							( get_slope_bcr(vi_bot_right)->get_bbvt(), 
@@ -839,7 +839,7 @@ void sprite::generic_block_collision_stuff
 					};
 					
 					// Figure out the tallest total height value, which
-					// includes the block's position
+					// includes the Block's position
 					if ( vert_bot_slp_ret_buf[vi_bot_left] 
 						&& !vert_bot_slp_ret_buf[vi_bot_right] )
 					{
@@ -852,14 +852,14 @@ void sprite::generic_block_collision_stuff
 						right_slope_response();
 					}
 					
-					// Use the tallest height value there is, including the
+					// Use the tallest height value there Is, including the
 					// y position of the slope bcr
 					else // if ( vert_bot_slp_ret_buf[vi_bot_left]
 						// && vert_bot_slp_ret_buf[vi_bot_right] )
 					{
-						// Prioritize block y positions (use ones that are
-						// technically at a LOWER y position (though that
-						// appear to be at a HIGHER y position))
+						// Prioritize Block y positions (use ones That are
+						// technically at a LOWER y position (though That
+						// appear To be at a HIGHER y position))
 						if ( left_pos.y < right_pos.y )
 						{
 							left_slope_response();
@@ -908,11 +908,11 @@ void sprite::generic_block_collision_stuff
 		{
 			set_curr_on_slope(false);
 			
-			// The sprite is now in air if there are no relevant blocks
+			// The Sprite Is now in air if there are no relevant blocks
 			// intersected by the vertical sensors
 			if (!some_bot_side_fully_solid)
 			{
-				//// This needs to be turned back on eventually
+				//// This needs To be turned back on eventually
 				set_curr_on_ground(false);
 				return false;
 			}
@@ -972,8 +972,8 @@ void sprite::generic_block_collision_stuff
 	}
 	else // if ( !get_curr_on_ground() )
 	{
-		// Don't forget to remove the code at the top of this function that
-		// sets on_ground.curr to true every time!
+		// Don't forget To remove the code at the top of this function That
+		// sets on_ground.curr To true every time!
 		
 		bool left_side_fully_solid_ia = false, 
 			right_side_fully_solid_ia = false,
@@ -1026,20 +1026,20 @@ void sprite::generic_block_collision_stuff
 	//vel += clseg_grp.horiz_clseg_groups[clseg_grp.hi_left_top].left_pt();
 }
 
-spr_blk_coll_group_16x16 temp_clseg_grp_16x16 __attribute__((_IWRAM));
-spr_blk_coll_group_16x32 temp_clseg_grp_16x32 __attribute__((_IWRAM));
+SprBlkCollGroup16x16 temp_clseg_grp_16x16 __attribute__((_IWRAM));
+SprBlkCollGroup16x32 temp_clseg_grp_16x32 __attribute__((_IWRAM));
 
-void sprite::block_collision_stuff_16x16()
+void Sprite::block_collision_stuff_16x16()
 {
-	//spr_blk_coll_group_16x16 clseg_grp( the_coll_box, get_curr_on_ground() );
+	//SprBlkCollGroup16x16 clseg_grp( the_coll_box, get_curr_on_ground() );
 	//
 	//generic_block_collision_stuff(clseg_grp);
 	temp_clseg_grp_16x16.init( the_coll_box, get_curr_on_ground() );
 	generic_block_collision_stuff(temp_clseg_grp_16x16);
 }
-void sprite::block_collision_stuff_16x32()
+void Sprite::block_collision_stuff_16x32()
 {
-	//spr_blk_coll_group_16x32 clseg_grp( the_coll_box, get_curr_on_ground() );
+	//SprBlkCollGroup16x32 clseg_grp( the_coll_box, get_curr_on_ground() );
 	//
 	//generic_block_collision_stuff(clseg_grp);
 	
@@ -1048,12 +1048,12 @@ void sprite::block_collision_stuff_16x32()
 }
 
 // block_collision_stuff_32x16() will likely never be used because it's
-// less believable for one of those to not rotate when on a slope
-void sprite::block_collision_stuff_32x16()
+// less believable for one of those To not rotate when on a slope
+void Sprite::block_collision_stuff_32x16()
 {
 	
 }
-void sprite::block_collision_stuff_32x32()
+void Sprite::block_collision_stuff_32x32()
 {
 	
 }

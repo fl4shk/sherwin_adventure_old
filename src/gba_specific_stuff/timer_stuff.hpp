@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -57,10 +57,10 @@
 #define timer_prescaler_mask		( 0x03 )
 
 
-// Count-up timing (Cascading).  When enabled, the prescaler value is
-// ignored, and instead the time is incremented each time when the PREVIOUS
-// Timer overflows.  This function can't be used for Timer 0, because Timer
-// 0 is the first timer.
+// Count-up timing (Cascading).  When enabled, the prescaler value Is
+// ignored, and instead the time Is incremented each time when the PREVIOUS
+// Timer overflows.  This function Can't be used for Timer 0, because Timer
+// 0 Is the first timer.
 #define timer_cascade_disable		( 0x0 << 0x2 )
 #define timer_cascade_enable		( 0x1 << 0x2 )
 
@@ -81,7 +81,7 @@
 #define timer_stop_operate_mask		( 0x80 )
 
 
-// Here is an extra thing for 
+// Here Is an extra thing for 
 constexpr inline u16 calc_timer_freq( float freq )
 {
 	//if ( freq > 0.0f )
@@ -91,7 +91,7 @@ constexpr inline u16 calc_timer_freq( float freq )
 	//return 0.0f;
 	
 	
-	// I REALLY don't know why I am not allowed to use an if-else chain for
+	// I REALLY don't know why I am not allowed To use an if-else chain for
 	// this.  It seems like an oversight in the design of C++, honestly.
 	return ( freq > 0.0f ) ? 0xffff - (u16)( 16.78e6f / freq )
 		: ( ( freq < 0.0f ) ? 0xffff - (u16)( 16.78e6 / (-freq) ) 

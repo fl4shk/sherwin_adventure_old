@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -81,14 +81,14 @@
 
 
 
-// DMA Sound A RIGHT (For stereo sound)
+// DMA Sound A RIGHT (for stereo sound)
 #define dma_sound_a_right_disable		( 0x0 << 8 )
 #define dma_sound_a_right_enable		( 0x1 << 8 )
 
 #define dma_sound_a_right_mask			( 0x0100 )
 
 
-// DMA Sound A LEFT (For stereo sound)
+// DMA Sound A LEFT (for stereo sound)
 #define dma_sound_a_left_disable		( 0x0 << 9 )
 #define dma_sound_a_left_enable			( 0x1 << 9 )
 
@@ -110,14 +110,14 @@
 
 
 
-// DMA Sound B RIGHT (For stereo sound)
+// DMA Sound B RIGHT (for stereo sound)
 #define dma_sound_b_right_disable		( 0x0 << 12 )
 #define dma_sound_b_right_enable		( 0x1 << 12 )
 
 #define dma_sound_b_right_mask			( 0x1000 )
 
 
-// DMA Sound B LEFT (For stereo sound)
+// DMA Sound B LEFT (for stereo sound)
 #define dma_sound_b_left_disable		( 0x0 << 13 )
 #define dma_sound_b_left_enable			( 0x1 << 13 )
 

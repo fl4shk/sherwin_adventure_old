@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -18,7 +18,7 @@
 
 #include "../block_stuff.hpp"
 
-const block_stuff_const_params grass_single_block_stuff::the_const_params
+const BlockStuffConstParams GrassSingleBlockStuff::the_const_params
 = {
 	// metatile_number
 	6,
@@ -30,7 +30,7 @@ const block_stuff_const_params grass_single_block_stuff::the_const_params
 	6,
 };
 
-const block_stuff_const_params grass_top_left_block_stuff::the_const_params
+const BlockStuffConstParams GrassTopLeftBlockStuff::the_const_params
 = {
 	// metatile_number
 	7,
@@ -44,8 +44,8 @@ const block_stuff_const_params grass_top_left_block_stuff::the_const_params
 
 
 
-const block_stuff_const_params
-	grass_top_middle_block_stuff::the_const_params
+const BlockStuffConstParams
+	GrassTopMiddleBlockStuff::the_const_params
 = {
 	// metatile_number
 	8,
@@ -57,8 +57,8 @@ const block_stuff_const_params
 	8,
 };
 
-const block_stuff_const_params
-	grass_top_right_block_stuff::the_const_params
+const BlockStuffConstParams
+	GrassTopRightBlockStuff::the_const_params
 = {
 	// metatile_number
 	9,
@@ -70,8 +70,8 @@ const block_stuff_const_params
 	9,
 };
 
-const block_stuff_const_params
-	dirt_middle_left_block_stuff::the_const_params
+const BlockStuffConstParams
+	DirtMiddleLeftBlockStuff::the_const_params
 = {
 	// metatile_number
 	10,
@@ -83,8 +83,8 @@ const block_stuff_const_params
 	10,
 };
 
-const block_stuff_const_params
-	dirt_middle_middle_block_stuff::the_const_params
+const BlockStuffConstParams
+	DirtMiddleMiddleBlockStuff::the_const_params
 = {
 	// metatile_number
 	11,
@@ -96,8 +96,8 @@ const block_stuff_const_params
 	11,
 };
 
-const block_stuff_const_params
-	dirt_middle_right_block_stuff::the_const_params
+const BlockStuffConstParams
+	DirtMiddleRightBlockStuff::the_const_params
 = {
 	// metatile_number
 	12,
@@ -109,8 +109,8 @@ const block_stuff_const_params
 	12,
 };
 
-const block_stuff_const_params
-	dirt_bottom_left_block_stuff::the_const_params
+const BlockStuffConstParams
+	DirtBottomLeftBlockStuff::the_const_params
 = {
 	// metatile_number
 	13,
@@ -122,8 +122,8 @@ const block_stuff_const_params
 	13,
 };
 
-const block_stuff_const_params
-	dirt_bottom_middle_block_stuff::the_const_params
+const BlockStuffConstParams
+	DirtBottomMiddleBlockStuff::the_const_params
 = {
 	// metatile_number
 	14,
@@ -135,8 +135,8 @@ const block_stuff_const_params
 	14,
 };
 
-const block_stuff_const_params
-	dirt_bottom_right_block_stuff::the_const_params
+const BlockStuffConstParams
+	DirtBottomRightBlockStuff::the_const_params
 = {
 	// metatile_number
 	15,
@@ -148,8 +148,8 @@ const block_stuff_const_params
 	15,
 };
 
-const block_stuff_const_params
-	grass_slope_p16_p16_block_stuff::the_const_params
+const BlockStuffConstParams
+	GrassSlopeP16P16BlockStuff::the_const_params
 = {
 	// metatile_number
 	16,
@@ -164,8 +164,8 @@ const block_stuff_const_params
 	bbvt_slope_p16_p16,
 };
 
-const block_stuff_const_params
-	grass_slope_n16_p16_block_stuff::the_const_params
+const BlockStuffConstParams
+	GrassSlopeN16P16BlockStuff::the_const_params
 = {
 	// metatile_number
 	17,
@@ -180,8 +180,8 @@ const block_stuff_const_params
 	bbvt_slope_n16_p16,
 };
 
-const block_stuff_const_params
-	grass_slope_p32_p16_short_block_stuff::the_const_params
+const BlockStuffConstParams
+	GrassSlopeP32P16ShortBlockStuff::the_const_params
 = {
 	// metatile_number
 	18,
@@ -196,8 +196,8 @@ const block_stuff_const_params
 	bbvt_slope_p32_p16_short,
 };
 
-const block_stuff_const_params
-	grass_slope_p32_p16_tall_block_stuff::the_const_params
+const BlockStuffConstParams
+	GrassSlopeP32P16TallBlockStuff::the_const_params
 = {
 	// metatile_number
 	19,
@@ -212,8 +212,8 @@ const block_stuff_const_params
 	bbvt_slope_p32_p16_tall,
 };
 
-const block_stuff_const_params
-	grass_slope_n32_p16_tall_block_stuff::the_const_params
+const BlockStuffConstParams
+	GrassSlopeN32P16TallBlockStuff::the_const_params
 = {
 	// metatile_number
 	20,
@@ -228,8 +228,8 @@ const block_stuff_const_params
 	bbvt_slope_n32_p16_tall,
 };
 
-const block_stuff_const_params
-	grass_slope_n32_p16_short_block_stuff::the_const_params
+const BlockStuffConstParams
+	GrassSlopeN32P16ShortBlockStuff::the_const_params
 = {
 	// metatile_number
 	21,
@@ -244,8 +244,8 @@ const block_stuff_const_params
 	bbvt_slope_n32_p16_short,
 };
 
-const block_stuff_const_params
-	grass_in_slope_left_block_stuff::the_const_params
+const BlockStuffConstParams
+	GrassInSlopeLeftBlockStuff::the_const_params
 = {
 	// metatile_number
 	22,
@@ -257,8 +257,8 @@ const block_stuff_const_params
 	22,
 };
 
-const block_stuff_const_params
-	grass_in_slope_right_block_stuff::the_const_params
+const BlockStuffConstParams
+	GrassInSlopeRightBlockStuff::the_const_params
 = {
 	// metatile_number
 	23,

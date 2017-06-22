@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -24,14 +24,14 @@
 
 #define X(name) \
 	name the_##name;
-list_of_block_stuff_classes(X)
+LIST_OF_BLOCK_STUFF_CLASSES(X)
 #undef X
 
-std::array< block_base_stuff*, lim_bt > block_stuff_array
+std::array< BlockBaseStuff*, lim_bt > block_stuff_array
 = {
 	#define X(name) \
 		&the_##name,
-	list_of_block_stuff_classes(X)
+	LIST_OF_BLOCK_STUFF_CLASSES(X)
 	#undef X
 };
 
@@ -47,7 +47,7 @@ bool bbvt_is_left_slope( block_behavior_type behavior_type )
 				return true; \
 				break;
 			
-		list_of_left_slope_configurations(X)
+		LIST_OF_LEFT_SLOPE_CONFIGURATIONS(X)
 		#undef X
 		
 		default:
@@ -67,7 +67,7 @@ bool bbvt_is_right_slope( block_behavior_type behavior_type )
 				return true; \
 				break;
 			
-		list_of_right_slope_configurations(X)
+		LIST_OF_RIGHT_SLOPE_CONFIGURATIONS(X)
 		#undef X
 		
 		default:
@@ -83,20 +83,20 @@ bool get_left_following_slope_bbvt( block_behavior_type any_slope_bbvt_in,
 {
 	switch (any_slope_bbvt_in)
 	{
-		// 45 degree angle slope (up and to the right)
+		// 45 degree angle slope (up and To the right)
 		case bbvt_slope_p16_p16:
 			some_slope_bbvt_out = bbvt_slope_p16_p16;
 			blk_crd_y_pos_offset = 1;
 			break;
 		
-		// 135 degree angle slope (up and to the left)
+		// 135 degree angle slope (up and To the left)
 		case bbvt_slope_n16_p16:
 			some_slope_bbvt_out = bbvt_slope_n16_p16;
 			blk_crd_y_pos_offset = -1;
 			break;
 		
 		// Approximately 26.57 degrees angle slope, with two blocks (up and
-		// to the right)
+		// To the right)
 		case bbvt_slope_p32_p16_short:
 			some_slope_bbvt_out = bbvt_slope_p32_p16_tall;
 			blk_crd_y_pos_offset = 1;
@@ -109,7 +109,7 @@ bool get_left_following_slope_bbvt( block_behavior_type any_slope_bbvt_in,
 		
 		
 		// Approximately 153.43 degrees angle slope, with two blocks (up
-		// and to the left)
+		// and To the left)
 		case bbvt_slope_n32_p16_tall:
 			some_slope_bbvt_out = bbvt_slope_n32_p16_short;
 			blk_crd_y_pos_offset = -1;
@@ -131,20 +131,20 @@ bool get_right_following_slope_bbvt( block_behavior_type any_slope_bbvt_in,
 {
 	switch (any_slope_bbvt_in)
 	{
-		// 45 degree angle slope (up and to the right)
+		// 45 degree angle slope (up and To the right)
 		case bbvt_slope_p16_p16:
 			some_slope_bbvt_out = bbvt_slope_p16_p16;
 			blk_crd_y_pos_offset = -1;
 			break;
 		
-		// 135 degree angle slope (up and to the left)
+		// 135 degree angle slope (up and To the left)
 		case bbvt_slope_n16_p16:
 			some_slope_bbvt_out = bbvt_slope_n16_p16;
 			blk_crd_y_pos_offset = 1;
 			break;
 		
 		// Approximately 26.57 degrees angle slope, with two blocks (up and
-		// to the right)
+		// To the right)
 		case bbvt_slope_p32_p16_short:
 			some_slope_bbvt_out = bbvt_slope_p32_p16_tall;
 			blk_crd_y_pos_offset = 0;
@@ -157,7 +157,7 @@ bool get_right_following_slope_bbvt( block_behavior_type any_slope_bbvt_in,
 		
 		
 		// Approximately 153.43 degrees angle slope, with two blocks (up
-		// and to the left)
+		// and To the left)
 		case bbvt_slope_n32_p16_tall:
 			some_slope_bbvt_out = bbvt_slope_n32_p16_short;
 			blk_crd_y_pos_offset = -1;

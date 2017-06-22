@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -21,21 +21,21 @@
 
 #include "sa_list_class_stuff.hpp"
 
-namespace sa_list_stuff
+namespace SaListStuff
 {
 
-// This is a template class intended for use as a BASE CLASS for classes
-// that act as statically-allocated linked lists.  Since some (or possibly 
+// This Is a template class Intended for use as a BASE CLASS for classes
+// That act as statically-allocated linked lists.  Since some (or possibly 
 // all) of the derived classes use only some of the non-constructor member
 // functions, 
 template< typename type, u32 total_num_nodes >
-class regular_list_base
+class RegularListBase
 {
 //protected:		// variables
 public:		// variables
-	externally_allocated_list<type> the_externally_allocated_list;
-	node<type> node_array[total_num_nodes];
-	sa_free_list<total_num_nodes> the_free_list;
+	ExternallyAllocatedList<type> the_externally_allocated_list;
+	Node<type> node_array[total_num_nodes];
+	SaFreeList<total_num_nodes> the_free_list;
 	
 	s32& front_index;
 	s32& back_index;
@@ -45,7 +45,7 @@ public:		// functions
 	
 protected:		// functions
 	// This may be the first time I've ever made a constructor protected.
-	inline regular_list_base() : the_externally_allocated_list
+	inline RegularListBase() : the_externally_allocated_list
 		( node_array, &the_free_list.the_sa_free_list_backend, 
 		get_total_num_nodes() ), front_index(the_externally_allocated_list
 		.get_front_index()), back_index(the_externally_allocated_list
@@ -74,20 +74,20 @@ protected:		// functions
 		return back_index;
 	}
 	
-	inline node<type>* get_node_array()
+	inline Node<type>* get_node_array()
 	{
 		return node_array;
 	}
-	inline const node<type>* get_node_array() const
+	inline const Node<type>* get_node_array() const
 	{
 		return node_array;
 	}
 	
-	inline sa_free_list<total_num_nodes>& get_free_list()
+	inline SaFreeList<total_num_nodes>& get_free_list()
 	{
 		return the_free_list;
 	}
-	inline const sa_free_list<total_num_nodes>& get_free_list() const
+	inline const SaFreeList<total_num_nodes>& get_free_list() const
 	{
 		return the_free_list;
 	}
@@ -100,11 +100,11 @@ protected:		// functions
 		return total_num_nodes;
 	}
 	
-	inline node<type>& get_node_at( s32 index )
+	inline Node<type>& get_node_at( s32 index )
 	{
 		return get_node_array()[index];
 	}
-	inline node<type>& front()
+	inline Node<type>& front()
 	{
 		//return get_node_at(get_front_index());
 		return the_externally_allocated_list.front();
@@ -202,13 +202,13 @@ protected:		// functions
 
 
 template< typename type, u32 total_num_nodes >
-class regular_list : public regular_list_base< type, total_num_nodes >
+class RegularList : public RegularListBase< type, total_num_nodes >
 {
 public:		// typedefs
-	typedef regular_list_base< type, total_num_nodes > base;
+	typedef RegularListBase< type, total_num_nodes > base;
 	
 public:		// functions
-	inline regular_list() : base()
+	inline RegularList() : base()
 	{
 	}
 	
@@ -229,20 +229,20 @@ public:		// functions
 		return base::get_back_index();
 	}
 	
-	inline node<type>* get_node_array()
+	inline Node<type>* get_node_array()
 	{
 		return base::get_node_array();
 	}
-	inline const node<type>* get_node_array() const
+	inline const Node<type>* get_node_array() const
 	{
 		return base::get_node_array();
 	}
 	
-	inline sa_free_list<total_num_nodes>& get_free_list()
+	inline SaFreeList<total_num_nodes>& get_free_list()
 	{
 		return base::get_free_list();
 	}
-	inline const sa_free_list<total_num_nodes>& get_free_list() const
+	inline const SaFreeList<total_num_nodes>& get_free_list() const
 	{
 		return base::get_free_list();
 	}
@@ -255,11 +255,11 @@ public:		// functions
 		return total_num_nodes;
 	}
 	
-	inline node<type>& get_node_at( s32 index )
+	inline Node<type>& get_node_at( s32 index )
 	{
 		return base::get_node_at(index);
 	}
-	inline node<type>& front()
+	inline Node<type>& front()
 	{
 		//return get_node_at(get_front_index());
 		return base::front();
@@ -354,17 +354,17 @@ public:		// functions
 } __attribute__((_ALIGN4));
 
 
-// This class is intended to always be sorted, though it does not have to
+// This class Is Intended To always be sorted, though it does not have To
 // be in some cases.
 template< typename type, u32 total_num_nodes >
-class sorted_always_list 
-	: public regular_list_base< type, total_num_nodes >
+class SortedAlwaysList 
+	: public RegularListBase< type, total_num_nodes >
 {
 public:		// typedefs
-	typedef regular_list_base< type, total_num_nodes > base;
+	typedef RegularListBase< type, total_num_nodes > base;
 	
 public:		// functions
-	inline sorted_always_list() : base()
+	inline SortedAlwaysList() : base()
 	{
 	}
 	
@@ -385,20 +385,20 @@ public:		// functions
 		return base::get_back_index();
 	}
 	
-	inline node<type>* get_node_array()
+	inline Node<type>* get_node_array()
 	{
 		return base::get_node_array();
 	}
-	inline const node<type>* get_node_array() const
+	inline const Node<type>* get_node_array() const
 	{
 		return base::get_node_array();
 	}
 	
-	inline sa_free_list<total_num_nodes>& get_free_list()
+	inline SaFreeList<total_num_nodes>& get_free_list()
 	{
 		return base::get_free_list();
 	}
-	inline const sa_free_list<total_num_nodes>& get_free_list() const
+	inline const SaFreeList<total_num_nodes>& get_free_list() const
 	{
 		return base::get_free_list();
 	}
@@ -421,11 +421,11 @@ public:		// functions
 	}
 	
 	
-	inline node<type>& get_node_at( s32 index )
+	inline Node<type>& get_node_at( s32 index )
 	{
 		return base::get_node_at(index);
 	}
-	inline node<type>& front()
+	inline Node<type>& front()
 	{
 		//return get_node_at(get_front_index());
 		return base::front();
@@ -473,8 +473,8 @@ public:		// functions
 	}
 	
 	
-	// There is no need to sort the list after erasing a single node.  This
-	// is because the list was already sorted to begin with.
+	// There Is no need To sort the list after erasing a single Node.  This
+	// Is because the list was already sorted To begin with.
 	inline void erase_at( s32 index )
 	{
 		base::erase_at(index);
@@ -502,6 +502,6 @@ public:		// functions
 	
 } __attribute__((_ALIGN4));
 
-} // end of namespace sa_list_stuff
+} // end of namespace SaListStuff
 
 #endif		// extended_list_class_stuff_hpp

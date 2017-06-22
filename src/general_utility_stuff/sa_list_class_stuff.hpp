@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -35,13 +35,13 @@
 
 
 // FL4SHK Note on April 8, 2017:  
-// WHY did I bother making this so unnecessarily complicated?
-// Reminder to myself:  DON'T do that!
-namespace sa_list_stuff
+// WHY did I bother making this So unnecessarily complicated?
+// Reminder To myself:  DON'T do That!
+namespace SaListStuff
 {
 
-// A non-template class intended to be used by the list_backend class.
-class node_contents
+// A non-template class Intended To be used by the ListBackend class.
+class NodeContents
 {
 public:		// constants
 	static constexpr size_t vec2_index_for_next_index = vec2_index_for_x,
@@ -53,8 +53,8 @@ public:		// variables
 	vec2_s16* index_pair_ptr;
 	
 public:		// functions
-	// This is safe so long as data_ptr is the first member variable of the
-	// node_contents class.
+	// This Is safe So long as data_ptr Is the first member variable of the
+	// NodeContents class.
 	inline void* get_node_as_void_ptr()
 	{
 		return data_ptr;
@@ -85,21 +85,21 @@ public:		// functions
 
 
 
-// Store only the original index of the node and a void pointer to its
-// data.  This is intended for use in array-based sorting algorithms that
+// Store only the original index of the Node and a void pointer To its
+// data.  This Is Intended for use in array-based sorting algorithms That
 // only change how nodes are linked.
-class node_data_and_index
+class NodeDataAndIndex
 {
 public:		// variables
 	void* data_ptr = NULL;
 	s32 index = -1;
 	
 public:		// functions
-	inline node_data_and_index()
+	inline NodeDataAndIndex()
 	{
 	}
 	
-	inline node_data_and_index( void* s_data_ptr, s32 s_index ) 
+	inline NodeDataAndIndex( void* s_data_ptr, s32 s_index ) 
 		: data_ptr(s_data_ptr), index(s_index)
 	{
 	}
@@ -114,26 +114,26 @@ public:		// functions
 
 
 
-typedef dyn_arr<node_data_and_index> ndai_dyn_arr;
+typedef DynArr<NodeDataAndIndex> ndai_dyn_arr;
 
 
 
 template< typename type >
-class node
+class Node
 {
 public:		// variables
 	type data __attribute__((_ALIGN4)) = type();
 	vec2_s16 index_pair = { -1, -1 };
 	
 public:		// functions
-	inline node()
+	inline Node()
 	{
 	}
 	
 	
 	template< typename type_in_vec2 >
-	inline node( const type& data_to_copy, 
-		vec2<type_in_vec2> s_index_pair ) : data(data_to_copy)
+	inline Node( const type& data_to_copy, 
+		Vec2<type_in_vec2> s_index_pair ) : data(data_to_copy)
 	{
 		next_index() = get_next_index_from_vec2(s_index_pair);
 		prev_index() = get_prev_index_from_vec2(s_index_pair);
@@ -142,29 +142,29 @@ public:		// functions
 	inline s16& next_index()
 	{
 		return index_pair
-			[node_contents::vec2_index_for_next_index];
+			[NodeContents::vec2_index_for_next_index];
 	}
 	inline s16& prev_index()
 	{
 		return index_pair
-			[node_contents::vec2_index_for_prev_index];
+			[NodeContents::vec2_index_for_prev_index];
 	}
 	
 	
 protected:		// functions
 	template< typename type_in_vec2 >
 	static inline s16 get_next_index_from_vec2
-		( const vec2<type_in_vec2>& n_index_pair )
+		( const Vec2<type_in_vec2>& n_index_pair )
 	{
 		return static_cast<s16>(n_index_pair
-			[node_contents::vec2_index_for_next_index]);
+			[NodeContents::vec2_index_for_next_index]);
 	}
 	template< typename type_in_vec2 >
 	static inline s16 get_prev_index_from_vec2
-		( const vec2<type_in_vec2>& n_index_pair )
+		( const Vec2<type_in_vec2>& n_index_pair )
 	{
 		return static_cast<s16>(n_index_pair
-			[node_contents::vec2_index_for_prev_index]);
+			[NodeContents::vec2_index_for_prev_index]);
 	}
 	
 	
@@ -173,9 +173,9 @@ protected:		// functions
 
 
 
-// This is basically a queue stored in an external circular buffer that
+// This Is basically a queue stored in an external circular buffer That
 // doesn't permit erasing elements.
-class circ_buf_helper
+class CircBufHelper
 {
 protected:		// variables
 	s32* the_array = NULL;
@@ -185,10 +185,10 @@ protected:		// variables
 	size_t max_size = 0, real_size = 0, head = 0, tail = 0;
 	
 public:		// classes
-	class iterator
+	class Iterator
 	{
 	public:		// enums
-		enum class index_type : u32
+		enum class IndexType : u32
 		{
 			it_other,
 			it_head,
@@ -197,20 +197,20 @@ public:		// classes
 		} _ALIGNAS_REGULAR;
 		
 	protected:  // variables
-		circ_buf_helper *const cbuf_helper_ptr;
+		CircBufHelper *const cbuf_helper_ptr;
 		size_t pos;
-		index_type the_index_type;
+		IndexType the_index_type;
 		
 	public:		// functions
-		inline iterator( circ_buf_helper* s_cbuf_helper_ptr, 
+		inline Iterator( CircBufHelper* s_cbuf_helper_ptr, 
 			size_t s_pos, 
-			index_type s_the_index_type=index_type::it_other ) 
+			IndexType s_the_index_type=IndexType::it_other ) 
 			: cbuf_helper_ptr(s_cbuf_helper_ptr), pos(s_pos),
 			the_index_type(s_the_index_type)
 		{
 		}
 		
-		inline circ_buf_helper *const get_cbuf_helper_ptr() const
+		inline CircBufHelper *const get_cbuf_helper_ptr() const
 		{
 			return cbuf_helper_ptr;
 		}
@@ -218,18 +218,18 @@ public:		// classes
 		{
 			return pos;
 		}
-		inline index_type get_index_type() const
+		inline IndexType get_index_type() const
 		{
 			return the_index_type;
 		}
 		
-		inline bool operator == ( const iterator& other ) const
+		inline bool operator == ( const Iterator& other ) const
 		{
 			return !( *this != other );
 		}
 		
 		// Required for a range-based for loop
-		inline bool operator != ( const iterator& other ) const
+		inline bool operator != ( const Iterator& other ) const
 		{
 			//return ( pos != other.pos ) || ( ( pos == other.pos )
 			//	&& ( get_is_head() != other.get_is_head() ) );
@@ -244,16 +244,16 @@ public:		// classes
 		
 	protected:		// functions
 		
-		inline bool same_pos_not_equals ( const iterator& other ) const
+		inline bool same_pos_not_equals ( const Iterator& other ) const
 		{
-			// At this point, is is known that pos == other.pos
+			// At this point, Is Is known That pos == other.pos
 			if ( get_cbuf_helper_ptr() != other.get_cbuf_helper_ptr() )
 			{
 				return true;
 			}
 			
-			// At this point, it is known that pos == other.pos, and both
-			// iterators are from the same circ_buf_helper.
+			// At this point, it Is known That pos == other.pos, and both
+			// iterators are from the same CircBufHelper.
 			if ( get_cbuf_helper_ptr()->get_real_size() == 0 )
 			{
 				return false;
@@ -265,8 +265,8 @@ public:		// classes
 			}
 			
 			
-			// At this point, it is known that both iterators are at the
-			// head of the same circ_buf_helper, so they are equal.
+			// At this point, it Is known That both iterators are at the
+			// head of the same CircBufHelper, So they are equal.
 			return false;
 		}
 		
@@ -278,7 +278,7 @@ public:		// classes
 			return cbuf_helper_ptr->at(pos);
 		}
 		
-		const iterator& operator ++ ()
+		const Iterator& operator ++ ()
 		{
 			auto get_corrected_other_pos = [&]( const size_t other_pos ) 
 				-> size_t
@@ -297,14 +297,14 @@ public:		// classes
 				const size_t updated_pos = get_corrected_other_pos
 					( get_pos() + 1 );
 				
-				if ( get_index_type() == index_type::it_head )
+				if ( get_index_type() == IndexType::it_head )
 				{
-					the_index_type = index_type::it_other;
+					the_index_type = IndexType::it_other;
 					pos = updated_pos; 
 				}
 				else if ( get_pos() == get_cbuf_helper_ptr()->get_tail() )
 				{
-					the_index_type = index_type::it_tail;
+					the_index_type = IndexType::it_tail;
 				}
 				else
 				{
@@ -316,7 +316,7 @@ public:		// classes
 				// PROPERLY handle iterators.
 				if ( get_cbuf_helper_ptr()->get_real_size() == 1 )
 				{
-					the_index_type = index_type::it_tail;
+					the_index_type = IndexType::it_tail;
 				}
 			}
 			
@@ -328,10 +328,10 @@ public:		// classes
 		
 	} __attribute__((_ALIGN4));
 	
-	friend const s32 iterator::operator * () const;
+	friend const s32 Iterator::operator * () const;
 	
 public:		// functions
-	circ_buf_helper( s32* s_the_array, size_t s_max_size )
+	CircBufHelper( s32* s_the_array, size_t s_max_size )
 		: the_array(s_the_array), max_size(s_max_size)
 	{
 		//// Don't call reset() here since it's called by
@@ -339,7 +339,7 @@ public:		// functions
 		//reset();
 	}
 	
-	circ_buf_helper& operator = ( const circ_buf_helper& to_copy )
+	CircBufHelper& operator = ( const CircBufHelper& to_copy )
 	{
 		the_array = to_copy.the_array;
 		max_size = to_copy.max_size;
@@ -375,13 +375,13 @@ public:		// functions
 		return the_array[offset];
 	}
 	
-	inline iterator begin()
+	inline Iterator begin()
 	{
-		return iterator( this, get_head(), iterator::index_type::it_head );
+		return Iterator( this, get_head(), Iterator::IndexType::it_head );
 	}
-	inline iterator end()
+	inline Iterator end()
 	{
-		return iterator( this, get_tail(), iterator::index_type::it_tail );
+		return Iterator( this, get_tail(), Iterator::IndexType::it_tail );
 	}
 	
 	void push( s32 to_push )
@@ -424,13 +424,13 @@ public:		// functions
 	
 } __attribute__((_ALIGN4));
 
-class extras_fp_group
+class ExtrasFpGroup
 {
 public:		// typedefs
 	typedef void (*sis_fp)( ndai_dyn_arr&, const size_t, const size_t );
 	
 public:		// function pointers
-	// Function pointers used by various functions in the list_backend
+	// Function pointers used by various functions in the ListBackend
 	// class.
 	
 	generic_void_2arg_fp specific_type_copy_fp = NULL;
@@ -453,27 +453,27 @@ public:		// function pointers
 	
 	
 	
-	//// The only reason this static_assert is wrapped inside a class that
-	//// has nothing else in it is to work around a bug in a Vim plugin that
+	//// The only reason this static_assert Is wrapped inside a class That
+	//// has nothing else in it Is To work around a bug in a Vim plugin That
 	//// I use (Taghighlight specifically).  I don't have any idea why this
-	//// is even an issue, but oh well.
-	//class wrapped_static_asserts
+	//// Is even an issue, but oh well.
+	//class WrappedStaticAsserts
 	//{
 	//public:		// functions
-	//	inline wrapped_static_asserts()
+	//	inline WrappedStaticAsserts()
 	//	{
-	//		static_assert( std::is_trivially_copyable<extras_fp_group>
+	//		static_assert( std::is_trivially_copyable<ExtrasFpGroup>
 	//			::value,
-	//			"Can't use struct_memcpy() in extras_fp_group::operator = "
+	//			"Can't use struct_memcpy() in ExtrasFpGroup::operator = "
 	//			"() !" );
 	//	}
 	//} __attribute__((_ALIGN4));
 	
 public:		// functions
-	inline extras_fp_group()
+	inline ExtrasFpGroup()
 	{
 	}
-	inline extras_fp_group( generic_void_2arg_fp s_specific_type_copy_fp,
+	inline ExtrasFpGroup( generic_void_2arg_fp s_specific_type_copy_fp,
 		generic_void_2arg_fp s_specific_type_move_fp,
 		generic_void_1arg_fp s_specific_type_reset_fp,
 		generic_void_2arg_fp s_specific_type_swap_fp,
@@ -506,7 +506,7 @@ public:		// functions
 		subarr_insertion_sort_fp = s_subarr_insertion_sort_fp;
 	}
 	
-	inline extras_fp_group( const extras_fp_group& to_copy )
+	inline ExtrasFpGroup( const ExtrasFpGroup& to_copy )
 	{
 		*this = to_copy;
 	}
@@ -568,12 +568,12 @@ public:		// functions
 } __attribute__((_ALIGN4));
 
 
-// A group of functions to use as function pointers in the list_backend
+// A group of functions To use as function pointers in the ListBackend
 // class.
 template< typename type >
-class list_extras
+class ListExtras
 {
-protected:		// functions to point to
+protected:		// functions To point To
 	static void specific_type_copy( type* a, type* b )
 		__attribute__((_TEXT_HOT_SECTION))
 	{
@@ -627,18 +627,18 @@ protected:		// functions to point to
 		}
 	}
 	
-	static void* get_node_data( node<type>* to_get_from )
+	static void* get_node_data( Node<type>* to_get_from )
 		__attribute__((_TEXT_HOT_SECTION))
 	{
 		return &to_get_from->data;
 	}
-	static vec2_s16* get_sa_list_index_pair( node<type>* to_get_from )
+	static vec2_s16* get_sa_list_index_pair( Node<type>* to_get_from )
 		__attribute__((_TEXT_HOT_SECTION))
 	{
 		return &to_get_from->index_pair;
 	}
-	static void conv_node_to_contents( node_contents* ret,
-		node<type>* to_convert ) __attribute__((_TEXT_HOT_SECTION))
+	static void conv_node_to_contents( NodeContents* ret,
+		Node<type>* to_convert ) __attribute__((_TEXT_HOT_SECTION))
 	{
 		ret->data_ptr = &to_convert->data;
 		ret->index_pair_ptr = &to_convert->index_pair;
@@ -647,15 +647,15 @@ protected:		// functions to point to
 	
 	// Instead of having the ENTIRE insertion_sort function be duplicated
 	// for EVERY externally_allocated_sa_list instantiation, only duplicate
-	// the inner loop.  This seems pretty good to me.
+	// the inner loop.  This seems pretty good To me.
 	//
-	// Note:  old_il_cbuf_helper is a CIRCULAR BUFFER helper that allows
-	// keeping track of a FIXED NUMBER of indices to nodes for sorting
+	// Note:  old_il_cbuf_helper Is a CIRCULAR BUFFER helper That allows
+	// keeping track of a FIXED NUMBER of indices To nodes for sorting
 	// purposes.
-	static void insertion_sort_inner_loop( node<type>* node_array, 
+	static void insertion_sort_inner_loop( Node<type>* node_array, 
 		s32* index_low_ptr ) //__attribute__((_TEXT_HOT_SECTION))
 	{
-		node<type>* node_at_j;
+		Node<type>* node_at_j;
 		
 		s32& index_low = *index_low_ptr;
 		
@@ -710,7 +710,7 @@ protected:		// functions to point to
 	
 	
 public:		// function pointer stuff
-	// This is the first time I've used an "auto" return type much, but it
+	// This Is the first time I've used an "auto" return type much, but it
 	// makes plenty of sense for this case.
 	static inline auto get_specific_type_copy_fp()
 	{
@@ -764,16 +764,16 @@ public:		// function pointer stuff
 	{
 		return get_generic_void_2arg_fp(&insertion_sort_inner_loop);
 	}
-	static inline extras_fp_group::sis_fp get_subarr_insertion_sort_fp()
+	static inline ExtrasFpGroup::sis_fp get_subarr_insertion_sort_fp()
 	{
-		//return reinterpret_cast<extras_fp_group::sis_fp>
+		//return reinterpret_cast<ExtrasFpGroup::sis_fp>
 		//	(&subarr_insertion_sort);
 		return &subarr_insertion_sort;
 	}
 	
-	static inline extras_fp_group get_extras_fp_group()
+	static inline ExtrasFpGroup get_extras_fp_group()
 	{
-		return extras_fp_group( get_specific_type_copy_fp(),
+		return ExtrasFpGroup( get_specific_type_copy_fp(),
 			get_specific_type_move_fp(),
 			get_specific_type_reset_fp(),
 			get_specific_type_swap_fp(),
@@ -790,8 +790,8 @@ public:		// function pointer stuff
 	}
 	
 	
-public:		// functions to not point to
-	static inline void subarr_insertion_sort( dyn_arr<type>& arr_a,
+public:		// functions To not point To
+	static inline void subarr_insertion_sort( DynArr<type>& arr_a,
 		const size_t subarr_offset, const size_t subarr_size )
 		__attribute__((always_inline))
 	{
@@ -822,9 +822,9 @@ public:		// functions to not point to
 
 
 
-// This class exists because C++ templates CAN generate too much code.  Oh,
-// and I can put code in IWRAM this way!
-class list_backend
+// This class Exists because C++ templates CAN generate too much code.  Oh,
+// and I Can put code in IWRAM this way!
+class ListBackend
 {
 protected:		// variables
 	size_t size = 0;
@@ -834,50 +834,50 @@ protected:		// variables
 	// node_array as a void pointer.
 	void* node_array = NULL;
 	
-	sa_free_list_backend* the_free_list_backend_ptr = NULL;
+	SaFreeListBackend* the_free_list_backend_ptr = NULL;
 	
 	
 	u32 total_num_nodes = 0;
 	
-	// node stuff
+	// Node stuff
 	u32 specific_type_size = 0, 
 		whole_node_size = 0;
 	
 	
-	extras_fp_group the_extras_fp_group;
+	ExtrasFpGroup the_extras_fp_group;
 	
-	template< typename type > friend class externally_allocated_list;
+	template< typename type > friend class ExternallyAllocatedList;
 	
 protected:		// functions
-	inline list_backend() : size(0)
+	inline ListBackend() : size(0)
 	{
 	}
-	// Dang, I had no idea it'd be this nice to get types automatically
+	// Dang, I had no idea it'd be this nice To get types automatically
 	// this way.
-	inline list_backend( void* s_node_array, 
-		sa_free_list_backend* s_the_free_list_backend_ptr,
+	inline ListBackend( void* s_node_array, 
+		SaFreeListBackend* s_the_free_list_backend_ptr,
 		u32 s_total_num_nodes, u32 s_specific_type_size,
 		u32 s_whole_node_size, 
 		
-		const extras_fp_group& s_the_extras_fp_group )
+		const ExtrasFpGroup& s_the_extras_fp_group )
 	{
 		init( s_node_array, s_the_free_list_backend_ptr,
 			s_total_num_nodes, s_specific_type_size, s_whole_node_size,
 			s_the_extras_fp_group );
 	}
-	inline list_backend( list_backend& to_copy )
+	inline ListBackend( ListBackend& to_copy )
 	{
 		init(to_copy);
 	}
 	
 	void init( void* n_node_array, 
-		sa_free_list_backend* n_the_free_list_backend_ptr,
+		SaFreeListBackend* n_the_free_list_backend_ptr,
 		u32 n_total_num_nodes, u32 n_specific_type_size,
 		u32 n_whole_node_size, 
 		
-		const extras_fp_group& n_the_extras_fp_group );
+		const ExtrasFpGroup& n_the_extras_fp_group );
 	
-	inline void init( list_backend& to_copy )
+	inline void init( ListBackend& to_copy )
 	{
 		init( to_copy.get_node_array(), 
 			to_copy.get_free_list_backend_ptr(),
@@ -924,20 +924,20 @@ protected:		// functions
 		return node_array;
 	}
 	
-	inline sa_free_list_backend* get_free_list_backend_ptr()
+	inline SaFreeListBackend* get_free_list_backend_ptr()
 	{
 		return the_free_list_backend_ptr;
 	}
-	inline const sa_free_list_backend* get_free_list_backend_ptr()
+	inline const SaFreeListBackend* get_free_list_backend_ptr()
 		const
 	{
 		return the_free_list_backend_ptr;
 	}
-	inline sa_free_list_backend& get_free_list_backend()
+	inline SaFreeListBackend& get_free_list_backend()
 	{
 		return *get_free_list_backend_ptr();
 	}
-	inline const sa_free_list_backend& get_free_list_backend() const
+	inline const SaFreeListBackend& get_free_list_backend() const
 	{
 		return *get_free_list_backend_ptr();
 	}
@@ -955,7 +955,7 @@ protected:		// functions
 		return whole_node_size;
 	}
 	
-	inline const extras_fp_group& get_extras_fp_group()
+	inline const ExtrasFpGroup& get_extras_fp_group()
 	{
 		return the_extras_fp_group;
 	}
@@ -965,14 +965,14 @@ protected:		// functions
 	inline uintptr_t get_node_addr_at( s32 index ) const
 	{
 		return reinterpret_cast<uintptr_t>(get_node_array())
-			+ arr_byte_index_macro( whole_node_size, index );
+			+ ARR_BYTE_INDEX_MACRO( whole_node_size, index );
 	}
 	
 	
 	
-	// These three functions are intended to be used sparingly.  They make
-	// most sense to use when their result is the ONLY part of a node that
-	// is relevant, and in that case it is still best to ONLY CALL them
+	// These three functions are Intended To be used sparingly.  They make
+	// most sense To use when their result Is the ONLY part of a Node That
+	// Is relevant, and in That case it Is still best To ONLY CALL them
 	// ONCE PER NODE.
 	inline void* get_node_data_at_index( s32 index )
 	{
@@ -1005,22 +1005,22 @@ protected:		// functions
 	inline s16& get_next_index_at( uintptr_t addr )
 	{
 		return ((*get_index_pair_at(addr))
-			[node_contents::vec2_index_for_next_index]);
+			[NodeContents::vec2_index_for_next_index]);
 	}
 	inline s16& get_prev_index_at( uintptr_t addr )
 	{
 		return ((*get_index_pair_at(addr))
-			[node_contents::vec2_index_for_prev_index]);
+			[NodeContents::vec2_index_for_prev_index]);
 	}
 	
-	inline node_contents get_node_contents_at( s32 index )
+	inline NodeContents get_node_contents_at( s32 index )
 	{
 		uintptr_t node_addr = get_node_addr_at(index);
 		
-		//node_contents ret = { get_node_data_at(node_addr),
+		//NodeContents ret = { get_node_data_at(node_addr),
 		//	get_index_pair_at(node_addr) };
 		
-		node_contents ret;
+		NodeContents ret;
 		
 		get_extras_fp_group().get_conv_node_to_contents_fp()( &ret, 
 			reinterpret_cast<void*>(node_addr) );
@@ -1029,7 +1029,7 @@ protected:		// functions
 	}
 	
 	
-	// Make sure to call this with node DATA!
+	// Make sure To call this with Node DATA!
 	inline void copy_node_data( void* dst_node_data, 
 		const void* src_node_data )
 	{
@@ -1044,7 +1044,7 @@ protected:		// functions
 	}
 	
 	
-	inline void assign_to_node_data( node_contents& dst_node_contents, 
+	inline void assign_to_node_data( NodeContents& dst_node_contents, 
 		const void* n_data, u32 can_move_value )
 	{
 		if (!can_move_value)
@@ -1057,7 +1057,7 @@ protected:		// functions
 		}
 	}
 	inline void assign_to_whole_node
-		( node_contents& dst_node_contents, const void* n_data,
+		( NodeContents& dst_node_contents, const void* n_data,
 		const vec2_s16& n_index_pair, u32 can_move_value )
 	{
 		assign_to_node_data( dst_node_contents, n_data, 
@@ -1067,7 +1067,7 @@ protected:		// functions
 	}
 	
 	
-	// Make sure to call this with node DATA!
+	// Make sure To call this with Node DATA!
 	inline void call_specific_type_swap_func( void* node_a_data, 
 		void* node_b_data )
 	{
@@ -1105,20 +1105,20 @@ protected:		// functions
 	
 	
 	
-	// This is used by frontends to the internal_func_move_unlinked_node*
+	// This Is used by frontends To the internal_func_move_unlinked_node*
 	// functions
 	void internal_func_allocate_and_assign_to_node( s32& index, 
-		node_contents& node, const void* n_data, u32 can_move_value );
+		NodeContents& Node, const void* n_data, u32 can_move_value );
 		__attribute__((_IWRAM_CODE));
 	
 	
 	
 	
 	
-	//// This is its own function because it's used by both push_front() and
+	//// This Is its own function because it's used by both push_front() and
 	//// push_back().
 	//inline s32 internal_func_push_front_unique_code( s32 to_push_index,
-	//	node_contents node_to_push )
+	//	NodeContents node_to_push )
 	//{
 	//}
 	
@@ -1126,7 +1126,7 @@ protected:		// functions
 	inline s32 push_front( const void* to_push, u32 can_move_value=false )
 	{
 		s32 to_push_index;
-		node_contents node_to_push;
+		NodeContents node_to_push;
 		
 		internal_func_allocate_and_assign_to_node( to_push_index,
 			node_to_push, to_push, can_move_value );
@@ -1139,7 +1139,7 @@ protected:		// functions
 	inline s32 push_back( const void* to_push, u32 can_move_value=false )
 	{
 		s32 new_index;
-		node_contents new_node;
+		NodeContents new_node;
 		internal_func_allocate_and_assign_to_node( new_index, new_node,
 			to_push, can_move_value );
 		
@@ -1152,7 +1152,7 @@ protected:		// functions
 		u32 can_move_value=false )
 	{
 		s32 to_insert_index;
-		node_contents node_to_insert;
+		NodeContents node_to_insert;
 		
 		internal_func_allocate_and_assign_to_node( to_insert_index,
 			node_to_insert, to_insert, can_move_value );
@@ -1165,7 +1165,7 @@ protected:		// functions
 		u32 can_move_value=false )
 	{
 		s32 to_insert_index;
-		node_contents node_to_insert;
+		NodeContents node_to_insert;
 		
 		internal_func_allocate_and_assign_to_node( to_insert_index,
 			node_to_insert, to_insert, can_move_value );
@@ -1203,11 +1203,11 @@ protected:		// functions
 	
 	// Some of the functions for internal use 
 	s32 internal_func_move_unlinked_node_to_front( s32 to_move_index, 
-		node_contents& node_to_move );
+		NodeContents& node_to_move );
 		//__attribute__((_IWRAM_CODE));
 		//__attribute__((noinline));
 	inline s32 internal_func_move_unlinked_node_to_back( s32 to_move_index,
-		node_contents& node_to_move )
+		NodeContents& node_to_move )
 	{
 		// If there's nothing in the list
 		if ( get_back_index() < 0 )
@@ -1223,20 +1223,20 @@ protected:		// functions
 		}
 	}
 	s32 internal_func_move_unlinked_node_before( s32 to_move_before_index, 
-		s32 to_move_index, node_contents& node_to_move );
+		s32 to_move_index, NodeContents& node_to_move );
 		//__attribute__((_IWRAM_CODE));
 		//__attribute__((noinline));
 	s32 internal_func_move_unlinked_node_after( s32 to_move_after_index, 
-		s32 to_move_index, node_contents& node_to_move );
+		s32 to_move_index, NodeContents& node_to_move );
 		//__attribute__((_IWRAM_CODE));
 		//__attribute__((noinline));
 	
 	
 	// Give slightly more flexibility, at the expense of a small amount of
-	// speed, to this function by allowing a pointer to the
-	// node_at_index be passed to it.
+	// speed, To this function by allowing a pointer To the
+	// node_at_index be passed To it.
 	void* internal_func_unlink_at( s32 index, 
-		node_contents* node_at_index_ptr=NULL );
+		NodeContents* node_at_index_ptr=NULL );
 		//__attribute__((_IWRAM_CODE));
 		//__attribute__((noinline));
 	
@@ -1248,40 +1248,40 @@ protected:		// functions
 	//inline void unlink_from_next_at( s32 index )
 	//{
 	//	internal_func_unlink_from_connected_index_at( index, 
-	//		node_contents::vec2_index_for_next_index );
+	//		NodeContents::vec2_index_for_next_index );
 	//}
 	//inline void unlink_from_prev_at( s32 index )
 	//{
 	//	internal_func_unlink_from_connected_index_at( index, 
-	//		node_contents::vec2_index_for_prev_index );
+	//		NodeContents::vec2_index_for_prev_index );
 	//}
 	
 	
 	inline void move_linked_node_to_front( s32 to_move_index, 
-		node_contents& node_to_move, list_backend& dst )
+		NodeContents& node_to_move, ListBackend& dst )
 	{
 		internal_func_unlink_at( to_move_index, &node_to_move );
 		dst.internal_func_move_unlinked_node_to_front( to_move_index, 
 			node_to_move );
 	}
 	inline void move_linked_node_to_back( s32 to_move_index, 
-		node_contents& node_to_move, list_backend& dst )
+		NodeContents& node_to_move, ListBackend& dst )
 	{
 		internal_func_unlink_at( to_move_index, &node_to_move );
 		dst.internal_func_move_unlinked_node_to_back( to_move_index, 
 			node_to_move );
 	}
 	inline void move_linked_node_before( s32 to_move_before_index,
-		s32 to_move_index, node_contents& node_to_move, 
-		list_backend& dst )
+		s32 to_move_index, NodeContents& node_to_move, 
+		ListBackend& dst )
 	{
 		internal_func_unlink_at( to_move_index, &node_to_move );
 		dst.internal_func_move_unlinked_node_before( to_move_before_index, 
 			to_move_index, node_to_move );
 	}
 	inline void move_linked_node_after( s32 to_move_after_index,
-		s32 to_move_index, node_contents& node_to_move, 
-		list_backend& dst )
+		s32 to_move_index, NodeContents& node_to_move, 
+		ListBackend& dst )
 	{
 		internal_func_unlink_at( to_move_index, &node_to_move );
 		dst.internal_func_move_unlinked_node_after( to_move_after_index, 
@@ -1291,8 +1291,8 @@ protected:		// functions
 	
 	// End of functions for internal use.
 	
-	// It is (slightly) faster to just unlink a node than it is to erase it
-	// because erase_at() ALSO resets the data of the node.  Use caution
+	// It Is (slightly) faster To just unlink a Node than it Is To erase it
+	// because erase_at() ALSO resets the data of the Node.  Use caution
 	// when using this function!
 	inline void* unlink_at_with_dealloc( s32 index )
 	{
@@ -1316,7 +1316,7 @@ protected:		// functions
 	
 	
 	
-	//// These two functions are slowwwwwww because there is too much list
+	//// These two functions are slowwwwwww because there Is too much list
 	//// traversal.  Thus, I have replaced them with an array of pointers
 	//// based method.
 	//s32 internal_func_merge( merge_args& args )
@@ -1325,12 +1325,12 @@ protected:		// functions
 	
 	
 	
-	void internal_func_subarr_merge( node_data_and_index* left_subarr,
-		const size_t left_subarr_size, node_data_and_index* right_subarr, 
-		const size_t right_subarr_size, node_data_and_index* out_subarr );
+	void internal_func_subarr_merge( NodeDataAndIndex* left_subarr,
+		const size_t left_subarr_size, NodeDataAndIndex* right_subarr, 
+		const size_t right_subarr_size, NodeDataAndIndex* out_subarr );
 		//__attribute__((_IWRAM_CODE));
 	
-	// Top-down merge sort using an array of node_data_and_index's.
+	// Top-down merge sort using an array of NodeDataAndIndex's.
 	s32 merge_sort_via_array(); //__attribute__((_IWRAM_CODE));
 	
 	
@@ -1344,44 +1344,44 @@ protected:		// functions
 
 
 template< typename type >
-class externally_allocated_list
+class ExternallyAllocatedList
 {
 protected:		// typedefs
-	typedef list_extras<type> extras_type;
+	typedef ListExtras<type> extras_type;
 	
 //public:		// variables
 protected:		// variables
 	//s32* ptr_to_front_index;
 	//s32 front_index;
-	node<type>* node_array = 0;
-	sa_free_list_backend* the_free_list_backend_ptr = 0;
+	Node<type>* node_array = 0;
+	SaFreeListBackend* the_free_list_backend_ptr = 0;
 	u32 total_num_nodes = 0;
 	
 	
 public:		// variables, temporarily public
-	list_backend the_list_backend;
+	ListBackend the_list_backend;
 	
 public:		// functions
-	inline externally_allocated_list() : the_list_backend()
+	inline ExternallyAllocatedList() : the_list_backend()
 	{
 	}
-	inline externally_allocated_list
-		( node<type>* s_node_array, 
-		sa_free_list_backend* s_the_free_list_backend_ptr,
+	inline ExternallyAllocatedList
+		( Node<type>* s_node_array, 
+		SaFreeListBackend* s_the_free_list_backend_ptr,
 		u32 s_total_num_nodes )
 	{
 		init( s_node_array, s_the_free_list_backend_ptr,
 			s_total_num_nodes );
 	}
 	
-	inline ~externally_allocated_list()
+	inline ~ExternallyAllocatedList()
 	{
 		fully_deallocate();
 	}
 	
 	
-	void init( node<type>* n_node_array, 
-		sa_free_list_backend* n_the_free_list_backend_ptr,
+	void init( Node<type>* n_node_array, 
+		SaFreeListBackend* n_the_free_list_backend_ptr,
 		u32 n_total_num_nodes ) __attribute__((noinline))
 	{
 		node_array = n_node_array;
@@ -1390,7 +1390,7 @@ public:		// functions
 		
 		the_list_backend.init( get_node_array(),
 			the_free_list_backend_ptr, get_total_num_nodes(),
-			sizeof(type), sizeof(node<type>),
+			sizeof(type), sizeof(Node<type>),
 			extras_type::get_extras_fp_group() );
 		
 		//static auto specific_type_copy = []( type* a, type* b ) -> void 
@@ -1403,10 +1403,10 @@ public:		// functions
 		//	{ return (*a) < (*b); };
 		//
 		//
-		//asm_comment("the_list_backend.init()");
+		//ASM_COMMENT("the_list_backend.init()");
 		//the_list_backend.init( get_node_array(),
 		//	the_free_list_backend_ptr, get_total_num_nodes(),
-		//	sizeof(type), sizeof(node<type>),
+		//	sizeof(type), sizeof(Node<type>),
 		//	
 		//	reinterpret_cast<generic_void_2arg_fp>(&specific_type_copy),
 		//	reinterpret_cast<generic_void_2arg_fp>(&specific_type_move),
@@ -1444,20 +1444,20 @@ public:		// functions
 		return the_list_backend.get_back_index();
 	}
 	
-	inline node<type>* get_node_array()
+	inline Node<type>* get_node_array()
 	{
 		return node_array;
 	}
-	inline const node<type>* get_node_array() const
+	inline const Node<type>* get_node_array() const
 	{
 		return node_array;
 	}
 	
-	inline sa_free_list_backend& get_free_list_backend()
+	inline SaFreeListBackend& get_free_list_backend()
 	{
 		return *the_free_list_backend_ptr;
 	}
-	inline const sa_free_list_backend& get_free_list_backend() const
+	inline const SaFreeListBackend& get_free_list_backend() const
 	{
 		return *the_free_list_backend_ptr;
 	}
@@ -1469,22 +1469,22 @@ public:		// functions
 	
 	
 	
-	inline node<type>& get_node_at( s32 index )
+	inline Node<type>& get_node_at( s32 index )
 	{
 		return get_node_array()[index];
 	}
-	inline node<type>& front()
+	inline Node<type>& front()
 	{
 		return get_node_at(get_front_index());
 	}
 	
-	inline node<type>& get_next_node_after_index
+	inline Node<type>& get_next_node_after_index
 		( s32 index )
 	{
 		return get_node_at(get_node_at(index)
 			.next_index());
 	}
-	inline node<type>& get_prev_node_before_index
+	inline Node<type>& get_prev_node_before_index
 		( s32 index )
 	{
 		return get_node_at(get_node_at(index)
@@ -1577,7 +1577,7 @@ public:		// functions
 			return the_front_index;
 		}
 		
-		externally_allocated_list<type> sorted_list( node_array, 
+		ExternallyAllocatedList<type> sorted_list( node_array, 
 			the_free_list_backend_ptr, get_total_num_nodes() );
 		
 		s32& temp_front_index = sorted_list.get_front_index();
@@ -1593,7 +1593,7 @@ public:		// functions
 			
 			s32 index_low = i;
 			
-			node<type>* node_at_j;
+			Node<type>* node_at_j;
 			
 			// Find the lowest value at or after i.
 			for ( s32 j=index_low;
@@ -1609,7 +1609,7 @@ public:		// functions
 				}
 			}
 			
-			node<type>& node_at_index_low = get_node_at(index_low);
+			Node<type>& node_at_index_low = get_node_at(index_low);
 			//const type data_to_move = node_at_index_low.data;
 			//type* data_to_move = &node_at_index_low.data;
 			
@@ -1647,8 +1647,8 @@ public:		// functions
 	
 	
 	
-	// This is a semi-optimized (though accidentally implemented
-	// differently from what was intended) version of
+	// This Is a semi-optimized (though accidentally implemented
+	// differently from what was Intended) version of
 	// insertion_sort_old_2()
 	s32 insertion_sort_old_3() __attribute__((noinline))
 	{
@@ -1666,10 +1666,10 @@ public:		// functions
 		
 		
 		//s32 temp_front_index = -1;
-		//sa_list_backend<type> sorted_list( &temp_front_index, 
+		//SaListBackend<type> sorted_list( &temp_front_index, 
 		//	node_array, ptr_to_the_free_list_backend, 
 		//	total_num_nodes );
-		externally_allocated_list<type> sorted_list( node_array, 
+		ExternallyAllocatedList<type> sorted_list( node_array, 
 			the_free_list_backend_ptr, get_total_num_nodes() );
 		
 		s32& temp_front_index = sorted_list.get_front_index();
@@ -1695,7 +1695,7 @@ public:		// functions
 			
 			s32 index_low = i;
 			
-			node<type>* node_at_j;
+			Node<type>* node_at_j;
 			
 			type* data_at_index_low = &get_node_at(index_low).data;
 			
@@ -1723,7 +1723,7 @@ public:		// functions
 				}
 			}
 			
-			node<type>& node_at_index_low = get_node_at(index_low);
+			Node<type>& node_at_index_low = get_node_at(index_low);
 			//const type data_to_move = node_at_index_low.data;
 			//type&& data_to_move = node_at_index_low.data
 			
@@ -1753,7 +1753,7 @@ public:		// functions
 			{
 				s32& curr_prev_index_low = prev_index_low_arr[j];
 				
-				node<type>& node_at_curr_prev_index_low 
+				Node<type>& node_at_curr_prev_index_low 
 					= get_node_at(curr_prev_index_low);
 				
 				if ( i == curr_prev_index_low )
@@ -1849,7 +1849,7 @@ public:		// functions
 		const size_t real_num_nodes = get_size();
 		
 		
-		dyn_arr<type> arr_a(real_num_nodes), work_arr(real_num_nodes);
+		DynArr<type> arr_a(real_num_nodes), work_arr(real_num_nodes);
 		
 		
 		{
@@ -1871,11 +1871,11 @@ public:		// functions
 		
 		if ( last_subarr_size > 1 )
 		{
-			asm_comment("last_subarr_size > 1; before");
+			ASM_COMMENT("last_subarr_size > 1; before");
 			
 			size_t subarr_offset, subarr_size;
 			
-			// This is an insertion sort of PORTIONS of arr_a.
+			// This Is an insertion sort of PORTIONS of arr_a.
 			for ( subarr_offset=0;
 				subarr_offset<real_num_nodes;
 				subarr_offset+=subarr_size )
@@ -1891,7 +1891,7 @@ public:		// functions
 					subarr_size );
 			}
 			
-			asm_comment("last_subarr_size > 1; after");
+			ASM_COMMENT("last_subarr_size > 1; after");
 		}
 		
 		
@@ -1904,7 +1904,7 @@ public:		// functions
 		static constexpr bool do_swap = true;
 		
 		bool main_arr_is_arr_a = false;
-		prev_curr_pair<dyn_arr<type>*> main_arr_pc_pair,
+		PrevCurrPair<DynArr<type>*> main_arr_pc_pair,
 			secondary_arr_pc_pair;
 		
 		//if (!do_swap)
@@ -1938,7 +1938,7 @@ public:		// functions
 				}
 			}
 			
-			auto get_merge_args = [&]( dyn_arr<type>& specific_arr, 
+			auto get_merge_args = [&]( DynArr<type>& specific_arr, 
 				size_t n_left_subarr_offset ) -> void
 			{
 				right_subarr_offset = 0;
@@ -2030,20 +2030,20 @@ public:		// functions
 
 
 
-// This is a template class for a statically allocated array of modifiable
-// doubly-linked lists.  "sa" is short for "statically allocated".
+// This Is a template class for a statically allocated array of modifiable
+// doubly-linked lists.  "sa" Is short for "statically allocated".
 template< typename type, u32 total_num_nodes, u32 num_lists >
-class sa_array_of_lists
+class SaArrayOfLists
 {
 public:		// variables
-	externally_allocated_list<type> ea_list_array[num_lists];
-	node<type> node_array[total_num_nodes];
+	ExternallyAllocatedList<type> ea_list_array[num_lists];
+	Node<type> node_array[total_num_nodes];
 	
-	sa_free_list<total_num_nodes> the_free_list;
+	SaFreeList<total_num_nodes> the_free_list;
 	
 public:		// functions
 	
-	inline sa_array_of_lists()
+	inline SaArrayOfLists()
 	{
 		for ( s32 i=(s32)get_array_size()-1; i>=0; --i )
 		{
@@ -2076,7 +2076,7 @@ public:		// functions
 	
 } __attribute__((_ALIGN4));
 
-} // end of namespace sa_list_stuff
+} // end of namespace SaListStuff
 
 
 #endif		// sa_list_class_stuff_hpp

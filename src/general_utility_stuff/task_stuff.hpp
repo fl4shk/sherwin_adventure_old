@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andy Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -24,7 +24,7 @@
 #include "misc_utility_funcs.hpp"
 #include "range_funcs.hpp"
 
-enum class task_priority : s32
+enum class TaskPriority : s32
 {
 	tp_0,
 	tp_1,
@@ -39,47 +39,47 @@ enum class task_priority : s32
 } _ALIGNAS_REGULAR;
 
 
-inline task_priority operator - ( task_priority the_tp, 
-	task_priority to_sub )
+inline TaskPriority operator - ( TaskPriority the_tp, 
+	TaskPriority to_sub )
 {
 	return the_tp - to_sub;
 }
-inline task_priority operator - ( task_priority the_tp, 
+inline TaskPriority operator - ( TaskPriority the_tp, 
 	s32 to_sub )
 {
 	return the_tp - to_sub;
 }
 
-inline task_priority clamp_task_prio( task_priority to_clamp )
+inline TaskPriority clamp_task_prio( TaskPriority to_clamp )
 {
-	return clamp_to_range<task_priority>( task_priority::tp_0, 
-		task_priority::lim_tp, to_clamp );
+	return clamp_to_range<TaskPriority>( TaskPriority::tp_0, 
+		TaskPriority::lim_tp, to_clamp );
 }
 
-class task
+class Task
 {
 public:		// typedefs
 	typedef void (*task_funcptr)();
 	
 protected:		// variables
-	task_priority the_task_prio = task_priority::tp_0;
+	TaskPriority the_task_prio = TaskPriority::tp_0;
 	task_funcptr func = NULL;
 	
 public:		// functions
-	inline task()
+	inline Task()
 	{
 	}
-	inline task( task_priority s_the_task_prio, task_funcptr s_func ) 
+	inline Task( TaskPriority s_the_task_prio, task_funcptr s_func ) 
 		: the_task_prio(clamp_task_prio(s_the_task_prio)),
 		func(s_func)
 	{
 	}
 	
-	inline task_priority get_task_prio() const
+	inline TaskPriority get_task_prio() const
 	{
 		return the_task_prio;
 	}
-	inline void set_task_prio( task_priority n_the_task_prio )
+	inline void set_task_prio( TaskPriority n_the_task_prio )
 	{
 		the_task_prio = clamp_task_prio(n_the_task_prio);
 	}

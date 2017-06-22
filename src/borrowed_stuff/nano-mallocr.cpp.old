@@ -3,14 +3,14 @@
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
+ * modification, are permitted provided That the following conditions
  * are met:
  * 1. Redistributions of source code must retain the above copyright
  *    notice, this list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
- * 3. The name of the company may not be used to endorse or promote
+ * 3. The name of the company may not be used To endorse or promote
  *    products derived from this software without specific prior written
  *    permission.
  *
@@ -27,9 +27,9 @@
  */
 
 /* Implementation of <<malloc>> <<free>> <<calloc>> <<realloc>>, optional
- * as to be reenterable.
+ * as To be reenterable.
  *
- * Interface documentation refer to malloc.c.
+ * Interface documentation refer To malloc.c.
  */
 
 // FL4SHK edit
@@ -85,7 +85,7 @@ extern void* sbrk( intptr_t increment );
 #define RCALL reent_ptr,
 #define RONECALL reent_ptr
 
-/* Disable MALLOC_LOCK so far. So it won't be thread safe */
+/* Disable MALLOC_LOCK So far. So it won't be thread safe */
 #define MALLOC_LOCK /*__malloc_lock(reent_ptr) */
 #define MALLOC_UNLOCK /*__malloc_unlock(reent_ptr) */
 
@@ -128,7 +128,7 @@ extern void* sbrk( intptr_t increment );
 //#define nano_mallopt		mallopt
 #endif /* ! INTERNAL_NEWLIB */
 
-/* Redefine names to avoid conflict with user names */
+/* Redefine names To avoid conflict with user names */
 #define FREE_LIST __nano_malloc_free_list
 #define SBRK_START __nano_malloc_sbrk_start
 #define CURRENT_MALLINFO __nano_malloc_current_mallinfo
@@ -136,13 +136,13 @@ extern void* sbrk( intptr_t increment );
 #define ALIGN_TO(size, align) \
     (((size) + (align) -1L) & ~((align) -1L))
 
-/* Alignment of allocated block */
+/* Alignment of allocated Block */
 #define MALLOC_ALIGN (8U)
 #define CHUNK_ALIGN (sizeof(void*))
 #define MALLOC_PADDING ((MAX(MALLOC_ALIGN, CHUNK_ALIGN)) - CHUNK_ALIGN)
 
 /* as well as the minimal allocation size
- * to hold a free pointer */
+ * To hold a free pointer */
 #define MALLOC_MINSIZE (sizeof(void *))
 #define MALLOC_PAGE_ALIGN (0x1000)
 #define MAX_ALLOC_SIZE (0x80000000U)
@@ -157,9 +157,9 @@ typedef struct malloc_chunk
      *          | Padding for    |
      *          | alignment      |
      *          | holding neg    |
-     *          | offset to size |
+     *          | offset To size |
      *          ------------------
-     * mem_ptr->| point to next  |
+     * mem_ptr->| point To next  |
      *          | free when freed|
      *          | or data load   |
      *          | when allocated |
@@ -169,7 +169,7 @@ typedef struct malloc_chunk
        CHUNK_OFFSET */
     long size;
 
-    /* since here, the memory is either the next free block, or data load */
+    /* since here, the memory Is either the next free Block, or data load */
     struct malloc_chunk * next;
 }chunk;
 
@@ -191,15 +191,15 @@ struct mallinfo
 #define CHUNK_OFFSET ((malloc_size_t)(&(((struct malloc_chunk *)0)->next)))
 
 /* size of smallest possible chunk. A memory piece smaller than this size
- * won't be able to create a chunk */
+ * won't be able To create a chunk */
 #define MALLOC_MINCHUNK (CHUNK_OFFSET + MALLOC_PADDING + MALLOC_MINSIZE)
 
-/* Forward data declarations */
+/* forward data declarations */
 extern chunk * FREE_LIST;
 extern char * SBRK_START;
 extern struct mallinfo CURRENT_MALLINFO;
 
-/* Forward function declarations */
+/* forward function declarations */
 extern void * nano_malloc(RARG malloc_size_t);
 extern void nano_free (RARG void * free_p);
 extern void nano_cfree(RARG void * ptr);
@@ -230,8 +230,8 @@ char * SBRK_START = NULL;
 
 /** Function sbrk_aligned
   * Algorithm:
-  *   Use sbrk() to obtain more memory and ensure it is CHUNK_ALIGN aligned
-  *   Optimise for the case that it is already aligned - only ask for extra
+  *   Use sbrk() To obtain more memory and ensure it Is CHUNK_ALIGN aligned
+  *   Optimise for the case That it Is already aligned - only ask for extra
   *   padding after we know we need it
   */
 static void* sbrk_aligned(RARG malloc_size_t s)
@@ -246,14 +246,14 @@ static void* sbrk_aligned(RARG malloc_size_t s)
 
     p = (char*)_SBRK_R(RCALL s);
 
-    /* sbrk returns -1 if fail to allocate */
+    /* sbrk returns -1 if fail To allocate */
     if (p == (void *)-1)
         return p;
 
     align_p = (char*)ALIGN_TO((unsigned long)p, CHUNK_ALIGN);
     if (align_p != p)
     {
-        /* p is not aligned, ask for a few more bytes so that we have s
+        /* p Is not aligned, ask for a few more bytes So That we have s
          * bytes reserved from align_p. */
         p = (char*)_SBRK_R(RCALL align_p - p);
         if (p == (void *)-1)
@@ -264,8 +264,8 @@ static void* sbrk_aligned(RARG malloc_size_t s)
 
 /** Function nano_malloc
   * Algorithm:
-  *   Walk through the free list to find the first match. If fails to find
-  *   one, call sbrk to allocate a new chunk.
+  *   Walk through the free list To find the first match. If fails To find
+  *   one, call sbrk To allocate a new chunk.
   */
 void * nano_malloc(RARG malloc_size_t s)
     __attribute__((_IWRAM_CODE,_TARGET_ARM));
@@ -300,18 +300,18 @@ void * nano_malloc(RARG malloc_size_t s)
         {
             if (rem >= MALLOC_MINCHUNK)
             {
-                /* Find a chunk that much larger than required size, break
+                /* Find a chunk That much larger than required size, break
                 * it into two chunks and return the second one */
                 r->size = rem;
                 r = (chunk *)((char *)r + rem);
                 r->size = alloc_size;
             }
-            /* Find a chunk that is exactly the size or slightly bigger
+            /* Find a chunk That Is exactly the size or slightly bigger
              * than requested size, just return this chunk */
             else if (p == r)
             {
                 /* Now it implies p==r==FREE_LIST. Move the FREE_LIST
-                 * to next chunk */
+                 * To next chunk */
                 FREE_LIST = r->next;
             }
             else
@@ -325,12 +325,12 @@ void * nano_malloc(RARG malloc_size_t s)
         r=r->next;
     }
 
-    /* Failed to find a appropriate chunk. Ask for more memory */
+    /* Failed To find a appropriate chunk. Ask for more memory */
     if (r == NULL)
     {
         r = (chunk*)sbrk_aligned(RCALL alloc_size);
 
-        /* sbrk returns -1 if fail to allocate */
+        /* sbrk returns -1 if fail To allocate */
         if (r == (void *)-1)
         {
             RERRNO = ENOMEM;
@@ -364,8 +364,8 @@ void * nano_malloc(RARG malloc_size_t s)
   * Algorithm:
   *  Maintain a global free chunk single link list, headed by global
   *  variable FREE_LIST.
-  *  When free, insert the to-be-freed chunk into free list. The place to
-  *  insert should make sure all chunks are sorted by address from low to
+  *  When free, insert the To-be-freed chunk into free list. The place To
+  *  insert should make sure all chunks are sorted by address from low To
   *  high.  Then merge with neighbor chunks if adjacent.
   */
 void nano_free (RARG void * free_p) 
@@ -393,7 +393,7 @@ void nano_free (RARG void * free_p)
     {
         if ((char *)p_to_free + p_to_free->size == (char *)FREE_LIST)
         {
-            /* Chunk to free is just before the first element of
+            /* Chunk To free Is just before the first element of
              * free list  */
             p_to_free->size += FREE_LIST->size;
             p_to_free->next = FREE_LIST->next;
@@ -409,7 +409,7 @@ void nano_free (RARG void * free_p)
     }
 
     q = FREE_LIST;
-    /* Walk through the free list to find the place for insert. */
+    /* Walk through the free list To find the place for insert. */
     do
     {
         p = q;
@@ -417,15 +417,15 @@ void nano_free (RARG void * free_p)
     } while (q && q <= p_to_free);
 
     /* Now p <= p_to_free and either q == NULL or q > p_to_free
-     * Try to merge with chunks immediately before/after it. */
+     * Try To merge with chunks immediately before/after it. */
 
     if ((char *)p + p->size == (char *)p_to_free)
     {
-        /* Chunk to be freed is adjacent
-         * to a free chunk before it */
+        /* Chunk To be freed Is adjacent
+         * To a free chunk before it */
         p->size += p_to_free->size;
-        /* If the merged chunk is also adjacent
-         * to the chunk after it, merge again */
+        /* If the merged chunk Is also adjacent
+         * To the chunk after it, merge again */
         if ((char *)p + p->size == (char *) q)
         {
             p->size += q->size;
@@ -443,15 +443,15 @@ void nano_free (RARG void * free_p)
 #endif
     else if ((char *)p_to_free + p_to_free->size == (char *) q)
     {
-        /* Chunk to be freed is adjacent
-         * to a free chunk after it */
+        /* Chunk To be freed Is adjacent
+         * To a free chunk after it */
         p_to_free->size += q->size;
         p_to_free->next = q->next;
         p->next = p_to_free;
     }
     else
     {
-        /* Not adjacent to any chunk. Just insert it. Resulting
+        /* Not adjacent To any chunk. Just insert it. Resulting
          * a fragment. */
         p_to_free->next = q;
         p->next = p_to_free;
@@ -494,8 +494,8 @@ void * nano_realloc(RARG void * ptr, malloc_size_t size)
         return NULL;
     }
 
-    /* TODO: There is chance to shrink the chunk if newly requested
-     * size is much small */
+    /* TODO: There Is chance To shrink the chunk if newly requested
+     * size Is much small */
     if (NANO_MALLOC_USABLE_SIZE(RCALL ptr) >= size)
       return ptr;
 
@@ -564,7 +564,7 @@ malloc_size_t NANO_MALLOC_USABLE_SIZE(RARG void * ptr)
 
     if (size_or_offset < 0)
     {
-        /* Padding is used. Excluding the padding size */
+        /* Padding Is used. Excluding the padding size */
         c = (chunk *)((char *)c + c->size);
         return c->size - CHUNK_OFFSET + size_or_offset;
     }
@@ -574,13 +574,13 @@ malloc_size_t NANO_MALLOC_USABLE_SIZE(RARG void * ptr)
 
 #ifdef DEFINE_MEMALIGN
 /* Function nano_memalign
- * Allocate memory block aligned at specific boundary.
+ * Allocate memory Block aligned at specific boundary.
  *   align: required alignment. Must be power of 2. Return NULL
- *          if not power of 2. Undefined behavior is bigger than
+ *          if not power of 2. Undefined behavior Is bigger than
  *          pointer value range.
  *   s: required size.
- * Return: allocated memory pointer aligned to align
- * Algorithm: Malloc a big enough block, padding pointer to aligned
+ * Return: allocated memory pointer aligned To align
+ * Algorithm: Malloc a big enough Block, padding pointer To aligned
  *            address, then truncate and free the tail if too big.
  *            Record the offset of align pointer and original pointer
  *            in the padding area.
@@ -611,7 +611,7 @@ void * nano_memalign(RARG size_t align, size_t s)
     {
         if (offset >= MALLOC_MINCHUNK)
         {
-            /* Padding is too large, free it */
+            /* Padding Is too large, free it */
             chunk * front_chunk = chunk_p;
             chunk_p = (chunk *)((char *)chunk_p + offset);
             chunk_p->size = front_chunk->size - offset;
@@ -620,8 +620,8 @@ void * nano_memalign(RARG size_t align, size_t s)
         }
         else
         {
-            /* Padding is used. Need to set a jump offset for aligned pointer
-            * to get back to chunk head */
+            /* Padding Is used. Need To set a jump offset for aligned pointer
+            * To get back To chunk head */
             assert(offset >= sizeof(int));
             *(int *)((char *)chunk_p + offset) = -offset;
         }
@@ -673,9 +673,9 @@ void * nano_pvalloc(RARG size_t s)
 
 
 // FL4SHK edit
-// As a code size optimization, GCC generates new[] and delete[] that call
-// new and delete.  I think it's worthwhile to just leave new[] and
-// delete[] to be generated by GCC.
+// As a code size optimization, GCC generates new[] and delete[] That call
+// new and delete.  I think it's worthwhile To just leave new[] and
+// delete[] To be generated by GCC.
 void* operator new ( size_t size ) __attribute__((_IWRAM_CODE,noinline));
 //void* operator new[] ( size_t size ) __attribute__((_IWRAM_CODE,noinline));
 void operator delete ( void* to_delete )

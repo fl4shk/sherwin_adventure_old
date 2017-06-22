@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -26,8 +26,8 @@
 #include <utility>
 
 
-// These were originally intended to be used by the sa_list_backend and
-// externally_allocated_sa_list classes, but they are of course free to use
+// These were originally Intended To be used by the SaListBackend and
+// externally_allocated_sa_list classes, but they are of course free To use
 // for other things.
 typedef void (*generic_void_1arg_fp)( void* );
 typedef void (*generic_void_2arg_fp)( void*, void* );
@@ -36,7 +36,7 @@ typedef void (*generic_void_4arg_fp)( void*, void*, void*, void* );
 typedef u32 (*generic_u32_2arg_fp)( void*, void* );
 
 
-// This is for function pointers to pass to qsort()
+// This Is for function pointers To pass To qsort()
 typedef int (*qscmp_fp)( const void*, const void* );
 
 
@@ -47,18 +47,18 @@ typedef s16* (*generic_s16_ptr_1arg_fp)( void* );
 typedef vec2_s16* (*generic_vec2_s16_ptr_1arg_fp)( void* );
 
 
-// This X macro is strictly used for working around what appears to be a
+// This X macro Is strictly used for working around what appears To be a
 // bug in my text editor's ctags stuff.
-#define list_of_types_to_make_ptr_typedefs_for(macro) \
+#define LIST_OF_TYPES_TO_MAKE_PTR_TYPEDEFS_FOR(macro) \
 	macro(void) macro(s16) macro(vec2_s16)
 
-#define generate_ptr_typedef(type) \
+#define GENERATE_PTR_TYPEDEF(type) \
 typedef type* type##_ptr;
 
-list_of_types_to_make_ptr_typedefs_for(generate_ptr_typedef)
+LIST_OF_TYPES_TO_MAKE_PTR_TYPEDEFS_FOR(GENERATE_PTR_TYPEDEF)
 
-#undef generate_ptr_typedef
-#undef list_of_types_to_make_ptr_typedefs_for
+#undef GENERATE_PTR_TYPEDEF
+#undef LIST_OF_TYPES_TO_MAKE_PTR_TYPEDEFS_FOR
 
 
 

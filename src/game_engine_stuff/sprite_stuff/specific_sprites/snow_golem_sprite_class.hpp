@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -21,7 +21,7 @@
 
 #include "../../../gfx/the_golem_enemy_gfx.h"
 
-class snow_golem_sprite : public sprite
+class SnowGolemSprite : public Sprite
 {
 public:		// enums
 	// "Global" graphics frames
@@ -36,7 +36,7 @@ public:		// enums
 		frm_throw_2 = 3,
 	} _ALIGNAS_REGULAR;
 	
-	// This enum allows multiple frame_slot's to be represented by the same
+	// This enum allows multiple frame_slot's To be represented by the same
 	// frame.
 	enum frame_slot
 	{
@@ -48,12 +48,12 @@ public:		// enums
 		frm_slot_throw_1, 
 		frm_slot_throw_2, 
 		
-		// lim_frm_slot is the amount of frame_slot's.  It is
+		// lim_frm_slot Is the amount of frame_slot's.  It Is
 		// automatically updated by the compiler.
 		lim_frm_slot,
 	} _ALIGNAS_REGULAR;
 	
-	// These are used to access misc_data_u and misc_data_s
+	// These are used To access misc_data_u and misc_data_s
 	enum udata_index
 	{
 		udi_frame_stuff_initalized,
@@ -73,17 +73,17 @@ public:		// variables
 	
 	// Graphics constants
 	
-	// A constant array that is intended to be indexed with a frame_slot,
-	// such that a frame_slot can be mapped to a frame.
+	// A constant array That Is Intended To be indexed with a frame_slot,
+	// such That a frame_slot Can be mapped To a frame.
 	static constexpr u32 frame_slot_to_frame_arr_size = lim_frm_slot;
 	static const frame frame_slot_to_frame_arr
 		[frame_slot_to_frame_arr_size];
 	
-	static const sprite_const_params the_const_params;
+	static const SpriteConstParams the_const_params;
 	
 	
 public:		// functions
-	inline snow_golem_sprite( bool facing_left )
+	inline SnowGolemSprite( bool facing_left )
 	{
 		shared_constructor_code_part_1();
 		shared_constructor_code_part_2(facing_left);
@@ -96,7 +96,7 @@ public:		// functions
 	//virtual void update_part_3( bg_point& camera_pos,
 	//	const vec2_u32& the_level_size_2d ) __attribute__((_IWRAM_CODE));
 	
-	inline virtual const sprite_const_params& get_const_params() const
+	inline virtual const SpriteConstParams& get_const_params() const
 	{
 		return the_const_params;
 	}

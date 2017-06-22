@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -38,11 +38,11 @@ static constexpr u32 bg3_sbb = 31;
 
 #include "../game_manager_class.hpp"
 
-class active_level_manager
+class ActiveLevelManager
 {
 public:		// variables
 	
-	// -- Switch to linear_memory_allocator --
+	// -- Switch To linear_memory_allocator --
 	static u32 converted_block_tile_ids_0[lim_bt],
 		converted_block_tile_ids_1[lim_bt],
 		converted_block_tile_ids_2[lim_bt],
@@ -59,12 +59,12 @@ public:		// functions
 	
 	
 	//static inline u32 sublevel_width_in_tiles 
-	//	( array_2d_helper<u16>& the_block_ids_2d )
+	//	( Array_2dHelper<u16>& the_block_ids_2d )
 	//{
 	//	return the_block_ids_2d.width() * 2;
 	//}
 	//static inline u32 sublevel_height_in_tiles 
-	//	( array_2d_helper<u16>& the_block_ids_2d )
+	//	( Array_2dHelper<u16>& the_block_ids_2d )
 	//{
 	//	return the_block_ids_2d.height() * 2;
 	//}
@@ -94,21 +94,21 @@ public:		// functions
 	
 	
 	//static void init_horiz_sublevel_sprite_ipg_lists
-	//	( const sprite_init_param_group* the_ext_sprite_ipg_arr, 
+	//	( const SpriteInitParamGroup* the_ext_sprite_ipg_arr, 
 	//	u32 the_ext_sprite_ipg_arr_size )
 	//	__attribute__((_IWRAM_CODE,_TARGET_ARM));
 	
 	
 	static inline void init_horiz_sublevel_sprite_ipg_lists()
 	{
-		sprite_manager::init_horiz_sublevel_sprite_ipg_lists
-			( active_level::get_curr_sublevel_ptr()
+		SpriteManager::init_horiz_sublevel_sprite_ipg_lists
+			( ActiveLevel::get_curr_sublevel_ptr()
 			.sprite_ipg_arr_arr_helper.get_array(),
-			active_level::get_curr_sublevel_ptr()
+			ActiveLevel::get_curr_sublevel_ptr()
 			.sprite_ipg_arr_arr_helper.get_size() );
 	}
 	
-	static void load_level( const level* n_the_current_level_ptr );
+	static void load_level( const Level* n_the_current_level_ptr );
 	
 	static void load_sublevel_basic( u32 n_sublevel_index );
 	

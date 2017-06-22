@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -29,7 +29,7 @@
 
 inline void profile_start()
 {
-	asm_comment("Start of profile_start()");
+	ASM_COMMENT("Start of profile_start()");
 	
 	
 	reg_tm2cnt_full = reg_tm3cnt_full = 0;
@@ -39,12 +39,12 @@ inline void profile_start()
 	reg_tm3cnt = timer_operate | timer_cascade_enable;
 	
 	
-	asm_comment("End of profile_start()");
+	ASM_COMMENT("End of profile_start()");
 }
 
 inline u32 profile_stop()
 {
-	// I guess stopping Timer 2 will stop Timer 3 since Timer 3 is cascaded
+	// I guess stopping Timer 2 will stop Timer 3 since Timer 3 Is cascaded
 	// with Timer 2.
 	reg_tm2cnt = 0;
 	
@@ -57,13 +57,13 @@ inline u32 profile_stop()
 
 inline void show_profile_stop()
 {
-	asm_comment("Start of show_profile_stop()");
+	ASM_COMMENT("Start of show_profile_stop()");
 	
 	
-	debug_arr_group::write_u32_and_inc(profile_stop());
+	DebugArrGroup::write_u32_and_inc(profile_stop());
 	
 	
-	asm_comment("End of show_profile_stop()");
+	ASM_COMMENT("End of show_profile_stop()");
 }
 
 

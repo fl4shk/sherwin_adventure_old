@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -36,19 +36,19 @@ enum game_mode
 	// When initializing the game
 	gm_initializing_the_game,
 	
-	// When loading a level.
+	// When loading a Level.
 	gm_loading_level,
 	
-	// When changing from one sublevel to another.
+	// When changing from one Sublevel To another.
 	gm_changing_sublevel,
 	
-	// When in a sublevel.
+	// When in a Sublevel.
 	gm_in_sublevel,
 	
-	// When a bug is automatically detected.
+	// When a bug Is automatically detected.
 	gm_do_halt,
 	
-	// lim_gm is the amount of game modes.  It is automatically updated
+	// lim_gm Is the amount of game modes.  It Is automatically updated
 	// by the compiler.
 	lim_gm,
 	
@@ -56,7 +56,7 @@ enum game_mode
 
 
 
-class game_manager
+class GameManager
 {
 public:		// variables
 	
@@ -83,8 +83,8 @@ public:		// variables
 	
 public:		// functions
 	
-	// This function toggles whether music is playing if the select button
-	// is down this frame but was not down on the previous frame.
+	// This function toggles whether music Is playing if the select button
+	// Is down this frame but was not down on the previous frame.
 	static inline void pause_or_unpause_music()
 	{
 		if( key_hit(KEY_SELECT) )

@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -25,7 +25,7 @@
 
 
 // Graphics constants
-const snow_golem_sprite::frame snow_golem_sprite::frame_slot_to_frame_arr
+const SnowGolemSprite::frame SnowGolemSprite::frame_slot_to_frame_arr
 	[frame_slot_to_frame_arr_size]
 = {
 	// Standing
@@ -35,7 +35,7 @@ const snow_golem_sprite::frame snow_golem_sprite::frame_slot_to_frame_arr
 	frm_throw_0, frm_throw_1, frm_throw_2
 };
 
-const sprite_const_params snow_golem_sprite::the_const_params
+const SpriteConstParams SnowGolemSprite::the_const_params
 = {
 	// the_const_sprite_type
 	st_snow_golem, 
@@ -47,26 +47,26 @@ const sprite_const_params snow_golem_sprite::the_const_params
 	0,
 	
 	// num_active_gfx_tiles
-	gfx_manager::num_tiles_in_ss_16x32,
+	GfxManager::num_tiles_in_ss_16x32,
 	
 	// tile_arr 
 	const_cast<tile*>(reinterpret_cast<const tile*>
 		(the_golem_enemy_gfxTiles)),
 	
 	// the_initial_shape_size
-	oam_entry::ss_16x32,
+	OamEntry::ss_16x32,
 	
-	// This needs to be better fit to snow golem enemies.
+	// This needs To be better fit To snow golem enemies.
 	// the_initial_coll_box_size
-	{ {12 << fixed24p8::get_shift() }, {29 << fixed24p8::get_shift() } },
+	{ {12 << Fixed24p8::get_shift() }, {29 << Fixed24p8::get_shift() } },
 	
 	// the_initial_cb_pos_offset
-	{ {2 << fixed24p8::get_shift() }, {3 << fixed24p8::get_shift() } },
+	{ {2 << Fixed24p8::get_shift() }, {3 << Fixed24p8::get_shift() } },
 };
 
 
 
-void snow_golem_sprite::update_part_2()
+void SnowGolemSprite::update_part_2()
 {
 	// Eventually, interesting stuff should happen in this function.
 	
@@ -75,7 +75,7 @@ void snow_golem_sprite::update_part_2()
 	
 	s32& frame_change_timer = misc_data_s[sdi_frame_change_timer];
 	
-	// This could just as easily be done in the init() function, but that'd
+	// This could just as easily be done in the init() function, but That'd
 	// require re-implementing it for this class.
 	if (!frame_stuff_initialized)
 	{
@@ -104,7 +104,7 @@ void snow_golem_sprite::update_part_2()
 
 
 // Graphics stuff
-const u32 snow_golem_sprite::get_curr_relative_tile_slot()
+const u32 SnowGolemSprite::get_curr_relative_tile_slot()
 {
 	//// Temporary!
 	//return frame_slot_to_frame_arr[frm_slot_throw_2] 

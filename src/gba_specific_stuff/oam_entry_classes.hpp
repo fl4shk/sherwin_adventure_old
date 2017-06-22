@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -27,20 +27,20 @@
 #include "../general_utility_stuff/fixed_classes.hpp"
 
 
-class oam_entry;
-class oam_entry_affine;
+class OamEntry;
+class OamEntryAffine;
 
 static const u32 oam_mirror_size = 128;
 static const u32 oam_mirror_aff_size = 32;
 
-extern oam_entry oam_mirror[oam_mirror_size];
-#define OAM_MIRROR_AFF ( (oam_entry_affine*)(oam_mirror) )
-//extern oam_entry_affine* const OAM_MIRROR_AFF;
+extern OamEntry oam_mirror[oam_mirror_size];
+#define OAM_MIRROR_AFF ( (OamEntryAffine*)(oam_mirror) )
+//extern OamEntryAffine* const OAM_MIRROR_AFF;
 
 
 
 // Regular OAM Entries, no affine transformations
-class oam_entry
+class OamEntry
 {
 public:		// enums
 	enum shape_size { ss_8x8, ss_16x16, ss_32x32, ss_64x64, ss_16x8, 
@@ -74,9 +74,9 @@ public:		// wrapper functions
 	void set_y_coord( s32 n_y_coord )
 	{
 		//clear_and_set_bits( attr0, obj_attr0_y_coord_mask,
-		//	obj_attr0_y_coord(n_y_coord) );
+		//	OBJ_ATTR0_Y_COORD(n_y_coord) );
 		clear_bits( attr0, obj_attr0_y_coord_mask );
-		set_bits( attr0, obj_attr0_y_coord(n_y_coord) );
+		set_bits( attr0, OBJ_ATTR0_Y_COORD(n_y_coord) );
 	}
 	
 	s32 get_x_coord() const
@@ -88,9 +88,9 @@ public:		// wrapper functions
 	void set_x_coord( s32 n_x_coord )
 	{
 		//clear_and_set_bits( attr1, obj_attr1_x_coord_mask,
-		//	obj_attr1_x_coord(n_x_coord) );
+		//	OBJ_ATTR1_X_COORD(n_x_coord) );
 		clear_bits( attr1, obj_attr1_x_coord_mask );
-		set_bits( attr1, obj_attr1_x_coord(n_x_coord) );
+		set_bits( attr1, OBJ_ATTR1_X_COORD(n_x_coord) );
 	}
 	
 	void enable_hflip()
@@ -141,7 +141,7 @@ public:		// wrapper functions
 	void set_tile_number( u32 n_tile_num )
 	{
 		clear_and_set_bits( attr2, obj_attr2_tile_number_mask,
-			obj_attr2_tile_number(n_tile_num) );
+			OBJ_ATTR2_TILE_NUMBER(n_tile_num) );
 	}
 	
 	u32 get_tile_number() const
@@ -153,7 +153,7 @@ public:		// wrapper functions
 	void set_pal_number( u32 n_pal_num )
 	{
 		clear_and_set_bits( attr2, obj_attr2_pal_num_mask,
-			obj_attr2_pal_num(n_pal_num) );
+			OBJ_ATTR2_PAL_NUM(n_pal_num) );
 	}
 	
 	u32 get_pal_number() const
@@ -178,25 +178,25 @@ public:		// wrapper functions
 
 
 // A class for OAM Affine stuffs
-// I could probably change every s16 member variable in this class to a
-// fixed8p8, since that's basically what it's supposed to be.
-class oam_entry_affine
+// I could probably change every s16 member variable in this class To a
+// Fixed8p8, since That's basically what it's supposed To be.
+class OamEntryAffine
 {
 public:		// variables
 	static const u32 fill_size = 3;
 	
 	
 	u16 fill0[fill_size];
-	fixed8p8 pa;
+	Fixed8p8 pa;
 	
 	u16 fill1[fill_size];
-	fixed8p8 pb;
+	Fixed8p8 pb;
 	
 	u16 fill2[fill_size];
-	fixed8p8 pc;
+	Fixed8p8 pc;
 	
 	u16 fill3[fill_size];
-	fixed8p8 pd;
+	Fixed8p8 pd;
 	
 public:		// functions
 	
@@ -208,9 +208,9 @@ public:		// functions
 inline void copy_oam_mirror_to_oam()
 {
 	//dma3_cpy( (vu16*)(MEM_OAM), oam_mirror, 
-	//	( oam_mirror_size * sizeof(oam_entry) ) / sizeof(u16), 0 );
+	//	( oam_mirror_size * sizeof(OamEntry) ) / sizeof(u16), 0 );
 	memcpy32( (void*)(MEM_OAM), oam_mirror,
-		( oam_mirror_size * sizeof(oam_entry) ) / sizeof(u32) );
+		( oam_mirror_size * sizeof(OamEntry) ) / sizeof(u32) );
 }
 
 inline void clear_oam_mirror()

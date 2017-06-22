@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -28,16 +28,16 @@
 
 #include "sprite_stuff/sprite_type_includes.hpp"
 
-bool hud_manager::hud_was_generated;
+bool HudManager::hud_was_generated;
 
-scr_entry hud_manager::bg1_screenblock_mirror[screenblock_size];
+scr_entry HudManager::bg1_screenblock_mirror[screenblock_size];
 
-array_csz_2d_helper< scr_entry, screenblock_xsize, screenblock_ysize > 
-	hud_manager::bg1_screenblock_2d(SE_RAM[bg1_sbb]);
-array_csz_2d_helper< scr_entry, screenblock_xsize, screenblock_ysize > 
-	hud_manager::bg1_screenblock_mirror_2d(bg1_screenblock_mirror);
+ArrayCsz_2dHelper< scr_entry, screenblock_xsize, screenblock_ysize > 
+	HudManager::bg1_screenblock_2d(SE_RAM[bg1_sbb]);
+ArrayCsz_2dHelper< scr_entry, screenblock_xsize, screenblock_ysize > 
+	HudManager::bg1_screenblock_mirror_2d(bg1_screenblock_mirror);
 
-const char hud_manager::char_to_plottable_char_arr
+const char HudManager::char_to_plottable_char_arr
 	[char_to_plottable_char_arr_size]
 	= { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
 	' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
@@ -60,21 +60,21 @@ const char hud_manager::char_to_plottable_char_arr
 	' ', ' ', ' ', ' ', ' ' };
 	
 
-//void hud_manager::plot_char_8x16_to_screenblock_mirror( u32 the_char, 
+//void HudManager::plot_char_8x16_to_screenblock_mirror( u32 the_char, 
 //	u32 pos_x, u32 pos_y )
 //{
 //	bg1_screenblock_mirror_2d.at( pos_x, pos_y )
-//		= gfx_manager::hud_vram_as_tiles_start_offset
-//		+ ( ( (char)the_char - ' ' ) * gfx_manager::num_tiles_in_ss_8x16 )
-//		| se_palbank(bgps_in_level_hud);
+//		= GfxManager::hud_vram_as_tiles_start_offset
+//		+ ( ( (char)the_char - ' ' ) * GfxManager::num_tiles_in_ss_8x16 )
+//		| SE_PALBANK(bgps_in_level_hud);
 //	
 //	bg1_screenblock_mirror_2d.at( pos_x, pos_y + 1 )
-//		= gfx_manager::hud_vram_as_tiles_start_offset
-//		+ ( ( (char)the_char - ' ' ) * gfx_manager::num_tiles_in_ss_8x16 
-//		+ 1 ) | se_palbank(bgps_in_level_hud);
+//		= GfxManager::hud_vram_as_tiles_start_offset
+//		+ ( ( (char)the_char - ' ' ) * GfxManager::num_tiles_in_ss_8x16 
+//		+ 1 ) | SE_PALBANK(bgps_in_level_hud);
 //}
 
-//void hud_manager::plot_char_8x8_to_screenblock_mirror( u32 the_char,
+//void HudManager::plot_char_8x8_to_screenblock_mirror( u32 the_char,
 //	u32 pos_x, u32 pos_y )
 //{
 //	//// Don't plot ASCII control codes.
@@ -87,22 +87,22 @@ const char hud_manager::char_to_plottable_char_arr
 //	//if ( the_char < ' ' )
 //	//{
 //	//	bg1_screenblock_mirror_2d.at( pos_x, pos_y )
-//	//		= gfx_manager::hud_vram_as_tiles_start_offset
-//	//		| se_palbank(bgps_in_level_hud);
+//	//		= GfxManager::hud_vram_as_tiles_start_offset
+//	//		| SE_PALBANK(bgps_in_level_hud);
 //	//	return;
 //	//}
 //	//
 //	//bg1_screenblock_mirror_2d.at( pos_x, pos_y )
-//	//	= gfx_manager::hud_vram_as_tiles_start_offset
-//	//	+ ( (char)the_char - ' ' ) | se_palbank(bgps_in_level_hud);
+//	//	= GfxManager::hud_vram_as_tiles_start_offset
+//	//	+ ( (char)the_char - ' ' ) | SE_PALBANK(bgps_in_level_hud);
 //	
 //	bg1_screenblock_mirror_2d.at( pos_x, pos_y )
-//		= ( gfx_manager::hud_vram_as_tiles_start_offset
+//		= ( GfxManager::hud_vram_as_tiles_start_offset
 //		+ ( char_to_plottable_char_arr[(u32)((u8)the_char)] - ' ' ) )
-//		| se_palbank(bgps_in_level_hud);
+//		| SE_PALBANK(bgps_in_level_hud);
 //}
 
-void hud_manager::plot_horiz_str_8x8_to_screenblock_mirror
+void HudManager::plot_horiz_str_8x8_to_screenblock_mirror
 	( const char* str, u32 str_size, u32& plot_x, u32& plot_y )
 {
 	
@@ -115,9 +115,9 @@ void hud_manager::plot_horiz_str_8x8_to_screenblock_mirror
 		}
 		
 		bg1_screenblock_mirror_2d.at( plot_x, plot_y )
-			= ( gfx_manager::hud_vram_as_tiles_start_offset
+			= ( GfxManager::hud_vram_as_tiles_start_offset
 			+ ( char_to_plottable_char_arr[(u32)(str[i])] - ' ' ) )
-			| se_palbank(bgps_in_level_hud);
+			| SE_PALBANK(bgps_in_level_hud);
 		
 		++plot_x;
 	}
@@ -125,7 +125,7 @@ void hud_manager::plot_horiz_str_8x8_to_screenblock_mirror
 }
 
 
-void hud_manager::update_hud_in_screenblock_mirror_2d()
+void HudManager::update_hud_in_screenblock_mirror_2d()
 {
 	if (!hud_was_generated)
 	{
@@ -171,8 +171,8 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 	//}
 	
 	
-	s32 to_convert = ( player_sprite::remaining_hp < 0 )
-		? 0 : player_sprite::remaining_hp;
+	s32 to_convert = ( PlayerSprite::remaining_hp < 0 )
+		? 0 : PlayerSprite::remaining_hp;
 	//s32 to_convert = 10;
 	
 	//for (;;)
@@ -256,43 +256,43 @@ void hud_manager::update_hud_in_screenblock_mirror_2d()
 	};
 	
 	
-	////print_num_debug(sprite::tallest_height_val.curr);
-	//print_num_debug(sprite_manager::the_player->the_oam_entry
+	////print_num_debug(Sprite::tallest_height_val.curr);
+	//print_num_debug(SpriteManager::the_player->the_oam_entry
 	//	.attr0);
-	//print_num_debug(sprite_manager::the_player->the_oam_entry
+	//print_num_debug(SpriteManager::the_player->the_oam_entry
 	//	.attr0);
 	//print_num_debug(debug_s32_arr[0]);
 	
-	//print_num_debug(sprite_manager::the_player->the_oam_entry
+	//print_num_debug(SpriteManager::the_player->the_oam_entry
 	//	.attr1);
-	//print_num_debug(sprite_manager::the_player->the_oam_entry
+	//print_num_debug(SpriteManager::the_player->the_oam_entry
 	//	.get_tile_number());
 	//print_num_debug(debug_s32_arr[1]);
 	
-	//print_num_debug(sprite_manager::the_player_oam_index);
-	//print_num_debug(sprite_manager::the_player
+	//print_num_debug(SpriteManager::the_player_oam_index);
+	//print_num_debug(SpriteManager::the_player
 	//	->get_prev_on_ground());
-	//print_num_debug(sprite_manager::the_player
+	//print_num_debug(SpriteManager::the_player
 	//	->get_curr_on_ground());
-	//print_num_debug(sprite_manager::the_player
+	//print_num_debug(SpriteManager::the_player
 	//	->get_prev_on_slope());
-	//print_num_debug(sprite_manager::the_player
+	//print_num_debug(SpriteManager::the_player
 	//	->get_curr_on_slope());
 	
 	//print_num_debug(debug_s32_arr[0]);
 	//print_num_debug(debug_s32_arr[1]);
 	//print_num_debug(debug_s32_arr[2]);
 	//print_num_debug(debug_s32_arr[3]);
-	print_num_debug(sprite_manager::num_active_sprites);
+	print_num_debug(SpriteManager::num_active_sprites);
 }
 
 
 
-void hud_manager::copy_hud_from_array_csz_2d_helper_to_vram()
+void HudManager::copy_hud_from_array_csz_2d_helper_to_vram()
 {
-	memcpy32( hud_manager::bg1_screenblock_2d.the_array,
-		hud_manager::bg1_screenblock_mirror_2d.the_array,
-		sizeof(scr_entry) * hud_manager::bg1_screenblock_mirror_2d
+	memcpy32( HudManager::bg1_screenblock_2d.the_array,
+		HudManager::bg1_screenblock_mirror_2d.the_array,
+		sizeof(scr_entry) * HudManager::bg1_screenblock_mirror_2d
 		.get_size() / sizeof(u32) );
 }
 

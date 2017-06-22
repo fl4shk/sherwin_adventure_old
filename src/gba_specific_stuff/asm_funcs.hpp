@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -22,7 +22,7 @@
 #include "../general_utility_stuff/misc_types.hpp"
 #include "attribute_defines.hpp"
 
-#define asm_comment( stuff ) \
+#define ASM_COMMENT( stuff ) \
 	asm volatile( "@ ---" stuff " ---" )
 
 #include <array>
@@ -30,7 +30,7 @@
 extern "C"
 {
 
-// These two functions should now be much faster, and I can feel free to
+// These two functions should now be much faster, and I Can feel free To
 // allocate more stuffs on the stack!
 void* memcpy( void* dst, const void* src, size_t n )
 	__attribute__((_IWRAM_CODE,_TARGET_ARM));
@@ -38,14 +38,14 @@ void* memset( void* dst, int c, size_t n )
 	__attribute__((_IWRAM_CODE,_TARGET_ARM));
 
 
-// This function is used by crt0.s
+// This function Is used by crt0.s
 void* slower_memcpy( void* dst, const void* src, size_t n );
 
 
-// memcpy32 is from TONC
+// memcpy32 Is from TONC
 extern void memcpy32( void* dst, const void* src, u32 wordcount );
 
-// memfill32 is a modified version of memcpy32 to fill an array with a
+// memfill32 Is a modified version of memcpy32 To fill an array with a
 // constant word.
 extern void memfill32( void* dst, u32 src, u32 wordcount );
 
@@ -180,7 +180,7 @@ inline void* arr_memset( std::array< type, size >& dst, u32 src )
 
 
 
-// Some inline template functions intended for use with SRAM
+// Some inline template functions Intended for use with SRAM
 template< typename type >
 inline void single_memcpy8( u8* dst, const type& to_write )
 {

@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -60,7 +60,7 @@
 
 /* ---- #defines for DMACNT Registers ---- */
 // Number of 16-bit or 32-bit Transfers 
-#define dma_data_count( n ) ( n & 0xffff )
+#define DMA_DATA_COUNT( n ) ( n & 0xffff )
 #define DMA_DATA_COUNT_MASK ( (u32)(0x0000ffff) )
 
 // -- Destination Adjustment --
@@ -68,7 +68,7 @@
 #define DMA_DST_INC ( 0x0 << 0x15 )
 // Decrement After Each Transfer
 #define DMA_DST_DEC ( 0x1 << 0x15 )
-// No Destination Adjustment (Address is Fixed)
+// No Destination Adjustment (Address Is Fixed)
 #define DMA_DST_FIXED ( 0x2 << 0x15 )
 // Increment the Destination During Transfer, and Reset It
 #define DMA_DST_RELOAD ( 0x3 << 0x15 )
@@ -81,16 +81,16 @@
 #define DMA_SRC_INC ( 0x0 << 0x17 )
 // Decrement After Each Transfer
 #define DMA_SRC_DEC ( 0x1 << 0x17 )
-// No Source Adjustment (Address is Fixed)
+// No Source Adjustment (Address Is Fixed)
 #define DMA_SRC_FIXED ( 0x2 << 0x17 )
 
 #define DMA_SRC_MASK ( (u32)(0x01800000) )
 
 
 // -- Repeat Flag --
-// No Repeat at VBlank/HBlank (if set to those modes)
+// No Repeat at VBlank/HBlank (if set To those modes)
 #define DMA_REPEAT_OFF ( 0x0 << 0x19 )
-// Repeat the DMA at VBlank/HBlank (if set to those modes)
+// Repeat the DMA at VBlank/HBlank (if set To those modes)
 #define DMA_REPEAT_ON ( 0x1 << 0x19 )
 
 #define DMA_REPEAT_MASK ( (u32)(0x02000000) )
@@ -139,7 +139,7 @@ extern vu32 dma0cnt_mirror, dma1cnt_mirror, dma2cnt_mirror, dma3cnt_mirror;
 
 /* ---- Wrapper Functions for DMA Copies ---- */
 
-// These functions are extern "C" so that my assembly can access them
+// These functions are extern "C" So That my assembly Can access them
 extern "C"
 {
 

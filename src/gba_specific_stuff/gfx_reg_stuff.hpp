@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -58,7 +58,7 @@ typedef tile8 charblock8[charblock8_size];
 #define BG_TILE_VRAM ( (vu16*)(tile_ram[0]) )
 #define BG_TILE_VRAM_AS_TILES ( (volatile tile*)(tile_ram[0]) )
 
-// Do note that OBJ_TILE_VRAM consists of TWO charblocks, or 1024 4bpp
+// Do note That OBJ_TILE_VRAM consists of TWO charblocks, or 1024 4bpp
 // tiles of 8x8 pixels (512 8bpp tiles of 8x8 pixels).
 #define OBJ_TILE_VRAM ( (vu16*)(tile_ram[4]) )
 #define OBJ_TILE_VRAM_AS_TILES ( (volatile tile*)(tile_ram[4]) )
@@ -90,7 +90,7 @@ static constexpr vec2_u32 screenblock_size_2d( screenblock_xsize,
 typedef scr_entry screenblock[screenblock_size];
 
 
-// Screen-entry mapping: SE_RAM[y][x] is SBB y, entry x
+// Screen-entry mapping: SE_RAM[y][x] Is SBB y, entry x
 #define SE_RAM ((screenblock*)MEM_VRAM)
 
 
@@ -98,7 +98,7 @@ typedef scr_entry screenblock[screenblock_size];
 // -- Defines for Screen Entries --
 
 // Tile Index of the SE
-#define se_id( n ) ( ( n ) & 0x3ff )
+#define SE_ID( n ) ( ( n ) & 0x3ff )
 #define SE_ID_MASK ( (u16)(0x03ff) )
 
 // SE Flipping
@@ -108,7 +108,7 @@ typedef scr_entry screenblock[screenblock_size];
 #define SE_FLIP_MASK ( (u16)(0x0c00) )
 
 // SE Palette Bank for 16-color mode
-#define se_palbank( n ) ( ( ( n ) & 0xf ) << 0xc )
+#define SE_PALBANK( n ) ( ( ( n ) & 0xf ) << 0xc )
 #define SE_PALBANK_MASK ( (u16)(0xf000) )
 
 
@@ -155,11 +155,11 @@ static const u32 num_colors_per_palette = 16;
 
 // LCD I/O BG Scrolling Registers
 //#define REG_BGOFS ((bg_point*)(MEM_IO + 0x0010))
-// Pretty cool how I can use my vec2_s16 class for this
+// Pretty cool how I Can use my vec2_s16 class for this
 #define REG_BGOFS ((vec2_s16*)(MEM_IO + 0x0010))
 
-#define reg_bghofs_n(n) *((vu16*)(MEM_IO + 0x0010 + 0x04 * n))
-#define reg_bgvofs_n(n) *((vu16*)(MEM_IO + 0x0012 + 0x04 * n))
+#define REG_BGHOFS_N(n) *((vu16*)(MEM_IO + 0x0010 + 0x04 * n))
+#define REG_BGVOFS_N(n) *((vu16*)(MEM_IO + 0x0012 + 0x04 * n))
 
 
 // Alpha Blending Registers
@@ -256,7 +256,7 @@ inline const type conv_slp_height_val_to_offset( type tallest_height_val )
 #define DCNT_OBJ_1D ( 0x0001 << 0x6 )
 #define DCNT_OBJ_DIM_MASK ( (u16)(0x0040) )
 
-//   Forced Blank (Select ONLY ONE)
+//   forced Blank (Select ONLY ONE)
 #define DCNT_BLANK_OFF ( 0x0000 << 0x7 )
 #define DCNT_BLANK_ON ( 0x0001 << 0x7 )
 #define DCNT_BLANK_MASK ( (u16)(0x0080) )
@@ -326,7 +326,7 @@ inline const type conv_slp_height_val_to_offset( type tallest_height_val )
 #define DSTAT_VCT_IRQ ( 0x0001 << 0x5 )
 
 //   VCount trigger value
-#define dstat_vct(x) ( x << 0x8 )
+#define DSTAT_VCT(x) ( x << 0x8 )
 
 /* ---- End of Defines for REG_DISPSTAT ---- */
 
@@ -337,11 +337,11 @@ inline const type conv_slp_height_val_to_offset( type tallest_height_val )
 // BG Priority.  Higher Priority BGs are drawn FIRST.  If there are any
 // BGs with the same priority, then BG0 has the highest priority, and BG3
 // has the lowest.
-#define bgcnt_prio( n ) ( n & 0x1 )
+#define BGCNT_PRIO( n ) ( n & 0x1 )
 #define BGCNT_PRIO_MASK ( (u16)(0x0001) )
 
 // Character Base Block (Virtually Worthless)
-#define bgcnt_cbb( n ) ( ( n & 0x3 ) << 0x2 )
+#define BGCNT_CBB( n ) ( ( n & 0x3 ) << 0x2 )
 #define BGCNT_CBB_MASK ( (u16)(0x000c) )
 
 // Mosaic Flag (I don't think I'll use it)
@@ -349,13 +349,13 @@ inline const type conv_slp_height_val_to_offset( type tallest_height_val )
 #define BGCNT_MOSAIC_ON ( 0x1 << 0x6 )
 #define BGCNT_MOSAIC_MASK ( (u16)(0x0040) )
 
-// Whether the BG is 4bpp or 8bpp (I'll probably be using 4bpp exclusively)
+// Whether the BG Is 4bpp or 8bpp (I'll probably be using 4bpp exclusively)
 #define BGCNT_4BPP ( 0x0 << 0x7 )
 #define BGCNT_8BPP ( 0x1 << 0x7 )
 #define BGCNT_BPP_MASK ( (u16)(0x0080) )
 
 // Screen Base Block
-#define bgcnt_sbb( n ) ( ( n & 0x1f ) << 0x8 )
+#define BGCNT_SBB( n ) ( ( n & 0x1f ) << 0x8 )
 #define BGCNT_SBB_MASK ( (u16)(0x1f00) )
 
 // Affine Wrapping
@@ -413,10 +413,10 @@ inline const type conv_slp_height_val_to_offset( type tallest_height_val )
 /* ---- Defines for REG_BLDALPHA ---- */
 
 // Top blend weight.  Only used for normal blending.
-#define bldalpha_top( n ) ( n & 0x1f )
+#define BLDALPHA_TOP( n ) ( n & 0x1f )
 
 // Bot blend weight.  Only used for normal blending.
-#define bldalpha_bot( n ) ( ( n & 0x1f ) << 0x8 )
+#define BLDALPHA_BOT( n ) ( ( n & 0x1f ) << 0x8 )
 
 /* ---- End of Defines for REG_BLDALPHA ---- */
 
@@ -424,7 +424,7 @@ inline const type conv_slp_height_val_to_offset( type tallest_height_val )
 /* ---- Defines for REG_BLDALPHA ---- */
 
 // Top blend weight.  Only used for normal blending.
-#define bldy( n ) ( n & 0x1f )
+#define BLDY( n ) ( n & 0x1f )
 
 /* ---- End of Defines for REG_BLDALPHA ---- */
 
@@ -482,31 +482,31 @@ inline void clamped_rgb15_component_add( s32& component, s32 amount_to_add,
 	}
 }
 
-inline void clamped_rgb15_f24p8_component_add( fixed24p8& component,
-	const fixed24p8& amount_to_add, const fixed24p8& target_value )
+inline void clamped_rgb15_f24p8_component_add( Fixed24p8& component,
+	const Fixed24p8& amount_to_add, const Fixed24p8& target_value )
 {
 	component += amount_to_add;
 	
-	if ( amount_to_add > (fixed24p8){0} && component > target_value )
+	if ( amount_to_add > (Fixed24p8){0} && component > target_value )
 	{
 		component = target_value;
 	}
-	else if ( amount_to_add < (fixed24p8){0} && component < target_value )
+	else if ( amount_to_add < (Fixed24p8){0} && component < target_value )
 	{
 		component = target_value;
 	}
 }
 
-//inline void clamped_rgb15_f8p8_component_add( fixed8p8& component,
-//	const fixed8p8& amount_to_add, const fixed8p8& target_value )
+//inline void clamped_rgb15_f8p8_component_add( Fixed8p8& component,
+//	const Fixed8p8& amount_to_add, const Fixed8p8& target_value )
 //{
 //	component += amount_to_add;
 //	
-//	if ( amount_to_add > (fixed8p8){0} && component > target_value )
+//	if ( amount_to_add > (Fixed8p8){0} && component > target_value )
 //	{
 //		component = target_value;
 //	}
-//	else if ( amount_to_add < (fixed8p8){0} && component < target_value )
+//	else if ( amount_to_add < (Fixed8p8){0} && component < target_value )
 //	{
 //		component = target_value;
 //	}
@@ -521,14 +521,14 @@ inline void m3_plot( u32 x, u32 y, u32 color )
 }
 inline void m4_plot_basic( u32 x, u32 y, u16 two_color_ids, u32 page = 0 )
 {
-	// Plot to Page 0
+	// Plot To Page 0
 	if ( page == 0 )
 	{
 		( (vu16*)(MEM_VRAM_PAGE_0) )[y * SCREEN_WIDTH + x] 
 			= two_color_ids;
 	}
 	
-	// Plot to Page 1
+	// Plot To Page 1
 	else
 	{
 		( (vu16*)(MEM_VRAM_PAGE_1) )[y * SCREEN_WIDTH + x] 
@@ -537,7 +537,7 @@ inline void m4_plot_basic( u32 x, u32 y, u16 two_color_ids, u32 page = 0 )
 }
 
 
-// The reason that color_id is passed in as a 32-bit variable is speed.
+// The reason That color_id Is passed in as a 32-bit variable Is speed.
 inline void m4_plot( s32 x, s32 y, u32 color_id, u32 page )
 {
 	
@@ -553,13 +553,13 @@ inline void m4_plot( s32 x, s32 y, u32 color_id, u32 page )
 	u8 color_id_8bit = color_id & 0xff;
 	
 	
-	// Plot to Page 0
+	// Plot To Page 0
 	if ( page == 0 )
 	{
 		vram_area = (vu16*)(MEM_VRAM_PAGE_0);
 	}
 	
-	// Plot to Page 1
+	// Plot To Page 1
 	else
 	{
 		vram_area = (vu16*)(MEM_VRAM_PAGE_1);
@@ -568,23 +568,23 @@ inline void m4_plot( s32 x, s32 y, u32 color_id, u32 page )
 	two_color_ids = vram_area[(y * SCREEN_WIDTH + x) / sizeof(vu16)];
 	
 	
-	// If x is odd, change the high byte
+	// If x Is odd, change the high byte
 	if ( x & 1 )
 	{
 		// Clear the high byte
 		two_color_ids &= 0x00ff;
 		
-		// Set the high byte to the new color ID
+		// Set the high byte To the new color ID
 		two_color_ids |= ( color_id_8bit << 8 );
 	}
 	
-	// If x is even, change the low byte
+	// If x Is even, change the low byte
 	else
 	{
 		// Clear the low byte
 		two_color_ids &= 0xff00;
 		
-		// Set the low byte to the new color ID
+		// Set the low byte To the new color ID
 		two_color_ids |= color_id_8bit;
 	}
 	

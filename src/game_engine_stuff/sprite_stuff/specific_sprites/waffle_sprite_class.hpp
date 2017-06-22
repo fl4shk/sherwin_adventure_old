@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -22,22 +22,22 @@
 #include "../../../gfx/the_powerup_gfx.h"
 
 
-class waffle_sprite : public sprite
+class WaffleSprite : public Sprite
 {
 public:		// enums
-	// These are used to access misc_data_u and misc_data_s
+	// These are used To access misc_data_u and misc_data_s
 	enum udata_index { udi_initial_pos_was_set, } _ALIGNAS_REGULAR;
 	enum sdata_index { sdi_initial_pos_x, sdi_initial_pos_y, 
 		sdi_move_timer, } _ALIGNAS_REGULAR;
 	
 public:		// variables
-	static const sprite_const_params the_const_params;
+	static const SpriteConstParams the_const_params;
 	
 	static constexpr u32 move_timer_start = 128;
 	
 	
 public:		// functions
-	inline waffle_sprite( bool facing_left )
+	inline WaffleSprite( bool facing_left )
 	{
 		shared_constructor_code_part_1();
 		shared_constructor_code_part_2(facing_left);
@@ -46,7 +46,7 @@ public:		// functions
 	
 	void update_part_2();
 	
-	inline virtual const sprite_const_params& get_const_params() const
+	inline virtual const SpriteConstParams& get_const_params() const
 	{
 		return the_const_params;
 	}
@@ -60,18 +60,18 @@ public:		// functions
 	
 protected:		// functions
 	virtual void block_coll_response_left_old
-		( const block_coll_result& lt_coll_result, 
-		const block_coll_result& lb_coll_result );
+		( const BlockCollResult& lt_coll_result, 
+		const BlockCollResult& lb_coll_result );
 	
 	virtual void block_coll_response_right_old
-		( const block_coll_result& rt_coll_result,
-		const block_coll_result& rb_coll_result );
+		( const BlockCollResult& rt_coll_result,
+		const BlockCollResult& rb_coll_result );
 	
 	
 	virtual void block_coll_response_left
-		( const spr_blk_coll_group_base::horiz_coll_tuple& hs );
+		( const SprBlkCollGroupBase::HorizCollTuple& hs );
 	virtual void block_coll_response_right
-		( const spr_blk_coll_group_base::horiz_coll_tuple& hs );
+		( const SprBlkCollGroupBase::HorizCollTuple& hs );
 	
 } __attribute__((_ALIGN4));
 

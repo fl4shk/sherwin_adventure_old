@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -26,26 +26,26 @@
 
 #include "sublevel_entrance_class.hpp"
 
-class sprite_init_param_group;
+class SpriteInitParamGroup;
 
-// The sublevel and sublevel_pointer classes need to be replaced with
-// a class that contains pointers to either ASSEMBLY arrays or .bin files
+// The Sublevel and SublevelPointer classes need To be replaced with
+// a class That Contains pointers To either ASSEMBLY arrays or .bin files
 // (which would be mentioned in an assembly file)
 
-// This is a class for COMPRESSED sublevels in ROM
+// This Is a class for COMPRESSED sublevels in ROM
 template< u32 cmp_block_data_size, u32 xsize, u32 ysize, 
 	u32 sprite_ipg_arr_size, u32 sublevel_entrance_arr_size >
-class sublevel
+class Sublevel
 {
 public:		// variables
-	// The lzss compressed block data
+	// The lzss compressed Block data
 	u32 cmp_block_data[cmp_block_data_size];
 	
-	// The array of sprite_init_param_group's
-	sprite_init_param_group sprite_ipg_arr[sprite_ipg_arr_size];
+	// The array of SpriteInitParamGroup's
+	SpriteInitParamGroup sprite_ipg_arr[sprite_ipg_arr_size];
 	
-	// The array of sublevel_entrance's
-	sublevel_entrance sublevel_entrance_arr[sublevel_entrance_arr_size];
+	// The array of SublevelEntrance's
+	SublevelEntrance sublevel_entrance_arr[sublevel_entrance_arr_size];
 	
 	
 public:		// functions
@@ -73,28 +73,28 @@ public:		// functions
 
 
 
-// A class for sublevel pointers is needed because C++ will not allow me to
-// have an array of pointers to sublevels that have different template
+// A class for Sublevel pointers Is needed because C++ will not allow me To
+// have an array of pointers To sublevels That have different template
 // parameters.
-class sublevel_pointer
+class SublevelPointer
 {
 protected:		// variables
 	vec2_u32 size_2d;
 	
 public:		// variables
-	array_helper<const u32> cmp_bd_arr_helper;
-	array_helper<const sprite_init_param_group> sprite_ipg_arr_arr_helper;
-	array_helper<const sublevel_entrance> sublevel_entrance_arr_arr_helper;
+	ArrayHelper<const u32> cmp_bd_arr_helper;
+	ArrayHelper<const SpriteInitParamGroup> sprite_ipg_arr_arr_helper;
+	ArrayHelper<const SublevelEntrance> sublevel_entrance_arr_arr_helper;
 	
 public:		// functions
 	
-	inline sublevel_pointer()
+	inline SublevelPointer()
 	{
 	}
 	
 	template< u32 cmp_block_data_size, u32 xsize, u32 ysize, 
 		u32 sprite_ipg_arr_size, u32 sublevel_entrance_arr_size >
-	inline sublevel_pointer( const sublevel< cmp_block_data_size, xsize, 
+	inline SublevelPointer( const Sublevel< cmp_block_data_size, xsize, 
 		ysize, sprite_ipg_arr_size, sublevel_entrance_arr_size >& 
 		the_sublevel )
 	{
@@ -112,7 +112,7 @@ public:		// functions
 	
 	template< u32 cmp_block_data_size, u32 xsize, u32 ysize, 
 		u32 sprite_ipg_arr_size, u32 sublevel_entrance_arr_size >
-	inline void init( const sublevel< cmp_block_data_size, xsize, ysize,
+	inline void init( const Sublevel< cmp_block_data_size, xsize, ysize,
 		sprite_ipg_arr_size, sublevel_entrance_arr_size >& the_sublevel )
 	{
 		size_2d = { xsize, ysize };

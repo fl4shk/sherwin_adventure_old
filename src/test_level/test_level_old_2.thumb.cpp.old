@@ -2,7 +2,7 @@
 
 
 // test_level.tmx
-const sublevel< 2007, 64, 32, 32, 33 > test_level_sublevel_0
+const Sublevel< 2007, 64, 32, 32, 33 > test_level_sublevel_0
 = {
 	{
 		0x1000010, 0x501, 0x1000600, 0x2550300,
@@ -583,7 +583,7 @@ const sublevel< 2007, 64, 32, 32, 33 > test_level_sublevel_0
 
 
 // test_level_2.tmx
-const sublevel< 1997, 64, 32, 6, 33 > test_level_sublevel_1
+const Sublevel< 1997, 64, 32, 6, 33 > test_level_sublevel_1
 = {
 	{
 		0x1000010, 0x501, 0x1000600, 0x2550300,
@@ -1136,7 +1136,7 @@ const sublevel< 1997, 64, 32, 6, 33 > test_level_sublevel_1
 
 
 // test_level_3.tmx
-const sublevel< 1953, 64, 32, 6, 33 > test_level_sublevel_2
+const Sublevel< 1953, 64, 32, 6, 33 > test_level_sublevel_2
 = {
 	{
 		0x1000010, 0x10f, 0xf003f000, 0xf003f003,
@@ -1678,7 +1678,7 @@ const sublevel< 1953, 64, 32, 6, 33 > test_level_sublevel_2
 
 
 // test_level_slopes.tmx
-const sublevel< 1993, 64, 32, 5, 33 > test_level_sublevel_3
+const Sublevel< 1993, 64, 32, 5, 33 > test_level_sublevel_3
 = {
 	{
 		0x1000010, 0x501, 0x1000600, 0x2550300,
@@ -2228,11 +2228,11 @@ const sublevel< 1993, 64, 32, 5, 33 > test_level_sublevel_3
 };
 
 
-const level test_level = level
-	( sublevel_pointer(test_level_sublevel_0),
-	sublevel_pointer(test_level_sublevel_1),
-	sublevel_pointer(test_level_sublevel_2),
-	sublevel_pointer(test_level_sublevel_3) );
+const Level test_level = Level
+	( SublevelPointer(test_level_sublevel_0),
+	SublevelPointer(test_level_sublevel_1),
+	SublevelPointer(test_level_sublevel_2),
+	SublevelPointer(test_level_sublevel_3) );
 
 
 

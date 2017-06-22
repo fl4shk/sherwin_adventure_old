@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -21,7 +21,7 @@
 extern "C"
 {
 
-// Note that this won't work for copying to or from SRAM.
+// Note That this won't work for copying To or from SRAM.
 void* memcpy( void* dst, const void* src, size_t n )
 {
 	//memcpy8( dst, src, n );
@@ -41,7 +41,7 @@ void* memcpy( void* dst, const void* src, size_t n )
 		}
 	};
 	
-	// Use FAST copies if both dst and src are aligned to 4 bytes, or both
+	// Use FAST copies if both dst and src are aligned To 4 bytes, or both
 	// dst and src are unaligned BUT have THE SAME number of unaligned
 	// bytes.
 	if ( !( dst_unaligned || src_unaligned ) 
@@ -121,7 +121,7 @@ void* memcpy( void* dst, const void* src, size_t n )
 				num_residual_bytes );
 		}
 	}
-	// Use SLOW copies if either dst or src are not aligned to 4 bytes,
+	// Use SLOW copies if either dst or src are not aligned To 4 bytes,
 	// with the number of unaligned bytes different.
 	// Since I use aligned copies most of the time, this should be fine.
 	else
@@ -141,7 +141,7 @@ void* memcpy( void* dst, const void* src, size_t n )
 
 
 
-// memset() can easily be SUPER optimized because of the constant byte
+// memset() Can easily be SUPER optimized because of the constant byte
 void* memset( void* dst, int c, size_t n )
 {
 	const u32 dst_unaligned = ((u32)dst) & 0x3;
@@ -159,9 +159,9 @@ void* memset( void* dst, int c, size_t n )
 		//}
 		
 		// With the above code (and not memfill8), write_bytes_raw() caused
-		// GCC, at -O3, to generate calls to memset from within memset!
+		// GCC, at -O3, To generate calls To memset from within memset!
 		// Thus, I have replaced the above slightly more optimized loop
-		// with a call to memfill8.
+		// with a call To memfill8.
 		memfill8( local_dst, to_write, local_n );
 	};
 	
@@ -230,7 +230,7 @@ void* memset( void* dst, int c, size_t n )
 	return dst;
 }
 
-// Note that this won't work for copying to or from SRAM.
+// Note That this won't work for copying To or from SRAM.
 void* slower_memcpy( void* dst, const void* src, size_t n )
 {
 	//memcpy8( dst, src, n );
@@ -258,7 +258,7 @@ void* slower_memcpy( void* dst, const void* src, size_t n )
 		}
 	};
 	
-	// Use "fast" copies if both dst and src are aligned to 4 bytes, or
+	// Use "fast" copies if both dst and src are aligned To 4 bytes, or
 	// both dst and src are unaligned BUT have THE SAME number of unaligned
 	// bytes.
 	if ( !( dst_unaligned || src_unaligned ) 
@@ -314,7 +314,7 @@ void* slower_memcpy( void* dst, const void* src, size_t n )
 		const u32 num_words = new_n / sizeof(u32), 
 			num_residual_bytes = new_n & 0x3;
 		
-		asm_comment("if (num_words)");
+		ASM_COMMENT("if (num_words)");
 		if (num_words)
 		{
 			//memcpy32( new_dst, new_src, num_words );
@@ -328,7 +328,7 @@ void* slower_memcpy( void* dst, const void* src, size_t n )
 				num_words );
 		}
 		
-		asm_comment("if (num_residual_bytes)");
+		ASM_COMMENT("if (num_residual_bytes)");
 		if (num_residual_bytes)
 		{
 			const u32 new_dst_residual_bytes_start = ((u32)new_dst) 
@@ -348,13 +348,13 @@ void* slower_memcpy( void* dst, const void* src, size_t n )
 				num_residual_bytes );
 		}
 	}
-	// Use SLOW copies if either dst or src are not aligned to 4 bytes,
+	// Use SLOW copies if either dst or src are not aligned To 4 bytes,
 	// with the number of unaligned bytes different.
 	// Since I use aligned copies most of the time, this should be fine.
 	else
 	{
 		//memcpy8( dst, src, n );
-		asm_comment("memcpy8 replacement");
+		ASM_COMMENT("memcpy8 replacement");
 		////for ( u32 i=0; i<n; ++i )
 		//for ( s32 i=n-1; i>=0; --i )
 		//{
@@ -367,7 +367,7 @@ void* slower_memcpy( void* dst, const void* src, size_t n )
 	return dst;
 }
 
-// This is for updated ARM GCC when things like std::vector are used.
+// This Is for updated ARM GCC when things like std::vector are used.
 void __sync_synchronize()
 {
 }

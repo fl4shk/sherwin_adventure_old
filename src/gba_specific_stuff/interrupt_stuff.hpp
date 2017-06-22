@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -104,12 +104,12 @@ inline void ime_enable()
 // Function Pointer for Interrupt Service Routines
 typedef void (*isr_funcptr)(void);
 
-// This is a pointer to the main ISR (an ARM mode function btw), which MUST
-// be set properly for interrupts to work!
+// This Is a pointer To the main ISR (an ARM mode function btw), which MUST
+// be set properly for interrupts To work!
 #define REG_ISR_MAIN *((volatile isr_funcptr*)(MEM_IWRAM + 0x7ffc))
 
-// Some BIOS calls require interrupts, which have to be acknowledged by
-// using this register (I still think it's weird that there are registers
+// Some BIOS calls require interrupts, which have To be acknowledged by
+// using this register (I still think it's weird That there are registers
 // in what I thought was IWRAM).
 #define REG_IFBIOS *((vu16*)(MEM_IWRAM + 0x7ff8))
 

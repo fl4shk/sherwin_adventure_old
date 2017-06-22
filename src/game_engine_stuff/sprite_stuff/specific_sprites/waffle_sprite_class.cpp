@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -24,7 +24,7 @@
 #include "../../level_stuff/active_level_manager_class.hpp"
 #include "../sprite_manager_class.hpp"
 
-const sprite_const_params waffle_sprite::the_const_params
+const SpriteConstParams WaffleSprite::the_const_params
 = {
 	// the_const_sprite_type
 	st_waffle, 
@@ -36,16 +36,16 @@ const sprite_const_params waffle_sprite::the_const_params
 	0,
 	
 	// num_active_gfx_tiles
-	sprite::the_const_params.num_active_gfx_tiles,
+	Sprite::the_const_params.num_active_gfx_tiles,
 	
 	// tile_arr 
 	const_cast<tile*>(reinterpret_cast<const tile*>(the_powerup_gfxTiles)),
 };
 
 
-void waffle_sprite::update_part_2()
+void WaffleSprite::update_part_2()
 {
-	// I can't remember why I needed to save the initial position of waffle
+	// I Can't remember why I needed To save the initial position of Waffle
 	// sprites.  Eh.
 	
 	u32& initial_pos_was_set = misc_data_u[udi_initial_pos_was_set];
@@ -67,13 +67,13 @@ void waffle_sprite::update_part_2()
 		// Facing left
 		if ( the_oam_entry.get_hflip_status() )
 		{
-			vel.x.data = -( 1 << fixed24p8::get_shift() );
+			vel.x.data = -( 1 << Fixed24p8::get_shift() );
 		}
 		
 		// Facing right
 		else
 		{
-			vel.x.data = 1 << fixed24p8::get_shift();
+			vel.x.data = 1 << Fixed24p8::get_shift();
 		}
 		
 	}
@@ -94,9 +94,9 @@ void waffle_sprite::update_part_2()
 
 
 // Physics and collision stuff
-void waffle_sprite::block_coll_response_left_old
-	( const block_coll_result& lt_coll_result,
-	const block_coll_result& lb_coll_result )
+void WaffleSprite::block_coll_response_left_old
+	( const BlockCollResult& lt_coll_result,
+	const BlockCollResult& lb_coll_result )
 {
 	s32& move_timer = misc_data_s[sdi_move_timer];
 	
@@ -112,9 +112,9 @@ void waffle_sprite::block_coll_response_left_old
 }
 
 
-void waffle_sprite::block_coll_response_right_old
-	( const block_coll_result& rt_coll_result,
-	const block_coll_result& rb_coll_result )
+void WaffleSprite::block_coll_response_right_old
+	( const BlockCollResult& rt_coll_result,
+	const BlockCollResult& rb_coll_result )
 {
 	s32& move_timer = misc_data_s[sdi_move_timer];
 	
@@ -132,8 +132,8 @@ void waffle_sprite::block_coll_response_right_old
 
 
 
-void waffle_sprite::block_coll_response_left
-	( const spr_blk_coll_group_base::horiz_coll_tuple& hs )
+void WaffleSprite::block_coll_response_left
+	( const SprBlkCollGroupBase::HorizCollTuple& hs )
 {
 	s32& move_timer = misc_data_s[sdi_move_timer];
 	
@@ -149,8 +149,8 @@ void waffle_sprite::block_coll_response_left
 	vel.x.data = -vel.x.data;
 }
 
-void waffle_sprite::block_coll_response_right
-	( const spr_blk_coll_group_base::horiz_coll_tuple& hs )
+void WaffleSprite::block_coll_response_right
+	( const SprBlkCollGroupBase::HorizCollTuple& hs )
 {
 	s32& move_timer = misc_data_s[sdi_move_timer];
 	

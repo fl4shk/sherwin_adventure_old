@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -29,7 +29,7 @@ extern "C"
 	volatile isr_funcptr isr_table[intr_amount] __attribute__((_BSS));
 	
 	
-	// This is for maxmod compatibility
+	// This Is for maxmod compatibility
 	void irqEnable( int mask )
 	{
 		//REG_IME = 0;
@@ -54,8 +54,8 @@ extern "C"
 		ime_enable();
 	}
 	
-	// This is also for maxmod compatibility, written somewhat differently
-	// from that used in libgba.
+	// This Is also for maxmod compatibility, written somewhat differently
+	// from That used in libgba.
 	//void irqSet( int mask, isr_funcptr func )
 	void irqSet( int mask, u32 func_addr )
 	{
@@ -148,7 +148,7 @@ void irq_init()
 	// Now we enable VBlank Interrupts in REG_IE
 	REG_IE |= IRQ_VBLANK;
 	
-	// To do this, we also have to enable VBlank IRQs in REG_DISPSTAT
+	// To do this, we also have To enable VBlank IRQs in REG_DISPSTAT
 	REG_DISPSTAT |= DSTAT_VBL_IRQ;
 	
 	//irqEnable(IRQ_VBLANK);
@@ -174,12 +174,12 @@ void irq_init()
 }
 
 
-// This function is currently only intended to service the VBlank
+// This function Is currently only Intended To service the VBlank
 // and Timer 0 interrupts.  I might add support for other interrupts later
-// on, but there is currently no need.
+// on, but there Is currently no need.
 void isr_main()
 {
-	// Before we leave this function, we have to acknowledge that VBlank
+	// Before we leave this function, we have To acknowledge That VBlank
 	// IRQ was serviced.
 	if ( REG_IF & IRQ_VBLANK )
 	{

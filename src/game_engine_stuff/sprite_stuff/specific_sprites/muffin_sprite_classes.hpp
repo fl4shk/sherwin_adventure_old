@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -22,40 +22,40 @@
 
 #include "../../../gfx/the_powerup_gfx.h"
 
-class muffin_sprite : public sprite
+class MuffinSprite : public Sprite
 {
 public:		// variables
-	static const sprite_const_params the_const_params;
+	static const SpriteConstParams the_const_params;
 	
 public:		// functions
-	inline muffin_sprite( bool facing_left )
+	inline MuffinSprite( bool facing_left )
 	{
 		shared_constructor_code_part_1();
 		shared_constructor_code_part_2(facing_left);
 		shared_constructor_code_part_3();
 	}
 	
-	inline virtual const sprite_const_params& get_const_params() const
+	inline virtual const SpriteConstParams& get_const_params() const
 	{
 		return the_const_params;
 	}
 	
 } __attribute__((_ALIGN4));
 
-class fire_muffin_sprite : public sprite
+class FireMuffinSprite : public Sprite
 {
 public:		// variables
-	static const sprite_const_params the_const_params;
+	static const SpriteConstParams the_const_params;
 	
 public:		// functions
-	inline fire_muffin_sprite( bool facing_left )
+	inline FireMuffinSprite( bool facing_left )
 	{
 		shared_constructor_code_part_1();
 		shared_constructor_code_part_2(facing_left);
 		shared_constructor_code_part_3();
 	}
 	
-	inline virtual const sprite_const_params& get_const_params() const
+	inline virtual const SpriteConstParams& get_const_params() const
 	{
 		return the_const_params;
 	}
@@ -63,40 +63,40 @@ public:		// functions
 } __attribute__((_ALIGN4));
 
 
-class ice_muffin_sprite : public sprite
+class IceMuffinSprite : public Sprite
 {
 public:		// variables
-	static const sprite_const_params the_const_params;
+	static const SpriteConstParams the_const_params;
 	
 public:		// functions
-	inline ice_muffin_sprite( bool facing_left )
+	inline IceMuffinSprite( bool facing_left )
 	{
 		shared_constructor_code_part_1();
 		shared_constructor_code_part_2(facing_left);
 		shared_constructor_code_part_3();
 	}
 	
-	inline virtual const sprite_const_params& get_const_params() const
+	inline virtual const SpriteConstParams& get_const_params() const
 	{
 		return the_const_params;
 	}
 	
 } __attribute__((_ALIGN4));
 
-class chocolate_muffin_sprite : public sprite
+class ChocolateMuffinSprite : public Sprite
 {
 public:		// variables
-	static const sprite_const_params the_const_params;
+	static const SpriteConstParams the_const_params;
 	
 public:		// functions
-	inline chocolate_muffin_sprite( bool facing_left )
+	inline ChocolateMuffinSprite( bool facing_left )
 	{
 		shared_constructor_code_part_1();
 		shared_constructor_code_part_2(facing_left);
 		shared_constructor_code_part_3();
 	}
 	
-	inline virtual const sprite_const_params& get_const_params() const
+	inline virtual const SpriteConstParams& get_const_params() const
 	{
 		return the_const_params;
 	}

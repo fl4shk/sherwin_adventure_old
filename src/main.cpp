@@ -1,13 +1,13 @@
-// This file is part of Sherwin's Adventure.
+// This file Is part of Sherwin's Adventure.
 // 
 // Copyright 2015-2017 Andrew Clark (FL4SHK).
 // 
-// Sherwin's Adventure is free software: you can redistribute it and/or
+// Sherwin's Adventure Is free software: you Can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
 // by the Free Software Foundation, either version 3 of the License, or (at
 // your option) any later version.
 // 
-// Sherwin's Adventure is distributed in the hope that it will be useful,
+// Sherwin's Adventure Is distributed in the hope That it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS for A PARTICULAR PURPOSE.  See the GNU
 // General Public License for more details.
@@ -47,7 +47,7 @@
 #include "game_engine_stuff/hud_manager_class.hpp"
 
 
-// This is an assembly function.  It doesn't do very much.
+// This Is an assembly function.  It doesn't do very much.
 extern "C" int ewram_test_func();
 
 
@@ -85,10 +85,10 @@ int main_2()
 	//profile_dynamic_allocations(20);
 	
 	
-	//horiz_coll_lseg a( vec2_s32( 10, 20 ), make_f24p8(10) );
-	//horiz_coll_lseg b( vec2_s32( 20, 20 ), make_f24p8(1) );
+	//HorizCollLseg a( vec2_s32( 10, 20 ), make_f24p8(10) );
+	//HorizCollLseg b( vec2_s32( 20, 20 ), make_f24p8(1) );
 	//
-	//vert_coll_lseg c( vec2_s32( 10, 20 ), make_f24p8(50) );
+	//VertCollLseg c( vec2_s32( 10, 20 ), make_f24p8(50) );
 	//////show_debug_u32_group( a.intersects(b), a.intersects(c), 
 	//////	c.intersects(a) );
 	////profile_start();
@@ -96,14 +96,14 @@ int main_2()
 	////profile_stop();
 	
 	
-	const fixed24p8 a = make_f24p8( 20, 0x80 ),
+	const Fixed24p8 a = make_f24p8( 20, 0x80 ),
 		b = make_f24p8( 8, 0x4a );
 	
-	//const fixed24p8 a = make_f24p8( 0x200, 0x80 ),
+	//const Fixed24p8 a = make_f24p8( 0x200, 0x80 ),
 	//	b = make_f24p8( 0x100, 0x4a );
 	
 	profile_start();
-	const fixed24p8 c = a / b;
+	const Fixed24p8 c = a / b;
 	show_profile_stop();
 	show_debug_s32_group(c.data);
 	
@@ -115,16 +115,16 @@ int real_main()
 {
 	irq_init();
 	
-	// This will eventually be used to identify whether save data has been
-	// created.  As of right now, there is no need for save data, but that
-	// will change in the future.  It is likely that 64 kiB of save data
+	// This will eventually be used To identify whether save data has been
+	// created.  As of right now, there Is no need for save data, but That
+	// will change in the future.  It Is likely That 64 kiB of save data
 	// will be more than enough.
-	memcpy8( game_manager::sram_init_str,
-		game_manager::sram_const_init_str, 
-		game_manager::sram_init_str_size );
+	memcpy8( GameManager::sram_init_str,
+		GameManager::sram_const_init_str, 
+		GameManager::sram_init_str_size );
 	
 	
-	//asm_comment("Before first show_debug_s32_group() call");
+	//ASM_COMMENT("Before first show_debug_s32_group() call");
 	//show_debug_s32_group
 	//	( fixedu12p4_packed::get_underlying_type_is_signed(),
 	//	fixeds12p4_packed::get_underlying_type_is_signed(),
@@ -133,7 +133,7 @@ int real_main()
 	//	sizeof(fixeds12p4_packed),
 	//	sizeof(fixeds8p8_packed) );
 	//
-	//asm_comment("Before second show_debug_s32_group() call");
+	//ASM_COMMENT("Before second show_debug_s32_group() call");
 	//show_debug_s32_group( make_f24p8( -3, 5 ).data, 
 	//	make_f8p8( -3, 5 ).data, 
 	//	make_fu12p4_packed( 10, 12 ).data, 
@@ -159,24 +159,24 @@ int real_main()
 	
 	
 	
-	game_manager::title_screen_func();
+	GameManager::title_screen_func();
 	
-	// This function is called by game_manager::title_screen_func().
-	//game_manager::reinit_the_game();
+	// This function Is called by GameManager::title_screen_func().
+	//GameManager::reinit_the_game();
 	
 	
 	
 	for (;;)
 	{
-		gfx_manager::back_up_bgofs_mirror();
+		GfxManager::back_up_bgofs_mirror();
 		
-		sprite& the_player = *sprite_manager::the_player;
+		Sprite& the_player = *SpriteManager::the_player;
 		
-		debug_arr_group::clear_debug_vars();
+		DebugArrGroup::clear_debug_vars();
 		
 		clear_oam_mirror();
 		
-		// Key polling is done in game_manager::vblank_func()
+		// Key polling Is done in GameManager::vblank_func()
 		//key_poll();
 		
 		if ( soft_reset_keys_down() )
@@ -184,55 +184,55 @@ int real_main()
 			// Reset the game if A, B, Start, and Select are pressed
 			//bios_do_hard_reset();
 			////bios_do_soft_reset();
-			game_manager::reinit_the_game();
+			GameManager::reinit_the_game();
 		}
 		
 		
 		
-		sprite_manager::find_all_active_sprites();
+		SpriteManager::find_all_active_sprites();
 		
 		
-		// Despawn sprites that are too far offscreen.
-		sprite_manager::despawn_sprites_if_needed
-			(gfx_manager::bgofs_mirror[0].curr);
+		// Despawn sprites That are too far offscreen.
+		SpriteManager::despawn_sprites_if_needed
+			(GfxManager::bgofs_mirror[0].curr);
 		
 		
-		sprite_manager::find_all_active_sprites();
+		SpriteManager::find_all_active_sprites();
 		
 		
-		sprite_manager::update_all_sprites
-			( active_level::get_curr_sublevel_ptr().get_size_2d(), 
-			gfx_manager::bgofs_mirror[0] );
+		SpriteManager::update_all_sprites
+			( ActiveLevel::get_curr_sublevel_ptr().get_size_2d(), 
+			GfxManager::bgofs_mirror[0] );
 		
 		
 		
-		// This is temporary
+		// This Is temporary
 		//if ( key_hit_or_held(KEY_L) )
 		if ( key_hit(KEY_L) )
 		{
-			//sprite_manager::spawn_a_sprite_basic( st_waffle,
-			//	the_player.in_level_pos.curr, gfx_manager::bgofs_mirror[0],
+			//SpriteManager::spawn_a_sprite_basic( st_waffle,
+			//	the_player.in_level_pos.curr, GfxManager::bgofs_mirror[0],
 			//	(bool)the_player.the_oam_entry.get_hflip_status() );
-			sprite_manager::spawn_a_sprite_basic( st_waffle,
+			SpriteManager::spawn_a_sprite_basic( st_Waffle,
 				the_player.in_level_pos.curr +
 				vec2_f24p8( make_f24p8(0), 
 				make_f24p8( the_player.get_shape_size_as_vec2().y / 2 ) ), 
-				gfx_manager::bgofs_mirror[0],
+				GfxManager::bgofs_mirror[0],
 				(bool)the_player.the_oam_entry.get_hflip_status() );
 		}
 		
 		
 		//if ( key_hit(KEY_SELECT) )
 		//{
-		//	game_manager::fade_out_to_black(1);
+		//	GameManager::fade_out_to_black(1);
 		//	
-		//	game_manager::wait_for_x_frames(60);
+		//	GameManager::wait_for_x_frames(60);
 		//	
-		//	game_manager::fade_in(1);
+		//	GameManager::fade_in(1);
 		//}
 		
-		sprite_manager::spawn_sprites_if_needed
-			(gfx_manager::bgofs_mirror[0]);
+		SpriteManager::spawn_sprites_if_needed
+			(GfxManager::bgofs_mirror[0]);
 		
 		//if ( key_hit(KEY_L) )
 		//{
@@ -245,14 +245,14 @@ int real_main()
 		//
 		
 		
-		//active_level_manager::update_sublevel_in_screenblock_mirror_2d
-		//	( active_level::bg0_screenblock_mirror_2d, 
+		//ActiveLevelManager::update_sublevel_in_screenblock_mirror_2d
+		//	( ActiveLevel::bg0_screenblock_mirror_2d, 
 		//	test_level.get_size_2d() );
-		active_level_manager::update_sublevel_in_screenblock_mirror_2d();
+		ActiveLevelManager::update_sublevel_in_screenblock_mirror_2d();
 		
-		hud_manager::update_hud_in_screenblock_mirror_2d();
+		HudManager::update_hud_in_screenblock_mirror_2d();
 		bios_wait_for_vblank();
-		//game_manager::vblank_func();
+		//GameManager::vblank_func();
 		
 	}
 	
