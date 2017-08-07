@@ -75,35 +75,12 @@ next:
 	@@ We will use the memcpy32 from Tonc function That Is --IN ROM-- To copy the memcpy32 from Tonc function To IWRAM (kind of ironic or something, isn't it?).
 	
 	
-	
 	@ Now we need To copy the code That goes in IWRAM To IWRAM
-	
 	ldr r0, =iwram_code_iwram_start			@ destination
 	ldr r1, =iwram_code_rom_start			@ source
-	@ldr r2, =iwram_code_section_size		@ \ word count
-	@lsr r2, #0x02							@ / 
-	
 	ldr r2, =iwram_code_section_size		@ byte count
 	
 	
-	@@@ Branch To the memcpy32 function That Is --IN ROM-- and use That To copy the .iwram_code section To IWRAM.
-	@@ldr r4, =memcpy32
-	
-	
-	@@ Branch To the slower_memcpy() function That Is --IN IWRAM-- and use
-	@@ THAT To copy the .iwram_code section To IWRAM.
-	@ldr r4, =slower_memcpy
-	@ldr r5, =iwram_code_iwram_start
-	@
-	@@.soft_break
-	@
-	@sub r6, r4, r5
-	@
-	@ldr r5, =iwram_code_rom_start
-	@add r6, r5
-	@@bx_afa r4
-	@
-	@long_call_via_r6_fata_type_2
 	
 	@ Branch To the slower_memcpy() function That Is --IN ROM-- and use
 	@ THAT To copy the .iwram_code section To IWRAM.
@@ -113,26 +90,12 @@ next:
 	
 	
 	
-	@@@ Now we will use the memcpy32 function That Is in IWRAM To copy the .ewram_code section To EWRAM.
-	
 	@ Now we will use the memcpy function That Is in IWRAM To copy the .ewram_code section To EWRAM.
 	ldr r0, =ewram_code_ewram_start			@ destination
 	ldr r1, =ewram_code_rom_start	@ source
-	@ldr r2, =ewram_code_size		@ \ word count
-	@lsr r2, #0x02					@ / 
-	
-	
 	ldr r2, =ewram_code_section_size		@ byte count
 	
-	@@ Branch To the memcpy32 function That Is in IWRAM and use it To copy the .ewram_code section To EWRAM.
-	@@ldr r4, =memcpy32
-	@@bx_afa r4
-	
-	
 	@ Branch To the memcpy function That Is in IWRAM and use it To copy the .ewram_code section To EWRAM.
-	@ldr r4, =memcpy
-	@mov lr, pc
-	@bx r4
 	long_call_via_r4_fata memcpy
 	
 	
@@ -140,19 +103,11 @@ next:
 	@ Copy Some of the MaxMOD code To IWRAM
 	ldr r0, =some_maxmod_code_iwram_start	@ destination
 	ldr r1, =some_maxmod_code_rom_start		@ source
-	@ldr r2, =some_maxmod_code_size			@ \ word count
-	@lsr r2, #0x02						@ /
-	
 	ldr r2, =some_maxmod_code_section_size			@ byte count
-	
-	@@@ r4 still Contains the address of memcpy32 in IWRAM (horray for stack
-	@@@ manipulation)
 	
 	
 	@ r4 still Contains the address of memcpy in IWRAM (horray for stack
 	@ manipulation)
-	@mov lr, pc
-	@bx r4
 	long_call_via_r4_fata_type_2
 	
 	
@@ -161,8 +116,6 @@ next:
 	ldr r1, =text_hot_rom_start
 	
 	ldr r2, =text_hot_section_size
-	@cmp r2, #0x0
-	@ble .L_done_copying_text_hot_to_iwram
 	long_call_via_r4_fata_type_2
 	
 .L_done_copying_text_hot_to_iwram:
@@ -173,26 +126,13 @@ next:
 	ldr r0, =__bss_start__
 	ldr r2, =__bss_end__
 	
-	@ Compute the size of the .bss section in bytes.  This Is the word
-	@ count, multiplied by 4.
-	
-	
 	@ Compute the size of the .bss section in bytes.
 	sub r2, r2, r0
 	
-	@@ Compute the word count.
-	@lsr r2, #0x02
-	
 	@ The .bss section Is To be filled with 0x00
-	@@mvn r1, #0x01
 	mov r1, #0x00
-	@ldr r1, silly_string
 	
 	
-	@@ldr r4, =memfill32
-	@ldr r4, =memset
-	@mov lr, pc
-	@bx r4
 	long_call_via_r4_fata memset
 	
 	
@@ -249,9 +189,6 @@ next:
 	
 	
 	@ Branch To the memcpy function.  It Is indeed in IWRAM.
-	@@ldr r4, =memcpy
-	@mov lr, pc
-	@bx r4
 	long_call_via_r4_fata_type_2
 	
 	
@@ -276,9 +213,6 @@ next:
 	ldr r0, =asm_main + 1
 	bx r0
 
-
-@silly_string:
-@	.ascii "olo_"
 
 
 .ltorg

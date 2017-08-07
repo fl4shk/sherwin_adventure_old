@@ -29,9 +29,25 @@
 #define _EWRAM section(".data")
 #define _IWRAM section(".iwram_data")
 
+
 // #defines for UNITIALIZED global variables That go into EWRAM, IWRAM,
 // and SRAM
 #define _BSS section(".bss")
+#define _BSS0 section(".bss0")
+#define _BSS1 section(".bss1")
+#define _BSS2 section(".bss2")
+#define _BSS3 section(".bss3")
+#define _BSS4 section(".bss4")
+#define _BSS5 section(".bss5")
+#define _BSS6 section(".bss6")
+#define _BSS7 section(".bss7")
+
+
+#define _TITLE_SCREEN_BSS _BSS0
+#define _IN_LEVEL_BSS _BSS1
+#define _OVERWORLD_BSS _BSS2
+
+
 #define _IWRAM_BSS section(".iwram_bss")
 #define _SRAM section(".sram")
 

@@ -9,15 +9,13 @@ MEMORY
 {
 	rom	: ORIGIN = 0x08000000, LENGTH = 32M
 	iwram	: ORIGIN = 0x03000000, LENGTH = 32K
-	ewram	: ORIGIN = 0x02000000, LENGTH = 224K
-	free_store	: ORIGIN = 0x02038000, LENGTH = 32K
+	ewram	: ORIGIN = 0x02000000, LENGTH = 256K
 	sram	: ORIGIN = 0x0e000000, LENGTH = 64K
 }
 
 __text_start	=	ORIGIN(rom);
-__iwram_start	=	ORIGIN(iwram);
 __ewram_start	=	ORIGIN(ewram);
-__free_store_start	=	ORIGIN(free_store);
+__iwram_start	=	ORIGIN(iwram);
 __sram_start	=	ORIGIN(sram);
 
 SECTIONS
@@ -210,6 +208,8 @@ SECTIONS
 	
 	ewram_code_section_size = SIZEOF(.ewram_code);
 	
+	
+	/* Uninitialized (set to zero) variables that go into EWRAM */
 	.bss :
 	{
 		__bss_start__ = .;
@@ -218,72 +218,11 @@ SECTIONS
 		*(COMMON)
 		. = ALIGN(4);
 		__bss_end__ = .;
+		
+		/* The symbols end or __end__ are used to tell where malloc, new, and friends have free access. */
+		end = .;
+		__end__ = .;
 	} >ewram
-
-	OVERLAY : NOCROSSREFS
-	{
-		/* Uninitialized (set to zero) variables that go into EWRAM */
-		.bss0
-		{
-			__bss0_start__ = .;
-			*(.bss0 .bss0.*)
-			. = ALIGN(4);
-			__bss0_end__ = .;
-		}
-		.bss1
-		{
-			__bss1_start__ = .;
-			*(.bss1 .bss1.*)
-			. = ALIGN(4);
-			__bss1_end__ = .;
-		}
-		.bss2
-		{
-			__bss2_start__ = .;
-			*(.bss2 .bss2.*)
-			. = ALIGN(4);
-			__bss2_end__ = .;
-		}
-		.bss3
-		{
-			__bss3_start__ = .;
-			*(.bss3 .bss2.*)
-			. = ALIGN(4);
-			__bss3_end__ = .;
-		}
-		.bss4
-		{
-			__bss4_start__ = .;
-			*(.bss4 .bss2.*)
-			. = ALIGN(4);
-			__bss4_end__ = .;
-		}
-		.bss5
-		{
-			__bss5_start__ = .;
-			*(.bss5 .bss2.*)
-			. = ALIGN(4);
-			__bss5_end__ = .;
-		}
-		.bss6
-		{
-			__bss6_start__ = .;
-			*(.bss6 .bss2.*)
-			. = ALIGN(4);
-			__bss6_end__ = .;
-		}
-		.bss7
-		{
-			__bss7_start__ = .;
-			*(.bss7 .bss2.*)
-			. = ALIGN(4);
-			__bss7_end__ = .;
-		}
-	} >ewram
-	
-	/* The symbols end or __end__ are used to tell where malloc, new, and friends have free access. */
-	end = __free_store_start;
-	__end__ = __free_store_start;
 	
 	bss_section_size = SIZEOF(.bss);
 	

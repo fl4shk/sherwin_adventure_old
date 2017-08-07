@@ -29,7 +29,7 @@
 // CONSTANT dimensions (as Is usually the case in my GBA code), Is stored
 // within a 1D array.
 template< typename type, u32 _width, u32 _height >
-class ArrayCsz_2dHelper
+class ArrayCsz2dHelper
 {
 protected:		// variables
 	static constexpr vec2_u32 size_2d = { _width, _height };
@@ -39,10 +39,10 @@ public:			// variables
 	type* the_array = NULL;
 	
 public:			// functions
-	inline ArrayCsz_2dHelper()
+	inline ArrayCsz2dHelper()
 	{
 	}
-	inline ArrayCsz_2dHelper(type* s_the_array)
+	inline ArrayCsz2dHelper(type* s_the_array)
 		: the_array(s_the_array)
 	{
 	}
@@ -52,8 +52,8 @@ public:			// functions
 		the_array = s_the_array;
 	}
 	
-	ArrayCsz_2dHelper< type, _width, _height >& operator = 
-		(const ArrayCsz_2dHelper< type, _width, _height >& to_copy)
+	ArrayCsz2dHelper< type, _width, _height >& operator = 
+		(const ArrayCsz2dHelper< type, _width, _height >& to_copy)
 	{
 		the_array = to_copy.the_array;
 		
