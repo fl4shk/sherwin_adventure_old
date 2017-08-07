@@ -32,9 +32,9 @@ bool HudManager::hud_was_generated;
 
 scr_entry HudManager::bg1_screenblock_mirror[screenblock_size];
 
-ArrayCsz_2dHelper< scr_entry, screenblock_xsize, screenblock_ysize > 
+ArrayCsz_2dHelper<scr_entry, screenblock_xsize, screenblock_ysize > 
 	HudManager::bg1_screenblock_2d(SE_RAM[bg1_sbb]);
-ArrayCsz_2dHelper< scr_entry, screenblock_xsize, screenblock_ysize > 
+ArrayCsz_2dHelper<scr_entry, screenblock_xsize, screenblock_ysize > 
 	HudManager::bg1_screenblock_mirror_2d(bg1_screenblock_mirror);
 
 const char HudManager::char_to_plottable_char_arr

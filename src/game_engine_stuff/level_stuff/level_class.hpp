@@ -34,7 +34,7 @@ public:		// constants
 	
 protected:		// variables
 	u32 actual_num_sublevels = 0;
-	array< SublevelPointer, max_num_sublevels > the_sublevels;
+	array<SublevelPointer, max_num_sublevels > the_sublevels;
 	
 	
 private:		// functions
@@ -44,7 +44,7 @@ private:		// functions
 		the_sublevels.at(actual_num_sublevels++) = some_sublevel_pointer;
 	}
 	
-	template< typename... rem_types >
+	template<typename... rem_types >
 	void init(SublevelPointer& first, 
 		rem_types&... rem_sublevel_pointers)
 	{
@@ -58,7 +58,7 @@ private:		// functions
 		the_sublevels.at(actual_num_sublevels++) = some_sublevel_pointer;
 	}
 	
-	template< typename... rem_types >
+	template<typename... rem_types >
 	void init(SublevelPointer&& first, 
 		rem_types&&... rem_sublevel_pointers)
 	{
@@ -67,12 +67,12 @@ private:		// functions
 	}
 public:		// functions
 	
-	template< typename... arg_types >
+	template<typename... arg_types >
 	Level(arg_types&... some_sublevel_pointers)
 	{
 		init(some_sublevel_pointers...);
 	}
-	template< typename... arg_types >
+	template<typename... arg_types >
 	Level(arg_types&&... some_sublevel_pointers)
 	{
 		init(some_sublevel_pointers...);

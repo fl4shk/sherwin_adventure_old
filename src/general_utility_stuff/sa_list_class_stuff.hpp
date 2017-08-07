@@ -60,7 +60,7 @@ public:		// functions
 		return data_ptr;
 	}
 	
-	template< typename type >
+	template<typename type >
 	inline type* cast_data_ptr()
 	{
 		return static_cast<type*>(data_ptr);
@@ -118,7 +118,7 @@ typedef DynArr<NodeDataAndIndex> ndai_dyn_arr;
 
 
 
-template< typename type >
+template<typename type >
 class Node
 {
 public:		// variables
@@ -131,7 +131,7 @@ public:		// functions
 	}
 	
 	
-	template< typename type_in_vec2 >
+	template<typename type_in_vec2 >
 	inline Node(const type& data_to_copy, 
 		Vec2<type_in_vec2> s_index_pair) : data(data_to_copy)
 	{
@@ -152,14 +152,14 @@ public:		// functions
 	
 	
 protected:		// functions
-	template< typename type_in_vec2 >
+	template<typename type_in_vec2 >
 	static inline s16 get_next_index_from_vec2
 		(const Vec2<type_in_vec2>& n_index_pair)
 	{
 		return static_cast<s16>(n_index_pair
 			[NodeContents::vec2_index_for_next_index]);
 	}
-	template< typename type_in_vec2 >
+	template<typename type_in_vec2 >
 	static inline s16 get_prev_index_from_vec2
 		(const Vec2<type_in_vec2>& n_index_pair)
 	{
@@ -570,7 +570,7 @@ public:		// functions
 
 // A group of functions To use as function pointers in the ListBackend
 // class.
-template< typename type >
+template<typename type >
 class ListExtras
 {
 protected:		// functions To point To
@@ -846,7 +846,7 @@ protected:		// variables
 	
 	ExtrasFpGroup the_extras_fp_group;
 	
-	template< typename type > friend class ExternallyAllocatedList;
+	template<typename type > friend class ExternallyAllocatedList;
 	
 protected:		// functions
 	inline ListBackend() : size(0)
@@ -1343,7 +1343,7 @@ protected:		// functions
 
 
 
-template< typename type >
+template<typename type >
 class ExternallyAllocatedList
 {
 protected:		// typedefs
@@ -2032,7 +2032,7 @@ public:		// functions
 
 // This Is a template class for a statically allocated array of modifiable
 // doubly-linked lists.  "sa" Is short for "statically allocated".
-template< typename type, u32 total_num_nodes, u32 num_lists >
+template<typename type, u32 total_num_nodes, u32 num_lists >
 class SaArrayOfLists
 {
 public:		// variables

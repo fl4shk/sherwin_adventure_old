@@ -28,7 +28,7 @@ namespace SaListStuff
 // That act as statically-allocated linked lists.  Since some (or possibly 
 // all) of the derived classes use only some of the non-constructor member
 // functions, 
-template< typename type, u32 total_num_nodes >
+template<typename type, u32 total_num_nodes >
 class RegularListBase
 {
 //protected:		// variables
@@ -201,11 +201,11 @@ protected:		// functions
 } __attribute__((_ALIGN4));
 
 
-template< typename type, u32 total_num_nodes >
-class RegularList : public RegularListBase< type, total_num_nodes >
+template<typename type, u32 total_num_nodes >
+class RegularList : public RegularListBase<type, total_num_nodes >
 {
 public:		// typedefs
-	typedef RegularListBase< type, total_num_nodes > base;
+	typedef RegularListBase<type, total_num_nodes > base;
 	
 public:		// functions
 	inline RegularList() : base()
@@ -356,12 +356,12 @@ public:		// functions
 
 // This class Is Intended To always be sorted, though it does not have To
 // be in some cases.
-template< typename type, u32 total_num_nodes >
+template<typename type, u32 total_num_nodes >
 class SortedAlwaysList 
-	: public RegularListBase< type, total_num_nodes >
+	: public RegularListBase<type, total_num_nodes >
 {
 public:		// typedefs
-	typedef RegularListBase< type, total_num_nodes > base;
+	typedef RegularListBase<type, total_num_nodes > base;
 	
 public:		// functions
 	inline SortedAlwaysList() : base()

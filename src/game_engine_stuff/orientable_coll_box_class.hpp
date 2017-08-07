@@ -631,9 +631,9 @@ public:		// functions
 		static constexpr u32 num_corners = 4, num_edges = 4, num_axes = 4;
 		
 		// this (world coords)
-		array< vec2_f24p8, num_corners > corners; 
-		array< vec2_f24p8, num_edges > edges; 
-		array< vec2_f24p8, num_axes > axes;
+		array<vec2_f24p8, num_corners > corners; 
+		array<vec2_f24p8, num_edges > edges; 
+		array<vec2_f24p8, num_axes > axes;
 		
 		vec2_f24p8& lt_corner = corners[0], 
 			& rt_corner = corners[1], 
@@ -668,9 +668,9 @@ public:		// functions
 		
 		
 		// other (world coords)
-		array< vec2_f24p8, num_corners > other_corners; 
-		array< vec2_f24p8, num_edges > other_edges; 
-		array< vec2_f24p8, num_axes > other_axes;
+		array<vec2_f24p8, num_corners > other_corners; 
+		array<vec2_f24p8, num_edges > other_edges; 
+		array<vec2_f24p8, num_axes > other_axes;
 		
 		vec2_f24p8& other_lt_corner = other_corners[0], 
 			& other_rt_corner = other_corners[1], 
@@ -708,7 +708,7 @@ public:		// functions
 		// projection.
 		auto project = [&](const vec2_f24p8& axis, Fixed24p8& min, 
 			Fixed24p8& max, 
-			const array< vec2_f24p8, num_corners >& corners_arr) -> void
+			const array<vec2_f24p8, num_corners >& corners_arr) -> void
 		{
 			min = max = axis.dot_prod(corners_arr.at(0));
 			

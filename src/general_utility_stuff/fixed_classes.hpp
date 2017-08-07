@@ -557,11 +557,11 @@ inline Fixed8p8 operator - (const Fixed8p8& a)
 
 
 
-template< typename underlying_type, u32 shift >
+template<typename underlying_type, u32 shift >
 class FixedptNumPacked
 {
 public:		// typedefs
-	typedef FixedptNumPacked< underlying_type, shift > 
+	typedef FixedptNumPacked<underlying_type, shift > 
 		specific_fixedpt_type;
 	
 public:		// variables
@@ -656,13 +656,13 @@ public:		// functions
 	
 } __attribute__((_PACKED));
 
-typedef FixedptNumPacked< u16, 4 > fixedu12p4_packed;
-typedef FixedptNumPacked< s16, 4 > fixeds12p4_packed;
-typedef FixedptNumPacked< s16, 8 > fixeds8p8_packed;
+typedef FixedptNumPacked<u16, 4 > fixedu12p4_packed;
+typedef FixedptNumPacked<s16, 4 > fixeds12p4_packed;
+typedef FixedptNumPacked<s16, 8 > fixeds8p8_packed;
 
 
 
-template< typename specific_fixedpt_type >
+template<typename specific_fixedpt_type >
 inline specific_fixedpt_type make_signed_fixedpt_num(s32 whole_part, 
 	u32 frac_part=0)
 {
@@ -694,7 +694,7 @@ inline specific_fixedpt_type make_signed_fixedpt_num(s32 whole_part,
 }
 
 
-template< typename specific_fixedpt_type >
+template<typename specific_fixedpt_type >
 inline specific_fixedpt_type make_unsigned_fixedpt_num(u32 whole_part, 
 	u32 frac_part=0)
 {

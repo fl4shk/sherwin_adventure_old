@@ -24,7 +24,7 @@
 
 // in_range and vec2_in_range are PRIMARILY Intended for use with a range
 // of 0 (inclusive) To size (exclusive)
-template< typename type >
+template<typename type >
 inline bool in_range(type range_start_inclusive, type range_end_exclusive, 
 	type to_check)
 {
@@ -33,7 +33,7 @@ inline bool in_range(type range_start_inclusive, type range_end_exclusive,
 }
 
 
-template< typename type >
+template<typename type >
 inline bool in_range_inclusive(type range_start_inclusive, 
 	type range_end_inclusive, type to_check)
 {
@@ -41,7 +41,7 @@ inline bool in_range_inclusive(type range_start_inclusive,
 		&& to_check <= range_end_inclusive);
 }
 
-template< typename type >
+template<typename type >
 inline bool vec2_in_range(Vec2<type> range_start_inclusive, 
 	Vec2<type> range_end_exclusive, Vec2<type> to_check)
 {
@@ -52,7 +52,7 @@ inline bool vec2_in_range(Vec2<type> range_start_inclusive,
 }
 
 
-template< typename type >
+template<typename type >
 inline type clamp_to_range(type range_start_inclusive, 
 	type range_end_exclusive, type to_clamp)
 {

@@ -29,7 +29,7 @@
 
 // This Is a class for dynamic arrays That Can be resized but only by
 // calling the resize() function.
-template< typename type >
+template<typename type >
 class DynArr
 {
 protected:		// variables

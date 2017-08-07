@@ -92,7 +92,7 @@ public:		// static variables
 	// horiz_sublevel_block_data_2d Is an ArrayCsz_2dHelper That wraps
 	// the access To block_data_array for horizontal sublevels.  Support
 	// for vertical sublevels MIGHT come later.
-	static ArrayCsz_2dHelper< Block, horiz_sublevel_xsize, 
+	static ArrayCsz_2dHelper<Block, horiz_sublevel_xsize, 
 		horiz_sublevel_ysize > horiz_sublevel_block_data_2d;
 	
 	
@@ -103,12 +103,12 @@ public:		// static variables
 	
 	// The array of lists of Sprite initialization parameters, including
 	// the spawned/despawned/dead status.
-	//static std::array< std::forward_list<SpriteInitParamGroup>,
+	//static std::array<std::forward_list<SpriteInitParamGroup>,
 	//	horiz_sublevel_xsize > horiz_sublevel_sprite_ipg_lists
 	//	__attribute__((_EWRAM));
 	
 	// -- Switch To linear_memory_allocator --
-	static SaListStuff::SaArrayOfLists< SpriteInitParamGroup,
+	static SaListStuff::SaArrayOfLists<SpriteInitParamGroup,
 		max_num_sprite_ipgs_per_sublevel, horiz_sublevel_xsize > 
 		horiz_sublevel_sprite_ipg_lists __attribute__((_EWRAM));
 	
@@ -118,11 +118,11 @@ public:		// static variables
 	
 	
 	// bg0_screenblock_2d Is in VRAM.
-	static ArrayCsz_2dHelper< scr_entry, screenblock_xsize,
+	static ArrayCsz_2dHelper<scr_entry, screenblock_xsize,
 		screenblock_ysize > bg0_screenblock_2d;
 	
 	// bg0_screenblock_mirror_2d Is in EWRAM.
-	static ArrayCsz_2dHelper< scr_entry, screenblock_xsize,
+	static ArrayCsz_2dHelper<scr_entry, screenblock_xsize,
 		screenblock_ysize > bg0_screenblock_mirror_2d;
 	
 	

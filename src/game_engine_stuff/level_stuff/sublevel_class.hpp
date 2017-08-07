@@ -33,7 +33,7 @@ class SpriteInitParamGroup;
 // (which would be mentioned in an assembly file)
 
 // This Is a class for COMPRESSED sublevels in ROM
-template< u32 cmp_block_data_size, u32 xsize, u32 ysize, 
+template<u32 cmp_block_data_size, u32 xsize, u32 ysize, 
 	u32 sprite_ipg_arr_size, u32 sublevel_entrance_arr_size >
 class Sublevel
 {
@@ -92,9 +92,9 @@ public:		// functions
 	{
 	}
 	
-	template< u32 cmp_block_data_size, u32 xsize, u32 ysize, 
+	template<u32 cmp_block_data_size, u32 xsize, u32 ysize, 
 		u32 sprite_ipg_arr_size, u32 sublevel_entrance_arr_size >
-	inline SublevelPointer(const Sublevel< cmp_block_data_size, xsize, 
+	inline SublevelPointer(const Sublevel<cmp_block_data_size, xsize, 
 		ysize, sprite_ipg_arr_size, sublevel_entrance_arr_size >& 
 		the_sublevel)
 	{
@@ -110,9 +110,9 @@ public:		// functions
 	}
 	
 	
-	template< u32 cmp_block_data_size, u32 xsize, u32 ysize, 
+	template<u32 cmp_block_data_size, u32 xsize, u32 ysize, 
 		u32 sprite_ipg_arr_size, u32 sublevel_entrance_arr_size >
-	inline void init(const Sublevel< cmp_block_data_size, xsize, ysize,
+	inline void init(const Sublevel<cmp_block_data_size, xsize, ysize,
 		sprite_ipg_arr_size, sublevel_entrance_arr_size >& the_sublevel)
 	{
 		size_2d = { xsize, ysize };

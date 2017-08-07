@@ -32,7 +32,7 @@ class VertCollLseg;
 //{
 //public:		// variables
 //	static constexpr size_t num_end_points = 2;
-//	std::array< vec2_f24p8, num_end_points > end_points;
+//	std::array<vec2_f24p8, num_end_points > end_points;
 //	
 //public:		// functions
 //	inline GenericCollLseg()

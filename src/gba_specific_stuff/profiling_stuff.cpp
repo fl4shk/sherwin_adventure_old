@@ -22,31 +22,31 @@
 
 #include <stdlib.h>
 
-//template< typename type >
+//template<typename type >
 //void allocate_arr_with_malloc(type*& ret, size_t num_elems) 
 //	__attribute__((noinline));
 
 
-template< typename type >
+template<typename type >
 inline void allocate_arr_with_malloc(type*& to_allocate, 
 	size_t num_elems) 
 {
 	to_allocate = static_cast<type*>(malloc(num_elems * sizeof(type)));
 }
-template< typename type >
+template<typename type >
 inline void deallocate_arr_with_free(type*& to_deallocate)
 {
 	free(to_deallocate);
 }
 
-//template< typename type >
+//template<typename type >
 //inline void allocate_arr_with_nano_malloc(type*& to_allocate, 
 //	size_t num_elems) 
 //{
 //	to_allocate = static_cast<type*>(nano_malloc(num_elems 
 //		* sizeof(type)));
 //}
-//template< typename type >
+//template<typename type >
 //inline void deallocate_arr_with_nano_free(type*& to_deallocate)
 //{
 //	nano_free(to_deallocate);

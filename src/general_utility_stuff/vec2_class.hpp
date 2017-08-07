@@ -28,7 +28,7 @@
 
 static constexpr size_t vec2_index_for_x = 0, vec2_index_for_y = 1;
 
-template< typename type >
+template<typename type >
 class Vec2
 {
 //public:		// constants
@@ -52,24 +52,24 @@ public:		// functions
 	
 	
 	
-	template< typename type_1, typename type_2 >
+	template<typename type_1, typename type_2 >
 	constexpr inline Vec2(const type_1& s_x, const type_2& s_y)
 		: x(s_x), y(s_y)
 	{
 	}
-	template< typename other_type >
+	template<typename other_type >
 	constexpr inline Vec2(const Vec2<other_type>& to_copy)
 		: x(to_copy.x), y(to_copy.y)
 	{
 	}
-	template< typename other_type >
+	template<typename other_type >
 	constexpr inline Vec2(Vec2<other_type>&& to_move)
 		: x(std::move(to_move.x)), y(std::move(to_move.y))
 	{
 	}
 	
 	
-	template< typename other_type >
+	template<typename other_type >
 	inline Vec2<type>& operator = (const Vec2<other_type>& to_copy)
 	{
 		x = to_copy.x;
@@ -77,7 +77,7 @@ public:		// functions
 		
 		return *this;
 	}
-	template< typename other_type >
+	template<typename other_type >
 	inline Vec2<type>& operator = (Vec2<other_type>&& to_move)
 	{
 		x = std::move(to_move.x);
@@ -87,44 +87,44 @@ public:		// functions
 	}
 	
 	
-	template< typename other_type >
+	template<typename other_type >
 	inline Vec2<type> operator + (const Vec2<other_type>& to_add) const
 	{
 		return Vec2<type>(x + to_add.x, y + to_add.y);
 	}
-	template< typename other_type >
+	template<typename other_type >
 	inline Vec2<type> operator - (const Vec2<other_type>& to_sub) const
 	{
 		return Vec2<type>(x - to_sub.x, y - to_sub.y);
 	}
 	
-	template< typename other_type >
+	template<typename other_type >
 	inline Vec2<type> operator * (const other_type& scale) const
 	{
 		return Vec2<type>(x * scale, y * scale);
 	}
 	
-	template< typename other_type >
+	template<typename other_type >
 	inline type dot(const Vec2<other_type>& to_cross) const
 	{
 		const type ret = (x * to_cross.x) + (y * to_cross.y);
 		return ret;
 	}
-	template< typename other_type >
+	template<typename other_type >
 	inline type zcross(const Vec2<other_type>& to_cross) const
 	{
 		const type ret = (x * to_cross.y) - (y * to_cross.x);
 		return ret;
 	}
 	
-	template< typename other_type >
+	template<typename other_type >
 	inline Vec2<type>& operator += (const Vec2<other_type>& to_add)
 	{
 		x += to_add.x;
 		y += to_add.y;
 		return *this;
 	}
-	template< typename other_type >
+	template<typename other_type >
 	inline Vec2<type>& operator -= (const Vec2<other_type>& to_sub)
 	{
 		x -= to_sub.x;
@@ -132,7 +132,7 @@ public:		// functions
 		return *this;
 	}
 	
-	template< typename other_type >
+	template<typename other_type >
 	inline Vec2<type>& operator *= (const other_type& scale)
 	{
 		x *= scale;
@@ -142,20 +142,20 @@ public:		// functions
 	
 	
 	// Comparison Operator Overloads
-	template< typename other_type >
+	template<typename other_type >
 	inline bool operator == (const Vec2<other_type>& to_cmp) const
 	{
 		return ((x == to_cmp.x) && (y == to_cmp.y));
 	}
 	
-	template< typename other_type >
+	template<typename other_type >
 	inline bool operator != (const Vec2<other_type>& to_cmp) const
 	{
 		return ((x != to_cmp.x) || (y != to_cmp.y));
 	}
 	
 	
-	template< typename other_type >
+	template<typename other_type >
 	inline operator Vec2<other_type>() const
 	{
 		return Vec2<other_type>(x, y);
@@ -190,7 +190,7 @@ public:		// functions
 
 
 
-template< typename type >
+template<typename type >
 inline Vec2<type> operator * (const type& scale, 
 	const Vec2<type>& vec2_to_mul)
 {
@@ -253,21 +253,21 @@ public:		/* functions */ \
 		return Vec2<specific_type>(x - to_sub.x, y - to_sub.y); \
 	} \
 	\
-	template< typename other_type > \
+	template<typename other_type > \
 	inline Vec2<specific_type> operator * (const other_type& scale) \
 		const \
 	{ \
 		return Vec2<specific_type>(x * scale, y * scale); \
 	} \
 	\
-	template< typename other_type > \
+	template<typename other_type > \
 	inline specific_type dot(const Vec2<other_type>& to_cross) const \
 	{ \
 		const specific_type ret = (x * to_cross.x) \
 			+ (y * to_cross.y); \
 		return ret; \
 	} \
-	template< typename other_type > \
+	template<typename other_type > \
 	inline specific_type zcross(const Vec2<other_type>& to_cross) const \
 	{ \
 		const specific_type ret = (x * to_cross.y) \
@@ -291,7 +291,7 @@ public:		/* functions */ \
 		return *this; \
 	} \
 	\
-	template< typename other_type > \
+	template<typename other_type > \
 	inline Vec2<specific_type>& operator *= (const other_type& scale) \
 	{ \
 		x *= scale; \
@@ -311,7 +311,7 @@ public:		/* functions */ \
 		return ((x != to_cmp.x) || (y != to_cmp.y)); \
 	} \
 	\
-	template< typename other_type > \
+	template<typename other_type > \
 	inline operator Vec2<other_type>() const \
 	{ \
 		return Vec2<other_type>(x, y); \
@@ -386,7 +386,7 @@ inline vec2_f24p8 operator - (const vec2_f8p8&a, const vec2_f24p8& b)
 //	return { {x}, {y} };
 //}
 
-template< typename type >
+template<typename type >
 inline Vec2<type> custom_abs(const Vec2<type>& val)
 {
 	return Vec2<type>(custom_abs(val.x), custom_abs(val.y));

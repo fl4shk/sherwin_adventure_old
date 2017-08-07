@@ -36,11 +36,11 @@ public:		// variables
 	
 	
 	// bg1_screenblock_2d Is in VRAM.
-	static ArrayCsz_2dHelper< scr_entry, screenblock_xsize,
+	static ArrayCsz_2dHelper<scr_entry, screenblock_xsize,
 		screenblock_ysize > bg1_screenblock_2d;
 	
 	// bg1_screenblock_mirror_2d Is in EWRAM.
-	static ArrayCsz_2dHelper< scr_entry, screenblock_xsize, 
+	static ArrayCsz_2dHelper<scr_entry, screenblock_xsize, 
 		screenblock_ysize > bg1_screenblock_mirror_2d;
 	
 	static constexpr u32 char_to_plottable_char_arr_size = 0x100;
