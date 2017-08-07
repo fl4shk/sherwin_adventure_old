@@ -314,6 +314,98 @@ SECTIONS
 	} >iwram AT >rom
 	
 	iwram_code_section_size = SIZEOF(.iwram_code);
+
+	OVERLAY : NOCROSSREFS
+	{
+		.iwram_code0
+		{
+			iwram_code0_rom_start = LOADADDR(.iwram_code0);
+			
+			iwram_code0_iwram_start = .;
+			
+			*(.iwram_code0 .iwram_code0.*);
+			
+			. = ALIGN(4);
+		}
+		.iwram_code1
+		{
+			iwram_code1_rom_start = LOADADDR(.iwram_code1);
+			
+			iwram_code1_iwram_start = .;
+			
+			*(.iwram_code1 .iwram_code1.*);
+			
+			. = ALIGN(4);
+		}
+		.iwram_code2
+		{
+			iwram_code2_rom_start = LOADADDR(.iwram_code2);
+			
+			iwram_code2_iwram_start = .;
+			
+			*(.iwram_code2 .iwram_code2.*);
+			
+			. = ALIGN(4);
+		}
+		.iwram_code3
+		{
+			iwram_code3_rom_start = LOADADDR(.iwram_code3);
+			
+			iwram_code3_iwram_start = .;
+			
+			*(.iwram_code3 .iwram_code3.*);
+			
+			. = ALIGN(4);
+		}
+		.iwram_code4
+		{
+			iwram_code4_rom_start = LOADADDR(.iwram_code4);
+			
+			iwram_code4_iwram_start = .;
+			
+			*(.iwram_code4 .iwram_code4.*);
+			
+			. = ALIGN(4);
+		}
+		.iwram_code5
+		{
+			iwram_code5_rom_start = LOADADDR(.iwram_code5);
+			
+			iwram_code5_iwram_start = .;
+			
+			*(.iwram_code5 .iwram_code5.*);
+			
+			. = ALIGN(4);
+		}
+		.iwram_code6
+		{
+			iwram_code6_rom_start = LOADADDR(.iwram_code6);
+			
+			iwram_code6_iwram_start = .;
+			
+			*(.iwram_code6 .iwram_code6.*);
+			
+			. = ALIGN(4);
+		}
+		.iwram_code7
+		{
+			iwram_code7_rom_start = LOADADDR(.iwram_code7);
+			
+			iwram_code7_iwram_start = .;
+			
+			*(.iwram_code7 .iwram_code7.*);
+			
+			. = ALIGN(4);
+		}
+	} >iwram AT >rom
+	__iwram_code0_section_size = SIZEOF(.iwram_code0);
+	__iwram_code1_section_size = SIZEOF(.iwram_code1);
+	__iwram_code2_section_size = SIZEOF(.iwram_code2);
+	__iwram_code3_section_size = SIZEOF(.iwram_code3);
+	__iwram_code4_section_size = SIZEOF(.iwram_code4);
+	__iwram_code5_section_size = SIZEOF(.iwram_code5);
+	__iwram_code6_section_size = SIZEOF(.iwram_code6);
+	__iwram_code7_section_size = SIZEOF(.iwram_code7);
 	
 	
 	/* MaxMOD puts SOME code in the .iwram segment, so it will be treated as
@@ -340,7 +432,7 @@ SECTIONS
 	/* Uninitialized variables that go into IWRAM*/
 	.iwram_bss :
 	{
-		*(.iwram_bss);
+		*(.iwram_bss .iwram_bss.*);
 		
 		. = ALIGN(4);
 		/* The symbols end or __end__ are used to tell where malloc, new, and friends have free access. */
@@ -349,6 +441,66 @@ SECTIONS
 	} >iwram
 	
 	iwram_bss_section_size = SIZEOF(.iwram_bss);
+
+	OVERLAY : NOCROSSREFS
+	{
+		.iwram_bss0
+		{
+			*(.iwram_bss0 .iwram_bss0.*);
+
+			. = ALIGN(4);
+		}
+		.iwram_bss1
+		{
+			*(.iwram_bss1 .iwram_bss1.*);
+
+			. = ALIGN(4);
+		}
+		.iwram_bss2
+		{
+			*(.iwram_bss2 .iwram_bss2.*);
+
+			. = ALIGN(4);
+		}
+		.iwram_bss3
+		{
+			*(.iwram_bss3 .iwram_bss3.*);
+
+			. = ALIGN(4);
+		}
+		.iwram_bss4
+		{
+			*(.iwram_bss4 .iwram_bss4.*);
+
+			. = ALIGN(4);
+		}
+		.iwram_bss5
+		{
+			*(.iwram_bss5 .iwram_bss5.*);
+
+			. = ALIGN(4);
+		}
+		.iwram_bss6
+		{
+			*(.iwram_bss6 .iwram_bss6.*);
+
+			. = ALIGN(4);
+		}
+		.iwram_bss7
+		{
+			*(.iwram_bss7 .iwram_bss7.*);
+
+			. = ALIGN(4);
+		}
+	}
+	__iwram_bss0_section_size = SIZEOF(.iwram_bss0);
+	__iwram_bss1_section_size = SIZEOF(.iwram_bss1);
+	__iwram_bss2_section_size = SIZEOF(.iwram_bss2);
+	__iwram_bss3_section_size = SIZEOF(.iwram_bss3);
+	__iwram_bss4_section_size = SIZEOF(.iwram_bss4);
+	__iwram_bss5_section_size = SIZEOF(.iwram_bss5);
+	__iwram_bss6_section_size = SIZEOF(.iwram_bss6);
+	__iwram_bss7_section_size = SIZEOF(.iwram_bss7);
 	
 	/* total_iwram_var_size = iwram_data_section_size + iwram_bss_section_size; */
 	
@@ -362,7 +514,7 @@ SECTIONS
 		ewram_code_rom_start = LOADADDR(.ewram_code);
 		
 		ewram_code_ewram_start = .;
-		*(.ewram_code);
+		*(.ewram_code .ewram_code.*);
 		
 		. = ALIGN(4);
 	} >ewram AT >rom
