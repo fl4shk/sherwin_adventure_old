@@ -33,6 +33,8 @@
 // #defines for UNITIALIZED global variables That go into EWRAM, IWRAM,
 // and SRAM
 #define _BSS section(".bss")
+
+// BSS linker overlay
 #define _BSS0 section(".bss0")
 #define _BSS1 section(".bss1")
 #define _BSS2 section(".bss2")
@@ -43,6 +45,7 @@
 #define _BSS7 section(".bss7")
 
 
+// Specific uses of the BSS linker overlay
 #define _TITLE_SCREEN_BSS _BSS0
 #define _IN_LEVEL_BSS _BSS1
 #define _OVERWORLD_BSS _BSS2

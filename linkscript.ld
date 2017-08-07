@@ -127,6 +127,81 @@ SECTIONS
 	
 	data_section_size = SIZEOF(.data);
 	
+	OVERLAY : NOCROSSREFS
+	{
+		.data0
+		{
+			__data0_load = LOADADDR(.data0);
+			__data0_start = .;
+			*(.data0 .data0.*);
+			. = ALIGN(4);
+			__data0_end = .;
+		}
+		.data1
+		{
+			__data1_load = LOADADDR(.data1);
+			__data1_start = .;
+			*(.data1 .data1.*);
+			. = ALIGN(4);
+			__data1_end = .;
+		}
+		.data2
+		{
+			__data2_load = LOADADDR(.data2);
+			__data2_start = .;
+			*(.data2 .data2.*);
+			. = ALIGN(4);
+			__data2_end = .;
+		}
+		.data3
+		{
+			__data3_load = LOADADDR(.data3);
+			__data3_start = .;
+			*(.data3 .data3.*);
+			. = ALIGN(4);
+			__data3_end = .;
+		}
+		.data4
+		{
+			__data4_load = LOADADDR(.data4);
+			__data4_start = .;
+			*(.data4 .data4.*);
+			. = ALIGN(4);
+			__data4_end = .;
+		}
+		.data5
+		{
+			__data5_load = LOADADDR(.data5);
+			__data5_start = .;
+			*(.data5 .data5.*);
+			. = ALIGN(4);
+			__data5_end = .;
+		}
+		.data6
+		{
+			__data6_load = LOADADDR(.data6);
+			__data6_start = .;
+			*(.data6 .data6.*);
+			. = ALIGN(4);
+			__data6_end = .;
+		}
+		.data7
+		{
+			__data7_load = LOADADDR(.data7);
+			__data7_start = .;
+			*(.data7 .data7.*);
+			. = ALIGN(4);
+			__data7_end = .;
+		}
+	} >ewram AT >rom
+	__data0_section_size = SIZEOF(.data0);
+	__data1_section_size = SIZEOF(.data1);
+	__data2_section_size = SIZEOF(.data2);
+	__data3_section_size = SIZEOF(.data3);
+	__data4_section_size = SIZEOF(.data4);
+	__data5_section_size = SIZEOF(.data5);
+	__data6_section_size = SIZEOF(.data6);
+	__data7_section_size = SIZEOF(.data7);
 	
 	/* Initialized data in IWRAM */
 	.iwram_data :
@@ -138,8 +213,92 @@ SECTIONS
 		. = ALIGN(4);
 		__iwram_data_end = .;
 	} >iwram AT >rom
-	
 	iwram_data_section_size = SIZEOF(.iwram_data);
+	
+	OVERLAY : NOCROSSREFS
+	{
+		.iwram_data0
+		{
+			__iwram_data0_load = LOADADDR(.iwram_data0);
+			__iwram_data0_start = .;
+			
+			*(.iwram_data0 .iwram_data0.*)
+			. = ALIGN(4);
+			__iwram_data0_end = .;
+		}
+		.iwram_data1
+		{
+			__iwram_data1_load = LOADADDR(.iwram_data1);
+			__iwram_data1_start = .;
+			
+			*(.iwram_data1 .iwram_data1.*)
+			. = ALIGN(4);
+			__iwram_data1_end = .;
+		}
+		.iwram_data2
+		{
+			__iwram_data2_load = LOADADDR(.iwram_data2);
+			__iwram_data2_start = .;
+			
+			*(.iwram_data2 .iwram_data2.*)
+			. = ALIGN(4);
+			__iwram_data2_end = .;
+		}
+		.iwram_data3
+		{
+			__iwram_data3_load = LOADADDR(.iwram_data3);
+			__iwram_data3_start = .;
+			
+			*(.iwram_data3 .iwram_data3.*)
+			. = ALIGN(4);
+			__iwram_data3_end = .;
+		}
+		.iwram_data4
+		{
+			__iwram_data4_load = LOADADDR(.iwram_data4);
+			__iwram_data4_start = .;
+			
+			*(.iwram_data4 .iwram_data4.*)
+			. = ALIGN(4);
+			__iwram_data4_end = .;
+		}
+		.iwram_data5
+		{
+			__iwram_data5_load = LOADADDR(.iwram_data5);
+			__iwram_data5_start = .;
+			
+			*(.iwram_data5 .iwram_data5.*)
+			. = ALIGN(4);
+			__iwram_data5_end = .;
+		}
+		.iwram_data6
+		{
+			__iwram_data6_load = LOADADDR(.iwram_data6);
+			__iwram_data6_start = .;
+			
+			*(.iwram_data6 .iwram_data6.*)
+			. = ALIGN(4);
+			__iwram_data6_end = .;
+		}
+		.iwram_data7
+		{
+			__iwram_data7_load = LOADADDR(.iwram_data7);
+			__iwram_data7_start = .;
+			
+			*(.iwram_data7 .iwram_data7.*)
+			. = ALIGN(4);
+			__iwram_data7_end = .;
+		}
+	} >iwram AT >rom
+	__iwram_data0_section_size = SIZEOF(.iwram_data0);
+	__iwram_data1_section_size = SIZEOF(.iwram_data1);
+	__iwram_data2_section_size = SIZEOF(.iwram_data2);
+	__iwram_data3_section_size = SIZEOF(.iwram_data3);
+	__iwram_data4_section_size = SIZEOF(.iwram_data4);
+	__iwram_data5_section_size = SIZEOF(.iwram_data5);
+	__iwram_data6_section_size = SIZEOF(.iwram_data6);
+	__iwram_data7_section_size = SIZEOF(.iwram_data7);
+	
 	
 	/* Non .text.hot* Code to be copied to IWRAM */
 	.iwram_code :
@@ -191,11 +350,11 @@ SECTIONS
 	
 	iwram_bss_section_size = SIZEOF(.iwram_bss);
 	
-	total_iwram_var_size = iwram_data_section_size + iwram_bss_section_size;
+	/* total_iwram_var_size = iwram_data_section_size + iwram_bss_section_size; */
 	
-    total_iwram_code_size = text_hot_section_size + iwram_code_section_size + some_maxmod_code_section_size;
-	/* total_iwram_code_size = iwram_code_section_size + * some_maxmod_code_section_size; */
-	total_iwram_usage = total_iwram_var_size + total_iwram_code_size;
+    /*total_iwram_code_size = text_hot_section_size + iwram_code_section_size + some_maxmod_code_section_size; */
+	/* total_iwram_usage = total_iwram_var_size + total_iwram_code_size; */
+
 	
 	.ewram_code :
 	{
@@ -207,9 +366,79 @@ SECTIONS
 		
 		. = ALIGN(4);
 	} >ewram AT >rom
-	
+
 	ewram_code_section_size = SIZEOF(.ewram_code);
 	
+	OVERLAY : NOCROSSREFS
+	{
+		.ewram_code0
+		{
+			__ewram_code0_rom_start = LOADADDR(.ewram_code0);
+			__ewram_code0_ewram_start = .;
+			*(.ewram_code0 .ewram_code0.*);
+			. = ALIGN(4);
+		}
+		.ewram_code1
+		{
+			__ewram_code1_rom_start = LOADADDR(.ewram_code0);
+			__ewram_code1_ewram_start = .;
+			*(.ewram_code1 .ewram_code1.*);
+			. = ALIGN(4);
+		}
+		.ewram_code2
+		{
+			__ewram_code2_rom_start = LOADADDR(.ewram_code0);
+			__ewram_code2_ewram_start = .;
+			*(.ewram_code2 .ewram_code2.*);
+			. = ALIGN(4);
+		}
+		.ewram_code3
+		{
+			__ewram_code3_rom_start = LOADADDR(.ewram_code0);
+			__ewram_code3_ewram_start = .;
+			*(.ewram_code3 .ewram_code3.*);
+			. = ALIGN(4);
+		}
+		.ewram_code4
+		{
+			__ewram_code4_rom_start = LOADADDR(.ewram_code0);
+			__ewram_code4_ewram_start = .;
+			*(.ewram_code4 .ewram_code4.*);
+			. = ALIGN(4);
+		}
+		.ewram_code5
+		{
+			__ewram_code5_rom_start = LOADADDR(.ewram_code0);
+			__ewram_code5_ewram_start = .;
+			*(.ewram_code5 .ewram_code5.*);
+			. = ALIGN(4);
+		}
+		.ewram_code6
+		{
+			__ewram_code6_rom_start = LOADADDR(.ewram_code0);
+			__ewram_code6_ewram_start = .;
+			*(.ewram_code6 .ewram_code6.*);
+			. = ALIGN(4);
+		}
+		.ewram_code7
+		{
+			__ewram_code7_rom_start = LOADADDR(.ewram_code0);
+			__ewram_code7_ewram_start = .;
+			*(.ewram_code7 .ewram_code7.*);
+			. = ALIGN(4);
+		}
+	} >ewram AT >rom
+	__ewram_code0_section_size = SIZEOF(.ewram_code0);
+	__ewram_code1_section_size = SIZEOF(.ewram_code1);
+	__ewram_code2_section_size = SIZEOF(.ewram_code2);
+	__ewram_code3_section_size = SIZEOF(.ewram_code3);
+	__ewram_code4_section_size = SIZEOF(.ewram_code4);
+	__ewram_code5_section_size = SIZEOF(.ewram_code5);
+	__ewram_code6_section_size = SIZEOF(.ewram_code6);
+	__ewram_code7_section_size = SIZEOF(.ewram_code7);
+	
+	
+	/* BSS that's always "active" */
 	.bss :
 	{
 		__bss_start__ = .;
@@ -247,39 +476,47 @@ SECTIONS
 		.bss3
 		{
 			__bss3_start__ = .;
-			*(.bss3 .bss2.*)
+			*(.bss3 .bss3.*)
 			. = ALIGN(4);
 			__bss3_end__ = .;
 		}
 		.bss4
 		{
 			__bss4_start__ = .;
-			*(.bss4 .bss2.*)
+			*(.bss4 .bss4.*)
 			. = ALIGN(4);
 			__bss4_end__ = .;
 		}
 		.bss5
 		{
 			__bss5_start__ = .;
-			*(.bss5 .bss2.*)
+			*(.bss5 .bss5.*)
 			. = ALIGN(4);
 			__bss5_end__ = .;
 		}
 		.bss6
 		{
 			__bss6_start__ = .;
-			*(.bss6 .bss2.*)
+			*(.bss6 .bss6.*)
 			. = ALIGN(4);
 			__bss6_end__ = .;
 		}
 		.bss7
 		{
 			__bss7_start__ = .;
-			*(.bss7 .bss2.*)
+			*(.bss7 .bss7.*)
 			. = ALIGN(4);
 			__bss7_end__ = .;
 		}
 	} >ewram
+	__bss0_section_size = SIZEOF(.bss0);
+	__bss1_section_size = SIZEOF(.bss1);
+	__bss2_section_size = SIZEOF(.bss2);
+	__bss3_section_size = SIZEOF(.bss3);
+	__bss4_section_size = SIZEOF(.bss4);
+	__bss5_section_size = SIZEOF(.bss5);
+	__bss6_section_size = SIZEOF(.bss6);
+	__bss7_section_size = SIZEOF(.bss7);
 	
 	/* The symbols end or __end__ are used to tell where malloc, new, and friends have free access. */
 	end = __free_store_start;
