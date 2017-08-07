@@ -127,6 +127,141 @@ SECTIONS
 	
 	data_section_size = SIZEOF(.data);
 	
+	
+	/* Initialized data in IWRAM */
+	.iwram_data :
+	{
+		__iwram_data_load = LOADADDR(.iwram_data);
+		__iwram_data_start = .;
+		
+		*(.iwram_data .iwram_data.*)
+		. = ALIGN(4);
+		__iwram_data_end = .;
+	} >iwram AT >rom
+	iwram_data_section_size = SIZEOF(.iwram_data);
+	
+	
+	
+	/* Non .text.hot* Code to be copied to IWRAM */
+	.iwram_code :
+	{
+		/* The start of code to be copied to IWRAM*/
+		iwram_code_rom_start = LOADADDR(.iwram_code);
+		
+		iwram_code_iwram_start = .;
+		
+		*(.iwram_code);
+		
+		. = ALIGN(4);
+	} >iwram AT >rom
+	
+	iwram_code_section_size = SIZEOF(.iwram_code);
+
+	
+	
+	/* MaxMOD puts SOME code in the .iwram segment, so it will be treated as
+	such here also */
+	.some_maxmod_code :
+	{
+		. = ALIGN(4);
+		/* The start of some MaxMOD code to be copied to IWRAM*/
+		some_maxmod_code_rom_start = LOADADDR(.some_maxmod_code);
+		
+		some_maxmod_code_iwram_start = .;
+		
+		/* Some of MaxMOD's code goes into the ".iwram" section */
+		*(.iwram);
+		
+		some_maxmod_code_iwram_end = .;
+		
+		. = ALIGN(4);
+		
+	} >iwram AT >rom
+	
+	some_maxmod_code_section_size = SIZEOF(.some_maxmod_code);
+	
+	/* Uninitialized variables that go into IWRAM*/
+	.iwram_bss :
+	{
+		*(.iwram_bss .iwram_bss.*);
+		
+		. = ALIGN(4);
+		/* The symbols end or __end__ are used to tell where malloc, new, and friends have free access. */
+		/*end = .;*/
+		/*__end__ = .;*/
+	} >iwram
+	
+	iwram_bss_section_size = SIZEOF(.iwram_bss);
+
+	
+	/* total_iwram_var_size = iwram_data_section_size + iwram_bss_section_size; */
+	
+    /*total_iwram_code_size = text_hot_section_size + iwram_code_section_size + some_maxmod_code_section_size; */
+	/* total_iwram_usage = total_iwram_var_size + total_iwram_code_size; */
+
+	
+	.ewram_code :
+	{
+		/* The start of code to be copied to EWRAM */
+		ewram_code_rom_start = LOADADDR(.ewram_code);
+		
+		ewram_code_ewram_start = .;
+		*(.ewram_code .ewram_code.*);
+		
+		. = ALIGN(4);
+	} >ewram AT >rom
+
+	ewram_code_section_size = SIZEOF(.ewram_code);
+	
+	
+	
+	/* BSS that's always "active" */
+	.bss :
+	{
+		__bss_start__ = .;
+		*(.bss .bss.* .gnu.linkonce.b.*)
+		*(.ewram .ewram.*)
+		*(COMMON)
+		. = ALIGN(4);
+		__bss_end__ = .;
+	} >ewram
+	bss_section_size = SIZEOF(.bss);
+
+	/* The symbols end or __end__ are used to tell where malloc, new, and friends have free access. */
+	end = __free_store_start;
+	__end__ = __free_store_start;
+	
+	
+	
+	/*
+	total_ewram_var_size = init_array_section_size + data_section_size + bss_section_size;
+	total_ewram_code_size = ewram_code_section_size;
+	total_ewram_usage = total_ewram_var_size + total_ewram_code_size;
+	*/
+	
+	
+	/*
+	__iwram_size = SIZEOF(.iwram);
+	__iwram_used = iwram_code_size + __iwram_size;
+	__iwram_remaining = LENGTH(iwram) - __iwram_used;
+	*/
+	
+	
+	
+	.sram :
+	{
+		*(.sram .sram.*);
+		
+		. = ALIGN(4);
+	} >sram
+	
+	sram_section_size = SIZEOF(.sram);
+	
+	.stab : { *(.stab) } AT >rom
+	.stabstr : { *(.stabstr) } AT >rom
+	.comment : { *(.comment) } AT >rom
+	.debug_frame : { *(.debug_frame) } AT >rom
+
 	OVERLAY : NOCROSSREFS
 	{
 		.data0
@@ -202,18 +337,6 @@ SECTIONS
 	__data5_section_size = SIZEOF(.data5);
 	__data6_section_size = SIZEOF(.data6);
 	__data7_section_size = SIZEOF(.data7);
-	
-	/* Initialized data in IWRAM */
-	.iwram_data :
-	{
-		__iwram_data_load = LOADADDR(.iwram_data);
-		__iwram_data_start = .;
-		
-		*(.iwram_data .iwram_data.*)
-		. = ALIGN(4);
-		__iwram_data_end = .;
-	} >iwram AT >rom
-	iwram_data_section_size = SIZEOF(.iwram_data);
 	
 	OVERLAY : NOCROSSREFS
 	{
@@ -299,22 +422,6 @@ SECTIONS
 	__iwram_data6_section_size = SIZEOF(.iwram_data6);
 	__iwram_data7_section_size = SIZEOF(.iwram_data7);
 	
-	
-	/* Non .text.hot* Code to be copied to IWRAM */
-	.iwram_code :
-	{
-		/* The start of code to be copied to IWRAM*/
-		iwram_code_rom_start = LOADADDR(.iwram_code);
-		
-		iwram_code_iwram_start = .;
-		
-		*(.iwram_code);
-		
-		. = ALIGN(4);
-	} >iwram AT >rom
-	
-	iwram_code_section_size = SIZEOF(.iwram_code);
-
 	OVERLAY : NOCROSSREFS
 	{
 		.iwram_code0
@@ -407,41 +514,6 @@ SECTIONS
 	__iwram_code6_section_size = SIZEOF(.iwram_code6);
 	__iwram_code7_section_size = SIZEOF(.iwram_code7);
 	
-	
-	/* MaxMOD puts SOME code in the .iwram segment, so it will be treated as
-	such here also */
-	.some_maxmod_code :
-	{
-		. = ALIGN(4);
-		/* The start of some MaxMOD code to be copied to IWRAM*/
-		some_maxmod_code_rom_start = LOADADDR(.some_maxmod_code);
-		
-		some_maxmod_code_iwram_start = .;
-		
-		/* Some of MaxMOD's code goes into the ".iwram" section */
-		*(.iwram);
-		
-		some_maxmod_code_iwram_end = .;
-		
-		. = ALIGN(4);
-		
-	} >iwram AT >rom
-	
-	some_maxmod_code_section_size = SIZEOF(.some_maxmod_code);
-	
-	/* Uninitialized variables that go into IWRAM*/
-	.iwram_bss :
-	{
-		*(.iwram_bss .iwram_bss.*);
-		
-		. = ALIGN(4);
-		/* The symbols end or __end__ are used to tell where malloc, new, and friends have free access. */
-		/*end = .;*/
-		/*__end__ = .;*/
-	} >iwram
-	
-	iwram_bss_section_size = SIZEOF(.iwram_bss);
-
 	OVERLAY : NOCROSSREFS
 	{
 		.iwram_bss0
@@ -501,25 +573,6 @@ SECTIONS
 	__iwram_bss5_section_size = SIZEOF(.iwram_bss5);
 	__iwram_bss6_section_size = SIZEOF(.iwram_bss6);
 	__iwram_bss7_section_size = SIZEOF(.iwram_bss7);
-	
-	/* total_iwram_var_size = iwram_data_section_size + iwram_bss_section_size; */
-	
-    /*total_iwram_code_size = text_hot_section_size + iwram_code_section_size + some_maxmod_code_section_size; */
-	/* total_iwram_usage = total_iwram_var_size + total_iwram_code_size; */
-
-	
-	.ewram_code :
-	{
-		/* The start of code to be copied to EWRAM */
-		ewram_code_rom_start = LOADADDR(.ewram_code);
-		
-		ewram_code_ewram_start = .;
-		*(.ewram_code .ewram_code.*);
-		
-		. = ALIGN(4);
-	} >ewram AT >rom
-
-	ewram_code_section_size = SIZEOF(.ewram_code);
 	
 	OVERLAY : NOCROSSREFS
 	{
@@ -589,18 +642,6 @@ SECTIONS
 	__ewram_code6_section_size = SIZEOF(.ewram_code6);
 	__ewram_code7_section_size = SIZEOF(.ewram_code7);
 	
-	
-	/* BSS that's always "active" */
-	.bss :
-	{
-		__bss_start__ = .;
-		*(.bss .bss.* .gnu.linkonce.b.*)
-		*(.ewram .ewram.*)
-		*(COMMON)
-		. = ALIGN(4);
-		__bss_end__ = .;
-	} >ewram
-
 	OVERLAY : NOCROSSREFS
 	{
 		/* Uninitialized (set to zero) variables that go into EWRAM */
@@ -670,39 +711,6 @@ SECTIONS
 	__bss6_section_size = SIZEOF(.bss6);
 	__bss7_section_size = SIZEOF(.bss7);
 	
-	/* The symbols end or __end__ are used to tell where malloc, new, and friends have free access. */
-	end = __free_store_start;
-	__end__ = __free_store_start;
-	
-	bss_section_size = SIZEOF(.bss);
-	
-	
-	total_ewram_var_size = init_array_section_size + data_section_size + bss_section_size;
-	total_ewram_code_size = ewram_code_section_size;
-	total_ewram_usage = total_ewram_var_size + total_ewram_code_size;
-	
-	
-	/*
-	__iwram_size = SIZEOF(.iwram);
-	__iwram_used = iwram_code_size + __iwram_size;
-	__iwram_remaining = LENGTH(iwram) - __iwram_used;
-	*/
-	
-	
-	
-	.sram :
-	{
-		*(.sram .sram.*);
-		
-		. = ALIGN(4);
-	} >sram
-	
-	sram_section_size = SIZEOF(.sram);
-	
-	.stab : { *(.stab) } AT >rom
-	.stabstr : { *(.stabstr) } AT >rom
-	.comment : { *(.comment) } AT >rom
-	.debug_frame : { *(.debug_frame) } AT >rom
 }
 
 /*PROVIDE( _HEAP_START = 0x020200000 );

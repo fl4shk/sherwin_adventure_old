@@ -74,12 +74,12 @@ char address_buff[20] __attribute__((_SRAM));
 extern "C"
 {
 
-u32 some_title_screen_var[8] __attribute__((_TITLE_SCREEN_BSS));
-u32 some_title_screen_other_var __attribute__((_TITLE_SCREEN_BSS));
+u32 some_title_screen_arr[8] __attribute__((_TITLE_SCREEN_BSS));
+u32 some_title_screen_var __attribute__((_TITLE_SCREEN_BSS));
 
 
 u32 some_in_level_var __attribute__((_IN_LEVEL_BSS));
-u32 some_in_level_other_var[8] __attribute__((_IN_LEVEL_BSS));
+u32 some_in_level_arr[8] __attribute__((_IN_LEVEL_BSS));
 
 }
 
@@ -90,8 +90,10 @@ int main()
 	//return main_2();
 	//snprintf(address_buff, 20, "%X", (unsigned)(&some_title_screen_other_var));
 	snprintf(test_buf, test_buf_size, "%X",
-		(unsigned)(&some_title_screen_other_var));
-	memcpy8(address_buff, test_buf, 9);
+		(unsigned)(&some_title_screen_arr));
+	//memcpy8(address_buff, test_buf, 9);
+	memcpy(some_in_level_arr, test_buf, 8);
+	memcpy(some_title_screen_arr, test_buf, 8);
 	return real_main();
 	//snprintf(test_buf, test_buf_size, "%s", "asdf");
 	
