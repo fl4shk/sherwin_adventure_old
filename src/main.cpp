@@ -65,9 +65,14 @@ volatile size_t very_temp;
 static constexpr size_t test_buf_size = 20;
 char test_buf[test_buf_size];
 
+extern "C"
+{
+
 int main_2();
 //int real_main() __attribute__((_IWRAM_CODE));
 int real_main();
+
+}
 
 char address_buff[20] __attribute__((_SRAM));
 
@@ -91,13 +96,17 @@ int main()
 	//snprintf(address_buff, 20, "%X", (unsigned)(&some_title_screen_other_var));
 	snprintf(test_buf, test_buf_size, "%X",
 		(unsigned)(&some_title_screen_arr));
-	//memcpy8(address_buff, test_buf, 9);
+	memcpy8(address_buff, test_buf, 9);
 	memcpy(some_in_level_arr, test_buf, 8);
 	memcpy(some_title_screen_arr, test_buf, 8);
 	return real_main();
 	//snprintf(test_buf, test_buf_size, "%s", "asdf");
 	
 }
+
+
+extern "C"
+{
 
 //volatile u32 very_temp;
 int main_2()
@@ -279,6 +288,8 @@ int real_main()
 	
 	
 	return 0;
+}
+
 }
 
 
