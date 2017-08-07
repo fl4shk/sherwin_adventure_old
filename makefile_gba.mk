@@ -130,7 +130,13 @@ ASMOUTS:=$(CXX_ASMOUTS) $(C_ASMOUTS)
 
 all : all_pre $(OFILES)
 	$(LD) $(OBJDIR)/*.o -o $(PROJ).elf $(LD_FLAGS) -Wl,-M > linker_map.txt
-	$(OBJCOPY) -O binary -S -g -R .iwram -R .sram $(PROJ).elf $(PROJ).gba
+	$(OBJCOPY) -O binary -S -g -R .iwram -R .bss -R .ewram -R .sram \
+	-R .bss0 -R .bss1 -R .bss2 -R .bss3 \
+	-R .bss4 -R .bss5 -R .bss6 -R .bss7 \
+	\
+	-R .iwram_bss0 -R .iwram_bss1 -R .iwram_bss2 -R .iwram_bss3 \
+	-R .iwram_bss4 -R .iwram_bss5 -R .iwram_bss6 -R .iwram_bss7 \
+	$(PROJ).elf $(PROJ).gba
 	./do_gbafix.sh
 
 # all_objs is ENTIRELY optional.
