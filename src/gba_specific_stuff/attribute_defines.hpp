@@ -30,34 +30,96 @@
 #define _IWRAM section(".iwram_data")
 
 
+#define PPCAT_NX(a, b) a ## b
+#define PPCAT(a, b) PPCAT_NX(a, b)
+#define STRINGIZE_NX(a) #a
+#define STRINGIZE(a) STRINGIZE_NX(a)
+
+// EWRAM data linker overlay
+#define _EWRAM_OVERLAY(num) section(STRINGIZE(PPCAT(.data, num)))
+
+// IWRAM data linker overlay
+#define _IWRAM_OVERLAY(num) section(STRINGIZE(PPCAT(.iwram_data, num)))
+
+
+
 // #defines for UNITIALIZED global variables That go into EWRAM, IWRAM,
 // and SRAM
 #define _BSS section(".bss")
 
+
 // BSS linker overlay
-#define _BSS0 section(".bss0")
-#define _BSS1 section(".bss1")
-#define _BSS2 section(".bss2")
-#define _BSS3 section(".bss3")
-#define _BSS4 section(".bss4")
-#define _BSS5 section(".bss5")
-#define _BSS6 section(".bss6")
-#define _BSS7 section(".bss7")
+//#define _BSS_OVERLAY(num) section(".bss" #num)
+#define _BSS_OVERLAY(num) section(STRINGIZE(PPCAT(.bss,num)))
 
 
-// Specific uses of the BSS linker overlay
-#define _TITLE_SCREEN_BSS _BSS0
-#define _IN_LEVEL_BSS _BSS1
-#define _OVERWORLD_BSS _BSS2
 
 
 #define _IWRAM_BSS section(".iwram_bss")
+
+
+// IWRAM BSS linker overlay
+#define _IWRAM_BSS_OVERLAY(num) section(STRINGIZE(PPCAT(.iwram_bss,num)))
+
+
 #define _SRAM section(".sram")
 
 
 // #defines for putting stuff in the code (sections for EWRAM and IWRAM)
 #define _EWRAM_CODE section(".ewram_code")
 #define _IWRAM_CODE section(".iwram_code")
+
+
+// EWRAM CODE linker overlay
+#define _EWRAM_CODE_OVERLAY(num) section(STRINGIZE(PPCAT(.ewram_code, \
+	num)))
+
+// IWRAM CODE linker overlay
+#define _IWRAM_CODE_OVERLAY(num) section(STRINGIZE(PPCAT(.iwram_code, \
+	num)))
+
+
+
+// Linker overlay stuffs
+#define _TITLE_SCREEN_OVERLAY_NUM 0
+#define _OVERWORLD_OVERLAY_NUM 1
+#define _IN_LEVEL_OVERLAY_NUM 2
+
+
+
+#define _TITLE_SCREEN_EWRAM _EWRAM_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
+#define _TITLE_SCREEN_IWRAM _IWRAM_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
+#define _TITLE_SCREEN_BSS _BSS_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
+#define _TITLE_SCREEN_IWRAM_BSS \
+	_IWRAM_BSS_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
+#define _TITLE_SCREEN_EWRAM_CODE \
+	_EWRAM_CODE_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
+#define _TITLE_SCREEN_IWRAM_CODE \
+	_IWRAM_CODE_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
+
+
+#define _OVERWORLD_EWRAM _EWRAM_OVERLAY(_OVERWORLD_OVERLAY_NUM)
+#define _OVERWORLD_IWRAM _IWRAM_OVERLAY(_OVERWORLD_OVERLAY_NUM)
+#define _OVERWORLD_BSS _BSS_OVERLAY(_OVERWORLD_OVERLAY_NUM)
+#define _OVERWORLD_IWRAM_BSS \
+	_IWRAM_BSS_OVERLAY(_OVERWORLD_OVERLAY_NUM)
+#define _OVERWORLD_EWRAM_CODE \
+	_EWRAM_CODE_OVERLAY(_OVERWORLD_OVERLAY_NUM)
+#define _OVERWORLD_IWRAM_CODE \
+	_IWRAM_CODE_OVERLAY(_OVERWORLD_OVERLAY_NUM)
+
+
+#define _IN_LEVEL_EWRAM _EWRAM_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
+#define _IN_LEVEL_IWRAM _IWRAM_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
+#define _IN_LEVEL_BSS _BSS_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
+#define _IN_LEVEL_IWRAM_BSS \
+	_IWRAM_BSS_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
+#define _IN_LEVEL_EWRAM_CODE \
+	_EWRAM_CODE_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
+#define _IN_LEVEL_IWRAM_CODE \
+	_IWRAM_CODE_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
+
+
 
 
 // Generate ARM-mode code instead of THUMB-mode code
