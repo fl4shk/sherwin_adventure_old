@@ -40,23 +40,23 @@ u16 ActiveLevel::persistent_block_data_arrays[max_num_sublevels]
 //	(ActiveLevel::block_data_array, 
 //	ActiveLevel::horiz_sublevel_size_2d);
 ArrayCsz2dHelper<Block, ActiveLevel::horiz_sublevel_xsize,
-	ActiveLevel::horiz_sublevel_ysize > 
+	ActiveLevel::horiz_sublevel_ysize> 
 	ActiveLevel::horiz_sublevel_block_data_2d(block_data_array);
 
 
 //std::array<std::forward_list<SpriteInitParamGroup>, 
-//	ActiveLevel::horiz_sublevel_xsize > 
+//	ActiveLevel::horiz_sublevel_xsize> 
 //	ActiveLevel::horiz_sublevel_sprite_ipg_lists; 
 //	//__attribute__((_ewram));
 
-//std::array<std::array<SpriteInitParamGroup, horiz_sublevel_ysize >, 
-//	ActiveLevel::horiz_sublevel_xsize > 
+//std::array<std::array<SpriteInitParamGroup, horiz_sublevel_ysize>, 
+//	ActiveLevel::horiz_sublevel_xsize> 
 //	ActiveLevel::horiz_sublevel_sprite_ipg_lists; 
 //	//__attribute__((_ewram));
 
 SaListStuff::SaArrayOfLists<SpriteInitParamGroup, 
 	ActiveLevel::max_num_sprite_ipgs_per_sublevel,
-	ActiveLevel::horiz_sublevel_xsize > 
+	ActiveLevel::horiz_sublevel_xsize> 
 	ActiveLevel::horiz_sublevel_sprite_ipg_lists;
 
 
@@ -64,9 +64,9 @@ scr_entry ActiveLevel::bg0_screenblock_mirror[screenblock_size];
 
 
 
-ArrayCsz2dHelper<scr_entry, screenblock_xsize, screenblock_ysize > 
+ArrayCsz2dHelper<scr_entry, screenblock_xsize, screenblock_ysize> 
 	ActiveLevel::bg0_screenblock_2d(SE_RAM[BG0_SBB]);
-ArrayCsz2dHelper<scr_entry, screenblock_xsize, screenblock_ysize > 
+ArrayCsz2dHelper<scr_entry, screenblock_xsize, screenblock_ysize> 
 	ActiveLevel::bg0_screenblock_mirror_2d(bg0_screenblock_mirror);
 
 const Level* ActiveLevel::the_current_level_ptr;

@@ -31,30 +31,30 @@
 #include "../halt_stuff.hpp"
 
 
-//std::array<Sprite*, SpriteManager::max_num_player_secondary_sprites >
+//std::array<Sprite*, SpriteManager::max_num_player_secondary_sprites>
 //	SpriteManager::the_player_secondary_sprites;
 //
-//std::array<Sprite*, SpriteManager::max_num_secondary_sprites >
+//std::array<Sprite*, SpriteManager::max_num_secondary_sprites>
 //	SpriteManager::the_secondary_sprites;
 
 Sprite* SpriteManager::the_player;
 
-//std::array<Sprite*, SpriteManager::max_num_regular_sprites > 
+//std::array<Sprite*, SpriteManager::max_num_regular_sprites> 
 //	SpriteManager::the_sprites;
 
 
 
 //// An array of Player secondary sprites To allocate from
-//std::array<Sprite, SpriteManager::max_num_player_secondary_sprites > 
+//std::array<Sprite, SpriteManager::max_num_player_secondary_sprites> 
 //	SpriteManager::the_player_secondary_sprites;
 //
 //// An array of secondary sprites To allocate from, other than the ones
 //// used by the_player 
-//std::array<Sprite, SpriteManager::max_num_secondary_sprites > 
+//std::array<Sprite, SpriteManager::max_num_secondary_sprites> 
 //	SpriteManager::the_secondary_sprites;
 //
 //// The array of REGULAR active sprites, not counting the_player.
-//std::array<Sprite, SpriteManager::max_num_regular_sprites > 
+//std::array<Sprite, SpriteManager::max_num_regular_sprites> 
 //	SpriteManager::the_sprites;
 
 //SpriteAllocator SpriteManager::the_player_secondary_sprites_allocator

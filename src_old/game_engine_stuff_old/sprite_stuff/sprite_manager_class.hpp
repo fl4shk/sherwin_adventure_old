@@ -53,12 +53,12 @@ public:		// variables
 	
 	//// The array of pointers To secondary active sprites That are "claimed"
 	//// by the_player.
-	//static std::array<Sprite*, max_num_player_secondary_sprites >
+	//static std::array<Sprite*, max_num_player_secondary_sprites>
 	//	the_player_secondary_sprites;
 	//
 	//// The array of pointers To secondary active sprites, not counting
 	//// those "claimed" by the_player.
-	//static std::array<Sprite*, max_num_secondary_sprites > 
+	//static std::array<Sprite*, max_num_secondary_sprites> 
 	//	the_secondary_sprites;
 	
 	// -- Switch To linear_memory_allocator --
@@ -66,21 +66,21 @@ public:		// variables
 	
 	//// The array of pointers To REGULAR active sprites, not counting
 	//// the_player.
-	//static std::array<Sprite*, max_num_regular_sprites > the_sprites;
+	//static std::array<Sprite*, max_num_regular_sprites> the_sprites;
 	
 	
 	
 	//// An array of Player secondary sprites To allocate from
-	//static std::array<Sprite, max_num_player_secondary_sprites > 
+	//static std::array<Sprite, max_num_player_secondary_sprites> 
 	//	the_player_secondary_sprites;
 	//
 	//// An array of secondary sprites To allocate from, other than the ones
 	//// used by the_player 
-	//static std::array<Sprite, max_num_secondary_sprites > 
+	//static std::array<Sprite, max_num_secondary_sprites> 
 	//	the_secondary_sprites;
 	//
 	//// The array of REGULAR active sprites, not counting the_player.
-	//static std::array<Sprite, max_num_regular_sprites > 
+	//static std::array<Sprite, max_num_regular_sprites> 
 	//	the_sprites;
 	
 	
@@ -141,13 +141,13 @@ public:		// variables
 	// -- Switch To linear_memory_allocator --
 	static u32 num_active_player_secondary_sprites, num_active_sprites, 
 		num_active_secondary_sprites, num_active_pseudo_bg_sprites;
-	static std::array<Sprite*, max_num_player_secondary_sprites >
+	static std::array<Sprite*, max_num_player_secondary_sprites>
 		the_active_player_secondary_sprites __attribute__((_ewram));
-	static std::array<Sprite*, max_num_secondary_sprites >
+	static std::array<Sprite*, max_num_secondary_sprites>
 		the_active_secondary_sprites __attribute__((_ewram));
-	static std::array<Sprite*, max_num_regular_sprites > 
+	static std::array<Sprite*, max_num_regular_sprites> 
 		the_active_sprites __attribute__((_iwram));
-	static std::array<Sprite*, max_num_pseudo_bg_sprites > 
+	static std::array<Sprite*, max_num_pseudo_bg_sprites> 
 		the_active_pseudo_bg_sprites __attribute__((_ewram));
 	
 	

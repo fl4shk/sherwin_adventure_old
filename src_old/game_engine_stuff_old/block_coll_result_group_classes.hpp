@@ -127,7 +127,7 @@ protected:		// variables
 	
 public:		// variables
 	//Array2dHelper<BlockCollResult> bcr_arr_csz_2d_helper;
-	ArrayCsz2dHelper<BlockCollResult, max_size_2d.x, max_size_2d.y >
+	ArrayCsz2dHelper<BlockCollResult, max_size_2d.x, max_size_2d.y>
 		bcr_arr_csz_2d_helper;
 	
 	

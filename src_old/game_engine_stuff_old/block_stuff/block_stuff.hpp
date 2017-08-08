@@ -270,7 +270,7 @@ class Block;
 
 #include "block_base_stuff_class.hpp"
 
-extern std::array<BlockBaseStuff*, lim_bt > block_stuff_array
+extern std::array<BlockBaseStuff*, lim_bt> block_stuff_array
 	__attribute__((_ewram));
 
 #include "specific_blocks/air_block_stuff_class.hpp"

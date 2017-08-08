@@ -27,7 +27,7 @@
 LIST_OF_BLOCK_STUFF_CLASSES(X)
 #undef X
 
-std::array<BlockBaseStuff*, lim_bt > block_stuff_array
+std::array<BlockBaseStuff*, lim_bt> block_stuff_array
 = {
 	#define X(name) \
 		&the_##name,
