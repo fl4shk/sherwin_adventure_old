@@ -65,9 +65,9 @@
 //	// regular_pos Is the position of the top left corner of the
 //	// OrientableCollBox when it Is neither rotated nor
 //	// reflected about an axis.
-//	vec2_f24p8 regular_pos;
+//	Vec2F24p8 regular_pos;
 //	
-//	vec2_f24p8 size_2d;
+//	Vec2F24p8 size_2d;
 //	
 //public:		// functions
 //	inline OrientableCollBox() 
@@ -77,8 +77,8 @@
 //	}
 //	
 //	inline OrientableCollBox
-//		(const vec2_f24p8& s_regular_pos, 
-//		const vec2_f24p8& s_size_2d) : the_origin_corner(oc_lt),
+//		(const Vec2F24p8& s_regular_pos, 
+//		const Vec2F24p8& s_size_2d) : the_origin_corner(oc_lt),
 //		angle_in_degrees(0), regular_pos(s_regular_pos),
 //		size_2d(s_size_2d)
 //	{
@@ -86,7 +86,7 @@
 //	
 //	inline OrientableCollBox
 //		(origin_corner s_the_origin_corner, u32 s_angle_in_degrees,
-//		const vec2_f24p8& s_regular_pos, const vec2_f24p8& s_size_2d)
+//		const Vec2F24p8& s_regular_pos, const Vec2F24p8& s_size_2d)
 //	{
 //		the_origin_corner = s_the_origin_corner;
 //		set_angle_in_degrees(s_angle_in_degrees);
@@ -114,63 +114,63 @@
 //	}
 //	
 //	
-//	inline vec2_f24p8 get_lt_corner_in_local_coords() const
+//	inline Vec2F24p8 get_lt_corner_in_local_coords() const
 //	{
 //		if (the_origin_corner == oc_lt)
 //		{
-//			return (vec2_f24p8){ {0}, {0} };
+//			return (Vec2F24p8){ {0}, {0} };
 //		}
 //		else if (the_origin_corner == oc_rt)
 //		{
-//			return (vec2_f24p8){ -size_2d.x, {0} };
+//			return (Vec2F24p8){ -size_2d.x, {0} };
 //		}
 //		else if (the_origin_corner == oc_lb)
 //		{
-//			return (vec2_f24p8){ {0}, -size_2d.y };
+//			return (Vec2F24p8){ {0}, -size_2d.y };
 //		}
 //		else if (the_origin_corner == oc_rb)
 //		{
 //			
 //		}
 //	}
-//	inline vec2_f24p8 get_rt_corner_in_local_coords() const
+//	inline Vec2F24p8 get_rt_corner_in_local_coords() const
 //	{
 //		if (the_origin_corner == oc_lt)
 //		{
-//			return (vec2_f24p8){ size_2d.x, {0} };
+//			return (Vec2F24p8){ size_2d.x, {0} };
 //		}
 //	}
-//	inline vec2_f24p8 get_lb_corner_in_local_coords() const
+//	inline Vec2F24p8 get_lb_corner_in_local_coords() const
 //	{
 //		if (the_origin_corner == oc_lt)
 //		{
-//			return (vec2_f24p8){ {0}, size_2d.y };
+//			return (Vec2F24p8){ {0}, size_2d.y };
 //		}
 //	}
-//	inline vec2_f24p8 get_rb_corner_in_local_coords() const
+//	inline Vec2F24p8 get_rb_corner_in_local_coords() const
 //	{
 //		if (the_origin_corner == oc_lt)
 //		{
-//			return (vec2_f24p8){ size_2d.x, size_2d.y };
+//			return (Vec2F24p8){ size_2d.x, size_2d.y };
 //		}
 //	}
 //	
 //	
-//	inline vec2_f24p8 get_lt_corner_in_world_coords() const
+//	inline Vec2F24p8 get_lt_corner_in_world_coords() const
 //	{
 //		return regular_pos;
 //	}
-//	inline vec2_f24p8 get_rt_corner_in_world_coords() const
+//	inline Vec2F24p8 get_rt_corner_in_world_coords() const
 //	{
 //		return convert_point_in_local_coords_to_world_coords
 //			(get_rt_corner_in_local_coords());
 //	}
-//	inline vec2_f24p8 get_lb_corner_in_world_coords() const
+//	inline Vec2F24p8 get_lb_corner_in_world_coords() const
 //	{
 //		return convert_point_in_local_coords_to_world_coords
 //			(get_lb_corner_in_local_coords());
 //	}
-//	inline vec2_f24p8 get_rb_corner_in_world_coords() const
+//	inline Vec2F24p8 get_rb_corner_in_world_coords() const
 //	{
 //		return convert_point_in_local_coords_to_world_coords
 //			(get_rb_corner_in_local_coords());
@@ -178,14 +178,14 @@
 //	
 //	
 //	// Convert from world coords To local coords.
-//	inline vec2_f24p8 convert_point_to_local_coords
-//		(const vec2_f24p8& point_in_world_coords) const
+//	inline Vec2F24p8 convert_point_to_local_coords
+//		(const Vec2F24p8& point_in_world_coords) const
 //	{
 //		// This subtraction Is the key To allowing rotations about corners
 //		// other than the top-left corner.
-//		//vec2_f24p8 ret = { point_in_world_coords.x - regular_pos.x,
+//		//Vec2F24p8 ret = { point_in_world_coords.x - regular_pos.x,
 //		//	point_in_world_coords.y - regular_pos.y };
-//		vec2_f24p8 ret; 
+//		Vec2F24p8 ret; 
 //		
 //		= point_in_world_coords - regular_pos;
 //		
@@ -239,10 +239,10 @@
 //	}
 //	
 //	// Convert from local coords To world coords.
-//	inline vec2_f24p8 convert_point_in_local_coords_to_world_coords
-//		(const vec2_f24p8& point_in_local_coords) const
+//	inline Vec2F24p8 convert_point_in_local_coords_to_world_coords
+//		(const Vec2F24p8& point_in_local_coords) const
 //	{
-//		vec2_f24p8 ret = point_in_local_coords;
+//		Vec2F24p8 ret = point_in_local_coords;
 //		
 //		if (the_reflection_type == rt_none)
 //		{
@@ -292,9 +292,9 @@
 //		return ret;
 //	}
 //	
-//	inline int Contains(const vec2_f24p8& point_in_world_coords) const
+//	inline int Contains(const Vec2F24p8& point_in_world_coords) const
 //	{
-//		vec2_f24p8 point_in_local_coords = convert_point_to_local_coords
+//		Vec2F24p8 point_in_local_coords = convert_point_to_local_coords
 //			(point_in_world_coords);
 //		
 //		if (point_in_local_coords.x >= (Fixed24p8){0}
@@ -328,9 +328,9 @@ public:		// variables
 	
 	// origin_corner_pos Is the position of the origin corner of the
 	// OrientableCollBox when it Is not rotated.
-	vec2_f24p8 origin_corner_pos;
+	Vec2F24p8 origin_corner_pos;
 	
-	vec2_f24p8 size_2d;
+	Vec2F24p8 size_2d;
 	
 public:		// functions
 	inline OrientableCollBox() : the_origin_corner(oc_lt), 
@@ -339,16 +339,16 @@ public:		// functions
 	{
 	}
 	
-	inline OrientableCollBox(const vec2_f24p8& s_origin_corner_pos, 
-		const vec2_f24p8& s_size_2d) : the_origin_corner(oc_lt),
+	inline OrientableCollBox(const Vec2F24p8& s_origin_corner_pos, 
+		const Vec2F24p8& s_size_2d) : the_origin_corner(oc_lt),
 		angle_in_degrees(0), origin_corner_pos(s_origin_corner_pos),
 		size_2d(s_size_2d)
 	{
 	}
 	
 	inline OrientableCollBox(origin_corner s_the_origin_corner, 
-		u32 s_angle_in_degrees, const vec2_f24p8& s_origin_corner_pos, 
-		const vec2_f24p8& s_size_2d):
+		u32 s_angle_in_degrees, const Vec2F24p8& s_origin_corner_pos, 
+		const Vec2F24p8& s_size_2d):
 		the_origin_corner(s_the_origin_corner),
 		angle_in_degrees(s_angle_in_degrees),
 		origin_corner_pos(s_origin_corner_pos), size_2d(s_size_2d)
@@ -396,9 +396,9 @@ public:		// functions
 	}
 	
 	
-	inline vec2_f24p8 get_lt_corner_in_local_coords() const
+	inline Vec2F24p8 get_lt_corner_in_local_coords() const
 	{
-		vec2_f24p8 ret = { {0}, {0} };
+		Vec2F24p8 ret = { {0}, {0} };
 		
 		if (the_origin_corner == oc_lt)
 		{
@@ -420,9 +420,9 @@ public:		// functions
 		return ret;
 		
 	}
-	inline vec2_f24p8 get_rt_corner_in_local_coords() const
+	inline Vec2F24p8 get_rt_corner_in_local_coords() const
 	{
-		vec2_f24p8 ret = { size_2d.x, {0} };
+		Vec2F24p8 ret = { size_2d.x, {0} };
 		
 		if (the_origin_corner == oc_lt)
 		{
@@ -443,9 +443,9 @@ public:		// functions
 		
 		return ret;
 	}
-	inline vec2_f24p8 get_rb_corner_in_local_coords() const
+	inline Vec2F24p8 get_rb_corner_in_local_coords() const
 	{
-		vec2_f24p8 ret = { size_2d.x, size_2d.y };
+		Vec2F24p8 ret = { size_2d.x, size_2d.y };
 		
 		if (the_origin_corner == oc_lt)
 		{
@@ -466,9 +466,9 @@ public:		// functions
 		
 		return ret;
 	}
-	inline vec2_f24p8 get_lb_corner_in_local_coords() const
+	inline Vec2F24p8 get_lb_corner_in_local_coords() const
 	{
-		vec2_f24p8 ret = { {0}, size_2d.y };
+		Vec2F24p8 ret = { {0}, size_2d.y };
 		
 		if (the_origin_corner == oc_lt)
 		{
@@ -491,22 +491,22 @@ public:		// functions
 	}
 	
 	
-	inline vec2_f24p8 get_lt_corner_in_world_coords() const
+	inline Vec2F24p8 get_lt_corner_in_world_coords() const
 	{
 		return convert_point_from_local_coords_to_world_coords
 			(get_lt_corner_in_local_coords());
 	}
-	inline vec2_f24p8 get_rt_corner_in_world_coords() const
+	inline Vec2F24p8 get_rt_corner_in_world_coords() const
 	{
 		return convert_point_from_local_coords_to_world_coords
 			(get_rt_corner_in_local_coords());
 	}
-	inline vec2_f24p8 get_rb_corner_in_world_coords() const
+	inline Vec2F24p8 get_rb_corner_in_world_coords() const
 	{
 		return convert_point_from_local_coords_to_world_coords
 			(get_rb_corner_in_local_coords());
 	}
-	inline vec2_f24p8 get_lb_corner_in_world_coords() const
+	inline Vec2F24p8 get_lb_corner_in_world_coords() const
 	{
 		return convert_point_from_local_coords_to_world_coords
 			(get_lb_corner_in_local_coords());
@@ -514,14 +514,14 @@ public:		// functions
 	
 	
 	// Convert from world coords To local coords.
-	inline vec2_f24p8 convert_point_to_local_coords
-		(const vec2_f24p8& point_in_world_coords) const
+	inline Vec2F24p8 convert_point_to_local_coords
+		(const Vec2F24p8& point_in_world_coords) const
 	{
 		// This subtraction Is the key To allowing rotations about corners
 		// other than the top-left corner.
-		//vec2_f24p8 ret = { point_in_world_coords.x - origin_corner_pos.x,
+		//Vec2F24p8 ret = { point_in_world_coords.x - origin_corner_pos.x,
 		//	point_in_world_coords.y - origin_corner_pos.y };
-		vec2_f24p8 ret = point_in_world_coords - origin_corner_pos;
+		Vec2F24p8 ret = point_in_world_coords - origin_corner_pos;
 		
 		//mat2x2d the_rotation_mat2x2d;
 		//the_rotation_mat2x2d.create_clockwise_rotation_mat2x2d
@@ -563,10 +563,10 @@ public:		// functions
 	}
 	
 	// Convert from local coords To world coords.
-	inline vec2_f24p8 convert_point_from_local_coords_to_world_coords
-		(const vec2_f24p8& point_in_local_coords) const
+	inline Vec2F24p8 convert_point_from_local_coords_to_world_coords
+		(const Vec2F24p8& point_in_local_coords) const
 	{
-		vec2_f24p8 ret = point_in_local_coords;
+		Vec2F24p8 ret = point_in_local_coords;
 		
 		//mat2x2d the_rotation_mat2x2d;
 		//the_rotation_mat2x2d.create_clockwise_rotation_mat2x2d
@@ -604,12 +604,12 @@ public:		// functions
 	}
 	
 	
-	inline bool Contains(const vec2_f24p8& point_in_world_coords) const
+	inline bool Contains(const Vec2F24p8& point_in_world_coords) const
 	{
-		vec2_f24p8 point_in_local_coords = convert_point_to_local_coords
+		Vec2F24p8 point_in_local_coords = convert_point_to_local_coords
 			(point_in_world_coords);
 		
-		vec2_f24p8 lt_corner_in_local_coords 
+		Vec2F24p8 lt_corner_in_local_coords 
 			= get_lt_corner_in_local_coords();
 		
 		if (point_in_local_coords.x >= lt_corner_in_local_coords.x
@@ -631,19 +631,19 @@ public:		// functions
 		static constexpr u32 num_corners = 4, num_edges = 4, num_axes = 4;
 		
 		// this (world coords)
-		array<vec2_f24p8, num_corners > corners; 
-		array<vec2_f24p8, num_edges > edges; 
-		array<vec2_f24p8, num_axes > axes;
+		array<Vec2F24p8, num_corners > corners; 
+		array<Vec2F24p8, num_edges > edges; 
+		array<Vec2F24p8, num_axes > axes;
 		
-		vec2_f24p8& lt_corner = corners[0], 
+		Vec2F24p8& lt_corner = corners[0], 
 			& rt_corner = corners[1], 
 			& rb_corner = corners[2], 
 			& lb_corner = corners[3];
-		vec2_f24p8& lt_rt_edge = edges[0], 
+		Vec2F24p8& lt_rt_edge = edges[0], 
 			& rt_rb_edge = edges[1], 
 			& rb_lb_edge = edges[2], 
 			& lb_lt_edge = edges[3];
-		vec2_f24p8& lt_rt_axis = axes[0], 
+		Vec2F24p8& lt_rt_axis = axes[0], 
 			& rt_rb_axis = axes[1], 
 			& rb_lb_axis = axes[2], 
 			& lb_lt_axis = axes[3];
@@ -668,19 +668,19 @@ public:		// functions
 		
 		
 		// other (world coords)
-		array<vec2_f24p8, num_corners > other_corners; 
-		array<vec2_f24p8, num_edges > other_edges; 
-		array<vec2_f24p8, num_axes > other_axes;
+		array<Vec2F24p8, num_corners > other_corners; 
+		array<Vec2F24p8, num_edges > other_edges; 
+		array<Vec2F24p8, num_axes > other_axes;
 		
-		vec2_f24p8& other_lt_corner = other_corners[0], 
+		Vec2F24p8& other_lt_corner = other_corners[0], 
 			& other_rt_corner = other_corners[1], 
 			& other_rb_corner = other_corners[2], 
 			& other_lb_corner = other_corners[3];
-		vec2_f24p8& other_lt_rt_edge = other_edges[0], 
+		Vec2F24p8& other_lt_rt_edge = other_edges[0], 
 			& other_rt_rb_edge = other_edges[1], 
 			& other_rb_lb_edge = other_edges[2], 
 			& other_lb_lt_edge = other_edges[3];
-		vec2_f24p8& other_lt_rt_axis = other_axes[0], 
+		Vec2F24p8& other_lt_rt_axis = other_axes[0], 
 			& other_rt_rb_axis = other_axes[1], 
 			& other_rb_lb_axis = other_axes[2], 
 			& other_lb_lt_axis = other_axes[3];
@@ -706,9 +706,9 @@ public:		// functions
 		
 		// Note:  The axis must be normalized To get an accurate
 		// projection.
-		auto project = [&](const vec2_f24p8& axis, Fixed24p8& min, 
+		auto project = [&](const Vec2F24p8& axis, Fixed24p8& min, 
 			Fixed24p8& max, 
-			const array<vec2_f24p8, num_corners >& corners_arr) -> void
+			const array<Vec2F24p8, num_corners >& corners_arr) -> void
 		{
 			min = max = axis.dot_prod(corners_arr.at(0));
 			
@@ -758,7 +758,7 @@ public:		// functions
 		};
 		
 		// loop over axes
-		for (const vec2_f24p8& axis : axes)
+		for (const Vec2F24p8& axis : axes)
 		{
 			Fixed24p8 min, max, other_min, other_max;
 			
@@ -775,7 +775,7 @@ public:		// functions
 		}
 		
 		// loop over other_axes
-		for (const vec2_f24p8& other_axis : other_axes)
+		for (const Vec2F24p8& other_axis : other_axes)
 		{
 			Fixed24p8 min, max, other_min, other_max;
 			

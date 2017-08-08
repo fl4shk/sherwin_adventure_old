@@ -36,7 +36,7 @@ public:		// functions
 		return the_const_params;
 	}
 	virtual void strongly_hit_response(Block& the_block, 
-		const vec2_s32& coord);
+		const Vec2s32& coord);
 	
 	virtual void finish_initializing_using_persistent_data
 		(Block& the_block);
@@ -48,7 +48,7 @@ class EyesBlockWithStWaffleStuff : public EyesBlockStuff
 {
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
-		const vec2_s32& coord);
+		const Vec2s32& coord);
 	
 } __attribute__((_align4));
 
@@ -56,7 +56,7 @@ class EyesBlockWithStMuffinStuff : public EyesBlockStuff
 {
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
-		const vec2_s32& coord);
+		const Vec2s32& coord);
 	
 } __attribute__((_align4));
 
@@ -64,7 +64,7 @@ class EyesBlockWithStFireMuffinStuff : public EyesBlockStuff
 {
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
-		const vec2_s32& coord);
+		const Vec2s32& coord);
 	
 } __attribute__((_align4));
 
@@ -72,7 +72,7 @@ class EyesBlockWithStIceMuffinStuff : public EyesBlockStuff
 {
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
-		const vec2_s32& coord);
+		const Vec2s32& coord);
 	
 } __attribute__((_align4));
 
@@ -80,7 +80,7 @@ class EyesBlockWithStChocolateMuffinStuff : public EyesBlockStuff
 {
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
-		const vec2_s32& coord);
+		const Vec2s32& coord);
 	
 } __attribute__((_align4));
 

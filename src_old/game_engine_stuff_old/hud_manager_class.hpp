@@ -31,16 +31,16 @@ public:		// variables
 	
 	
 	// -- Switch To linear_memory_allocator --
-	static scr_entry bg1_screenblock_mirror[screenblock_size]
+	static ScrEntry bg1_screenblock_mirror[screenblock_size]
 		__attribute__((_ewram));
 	
 	
 	// bg1_screenblock_2d Is in VRAM.
-	static ArrayCsz2dHelper<scr_entry, screenblock_xsize,
+	static ArrayCsz2dHelper<ScrEntry, screenblock_xsize,
 		screenblock_ysize> bg1_screenblock_2d;
 	
 	// bg1_screenblock_mirror_2d Is in EWRAM.
-	static ArrayCsz2dHelper<scr_entry, screenblock_xsize, 
+	static ArrayCsz2dHelper<ScrEntry, screenblock_xsize, 
 		screenblock_ysize> bg1_screenblock_mirror_2d;
 	
 	static constexpr u32 char_to_plottable_char_arr_size = 0x100;

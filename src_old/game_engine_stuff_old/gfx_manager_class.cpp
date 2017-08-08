@@ -44,8 +44,8 @@
 #include "../gfx/the_golem_enemy_gfx.h"
 #include "../gfx/the_16x16_secondary_sprites_gfx.h"
 
-bg_point GfxManager::prev_prev_bgofs_mirror[bgofs_mirror_size];
-PrevCurrPair<bg_point> GfxManager::bgofs_mirror[bgofs_mirror_size];
+BgPoint GfxManager::prev_prev_bgofs_mirror[bgofs_mirror_size];
+PrevCurrPair<BgPoint> GfxManager::bgofs_mirror[bgofs_mirror_size];
 
 // Current component arrays, stored in EWRAM as Fixed24p8's for speed and
 // accuracy reasons.
@@ -168,17 +168,17 @@ void GfxManager::upload_bg_tiles_to_vram()
 		
 		memcpy32(&(BG_TILE_VRAM_AS_TILES[graphics_slot]),
 			
-			&((reinterpret_cast<const tile*>(the_block_gfxTiles))
+			&((reinterpret_cast<const Tile*>(the_block_gfxTiles))
 			[metatile_number * num_tiles_in_ss_16x16]),
 			
-			sizeof(tile) * num_tiles_in_ss_16x16 / sizeof (u32));
+			sizeof(Tile) * num_tiles_in_ss_16x16 / sizeof (u32));
 		
 		//arr_memcpy32(&(BG_TILE_VRAM_AS_TILES[graphics_slot]),
 		//	
-		//	&((reinterpret_cast<const tile*>(the_block_gfxTiles))
+		//	&((reinterpret_cast<const Tile*>(the_block_gfxTiles))
 		//	[metatile_number * num_tiles_in_ss_16x16]),
 		//	
-		//	sizeof(tile) * num_tiles_in_ss_16x16);
+		//	sizeof(Tile) * num_tiles_in_ss_16x16);
 	}
 	
 	memcpy32(&(BG_TILE_VRAM_AS_TILES[hud_vram_as_tiles_start_offset]),
@@ -236,29 +236,29 @@ void GfxManager::upload_sprite_tiles_to_vram(Sprite& the_sprite)
 	
 	//// This memfill32() call isn't strictly necessary, but it makes VRAM
 	//// look nicer in the VRAM viewer functionality of some emulators.
-	//memfill32(&(((tile*)OBJ_TILE_VRAM)[the_sprite.get_vram_chunk_index()
-	//	* num_tiles_in_ss_32x32]), 0, sizeof(tile) * num_tiles_in_ss_32x32
+	//memfill32(&(((Tile*)OBJ_TILE_VRAM)[the_sprite.get_vram_chunk_index()
+	//	* num_tiles_in_ss_32x32]), 0, sizeof(Tile) * num_tiles_in_ss_32x32
 	//	/ sizeof(u32));
 	
 	
-	memcpy32(&(((tile*)OBJ_TILE_VRAM)[the_sprite.get_vram_chunk_index()
+	memcpy32(&(((Tile*)OBJ_TILE_VRAM)[the_sprite.get_vram_chunk_index()
 			* num_tiles_in_ss_32x32]),
 		
 		&(the_sprite.get_tile_arr()
 			[the_sprite.get_curr_relative_tile_slot()]),
 		
-		//sizeof(tile) * num_tiles_in_ss_32x32 / sizeof(u32));
-		sizeof(tile) * the_sprite.get_num_active_gfx_tiles() 
+		//sizeof(Tile) * num_tiles_in_ss_32x32 / sizeof(u32));
+		sizeof(Tile) * the_sprite.get_num_active_gfx_tiles() 
 		/ sizeof(u32));
 	
-	//arr_memcpy32(&(((tile*)OBJ_TILE_VRAM)
+	//arr_memcpy32(&(((Tile*)OBJ_TILE_VRAM)
 	//	[the_sprite.get_vram_chunk_index() * num_tiles_in_ss_32x32]),
 	//	
 	//	&(the_sprite.get_tile_arr()
 	//		[the_sprite.get_curr_relative_tile_slot()]),
 	//	
-	//	//sizeof(tile) * num_tiles_in_ss_32x32 / sizeof(u32));
-	//	sizeof(tile) * the_sprite.get_num_active_gfx_tiles());
+	//	//sizeof(Tile) * num_tiles_in_ss_32x32 / sizeof(u32));
+	//	sizeof(Tile) * the_sprite.get_num_active_gfx_tiles());
 }
 
 

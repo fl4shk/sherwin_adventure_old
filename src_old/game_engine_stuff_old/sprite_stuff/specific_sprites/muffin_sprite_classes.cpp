@@ -34,7 +34,7 @@ const SpriteConstParams MuffinSprite::the_const_params
 	GfxManager::num_tiles_in_ss_16x16,
 	
 	// tile_arr 
-	const_cast<tile*>(reinterpret_cast<const tile*>(the_powerup_gfxTiles)),
+	const_cast<Tile*>(reinterpret_cast<const Tile*>(the_powerup_gfxTiles)),
 };
 
 

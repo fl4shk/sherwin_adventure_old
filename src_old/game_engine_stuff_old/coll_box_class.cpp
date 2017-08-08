@@ -42,7 +42,7 @@
 //}
 
 
-int CollBox::Contains(const vec2_f24p8& point)
+int CollBox::Contains(const Vec2F24p8& point)
 {
 	if (point.x > left() && point.x < right() 
 		&& point.y > top() && point.y < bot())
@@ -64,8 +64,8 @@ void CollBox::set_side_coords(Fixed24p8 left_x, Fixed24p8 right_x,
 
 
 
-void CollBox::get_corners(vec2_f24p8& lt_corner, vec2_f24p8& rt_corner, 
-	vec2_f24p8& rb_corner, vec2_f24p8& lb_corner)
+void CollBox::get_corners(Vec2F24p8& lt_corner, Vec2F24p8& rt_corner, 
+	Vec2F24p8& rb_corner, Vec2F24p8& lb_corner)
 {
 	lt_corner.x = lb_corner.x = left();
 	rt_corner.x = rb_corner.x = right();
@@ -77,8 +77,8 @@ void CollBox::get_corners(vec2_f24p8& lt_corner, vec2_f24p8& rt_corner,
 
 
 void CollBox::get_block_coords_intersected_by_corners 
-	(vec2_s32& lt_block_coord, vec2_s32& rt_block_coord,
-	vec2_s32& rb_block_coord, vec2_s32& lb_block_coord)
+	(Vec2s32& lt_block_coord, Vec2s32& rt_block_coord,
+	Vec2s32& rb_block_coord, Vec2s32& lb_block_coord)
 {
 	
 	lt_block_coord.x = lb_block_coord.x = left().round_to_int() >> 4;

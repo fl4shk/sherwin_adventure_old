@@ -59,7 +59,7 @@ public:		// classes
 		//BcrLsegGroup bcrlg;
 		//HorizCollLseg clseg;
 		BlockCollResult bcr;
-		vec2_s32 blk_crd_pos;
+		Vec2s32 blk_crd_pos;
 	} __attribute__((_align4));
 	
 	// Top side uses this
@@ -202,13 +202,13 @@ protected:		// functions
 	static const s32 get_blk_crd_pos_y_for_mid_hs();
 	static const s32 get_blk_crd_pos_y_for_bot_hs();
 	
-	static const vec2_s32 get_left_top_hs_blk_crd_pos();
-	static const vec2_s32 get_left_mid_hs_blk_crd_pos();
-	static const vec2_s32 get_left_bot_hs_blk_crd_pos();
+	static const Vec2s32 get_left_top_hs_blk_crd_pos();
+	static const Vec2s32 get_left_mid_hs_blk_crd_pos();
+	static const Vec2s32 get_left_bot_hs_blk_crd_pos();
 	
-	static const vec2_s32 get_right_top_hs_blk_crd_pos();
-	static const vec2_s32 get_right_mid_hs_blk_crd_pos();
-	static const vec2_s32 get_right_bot_hs_blk_crd_pos();
+	static const Vec2s32 get_right_top_hs_blk_crd_pos();
+	static const Vec2s32 get_right_mid_hs_blk_crd_pos();
+	static const Vec2s32 get_right_bot_hs_blk_crd_pos();
 	
 	// "ia" means "in air"
 	// "vs" means "vertical sensor"
@@ -223,9 +223,9 @@ protected:		// functions
 	static const s32 get_blk_crd_pos_y_for_top_vs();
 	static const Fixed24p8 get_pos_y_for_bot_vs();
 	
-	static const vec2_s32 get_top_left_vs_blk_crd_pos();
-	static const vec2_s32 get_top_mid_vs_blk_crd_pos();
-	static const vec2_s32 get_top_right_vs_blk_crd_pos();
+	static const Vec2s32 get_top_left_vs_blk_crd_pos();
+	static const Vec2s32 get_top_mid_vs_blk_crd_pos();
+	static const Vec2s32 get_top_right_vs_blk_crd_pos();
 	
 	static const VertCollLseg get_bot_left_vs_og();
 	static const VertCollLseg get_bot_mid_vs_og();

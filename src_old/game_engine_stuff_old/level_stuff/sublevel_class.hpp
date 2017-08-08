@@ -59,9 +59,9 @@ public:		// functions
 		return xsize * ysize;
 	}
 	
-	inline constexpr vec2_u32 get_size_2d() const
+	inline constexpr Vec2u32 get_size_2d() const
 	{
-		return vec2_u32(xsize, ysize);
+		return Vec2u32(xsize, ysize);
 	}
 	
 	inline constexpr u32 get_sprite_ipg_arr_size() const
@@ -79,7 +79,7 @@ public:		// functions
 class SublevelPointer
 {
 protected:		// variables
-	vec2_u32 size_2d;
+	Vec2u32 size_2d;
 	
 public:		// variables
 	ArrayHelper<const u32> cmp_bd_arr_helper;
@@ -126,7 +126,7 @@ public:		// functions
 			sublevel_entrance_arr_size);
 	}
 	
-	inline const vec2_u32& get_size_2d() const
+	inline const Vec2u32& get_size_2d() const
 	{
 		return size_2d;
 	}

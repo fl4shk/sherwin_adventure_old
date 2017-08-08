@@ -35,7 +35,7 @@ const BlockStuffConstParams
 };
 
 void EyesBlockStuff::strongly_hit_response(Block& the_block, 
-	const vec2_s32& coord)
+	const Vec2s32& coord)
 {
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
@@ -58,13 +58,13 @@ void EyesBlockStuff::finish_initializing_using_persistent_data
 }
 
 //void EyesBlockStuff::strongly_hit_response(Block& the_block, 
-//	const vec2_s32& coord)
+//	const Vec2s32& coord)
 //{
 //	constexpr sprite_type the_spawnable_sprite_type = StWaffle;
 //	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type = bt_dud;
 //	
-//	vec2_s32 spawn_block_grid_coord = vec2_s32(coord.x, coord.y - 1);
-//	vec2_f24p8 spawn_in_level_pos = vec2_f24p8
+//	Vec2s32 spawn_block_grid_coord = Vec2s32(coord.x, coord.y - 1);
+//	Vec2F24p8 spawn_in_level_pos = Vec2F24p8
 //		(make_f24p8(spawn_block_grid_coord.x * num_pixels_per_block_row), 
 //		make_f24p8(spawn_block_grid_coord.y * num_pixels_per_block_col));
 //	
@@ -74,14 +74,14 @@ void EyesBlockStuff::finish_initializing_using_persistent_data
 //}
 
 void EyesBlockWithStWaffleStuff::strongly_hit_response
-	(Block& the_block, const vec2_s32& coord)
+	(Block& the_block, const Vec2s32& coord)
 {
 	constexpr sprite_type the_spawnable_sprite_type = StWaffle;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
 	
-	vec2_s32 spawn_block_grid_coord = vec2_s32(coord.x, coord.y - 1);
-	vec2_f24p8 spawn_in_level_pos = vec2_f24p8
+	Vec2s32 spawn_block_grid_coord = Vec2s32(coord.x, coord.y - 1);
+	Vec2F24p8 spawn_in_level_pos = Vec2F24p8
 		(make_f24p8(spawn_block_grid_coord.x * num_pixels_per_block_row), 
 		make_f24p8(spawn_block_grid_coord.y * num_pixels_per_block_col));
 	
@@ -95,14 +95,14 @@ void EyesBlockWithStWaffleStuff::strongly_hit_response
 }
 
 void EyesBlockWithStMuffinStuff::strongly_hit_response
-	(Block& the_block, const vec2_s32& coord)
+	(Block& the_block, const Vec2s32& coord)
 {
 	constexpr sprite_type the_spawnable_sprite_type = StMuffin;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
 	
-	vec2_s32 spawn_block_grid_coord = vec2_s32(coord.x, coord.y - 1);
-	vec2_f24p8 spawn_in_level_pos = vec2_f24p8
+	Vec2s32 spawn_block_grid_coord = Vec2s32(coord.x, coord.y - 1);
+	Vec2F24p8 spawn_in_level_pos = Vec2F24p8
 		(make_f24p8(spawn_block_grid_coord.x * num_pixels_per_block_row), 
 		make_f24p8(spawn_block_grid_coord.y * num_pixels_per_block_col));
 	
@@ -115,14 +115,14 @@ void EyesBlockWithStMuffinStuff::strongly_hit_response
 }
 
 void EyesBlockWithStFireMuffinStuff::strongly_hit_response
-	(Block& the_block, const vec2_s32& coord)
+	(Block& the_block, const Vec2s32& coord)
 {
 	constexpr sprite_type the_spawnable_sprite_type = StFireMuffin;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
 	
-	vec2_s32 spawn_block_grid_coord = vec2_s32(coord.x, coord.y - 1);
-	vec2_f24p8 spawn_in_level_pos = vec2_f24p8
+	Vec2s32 spawn_block_grid_coord = Vec2s32(coord.x, coord.y - 1);
+	Vec2F24p8 spawn_in_level_pos = Vec2F24p8
 		(make_f24p8(spawn_block_grid_coord.x * num_pixels_per_block_row), 
 		make_f24p8(spawn_block_grid_coord.y * num_pixels_per_block_col));
 	
@@ -135,14 +135,14 @@ void EyesBlockWithStFireMuffinStuff::strongly_hit_response
 }
 
 void EyesBlockWithStIceMuffinStuff::strongly_hit_response
-	(Block& the_block, const vec2_s32& coord)
+	(Block& the_block, const Vec2s32& coord)
 {
 	constexpr sprite_type the_spawnable_sprite_type = StIceMuffin;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
 	
-	vec2_s32 spawn_block_grid_coord = vec2_s32(coord.x, coord.y - 1);
-	vec2_f24p8 spawn_in_level_pos = vec2_f24p8
+	Vec2s32 spawn_block_grid_coord = Vec2s32(coord.x, coord.y - 1);
+	Vec2F24p8 spawn_in_level_pos = Vec2F24p8
 		(make_f24p8(spawn_block_grid_coord.x * num_pixels_per_block_row), 
 		make_f24p8(spawn_block_grid_coord.y * num_pixels_per_block_col));
 	
@@ -155,14 +155,14 @@ void EyesBlockWithStIceMuffinStuff::strongly_hit_response
 }
 
 void EyesBlockWithStChocolateMuffinStuff::strongly_hit_response
-	(Block& the_block, const vec2_s32& coord)
+	(Block& the_block, const Vec2s32& coord)
 {
 	constexpr sprite_type the_spawnable_sprite_type = StChocolateMuffin;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
 	
-	vec2_s32 spawn_block_grid_coord = vec2_s32(coord.x, coord.y - 1);
-	vec2_f24p8 spawn_in_level_pos = vec2_f24p8
+	Vec2s32 spawn_block_grid_coord = Vec2s32(coord.x, coord.y - 1);
+	Vec2F24p8 spawn_in_level_pos = Vec2F24p8
 		(make_f24p8(spawn_block_grid_coord.x * num_pixels_per_block_row), 
 		make_f24p8(spawn_block_grid_coord.y * num_pixels_per_block_col));
 	

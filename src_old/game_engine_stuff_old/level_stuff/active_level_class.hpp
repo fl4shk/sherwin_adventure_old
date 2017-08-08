@@ -84,9 +84,9 @@ public:		// static variables
 	static constexpr u32 horiz_sublevel_xsize = block_data_array_size 
 		/ horiz_sublevel_ysize;
 	
-	//static constexpr vec2_u32 horiz_sublevel_size_2d 
+	//static constexpr Vec2u32 horiz_sublevel_size_2d 
 	//	= { horiz_sublevel_xsize, horiz_sublevel_ysize };
-	static const vec2_u32 horiz_sublevel_size_2d;
+	static const Vec2u32 horiz_sublevel_size_2d;
 	
 	
 	// horiz_sublevel_block_data_2d Is an ArrayCsz2dHelper That wraps
@@ -113,16 +113,16 @@ public:		// static variables
 		horiz_sublevel_sprite_ipg_lists __attribute__((_ewram));
 	
 	// -- Switch To linear_memory_allocator --
-	static scr_entry bg0_screenblock_mirror[screenblock_size] 
+	static ScrEntry bg0_screenblock_mirror[screenblock_size] 
 		__attribute__((_ewram));
 	
 	
 	// bg0_screenblock_2d Is in VRAM.
-	static ArrayCsz2dHelper<scr_entry, screenblock_xsize,
+	static ArrayCsz2dHelper<ScrEntry, screenblock_xsize,
 		screenblock_ysize> bg0_screenblock_2d;
 	
 	// bg0_screenblock_mirror_2d Is in EWRAM.
-	static ArrayCsz2dHelper<scr_entry, screenblock_xsize,
+	static ArrayCsz2dHelper<ScrEntry, screenblock_xsize,
 		screenblock_ysize> bg0_screenblock_mirror_2d;
 	
 	
@@ -136,27 +136,27 @@ public:		// static variables
 	
 	
 public:		// functions
-	static inline bool block_coord_is_valid(const vec2_s32& block_coord)
+	static inline bool block_coord_is_valid(const Vec2s32& block_coord)
 	{
 		//return (block_coord.x >= 0 && block_coord.x 
 		//	< (s32)get_curr_sublevel_ptr().get_size_2d().x
 		//	&& block_coord.y >= 0 && block_coord.y 
 		//	< (s32)get_curr_sublevel_ptr().get_size_2d().y);
 		
-		const vec2_u32& curr_sublevel_ptr_size_2d = get_curr_sublevel_ptr()
+		const Vec2u32& curr_sublevel_ptr_size_2d = get_curr_sublevel_ptr()
 			.get_size_2d();
-		vec2_s32 curr_sublevel_ptr_size_2d_s32
+		Vec2s32 curr_sublevel_ptr_size_2d_s32
 			((s32)curr_sublevel_ptr_size_2d.x,
 			(s32)curr_sublevel_ptr_size_2d.y);
 		
-		return vec2_in_range(vec2_s32(0, 0),
+		return vec2_in_range(Vec2s32(0, 0),
 			curr_sublevel_ptr_size_2d_s32, block_coord);
 	}
 	
 	// This function computes the Block coordinate of a point.
-	static inline vec2_s32 get_block_coord_of_point(const vec2_f24p8& pt)
+	static inline Vec2s32 get_block_coord_of_point(const Vec2F24p8& pt)
 	{
-		vec2_s32 ret;
+		Vec2s32 ret;
 		
 		//ret.x = pt.x.round_to_int() / 16;
 		//ret.y = pt.y.round_to_int() / 16;
@@ -170,7 +170,7 @@ public:		// functions
 	}
 	
 	static inline block_type get_block_type_at_coord 
-		(const vec2_s32& block_coord)
+		(const Vec2s32& block_coord)
 	{
 		if (block_coord_is_valid(block_coord))
 		{
@@ -184,7 +184,7 @@ public:		// functions
 	}
 	
 	static inline Block& the_block_at_coord 
-		(const vec2_s32& block_coord)
+		(const Vec2s32& block_coord)
 	{
 		if (block_coord_is_valid(block_coord))
 		{

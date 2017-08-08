@@ -33,7 +33,7 @@
 // comment was there.
 
 #define GENERATE_PT(name) \
-	vec2_f24p8 & pt_##name = get_pt_##name();
+	Vec2F24p8 & pt_##name = get_pt_##name();
 #define X(name) \
 	pt_##name.x =
 #define Y(name) \
@@ -41,9 +41,9 @@
 
 
 void coll_point_group_base::assign_vert_side_x_positions
-	(const CollBox& the_coll_box, vec2_f24p8& pt_lt, vec2_f24p8& pt_lm, 
-	vec2_f24p8& pt_lb, vec2_f24p8& pt_rt, vec2_f24p8& pt_rm, 
-	vec2_f24p8& pt_rb)
+	(const CollBox& the_coll_box, Vec2F24p8& pt_lt, Vec2F24p8& pt_lm, 
+	Vec2F24p8& pt_lb, Vec2F24p8& pt_rt, Vec2F24p8& pt_rm, 
+	Vec2F24p8& pt_rb)
 {
 	//pt_lt.x = pt_lm.x = pt_lb.x = the_coll_box.left();
 	
@@ -60,8 +60,8 @@ void coll_point_group_base::assign_vert_side_x_positions
 }
 void coll_point_group_base::assign_horiz_side_y_positions
 	(const Sprite& the_sprite, const CollBox& the_coll_box, 
-	vec2_f24p8& pt_tl, vec2_f24p8& pt_tm, vec2_f24p8& pt_tr, 
-	vec2_f24p8& pt_bl, vec2_f24p8& pt_bm, vec2_f24p8& pt_br)
+	Vec2F24p8& pt_tl, Vec2F24p8& pt_tm, Vec2F24p8& pt_tr, 
+	Vec2F24p8& pt_bl, Vec2F24p8& pt_bm, Vec2F24p8& pt_br)
 {
 	LIST_OF_SHARED_TOP_SIDE_COLL_POINT_NAMES(Y)
 		the_coll_box.top();
@@ -86,13 +86,13 @@ void coll_point_group_base::assign_horiz_side_y_positions
 
 
 void coll_point_group_base::assign_vert_side_mid_y_positions
-	(const CollBox& the_coll_box, vec2_f24p8& pt_lm, vec2_f24p8& pt_rm)
+	(const CollBox& the_coll_box, Vec2F24p8& pt_lm, Vec2F24p8& pt_rm)
 {
 	LIST_OF_SHARED_VERT_SIDE_YPOS_MID_COLL_POINT_NAMES(Y)
 		the_coll_box.top() + (Fixed24p8){ the_coll_box.size.y.data / 2 };
 }
 void coll_point_group_base::assign_horiz_side_mid_x_positions
-	(const CollBox& the_coll_box, vec2_f24p8& pt_tm, vec2_f24p8& pt_bm)
+	(const CollBox& the_coll_box, Vec2F24p8& pt_tm, Vec2F24p8& pt_bm)
 {
 	LIST_OF_SHARED_HORIZ_SIDE_XPOS_MID_COLL_POINT_NAMES(X)
 		the_coll_box.left() + (Fixed24p8){ the_coll_box.size.x.data / 2 };
@@ -127,13 +127,13 @@ coll_point_group_16x16::coll_point_group_16x16(const Sprite& the_sprite)
 }
 
 void coll_point_group_16x16::assign_vert_side_top_y_positions
-	(const CollBox& the_coll_box, vec2_f24p8& pt_lt, vec2_f24p8& pt_rt)
+	(const CollBox& the_coll_box, Vec2F24p8& pt_lt, Vec2F24p8& pt_rt)
 {
 	LIST_OF_SHARED_VERT_SIDE_YPOS_TOP_COLL_POINT_NAMES(Y) 
 		the_coll_box.top() + (Fixed24p8){ the_coll_box.size.y.data / 4 };
 }
 void coll_point_group_16x16::assign_vert_side_bot_y_positions
-	(const CollBox& the_coll_box, vec2_f24p8& pt_lb, vec2_f24p8& pt_rb)
+	(const CollBox& the_coll_box, Vec2F24p8& pt_lb, Vec2F24p8& pt_rb)
 {
 	LIST_OF_SHARED_VERT_SIDE_YPOS_BOT_COLL_POINT_NAMES(Y) 
 		the_coll_box.bot() - (Fixed24p8){ the_coll_box.size.y.data / 4 };
@@ -141,13 +141,13 @@ void coll_point_group_16x16::assign_vert_side_bot_y_positions
 
 
 void coll_point_group_16x16::assign_horiz_side_left_x_positions
-	(const CollBox& the_coll_box, vec2_f24p8& pt_tl, vec2_f24p8& pt_bl)
+	(const CollBox& the_coll_box, Vec2F24p8& pt_tl, Vec2F24p8& pt_bl)
 {
 	LIST_OF_SHARED_HORIZ_SIDE_XPOS_LEFT_COLL_POINT_NAMES(X)
 		the_coll_box.left() + (Fixed24p8){ the_coll_box.size.x.data / 4 };
 }
 void coll_point_group_16x16::assign_horiz_side_right_x_positions
-	(const CollBox& the_coll_box, vec2_f24p8& pt_tr, vec2_f24p8& pt_br)
+	(const CollBox& the_coll_box, Vec2F24p8& pt_tr, Vec2F24p8& pt_br)
 {
 	LIST_OF_SHARED_HORIZ_SIDE_XPOS_RIGHT_COLL_POINT_NAMES(X)
 		the_coll_box.right() - (Fixed24p8){ the_coll_box.size.x.data / 4 };
@@ -182,13 +182,13 @@ coll_point_group_16x32::coll_point_group_16x32(const Sprite& the_sprite)
 }
 
 void coll_point_group_16x32::assign_vert_side_top_y_positions
-	(const CollBox& the_coll_box, vec2_f24p8& pt_lt, vec2_f24p8& pt_rt)
+	(const CollBox& the_coll_box, Vec2F24p8& pt_lt, Vec2F24p8& pt_rt)
 {
 	LIST_OF_SHARED_VERT_SIDE_YPOS_TOP_COLL_POINT_NAMES(Y)
 		the_coll_box.top() + Sprite::cpg_16x32_threshold_abs.y;
 }
 void coll_point_group_16x32::assign_vert_side_bot_y_positions
-	(const CollBox& the_coll_box, vec2_f24p8& pt_lb, vec2_f24p8& pt_rb)
+	(const CollBox& the_coll_box, Vec2F24p8& pt_lb, Vec2F24p8& pt_rb)
 {
 	LIST_OF_SHARED_VERT_SIDE_YPOS_BOT_COLL_POINT_NAMES(Y)
 		the_coll_box.bot() - Sprite::cpg_16x32_threshold_abs.y;
@@ -196,13 +196,13 @@ void coll_point_group_16x32::assign_vert_side_bot_y_positions
 
 
 void coll_point_group_16x32::assign_horiz_side_left_x_positions
-	(const CollBox& the_coll_box, vec2_f24p8& pt_tl, vec2_f24p8& pt_bl)
+	(const CollBox& the_coll_box, Vec2F24p8& pt_tl, Vec2F24p8& pt_bl)
 {
 	LIST_OF_SHARED_HORIZ_SIDE_XPOS_LEFT_COLL_POINT_NAMES(X)
 		the_coll_box.left() + Sprite::cpg_16x32_threshold_abs.x;
 }
 void coll_point_group_16x32::assign_horiz_side_right_x_positions
-	(const CollBox& the_coll_box, vec2_f24p8& pt_tr, vec2_f24p8& pt_br)
+	(const CollBox& the_coll_box, Vec2F24p8& pt_tr, Vec2F24p8& pt_br)
 {
 	LIST_OF_SHARED_HORIZ_SIDE_XPOS_RIGHT_COLL_POINT_NAMES(X)
 		the_coll_box.right() - Sprite::cpg_16x32_threshold_abs.x;

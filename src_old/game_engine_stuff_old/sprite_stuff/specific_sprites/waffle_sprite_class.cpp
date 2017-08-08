@@ -39,7 +39,7 @@ const SpriteConstParams WaffleSprite::the_const_params
 	Sprite::the_const_params.num_active_gfx_tiles,
 	
 	// tile_arr 
-	const_cast<tile*>(reinterpret_cast<const tile*>(the_powerup_gfxTiles)),
+	const_cast<Tile*>(reinterpret_cast<const Tile*>(the_powerup_gfxTiles)),
 };
 
 

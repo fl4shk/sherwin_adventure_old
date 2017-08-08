@@ -38,7 +38,7 @@ public:		// functions
 		return the_const_params;
 	}
 	virtual void strongly_hit_response(Block& the_block, 
-		const vec2_s32& coord);
+		const Vec2s32& coord);
 	
 } __attribute__((_align4));
 
@@ -47,7 +47,7 @@ class WoodBlockWithBtDudStuff : public WoodBlockStuff
 {
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
-		const vec2_s32& coord);
+		const Vec2s32& coord);
 	
 	virtual void finish_initializing_using_persistent_data
 		(Block& the_block);
@@ -58,7 +58,7 @@ class WoodBlockWithStWaffleStuff : public WoodBlockStuff
 {
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
-		const vec2_s32& coord);
+		const Vec2s32& coord);
 	
 	virtual void finish_initializing_using_persistent_data
 		(Block& the_block);
@@ -68,7 +68,7 @@ class WoodBlockWithStMuffinStuff : public WoodBlockStuff
 {
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
-		const vec2_s32& coord);
+		const Vec2s32& coord);
 	
 	virtual void finish_initializing_using_persistent_data
 		(Block& the_block);
@@ -78,7 +78,7 @@ class WoodBlockWithStFireMuffinStuff : public WoodBlockStuff
 {
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
-		const vec2_s32& coord);
+		const Vec2s32& coord);
 	
 	virtual void finish_initializing_using_persistent_data
 		(Block& the_block);
@@ -88,7 +88,7 @@ class WoodBlockWithStIceMuffinStuff : public WoodBlockStuff
 {
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
-		const vec2_s32& coord);
+		const Vec2s32& coord);
 	
 	virtual void finish_initializing_using_persistent_data
 		(Block& the_block);
@@ -98,7 +98,7 @@ class WoodBlockWithStChocolateMuffinStuff : public WoodBlockStuff
 {
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
-		const vec2_s32& coord);
+		const Vec2s32& coord);
 	
 	virtual void finish_initializing_using_persistent_data
 		(Block& the_block);

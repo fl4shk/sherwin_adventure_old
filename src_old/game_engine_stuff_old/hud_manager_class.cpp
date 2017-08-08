@@ -30,11 +30,11 @@
 
 bool HudManager::hud_was_generated;
 
-scr_entry HudManager::bg1_screenblock_mirror[screenblock_size];
+ScrEntry HudManager::bg1_screenblock_mirror[screenblock_size];
 
-ArrayCsz2dHelper<scr_entry, screenblock_xsize, screenblock_ysize> 
+ArrayCsz2dHelper<ScrEntry, screenblock_xsize, screenblock_ysize> 
 	HudManager::bg1_screenblock_2d(SE_RAM[bg1_sbb]);
-ArrayCsz2dHelper<scr_entry, screenblock_xsize, screenblock_ysize> 
+ArrayCsz2dHelper<ScrEntry, screenblock_xsize, screenblock_ysize> 
 	HudManager::bg1_screenblock_mirror_2d(bg1_screenblock_mirror);
 
 const char HudManager::char_to_plottable_char_arr
@@ -292,7 +292,7 @@ void HudManager::copy_hud_from_array_csz_2d_helper_to_vram()
 {
 	memcpy32(HudManager::bg1_screenblock_2d.the_array,
 		HudManager::bg1_screenblock_mirror_2d.the_array,
-		sizeof(scr_entry) * HudManager::bg1_screenblock_mirror_2d
+		sizeof(ScrEntry) * HudManager::bg1_screenblock_mirror_2d
 		.get_size() / sizeof(u32));
 }
 

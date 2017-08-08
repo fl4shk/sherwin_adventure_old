@@ -32,14 +32,14 @@ class VertCollLseg;
 //{
 //public:		// variables
 //	static constexpr size_t num_end_points = 2;
-//	std::array<vec2_f24p8, num_end_points> end_points;
+//	std::array<Vec2F24p8, num_end_points> end_points;
 //	
 //public:		// functions
 //	inline GenericCollLseg()
 //	{
 //	}
-//	inline GenericCollLseg(const vec2_f24p8& s_end_pt_0, 
-//		const vec2_f24p8& s_end_pt_1) : end_points{ s_end_pt_0, 
+//	inline GenericCollLseg(const Vec2F24p8& s_end_pt_0, 
+//		const Vec2F24p8& s_end_pt_1) : end_points{ s_end_pt_0, 
 //		s_end_pt_1 }
 //	{
 //	}
@@ -57,7 +57,7 @@ class VertCollLseg;
 //	}
 //	
 //	bool intersects(const GenericCollLseg& to_check, 
-//		vec2_f24p8* ret=NULL) const __attribute__((_iwram_code));
+//		Vec2F24p8* ret=NULL) const __attribute__((_iwram_code));
 //	
 //} __attribute__((_align4));
 
@@ -79,19 +79,19 @@ protected:		// functions
 class HorizCollLseg
 {
 protected:		// variables
-	vec2_f24p8 internal_left_pt;
+	Vec2F24p8 internal_left_pt;
 	Fixed24p8 internal_length;
 	
 public:		// functions
 	inline HorizCollLseg()
 	{
 	}
-	inline HorizCollLseg(const vec2_f24p8& s_left_pt, 
+	inline HorizCollLseg(const Vec2F24p8& s_left_pt, 
 		const Fixed24p8& s_length) : internal_left_pt(s_left_pt),
 		internal_length(s_length)
 	{
 	}
-	inline HorizCollLseg(const vec2_s32& s_left_pt, 
+	inline HorizCollLseg(const Vec2s32& s_left_pt, 
 		const Fixed24p8& s_length)
 		: internal_left_pt(make_f24p8(s_left_pt.x), 
 		make_f24p8(s_left_pt.y)), internal_length(s_length)
@@ -109,11 +109,11 @@ public:		// functions
 		return *this;
 	}
 	
-	inline vec2_f24p8& left_pt()
+	inline Vec2F24p8& left_pt()
 	{
 		return internal_left_pt;
 	}
-	inline const vec2_f24p8& left_pt() const
+	inline const Vec2F24p8& left_pt() const
 	{
 		return internal_left_pt;
 	}
@@ -125,9 +125,9 @@ public:		// functions
 	{
 		return internal_length;
 	}
-	inline const vec2_f24p8 right_pt() const
+	inline const Vec2F24p8 right_pt() const
 	{
-		return left_pt() + vec2_f24p8(length(), make_f24p8(0));
+		return left_pt() + Vec2F24p8(length(), make_f24p8(0));
 	}
 	
 	inline bool intersects(const HorizCollLseg& to_check) const
@@ -149,19 +149,19 @@ public:		// functions
 class VertCollLseg
 {
 protected:		// variables
-	vec2_f24p8 internal_top_pt;
+	Vec2F24p8 internal_top_pt;
 	Fixed24p8 internal_length;
 	
 public:		// functions
 	inline VertCollLseg()
 	{
 	}
-	inline VertCollLseg(const vec2_f24p8& s_top_pt, 
+	inline VertCollLseg(const Vec2F24p8& s_top_pt, 
 		const Fixed24p8& s_length) : internal_top_pt(s_top_pt),
 		internal_length(s_length)
 	{
 	}
-	inline VertCollLseg(const vec2_s32& s_top_pt, 
+	inline VertCollLseg(const Vec2s32& s_top_pt, 
 		const Fixed24p8& s_length)
 		: internal_top_pt(make_f24p8(s_top_pt.x), 
 		make_f24p8(s_top_pt.y)), internal_length(s_length)
@@ -179,11 +179,11 @@ public:		// functions
 		return *this;
 	}
 	
-	inline vec2_f24p8& top_pt()
+	inline Vec2F24p8& top_pt()
 	{
 		return internal_top_pt;
 	}
-	inline const vec2_f24p8& top_pt() const
+	inline const Vec2F24p8& top_pt() const
 	{
 		return internal_top_pt;
 	}
@@ -195,9 +195,9 @@ public:		// functions
 	{
 		return internal_length;
 	}
-	inline const vec2_f24p8 bot_pt() const
+	inline const Vec2F24p8 bot_pt() const
 	{
-		return top_pt() + vec2_f24p8(make_f24p8(0), length());
+		return top_pt() + Vec2F24p8(make_f24p8(0), length());
 	}
 	
 	//inline bool intersects(const HorizCollLseg& to_check) const

@@ -42,9 +42,9 @@ class CollBox
 public:		// variables
 	
 	// pos Is the position of the top left corner of the CollBox
-	vec2_f24p8 pos;
+	Vec2F24p8 pos;
 	
-	vec2_f24p8 size;
+	Vec2F24p8 size;
 	
 	// If this CollBox Is actually a hit_box, then strength > 0.
 	u32 strength;
@@ -79,9 +79,9 @@ public:		// functions
 	{
 		return (Fixed24p8){ size.y.data >> 1 };
 	}
-	inline vec2_f24p8 half_size() const
+	inline Vec2F24p8 half_size() const
 	{
-		return vec2_f24p8(half_width(), half_height());
+		return Vec2F24p8(half_width(), half_height());
 	}
 	
 	inline Fixed24p8 get_x_center() const
@@ -112,7 +112,7 @@ public:		// functions
 		return coll_box_intersects_now_2(*this, other);
 	}
 	
-	int Contains(const vec2_f24p8& point) __attribute__((_iwram_code));
+	int Contains(const Vec2F24p8& point) __attribute__((_iwram_code));
 	
 	// Note:  This function doesn't check whether right_x > left_x, nor
 	// whether bot_y > top_y.  That makes this function less safe than it
@@ -120,12 +120,12 @@ public:		// functions
 	void set_side_coords(Fixed24p8 left_x, Fixed24p8 right_x,
 		Fixed24p8 top_y, Fixed24p8 bot_y);
 	
-	void get_corners(vec2_f24p8& lt_corner, vec2_f24p8& rt_corner, 
-		vec2_f24p8& rb_corner, vec2_f24p8& lb_corner);
+	void get_corners(Vec2F24p8& lt_corner, Vec2F24p8& rt_corner, 
+		Vec2F24p8& rb_corner, Vec2F24p8& lb_corner);
 	
 	void get_block_coords_intersected_by_corners 
-		(vec2_s32& lt_block_coord, vec2_s32& rt_block_coord,
-		vec2_s32& rb_block_coord, vec2_s32& lb_block_coord);
+		(Vec2s32& lt_block_coord, Vec2s32& rt_block_coord,
+		Vec2s32& rb_block_coord, Vec2s32& lb_block_coord);
 	
 	
 	

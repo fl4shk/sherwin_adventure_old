@@ -222,19 +222,19 @@ public:		// variables
 	//static constexpr u32 num_active_gfx_tiles 
 	//	= GfxManager::num_tiles_in_ss_16x32;
 	//
-	//static constexpr tile* tile_arr = const_cast<tile*>
-	//	(reinterpret_cast<const tile*>(sherwin_gfxTiles));
+	//static constexpr Tile* tile_arr = const_cast<Tile*>
+	//	(reinterpret_cast<const Tile*>(sherwin_gfxTiles));
 	//
 	//static const OamEntry::shape_size the_initial_shape_size 
 	//	= OamEntry::ss_16x32;
 	//
-	//static const vec2_f24p8 the_initial_coll_box_size,
+	//static const Vec2F24p8 the_initial_coll_box_size,
 	//	the_initial_cb_pos_offset;
 	//
 	//// This Is used To correct the initial in-Level position for sprites
 	//// That are normally considered To be of a certain size but That use
 	//// larger graphics for some frames.
-	//static const vec2_f24p8 the_initial_in_level_pos_offset;
+	//static const Vec2F24p8 the_initial_in_level_pos_offset;
 	
 	
 public:		// functions
@@ -245,19 +245,19 @@ public:		// functions
 		shared_constructor_code_part_3();
 	}
 	//PlayerSprite(bool facing_left);
-	//PlayerSprite(const vec2_f24p8& s_in_level_pos, 
-	//	const PrevCurrPair<bg_point>& camera_pos, bool facing_left);
-	PlayerSprite(const vec2_f24p8& s_in_level_pos, 
-		const vec2_u32& the_level_size_2d, 
-		PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left);
+	//PlayerSprite(const Vec2F24p8& s_in_level_pos, 
+	//	const PrevCurrPair<BgPoint>& camera_pos, bool facing_left);
+	PlayerSprite(const Vec2F24p8& s_in_level_pos, 
+		const Vec2u32& the_level_size_2d, 
+		PrevCurrPair<BgPoint>& camera_pos_pc_pair, bool facing_left);
 	
 	
 	//virtual void shared_constructor_code_part_1();
 	//virtual void shared_constructor_code_part_2(bool facing_left=false);
 	virtual void shared_constructor_code_part_2
-		(const vec2_f24p8& s_in_level_pos, 
-		const vec2_u32& the_level_size_2d, 
-		PrevCurrPair<bg_point>& camera_pos_pc_pair,
+		(const Vec2F24p8& s_in_level_pos, 
+		const Vec2u32& the_level_size_2d, 
+		PrevCurrPair<BgPoint>& camera_pos_pc_pair,
 		bool facing_left=false);
 	
 	virtual void shared_constructor_code_part_3();
@@ -277,8 +277,8 @@ public:		// functions
 	virtual void update_part_1();
 	virtual void update_part_2();
 	virtual void update_part_3
-		(PrevCurrPair<bg_point>& camera_pos_pc_pair,
-		const vec2_u32& the_sublevel_size_2d);
+		(PrevCurrPair<BgPoint>& camera_pos_pc_pair,
+		const Vec2u32& the_sublevel_size_2d);
 	
 	
 	// Graphics stuff
@@ -306,8 +306,8 @@ public:		// functions
 	
 	// Sprite-Sprite interaction stuff
 	virtual void sprite_interaction_reponse(Sprite& the_other_sprite, 
-		PrevCurrPair<bg_point>& camera_pos, 
-		const vec2_u32& the_level_size_2d);
+		PrevCurrPair<BgPoint>& camera_pos, 
+		const Vec2u32& the_level_size_2d);
 	
 	
 protected:		// functions

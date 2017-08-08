@@ -51,9 +51,9 @@ public:		// variables
 	
 public:		// functions
 	
-	static scr_entry horiz_sublevel_tile_at_basic(u32 tile_x, 
+	static ScrEntry horiz_sublevel_tile_at_basic(u32 tile_x, 
 		u32 tile_y) __attribute__((_iwram_code,_target_arm));
-	static scr_entry horiz_sublevel_tile_at(u32 tile_x, u32 tile_y)
+	static ScrEntry horiz_sublevel_tile_at(u32 tile_x, u32 tile_y)
 		__attribute__((_iwram_code,_target_arm));
 	
 	
@@ -70,19 +70,19 @@ public:		// functions
 	//}
 	
 	static inline u32 sublevel_width_in_tiles 
-		(const vec2_u32& sublevel_size_in_blocks_2d)
+		(const Vec2u32& sublevel_size_in_blocks_2d)
 	{
 		return sublevel_size_in_blocks_2d.x * 2;
 	}
 	static inline u32 sublevel_height_in_tiles 
-		(const vec2_u32& sublevel_size_in_blocks_2d)
+		(const Vec2u32& sublevel_size_in_blocks_2d)
 	{
 		return sublevel_size_in_blocks_2d.y * 2;
 	}
 	
 	
 	static void correct_bg0_scroll_mirror 
-		(const vec2_u32& sublevel_size_in_blocks_2d)
+		(const Vec2u32& sublevel_size_in_blocks_2d)
 		__attribute__((_iwram_code,_target_arm));
 	
 	static void update_sublevel_in_screenblock_mirror_2d()

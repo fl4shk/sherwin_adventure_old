@@ -35,7 +35,7 @@ class VertCollLseg;
 class BlockCollResult
 {
 public:		// variables
-	//vec2_s32 coord;
+	//Vec2s32 coord;
 	//block_type type;
 	Block* the_block __attribute__((_align4));
 	//block_behavior_type the_bbvt __attribute__((_align4));
@@ -51,11 +51,11 @@ public:		// functions
 	//{
 	//	memset(this, 0, sizeof(*this));
 	//}
-	inline BlockCollResult(const vec2_s32& s_blk_coord)
+	inline BlockCollResult(const Vec2s32& s_blk_coord)
 	{
 		init(s_blk_coord);
 	}
-	inline BlockCollResult(const vec2_f24p8& s_coord_f24p8)
+	inline BlockCollResult(const Vec2F24p8& s_coord_f24p8)
 	{
 		init(s_coord_f24p8);
 	}
@@ -64,12 +64,12 @@ public:		// functions
 		*this = to_copy;
 	}
 	
-	inline void init(const vec2_s32& s_blk_coord)
+	inline void init(const Vec2s32& s_blk_coord)
 	{
 		the_block = &ActiveLevel::the_block_at_coord(s_blk_coord);
 		the_bbvt = get_behavior_type_of_block_type(get_block_type());
 	}
-	inline void init(const vec2_f24p8& s_coord_f24p8)
+	inline void init(const Vec2F24p8& s_coord_f24p8)
 	{
 		init(ActiveLevel::get_block_coord_of_point(s_coord_f24p8));
 	}
@@ -109,17 +109,17 @@ public:		// constants
 	// The value of (3, 3) corresponds To a 32x32 Sprite.  Definitely
 	// change these two values (among other things) if there Is every any
 	// infrastructure for sprites larger than 32x32 pixels.
-	//const vec2_u32 BlockCollResultRectGroup::shared_max_size_2d(3, 3);
-	static constexpr vec2_u32 max_size_2d = vec2_u32(3, 3);
-	//static constexpr vec2_u32 max_size_2d = vec2_u32(80, 80);
+	//const Vec2u32 BlockCollResultRectGroup::shared_max_size_2d(3, 3);
+	static constexpr Vec2u32 max_size_2d = Vec2u32(3, 3);
+	//static constexpr Vec2u32 max_size_2d = Vec2u32(80, 80);
 	static constexpr u32 max_size = max_size_2d.x * max_size_2d.y;
 	
 protected:		// variables
 	BlockCollResult bcr_arr_csz_2d_helper_data[max_size];
 	
-	vec2_s32 start_pos;
+	Vec2s32 start_pos;
 	
-	vec2_s32 real_size_2d;
+	Vec2s32 real_size_2d;
 	
 	bool moving_left, moving_right;
 	
@@ -146,11 +146,11 @@ public:		// functions
 	{
 		return at(local_x, local_y);
 	}
-	inline BlockCollResult& operator () (const vec2_u32& local_coord)
+	inline BlockCollResult& operator () (const Vec2u32& local_coord)
 	{
 		return at(local_coord);
 	}
-	inline BlockCollResult& operator () (const vec2_s32& local_coord)
+	inline BlockCollResult& operator () (const Vec2s32& local_coord)
 	{
 		return at(local_coord);
 	}
@@ -159,11 +159,11 @@ public:		// functions
 	{
 		return bcr_arr_csz_2d_helper.at(local_x, local_y);
 	}
-	inline BlockCollResult& at(const vec2_u32& local_coord)
+	inline BlockCollResult& at(const Vec2u32& local_coord)
 	{
 		return bcr_arr_csz_2d_helper.at(local_coord);
 	}
-	inline BlockCollResult& at(const vec2_s32& local_coord)
+	inline BlockCollResult& at(const Vec2s32& local_coord)
 	{
 		return bcr_arr_csz_2d_helper.at(local_coord);
 	}
@@ -178,7 +178,7 @@ public:		// functions
 	{
 		return real_size_2d.y;
 	}
-	inline vec2_s32 get_real_size_2d() const
+	inline Vec2s32 get_real_size_2d() const
 	{
 		return real_size_2d;
 	}
@@ -217,21 +217,21 @@ public:		// functions
 	}
 	
 	// Corners
-	inline vec2_s32 tl_corner() const
+	inline Vec2s32 tl_corner() const
 	{
-		return vec2_s32(left(), top());
+		return Vec2s32(left(), top());
 	}
-	inline vec2_s32 tr_corner() const
+	inline Vec2s32 tr_corner() const
 	{
-		return vec2_s32(right(), top());
+		return Vec2s32(right(), top());
 	}
-	inline vec2_s32 bl_corner() const
+	inline Vec2s32 bl_corner() const
 	{
-		return vec2_s32(left(), bot());
+		return Vec2s32(left(), bot());
 	}
-	inline vec2_s32 br_corner() const
+	inline Vec2s32 br_corner() const
 	{
-		return vec2_s32(right(), bot());
+		return Vec2s32(right(), bot());
 	}
 	
 	
@@ -255,21 +255,21 @@ public:		// functions
 	}
 	
 	// Corners
-	inline vec2_s32 local_tl_corner() const
+	inline Vec2s32 local_tl_corner() const
 	{
-		return vec2_s32(local_left(), local_top());
+		return Vec2s32(local_left(), local_top());
 	}
-	inline vec2_s32 local_tr_corner() const
+	inline Vec2s32 local_tr_corner() const
 	{
-		return vec2_s32(local_right(), local_top());
+		return Vec2s32(local_right(), local_top());
 	}
-	inline vec2_s32 local_bl_corner() const
+	inline Vec2s32 local_bl_corner() const
 	{
-		return vec2_s32(local_left(), local_bot());
+		return Vec2s32(local_left(), local_bot());
 	}
-	inline vec2_s32 local_br_corner() const
+	inline Vec2s32 local_br_corner() const
 	{
-		return vec2_s32(local_right(), local_bot());
+		return Vec2s32(local_right(), local_bot());
 	}
 	
 	
@@ -281,10 +281,10 @@ public:		// functions
 	{
 		return in_range<s32>(0, real_size_2d.y, to_check);
 	}
-	inline bool contains_local_block_coord(const vec2_s32& to_check)
+	inline bool contains_local_block_coord(const Vec2s32& to_check)
 		const
 	{
-		//return vec2_in_range(vec2_s32(0, 0), real_size_2d, to_check);
+		//return vec2_in_range(Vec2s32(0, 0), real_size_2d, to_check);
 		return (contains_local_block_x_coord(to_check.x) 
 			&& contains_local_block_y_coord(to_check.y));
 	}
@@ -307,7 +307,7 @@ protected:		// functions
 	inline void init_bcr_arr_csz_2d_helper()
 	{
 		//bcr_arr_csz_2d_helper.init(bcr_arr_csz_2d_helper_data, 
-		//	vec2_u32(real_width(), real_height()));
+		//	Vec2u32(real_width(), real_height()));
 		bcr_arr_csz_2d_helper.init(bcr_arr_csz_2d_helper_data);
 	}
 	
@@ -330,7 +330,7 @@ protected:		// variables
 	
 	// The (Block coordinates) position of the left or top That was passed
 	// To the BcrLsegGroup
-	vec2_s32 start_pos = vec2_s32(0, 0);
+	Vec2s32 start_pos = Vec2s32(0, 0);
 	
 	// Whether this BcrLsegGroup represents a column (false) or a row
 	// (true)
@@ -354,11 +354,11 @@ public:		// functions
 	void init(const VertCollLseg& the_coll_lseg)
 		__attribute__((_iwram_code));
 	
-	BlockCollResult* horiz_any_bbvt_is_fully_solid(vec2_s32& pos);
+	BlockCollResult* horiz_any_bbvt_is_fully_solid(Vec2s32& pos);
 		//__attribute__((_iwram_code));
-	BlockCollResult* vert_any_bbvt_is_fully_solid(vec2_s32& pos)
+	BlockCollResult* vert_any_bbvt_is_fully_solid(Vec2s32& pos)
 		__attribute__((_iwram_code));
-	BlockCollResult* vert_any_bbvt_is_slope(vec2_s32& pos)
+	BlockCollResult* vert_any_bbvt_is_slope(Vec2s32& pos)
 		__attribute__((_iwram_code));
 	
 	inline BlockCollResult& operator () (u32 index)
@@ -421,26 +421,26 @@ public:		// functions
 		return real_size;
 	}
 	
-	inline const vec2_s32& get_start_pos() const
+	inline const Vec2s32& get_start_pos() const
 	{
 		return start_pos;
 	}
-	inline const vec2_s32 get_horiz_end_pos() const
+	inline const Vec2s32 get_horiz_end_pos() const
 	{
 		return get_start_pos() + get_horiz_offset(get_end_pos_offset());
 	}
-	inline const vec2_s32 get_vert_end_pos() const
+	inline const Vec2s32 get_vert_end_pos() const
 	{
 		return get_start_pos() + get_vert_offset(get_end_pos_offset());
 	}
 	
-	inline const vec2_s32 get_horiz_offset(s32 i) const
+	inline const Vec2s32 get_horiz_offset(s32 i) const
 	{
-		return vec2_s32(i, 0);
+		return Vec2s32(i, 0);
 	}
-	inline const vec2_s32 get_vert_offset(s32 i) const
+	inline const Vec2s32 get_vert_offset(s32 i) const
 	{
-		return vec2_s32(0, i);
+		return Vec2s32(0, i);
 	}
 	
 	inline const s32 horiz_left_pos() const

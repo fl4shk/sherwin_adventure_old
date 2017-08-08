@@ -47,7 +47,7 @@ const SpriteConstParams PlayerPickaxeSprite::the_const_params
 	GfxManager::num_tiles_in_ss_16x16,
 	
 	// tile_arr 
-	const_cast<tile*>(reinterpret_cast<const tile*>
+	const_cast<Tile*>(reinterpret_cast<const Tile*>
 		(the_16x16_secondary_sprites_gfxTiles)),
 	
 	// the_initial_shape_size

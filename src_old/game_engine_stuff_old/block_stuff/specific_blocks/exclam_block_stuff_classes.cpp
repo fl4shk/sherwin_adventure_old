@@ -34,7 +34,7 @@ const BlockStuffConstParams
 };
 
 void ExclamBlockStuff::strongly_hit_response(Block& the_block, 
-	const vec2_s32& coord)
+	const Vec2s32& coord)
 {
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;

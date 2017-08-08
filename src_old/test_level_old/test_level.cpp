@@ -496,8 +496,8 @@ const Sublevel<1939, 64, 32, 1, 2> test_level_sublevel_0
 	},
 	
 	{
-		{ sle_from_door, vec2_f24p8({0x1000}, {0x1d000}) },
-		{ sle_start_of_level, vec2_f24p8({0x3000}, {0x1d000}) },
+		{ sle_from_door, Vec2F24p8({0x1000}, {0x1d000}) },
+		{ sle_start_of_level, Vec2F24p8({0x3000}, {0x1d000}) },
 	},
 };
 
@@ -1005,9 +1005,9 @@ const Sublevel<1960, 64, 32, 4, 3> test_level_sublevel_1
 	},
 	
 	{
-		{ sle_from_door, vec2_f24p8({0x6000}, {0x1d000}) },
-		{ sle_from_door, vec2_f24p8({0xd000}, {0x12000}) },
-		{ sle_from_door, vec2_f24p8({0x4000}, {0x1d000}) },
+		{ sle_from_door, Vec2F24p8({0x6000}, {0x1d000}) },
+		{ sle_from_door, Vec2F24p8({0xd000}, {0x12000}) },
+		{ sle_from_door, Vec2F24p8({0x4000}, {0x1d000}) },
 	},
 };
 
@@ -1513,10 +1513,10 @@ const Sublevel<1951, 64, 32, 4, 4> test_level_sublevel_2
 	},
 	
 	{
-		{ sle_from_door, vec2_f24p8({0x1000}, {0xd000}) },
-		{ sle_from_door, vec2_f24p8({0x3e000}, {0xd000}) },
-		{ sle_from_door, vec2_f24p8({0x1000}, {0x1d000}) },
-		{ sle_from_door, vec2_f24p8({0x33000}, {0x1d000}) },
+		{ sle_from_door, Vec2F24p8({0x1000}, {0xd000}) },
+		{ sle_from_door, Vec2F24p8({0x3e000}, {0xd000}) },
+		{ sle_from_door, Vec2F24p8({0x1000}, {0x1d000}) },
+		{ sle_from_door, Vec2F24p8({0x33000}, {0x1d000}) },
 	},
 };
 

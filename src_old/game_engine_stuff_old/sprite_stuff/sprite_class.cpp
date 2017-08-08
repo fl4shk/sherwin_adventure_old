@@ -39,7 +39,7 @@ const SpriteConstParams Sprite::the_const_params;
 const Fixed24p8 Sprite::cpg_on_slope_threshold_abs = {0x400};
 
 // coll_point_group threshold
-const vec2_f24p8 Sprite::cpg_16x32_threshold_abs = { {0x400}, 
+const Vec2F24p8 Sprite::cpg_16x32_threshold_abs = { {0x400}, 
 	{0x480} };
 
 //const Fixed24p8 Sprite::grav_acc = {0x80};
@@ -52,18 +52,18 @@ const Fixed24p8 Sprite::max_y_vel = {0x300};
 
 
 
-vec2_f24p8 Sprite::prev_prev_on_screen_pos; 
-PrevCurrPair<vec2_f24p8> Sprite::on_screen_pos;
-vec2_s32 Sprite::prev_prev_on_screen_pos_s32;
-PrevCurrPair<vec2_s32> Sprite::on_screen_pos_s32;
-PrevCurrPair<vec2_s32> Sprite::camera_pos_pc_pair_s32;
+Vec2F24p8 Sprite::prev_prev_on_screen_pos; 
+PrevCurrPair<Vec2F24p8> Sprite::on_screen_pos;
+Vec2s32 Sprite::prev_prev_on_screen_pos_s32;
+PrevCurrPair<Vec2s32> Sprite::on_screen_pos_s32;
+PrevCurrPair<Vec2s32> Sprite::camera_pos_pc_pair_s32;
 
 Vec2<bool> Sprite::temp_debug_thing;
 
-vec2_f24p8 Sprite::on_screen_pos_diff_abs;
-vec2_s32 Sprite::on_screen_pos_s32_diff_abs;
-vec2_f24p8 Sprite::camera_pos_diff_abs;
-vec2_s32 Sprite::camera_pos_s32_diff_abs;
+Vec2F24p8 Sprite::on_screen_pos_diff_abs;
+Vec2s32 Sprite::on_screen_pos_s32_diff_abs;
+Vec2F24p8 Sprite::camera_pos_diff_abs;
+Vec2s32 Sprite::camera_pos_s32_diff_abs;
 //PrevCurrPair<s32> Sprite::tallest_height_val;
 
 
@@ -76,16 +76,16 @@ Sprite::Sprite(bool facing_left)
 	shared_constructor_code_part_1();
 	shared_constructor_code_part_2(facing_left);
 }
-Sprite::Sprite(const vec2_f24p8& s_in_level_pos, 
-	const PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left)
+Sprite::Sprite(const Vec2F24p8& s_in_level_pos, 
+	const PrevCurrPair<BgPoint>& camera_pos_pc_pair, bool facing_left)
 {
 	shared_constructor_code_part_1();
 	shared_constructor_code_part_2(s_in_level_pos, camera_pos_pc_pair, 
 		facing_left);
 }
-Sprite::Sprite(const vec2_f24p8& s_in_level_pos, 
-	const vec2_u32& the_level_size_2d, 
-	PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left)
+Sprite::Sprite(const Vec2F24p8& s_in_level_pos, 
+	const Vec2u32& the_level_size_2d, 
+	PrevCurrPair<BgPoint>& camera_pos_pc_pair, bool facing_left)
 {
 	shared_constructor_code_part_1();
 	shared_constructor_code_part_2(s_in_level_pos, the_level_size_2d, 
@@ -109,10 +109,10 @@ void Sprite::shared_constructor_code_part_1()
 	the_oam_entry.set_tile_number(get_curr_tile_slot());
 	the_oam_entry.set_pal_number(get_palette_slot());
 	
-	clear_and_set_bits(the_oam_entry.attr2, obj_attr2_prio_mask, 
-		obj_attr2_prio_1);
+	clear_and_set_bits(the_oam_entry.attr2, OBJ_ATTR2_PRIO_MASK, 
+		OBJ_ATTR2_PRIO_1);
 	
-	in_level_pos.prev = vec2_f24p8((Fixed24p8){0}, (Fixed24p8){0});
+	in_level_pos.prev = Vec2F24p8((Fixed24p8){0}, (Fixed24p8){0});
 	in_level_pos.curr = vel = in_level_pos.prev;
 	
 	max_vel_x_abs_val = accel_x = (Fixed24p8){0};
@@ -140,8 +140,8 @@ void Sprite::shared_constructor_code_part_2(bool facing_left)
 
 
 void Sprite::shared_constructor_code_part_2
-	(const vec2_f24p8& s_in_level_pos, 
-	const PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left)
+	(const Vec2F24p8& s_in_level_pos, 
+	const PrevCurrPair<BgPoint>& camera_pos_pc_pair, bool facing_left)
 {
 	shared_constructor_code_part_2(facing_left);
 	//in_level_pos.curr = s_in_level_pos 
@@ -157,8 +157,8 @@ void Sprite::shared_constructor_code_part_2
 // This form of shared_constructor_code() Is primarily Intended To be
 // used by the_player.
 void Sprite::shared_constructor_code_part_2
-	(const vec2_f24p8& s_in_level_pos, const vec2_u32& the_level_size_2d, 
-	PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left)
+	(const Vec2F24p8& s_in_level_pos, const Vec2u32& the_level_size_2d, 
+	PrevCurrPair<BgPoint>& camera_pos_pc_pair, bool facing_left)
 {
 	shared_constructor_code_part_2(facing_left);
 	//in_level_pos = s_in_level_pos - get_initial_in_level_pos_offset();
@@ -216,13 +216,13 @@ void* Sprite::operator new(size_t size,
 
 
 void Sprite::update_on_screen_pos
-	(const PrevCurrPair<bg_point>& camera_pos_pc_pair)
+	(const PrevCurrPair<BgPoint>& camera_pos_pc_pair)
 {
-	vec2_f24p8 temp_on_screen_pos = get_on_screen_pos
+	Vec2F24p8 temp_on_screen_pos = get_on_screen_pos
 		(camera_pos_pc_pair.curr);
 	
-	vec2_u32 ss_vec2 = get_shape_size_as_vec2();
-	vec2_f24p8 offset(make_f24p8(ss_vec2.x), make_f24p8(ss_vec2.y));
+	Vec2u32 ss_vec2 = get_shape_size_as_vec2();
+	Vec2F24p8 offset(make_f24p8(ss_vec2.x), make_f24p8(ss_vec2.y));
 	
 	
 	//// Round To the nearest whole number.
@@ -261,9 +261,9 @@ void Sprite::update_on_screen_pos
 
 
 void Sprite::camera_follow_basic
-	(PrevCurrPair<bg_point>& camera_pos_pc_pair)
+	(PrevCurrPair<BgPoint>& camera_pos_pc_pair)
 {
-	bg_point& camera_pos = camera_pos_pc_pair.curr;
+	BgPoint& camera_pos = camera_pos_pc_pair.curr;
 	
 	const Fixed24p8 
 		left_limit = make_f24p8(100), 
@@ -282,8 +282,8 @@ void Sprite::camera_follow_basic
 	
 	const Fixed24p8 to_add_abs = make_f24p8(4);
 	
-	vec2_f24p8 temp_on_screen_pos = get_on_screen_pos(camera_pos);
-	vec2_f24p8 prev_on_screen_pos = get_prev_in_level_pos()
+	Vec2F24p8 temp_on_screen_pos = get_on_screen_pos(camera_pos);
+	Vec2F24p8 prev_on_screen_pos = get_prev_in_level_pos()
 		- camera_pos_pc_pair.prev;
 	
 	Fixed24p8 on_screen_bottom_pos = temp_on_screen_pos.y 
@@ -345,7 +345,7 @@ void Sprite::camera_follow_basic
 	
 }
 
-void Sprite::center_camera_almost(bg_point& camera_pos) const
+void Sprite::center_camera_almost(BgPoint& camera_pos) const
 {
 	//camera_pos.x = (in_level_pos.x 
 	//	- (Fixed24p8){ SCREEN_WIDTH << 7 }).floor_to_int();
@@ -369,7 +369,7 @@ void Sprite::center_camera_almost(bg_point& camera_pos) const
 
 
 
-vec2_u32 Sprite::get_shape_size_as_vec2_raw() const
+Vec2u32 Sprite::get_shape_size_as_vec2_raw() const
 {
 	return OamEntry::ss_to_vec2_arr[the_shape_size];
 } 
@@ -391,15 +391,15 @@ void Sprite::update_part_2()
 
 
 // The player_sprite_stuff class Is the primary user of this function.
-void Sprite::update_part_3(PrevCurrPair<bg_point>& camera_pos_pc_pair, 
-	const vec2_u32& the_level_size_2d)
+void Sprite::update_part_3(PrevCurrPair<BgPoint>& camera_pos_pc_pair, 
+	const Vec2u32& the_level_size_2d)
 {
 }
 
 
 
 void Sprite::update_part_3
-	(const PrevCurrPair<bg_point>& camera_pos_pc_pair, 
+	(const PrevCurrPair<BgPoint>& camera_pos_pc_pair, 
 	int& next_oam_index)
 {
 	gfx_update();
@@ -415,7 +415,7 @@ void Sprite::update_part_3
 //{
 //	return 
 //		((GfxManager::sprite_palette_slot_first_vram_slot_list 
-//		[get_palette_slot()] / sizeof(tile) * sizeof(u16))
+//		[get_palette_slot()] / sizeof(Tile) * sizeof(u16))
 //		+ get_curr_relative_tile_slot());
 //}
 
@@ -541,8 +541,8 @@ void Sprite::sprite_interaction_reponse(Sprite& the_other_sprite)
 
 // the_player Is the primary user of this function
 void Sprite::sprite_interaction_reponse(Sprite& the_other_sprite, 
-	PrevCurrPair<bg_point>& camera_pos_pc_pair, 
-	const vec2_u32& the_level_size_2d)
+	PrevCurrPair<BgPoint>& camera_pos_pc_pair, 
+	const Vec2u32& the_level_size_2d)
 {
 	
 }
@@ -583,11 +583,11 @@ void Sprite::generic_block_collision_stuff
 	BlockCollResult* vert_bot_fs_ret_buf[num_vert_bot_ctups];
 	BlockCollResult* vert_bot_slp_ret_buf[num_vert_bot_ctups];
 	
-	//vec2_s32 horiz_fs_pos_buf[num_horiz_ctups];
-	//vec2_s32 vert_top_fs_pos_buf[num_vert_top_ctups];
-	//vec2_s32 vert_top_slp_pos_buf[num_vert_top_ctups];
-	vec2_s32 vert_bot_fs_pos_buf[num_vert_bot_ctups];
-	vec2_s32 vert_bot_slp_pos_buf[num_vert_bot_ctups];
+	//Vec2s32 horiz_fs_pos_buf[num_horiz_ctups];
+	//Vec2s32 vert_top_fs_pos_buf[num_vert_top_ctups];
+	//Vec2s32 vert_top_slp_pos_buf[num_vert_top_ctups];
+	Vec2s32 vert_bot_fs_pos_buf[num_vert_bot_ctups];
+	Vec2s32 vert_bot_slp_pos_buf[num_vert_bot_ctups];
 	
 	auto iterate_horiz = [&](const u32 first, const u32 last,
 		bool& some_horiz_side_fully_solid) -> void
@@ -702,7 +702,7 @@ void Sprite::generic_block_collision_stuff
 	
 	auto assign_slope_height_val_and_y_pos = [&]
 		(s32& height_val, s32& hv_vs_blk_crd_y_pos, 
-		const s32 temp_height_val, const vec2_s32& pos) -> void
+		const s32 temp_height_val, const Vec2s32& pos) -> void
 	{
 		//const s32 temp_pix_crd_y_pos = conv_blk_crd_to_pix_crd(pos.y)
 		//	+ conv_slp_height_val_to_offset(temp_height_val);
@@ -748,9 +748,9 @@ void Sprite::generic_block_collision_stuff
 				get_height_mask_index(vi_bot_right) };
 			
 			
-			const vec2_s32& mid_pos = vert_bot_slp_pos_buf[vi_bot_mid];
-			const vec2_s32& left_pos = vert_bot_slp_pos_buf[vi_bot_left];
-			const vec2_s32& right_pos = vert_bot_slp_pos_buf[vi_bot_right];
+			const Vec2s32& mid_pos = vert_bot_slp_pos_buf[vi_bot_mid];
+			const Vec2s32& left_pos = vert_bot_slp_pos_buf[vi_bot_left];
+			const Vec2s32& right_pos = vert_bot_slp_pos_buf[vi_bot_right];
 			//conv_blk_crd_to_pix_crd
 			
 			if (vert_bot_slp_ret_buf[vi_bot_mid])
@@ -802,7 +802,7 @@ void Sprite::generic_block_collision_stuff
 							
 							assign_slope_height_val_and_y_pos(height_val, 
 								hv_vs_blk_crd_y_pos, temp_height_val, 
-								left_pos + vec2_s32(0, 
+								left_pos + Vec2s32(0, 
 								temp_blk_crd_y_pos_offset));
 						}
 						else
@@ -829,7 +829,7 @@ void Sprite::generic_block_collision_stuff
 							
 							assign_slope_height_val_and_y_pos(height_val, 
 								hv_vs_blk_crd_y_pos, temp_height_val, 
-								right_pos + vec2_s32(0, 
+								right_pos + Vec2s32(0, 
 								temp_blk_crd_y_pos_offset));
 						}
 						else

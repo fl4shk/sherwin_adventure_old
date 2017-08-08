@@ -120,35 +120,35 @@ const s32 SprBlkCollGroupBase::get_blk_crd_pos_y_for_bot_hs()
 	return blk_crd_pos_y_for_bot_hs;
 }
 
-const vec2_s32 SprBlkCollGroupBase::get_left_top_hs_blk_crd_pos()
+const Vec2s32 SprBlkCollGroupBase::get_left_top_hs_blk_crd_pos()
 {
-	return vec2_s32(get_blk_crd_pos_x_for_left_hs(),
+	return Vec2s32(get_blk_crd_pos_x_for_left_hs(),
 		get_blk_crd_pos_y_for_top_hs());
 }
-const vec2_s32 SprBlkCollGroupBase::get_left_mid_hs_blk_crd_pos()
+const Vec2s32 SprBlkCollGroupBase::get_left_mid_hs_blk_crd_pos()
 {
-	return vec2_s32(get_blk_crd_pos_x_for_left_hs(), 
+	return Vec2s32(get_blk_crd_pos_x_for_left_hs(), 
 		get_blk_crd_pos_y_for_mid_hs());
 }
-const vec2_s32 SprBlkCollGroupBase::get_left_bot_hs_blk_crd_pos()
+const Vec2s32 SprBlkCollGroupBase::get_left_bot_hs_blk_crd_pos()
 {
-	return vec2_s32(get_blk_crd_pos_x_for_left_hs(), 
+	return Vec2s32(get_blk_crd_pos_x_for_left_hs(), 
 		get_blk_crd_pos_y_for_bot_hs());
 }
 
-const vec2_s32 SprBlkCollGroupBase::get_right_top_hs_blk_crd_pos()
+const Vec2s32 SprBlkCollGroupBase::get_right_top_hs_blk_crd_pos()
 {
-	return vec2_s32(get_blk_crd_pos_x_for_right_hs(), 
+	return Vec2s32(get_blk_crd_pos_x_for_right_hs(), 
 		get_blk_crd_pos_y_for_top_hs());
 }
-const vec2_s32 SprBlkCollGroupBase::get_right_mid_hs_blk_crd_pos()
+const Vec2s32 SprBlkCollGroupBase::get_right_mid_hs_blk_crd_pos()
 {
-	return vec2_s32(get_blk_crd_pos_x_for_right_hs(), 
+	return Vec2s32(get_blk_crd_pos_x_for_right_hs(), 
 		get_blk_crd_pos_y_for_mid_hs());
 }
-const vec2_s32 SprBlkCollGroupBase::get_right_bot_hs_blk_crd_pos()
+const Vec2s32 SprBlkCollGroupBase::get_right_bot_hs_blk_crd_pos()
 {
-	return vec2_s32(get_blk_crd_pos_x_for_right_hs(), 
+	return Vec2s32(get_blk_crd_pos_x_for_right_hs(), 
 		get_blk_crd_pos_y_for_bot_hs());
 }
 
@@ -193,52 +193,52 @@ const Fixed24p8 SprBlkCollGroupBase::get_pos_y_for_bot_vs()
 
 const VertCollLseg SprBlkCollGroupBase::get_bot_left_vs_og()
 {
-	return VertCollLseg(vec2_f24p8(get_pos_x_for_left_vs(), 
+	return VertCollLseg(Vec2F24p8(get_pos_x_for_left_vs(), 
 		get_pos_y_for_bot_vs()), vs_height_non_bot_mid_og);
 }
 const VertCollLseg SprBlkCollGroupBase::get_bot_mid_vs_og()
 {
-	return VertCollLseg(vec2_f24p8(get_pos_x_for_mid_vs(),
+	return VertCollLseg(Vec2F24p8(get_pos_x_for_mid_vs(),
 		get_pos_y_for_bot_vs()), vs_height_bot_mid_og);
 }
 const VertCollLseg SprBlkCollGroupBase::get_bot_right_vs_og()
 {
-	return VertCollLseg(vec2_f24p8(get_pos_x_for_right_vs(), 
+	return VertCollLseg(Vec2F24p8(get_pos_x_for_right_vs(), 
 		get_pos_y_for_bot_vs()), vs_height_non_bot_mid_og);
 }
 
 
 const VertCollLseg SprBlkCollGroupBase::get_bot_left_vs_ia()
 {
-	return VertCollLseg(vec2_f24p8(get_pos_x_for_left_vs(), 
+	return VertCollLseg(Vec2F24p8(get_pos_x_for_left_vs(), 
 		get_pos_y_for_bot_vs()), vs_height_bot_ia);
 }
 const VertCollLseg SprBlkCollGroupBase::get_bot_mid_vs_ia()
 {
-	return VertCollLseg(vec2_f24p8(get_pos_x_for_mid_vs(),
+	return VertCollLseg(Vec2F24p8(get_pos_x_for_mid_vs(),
 		get_pos_y_for_bot_vs()), vs_height_bot_ia);
 }
 const VertCollLseg SprBlkCollGroupBase::get_bot_right_vs_ia()
 {
-	return VertCollLseg(vec2_f24p8(get_pos_x_for_right_vs(), 
+	return VertCollLseg(Vec2F24p8(get_pos_x_for_right_vs(), 
 		get_pos_y_for_bot_vs()), vs_height_bot_ia);
 }
 
 
 
-const vec2_s32 SprBlkCollGroupBase::get_top_left_vs_blk_crd_pos()
+const Vec2s32 SprBlkCollGroupBase::get_top_left_vs_blk_crd_pos()
 {
-	return vec2_s32(get_blk_crd_pos_x_for_left_vs(),
+	return Vec2s32(get_blk_crd_pos_x_for_left_vs(),
 		get_blk_crd_pos_y_for_top_vs());
 }
-const vec2_s32 SprBlkCollGroupBase::get_top_mid_vs_blk_crd_pos()
+const Vec2s32 SprBlkCollGroupBase::get_top_mid_vs_blk_crd_pos()
 {
-	return vec2_s32(get_blk_crd_pos_x_for_mid_vs(),
+	return Vec2s32(get_blk_crd_pos_x_for_mid_vs(),
 		get_blk_crd_pos_y_for_top_vs());
 }
-const vec2_s32 SprBlkCollGroupBase::get_top_right_vs_blk_crd_pos()
+const Vec2s32 SprBlkCollGroupBase::get_top_right_vs_blk_crd_pos()
 {
-	return vec2_s32(get_blk_crd_pos_x_for_right_vs(),
+	return Vec2s32(get_blk_crd_pos_x_for_right_vs(),
 		get_blk_crd_pos_y_for_top_vs());
 }
 

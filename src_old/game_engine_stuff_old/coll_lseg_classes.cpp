@@ -21,19 +21,19 @@
 
 
 //bool GenericCollLseg::intersects(const GenericCollLseg& to_check,
-//	vec2_f24p8* ret) const
+//	Vec2F24p8* ret) const
 //{
-//	const vec2_f24p8& p = end_points[0];
-//	const vec2_f24p8& r = end_points[1];
+//	const Vec2F24p8& p = end_points[0];
+//	const Vec2F24p8& r = end_points[1];
 //	
-//	const vec2_f24p8& q = to_check.end_points[0];
-//	const vec2_f24p8& s = to_check.end_points[1];
+//	const Vec2F24p8& q = to_check.end_points[0];
+//	const Vec2F24p8& s = to_check.end_points[1];
 //	
 //	Fixed24p8 t, u;
 //	
 //	const Fixed24p8 r_zcross_s = r.zcross(s);
 //	
-//	const vec2_f24p8 q_minus_p = q - p;
+//	const Vec2F24p8 q_minus_p = q - p;
 //	
 //	const Fixed24p8 u_num = q_minus_p.zcross(s);
 //	

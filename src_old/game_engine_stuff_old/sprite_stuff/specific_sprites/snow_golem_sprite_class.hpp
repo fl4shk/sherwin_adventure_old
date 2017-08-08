@@ -93,8 +93,8 @@ public:		// functions
 	
 	
 	virtual void update_part_2();
-	//virtual void update_part_3(bg_point& camera_pos,
-	//	const vec2_u32& the_level_size_2d) __attribute__((_iwram_code));
+	//virtual void update_part_3(BgPoint& camera_pos,
+	//	const Vec2u32& the_level_size_2d) __attribute__((_iwram_code));
 	
 	inline virtual const SpriteConstParams& get_const_params() const
 	{

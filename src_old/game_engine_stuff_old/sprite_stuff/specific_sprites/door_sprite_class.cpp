@@ -39,7 +39,7 @@ const SpriteConstParams DoorSprite::the_const_params
 	GfxManager::num_tiles_in_ss_16x32,
 	
 	// tile_arr 
-	const_cast<tile*>(reinterpret_cast<const tile*>(the_door_gfxTiles)),
+	const_cast<Tile*>(reinterpret_cast<const Tile*>(the_door_gfxTiles)),
 	
 	// the_initial_shape_size
 	OamEntry::ss_16x32,
@@ -60,8 +60,8 @@ void DoorSprite::shared_constructor_code_part_2(bool facing_left)
 	// Door sprites should be thought of as part of the "background".
 	// Other sprites are supposed To appear in front of the Door sprites,
 	// no matter which OAM entries are involved.
-	clear_and_set_bits(the_oam_entry.attr2, obj_attr2_prio_mask, 
-		obj_attr2_prio_2);
+	clear_and_set_bits(the_oam_entry.attr2, OBJ_ATTR2_PRIO_MASK, 
+		OBJ_ATTR2_PRIO_2);
 }
 
 

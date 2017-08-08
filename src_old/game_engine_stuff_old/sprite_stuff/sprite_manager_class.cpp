@@ -252,8 +252,8 @@ Sprite* SpriteManager::allocate_sprite
 
 Sprite* SpriteManager::allocate_sprite
 	(SpriteAllocator& the_sprite_allocator, sprite_type the_sprite_type, 
-	const vec2_f24p8& s_in_level_pos, 
-	const PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left)
+	const Vec2F24p8& s_in_level_pos, 
+	const PrevCurrPair<BgPoint>& camera_pos_pc_pair, bool facing_left)
 {
 	//if (sprite_type_exists(the_sprite_type))
 	//{
@@ -322,7 +322,7 @@ Sprite* SpriteManager::reinit_sprite_with_sprite_ipg(Sprite& the_sprite,
 		Sprite* spr_ptr = allocate_sprite(the_sprite_allocator, 
 			s_the_sprite_ipg->type, !s_the_sprite_ipg->facing_right);
 		
-		vec2_f24p8 s_in_level_pos(make_f24p8(s_the_sprite_ipg
+		Vec2F24p8 s_in_level_pos(make_f24p8(s_the_sprite_ipg
 			->initial_block_grid_x_coord * 16), make_f24p8
 			(s_the_sprite_ipg->initial_block_grid_y_coord * 16));
 		
@@ -341,8 +341,8 @@ Sprite* SpriteManager::reinit_sprite_with_sprite_ipg(Sprite& the_sprite,
 
 Sprite* SpriteManager::reinit_sprite_by_spawning(Sprite& the_sprite, 
 	SpriteAllocator& the_sprite_allocator, sprite_type s_the_sprite_type, 
-	const vec2_f24p8& s_in_level_pos, 
-	const PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left)
+	const Vec2F24p8& s_in_level_pos, 
+	const PrevCurrPair<BgPoint>& camera_pos_pc_pair, bool facing_left)
 {
 	//if (the_sprite != NULL)
 	//{
@@ -359,8 +359,8 @@ Sprite* SpriteManager::reinit_sprite_by_spawning(Sprite& the_sprite,
 
 
 s32 SpriteManager::spawn_a_player_secondary_sprite_basic
-	(sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos, 
-	const PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left)
+	(sprite_type the_sprite_type, const Vec2F24p8& s_in_level_pos, 
+	const PrevCurrPair<BgPoint>& camera_pos_pc_pair, bool facing_left)
 {
 	//u32 next_sprite_index = 0;
 	//
@@ -421,8 +421,8 @@ s32 SpriteManager::spawn_a_player_secondary_sprite_basic
 }
 
 s32 SpriteManager::spawn_a_secondary_sprite_basic
-	(sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos, 
-	const PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left)
+	(sprite_type the_sprite_type, const Vec2F24p8& s_in_level_pos, 
+	const PrevCurrPair<BgPoint>& camera_pos_pc_pair, bool facing_left)
 {
 	//u32 next_sprite_index = 0;
 	//
@@ -488,8 +488,8 @@ s32 SpriteManager::spawn_a_secondary_sprite_basic
 // list would be spawned from within the function called
 // spawn_sprites_if_needed().
 s32 SpriteManager::spawn_a_sprite_basic(sprite_type the_sprite_type, 
-	const vec2_f24p8& s_in_level_pos, 
-	const PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left)
+	const Vec2F24p8& s_in_level_pos, 
+	const PrevCurrPair<BgPoint>& camera_pos_pc_pair, bool facing_left)
 {
 	//u32 next_sprite_index = 0;
 	//
@@ -565,9 +565,9 @@ s32 SpriteManager::spawn_a_sprite_basic(sprite_type the_sprite_type,
 
 
 
-void SpriteManager::init_the_player (const vec2_f24p8& s_in_level_pos, 
-	const vec2_u32& the_sublevel_size_2d, 
-	PrevCurrPair<bg_point>& camera_pos_pc_pair)
+void SpriteManager::init_the_player (const Vec2F24p8& s_in_level_pos, 
+	const Vec2u32& the_sublevel_size_2d, 
+	PrevCurrPair<BgPoint>& camera_pos_pc_pair)
 {
 	if (the_player != NULL)
 	{
@@ -739,7 +739,7 @@ void SpriteManager::init_horiz_sublevel_sprite_ipg_lists
 //		sprite_stuff_array[StMuffin]->init(the_spr);
 //		
 //		the_spr.in_level_pos = the_prev_spr.in_level_pos 
-//			+ vec2_s32(0x1000, 0);
+//			+ Vec2s32(0x1000, 0);
 //		
 //		the_spr.update_f24p8_positions();
 //		the_spr.update_on_screen_pos(GfxManager::bgofs_mirror[0].curr);
@@ -750,7 +750,7 @@ void SpriteManager::init_horiz_sublevel_sprite_ipg_lists
 //}
 
 void SpriteManager::initial_sprite_spawning_at_start_of_level
-	(PrevCurrPair<bg_point>& camera_pos_pc_pair)
+	(PrevCurrPair<BgPoint>& camera_pos_pc_pair)
 {
 	clear_the_sprite_arrays();
 	
@@ -761,7 +761,7 @@ void SpriteManager::initial_sprite_spawning_at_start_of_level
 		[ActiveLevel::get_curr_sublevel_ptr()
 		.sublevel_entrance_arr_arr_helper.get_size() - 1];
 	
-	vec2_f24p8 player_initial_in_level_pos 
+	Vec2F24p8 player_initial_in_level_pos 
 		= the_start_of_level_sle.in_level_pos;
 	
 	init_the_player(player_initial_in_level_pos, 
@@ -781,7 +781,7 @@ void SpriteManager::initial_sprite_spawning_at_start_of_level
 
 
 void SpriteManager::initial_sprite_spawning_at_intra_sublevel_warp
-	(PrevCurrPair<bg_point>& camera_pos_pc_pair, 
+	(PrevCurrPair<BgPoint>& camera_pos_pc_pair, 
 	u32 sublevel_entrance_index)
 {
 	clear_the_sprite_arrays();
@@ -792,9 +792,9 @@ void SpriteManager::initial_sprite_spawning_at_intra_sublevel_warp
 		.sublevel_entrance_arr_arr_helper.the_array
 		[sublevel_entrance_index];
 	
-	vec2_f24p8 player_initial_in_level_pos;
+	Vec2F24p8 player_initial_in_level_pos;
 	player_initial_in_level_pos.x = the_dest_sle.in_level_pos.x;
-	//	= the_dest_sle.in_level_pos - vec2_f24p8({0}, 
+	//	= the_dest_sle.in_level_pos - Vec2F24p8({0}, 
 	//	make_f24p8(num_pixels_per_block_col));
 	//player_initial_in_level_pos.y = the_dest_sle.in_level_pos.y
 	//	- make_f24p8(the_player.get_shape_size_as_vec2().y
@@ -819,7 +819,7 @@ void SpriteManager::initial_sprite_spawning_at_intra_sublevel_warp
 
 
 void SpriteManager::initial_sprite_spawning_shared_code
-	(PrevCurrPair<bg_point>& camera_pos_pc_pair)
+	(PrevCurrPair<BgPoint>& camera_pos_pc_pair)
 {
 	////auto which_spr = the_sprites.begin();
 	//auto which_spr_ptr = the_sprites.begin();
@@ -829,12 +829,12 @@ void SpriteManager::initial_sprite_spawning_shared_code
 	//Sprite* which_spr = the_sprites[0];
 	
 	// Convert 
-	//vec2_f24p8 camera_pos_f24p8;
+	//Vec2F24p8 camera_pos_f24p8;
 	//camera_pos_f24p8.x = make_f24p8(camera_pos.x);
 	//camera_pos_f24p8.y = make_f24p8(camera_pos.y);
 	
 	// Convert the position of the camera To Block grid coordinates
-	vec2_f24p8 camera_block_grid_pos;
+	Vec2F24p8 camera_block_grid_pos;
 	//camera_block_grid_pos.x = make_f24p8(camera_pos.x >> 4);
 	//camera_block_grid_pos.y = make_f24p8(camera_pos.y >> 4);
 	//camera_block_grid_pos.x = camera_pos_pc_pair.curr.x.trunc_to_int() 
@@ -864,17 +864,17 @@ void SpriteManager::initial_sprite_spawning_shared_code
 		{
 			sprite_ipg = &which_list.get_node_at(i).data;
 			
-			vec2_u32 spr_block_grid_coord;
+			Vec2u32 spr_block_grid_coord;
 			spr_block_grid_coord.x = sprite_ipg
 				->initial_block_grid_x_coord;
 			spr_block_grid_coord.y = sprite_ipg
 				->initial_block_grid_y_coord;
 			
-			vec2_f24p8 spr_in_level_pos;
+			Vec2F24p8 spr_in_level_pos;
 			spr_in_level_pos.x = make_f24p8(spr_block_grid_coord.x * 16);
 			spr_in_level_pos.y = make_f24p8(spr_block_grid_coord.y * 16);
 			
-			vec2_f24p8 spr_on_screen_pos;
+			Vec2F24p8 spr_on_screen_pos;
 			//spr_on_screen_pos.x = spr_in_level_pos.x - camera_pos_f24p8.x;
 			//spr_on_screen_pos.y = spr_in_level_pos.y - camera_pos_f24p8.y;
 			spr_on_screen_pos.x = spr_in_level_pos.x 
@@ -1123,7 +1123,7 @@ void SpriteManager::find_all_active_sprites()
 }
 
 void SpriteManager::spawn_sprites_if_needed
-	(const PrevCurrPair<bg_point>& camera_pos_pc_pair)
+	(const PrevCurrPair<BgPoint>& camera_pos_pc_pair)
 {
 	
 	PrevCurrPair<s32> camera_block_grid_pos_x;
@@ -1402,7 +1402,7 @@ void SpriteManager::spawn_sprites_if_needed
 // This function despawns sprites from the_player_secondary_sprites,
 // the_sprites, and the_secondary_sprites, if they are offscreen.
 void SpriteManager::despawn_sprites_if_needed
-	(const bg_point& camera_pos)
+	(const BgPoint& camera_pos)
 {
 	// Sprites are despawned only when they are HORIZONTALLY too far off
 	// screen.
@@ -1410,7 +1410,7 @@ void SpriteManager::despawn_sprites_if_needed
 		max_right = (SCREEN_WIDTH + 2 * 16) << 8;
 	
 	
-	//vec2_f24p8 camera_pos_f24p8;
+	//Vec2F24p8 camera_pos_f24p8;
 	//camera_pos_f24p8.x = make_f24p8(camera_pos.x);
 	//camera_pos_f24p8.y = make_f24p8(camera_pos.y);
 	
@@ -1512,7 +1512,7 @@ void SpriteManager::upload_tiles_of_active_sprites_to_vram()
 	// Clear the first 32x32-pixel VRAM chunk.  This prevents unused
 	// OAM indices from displaying any graphics.  Perhaps this should
 	// be optimized To use only a single 8x8-pixel VRAM chunk.
-	//memfill32(&(((tile*)OBJ_TILE_VRAM)[0]), 0, sizeof(tile)
+	//memfill32(&(((Tile*)OBJ_TILE_VRAM)[0]), 0, sizeof(Tile)
 	//	* GfxManager::num_tiles_in_ss_32x32 / sizeof(u32));
 	
 	GfxManager::upload_sprite_tiles_to_vram(*the_player);
@@ -1584,8 +1584,8 @@ void SpriteManager::upload_tiles_of_active_sprites_to_vram()
 
 
 void SpriteManager::update_all_sprites
-	(const vec2_u32& the_sublevel_size_2d, 
-	PrevCurrPair<bg_point>& camera_pos_pc_pair)
+	(const Vec2u32& the_sublevel_size_2d, 
+	PrevCurrPair<BgPoint>& camera_pos_pc_pair)
 {
 	
 	

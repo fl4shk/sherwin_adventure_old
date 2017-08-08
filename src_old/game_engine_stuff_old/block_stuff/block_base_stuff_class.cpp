@@ -109,7 +109,7 @@ block_behavior_type BlockBaseStuff::get_behavior_type()
 // Dummy function To be implemented by classes That inherit from this one,
 // if they need it.
 void BlockBaseStuff::strongly_hit_response(Block& the_block, 
-	const vec2_s32& coord)
+	const Vec2s32& coord)
 {
 }
 

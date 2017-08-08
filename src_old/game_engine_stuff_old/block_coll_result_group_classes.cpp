@@ -34,8 +34,8 @@ BlockCollResultRectGroup::BlockCollResultRectGroup()
 	//memset(bcr_arr_csz_2d_helper_data, 0, sizeof(bcr_arr_csz_2d_helper_data));
 	
 	//arr_memfill32(bcr_arr_csz_2d_helper_data, 0, max_size);
-	//start_pos = vec2_s32(0, 0);
-	//real_size_2d = vec2_s32(1, 1);
+	//start_pos = Vec2s32(0, 0);
+	//real_size_2d = Vec2s32(1, 1);
 	//
 	//moving_left = moving_right = false;
 	
@@ -46,7 +46,7 @@ BlockCollResultRectGroup::BlockCollResultRectGroup()
 		for (s32 i=0; i<real_width(); ++i)
 		{
 			at(i, j) = BlockCollResult(tl_corner() 
-				+ vec2_s32(i, j));
+				+ Vec2s32(i, j));
 		}
 	}
 }
@@ -59,11 +59,11 @@ BlockCollResultRectGroup::BlockCollResultRectGroup
 	
 	//arr_memfill32(bcr_arr_csz_2d_helper_data, 0, max_size);
 	
-	start_pos = ActiveLevel::get_block_coord_of_point(vec2_f24p8
+	start_pos = ActiveLevel::get_block_coord_of_point(Vec2F24p8
 		(the_coll_box.left(), the_coll_box.top()));
-	const vec2_s32 end_pos = ActiveLevel::get_block_coord_of_point
-		(vec2_f24p8(the_coll_box.right(), the_coll_box.bot()));
-	real_size_2d = end_pos - start_pos + vec2_s32(1, 1);
+	const Vec2s32 end_pos = ActiveLevel::get_block_coord_of_point
+		(Vec2F24p8(the_coll_box.right(), the_coll_box.bot()));
+	real_size_2d = end_pos - start_pos + Vec2s32(1, 1);
 	
 	moving_left = s_moving_left;
 	moving_right = s_moving_right;
@@ -75,7 +75,7 @@ BlockCollResultRectGroup::BlockCollResultRectGroup
 		for (s32 i=0; i<real_width(); ++i)
 		{
 			at(i, j) = BlockCollResult(tl_corner() 
-				+ vec2_s32(i, j));
+				+ Vec2s32(i, j));
 		}
 	}
 	
@@ -109,7 +109,7 @@ void BcrLsegGroup::init(const HorizCollLseg& the_coll_lseg)
 {
 	start_pos = ActiveLevel::get_block_coord_of_point
 		(the_coll_lseg.left_pt());
-	const vec2_s32 end_pos = ActiveLevel::get_block_coord_of_point
+	const Vec2s32 end_pos = ActiveLevel::get_block_coord_of_point
 		(the_coll_lseg.right_pt());
 	real_size = end_pos.x - start_pos.x + 1;
 	is_horiz = true;
@@ -126,7 +126,7 @@ void BcrLsegGroup::init(const VertCollLseg& the_coll_lseg)
 {
 	start_pos = ActiveLevel::get_block_coord_of_point
 		(the_coll_lseg.top_pt());
-	const vec2_s32 end_pos = ActiveLevel::get_block_coord_of_point
+	const Vec2s32 end_pos = ActiveLevel::get_block_coord_of_point
 		(the_coll_lseg.bot_pt());
 	real_size = end_pos.y - start_pos.y + 1;
 	is_horiz = false;
@@ -141,7 +141,7 @@ void BcrLsegGroup::init(const VertCollLseg& the_coll_lseg)
 }
 
 BlockCollResult* BcrLsegGroup::horiz_any_bbvt_is_fully_solid
-	(vec2_s32& pos)
+	(Vec2s32& pos)
 {
 	for (s32 i=0; i<get_real_size(); ++i)
 	{
@@ -155,7 +155,7 @@ BlockCollResult* BcrLsegGroup::horiz_any_bbvt_is_fully_solid
 	return NULL;
 }
 BlockCollResult* BcrLsegGroup::vert_any_bbvt_is_fully_solid
-	(vec2_s32& pos)
+	(Vec2s32& pos)
 {
 	for (s32 i=0; i<get_real_size(); ++i)
 	{
@@ -168,7 +168,7 @@ BlockCollResult* BcrLsegGroup::vert_any_bbvt_is_fully_solid
 	
 	return NULL;
 }
-BlockCollResult* BcrLsegGroup::vert_any_bbvt_is_slope(vec2_s32& pos)
+BlockCollResult* BcrLsegGroup::vert_any_bbvt_is_slope(Vec2s32& pos)
 {
 	for (s32 i=0; i<get_real_size(); ++i)
 	{

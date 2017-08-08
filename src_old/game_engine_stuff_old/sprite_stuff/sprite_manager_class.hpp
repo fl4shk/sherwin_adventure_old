@@ -208,8 +208,8 @@ public:		// functions
 	static Sprite* allocate_sprite(SpriteAllocator& the_sprite_allocator, 
 		sprite_type the_sprite_type, bool facing_left);
 	static Sprite* allocate_sprite(SpriteAllocator& the_sprite_allocator, 
-		sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos,
-		const PrevCurrPair<bg_point>& camera_pos, bool facing_left);
+		sprite_type the_sprite_type, const Vec2F24p8& s_in_level_pos,
+		const PrevCurrPair<BgPoint>& camera_pos, bool facing_left);
 	
 	//static void reinit_sprite_with_sprite_ipg(Sprite*& the_sprite, 
 	//	SpriteAllocator& the_sprite_allocator, 
@@ -224,19 +224,19 @@ public:		// functions
 	
 	//static void reinit_sprite_by_spawning(Sprite*& the_sprite, 
 	//	SpriteAllocator& the_sprite_allocator,
-	//	sprite_type s_the_sprite_type, const vec2_f24p8& s_in_level_pos, 
-	//	const PrevCurrPair<bg_point>& camera_pos, 
+	//	sprite_type s_the_sprite_type, const Vec2F24p8& s_in_level_pos, 
+	//	const PrevCurrPair<BgPoint>& camera_pos, 
 	//	bool facing_left=true);
 	static Sprite* reinit_sprite_by_spawning(Sprite& the_sprite, 
 		SpriteAllocator& the_sprite_allocator,
-		sprite_type s_the_sprite_type, const vec2_f24p8& s_in_level_pos, 
-		const PrevCurrPair<bg_point>& camera_pos, 
+		sprite_type s_the_sprite_type, const Vec2F24p8& s_in_level_pos, 
+		const PrevCurrPair<BgPoint>& camera_pos, 
 		bool facing_left=true);
 	
 	
 	static s32 spawn_a_player_secondary_sprite_basic
-		(sprite_type the_sprite_type, const vec2_f24p8& s_in_level_pos, 
-		const PrevCurrPair<bg_point>& camera_pos_pc_pair, 
+		(sprite_type the_sprite_type, const Vec2F24p8& s_in_level_pos, 
+		const PrevCurrPair<BgPoint>& camera_pos_pc_pair, 
 		bool facing_left=false);
 	
 	// This Is a temporary function.  It should be replaced by a function
@@ -245,21 +245,21 @@ public:		// functions
 	// spawn_sprites_if_needed().
 	// That said, this Is PROBABLY good enough.
 	static s32 spawn_a_sprite_basic(sprite_type the_sprite_type, 
-		const vec2_f24p8& s_in_level_pos, 
-		const PrevCurrPair<bg_point>& camera_pos_pc_pair, 
+		const Vec2F24p8& s_in_level_pos, 
+		const PrevCurrPair<BgPoint>& camera_pos_pc_pair, 
 		bool facing_left=false);
 	
 	static s32 spawn_a_secondary_sprite_basic(sprite_type the_sprite_type,
-		const vec2_f24p8& s_in_level_pos, 
-		const PrevCurrPair<bg_point>& camera_pos_pc_pair, 
+		const Vec2F24p8& s_in_level_pos, 
+		const PrevCurrPair<BgPoint>& camera_pos_pc_pair, 
 		bool facing_left=false);
 	
 	
 	
 	
-	static void init_the_player (const vec2_f24p8& s_in_level_pos, 
-		const vec2_u32& the_sublevel_size_2d, 
-		PrevCurrPair<bg_point>& camera_pos);
+	static void init_the_player (const Vec2F24p8& s_in_level_pos, 
+		const Vec2u32& the_sublevel_size_2d, 
+		PrevCurrPair<BgPoint>& camera_pos);
 	
 	static void clear_the_sprite_arrays();
 	
@@ -313,14 +313,14 @@ public:		// functions
 	//static void some_sprite_init_thing();
 	
 	//static void initial_sprite_spawning_from_sublevel_data
-	//	(const vec2_u32& the_sublevel_size_2d, bg_point& camera_pos);
+	//	(const Vec2u32& the_sublevel_size_2d, BgPoint& camera_pos);
 	
 	// The 
 	static void initial_sprite_spawning_at_start_of_level
-		(PrevCurrPair<bg_point>& camera_pos_pc_pair);
+		(PrevCurrPair<BgPoint>& camera_pos_pc_pair);
 	
 	static void initial_sprite_spawning_at_intra_sublevel_warp
-		(PrevCurrPair<bg_point>& camera_pos, 
+		(PrevCurrPair<BgPoint>& camera_pos, 
 		u32 sublevel_entrance_index);
 	
 	
@@ -329,19 +329,19 @@ public:		// functions
 	// particular Sublevel without CHANGING sublevels, sprites need To be
 	// spawned, which Can be an intensive operation.
 	static void initial_sprite_spawning_shared_code
-		(PrevCurrPair<bg_point>& camera_pos);
+		(PrevCurrPair<BgPoint>& camera_pos);
 		//__attribute__((_iwram_code));
 	
 	
 	static void initial_sprite_spawning_from_sublevel_data_old
-		(const bg_point& camera_pos);
+		(const BgPoint& camera_pos);
 	
 	static void find_all_active_sprites() __attribute__((_iwram_code));
 	
 	static void spawn_sprites_if_needed
-		(const PrevCurrPair<bg_point>& camera_pos_pc_pair) 
+		(const PrevCurrPair<BgPoint>& camera_pos_pc_pair) 
 		__attribute__((_iwram_code));
-	static void despawn_sprites_if_needed(const bg_point& camera_pos) 
+	static void despawn_sprites_if_needed(const BgPoint& camera_pos) 
 		__attribute__((_iwram_code));
 	
 	static void upload_tiles_of_active_sprites_to_vram();
@@ -349,8 +349,8 @@ public:		// functions
 	
 	// This function Is one of the most intensive, So it Is an ARM function
 	// That goes in IWRAM.
-	static void update_all_sprites(const vec2_u32& the_sublevel_size_2d,
-		PrevCurrPair<bg_point>& camera_pos_pc_pair) 
+	static void update_all_sprites(const Vec2u32& the_sublevel_size_2d,
+		PrevCurrPair<BgPoint>& camera_pos_pc_pair) 
 		__attribute__((_iwram_code));
 	
 } __attribute__((_align4));

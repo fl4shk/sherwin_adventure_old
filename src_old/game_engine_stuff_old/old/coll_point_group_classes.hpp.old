@@ -126,59 +126,59 @@ public:		// variables
 	// on stack space (though saving on space in other memory areas Is good
 	// too).
 	static const u32 max_num_coll_points = 12;
-	vec2_f24p8 the_array[max_num_coll_points];
+	Vec2F24p8 the_array[max_num_coll_points];
 	
 	
 public:		// functions
-	inline vec2_f24p8& get_pt_lt()
+	inline Vec2F24p8& get_pt_lt()
 		{ return the_array[arr_ind_16x16_pt_lt]; }
-	inline vec2_f24p8& get_pt_lm()
+	inline Vec2F24p8& get_pt_lm()
 		{ return the_array[arr_ind_16x16_pt_lm]; }
-	inline vec2_f24p8& get_pt_lb()
+	inline Vec2F24p8& get_pt_lb()
 		{ return the_array[arr_ind_16x16_pt_lb]; }
 	
-	inline vec2_f24p8& get_pt_rt()
+	inline Vec2F24p8& get_pt_rt()
 		{ return the_array[arr_ind_16x16_pt_rt]; }
-	inline vec2_f24p8& get_pt_rm()
+	inline Vec2F24p8& get_pt_rm()
 		{ return the_array[arr_ind_16x16_pt_rm]; }
-	inline vec2_f24p8& get_pt_rb()
+	inline Vec2F24p8& get_pt_rb()
 		{ return the_array[arr_ind_16x16_pt_rb]; }
 	
-	inline vec2_f24p8& get_pt_tl()
+	inline Vec2F24p8& get_pt_tl()
 		{ return the_array[arr_ind_16x16_pt_tl]; }
-	inline vec2_f24p8& get_pt_tm()
+	inline Vec2F24p8& get_pt_tm()
 		{ return the_array[arr_ind_16x16_pt_tm]; }
-	inline vec2_f24p8& get_pt_tr()
+	inline Vec2F24p8& get_pt_tr()
 		{ return the_array[arr_ind_16x16_pt_tr]; }
 	
-	inline vec2_f24p8& get_pt_bl()
+	inline Vec2F24p8& get_pt_bl()
 		{ return the_array[arr_ind_16x16_pt_bl]; }
-	inline vec2_f24p8& get_pt_bm()
+	inline Vec2F24p8& get_pt_bm()
 		{ return the_array[arr_ind_16x16_pt_bm]; }
-	inline vec2_f24p8& get_pt_br()
+	inline Vec2F24p8& get_pt_br()
 		{ return the_array[arr_ind_16x16_pt_br]; }
 	
-	//inline vec2_f24p8& get_pt_mt()
+	//inline Vec2F24p8& get_pt_mt()
 	//	{ return the_array[arr_ind_16x16_pt_mt]; }
-	//inline vec2_f24p8& get_pt_mm()
+	//inline Vec2F24p8& get_pt_mm()
 	//	{ return the_array[arr_ind_16x16_pt_mm]; }
-	//inline vec2_f24p8& get_pt_mb()
+	//inline Vec2F24p8& get_pt_mb()
 	//	{ return the_array[arr_ind_16x16_pt_mb]; }
 	
 protected:		// functions
 	void assign_vert_side_x_positions(const CollBox& the_coll_box, 
-		vec2_f24p8& pt_lt, vec2_f24p8& pt_lm, vec2_f24p8& pt_lb, 
-		vec2_f24p8& pt_rt, vec2_f24p8& pt_rm, vec2_f24p8& pt_rb);
+		Vec2F24p8& pt_lt, Vec2F24p8& pt_lm, Vec2F24p8& pt_lb, 
+		Vec2F24p8& pt_rt, Vec2F24p8& pt_rm, Vec2F24p8& pt_rb);
 	void assign_horiz_side_y_positions(const Sprite& the_sprite, 
-		const CollBox& the_coll_box, vec2_f24p8& pt_tl, 
-		vec2_f24p8& pt_tm, vec2_f24p8& pt_tr, vec2_f24p8& pt_bl, 
-		vec2_f24p8& pt_bm, vec2_f24p8& pt_br);
+		const CollBox& the_coll_box, Vec2F24p8& pt_tl, 
+		Vec2F24p8& pt_tm, Vec2F24p8& pt_tr, Vec2F24p8& pt_bl, 
+		Vec2F24p8& pt_bm, Vec2F24p8& pt_br);
 	
 	
 	void assign_vert_side_mid_y_positions(const CollBox& the_coll_box, 
-		vec2_f24p8& pt_lm, vec2_f24p8& pt_rm);
+		Vec2F24p8& pt_lm, Vec2F24p8& pt_rm);
 	void assign_horiz_side_mid_x_positions(const CollBox& the_coll_box,
-		vec2_f24p8& pt_tm, vec2_f24p8& pt_bm);
+		Vec2F24p8& pt_tm, Vec2F24p8& pt_bm);
 	
 	
 } __attribute__((_align4));
@@ -191,15 +191,15 @@ public:		// functions
 	
 protected:		// functions
 	void assign_vert_side_top_y_positions(const CollBox& the_coll_box, 
-		vec2_f24p8& pt_lt, vec2_f24p8& pt_rt);
+		Vec2F24p8& pt_lt, Vec2F24p8& pt_rt);
 	void assign_vert_side_bot_y_positions(const CollBox& the_coll_box, 
-		vec2_f24p8& pt_lb, vec2_f24p8& pt_rb);
+		Vec2F24p8& pt_lb, Vec2F24p8& pt_rb);
 	
 	
 	void assign_horiz_side_left_x_positions(const CollBox& the_coll_box, 
-		vec2_f24p8& pt_tl, vec2_f24p8& pt_bl);
+		Vec2F24p8& pt_tl, Vec2F24p8& pt_bl);
 	void assign_horiz_side_right_x_positions(const CollBox& the_coll_box, 
-		vec2_f24p8& pt_tr, vec2_f24p8& pt_br);
+		Vec2F24p8& pt_tr, Vec2F24p8& pt_br);
 	
 	
 } __attribute__((_align4));
@@ -212,15 +212,15 @@ public:		// functions
 	
 protected:		// functions
 	void assign_vert_side_top_y_positions(const CollBox& the_coll_box, 
-		vec2_f24p8& pt_lt, vec2_f24p8& pt_rt);
+		Vec2F24p8& pt_lt, Vec2F24p8& pt_rt);
 	void assign_vert_side_bot_y_positions(const CollBox& the_coll_box, 
-		vec2_f24p8& pt_lb, vec2_f24p8& pt_rb);
+		Vec2F24p8& pt_lb, Vec2F24p8& pt_rb);
 	
 	
 	void assign_horiz_side_left_x_positions(const CollBox& the_coll_box, 
-		vec2_f24p8& pt_tl, vec2_f24p8& pt_bl);
+		Vec2F24p8& pt_tl, Vec2F24p8& pt_bl);
 	void assign_horiz_side_right_x_positions(const CollBox& the_coll_box, 
-		vec2_f24p8& pt_tr, vec2_f24p8& pt_br);
+		Vec2F24p8& pt_tr, Vec2F24p8& pt_br);
 	
 	
 } __attribute__((_align4));

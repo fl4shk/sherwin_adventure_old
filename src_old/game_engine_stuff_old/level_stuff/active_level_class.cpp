@@ -25,7 +25,7 @@
 
 Block ActiveLevel::blank_block;
 
-const vec2_u32 ActiveLevel::horiz_sublevel_size_2d
+const Vec2u32 ActiveLevel::horiz_sublevel_size_2d
 	(horiz_sublevel_xsize, horiz_sublevel_ysize);
 
 Block ActiveLevel::block_data_array[block_data_array_size];
@@ -60,13 +60,13 @@ SaListStuff::SaArrayOfLists<SpriteInitParamGroup,
 	ActiveLevel::horiz_sublevel_sprite_ipg_lists;
 
 
-scr_entry ActiveLevel::bg0_screenblock_mirror[screenblock_size];
+ScrEntry ActiveLevel::bg0_screenblock_mirror[screenblock_size];
 
 
 
-ArrayCsz2dHelper<scr_entry, screenblock_xsize, screenblock_ysize> 
+ArrayCsz2dHelper<ScrEntry, screenblock_xsize, screenblock_ysize> 
 	ActiveLevel::bg0_screenblock_2d(SE_RAM[BG0_SBB]);
-ArrayCsz2dHelper<scr_entry, screenblock_xsize, screenblock_ysize> 
+ArrayCsz2dHelper<ScrEntry, screenblock_xsize, screenblock_ysize> 
 	ActiveLevel::bg0_screenblock_mirror_2d(bg0_screenblock_mirror);
 
 const Level* ActiveLevel::the_current_level_ptr;

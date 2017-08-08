@@ -31,7 +31,7 @@ u32 ActiveLevelManager::converted_block_tile_ids_0[lim_bt],
 	ActiveLevelManager::converted_block_tile_ids_2[lim_bt],
 	ActiveLevelManager::converted_block_tile_ids_3[lim_bt];
 
-scr_entry ActiveLevelManager::horiz_sublevel_tile_at_basic(u32 tile_x, 
+ScrEntry ActiveLevelManager::horiz_sublevel_tile_at_basic(u32 tile_x, 
 	u32 tile_y)
 {
 	//return the_block_ids_2d
@@ -101,7 +101,7 @@ scr_entry ActiveLevelManager::horiz_sublevel_tile_at_basic(u32 tile_x,
 }
 
 
-scr_entry ActiveLevelManager::horiz_sublevel_tile_at(u32 tile_x, 
+ScrEntry ActiveLevelManager::horiz_sublevel_tile_at(u32 tile_x, 
 	u32 tile_y)
 {
 	u32 block_x = tile_x >> 0x1, block_y = tile_y >> 0x1;
@@ -159,7 +159,7 @@ scr_entry ActiveLevelManager::horiz_sublevel_tile_at(u32 tile_x,
 
 
 void ActiveLevelManager::correct_bg0_scroll_mirror 
-	(const vec2_u32& sublevel_size_in_blocks_2d)
+	(const Vec2u32& sublevel_size_in_blocks_2d)
 {
 	//return;
 	
@@ -260,8 +260,8 @@ void ActiveLevelManager::correct_bg0_scroll_mirror
 }
 
 void ActiveLevelManager::update_sublevel_in_screenblock_mirror_2d()
-	//(Array2dHelper<scr_entry>& screenblock_mirror_2d,
-	//const vec2_u32& sublevel_size_in_blocks_2d)
+	//(Array2dHelper<ScrEntry>& screenblock_mirror_2d,
+	//const Vec2u32& sublevel_size_in_blocks_2d)
 {
 	
 	correct_bg0_scroll_mirror(ActiveLevel::get_curr_sublevel_ptr()
@@ -277,7 +277,7 @@ void ActiveLevelManager::update_sublevel_in_screenblock_mirror_2d()
 		.floor_to_int() >> 3;
 	
 	
-	// Create a list of 8x8 tile IDs for each block_type
+	// Create a list of 8x8 Tile IDs for each block_type
 	for (u32 i=0; i<lim_bt; ++i)
 	{
 		block_type the_block_type = (block_type)i;
@@ -288,19 +288,19 @@ void ActiveLevelManager::update_sublevel_in_screenblock_mirror_2d()
 		u32 the_palette_id = GfxManager::get_palette_number_of_block_type
 			(the_block_type);
 		
-		// Top-left 8x8 tile ID
+		// Top-left 8x8 Tile ID
 		converted_block_tile_ids_0[i] = ((the_metatile_id * 4) + 0)
 			| SE_PALBANK(the_palette_id);
 		
-		// Top-right 8x8 tile ID
+		// Top-right 8x8 Tile ID
 		converted_block_tile_ids_1[i] = ((the_metatile_id * 4) + 1)
 			| SE_PALBANK(the_palette_id);
 		
-		// Bottom-left 8x8 tile ID
+		// Bottom-left 8x8 Tile ID
 		converted_block_tile_ids_2[i] = ((the_metatile_id * 4) + 2)
 			| SE_PALBANK(the_palette_id);
 		
-		// Bottom-right 8x8 tile ID
+		// Bottom-right 8x8 Tile ID
 		converted_block_tile_ids_3[i] = ((the_metatile_id * 4) + 3)
 			| SE_PALBANK(the_palette_id);
 	}
@@ -323,12 +323,12 @@ void ActiveLevelManager::update_sublevel_in_screenblock_mirror_2d()
 }
 
 void ActiveLevelManager::copy_sublevel_from_array_csz_2d_helper_to_vram()
-	//(Array2dHelper<scr_entry>& screenblock_in_vram_2d,
-	//Array2dHelper<scr_entry>& screenblock_mirror_2d)
+	//(Array2dHelper<ScrEntry>& screenblock_in_vram_2d,
+	//Array2dHelper<ScrEntry>& screenblock_mirror_2d)
 {
 	memcpy32(ActiveLevel::bg0_screenblock_2d.the_array, 
 		ActiveLevel::bg0_screenblock_mirror_2d.the_array,
-		sizeof(scr_entry) * ActiveLevel::bg0_screenblock_mirror_2d
+		sizeof(ScrEntry) * ActiveLevel::bg0_screenblock_mirror_2d
 		.get_size() / sizeof(u32)); 
 }
 

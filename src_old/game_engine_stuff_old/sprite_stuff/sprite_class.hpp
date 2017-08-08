@@ -39,13 +39,13 @@ public:		// variables
 	sprite_palette_slot the_palette_slot = sps_player;
 	u32 the_relative_metatile_slot = 0, 
 		num_active_gfx_tiles = GfxManager::num_tiles_in_ss_16x16;
-	tile* tile_arr = const_cast<tile*>(reinterpret_cast<const tile*>
+	Tile* tile_arr = const_cast<Tile*>(reinterpret_cast<const Tile*>
 		(sherwin_gfxTiles));
 	OamEntry::shape_size the_initial_shape_size = OamEntry::ss_16x16;
-	vec2_f24p8 the_initial_coll_box_size = { {14 << Fixed24p8::get_shift()}, 
+	Vec2F24p8 the_initial_coll_box_size = { {14 << Fixed24p8::get_shift()}, 
 		{14 << Fixed24p8::get_shift()} };
 	
-	vec2_f24p8 the_initial_cb_pos_offset = { {1 << Fixed24p8::get_shift()}, 
+	Vec2F24p8 the_initial_cb_pos_offset = { {1 << Fixed24p8::get_shift()}, 
 		{1 << Fixed24p8::get_shift()} };
 	
 	
@@ -55,7 +55,7 @@ public:		// variables
 	// StPlayer sprite_type, which Is normally considered To be a 16x32
 	// Sprite but uses 32x32 graphics in some cases, like during the
 	// pickaxe swing animation.
-	vec2_f24p8 the_initial_in_level_pos_offset
+	Vec2F24p8 the_initial_in_level_pos_offset
 		= { {0 << Fixed24p8::get_shift()}, {0 << Fixed24p8::get_shift()} };
 } __attribute__((_align4));
 
@@ -80,7 +80,7 @@ class Sprite
 protected:		// variables
 	// These are protected variables because they're not normally supposed
 	// To change after initialization.
-	vec2_u32 the_shape_size_vec2;
+	Vec2u32 the_shape_size_vec2;
 	OamEntry::shape_size the_shape_size;
 	
 	// Which 32x32 VRAM chunk this Sprite uses, which Is equal To the
@@ -100,7 +100,7 @@ public:		// constants
 	static const Fixed24p8 cpg_on_slope_threshold_abs;
 	
 	// coll_point_group threshold
-	static const vec2_f24p8 cpg_16x32_threshold_abs;
+	static const Vec2F24p8 cpg_16x32_threshold_abs;
 	
 	static const Fixed24p8 grav_acc;
 	static const Fixed24p8 max_y_vel;
@@ -112,13 +112,13 @@ public:		// constants
 	//
 	//static const u32 the_relative_metatile_slot,
 	//	num_active_gfx_tiles;
-	//static const tile* tile_arr;
+	//static const Tile* tile_arr;
 	//static const OamEntry::shape_size the_initial_shape_size;
 	//
-	//static const vec2_f24p8 the_initial_coll_box_size,
+	//static const Vec2F24p8 the_initial_coll_box_size,
 	//	the_initial_cb_pos_offset;
 	//
-	//static const vec2_f24p8 the_initial_in_level_pos_offset;
+	//static const Vec2F24p8 the_initial_in_level_pos_offset;
 	
 public:		// variables
 	
@@ -145,10 +145,10 @@ public:		// variables
 	
 	// in_level_pos Is the "global" position of the Sprite within the
 	// current Level, connected To the top left corner.
-	PrevCurrPair<vec2_f24p8> in_level_pos;
+	PrevCurrPair<Vec2F24p8> in_level_pos;
 	
 	// vel Is the velocity of the Sprite.
-	vec2_f24p8 vel;
+	Vec2F24p8 vel;
 	
 	// The absolute value of the maximum horizontal velocity of the Sprite
 	Fixed24p8 max_vel_x_abs_val;
@@ -166,7 +166,7 @@ public:		// variables
 	// cb_pos_offset Is the position of the CollBox relative To
 	// in_level_pos.  It Is used because most sprites will have a CollBox
 	// with a size other than the visible 
-	vec2_f24p8 cb_pos_offset;
+	Vec2F24p8 cb_pos_offset;
 	
 	// on_ground Is a flag That tells whether the Sprite Is on the ground,
 	// though That's really obvious.
@@ -198,22 +198,22 @@ public:		// variables
 	
 	// These are mainly for debugging.
 	//bool did_update_prev_on_screen_pos_this_frame;
-	//vec2_f24p8 prev_on_screen_pos, curr_on_screen_pos;
-	//PrevCurrPair<vec2_f24p8> on_screen_pos;
-	//PrevCurrPair<vec2_s32> on_screen_pos_s32;
+	//Vec2F24p8 prev_on_screen_pos, curr_on_screen_pos;
+	//PrevCurrPair<Vec2F24p8> on_screen_pos;
+	//PrevCurrPair<Vec2s32> on_screen_pos_s32;
 	
-	static vec2_f24p8 prev_prev_on_screen_pos; 
-	static PrevCurrPair<vec2_f24p8> on_screen_pos;
-	static vec2_s32 prev_prev_on_screen_pos_s32;
-	static PrevCurrPair<vec2_s32> on_screen_pos_s32;
-	static PrevCurrPair<vec2_s32> camera_pos_pc_pair_s32;
+	static Vec2F24p8 prev_prev_on_screen_pos; 
+	static PrevCurrPair<Vec2F24p8> on_screen_pos;
+	static Vec2s32 prev_prev_on_screen_pos_s32;
+	static PrevCurrPair<Vec2s32> on_screen_pos_s32;
+	static PrevCurrPair<Vec2s32> camera_pos_pc_pair_s32;
 	
 	static Vec2<bool> temp_debug_thing;
 	
-	static vec2_f24p8 on_screen_pos_diff_abs;
-	static vec2_s32 on_screen_pos_s32_diff_abs;
-	static vec2_f24p8 camera_pos_diff_abs;
-	static vec2_s32 camera_pos_s32_diff_abs;
+	static Vec2F24p8 on_screen_pos_diff_abs;
+	static Vec2s32 on_screen_pos_s32_diff_abs;
+	static Vec2F24p8 camera_pos_diff_abs;
+	static Vec2s32 camera_pos_s32_diff_abs;
 	
 	//static PrevCurrPair<s32> height_val;
 	
@@ -221,12 +221,12 @@ public:		// functions
 	
 	Sprite();
 	Sprite(bool facing_left);
-	Sprite(const vec2_f24p8& s_in_level_pos, 
-		const PrevCurrPair<bg_point>& camera_pos_pc_pair, 
+	Sprite(const Vec2F24p8& s_in_level_pos, 
+		const PrevCurrPair<BgPoint>& camera_pos_pc_pair, 
 		bool facing_left);
-	Sprite(const vec2_f24p8& s_in_level_pos, 
-		const vec2_u32& the_level_size_2d, 
-		PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left);
+	Sprite(const Vec2F24p8& s_in_level_pos, 
+		const Vec2u32& the_level_size_2d, 
+		PrevCurrPair<BgPoint>& camera_pos_pc_pair, bool facing_left);
 	
 	
 	inline Sprite(u32 s_vram_chunk_index)
@@ -249,16 +249,16 @@ public:		// functions
 	// This form of shared_constructor_code() might eventually become the
 	// default form of shared_constructor_code().
 	virtual void shared_constructor_code_part_2
-		(const vec2_f24p8& s_in_level_pos, 
-		const PrevCurrPair<bg_point>& camera_pos_pc_pair, 
+		(const Vec2F24p8& s_in_level_pos, 
+		const PrevCurrPair<BgPoint>& camera_pos_pc_pair, 
 		bool facing_left);
 	
 	// This form of shared_constructor_code() Is primarily Intended To be
 	// used by the_player.
 	virtual void shared_constructor_code_part_2
-		(const vec2_f24p8& s_in_level_pos, 
-		const vec2_u32& the_level_size_2d, 
-		PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left);
+		(const Vec2F24p8& s_in_level_pos, 
+		const Vec2u32& the_level_size_2d, 
+		PrevCurrPair<BgPoint>& camera_pos_pc_pair, bool facing_left);
 	
 	virtual void shared_constructor_code_part_3();
 	
@@ -270,7 +270,7 @@ public:		// functions
 	//	SpriteAllocator& the_sprite_allocator);
 	
 	
-	inline const vec2_f24p8& get_prev_in_level_pos() const
+	inline const Vec2F24p8& get_prev_in_level_pos() const
 	{
 		return in_level_pos.prev;
 	}
@@ -283,7 +283,7 @@ public:		// functions
 	//	return get_prev_in_level_pos().y;
 	//}
 	
-	inline const vec2_f24p8& get_curr_in_level_pos() const
+	inline const Vec2F24p8& get_curr_in_level_pos() const
 	{
 		return in_level_pos.curr;
 	}
@@ -297,7 +297,7 @@ public:		// functions
 	//}
 	
 	inline void set_curr_in_level_pos
-		(const vec2_f24p8& n_curr_in_level_pos)
+		(const Vec2F24p8& n_curr_in_level_pos)
 	{
 		in_level_pos.curr = n_curr_in_level_pos;
 	}
@@ -346,7 +346,7 @@ public:		// functions
 	{
 		return the_shape_size;
 	}
-	inline const vec2_u32& get_shape_size_as_vec2() const
+	inline const Vec2u32& get_shape_size_as_vec2() const
 	{
 		return the_shape_size_vec2;
 	}
@@ -389,32 +389,32 @@ public:		// functions
 	}
 	
 	
-	inline vec2_f24p8 get_on_screen_pos(const bg_point& camera_pos)
+	inline Vec2F24p8 get_on_screen_pos(const BgPoint& camera_pos)
 		const
 	{
-		//vec2_f24p8 ret = in_level_pos - camera_pos;
+		//Vec2F24p8 ret = in_level_pos - camera_pos;
 		//
 		//return ret;
 		//return in_level_pos - camera_pos;
 		
 		//return get_curr_in_level_pos() - camera_pos;
 		
-		//return vec2_f24p8(make_f24p8(get_curr_in_level_pos().x
+		//return Vec2F24p8(make_f24p8(get_curr_in_level_pos().x
 		//	.floor_to_int()), make_f24p8
 		//	(get_curr_in_level_pos().y.floor_to_int())) 
 		//	- camera_pos;
 		
-		//return get_curr_in_level_pos() - vec2_f24p8(make_f24p8
+		//return get_curr_in_level_pos() - Vec2F24p8(make_f24p8
 		//	(camera_pos.x.round_to_int()), 
 		//	make_f24p8(camera_pos.y.round_to_int()));
 		
-		//return vec2_f24p8(make_f24p8(get_curr_in_level_pos().x
+		//return Vec2F24p8(make_f24p8(get_curr_in_level_pos().x
 		//	.to_int_for_on_screen()), make_f24p8(get_curr_in_level_pos().y
 		//	.to_int_for_on_screen()))
-		//	- vec2_f24p8(make_f24p8(camera_pos.x.to_int_for_on_screen()),
+		//	- Vec2F24p8(make_f24p8(camera_pos.x.to_int_for_on_screen()),
 		//	make_f24p8(camera_pos.y.to_int_for_on_screen()));
 		
-		vec2_f24p8 ret(get_curr_in_level_pos());
+		Vec2F24p8 ret(get_curr_in_level_pos());
 		
 		if (get_curr_in_level_pos().x != get_prev_in_level_pos().x)
 		{
@@ -446,9 +446,9 @@ public:		// functions
 	}
 	
 	void update_on_screen_pos
-		(const PrevCurrPair<bg_point>& camera_pos_pc_pair);
+		(const PrevCurrPair<BgPoint>& camera_pos_pc_pair);
 	
-	//inline void update_full(const bg_point& camera_pos)
+	//inline void update_full(const BgPoint& camera_pos)
 	//{
 	//	//in_level_pos += vel;
 	//	//the_coll_box.pos = in_level_pos + cb_pos_offset;
@@ -462,8 +462,8 @@ public:		// functions
 	//}
 	
 	void camera_follow_basic
-		(PrevCurrPair<bg_point>& camera_pos_pc_pair);
-	void center_camera_almost(bg_point& camera_pos) const;
+		(PrevCurrPair<BgPoint>& camera_pos_pc_pair);
+	void center_camera_almost(BgPoint& camera_pos) const;
 	
 	
 	//inline void copy_the_oam_entry_to_oam_mirror 
@@ -496,7 +496,7 @@ public:		// functions
 		return get_const_params().the_const_sprite_type;
 	}
 	
-	inline virtual const tile* get_tile_arr() const
+	inline virtual const Tile* get_tile_arr() const
 	{
 		return get_const_params().tile_arr;
 	}
@@ -517,16 +517,16 @@ public:		// functions
 		cb_pos_offset = get_initial_cb_pos_offset();
 	}
 	
-	inline virtual const vec2_f24p8& get_initial_coll_box_size() const
+	inline virtual const Vec2F24p8& get_initial_coll_box_size() const
 	{
 		return get_const_params().the_initial_coll_box_size;
 	}
-	inline virtual const vec2_f24p8& get_initial_cb_pos_offset() const
+	inline virtual const Vec2F24p8& get_initial_cb_pos_offset() const
 	{
 		return get_const_params().the_initial_cb_pos_offset;
 	}
 	
-	inline virtual const vec2_f24p8& get_initial_in_level_pos_offset()
+	inline virtual const Vec2F24p8& get_initial_in_level_pos_offset()
 		const
 	{
 		return get_const_params().the_initial_in_level_pos_offset;
@@ -562,13 +562,13 @@ public:		// functions
 	// update_part_3() used To be update_part_2()
 	// The PlayerSprite class Is the primary user of this function.
 	virtual void update_part_3
-		(PrevCurrPair<bg_point>& camera_pos_pc_pair,
-		const vec2_u32& the_level_size_2d);
+		(PrevCurrPair<BgPoint>& camera_pos_pc_pair,
+		const Vec2u32& the_level_size_2d);
 	
 	// Sprites other than PlayerSprite use this function.  Some sprites
 	// won't need To override this specific version.
 	virtual void update_part_3
-		(const PrevCurrPair<bg_point>& camera_pos_pc_pair, 
+		(const PrevCurrPair<BgPoint>& camera_pos_pc_pair, 
 		int& next_oam_index);
 	
 	
@@ -603,12 +603,12 @@ public:		// functions
 	
 	// the_player Is the primary user of this function
 	virtual void sprite_interaction_reponse(Sprite& the_other_sprite, 
-		PrevCurrPair<bg_point>& camera_pos_pc_pair, 
-		const vec2_u32& the_level_size_2d);
+		PrevCurrPair<BgPoint>& camera_pos_pc_pair, 
+		const Vec2u32& the_level_size_2d);
 	
 	
 protected:		// functions
-	vec2_u32 get_shape_size_as_vec2_raw() const;
+	Vec2u32 get_shape_size_as_vec2_raw() const;
 	
 	
 	//virtual void block_coll_response_left
@@ -645,19 +645,19 @@ protected:		// functions
 	//		- the_coll_box.size.x - cb_pos_offset.x);
 	//}
 	inline void push_out_of_left_block
-		(const vec2_s32& blk_crd_pos)
+		(const Vec2s32& blk_crd_pos)
 	{
 		set_curr_in_level_pos_x(make_f24p8(conv_blk_crd_to_pix_crd
 			(blk_crd_pos.x + 1)) - cb_pos_offset.x);
 	}
 	inline void push_out_of_right_block
-		(const vec2_s32& blk_crd_pos)
+		(const Vec2s32& blk_crd_pos)
 	{
 		set_curr_in_level_pos_x(make_f24p8(conv_blk_crd_to_pix_crd
 			(blk_crd_pos.x)) - the_coll_box.size.x - cb_pos_offset.x);
 	}
 	inline void push_out_of_top_block
-		(const vec2_s32& blk_crd_pos)
+		(const Vec2s32& blk_crd_pos)
 	{
 		set_curr_in_level_pos_y(make_f24p8(conv_blk_crd_to_pix_crd
 			(blk_crd_pos.y + 1) + 1) - cb_pos_offset.y);

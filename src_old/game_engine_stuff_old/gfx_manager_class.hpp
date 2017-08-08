@@ -137,9 +137,9 @@ public:		// variables and constants
 	
 	static const u32 bgofs_mirror_size = 4;
 	
-	static bg_point prev_prev_bgofs_mirror[bgofs_mirror_size]
+	static BgPoint prev_prev_bgofs_mirror[bgofs_mirror_size]
 		__attribute__((_iwram));
-	static PrevCurrPair<bg_point> bgofs_mirror[bgofs_mirror_size]
+	static PrevCurrPair<BgPoint> bgofs_mirror[bgofs_mirror_size]
 		__attribute__((_iwram));
 	
 	// Current component arrays, stored in EWRAM as Fixed24p8's for speed

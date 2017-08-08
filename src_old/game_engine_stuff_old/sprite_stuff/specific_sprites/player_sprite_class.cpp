@@ -45,7 +45,7 @@ const SpriteConstParams PlayerSprite::the_const_params
 	GfxManager::num_tiles_in_ss_16x32,
 	
 	// tile_arr 
-	const_cast<tile*>(reinterpret_cast<const tile*>(sherwin_gfxTiles)),
+	const_cast<Tile*>(reinterpret_cast<const Tile*>(sherwin_gfxTiles)),
 	
 	// the_initial_shape_size
 	OamEntry::ss_16x32,
@@ -172,37 +172,37 @@ const PlayerSprite::frame PlayerSprite::frame_slot_to_frame_arr
 
 
 
-////const vec2_f24p8 PlayerSprite::the_initial_coll_box_size 
+////const Vec2F24p8 PlayerSprite::the_initial_coll_box_size 
 ////	= { {12 << Fixed24p8::get_shift() }, {29 << Fixed24p8::get_shift() } },
 ////	PlayerSprite::the_initial_cb_pos_offset 
 ////	= { {2 << Fixed24p8::get_shift() }, {3 << Fixed24p8::get_shift() } };
-////const vec2_f24p8 PlayerSprite::the_initial_coll_box_size 
+////const Vec2F24p8 PlayerSprite::the_initial_coll_box_size 
 ////	= { {12 << Fixed24p8::get_shift() }, {27 << Fixed24p8::get_shift() } },
 ////	PlayerSprite::the_initial_cb_pos_offset 
 ////	= { {2 << Fixed24p8::get_shift() }, {5 << Fixed24p8::get_shift() } };
-////const vec2_f24p8 PlayerSprite::the_initial_coll_box_size 
+////const Vec2F24p8 PlayerSprite::the_initial_coll_box_size 
 ////	= { {12 << Fixed24p8::get_shift() }, {28 << Fixed24p8::get_shift() } },
 ////	PlayerSprite::the_initial_cb_pos_offset 
 ////	= { {2 << Fixed24p8::get_shift() }, {4 << Fixed24p8::get_shift() } };
-//const vec2_f24p8 PlayerSprite::the_initial_coll_box_size 
+//const Vec2F24p8 PlayerSprite::the_initial_coll_box_size 
 //	= { {11 << Fixed24p8::get_shift() }, {28 << Fixed24p8::get_shift() } },
 //	PlayerSprite::the_initial_cb_pos_offset 
 //	= { {2 << Fixed24p8::get_shift() }, {4 << Fixed24p8::get_shift() } };
 //
-//const vec2_f24p8 PlayerSprite::the_initial_in_level_pos_offset
+//const Vec2F24p8 PlayerSprite::the_initial_in_level_pos_offset
 //	= { {0 << Fixed24p8::get_shift()}, {0 << Fixed24p8::get_shift()} };
 //
-////const vec2_f24p8 PlayerSprite::the_initial_coll_box_size 
+////const Vec2F24p8 PlayerSprite::the_initial_coll_box_size 
 ////	= { {12 << Fixed24p8::get_shift() }, {29 << Fixed24p8::get_shift() } },
 ////	PlayerSprite::the_initial_cb_pos_offset 
 ////	= { {(2 + 8) << Fixed24p8::get_shift() }, {3 << Fixed24p8::get_shift() } };
 ////
-////const vec2_f24p8 PlayerSprite::the_initial_in_level_pos_offset
+////const Vec2F24p8 PlayerSprite::the_initial_in_level_pos_offset
 ////	= { {8 << Fixed24p8::get_shift()}, {0 << Fixed24p8::get_shift()} };
 
-PlayerSprite::PlayerSprite(const vec2_f24p8& s_in_level_pos, 
-	const vec2_u32& the_level_size_2d, 
-	PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left)
+PlayerSprite::PlayerSprite(const Vec2F24p8& s_in_level_pos, 
+	const Vec2u32& the_level_size_2d, 
+	PrevCurrPair<BgPoint>& camera_pos_pc_pair, bool facing_left)
 {
 	shared_constructor_code_part_1();
 	shared_constructor_code_part_2(s_in_level_pos, the_level_size_2d, 
@@ -217,8 +217,8 @@ PlayerSprite::PlayerSprite(const vec2_f24p8& s_in_level_pos,
 //}
 
 void PlayerSprite::shared_constructor_code_part_2
-	(const vec2_f24p8& s_in_level_pos, const vec2_u32& the_level_size_2d,
-	PrevCurrPair<bg_point>& camera_pos_pc_pair, bool facing_left)
+	(const Vec2F24p8& s_in_level_pos, const Vec2u32& the_level_size_2d,
+	PrevCurrPair<BgPoint>& camera_pos_pc_pair, bool facing_left)
 {
 	Sprite::shared_constructor_code_part_2(facing_left);
 	
@@ -236,8 +236,8 @@ void PlayerSprite::shared_constructor_code_part_2
 	copy_the_oam_entry_to_oam_mirror
 		(SpriteManager::the_player_oam_index);
 	
-	clear_and_set_bits(the_oam_entry.attr2, obj_attr2_prio_mask, 
-		obj_attr2_prio_1);
+	clear_and_set_bits(the_oam_entry.attr2, OBJ_ATTR2_PRIO_MASK, 
+		OBJ_ATTR2_PRIO_1);
 }
 
 void PlayerSprite::shared_constructor_code_part_3()
@@ -436,8 +436,8 @@ void PlayerSprite::update_part_2()
 
 
 void PlayerSprite::update_part_3
-	(PrevCurrPair<bg_point>& camera_pos_pc_pair, 
-	const vec2_u32& the_sublevel_size_2d)
+	(PrevCurrPair<BgPoint>& camera_pos_pc_pair, 
+	const Vec2u32& the_sublevel_size_2d)
 {
 	// These should totally should be replaced by getter functions
 	
@@ -808,18 +808,18 @@ void PlayerSprite::update_the_pickaxe()
 				if (!the_oam_entry.get_hflip_status())
 				{
 					//the_pickaxe_ptr->in_level_pos = in_level_pos
-					//	+ (vec2_f24p8){ make_f24p8(-14), make_f24p8(0) };
+					//	+ (Vec2F24p8){ make_f24p8(-14), make_f24p8(0) };
 					the_pickaxe_ptr->set_curr_in_level_pos
 						(get_curr_in_level_pos() 
-						+ (vec2_f24p8){ make_f24p8(-14), make_f24p8(0) });
+						+ (Vec2F24p8){ make_f24p8(-14), make_f24p8(0) });
 				}
 				else //if (the_oam_entry.get_hflip_status())
 				{
 					//the_pickaxe_ptr->in_level_pos = in_level_pos
-					//	+ (vec2_f24p8){ make_f24p8(14), make_f24p8(0) };
+					//	+ (Vec2F24p8){ make_f24p8(14), make_f24p8(0) };
 					the_pickaxe_ptr->set_curr_in_level_pos
 						(get_curr_in_level_pos()
-						+ (vec2_f24p8){ make_f24p8(14), make_f24p8(0) });
+						+ (Vec2F24p8){ make_f24p8(14), make_f24p8(0) });
 				}
 				
 				the_pickaxe_ptr->update_f24p8_positions();
@@ -832,19 +832,19 @@ void PlayerSprite::update_the_pickaxe()
 				if (!the_oam_entry.get_hflip_status())
 				{
 					//the_pickaxe_ptr->in_level_pos = in_level_pos
-					//	+ (vec2_f24p8){ make_f24p8(-10), make_f24p8(-2) };
+					//	+ (Vec2F24p8){ make_f24p8(-10), make_f24p8(-2) };
 					the_pickaxe_ptr->set_curr_in_level_pos
 						(get_curr_in_level_pos()
-						+ (vec2_f24p8){ make_f24p8(-10), 
+						+ (Vec2F24p8){ make_f24p8(-10), 
 						make_f24p8(-2) });
 				}
 				else //if (the_oam_entry.get_hflip_status())
 				{
 					//the_pickaxe_ptr->in_level_pos = in_level_pos
-					//	+ (vec2_f24p8){ make_f24p8(10), make_f24p8(-2) };
+					//	+ (Vec2F24p8){ make_f24p8(10), make_f24p8(-2) };
 					the_pickaxe_ptr->set_curr_in_level_pos(
 						get_curr_in_level_pos()
-						+ (vec2_f24p8){ make_f24p8(10), make_f24p8(-2) });
+						+ (Vec2F24p8){ make_f24p8(10), make_f24p8(-2) });
 				}
 				//if ((speed != (Fixed24p8){0} && get_curr_on_ground())
 				//	|| !get_curr_on_ground())
@@ -867,18 +867,18 @@ void PlayerSprite::update_the_pickaxe()
 				if (!the_oam_entry.get_hflip_status())
 				{
 					//the_pickaxe_ptr->in_level_pos = in_level_pos
-					//	+ (vec2_f24p8){ make_f24p8(-1), make_f24p8(-4) };
+					//	+ (Vec2F24p8){ make_f24p8(-1), make_f24p8(-4) };
 					the_pickaxe_ptr->set_curr_in_level_pos
 						(get_curr_in_level_pos()
-						+ (vec2_f24p8){ make_f24p8(-1), make_f24p8(-4) });
+						+ (Vec2F24p8){ make_f24p8(-1), make_f24p8(-4) });
 				}
 				else //if (the_oam_entry.get_hflip_status())
 				{
 					//the_pickaxe_ptr->in_level_pos = in_level_pos
-					//	+ (vec2_f24p8){ make_f24p8(1), make_f24p8(-4) };
+					//	+ (Vec2F24p8){ make_f24p8(1), make_f24p8(-4) };
 					the_pickaxe_ptr->set_curr_in_level_pos
 						(get_curr_in_level_pos()
-						+ (vec2_f24p8){ make_f24p8(1), make_f24p8(-4) });
+						+ (Vec2F24p8){ make_f24p8(1), make_f24p8(-4) });
 				}
 				//if ((speed != (Fixed24p8){0} && get_curr_on_ground())
 				//	|| !get_curr_on_ground())
@@ -901,18 +901,18 @@ void PlayerSprite::update_the_pickaxe()
 				if (!the_oam_entry.get_hflip_status())
 				{
 					//the_pickaxe_ptr->in_level_pos = in_level_pos
-					//	+ (vec2_f24p8){ make_f24p8(7), make_f24p8(-2) };
+					//	+ (Vec2F24p8){ make_f24p8(7), make_f24p8(-2) };
 					the_pickaxe_ptr->set_curr_in_level_pos
 						(get_curr_in_level_pos()
-						+ (vec2_f24p8){ make_f24p8(7), make_f24p8(-2) });
+						+ (Vec2F24p8){ make_f24p8(7), make_f24p8(-2) });
 				}
 				else //if (the_oam_entry.get_hflip_status())
 				{
 					//the_pickaxe_ptr->in_level_pos = in_level_pos
-					//	+ (vec2_f24p8){ make_f24p8(-7), make_f24p8(-2) };
+					//	+ (Vec2F24p8){ make_f24p8(-7), make_f24p8(-2) };
 					the_pickaxe_ptr->set_curr_in_level_pos
 						(get_curr_in_level_pos()
-						+ (vec2_f24p8){ make_f24p8(-7), make_f24p8(-2) });
+						+ (Vec2F24p8){ make_f24p8(-7), make_f24p8(-2) });
 				}
 				//if ((speed != (Fixed24p8){0} && get_curr_on_ground())
 				//	|| !get_curr_on_ground())
@@ -935,18 +935,18 @@ void PlayerSprite::update_the_pickaxe()
 				if (!the_oam_entry.get_hflip_status())
 				{
 					//the_pickaxe_ptr->in_level_pos = in_level_pos
-					//	+ (vec2_f24p8){ make_f24p8(11), make_f24p8(3) };
+					//	+ (Vec2F24p8){ make_f24p8(11), make_f24p8(3) };
 					the_pickaxe_ptr->set_curr_in_level_pos
 						(get_curr_in_level_pos()
-						+ (vec2_f24p8){ make_f24p8(11), make_f24p8(3) });
+						+ (Vec2F24p8){ make_f24p8(11), make_f24p8(3) });
 				}
 				else //if (the_oam_entry.get_hflip_status())
 				{
 					//the_pickaxe_ptr->in_level_pos = in_level_pos
-					//	+ (vec2_f24p8){ make_f24p8(-11), make_f24p8(3) };
+					//	+ (Vec2F24p8){ make_f24p8(-11), make_f24p8(3) };
 					the_pickaxe_ptr->set_curr_in_level_pos
 						(get_curr_in_level_pos()
-						+ (vec2_f24p8){ make_f24p8(-11), make_f24p8(3) });
+						+ (Vec2F24p8){ make_f24p8(-11), make_f24p8(3) });
 				}
 				//if ((speed != (Fixed24p8){0} && get_curr_on_ground())
 				//	|| !get_curr_on_ground())
@@ -970,18 +970,18 @@ void PlayerSprite::update_the_pickaxe()
 				if (!the_oam_entry.get_hflip_status())
 				{
 					//the_pickaxe_ptr->in_level_pos = in_level_pos
-					//	+ (vec2_f24p8){ make_f24p8(14), make_f24p8(17) };
+					//	+ (Vec2F24p8){ make_f24p8(14), make_f24p8(17) };
 					the_pickaxe_ptr->set_curr_in_level_pos
 						(get_curr_in_level_pos()
-						+ (vec2_f24p8){ make_f24p8(14), make_f24p8(17) });
+						+ (Vec2F24p8){ make_f24p8(14), make_f24p8(17) });
 				}
 				else //if (the_oam_entry.get_hflip_status())
 				{
 					//the_pickaxe_ptr->in_level_pos = in_level_pos
-					//	+ (vec2_f24p8){ make_f24p8(-14), make_f24p8(17) };
+					//	+ (Vec2F24p8){ make_f24p8(-14), make_f24p8(17) };
 					the_pickaxe_ptr->set_curr_in_level_pos
 						(get_curr_in_level_pos()
-						+ (vec2_f24p8){ make_f24p8(-14), 
+						+ (Vec2F24p8){ make_f24p8(-14), 
 						make_f24p8(17) });
 				}
 				//if ((speed != (Fixed24p8){0} && get_curr_on_ground())
@@ -1287,8 +1287,8 @@ void PlayerSprite::handle_jumping_stuff(u32 is_jump_key_hit,
 // This function SHOULD be passed a SpriteAllocator So That some types of
 // sprites, such as powerups, Can be properly despawned!
 void PlayerSprite::sprite_interaction_reponse(Sprite& the_other_sprite, 
-	PrevCurrPair<bg_point>& camera_pos_pc_pair, 
-	const vec2_u32& the_level_size_2d)
+	PrevCurrPair<BgPoint>& camera_pos_pc_pair, 
+	const Vec2u32& the_level_size_2d)
 {
 	switch (the_other_sprite.the_sprite_type)
 	{

@@ -134,13 +134,13 @@ inline auto get_qscmp_fp(int (*to_cast)(const Type*, const Type*))
 }
 
 template<typename Type>
-inline auto get_generic_void_ptr_1arg_fp(void_ptr (*to_cast)(Type*))
+inline auto get_generic_void_ptr_1arg_fp(voidPtr (*to_cast)(Type*))
 {
 	return get_other_1arg_fp(to_cast);
 }
 
 template<typename Type>
-inline auto get_generic_s16_ptr_1arg_fp(s16_ptr (*to_cast)(Type*))
+inline auto get_generic_s16_ptr_1arg_fp(s16Ptr (*to_cast)(Type*))
 {
 	return get_other_1arg_fp(to_cast);
 }

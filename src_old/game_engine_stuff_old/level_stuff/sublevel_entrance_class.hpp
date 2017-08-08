@@ -45,7 +45,7 @@ public:		// variables
 	
 	sublevel_entrance_type type;
 	
-	vec2_f24p8 in_level_pos;
+	Vec2F24p8 in_level_pos;
 	
 } __attribute__((_align4));
 
