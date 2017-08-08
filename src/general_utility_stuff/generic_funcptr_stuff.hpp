@@ -30,27 +30,27 @@
 // externally_allocated_sa_list classes, but they are of course free To use
 // for other things.
 typedef void (*generic_void_1arg_fp)(void*);
-typedef void (*generic_void_2arg_fp)(void*, void*);
-typedef void (*generic_void_3arg_fp)(void*, void*, void*);
-typedef void (*generic_void_4arg_fp)(void*, void*, void*, void*);
-typedef u32 (*generic_u32_2arg_fp)(void*, void*);
+typedef void (*GenericVoid2ArgFp)(void*, void*);
+typedef void (*GenericVoid3ArgFp)(void*, void*, void*);
+typedef void (*GenericVoid4ArgFp)(void*, void*, void*, void*);
+typedef u32 (*Genericu32_2ArgFp)(void*, void*);
 
 
 // This Is for function pointers To pass To qsort()
-typedef int (*qscmp_fp)(const void*, const void*);
+typedef int (*QscmpFp)(const void*, const void*);
 
 
 
-typedef void* (*generic_void_ptr_1arg_fp)(void*);
-typedef s16* (*generic_s16_ptr_1arg_fp)(void*);
+typedef void* (*GenericVoidPtr1ArgFp)(void*);
+typedef s16* (*Generics16Ptr1ArgFp)(void*);
 
-typedef vec2_s16* (*generic_vec2_s16_ptr_1arg_fp)(void*);
+typedef Vec2s16* (*GenericVec2s16Ptr1ArgFp)(void*);
 
 
 // This X macro Is strictly used for working around what appears To be a
 // bug in my text editor's ctags stuff.
 #define LIST_OF_TYPES_TO_MAKE_PTR_TYPEDEFS_FOR(macro) \
-	macro(void) macro(s16) macro(vec2_s16)
+	macro(void) macro(s16) macro(Vec2s16)
 
 #define GENERATE_PTR_TYPEDEF(type) \
 typedef type* type##_ptr;
@@ -69,23 +69,23 @@ inline generic_void_1arg_fp get_generic_void_1arg_fp
 	return reinterpret_cast<generic_void_1arg_fp>(to_cast);
 }
 template<typename type_1, typename type_2 >
-inline generic_void_2arg_fp get_generic_void_2arg_fp
+inline GenericVoid2ArgFp get_generic_void_2arg_fp
 	(void (*to_cast)(type_1*, type_2*))
 {
-	return reinterpret_cast<generic_void_2arg_fp>(to_cast);
+	return reinterpret_cast<GenericVoid2ArgFp>(to_cast);
 }
 template<typename type_1, typename type_2, typename type_3 >
-inline generic_void_3arg_fp get_generic_void_3arg_fp
+inline GenericVoid3ArgFp get_generic_void_3arg_fp
 	(void (*to_cast)(type_1*, type_2*, type_3*))
 {
-	return reinterpret_cast<generic_void_3arg_fp>(to_cast);
+	return reinterpret_cast<GenericVoid3ArgFp>(to_cast);
 }
 template<typename type_1, typename type_2, typename type_3, 
 	typename type_4 >
-inline generic_void_4arg_fp get_generic_void_4arg_fp
+inline GenericVoid4ArgFp get_generic_void_4arg_fp
 	(void (*to_cast)(type_1*, type_2*, type_3*, type_4*))
 {
-	return reinterpret_cast<generic_void_4arg_fp>(to_cast);
+	return reinterpret_cast<GenericVoid4ArgFp>(to_cast);
 }
 
 
@@ -157,10 +157,10 @@ inline auto get_generic_vec2_s16_ptr_1arg_fp
 extern "C"
 {
 void generic_binary_func_shared_backend(void* a, void* b,
-	generic_void_2arg_fp the_fp);
+	GenericVoid2ArgFp the_fp);
 
 u32 generic_u32_func_shared_backend(void* a, void* b,
-	generic_u32_2arg_fp the_fp);
+	Genericu32_2ArgFp the_fp);
 }
 
 
@@ -170,7 +170,7 @@ inline void generic_binary_func_backend(type* a, type* b,
 {
 	generic_binary_func_shared_backend
 		(const_cast<type*>(a), const_cast<type*>(b), 
-		reinterpret_cast<generic_void_2arg_fp>(the_fp));
+		reinterpret_cast<GenericVoid2ArgFp>(the_fp));
 }
 template<typename type >
 inline void generic_binary_func_backend(const type* a, type* b,
@@ -178,7 +178,7 @@ inline void generic_binary_func_backend(const type* a, type* b,
 {
 	generic_binary_func_shared_backend
 		(const_cast<type*>(a), const_cast<type*>(b), 
-		reinterpret_cast<generic_void_2arg_fp>(the_fp));
+		reinterpret_cast<GenericVoid2ArgFp>(the_fp));
 }
 template<typename type >
 inline void generic_binary_func_backend(type* a, const type* b,
@@ -186,7 +186,7 @@ inline void generic_binary_func_backend(type* a, const type* b,
 {
 	generic_binary_func_shared_backend
 		(const_cast<type*>(a), const_cast<type*>(b),
-		reinterpret_cast<generic_void_2arg_fp>(the_fp));
+		reinterpret_cast<GenericVoid2ArgFp>(the_fp));
 }
 // Not sure I'll ever use this
 template<typename type >
@@ -195,7 +195,7 @@ inline void generic_binary_func_backend(const type* a, const type* b,
 {
 	generic_binary_func_shared_backend
 		(const_cast<type*>(a), const_cast<type*>(b), 
-		reinterpret_cast<generic_void_2arg_fp>(the_fp));
+		reinterpret_cast<GenericVoid2ArgFp>(the_fp));
 }
 
 
@@ -205,7 +205,7 @@ inline u32 generic_u32_func_backend(type* a, type* b,
 {
 	return generic_u32_func_shared_backend
 		(const_cast<type*>(a), const_cast<type*>(b), 
-		reinterpret_cast<generic_u32_2arg_fp>(the_fp));
+		reinterpret_cast<Genericu32_2ArgFp>(the_fp));
 }
 template<typename type >
 inline u32 generic_u32_func_backend(const type* a, type* b,
@@ -213,7 +213,7 @@ inline u32 generic_u32_func_backend(const type* a, type* b,
 {
 	return generic_u32_func_shared_backend
 		(const_cast<type*>(a), const_cast<type*>(b), 
-		reinterpret_cast<generic_u32_2arg_fp>(the_fp));
+		reinterpret_cast<Genericu32_2ArgFp>(the_fp));
 }
 template<typename type >
 inline u32 generic_u32_func_backend(type* a, const type* b,
@@ -221,7 +221,7 @@ inline u32 generic_u32_func_backend(type* a, const type* b,
 {
 	return generic_u32_func_shared_backend
 		(const_cast<type*>(a), const_cast<type*>(b), 
-		reinterpret_cast<generic_u32_2arg_fp>(the_fp));
+		reinterpret_cast<Genericu32_2ArgFp>(the_fp));
 }
 template<typename type >
 inline u32 generic_u32_func_backend(const type* a, const type* b,
@@ -229,7 +229,7 @@ inline u32 generic_u32_func_backend(const type* a, const type* b,
 {
 	return generic_u32_func_shared_backend
 		(const_cast<type*>(a), const_cast<type*>(b), 
-		reinterpret_cast<generic_u32_2arg_fp>(the_fp));
+		reinterpret_cast<Genericu32_2ArgFp>(the_fp));
 }
 
 

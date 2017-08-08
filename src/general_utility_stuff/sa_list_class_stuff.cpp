@@ -135,7 +135,7 @@ void ListBackend::internal_func_allocate_and_assign_to_node
 //	//the_front_node.next_index() = new_next_index;
 //	//the_front_node.prev_index() = -1;
 //	assign_to_whole_node(the_front_node, to_push, 
-//		vec2_s16(new_next_index, -1), can_move_value);
+//		Vec2s16(new_next_index, -1), can_move_value);
 //	
 //	return the_front_index;
 //}
@@ -167,7 +167,7 @@ void ListBackend::internal_func_allocate_and_assign_to_node
 //		get_prev_index_at_index(old_front_index) = the_front_index;
 //	}
 //	
-//	*node_to_move.index_pair_ptr = vec2_s16(new_next_index, -1);
+//	*node_to_move.index_pair_ptr = Vec2s16(new_next_index, -1);
 //	
 //	
 //	return the_front_index;
@@ -221,7 +221,7 @@ s32 ListBackend::internal_func_move_unlinked_node_to_front
 	//the_front_node.prev_index() = -1;
 	
 	
-	*node_to_move.index_pair_ptr = vec2_s16(new_next_index, -1);
+	*node_to_move.index_pair_ptr = Vec2s16(new_next_index, -1);
 	
 	return the_front_index;
 }
@@ -271,8 +271,8 @@ s32 ListBackend::internal_func_move_unlinked_node_to_front
 //	////the_front_node.next_index() = new_next_index;
 //	////the_front_node.prev_index() = -1;
 //	//assign_to_whole_node(the_front_node, to_push, 
-//	//	vec2_s16(new_next_index, -1), can_move_value);
-//	*node_to_move.index_pair_ptr = vec2_s16(new_next_index, -1);
+//	//	Vec2s16(new_next_index, -1), can_move_value);
+//	*node_to_move.index_pair_ptr = Vec2s16(new_next_index, -1);
 //	
 //	return the_front_index;
 //}
@@ -326,7 +326,7 @@ s32 ListBackend::internal_func_move_unlinked_node_to_front
 //		//node_at_new_index.prev_index() = old_prev_index;
 //		
 //		assign_to_whole_node(node_at_new_index, to_insert, 
-//			vec2_s16(index, old_prev_index), can_move_value);
+//			Vec2s16(index, old_prev_index), can_move_value);
 //		
 //		
 //		node_at_index.prev_index() = new_index;
@@ -361,7 +361,7 @@ s32 ListBackend::internal_func_move_unlinked_node_before
 	
 	get_next_index_at_index(old_prev_index) = to_move_index;
 	
-	*node_to_move.index_pair_ptr = vec2_s16(to_move_before_index, 
+	*node_to_move.index_pair_ptr = Vec2s16(to_move_before_index, 
 		old_prev_index);
 	
 	node_to_move_before.prev_index() = to_move_index;
@@ -422,7 +422,7 @@ s32 ListBackend::internal_func_move_unlinked_node_before
 //	//node_at_new_index.prev_index() = index;
 //	
 //	assign_to_whole_node(node_at_new_index, to_insert,
-//		vec2_s16(new_next_index, index), can_move_value);
+//		Vec2s16(new_next_index, index), can_move_value);
 //	
 //	
 //	//return index;
@@ -465,8 +465,8 @@ s32 ListBackend::internal_func_move_unlinked_node_after
 	}
 	
 	//assign_to_whole_node(node_at_new_index, to_insert,
-	//	vec2_s16(new_next_index, index), can_move_value);
-	*node_to_move.index_pair_ptr = vec2_s16(new_next_index,
+	//	Vec2s16(new_next_index, index), can_move_value);
+	*node_to_move.index_pair_ptr = Vec2s16(new_next_index,
 		to_move_after_index);
 	
 	//return index;
@@ -501,10 +501,10 @@ s32 ListBackend::internal_func_move_unlinked_node_after
 //	const s32 old_front_index = the_front_index,
 //		old_back_index = the_back_index;
 //	
-//	//vec2_s16& index_pair_at_index = *get_index_pair_at_index(index);
+//	//Vec2s16& index_pair_at_index = *get_index_pair_at_index(index);
 //	
 //	NodeContents node_at_index = get_node_contents_at(index);
-//	vec2_s16& index_pair_at_index = *node_at_index.index_pair_ptr;
+//	Vec2s16& index_pair_at_index = *node_at_index.index_pair_ptr;
 //	
 //	const s32 old_next_index = index_pair_at_index
 //		[NodeContents::vec2_index_for_next_index],
@@ -607,7 +607,7 @@ void* ListBackend::internal_func_unlink_at(s32 index,
 	}
 	
 	
-	vec2_s16& index_pair_at_index = *local_node_at_index_ptr
+	Vec2s16& index_pair_at_index = *local_node_at_index_ptr
 		->index_pair_ptr;
 	
 	const s32 old_next_index = index_pair_at_index
@@ -666,7 +666,7 @@ void* ListBackend::internal_func_unlink_at(s32 index,
 //void ListBackend::internal_func_unlink_from_connected_index_at
 //	(s32 index, u32 index_to_vec2)
 //{
-//	vec2_s16& index_pair_at_index = *get_index_pair_at_index(index);
+//	Vec2s16& index_pair_at_index = *get_index_pair_at_index(index);
 //	
 //	const s32 old_other_index = index_pair_at_index[index_to_vec2];
 //	
@@ -679,7 +679,7 @@ void* ListBackend::internal_func_unlink_at(s32 index,
 //	
 //	index_pair_at_index[index_to_vec2] = -1;
 //	
-//	vec2_s16& index_pair_at_other_index = *get_index_pair_at_index
+//	Vec2s16& index_pair_at_other_index = *get_index_pair_at_index
 //		(old_other_index);
 //	
 //	// Generic code
@@ -1139,7 +1139,7 @@ s32 ListBackend::merge_sort_via_array()
 	// This Is slower than filling arr_a in the previous for loop, but it
 	// Can use SIGNIFICANTLY less memory in the general case if the sa_list
 	// Is not full.  This might be a good use case for an std::vector.
-	ndai_dyn_arr arr_a(real_num_nodes), work_arr(real_num_nodes);
+	NdaiDynArr arr_a(real_num_nodes), work_arr(real_num_nodes);
 	
 	
 	{
@@ -1223,7 +1223,7 @@ s32 ListBackend::merge_sort_via_array()
 	static constexpr bool do_swap = true;
 	
 	bool main_arr_is_arr_a = false;
-	PrevCurrPair<ndai_dyn_arr*> main_arr_pc_pair, secondary_arr_pc_pair;
+	PrevCurrPair<NdaiDynArr*> main_arr_pc_pair, secondary_arr_pc_pair;
 	
 	
 	//if (!do_swap)
@@ -1255,7 +1255,7 @@ s32 ListBackend::merge_sort_via_array()
 		}
 		
 		//auto get_merge_args = [&](NodeDataAndIndex* n_left_subarr)
-		auto get_merge_args = [&](ndai_dyn_arr& specific_arr, 
+		auto get_merge_args = [&](NdaiDynArr& specific_arr, 
 			size_t n_left_subarr_offset) -> void
 		{
 			right_subarr_offset = 0;

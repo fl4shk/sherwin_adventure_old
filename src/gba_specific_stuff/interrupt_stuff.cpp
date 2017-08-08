@@ -26,7 +26,7 @@
 
 extern "C"
 {
-	volatile isr_funcptr isr_table[intr_amount] __attribute__((_bss));
+	volatile IrsFuncptr isr_table[intr_amount] __attribute__((_bss));
 	
 	
 	// This Is for maxmod compatibility
@@ -56,7 +56,7 @@ extern "C"
 	
 	// This Is also for maxmod compatibility, written somewhat differently
 	// from That used in libgba.
-	//void irqSet(int mask, isr_funcptr func)
+	//void irqSet(int mask, IrsFuncptr func)
 	void irqSet(int mask, u32 func_addr)
 	{
 		
@@ -154,7 +154,7 @@ void irq_init()
 	//irqEnable(IRQ_VBLANK);
 	
 	//irqSet(IRQ_VBLANK, mmVBlank);
-	//irqSet(IRQ_VBLANK, reinterpret_cast<isr_funcptr>
+	//irqSet(IRQ_VBLANK, reinterpret_cast<IrsFuncptr>
 	//	(&maxmod_vblank_updater_func));
 	
 	//irqSet(IRQ_VBLANK, (u32)mmVBlank);

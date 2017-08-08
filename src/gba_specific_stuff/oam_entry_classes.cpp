@@ -24,7 +24,7 @@ OamEntry oam_mirror[oam_mirror_size];
 //OamEntryAffine* const OAM_MIRROR_AFF = (OamEntryAffine*)oam_mirror ;
 
 
-const vec2_u32 OamEntry::ss_to_vec2_arr[lim_ss]
+const Vec2u32 OamEntry::ss_to_vec2_arr[lim_ss]
 = {
 	// Square shapes
 	{ 8, 8 }, { 16, 16 }, { 32, 32 }, { 64, 64 },
@@ -36,7 +36,7 @@ const vec2_u32 OamEntry::ss_to_vec2_arr[lim_ss]
 	{ 8, 16 }, { 8, 32 }, { 16, 32 }, { 32, 64 },
 };
 
-const vec2_u32 OamEntry::ss_enum_to_ss_attrs_arr[lim_ss]
+const Vec2u32 OamEntry::ss_enum_to_ss_attrs_arr[lim_ss]
 = {
 	// Square shapes
 	{ OBJ_ATTR0_SHAPE_SQUARE, OBJ_ATTR1_SIZE_0 }, 
@@ -77,7 +77,7 @@ void OamEntry::set_shape_size(OamEntry::shape_size n_shape_size)
 	
 	if (n_shape_size < 0 || n_shape_size >= lim_ss)
 	{
-		const vec2_u32& ss_attrs_vec2 = ss_enum_to_ss_attrs_arr[0];
+		const Vec2u32& ss_attrs_vec2 = ss_enum_to_ss_attrs_arr[0];
 		
 		clear_and_set_bits(temp_attr0, OBJ_ATTR0_SHAPE_MASK,
 			ss_attrs_vec2.x);
@@ -86,7 +86,7 @@ void OamEntry::set_shape_size(OamEntry::shape_size n_shape_size)
 	}
 	else
 	{
-		const vec2_u32& ss_attrs_vec2 = ss_enum_to_ss_attrs_arr
+		const Vec2u32& ss_attrs_vec2 = ss_enum_to_ss_attrs_arr
 			[n_shape_size];
 		
 		clear_and_set_bits(temp_attr0, OBJ_ATTR0_SHAPE_MASK,
@@ -129,7 +129,7 @@ OamEntry::shape_size OamEntry::get_shape_size() const
 	}
 }
 
-void OamEntry::set_shape_size_with_vec2(const vec2_u32& n_shape_size)
+void OamEntry::set_shape_size_with_vec2(const Vec2u32& n_shape_size)
 {
 	switch (n_shape_size.x)
 	{
@@ -198,7 +198,7 @@ void OamEntry::set_shape_size_with_vec2(const vec2_u32& n_shape_size)
 }
 
 
-vec2_u32 OamEntry::get_shape_size_as_vec2() const
+Vec2u32 OamEntry::get_shape_size_as_vec2() const
 {
 	return ss_to_vec2_arr[get_shape_size()];
 }

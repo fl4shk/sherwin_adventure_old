@@ -23,13 +23,13 @@ extern "C"
 {
 
 void generic_binary_func_shared_backend(void* a, void* b,
-	generic_void_2arg_fp the_fp)
+	GenericVoid2ArgFp the_fp)
 {
 	(*the_fp)(a, b);
 }
 
 u32 generic_u32_func_shared_backend(void* a, void* b,
-	generic_u32_2arg_fp the_fp)
+	Genericu32_2ArgFp the_fp)
 {
 	return (*the_fp)(a, b);
 }

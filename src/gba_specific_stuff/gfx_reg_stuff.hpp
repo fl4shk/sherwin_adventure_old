@@ -35,7 +35,7 @@ struct Tile
 	static const u32 arrsize = 8;
 	u32 data[arrsize];
 };
-typedef Tile tile4;
+typedef Tile Tile4;
 
 // d-Tile:  double-sized Tile (8bpp)
 struct Tile8
@@ -46,13 +46,13 @@ struct Tile8
 
 
 static const u32 charblock_size = 0x200;
-typedef Tile charblock[charblock_size];
+typedef Tile Charblock[charblock_size];
 
 static const u32 charblock8_size = 0x100;
-typedef Tile8 charblock8[charblock8_size];
+typedef Tile8 Charblock8[charblock8_size];
 
-#define TILE_RAM		((charblock*)(MEM_VRAM))
-#define TILE8_RAM		((charblock8*)(MEM_VRAM))
+#define TILE_RAM		((Charblock*)(MEM_VRAM))
+#define TILE8_RAM		((Charblock8*)(MEM_VRAM))
 
 
 #define BG_TILE_VRAM ((vu16*)(TILE_RAM[0]))
@@ -69,7 +69,7 @@ typedef Tile8 charblock8[charblock8_size];
 // ---- Screen-Entry Stuffs ----
 
 // Screen entry conceptual typedef
-typedef u16 scr_entry;
+typedef u16 ScrEntry;
 
 // Regular map offsets
 //struct BgPoint
@@ -77,21 +77,21 @@ typedef u16 scr_entry;
 //	//s16 x, y;
 //	u16 x, y;
 //} __attribute__((aligned(4)));
-//typedef vec2_s16 BgPoint;
-typedef vec2_f24p8 BgPoint;
+//typedef Vec2s16 BgPoint;
+typedef Vec2F24p8 BgPoint;
 
 
 // Screenblock struct.  There are 32 (0x20) tiles per row, and 32 (0x20)
 // tiles per column.
 static constexpr u32 screenblock_size = 0x400;
 static constexpr u32 screenblock_xsize = 0x20, screenblock_ysize = 0x20;
-static constexpr vec2_u32 screenblock_size_2d(screenblock_xsize, 
+static constexpr Vec2u32 screenblock_size_2d(screenblock_xsize, 
 	screenblock_ysize);
-typedef scr_entry screenblock[screenblock_size];
+typedef ScrEntry Screenblock[screenblock_size];
 
 
 // Screen-entry mapping: SE_RAM[y][x] Is SBB y, entry x
-#define SE_RAM ((screenblock*)MEM_VRAM)
+#define SE_RAM ((Screenblock*)MEM_VRAM)
 
 
 
@@ -155,8 +155,8 @@ static const u32 num_colors_per_palette = 16;
 
 // LCD I/O BG Scrolling Registers
 //#define REG_BGOFS ((BgPoint*)(MEM_IO + 0x0010))
-// Pretty cool how I Can use my vec2_s16 class for this
-#define REG_BGOFS ((vec2_s16*)(MEM_IO + 0x0010))
+// Pretty cool how I Can use my Vec2s16 class for this
+#define REG_BGOFS ((Vec2s16*)(MEM_IO + 0x0010))
 
 #define REG_BGHOFS_N(n) *((vu16*)(MEM_IO + 0x0010 + 0x04 * n))
 #define REG_BGVOFS_N(n) *((vu16*)(MEM_IO + 0x0012 + 0x04 * n))
@@ -177,25 +177,25 @@ static const u32 num_colors_per_palette = 16;
 static const u32 SCREEN_WIDTH = 240;
 static const u32 SCREEN_HEIGHT = 160;
 
-//static const vec2_u32 screen_size_2d = { SCREEN_WIDTH, SCREEN_HEIGHT };
-static const vec2_u32 screen_size_2d(SCREEN_WIDTH, SCREEN_HEIGHT);
+//static const Vec2u32 screen_size_2d = { SCREEN_WIDTH, SCREEN_HEIGHT };
+static const Vec2u32 screen_size_2d(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 // The width and height of the screen, in tiles
 static const u32 screen_width_in_tiles = 30;
 static const u32 screen_height_in_tiles = 20;
 
-//static const vec2_u32 screen_size_in_tiles_2d = { screen_width_in_tiles, 
+//static const Vec2u32 screen_size_in_tiles_2d = { screen_width_in_tiles, 
 //	screen_height_in_tiles };
-static const vec2_u32 screen_size_in_tiles_2d(screen_width_in_tiles, 
+static const Vec2u32 screen_size_in_tiles_2d(screen_width_in_tiles, 
 	screen_height_in_tiles);
 
 // The width and height of the screen, in blocks
 static const u32 screen_width_in_blocks = 15;
 static const u32 screen_height_in_blocks = 10;
 
-//static const vec2_u32 screen_size_in_blocks_2d = { screen_width_in_blocks, 
+//static const Vec2u32 screen_size_in_blocks_2d = { screen_width_in_blocks, 
 //	screen_height_in_blocks };
-static const vec2_u32 screen_size_in_blocks_2d(screen_width_in_blocks, 
+static const Vec2u32 screen_size_in_blocks_2d(screen_width_in_blocks, 
 	screen_height_in_blocks);
 
 static const u32 num_pixels_per_tile_row = 8;

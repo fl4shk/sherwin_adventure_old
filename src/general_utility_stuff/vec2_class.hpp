@@ -198,9 +198,9 @@ inline Vec2<type> operator * (const type& scale,
 }
 
 
-typedef Vec2<u16> vec2_u16; typedef Vec2<s16> vec2_s16;
-typedef Vec2<u32> vec2_u32; typedef Vec2<s32> vec2_s32;
-typedef Vec2<u64> vec2_u64; typedef Vec2<s64> vec2_s64;
+typedef Vec2<u16> Vec2u16; typedef Vec2<s16> Vec2s16;
+typedef Vec2<u32> Vec2u32; typedef Vec2<s32> Vec2s32;
+typedef Vec2<u64> Vec2u64; typedef Vec2<s64> Vec2s64;
 
 
 #define GENERATE_SPECIFIC_VEC2_CLASS_CONTENTS(specific_type) \
@@ -354,8 +354,8 @@ class Vec2<Fixed8p8>
 GENERATE_SPECIFIC_VEC2_CLASS_CONTENTS(Fixed8p8)
 } __attribute__((_align4));
 
-typedef Vec2<Fixed24p8> vec2_f24p8;
-typedef Vec2<Fixed8p8> vec2_f8p8;
+typedef Vec2<Fixed24p8> Vec2F24p8;
+typedef Vec2<Fixed8p8> Vec2F8p8;
 
 
 
@@ -369,13 +369,13 @@ typedef Vec2<Fixed8p8> vec2_f8p8;
 
 
 
-inline vec2_f24p8 operator + (const vec2_f8p8&a, const vec2_f24p8& b)
+inline Vec2F24p8 operator + (const Vec2F8p8&a, const Vec2F24p8& b)
 {
 	return { a.x + b.x, a.y + b.y };
 }
 
 
-inline vec2_f24p8 operator - (const vec2_f8p8&a, const vec2_f24p8& b)
+inline Vec2F24p8 operator - (const Vec2F8p8&a, const Vec2F24p8& b)
 {
 	return { a.x - b.x, a.y - b.y };
 }
@@ -395,16 +395,16 @@ inline Vec2<type> custom_abs(const Vec2<type>& val)
 
 // These are not actually hacks because the specific Vec2's contain plain
 // old data.
-inline vec2_s16& copy_vec2_s16_via_ptr(vec2_s16& to_assign, 
-	const vec2_s16& to_copy)
+inline Vec2s16& copy_vec2_s16_via_ptr(Vec2s16& to_assign, 
+	const Vec2s16& to_copy)
 {
 	*reinterpret_cast<u32*>(&to_assign)
 		= *reinterpret_cast<const u32*>(&to_copy);
 	
 	return to_assign;
 }
-inline vec2_u16& copy_vec2_u16_via_ptr(vec2_u16& to_assign, 
-	const vec2_u16& to_copy)
+inline Vec2u16& copy_Vec2u16_via_ptr(Vec2u16& to_assign, 
+	const Vec2u16& to_copy)
 {
 	*reinterpret_cast<u32*>(&to_assign)
 		= *reinterpret_cast<const u32*>(&to_copy);

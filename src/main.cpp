@@ -125,10 +125,10 @@ int main_2()
 	//profile_dynamic_allocations(20);
 	
 	
-	//HorizCollLseg a(vec2_s32(10, 20), make_f24p8(10));
-	//HorizCollLseg b(vec2_s32(20, 20), make_f24p8(1));
+	//HorizCollLseg a(Vec2s32(10, 20), make_f24p8(10));
+	//HorizCollLseg b(Vec2s32(20, 20), make_f24p8(1));
 	//
-	//VertCollLseg c(vec2_s32(10, 20), make_f24p8(50));
+	//VertCollLseg c(Vec2s32(10, 20), make_f24p8(50));
 	//////show_debug_u32_group(a.intersects(b), a.intersects(c), 
 	//////	c.intersects(a));
 	////profile_start();
@@ -176,12 +176,12 @@ int real_main()
 //	
 //	//ASM_COMMENT("Before first show_debug_s32_group() call");
 //	//show_debug_s32_group
-//	//	(fixedu12p4_packed::get_underlying_type_is_signed(),
-//	//	fixeds12p4_packed::get_underlying_type_is_signed(),
-//	//	fixeds8p8_packed::get_underlying_type_is_signed(),
-//	//	sizeof(fixedu12p4_packed), 
-//	//	sizeof(fixeds12p4_packed),
-//	//	sizeof(fixeds8p8_packed));
+//	//	(Fixedu12p4Packed::get_underlying_type_is_signed(),
+//	//	Fixeds12p4Packed::get_underlying_type_is_signed(),
+//	//	Fixeds8p8Packed::get_underlying_type_is_signed(),
+//	//	sizeof(Fixedu12p4Packed), 
+//	//	sizeof(Fixeds12p4Packed),
+//	//	sizeof(Fixeds8p8Packed));
 //	//
 //	//ASM_COMMENT("Before second show_debug_s32_group() call");
 //	//show_debug_s32_group(make_f24p8(-3, 5).data, 
@@ -265,7 +265,7 @@ int real_main()
 //			//	(bool)the_player.the_oam_entry.get_hflip_status());
 //			SpriteManager::spawn_a_sprite_basic(StWaffle,
 //				the_player.in_level_pos.curr +
-//				vec2_f24p8(make_f24p8(0), 
+//				Vec2F24p8(make_f24p8(0), 
 //				make_f24p8(the_player.get_shape_size_as_vec2().y / 2)), 
 //				GfxManager::bgofs_mirror[0],
 //				(bool)the_player.the_oam_entry.get_hflip_status());

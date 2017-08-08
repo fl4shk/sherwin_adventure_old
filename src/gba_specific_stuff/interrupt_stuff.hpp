@@ -102,11 +102,11 @@ inline void ime_enable()
 
 
 // Function Pointer for Interrupt Service Routines
-typedef void (*isr_funcptr)(void);
+typedef void (*IrsFuncptr)(void);
 
 // This Is a pointer To the main ISR (an ARM mode function btw), which MUST
 // be set properly for interrupts To work!
-#define REG_ISR_MAIN *((volatile isr_funcptr*)(MEM_IWRAM + 0x7ffc))
+#define REG_ISR_MAIN *((volatile IrsFuncptr*)(MEM_IWRAM + 0x7ffc))
 
 // Some BIOS calls require interrupts, which have To be acknowledged by
 // using this register (I still think it's weird That there are registers
@@ -121,11 +121,11 @@ typedef void (*isr_funcptr)(void);
 extern "C"
 {
 	// Also
-	extern volatile isr_funcptr isr_table[intr_amount];
+	extern volatile IrsFuncptr isr_table[intr_amount];
 	
 	void irqEnable(int mask);
 	
-	//void irqSet(int mask, isr_funcptr func);
+	//void irqSet(int mask, IrsFuncptr func);
 	void irqSet(int mask, u32 func_addr);
 }
 

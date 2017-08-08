@@ -656,9 +656,9 @@ public:		// functions
 	
 } __attribute__((_packed));
 
-typedef FixedptNumPacked<u16, 4 > fixedu12p4_packed;
-typedef FixedptNumPacked<s16, 4 > fixeds12p4_packed;
-typedef FixedptNumPacked<s16, 8 > fixeds8p8_packed;
+typedef FixedptNumPacked<u16, 4 > Fixedu12p4Packed;
+typedef FixedptNumPacked<s16, 4 > Fixeds12p4Packed;
+typedef FixedptNumPacked<s16, 8 > Fixeds8p8Packed;
 
 
 
@@ -722,23 +722,23 @@ inline Fixed8p8 make_f8p8(s32 whole_part, u32 frac_part=0)
 	return make_signed_fixedpt_num<Fixed8p8>(whole_part, frac_part);
 }
 
-inline fixedu12p4_packed make_fu12p4_packed(u32 whole_part, 
+inline Fixedu12p4Packed make_fu12p4_packed(u32 whole_part, 
 	u32 frac_part=0)
 {
-	return make_unsigned_fixedpt_num<fixedu12p4_packed>(whole_part, 
+	return make_unsigned_fixedpt_num<Fixedu12p4Packed>(whole_part, 
 		frac_part);
 }
-inline fixeds12p4_packed make_fs12p4_packed(s32 whole_part, 
+inline Fixeds12p4Packed make_fs12p4_packed(s32 whole_part, 
 	u32 frac_part=0)
 {
-	return make_signed_fixedpt_num<fixeds12p4_packed>(whole_part, 
+	return make_signed_fixedpt_num<Fixeds12p4Packed>(whole_part, 
 		frac_part);
 }
 
-inline fixeds8p8_packed make_fs8p8_packed(s32 whole_part, 
+inline Fixeds8p8Packed make_fs8p8_packed(s32 whole_part, 
 	u32 frac_part=0)
 {
-	return make_signed_fixedpt_num<fixeds8p8_packed>(whole_part, 
+	return make_signed_fixedpt_num<Fixeds8p8Packed>(whole_part, 
 		frac_part);
 }
 

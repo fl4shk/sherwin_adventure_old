@@ -32,7 +32,7 @@ template< typename type, u32 _width, u32 _height >
 class ArrayCsz2dHelper
 {
 protected:		// variables
-	static constexpr vec2_u32 size_2d = { _width, _height };
+	static constexpr Vec2u32 size_2d = { _width, _height };
 	static constexpr u32 size = size_2d.x * size_2d.y;
 	
 public:			// variables
@@ -75,7 +75,7 @@ public:			// functions
 		return size_2d.y;
 	}
 	
-	const vec2_u32& get_size_2d() const
+	const Vec2u32& get_size_2d() const
 	{
 		return size_2d;
 	}
@@ -88,11 +88,11 @@ public:			// functions
 	{
 		return the_array[y * size_2d.x + x];
 	}
-	type& at(const vec2_u32& offset_2d)
+	type& at(const Vec2u32& offset_2d)
 	{
 		return the_array[offset_2d.y * size_2d.x + offset_2d.x];
 	}
-	type& at(const vec2_s32& offset_2d)
+	type& at(const Vec2s32& offset_2d)
 	{
 		return the_array[offset_2d.y * size_2d.x + offset_2d.x];
 	}
@@ -102,11 +102,11 @@ public:			// functions
 	{
 		return the_array[y * size_2d.x + x];
 	}
-	const type& at(const vec2_u32& offset_2d) const
+	const type& at(const Vec2u32& offset_2d) const
 	{
 		return the_array[offset_2d.y * size_2d.x + offset_2d.x];
 	}
-	const type& at(const vec2_s32& offset_2d) const
+	const type& at(const Vec2s32& offset_2d) const
 	{
 		return the_array[offset_2d.y * size_2d.x + offset_2d.x];
 	}
@@ -121,7 +121,7 @@ template< typename type >
 class Array2dHelper
 {
 protected:		// variables
-	vec2_u32 size_2d;
+	Vec2u32 size_2d;
 	u32 size = 0;
 	
 public:			// variables
@@ -135,13 +135,13 @@ public:			// functions
 	{
 	}
 	inline Array2dHelper(type* s_the_array, 
-		const vec2_u32& s_size_2d)
+		const Vec2u32& s_size_2d)
 		: size_2d(s_size_2d), size(s_size_2d.x * s_size_2d.y),
 		the_array(s_the_array)
 	{
 	}
 	
-	void init(type* s_the_array, const vec2_u32& s_size_2d)
+	void init(type* s_the_array, const Vec2u32& s_size_2d)
 	{
 		size_2d = s_size_2d;
 		size = size_2d.x * size_2d.y;
@@ -173,7 +173,7 @@ public:			// functions
 		return size_2d.y;
 	}
 	
-	const vec2_u32& get_size_2d() const
+	const Vec2u32& get_size_2d() const
 	{
 		return size_2d;
 	}
@@ -186,11 +186,11 @@ public:			// functions
 	{
 		return the_array[y * size_2d.x + x];
 	}
-	type& at(const vec2_u32& offset_2d)
+	type& at(const Vec2u32& offset_2d)
 	{
 		return the_array[offset_2d.y * size_2d.x + offset_2d.x];
 	}
-	type& at(const vec2_s32& offset_2d)
+	type& at(const Vec2s32& offset_2d)
 	{
 		return the_array[offset_2d.y * size_2d.x + offset_2d.x];
 	}
@@ -200,11 +200,11 @@ public:			// functions
 	{
 		return the_array[y * size_2d.x + x];
 	}
-	const type& at(const vec2_u32& offset_2d) const
+	const type& at(const Vec2u32& offset_2d) const
 	{
 		return the_array[offset_2d.y * size_2d.x + offset_2d.x];
 	}
-	const type& at(const vec2_s32& offset_2d) const
+	const type& at(const Vec2s32& offset_2d) const
 	{
 		return the_array[offset_2d.y * size_2d.x + offset_2d.x];
 	}

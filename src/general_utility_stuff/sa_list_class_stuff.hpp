@@ -50,7 +50,7 @@ public:		// constants
 public:		// variables
 	void* data_ptr;
 	
-	vec2_s16* index_pair_ptr;
+	Vec2s16* index_pair_ptr;
 	
 public:		// functions
 	// This Is safe So long as data_ptr Is the first member variable of the
@@ -66,7 +66,7 @@ public:		// functions
 		return static_cast<type*>(data_ptr);
 	}
 	
-	inline vec2_s16& get_index_pair()
+	inline Vec2s16& get_index_pair()
 	{
 		return *index_pair_ptr;
 	}
@@ -114,7 +114,7 @@ public:		// functions
 
 
 
-typedef DynArr<NodeDataAndIndex> ndai_dyn_arr;
+typedef DynArr<NodeDataAndIndex> NdaiDynArr;
 
 
 
@@ -123,7 +123,7 @@ class Node
 {
 public:		// variables
 	type data __attribute__((_align4)) = type();
-	vec2_s16 index_pair = { -1, -1 };
+	Vec2s16 index_pair = { -1, -1 };
 	
 public:		// functions
 	inline Node()
@@ -427,27 +427,27 @@ public:		// functions
 class ExtrasFpGroup
 {
 public:		// typedefs
-	typedef void (*sis_fp)(ndai_dyn_arr&, const size_t, const size_t);
+	typedef void (*sis_fp)(NdaiDynArr&, const size_t, const size_t);
 	
 public:		// function pointers
 	// Function pointers used by various functions in the ListBackend
 	// class.
 	
-	generic_void_2arg_fp specific_type_copy_fp = NULL;
-	generic_void_2arg_fp specific_type_move_fp = NULL;
+	GenericVoid2ArgFp specific_type_copy_fp = NULL;
+	GenericVoid2ArgFp specific_type_move_fp = NULL;
 	generic_void_1arg_fp specific_type_reset_fp = NULL;
-	generic_void_2arg_fp specific_type_swap_fp = NULL;
+	GenericVoid2ArgFp specific_type_swap_fp = NULL;
 	
 	
-	generic_u32_2arg_fp specific_type_less_fp = NULL;
-	generic_u32_2arg_fp specific_type_greater_fp = NULL;
-	qscmp_fp specific_type_qscmp_fp = NULL;
+	Genericu32_2ArgFp specific_type_less_fp = NULL;
+	Genericu32_2ArgFp specific_type_greater_fp = NULL;
+	QscmpFp specific_type_qscmp_fp = NULL;
 	
 	
-	generic_void_ptr_1arg_fp get_node_data_fp = NULL;
-	generic_vec2_s16_ptr_1arg_fp get_index_pair_fp = NULL;
-	generic_void_2arg_fp conv_node_to_contents_fp = NULL;
-	generic_void_2arg_fp insertion_sort_inner_loop_fp = NULL;
+	GenericVoidPtr1ArgFp get_node_data_fp = NULL;
+	GenericVec2s16Ptr1ArgFp get_index_pair_fp = NULL;
+	GenericVoid2ArgFp conv_node_to_contents_fp = NULL;
+	GenericVoid2ArgFp insertion_sort_inner_loop_fp = NULL;
 	
 	sis_fp subarr_insertion_sort_fp = NULL;
 	
@@ -473,19 +473,19 @@ public:		// functions
 	inline ExtrasFpGroup()
 	{
 	}
-	inline ExtrasFpGroup(generic_void_2arg_fp s_specific_type_copy_fp,
-		generic_void_2arg_fp s_specific_type_move_fp,
+	inline ExtrasFpGroup(GenericVoid2ArgFp s_specific_type_copy_fp,
+		GenericVoid2ArgFp s_specific_type_move_fp,
 		generic_void_1arg_fp s_specific_type_reset_fp,
-		generic_void_2arg_fp s_specific_type_swap_fp,
+		GenericVoid2ArgFp s_specific_type_swap_fp,
 		
-		generic_u32_2arg_fp s_specific_type_less_fp,
-		generic_u32_2arg_fp s_specific_type_greater_fp,
-		qscmp_fp s_specific_type_qscmp_fp,
+		Genericu32_2ArgFp s_specific_type_less_fp,
+		Genericu32_2ArgFp s_specific_type_greater_fp,
+		QscmpFp s_specific_type_qscmp_fp,
 		
-		generic_void_ptr_1arg_fp s_get_node_data_fp,
-		generic_vec2_s16_ptr_1arg_fp s_get_index_pair_fp,
-		generic_void_2arg_fp s_conv_node_to_contents_fp,
-		generic_void_2arg_fp s_insertion_sort_inner_loop_fp,
+		GenericVoidPtr1ArgFp s_get_node_data_fp,
+		GenericVec2s16Ptr1ArgFp s_get_index_pair_fp,
+		GenericVoid2ArgFp s_conv_node_to_contents_fp,
+		GenericVoid2ArgFp s_insertion_sort_inner_loop_fp,
 		sis_fp s_subarr_insertion_sort_fp)
 	{
 		specific_type_copy_fp = s_specific_type_copy_fp;
@@ -512,11 +512,11 @@ public:		// functions
 	}
 	
 	
-	inline generic_void_2arg_fp get_specific_type_copy_fp() const
+	inline GenericVoid2ArgFp get_specific_type_copy_fp() const
 	{
 		return specific_type_copy_fp;
 	}
-	inline generic_void_2arg_fp get_specific_type_move_fp() const
+	inline GenericVoid2ArgFp get_specific_type_move_fp() const
 	{
 		return specific_type_move_fp;
 	}
@@ -524,39 +524,39 @@ public:		// functions
 	{
 		return specific_type_reset_fp;
 	}
-	inline generic_void_2arg_fp get_specific_type_swap_fp() const
+	inline GenericVoid2ArgFp get_specific_type_swap_fp() const
 	{
 		return specific_type_swap_fp;
 	}
 	
 	
-	inline generic_u32_2arg_fp get_specific_type_less_fp() const
+	inline Genericu32_2ArgFp get_specific_type_less_fp() const
 	{
 		return specific_type_less_fp;
 	}
-	inline generic_u32_2arg_fp get_specific_type_greater_fp() const
+	inline Genericu32_2ArgFp get_specific_type_greater_fp() const
 	{
 		return specific_type_greater_fp;
 	}
-	inline qscmp_fp get_specific_type_qscmp_fp() const
+	inline QscmpFp get_specific_type_qscmp_fp() const
 	{
 		return specific_type_qscmp_fp;
 	}
 	
 	
-	inline generic_void_ptr_1arg_fp get_get_node_data_fp() const
+	inline GenericVoidPtr1ArgFp get_get_node_data_fp() const
 	{
 		return get_node_data_fp;
 	}
-	inline generic_vec2_s16_ptr_1arg_fp get_get_index_pair_fp() const
+	inline GenericVec2s16Ptr1ArgFp get_get_index_pair_fp() const
 	{
 		return get_index_pair_fp;
 	}
-	inline generic_void_2arg_fp get_conv_node_to_contents_fp() const
+	inline GenericVoid2ArgFp get_conv_node_to_contents_fp() const
 	{
 		return conv_node_to_contents_fp;
 	}
-	inline generic_void_2arg_fp get_insertion_sort_inner_loop_fp() const
+	inline GenericVoid2ArgFp get_insertion_sort_inner_loop_fp() const
 	{
 		return insertion_sort_inner_loop_fp;
 	}
@@ -632,7 +632,7 @@ protected:		// functions To point To
 	{
 		return &to_get_from->data;
 	}
-	static vec2_s16* get_sa_list_index_pair(Node<type>* to_get_from)
+	static Vec2s16* get_sa_list_index_pair(Node<type>* to_get_from)
 		__attribute__((_text_hot_section))
 	{
 		return &to_get_from->index_pair;
@@ -682,7 +682,7 @@ protected:		// functions To point To
 	}
 	
 	
-	static void subarr_insertion_sort(ndai_dyn_arr& arr_a,
+	static void subarr_insertion_sort(NdaiDynArr& arr_a,
 		const size_t subarr_offset, const size_t subarr_size)
 		//__attribute__((_text_hot_section))
 	{
@@ -978,7 +978,7 @@ protected:		// functions
 	{
 		return get_node_data_at(get_node_addr_at(index));
 	}
-	inline vec2_s16* get_index_pair_at_index(s32 index)
+	inline Vec2s16* get_index_pair_at_index(s32 index)
 	{
 		return get_index_pair_at(get_node_addr_at(index));
 	}
@@ -997,7 +997,7 @@ protected:		// functions
 		return get_extras_fp_group().get_get_node_data_fp()
 			(reinterpret_cast<void*>(addr));
 	}
-	inline vec2_s16* get_index_pair_at(uintptr_t addr)
+	inline Vec2s16* get_index_pair_at(uintptr_t addr)
 	{
 		return get_extras_fp_group().get_get_index_pair_fp()
 			(reinterpret_cast<void*>(addr));
@@ -1058,7 +1058,7 @@ protected:		// functions
 	}
 	inline void assign_to_whole_node
 		(NodeContents& dst_node_contents, const void* n_data,
-		const vec2_s16& n_index_pair, u32 can_move_value)
+		const Vec2s16& n_index_pair, u32 can_move_value)
 	{
 		assign_to_node_data(dst_node_contents, n_data, 
 			can_move_value);
@@ -1347,7 +1347,7 @@ template<typename type >
 class ExternallyAllocatedList
 {
 protected:		// typedefs
-	typedef ListExtras<type> extras_type;
+	typedef ListExtras<type> ExtrasType;
 	
 //public:		// variables
 protected:		// variables
@@ -1391,7 +1391,7 @@ public:		// functions
 		the_list_backend.init(get_node_array(),
 			the_free_list_backend_ptr, get_total_num_nodes(),
 			sizeof(type), sizeof(Node<type>),
-			extras_type::get_extras_fp_group());
+			ExtrasType::get_extras_fp_group());
 		
 		//static auto specific_type_copy = [](type* a, type* b) -> void 
 		//	{ *a = *b; };
@@ -1408,14 +1408,14 @@ public:		// functions
 		//	the_free_list_backend_ptr, get_total_num_nodes(),
 		//	sizeof(type), sizeof(Node<type>),
 		//	
-		//	reinterpret_cast<generic_void_2arg_fp>(&specific_type_copy),
-		//	reinterpret_cast<generic_void_2arg_fp>(&specific_type_move),
+		//	reinterpret_cast<GenericVoid2ArgFp>(&specific_type_copy),
+		//	reinterpret_cast<GenericVoid2ArgFp>(&specific_type_move),
 		//	reinterpret_cast<generic_void_1arg_fp>(&specific_type_reset),
-		//	reinterpret_cast<generic_u32_2arg_fp>(&specific_type_less), 
+		//	reinterpret_cast<Genericu32_2ArgFp>(&specific_type_less), 
 		//	
-		//	extras_type::get_get_node_data_fp(),
-		//	extras_type::get_get_index_pair_fp(),
-		//	extras_type::get_conv_node_to_contents_fp());
+		//	ExtrasType::get_get_node_data_fp(),
+		//	ExtrasType::get_get_index_pair_fp(),
+		//	ExtrasType::get_conv_node_to_contents_fp());
 	}
 	
 	inline size_t& get_size()
@@ -1887,7 +1887,7 @@ public:		// functions
 					subarr_size = real_num_nodes - subarr_offset;
 				}
 				
-				extras_type::subarr_insertion_sort(arr_a, subarr_offset,
+				ExtrasType::subarr_insertion_sort(arr_a, subarr_offset,
 					subarr_size);
 			}
 			
@@ -2001,7 +2001,7 @@ public:		// functions
 		
 		//if (last_subarr_size > 1)
 		//{
-		//	extras_type::subarr_insertion_sort((*main_arr_pc_pair.prev), 
+		//	ExtrasType::subarr_insertion_sort((*main_arr_pc_pair.prev), 
 		//		0, real_num_nodes);
 		//}
 		

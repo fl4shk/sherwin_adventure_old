@@ -50,10 +50,10 @@ public:		// enums
 public:		// constants
 	static constexpr u32 num_attr0_shapes = 3, num_attr1_sizes = 4;
 	
-	static const vec2_u32 ss_to_vec2_arr[lim_ss];
+	static const Vec2u32 ss_to_vec2_arr[lim_ss];
 	
-	//static const vec2_u32 attrs_to_ss_arr_2d[4][3];
-	static const vec2_u32 ss_enum_to_ss_attrs_arr[lim_ss];
+	//static const Vec2u32 attrs_to_ss_arr_2d[4][3];
+	static const Vec2u32 ss_enum_to_ss_attrs_arr[lim_ss];
 	//static const shape_size ss_attrs_no_shift_to_ss_enum_arr_2d
 	//	[num_attr0_shapes][num_attr1_sizes];
 	
@@ -168,8 +168,8 @@ public:		// wrapper functions
 	void set_shape_size(shape_size n_shape_size);
 	shape_size get_shape_size() const;
 	
-	void set_shape_size_with_vec2(const vec2_u32& n_shape_size);
-	vec2_u32 get_shape_size_as_vec2() const;
+	void set_shape_size_with_vec2(const Vec2u32& n_shape_size);
+	Vec2u32 get_shape_size_as_vec2() const;
 	
 	
 	

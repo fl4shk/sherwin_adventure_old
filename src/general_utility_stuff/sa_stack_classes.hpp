@@ -381,21 +381,21 @@ template< u32 size >
 class OldSaFreeList : public SaStack< int, size >
 {
 public:		// typedefs
-	typedef SaStack< int, size > specific_sa_stack;
+	typedef SaStack< int, size > SpecificSaStack;
 	
 public:		// functions
 	inline OldSaFreeList()
 	{
 		for (int i=size-1; i>=0; --i)
 		{
-			specific_sa_stack::push(i);
+			SpecificSaStack::push(i);
 		}
 	}
 	
 	inline void pop()
 	{
-		specific_sa_stack::the_array[specific_sa_stack::next_index-1] = -1;
-		--specific_sa_stack::next_index;
+		SpecificSaStack::the_array[SpecificSaStack::next_index-1] = -1;
+		--SpecificSaStack::next_index;
 	}
 	
 } __attribute__((_align4));
