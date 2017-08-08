@@ -260,7 +260,7 @@ void ActiveLevelManager::correct_bg0_scroll_mirror
 }
 
 void ActiveLevelManager::update_sublevel_in_screenblock_mirror_2d()
-	//(Array_2dHelper<scr_entry>& screenblock_mirror_2d,
+	//(Array2dHelper<scr_entry>& screenblock_mirror_2d,
 	//const vec2_u32& sublevel_size_in_blocks_2d)
 {
 	
@@ -323,8 +323,8 @@ void ActiveLevelManager::update_sublevel_in_screenblock_mirror_2d()
 }
 
 void ActiveLevelManager::copy_sublevel_from_array_csz_2d_helper_to_vram()
-	//(Array_2dHelper<scr_entry>& screenblock_in_vram_2d,
-	//Array_2dHelper<scr_entry>& screenblock_mirror_2d)
+	//(Array2dHelper<scr_entry>& screenblock_in_vram_2d,
+	//Array2dHelper<scr_entry>& screenblock_mirror_2d)
 {
 	memcpy32(ActiveLevel::bg0_screenblock_2d.the_array, 
 		ActiveLevel::bg0_screenblock_mirror_2d.the_array,

@@ -36,7 +36,7 @@ u16 ActiveLevel::persistent_block_data_arrays[max_num_sublevels]
 	[persistent_block_data_array_size]; //__attribute__((_ewram));
 
 
-//Array_2dHelper<Block> ActiveLevel::horiz_sublevel_block_data_2d 
+//Array2dHelper<Block> ActiveLevel::horiz_sublevel_block_data_2d 
 //	(ActiveLevel::block_data_array, 
 //	ActiveLevel::horiz_sublevel_size_2d);
 ArrayCsz2dHelper<Block, ActiveLevel::horiz_sublevel_xsize,

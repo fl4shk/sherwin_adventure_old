@@ -59,12 +59,12 @@ public:		// functions
 	
 	
 	//static inline u32 sublevel_width_in_tiles 
-	//	(Array_2dHelper<u16>& the_block_ids_2d)
+	//	(Array2dHelper<u16>& the_block_ids_2d)
 	//{
 	//	return the_block_ids_2d.width() * 2;
 	//}
 	//static inline u32 sublevel_height_in_tiles 
-	//	(Array_2dHelper<u16>& the_block_ids_2d)
+	//	(Array2dHelper<u16>& the_block_ids_2d)
 	//{
 	//	return the_block_ids_2d.height() * 2;
 	//}

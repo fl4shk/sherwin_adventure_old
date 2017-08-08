@@ -118,7 +118,7 @@ public:			// functions
 // This utility class Is Intended To be used when inherently 2D data Is
 // stored within a 1D array.
 template< typename type >
-class Array_2dHelper
+class Array2dHelper
 {
 protected:		// variables
 	vec2_u32 size_2d;
@@ -128,13 +128,13 @@ public:			// variables
 	type* the_array = NULL;
 	
 public:			// functions
-	//Array_2dHelper() : size_2d({ 0, 0 }), size(0), the_array(0)
+	//Array2dHelper() : size_2d({ 0, 0 }), size(0), the_array(0)
 	//{
 	//}
-	inline Array_2dHelper()
+	inline Array2dHelper()
 	{
 	}
-	inline Array_2dHelper(type* s_the_array, 
+	inline Array2dHelper(type* s_the_array, 
 		const vec2_u32& s_size_2d)
 		: size_2d(s_size_2d), size(s_size_2d.x * s_size_2d.y),
 		the_array(s_the_array)
@@ -148,8 +148,8 @@ public:			// functions
 		the_array = s_the_array;
 	}
 	
-	Array_2dHelper<type>& operator = 
-		(const Array_2dHelper<type>& to_copy)
+	Array2dHelper<type>& operator = 
+		(const Array2dHelper<type>& to_copy)
 	{
 		size_2d = to_copy.size_2d;
 		size = to_copy.size;
