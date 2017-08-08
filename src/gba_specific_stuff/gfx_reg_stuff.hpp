@@ -208,28 +208,28 @@ static const u32 num_pixels_per_block_row = 16;
 static const u32 num_pixels_per_block_col = 16;
 static const u32 num_pixels_per_block_dim = 16;
 
-template< typename type >
-inline const type conv_blk_crd_to_pix_crd(type to_convert)
+template<typename Type>
+inline const Type conv_blk_crd_to_pix_crd(Type to_convert)
 {
-	return to_convert * static_cast<type>(num_pixels_per_block_dim);
+	return to_convert * static_cast<Type>(num_pixels_per_block_dim);
 }
 
-template< typename type >
-inline const type conv_pix_crd_to_blk_local_crd(type to_convert)
+template<typename Type>
+inline const Type conv_pix_crd_to_blk_local_crd(Type to_convert)
 {
-	return to_convert % static_cast<type>(num_pixels_per_block_dim);
+	return to_convert % static_cast<Type>(num_pixels_per_block_dim);
 }
 
-template< typename type >
-inline const type conv_pix_crd_to_blk_crd(type to_convert)
+template<typename Type>
+inline const Type conv_pix_crd_to_blk_crd(Type to_convert)
 {
-	return to_convert / static_cast<type>(num_pixels_per_block_dim);
+	return to_convert / static_cast<Type>(num_pixels_per_block_dim);
 }
 
-template< typename type >
-inline const type conv_slp_height_val_to_offset(type tallest_height_val)
+template<typename Type>
+inline const Type conv_slp_height_val_to_offset(Type tallest_height_val)
 {
-	return static_cast<type>(num_pixels_per_block_dim) 
+	return static_cast<Type>(num_pixels_per_block_dim) 
 		- tallest_height_val;
 }
 

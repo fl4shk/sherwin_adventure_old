@@ -28,13 +28,13 @@ namespace SaListStuff
 // That act as statically-allocated linked lists.  Since some (or possibly 
 // all) of the derived classes use only some of the non-constructor member
 // functions, 
-template<typename type, u32 total_num_nodes >
+template<typename Type, u32 total_num_nodes>
 class RegularListBase
 {
 //protected:		// variables
 public:		// variables
-	ExternallyAllocatedList<type> the_externally_allocated_list;
-	Node<type> node_array[total_num_nodes];
+	ExternallyAllocatedList<Type> the_externally_allocated_list;
+	Node<Type> node_array[total_num_nodes];
 	SaFreeList<total_num_nodes> the_free_list;
 	
 	s32& front_index;
@@ -74,11 +74,11 @@ protected:		// functions
 		return back_index;
 	}
 	
-	inline Node<type>* get_node_array()
+	inline Node<Type>* get_node_array()
 	{
 		return node_array;
 	}
-	inline const Node<type>* get_node_array() const
+	inline const Node<Type>* get_node_array() const
 	{
 		return node_array;
 	}
@@ -100,11 +100,11 @@ protected:		// functions
 		return total_num_nodes;
 	}
 	
-	inline Node<type>& get_node_at(s32 index)
+	inline Node<Type>& get_node_at(s32 index)
 	{
 		return get_node_array()[index];
 	}
-	inline Node<type>& front()
+	inline Node<Type>& front()
 	{
 		//return get_node_at(get_front_index());
 		return the_externally_allocated_list.front();
@@ -120,20 +120,20 @@ protected:		// functions
 	}
 	
 	
-	inline s32 push_front(const type& to_push)
+	inline s32 push_front(const Type& to_push)
 	{
 		return the_externally_allocated_list.push_front(to_push);
 	}
-	inline s32 push_front(type&& to_push)
+	inline s32 push_front(Type&& to_push)
 	{
 		return the_externally_allocated_list.push_front
 			(std::move(to_push));
 	}
-	inline s32 push_back(const type& to_push)
+	inline s32 push_back(const Type& to_push)
 	{
 		return the_externally_allocated_list.push_back(to_push);
 	}
-	inline s32 push_back(type&& to_push)
+	inline s32 push_back(Type&& to_push)
 	{
 		return the_externally_allocated_list.push_back
 			(std::move(to_push));
@@ -149,24 +149,24 @@ protected:		// functions
 	}
 	
 	
-	inline s32 insert_before(s32 index, const type& to_insert)
+	inline s32 insert_before(s32 index, const Type& to_insert)
 	{
 		return the_externally_allocated_list.insert_before(index,
 			to_insert);
 	}
-	inline s32 insert_before(s32 index, type&& to_insert)
+	inline s32 insert_before(s32 index, Type&& to_insert)
 	{
 		return the_externally_allocated_list.insert_before(index,
 			std::move(to_insert));
 	}
 	
 	
-	inline s32 insert_after(s32 index, const type& to_insert)
+	inline s32 insert_after(s32 index, const Type& to_insert)
 	{
 		return the_externally_allocated_list.insert_after(index,
 			to_insert);
 	}
-	inline s32 insert_after(s32 index, type&& to_insert)
+	inline s32 insert_after(s32 index, Type&& to_insert)
 	{
 		return the_externally_allocated_list.insert_after(index,
 			std::move(to_insert));
@@ -201,11 +201,11 @@ protected:		// functions
 } __attribute__((_align4));
 
 
-template<typename type, u32 total_num_nodes >
-class RegularList : public RegularListBase<type, total_num_nodes >
+template<typename Type, u32 total_num_nodes>
+class RegularList : public RegularListBase<Type, total_num_nodes>
 {
 public:		// typedefs
-	typedef RegularListBase<type, total_num_nodes > Base;
+	typedef RegularListBase<Type, total_num_nodes> Base;
 	
 public:		// functions
 	inline RegularList() : Base()
@@ -229,11 +229,11 @@ public:		// functions
 		return Base::get_back_index();
 	}
 	
-	inline Node<type>* get_node_array()
+	inline Node<Type>* get_node_array()
 	{
 		return Base::get_node_array();
 	}
-	inline const Node<type>* get_node_array() const
+	inline const Node<Type>* get_node_array() const
 	{
 		return Base::get_node_array();
 	}
@@ -255,11 +255,11 @@ public:		// functions
 		return total_num_nodes;
 	}
 	
-	inline Node<type>& get_node_at(s32 index)
+	inline Node<Type>& get_node_at(s32 index)
 	{
 		return Base::get_node_at(index);
 	}
-	inline Node<type>& front()
+	inline Node<Type>& front()
 	{
 		//return get_node_at(get_front_index());
 		return Base::front();
@@ -275,19 +275,19 @@ public:		// functions
 	}
 	
 	
-	inline s32 push_front(const type& to_push)
+	inline s32 push_front(const Type& to_push)
 	{
 		return Base::push_front(to_push);
 	}
-	inline s32 push_front(type&& to_push)
+	inline s32 push_front(Type&& to_push)
 	{
 		return Base::push_front(std::move(to_push));
 	}
-	inline s32 push_back(const type& to_push)
+	inline s32 push_back(const Type& to_push)
 	{
 		return Base::push_back(to_push);
 	}
-	inline s32 push_back(type&& to_push)
+	inline s32 push_back(Type&& to_push)
 	{
 		return Base::push_back(std::move(to_push));
 	}
@@ -302,24 +302,24 @@ public:		// functions
 	}
 	
 	
-	inline s32 insert_before(s32 index, const type& to_insert)
+	inline s32 insert_before(s32 index, const Type& to_insert)
 	{
 		return Base::insert_before(index,
 			to_insert);
 	}
-	inline s32 insert_before(s32 index, type&& to_insert)
+	inline s32 insert_before(s32 index, Type&& to_insert)
 	{
 		return Base::insert_before(index,
 			std::move(to_insert));
 	}
 	
 	
-	inline s32 insert_after(s32 index, const type& to_insert)
+	inline s32 insert_after(s32 index, const Type& to_insert)
 	{
 		return Base::insert_after(index,
 			to_insert);
 	}
-	inline s32 insert_after(s32 index, type&& to_insert)
+	inline s32 insert_after(s32 index, Type&& to_insert)
 	{
 		return Base::insert_after(index,
 			std::move(to_insert));
@@ -356,12 +356,12 @@ public:		// functions
 
 // This class Is Intended To always be sorted, though it does not have To
 // be in some cases.
-template<typename type, u32 total_num_nodes >
+template<typename Type, u32 total_num_nodes>
 class SortedAlwaysList 
-	: public RegularListBase<type, total_num_nodes >
+	: public RegularListBase<Type, total_num_nodes>
 {
 public:		// typedefs
-	typedef RegularListBase<type, total_num_nodes > Base;
+	typedef RegularListBase<Type, total_num_nodes> Base;
 	
 public:		// functions
 	inline SortedAlwaysList() : Base()
@@ -385,11 +385,11 @@ public:		// functions
 		return Base::get_back_index();
 	}
 	
-	inline Node<type>* get_node_array()
+	inline Node<Type>* get_node_array()
 	{
 		return Base::get_node_array();
 	}
-	inline const Node<type>* get_node_array() const
+	inline const Node<Type>* get_node_array() const
 	{
 		return Base::get_node_array();
 	}
@@ -421,29 +421,29 @@ public:		// functions
 	}
 	
 	
-	inline Node<type>& get_node_at(s32 index)
+	inline Node<Type>& get_node_at(s32 index)
 	{
 		return Base::get_node_at(index);
 	}
-	inline Node<type>& front()
+	inline Node<Type>& front()
 	{
 		//return get_node_at(get_front_index());
 		return Base::front();
 	}
 	
-	inline s32 push_front(const type& to_push)
+	inline s32 push_front(const Type& to_push)
 	{
 		return Base::push_front(to_push);
 	}
-	inline s32 push_front(type&& to_push)
+	inline s32 push_front(Type&& to_push)
 	{
 		return Base::push_front(std::move(to_push));
 	}
-	inline s32 push_back(const type& to_push)
+	inline s32 push_back(const Type& to_push)
 	{
 		return Base::push_back(to_push);
 	}
-	inline s32 push_back(type&& to_push)
+	inline s32 push_back(Type&& to_push)
 	{
 		return Base::push_back(std::move(to_push));
 	}
@@ -457,14 +457,14 @@ public:		// functions
 		return Base::pop_back_basic();
 	}
 	
-	inline s32 insert_and_sort(const type& to_insert)
+	inline s32 insert_and_sort(const Type& to_insert)
 	{
 		push_front(to_insert);
 		
 		//return Base::insertion_sort();
 		return merge_sort_via_array_2();
 	}
-	inline s32 insert_and_sort(type&& to_insert)
+	inline s32 insert_and_sort(Type&& to_insert)
 	{
 		push_front(std::move(to_insert));
 		

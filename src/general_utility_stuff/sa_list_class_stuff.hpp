@@ -60,10 +60,10 @@ public:		// functions
 		return data_ptr;
 	}
 	
-	template<typename type >
-	inline type* cast_data_ptr()
+	template<typename Type>
+	inline Type* cast_data_ptr()
 	{
-		return static_cast<type*>(data_ptr);
+		return static_cast<Type*>(data_ptr);
 	}
 	
 	inline Vec2s16& get_index_pair()
@@ -118,11 +118,11 @@ typedef DynArr<NodeDataAndIndex> NdaiDynArr;
 
 
 
-template<typename type >
+template<typename Type>
 class Node
 {
 public:		// variables
-	type data __attribute__((_align4)) = type();
+	Type data __attribute__((_align4)) = Type();
 	Vec2s16 index_pair = { -1, -1 };
 	
 public:		// functions
@@ -131,8 +131,8 @@ public:		// functions
 	}
 	
 	
-	template<typename type_in_vec2 >
-	inline Node(const type& data_to_copy, 
+	template<typename type_in_vec2>
+	inline Node(const Type& data_to_copy, 
 		Vec2<type_in_vec2> s_index_pair) : data(data_to_copy)
 	{
 		next_index() = get_next_index_from_vec2(s_index_pair);
@@ -152,14 +152,14 @@ public:		// functions
 	
 	
 protected:		// functions
-	template<typename type_in_vec2 >
+	template<typename type_in_vec2>
 	static inline s16 get_next_index_from_vec2
 		(const Vec2<type_in_vec2>& n_index_pair)
 	{
 		return static_cast<s16>(n_index_pair
 			[NodeContents::vec2_index_for_next_index]);
 	}
-	template<typename type_in_vec2 >
+	template<typename type_in_vec2>
 	static inline s16 get_prev_index_from_vec2
 		(const Vec2<type_in_vec2>& n_index_pair)
 	{
@@ -570,47 +570,47 @@ public:		// functions
 
 // A group of functions To use as function pointers in the ListBackend
 // class.
-template<typename type >
+template<typename Type>
 class ListExtras
 {
 protected:		// functions To point To
-	static void specific_type_copy(type* a, type* b)
+	static void specific_type_copy(Type* a, Type* b)
 		__attribute__((_text_hot_section))
 	{
 		*a = *b;
 	}
-	static void specific_type_move(type* a, type* b)
+	static void specific_type_move(Type* a, Type* b)
 		__attribute__((_text_hot_section))
 	{
 		*a = std::move(*b);
 	}
-	static void specific_type_reset(type* to_reset)
+	static void specific_type_reset(Type* to_reset)
 		__attribute__((_text_hot_section))
 	{
-		*to_reset = type();
+		*to_reset = Type();
 	}
-	static void specific_type_swap(type* a, type* b)
+	static void specific_type_swap(Type* a, Type* b)
 		__attribute__((_text_hot_section))
 	{
-		//type temp = std::move(*a);
+		//Type temp = std::move(*a);
 		//*a = std::move(*b);
 		//*b = std::move(temp);
 		std::swap(*a, *b);
 	}
 	
-	static u32 specific_type_less(type* a, type* b)
+	static u32 specific_type_less(Type* a, Type* b)
 		__attribute__((_text_hot_section))
 	{
 		return ((*a) < (*b));
 	}
-	static u32 specific_type_greater(type* a, type* b)
+	static u32 specific_type_greater(Type* a, Type* b)
 		__attribute__((_text_hot_section))
 	{
 		return ((*a) > (*b));
 	}
 	
 	// qsort() comparison function
-	static int specific_type_qscmp(const type* a, const type* b)
+	static int specific_type_qscmp(const Type* a, const Type* b)
 		__attribute__((_text_hot_section))
 	{
 		if ((*a) < (*b))
@@ -627,18 +627,18 @@ protected:		// functions To point To
 		}
 	}
 	
-	static void* get_node_data(Node<type>* to_get_from)
+	static void* get_node_data(Node<Type>* to_get_from)
 		__attribute__((_text_hot_section))
 	{
 		return &to_get_from->data;
 	}
-	static Vec2s16* get_sa_list_index_pair(Node<type>* to_get_from)
+	static Vec2s16* get_sa_list_index_pair(Node<Type>* to_get_from)
 		__attribute__((_text_hot_section))
 	{
 		return &to_get_from->index_pair;
 	}
 	static void conv_node_to_contents(NodeContents* ret,
-		Node<type>* to_convert) __attribute__((_text_hot_section))
+		Node<Type>* to_convert) __attribute__((_text_hot_section))
 	{
 		ret->data_ptr = &to_convert->data;
 		ret->index_pair_ptr = &to_convert->index_pair;
@@ -652,14 +652,14 @@ protected:		// functions To point To
 	// Note:  old_il_cbuf_helper Is a CIRCULAR BUFFER helper That allows
 	// keeping track of a FIXED NUMBER of indices To nodes for sorting
 	// purposes.
-	static void insertion_sort_inner_loop(Node<type>* node_array, 
+	static void insertion_sort_inner_loop(Node<Type>* node_array, 
 		s32* index_low_ptr) //__attribute__((_text_hot_section))
 	{
-		Node<type>* node_at_j;
+		Node<Type>* node_at_j;
 		
 		s32& index_low = *index_low_ptr;
 		
-		type* data_at_index_low = &(node_array[index_low].data);
+		Type* data_at_index_low = &(node_array[index_low].data);
 		
 		// Find the lowest value at or after i.
 		for (s32 j=index_low;
@@ -693,14 +693,14 @@ protected:		// functions To point To
 		{
 			size_t j = ++curr_offset;
 			
-			while (j > 0 && *(type*)arr_a[j - 1].data_ptr
-				> *(type*)arr_a[j].data_ptr)
+			while (j > 0 && *(Type*)arr_a[j - 1].data_ptr
+				> *(Type*)arr_a[j].data_ptr)
 			{
-				type temp = std::move(*(type*)arr_a[j - 1].data_ptr);
+				Type temp = std::move(*(Type*)arr_a[j - 1].data_ptr);
 				
-				*(type*)arr_a[j - 1].data_ptr 
-					= std::move(*(type*)arr_a[j].data_ptr);
-				*(type*)arr_a[j].data_ptr = std::move(temp);
+				*(Type*)arr_a[j - 1].data_ptr 
+					= std::move(*(Type*)arr_a[j].data_ptr);
+				*(Type*)arr_a[j].data_ptr = std::move(temp);
 				
 				--j;
 			}
@@ -710,7 +710,7 @@ protected:		// functions To point To
 	
 	
 public:		// function pointer stuff
-	// This Is the first time I've used an "auto" return type much, but it
+	// This Is the first time I've used an "auto" return Type much, but it
 	// makes plenty of sense for this case.
 	static inline auto get_specific_type_copy_fp()
 	{
@@ -791,7 +791,7 @@ public:		// function pointer stuff
 	
 	
 public:		// functions To not point To
-	static inline void subarr_insertion_sort(DynArr<type>& arr_a,
+	static inline void subarr_insertion_sort(DynArr<Type>& arr_a,
 		const size_t subarr_offset, const size_t subarr_size)
 		__attribute__((always_inline))
 	{
@@ -846,7 +846,7 @@ protected:		// variables
 	
 	ExtrasFpGroup the_extras_fp_group;
 	
-	template<typename type > friend class ExternallyAllocatedList;
+	template<typename Type> friend class ExternallyAllocatedList;
 	
 protected:		// functions
 	inline ListBackend() : size(0)
@@ -1343,17 +1343,17 @@ protected:		// functions
 
 
 
-template<typename type >
+template<typename Type>
 class ExternallyAllocatedList
 {
 protected:		// typedefs
-	typedef ListExtras<type> ExtrasType;
+	typedef ListExtras<Type> ExtrasType;
 	
 //public:		// variables
 protected:		// variables
 	//s32* ptr_to_front_index;
 	//s32 front_index;
-	Node<type>* node_array = 0;
+	Node<Type>* node_array = 0;
 	SaFreeListBackend* the_free_list_backend_ptr = 0;
 	u32 total_num_nodes = 0;
 	
@@ -1366,7 +1366,7 @@ public:		// functions
 	{
 	}
 	inline ExternallyAllocatedList
-		(Node<type>* s_node_array, 
+		(Node<Type>* s_node_array, 
 		SaFreeListBackend* s_the_free_list_backend_ptr,
 		u32 s_total_num_nodes)
 	{
@@ -1380,7 +1380,7 @@ public:		// functions
 	}
 	
 	
-	void init(Node<type>* n_node_array, 
+	void init(Node<Type>* n_node_array, 
 		SaFreeListBackend* n_the_free_list_backend_ptr,
 		u32 n_total_num_nodes) __attribute__((noinline))
 	{
@@ -1390,23 +1390,23 @@ public:		// functions
 		
 		the_list_backend.init(get_node_array(),
 			the_free_list_backend_ptr, get_total_num_nodes(),
-			sizeof(type), sizeof(Node<type>),
+			sizeof(Type), sizeof(Node<Type>),
 			ExtrasType::get_extras_fp_group());
 		
-		//static auto specific_type_copy = [](type* a, type* b) -> void 
+		//static auto specific_type_copy = [](Type* a, Type* b) -> void 
 		//	{ *a = *b; };
-		//static auto specific_type_move = [](type* a, type* b) -> void
+		//static auto specific_type_move = [](Type* a, Type* b) -> void
 		//	{ *a = std::move(*b); };
-		//static auto specific_type_reset = [](type* a) -> void
-		//	{ *a = type(); };
-		//static auto specific_type_less = [](type* a, type* b) -> u32
+		//static auto specific_type_reset = [](Type* a) -> void
+		//	{ *a = Type(); };
+		//static auto specific_type_less = [](Type* a, Type* b) -> u32
 		//	{ return (*a) < (*b); };
 		//
 		//
 		//ASM_COMMENT("the_list_backend.init()");
 		//the_list_backend.init(get_node_array(),
 		//	the_free_list_backend_ptr, get_total_num_nodes(),
-		//	sizeof(type), sizeof(Node<type>),
+		//	sizeof(Type), sizeof(Node<Type>),
 		//	
 		//	reinterpret_cast<GenericVoid2ArgFp>(&specific_type_copy),
 		//	reinterpret_cast<GenericVoid2ArgFp>(&specific_type_move),
@@ -1444,11 +1444,11 @@ public:		// functions
 		return the_list_backend.get_back_index();
 	}
 	
-	inline Node<type>* get_node_array()
+	inline Node<Type>* get_node_array()
 	{
 		return node_array;
 	}
-	inline const Node<type>* get_node_array() const
+	inline const Node<Type>* get_node_array() const
 	{
 		return node_array;
 	}
@@ -1469,22 +1469,22 @@ public:		// functions
 	
 	
 	
-	inline Node<type>& get_node_at(s32 index)
+	inline Node<Type>& get_node_at(s32 index)
 	{
 		return get_node_array()[index];
 	}
-	inline Node<type>& front()
+	inline Node<Type>& front()
 	{
 		return get_node_at(get_front_index());
 	}
 	
-	inline Node<type>& get_next_node_after_index
+	inline Node<Type>& get_next_node_after_index
 		(s32 index)
 	{
 		return get_node_at(get_node_at(index)
 			.next_index());
 	}
-	inline Node<type>& get_prev_node_before_index
+	inline Node<Type>& get_prev_node_before_index
 		(s32 index)
 	{
 		return get_node_at(get_node_at(index)
@@ -1502,19 +1502,19 @@ public:		// functions
 	}
 	
 	
-	inline s32 push_front(const type& to_push)
+	inline s32 push_front(const Type& to_push)
 	{
 		return the_list_backend.push_front(&to_push);
 	}
-	inline s32 push_front(type&& to_push)
+	inline s32 push_front(Type&& to_push)
 	{
 		return the_list_backend.push_front(&to_push, true);
 	}
-	inline s32 push_back(const type& to_push)
+	inline s32 push_back(const Type& to_push)
 	{
 		return the_list_backend.push_back(&to_push);
 	}
-	inline s32 push_back(type&& to_push)
+	inline s32 push_back(Type&& to_push)
 	{
 		return the_list_backend.push_back(&to_push, true);
 	}
@@ -1529,11 +1529,11 @@ public:		// functions
 		return the_list_backend.pop_back_basic();
 	}
 	
-	inline s32 insert_before(s32 index, const type& to_insert)
+	inline s32 insert_before(s32 index, const Type& to_insert)
 	{
 		return the_list_backend.insert_before(index, &to_insert);
 	}
-	inline s32 insert_before(s32 index, type&& to_insert)
+	inline s32 insert_before(s32 index, Type&& to_insert)
 	{
 		return the_list_backend.insert_before(index, &to_insert,
 			true);
@@ -1541,11 +1541,11 @@ public:		// functions
 	
 	
 	
-	inline s32 insert_after(s32 index, const type& to_insert)
+	inline s32 insert_after(s32 index, const Type& to_insert)
 	{
 		return the_list_backend.insert_after(index, &to_insert);
 	}
-	inline s32 insert_after(s32 index, type&& to_insert)
+	inline s32 insert_after(s32 index, Type&& to_insert)
 	{
 		return the_list_backend.insert_after(index, &to_insert, true);
 	}
@@ -1554,9 +1554,9 @@ public:		// functions
 	{
 		the_list_backend.erase_at(index);
 	}
-	inline type&& unlink_at_with_dealloc(s32 index)
+	inline Type&& unlink_at_with_dealloc(s32 index)
 	{
-		return std::move(*static_cast<type*>
+		return std::move(*static_cast<Type*>
 			(the_list_backend.unlink_at_with_dealloc(index)));
 	}
 	
@@ -1577,7 +1577,7 @@ public:		// functions
 			return the_front_index;
 		}
 		
-		ExternallyAllocatedList<type> sorted_list(node_array, 
+		ExternallyAllocatedList<Type> sorted_list(node_array, 
 			the_free_list_backend_ptr, get_total_num_nodes());
 		
 		s32& temp_front_index = sorted_list.get_front_index();
@@ -1593,7 +1593,7 @@ public:		// functions
 			
 			s32 index_low = i;
 			
-			Node<type>* node_at_j;
+			Node<Type>* node_at_j;
 			
 			// Find the lowest value at or after i.
 			for (s32 j=index_low;
@@ -1609,9 +1609,9 @@ public:		// functions
 				}
 			}
 			
-			Node<type>& node_at_index_low = get_node_at(index_low);
-			//const type data_to_move = node_at_index_low.data;
-			//type* data_to_move = &node_at_index_low.data;
+			Node<Type>& node_at_index_low = get_node_at(index_low);
+			//const Type data_to_move = node_at_index_low.data;
+			//Type* data_to_move = &node_at_index_low.data;
 			
 			if (i == index_low)
 			{
@@ -1619,7 +1619,7 @@ public:		// functions
 			}
 			
 			//erase_at(index_low);
-			type&& data_to_move = unlink_at_with_dealloc(index_low);
+			Type&& data_to_move = unlink_at_with_dealloc(index_low);
 			
 			if (temp_front_index < 0)
 			{
@@ -1666,10 +1666,10 @@ public:		// functions
 		
 		
 		//s32 temp_front_index = -1;
-		//SaListBackend<type> sorted_list(&temp_front_index, 
+		//SaListBackend<Type> sorted_list(&temp_front_index, 
 		//	node_array, ptr_to_the_free_list_backend, 
 		//	total_num_nodes);
-		ExternallyAllocatedList<type> sorted_list(node_array, 
+		ExternallyAllocatedList<Type> sorted_list(node_array, 
 			the_free_list_backend_ptr, get_total_num_nodes());
 		
 		s32& temp_front_index = sorted_list.get_front_index();
@@ -1695,9 +1695,9 @@ public:		// functions
 			
 			s32 index_low = i;
 			
-			Node<type>* node_at_j;
+			Node<Type>* node_at_j;
 			
-			type* data_at_index_low = &get_node_at(index_low).data;
+			Type* data_at_index_low = &get_node_at(index_low).data;
 			
 			// Find the lowest value at or after i.
 			for (s32 j=index_low;
@@ -1723,9 +1723,9 @@ public:		// functions
 				}
 			}
 			
-			Node<type>& node_at_index_low = get_node_at(index_low);
-			//const type data_to_move = node_at_index_low.data;
-			//type&& data_to_move = node_at_index_low.data
+			Node<Type>& node_at_index_low = get_node_at(index_low);
+			//const Type data_to_move = node_at_index_low.data;
+			//Type&& data_to_move = node_at_index_low.data
 			
 			if (i == index_low)
 			{
@@ -1733,7 +1733,7 @@ public:		// functions
 			}
 			
 			//erase_at(index_low);
-			type&& data_to_move = unlink_at_with_dealloc(index_low);
+			Type&& data_to_move = unlink_at_with_dealloc(index_low);
 			
 			if (temp_front_index < 0)
 			{
@@ -1753,7 +1753,7 @@ public:		// functions
 			{
 				s32& curr_prev_index_low = prev_index_low_arr[j];
 				
-				Node<type>& node_at_curr_prev_index_low 
+				Node<Type>& node_at_curr_prev_index_low 
 					= get_node_at(curr_prev_index_low);
 				
 				if (i == curr_prev_index_low)
@@ -1761,7 +1761,7 @@ public:		// functions
 					i = node_at_curr_prev_index_low.next_index();
 				}
 				
-				type&& curr_data_to_move = unlink_at_with_dealloc
+				Type&& curr_data_to_move = unlink_at_with_dealloc
 					(curr_prev_index_low);
 				
 				//if (temp_front_index < 0)
@@ -1802,9 +1802,9 @@ public:		// functions
 	
 	
 protected:		// functions
-	inline void internal_func_subarr_merge_2(type* left_subarr,
-		const size_t left_subarr_size, type* right_subarr, 
-		const size_t right_subarr_size, type* out_subarr)
+	inline void internal_func_subarr_merge_2(Type* left_subarr,
+		const size_t left_subarr_size, Type* right_subarr, 
+		const size_t right_subarr_size, Type* out_subarr)
 		__attribute__((always_inline))
 	{
 		const size_t out_subarr_size = left_subarr_size 
@@ -1849,7 +1849,7 @@ public:		// functions
 		const size_t real_num_nodes = get_size();
 		
 		
-		DynArr<type> arr_a(real_num_nodes), work_arr(real_num_nodes);
+		DynArr<Type> arr_a(real_num_nodes), work_arr(real_num_nodes);
 		
 		
 		{
@@ -1897,14 +1897,14 @@ public:		// functions
 		
 		
 		size_t left_subarr_offset = 0, right_subarr_offset = 0;
-		type * left_subarr, * right_subarr;
+		Type * left_subarr, * right_subarr;
 		size_t left_subarr_size = 0, right_subarr_size = 0;
 		
 		
 		static constexpr bool do_swap = true;
 		
 		bool main_arr_is_arr_a = false;
-		PrevCurrPair<DynArr<type>*> main_arr_pc_pair,
+		PrevCurrPair<DynArr<Type>*> main_arr_pc_pair,
 			secondary_arr_pc_pair;
 		
 		//if (!do_swap)
@@ -1938,7 +1938,7 @@ public:		// functions
 				}
 			}
 			
-			auto get_merge_args = [&](DynArr<type>& specific_arr, 
+			auto get_merge_args = [&](DynArr<Type>& specific_arr, 
 				size_t n_left_subarr_offset) -> void
 			{
 				right_subarr_offset = 0;
@@ -2032,12 +2032,12 @@ public:		// functions
 
 // This Is a template class for a statically allocated array of modifiable
 // doubly-linked lists.  "sa" Is short for "statically allocated".
-template<typename type, u32 total_num_nodes, u32 num_lists >
+template<typename Type, u32 total_num_nodes, u32 num_lists>
 class SaArrayOfLists
 {
 public:		// variables
-	ExternallyAllocatedList<type> ea_list_array[num_lists];
-	Node<type> node_array[total_num_nodes];
+	ExternallyAllocatedList<Type> ea_list_array[num_lists];
+	Node<Type> node_array[total_num_nodes];
 	
 	SaFreeList<total_num_nodes> the_free_list;
 	

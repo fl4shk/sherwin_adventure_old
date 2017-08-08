@@ -256,7 +256,7 @@ _blx_r3_stub:
 .thumb_func
 
 .global asm_main
-.type asm_main function
+.Type asm_main function
 
 asm_main:
 	bl main

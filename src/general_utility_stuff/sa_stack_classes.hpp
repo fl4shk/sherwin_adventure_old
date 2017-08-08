@@ -33,9 +33,9 @@ using std::array;
 namespace SaListStuff
 {
 
-template< typename type, u32 total_num_nodes > 
+template<typename Type, u32 total_num_nodes> 
 	class RegularListBase;
-template< typename type, u32 total_num_nodes, u32 num_lists >
+template<typename Type, u32 total_num_nodes, u32 num_lists>
 	class SaArrayOfLists;
 
 } // end of namespace SaListStuff
@@ -45,12 +45,12 @@ template< typename type, u32 total_num_nodes, u32 num_lists >
 #define ARR_BYTE_INDEX_MACRO(the_type_size, index_to_array_of_types) \
 	the_type_size * index_to_array_of_types
 
-#define ARR_BYTE_SIZE_MACRO(type, the_num_arr_elems) \
-	ARR_BYTE_INDEX_MACRO(sizeof(type), the_num_arr_elems)
-template< typename type >
+#define ARR_BYTE_SIZE_MACRO(Type, the_num_arr_elems) \
+	ARR_BYTE_INDEX_MACRO(sizeof(Type), the_num_arr_elems)
+template<typename Type>
 inline size_t arr_byte_size(size_t the_num_arr_elems)
 {
-	return (sizeof(type) * the_num_arr_elems);
+	return (sizeof(Type) * the_num_arr_elems);
 }
 
 
@@ -101,7 +101,7 @@ public:		// functions
 	}
 	inline bool can_pop() const
 	{
-		return (get_next_index() > 0);
+		return (get_next_index()> 0);
 	}
 	
 	inline void push(const u8* to_push_u8)
@@ -216,13 +216,13 @@ public:		// functions
 
 // A backend To a more generic statically allocated stack which Is used
 // because it reduces the number of template parameters.
-template< typename type >
+template<typename Type>
 class SaStackBackend
 {
 public:		// variables
-	//type* the_array;
+	//Type* the_array;
 	//u32 num_elems;
-	ArrayHelper<type> the_array_helper;
+	ArrayHelper<Type> the_array_helper;
 	u32* next_index_ptr;
 	
 public:		// functions
@@ -230,25 +230,25 @@ public:		// functions
 	{
 	}
 	
-	SaStackBackend(type* s_the_array, u32 s_num_elems, 
+	SaStackBackend(Type* s_the_array, u32 s_num_elems, 
 		u32* s_next_index_ptr) 
 		: the_array_helper(s_the_array, s_num_elems), 
 		next_index_ptr(s_next_index_ptr)
 	{
 	}
 	
-	void init(type* s_the_array, u32 s_num_elems, 
+	void init(Type* s_the_array, u32 s_num_elems, 
 		u32* s_next_index_ptr)
 	{
 		the_array_helper.init(s_the_array, s_num_elems);
 		next_index_ptr = s_next_index_ptr;
 	}
 	
-	type* get_array()
+	Type* get_array()
 	{
 		return the_array_helper.the_array;
 	}
-	const type* get_array() const
+	const Type* get_array() const
 	{
 		return the_array_helper.get_array();
 	}
@@ -268,7 +268,7 @@ public:		// functions
 	}
 	
 	
-	void push(const type& to_push)
+	void push(const Type& to_push)
 	{
 		get_array()[get_next_index()++] = to_push;
 	}
@@ -278,20 +278,20 @@ public:		// functions
 		--get_next_index();
 	}
 	
-	inline type peek_top()
+	inline Type peek_top()
 	{
 		return get_array()[get_next_index()-1];
 	}
-	inline const type peek_top() const
+	inline const Type peek_top() const
 	{
 		return get_array()[get_next_index()-1];
 	}
 	
-	//inline type peek_next()
+	//inline Type peek_next()
 	//{
 	//	return get_array()[get_next_index()-2];
 	//}
-	//inline const type peek_next() const
+	//inline const Type peek_next() const
 	//{
 	//	return get_array()[get_next_index()-2];
 	//}
@@ -300,24 +300,24 @@ public:		// functions
 
 
 
-template< typename type, u32 size >
+template<typename Type, u32 size>
 class SaStack
 {
 protected:		// variables
-	SaStackBackend<type> the_sa_stack_backend;
+	SaStackBackend<Type> the_sa_stack_backend;
 	
 public:		// variables
-	//type the_array[size];
-	array< type, size > the_array;
+	//Type the_array[size];
+	array<Type, size> the_array;
 	u32 next_index;
 	
 public:		// functions
 	inline SaStack() : the_sa_stack_backend(the_array.data(), get_size(), 
 		&next_index), next_index(0)
 	{
-		//memfill32(the_array.data(), type(), size * sizeof(type));
+		//memfill32(the_array.data(), Type(), size * sizeof(Type));
 		
-		the_array.fill(type());
+		the_array.fill(Type());
 	}
 	
 	inline u32& get_next_index()
@@ -334,13 +334,13 @@ public:		// functions
 	}
 	
 	
-	inline void push(const type& to_push)
+	inline void push(const Type& to_push)
 	{
 		//the_array[next_index++] = to_push;
 		the_sa_stack_backend.push(to_push);
 	}
 	
-	//inline virtual const type pop()
+	//inline virtual const Type pop()
 	//{
 	//	return the_array[--next_index];
 	//}
@@ -351,23 +351,23 @@ public:		// functions
 		the_sa_stack_backend.pop();
 	}
 	
-	inline type peek_top()
+	inline Type peek_top()
 	{
 		//return the_array[next_index-1];
 		return the_sa_stack_backend.peek_top();
 	}
-	inline const type peek_top() const
+	inline const Type peek_top() const
 	{
 		//return the_array[next_index-1];
 		return the_sa_stack_backend.peek_top();
 	}
 	
-	//inline type peek_next()
+	//inline Type peek_next()
 	//{
 	//	//return the_array[next_index];
 	//	return the_sa_stack_backend.peek_next();
 	//}
-	//inline const type peek_next() const
+	//inline const Type peek_next() const
 	//{
 	//	//return the_array[next_index];
 	//	return the_sa_stack_backend.peek_next();
@@ -377,11 +377,11 @@ public:		// functions
 } __attribute__((_align4));
 
 
-template< u32 size >
-class OldSaFreeList : public SaStack< int, size >
+template<u32 size>
+class OldSaFreeList : public SaStack<int, size>
 {
 public:		// typedefs
-	typedef SaStack< int, size > SpecificSaStack;
+	typedef SaStack<int, size> SpecificSaStack;
 	
 public:		// functions
 	inline OldSaFreeList()
@@ -401,23 +401,23 @@ public:		// functions
 } __attribute__((_align4));
 
 
-template< u32 size >
+template<u32 size>
 class SaFreeList
 {
 protected:		// variables
 	SaFreeListBackend the_sa_free_list_backend;
 	
-	//template< typename type > friend class SaListBackend;
-	//template< typename type, u32 total_num_nodes > friend class
+	//template<typename Type> friend class SaListBackend;
+	//template<typename Type, u32 total_num_nodes> friend class
 	//	externally_allocated_sa_list;
-	template< typename type, u32 total_num_nodes > 
+	template<typename Type, u32 total_num_nodes> 
 		friend class SaListStuff::RegularListBase;
-	template< typename type, u32 total_num_nodes, u32 num_lists >
+	template<typename Type, u32 total_num_nodes, u32 num_lists>
 		friend class SaListStuff::SaArrayOfLists;
 	
 protected:		// variables
-	//array< int, size > the_array;
-	array< s16, size > the_array __attribute__((_align4));
+	//array<int, size> the_array;
+	array<s16, size> the_array __attribute__((_align4));
 	u32 next_index;
 	
 public:		// functions
@@ -465,7 +465,7 @@ public:		// functions
 		the_sa_free_list_backend.push(to_push);
 	}
 	
-	//inline virtual const type pop()
+	//inline virtual const Type pop()
 	//{
 	//	return the_array[--next_index];
 	//}

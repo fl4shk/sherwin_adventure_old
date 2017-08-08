@@ -13,7 +13,7 @@
     .align  2
     .code   32
     .global memcpy32
-    .type   memcpy32 STT_FUNC
+    .Type   memcpy32 STT_FUNC
 memcpy32:
 	@mov r11, r11
     and     r12, r2, #7     @ r12= residual word count
@@ -61,7 +61,7 @@ memcpy32:
 .arm
 
 .global memfill32
-.type memfill32, %function
+.Type memfill32, %function
 memfill32:
 	@mov r11, r11				@ This Is a no$gba soft breakpoint
 	

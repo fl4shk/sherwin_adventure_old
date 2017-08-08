@@ -24,17 +24,17 @@
 
 #include <utility>
 
-template < typename type >
+template<typename Type>
 class Vec2;
 
 // This Is a small class for the purposes of holding the states of
 // "previous" and "current" pairs.  It Is primarily Intended for use with
 // SMALL types, such as Vec2's, built-in types, and So on and So forth.
-template< typename type >
+template<typename Type>
 class PrevCurrPair
 {
 public:		// variables
-	type prev, curr;
+	Type prev, curr;
 	
 public:		// functions
 	
@@ -43,12 +43,12 @@ public:		// functions
 		prev = curr;
 	}
 	
-	inline void back_up_and_update(const type& n_curr)
+	inline void back_up_and_update(const Type& n_curr)
 	{
 		prev = std::move(curr);
 		curr = n_curr;
 	}
-	inline void back_up_and_update(type&& n_curr)
+	inline void back_up_and_update(Type&& n_curr)
 	{
 		prev = std::move(curr);
 		curr = std::move(n_curr);
@@ -59,9 +59,9 @@ public:		// functions
 		return (prev != curr);
 	}
 	
-	inline operator Vec2<type>() const
+	inline operator Vec2<Type>() const
 	{
-		return Vec2<type>(prev, curr);
+		return Vec2<Type>(prev, curr);
 	}
 	
 	

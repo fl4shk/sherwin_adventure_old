@@ -29,35 +29,35 @@
 
 // This Is a class for dynamic arrays That Can be resized but only by
 // calling the resize() function.
-template<typename type >
+template<typename Type>
 class DynArr
 {
 protected:		// variables
 	size_t size = 0;
-	type* arr = NULL;
+	Type* arr = NULL;
 	
 public:		// classes
 	//class Iterator
 	//{
 	//public:		// typedefs
 	//	typedef Iterator self_type;
-	//	typedef type value_type;
-	//	typedef type& reference;
-	//	typedef type* pointer;
+	//	typedef Type value_type;
+	//	typedef Type& reference;
+	//	typedef Type* pointer;
 	//	typedef std::random_access_iterator_tag iterator_category;
 	//	typedef s32 difference_type;
 	//	
 	//protected:		// variables
-	//	DynArr<type> *const dyn_arr_ptr;
+	//	DynArr<Type> *const dyn_arr_ptr;
 	//	size_t pos;
 	//	
 	//public:		// functions
-	//	inline Iterator(DynArr<type>* s_dyn_arr_ptr, size_t s_pos)
+	//	inline Iterator(DynArr<Type>* s_dyn_arr_ptr, size_t s_pos)
 	//		: dyn_arr_ptr(s_dyn_arr_ptr), pos(s_pos)
 	//	{
 	//	}
 	//	
-	//	inline DynArr<type> *const get_dyn_arr_ptr() const
+	//	inline DynArr<Type> *const get_dyn_arr_ptr() const
 	//	{
 	//		return dyn_arr_ptr;
 	//	}
@@ -83,16 +83,16 @@ public:		// classes
 	//	
 	//	
 	//protected:		// variables
-	//	DynArr<type> *const dyn_arr_ptr;
+	//	DynArr<Type> *const dyn_arr_ptr;
 	//	s32 pos;
 	//	
 	//public:		// functions
-	//	inline Iterator(DynArr<type>* s_dyn_arr_ptr, s32 s_pos)
+	//	inline Iterator(DynArr<Type>* s_dyn_arr_ptr, s32 s_pos)
 	//		: dyn_arr_ptr(s_dyn_arr_ptr), pos(s_pos)
 	//	{
 	//	}
 	//	
-	//	inline DynArr<type> *const get_dyn_arr_ptr() const
+	//	inline DynArr<Type> *const get_dyn_arr_ptr() const
 	//	{
 	//		return dyn_arr_ptr;
 	//	}
@@ -143,11 +143,11 @@ public:		// functions
 	{
 		alloc_arr();
 	}
-	inline DynArr(const DynArr<type>& to_copy)
+	inline DynArr(const DynArr<Type>& to_copy)
 	{
 		*this = to_copy;
 	}
-	inline DynArr(DynArr<type>&& to_move)
+	inline DynArr(DynArr<Type>&& to_move)
 	{
 		*this = std::move(to_move);
 	}
@@ -157,7 +157,7 @@ public:		// functions
 	}
 	
 	
-	inline DynArr& operator = (const DynArr<type>& to_copy)
+	inline DynArr& operator = (const DynArr<Type>& to_copy)
 	{
 		dealloc_arr();
 		
@@ -166,7 +166,7 @@ public:		// functions
 		
 		copy_to_arr(to_copy.get_arr(), get_size());
 	}
-	inline DynArr& operator = (DynArr<type>&& to_copy)
+	inline DynArr& operator = (DynArr<Type>&& to_copy)
 	{
 		size = to_copy.get_size();
 		arr = to_copy.get_arr();
@@ -175,11 +175,11 @@ public:		// functions
 		to_copy.arr = NULL;
 	}
 	
-	inline type* get_arr()
+	inline Type* get_arr()
 	{
 		return arr;
 	}
-	inline const type* get_arr() const
+	inline const Type* get_arr() const
 	{
 		return arr;
 	}
@@ -188,18 +188,18 @@ public:		// functions
 		return size;
 	}
 	
-	inline type& operator [] (size_t index)
+	inline Type& operator [] (size_t index)
 	{
 		return get_arr()[index];
 	}
-	inline const type& operator [] (size_t index) const
+	inline const Type& operator [] (size_t index) const
 	{
 		return get_arr()[index];
 	}
 	
 	inline void resize(size_t n_size)
 	{
-		DynArr<type> temp_arr(std::move(*this));
+		DynArr<Type> temp_arr(std::move(*this));
 		
 		size = n_size;
 		alloc_arr();
@@ -210,11 +210,11 @@ public:		// functions
 	}
 	
 protected:		// functions
-	inline void copy_to_arr(type* to_copy, size_t the_size)
+	inline void copy_to_arr(Type* to_copy, size_t the_size)
 	{
 		//// Optimization for trivially copyable types... eh screw it I'll
 		//// let the compiler do That if it wants.
-		//if (std::is_trivially_copyable<type>::value)
+		//if (std::is_trivially_copyable<Type>::value)
 		//{
 		//	arr_memcpy(arr, to_copy, the_size);
 		//}
@@ -229,7 +229,7 @@ protected:		// functions
 	}
 	inline void alloc_arr()
 	{
-		arr = new type[get_size()];
+		arr = new Type[get_size()];
 	}
 	inline void dealloc_arr()
 	{

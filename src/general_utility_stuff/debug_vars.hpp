@@ -130,7 +130,7 @@ public:		// and constants
 	///static constexpr u32 max_size = 16;
 	static constexpr u32 max_size = 20;
 	//char arr[max_size];
-	std::array< char, max_size > arr;
+	std::array<char, max_size> arr;
 	
 public:		// functions
 	inline DebugStr() : real_size(0)
@@ -329,13 +329,13 @@ public:		// functions
 
 
 
-//template< typename debug_arr_type, typename type >
+//template<typename debug_arr_type, typename Type>
 //void show_debug_values_group_backend(debug_arr_type* debug_values_arr, 
-//	u32& curr_index, const u32 total_num_args, type* all_values_arr) 
+//	u32& curr_index, const u32 total_num_args, Type* all_values_arr) 
 //	__attribute__((noinline));
-template< typename debug_arr_type, typename type >
+template<typename debug_arr_type, typename Type>
 void show_debug_values_group_backend(debug_arr_type* debug_values_arr, 
-	u32& curr_index, const u32 total_num_args, const type* all_values_arr)
+	u32& curr_index, const u32 total_num_args, const Type* all_values_arr)
 {
 	//ASM_COMMENT("show_debug_values_group_backend()");
 	
@@ -361,44 +361,44 @@ void show_debug_values_group_backend(debug_arr_type* debug_values_arr,
 
 
 
-// type Is the actual type, and suffix Is the type's suffix.  Sometimes,
-// type == suffix, especially with generic types.
-#define GENERATE_FUNC_CONTENTS(type, suffix) \
+// Type Is the actual Type, and suffix Is the Type's suffix.  Sometimes,
+// Type == suffix, especially with generic types.
+#define GENERATE_FUNC_CONTENTS(Type, suffix) \
 ASM_COMMENT("show_debug_" #suffix "_group()"); \
 static constexpr size_t total_num_args = sizeof...(all_the_values); \
-type all_values_arr[total_num_args]; \
+Type all_values_arr[total_num_args]; \
 copy_to_array(all_values_arr, all_the_values...); \
 show_debug_values_group_backend \
 	(DebugArrGroup::debug_##suffix##_arr(), \
 	DebugArrGroup::curr_index_arr()[cdit_##suffix], total_num_args, \
 	all_values_arr);
 
-template< typename... all_the_types >
+template<typename... all_the_types>
 inline void show_debug_u32_group(const all_the_types&... all_the_values)
 {
 	MACRO_FOR_DEBUG_U32_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);
 }
 
 
-template< typename... all_the_types >
+template<typename... all_the_types>
 inline void show_debug_s32_group(const all_the_types&... all_the_values)
 {
 	MACRO_FOR_DEBUG_S32_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);
 }
 
-template< typename... all_the_types >
+template<typename... all_the_types>
 inline void show_debug_f24p8_group(const all_the_types&... all_the_values)
 {
 	MACRO_FOR_DEBUG_FIXED24P8_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);
 }
 
-template< typename... all_the_types >
+template<typename... all_the_types>
 inline void show_debug_f8p8_group(const all_the_types&... all_the_values)
 {
 	MACRO_FOR_DEBUG_FIXED8P8_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);
 }
 
-template< typename... all_the_types >
+template<typename... all_the_types>
 inline void show_debug_str_group(const all_the_types&... all_the_values)
 {
 	MACRO_FOR_DEBUG_STR_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);

@@ -22,32 +22,32 @@
 
 #include <stdlib.h>
 
-//template<typename type >
-//void allocate_arr_with_malloc(type*& ret, size_t num_elems) 
+//template<typename Type>
+//void allocate_arr_with_malloc(Type*& ret, size_t num_elems) 
 //	__attribute__((noinline));
 
 
-template<typename type >
-inline void allocate_arr_with_malloc(type*& to_allocate, 
+template<typename Type>
+inline void allocate_arr_with_malloc(Type*& to_allocate, 
 	size_t num_elems) 
 {
-	to_allocate = static_cast<type*>(malloc(num_elems * sizeof(type)));
+	to_allocate = static_cast<Type*>(malloc(num_elems * sizeof(Type)));
 }
-template<typename type >
-inline void deallocate_arr_with_free(type*& to_deallocate)
+template<typename Type>
+inline void deallocate_arr_with_free(Type*& to_deallocate)
 {
 	free(to_deallocate);
 }
 
-//template<typename type >
-//inline void allocate_arr_with_nano_malloc(type*& to_allocate, 
+//template<typename Type>
+//inline void allocate_arr_with_nano_malloc(Type*& to_allocate, 
 //	size_t num_elems) 
 //{
-//	to_allocate = static_cast<type*>(nano_malloc(num_elems 
-//		* sizeof(type)));
+//	to_allocate = static_cast<Type*>(nano_malloc(num_elems 
+//		* sizeof(Type)));
 //}
-//template<typename type >
-//inline void deallocate_arr_with_nano_free(type*& to_deallocate)
+//template<typename Type>
+//inline void deallocate_arr_with_nano_free(Type*& to_deallocate)
 //{
 //	nano_free(to_deallocate);
 //}

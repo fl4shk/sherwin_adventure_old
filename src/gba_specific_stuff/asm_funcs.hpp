@@ -84,158 +84,158 @@ inline void memfill8(volatile void* dst, u32 src, u32 bytecount)
 
 
 // arr_mem*() with raw arrays
-template< typename type >
-inline void arr_memcpy32(type* dst, const void* src, u32 num_elems)
+template<typename Type>
+inline void arr_memcpy32(Type* dst, const void* src, u32 num_elems)
 {
-	memcpy32((void*)dst, (const void*)src, num_elems * sizeof(type) 
+	memcpy32((void*)dst, (const void*)src, num_elems * sizeof(Type) 
 		/ sizeof(u32));
 }
-template< typename type >
-inline void arr_memfill32(type* dst, u32 src, u32 num_elems)
+template<typename Type>
+inline void arr_memfill32(Type* dst, u32 src, u32 num_elems)
 {
-	memfill32((void*)dst, src, num_elems * sizeof(type) / sizeof(u32));
+	memfill32((void*)dst, src, num_elems * sizeof(Type) / sizeof(u32));
 }
 
-template< typename type >
-inline void arr_memcpy8(type* dst, const void* src, u32 num_elems)
+template<typename Type>
+inline void arr_memcpy8(Type* dst, const void* src, u32 num_elems)
 {
-	memcpy8((void*)dst, src, num_elems * sizeof(type) / sizeof(u8));
+	memcpy8((void*)dst, src, num_elems * sizeof(Type) / sizeof(u8));
 }
-template< typename type >
-inline void arr_memfill8(type* dst, u32 src, u32 num_elems)
+template<typename Type>
+inline void arr_memfill8(Type* dst, u32 src, u32 num_elems)
 {
-	memfill8((void*)dst, (src & 0xff), num_elems * sizeof(type) 
+	memfill8((void*)dst, (src & 0xff), num_elems * sizeof(Type) 
 		/ sizeof(u8));
 }
 
-template< typename type >
-inline void* arr_memcpy(type* dst, const void* src, u32 num_elems)
+template<typename Type>
+inline void* arr_memcpy(Type* dst, const void* src, u32 num_elems)
 {
-	return memcpy((void*)dst, src, num_elems * sizeof(type) / sizeof(u8));
+	return memcpy((void*)dst, src, num_elems * sizeof(Type) / sizeof(u8));
 }
-template< typename type >
-inline void* arr_memset(type* dst, int c, u32 num_elems)
+template<typename Type>
+inline void* arr_memset(Type* dst, int c, u32 num_elems)
 {
-	return memset((void*)dst, c, num_elems * sizeof(type) / sizeof(u8));
+	return memset((void*)dst, c, num_elems * sizeof(Type) / sizeof(u8));
 }
 
 
 
 
 
-template< typename dst_type, typename src_type, size_t size >
-inline void arr_memcpy32(std::array< dst_type, size >& dst, 
-	std::array< src_type, size >& src)
+template<typename dst_type, typename src_type, size_t size>
+inline void arr_memcpy32(std::array<dst_type, size>& dst, 
+	std::array<src_type, size>& src)
 {
 	arr_memcpy32<dst_type>(dst.data(), src.data(), size);
 }
-template< typename type, size_t size >
-inline void arr_memcpy32(std::array< type, size >& dst, const void* src)
+template<typename Type, size_t size>
+inline void arr_memcpy32(std::array<Type, size>& dst, const void* src)
 {
-	arr_memcpy32<type>(dst.data(), src, size);
+	arr_memcpy32<Type>(dst.data(), src, size);
 }
-template< typename type, size_t size >
-inline void arr_memfill32(std::array< type, size >& dst, u32 src)
+template<typename Type, size_t size>
+inline void arr_memfill32(std::array<Type, size>& dst, u32 src)
 {
-	arr_memfill32<type>(static_cast<type*>(dst.data()), src, size);
+	arr_memfill32<Type>(static_cast<Type*>(dst.data()), src, size);
 }
 
 
-template< typename dst_type, typename src_type, size_t size >
-inline void arr_memcpy8(std::array< dst_type, size >& dst, 
-	std::array< src_type, size >& src)
+template<typename dst_type, typename src_type, size_t size>
+inline void arr_memcpy8(std::array<dst_type, size>& dst, 
+	std::array<src_type, size>& src)
 {
 	arr_memcpy8<dst_type>(dst.data(), src.data(), size);
 }
-template< typename type, size_t size >
-inline void arr_memcpy8(std::array< type, size >& dst, const void* src)
+template<typename Type, size_t size>
+inline void arr_memcpy8(std::array<Type, size>& dst, const void* src)
 {
-	arr_memcpy8<type>(dst.data(), src, size);
+	arr_memcpy8<Type>(dst.data(), src, size);
 }
-template< typename type, size_t size >
-inline void arr_memfill8(std::array< type, size >& dst, u32 src)
+template<typename Type, size_t size>
+inline void arr_memfill8(std::array<Type, size>& dst, u32 src)
 {
-	arr_memfill8<type>(dst.data(), src, size);
+	arr_memfill8<Type>(dst.data(), src, size);
 }
 
 
 
-template< typename dst_type, typename src_type, size_t size >
-inline void* arr_memcpy(std::array< dst_type, size >& dst, 
-	std::array< src_type, size >& src)
+template<typename dst_type, typename src_type, size_t size>
+inline void* arr_memcpy(std::array<dst_type, size>& dst, 
+	std::array<src_type, size>& src)
 {
 	return arr_memcpy<dst_type>(dst.data(), src.data(), size);
 }
-template< typename type, size_t size >
-inline void* arr_memcpy(std::array< type, size >& dst, const void* src)
+template<typename Type, size_t size>
+inline void* arr_memcpy(std::array<Type, size>& dst, const void* src)
 {
-	return arr_memcpy<type>(dst.data(), src, size);
+	return arr_memcpy<Type>(dst.data(), src, size);
 }
-template< typename type, size_t size >
-inline void* arr_memset(std::array< type, size >& dst, u32 src)
+template<typename Type, size_t size>
+inline void* arr_memset(std::array<Type, size>& dst, u32 src)
 {
-	return arr_memset<type>(dst.data(), src, size);
+	return arr_memset<Type>(dst.data(), src, size);
 }
 
 
 
 
 // Some inline template functions Intended for use with SRAM
-template< typename type >
-inline void single_memcpy8(u8* dst, const type& to_write)
+template<typename Type>
+inline void single_memcpy8(u8* dst, const Type& to_write)
 {
-	memcpy8(dst, &to_write, sizeof(type));
+	memcpy8(dst, &to_write, sizeof(Type));
 }
 
-template< typename type >
-inline void single_write_as_bytes(u8* dst, const type& to_write)
+template<typename Type>
+inline void single_write_as_bytes(u8* dst, const Type& to_write)
 {
 	const u8* src = reinterpret_cast<const u8*>(&to_write);
 	
-	for (s32 i=sizeof(type)-1; i>=0; --i)
+	for (s32 i=sizeof(Type)-1; i>=0; --i)
 	{
 		dst[i] = src[i];
 	}
 }
 
 
-template< typename type >
+template<typename Type>
 inline void single_memcpy8(u8* dst_start, size_t type_offset, 
-	const type& to_write)
+	const Type& to_write)
 {
-	u8* dst = &(dst_start[type_offset * sizeof(type)]);
+	u8* dst = &(dst_start[type_offset * sizeof(Type)]);
 	
-	memcpy8(dst, &to_write, sizeof(type));
+	memcpy8(dst, &to_write, sizeof(Type));
 }
 
-template< typename type >
+template<typename Type>
 inline void single_write_as_bytes(u8* dst_start, size_t type_offset, 
-	const type& to_write)
+	const Type& to_write)
 {
-	u8* dst = &(dst_start[type_offset * sizeof(type)]);
+	u8* dst = &(dst_start[type_offset * sizeof(Type)]);
 	const u8* src = reinterpret_cast<const u8*>(&to_write);
 	
-	for (s32 i=sizeof(type)-1; i>=0; --i)
+	for (s32 i=sizeof(Type)-1; i>=0; --i)
 	{
 		dst[i] = src[i];
 	}
 }
 
 
-template< typename type >
-inline void struct_memcpy32(type& dst, const type& src)
+template<typename Type>
+inline void struct_memcpy32(Type& dst, const Type& src)
 {
-	memcpy32(&dst, &src, sizeof(type) / sizeof(u32));
+	memcpy32(&dst, &src, sizeof(Type) / sizeof(u32));
 }
-template< typename type >
-inline void struct_memcpy8(type& dst, const type& src)
+template<typename Type>
+inline void struct_memcpy8(Type& dst, const Type& src)
 {
-	memcpy8(&dst, &src, sizeof(type));
+	memcpy8(&dst, &src, sizeof(Type));
 }
-template< typename type >
-inline void* struct_memcpy(type& dst, const type& src)
+template<typename Type>
+inline void* struct_memcpy(Type& dst, const Type& src)
 {
-	return memcpy(&dst, &src, sizeof(type));
+	return memcpy(&dst, &src, sizeof(Type));
 }
 
 

@@ -30,7 +30,7 @@
 .align 4
 .do_arm
 .global memcpy8
-.type memcpy8, %function
+.Type memcpy8, %function
 
 memcpy8:
 	.fnstart
@@ -59,7 +59,7 @@ memcpy8:
 .align 4
 .do_arm
 .global memfill8
-.type memfill8, %function
+.Type memfill8, %function
 
 memfill8:
 	.fnstart

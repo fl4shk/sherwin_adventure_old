@@ -108,7 +108,7 @@ void ListBackend::internal_func_allocate_and_assign_to_node
 //	the_front_index = get_free_list_backend().peek_top_and_pop();
 //	
 //	
-//	//Node<type>& the_front_node 
+//	//Node<Type>& the_front_node 
 //	//	= get_node_at(the_front_index);
 //	
 //	NodeContents the_front_node = get_node_contents_at(the_front_index);
@@ -189,7 +189,7 @@ s32 ListBackend::internal_func_move_unlinked_node_to_front
 	//the_free_list_backend.pop();
 	
 	
-	//Node<type>& the_front_node 
+	//Node<Type>& the_front_node 
 	//	= get_node_at(the_front_index);
 	
 	the_front_index = to_move_index;
@@ -244,7 +244,7 @@ s32 ListBackend::internal_func_move_unlinked_node_to_front
 //	
 //	the_front_index = to_move_index;
 //	
-//	//Node<type>& the_front_node 
+//	//Node<Type>& the_front_node 
 //	//	= get_node_at(the_front_index);
 //	
 //	NodeContents the_front_node = get_node_contents_at(the_front_index);
@@ -298,7 +298,7 @@ s32 ListBackend::internal_func_move_unlinked_node_to_front
 //	}
 //	else
 //	{
-//		//Node<type>& node_at_index 
+//		//Node<Type>& node_at_index 
 //		//	= get_node_at(index);
 //		NodeContents node_at_index = get_node_contents_at(index);
 //		
@@ -311,7 +311,7 @@ s32 ListBackend::internal_func_move_unlinked_node_to_front
 //			.peek_top_and_pop();
 //		
 //		
-//		//Node<type>& node_at_new_index
+//		//Node<Type>& node_at_new_index
 //		//	= get_node_at(new_index);
 //		NodeContents node_at_new_index = get_node_contents_at(new_index);
 //		
@@ -381,7 +381,7 @@ s32 ListBackend::internal_func_move_unlinked_node_before
 //	//s32 old_next_index = get_node_at(index)
 //	//	.next_index();
 //	
-//	//Node<type>& node_at_index = get_node_at(index);
+//	//Node<Type>& node_at_index = get_node_at(index);
 //	//const s32 old_next_index = node_at_index
 //	//	.next_index();
 //	
@@ -397,7 +397,7 @@ s32 ListBackend::internal_func_move_unlinked_node_before
 //	
 //	node_at_index.next_index() = new_index;
 //	
-//	//Node<type>& node_at_new_index 
+//	//Node<Type>& node_at_new_index 
 //	//	= get_node_at(new_index);
 //	NodeContents node_at_new_index = get_node_contents_at(new_index);
 //	
@@ -487,7 +487,7 @@ s32 ListBackend::internal_func_move_unlinked_node_after
 //	//	old_next_index = get_node_at(index)
 //	//	.next_index();
 //	
-//	//Node<type>& node_at_index = get_node_at(index);
+//	//Node<Type>& node_at_index = get_node_at(index);
 //	//
 //	//const s32 old_prev_index = node_at_index
 //	//	.prev_index(),
@@ -515,10 +515,10 @@ s32 ListBackend::internal_func_move_unlinked_node_after
 //	
 //	
 //	
-//	////node_at_index.data = type();
+//	////node_at_index.data = Type();
 //	////node_at_index.next_index() = -1;
 //	////node_at_index.prev_index() = -1;
-//	//node_at_index = Node<type>();
+//	//node_at_index = Node<Type>();
 //	
 //	
 //	get_free_list_backend().push(index);
@@ -549,7 +549,7 @@ s32 ListBackend::internal_func_move_unlinked_node_after
 //	}
 //	else //if (index != old_front_index && index != old_back_index)
 //	{
-//		//Node<type>& old_prev_node 
+//		//Node<Type>& old_prev_node 
 //		//	= get_node_at(old_prev_index);
 //		s16& the_next_index = get_next_index_at_index(old_prev_index);
 //		

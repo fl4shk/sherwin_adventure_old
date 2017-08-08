@@ -41,8 +41,8 @@ Fixed24p8 f24p8_div_by_u16(const Fixed24p8& num, u16 den)
 static constexpr u32 f24p8_shift = 8;
 static constexpr u32 f24p8_frac_mask = (1 << f24p8_shift) - 1;
 
-// Underlying type Is s32, with 8 fraction bits
-// This will be the most often used fixed-point type in my GBA stuff
+// Underlying Type Is s32, with 8 fraction bits
+// This will be the most often used fixed-point Type in my GBA stuff
 class Fixed24p8
 {
 public:		// variables
@@ -305,7 +305,7 @@ inline bool Fixed24p8::operator >= (const Fixed24p8& to_cmp) const
 
 
 
-// Underlying type Is s16, with 8 fraction bits
+// Underlying Type Is s16, with 8 fraction bits
 class Fixed8p8
 {
 public:		// variables
@@ -557,11 +557,11 @@ inline Fixed8p8 operator - (const Fixed8p8& a)
 
 
 
-template<typename underlying_type, u32 shift >
+template<typename underlying_type, u32 shift>
 class FixedptNumPacked
 {
 public:		// typedefs
-	typedef FixedptNumPacked<underlying_type, shift > 
+	typedef FixedptNumPacked<underlying_type, shift> 
 		specific_fixedpt_type;
 	
 public:		// variables
@@ -656,13 +656,13 @@ public:		// functions
 	
 } __attribute__((_packed));
 
-typedef FixedptNumPacked<u16, 4 > Fixedu12p4Packed;
-typedef FixedptNumPacked<s16, 4 > Fixeds12p4Packed;
-typedef FixedptNumPacked<s16, 8 > Fixeds8p8Packed;
+typedef FixedptNumPacked<u16, 4> Fixedu12p4Packed;
+typedef FixedptNumPacked<s16, 4> Fixeds12p4Packed;
+typedef FixedptNumPacked<s16, 8> Fixeds8p8Packed;
 
 
 
-template<typename specific_fixedpt_type >
+template<typename specific_fixedpt_type>
 inline specific_fixedpt_type make_signed_fixedpt_num(s32 whole_part, 
 	u32 frac_part=0)
 {
@@ -694,7 +694,7 @@ inline specific_fixedpt_type make_signed_fixedpt_num(s32 whole_part,
 }
 
 
-template<typename specific_fixedpt_type >
+template<typename specific_fixedpt_type>
 inline specific_fixedpt_type make_unsigned_fixedpt_num(u32 whole_part, 
 	u32 frac_part=0)
 {
