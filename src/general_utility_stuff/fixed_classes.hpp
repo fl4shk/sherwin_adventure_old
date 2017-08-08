@@ -29,13 +29,13 @@ class Fixed8p8;
 
 
 //extern Fixed24p8 f24p8_div_by_f8p8(const Fixed24p8& num, 
-//	const Fixed8p8& den) __attribute__((_IWRAM_CODE));
+//	const Fixed8p8& den) __attribute__((_iwram_code));
 Fixed24p8 f24p8_div_by_f8p8(const Fixed24p8& num, const Fixed8p8& den) 
-	__attribute__((_IWRAM_CODE,_TARGET_ARM));
+	__attribute__((_iwram_code,_target_arm));
 Fixed24p8 f24p8_div_by_f24p8(const Fixed24p8& num, const Fixed24p8& den) 
-	__attribute__((_IWRAM_CODE,_TARGET_ARM));
+	__attribute__((_iwram_code,_target_arm));
 Fixed24p8 f24p8_div_by_u16(const Fixed24p8& num, u16 den)
-	__attribute__((_IWRAM_CODE,_TARGET_ARM));
+	__attribute__((_iwram_code,_target_arm));
 
 
 static constexpr u32 f24p8_shift = 8;
@@ -89,7 +89,7 @@ public:		// functions
 	
 	//inline Fixed24p8 operator * (const Fixed24p8& to_mul) const;
 	Fixed24p8 operator * (const Fixed24p8& to_mul) const
-		__attribute__((_IWRAM_CODE,_TARGET_ARM));
+		__attribute__((_iwram_code,_target_arm));
 	inline Fixed24p8 guaranteed_f24p8_by_f8p8_multiplication
 		(const Fixed8p8& to_mul) const;
 	inline Fixed24p8 operator / (const Fixed8p8& den) const
@@ -149,7 +149,7 @@ public:		// functions
 	inline bool operator >= (const Fixed24p8& to_cmp) const;
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 template<>
@@ -349,7 +349,7 @@ public:		// functions
 	inline bool operator >= (const Fixed8p8& to_cmp) const;
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 inline s16 Fixed8p8::round_to_int() const
@@ -548,11 +548,11 @@ inline Fixed8p8 operator - (const Fixed8p8& a)
 }
 
 //Fixed24p8 make_f24p8(s32 whole_part, u8 frac_part=0) 
-//	__attribute__((_IWRAM_CODE));
+//	__attribute__((_iwram_code));
 //
 //
 //Fixed8p8 make_f8p8(s8 whole_part, u8 frac_part=0) 
-//	__attribute__((_IWRAM_CODE));
+//	__attribute__((_iwram_code));
 
 
 
@@ -654,7 +654,7 @@ public:		// functions
 	
 	
 	
-} __attribute__((_PACKED));
+} __attribute__((_packed));
 
 typedef FixedptNumPacked<u16, 4 > fixedu12p4_packed;
 typedef FixedptNumPacked<s16, 4 > fixeds12p4_packed;

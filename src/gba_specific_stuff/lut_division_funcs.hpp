@@ -23,13 +23,13 @@
 #include "attribute_defines.hpp"
 
 u64 unsafe_lut_udiv(u32 numerator, u16 divisor)
-	__attribute__((_IWRAM_CODE,_TARGET_ARM));
+	__attribute__((_iwram_code,_target_arm));
 s64 unsafe_lut_sdiv(s32 numerator, s16 divisor)
-	__attribute__((_IWRAM_CODE,_TARGET_ARM));
+	__attribute__((_iwram_code,_target_arm));
 u64 safe_lut_udiv(u32 numerator, u16 divisor, int& valid) 
-	__attribute__((_IWRAM_CODE,_TARGET_ARM));
+	__attribute__((_iwram_code,_target_arm));
 s64 safe_lut_sdiv(s32 numerator, s16 divisor, int& valid) 
-	__attribute__((_IWRAM_CODE,_TARGET_ARM));
+	__attribute__((_iwram_code,_target_arm));
 
 
 extern const u32 udiv_table[];

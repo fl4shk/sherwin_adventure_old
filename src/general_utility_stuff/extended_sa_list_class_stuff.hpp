@@ -198,7 +198,7 @@ protected:		// functions
 		return the_externally_allocated_list.merge_sort_via_array_2();
 	}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 template<typename type, u32 total_num_nodes >
@@ -351,7 +351,7 @@ public:		// functions
 		return base::merge_sort_via_array_2();
 	}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 // This class Is Intended To always be sorted, though it does not have To
@@ -500,7 +500,7 @@ public:		// functions
 		return base::merge_sort_via_array_2();
 	}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 } // end of namespace SaListStuff
 

@@ -141,7 +141,7 @@ public:		// variables
 	s32 remainder;
 	u32 quotient_abs;
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 

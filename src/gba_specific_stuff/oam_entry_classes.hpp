@@ -173,7 +173,7 @@ public:		// wrapper functions
 	
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 
@@ -201,7 +201,7 @@ public:		// variables
 public:		// functions
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 

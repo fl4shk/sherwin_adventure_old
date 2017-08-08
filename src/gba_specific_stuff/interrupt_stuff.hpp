@@ -132,10 +132,10 @@ extern "C"
 
 void irq_init();
 
-void irq_dummy() __attribute__((_IWRAM_CODE));
+void irq_dummy() __attribute__((_iwram_code));
 
 
-void isr_main() __attribute__((_IWRAM_CODE,_TARGET_ARM));
+void isr_main() __attribute__((_iwram_code,_target_arm));
 
 //#define ISR_MAIN_COUNTER *((vu16*)(MEM_EWRAM + 0x8000))
 //#define ISR_MAIN_ARR0 ((vu16*)(MEM_EWRAM + 0x8002))

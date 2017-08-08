@@ -29,7 +29,7 @@
 /*
 extern u32 curr_debug_s32_index, curr_debug_u32_index, 
 	curr_debug_f24p8_index, curr_debug_f8p8_index, 
-	curr_debug_st_result_index __attribute__((_IWRAM));
+	curr_debug_st_result_index __attribute__((_iwram));
 
 static const u32 debug_arr_s32_size = 32;
 extern vs32 debug_arr_s32[debug_arr_s32_size];
@@ -56,7 +56,7 @@ static const u32 debug_arr_f8p8_size = 32;
 extern Fixed8p8 debug_arr_f8p8[debug_arr_f8p8_size];
 #define NEXT_DEBUG_F8P8 (debug_arr_f8p8[curr_debug_f8p8_index++])
 
-void clear_debug_vars() __attribute__((_IWRAM_CODE));
+void clear_debug_vars() __attribute__((_iwram_code));
 */
 
 
@@ -193,7 +193,7 @@ public:		// functions
 		}
 	}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 extern u32 (& curr_index_arr)[curr_index_arr_size];
@@ -217,7 +217,7 @@ public:		// static variables (raw debug arrays)
 		Fixed8p8 debug_f8p8_arr[debug_f8p8_arr_size];
 		
 		DebugStr debug_str_arr[debug_str_arr_size];
-	} __attribute__((_ALIGN4));
+	} __attribute__((_align4));
 	static raw_array_group the_raw_array_group;
 	
 	
@@ -323,7 +323,7 @@ public:		// functions
 	
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 

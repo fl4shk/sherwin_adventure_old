@@ -75,7 +75,7 @@ public:		// classes
 	//	
 	//	//inline 
 	//	
-	//} __attribute__((_ALIGN4));
+	//} __attribute__((_align4));
 	
 	//class Iterator
 	//{
@@ -135,7 +135,7 @@ public:		// classes
 	//	
 	//	//inline 
 	//	
-	//} __attribute__((_ALIGN4));
+	//} __attribute__((_align4));
 	
 	
 public:		// functions
@@ -237,7 +237,7 @@ protected:		// functions
 	}
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 

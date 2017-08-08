@@ -96,7 +96,7 @@ public:			// functions
 	}
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 #endif		// array_helper_class_hpp

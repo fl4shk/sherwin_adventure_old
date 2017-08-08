@@ -564,7 +564,7 @@ SECTIONS
 
 			. = ALIGN(4);
 		}
-	}
+	} >iwram
 	__iwram_bss0_section_size = SIZEOF(.iwram_bss0);
 	__iwram_bss1_section_size = SIZEOF(.iwram_bss1);
 	__iwram_bss2_section_size = SIZEOF(.iwram_bss2);

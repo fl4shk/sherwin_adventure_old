@@ -113,7 +113,7 @@ public:			// functions
 	
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 // This utility class Is Intended To be used when inherently 2D data Is
 // stored within a 1D array.
@@ -211,7 +211,7 @@ public:			// functions
 	
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 

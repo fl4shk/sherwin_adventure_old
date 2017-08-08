@@ -19,7 +19,7 @@
 .include "include/all_includes.s"
 
 @ void memcpy8 (void* dst, const void* src, uint bytecount) 
-@	__attribute__ ((_IWRAM_CODE));
+@	__attribute__ ((_iwram_code));
 @ 
 @ r0, r1:  dst, src
 @ r2:  bytecount
@@ -50,7 +50,7 @@ memcpy8:
 
 
 @ void memfill8 (void* dst, u32 src, uint bytecount) 
-@	__attribute__ ((_IWRAM_CODE));
+@	__attribute__ ((_iwram_code));
 @ 
 @ r0, r1:  dst, src
 @ r2:  bytecount

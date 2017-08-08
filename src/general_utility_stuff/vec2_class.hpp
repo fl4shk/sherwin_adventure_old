@@ -185,7 +185,7 @@ public:		// functions
 		}
 	}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 
@@ -346,13 +346,13 @@ template<>
 class Vec2<Fixed24p8>
 {
 GENERATE_SPECIFIC_VEC2_CLASS_CONTENTS(Fixed24p8)
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 template<>
 class Vec2<Fixed8p8>
 {
 GENERATE_SPECIFIC_VEC2_CLASS_CONTENTS(Fixed8p8)
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 typedef Vec2<Fixed24p8> vec2_f24p8;
 typedef Vec2<Fixed8p8> vec2_f8p8;

@@ -26,7 +26,7 @@
 
 extern "C"
 {
-	volatile isr_funcptr isr_table[intr_amount] __attribute__((_BSS));
+	volatile isr_funcptr isr_table[intr_amount] __attribute__((_bss));
 	
 	
 	// This Is for maxmod compatibility

@@ -52,13 +52,13 @@ extern "C" int ewram_test_func();
 
 
 static const u32 ewram_test_arr_size = 10;
-u8 ewram_test_arr[ewram_test_arr_size] __attribute__((_EWRAM));
+u8 ewram_test_arr[ewram_test_arr_size] __attribute__((_ewram));
 
 static const char test_str[] = "Birds2";
 static const u32 test_str_size = (sizeof(test_str) / sizeof(char)) - 1;
 
 //static const size_t sram_test_arr_size = 2000;
-//u8 sram_test_arr[sram_test_arr_size] __attribute__((_SRAM));
+//u8 sram_test_arr[sram_test_arr_size] __attribute__((_sram));
 
 extern const size_t clseg_grp_16x32_size;
 volatile size_t very_temp;
@@ -69,28 +69,33 @@ extern "C"
 {
 
 int main_2();
-//int real_main() __attribute__((_IWRAM_CODE));
+//int real_main() __attribute__((_iwram_code));
 int real_main();
 
 }
 
-char address_buff[20] __attribute__((_SRAM));
+char address_buff[20] __attribute__((_sram));
 
 extern "C"
 {
 
-u32 some_title_screen_arr[8] __attribute__((_TITLE_SCREEN_BSS));
-u32 some_title_screen_var __attribute__((_TITLE_SCREEN_BSS));
+u32 some_title_screen_arr[8] __attribute__((_title_screen_bss));
+u32 some_title_screen_var __attribute__((_title_screen_bss));
 
 
-u32 some_in_level_var __attribute__((_IN_LEVEL_BSS));
-u32 some_in_level_arr[8] __attribute__((_IN_LEVEL_BSS));
+u32 some_in_level_var __attribute__((_in_level_bss));
+u32 some_in_level_arr[8] __attribute__((_in_level_bss));
 
-char asdf[8] __attribute__((_TITLE_SCREEN_SRAM));
-char asdf_2[8] __attribute__((_IN_LEVEL_SRAM));
 
-char asdf_ewram[8] __attribute__((_TITLE_SCREEN_EWRAM));
-char asdf_2_ewram[8] __attribute__((_IN_LEVEL_EWRAM));
+u32 some_title_screen_buf[8] __attribute__((_title_screen_iwram_bss));
+u32 some_in_level_buf[8] __attribute__((_in_level_iwram_bss));
+
+
+char asdf[8] __attribute__((_title_screen_sram));
+char asdf_2[8] __attribute__((_in_level_sram));
+
+char asdf_ewram[8] __attribute__((_title_screen_ewram));
+char asdf_2_ewram[8] __attribute__((_in_level_ewram));
 
 }
 

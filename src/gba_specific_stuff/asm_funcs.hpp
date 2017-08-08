@@ -33,9 +33,9 @@ extern "C"
 // These two functions should now be much faster, and I Can feel free To
 // allocate more stuffs on the stack!
 void* memcpy(void* dst, const void* src, size_t n)
-	__attribute__((_IWRAM_CODE,_TARGET_ARM));
+	__attribute__((_iwram_code,_target_arm));
 void* memset(void* dst, int c, size_t n)
-	__attribute__((_IWRAM_CODE,_TARGET_ARM));
+	__attribute__((_iwram_code,_target_arm));
 
 
 // This function Is used by crt0.s

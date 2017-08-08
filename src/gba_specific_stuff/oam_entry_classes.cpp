@@ -19,7 +19,7 @@
 #include "attribute_defines.hpp"
 #include "oam_entry_classes.hpp"
 
-// I'm tempted To put these two arrays in _IWRAM.
+// I'm tempted To put these two arrays in _iwram.
 OamEntry oam_mirror[oam_mirror_size];
 //OamEntryAffine* const OAM_MIRROR_AFF = (OamEntryAffine*)oam_mirror ;
 

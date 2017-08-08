@@ -119,7 +119,7 @@ public:		// functions
 protected:		// functions
 	void write_to_the_array_u8(const u8* to_write_u8, u32 non_u8_index);
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 
@@ -208,7 +208,7 @@ public:		// functions
 		return ret;
 	}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 
@@ -296,7 +296,7 @@ public:		// functions
 	//	return get_array()[get_next_index()-2];
 	//}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 
@@ -374,7 +374,7 @@ public:		// functions
 	//}
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 template< u32 size >
@@ -398,7 +398,7 @@ public:		// functions
 		--specific_sa_stack::next_index;
 	}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 template< u32 size >
@@ -417,7 +417,7 @@ protected:		// variables
 	
 protected:		// variables
 	//array< int, size > the_array;
-	array< s16, size > the_array __attribute__((_ALIGN4));
+	array< s16, size > the_array __attribute__((_align4));
 	u32 next_index;
 	
 public:		// functions
@@ -499,7 +499,7 @@ public:		// functions
 	//}
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 

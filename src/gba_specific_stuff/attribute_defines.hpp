@@ -23,11 +23,11 @@
 /* ---- #defines for Sections ---- */
 
 // Example:  __attribute__((_EWRAM))
-// Another example:  __attribute__((_EWRAM, _ALIGN4))
+// Another example:  __attribute__((_EWRAM, _align4))
 
 // #defines for putting INITIAILZED stuff in EWRAM and IWRAM
-#define _EWRAM section(".data")
-#define _IWRAM section(".iwram_data")
+#define _ewram section(".data")
+#define _iwram section(".iwram_data")
 
 
 #define PPCAT_NX(a, b) a ## b
@@ -45,7 +45,7 @@
 
 // #defines for UNITIALIZED global variables That go into EWRAM, IWRAM,
 // and SRAM
-#define _BSS section(".bss")
+#define _bss section(".bss")
 
 
 // BSS linker overlay
@@ -55,7 +55,7 @@
 
 
 
-#define _IWRAM_BSS section(".iwram_bss")
+#define _iwram_bss section(".iwram_bss")
 
 
 // IWRAM BSS linker overlay
@@ -63,15 +63,15 @@
 
 
 // Cart RAM
-#define _SRAM section(".sram")
+#define _sram section(".sram")
 
 // SRAM linker overlay (potentially not necessary at all)
 #define _SRAM_OVERLAY(num) section(STRINGIZE(PPCAT(.sram, num)))
 
 
 // #defines for putting stuff in the code (sections for EWRAM and IWRAM)
-#define _EWRAM_CODE section(".ewram_code")
-#define _IWRAM_CODE section(".iwram_code")
+#define _ewram_code section(".ewram_code")
+#define _iwram_code section(".iwram_code")
 
 
 // EWRAM CODE linker overlay (potentially not necessary at all)
@@ -92,46 +92,46 @@
 
 
 // These are what will actually be used
-#define _TITLE_SCREEN_EWRAM _EWRAM_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
-#define _TITLE_SCREEN_IWRAM _IWRAM_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
-#define _TITLE_SCREEN_BSS _BSS_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
-#define _TITLE_SCREEN_IWRAM_BSS \
+#define _title_screen_ewram _EWRAM_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
+#define _title_screen_iwram _IWRAM_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
+#define _title_screen_bss _BSS_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
+#define _title_screen_iwram_bss \
 	_IWRAM_BSS_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
-#define _TITLE_SCREEN_SRAM _SRAM_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
-#define _TITLE_SCREEN_EWRAM_CODE \
+#define _title_screen_sram _SRAM_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
+#define _title_screen_ewram_code \
 	_EWRAM_CODE_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
-#define _TITLE_SCREEN_IWRAM_CODE \
+#define _title_screen_iwram_code \
 	_IWRAM_CODE_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
 
 
-#define _OVERWORLD_EWRAM _EWRAM_OVERLAY(_OVERWORLD_OVERLAY_NUM)
-#define _OVERWORLD_IWRAM _IWRAM_OVERLAY(_OVERWORLD_OVERLAY_NUM)
-#define _OVERWORLD_BSS _BSS_OVERLAY(_OVERWORLD_OVERLAY_NUM)
-#define _OVERWORLD_IWRAM_BSS \
+#define _overworld_ewram _EWRAM_OVERLAY(_OVERWORLD_OVERLAY_NUM)
+#define _overworld_iwram _IWRAM_OVERLAY(_OVERWORLD_OVERLAY_NUM)
+#define _overworld_bss _BSS_OVERLAY(_OVERWORLD_OVERLAY_NUM)
+#define _overworld_iwram_bss \
 	_IWRAM_BSS_OVERLAY(_OVERWORLD_OVERLAY_NUM)
-#define _OVERWORLD_SRAM _SRAM_OVERLAY(_OVERWORLD_OVERLAY_NUM)
-#define _OVERWORLD_EWRAM_CODE \
+#define _overworld_sram _SRAM_OVERLAY(_OVERWORLD_OVERLAY_NUM)
+#define _overworld_ewram_code \
 	_EWRAM_CODE_OVERLAY(_OVERWORLD_OVERLAY_NUM)
-#define _OVERWORLD_IWRAM_CODE \
+#define _overworld_iwram_code \
 	_IWRAM_CODE_OVERLAY(_OVERWORLD_OVERLAY_NUM)
 
 
-#define _IN_LEVEL_EWRAM _EWRAM_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
-#define _IN_LEVEL_IWRAM _IWRAM_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
-#define _IN_LEVEL_BSS _BSS_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
-#define _IN_LEVEL_IWRAM_BSS \
+#define _in_level_ewram _EWRAM_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
+#define _in_level_iwram _IWRAM_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
+#define _in_level_bss _BSS_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
+#define _in_level_iwram_bss \
 	_IWRAM_BSS_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
-#define _IN_LEVEL_SRAM _SRAM_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
-#define _IN_LEVEL_EWRAM_CODE \
+#define _in_level_sram _SRAM_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
+#define _in_level_ewram_code \
 	_EWRAM_CODE_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
-#define _IN_LEVEL_IWRAM_CODE \
+#define _in_level_iwram_code \
 	_IWRAM_CODE_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
 
 
 
 
 // Generate ARM-mode code instead of THUMB-mode code
-#define _TARGET_ARM target("arm")
+#define _target_arm target("arm")
 
 // There's a bug That I encountered in GCC (as of 5.3.0) That causes the
 // section attribute To be ignored when dealing with template functions.
@@ -142,23 +142,23 @@
 // When using an optimization Level less than -O2, the .text.hot section
 // does not seem To be generated.  Perhaps there's some -f... flag (or
 // flags) That would cause the .text.hot To be generated at less than -O2.
-#define _TEXT_HOT_SECTION hot
-//#define _TEXT_HOT_SECTION_forCED hot,optimize("O3")
+#define _text_hot_section hot
+//#define _text_hot_section_forced hot,optimize("O3")
 
 /* ---- End of #defines for Sections ---- */
 
 
 // Some #defines for aligning structs/classes
-#define _ALIGN4 aligned(4)
+#define _align4 aligned(4)
 
 
 // A #define for making sure That structs/classes have the exact size of
 // all their members combined (USE WITH CAUTION)
-#define _PACKED packed
+#define _packed packed
 
 
 // This Is for C++'s built-in alignment, which finally Exists!
-#define _ALIGNAS_REGULAR alignas(4)
+#define _alignas_regular alignas(4)
 
 
 #endif		// attribute_defines_hpp

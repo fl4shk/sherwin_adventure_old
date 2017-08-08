@@ -25,7 +25,7 @@
 //vu16 __key_curr __attribute__((_EWRAM)) = 0,
 //	__key_prev __attribute__((_EWRAM)) = 0;
 
-volatile PrevCurrPair<vu16> __key_state __attribute__((_IWRAM)) 
+volatile PrevCurrPair<vu16> __key_state __attribute__((_iwram)) 
 	= { 0, 0 };
 
 

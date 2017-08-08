@@ -80,7 +80,7 @@ public:		// functions
 		return get_index_pair()[vec2_index_for_prev_index];
 	}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 
@@ -110,7 +110,7 @@ public:		// functions
 		return index;
 	}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 
@@ -122,7 +122,7 @@ template<typename type >
 class Node
 {
 public:		// variables
-	type data __attribute__((_ALIGN4)) = type();
+	type data __attribute__((_align4)) = type();
 	vec2_s16 index_pair = { -1, -1 };
 	
 public:		// functions
@@ -168,7 +168,7 @@ protected:		// functions
 	}
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 
@@ -326,7 +326,7 @@ public:		// classes
 		
 		
 		
-	} __attribute__((_ALIGN4));
+	} __attribute__((_align4));
 	
 	friend const s32 Iterator::operator * () const;
 	
@@ -422,7 +422,7 @@ public:		// functions
 		
 	}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 class ExtrasFpGroup
 {
@@ -467,7 +467,7 @@ public:		// function pointers
 	//			"Can't use struct_memcpy() in ExtrasFpGroup::operator = "
 	//			"() !");
 	//	}
-	//} __attribute__((_ALIGN4));
+	//} __attribute__((_align4));
 	
 public:		// functions
 	inline ExtrasFpGroup()
@@ -565,7 +565,7 @@ public:		// functions
 		return subarr_insertion_sort_fp;
 	}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 // A group of functions To use as function pointers in the ListBackend
@@ -575,22 +575,22 @@ class ListExtras
 {
 protected:		// functions To point To
 	static void specific_type_copy(type* a, type* b)
-		__attribute__((_TEXT_HOT_SECTION))
+		__attribute__((_text_hot_section))
 	{
 		*a = *b;
 	}
 	static void specific_type_move(type* a, type* b)
-		__attribute__((_TEXT_HOT_SECTION))
+		__attribute__((_text_hot_section))
 	{
 		*a = std::move(*b);
 	}
 	static void specific_type_reset(type* to_reset)
-		__attribute__((_TEXT_HOT_SECTION))
+		__attribute__((_text_hot_section))
 	{
 		*to_reset = type();
 	}
 	static void specific_type_swap(type* a, type* b)
-		__attribute__((_TEXT_HOT_SECTION))
+		__attribute__((_text_hot_section))
 	{
 		//type temp = std::move(*a);
 		//*a = std::move(*b);
@@ -599,19 +599,19 @@ protected:		// functions To point To
 	}
 	
 	static u32 specific_type_less(type* a, type* b)
-		__attribute__((_TEXT_HOT_SECTION))
+		__attribute__((_text_hot_section))
 	{
 		return ((*a) < (*b));
 	}
 	static u32 specific_type_greater(type* a, type* b)
-		__attribute__((_TEXT_HOT_SECTION))
+		__attribute__((_text_hot_section))
 	{
 		return ((*a) > (*b));
 	}
 	
 	// qsort() comparison function
 	static int specific_type_qscmp(const type* a, const type* b)
-		__attribute__((_TEXT_HOT_SECTION))
+		__attribute__((_text_hot_section))
 	{
 		if ((*a) < (*b))
 		{
@@ -628,17 +628,17 @@ protected:		// functions To point To
 	}
 	
 	static void* get_node_data(Node<type>* to_get_from)
-		__attribute__((_TEXT_HOT_SECTION))
+		__attribute__((_text_hot_section))
 	{
 		return &to_get_from->data;
 	}
 	static vec2_s16* get_sa_list_index_pair(Node<type>* to_get_from)
-		__attribute__((_TEXT_HOT_SECTION))
+		__attribute__((_text_hot_section))
 	{
 		return &to_get_from->index_pair;
 	}
 	static void conv_node_to_contents(NodeContents* ret,
-		Node<type>* to_convert) __attribute__((_TEXT_HOT_SECTION))
+		Node<type>* to_convert) __attribute__((_text_hot_section))
 	{
 		ret->data_ptr = &to_convert->data;
 		ret->index_pair_ptr = &to_convert->index_pair;
@@ -653,7 +653,7 @@ protected:		// functions To point To
 	// keeping track of a FIXED NUMBER of indices To nodes for sorting
 	// purposes.
 	static void insertion_sort_inner_loop(Node<type>* node_array, 
-		s32* index_low_ptr) //__attribute__((_TEXT_HOT_SECTION))
+		s32* index_low_ptr) //__attribute__((_text_hot_section))
 	{
 		Node<type>* node_at_j;
 		
@@ -684,7 +684,7 @@ protected:		// functions To point To
 	
 	static void subarr_insertion_sort(ndai_dyn_arr& arr_a,
 		const size_t subarr_offset, const size_t subarr_size)
-		//__attribute__((_TEXT_HOT_SECTION))
+		//__attribute__((_text_hot_section))
 	{
 		size_t curr_offset = subarr_offset;
 		
@@ -816,7 +816,7 @@ public:		// functions To not point To
 	}
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 
@@ -1100,8 +1100,8 @@ protected:		// functions
 	}
 	
 	
-	void fully_deallocate() __attribute__((_IWRAM_CODE));
-	void fully_deallocate_via_unlink() __attribute__((_IWRAM_CODE));
+	void fully_deallocate() __attribute__((_iwram_code));
+	void fully_deallocate_via_unlink() __attribute__((_iwram_code));
 	
 	
 	
@@ -1109,7 +1109,7 @@ protected:		// functions
 	// functions
 	void internal_func_allocate_and_assign_to_node(s32& index, 
 		NodeContents& Node, const void* n_data, u32 can_move_value);
-		__attribute__((_IWRAM_CODE));
+		__attribute__((_iwram_code));
 	
 	
 	
@@ -1204,7 +1204,7 @@ protected:		// functions
 	// Some of the functions for internal use 
 	s32 internal_func_move_unlinked_node_to_front(s32 to_move_index, 
 		NodeContents& node_to_move);
-		//__attribute__((_IWRAM_CODE));
+		//__attribute__((_iwram_code));
 		//__attribute__((noinline));
 	inline s32 internal_func_move_unlinked_node_to_back(s32 to_move_index,
 		NodeContents& node_to_move)
@@ -1224,11 +1224,11 @@ protected:		// functions
 	}
 	s32 internal_func_move_unlinked_node_before(s32 to_move_before_index, 
 		s32 to_move_index, NodeContents& node_to_move);
-		//__attribute__((_IWRAM_CODE));
+		//__attribute__((_iwram_code));
 		//__attribute__((noinline));
 	s32 internal_func_move_unlinked_node_after(s32 to_move_after_index, 
 		s32 to_move_index, NodeContents& node_to_move);
-		//__attribute__((_IWRAM_CODE));
+		//__attribute__((_iwram_code));
 		//__attribute__((noinline));
 	
 	
@@ -1237,13 +1237,13 @@ protected:		// functions
 	// node_at_index be passed To it.
 	void* internal_func_unlink_at(s32 index, 
 		NodeContents* node_at_index_ptr=NULL);
-		//__attribute__((_IWRAM_CODE));
+		//__attribute__((_iwram_code));
 		//__attribute__((noinline));
 	
 	
 	//void internal_func_unlink_from_connected_index_at(s32 index, 
 	//	u32 index_to_vec2); 
-	//	//__attribute__((_IWRAM_CODE));
+	//	//__attribute__((_iwram_code));
 	//
 	//inline void unlink_from_next_at(s32 index)
 	//{
@@ -1310,9 +1310,9 @@ protected:		// functions
 	
 	
 	
-	//s32 insertion_sort() __attribute__((_IWRAM_CODE));
-	//s32 insertion_sort() __attribute__((_TEXT_HOT_SECTION));
-	s32 insertion_sort(); //__attribute__((_IWRAM_CODE));
+	//s32 insertion_sort() __attribute__((_iwram_code));
+	//s32 insertion_sort() __attribute__((_text_hot_section));
+	s32 insertion_sort(); //__attribute__((_iwram_code));
 	
 	
 	
@@ -1320,24 +1320,24 @@ protected:		// functions
 	//// traversal.  Thus, I have replaced them with an array of pointers
 	//// based method.
 	//s32 internal_func_merge(merge_args& args)
-	//	__attribute__((_IWRAM_CODE));
-	//s32 merge_sort() __attribute__((_IWRAM_CODE));
+	//	__attribute__((_iwram_code));
+	//s32 merge_sort() __attribute__((_iwram_code));
 	
 	
 	
 	void internal_func_subarr_merge(NodeDataAndIndex* left_subarr,
 		const size_t left_subarr_size, NodeDataAndIndex* right_subarr, 
 		const size_t right_subarr_size, NodeDataAndIndex* out_subarr);
-		//__attribute__((_IWRAM_CODE));
+		//__attribute__((_iwram_code));
 	
 	// Top-down merge sort using an array of NodeDataAndIndex's.
-	s32 merge_sort_via_array(); //__attribute__((_IWRAM_CODE));
+	s32 merge_sort_via_array(); //__attribute__((_iwram_code));
 	
 	
 	//s32 heapsort_via_array();
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 
@@ -1562,7 +1562,7 @@ public:		// functions
 	
 	
 	s32 insertion_sort_old_2() 
-		//__attribute__((_TEXT_HOT_SECTION,noinline))
+		//__attribute__((_text_hot_section,noinline))
 		__attribute__((noinline))
 	{
 		s32& the_front_index = get_front_index();
@@ -2026,7 +2026,7 @@ public:		// functions
 	//}
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 
@@ -2074,7 +2074,7 @@ public:		// functions
 		return num_lists;
 	}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 } // end of namespace SaListStuff
 
