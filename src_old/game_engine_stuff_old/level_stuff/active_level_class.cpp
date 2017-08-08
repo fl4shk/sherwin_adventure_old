@@ -29,11 +29,11 @@ const vec2_u32 ActiveLevel::horiz_sublevel_size_2d
 	(horiz_sublevel_xsize, horiz_sublevel_ysize);
 
 Block ActiveLevel::block_data_array[block_data_array_size];
-//	__attribute__((_EWRAM));
+//	__attribute__((_ewram));
 
 
 u16 ActiveLevel::persistent_block_data_arrays[max_num_sublevels]
-	[persistent_block_data_array_size]; //__attribute__((_EWRAM));
+	[persistent_block_data_array_size]; //__attribute__((_ewram));
 
 
 //Array_2dHelper<Block> ActiveLevel::horiz_sublevel_block_data_2d 
@@ -47,12 +47,12 @@ ArrayCsz2dHelper<Block, ActiveLevel::horiz_sublevel_xsize,
 //std::array<std::forward_list<SpriteInitParamGroup>, 
 //	ActiveLevel::horiz_sublevel_xsize > 
 //	ActiveLevel::horiz_sublevel_sprite_ipg_lists; 
-//	//__attribute__((_EWRAM));
+//	//__attribute__((_ewram));
 
 //std::array<std::array<SpriteInitParamGroup, horiz_sublevel_ysize >, 
 //	ActiveLevel::horiz_sublevel_xsize > 
 //	ActiveLevel::horiz_sublevel_sprite_ipg_lists; 
-//	//__attribute__((_EWRAM));
+//	//__attribute__((_ewram));
 
 SaListStuff::SaArrayOfLists<SpriteInitParamGroup, 
 	ActiveLevel::max_num_sprite_ipgs_per_sublevel,

@@ -52,7 +52,7 @@ enum game_mode
 	// by the compiler.
 	lim_gm,
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 
@@ -64,16 +64,16 @@ public:		// variables
 	
 	static const char sram_const_init_str[];
 	//static constexpr u32 sram_init_str_size = sizeof(sram_const_init_str);
-	//static char sram_init_str[sram_init_str_size] __attribute__((_SRAM));
+	//static char sram_init_str[sram_init_str_size] __attribute__((_sram));
 	static const u32 sram_init_str_size;
-	static char sram_init_str[] __attribute__((_SRAM));
+	static char sram_init_str[] __attribute__((_sram));
 	
 	//static constexpr u32 test_sram_arr_size = debug_arr_u32_size 
 	//	* sizeof(u32);
 	//static constexpr u32 test_sram_arr_size = sizeof(debug_arr_u32);
 	static constexpr u32 test_sram_arr_size = debug_u32_arr_size 
 		* sizeof(u32);
-	static u8 test_sram_arr[test_sram_arr_size] __attribute__((_SRAM));
+	static u8 test_sram_arr[test_sram_arr_size] __attribute__((_sram));
 	
 	
 	// The current game mode.
@@ -112,22 +112,22 @@ public:		// functions
 	}
 	
 	
-	//static void vblank_func() __attribute__((_IWRAM_CODE, __noinline__));
-	static void vblank_func() __attribute__((_IWRAM_CODE));
-	//static void vblank_func() __attribute__((_IWRAM_CODE,_TARGET_ARM));
+	//static void vblank_func() __attribute__((_iwram_code, __noinline__));
+	static void vblank_func() __attribute__((_iwram_code));
+	//static void vblank_func() __attribute__((_iwram_code,_target_arm));
 	//static void vblank_func();
 	
 	//static void title_screen_func() __attribute__((__noinline__));
-	static void title_screen_func() __attribute__((_IWRAM_CODE));
+	static void title_screen_func() __attribute__((_iwram_code));
 	
-	static void reinit_the_game() __attribute__((_IWRAM_CODE));
-	
-	
+	static void reinit_the_game() __attribute__((_iwram_code));
 	
 	
 	
 	
-} __attribute__((_ALIGN4));
+	
+	
+} __attribute__((_align4));
 
 
 

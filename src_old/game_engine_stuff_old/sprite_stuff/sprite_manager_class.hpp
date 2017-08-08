@@ -121,7 +121,7 @@ public:		// variables
 	// The array of REGULAR active sprites, not counting the_player.
 	// -- Switch To linear_memory_allocator --
 	static Sprite the_sprites[max_num_regular_sprites]
-		__attribute__((_IWRAM));
+		__attribute__((_iwram));
 	
 	// The array of pseudo-background sprites, which are ONLY checked for
 	// intersection with the_player (and possibly Player secondary sprites)
@@ -142,13 +142,13 @@ public:		// variables
 	static u32 num_active_player_secondary_sprites, num_active_sprites, 
 		num_active_secondary_sprites, num_active_pseudo_bg_sprites;
 	static std::array<Sprite*, max_num_player_secondary_sprites >
-		the_active_player_secondary_sprites __attribute__((_EWRAM));
+		the_active_player_secondary_sprites __attribute__((_ewram));
 	static std::array<Sprite*, max_num_secondary_sprites >
-		the_active_secondary_sprites __attribute__((_EWRAM));
+		the_active_secondary_sprites __attribute__((_ewram));
 	static std::array<Sprite*, max_num_regular_sprites > 
-		the_active_sprites __attribute__((_IWRAM));
+		the_active_sprites __attribute__((_iwram));
 	static std::array<Sprite*, max_num_pseudo_bg_sprites > 
-		the_active_pseudo_bg_sprites __attribute__((_EWRAM));
+		the_active_pseudo_bg_sprites __attribute__((_ewram));
 	
 	
 	//static constexpr u32 the_player_vram_chunk_index = 1;
@@ -330,30 +330,30 @@ public:		// functions
 	// spawned, which Can be an intensive operation.
 	static void initial_sprite_spawning_shared_code
 		(PrevCurrPair<bg_point>& camera_pos);
-		//__attribute__((_IWRAM_CODE));
+		//__attribute__((_iwram_code));
 	
 	
 	static void initial_sprite_spawning_from_sublevel_data_old
 		(const bg_point& camera_pos);
 	
-	static void find_all_active_sprites() __attribute__((_IWRAM_CODE));
+	static void find_all_active_sprites() __attribute__((_iwram_code));
 	
 	static void spawn_sprites_if_needed
 		(const PrevCurrPair<bg_point>& camera_pos_pc_pair) 
-		__attribute__((_IWRAM_CODE));
+		__attribute__((_iwram_code));
 	static void despawn_sprites_if_needed(const bg_point& camera_pos) 
-		__attribute__((_IWRAM_CODE));
+		__attribute__((_iwram_code));
 	
 	static void upload_tiles_of_active_sprites_to_vram();
-		//__attribute__((_IWRAM_CODE));
+		//__attribute__((_iwram_code));
 	
 	// This function Is one of the most intensive, So it Is an ARM function
 	// That goes in IWRAM.
 	static void update_all_sprites(const vec2_u32& the_sublevel_size_2d,
 		PrevCurrPair<bg_point>& camera_pos_pc_pair) 
-		__attribute__((_IWRAM_CODE));
+		__attribute__((_iwram_code));
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 

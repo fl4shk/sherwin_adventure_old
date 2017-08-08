@@ -31,9 +31,9 @@
 class CollBox;
 
 int coll_box_intersects_now(const CollBox& a, const CollBox& b)
-	__attribute__((_IWRAM_CODE,_TARGET_ARM));
+	__attribute__((_iwram_code,_target_arm));
 //int coll_box_intersects_now_2(const CollBox& a, const CollBox& b)
-//	__attribute__((_IWRAM_CODE,_TARGET_ARM));
+//	__attribute__((_iwram_code,_target_arm));
 int coll_box_intersects_now_2(const CollBox& a, const CollBox& b);
 
 
@@ -112,7 +112,7 @@ public:		// functions
 		return coll_box_intersects_now_2(*this, other);
 	}
 	
-	int Contains(const vec2_f24p8& point) __attribute__((_IWRAM_CODE));
+	int Contains(const vec2_f24p8& point) __attribute__((_iwram_code));
 	
 	// Note:  This function doesn't check whether right_x > left_x, nor
 	// whether bot_y > top_y.  That makes this function less safe than it
@@ -129,7 +129,7 @@ public:		// functions
 	
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 

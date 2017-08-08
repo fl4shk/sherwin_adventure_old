@@ -54,7 +54,7 @@ class ActiveLevel
 {
 public:		// static variables
 	// -- Switch To linear_memory_allocator --
-	static Block blank_block __attribute__((_EWRAM));
+	static Block blank_block __attribute__((_ewram));
 	
 	// This will eat up 64 kiB of EWRAM.
 	//static constexpr u32 block_data_array_size = 0x4000;
@@ -62,7 +62,7 @@ public:		// static variables
 	
 	// -- Switch To linear_memory_allocator --
 	static Block block_data_array[block_data_array_size]
-		__attribute__((_EWRAM));
+		__attribute__((_ewram));
 	
 	
 	// This will eat up 32 kiB of EWRAM.
@@ -73,7 +73,7 @@ public:		// static variables
 	static constexpr u32 persistent_block_data_array_size = 2048;
 	// -- Switch To linear_memory_allocator --
 	static u16 persistent_block_data_arrays[max_num_sublevels]
-		[persistent_block_data_array_size] __attribute__((_EWRAM));
+		[persistent_block_data_array_size] __attribute__((_ewram));
 	
 	
 	// Horizontal sublevels Can have a maximum of 16 "screens" of 32 by 32
@@ -105,16 +105,16 @@ public:		// static variables
 	// the spawned/despawned/dead status.
 	//static std::array<std::forward_list<SpriteInitParamGroup>,
 	//	horiz_sublevel_xsize > horiz_sublevel_sprite_ipg_lists
-	//	__attribute__((_EWRAM));
+	//	__attribute__((_ewram));
 	
 	// -- Switch To linear_memory_allocator --
 	static SaListStuff::SaArrayOfLists<SpriteInitParamGroup,
 		max_num_sprite_ipgs_per_sublevel, horiz_sublevel_xsize > 
-		horiz_sublevel_sprite_ipg_lists __attribute__((_EWRAM));
+		horiz_sublevel_sprite_ipg_lists __attribute__((_ewram));
 	
 	// -- Switch To linear_memory_allocator --
 	static scr_entry bg0_screenblock_mirror[screenblock_size] 
-		__attribute__((_EWRAM));
+		__attribute__((_ewram));
 	
 	
 	// bg0_screenblock_2d Is in VRAM.
@@ -131,8 +131,8 @@ public:		// static variables
 	//// created which acts as an index To the array of SublevelPointer's.
 	//static const SublevelPointer* the_current_sublevel_ptr_ptr;
 	
-	static const Level* the_current_level_ptr __attribute__((_IWRAM));
-	static u32 the_current_active_sublevel_index __attribute__((_IWRAM));
+	static const Level* the_current_level_ptr __attribute__((_iwram));
+	static u32 the_current_active_sublevel_index __attribute__((_iwram));
 	
 	
 public:		// functions
@@ -221,7 +221,7 @@ public:		// functions
 	//	}
 	//}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 

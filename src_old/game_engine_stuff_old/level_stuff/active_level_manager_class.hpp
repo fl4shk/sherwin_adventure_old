@@ -52,9 +52,9 @@ public:		// variables
 public:		// functions
 	
 	static scr_entry horiz_sublevel_tile_at_basic(u32 tile_x, 
-		u32 tile_y) __attribute__((_IWRAM_CODE,_TARGET_ARM));
+		u32 tile_y) __attribute__((_iwram_code,_target_arm));
 	static scr_entry horiz_sublevel_tile_at(u32 tile_x, u32 tile_y)
-		__attribute__((_IWRAM_CODE,_TARGET_ARM));
+		__attribute__((_iwram_code,_target_arm));
 	
 	
 	
@@ -83,20 +83,20 @@ public:		// functions
 	
 	static void correct_bg0_scroll_mirror 
 		(const vec2_u32& sublevel_size_in_blocks_2d)
-		__attribute__((_IWRAM_CODE,_TARGET_ARM));
+		__attribute__((_iwram_code,_target_arm));
 	
 	static void update_sublevel_in_screenblock_mirror_2d()
-		__attribute__((_IWRAM_CODE,_TARGET_ARM));
+		__attribute__((_iwram_code,_target_arm));
 	
 	static void copy_sublevel_from_array_csz_2d_helper_to_vram();
-		//__attribute__((_IWRAM_CODE,_TARGET_ARM));
+		//__attribute__((_iwram_code,_target_arm));
 	
 	
 	
 	//static void init_horiz_sublevel_sprite_ipg_lists
 	//	(const SpriteInitParamGroup* the_ext_sprite_ipg_arr, 
 	//	u32 the_ext_sprite_ipg_arr_size)
-	//	__attribute__((_IWRAM_CODE,_TARGET_ARM));
+	//	__attribute__((_iwram_code,_target_arm));
 	
 	
 	static inline void init_horiz_sublevel_sprite_ipg_lists()
@@ -115,7 +115,7 @@ public:		// functions
 	static void load_sublevel_at_intra_sublevel_warp
 		(u32 n_sublevel_index, u32 sublevel_entrance_index);
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 

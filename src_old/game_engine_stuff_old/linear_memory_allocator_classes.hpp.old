@@ -32,7 +32,7 @@ public:		// constants
 private:		// variables
 	size_t internal_curr_index = 0;
 	
-	static u8 internal_buf[max_size] __attribute__((_EWRAM));
+	static u8 internal_buf[max_size] __attribute__((_ewram));
 	
 	
 private:		// functions
@@ -54,7 +54,7 @@ public:		// functions
 	GEN_GETTER_BY_VAL(curr_index);
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 #endif		// linear_memory_allocator_classes_hpp

@@ -31,7 +31,7 @@ enum sprite_spawn_state
 	sss_active,
 	sss_dead,
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 
@@ -146,7 +146,7 @@ public:		// functions
 	}
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 

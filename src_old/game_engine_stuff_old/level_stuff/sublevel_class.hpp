@@ -69,7 +69,7 @@ public:		// functions
 		return sprite_ipg_arr_size;
 	}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 
@@ -132,7 +132,7 @@ public:		// functions
 	}
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 #endif		// sublevel_class_hpp

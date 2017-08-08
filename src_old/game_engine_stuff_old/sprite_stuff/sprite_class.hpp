@@ -57,20 +57,20 @@ public:		// variables
 	// pickaxe swing animation.
 	vec2_f24p8 the_initial_in_level_pos_offset
 		= { {0 << Fixed24p8::get_shift()}, {0 << Fixed24p8::get_shift()} };
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 ////
 //class SpriteVolatileMembers
 //{
 //public:		// variables
 //	
-//} __attribute__((_ALIGN4));
+//} __attribute__((_align4));
 
 //class SpritePhysicsMembers
 //{
 //public:		// variables
 //	
-//} __attribute__((_ALIGN4));
+//} __attribute__((_align4));
 
 class SprBlkCollGroupBase;
 //class SprBlkCollGroupBase::HorizCollTuple;
@@ -264,7 +264,7 @@ public:		// functions
 	
 	void* operator new(size_t size, 
 		SpriteAllocator& the_sprite_allocator)
-		__attribute__((_IWRAM_CODE));
+		__attribute__((_iwram_code));
 	
 	//void operator delete(void* the_sprite, 
 	//	SpriteAllocator& the_sprite_allocator);
@@ -475,7 +475,7 @@ public:		// functions
 	//}
 	
 	//void copy_the_oam_entry_to_oam_mirror(u32 slot_for_oam_mirror)
-	//	__attribute__((_IWRAM_CODE));
+	//	__attribute__((_iwram_code));
 	
 	inline void copy_the_oam_entry_to_oam_mirror(u32 slot_for_oam_mirror)
 	{
@@ -484,7 +484,7 @@ public:		// functions
 		oam_mirror[slot_for_oam_mirror].attr2 = the_oam_entry.attr2;
 	}
 	
-	//void block_collision_stuff() __attribute__((_IWRAM_CODE));
+	//void block_collision_stuff() __attribute__((_iwram_code));
 	
 	inline virtual const SpriteConstParams& get_const_params() const
 	{
@@ -553,7 +553,7 @@ public:		// functions
 	// The PlayerSprite class Overrides this function (but still calls the
 	// original) So That the PlayerSprite class Can set warped_this_frame
 	// To false.
-	virtual void update_part_1() __attribute__((_IWRAM_CODE));
+	virtual void update_part_1() __attribute__((_iwram_code));
 	
 	// This used To be update_part_1()
 	virtual void update_part_2();
@@ -682,7 +682,7 @@ protected:		// functions
 	// Regular Block collision stuff
 	virtual void generic_block_collision_stuff
 		(SprBlkCollGroupBase& clseg_grp)
-		__attribute__((_IWRAM_CODE,_TARGET_ARM));
+		__attribute__((_iwram_code,_target_arm));
 	virtual void block_collision_stuff_16x16();
 	virtual void block_collision_stuff_16x32();
 	
@@ -697,7 +697,7 @@ protected:		// functions
 	//virtual void block_collision_stuff_strongly_hit_stuff_only_32x16();
 	//virtual void block_collision_stuff_strongly_hit_stuff_only_32x32();
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 

@@ -34,7 +34,7 @@ public:		// enums
 		frm_throw_0 = 1, 
 		frm_throw_1 = 2,
 		frm_throw_2 = 3,
-	} _ALIGNAS_REGULAR;
+	} _alignas_regular;
 	
 	// This enum allows multiple frame_slot's To be represented by the same
 	// frame.
@@ -51,7 +51,7 @@ public:		// enums
 		// lim_frm_slot Is the amount of frame_slot's.  It Is
 		// automatically updated by the compiler.
 		lim_frm_slot,
-	} _ALIGNAS_REGULAR;
+	} _alignas_regular;
 	
 	// These are used To access misc_data_u and misc_data_s
 	enum udata_index
@@ -59,12 +59,12 @@ public:		// enums
 		udi_frame_stuff_initalized,
 		
 		udi_curr_frame_slot,
-	} _ALIGNAS_REGULAR;
+	} _alignas_regular;
 	
 	enum sdata_index
 	{
 		sdi_frame_change_timer,
-	} _ALIGNAS_REGULAR;
+	} _alignas_regular;
 	
 public:		// variables
 	
@@ -94,7 +94,7 @@ public:		// functions
 	
 	virtual void update_part_2();
 	//virtual void update_part_3(bg_point& camera_pos,
-	//	const vec2_u32& the_level_size_2d) __attribute__((_IWRAM_CODE));
+	//	const vec2_u32& the_level_size_2d) __attribute__((_iwram_code));
 	
 	inline virtual const SpriteConstParams& get_const_params() const
 	{
@@ -107,7 +107,7 @@ public:		// functions
 	virtual const u32 get_curr_relative_tile_slot();
 	
 
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 #endif		// snow_golem_sprite_class_hpp

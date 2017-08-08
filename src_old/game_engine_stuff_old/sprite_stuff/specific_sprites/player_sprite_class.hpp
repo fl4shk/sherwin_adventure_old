@@ -78,7 +78,7 @@ public:		// enums
 		frm_weapon_swing_ground_moving_3_row_2,
 		frm_weapon_swing_ground_moving_4_row_2,
 		frm_weapon_swing_ground_moving_5_row_2,
-	} _ALIGNAS_REGULAR;
+	} _alignas_regular;
 	
 	// This enum allows multiple frame_slot's To be represented by the same
 	// frame, which Is used, for example, in the walking animation.  Also,
@@ -151,7 +151,7 @@ public:		// enums
 		// lim_frm_slot Is the amount of frame_slot's.  It Is
 		// automatically updated by the compiler.
 		lim_frm_slot,
-	} _ALIGNAS_REGULAR;
+	} _alignas_regular;
 	
 	
 	// These are used To access misc_data_u and misc_data_s
@@ -159,18 +159,18 @@ public:		// enums
 	{ 
 		udi_active_walk_frame_slot, 
 		udi_active_pickaxe_swing_frame_slot,
-	} _ALIGNAS_REGULAR;
+	} _alignas_regular;
 	enum sdata_index
 	{
 		sdi_walk_frame_timer, 
 		sdi_pickaxe_swing_frame_timer,
-	} _ALIGNAS_REGULAR;
+	} _alignas_regular;
 	
 	
 public:		// variables
 	// Static variables
 	
-	//static Fixed24p8 speed __attribute__((_IWRAM));
+	//static Fixed24p8 speed __attribute__((_iwram));
 	static bool use_16x16;
 	static bool run_toggle;
 	
@@ -301,7 +301,7 @@ public:		// functions
 	//	const BlockCollResult& tr_coll_result);
 	
 	virtual void handle_jumping_stuff(u32 is_jump_key_hit, 
-		u32 is_jump_key_held) __attribute__((_IWRAM_CODE));
+		u32 is_jump_key_held) __attribute__((_iwram_code));
 	
 	
 	// Sprite-Sprite interaction stuff
@@ -312,9 +312,9 @@ public:		// functions
 	
 protected:		// functions
 	//virtual void block_collision_stuff_16x16()
-	//	__attribute__((_IWRAM_CODE));
+	//	__attribute__((_iwram_code));
 	//virtual void block_collision_stuff_16x32()
-	//	__attribute__((_IWRAM_CODE));
+	//	__attribute__((_iwram_code));
 	
 	virtual void update_frames_and_frame_timers();
 	
@@ -322,7 +322,7 @@ protected:		// functions
 	
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 

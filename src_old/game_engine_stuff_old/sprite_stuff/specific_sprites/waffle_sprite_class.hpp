@@ -26,9 +26,9 @@ class WaffleSprite : public Sprite
 {
 public:		// enums
 	// These are used To access misc_data_u and misc_data_s
-	enum udata_index { udi_initial_pos_was_set, } _ALIGNAS_REGULAR;
+	enum udata_index { udi_initial_pos_was_set, } _alignas_regular;
 	enum sdata_index { sdi_initial_pos_x, sdi_initial_pos_y, 
-		sdi_move_timer, } _ALIGNAS_REGULAR;
+		sdi_move_timer, } _alignas_regular;
 	
 public:		// variables
 	static const SpriteConstParams the_const_params;
@@ -73,7 +73,7 @@ protected:		// functions
 	virtual void block_coll_response_right
 		(const SprBlkCollGroupBase::HorizCollTuple& hs);
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 #endif		// waffle_sprite_class_hpp

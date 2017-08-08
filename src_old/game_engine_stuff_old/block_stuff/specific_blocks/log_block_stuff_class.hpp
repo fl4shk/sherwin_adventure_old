@@ -33,9 +33,9 @@ public:		// functions
 		return the_const_params;
 	}
 	virtual void strongly_hit_response(Block& the_block, 
-		const vec2_s32& coord) __attribute__((_IWRAM_CODE));
+		const vec2_s32& coord) __attribute__((_iwram_code));
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 #endif		// log_block_stuff_class_hpp

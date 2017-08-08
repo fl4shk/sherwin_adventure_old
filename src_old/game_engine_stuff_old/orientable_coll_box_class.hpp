@@ -53,7 +53,7 @@
 //{
 //public:		// enums
 //	enum origin_corner { oc_lt, oc_rt, oc_lb, oc_rb }
-//		__attribute__((_ALIGN4));
+//		__attribute__((_align4));
 //	
 //protected:		// variables
 //	origin_corner the_origin_corner;
@@ -308,14 +308,14 @@
 //		return false;
 //	}
 //	
-//} __attribute__((_ALIGN4));
+//} __attribute__((_align4));
 
 
 class OrientableCollBox
 {
 public:		// enums
 	enum origin_corner { oc_lt, oc_rt, oc_lb, oc_rb }
-		__attribute__((_ALIGN4));
+		__attribute__((_align4));
 	
 protected:		// variables
 	// the_origin_corner Is protected So That it Can only be changed by

@@ -23,7 +23,7 @@ class ExclamBlockStuff : public BlockBaseStuff
 {
 public:		// enums
 	enum persistent_data_state { is_exclam, is_bt_dud } 
-		__attribute__((_ALIGN4));
+		__attribute__((_align4));
 	
 public:		// variables
 	static const BlockStuffConstParams the_const_params;
@@ -42,6 +42,6 @@ public:		// functions
 	virtual void finish_initializing_using_persistent_data
 		(Block& the_block);
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 #endif		// exclam_block_stuff_classes_hpp

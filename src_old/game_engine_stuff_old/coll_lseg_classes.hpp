@@ -57,9 +57,9 @@ class VertCollLseg;
 //	}
 //	
 //	bool intersects(const GenericCollLseg& to_check, 
-//		vec2_f24p8* ret=NULL) const __attribute__((_IWRAM_CODE));
+//		vec2_f24p8* ret=NULL) const __attribute__((_iwram_code));
 //	
-//} __attribute__((_ALIGN4));
+//} __attribute__((_align4));
 
 
 class CollLsegExtras
@@ -71,7 +71,7 @@ protected:		// functions
 	friend class HorizCollLseg;
 	friend class VertCollLseg;
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 
@@ -143,7 +143,7 @@ public:		// functions
 	}
 	//inline bool intersects(const VertCollLseg& to_check) const;
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 class VertCollLseg
@@ -215,7 +215,7 @@ public:		// functions
 		return false;
 	}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 

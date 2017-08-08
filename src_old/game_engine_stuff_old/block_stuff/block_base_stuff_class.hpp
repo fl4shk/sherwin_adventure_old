@@ -27,7 +27,7 @@ public:		// variables
 	u32 metatile_graphics_slot = metatile_number;
 	block_behavior_type behavior_type = bbvt_solid;
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 class BlockBaseStuff
@@ -79,7 +79,7 @@ public:		// functions
 		(Block& the_block);
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 #endif		// block_base_stuff_class_hpp

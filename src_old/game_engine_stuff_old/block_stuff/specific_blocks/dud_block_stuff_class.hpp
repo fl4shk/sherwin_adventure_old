@@ -36,6 +36,6 @@ public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
 		const vec2_s32& coord);
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 #endif		// dud_block_stuff_class_hpp

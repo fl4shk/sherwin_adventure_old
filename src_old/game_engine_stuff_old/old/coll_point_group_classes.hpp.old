@@ -57,7 +57,7 @@ public:		// enums
 		// automatically updated by the compiler.
 		arr_ind_16x16_count,
 		
-	} __attribute__((_ALIGN4));
+	} __attribute__((_align4));
 	
 	
 	// The reason an X-macro isn't used here Is because ctags wouldn't be
@@ -85,7 +85,7 @@ public:		// enums
 		// automatically updated by the compiler.
 		arr_ind_16x32_count,
 		
-	} __attribute__((_ALIGN4));
+	} __attribute__((_align4));
 	
 	
 	// The reason an X-macro isn't used here Is because ctags wouldn't be
@@ -113,7 +113,7 @@ public:		// enums
 		// automatically updated by the compiler.
 		arr_ind_32x16_count,
 		
-	} __attribute__((_ALIGN4));
+	} __attribute__((_align4));
 	
 public:		// variables
 	//// The maximum number of collision points, 32, Is definitely more than
@@ -181,7 +181,7 @@ protected:		// functions
 		vec2_f24p8& pt_tm, vec2_f24p8& pt_bm);
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 class coll_point_group_16x16 : public coll_point_group_base
 {
@@ -202,7 +202,7 @@ protected:		// functions
 		vec2_f24p8& pt_tr, vec2_f24p8& pt_br);
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 class coll_point_group_16x32 : public coll_point_group_base
@@ -223,19 +223,19 @@ protected:		// functions
 		vec2_f24p8& pt_tr, vec2_f24p8& pt_br);
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 //void generate_coll_point_group_16x16(const Sprite& the_sprite, 
-//	coll_point_group& the_pt_group) __attribute__((_IWRAM_CODE));
+//	coll_point_group& the_pt_group) __attribute__((_iwram_code));
 //
 //void generate_coll_point_group_16x32(const Sprite& the_sprite, 
-//	coll_point_group& the_pt_group) __attribute__((_IWRAM_CODE));
+//	coll_point_group& the_pt_group) __attribute__((_iwram_code));
 //
 //void generate_coll_point_group_32x16(const Sprite& the_sprite, 
-//	coll_point_group& the_pt_group) __attribute__((_IWRAM_CODE));
+//	coll_point_group& the_pt_group) __attribute__((_iwram_code));
 //
 //void generate_coll_point_group_32x32(const Sprite& the_sprite, 
-//	coll_point_group& the_pt_group) __attribute__((_IWRAM_CODE));
+//	coll_point_group& the_pt_group) __attribute__((_iwram_code));
 
 
 

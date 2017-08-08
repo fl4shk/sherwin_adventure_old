@@ -34,7 +34,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 class GrassTopLeftBlockStuff : public BlockBaseStuff
 {
@@ -49,7 +49,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 class GrassTopMiddleBlockStuff : public BlockBaseStuff
 {
 public:		// variables
@@ -63,7 +63,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 class GrassTopRightBlockStuff : public BlockBaseStuff
 {
 public:		// variables
@@ -77,7 +77,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 class DirtMiddleLeftBlockStuff : public BlockBaseStuff
@@ -93,7 +93,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 class DirtMiddleMiddleBlockStuff : public BlockBaseStuff
 {
 public:		// variables
@@ -107,7 +107,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 class DirtMiddleRightBlockStuff : public BlockBaseStuff
 {
 public:		// variables
@@ -121,7 +121,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 class DirtBottomLeftBlockStuff : public BlockBaseStuff
 {
@@ -136,7 +136,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 class DirtBottomMiddleBlockStuff : public BlockBaseStuff
 {
 public:		// variables
@@ -150,7 +150,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 class DirtBottomRightBlockStuff : public BlockBaseStuff
 {
 public:		// variables
@@ -164,7 +164,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 // Slopes
 class GrassSlopeP16P16BlockStuff : public BlockBaseStuff
@@ -182,7 +182,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 class GrassSlopeN16P16BlockStuff : public BlockBaseStuff
 {
 public:		// variables
@@ -198,7 +198,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 class GrassSlopeP32P16ShortBlockStuff : public BlockBaseStuff
 {
@@ -215,7 +215,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 class GrassSlopeP32P16TallBlockStuff : public BlockBaseStuff
 {
@@ -232,7 +232,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 class GrassSlopeN32P16TallBlockStuff : public BlockBaseStuff
 {
@@ -249,7 +249,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 class GrassSlopeN32P16ShortBlockStuff : public BlockBaseStuff
 {
 public:		// variables
@@ -265,7 +265,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 class GrassInSlopeLeftBlockStuff : public BlockBaseStuff
 {
@@ -280,7 +280,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 class GrassInSlopeRightBlockStuff : public BlockBaseStuff
 {
 public:		// variables
@@ -294,7 +294,7 @@ public:		// functions
 	{
 		return the_const_params;
 	}
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 #endif		// grass_and_dirt_block_stuff_classes_hpp

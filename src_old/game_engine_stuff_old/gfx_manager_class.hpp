@@ -56,7 +56,7 @@ enum bg_palette_slot_in_level
 	// as a simple hack since it basically abuses the way enums work.
 	lim_bgps_in_level,
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 //enum bg_palette_slot_in_overworld
@@ -101,7 +101,7 @@ enum sprite_palette_slot
 	// and it Is automatically updated by the compiler.  This might count
 	// as a simple hack since it basically abuses the way enums work.
 	lim_sps,
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 class GfxManager
@@ -138,9 +138,9 @@ public:		// variables and constants
 	static const u32 bgofs_mirror_size = 4;
 	
 	static bg_point prev_prev_bgofs_mirror[bgofs_mirror_size]
-		__attribute__((_IWRAM));
+		__attribute__((_iwram));
 	static PrevCurrPair<bg_point> bgofs_mirror[bgofs_mirror_size]
-		__attribute__((_IWRAM));
+		__attribute__((_iwram));
 	
 	// Current component arrays, stored in EWRAM as Fixed24p8's for speed
 	// and accuracy reasons.
@@ -149,22 +149,22 @@ public:		// variables and constants
 	
 	// -- Switch To linear_memory_allocator --
 	static Fixed24p8 bg_fade_curr_red_arr
-		[bg_fade_curr_component_arr_size] __attribute__((_EWRAM)),
+		[bg_fade_curr_component_arr_size] __attribute__((_ewram)),
 	bg_fade_curr_green_arr
-		[bg_fade_curr_component_arr_size] __attribute__((_EWRAM)),
+		[bg_fade_curr_component_arr_size] __attribute__((_ewram)),
 	bg_fade_curr_blue_arr
-		[bg_fade_curr_component_arr_size] __attribute__((_EWRAM));
+		[bg_fade_curr_component_arr_size] __attribute__((_ewram));
 
 	static constexpr u32 obj_fade_curr_component_arr_size 
 		= num_colors_in_8_palettes;
 	
 	// -- Switch To linear_memory_allocator --
 	static Fixed24p8 obj_fade_curr_red_arr
-		[obj_fade_curr_component_arr_size] __attribute__((_EWRAM)),
+		[obj_fade_curr_component_arr_size] __attribute__((_ewram)),
 	obj_fade_curr_green_arr
-		[obj_fade_curr_component_arr_size] __attribute__((_EWRAM)),
+		[obj_fade_curr_component_arr_size] __attribute__((_ewram)),
 	obj_fade_curr_blue_arr
-		[obj_fade_curr_component_arr_size] __attribute__((_EWRAM));
+		[obj_fade_curr_component_arr_size] __attribute__((_ewram));
 	
 	
 	// Fade out/in step amounts.
@@ -173,22 +173,22 @@ public:		// variables and constants
 	
 	// -- Switch To linear_memory_allocator --
 	static Fixed24p8 bg_fade_red_step_amount_arr
-		[bg_fade_step_amount_arr_size] __attribute__((_EWRAM)),
+		[bg_fade_step_amount_arr_size] __attribute__((_ewram)),
 	bg_fade_green_step_amount_arr
-		[bg_fade_step_amount_arr_size] __attribute__((_EWRAM)),
+		[bg_fade_step_amount_arr_size] __attribute__((_ewram)),
 	bg_fade_blue_step_amount_arr
-		[bg_fade_step_amount_arr_size] __attribute__((_EWRAM));
+		[bg_fade_step_amount_arr_size] __attribute__((_ewram));
 	
 	static constexpr u32 obj_fade_step_amount_arr_size 
 		= num_colors_in_8_palettes;
 	
 	// -- Switch To linear_memory_allocator --
 	static Fixed24p8 obj_fade_red_step_amount_arr
-		[obj_fade_step_amount_arr_size] __attribute__((_EWRAM)),
+		[obj_fade_step_amount_arr_size] __attribute__((_ewram)),
 	obj_fade_green_step_amount_arr
-		[obj_fade_step_amount_arr_size] __attribute__((_EWRAM)),
+		[obj_fade_step_amount_arr_size] __attribute__((_ewram)),
 	obj_fade_blue_step_amount_arr
-		[obj_fade_step_amount_arr_size] __attribute__((_EWRAM));
+		[obj_fade_step_amount_arr_size] __attribute__((_ewram));
 	
 	
 	// Sprite VRAM allocation stuff
@@ -202,16 +202,16 @@ public:		// variables and constants
 	// BG palette stuff
 	// -- Switch To linear_memory_allocator --
 	static u16 bg_pal_mirror[bg_pal_ram_size_in_u16]
-		__attribute__((_EWRAM));
+		__attribute__((_ewram));
 	
 	// Sprite palette stuff
 	// -- Switch To linear_memory_allocator --
 	static u16 obj_pal_mirror[obj_pal_ram_size_in_u16] 
-		__attribute__((_EWRAM));
+		__attribute__((_ewram));
 	
 	// HUD stuff
 	// -- Switch To linear_memory_allocator --
-	static u32 hud_vram_as_tiles_start_offset __attribute__((_EWRAM));
+	static u32 hud_vram_as_tiles_start_offset __attribute__((_ewram));
 	
 public:		// functions
 	
@@ -270,7 +270,7 @@ public:		// functions
 	
 	static void copy_bg_pal_mirror_to_bg_pal_ram();
 	
-	static void upload_bg_tiles_to_vram() __attribute__((_IWRAM_CODE));
+	static void upload_bg_tiles_to_vram() __attribute__((_iwram_code));
 	
 	
 	// Sprite graphics stuff
@@ -283,7 +283,7 @@ public:		// functions
 	
 	
 	static void upload_sprite_tiles_to_vram(Sprite& the_sprite)
-		__attribute__((_IWRAM_CODE));
+		__attribute__((_iwram_code));
 	
 	// HUD stuff
 	static inline void init_hud_vram_as_tiles_start_offset()
@@ -305,18 +305,18 @@ public:		// functions
 	
 	// Fading stuff
 	static void fade_out_to_black(u32 num_steps, 
-		u32 num_frames_to_wait_per_iter=1) __attribute__((_IWRAM_CODE));
+		u32 num_frames_to_wait_per_iter=1) __attribute__((_iwram_code));
 	
 	static void fade_out_to_white(u32 num_steps, 
-		u32 num_frames_to_wait_per_iter=1) __attribute__((_IWRAM_CODE));
+		u32 num_frames_to_wait_per_iter=1) __attribute__((_iwram_code));
 	
 	static void fade_in(u32 num_steps, 
-		u32 num_frames_to_wait_per_iter=1) __attribute__((_IWRAM_CODE));
+		u32 num_frames_to_wait_per_iter=1) __attribute__((_iwram_code));
 	
 	
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 

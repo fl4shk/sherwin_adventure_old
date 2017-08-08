@@ -137,7 +137,7 @@ enum sprite_type
 	// by the compiler.
 	LimSt,
 	
-} _ALIGNAS_REGULAR;
+} _alignas_regular;
 
 
 #define GENERATE_ST_VALUE(suffix) St##suffix

@@ -37,9 +37,9 @@ class BlockCollResult
 public:		// variables
 	//vec2_s32 coord;
 	//block_type type;
-	Block* the_block __attribute__((_ALIGN4));
-	//block_behavior_type the_bbvt __attribute__((_ALIGN4));
-	u32 the_bbvt __attribute__((_ALIGN4));
+	Block* the_block __attribute__((_align4));
+	//block_behavior_type the_bbvt __attribute__((_align4));
+	u32 the_bbvt __attribute__((_align4));
 	
 public:		// functions
 	inline BlockCollResult()
@@ -93,7 +93,7 @@ public:		// functions
 		return (block_behavior_type)the_bbvt;
 	}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 
@@ -293,15 +293,15 @@ public:		// functions
 	//void get_corner_stuff_old
 	//	(ArrayHelper<BlockCollResult*>& bcr_ptr_arr_helper, 
 	//	ArrayHelper<u32>& bool_as_u32_arr_helper)
-	//	__attribute__((_TARGET_ARM));
+	//	__attribute__((_target_arm));
 	//
 	//void get_coll_box_related_stuff_old(const Sprite& the_sprite,
 	//	ArrayHelper<BlockCollResult*>& bcr_ptr_arr_helper)
-	//	__attribute__((_TARGET_ARM));
+	//	__attribute__((_target_arm));
 	//
 	//void get_side_blocked_stuff_old
 	//	(ArrayHelper<u32>& bool_as_u32_arr_helper)
-	//	__attribute__((_TARGET_ARM));
+	//	__attribute__((_target_arm));
 	
 protected:		// functions
 	inline void init_bcr_arr_csz_2d_helper()
@@ -312,7 +312,7 @@ protected:		// functions
 	}
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 class BcrLsegGroup
 {
@@ -350,16 +350,16 @@ public:		// functions
 	}
 	
 	void init(const HorizCollLseg& the_coll_lseg);
-		//__attribute__((_IWRAM_CODE));
+		//__attribute__((_iwram_code));
 	void init(const VertCollLseg& the_coll_lseg)
-		__attribute__((_IWRAM_CODE));
+		__attribute__((_iwram_code));
 	
 	BlockCollResult* horiz_any_bbvt_is_fully_solid(vec2_s32& pos);
-		//__attribute__((_IWRAM_CODE));
+		//__attribute__((_iwram_code));
 	BlockCollResult* vert_any_bbvt_is_fully_solid(vec2_s32& pos)
-		__attribute__((_IWRAM_CODE));
+		__attribute__((_iwram_code));
 	BlockCollResult* vert_any_bbvt_is_slope(vec2_s32& pos)
-		__attribute__((_IWRAM_CODE));
+		__attribute__((_iwram_code));
 	
 	inline BlockCollResult& operator () (u32 index)
 	{
@@ -478,7 +478,7 @@ protected:		// functions
 	}
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 

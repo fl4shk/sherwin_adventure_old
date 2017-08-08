@@ -40,7 +40,7 @@ public:		// functions
 		return the_const_params;
 	}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 class FireMuffinSprite : public Sprite
 {
@@ -60,7 +60,7 @@ public:		// functions
 		return the_const_params;
 	}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 class IceMuffinSprite : public Sprite
@@ -81,7 +81,7 @@ public:		// functions
 		return the_const_params;
 	}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 class ChocolateMuffinSprite : public Sprite
 {
@@ -101,6 +101,6 @@ public:		// functions
 		return the_const_params;
 	}
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 #endif		// muffin_sprite_classes_hpp

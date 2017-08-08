@@ -27,12 +27,12 @@
 class HudManager
 {
 public:		// variables
-	static bool hud_was_generated __attribute__((_EWRAM));
+	static bool hud_was_generated __attribute__((_ewram));
 	
 	
 	// -- Switch To linear_memory_allocator --
 	static scr_entry bg1_screenblock_mirror[screenblock_size]
-		__attribute__((_EWRAM));
+		__attribute__((_ewram));
 	
 	
 	// bg1_screenblock_2d Is in VRAM.
@@ -51,22 +51,22 @@ public:		// functions
 	// for some reason, NOT having these two functions marked as
 	// __noinline__ causes problems.
 	//static void plot_char_8x16_to_screenblock_mirror(u32 the_char, 
-	//	u32 pos_x, u32 pos_y) __attribute__((_IWRAM_CODE,__noinline__));
+	//	u32 pos_x, u32 pos_y) __attribute__((_iwram_code,__noinline__));
 	
 	//static void plot_char_8x8_to_screenblock_mirror(u32 the_char,
-	//	u32 pos_x, u32 pos_y) __attribute__((_IWRAM_CODE,__noinline__));
+	//	u32 pos_x, u32 pos_y) __attribute__((_iwram_code,__noinline__));
 	
 	static void plot_horiz_str_8x8_to_screenblock_mirror(const char* str,
 		u32 str_size, u32& plot_x, u32& plot_y);
-		__attribute__((_IWRAM_CODE));
+		__attribute__((_iwram_code));
 	
 	
 	static void update_hud_in_screenblock_mirror_2d();
-		__attribute__((_IWRAM_CODE));
+		__attribute__((_iwram_code));
 	
 	static void copy_hud_from_array_csz_2d_helper_to_vram();
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 #endif		// hud_manager_class_hpp

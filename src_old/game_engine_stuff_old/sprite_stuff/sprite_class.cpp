@@ -547,7 +547,7 @@ void Sprite::sprite_interaction_reponse(Sprite& the_other_sprite,
 	
 }
 
-//SprBlkCollGroup16x32 clseg_grp __attribute__((_EWRAM));
+//SprBlkCollGroup16x32 clseg_grp __attribute__((_ewram));
 const size_t clseg_grp_16x32_size = sizeof(SprBlkCollGroup16x32);
 
 
@@ -1026,8 +1026,8 @@ void Sprite::generic_block_collision_stuff
 	//vel += clseg_grp.horiz_clseg_groups[clseg_grp.hi_left_top].left_pt();
 }
 
-SprBlkCollGroup16x16 temp_clseg_grp_16x16 __attribute__((_IWRAM));
-SprBlkCollGroup16x32 temp_clseg_grp_16x32 __attribute__((_IWRAM));
+SprBlkCollGroup16x16 temp_clseg_grp_16x16 __attribute__((_iwram));
+SprBlkCollGroup16x32 temp_clseg_grp_16x32 __attribute__((_iwram));
 
 void Sprite::block_collision_stuff_16x16()
 {

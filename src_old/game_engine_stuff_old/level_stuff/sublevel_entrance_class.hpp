@@ -33,7 +33,7 @@ enum sublevel_entrance_type
 	// The number of sublevel_entrance_type's Is automatically updated by
 	// the compiler via the lim_sle enum id.
 	lim_sle,
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 // There Is probably no need for a sublevel_exit class because That
@@ -47,7 +47,7 @@ public:		// variables
 	
 	vec2_f24p8 in_level_pos;
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 #endif		// sublevel_entrance_class_hpp

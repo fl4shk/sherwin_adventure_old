@@ -59,7 +59,7 @@ public:		// functions
 	//virtual void block_collision_stuff();
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 #endif		// door_sprite_stuff_class_hpp

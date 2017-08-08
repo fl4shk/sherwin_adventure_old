@@ -60,7 +60,7 @@ public:		// classes
 		//HorizCollLseg clseg;
 		BlockCollResult bcr;
 		vec2_s32 blk_crd_pos;
-	} __attribute__((_ALIGN4));
+	} __attribute__((_align4));
 	
 	// Top side uses this
 	class VertTopCollTuple : public HorizCollTuple
@@ -73,7 +73,7 @@ public:		// classes
 	public:		// variables
 		BcrLsegGroup bcrlg;
 		VertCollLseg clseg;
-	} __attribute__((_ALIGN4));
+	} __attribute__((_align4));
 	
 protected:		// variables and constants
 	static constexpr size_t num_horiz_ctups = lim_hi;
@@ -86,38 +86,38 @@ protected:		// variables and constants
 	//ArrayHelper<VertTopCollTuple> vert_top_ctups;
 	//ArrayHelper<VertBotCollTuple> vert_bot_ctups;
 	static HorizCollTuple horiz_ctups[max_num_horiz_ctups]
-		__attribute__((_IWRAM));
+		__attribute__((_iwram));
 	static VertTopCollTuple vert_top_ctups[max_num_vert_top_ctups]
-		__attribute__((_IWRAM));
+		__attribute__((_iwram));
 	static VertBotCollTuple vert_bot_ctups[max_num_vert_bot_ctups]
-		__attribute__((_IWRAM));
+		__attribute__((_iwram));
 	
-	static Vec2<bool> size_is_tiny __attribute__((_IWRAM));
-	static bool internal_on_ground __attribute__((_IWRAM));
+	static Vec2<bool> size_is_tiny __attribute__((_iwram));
+	static bool internal_on_ground __attribute__((_iwram));
 	
 	
-	static s32 blk_crd_pos_x_for_left_hs __attribute__((_IWRAM));
-	static s32 blk_crd_pos_x_for_right_hs __attribute__((_IWRAM));
+	static s32 blk_crd_pos_x_for_left_hs __attribute__((_iwram));
+	static s32 blk_crd_pos_x_for_right_hs __attribute__((_iwram));
 	
-	static s32 blk_crd_pos_y_for_top_hs __attribute__((_IWRAM));
-	static s32 blk_crd_pos_y_for_mid_hs __attribute__((_IWRAM));
-	static s32 blk_crd_pos_y_for_bot_hs __attribute__((_IWRAM));
+	static s32 blk_crd_pos_y_for_top_hs __attribute__((_iwram));
+	static s32 blk_crd_pos_y_for_mid_hs __attribute__((_iwram));
+	static s32 blk_crd_pos_y_for_bot_hs __attribute__((_iwram));
 	
-	//static Fixed24p8 hs_width __attribute__((_IWRAM));
+	//static Fixed24p8 hs_width __attribute__((_iwram));
 	
-	static Fixed24p8 pos_x_for_left_vs __attribute__((_IWRAM));
-	static Fixed24p8 pos_x_for_mid_vs __attribute__((_IWRAM));
-	static Fixed24p8 pos_x_for_right_vs __attribute__((_IWRAM));
+	static Fixed24p8 pos_x_for_left_vs __attribute__((_iwram));
+	static Fixed24p8 pos_x_for_mid_vs __attribute__((_iwram));
+	static Fixed24p8 pos_x_for_right_vs __attribute__((_iwram));
 	
-	static s32 blk_crd_pos_x_for_left_vs __attribute__((_IWRAM));
-	static s32 blk_crd_pos_x_for_mid_vs __attribute__((_IWRAM));
-	static s32 blk_crd_pos_x_for_right_vs __attribute__((_IWRAM));
+	static s32 blk_crd_pos_x_for_left_vs __attribute__((_iwram));
+	static s32 blk_crd_pos_x_for_mid_vs __attribute__((_iwram));
+	static s32 blk_crd_pos_x_for_right_vs __attribute__((_iwram));
 	
-	static s32 blk_crd_pos_y_for_top_vs __attribute__((_IWRAM));
-	static Fixed24p8 pos_y_for_bot_vs __attribute__((_IWRAM));
+	static s32 blk_crd_pos_y_for_top_vs __attribute__((_iwram));
+	static Fixed24p8 pos_y_for_bot_vs __attribute__((_iwram));
 	
-	static Fixed24p8 vs_height_bot_ia __attribute__((_IWRAM));
-	static Fixed24p8 offset_y_for_bot_vs __attribute__((_IWRAM));
+	static Fixed24p8 vs_height_bot_ia __attribute__((_iwram));
+	static Fixed24p8 offset_y_for_bot_vs __attribute__((_iwram));
 	
 	
 	//static const Fixed24p8 offset_x_for_any_hs_left;
@@ -237,7 +237,7 @@ protected:		// functions
 	
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 // 
 
@@ -269,7 +269,7 @@ public:		// functions
 	}
 	SprBlkCollGroup16x16(const CollBox& s_coll_box, u32 s_on_ground);
 	void init(const CollBox& s_coll_box, u32 s_on_ground)
-		__attribute__((_IWRAM_CODE,_TARGET_ARM));
+		__attribute__((_iwram_code,_target_arm));
 	
 	//const size_t get_num_horiz_ctups() const;
 	const size_t get_num_vert_top_ctups() const;
@@ -287,10 +287,10 @@ public:		// functions
 protected:		// functions
 	//void init_arr_helpers();
 	static void init_static_vars(const CollBox& s_coll_box, 
-		bool s_on_ground) __attribute__((_IWRAM_CODE,_TARGET_ARM));
+		bool s_on_ground) __attribute__((_iwram_code,_target_arm));
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 // Sprite/Block Collision Group for collision boxes That are at most 16x32
 // in size but larger than 16x16
@@ -321,7 +321,7 @@ public:		// functions
 	}
 	SprBlkCollGroup16x32(const CollBox& s_coll_box, u32 s_on_ground);
 	void init(const CollBox& s_coll_box, u32 s_on_ground)
-		__attribute__((_IWRAM_CODE,_TARGET_ARM));
+		__attribute__((_iwram_code,_target_arm));
 	
 	//const size_t get_num_horiz_ctups() const;
 	const size_t get_num_vert_top_ctups() const;
@@ -339,9 +339,9 @@ public:		// functions
 protected:		// functions
 	//void init_arr_helpers();
 	static void init_static_vars(const CollBox& s_coll_box, 
-		bool s_on_ground) __attribute__((_IWRAM_CODE,_TARGET_ARM));
+		bool s_on_ground) __attribute__((_iwram_code,_target_arm));
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 

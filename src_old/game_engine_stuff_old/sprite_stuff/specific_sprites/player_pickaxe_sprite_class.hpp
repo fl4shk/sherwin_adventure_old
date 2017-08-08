@@ -79,7 +79,7 @@ public:		// functions
 	virtual void update_part_1();
 	
 	//virtual void update_part_2(bg_point& camera_pos,
-	//	const vec2_u32& the_level_size_2d) __attribute__((_IWRAM_CODE));
+	//	const vec2_u32& the_level_size_2d) __attribute__((_iwram_code));
 	
 	inline virtual const SpriteConstParams& get_const_params() const
 	{
@@ -93,7 +93,7 @@ public:		// functions
 	
 	
 	// Physics and collision stuff
-	virtual void block_collision_stuff() __attribute__((_IWRAM_CODE));
+	virtual void block_collision_stuff() __attribute__((_iwram_code));
 	
 	
 protected:		// functions
@@ -114,7 +114,7 @@ protected:		// functions
 		const BlockCollResult& br_coll_result);
 	
 	
-} __attribute__((_ALIGN4));
+} __attribute__((_align4));
 
 
 #endif		// player_pickaxe_sprite_class_hpp
