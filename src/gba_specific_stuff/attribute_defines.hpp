@@ -62,7 +62,11 @@
 #define _IWRAM_BSS_OVERLAY(num) section(STRINGIZE(PPCAT(.iwram_bss,num)))
 
 
+// Cart RAM
 #define _SRAM section(".sram")
+
+// SRAM linker overlay (potentially not necessary at all)
+#define _SRAM_OVERLAY(num) section(STRINGIZE(PPCAT(.sram, num)))
 
 
 // #defines for putting stuff in the code (sections for EWRAM and IWRAM)
@@ -70,7 +74,7 @@
 #define _IWRAM_CODE section(".iwram_code")
 
 
-// EWRAM CODE linker overlay
+// EWRAM CODE linker overlay (potentially not necessary at all)
 #define _EWRAM_CODE_OVERLAY(num) section(STRINGIZE(PPCAT(.ewram_code, \
 	num)))
 
@@ -87,11 +91,13 @@
 
 
 
+// These are what will actually be used
 #define _TITLE_SCREEN_EWRAM _EWRAM_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
 #define _TITLE_SCREEN_IWRAM _IWRAM_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
 #define _TITLE_SCREEN_BSS _BSS_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
 #define _TITLE_SCREEN_IWRAM_BSS \
 	_IWRAM_BSS_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
+#define _TITLE_SCREEN_SRAM _SRAM_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
 #define _TITLE_SCREEN_EWRAM_CODE \
 	_EWRAM_CODE_OVERLAY(_TITLE_SCREEN_OVERLAY_NUM)
 #define _TITLE_SCREEN_IWRAM_CODE \
@@ -103,6 +109,7 @@
 #define _OVERWORLD_BSS _BSS_OVERLAY(_OVERWORLD_OVERLAY_NUM)
 #define _OVERWORLD_IWRAM_BSS \
 	_IWRAM_BSS_OVERLAY(_OVERWORLD_OVERLAY_NUM)
+#define _OVERWORLD_SRAM _SRAM_OVERLAY(_OVERWORLD_OVERLAY_NUM)
 #define _OVERWORLD_EWRAM_CODE \
 	_EWRAM_CODE_OVERLAY(_OVERWORLD_OVERLAY_NUM)
 #define _OVERWORLD_IWRAM_CODE \
@@ -114,6 +121,7 @@
 #define _IN_LEVEL_BSS _BSS_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
 #define _IN_LEVEL_IWRAM_BSS \
 	_IWRAM_BSS_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
+#define _IN_LEVEL_SRAM _SRAM_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
 #define _IN_LEVEL_EWRAM_CODE \
 	_EWRAM_CODE_OVERLAY(_IN_LEVEL_OVERLAY_NUM)
 #define _IN_LEVEL_IWRAM_CODE \

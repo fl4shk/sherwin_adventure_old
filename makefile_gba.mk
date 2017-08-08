@@ -135,6 +135,8 @@ all : all_pre $(OFILES)
 	-R .bss4 -R .bss5 -R .bss6 -R .bss7 \
 	-R .iwram_bss0 -R .iwram_bss1 -R .iwram_bss2 -R .iwram_bss3 \
 	-R .iwram_bss4 -R .iwram_bss5 -R .iwram_bss6 -R .iwram_bss7 \
+	-R .sram0 -R .sram1 -R .sram2 -R .sram3 \
+	-R .sram4 -R .sram5 -R .sram6 -R .sram7 \
 	$(PROJ).elf $(PROJ).gba
 	./do_gbafix.sh
 

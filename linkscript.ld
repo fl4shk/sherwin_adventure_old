@@ -711,6 +711,88 @@ SECTIONS
 	__bss6_section_size = SIZEOF(.bss6);
 	__bss7_section_size = SIZEOF(.bss7);
 	
+
+	/* 
+	I figure I might as well have this, though it's probably not 
+	needed.
+	*/
+	OVERLAY : NOCROSSREFS
+	{
+		.sram0
+		{
+			__sram0_start__ = .;
+			*(.sram0 .sram0.*);
+
+			. = ALIGN(4);
+			__sram0_end__ = .;
+		}
+		.sram1
+		{
+			__sram1_start__ = .;
+			*(.sram1 .sram1.*);
+
+			. = ALIGN(4);
+			__sram1_end__ = .;
+		}
+		.sram2
+		{
+			__sram2_start__ = .;
+			*(.sram2 .sram2.*);
+
+			. = ALIGN(4);
+			__sram2_end__ = .;
+		}
+		.sram3
+		{
+			__sram3_start__ = .;
+			*(.sram3 .sram3.*);
+
+			. = ALIGN(4);
+			__sram3_end__ = .;
+		}
+		.sram4
+		{
+			__sram4_start__ = .;
+			*(.sram4 .sram4.*);
+
+			. = ALIGN(4);
+			__sram4_end__ = .;
+		}
+		.sram5
+		{
+			__sram5_start__ = .;
+			*(.sram5 .sram5.*);
+
+			. = ALIGN(4);
+			__sram5_end__ = .;
+		}
+		.sram6
+		{
+			__sram6_start__ = .;
+			*(.sram6 .sram6.*);
+
+			. = ALIGN(4);
+			__sram6_end__ = .;
+		}
+		.sram7
+		{
+			__sram7_start__ = .;
+			*(.sram7 .sram7.*);
+
+			. = ALIGN(4);
+			__sram7_end__ = .;
+		}
+	} >sram
+	
+	__sram0_section_size = SIZEOF(.sram0);
+	__sram1_section_size = SIZEOF(.sram1);
+	__sram2_section_size = SIZEOF(.sram2);
+	__sram3_section_size = SIZEOF(.sram3);
+	__sram4_section_size = SIZEOF(.sram4);
+	__sram5_section_size = SIZEOF(.sram5);
+	__sram6_section_size = SIZEOF(.sram6);
+	__sram7_section_size = SIZEOF(.sram7);
+	
 }
 
 /*PROVIDE( _HEAP_START = 0x020200000 );

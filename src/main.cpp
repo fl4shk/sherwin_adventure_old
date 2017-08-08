@@ -86,6 +86,12 @@ u32 some_title_screen_var __attribute__((_TITLE_SCREEN_BSS));
 u32 some_in_level_var __attribute__((_IN_LEVEL_BSS));
 u32 some_in_level_arr[8] __attribute__((_IN_LEVEL_BSS));
 
+char asdf[8] __attribute__((_TITLE_SCREEN_SRAM));
+char asdf_2[8] __attribute__((_IN_LEVEL_SRAM));
+
+char asdf_ewram[8] __attribute__((_TITLE_SCREEN_EWRAM));
+char asdf_2_ewram[8] __attribute__((_IN_LEVEL_EWRAM));
+
 }
 
 
