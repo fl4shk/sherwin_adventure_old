@@ -102,7 +102,7 @@ DebugStr (& debug_str_arr)[debug_str_arr_size]
 
 
 // static variables (raw debug arrays)
-DebugArrGroup::raw_array_group DebugArrGroup::the_raw_array_group;
+DebugArrGroup::RawArrayGroup DebugArrGroup::the_raw_array_group;
 u32 DebugArrGroup::gdb_breakpoint_helper;
 
 // static variables (array_helpers)
@@ -149,10 +149,10 @@ void DebugArrGroup::clear_debug_vars()
 	//memfill32(debug_str_arr(), 0, debug_str_arr_helper.get_size() 
 	//	* sizeof(DebugStr) / sizeof(u32));
 	
-	//memfill32(&the_raw_array_group, 0, sizeof(raw_array_group) 
+	//memfill32(&the_raw_array_group, 0, sizeof(RawArrayGroup) 
 	//	/ sizeof(u32));
 	
-	memset(&the_raw_array_group, 0, sizeof(raw_array_group));
+	memset(&the_raw_array_group, 0, sizeof(RawArrayGroup));
 	gdb_breakpoint_helper = 0;
 	
 }

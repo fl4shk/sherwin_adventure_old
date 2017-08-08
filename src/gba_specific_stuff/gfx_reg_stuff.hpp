@@ -29,16 +29,16 @@
 /* ---- Some Helper Structs ---- */
 
 // ---- Character/Tile Stuffs ----
-// tile 8x8@4bpp:  32 bytes; 8 ints
-struct tile
+// Tile 8x8@4bpp:  32 bytes; 8 ints
+struct Tile
 {
 	static const u32 arrsize = 8;
 	u32 data[arrsize];
 };
-typedef tile tile4;
+typedef Tile tile4;
 
-// d-tile:  double-sized tile (8bpp)
-struct tile8
+// d-Tile:  double-sized Tile (8bpp)
+struct Tile8
 {
 	static const u32 arrsize = 16;
 	u32 data[arrsize];
@@ -46,22 +46,22 @@ struct tile8
 
 
 static const u32 charblock_size = 0x200;
-typedef tile charblock[charblock_size];
+typedef Tile charblock[charblock_size];
 
 static const u32 charblock8_size = 0x100;
-typedef tile8 charblock8[charblock8_size];
+typedef Tile8 charblock8[charblock8_size];
 
-#define tile_ram		((charblock*)(MEM_VRAM))
-#define tile8_ram		((charblock8*)(MEM_VRAM))
+#define TILE_RAM		((charblock*)(MEM_VRAM))
+#define TILE8_RAM		((charblock8*)(MEM_VRAM))
 
 
-#define BG_TILE_VRAM ((vu16*)(tile_ram[0]))
-#define BG_TILE_VRAM_AS_TILES ((volatile tile*)(tile_ram[0]))
+#define BG_TILE_VRAM ((vu16*)(TILE_RAM[0]))
+#define BG_TILE_VRAM_AS_TILES ((volatile Tile*)(TILE_RAM[0]))
 
 // Do note That OBJ_TILE_VRAM consists of TWO charblocks, or 1024 4bpp
 // tiles of 8x8 pixels (512 8bpp tiles of 8x8 pixels).
-#define OBJ_TILE_VRAM ((vu16*)(tile_ram[4]))
-#define OBJ_TILE_VRAM_AS_TILES ((volatile tile*)(tile_ram[4]))
+#define OBJ_TILE_VRAM ((vu16*)(TILE_RAM[4]))
+#define OBJ_TILE_VRAM_AS_TILES ((volatile Tile*)(TILE_RAM[4]))
 
 // ---- End of Character/Tile Stuffs ----
 
@@ -72,13 +72,13 @@ typedef tile8 charblock8[charblock8_size];
 typedef u16 scr_entry;
 
 // Regular map offsets
-//struct bg_point
+//struct BgPoint
 //{
 //	//s16 x, y;
 //	u16 x, y;
 //} __attribute__((aligned(4)));
-//typedef vec2_s16 bg_point;
-typedef vec2_f24p8 bg_point;
+//typedef vec2_s16 BgPoint;
+typedef vec2_f24p8 BgPoint;
 
 
 // Screenblock struct.  There are 32 (0x20) tiles per row, and 32 (0x20)
@@ -154,7 +154,7 @@ static const u32 num_colors_per_palette = 16;
 #define REG_BG3CNT (REG_BGCNT_ARR[3])
 
 // LCD I/O BG Scrolling Registers
-//#define REG_BGOFS ((bg_point*)(MEM_IO + 0x0010))
+//#define REG_BGOFS ((BgPoint*)(MEM_IO + 0x0010))
 // Pretty cool how I Can use my vec2_s16 class for this
 #define REG_BGOFS ((vec2_s16*)(MEM_IO + 0x0010))
 

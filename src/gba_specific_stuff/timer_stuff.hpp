@@ -25,60 +25,60 @@
 
 
 // Timer Counter/Reload, AKA Timer Data (R/W)
-#define reg_tm0data				*((vu16*)(MEM_IO + 0x100))
-#define reg_tm1data				*((vu16*)(MEM_IO + 0x104))
-#define reg_tm2data				*((vu16*)(MEM_IO + 0x108))
-#define reg_tm3data				*((vu16*)(MEM_IO + 0x10c))
+#define REG_TM0DATA				*((vu16*)(MEM_IO + 0x100))
+#define REG_TM1DATA				*((vu16*)(MEM_IO + 0x104))
+#define REG_TM2DATA				*((vu16*)(MEM_IO + 0x108))
+#define REG_TM3DATA				*((vu16*)(MEM_IO + 0x10c))
 
 // Timer Control (R/W)
-#define reg_tm0cnt				*((vu16*)(MEM_IO + 0x102))
-#define reg_tm1cnt				*((vu16*)(MEM_IO + 0x106))
-#define reg_tm2cnt				*((vu16*)(MEM_IO + 0x10a))
-#define reg_tm3cnt				*((vu16*)(MEM_IO + 0x10e))
+#define REG_TM0CNT				*((vu16*)(MEM_IO + 0x102))
+#define REG_TM1CNT				*((vu16*)(MEM_IO + 0x106))
+#define REG_TM2CNT				*((vu16*)(MEM_IO + 0x10a))
+#define REG_TM3CNT				*((vu16*)(MEM_IO + 0x10e))
 
 
 // 32-bit "versions" of the timer registers (R/W)
-#define reg_tmcnt_full_arr		((vu32*)(MEM_IO + 0x100))
-#define reg_tm0cnt_full			(reg_tmcnt_full_arr[0])
-#define reg_tm1cnt_full			(reg_tmcnt_full_arr[1])
-#define reg_tm2cnt_full			(reg_tmcnt_full_arr[2])
-#define reg_tm3cnt_full			(reg_tmcnt_full_arr[3])
+#define REG_TMCNT_FULL_ARR		((vu32*)(MEM_IO + 0x100))
+#define REG_TM0CNT_FULL			(REG_TMCNT_FULL_ARR[0])
+#define REG_TM1CNT_FULL			(REG_TMCNT_FULL_ARR[1])
+#define REG_TM2CNT_FULL			(REG_TMCNT_FULL_ARR[2])
+#define REG_TM3CNT_FULL			(REG_TMCNT_FULL_ARR[3])
 
 
 
 
 // Prescaler Selection (F/1, F/64, F/256, F/1024)
 // F = System Clock (16.78MHz)
-#define timer_prescaler_1			(0x0 << 0x0)
-#define timer_prescaler_64			(0x1 << 0x0)
-#define timer_prescaler_256			(0x2 << 0x0)
-#define timer_prescaler_1024		(0x3 << 0x0)
+#define TIMER_PRESCALER_1			(0x0 << 0x0)
+#define TIMER_PRESCALER_64			(0x1 << 0x0)
+#define TIMER_PRESCALER_256			(0x2 << 0x0)
+#define TIMER_PRESCALER_1024		(0x3 << 0x0)
 
-#define timer_prescaler_mask		(0x03)
+#define TIMER_PRESCALER_MASK		(0x03)
 
 
 // Count-up timing (Cascading).  When enabled, the prescaler value Is
 // ignored, and instead the time Is incremented each time when the PREVIOUS
 // Timer overflows.  This function Can't be used for Timer 0, because Timer
 // 0 Is the first timer.
-#define timer_cascade_disable		(0x0 << 0x2)
-#define timer_cascade_enable		(0x1 << 0x2)
+#define TIMER_CASCADE_DISABLE		(0x0 << 0x2)
+#define TIMER_CASCADE_ENABLE		(0x1 << 0x2)
 
-#define timer_cascade_mask			(0x04)
+#define TIMER_CASCADE_MASK			(0x04)
 
 
 // Timer IRQ Enable		(0=Disable, 1=IRQ on Timer overflow)
-#define timer_irq_disable			(0x0 << 0x6)
-#define timer_irq_enable			(0x1 << 0x6)
+#define TIMER_IRQ_DISABLE			(0x0 << 0x6)
+#define TIMER_IRQ_ENABLE			(0x1 << 0x6)
 
-#define timer_irq_mask				(0x40)
+#define TIMER_IRQ_MASK				(0x40)
 
 
 // Timer Start/Stop
-#define timer_stop					(0x0 << 0x7)
-#define timer_operate				(0x1 << 0x7)
+#define TIMER_STOP					(0x0 << 0x7)
+#define TIMER_OPERATE				(0x1 << 0x7)
 
-#define timer_stop_operate_mask		(0x80)
+#define TIMER_STOP_OPERATE_MASK		(0x80)
 
 
 // Here Is an extra thing for 

@@ -39,22 +39,22 @@ const vec2_u32 OamEntry::ss_to_vec2_arr[lim_ss]
 const vec2_u32 OamEntry::ss_enum_to_ss_attrs_arr[lim_ss]
 = {
 	// Square shapes
-	{ obj_attr0_shape_square, obj_attr1_size_0 }, 
-	{ obj_attr0_shape_square, obj_attr1_size_1 }, 
-	{ obj_attr0_shape_square, obj_attr1_size_2 }, 
-	{ obj_attr0_shape_square, obj_attr1_size_3 },
+	{ OBJ_ATTR0_SHAPE_SQUARE, OBJ_ATTR1_SIZE_0 }, 
+	{ OBJ_ATTR0_SHAPE_SQUARE, OBJ_ATTR1_SIZE_1 }, 
+	{ OBJ_ATTR0_SHAPE_SQUARE, OBJ_ATTR1_SIZE_2 }, 
+	{ OBJ_ATTR0_SHAPE_SQUARE, OBJ_ATTR1_SIZE_3 },
 	
 	// Horizontal shapes
-	{ obj_attr0_shape_horizontal, obj_attr1_size_0 }, 
-	{ obj_attr0_shape_horizontal, obj_attr1_size_1 }, 
-	{ obj_attr0_shape_horizontal, obj_attr1_size_2 }, 
-	{ obj_attr0_shape_horizontal, obj_attr1_size_3 },
+	{ OBJ_ATTR0_SHAPE_HORIZONTAL, OBJ_ATTR1_SIZE_0 }, 
+	{ OBJ_ATTR0_SHAPE_HORIZONTAL, OBJ_ATTR1_SIZE_1 }, 
+	{ OBJ_ATTR0_SHAPE_HORIZONTAL, OBJ_ATTR1_SIZE_2 }, 
+	{ OBJ_ATTR0_SHAPE_HORIZONTAL, OBJ_ATTR1_SIZE_3 },
 	
 	// Vertical shapes
-	{ obj_attr0_shape_vertical, obj_attr1_size_0 }, 
-	{ obj_attr0_shape_vertical, obj_attr1_size_1 }, 
-	{ obj_attr0_shape_vertical, obj_attr1_size_2 }, 
-	{ obj_attr0_shape_vertical, obj_attr1_size_3 },
+	{ OBJ_ATTR0_SHAPE_VERTICAL, OBJ_ATTR1_SIZE_0 }, 
+	{ OBJ_ATTR0_SHAPE_VERTICAL, OBJ_ATTR1_SIZE_1 }, 
+	{ OBJ_ATTR0_SHAPE_VERTICAL, OBJ_ATTR1_SIZE_2 }, 
+	{ OBJ_ATTR0_SHAPE_VERTICAL, OBJ_ATTR1_SIZE_3 },
 };
 
 //const OamEntry::shape_size OamEntry::ss_attrs_no_shift_to_ss_enum_arr_2d
@@ -79,9 +79,9 @@ void OamEntry::set_shape_size(OamEntry::shape_size n_shape_size)
 	{
 		const vec2_u32& ss_attrs_vec2 = ss_enum_to_ss_attrs_arr[0];
 		
-		clear_and_set_bits(temp_attr0, obj_attr0_shape_mask,
+		clear_and_set_bits(temp_attr0, OBJ_ATTR0_SHAPE_MASK,
 			ss_attrs_vec2.x);
-		clear_and_set_bits(temp_attr1, obj_attr1_size_mask,
+		clear_and_set_bits(temp_attr1, OBJ_ATTR1_SIZE_MASK,
 			ss_attrs_vec2.y);
 	}
 	else
@@ -89,9 +89,9 @@ void OamEntry::set_shape_size(OamEntry::shape_size n_shape_size)
 		const vec2_u32& ss_attrs_vec2 = ss_enum_to_ss_attrs_arr
 			[n_shape_size];
 		
-		clear_and_set_bits(temp_attr0, obj_attr0_shape_mask,
+		clear_and_set_bits(temp_attr0, OBJ_ATTR0_SHAPE_MASK,
 			ss_attrs_vec2.x);
-		clear_and_set_bits(temp_attr1, obj_attr1_size_mask,
+		clear_and_set_bits(temp_attr1, OBJ_ATTR1_SIZE_MASK,
 			ss_attrs_vec2.y);
 	}
 	
@@ -105,10 +105,10 @@ void OamEntry::set_shape_size(OamEntry::shape_size n_shape_size)
 
 OamEntry::shape_size OamEntry::get_shape_size() const
 {
-	u32 attr0_shape_no_shift = get_bits(attr0, obj_attr0_shape_mask,
-		obj_attr0_shape_shift);
-	u32 attr1_size_no_shift = get_bits(attr1, obj_attr1_size_mask,
-		obj_attr1_size_shift);
+	u32 attr0_shape_no_shift = get_bits(attr0, OBJ_ATTR0_SHAPE_MASK,
+		OBJ_ATTR0_SHAPE_SHIFT);
+	u32 attr1_size_no_shift = get_bits(attr1, OBJ_ATTR1_SIZE_MASK,
+		OBJ_ATTR1_SIZE_SHIFT);
 	
 	// Error checking
 	if (attr0_shape_no_shift >= num_attr0_shapes 

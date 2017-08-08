@@ -207,7 +207,7 @@ class DebugArrGroup
 {
 //protected:		// static variables (raw debug arrays)
 public:		// static variables (raw debug arrays)
-	struct raw_array_group
+	struct RawArrayGroup
 	{
 		u32 curr_index_arr[curr_index_arr_size];
 		
@@ -218,7 +218,7 @@ public:		// static variables (raw debug arrays)
 		
 		DebugStr debug_str_arr[debug_str_arr_size];
 	} __attribute__((_align4));
-	static raw_array_group the_raw_array_group;
+	static RawArrayGroup the_raw_array_group;
 	
 	
 	// The main reason this Exists Is To give something To write To So That

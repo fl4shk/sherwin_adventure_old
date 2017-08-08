@@ -67,59 +67,59 @@ public:		// wrapper functions
 	
 	s32 get_y_coord() const
 	{
-		return get_bits(attr0, obj_attr0_y_coord_mask, 
-			obj_attr0_y_coord_shift);
+		return get_bits(attr0, OBJ_ATTR0_Y_COORD_MASK, 
+			OBJ_ATTR0_Y_COORD_SHIFT);
 	}
 	
 	void set_y_coord(s32 n_y_coord)
 	{
-		//clear_and_set_bits(attr0, obj_attr0_y_coord_mask,
+		//clear_and_set_bits(attr0, OBJ_ATTR0_Y_COORD_MASK,
 		//	OBJ_ATTR0_Y_COORD(n_y_coord));
-		clear_bits(attr0, obj_attr0_y_coord_mask);
+		clear_bits(attr0, OBJ_ATTR0_Y_COORD_MASK);
 		set_bits(attr0, OBJ_ATTR0_Y_COORD(n_y_coord));
 	}
 	
 	s32 get_x_coord() const
 	{
-		return get_bits(attr1, obj_attr1_x_coord_mask,
-			obj_attr1_x_coord_shift);
+		return get_bits(attr1, OBJ_ATTR1_X_COORD_MASK,
+			OBJ_ATTR1_X_COORD_SHIFT);
 	}
 	
 	void set_x_coord(s32 n_x_coord)
 	{
-		//clear_and_set_bits(attr1, obj_attr1_x_coord_mask,
+		//clear_and_set_bits(attr1, OBJ_ATTR1_X_COORD_MASK,
 		//	OBJ_ATTR1_X_COORD(n_x_coord));
-		clear_bits(attr1, obj_attr1_x_coord_mask);
+		clear_bits(attr1, OBJ_ATTR1_X_COORD_MASK);
 		set_bits(attr1, OBJ_ATTR1_X_COORD(n_x_coord));
 	}
 	
 	void enable_hflip()
 	{
-		set_bits(attr1, obj_attr1_hflip_on);
+		set_bits(attr1, OBJ_ATTR1_HFLIP_ON);
 	}
 	void disable_hflip()
 	{
-		clear_bits(attr1, obj_attr1_hflip_mask);
+		clear_bits(attr1, OBJ_ATTR1_HFLIP_MASK);
 	}
 	u32 get_hflip_status() const
 	{
-		return get_bits(attr1, obj_attr1_hflip_mask, 
-			obj_attr1_hflip_shift);
+		return get_bits(attr1, OBJ_ATTR1_HFLIP_MASK, 
+			OBJ_ATTR1_HFLIP_SHIFT);
 	}
 	
 	
 	void enable_vflip()
 	{
-		set_bits(attr1, obj_attr1_vflip_on);
+		set_bits(attr1, OBJ_ATTR1_VFLIP_ON);
 	}
 	void disable_vflip()
 	{
-		clear_bits(attr1, obj_attr1_vflip_mask);
+		clear_bits(attr1, OBJ_ATTR1_VFLIP_MASK);
 	}
 	u32 get_vflip_status() const
 	{
-		return get_bits(attr1, obj_attr1_vflip_mask, 
-			obj_attr1_vflip_shift);
+		return get_bits(attr1, OBJ_ATTR1_VFLIP_MASK, 
+			OBJ_ATTR1_VFLIP_SHIFT);
 	}
 	
 	
@@ -127,39 +127,39 @@ public:		// wrapper functions
 	void show_non_affine()
 	{
 		clear_bits(attr0, 
-			(obj_attr0_affine_mask | obj_attr0_disable_mask));
+			(OBJ_ATTR0_AFFINE_MASK | OBJ_ATTR0_DISABLE_MASK));
 	}
 	
 	void hide_non_affine()
 	{
 		clear_bits(attr0, 
-			(obj_attr0_affine_mask | obj_attr0_disable_mask));
+			(OBJ_ATTR0_AFFINE_MASK | OBJ_ATTR0_DISABLE_MASK));
 		
-		set_bits(attr0, obj_attr0_disable_on);
+		set_bits(attr0, OBJ_ATTR0_DISABLE_ON);
 	}
 	
 	void set_tile_number(u32 n_tile_num)
 	{
-		clear_and_set_bits(attr2, obj_attr2_tile_number_mask,
+		clear_and_set_bits(attr2, OBJ_ATTR2_TILE_NUMBER_MASK,
 			OBJ_ATTR2_TILE_NUMBER(n_tile_num));
 	}
 	
 	u32 get_tile_number() const
 	{
-		return get_bits(attr2, obj_attr2_tile_number_mask,
-			obj_attr2_tile_number_shift);
+		return get_bits(attr2, OBJ_ATTR2_TILE_NUMBER_MASK,
+			OBJ_ATTR2_TILE_NUMBER_SHIFT);
 	}
 	
 	void set_pal_number(u32 n_pal_num)
 	{
-		clear_and_set_bits(attr2, obj_attr2_pal_num_mask,
+		clear_and_set_bits(attr2, OBJ_ATTR2_PAL_NUM_MASK,
 			OBJ_ATTR2_PAL_NUM(n_pal_num));
 	}
 	
 	u32 get_pal_number() const
 	{
-		return get_bits(attr2, obj_attr2_pal_num_mask,
-			obj_attr2_pal_num_shift);
+		return get_bits(attr2, OBJ_ATTR2_PAL_NUM_MASK,
+			OBJ_ATTR2_PAL_NUM_SHIFT);
 	}
 	
 	

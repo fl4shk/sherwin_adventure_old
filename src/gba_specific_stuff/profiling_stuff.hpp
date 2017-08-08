@@ -32,11 +32,11 @@ inline void profile_start()
 	ASM_COMMENT("Start of profile_start()");
 	
 	
-	reg_tm2cnt_full = reg_tm3cnt_full = 0;
+	REG_TM2CNT_FULL = REG_TM3CNT_FULL = 0;
 	
 	// Cascade Timer 3 with Timer 2
-	reg_tm2cnt = timer_operate;
-	reg_tm3cnt = timer_operate | timer_cascade_enable;
+	REG_TM2CNT = TIMER_OPERATE;
+	REG_TM3CNT = TIMER_OPERATE | TIMER_CASCADE_ENABLE;
 	
 	
 	ASM_COMMENT("End of profile_start()");
@@ -46,10 +46,10 @@ inline u32 profile_stop()
 {
 	// I guess stopping Timer 2 will stop Timer 3 since Timer 3 Is cascaded
 	// with Timer 2.
-	reg_tm2cnt = 0;
+	REG_TM2CNT = 0;
 	
-	const u32 ret = ((static_cast<u32>(reg_tm3data) << 16) 
-		| static_cast<u32>(reg_tm2data));
+	const u32 ret = ((static_cast<u32>(REG_TM3DATA) << 16) 
+		| static_cast<u32>(REG_TM2DATA));
 	
 	
 	return ret;
