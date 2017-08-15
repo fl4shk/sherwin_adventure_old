@@ -16,10 +16,9 @@ S_DIRS:=$(SHARED_SRC_DIRS)
 
 # Comment out or un-comment out the next line to enable debugging stuff to
 # be generated
-#DEBUG:=yeah do debug
+DEBUG:=yeah do debug
 
-#DEBUG_OPTIMIZATION_LEVEL:=-O0
-DEBUG_OPTIMIZATION_LEVEL:=-O2
+DEBUG_OPTIMIZATION_LEVEL:=-O0
 REGULAR_OPTIMIZATION_LEVEL:=-O2
 
 ALWAYS_DEBUG_SUFFIX:=_debug
@@ -156,8 +155,6 @@ all_pre_asmout :
 $(BIN_OFILES) : $(OBJDIR)/%.o : %.bin
 	util/bin2o_gba.sh $< $@
 
-# This sed script is basically a hack for dependency generation stuff.
-sed_script:=$(shell echo "sed -e 's/\#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' -e '/^$$/ d' -e 's/$$/ :/'")
 
 
 # Here's where things get really messy.
@@ -167,7 +164,7 @@ $(CXX_OFILES) : $(OBJDIR)/%.o : %.cpp
 	@echo $@" was updated or has no object file.  (Re)Compiling...." 
 	$(CXX) $(CXX_FLAGS) -MMD -c $< -o $@ 
 	@cp $(OBJDIR)/$*.d $(DEPDIR)/$*.P 
-	@$(sed_script) < $(OBJDIR)/$*.d >> $(DEPDIR)/$*.P 
+	@#$(sed_script) < $(OBJDIR)/$*.d >> $(DEPDIR)/$*.P 
 	@rm -f $(OBJDIR)/$*.d
 
 $(S_OFILES) : $(OBJDIR)/%.o : %.s
@@ -175,7 +172,7 @@ $(S_OFILES) : $(OBJDIR)/%.o : %.s
 	@echo $@" was updated or has no object file.  (Re)Assembling...."
 	$(AS) $(S_FLAGS) -MD $(OBJDIR)/$*.d -c $< -o $@
 	@cp $(OBJDIR)/$*.d $(DEPDIR)/$*.P
-	@$(sed_script) < $(OBJDIR)/$*.d >> $(DEPDIR)/$*.P
+	@#$(sed_script) < $(OBJDIR)/$*.d >> $(DEPDIR)/$*.P
 	@rm -f $(OBJDIR)/$*.d
 
 
@@ -186,7 +183,7 @@ $(CXX_ASMOUTS) : $(ASMOUTDIR)/%.s : %.cpp
 	@#$(CXX) $(CXX_FLAGS) -MMD -S $< -o $@ 
 	$(CXX) $(CXX_FLAGS) -MMD -S $(VERBOSE_ASM_FLAG) $< -o $@ 
 	@cp $(ASMOUTDIR)/$*.d $(DEPDIR)/$*.P 
-	@$(sed_script) < $(ASMOUTDIR)/$*.d >> $(DEPDIR)/$*.P 
+	@#$(sed_script) < $(ASMOUTDIR)/$*.d >> $(DEPDIR)/$*.P 
 	@rm -f $(ASMOUTDIR)/$*.d
 
 
@@ -196,7 +193,7 @@ $(CXX_ASMOUTS) : $(ASMOUTDIR)/%.s : %.cpp
 
 .PHONY : clean
 clean :
-	rm -rfv $(OBJDIR) $(DEPDIR) $(ASMOUTDIR) $(PREPROCDIR) $(PROJ).elf $(PROJ).gba tags *.taghl gmon.out
+	rm -rfv $(OBJDIR) $(DEPDIR) $(ASMOUTDIR) $(PREPROCDIR) $(PROJ) tags *.taghl gmon.out
 
 # Flags for make disassemble*
 DISASSEMBLE_FLAGS:=$(DISASSEMBLE_BASE_FLAGS) -C -d 
