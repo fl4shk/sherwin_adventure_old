@@ -74,10 +74,11 @@ int real_main();
 
 }
 
-char address_buff[20] __attribute__((_sram));
 
 extern "C"
 {
+
+char address_buff[20] __attribute__((_sram));
 
 u32 some_title_screen_arr[8] __attribute__((_title_screen_bss));
 u32 some_title_screen_var __attribute__((_title_screen_bss));
@@ -98,6 +99,7 @@ char asdf_ewram[8] __attribute__((_title_screen_ewram));
 char asdf_2_ewram[8] __attribute__((_in_level_ewram));
 
 }
+
 
 
 int main()
