@@ -129,7 +129,8 @@ typedef void (*IrsFuncptr)(void);
 extern "C"
 {
 	// Also
-	extern volatile IrsFuncptr isr_table[intr_amount];
+	extern volatile sherwin_adventure::gba::IrsFuncptr 
+		isr_table[sherwin_adventure::gba::intr_amount];
 
 	void irqEnable(int mask);
 

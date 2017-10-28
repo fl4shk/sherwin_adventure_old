@@ -23,6 +23,7 @@
 
 #include "../general_utility_stuff/debug_vars.hpp"
 
+using namespace gba;
 
 extern "C"
 {

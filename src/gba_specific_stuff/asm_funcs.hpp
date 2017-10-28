@@ -28,6 +28,11 @@
 
 #include <array>
 
+inline void* memcpy(volatile void* dst, const void* src, size_t n)
+{
+	return memcpy((void*)dst, src, n);
+}
+
 extern "C"
 {
 

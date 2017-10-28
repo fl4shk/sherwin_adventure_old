@@ -46,15 +46,22 @@ using namespace sherwin_adventure::containers;
 
 namespace sherwin_adventure 
 	{ namespace trig {} }
-using namespace sherwin_adventure::trig;
+//using namespace sherwin_adventure::trig;
 
 namespace sherwin_adventure 
 	{ namespace gba {} }
-using namespace sherwin_adventure::gba;
+//using namespace sherwin_adventure::gba;
 
 namespace sherwin_adventure 
 	{ namespace overlay {} }
-using namespace sherwin_adventure::overlay;
+//using namespace sherwin_adventure::overlay;
+
+namespace sherwin_adventure 
+	{ namespace game_engine {} }
+//using namespace sherwin_adventure::game_engine;
+
+
+using namespace sherwin_adventure;
 
 
 //#endif		// namespace_using_hpp

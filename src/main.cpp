@@ -46,6 +46,8 @@
 //#include "game_engine_stuff/coll_lseg_classes.hpp"
 //#include "game_engine_stuff/hud_manager_class.hpp"
 
+#include "gba_specific_stuff/interrupt_stuff.hpp"
+
 #include "namespace_using.hpp"
 
 // This Is an assembly function.  It doesn't do very much.
@@ -80,16 +82,16 @@ extern "C"
 
 char address_buff[20] __attribute__((_sram));
 
-u32 some_title_screen_arr[8] __attribute__((_title_screen_bss));
-u32 some_title_screen_var __attribute__((_title_screen_bss));
+vu32 some_title_screen_arr[8] __attribute__((_title_screen_bss));
+vu32 some_title_screen_var __attribute__((_title_screen_bss));
 
 
-u32 some_in_level_var __attribute__((_in_level_bss));
-u32 some_in_level_arr[8] __attribute__((_in_level_bss));
+vu32 some_in_level_var __attribute__((_in_level_bss));
+vu32 some_in_level_arr[8] __attribute__((_in_level_bss));
 
 
-u32 some_title_screen_buf[8] __attribute__((_title_screen_iwram_bss));
-u32 some_in_level_buf[8] __attribute__((_in_level_iwram_bss));
+vu32 some_title_screen_buf[8] __attribute__((_title_screen_iwram_bss));
+vu32 some_in_level_buf[8] __attribute__((_in_level_iwram_bss));
 
 
 char asdf[8] __attribute__((_title_screen_sram));
@@ -113,7 +115,7 @@ int main()
 	//	(unsigned)(&some_title_screen_arr));
 	snprintf(test_buf, test_buf_size, "%X",
 		(unsigned)(&__iwram_data0_section_size));
-	memcpy8(address_buff, test_buf, 9);
+	gba::memcpy8(address_buff, test_buf, 9);
 	memcpy(some_in_level_arr, test_buf, 8);
 	memcpy(some_title_screen_arr, test_buf, 8);
 	return real_main();
@@ -127,11 +129,11 @@ extern "C"
 
 int real_main()
 {
-	irq_init();
+	gba::irq_init();
 
 	for (;;)
 	{
-		bios_wait_for_vblank();
+		gba::bios_wait_for_vblank();
 	}
 }
 

@@ -184,7 +184,7 @@ public:		// functions
 	{
 		//arr_memfill32(arr, 0, max_size);
 		//arr_memset(arr, 0, max_size);
-		arr_memset(arr, 0);
+		gba::arr_memset(arr, 0);
 	}
 	inline void total_clear()
 	{

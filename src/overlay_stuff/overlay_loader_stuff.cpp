@@ -23,6 +23,16 @@ namespace sherwin_adventure
 namespace overlay
 {
 
+void OverlayLoader::load(OverlayNum n_overlay_num)
+{
+	__overlay_num = n_overlay_num;
+
+	switch (overlay_num())
+	{
+		halt()
+	}
+
+}
 
 }
 }

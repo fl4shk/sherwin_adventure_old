@@ -30,6 +30,8 @@ vu32 dma0cnt_mirror, dma1cnt_mirror, dma2cnt_mirror, dma3cnt_mirror;
 
 }
 
+using namespace gba;
+
 
 extern "C"
 {

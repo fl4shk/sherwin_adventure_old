@@ -18,6 +18,8 @@
 #include "fixed_classes.hpp"
 #include "../gba_specific_stuff/lut_division_funcs.hpp"
 
+using namespace gba;
+
 namespace sherwin_adventure
 {
 

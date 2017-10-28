@@ -21,6 +21,8 @@
 
 #include <string.h>
 
+using namespace gba;
+
 namespace sherwin_adventure
 {
 
