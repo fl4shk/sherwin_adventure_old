@@ -22,6 +22,7 @@
 
 #include "../namespace_using.hpp"
 #include "../gba_specific_stuff/attribute_defines.hpp"
+#include "../general_utility_stuff/gen_getter_setter_defines.hpp"
 
 namespace sherwin_adventure
 {
@@ -31,8 +32,17 @@ namespace overlay
 
 class OverlayLoader
 {
-public:		// variables
-	
+private:		// variables
+	OverlayNum __overlay_num;
+
+public:		// functions
+	inline OverlayLoader()
+		: __overlay_num(OverlayNum::TitleScreen)
+	{
+	}
+
+	gen_getter_by_val(overlay_num);
+
 } __attribute__((_align4));
 
 

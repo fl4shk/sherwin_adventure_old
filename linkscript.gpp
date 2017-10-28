@@ -265,7 +265,7 @@ SECTIONS
 
 #define CONCAT #1#2
 #define CONCAT3 #1#2#3
-#define MAKE_SECTION_SIZE(prefix,num) CONCAT3(__,prefix,num)_section_size = SIZEOF(.CONCAT(prefix,num));
+#define MAKE_SECTION_SIZE(prefix,num) CONCAT3(__,prefix,num)_section_size = SIZEOF(CONCAT(.prefix,num));
 
 
 #define MAKE_LIST LIST_MACRO(0) \

@@ -108,8 +108,11 @@ int main()
 	//return main_2();
 	//snprintf(address_buff, 20, "%X", 
 	//	(unsigned)(&some_title_screen_other_var));
+
+	//snprintf(test_buf, test_buf_size, "%X",
+	//	(unsigned)(&some_title_screen_arr));
 	snprintf(test_buf, test_buf_size, "%X",
-		(unsigned)(&some_title_screen_arr));
+		(unsigned)(&__iwram_data0_section_size));
 	memcpy8(address_buff, test_buf, 9);
 	memcpy(some_in_level_arr, test_buf, 8);
 	memcpy(some_title_screen_arr, test_buf, 8);
