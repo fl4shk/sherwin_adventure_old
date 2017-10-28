@@ -29,7 +29,29 @@ void OverlayLoader::load(OverlayNum n_overlay_num)
 
 	switch (overlay_num())
 	{
-		halt()
+		case OverlayNum::TitleScreen:
+			//memcpy(__iwram_data0_load, __iwram_data)
+			break;
+
+		case OverlayNum::OverworldLoad:
+			
+			break;
+
+		case OverlayNum::InOverworld:
+			
+			break;
+
+		case OverlayNum::LevelLoad:
+			
+			break;
+
+		case OverlayNum::InLevel:
+			
+			break;
+
+		default:
+			game_engine::halt();
+			break;
 	}
 
 }

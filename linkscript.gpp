@@ -308,9 +308,9 @@ SECTIONS
 
 #define MAKE_IWRAM_CODE_OVERLAY(num) CONCAT(.iwram_code,num) \
 		{ \
-			CONCAT(iwram_code,num)_rom_start = LOADADDR(CONCAT(.iwram_code,num)); \
+			CONCAT(__iwram_code,num)_rom_start = LOADADDR(CONCAT(.iwram_code,num)); \
 \
-			CONCAT(iwram_code,num)_iwram_start = .; \
+			CONCAT(__iwram_code,num)_iwram_start = .; \
 \
 			*(CONCAT(.iwram_code,num) CONCAT(.iwram_code,num).*); \
 \
@@ -320,9 +320,11 @@ SECTIONS
 
 #define MAKE_IWRAM_BSS_OVERLAY(num) CONCAT(.iwram_bss,num) \
 		{ \
+			CONCAT(__iwram_bss,num)_start__ = .; \
 			*(CONCAT(.iwram_bss,num) CONCAT(.iwram_bss,num).*); \
 \
 			. = ALIGN(4); \
+			CONCAT(__iwram_bss,num)_end__ = .; \
 		}
 
 #define MAKE_IWRAM_BSS_SECTION_SIZE(num) MAKE_SECTION_SIZE(iwram_bss,num)
