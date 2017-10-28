@@ -1,7 +1,7 @@
 # These directories specify where source code files are located.
 # Edit these variables if more directories are needed.  
 # Separate each entry by spaces.
-SHARED_SRC_DIRS:=src src/borrowed_stuff src/general_utility_stuff \
+SHARED_SRC_DIRS:=src src/general_utility_stuff \
 	src/game_engine_stuff src/game_engine_stuff/block_stuff \
 	src/game_engine_stuff/block_stuff/specific_blocks \
 	src/game_engine_stuff/level_stuff src/game_engine_stuff/sprite_stuff \

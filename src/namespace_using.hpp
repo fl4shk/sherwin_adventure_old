@@ -27,34 +27,34 @@
 //#include "general_utility_stuff/trigonometry_funcs.hpp"
 //#include "general_utility_stuff/vec2_class.hpp"
 //#include "gba_specific_stuff/asm_funcs.hpp"
-namespace sherwin_adventure
-{
-namespace integer_types
-{
-}
-namespace misc_util
-{
-}
-namespace bitwise
-{
-}
-namespace containers
-{
-}
-namespace trig
-{
-}
-namespace gba
-{
-}
-}
 
+namespace sherwin_adventure 
+	{ namespace integer_types {} }
 using namespace sherwin_adventure::integer_types;
+
+namespace sherwin_adventure 
+	{ namespace misc_util {} }
 using namespace sherwin_adventure::misc_util;
+
+namespace sherwin_adventure 
+	{ namespace bitwise {} }
 using namespace sherwin_adventure::bitwise;
+
+namespace sherwin_adventure 
+	{ namespace containers {} }
 using namespace sherwin_adventure::containers;
+
+namespace sherwin_adventure 
+	{ namespace trig {} }
 using namespace sherwin_adventure::trig;
+
+namespace sherwin_adventure 
+	{ namespace gba {} }
 using namespace sherwin_adventure::gba;
+
+namespace sherwin_adventure 
+	{ namespace overlay {} }
+using namespace sherwin_adventure::overlay;
 
 
 //#endif		// namespace_using_hpp
