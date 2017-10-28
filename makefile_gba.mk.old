@@ -16,7 +16,7 @@ S_DIRS:=$(SHARED_SRC_DIRS)
 
 # Comment out or un-comment out the next line to enable debugging stuff to
 # be generated
-DEBUG:=yeah do debug
+#DEBUG:=yeah do debug
 
 DEBUG_OPTIMIZATION_LEVEL:=-O0
 REGULAR_OPTIMIZATION_LEVEL:=-O2
@@ -31,6 +31,7 @@ PROJ:=$(shell basename $(CURDIR))$(DEBUG_SUFFIX)
 
 
 # This is used for do_asmouts
+VERBOSE_ASM_FLAG:=
 #VERBOSE_ASM_FLAG:=-fverbose-asm
 
 PREFIX:=$(DEVKITARM)/bin/arm-none-eabi-
@@ -59,22 +60,20 @@ else
 	OPTIMIZATION_LEVEL:=$(REGULAR_OPTIMIZATION_LEVEL)
 endif
 
-LD_SCRIPT:=linkscript.ld
-LD_SCRIPT_GPP_SRC:=linkscript.gpp
-COMMON_LD_FLAGS:=$(COMMON_LD_FLAGS) -T $(LD_SCRIPT) 
-
 EXTRA_BASE_FLAGS:=-mcpu=arm7tdmi -mtune=arm7tdmi -mthumb \
 	-mthumb-interwork \
 	-fno-threadsafe-statics -nostartfiles
+#EXTRA_BASE_FLAGS:=-mcpu=arm7tdmi -mtune=arm7tdmi -marm \
+#	-mthumb-interwork \
+#	-fno-threadsafe-statics -nostartfiles
 
-EXTRA_LD_FLAGS:=$(EXTRA_LD_FLAGS) -mthumb --specs=nosys.specs \
-	-lm -lgcc -lc -lstdc++ 
+EXTRA_LD_FLAGS:=$(EXTRA_LD_FLAGS) -mthumb --specs=nosys.specs -lm \
+	-lgcc -lc -lstdc++
+LD_SCRIPT:=linkscript.ld
 COMMON_LD_FLAGS:=$(COMMON_LD_FLAGS) -L$(DEVKITPRO)/libgba/lib \
-	-Wl,--entry=_start2 -lmm 
+	-T $(LD_SCRIPT) -Wl,--entry=_start2 -lmm
 
 DISASSEMBLE_BASE_FLAGS:=-marm7tdmi
-
-
 
 
 
@@ -93,7 +92,6 @@ LD_FLAGS:=$(LD_FLAGS) $(EXTRA_LD_FLAGS) $(COMMON_LD_FLAGS)
 OBJDIR:=objs$(DEBUG_SUFFIX)
 ASMOUTDIR:=asmouts$(DEBUG_SUFFIX)
 DEPDIR:=deps$(DEBUG_SUFFIX)
-PREPROCDIR:=preprocs$(DEBUG_SUFFIX)
 
 # Directories to search, specified at the top of this file
 export VPATH	:=	\
@@ -127,12 +125,9 @@ OFILES:=$(BIN_OFILES) $(CXX_OFILES) $(S_OFILES)
 PFILES:=$(BIN_PFILES) $(CXX_PFILES) $(S_PFILES) 
 ASMOUTS:=$(CXX_ASMOUTS) $(C_ASMOUTS)
 
-# Preprocessed output of only C++ files
-CXX_EFILES:=$(CXX_SOURCES:%.cpp=$(PREPROCDIR)/%.E)
-EFILES:=$(CXX_EFILES)
 
 
-all : all_pre $(LD_SCRIPT) $(OFILES)
+all : all_pre $(OFILES)
 	$(LD) $(OBJDIR)/*.o -o $(PROJ).elf $(LD_FLAGS) -Wl,-M > linker_map.txt
 	$(OBJCOPY) -O binary -S -g -R .iwram -R .bss -R .ewram -R .sram \
 	-R .bss0 -R .bss1 -R .bss2 -R .bss3 \
@@ -160,8 +155,6 @@ all_pre_asmout :
 $(BIN_OFILES) : $(OBJDIR)/%.o : %.bin
 	util/bin2o_gba.sh $< $@
 
-$(LD_SCRIPT) : $(LD_SCRIPT_GPP_SRC)
-	gpp $(LD_SCRIPT_GPP_SRC) > $(LD_SCRIPT)
 
 
 # Here's where things get really messy.
@@ -196,28 +189,11 @@ $(CXX_ASMOUTS) : $(ASMOUTDIR)/%.s : %.cpp
 
 -include $(PFILES)
 
-
-only_preprocess : only_preprocess_pre $(EFILES)
-	@#
-
-only_preprocess_pre : 
-	mkdir -p $(DEPDIR) $(PREPROCDIR)
-
-
-#$(CXX_EFILES) : $(PREPROCDIR)/%.E : %.cpp
-$(CXX_EFILES) : $(PREPROCDIR)/%.E : %.cpp
-	$(CXX) $(CXX_FLAGS) -MMD -E $< -o $@
-	@cp $(PREPROCDIR)/$*.d $(DEPDIR)/$*.P
-	@#$(sed_script) < $(PREPROCDIR)/$*.d >> $(DEPDIR)/$*.P
-	@rm -f $(PREPROCDIR)/$*.d
-
-
 #¯\(°_o)/¯
 
 .PHONY : clean
 clean :
-	rm -rfv $(OBJDIR) $(DEPDIR) $(ASMOUTDIR) $(PREPROCDIR) \
-	$(PROJ).gba $(PROJ).elf tags *.taghl gmon.out $(LD_SCRIPT)
+	rm -rfv $(OBJDIR) $(DEPDIR) $(ASMOUTDIR) $(PREPROCDIR) $(PROJ) tags *.taghl gmon.out
 
 # Flags for make disassemble*
 DISASSEMBLE_FLAGS:=$(DISASSEMBLE_BASE_FLAGS) -C -d 

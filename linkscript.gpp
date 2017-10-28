@@ -1,0 +1,514 @@
+ENTRY(_start2)
+/*STARTUP(objs/main.o)*/
+
+OUTPUT_FORMAT("elf32-littlearm")
+OUTPUT_ARCH(arm)
+
+
+MEMORY
+{
+	rom	: ORIGIN = 0x08000000, LENGTH = 32M
+	iwram	: ORIGIN = 0x03000000, LENGTH = 32K
+	ewram	: ORIGIN = 0x02000000, LENGTH = 224K
+	free_store	: ORIGIN = 0x02038000, LENGTH = 32K
+	sram	: ORIGIN = 0x0e000000, LENGTH = 64K
+}
+
+__text_start	=	ORIGIN(rom);
+__iwram_start	=	ORIGIN(iwram);
+__ewram_start	=	ORIGIN(ewram);
+__free_store_start	=	ORIGIN(free_store);
+__sram_start	=	ORIGIN(sram);
+
+SECTIONS
+{
+	. = __text_start;
+
+	.startup :
+	{
+		*(.startup);
+		*(.asm_text);
+		. = ALIGN(4);
+	} >rom
+
+	startup_section_size = SIZEOF(.startup);
+
+	.text :
+	{
+		CREATE_OBJECT_SYMBOLS
+		/*
+			*(.text .text.* .gnu.linkonce.t.*)
+		*/
+
+		*(.text .gnu.linkonce.t.*)
+
+		*(.plt)
+		*(.gnu_warning)
+		*(.glue_7t) *(.glue_7)
+
+		. = ALIGN(4);
+
+		KEEP(*crtbegin.o(.ctors))
+		KEEP(*(EXCLUDE_FILE(*crtend.o) .ctors))
+		KEEP(*(SORT(.ctors.*)))
+		KEEP(*crtend.o(.ctors))
+		KEEP(*ctrbegin.o(.dtors))
+		KEEP(*(EXCLUDE_FILE(*crtend.o) .dtors))
+		KEEP(*(SORT(.dtors.*)))
+		KEEP(*ctrend.o(.dtors))
+
+		*(.rodata .rodata.* .gnu.linkonce.r.*)
+
+
+		*(.init)
+		*(.fini)
+
+		. = ALIGN(4);
+	} >rom
+
+	text_section_size = SIZEOF(.text);
+
+	.text_hot :
+	{
+		text_hot_rom_start = LOADADDR(.text_hot);
+		text_hot_iwram_start = .;
+
+		*(.text.hot*);
+
+		. = ALIGN(4);
+	} >iwram AT >rom
+
+	text_hot_section_size = SIZEOF(.text_hot);
+
+	/* 
+		*(.text.*) is put AFTER *(.text.hot*) so that the .text_hot section
+		goes into IWRAM
+	*/
+	.text_extra :
+	{
+		*(.text.*)
+		. = ALIGN(4);
+	} >rom
+
+
+
+	.ARM.extab   : { *(.ARM.extab* .gnu.linkonce.armextab.*) } >rom
+	__exidx_start = .;
+	.ARM.exidx   : { *(.ARM.exidx* .gnu.linkonce.armexidx.*) } >rom
+	__exidx_end = .;
+
+	.ARM.attributes : { *(.ARM.attributes) } >rom
+
+
+	.init_array : ALIGN(4)
+	{
+		__init_array_load = LOADADDR(.init_array);
+		__init_array_start = .;
+		*(.init_array)
+		*(SORT_BY_INIT_PRIORITY(.init_array.*))
+		__init_array_end = .;
+	} >ewram AT >rom
+
+	init_array_section_size = SIZEOF(.init_array);
+
+
+	/* Initialized data in EWRAM */
+	.data :
+	{
+		__data_load = LOADADDR(.data);
+		__data_start = .;
+		KEEP(*(.jcr))
+		*(.got.plt) *(.got)
+		*(.shdata)
+		*(.data .data.* .gnu.linkonce.d.*)
+		. = ALIGN(4);
+		__data_end = .;
+	} >ewram AT >rom
+
+	data_section_size = SIZEOF(.data);
+
+
+	/* Initialized data in IWRAM */
+	.iwram_data :
+	{
+		__iwram_data_load = LOADADDR(.iwram_data);
+		__iwram_data_start = .;
+
+		*(.iwram_data .iwram_data.*)
+		. = ALIGN(4);
+		__iwram_data_end = .;
+	} >iwram AT >rom
+	iwram_data_section_size = SIZEOF(.iwram_data);
+
+
+
+	/* Non .text.hot* Code to be copied to IWRAM */
+	.iwram_code :
+	{
+		/* The start of code to be copied to IWRAM*/
+		iwram_code_rom_start = LOADADDR(.iwram_code);
+
+		iwram_code_iwram_start = .;
+
+		*(.iwram_code);
+
+		. = ALIGN(4);
+	} >iwram AT >rom
+
+	iwram_code_section_size = SIZEOF(.iwram_code);
+
+
+
+	/* MaxMOD puts SOME code in the .iwram segment, so it will be treated as
+	such here also */
+	.some_maxmod_code :
+	{
+		. = ALIGN(4);
+		/* The start of some MaxMOD code to be copied to IWRAM*/
+		some_maxmod_code_rom_start = LOADADDR(.some_maxmod_code);
+
+		some_maxmod_code_iwram_start = .;
+
+		/* Some of MaxMOD's code goes into the ".iwram" section */
+		*(.iwram);
+
+		some_maxmod_code_iwram_end = .;
+
+		. = ALIGN(4);
+
+	} >iwram AT >rom
+
+	some_maxmod_code_section_size = SIZEOF(.some_maxmod_code);
+
+	/* Uninitialized variables that go into IWRAM*/
+	.iwram_bss :
+	{
+		*(.iwram_bss .iwram_bss.*);
+
+		. = ALIGN(4);
+		/* The symbols end or __end__ are used to tell where malloc, new, and friends have free access. */
+		/*end = .;*/
+		/*__end__ = .;*/
+	} >iwram
+
+	iwram_bss_section_size = SIZEOF(.iwram_bss);
+
+
+	/* total_iwram_var_size = iwram_data_section_size + iwram_bss_section_size; */
+
+    /*total_iwram_code_size = text_hot_section_size + iwram_code_section_size + some_maxmod_code_section_size; */
+	/* total_iwram_usage = total_iwram_var_size + total_iwram_code_size; */
+
+
+	.ewram_code :
+	{
+		/* The start of code to be copied to EWRAM */
+		ewram_code_rom_start = LOADADDR(.ewram_code);
+
+		ewram_code_ewram_start = .;
+		*(.ewram_code .ewram_code.*);
+
+		. = ALIGN(4);
+	} >ewram AT >rom
+
+	ewram_code_section_size = SIZEOF(.ewram_code);
+
+
+
+	/* BSS that's always "active" */
+	.bss :
+	{
+		__bss_start__ = .;
+		*(.bss .bss.* .gnu.linkonce.b.*)
+		*(.ewram .ewram.*)
+		*(COMMON)
+		. = ALIGN(4);
+		__bss_end__ = .;
+	} >ewram
+	bss_section_size = SIZEOF(.bss);
+
+	/* The symbols end or __end__ are used to tell where malloc, new, and friends have free access. */
+	end = __free_store_start;
+	__end__ = __free_store_start;
+
+
+
+	/*
+	total_ewram_var_size = init_array_section_size + data_section_size + bss_section_size;
+	total_ewram_code_size = ewram_code_section_size;
+	total_ewram_usage = total_ewram_var_size + total_ewram_code_size;
+	*/
+
+
+	/*
+	__iwram_size = SIZEOF(.iwram);
+	__iwram_used = iwram_code_size + __iwram_size;
+	__iwram_remaining = LENGTH(iwram) - __iwram_used;
+	*/
+
+
+
+	.sram :
+	{
+		*(.sram .sram.*);
+
+		. = ALIGN(4);
+	} >sram
+
+	sram_section_size = SIZEOF(.sram);
+
+	.stab : { *(.stab) } AT >rom
+	.stabstr : { *(.stabstr) } AT >rom
+	.comment : { *(.comment) } AT >rom
+	.debug_frame : { *(.debug_frame) } AT >rom
+
+
+#define CONCAT #1#2
+#define CONCAT3 #1#2#3
+#define MAKE_SECTION_SIZE(prefix,num) CONCAT3(__,prefix,num)_section_size = SIZEOF(.CONCAT(prefix,num));
+
+
+#define MAKE_LIST LIST_MACRO(0) \
+		LIST_MACRO(1) \
+		LIST_MACRO(2) \
+		LIST_MACRO(3) \
+		LIST_MACRO(4) \
+		LIST_MACRO(5) \
+		LIST_MACRO(6) \
+		LIST_MACRO(7) \
+
+#define MAKE_DATA_OVERLAY(num) CONCAT(.data,num) \
+		{ \
+			CONCAT(__data,num)_load = LOADADDR(CONCAT(.data,num)); \
+			CONCAT(__data,num)_start = .; \
+			*(CONCAT(.__data,num) CONCAT(.__data,num).*); \
+			. = ALIGN(4); \
+			CONCAT(__data,num)_end = .; \
+		}
+#define MAKE_DATA_SECTION_SIZE(num) MAKE_SECTION_SIZE(data,num)
+
+#define MAKE_IWRAM_DATA_OVERLAY(num) CONCAT(.iwram_data,num) \
+		{ \
+			CONCAT(__iwram_data,num)_load = LOADADDR(CONCAT(.iwram_data,num)); \
+			CONCAT(__iwram_data,num)_start = .; \
+\
+			*(CONCAT(.iwram_data,num) CONCAT(.iwram_data,num).*) \
+			. = ALIGN(4); \
+			CONCAT(__iwram_data,num)_end = .; \
+		}
+#define MAKE_IWRAM_DATA_SECTION_SIZE(num) MAKE_SECTION_SIZE(iwram_data,num)
+
+#define MAKE_IWRAM_CODE_OVERLAY(num) CONCAT(.iwram_code,num) \
+		{ \
+			CONCAT(iwram_code,num)_rom_start = LOADADDR(CONCAT(.iwram_code,num)); \
+\
+			CONCAT(iwram_code,num)_iwram_start = .; \
+\
+			*(CONCAT(.iwram_code,num) CONCAT(.iwram_code,num).*); \
+\
+			. = ALIGN(4); \
+		}
+#define MAKE_IWRAM_CODE_SECTION_SIZE(num) MAKE_SECTION_SIZE(iwram_code,num)
+
+#define MAKE_IWRAM_BSS_OVERLAY(num) CONCAT(.iwram_bss,num) \
+		{ \
+			*(CONCAT(.iwram_bss,num) CONCAT(.iwram_bss,num).*); \
+\
+			. = ALIGN(4); \
+		}
+
+#define MAKE_IWRAM_BSS_SECTION_SIZE(num) MAKE_SECTION_SIZE(iwram_bss,num)
+
+
+#define MAKE_EWRAM_CODE_OVERLAY(num) CONCAT(.ewram_code,num) \
+		{ \
+			CONCAT(__ewram_code,num)_rom_start = LOADADDR(CONCAT(.ewram_code,num)); \
+			CONCAT(__ewram_code,num)_ewram_start = .; \
+			*(CONCAT(.ewram_code,num) CONCAT(.ewram_code,num).*); \
+			. = ALIGN(4); \
+		}
+
+#define MAKE_EWRAM_CODE_SECTION_SIZE(num) MAKE_SECTION_SIZE(ewram_code,num)
+
+#define MAKE_BSS_OVERLAY(num) CONCAT(.bss,num) \
+		{ \
+			CONCAT(__bss,num)_start__ = .; \
+			*(CONCAT(.bss,num) CONCAT(.bss,num).*) \
+			. = ALIGN(4); \
+			CONCAT(__bss,num)_end__ = .; \
+		}
+
+#define MAKE_BSS_SECTION_SIZE(num) MAKE_SECTION_SIZE(bss,num)
+
+
+#define MAKE_SRAM_OVERLAY(num) CONCAT(.sram,num) \
+		{ \
+			CONCAT(__sram,num)_start__ = .; \
+			*(CONCAT(.sram,num) CONCAT(.sram,num).*); \
+\
+			. = ALIGN(4); \
+			CONCAT(__sram,num)_end__ = .; \
+		}
+
+#define MAKE_SRAM_SECTION_SIZE(num) MAKE_SECTION_SIZE(sram,num)
+
+
+
+
+#define LIST_MACRO MAKE_DATA_OVERLAY 
+	OVERLAY : NOCROSSREFS
+	{
+		MAKE_LIST 
+	} >ewram AT >rom
+#undef LIST_MACRO
+
+#define LIST_MACRO MAKE_DATA_SECTION_SIZE 
+		MAKE_LIST 
+#undef LIST_MACRO
+
+
+
+#define LIST_MACRO MAKE_IWRAM_DATA_OVERLAY
+	OVERLAY : NOCROSSREFS
+	{
+		/*
+		.iwram_data0
+		{
+			__iwram_data0_load = LOADADDR(.iwram_data0);
+			__iwram_data0_start = .;
+
+			*(.iwram_data0 .iwram_data0.*)
+			. = ALIGN(4);
+			__iwram_data0_end = .;
+		}
+		*/
+		MAKE_LIST
+	} >iwram AT >rom
+#undef LIST_MACRO
+
+	/* __iwram_data0_section_size = SIZEOF(.iwram_data0); */
+#define LIST_MACRO MAKE_IWRAM_DATA_SECTION_SIZE
+		MAKE_LIST
+#undef LIST_MACRO
+
+#define LIST_MACRO MAKE_IWRAM_CODE_OVERLAY
+	OVERLAY : NOCROSSREFS
+	{
+		/*
+		.iwram_code0
+		{
+			iwram_code0_rom_start = LOADADDR(.iwram_code0);
+
+			iwram_code0_iwram_start = .;
+
+			*(.iwram_code0 .iwram_code0.*);
+
+			. = ALIGN(4);
+		}
+		*/
+		MAKE_LIST
+	} >iwram AT >rom
+#undef LIST_MACRO
+
+	/* __iwram_code0_section_size = SIZEOF(.iwram_code0); */
+#define LIST_MACRO MAKE_IWRAM_CODE_SECTION_SIZE
+		MAKE_LIST
+#undef LIST_MACRO
+
+#define LIST_MACRO MAKE_IWRAM_BSS_OVERLAY
+	OVERLAY : NOCROSSREFS
+	{
+		/*
+		.iwram_bss0
+		{
+			*(.iwram_bss0 .iwram_bss0.*);
+
+			. = ALIGN(4);
+		}
+		*/
+		MAKE_LIST
+	} >iwram
+#undef LIST_MACRO
+
+	/* __iwram_bss0_section_size = SIZEOF(.iwram_bss0); */
+#define LIST_MACRO MAKE_IWRAM_BSS_SECTION_SIZE
+		MAKE_LIST
+#undef LIST_MACRO
+
+#define LIST_MACRO MAKE_EWRAM_CODE_OVERLAY
+	OVERLAY : NOCROSSREFS
+	{
+		/*
+		.ewram_code0
+		{
+			__ewram_code0_rom_start = LOADADDR(.ewram_code0);
+			__ewram_code0_ewram_start = .;
+			*(.ewram_code0 .ewram_code0.*);
+			. = ALIGN(4);
+		}
+		*/
+		MAKE_LIST
+	} >ewram AT >rom
+#undef LIST_MACRO
+
+	/* __ewram_code0_section_size = SIZEOF(.ewram_code0); */
+#define LIST_MACRO MAKE_EWRAM_CODE_SECTION_SIZE
+		MAKE_LIST
+#undef LIST_MACRO
+
+
+#define LIST_MACRO MAKE_BSS_OVERLAY
+	OVERLAY : NOCROSSREFS
+	{
+		/* Uninitialized (set to zero) variables that go into EWRAM */
+		/*
+		.bss0
+		{
+			__bss0_start__ = .;
+			*(.bss0 .bss0.*)
+			. = ALIGN(4);
+			__bss0_end__ = .;
+		}
+		*/
+		MAKE_LIST
+	} >ewram
+#undef LIST_MACRO
+
+	/* __bss0_section_size = SIZEOF(.bss0); */
+#define LIST_MACRO MAKE_BSS_SECTION_SIZE
+		MAKE_LIST
+#undef LIST_MACRO
+
+
+#define LIST_MACRO MAKE_SRAM_OVERLAY
+	/* 
+	I figure I might as well have this, though it's probably not 
+	needed.
+	*/
+	OVERLAY : NOCROSSREFS
+	{
+		/*
+		.sram0
+		{
+			__sram0_start__ = .;
+			*(.sram0 .sram0.*);
+
+			. = ALIGN(4);
+			__sram0_end__ = .;
+		}
+		*/
+		MAKE_LIST
+	} >sram
+#undef LIST_MACRO
+
+	/* __sram0_section_size = SIZEOF(.sram0); */
+#define LIST_MACRO MAKE_SRAM_SECTION_SIZE
+		MAKE_LIST
+#undef LIST_MACRO
+
+}
+
+/*PROVIDE( _HEAP_START = 0x020200000 );
+
+PROVIDE( _HEAP_END = 0x020300000 );*/
+
