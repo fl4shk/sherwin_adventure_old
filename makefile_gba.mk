@@ -60,7 +60,7 @@ else
 endif
 
 LD_SCRIPT:=linkscript.ld
-LD_SCRIPT_GPP_SRC:=linkscript.gpp
+#LD_SCRIPT_GPP_SRC:=linkscript.gpp
 COMMON_LD_FLAGS:=$(COMMON_LD_FLAGS) -T $(LD_SCRIPT) 
 
 EXTRA_BASE_FLAGS:=-mcpu=arm7tdmi -mtune=arm7tdmi -mthumb \
@@ -160,8 +160,8 @@ all_pre_asmout :
 $(BIN_OFILES) : $(OBJDIR)/%.o : %.bin
 	util/bin2o_gba.sh $< $@
 
-$(LD_SCRIPT) : $(LD_SCRIPT_GPP_SRC)
-	gpp $(LD_SCRIPT_GPP_SRC) > $(LD_SCRIPT)
+#$(LD_SCRIPT) : $(LD_SCRIPT_GPP_SRC)
+#	gpp $(LD_SCRIPT_GPP_SRC) > $(LD_SCRIPT)
 
 
 # Here's where things get really messy.
