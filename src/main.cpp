@@ -100,6 +100,9 @@ char asdf_2[8] __attribute__((_in_level_sram));
 char asdf_ewram[8] __attribute__((_title_screen_ewram));
 char asdf_2_ewram[8] __attribute__((_in_level_ewram));
 
+
+int egg_title_screen __attribute__((_title_screen_iwram));
+
 }
 
 
@@ -113,11 +116,17 @@ int main()
 
 	//snprintf(test_buf, test_buf_size, "%X",
 	//	(unsigned)(&some_title_screen_arr));
-	snprintf(test_buf, test_buf_size, "%X",
-		(unsigned)(&__iwram_data0_section_size));
+	//snprintf(test_buf, test_buf_size, "%X",
+	//	(unsigned)(&__iwram_data0_section_size));
+
+	//snprintf(test_buf, test_buf_size, "%X",
+	//	(unsigned)(__iwram_data0_section_size));
+	//snprintf(test_buf, test_buf_size, "%X",
+	//	(unsigned)(*__iwram_data0_start));
+
 	gba::memcpy8(address_buff, test_buf, 9);
-	memcpy(some_in_level_arr, test_buf, 8);
-	memcpy(some_title_screen_arr, test_buf, 8);
+	//memcpy(some_in_level_arr, test_buf, 8);
+	//memcpy(some_title_screen_arr, test_buf, 8);
 	return real_main();
 	//snprintf(test_buf, test_buf_size, "%s", "asdf");
 

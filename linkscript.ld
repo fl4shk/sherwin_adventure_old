@@ -285,131 +285,131 @@ SECTIONS
 	{
 		.data0 
 		{ 
-			__data0_load = LOADADDR(.data0); 
-			__data0_start = .; 
+			__data0_rom_start__ = LOADADDR(.data0); 
+			__data0_ewram_start__ = .; 
 			*(.__data0 .__data0.*); 
 			. = ALIGN(4); 
-			__data0_end = .; 
+			__data0_ewram_end__ = .; 
 		} 
 		.data1 
 		{ 
-			__data1_load = LOADADDR(.data1); 
-			__data1_start = .; 
+			__data1_rom_start__ = LOADADDR(.data1); 
+			__data1_ewram_start__ = .; 
 			*(.__data1 .__data1.*); 
 			. = ALIGN(4); 
-			__data1_end = .; 
+			__data1_ewram_end__ = .; 
 		} 
 		.data2 
 		{ 
-			__data2_load = LOADADDR(.data2); 
-			__data2_start = .; 
+			__data2_rom_start__ = LOADADDR(.data2); 
+			__data2_ewram_start__ = .; 
 			*(.__data2 .__data2.*); 
 			. = ALIGN(4); 
-			__data2_end = .; 
+			__data2_ewram_end__ = .; 
 		} 
 		.data3 
 		{ 
-			__data3_load = LOADADDR(.data3); 
-			__data3_start = .; 
+			__data3_rom_start__ = LOADADDR(.data3); 
+			__data3_ewram_start__ = .; 
 			*(.__data3 .__data3.*); 
 			. = ALIGN(4); 
-			__data3_end = .; 
+			__data3_ewram_end__ = .; 
 		} 
 		.data4 
 		{ 
-			__data4_load = LOADADDR(.data4); 
-			__data4_start = .; 
+			__data4_rom_start__ = LOADADDR(.data4); 
+			__data4_ewram_start__ = .; 
 			*(.__data4 .__data4.*); 
 			. = ALIGN(4); 
-			__data4_end = .; 
+			__data4_ewram_end__ = .; 
 		} 
 		.data5 
 		{ 
-			__data5_load = LOADADDR(.data5); 
-			__data5_start = .; 
+			__data5_rom_start__ = LOADADDR(.data5); 
+			__data5_ewram_start__ = .; 
 			*(.__data5 .__data5.*); 
 			. = ALIGN(4); 
-			__data5_end = .; 
+			__data5_ewram_end__ = .; 
 		} 
 		.data6 
 		{ 
-			__data6_load = LOADADDR(.data6); 
-			__data6_start = .; 
+			__data6_rom_start__ = LOADADDR(.data6); 
+			__data6_ewram_start__ = .; 
 			*(.__data6 .__data6.*); 
 			. = ALIGN(4); 
-			__data6_end = .; 
+			__data6_ewram_end__ = .; 
 		} 
 		.data7 
 		{ 
-			__data7_load = LOADADDR(.data7); 
-			__data7_start = .; 
+			__data7_rom_start__ = LOADADDR(.data7); 
+			__data7_ewram_start__ = .; 
 			*(.__data7 .__data7.*); 
 			. = ALIGN(4); 
-			__data7_end = .; 
+			__data7_ewram_end__ = .; 
 		} 
 		.data8 
 		{ 
-			__data8_load = LOADADDR(.data8); 
-			__data8_start = .; 
+			__data8_rom_start__ = LOADADDR(.data8); 
+			__data8_ewram_start__ = .; 
 			*(.__data8 .__data8.*); 
 			. = ALIGN(4); 
-			__data8_end = .; 
+			__data8_ewram_end__ = .; 
 		} 
 		.data9 
 		{ 
-			__data9_load = LOADADDR(.data9); 
-			__data9_start = .; 
+			__data9_rom_start__ = LOADADDR(.data9); 
+			__data9_ewram_start__ = .; 
 			*(.__data9 .__data9.*); 
 			. = ALIGN(4); 
-			__data9_end = .; 
+			__data9_ewram_end__ = .; 
 		} 
 		.data10 
 		{ 
-			__data10_load = LOADADDR(.data10); 
-			__data10_start = .; 
+			__data10_rom_start__ = LOADADDR(.data10); 
+			__data10_ewram_start__ = .; 
 			*(.__data10 .__data10.*); 
 			. = ALIGN(4); 
-			__data10_end = .; 
+			__data10_ewram_end__ = .; 
 		} 
 		.data11 
 		{ 
-			__data11_load = LOADADDR(.data11); 
-			__data11_start = .; 
+			__data11_rom_start__ = LOADADDR(.data11); 
+			__data11_ewram_start__ = .; 
 			*(.__data11 .__data11.*); 
 			. = ALIGN(4); 
-			__data11_end = .; 
+			__data11_ewram_end__ = .; 
 		} 
 		.data12 
 		{ 
-			__data12_load = LOADADDR(.data12); 
-			__data12_start = .; 
+			__data12_rom_start__ = LOADADDR(.data12); 
+			__data12_ewram_start__ = .; 
 			*(.__data12 .__data12.*); 
 			. = ALIGN(4); 
-			__data12_end = .; 
+			__data12_ewram_end__ = .; 
 		} 
 		.data13 
 		{ 
-			__data13_load = LOADADDR(.data13); 
-			__data13_start = .; 
+			__data13_rom_start__ = LOADADDR(.data13); 
+			__data13_ewram_start__ = .; 
 			*(.__data13 .__data13.*); 
 			. = ALIGN(4); 
-			__data13_end = .; 
+			__data13_ewram_end__ = .; 
 		} 
 		.data14 
 		{ 
-			__data14_load = LOADADDR(.data14); 
-			__data14_start = .; 
+			__data14_rom_start__ = LOADADDR(.data14); 
+			__data14_ewram_start__ = .; 
 			*(.__data14 .__data14.*); 
 			. = ALIGN(4); 
-			__data14_end = .; 
+			__data14_ewram_end__ = .; 
 		} 
 		.data15 
 		{ 
-			__data15_load = LOADADDR(.data15); 
-			__data15_start = .; 
+			__data15_rom_start__ = LOADADDR(.data15); 
+			__data15_ewram_start__ = .; 
 			*(.__data15 .__data15.*); 
 			. = ALIGN(4); 
-			__data15_end = .; 
+			__data15_ewram_end__ = .; 
 		} 
  
 	} >ewram AT >rom
@@ -449,147 +449,131 @@ SECTIONS
 		*/
 		.iwram_data0 
 		{ 
-			__iwram_data0_load = LOADADDR(.iwram_data0); 
-			__iwram_data0_start = .; 
-
+			__iwram_data0_rom_start__ = LOADADDR(.iwram_data0); 
+			__iwram_data0_iwram_start__ = .; 
 			*(.iwram_data0 .iwram_data0.*) 
 			. = ALIGN(4); 
-			__iwram_data0_end = .; 
+			__iwram_data0_iwram_end__ = .; 
 		} 
 		.iwram_data1 
 		{ 
-			__iwram_data1_load = LOADADDR(.iwram_data1); 
-			__iwram_data1_start = .; 
-
+			__iwram_data1_rom_start__ = LOADADDR(.iwram_data1); 
+			__iwram_data1_iwram_start__ = .; 
 			*(.iwram_data1 .iwram_data1.*) 
 			. = ALIGN(4); 
-			__iwram_data1_end = .; 
+			__iwram_data1_iwram_end__ = .; 
 		} 
 		.iwram_data2 
 		{ 
-			__iwram_data2_load = LOADADDR(.iwram_data2); 
-			__iwram_data2_start = .; 
-
+			__iwram_data2_rom_start__ = LOADADDR(.iwram_data2); 
+			__iwram_data2_iwram_start__ = .; 
 			*(.iwram_data2 .iwram_data2.*) 
 			. = ALIGN(4); 
-			__iwram_data2_end = .; 
+			__iwram_data2_iwram_end__ = .; 
 		} 
 		.iwram_data3 
 		{ 
-			__iwram_data3_load = LOADADDR(.iwram_data3); 
-			__iwram_data3_start = .; 
-
+			__iwram_data3_rom_start__ = LOADADDR(.iwram_data3); 
+			__iwram_data3_iwram_start__ = .; 
 			*(.iwram_data3 .iwram_data3.*) 
 			. = ALIGN(4); 
-			__iwram_data3_end = .; 
+			__iwram_data3_iwram_end__ = .; 
 		} 
 		.iwram_data4 
 		{ 
-			__iwram_data4_load = LOADADDR(.iwram_data4); 
-			__iwram_data4_start = .; 
-
+			__iwram_data4_rom_start__ = LOADADDR(.iwram_data4); 
+			__iwram_data4_iwram_start__ = .; 
 			*(.iwram_data4 .iwram_data4.*) 
 			. = ALIGN(4); 
-			__iwram_data4_end = .; 
+			__iwram_data4_iwram_end__ = .; 
 		} 
 		.iwram_data5 
 		{ 
-			__iwram_data5_load = LOADADDR(.iwram_data5); 
-			__iwram_data5_start = .; 
-
+			__iwram_data5_rom_start__ = LOADADDR(.iwram_data5); 
+			__iwram_data5_iwram_start__ = .; 
 			*(.iwram_data5 .iwram_data5.*) 
 			. = ALIGN(4); 
-			__iwram_data5_end = .; 
+			__iwram_data5_iwram_end__ = .; 
 		} 
 		.iwram_data6 
 		{ 
-			__iwram_data6_load = LOADADDR(.iwram_data6); 
-			__iwram_data6_start = .; 
-
+			__iwram_data6_rom_start__ = LOADADDR(.iwram_data6); 
+			__iwram_data6_iwram_start__ = .; 
 			*(.iwram_data6 .iwram_data6.*) 
 			. = ALIGN(4); 
-			__iwram_data6_end = .; 
+			__iwram_data6_iwram_end__ = .; 
 		} 
 		.iwram_data7 
 		{ 
-			__iwram_data7_load = LOADADDR(.iwram_data7); 
-			__iwram_data7_start = .; 
-
+			__iwram_data7_rom_start__ = LOADADDR(.iwram_data7); 
+			__iwram_data7_iwram_start__ = .; 
 			*(.iwram_data7 .iwram_data7.*) 
 			. = ALIGN(4); 
-			__iwram_data7_end = .; 
+			__iwram_data7_iwram_end__ = .; 
 		} 
 		.iwram_data8 
 		{ 
-			__iwram_data8_load = LOADADDR(.iwram_data8); 
-			__iwram_data8_start = .; 
-
+			__iwram_data8_rom_start__ = LOADADDR(.iwram_data8); 
+			__iwram_data8_iwram_start__ = .; 
 			*(.iwram_data8 .iwram_data8.*) 
 			. = ALIGN(4); 
-			__iwram_data8_end = .; 
+			__iwram_data8_iwram_end__ = .; 
 		} 
 		.iwram_data9 
 		{ 
-			__iwram_data9_load = LOADADDR(.iwram_data9); 
-			__iwram_data9_start = .; 
-
+			__iwram_data9_rom_start__ = LOADADDR(.iwram_data9); 
+			__iwram_data9_iwram_start__ = .; 
 			*(.iwram_data9 .iwram_data9.*) 
 			. = ALIGN(4); 
-			__iwram_data9_end = .; 
+			__iwram_data9_iwram_end__ = .; 
 		} 
 		.iwram_data10 
 		{ 
-			__iwram_data10_load = LOADADDR(.iwram_data10); 
-			__iwram_data10_start = .; 
-
+			__iwram_data10_rom_start__ = LOADADDR(.iwram_data10); 
+			__iwram_data10_iwram_start__ = .; 
 			*(.iwram_data10 .iwram_data10.*) 
 			. = ALIGN(4); 
-			__iwram_data10_end = .; 
+			__iwram_data10_iwram_end__ = .; 
 		} 
 		.iwram_data11 
 		{ 
-			__iwram_data11_load = LOADADDR(.iwram_data11); 
-			__iwram_data11_start = .; 
-
+			__iwram_data11_rom_start__ = LOADADDR(.iwram_data11); 
+			__iwram_data11_iwram_start__ = .; 
 			*(.iwram_data11 .iwram_data11.*) 
 			. = ALIGN(4); 
-			__iwram_data11_end = .; 
+			__iwram_data11_iwram_end__ = .; 
 		} 
 		.iwram_data12 
 		{ 
-			__iwram_data12_load = LOADADDR(.iwram_data12); 
-			__iwram_data12_start = .; 
-
+			__iwram_data12_rom_start__ = LOADADDR(.iwram_data12); 
+			__iwram_data12_iwram_start__ = .; 
 			*(.iwram_data12 .iwram_data12.*) 
 			. = ALIGN(4); 
-			__iwram_data12_end = .; 
+			__iwram_data12_iwram_end__ = .; 
 		} 
 		.iwram_data13 
 		{ 
-			__iwram_data13_load = LOADADDR(.iwram_data13); 
-			__iwram_data13_start = .; 
-
+			__iwram_data13_rom_start__ = LOADADDR(.iwram_data13); 
+			__iwram_data13_iwram_start__ = .; 
 			*(.iwram_data13 .iwram_data13.*) 
 			. = ALIGN(4); 
-			__iwram_data13_end = .; 
+			__iwram_data13_iwram_end__ = .; 
 		} 
 		.iwram_data14 
 		{ 
-			__iwram_data14_load = LOADADDR(.iwram_data14); 
-			__iwram_data14_start = .; 
-
+			__iwram_data14_rom_start__ = LOADADDR(.iwram_data14); 
+			__iwram_data14_iwram_start__ = .; 
 			*(.iwram_data14 .iwram_data14.*) 
 			. = ALIGN(4); 
-			__iwram_data14_end = .; 
+			__iwram_data14_iwram_end__ = .; 
 		} 
 		.iwram_data15 
 		{ 
-			__iwram_data15_load = LOADADDR(.iwram_data15); 
-			__iwram_data15_start = .; 
-
+			__iwram_data15_rom_start__ = LOADADDR(.iwram_data15); 
+			__iwram_data15_iwram_start__ = .; 
 			*(.iwram_data15 .iwram_data15.*) 
 			. = ALIGN(4); 
-			__iwram_data15_end = .; 
+			__iwram_data15_iwram_end__ = .; 
 		} 
 
 	} >iwram AT >rom
@@ -629,163 +613,131 @@ SECTIONS
 		*/
 		.iwram_code0 
 		{ 
-			__iwram_code0_rom_start = LOADADDR(.iwram_code0); 
-
-			__iwram_code0_iwram_start = .; 
-
+			__iwram_code0_rom_start__ = LOADADDR(.iwram_code0); 
+			__iwram_code0_iwram_start__ = .; 
 			*(.iwram_code0 .iwram_code0.*); 
-
 			. = ALIGN(4); 
+			__iwram_code0_iwram_end__ = .; 
 		} 
 		.iwram_code1 
 		{ 
-			__iwram_code1_rom_start = LOADADDR(.iwram_code1); 
-
-			__iwram_code1_iwram_start = .; 
-
+			__iwram_code1_rom_start__ = LOADADDR(.iwram_code1); 
+			__iwram_code1_iwram_start__ = .; 
 			*(.iwram_code1 .iwram_code1.*); 
-
 			. = ALIGN(4); 
+			__iwram_code1_iwram_end__ = .; 
 		} 
 		.iwram_code2 
 		{ 
-			__iwram_code2_rom_start = LOADADDR(.iwram_code2); 
-
-			__iwram_code2_iwram_start = .; 
-
+			__iwram_code2_rom_start__ = LOADADDR(.iwram_code2); 
+			__iwram_code2_iwram_start__ = .; 
 			*(.iwram_code2 .iwram_code2.*); 
-
 			. = ALIGN(4); 
+			__iwram_code2_iwram_end__ = .; 
 		} 
 		.iwram_code3 
 		{ 
-			__iwram_code3_rom_start = LOADADDR(.iwram_code3); 
-
-			__iwram_code3_iwram_start = .; 
-
+			__iwram_code3_rom_start__ = LOADADDR(.iwram_code3); 
+			__iwram_code3_iwram_start__ = .; 
 			*(.iwram_code3 .iwram_code3.*); 
-
 			. = ALIGN(4); 
+			__iwram_code3_iwram_end__ = .; 
 		} 
 		.iwram_code4 
 		{ 
-			__iwram_code4_rom_start = LOADADDR(.iwram_code4); 
-
-			__iwram_code4_iwram_start = .; 
-
+			__iwram_code4_rom_start__ = LOADADDR(.iwram_code4); 
+			__iwram_code4_iwram_start__ = .; 
 			*(.iwram_code4 .iwram_code4.*); 
-
 			. = ALIGN(4); 
+			__iwram_code4_iwram_end__ = .; 
 		} 
 		.iwram_code5 
 		{ 
-			__iwram_code5_rom_start = LOADADDR(.iwram_code5); 
-
-			__iwram_code5_iwram_start = .; 
-
+			__iwram_code5_rom_start__ = LOADADDR(.iwram_code5); 
+			__iwram_code5_iwram_start__ = .; 
 			*(.iwram_code5 .iwram_code5.*); 
-
 			. = ALIGN(4); 
+			__iwram_code5_iwram_end__ = .; 
 		} 
 		.iwram_code6 
 		{ 
-			__iwram_code6_rom_start = LOADADDR(.iwram_code6); 
-
-			__iwram_code6_iwram_start = .; 
-
+			__iwram_code6_rom_start__ = LOADADDR(.iwram_code6); 
+			__iwram_code6_iwram_start__ = .; 
 			*(.iwram_code6 .iwram_code6.*); 
-
 			. = ALIGN(4); 
+			__iwram_code6_iwram_end__ = .; 
 		} 
 		.iwram_code7 
 		{ 
-			__iwram_code7_rom_start = LOADADDR(.iwram_code7); 
-
-			__iwram_code7_iwram_start = .; 
-
+			__iwram_code7_rom_start__ = LOADADDR(.iwram_code7); 
+			__iwram_code7_iwram_start__ = .; 
 			*(.iwram_code7 .iwram_code7.*); 
-
 			. = ALIGN(4); 
+			__iwram_code7_iwram_end__ = .; 
 		} 
 		.iwram_code8 
 		{ 
-			__iwram_code8_rom_start = LOADADDR(.iwram_code8); 
-
-			__iwram_code8_iwram_start = .; 
-
+			__iwram_code8_rom_start__ = LOADADDR(.iwram_code8); 
+			__iwram_code8_iwram_start__ = .; 
 			*(.iwram_code8 .iwram_code8.*); 
-
 			. = ALIGN(4); 
+			__iwram_code8_iwram_end__ = .; 
 		} 
 		.iwram_code9 
 		{ 
-			__iwram_code9_rom_start = LOADADDR(.iwram_code9); 
-
-			__iwram_code9_iwram_start = .; 
-
+			__iwram_code9_rom_start__ = LOADADDR(.iwram_code9); 
+			__iwram_code9_iwram_start__ = .; 
 			*(.iwram_code9 .iwram_code9.*); 
-
 			. = ALIGN(4); 
+			__iwram_code9_iwram_end__ = .; 
 		} 
 		.iwram_code10 
 		{ 
-			__iwram_code10_rom_start = LOADADDR(.iwram_code10); 
-
-			__iwram_code10_iwram_start = .; 
-
+			__iwram_code10_rom_start__ = LOADADDR(.iwram_code10); 
+			__iwram_code10_iwram_start__ = .; 
 			*(.iwram_code10 .iwram_code10.*); 
-
 			. = ALIGN(4); 
+			__iwram_code10_iwram_end__ = .; 
 		} 
 		.iwram_code11 
 		{ 
-			__iwram_code11_rom_start = LOADADDR(.iwram_code11); 
-
-			__iwram_code11_iwram_start = .; 
-
+			__iwram_code11_rom_start__ = LOADADDR(.iwram_code11); 
+			__iwram_code11_iwram_start__ = .; 
 			*(.iwram_code11 .iwram_code11.*); 
-
 			. = ALIGN(4); 
+			__iwram_code11_iwram_end__ = .; 
 		} 
 		.iwram_code12 
 		{ 
-			__iwram_code12_rom_start = LOADADDR(.iwram_code12); 
-
-			__iwram_code12_iwram_start = .; 
-
+			__iwram_code12_rom_start__ = LOADADDR(.iwram_code12); 
+			__iwram_code12_iwram_start__ = .; 
 			*(.iwram_code12 .iwram_code12.*); 
-
 			. = ALIGN(4); 
+			__iwram_code12_iwram_end__ = .; 
 		} 
 		.iwram_code13 
 		{ 
-			__iwram_code13_rom_start = LOADADDR(.iwram_code13); 
-
-			__iwram_code13_iwram_start = .; 
-
+			__iwram_code13_rom_start__ = LOADADDR(.iwram_code13); 
+			__iwram_code13_iwram_start__ = .; 
 			*(.iwram_code13 .iwram_code13.*); 
-
 			. = ALIGN(4); 
+			__iwram_code13_iwram_end__ = .; 
 		} 
 		.iwram_code14 
 		{ 
-			__iwram_code14_rom_start = LOADADDR(.iwram_code14); 
-
-			__iwram_code14_iwram_start = .; 
-
+			__iwram_code14_rom_start__ = LOADADDR(.iwram_code14); 
+			__iwram_code14_iwram_start__ = .; 
 			*(.iwram_code14 .iwram_code14.*); 
-
 			. = ALIGN(4); 
+			__iwram_code14_iwram_end__ = .; 
 		} 
 		.iwram_code15 
 		{ 
-			__iwram_code15_rom_start = LOADADDR(.iwram_code15); 
-
-			__iwram_code15_iwram_start = .; 
-
+			__iwram_code15_rom_start__ = LOADADDR(.iwram_code15); 
+			__iwram_code15_iwram_start__ = .; 
 			*(.iwram_code15 .iwram_code15.*); 
-
 			. = ALIGN(4); 
+			__iwram_code15_iwram_end__ = .; 
 		} 
 
 	} >iwram AT >rom
@@ -823,7 +775,6 @@ SECTIONS
 		{ 
 			__iwram_bss0_start__ = .; 
 			*(.iwram_bss0 .iwram_bss0.*); 
-
 			. = ALIGN(4); 
 			__iwram_bss0_end__ = .; 
 		} 
@@ -831,7 +782,6 @@ SECTIONS
 		{ 
 			__iwram_bss1_start__ = .; 
 			*(.iwram_bss1 .iwram_bss1.*); 
-
 			. = ALIGN(4); 
 			__iwram_bss1_end__ = .; 
 		} 
@@ -839,7 +789,6 @@ SECTIONS
 		{ 
 			__iwram_bss2_start__ = .; 
 			*(.iwram_bss2 .iwram_bss2.*); 
-
 			. = ALIGN(4); 
 			__iwram_bss2_end__ = .; 
 		} 
@@ -847,7 +796,6 @@ SECTIONS
 		{ 
 			__iwram_bss3_start__ = .; 
 			*(.iwram_bss3 .iwram_bss3.*); 
-
 			. = ALIGN(4); 
 			__iwram_bss3_end__ = .; 
 		} 
@@ -855,7 +803,6 @@ SECTIONS
 		{ 
 			__iwram_bss4_start__ = .; 
 			*(.iwram_bss4 .iwram_bss4.*); 
-
 			. = ALIGN(4); 
 			__iwram_bss4_end__ = .; 
 		} 
@@ -863,7 +810,6 @@ SECTIONS
 		{ 
 			__iwram_bss5_start__ = .; 
 			*(.iwram_bss5 .iwram_bss5.*); 
-
 			. = ALIGN(4); 
 			__iwram_bss5_end__ = .; 
 		} 
@@ -871,7 +817,6 @@ SECTIONS
 		{ 
 			__iwram_bss6_start__ = .; 
 			*(.iwram_bss6 .iwram_bss6.*); 
-
 			. = ALIGN(4); 
 			__iwram_bss6_end__ = .; 
 		} 
@@ -879,7 +824,6 @@ SECTIONS
 		{ 
 			__iwram_bss7_start__ = .; 
 			*(.iwram_bss7 .iwram_bss7.*); 
-
 			. = ALIGN(4); 
 			__iwram_bss7_end__ = .; 
 		} 
@@ -887,7 +831,6 @@ SECTIONS
 		{ 
 			__iwram_bss8_start__ = .; 
 			*(.iwram_bss8 .iwram_bss8.*); 
-
 			. = ALIGN(4); 
 			__iwram_bss8_end__ = .; 
 		} 
@@ -895,7 +838,6 @@ SECTIONS
 		{ 
 			__iwram_bss9_start__ = .; 
 			*(.iwram_bss9 .iwram_bss9.*); 
-
 			. = ALIGN(4); 
 			__iwram_bss9_end__ = .; 
 		} 
@@ -903,7 +845,6 @@ SECTIONS
 		{ 
 			__iwram_bss10_start__ = .; 
 			*(.iwram_bss10 .iwram_bss10.*); 
-
 			. = ALIGN(4); 
 			__iwram_bss10_end__ = .; 
 		} 
@@ -911,7 +852,6 @@ SECTIONS
 		{ 
 			__iwram_bss11_start__ = .; 
 			*(.iwram_bss11 .iwram_bss11.*); 
-
 			. = ALIGN(4); 
 			__iwram_bss11_end__ = .; 
 		} 
@@ -919,7 +859,6 @@ SECTIONS
 		{ 
 			__iwram_bss12_start__ = .; 
 			*(.iwram_bss12 .iwram_bss12.*); 
-
 			. = ALIGN(4); 
 			__iwram_bss12_end__ = .; 
 		} 
@@ -927,7 +866,6 @@ SECTIONS
 		{ 
 			__iwram_bss13_start__ = .; 
 			*(.iwram_bss13 .iwram_bss13.*); 
-
 			. = ALIGN(4); 
 			__iwram_bss13_end__ = .; 
 		} 
@@ -935,7 +873,6 @@ SECTIONS
 		{ 
 			__iwram_bss14_start__ = .; 
 			*(.iwram_bss14 .iwram_bss14.*); 
-
 			. = ALIGN(4); 
 			__iwram_bss14_end__ = .; 
 		} 
@@ -943,7 +880,6 @@ SECTIONS
 		{ 
 			__iwram_bss15_start__ = .; 
 			*(.iwram_bss15 .iwram_bss15.*); 
-
 			. = ALIGN(4); 
 			__iwram_bss15_end__ = .; 
 		} 
@@ -982,115 +918,131 @@ SECTIONS
 		*/
 		.ewram_code0 
 		{ 
-			__ewram_code0_rom_start = LOADADDR(.ewram_code0); 
-			__ewram_code0_ewram_start = .; 
+			__ewram_code0_rom_start__ = LOADADDR(.ewram_code0); 
+			__ewram_code0_ewram_start__ = .; 
 			*(.ewram_code0 .ewram_code0.*); 
 			. = ALIGN(4); 
+			__ewram_code0_ewram_end__ = .; 
 		} 
 		.ewram_code1 
 		{ 
-			__ewram_code1_rom_start = LOADADDR(.ewram_code1); 
-			__ewram_code1_ewram_start = .; 
+			__ewram_code1_rom_start__ = LOADADDR(.ewram_code1); 
+			__ewram_code1_ewram_start__ = .; 
 			*(.ewram_code1 .ewram_code1.*); 
 			. = ALIGN(4); 
+			__ewram_code1_ewram_end__ = .; 
 		} 
 		.ewram_code2 
 		{ 
-			__ewram_code2_rom_start = LOADADDR(.ewram_code2); 
-			__ewram_code2_ewram_start = .; 
+			__ewram_code2_rom_start__ = LOADADDR(.ewram_code2); 
+			__ewram_code2_ewram_start__ = .; 
 			*(.ewram_code2 .ewram_code2.*); 
 			. = ALIGN(4); 
+			__ewram_code2_ewram_end__ = .; 
 		} 
 		.ewram_code3 
 		{ 
-			__ewram_code3_rom_start = LOADADDR(.ewram_code3); 
-			__ewram_code3_ewram_start = .; 
+			__ewram_code3_rom_start__ = LOADADDR(.ewram_code3); 
+			__ewram_code3_ewram_start__ = .; 
 			*(.ewram_code3 .ewram_code3.*); 
 			. = ALIGN(4); 
+			__ewram_code3_ewram_end__ = .; 
 		} 
 		.ewram_code4 
 		{ 
-			__ewram_code4_rom_start = LOADADDR(.ewram_code4); 
-			__ewram_code4_ewram_start = .; 
+			__ewram_code4_rom_start__ = LOADADDR(.ewram_code4); 
+			__ewram_code4_ewram_start__ = .; 
 			*(.ewram_code4 .ewram_code4.*); 
 			. = ALIGN(4); 
+			__ewram_code4_ewram_end__ = .; 
 		} 
 		.ewram_code5 
 		{ 
-			__ewram_code5_rom_start = LOADADDR(.ewram_code5); 
-			__ewram_code5_ewram_start = .; 
+			__ewram_code5_rom_start__ = LOADADDR(.ewram_code5); 
+			__ewram_code5_ewram_start__ = .; 
 			*(.ewram_code5 .ewram_code5.*); 
 			. = ALIGN(4); 
+			__ewram_code5_ewram_end__ = .; 
 		} 
 		.ewram_code6 
 		{ 
-			__ewram_code6_rom_start = LOADADDR(.ewram_code6); 
-			__ewram_code6_ewram_start = .; 
+			__ewram_code6_rom_start__ = LOADADDR(.ewram_code6); 
+			__ewram_code6_ewram_start__ = .; 
 			*(.ewram_code6 .ewram_code6.*); 
 			. = ALIGN(4); 
+			__ewram_code6_ewram_end__ = .; 
 		} 
 		.ewram_code7 
 		{ 
-			__ewram_code7_rom_start = LOADADDR(.ewram_code7); 
-			__ewram_code7_ewram_start = .; 
+			__ewram_code7_rom_start__ = LOADADDR(.ewram_code7); 
+			__ewram_code7_ewram_start__ = .; 
 			*(.ewram_code7 .ewram_code7.*); 
 			. = ALIGN(4); 
+			__ewram_code7_ewram_end__ = .; 
 		} 
 		.ewram_code8 
 		{ 
-			__ewram_code8_rom_start = LOADADDR(.ewram_code8); 
-			__ewram_code8_ewram_start = .; 
+			__ewram_code8_rom_start__ = LOADADDR(.ewram_code8); 
+			__ewram_code8_ewram_start__ = .; 
 			*(.ewram_code8 .ewram_code8.*); 
 			. = ALIGN(4); 
+			__ewram_code8_ewram_end__ = .; 
 		} 
 		.ewram_code9 
 		{ 
-			__ewram_code9_rom_start = LOADADDR(.ewram_code9); 
-			__ewram_code9_ewram_start = .; 
+			__ewram_code9_rom_start__ = LOADADDR(.ewram_code9); 
+			__ewram_code9_ewram_start__ = .; 
 			*(.ewram_code9 .ewram_code9.*); 
 			. = ALIGN(4); 
+			__ewram_code9_ewram_end__ = .; 
 		} 
 		.ewram_code10 
 		{ 
-			__ewram_code10_rom_start = LOADADDR(.ewram_code10); 
-			__ewram_code10_ewram_start = .; 
+			__ewram_code10_rom_start__ = LOADADDR(.ewram_code10); 
+			__ewram_code10_ewram_start__ = .; 
 			*(.ewram_code10 .ewram_code10.*); 
 			. = ALIGN(4); 
+			__ewram_code10_ewram_end__ = .; 
 		} 
 		.ewram_code11 
 		{ 
-			__ewram_code11_rom_start = LOADADDR(.ewram_code11); 
-			__ewram_code11_ewram_start = .; 
+			__ewram_code11_rom_start__ = LOADADDR(.ewram_code11); 
+			__ewram_code11_ewram_start__ = .; 
 			*(.ewram_code11 .ewram_code11.*); 
 			. = ALIGN(4); 
+			__ewram_code11_ewram_end__ = .; 
 		} 
 		.ewram_code12 
 		{ 
-			__ewram_code12_rom_start = LOADADDR(.ewram_code12); 
-			__ewram_code12_ewram_start = .; 
+			__ewram_code12_rom_start__ = LOADADDR(.ewram_code12); 
+			__ewram_code12_ewram_start__ = .; 
 			*(.ewram_code12 .ewram_code12.*); 
 			. = ALIGN(4); 
+			__ewram_code12_ewram_end__ = .; 
 		} 
 		.ewram_code13 
 		{ 
-			__ewram_code13_rom_start = LOADADDR(.ewram_code13); 
-			__ewram_code13_ewram_start = .; 
+			__ewram_code13_rom_start__ = LOADADDR(.ewram_code13); 
+			__ewram_code13_ewram_start__ = .; 
 			*(.ewram_code13 .ewram_code13.*); 
 			. = ALIGN(4); 
+			__ewram_code13_ewram_end__ = .; 
 		} 
 		.ewram_code14 
 		{ 
-			__ewram_code14_rom_start = LOADADDR(.ewram_code14); 
-			__ewram_code14_ewram_start = .; 
+			__ewram_code14_rom_start__ = LOADADDR(.ewram_code14); 
+			__ewram_code14_ewram_start__ = .; 
 			*(.ewram_code14 .ewram_code14.*); 
 			. = ALIGN(4); 
+			__ewram_code14_ewram_end__ = .; 
 		} 
 		.ewram_code15 
 		{ 
-			__ewram_code15_rom_start = LOADADDR(.ewram_code15); 
-			__ewram_code15_ewram_start = .; 
+			__ewram_code15_rom_start__ = LOADADDR(.ewram_code15); 
+			__ewram_code15_ewram_start__ = .; 
 			*(.ewram_code15 .ewram_code15.*); 
 			. = ALIGN(4); 
+			__ewram_code15_ewram_end__ = .; 
 		} 
 
 	} >ewram AT >rom

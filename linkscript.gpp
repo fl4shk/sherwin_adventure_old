@@ -287,34 +287,31 @@ SECTIONS
 
 #define MAKE_DATA_OVERLAY(num) CONCAT(.data,num) \
 		{ \
-			CONCAT(__data,num)_load = LOADADDR(CONCAT(.data,num)); \
-			CONCAT(__data,num)_start = .; \
+			CONCAT(__data,num)_rom_start__ = LOADADDR(CONCAT(.data,num)); \
+			CONCAT(__data,num)_ewram_start__ = .; \
 			*(CONCAT(.__data,num) CONCAT(.__data,num).*); \
 			. = ALIGN(4); \
-			CONCAT(__data,num)_end = .; \
+			CONCAT(__data,num)_ewram_end__ = .; \
 		}
 #define MAKE_DATA_SECTION_SIZE(num) MAKE_SECTION_SIZE(data,num)
 
 #define MAKE_IWRAM_DATA_OVERLAY(num) CONCAT(.iwram_data,num) \
 		{ \
-			CONCAT(__iwram_data,num)_load = LOADADDR(CONCAT(.iwram_data,num)); \
-			CONCAT(__iwram_data,num)_start = .; \
-\
+			CONCAT(__iwram_data,num)_rom_start__ = LOADADDR(CONCAT(.iwram_data,num)); \
+			CONCAT(__iwram_data,num)_iwram_start__ = .; \
 			*(CONCAT(.iwram_data,num) CONCAT(.iwram_data,num).*) \
 			. = ALIGN(4); \
-			CONCAT(__iwram_data,num)_end = .; \
+			CONCAT(__iwram_data,num)_iwram_end__ = .; \
 		}
 #define MAKE_IWRAM_DATA_SECTION_SIZE(num) MAKE_SECTION_SIZE(iwram_data,num)
 
 #define MAKE_IWRAM_CODE_OVERLAY(num) CONCAT(.iwram_code,num) \
 		{ \
-			CONCAT(__iwram_code,num)_rom_start = LOADADDR(CONCAT(.iwram_code,num)); \
-\
-			CONCAT(__iwram_code,num)_iwram_start = .; \
-\
+			CONCAT(__iwram_code,num)_rom_start__ = LOADADDR(CONCAT(.iwram_code,num)); \
+			CONCAT(__iwram_code,num)_iwram_start__ = .; \
 			*(CONCAT(.iwram_code,num) CONCAT(.iwram_code,num).*); \
-\
 			. = ALIGN(4); \
+			CONCAT(__iwram_code,num)_iwram_end__ = .; \
 		}
 #define MAKE_IWRAM_CODE_SECTION_SIZE(num) MAKE_SECTION_SIZE(iwram_code,num)
 
@@ -322,7 +319,6 @@ SECTIONS
 		{ \
 			CONCAT(__iwram_bss,num)_start__ = .; \
 			*(CONCAT(.iwram_bss,num) CONCAT(.iwram_bss,num).*); \
-\
 			. = ALIGN(4); \
 			CONCAT(__iwram_bss,num)_end__ = .; \
 		}
@@ -332,10 +328,11 @@ SECTIONS
 
 #define MAKE_EWRAM_CODE_OVERLAY(num) CONCAT(.ewram_code,num) \
 		{ \
-			CONCAT(__ewram_code,num)_rom_start = LOADADDR(CONCAT(.ewram_code,num)); \
-			CONCAT(__ewram_code,num)_ewram_start = .; \
+			CONCAT(__ewram_code,num)_rom_start__ = LOADADDR(CONCAT(.ewram_code,num)); \
+			CONCAT(__ewram_code,num)_ewram_start__ = .; \
 			*(CONCAT(.ewram_code,num) CONCAT(.ewram_code,num).*); \
 			. = ALIGN(4); \
+			CONCAT(__ewram_code,num)_ewram_end__ = .; \
 		}
 
 #define MAKE_EWRAM_CODE_SECTION_SIZE(num) MAKE_SECTION_SIZE(ewram_code,num)
