@@ -18,7 +18,17 @@
 
 #include "dma_stuff.hpp"
 
+namespace sherwin_adventure
+{
+
+namespace gba
+{
+
 vu32 dma0cnt_mirror, dma1cnt_mirror, dma2cnt_mirror, dma3cnt_mirror;
+
+}
+
+}
 
 
 extern "C"
@@ -31,16 +41,16 @@ void dma3_cpy(volatile void* dst, const void* src, u32 count,
 	u32 mode = 1)
 {
 	static const u32 chunk_size_arr[2] = { DMA_16, DMA_32 };
-	
+
 	// Store the addresses of src and dst
 	REG_DMA3SAD = (u32)(src);
 	REG_DMA3DAD = (u32)(dst);
-	
+
 	//dma3cnt_mirror = DMA_DATA_COUNT(count) | DMA_32;
 	dma3cnt_mirror = DMA_DATA_COUNT(count) | chunk_size_arr[mode & 0x1];
 	REG_DMA3CNT = dma3cnt_mirror | DMA_ENABLE;
-	
-	
+
+
 	// We have To wait at least two cycles before we Can access DMA
 	// registers again.
 	asm volatile
@@ -48,25 +58,25 @@ void dma3_cpy(volatile void* dst, const void* src, u32 count,
 		"nop\n\t"
 		//"nop\n\t"
 	);
-	
-	
+
+
 }
 
 void dma0_cpy(volatile void* dst, const void* src, u32 count, 
 	u32 mode = 1)
 {
 	static const u32 chunk_size_arr[2] = { DMA_16, DMA_32 };
-	
+
 	// Store the addresses of src and dst
 	REG_DMA0SAD = (u32)(src);
 	REG_DMA0DAD = (u32)(dst);
-	
+
 	//dma3cnt_mirror = DMA_DATA_COUNT(count) | DMA_32;
 	dma0cnt_mirror = DMA_DATA_COUNT(count) | chunk_size_arr[mode & 0x1];
 	REG_DMA0CNT = dma0cnt_mirror | DMA_ENABLE;
-	
-	
-	
+
+
+
 	// We have To wait at least two cycles before we Can access DMA
 	// registers again.
 	asm volatile
@@ -74,8 +84,8 @@ void dma0_cpy(volatile void* dst, const void* src, u32 count,
 		"nop\n\t"
 		//"nop\n\t"
 	);
-	
-	
+
+
 }
 
 
@@ -86,12 +96,12 @@ void dma3_fill(volatile void* dst, vu32 src, u32 count)
 	// Store the addresses of src and dst
 	REG_DMA3SAD = (u32)((const void *)(&src));
 	REG_DMA3DAD = (u32)(dst);
-	
+
 	dma3cnt_mirror = DMA_DATA_COUNT(count) | DMA_SRC_FIXED | DMA_32;
 	REG_DMA3CNT = dma3cnt_mirror | DMA_ENABLE;
-	
-	
-	
+
+
+
 	// We have To wait at least two cycles before we Can access DMA
 	// registers again.
 	asm volatile
@@ -99,7 +109,7 @@ void dma3_fill(volatile void* dst, vu32 src, u32 count)
 		"nop\n\t"
 		//"nop\n\t"
 	);
-	
+
 }
 
 }

@@ -25,10 +25,10 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	2,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	2,
 };
@@ -46,7 +46,7 @@ void WoodBlockWithBtDudStuff::strongly_hit_response(Block& the_block,
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
 	//ActiveLevel::persistent_block_data_arrays
-	
+
 	ActiveLevel::persistent_block_data_arrays
 		[ActiveLevel::the_current_active_sublevel_index]
 		[the_block.persistent_data_index] = WoodBlockStuff::is_bt_dud;
@@ -70,15 +70,15 @@ void WoodBlockWithStWaffleStuff::strongly_hit_response
 	constexpr sprite_type the_spawnable_sprite_type = StWaffle;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
-	
+
 	Vec2s32 spawn_block_grid_coord = Vec2s32(coord.x, coord.y - 1);
 	Vec2F24p8 spawn_in_level_pos = Vec2F24p8
 		(make_f24p8(spawn_block_grid_coord.x * num_pixels_per_block_row), 
 		make_f24p8(spawn_block_grid_coord.y * num_pixels_per_block_col));
-	
+
 	SpriteManager::spawn_a_sprite_basic(the_spawnable_sprite_type, 
 		spawn_in_level_pos, GfxManager::bgofs_mirror[0], false);
-	
+
 	ActiveLevel::persistent_block_data_arrays
 		[ActiveLevel::the_current_active_sublevel_index]
 		[the_block.persistent_data_index] = is_bt_dud;
@@ -101,15 +101,15 @@ void WoodBlockWithStMuffinStuff::strongly_hit_response
 	constexpr sprite_type the_spawnable_sprite_type = StMuffin;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
-	
+
 	Vec2s32 spawn_block_grid_coord = Vec2s32(coord.x, coord.y - 1);
 	Vec2F24p8 spawn_in_level_pos = Vec2F24p8
 		(make_f24p8(spawn_block_grid_coord.x * num_pixels_per_block_row), 
 		make_f24p8(spawn_block_grid_coord.y * num_pixels_per_block_col));
-	
+
 	SpriteManager::spawn_a_sprite_basic(the_spawnable_sprite_type, 
 		spawn_in_level_pos, GfxManager::bgofs_mirror[0], false);
-	
+
 	ActiveLevel::persistent_block_data_arrays
 		[ActiveLevel::the_current_active_sublevel_index]
 		[the_block.persistent_data_index] = is_bt_dud;
@@ -132,15 +132,15 @@ void WoodBlockWithStFireMuffinStuff::strongly_hit_response
 	constexpr sprite_type the_spawnable_sprite_type = StFireMuffin;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
-	
+
 	Vec2s32 spawn_block_grid_coord = Vec2s32(coord.x, coord.y - 1);
 	Vec2F24p8 spawn_in_level_pos = Vec2F24p8
 		(make_f24p8(spawn_block_grid_coord.x * num_pixels_per_block_row), 
 		make_f24p8(spawn_block_grid_coord.y * num_pixels_per_block_col));
-	
+
 	SpriteManager::spawn_a_sprite_basic(the_spawnable_sprite_type, 
 		spawn_in_level_pos, GfxManager::bgofs_mirror[0], false);
-	
+
 	ActiveLevel::persistent_block_data_arrays
 		[ActiveLevel::the_current_active_sublevel_index]
 		[the_block.persistent_data_index] = is_bt_dud;
@@ -162,15 +162,15 @@ void WoodBlockWithStIceMuffinStuff::strongly_hit_response
 	constexpr sprite_type the_spawnable_sprite_type = StIceMuffin;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
-	
+
 	Vec2s32 spawn_block_grid_coord = Vec2s32(coord.x, coord.y - 1);
 	Vec2F24p8 spawn_in_level_pos = Vec2F24p8
 		(make_f24p8(spawn_block_grid_coord.x * num_pixels_per_block_row), 
 		make_f24p8(spawn_block_grid_coord.y * num_pixels_per_block_col));
-	
+
 	SpriteManager::spawn_a_sprite_basic(the_spawnable_sprite_type, 
 		spawn_in_level_pos, GfxManager::bgofs_mirror[0], false);
-	
+
 	ActiveLevel::persistent_block_data_arrays
 		[ActiveLevel::the_current_active_sublevel_index]
 		[the_block.persistent_data_index] = is_bt_dud;
@@ -192,15 +192,15 @@ void WoodBlockWithStChocolateMuffinStuff::strongly_hit_response
 	constexpr sprite_type the_spawnable_sprite_type = StChocolateMuffin;
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
-	
+
 	Vec2s32 spawn_block_grid_coord = Vec2s32(coord.x, coord.y - 1);
 	Vec2F24p8 spawn_in_level_pos = Vec2F24p8
 		(make_f24p8(spawn_block_grid_coord.x * num_pixels_per_block_row), 
 		make_f24p8(spawn_block_grid_coord.y * num_pixels_per_block_col));
-	
+
 	SpriteManager::spawn_a_sprite_basic(the_spawnable_sprite_type, 
 		spawn_in_level_pos, GfxManager::bgofs_mirror[0], false);
-	
+
 	ActiveLevel::persistent_block_data_arrays
 		[ActiveLevel::the_current_active_sublevel_index]
 		[the_block.persistent_data_index] = is_bt_dud;

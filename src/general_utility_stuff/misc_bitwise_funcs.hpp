@@ -19,13 +19,13 @@
 #ifndef misc_bitwise_funcs_hpp
 #define misc_bitwise_funcs_hpp
 
-#include "misc_types.hpp"
+#include "misc_defines.hpp"
 
-#define WIDTH_TO_MSB_POS(some_width) (some_width - 1)
-#define BPRANGE_TO_MASK(bit_pos_hi, bit_pos_lo) \
-	((1 << (bit_pos_hi - bit_pos_lo + 1)) - 1)
-#define BPRANGE_TO_SHIFTED_MASK(bit_pos_hi, bit_pos_lo) \
-	(((1 << (bit_pos_hi - bit_pos_lo + 1)) - 1) << bit_pos_lo)
+namespace sherwin_adventure
+{
+
+namespace bitwise
+{
 
 template<typename Type>
 inline void clear_bits(Type& to_clear, size_t mask)
@@ -51,7 +51,7 @@ inline constexpr Type get_bits_with_range(Type to_get_from,
 	size_t bit_pos_range_hi, size_t bit_pos_range_lo)
 {
 	return get_bits(to_get_from, 
-		BPRANGE_TO_SHIFTED_MASK(bit_pos_range_hi, bit_pos_range_lo),
+		bprange_to_shifted_mask(bit_pos_range_hi, bit_pos_range_lo),
 		bit_pos_range_lo);
 }
 
@@ -69,9 +69,13 @@ inline void clear_and_set_bits_with_range(Type& to_change, size_t val,
 	size_t bit_pos_range_hi, size_t bit_pos_range_lo)
 {
 	clear_and_set_bits(to_change, 
-		BPRANGE_TO_SHIFTED_MASK(bit_pos_range_hi, bit_pos_range_lo), 
-		((val & BPRANGE_TO_MASK(bit_pos_range_hi, bit_pos_range_lo))
+		bprange_to_shifted_mask(bit_pos_range_hi, bit_pos_range_lo), 
+		((val & bprange_to_mask(bit_pos_range_hi, bit_pos_range_lo))
 		<< bit_pos_range_lo));
+}
+
+}
+
 }
 
 

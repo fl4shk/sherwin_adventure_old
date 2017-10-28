@@ -27,7 +27,7 @@ public:		// variables
 	//static const u32 palette_number = 0;
 	//static const u32 metatile_graphics_slot = metatile_number;
 	//static constexpr block_behavior_type behavior_type = bbvt_air;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -35,7 +35,7 @@ public:		// functions
 	}
 	virtual void strongly_hit_response(Block& the_block, 
 		const Vec2s32& coord);
-	
+
 } __attribute__((_align4));
 
 #endif		// air_block_stuff_class_hpp

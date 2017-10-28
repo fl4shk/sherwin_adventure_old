@@ -29,13 +29,13 @@ public:		// enums
 	enum udata_index { udi_initial_pos_was_set, } _alignas_regular;
 	enum sdata_index { sdi_initial_pos_x, sdi_initial_pos_y, 
 		sdi_move_timer, } _alignas_regular;
-	
+
 public:		// variables
 	static const SpriteConstParams the_const_params;
-	
+
 	static constexpr u32 move_timer_start = 128;
-	
-	
+
+
 public:		// functions
 	inline WaffleSprite(bool facing_left)
 	{
@@ -43,36 +43,36 @@ public:		// functions
 		shared_constructor_code_part_2(facing_left);
 		shared_constructor_code_part_3();
 	}
-	
+
 	void update_part_2();
-	
+
 	inline virtual const SpriteConstParams& get_const_params() const
 	{
 		return the_const_params;
 	}
-	
+
 	// Physics and collision stuff
 	inline virtual void block_collision_stuff()
 	{
 		block_collision_stuff_16x16();
 	}
-	
-	
+
+
 protected:		// functions
 	virtual void block_coll_response_left_old
 		(const BlockCollResult& lt_coll_result, 
 		const BlockCollResult& lb_coll_result);
-	
+
 	virtual void block_coll_response_right_old
 		(const BlockCollResult& rt_coll_result,
 		const BlockCollResult& rb_coll_result);
-	
-	
+
+
 	virtual void block_coll_response_left
 		(const SprBlkCollGroupBase::HorizCollTuple& hs);
 	virtual void block_coll_response_right
 		(const SprBlkCollGroupBase::HorizCollTuple& hs);
-	
+
 } __attribute__((_align4));
 
 

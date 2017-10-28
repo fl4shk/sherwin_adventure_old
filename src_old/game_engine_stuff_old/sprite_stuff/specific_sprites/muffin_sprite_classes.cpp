@@ -23,16 +23,16 @@ const SpriteConstParams MuffinSprite::the_const_params
 = {
 	// the_const_sprite_type
 	StMuffin, 
-	
+
 	// the_palette_slot
 	sps_powerup, 
-	
+
 	// the_relative_metatile_slot
 	1,
-	
+
 	// num_active_gfx_tiles
 	GfxManager::num_tiles_in_ss_16x16,
-	
+
 	// tile_arr 
 	const_cast<Tile*>(reinterpret_cast<const Tile*>(the_powerup_gfxTiles)),
 };
@@ -42,16 +42,16 @@ const SpriteConstParams FireMuffinSprite::the_const_params
 = {
 	// the_const_sprite_type
 	StFireMuffin, 
-	
+
 	// the_palette_slot
 	MuffinSprite::the_const_params.the_palette_slot, 
-	
+
 	// the_relative_metatile_slot
 	2,
-	
+
 	// num_active_gfx_tiles
 	MuffinSprite::the_const_params.num_active_gfx_tiles,
-	
+
 	// tile_arr 
 	MuffinSprite::the_const_params.tile_arr,
 };
@@ -61,16 +61,16 @@ const SpriteConstParams IceMuffinSprite::the_const_params
 = {
 	// the_const_sprite_type
 	StIceMuffin, 
-	
+
 	// the_palette_slot
 	MuffinSprite::the_const_params.the_palette_slot, 
-	
+
 	// the_relative_metatile_slot
 	3,
-	
+
 	// num_active_gfx_tiles
 	MuffinSprite::the_const_params.num_active_gfx_tiles,
-	
+
 	// tile_arr 
 	MuffinSprite::the_const_params.tile_arr,
 };
@@ -80,16 +80,16 @@ const SpriteConstParams ChocolateMuffinSprite::the_const_params
 = {
 	// the_const_sprite_type
 	StChocolateMuffin, 
-	
+
 	// the_palette_slot
 	MuffinSprite::the_const_params.the_palette_slot, 
-	
+
 	// the_relative_metatile_slot
 	4,
-	
+
 	// num_active_gfx_tiles
 	MuffinSprite::the_const_params.num_active_gfx_tiles,
-	
+
 	// tile_arr 
 	MuffinSprite::the_const_params.tile_arr,
 };

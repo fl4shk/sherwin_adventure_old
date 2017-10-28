@@ -25,10 +25,10 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	4,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	4,
 };
@@ -38,7 +38,7 @@ void ExclamBlockStuff::strongly_hit_response(Block& the_block,
 {
 	ActiveLevel::horiz_sublevel_block_data_2d.at(coord).type 
 		= bt_dud;
-	
+
 	ActiveLevel::persistent_block_data_arrays
 		[ActiveLevel::the_current_active_sublevel_index]
 		[the_block.persistent_data_index] = is_bt_dud;

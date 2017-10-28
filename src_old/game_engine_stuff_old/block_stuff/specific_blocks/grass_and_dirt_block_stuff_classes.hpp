@@ -27,7 +27,7 @@ public:		// variables
 	//static constexpr u32 metatile_number = 6;
 	//static constexpr u32 palette_number = 0;
 	//static constexpr u32 metatile_graphics_slot = metatile_number;
-	
+
 public:		// functions
 	// Turns out That inline virtual Is not actually inline.
 	inline virtual const BlockStuffConstParams& get_const_params() const
@@ -43,7 +43,7 @@ public:		// variables
 	//static constexpr u32 metatile_number = 7;
 	//static constexpr u32 palette_number = 0;
 	//static constexpr u32 metatile_graphics_slot = metatile_number;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -57,7 +57,7 @@ public:		// variables
 	//static constexpr u32 metatile_number = 8;
 	//static constexpr u32 palette_number = 0;
 	//static constexpr u32 metatile_graphics_slot = metatile_number;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -71,7 +71,7 @@ public:		// variables
 	//static constexpr u32 metatile_number = 9;
 	//static constexpr u32 palette_number = 0;
 	//static constexpr u32 metatile_graphics_slot = metatile_number;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -87,7 +87,7 @@ public:		// variables
 	//static constexpr u32 metatile_number = 10;
 	//static constexpr u32 palette_number = 0;
 	//static constexpr u32 metatile_graphics_slot = metatile_number;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -101,7 +101,7 @@ public:		// variables
 	//static constexpr u32 metatile_number = 11;
 	//static constexpr u32 palette_number = 0;
 	//static constexpr u32 metatile_graphics_slot = metatile_number;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -115,7 +115,7 @@ public:		// variables
 	//static constexpr u32 metatile_number = 12;
 	//static constexpr u32 palette_number = 0;
 	//static constexpr u32 metatile_graphics_slot = metatile_number;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -130,7 +130,7 @@ public:		// variables
 	//static constexpr u32 metatile_number = 13;
 	//static constexpr u32 palette_number = 0;
 	//static constexpr u32 metatile_graphics_slot = metatile_number;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -144,7 +144,7 @@ public:		// variables
 	//static constexpr u32 metatile_number = 14;
 	//static constexpr u32 palette_number = 0;
 	//static constexpr u32 metatile_graphics_slot = metatile_number;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -158,7 +158,7 @@ public:		// variables
 	//static constexpr u32 metatile_number = 15;
 	//static constexpr u32 palette_number = 0;
 	//static constexpr u32 metatile_graphics_slot = metatile_number;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -176,7 +176,7 @@ public:		// variables
 	//static constexpr u32 metatile_graphics_slot = metatile_number;
 	//static constexpr block_behavior_type behavior_type 
 	//	= bbvt_slope_p16_p16;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -192,7 +192,7 @@ public:		// variables
 	//static constexpr u32 metatile_graphics_slot = metatile_number;
 	//static constexpr block_behavior_type behavior_type 
 	//	= bbvt_slope_n16_p16;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -209,7 +209,7 @@ public:		// variables
 	//static constexpr u32 metatile_graphics_slot = metatile_number;
 	//static constexpr block_behavior_type behavior_type 
 	//	= bbvt_slope_p32_p16_short;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -226,7 +226,7 @@ public:		// variables
 	//static constexpr u32 metatile_graphics_slot = metatile_number;
 	//static constexpr block_behavior_type behavior_type 
 	//	= bbvt_slope_p32_p16_tall;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -243,7 +243,7 @@ public:		// variables
 	//static constexpr u32 metatile_graphics_slot = metatile_number;
 	//static constexpr block_behavior_type behavior_type 
 	//	= bbvt_slope_n32_p16_tall;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -259,7 +259,7 @@ public:		// variables
 	//static constexpr u32 metatile_graphics_slot = metatile_number;
 	//static constexpr block_behavior_type behavior_type 
 	//	= bbvt_slope_n32_p16_short;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -274,7 +274,7 @@ public:		// variables
 	//static constexpr u32 metatile_number = 22;
 	//static constexpr u32 palette_number = 0;
 	//static constexpr u32 metatile_graphics_slot = metatile_number;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -288,7 +288,7 @@ public:		// variables
 	//static constexpr u32 metatile_number = 23;
 	//static constexpr u32 palette_number = 0;
 	//static constexpr u32 metatile_graphics_slot = metatile_number;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{

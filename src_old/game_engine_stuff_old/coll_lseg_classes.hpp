@@ -33,7 +33,7 @@ class VertCollLseg;
 //public:		// variables
 //	static constexpr size_t num_end_points = 2;
 //	std::array<Vec2F24p8, num_end_points> end_points;
-//	
+//
 //public:		// functions
 //	inline GenericCollLseg()
 //	{
@@ -47,18 +47,18 @@ class VertCollLseg;
 //	{
 //		*this = to_copy;
 //	}
-//	
+//
 //	inline GenericCollLseg& operator = 
 //		(const GenericCollLseg& to_copy)
 //	{
 //		end_points = to_copy.end_points;
-//		
+//
 //		return *this;
 //	}
-//	
+//
 //	bool intersects(const GenericCollLseg& to_check, 
 //		Vec2F24p8* ret=NULL) const __attribute__((_iwram_code));
-//	
+//
 //} __attribute__((_align4));
 
 
@@ -67,10 +67,10 @@ class CollLsegExtras
 protected:		// functions
 	static bool collinear_lsegs_intersect(const Fixed24p8& a_0, 
 		const Fixed24p8& a_1, const Fixed24p8& b_0, const Fixed24p8& b_1);
-	
+
 	friend class HorizCollLseg;
 	friend class VertCollLseg;
-	
+
 } __attribute__((_align4));
 
 
@@ -81,7 +81,7 @@ class HorizCollLseg
 protected:		// variables
 	Vec2F24p8 internal_left_pt;
 	Fixed24p8 internal_length;
-	
+
 public:		// functions
 	inline HorizCollLseg()
 	{
@@ -101,14 +101,14 @@ public:		// functions
 	{
 		*this = to_copy;
 	}
-	
+
 	inline HorizCollLseg& operator = (const HorizCollLseg& to_copy)
 	{
 		left_pt() = to_copy.left_pt();
 		length() = to_copy.length();
 		return *this;
 	}
-	
+
 	inline Vec2F24p8& left_pt()
 	{
 		return internal_left_pt;
@@ -129,7 +129,7 @@ public:		// functions
 	{
 		return left_pt() + Vec2F24p8(length(), make_f24p8(0));
 	}
-	
+
 	inline bool intersects(const HorizCollLseg& to_check) const
 	{
 		if (left_pt().y == to_check.left_pt().y)
@@ -138,11 +138,11 @@ public:		// functions
 				(left_pt().x, right_pt().x, to_check.left_pt().x, 
 				to_check.right_pt().x);
 		}
-		
+
 		return false;
 	}
 	//inline bool intersects(const VertCollLseg& to_check) const;
-	
+
 } __attribute__((_align4));
 
 
@@ -151,7 +151,7 @@ class VertCollLseg
 protected:		// variables
 	Vec2F24p8 internal_top_pt;
 	Fixed24p8 internal_length;
-	
+
 public:		// functions
 	inline VertCollLseg()
 	{
@@ -171,14 +171,14 @@ public:		// functions
 	{
 		*this = to_copy;
 	}
-	
+
 	inline VertCollLseg& operator = (const VertCollLseg& to_copy)
 	{
 		top_pt() = to_copy.top_pt();
 		length() = to_copy.length();
 		return *this;
 	}
-	
+
 	inline Vec2F24p8& top_pt()
 	{
 		return internal_top_pt;
@@ -199,7 +199,7 @@ public:		// functions
 	{
 		return top_pt() + Vec2F24p8(make_f24p8(0), length());
 	}
-	
+
 	//inline bool intersects(const HorizCollLseg& to_check) const
 	//{
 	//	return to_check.intersects(*this);
@@ -211,10 +211,10 @@ public:		// functions
 			return CollLsegExtras::collinear_lsegs_intersect(top_pt().x,
 				bot_pt().x, to_check.top_pt().x, to_check.bot_pt().x);
 		}
-		
+
 		return false;
 	}
-	
+
 } __attribute__((_align4));
 
 

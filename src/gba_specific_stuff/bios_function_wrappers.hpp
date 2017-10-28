@@ -134,13 +134,19 @@
 #endif
 
 
+namespace sherwin_adventure
+{
+
+namespace gba
+{
+
 class BiosDivResult
 {
 public:		// variables
 	s32 quotient;
 	s32 remainder;
 	u32 quotient_abs;
-	
+
 } __attribute__((_align4));
 
 
@@ -179,9 +185,9 @@ inline void bios_wait_for_vblank()
 inline s32 bios_do_div(s32 numerator, s32 denominator)
 {
 	//nocash_soft_break();
-	
+
 	s32 ret;
-	
+
 	if (denominator == 0)
 	{
 		ret = 0;
@@ -199,15 +205,15 @@ inline s32 bios_do_div(s32 numerator, s32 denominator)
 			: "r0", "r1"							// clobbers
 		);
 	}
-	
+
 	return ret;
-	
+
 }
 
 inline void bios_do_div(s32 numerator, s32 denominator, 
 	BiosDivResult& the_div_result)
 {
-	
+
 	if (denominator == 0)
 	{
 		the_div_result.quotient = 0;
@@ -224,7 +230,7 @@ inline void bios_do_div(s32 numerator, s32 denominator,
 			"mov %0, r0\n\t"
 			"mov %1, r1\n\t"
 			"mov %2, r3\n\t"
-			
+
 			: "=r" (the_div_result.quotient), 
 			"=r" (the_div_result.remainder), 
 			"=r" (the_div_result.quotient_abs)		// outputs
@@ -240,7 +246,7 @@ inline void bios_do_div(s32 numerator, s32 denominator,
 inline u16 bios_do_sqrt(u32 r0_value)
 {
 	u32 ret;
-	
+
 	asm __volatile__
 	(
 		"mov r0, %1\n\t"
@@ -250,15 +256,15 @@ inline u16 bios_do_sqrt(u32 r0_value)
 		: "r" (r0_value)	// inputs
 		: "r0"				// clobbers
 	);
-	
+
 	return (u16)ret;
-	
+
 }
 
 inline void bios_do_lz77_uncomp_wram(const void* src, void* dst)
 {
 	//BIOS_LZ77_UNCOMP_WRAM
-	
+
 	asm __volatile__
 	(
 		"mov r0, %0\n\t"
@@ -278,7 +284,7 @@ inline void bios_do_lz77_uncomp_wram(const void* src, volatile void* dst)
 inline void bios_do_lz77_uncomp_vram(const void* src, void* dst)
 {
 	//BIOS_LZ77_UNCOMP_VRAM
-	
+
 	asm __volatile__
 	(
 		"mov r0, %0\n\t"
@@ -301,8 +307,8 @@ inline void bios_do_hard_reset()
 	SWI_CALL(0x26);
 }
 
+}
 
-
-
+}
 
 #endif		// bios_function_wrappers_hpp

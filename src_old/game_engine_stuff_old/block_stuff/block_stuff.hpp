@@ -31,27 +31,27 @@ enum block_type
 {
 	// A graphics-less Block That sprites are free To move through.
 	bt_air,
-	
+
 	// A Block That looks like a wooden log.  It Is indestructible, which
 	// Is quite unlike real life wooden logs.
 	bt_log,
-	
+
 	// A wooden Block without anything inside.  It Is destroyed (That Is,
 	// replaced with an air Block) when strongly hit.
 	bt_wood,
-	
+
 	// A Block with eyes without anything inside.  It becomes an empty
 	// Block upon being strongly hit.
 	bt_eyes,
-	
+
 	// A Block with an exclamation point on it.  The purpose of these
 	// blocks Is yet To be chosen, but I'm thinking That some kind of event
 	// will happen when one Is strongly hit.
 	bt_exclam,
-	
+
 	// An empty Block That Is indestructible.  
 	bt_dud,
-	
+
 	// Wooden blocks with contents
 	bt_wood_with_bt_dud,
 	bt_wood_with_st_waffle,
@@ -59,7 +59,7 @@ enum block_type
 	bt_wood_with_st_fire_muffin,
 	bt_wood_with_st_ice_muffin,
 	bt_wood_with_st_chocolate_muffin,
-	
+
 	// Eyes blocks with contents
 	//bt_eyes_with_bt_dud		// This Is the same as bt_eyes.
 	bt_eyes_with_st_waffle,
@@ -67,47 +67,47 @@ enum block_type
 	bt_eyes_with_st_fire_muffin,
 	bt_eyes_with_st_ice_muffin,
 	bt_eyes_with_st_chocolate_muffin,
-	
-	
+
+
 	// Grass/Dirt blocks
 	bt_grass_single,
-	
+
 	bt_grass_top_left,
 	bt_grass_top_middle,
 	bt_grass_top_right,
-	
+
 	bt_dirt_middle_left,
 	bt_dirt_middle_middle,
 	bt_dirt_middle_right,
-	
+
 	bt_dirt_bottom_left,
 	bt_dirt_bottom_middle,
 	bt_dirt_bottom_right,
-	
-	
+
+
 	// 45 degree angle slope
 	bt_grass_slope_p16_p16,
-	
+
 	// 135 degree angle slope
 	bt_grass_slope_n16_p16,
-	
+
 	// Approximately 26.57 degrees angle slope, with two blocks
 	bt_grass_slope_p32_p16_short,
 	bt_grass_slope_p32_p16_tall,
-	
+
 	// Approximately 153.43 degrees angle slope, with two blocks
 	bt_grass_slope_n32_p16_tall,
 	bt_grass_slope_n32_p16_short,
-	
+
 	// These two blocks are for decoration
 	bt_grass_in_slope_left,
 	bt_grass_in_slope_right,
-	
-	
+
+
 	// lim_bt Is the amount of Block types.  It Is automatically updated
 	// by the compiler.
 	lim_bt,
-	
+
 } _alignas_regular;
 
 // It's about time I added in something like this!  In MANY cases, there
@@ -118,34 +118,34 @@ enum block_behavior_type
 	// The actually non-default block_behavior_type (most blocks are
 	// completely solid)
 	bbvt_air,
-	
+
 	// The vast majority of blocks will use this type of behavior.  It Is
 	// the one used by the BlockBaseStuff class So That most Block types
 	// won't need To re-define get_behavior_type().
 	bbvt_solid,
-	
+
 	// 45 degree angle slope (up and To the right)
 	bbvt_slope_p16_p16,
-	
+
 	// 135 degree angle slope (up and To the left)
 	bbvt_slope_n16_p16,
-	
+
 	// Approximately 26.57 degrees angle slope, with two blocks (up and To
 	// the right)
 	bbvt_slope_p32_p16_short,
 	bbvt_slope_p32_p16_tall,
-	
+
 	// Approximately 153.43 degrees angle slope, with two blocks (up and To
 	// the left)
 	bbvt_slope_n32_p16_tall,
 	bbvt_slope_n32_p16_short,
-	
-	
+
+
 	// lim_bbvt Is the amount of Block behavior types.  It Is
 	// automatically updated by the compiler.
 	lim_bbvt,
-	
-	
+
+
 } _alignas_regular;
 
 #define LIST_OF_BLOCK_STUFF_CLASSES(macro) \
@@ -254,12 +254,12 @@ macro(p32_p16_tall)
 //{
 //	// Day Sky
 //	bg1bt_day_sky,
-//	
+//
 //	// Night Sky Block.  Also doubles as a go-To Block for fading out or
 //	// in.
 //	bg1bt_night_sky,
-//	
-//	
+//
+//
 //	// bg1lim_bt Is the amount of Block types.  It Is automatically
 //	// updated by the compiler.
 //	bg1lim_bt,
@@ -294,14 +294,14 @@ class Block
 public:		// variables
 	u16 type;
 	u16 persistent_data_index;
-	
+
 public:		// functions
-	
+
 	inline block_type get_block_type() const
 	{
 		return (block_type)type;
 	}
-	
+
 } __attribute__((_align4));
 
 inline bool block_type_exists(block_type the_block_type)

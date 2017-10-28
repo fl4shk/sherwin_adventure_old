@@ -31,13 +31,13 @@ class SpriteAllocator : public ArrayHelper<Sprite>
 protected:		// variables
 	u32 the_sa_free_list_backend_curr_index;
 	SaFreeListBackend the_sa_free_list_backend;
-	
+
 public:		// functions
 	SpriteAllocator(s16* the_sa_free_list_backend_array, 
 		Sprite* s_the_array, u32 s_size);
 	SpriteAllocator(s16* the_sa_free_list_backend_array,
 		const ArrayHelper<Sprite>& s_allocatable_sprite_arr);
-	
+
 	////void* allocate_sprite() __attribute__((_iwram_code,hot));
 	////void* allocate_sprite() __attribute__((hot));
 	////void* allocate_sprite();
@@ -47,14 +47,14 @@ public:		// functions
 	//void* allocate_sprite() __attribute__((_iwram_code,cold));
 	//void deallocate_sprite(Sprite*& the_sprite)
 	//	__attribute__((_iwram_code,cold));
-	
+
 	//void* allocate_sprite() __attribute__((cold,returns_nonnull));
 	//void deallocate_sprite(Sprite*& the_sprite) __attribute__((cold));
 	void* allocate_sprite() __attribute__((_iwram_code,returns_nonnull));
 	void deallocate_sprite(Sprite& the_sprite)
 		__attribute__((_iwram_code));
-	
-	
+
+
 	inline bool can_push_index() const
 	{
 		return the_sa_free_list_backend.can_push();
@@ -71,10 +71,10 @@ public:		// functions
 	//{
 	//	return the_sa_free_list_backend.peek_next();
 	//}
-	
+
 protected:		// functions
 	//inline 
-	
+
 } __attribute__((_align4));
 
 #endif		// sprite_allocator_class_hpp

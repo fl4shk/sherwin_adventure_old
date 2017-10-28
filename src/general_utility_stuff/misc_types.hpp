@@ -22,6 +22,11 @@
 #include <stdint.h>
 #include <sys/types.h>
 
+namespace sherwin_adventure
+{
+
+namespace integer_types
+{
 
 //typedef unsigned char u8; typedef signed char s8;
 //typedef unsigned short u16; typedef signed short s16;
@@ -41,53 +46,55 @@ typedef volatile u32 vu32; typedef volatile s32 vs32;
 typedef volatile u64 vu64; typedef volatile s64 vs64;
 //typedef vu32 vuint;
 
+}
 
+}
 
-// I'm not sure what To call these :/
-union byte_group_16
-{
-	u16 data16;
-	
-	struct
-	{
-		u8 data8 [2];
-	};
-};
-
-union byte_group_32
-{
-	u32 data32;
-	
-	struct
-	{
-		u16 data16 [2];
-	};
-	
-	struct
-	{
-		u8 data8 [4];
-	};
-};
-
-union byte_group_64
-{
-	u64 data64;
-	
-	struct
-	{
-		u32 data32 [2];
-	};
-	
-	struct
-	{
-		u16 data16 [4];
-	};
-	
-	struct
-	{
-		u8 data8 [8];
-	};
-};
+//// I'm not sure what To call these :/
+//union byte_group_16
+//{
+//	u16 data16;
+//
+//	struct
+//	{
+//		u8 data8 [2];
+//	};
+//};
+//
+//union byte_group_32
+//{
+//	u32 data32;
+//
+//	struct
+//	{
+//		u16 data16 [2];
+//	};
+//
+//	struct
+//	{
+//		u8 data8 [4];
+//	};
+//};
+//
+//union byte_group_64
+//{
+//	u64 data64;
+//
+//	struct
+//	{
+//		u32 data32 [2];
+//	};
+//
+//	struct
+//	{
+//		u16 data16 [4];
+//	};
+//
+//	struct
+//	{
+//		u8 data8 [8];
+//	};
+//};
 
 
 #endif		// misc_types_hpp

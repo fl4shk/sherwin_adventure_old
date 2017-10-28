@@ -28,16 +28,16 @@ const SpriteConstParams WaffleSprite::the_const_params
 = {
 	// the_const_sprite_type
 	StWaffle, 
-	
+
 	// the_palette_slot
 	sps_powerup, 
-	
+
 	// the_relative_metatile_slot
 	0,
-	
+
 	// num_active_gfx_tiles
 	Sprite::the_const_params.num_active_gfx_tiles,
-	
+
 	// tile_arr 
 	const_cast<Tile*>(reinterpret_cast<const Tile*>(the_powerup_gfxTiles)),
 };
@@ -47,47 +47,47 @@ void WaffleSprite::update_part_2()
 {
 	// I Can't remember why I needed To save the initial position of Waffle
 	// sprites.  Eh.
-	
+
 	u32& initial_pos_was_set = misc_data_u[udi_initial_pos_was_set];
 	s32& initial_pos_x = misc_data_s[sdi_initial_pos_x];
 	s32& initial_pos_y = misc_data_s[sdi_initial_pos_y];
 	s32& move_timer = misc_data_s[sdi_move_timer];
-	
+
 	if (!initial_pos_was_set)
 	{
 		initial_pos_was_set = true;
-		
+
 		//initial_pos_x = in_level_pos.x.data;
 		//initial_pos_y = in_level_pos.y.data;
 		initial_pos_x = get_curr_in_level_pos().x.data;
 		initial_pos_y = get_curr_in_level_pos().y.data;
-		
+
 		move_timer = move_timer_start;
-		
+
 		// Facing left
 		if (the_oam_entry.get_hflip_status())
 		{
 			vel.x.data = -(1 << Fixed24p8::get_shift());
 		}
-		
+
 		// Facing right
 		else
 		{
 			vel.x.data = 1 << Fixed24p8::get_shift();
 		}
-		
+
 	}
-	
+
 	if (move_timer <= 0)
 	{
 		move_timer = move_timer_start;
-		
+
 		vel.x.data = -vel.x.data;
 	}
-	
+
 	--move_timer;
-	
-	
+
+
 	update_f24p8_positions();
 	block_collision_stuff();
 }
@@ -99,15 +99,15 @@ void WaffleSprite::block_coll_response_left_old
 	const BlockCollResult& lb_coll_result)
 {
 	s32& move_timer = misc_data_s[sdi_move_timer];
-	
-	
+
+
 	////in_level_pos.x = make_f24p8((lt_coll_result.coord.x + 1) * 16)
 	////	- cb_pos_offset.x;
 	//set_curr_in_level_pos_x(make_f24p8((lt_coll_result.coord.x + 1) 
 	//	* 16) - cb_pos_offset.x);
-	
+
 	move_timer = move_timer_start;
-	
+
 	vel.x.data = -vel.x.data;
 }
 
@@ -117,16 +117,16 @@ void WaffleSprite::block_coll_response_right_old
 	const BlockCollResult& rb_coll_result)
 {
 	s32& move_timer = misc_data_s[sdi_move_timer];
-	
+
 	////in_level_pos.x = make_f24p8(rt_coll_result.coord.x * 16)
 	////	- the_coll_box.size.x - cb_pos_offset.x;
 	////	//- make_f24p8(get_shape_size_as_vec2().x);
 	//set_curr_in_level_pos_x(make_f24p8(rt_coll_result.coord.x * 16)
 	//	- the_coll_box.size.x - cb_pos_offset.x);
-	
-	
+
+
 	move_timer = move_timer_start;
-	
+
 	vel.x.data = -vel.x.data;
 }
 
@@ -136,16 +136,16 @@ void WaffleSprite::block_coll_response_left
 	(const SprBlkCollGroupBase::HorizCollTuple& hs)
 {
 	s32& move_timer = misc_data_s[sdi_move_timer];
-	
-	
+
+
 	////in_level_pos.x = make_f24p8((lt_coll_result.coord.x + 1) * 16)
 	////	- cb_pos_offset.x;
 	//set_curr_in_level_pos_x(make_f24p8((lt_coll_result.coord.x + 1) 
 	//	* 16) - cb_pos_offset.x);
 	push_out_of_left_block(hs.blk_crd_pos);
-	
+
 	move_timer = move_timer_start;
-	
+
 	vel.x.data = -vel.x.data;
 }
 
@@ -153,17 +153,17 @@ void WaffleSprite::block_coll_response_right
 	(const SprBlkCollGroupBase::HorizCollTuple& hs)
 {
 	s32& move_timer = misc_data_s[sdi_move_timer];
-	
+
 	////in_level_pos.x = make_f24p8(rt_coll_result.coord.x * 16)
 	////	- the_coll_box.size.x - cb_pos_offset.x;
 	////	//- make_f24p8(get_shape_size_as_vec2().x);
 	//set_curr_in_level_pos_x(make_f24p8(rt_coll_result.coord.x * 16)
 	//	- the_coll_box.size.x - cb_pos_offset.x);
 	push_out_of_right_block(hs.blk_crd_pos);
-	
-	
+
+
 	move_timer = move_timer_start;
-	
+
 	vel.x.data = -vel.x.data;
 }
 

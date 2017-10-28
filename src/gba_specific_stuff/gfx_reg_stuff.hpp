@@ -26,6 +26,12 @@
 #include "../general_utility_stuff/misc_bitwise_funcs.hpp"
 
 
+namespace sherwin_adventure
+{
+
+namespace gba
+{
+
 /* ---- Some Helper Structs ---- */
 
 // ---- Character/Tile Stuffs ----
@@ -77,7 +83,7 @@ typedef u16 ScrEntry;
 //	//s16 x, y;
 //	u16 x, y;
 //} __attribute__((aligned(4)));
-//typedef Vec2s16 BgPoint;
+//typedef Vec2S16 BgPoint;
 typedef Vec2F24p8 BgPoint;
 
 
@@ -85,7 +91,7 @@ typedef Vec2F24p8 BgPoint;
 // tiles per column.
 static constexpr u32 screenblock_size = 0x400;
 static constexpr u32 screenblock_xsize = 0x20, screenblock_ysize = 0x20;
-static constexpr Vec2u32 screenblock_size_2d(screenblock_xsize, 
+static constexpr Vec2U32 screenblock_size_2d(screenblock_xsize, 
 	screenblock_ysize);
 typedef ScrEntry Screenblock[screenblock_size];
 
@@ -155,8 +161,8 @@ static const u32 num_colors_per_palette = 16;
 
 // LCD I/O BG Scrolling Registers
 //#define REG_BGOFS ((BgPoint*)(MEM_IO + 0x0010))
-// Pretty cool how I Can use my Vec2s16 class for this
-#define REG_BGOFS ((Vec2s16*)(MEM_IO + 0x0010))
+// Pretty cool how I Can use my Vec2S16 class for this
+#define REG_BGOFS ((Vec2S16*)(MEM_IO + 0x0010))
 
 #define REG_BGHOFS_N(n) *((vu16*)(MEM_IO + 0x0010 + 0x04 * n))
 #define REG_BGVOFS_N(n) *((vu16*)(MEM_IO + 0x0012 + 0x04 * n))
@@ -177,25 +183,25 @@ static const u32 num_colors_per_palette = 16;
 static const u32 SCREEN_WIDTH = 240;
 static const u32 SCREEN_HEIGHT = 160;
 
-//static const Vec2u32 screen_size_2d = { SCREEN_WIDTH, SCREEN_HEIGHT };
-static const Vec2u32 screen_size_2d(SCREEN_WIDTH, SCREEN_HEIGHT);
+//static const Vec2U32 screen_size_2d = { SCREEN_WIDTH, SCREEN_HEIGHT };
+static const Vec2U32 screen_size_2d(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 // The width and height of the screen, in tiles
 static const u32 screen_width_in_tiles = 30;
 static const u32 screen_height_in_tiles = 20;
 
-//static const Vec2u32 screen_size_in_tiles_2d = { screen_width_in_tiles, 
+//static const Vec2U32 screen_size_in_tiles_2d = { screen_width_in_tiles, 
 //	screen_height_in_tiles };
-static const Vec2u32 screen_size_in_tiles_2d(screen_width_in_tiles, 
+static const Vec2U32 screen_size_in_tiles_2d(screen_width_in_tiles, 
 	screen_height_in_tiles);
 
 // The width and height of the screen, in blocks
 static const u32 screen_width_in_blocks = 15;
 static const u32 screen_height_in_blocks = 10;
 
-//static const Vec2u32 screen_size_in_blocks_2d = { screen_width_in_blocks, 
+//static const Vec2U32 screen_size_in_blocks_2d = { screen_width_in_blocks, 
 //	screen_height_in_blocks };
-static const Vec2u32 screen_size_in_blocks_2d(screen_width_in_blocks, 
+static const Vec2U32 screen_size_in_blocks_2d(screen_width_in_blocks, 
 	screen_height_in_blocks);
 
 static const u32 num_pixels_per_tile_row = 8;
@@ -471,7 +477,7 @@ inline void clamped_rgb15_component_add(s32& component, s32 amount_to_add,
 	s32 component_max_value=RGB15_COMPONENT_MAX_VAL)
 {
 	component += amount_to_add;
-	
+
 	if (component > component_max_value )
 	{
 		component = component_max_value;
@@ -486,7 +492,7 @@ inline void clamped_rgb15_f24p8_component_add(Fixed24p8& component,
 	const Fixed24p8& amount_to_add, const Fixed24p8& target_value)
 {
 	component += amount_to_add;
-	
+
 	if (amount_to_add > (Fixed24p8){0} && component > target_value)
 	{
 		component = target_value;
@@ -501,7 +507,7 @@ inline void clamped_rgb15_f24p8_component_add(Fixed24p8& component,
 //	const Fixed8p8& amount_to_add, const Fixed8p8& target_value)
 //{
 //	component += amount_to_add;
-//	
+//
 //	if (amount_to_add > (Fixed8p8){0} && component > target_value)
 //	{
 //		component = target_value;
@@ -527,7 +533,7 @@ inline void m4_plot_basic(u32 x, u32 y, u16 two_color_ids, u32 page = 0)
 		((vu16*)(MEM_VRAM_PAGE_0))[y * SCREEN_WIDTH + x] 
 			= two_color_ids;
 	}
-	
+
 	// Plot To Page 1
 	else
 	{
@@ -540,61 +546,60 @@ inline void m4_plot_basic(u32 x, u32 y, u16 two_color_ids, u32 page = 0)
 // The reason That color_id Is passed in as a 32-bit variable Is speed.
 inline void m4_plot(s32 x, s32 y, u32 color_id, u32 page)
 {
-	
+
 	if (!(x >= 0 && x <= (s32)SCREEN_WIDTH 
 		&& y >= 0 && y <= (s32)SCREEN_HEIGHT))
 	{
 		return;
 	}
-	
+
 	vu16* vram_area;
 	u16 two_color_ids;
-	
+
 	u8 color_id_8bit = color_id & 0xff;
-	
-	
+
+
 	// Plot To Page 0
 	if (page == 0)
 	{
 		vram_area = (vu16*)(MEM_VRAM_PAGE_0);
 	}
-	
+
 	// Plot To Page 1
 	else
 	{
 		vram_area = (vu16*)(MEM_VRAM_PAGE_1);
 	}
-	
+
 	two_color_ids = vram_area[(y * SCREEN_WIDTH + x) / sizeof(vu16)];
-	
-	
+
+
 	// If x Is odd, change the high byte
 	if (x & 1)
 	{
 		// Clear the high byte
 		two_color_ids &= 0x00ff;
-		
+
 		// Set the high byte To the new color ID
 		two_color_ids |= (color_id_8bit << 8);
 	}
-	
+
 	// If x Is even, change the low byte
 	else
 	{
 		// Clear the low byte
 		two_color_ids &= 0xff00;
-		
+
 		// Set the low byte To the new color ID
 		two_color_ids |= color_id_8bit;
 	}
-	
+
 	vram_area[(y * SCREEN_WIDTH + x) / sizeof(vu16)] = two_color_ids;
 }
 
 
+}
 
-
-
-
+}
 
 #endif		// gfx_reg_stuff_hpp

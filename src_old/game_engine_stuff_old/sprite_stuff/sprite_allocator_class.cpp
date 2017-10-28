@@ -48,42 +48,42 @@ void* SpriteAllocator::allocate_sprite()
 	//for (u32 i=0; i<get_size(); ++i)
 	//{
 	//	Sprite& curr_sprite = at(i);
-	//	
+	//
 	//	if (curr_sprite.the_sprite_type == StDefault)
 	//	{
 	//		return (void*)(&curr_sprite);
 	//	}
 	//}
-	
+
 	ASM_COMMENT("if (can_pop_index()");
 	if (can_pop_index())
 	{
 		int n_arr_index = the_sa_free_list_backend.peek_top();
 		Sprite& ret = at(n_arr_index);
 		ret.the_arr_index = n_arr_index;
-		
+
 		the_sa_free_list_backend.pop();
-		
+
 		if (ret.the_sprite_type != StDefault)
 		{
 			ASM_COMMENT("BadSprite");
 			DebugArrGroup::write_str_and_inc("BadSprite");
 			halt();
 		}
-		
+
 		return (void*)(&ret);
 	}
-	
-	
+
+
 	ASM_COMMENT("NoFreeSprite");
 	// No free Sprite found, So at least put something in the debug vars.
 	// cout or printf would be nice here.
 	//NEXT_DEBUG_U32 = (('a' << 24) | ('s' << 16) | ('p' << 8)
 	//	| ('r' << 0));
-	
+
 	DebugArrGroup::write_str_and_inc("NoFreeSprite");
 	halt();
-	
+
 	//return NULL;
 	for (;;)
 	{
@@ -98,24 +98,24 @@ void SpriteAllocator::deallocate_sprite(Sprite& the_sprite)
 	//	//halt();
 	//	return;
 	//}
-	
+
 	if (the_sprite.the_sprite_type == StDefault)
 	{
 		//DebugArrGroup::write_str_and_inc("SadsSprStDefault");
 		//halt();
 		return;
 	}
-	
+
 	if (!can_push_index())
 	{
 		DebugArrGroup::write_str_and_inc("SadsCan'tPush");
 		halt();
 	}
-	
-	
+
+
 	the_sprite.the_sprite_type = StDefault;
-	
-	
+
+
 	// Some sprites are spawned in from something other than the Level data
 	// and DON'T HAVE a the_sprite_ipg
 	if (the_sprite.the_sprite_ipg)
@@ -126,34 +126,34 @@ void SpriteAllocator::deallocate_sprite(Sprite& the_sprite)
 		}
 		the_sprite.the_sprite_ipg = NULL;
 	}
-	
+
 	//u32 old_vram_chunk_index = the_sprite.get_vram_chunk_index();
 	//
 	//*the_sprite = Sprite();
 	//the_sprite.shared_constructor_code();
 	//*the_sprite = Sprite(the_sprite.get_vram_chunk_index());
-	
-	
+
+
 	the_sa_free_list_backend.push(the_sprite.the_arr_index);
 	the_sprite.the_arr_index = -1;
-	
-	
+
+
 	//the_sprite = NULL;
-	
+
 	//for (u32 i=0; i<get_size(); ++i)
 	//{
 	//	Sprite& curr_sprite = at(i);
-	//	
+	//
 	//	if (*the_sprite == &curr_sprite)
 	//	{
 	//		the_sprite->~Sprite();
 	//		the_sprite = NULL;
-	//		
+	//
 	//		return;
 	//	}
 	//}
-	
-	
+
+
 	//// No Sprite found, So at least put something in the debug vars.
 	//// cout or printf would be nice here.
 	//NEXT_DEBUG_U32 = (('d' << 24) | ('s' << 16) | ('p' << 8)

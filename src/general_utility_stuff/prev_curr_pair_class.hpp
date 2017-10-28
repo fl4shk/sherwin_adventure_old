@@ -24,6 +24,13 @@
 
 #include <utility>
 
+
+namespace sherwin_adventure
+{
+
+namespace containers
+{
+
 template<typename Type>
 class Vec2;
 
@@ -35,14 +42,14 @@ class PrevCurrPair
 {
 public:		// variables
 	Type prev, curr;
-	
+
 public:		// functions
-	
+
 	inline void back_up()
 	{
 		prev = curr;
 	}
-	
+
 	inline void back_up_and_update(const Type& n_curr)
 	{
 		prev = std::move(curr);
@@ -53,20 +60,21 @@ public:		// functions
 		prev = std::move(curr);
 		curr = std::move(n_curr);
 	}
-	
+
 	inline bool has_changed() const
 	{
 		return (prev != curr);
 	}
-	
+
 	inline operator Vec2<Type>() const
 	{
 		return Vec2<Type>(prev, curr);
 	}
-	
-	
+
+
 } __attribute__((_align4));
 
-
+}
+}
 
 #endif		// prev_curr_pair_class_hpp

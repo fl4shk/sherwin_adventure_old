@@ -21,6 +21,13 @@
 
 #include <string.h>
 
+namespace sherwin_adventure
+{
+
+namespace misc_util
+{
+
+
 /*
 u32 curr_debug_s32_index, curr_debug_u32_index, curr_debug_f24p8_index,
 	curr_debug_f8p8_index, curr_debug_st_result_index;
@@ -38,7 +45,7 @@ void clear_debug_vars()
 	curr_debug_u32_index = 0;
 	curr_debug_f24p8_index = 0;
 	curr_debug_f8p8_index = 0;
-	
+
 	//memfill32(debug_arr_s32, 0, (debug_arr_s32_size
 	//	*  sizeof(s32)) / sizeof(u32));
 	//memfill32(debug_arr_u32, 0, debug_arr_u32_size);
@@ -58,11 +65,11 @@ DebugStr& DebugStr::operator = (const DebugStr& to_copy)
 	//memcpy32(arr, to_copy.arr, max_size / sizeof(u32));
 	//arr_memcpy32(arr, to_copy.arr, max_size);
 	//arr_memcpy(arr, to_copy.arr, max_size);
-	
+
 	arr_memcpy(arr.data(), to_copy.arr.data(), get_real_size());
-	
+
 	clear_unused_portion();
-	
+
 	return *this;
 }
 
@@ -71,7 +78,7 @@ DebugStr& DebugStr::operator = (const char* to_copy)
 	//memfill32(arr, 0, max_size / sizeof(u32));
 	//arr_memfill32(arr, 0, max_size);
 	//clear();
-	
+
 	for (real_size=0; real_size<max_size; ++real_size)
 	{
 		if (to_copy[real_size] == '\0')
@@ -80,10 +87,10 @@ DebugStr& DebugStr::operator = (const char* to_copy)
 		}
 		arr[real_size] = to_copy[real_size];
 	}
-	
+
 	// Clear any leftover bytes
 	clear_unused_portion();
-	
+
 	return *this;
 }
 
@@ -130,31 +137,35 @@ void DebugArrGroup::clear_debug_vars()
 	//{
 	//	curr_index_arr_helper.at(i) = 0;
 	//}
-	//
+
 	//// One big memfill32() call That depends on the order in which the
 	//// arrays are declared.
 	////memfill32(debug_u32_arr, 0, (debug_u32_arr_size * sizeof(u32)
 	////	+ debug_s32_arr_size * sizeof(s32)
 	////	+ debug_f24p8_arr_size * sizeof(Fixed24p8)
 	////	+ debug_f8p8_arr_size * sizeof(Fixed8p8)) / sizeof(u32));
-	//
-	//
+
+
 	//// I believe this will work?
 	//memfill32(debug_u32_arr(), 0, ((u32)debug_f8p8_arr() 
 	//	+ (debug_f8p8_arr_size * sizeof(Fixed8p8)) 
 	//	- (u32)(u32*)debug_u32_arr()) / sizeof(u32));
-	//
+
 	//// Use a separate memfill32() call for the array of debug_strs, just in
 	//// case.
 	//memfill32(debug_str_arr(), 0, debug_str_arr_helper.get_size() 
 	//	* sizeof(DebugStr) / sizeof(u32));
-	
+
 	//memfill32(&the_raw_array_group, 0, sizeof(RawArrayGroup) 
 	//	/ sizeof(u32));
-	
+
 	memset(&the_raw_array_group, 0, sizeof(RawArrayGroup));
 	gdb_breakpoint_helper = 0;
-	
+
+}
+
+}
+
 }
 
 

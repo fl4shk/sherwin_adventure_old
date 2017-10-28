@@ -22,8 +22,14 @@
 #include "vec2_class.hpp"
 
 
-// in_range and vec2_in_range are PRIMARILY Intended for use with a range
-// of 0 (inclusive) To size (exclusive)
+namespace sherwin_adventure
+{
+
+namespace range
+{
+
+// in_range and vec2_in_range are PRIMARILY intended for use with a range
+// of 0 (inclusive) to size (exclusive)
 template<typename Type>
 inline bool in_range(Type range_start_inclusive, Type range_end_exclusive, 
 	Type to_check)
@@ -32,18 +38,18 @@ inline bool in_range(Type range_start_inclusive, Type range_end_exclusive,
 		&& to_check < range_end_exclusive);
 }
 
-
 template<typename Type>
 inline bool in_range_inclusive(Type range_start_inclusive, 
 	Type range_end_inclusive, Type to_check)
 {
-	return (to_check >= range_start_inclusive 
+	return (to_check >= range_start_inclusive
 		&& to_check <= range_end_inclusive);
 }
 
 template<typename Type>
-inline bool vec2_in_range(Vec2<Type> range_start_inclusive, 
-	Vec2<Type> range_end_exclusive, Vec2<Type> to_check)
+inline bool vec2_in_range(containers::Vec2<Type> range_start_inclusive, 
+	containers::Vec2<Type> range_end_exclusive, 
+	containers::Vec2<Type> to_check)
 {
 	return (to_check.x >= range_start_inclusive.x 
 		&& to_check.x < range_end_exclusive.x
@@ -67,7 +73,7 @@ inline Type clamp_to_range(Type range_start_inclusive,
 		return range_end_exclusive - (Type)(1);
 		//Type ret = range_end_exclusive;
 		//ret -= (Type)1;
-		
+
 	}
 	else
 	{
@@ -75,7 +81,9 @@ inline Type clamp_to_range(Type range_start_inclusive,
 	}
 }
 
+}
 
+}
 
 
 #endif		// range_funcs_hppc

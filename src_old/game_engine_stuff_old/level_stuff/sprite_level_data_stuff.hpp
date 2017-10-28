@@ -30,7 +30,7 @@ enum sprite_spawn_state
 	sss_not_active,
 	sss_active,
 	sss_dead,
-	
+
 } __attribute__((_align4));
 
 
@@ -41,19 +41,19 @@ public:		// variables
 	// The type of Sprite
 	//const sprite_type type;
 	sprite_type type;
-	
+
 	// The initial in-Level x coordinate, divided by 16
 	//const u32 initial_block_grid_x_coord;
 	u32 initial_block_grid_x_coord;
-	
+
 	// The initial in-Level y coordinate, divided by 16
 	//const u32 initial_block_grid_y_coord;
 	u32 initial_block_grid_y_coord;
-	
+
 	// Here Is a s
 	//const bool facing_right;
 	bool facing_right;
-	
+
 	// Here are extra parameters That are used in different ways depending
 	// on the type of Sprite.
 	//const u32 extra_param_0;
@@ -64,15 +64,15 @@ public:		// variables
 	u32 extra_param_1;
 	u32 extra_param_2;
 	u32 extra_param_3;
-	
+
 	// The despawned/spawned/dead information Is merged into the
 	// SpriteInitParamGroup class.  for SpriteInitParamGroup's in
 	// ROM, this Is supposed To be set To sss_not_active.
 	sprite_spawn_state spawn_state;
-	
+
 public:		// functions
-	
-	
+
+
 	inline bool operator == (const SpriteInitParamGroup& other) const
 	{
 		return ((initial_block_grid_x_coord 
@@ -84,7 +84,7 @@ public:		// functions
 	{
 		return !(*this == other);
 	}
-	
+
 	// This function Is included So That an std::forward_list of
 	// SpriteInitParamGroup's Can be sorted in ascending order by the
 	// std::forward_list::sort() method.  The sorting Is To be done based
@@ -108,11 +108,11 @@ public:		// functions
 		//	return (initial_block_grid_y_coord 
 		//		< other.initial_block_grid_y_coord);
 		//}
-		
+
 		return (initial_block_grid_y_coord 
 			< other.initial_block_grid_y_coord);
 	}
-	
+
 	inline bool operator > (const SpriteInitParamGroup& other) const
 	{
 		if (initial_block_grid_x_coord 
@@ -131,11 +131,11 @@ public:		// functions
 		//	return (initial_block_grid_y_coord 
 		//		< other.initial_block_grid_y_coord);
 		//}
-		
+
 		return (initial_block_grid_y_coord 
 			> other.initial_block_grid_y_coord);
 	}
-	
+
 	inline bool operator <= (const SpriteInitParamGroup& other) const
 	{
 		return ((*this) < other || (*this) == other);
@@ -144,8 +144,8 @@ public:		// functions
 	{
 		return ((*this) > other || (*this) == other);
 	}
-	
-	
+
+
 } __attribute__((_align4));
 
 

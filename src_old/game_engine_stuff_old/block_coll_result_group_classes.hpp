@@ -40,7 +40,7 @@ public:		// variables
 	Block* the_block __attribute__((_align4));
 	//block_behavior_type the_bbvt __attribute__((_align4));
 	u32 the_bbvt __attribute__((_align4));
-	
+
 public:		// functions
 	inline BlockCollResult()
 	{
@@ -63,7 +63,7 @@ public:		// functions
 	{
 		*this = to_copy;
 	}
-	
+
 	inline void init(const Vec2s32& s_blk_coord)
 	{
 		the_block = &ActiveLevel::the_block_at_coord(s_blk_coord);
@@ -73,17 +73,17 @@ public:		// functions
 	{
 		init(ActiveLevel::get_block_coord_of_point(s_coord_f24p8));
 	}
-	
+
 	//inline BlockCollResult& operator = 
 	//	(const BlockCollResult& to_copy)
 	//{
 	//	coord = to_copy.coord;
 	//	the_block = to_copy.the_block;
 	//	the_bbvt = to_copy.the_bbvt;
-	//	
+	//
 	//	return *this;
 	//}
-	
+
 	inline block_type get_block_type() const
 	{
 		return the_block->get_block_type();
@@ -92,7 +92,7 @@ public:		// functions
 	{
 		return (block_behavior_type)the_bbvt;
 	}
-	
+
 } __attribute__((_align4));
 
 
@@ -113,35 +113,35 @@ public:		// constants
 	static constexpr Vec2u32 max_size_2d = Vec2u32(3, 3);
 	//static constexpr Vec2u32 max_size_2d = Vec2u32(80, 80);
 	static constexpr u32 max_size = max_size_2d.x * max_size_2d.y;
-	
+
 protected:		// variables
 	BlockCollResult bcr_arr_csz_2d_helper_data[max_size];
-	
+
 	Vec2s32 start_pos;
-	
+
 	Vec2s32 real_size_2d;
-	
+
 	bool moving_left, moving_right;
-	
+
 	static u32 temp_debug_thing;
-	
+
 public:		// variables
 	//Array2dHelper<BlockCollResult> bcr_arr_csz_2d_helper;
 	ArrayCsz2dHelper<BlockCollResult, max_size_2d.x, max_size_2d.y>
 		bcr_arr_csz_2d_helper;
-	
-	
+
+
 public:		// functions
 	BlockCollResultRectGroup();
 	BlockCollResultRectGroup(const CollBox& the_coll_box, 
 		u32 s_moving_left, u32 s_moving_right);
 	BlockCollResultRectGroup
 		(const BlockCollResultRectGroup& to_copy);
-	
+
 	BlockCollResultRectGroup& operator = 
 		(const BlockCollResultRectGroup& to_copy);
-	
-	
+
+
 	inline BlockCollResult& operator () (u32 local_x, u32 local_y)
 	{
 		return at(local_x, local_y);
@@ -154,7 +154,7 @@ public:		// functions
 	{
 		return at(local_coord);
 	}
-	
+
 	inline BlockCollResult& at(u32 local_x, u32 local_y)
 	{
 		return bcr_arr_csz_2d_helper.at(local_x, local_y);
@@ -167,9 +167,9 @@ public:		// functions
 	{
 		return bcr_arr_csz_2d_helper.at(local_coord);
 	}
-	
-	
-	
+
+
+
 	inline s32 real_width() const
 	{
 		return real_size_2d.x;
@@ -182,7 +182,7 @@ public:		// functions
 	{
 		return real_size_2d;
 	}
-	
+
 	inline bool get_moving_left() const
 	{
 		return moving_left;
@@ -191,8 +191,8 @@ public:		// functions
 	{
 		return moving_right;
 	}
-	
-	
+
+
 	// Global coordinates
 	inline s32 left() const
 	{
@@ -204,7 +204,7 @@ public:		// functions
 		//return left() + real_width() - 1;
 		return left() + local_right();
 	}
-	
+
 	inline s32 top() const
 	{
 		//return bcr_arr_csz_2d_helper_data[0].coord.y;
@@ -215,7 +215,7 @@ public:		// functions
 		//return top() + real_height() - 1;
 		return top() + local_bot();
 	}
-	
+
 	// Corners
 	inline Vec2s32 tl_corner() const
 	{
@@ -233,8 +233,8 @@ public:		// functions
 	{
 		return Vec2s32(right(), bot());
 	}
-	
-	
+
+
 	// Local coordinates
 	inline s32 local_left() const
 	{
@@ -244,7 +244,7 @@ public:		// functions
 	{
 		return real_width() - 1;
 	}
-	
+
 	inline s32 local_top() const
 	{
 		return 0;
@@ -253,7 +253,7 @@ public:		// functions
 	{
 		return real_height() - 1;
 	}
-	
+
 	// Corners
 	inline Vec2s32 local_tl_corner() const
 	{
@@ -271,8 +271,8 @@ public:		// functions
 	{
 		return Vec2s32(local_right(), local_bot());
 	}
-	
-	
+
+
 	inline bool contains_local_block_x_coord(s32 to_check) const
 	{
 		return in_range<s32>(0, real_size_2d.x, to_check);
@@ -288,8 +288,8 @@ public:		// functions
 		return (contains_local_block_x_coord(to_check.x) 
 			&& contains_local_block_y_coord(to_check.y));
 	}
-	
-	
+
+
 	//void get_corner_stuff_old
 	//	(ArrayHelper<BlockCollResult*>& bcr_ptr_arr_helper, 
 	//	ArrayHelper<u32>& bool_as_u32_arr_helper)
@@ -302,7 +302,7 @@ public:		// functions
 	//void get_side_blocked_stuff_old
 	//	(ArrayHelper<u32>& bool_as_u32_arr_helper)
 	//	__attribute__((_target_arm));
-	
+
 protected:		// functions
 	inline void init_bcr_arr_csz_2d_helper()
 	{
@@ -310,8 +310,8 @@ protected:		// functions
 		//	Vec2u32(real_width(), real_height()));
 		bcr_arr_csz_2d_helper.init(bcr_arr_csz_2d_helper_data);
 	}
-	
-	
+
+
 } __attribute__((_align4));
 
 class BcrLsegGroup
@@ -319,23 +319,23 @@ class BcrLsegGroup
 public:		// constants
 	// This size Is arbitrary, but Intended To be large enough To work with
 	static constexpr size_t max_size = 3;
-	
+
 public:		// variables
 	BlockCollResult bcr_arr[max_size];
-	
+
 protected:		// variables
 	// The real size of the row or column of pointers To
 	// BlockCollResult's
 	s32 real_size = max_size;
-	
+
 	// The (Block coordinates) position of the left or top That was passed
 	// To the BcrLsegGroup
 	Vec2s32 start_pos = Vec2s32(0, 0);
-	
+
 	// Whether this BcrLsegGroup represents a column (false) or a row
 	// (true)
 	u32 is_horiz = false;
-	
+
 public:		// functions
 	inline BcrLsegGroup()
 	{
@@ -348,19 +348,19 @@ public:		// functions
 	{
 		init(the_coll_lseg);
 	}
-	
+
 	void init(const HorizCollLseg& the_coll_lseg);
 		//__attribute__((_iwram_code));
 	void init(const VertCollLseg& the_coll_lseg)
 		__attribute__((_iwram_code));
-	
+
 	BlockCollResult* horiz_any_bbvt_is_fully_solid(Vec2s32& pos);
 		//__attribute__((_iwram_code));
 	BlockCollResult* vert_any_bbvt_is_fully_solid(Vec2s32& pos)
 		__attribute__((_iwram_code));
 	BlockCollResult* vert_any_bbvt_is_slope(Vec2s32& pos)
 		__attribute__((_iwram_code));
-	
+
 	inline BlockCollResult& operator () (u32 index)
 	{
 		return at(index);
@@ -369,7 +369,7 @@ public:		// functions
 	{
 		return at(index);
 	}
-	
+
 	inline BlockCollResult& at(u32 index)
 	{
 		return bcr_arr[index];
@@ -378,7 +378,7 @@ public:		// functions
 	{
 		return bcr_arr[index];
 	}
-	
+
 	inline BlockCollResult& horiz_left()
 	{
 		return at(0);
@@ -395,8 +395,8 @@ public:		// functions
 	{
 		return at(get_end_pos_offset());
 	}
-	
-	
+
+
 	inline const BlockCollResult& horiz_left() const
 	{
 		return at(0);
@@ -413,14 +413,14 @@ public:		// functions
 	{
 		return at(get_end_pos_offset());
 	}
-	
-	
-	
+
+
+
 	inline s32 get_real_size() const
 	{
 		return real_size;
 	}
-	
+
 	inline const Vec2s32& get_start_pos() const
 	{
 		return start_pos;
@@ -433,7 +433,7 @@ public:		// functions
 	{
 		return get_start_pos() + get_vert_offset(get_end_pos_offset());
 	}
-	
+
 	inline const Vec2s32 get_horiz_offset(s32 i) const
 	{
 		return Vec2s32(i, 0);
@@ -442,7 +442,7 @@ public:		// functions
 	{
 		return Vec2s32(0, i);
 	}
-	
+
 	inline const s32 horiz_left_pos() const
 	{
 		return get_start_pos().x;
@@ -459,7 +459,7 @@ public:		// functions
 	{
 		return vert_top_pos() + get_end_pos_offset();
 	}
-	
+
 	inline bool get_is_horiz() const
 	{
 		return is_horiz;
@@ -468,16 +468,16 @@ public:		// functions
 	{
 		return !is_horiz;
 	}
-	
-	
-	
+
+
+
 protected:		// functions
 	inline const s32 get_end_pos_offset() const
 	{
 		return get_real_size() - 1;
 	}
-	
-	
+
+
 } __attribute__((_align4));
 
 

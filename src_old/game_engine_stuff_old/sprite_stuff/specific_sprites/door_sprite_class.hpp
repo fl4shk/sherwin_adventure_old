@@ -29,8 +29,8 @@ class DoorSprite : public Sprite
 {
 public:		// variables
 	static const SpriteConstParams the_const_params;
-	
-	
+
+
 public:		// functions
 	inline DoorSprite(bool facing_left)
 	{
@@ -38,27 +38,27 @@ public:		// functions
 		shared_constructor_code_part_2(facing_left);
 		shared_constructor_code_part_3();
 	}
-	
+
 	virtual void shared_constructor_code_part_2(bool facing_left);
-	
+
 	inline virtual const SpriteConstParams& get_const_params() const
 	{
 		return the_const_params;
 	}
-	
+
 	// Graphics stuff
 	//virtual void gfx_update();
-	
-	
+
+
 	// Initial
 	//static const SublevelEntrance& get_dest_sle();
-	
-	
+
+
 	// Physics and collision stuff
 	//// All Door sprites are not affected by gravity, and they don't move.
 	//virtual void block_collision_stuff();
-	
-	
+
+
 } __attribute__((_align4));
 
 

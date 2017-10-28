@@ -40,35 +40,35 @@ class Sublevel
 public:		// variables
 	// The lzss compressed Block data
 	u32 cmp_block_data[cmp_block_data_size];
-	
+
 	// The array of SpriteInitParamGroup's
 	SpriteInitParamGroup sprite_ipg_arr[sprite_ipg_arr_size];
-	
+
 	// The array of SublevelEntrance's
 	SublevelEntrance sublevel_entrance_arr[sublevel_entrance_arr_size];
-	
-	
+
+
 public:		// functions
 	inline constexpr u32 get_cmp_bd_size() const
 	{
 		return cmp_block_data_size;
 	}
-	
+
 	inline constexpr u32 get_uncmp_bd_size() const
 	{
 		return xsize * ysize;
 	}
-	
+
 	inline constexpr Vec2u32 get_size_2d() const
 	{
 		return Vec2u32(xsize, ysize);
 	}
-	
+
 	inline constexpr u32 get_sprite_ipg_arr_size() const
 	{
 		return sprite_ipg_arr_size;
 	}
-	
+
 } __attribute__((_align4));
 
 
@@ -80,18 +80,18 @@ class SublevelPointer
 {
 protected:		// variables
 	Vec2u32 size_2d;
-	
+
 public:		// variables
 	ArrayHelper<const u32> cmp_bd_arr_helper;
 	ArrayHelper<const SpriteInitParamGroup> sprite_ipg_arr_arr_helper;
 	ArrayHelper<const SublevelEntrance> sublevel_entrance_arr_arr_helper;
-	
+
 public:		// functions
-	
+
 	inline SublevelPointer()
 	{
 	}
-	
+
 	template<u32 cmp_block_data_size, u32 xsize, u32 ysize, 
 		u32 sprite_ipg_arr_size, u32 sublevel_entrance_arr_size>
 	inline SublevelPointer(const Sublevel<cmp_block_data_size, xsize, 
@@ -99,7 +99,7 @@ public:		// functions
 		the_sublevel)
 	{
 		size_2d = { xsize, ysize };
-		
+
 		cmp_bd_arr_helper.init(the_sublevel.cmp_block_data,
 			cmp_block_data_size);
 		sprite_ipg_arr_arr_helper.init(the_sublevel.sprite_ipg_arr,
@@ -108,15 +108,15 @@ public:		// functions
 			(the_sublevel.sublevel_entrance_arr, 
 			sublevel_entrance_arr_size);
 	}
-	
-	
+
+
 	template<u32 cmp_block_data_size, u32 xsize, u32 ysize, 
 		u32 sprite_ipg_arr_size, u32 sublevel_entrance_arr_size>
 	inline void init(const Sublevel<cmp_block_data_size, xsize, ysize,
 		sprite_ipg_arr_size, sublevel_entrance_arr_size>& the_sublevel)
 	{
 		size_2d = { xsize, ysize };
-		
+
 		cmp_bd_arr_helper.init(the_sublevel.cmp_block_data,
 			cmp_block_data_size);
 		sprite_ipg_arr_arr_helper.init(the_sublevel.sprite_ipg_arr,
@@ -125,13 +125,13 @@ public:		// functions
 			(the_sublevel.sublevel_entrance_arr,
 			sublevel_entrance_arr_size);
 	}
-	
+
 	inline const Vec2u32& get_size_2d() const
 	{
 		return size_2d;
 	}
-	
-	
+
+
 } __attribute__((_align4));
 
 

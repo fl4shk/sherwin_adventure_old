@@ -46,6 +46,7 @@
 //#include "game_engine_stuff/coll_lseg_classes.hpp"
 //#include "game_engine_stuff/hud_manager_class.hpp"
 
+#include "namespace_using.hpp"
 
 // This Is an assembly function.  It doesn't do very much.
 extern "C" int ewram_test_func();
@@ -114,7 +115,7 @@ int main()
 	memcpy(some_title_screen_arr, test_buf, 8);
 	return real_main();
 	//snprintf(test_buf, test_buf_size, "%s", "asdf");
-	
+
 }
 
 
@@ -125,31 +126,31 @@ extern "C"
 int main_2()
 {
 	//profile_dynamic_allocations(20);
-	
-	
-	//HorizCollLseg a(Vec2s32(10, 20), make_f24p8(10));
-	//HorizCollLseg b(Vec2s32(20, 20), make_f24p8(1));
+
+
+	//HorizCollLseg a(Vec2S32(10, 20), make_f24p8(10));
+	//HorizCollLseg b(Vec2S32(20, 20), make_f24p8(1));
 	//
-	//VertCollLseg c(Vec2s32(10, 20), make_f24p8(50));
+	//VertCollLseg c(Vec2S32(10, 20), make_f24p8(50));
 	//////show_debug_u32_group(a.intersects(b), a.intersects(c), 
 	//////	c.intersects(a));
 	////profile_start();
 	//////very_temp = a.intersects(c);
 	////profile_stop();
-	
-	
+
+
 	const Fixed24p8 a = make_f24p8(20, 0x80),
 		b = make_f24p8(8, 0x4a);
-	
+
 	//const Fixed24p8 a = make_f24p8(0x200, 0x80),
 	//	b = make_f24p8(0x100, 0x4a);
-	
+
 	profile_start();
 	const Fixed24p8 c = a / b;
 	show_profile_stop();
 	show_debug_s32_group(c.data);
-	
-	
+
+
 	return 0;
 }
 
@@ -166,7 +167,7 @@ int real_main()
 //int real_main()
 //{
 //	irq_init();
-//	
+//
 //	// This will eventually be used To identify whether save data has been
 //	// created.  As of right now, there Is no need for save data, but That
 //	// will change in the future.  It Is likely That 64 kiB of save data
@@ -174,8 +175,8 @@ int real_main()
 //	memcpy8(GameManager::sram_init_str,
 //		GameManager::sram_const_init_str, 
 //		GameManager::sram_init_str_size);
-//	
-//	
+//
+//
 //	//ASM_COMMENT("Before first show_debug_s32_group() call");
 //	//show_debug_s32_group
 //	//	(Fixedu12p4Packed::get_underlying_type_is_signed(),
@@ -191,46 +192,46 @@ int real_main()
 //	//	make_fu12p4_packed(10, 12).data, 
 //	//	make_fs12p4_packed(-3, 5).data, 
 //	//	make_fs8p8_packed(124, 200).data);
-//	
-//	
+//
+//
 //	//arr_memfill8((u8*)ewram_test_arr, '#', ewram_test_arr_size);
 //	//memset(ewram_test_arr, '#', ewram_test_arr_size);
 //	//memset(ewram_test_arr, '#', 4);
-//	
+//
 //	//ewram_test_arr[0] = '9';
-//	
-//	
+//
+//
 //	//memset(&ewram_test_arr[1], '3', 9);
 //	//memcpy(&ewram_test_arr[1], test_str, 5);
 //	//slower_memcpy(&ewram_test_arr[1], test_str, 5);
-//	
+//
 //	//memcpy(&ewram_test_arr[1]
-//	
+//
 //	//halt();
-//	
-//	
-//	
-//	
+//
+//
+//
+//
 //	GameManager::title_screen_func();
-//	
+//
 //	// This function Is called by GameManager::title_screen_func().
 //	//GameManager::reinit_the_game();
-//	
-//	
-//	
+//
+//
+//
 //	for (;;)
 //	{
 //		GfxManager::back_up_bgofs_mirror();
-//		
+//
 //		Sprite& the_player = *SpriteManager::the_player;
-//		
+//
 //		DebugArrGroup::clear_debug_vars();
-//		
+//
 //		clear_oam_mirror();
-//		
+//
 //		// Key polling Is done in GameManager::vblank_func()
 //		//key_poll();
-//		
+//
 //		if (soft_reset_keys_down())
 //		{
 //			// Reset the game if A, B, Start, and Select are pressed
@@ -238,26 +239,26 @@ int real_main()
 //			////bios_do_soft_reset();
 //			GameManager::reinit_the_game();
 //		}
-//		
-//		
-//		
+//
+//
+//
 //		SpriteManager::find_all_active_sprites();
-//		
-//		
+//
+//
 //		// Despawn sprites That are too far offscreen.
 //		SpriteManager::despawn_sprites_if_needed
 //			(GfxManager::bgofs_mirror[0].curr);
-//		
-//		
+//
+//
 //		SpriteManager::find_all_active_sprites();
-//		
-//		
+//
+//
 //		SpriteManager::update_all_sprites
 //			(ActiveLevel::get_curr_sublevel_ptr().get_size_2d(), 
 //			GfxManager::bgofs_mirror[0]);
-//		
-//		
-//		
+//
+//
+//
 //		// This Is temporary
 //		//if (key_hit_or_held(KEY_L))
 //		if (key_hit(KEY_L))
@@ -272,20 +273,20 @@ int real_main()
 //				GfxManager::bgofs_mirror[0],
 //				(bool)the_player.the_oam_entry.get_hflip_status());
 //		}
-//		
-//		
+//
+//
 //		//if (key_hit(KEY_SELECT))
 //		//{
 //		//	GameManager::fade_out_to_black(1);
-//		//	
+//		//
 //		//	GameManager::wait_for_x_frames(60);
-//		//	
+//		//
 //		//	GameManager::fade_in(1);
 //		//}
-//		
+//
 //		SpriteManager::spawn_sprites_if_needed
 //			(GfxManager::bgofs_mirror[0]);
-//		
+//
 //		//if (key_hit(KEY_L))
 //		//{
 //		//	--player_sprite_stuff::remaining_hp;
@@ -295,21 +296,21 @@ int real_main()
 //		//	++player_sprite_stuff::remaining_hp;
 //		//}
 //		//
-//		
-//		
+//
+//
 //		//ActiveLevelManager::update_sublevel_in_screenblock_mirror_2d
 //		//	(ActiveLevel::bg0_screenblock_mirror_2d, 
 //		//	test_level.get_size_2d());
 //		ActiveLevelManager::update_sublevel_in_screenblock_mirror_2d();
-//		
+//
 //		HudManager::update_hud_in_screenblock_mirror_2d();
 //		bios_wait_for_vblank();
 //		//GameManager::vblank_func();
-//		
+//
 //	}
-//	
-//	
-//	
+//
+//
+//
 //	return 0;
 //}
 

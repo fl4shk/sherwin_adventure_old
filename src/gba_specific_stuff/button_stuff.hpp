@@ -24,6 +24,14 @@
 
 #include "../general_utility_stuff/prev_curr_pair_class.hpp"
 
+#include "../namespace_using.hpp"
+
+
+namespace sherwin_adventure
+{
+
+namespace gba
+{
 // This stuff Is shamelessly taken from TONC.
 //extern vu16 __key_curr, __key_prev;
 //extern vu16 __key_state.curr, __key_state.prev;
@@ -127,5 +135,10 @@ inline bool key_hit_or_held(u32 key)
 bool soft_reset_keys_down(); //__attribute__((_iwram_code));
 
 
+
+
+}
+
+}
 
 #endif		// button_stuff_hpp

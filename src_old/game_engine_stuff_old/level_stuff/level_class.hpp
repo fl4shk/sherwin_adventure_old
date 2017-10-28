@@ -31,19 +31,19 @@ class Level
 {
 public:		// constants
 	static constexpr u32 max_num_sublevels = max_num_sublevels_per_level;
-	
+
 protected:		// variables
 	u32 actual_num_sublevels = 0;
 	array<SublevelPointer, max_num_sublevels> the_sublevels;
-	
-	
+
+
 private:		// functions
-	
+
 	void init(SublevelPointer& some_sublevel_pointer)
 	{
 		the_sublevels.at(actual_num_sublevels++) = some_sublevel_pointer;
 	}
-	
+
 	template<typename... rem_types>
 	void init(SublevelPointer& first, 
 		rem_types&... rem_sublevel_pointers)
@@ -51,13 +51,13 @@ private:		// functions
 		init(first);
 		init(rem_sublevel_pointers...);
 	}
-	
-	
+
+
 	void init(SublevelPointer&& some_sublevel_pointer)
 	{
 		the_sublevels.at(actual_num_sublevels++) = some_sublevel_pointer;
 	}
-	
+
 	template<typename... rem_types>
 	void init(SublevelPointer&& first, 
 		rem_types&&... rem_sublevel_pointers)
@@ -66,7 +66,7 @@ private:		// functions
 		init(std::move(rem_sublevel_pointers...));
 	}
 public:		// functions
-	
+
 	template<typename... arg_types>
 	Level(arg_types&... some_sublevel_pointers)
 	{
@@ -77,19 +77,19 @@ public:		// functions
 	{
 		init(some_sublevel_pointers...);
 	}
-	
-	
+
+
 	inline const u32 get_actual_num_sublevels() const
 	{
 		return actual_num_sublevels;
 	}
-	
+
 	inline const SublevelPointer* get_sublevels() const
 	{
 		return the_sublevels.data();
 	}
-	
-	
+
+
 } __attribute__((_align4));
 
 

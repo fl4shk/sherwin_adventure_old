@@ -26,10 +26,10 @@ public:		// variables
 	//static const u32 metatile_number = 3;
 	//static const u32 palette_number = 0;
 	//static const u32 metatile_graphics_slot = metatile_number;
-	
+
 public:		// enums
 	enum persistent_data_state { is_eyes, is_bt_dud } _alignas_regular;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -37,10 +37,10 @@ public:		// functions
 	}
 	virtual void strongly_hit_response(Block& the_block, 
 		const Vec2s32& coord);
-	
+
 	virtual void finish_initializing_using_persistent_data
 		(Block& the_block);
-	
+
 } __attribute__((_align4));
 
 
@@ -49,7 +49,7 @@ class EyesBlockWithStWaffleStuff : public EyesBlockStuff
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
 		const Vec2s32& coord);
-	
+
 } __attribute__((_align4));
 
 class EyesBlockWithStMuffinStuff : public EyesBlockStuff
@@ -57,7 +57,7 @@ class EyesBlockWithStMuffinStuff : public EyesBlockStuff
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
 		const Vec2s32& coord);
-	
+
 } __attribute__((_align4));
 
 class EyesBlockWithStFireMuffinStuff : public EyesBlockStuff
@@ -65,7 +65,7 @@ class EyesBlockWithStFireMuffinStuff : public EyesBlockStuff
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
 		const Vec2s32& coord);
-	
+
 } __attribute__((_align4));
 
 class EyesBlockWithStIceMuffinStuff : public EyesBlockStuff
@@ -73,7 +73,7 @@ class EyesBlockWithStIceMuffinStuff : public EyesBlockStuff
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
 		const Vec2s32& coord);
-	
+
 } __attribute__((_align4));
 
 class EyesBlockWithStChocolateMuffinStuff : public EyesBlockStuff
@@ -81,7 +81,7 @@ class EyesBlockWithStChocolateMuffinStuff : public EyesBlockStuff
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
 		const Vec2s32& coord);
-	
+
 } __attribute__((_align4));
 
 

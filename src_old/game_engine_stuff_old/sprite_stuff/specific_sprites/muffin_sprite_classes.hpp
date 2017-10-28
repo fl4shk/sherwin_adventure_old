@@ -26,7 +26,7 @@ class MuffinSprite : public Sprite
 {
 public:		// variables
 	static const SpriteConstParams the_const_params;
-	
+
 public:		// functions
 	inline MuffinSprite(bool facing_left)
 	{
@@ -34,19 +34,19 @@ public:		// functions
 		shared_constructor_code_part_2(facing_left);
 		shared_constructor_code_part_3();
 	}
-	
+
 	inline virtual const SpriteConstParams& get_const_params() const
 	{
 		return the_const_params;
 	}
-	
+
 } __attribute__((_align4));
 
 class FireMuffinSprite : public Sprite
 {
 public:		// variables
 	static const SpriteConstParams the_const_params;
-	
+
 public:		// functions
 	inline FireMuffinSprite(bool facing_left)
 	{
@@ -54,12 +54,12 @@ public:		// functions
 		shared_constructor_code_part_2(facing_left);
 		shared_constructor_code_part_3();
 	}
-	
+
 	inline virtual const SpriteConstParams& get_const_params() const
 	{
 		return the_const_params;
 	}
-	
+
 } __attribute__((_align4));
 
 
@@ -67,7 +67,7 @@ class IceMuffinSprite : public Sprite
 {
 public:		// variables
 	static const SpriteConstParams the_const_params;
-	
+
 public:		// functions
 	inline IceMuffinSprite(bool facing_left)
 	{
@@ -75,19 +75,19 @@ public:		// functions
 		shared_constructor_code_part_2(facing_left);
 		shared_constructor_code_part_3();
 	}
-	
+
 	inline virtual const SpriteConstParams& get_const_params() const
 	{
 		return the_const_params;
 	}
-	
+
 } __attribute__((_align4));
 
 class ChocolateMuffinSprite : public Sprite
 {
 public:		// variables
 	static const SpriteConstParams the_const_params;
-	
+
 public:		// functions
 	inline ChocolateMuffinSprite(bool facing_left)
 	{
@@ -95,12 +95,12 @@ public:		// functions
 		shared_constructor_code_part_2(facing_left);
 		shared_constructor_code_part_3();
 	}
-	
+
 	inline virtual const SpriteConstParams& get_const_params() const
 	{
 		return the_const_params;
 	}
-	
+
 } __attribute__((_align4));
 
 #endif		// muffin_sprite_classes_hpp

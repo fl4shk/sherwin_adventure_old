@@ -39,7 +39,7 @@ void SaPodStackBackend::write_to_the_array_u8(const u8* to_write_u8,
 {
 	u32 start_index_u8 = ARR_BYTE_INDEX_MACRO(get_type_size(), 
 		non_u8_index);
-	
+
 	for (u32 i=0; i<get_type_size(); ++i)
 	{
 		get_array_u8()[start_index_u8 + i] = to_write_u8[i];
@@ -69,7 +69,7 @@ SaFreeListBackend::SaFreeListBackend(s16* s_the_array,
 void SaFreeListBackend::init()
 {
 	get_next_index() = 0;
-	
+
 	// This makes it So That the values initially stored in the array are
 	// decrementing in value, starting with the highest value of
 	// (get_size() - 1) and ending with 0. 
@@ -83,7 +83,7 @@ void SaFreeListBackend::init()
 //s16& SaFreeListBackend::peek_top_and_pop()
 //{
 //	pop();
-//	
+//
 //	return get_array()[get_next_index()];
 //}
 

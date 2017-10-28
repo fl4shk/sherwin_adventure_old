@@ -26,7 +26,7 @@ public:		// variables
 	//static const u32 metatile_number = 1;
 	//static const u32 palette_number = 0;
 	//static const u32 metatile_graphics_slot = metatile_number;
-	
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -34,7 +34,7 @@ public:		// functions
 	}
 	virtual void strongly_hit_response(Block& the_block, 
 		const Vec2s32& coord) __attribute__((_iwram_code));
-	
+
 } __attribute__((_align4));
 
 

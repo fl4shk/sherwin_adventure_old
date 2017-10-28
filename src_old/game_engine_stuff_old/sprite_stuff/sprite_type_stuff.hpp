@@ -126,17 +126,17 @@ enum sprite_type
 	// The Default Sprite (also used for when there Is no Sprite in the
 	// slot).
 	StDefault,
-	
+
 	#define GENERATE_ENUM_ENTRY(suffix) \
 	St##suffix,
-	
+
 	LIST_OF_MAIN_SPRITE_TYPE_SUFFIXES(GENERATE_ENUM_ENTRY)
 	#undef GENERATE_ENUM_ENTRY
-	
+
 	// LimSt Is the amount of Sprite types.  It Is automatically updated
 	// by the compiler.
 	LimSt,
-	
+
 } _alignas_regular;
 
 

@@ -25,10 +25,10 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	5,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	5,
 };

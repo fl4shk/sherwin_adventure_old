@@ -20,6 +20,11 @@
 #include "button_stuff.hpp"
 #include "../general_utility_stuff/prev_curr_pair_class.hpp"
 
+namespace sherwin_adventure
+{
+
+namespace gba
+{
 
 // Global variables To hold the key state
 //vu16 __key_curr __attribute__((_EWRAM)) = 0,
@@ -42,6 +47,11 @@ bool soft_reset_keys_down()
 	{
 		return true;
 	}
-	
+
 	return false;
+
+}
+
+}
+
 }

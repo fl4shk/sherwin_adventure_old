@@ -25,6 +25,11 @@
 
 #include <utility>
 
+namespace sherwin_adventure
+{
+
+namespace misc_util
+{
 
 // These were originally Intended To be used by the SaListBackend and
 // externally_allocated_sa_list classes, but they are of course free To use
@@ -44,13 +49,13 @@ typedef int (*QscmpFp)(const void*, const void*);
 typedef void* (*GenericVoidPtr1ArgFp)(void*);
 typedef s16* (*Generics16Ptr1ArgFp)(void*);
 
-typedef Vec2s16* (*GenericVec2s16Ptr1ArgFp)(void*);
+typedef Vec2S16* (*GenericVec2S16Ptr1ArgFp)(void*);
 
 
 // This X macro Is strictly used for working around what appears To be a
 // bug in my text editor's ctags stuff.
 #define LIST_OF_TYPES_TO_MAKE_PTR_TYPEDEFS_FOR(macro) \
-	macro(void) macro(s16) macro(Vec2s16)
+	macro(void) macro(s16) macro(Vec2S16)
 
 #define GENERATE_PTR_TYPEDEF(Type) \
 typedef Type* Type##Ptr;
@@ -147,7 +152,7 @@ inline auto get_generic_s16_ptr_1arg_fp(s16Ptr (*to_cast)(Type*))
 
 template<typename Type>
 inline auto get_generic_vec2_s16_ptr_1arg_fp
-	(Vec2s16Ptr (*to_cast)(Type*))
+	(Vec2S16Ptr (*to_cast)(Type*))
 {
 	return get_other_1arg_fp(to_cast);
 }
@@ -266,6 +271,9 @@ inline u32 generic_less(const Type& a, const Type& b)
 		{ return ((*a2) < (*b2)); });
 }
 
+}
+
+}
 
 
 

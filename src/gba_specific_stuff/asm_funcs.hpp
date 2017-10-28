@@ -19,6 +19,7 @@
 #ifndef asm_funcs_hpp
 #define asm_funcs_hpp
 
+#include "../namespace_using.hpp"
 #include "../general_utility_stuff/misc_types.hpp"
 #include "attribute_defines.hpp"
 
@@ -55,6 +56,12 @@ extern void memcpy8(void* dst, const void* src, u32 bytecount);
 extern void memfill8(void* dst, u32 src, u32 bytecount);
 
 }
+
+namespace sherwin_adventure
+{
+
+namespace gba
+{
 
 // A bunch of wrappers
 inline void memcpy32(volatile void* dst, const void* src, 
@@ -191,7 +198,7 @@ template<typename Type>
 inline void single_write_as_bytes(u8* dst, const Type& to_write)
 {
 	const u8* src = reinterpret_cast<const u8*>(&to_write);
-	
+
 	for (s32 i=sizeof(Type)-1; i>=0; --i)
 	{
 		dst[i] = src[i];
@@ -204,7 +211,7 @@ inline void single_memcpy8(u8* dst_start, size_t type_offset,
 	const Type& to_write)
 {
 	u8* dst = &(dst_start[type_offset * sizeof(Type)]);
-	
+
 	memcpy8(dst, &to_write, sizeof(Type));
 }
 
@@ -214,7 +221,7 @@ inline void single_write_as_bytes(u8* dst_start, size_t type_offset,
 {
 	u8* dst = &(dst_start[type_offset * sizeof(Type)]);
 	const u8* src = reinterpret_cast<const u8*>(&to_write);
-	
+
 	for (s32 i=sizeof(Type)-1; i>=0; --i)
 	{
 		dst[i] = src[i];
@@ -238,8 +245,8 @@ inline void* struct_memcpy(Type& dst, const Type& src)
 	return memcpy(&dst, &src, sizeof(Type));
 }
 
+}
 
-
-
+}
 
 #endif		// asm_funcs_hpp

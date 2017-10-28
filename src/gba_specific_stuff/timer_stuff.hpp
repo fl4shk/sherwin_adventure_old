@@ -81,6 +81,12 @@
 #define TIMER_STOP_OPERATE_MASK		(0x80)
 
 
+namespace sherwin_adventure
+{
+
+namespace gba
+{
+
 // Here Is an extra thing for 
 constexpr inline u16 calc_timer_freq(float freq)
 {
@@ -89,8 +95,8 @@ constexpr inline u16 calc_timer_freq(float freq)
 	//	return 0xffff - (u16)(16.78e6f / freq);
 	//}
 	//return 0.0f;
-	
-	
+
+
 	// I REALLY don't know why I am not allowed To use an if-else chain for
 	// this.  It seems like an oversight in the design of C++, honestly.
 	return (freq > 0.0f) ? 0xffff - (u16)(16.78e6f / freq)
@@ -98,6 +104,8 @@ constexpr inline u16 calc_timer_freq(float freq)
 			: 0xffff);
 }
 
+}
 
+}
 
 #endif		// timer_stuff_hpp

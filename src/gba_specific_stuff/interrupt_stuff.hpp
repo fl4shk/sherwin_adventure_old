@@ -26,6 +26,12 @@
 #include "timer_stuff.hpp"
 
 
+namespace sherwin_adventure
+{
+
+namespace gba
+{
+
 // The Interrupt Enable Register (R/W)
 #define REG_IE *((vu16*)(MEM_IO + 0x0200))
 
@@ -52,7 +58,7 @@ enum intr_type
 	intr_dma3 = 0xb,
 	intr_keypad = 0xc,
 	intr_gamepak = 0xd,
-	
+
 	intr_amount = 0xe,
 };
 
@@ -113,6 +119,8 @@ typedef void (*IrsFuncptr)(void);
 // in what I thought was IWRAM).
 #define REG_IFBIOS *((vu16*)(MEM_IWRAM + 0x7ff8))
 
+}
+}
 
 
 // These extern "C" functions are for maxmod compatibility.  They were
@@ -122,14 +130,18 @@ extern "C"
 {
 	// Also
 	extern volatile IrsFuncptr isr_table[intr_amount];
-	
+
 	void irqEnable(int mask);
-	
+
 	//void irqSet(int mask, IrsFuncptr func);
 	void irqSet(int mask, u32 func_addr);
 }
 
+namespace sherwin_adventure
+{
 
+namespace gba
+{
 void irq_init();
 
 void irq_dummy() __attribute__((_iwram_code));
@@ -149,6 +161,11 @@ inline void nocash_soft_break()
 	(
 		"mov r11, r11\n\t"
 	);
+}
+
+
+}
+
 }
 
 #endif		// interrupt_stuff_hpp

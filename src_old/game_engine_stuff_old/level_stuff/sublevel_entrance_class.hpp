@@ -25,11 +25,11 @@
 enum sublevel_entrance_type
 {
 	sle_blank,
-	
+
 	sle_start_of_level,
-	
+
 	sle_from_door,
-	
+
 	// The number of sublevel_entrance_type's Is automatically updated by
 	// the compiler via the lim_sle enum id.
 	lim_sle,
@@ -42,11 +42,11 @@ enum sublevel_entrance_type
 class SublevelEntrance
 {
 public:		// variables
-	
+
 	sublevel_entrance_type type;
-	
+
 	Vec2F24p8 in_level_pos;
-	
+
 } __attribute__((_align4));
 
 

@@ -132,7 +132,8 @@ CXX_EFILES:=$(CXX_SOURCES:%.cpp=$(PREPROCDIR)/%.E)
 EFILES:=$(CXX_EFILES)
 
 
-all : all_pre $(LD_SCRIPT) $(OFILES)
+#all : all_pre $(LD_SCRIPT) $(OFILES)
+all : all_pre $(OFILES)
 	$(LD) $(OBJDIR)/*.o -o $(PROJ).elf $(LD_FLAGS) -Wl,-M > linker_map.txt
 	$(OBJCOPY) -O binary -S -g -R .iwram -R .bss -R .ewram -R .sram \
 	-R .bss0 -R .bss1 -R .bss2 -R .bss3 \
@@ -217,7 +218,8 @@ $(CXX_EFILES) : $(PREPROCDIR)/%.E : %.cpp
 .PHONY : clean
 clean :
 	rm -rfv $(OBJDIR) $(DEPDIR) $(ASMOUTDIR) $(PREPROCDIR) \
-	$(PROJ).gba $(PROJ).elf tags *.taghl gmon.out $(LD_SCRIPT)
+	$(PROJ).gba $(PROJ).elf tags *.taghl gmon.out
+	#$(PROJ).gba $(PROJ).elf tags *.taghl gmon.out $(LD_SCRIPT)
 
 # Flags for make disassemble*
 DISASSEMBLE_FLAGS:=$(DISASSEMBLE_BASE_FLAGS) -C -d 

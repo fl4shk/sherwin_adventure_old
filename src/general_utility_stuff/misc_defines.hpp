@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 Andrew Clark (FL4SHK).
+// Copyright 2015-2017 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -16,16 +16,15 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include "halt_stuff.hpp"
+#ifndef misc_defines_hpp
+#define misc_defines_hpp
 
-#include "game_manager_class.hpp"
 
-void halt()
-{
-	GameManager::curr_game_mode = gm_do_halt;
+#define width_to_msb_pos(some_width) (some_width - 1)
+#define bprange_to_mask(bit_pos_hi, bit_pos_lo) \
+	((1 << (bit_pos_hi - bit_pos_lo + 1)) - 1)
+#define bprange_to_shifted_mask(bit_pos_hi, bit_pos_lo) \
+	(((1 << (bit_pos_hi - bit_pos_lo + 1)) - 1) << bit_pos_lo)
 
-	for (;;)
-	{
-		bios_wait_for_vblank();
-	}
-}
+
+#endif		// misc_defines_hpp

@@ -22,6 +22,13 @@
 #include "../general_utility_stuff/misc_types.hpp"
 #include "attribute_defines.hpp"
 
+#include "../namespace_using.hpp"
+
+namespace sherwin_adventure
+{
+
+namespace gba
+{
 u64 unsafe_lut_udiv(u32 numerator, u16 divisor)
 	__attribute__((_iwram_code,_target_arm));
 s64 unsafe_lut_sdiv(s32 numerator, s16 divisor)
@@ -32,7 +39,17 @@ s64 safe_lut_sdiv(s32 numerator, s16 divisor, int& valid)
 	__attribute__((_iwram_code,_target_arm));
 
 
+
+}
+
+}
+
+extern "C"
+{
+
 extern const u32 udiv_table[];
 extern const s32 sdiv_table[];
+
+}
 
 #endif		// lut_division_funcs_hpp

@@ -24,7 +24,14 @@
 #include "../gba_specific_stuff/asm_funcs.hpp"
 //#include "coll_box_class.hpp"
 #include "fixed_classes.hpp"
-#include "array_helper_class.hpp"
+#include "array_helper_classes.hpp"
+
+
+namespace sherwin_adventure
+{
+
+namespace misc_util
+{
 
 /*
 extern u32 curr_debug_s32_index, curr_debug_u32_index, 
@@ -89,7 +96,7 @@ enum curr_debug_index_type
 	cdit_f24p8,
 	cdit_f8p8,
 	cdit_str,
-	
+
 	lim_cdit
 };
 
@@ -119,19 +126,19 @@ class DebugStr
 {
 protected:		// variables
 	u32 real_size;
-	
+
 public:		// and constants
 	//// Please make sure That max_size Is a multiple of 4.  max_size Is the
 	//// number of elements in arr.
-	
-	
+
+
 	// It Is a very good idea for max_size To be a multiple of 4.  It makes
 	// copying and clearing faster.
 	///static constexpr u32 max_size = 16;
 	static constexpr u32 max_size = 20;
 	//char arr[max_size];
 	std::array<char, max_size> arr;
-	
+
 public:		// functions
 	inline DebugStr() : real_size(0)
 	{
@@ -152,15 +159,15 @@ public:		// functions
 	{
 		operator = (to_copy);
 	}
-	
+
 	DebugStr& operator = (const DebugStr& to_copy);
 	DebugStr& operator = (const char* to_copy);
-	
+
 	inline u32 get_real_size() const
 	{
 		return real_size;
 	}
-	
+
 	inline void set_real_size(u32 n_real_size)
 	{
 		if (n_real_size > max_size)
@@ -172,7 +179,7 @@ public:		// functions
 			real_size = n_real_size;
 		}
 	}
-	
+
 	inline void clear_arr()
 	{
 		//arr_memfill32(arr, 0, max_size);
@@ -184,7 +191,7 @@ public:		// functions
 		real_size = 0;
 		clear_arr();
 	}
-	
+
 	inline void clear_unused_portion()
 	{
 		for (u32 i=get_real_size(); i<max_size; ++i)
@@ -192,7 +199,7 @@ public:		// functions
 			arr[i] = 0;
 		}
 	}
-	
+
 } __attribute__((_align4));
 
 
@@ -210,41 +217,41 @@ public:		// static variables (raw debug arrays)
 	struct RawArrayGroup
 	{
 		u32 curr_index_arr[curr_index_arr_size];
-		
+
 		u32 debug_u32_arr[debug_u32_arr_size];
 		s32 debug_s32_arr[debug_s32_arr_size];
 		Fixed24p8 debug_f24p8_arr[debug_f24p8_arr_size];
 		Fixed8p8 debug_f8p8_arr[debug_f8p8_arr_size];
-		
+
 		DebugStr debug_str_arr[debug_str_arr_size];
 	} __attribute__((_align4));
 	static RawArrayGroup the_raw_array_group;
-	
-	
+
+
 	// The main reason this Exists Is To give something To write To So That
 	// a breakpoint Can be sure To be hit in GDB.  It's a  bit unfortunate
 	// That I had To resort To something like this due To it being
 	// inflexible, but oh well.
 	static u32 gdb_breakpoint_helper;
-	
+
 public:		// static variables (array_helpers)
 	static ArrayHelper<u32> curr_index_arr_helper;
-	
+
 	static ArrayHelper<u32> debug_u32_arr_helper;
 	static ArrayHelper<s32> debug_s32_arr_helper;
 	static ArrayHelper<Fixed24p8> debug_f24p8_arr_helper;
 	static ArrayHelper<Fixed8p8> debug_f8p8_arr_helper;
-	
+
 	static ArrayHelper<DebugStr> debug_str_arr_helper;
-	
+
 //protected:		// functions
 public:		// functions
-	
+
 	static inline u32* curr_index_arr()
 	{
 		return the_raw_array_group.curr_index_arr;
 	}
-	
+
 	static inline u32* debug_u32_arr() 
 	{
 		return the_raw_array_group.debug_u32_arr;
@@ -266,34 +273,34 @@ public:		// functions
 		return the_raw_array_group.debug_str_arr;
 	}
 public:		// functions
-	
-	
+
+
 	static void clear_debug_vars();
-	
+
 	#define RAW_WRITE_DEBUG_U32_AND_INC(to_write) \
 	DebugArrGroup::debug_u32_arr() \
 		[DebugArrGroup::curr_index_arr()[cdit_u32]++] \
 		= static_cast<u32>(to_write);
-	
+
 	#define RAW_WRITE_DEBUG_S32_AND_INC(to_write) \
 	DebugArrGroup::debug_s32_arr() \
 		[DebugArrGroup::curr_index_arr()[cdit_s32]++] \
 		= static_cast<s32>(to_write);
-	
+
 	#define RAW_WRITE_DEBUG_F24P8_AND_INC(to_write) \
 	DebugArrGroup::debug_f24p8_arr() \
 		[DebugArrGroup::curr_index_arr()[cdit_f24p8]++] \
 		= static_cast<Fixed24p8>(to_write);
-	
+
 	#define RAW_WRITE_DEBUG_F8P8_AND_INC(to_write) \
 	DebugArrGroup::debug_f8p8_arr() \
 		[DebugArrGroup::curr_index_arr()[cdit_f8p8]++] \
 		= static_cast<Fixed8p8>(to_write);
-	
+
 	#define RAW_WRITE_DEBUG_STR_AND_INC(to_write) \
 	DebugArrGroup::debug_str_arr() \
 		[DebugArrGroup::curr_index_arr()[cdit_str]++] = to_write;
-	
+
 	static inline void write_u32_and_inc(u32 to_write)
 	{
 		RAW_WRITE_DEBUG_U32_AND_INC(to_write);
@@ -310,19 +317,19 @@ public:		// functions
 	{
 		RAW_WRITE_DEBUG_F8P8_AND_INC(to_write);
 	}
-	
+
 	static inline void write_str_and_inc(const DebugStr& to_write)
 	{
 		RAW_WRITE_DEBUG_STR_AND_INC(to_write);
 	}
-	
+
 	static inline void write_str_and_inc(const char* to_write)
 	{
 		RAW_WRITE_DEBUG_STR_AND_INC(to_write);
 	}
-	
-	
-	
+
+
+
 } __attribute__((_align4));
 
 
@@ -338,24 +345,24 @@ void show_debug_values_group_backend(debug_arr_type* debug_values_arr,
 	u32& curr_index, const u32 total_num_args, const Type* all_values_arr)
 {
 	//ASM_COMMENT("show_debug_values_group_backend()");
-	
+
 	//ASM_COMMENT("Before old_curr_index");
 	const u32 old_curr_index = curr_index;
-	
+
 	//ASM_COMMENT("Before curr_index = old_curr_index + total_num_args");
-	
+
 	//curr_index += total_num_args;
 	// Turns out That curr_index = old_curr_index + total_num_args Is
 	// FASTER than curr_index += total_num_args with the code That gets
 	// generated.
 	curr_index = old_curr_index + total_num_args;
-	
+
 	//ASM_COMMENT("Before for loop");
 	for (s32 i=total_num_args-1; i>=0; --i)
 	{
 		debug_values_arr[old_curr_index + i] = all_values_arr[i];
 	}
-	
+
 	//ASM_COMMENT("end of show_debug_values_group_backend()");
 }
 
@@ -367,7 +374,7 @@ void show_debug_values_group_backend(debug_arr_type* debug_values_arr,
 ASM_COMMENT("show_debug_" #suffix "_group()"); \
 static constexpr size_t total_num_args = sizeof...(all_the_values); \
 Type all_values_arr[total_num_args]; \
-copy_to_array(all_values_arr, all_the_values...); \
+init_array(all_values_arr, all_the_values...); \
 show_debug_values_group_backend \
 	(DebugArrGroup::debug_##suffix##_arr(), \
 	DebugArrGroup::curr_index_arr()[cdit_##suffix], total_num_args, \
@@ -406,6 +413,10 @@ inline void show_debug_str_group(const all_the_types&... all_the_values)
 
 
 #undef GENERATE_FUNC_CONTENTS
+
+}
+
+}
 
 
 #endif		// debug_vars_hpp

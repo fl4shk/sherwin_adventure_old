@@ -28,25 +28,25 @@ const SpriteConstParams DoorSprite::the_const_params
 = {
 	// the_const_sprite_type
 	StDoor, 
-	
+
 	// the_palette_slot
 	sps_door, 
-	
+
 	// the_relative_metatile_slot
 	0,
-	
+
 	// num_active_gfx_tiles
 	GfxManager::num_tiles_in_ss_16x32,
-	
+
 	// tile_arr 
 	const_cast<Tile*>(reinterpret_cast<const Tile*>(the_door_gfxTiles)),
-	
+
 	// the_initial_shape_size
 	OamEntry::ss_16x32,
-	
+
 	// the_initial_coll_box_size
 	{ {14 << Fixed24p8::get_shift()}, {32 << Fixed24p8::get_shift()} }, 
-	
+
 	// the_initial_cb_pos_offset
 	{ {1}, {0} },
 };
@@ -56,7 +56,7 @@ void DoorSprite::shared_constructor_code_part_2(bool facing_left)
 {
 	// Use the default initialization function first.
 	Sprite::shared_constructor_code_part_2(facing_left);
-	
+
 	// Door sprites should be thought of as part of the "background".
 	// Other sprites are supposed To appear in front of the Door sprites,
 	// no matter which OAM entries are involved.
@@ -73,12 +73,12 @@ void DoorSprite::shared_constructor_code_part_2(bool facing_left)
 //	// the_door.the_sprite_ipg->extra_param_0 Contains the
 //	// destination of the StDoor, or at least, it's SUPPOSED To
 //	// contain the destination.
-//	
+//
 //	//NEXT_DEBUG_F24P8.data = ActiveLevel::the_current_sublevel_ptr
 //	//	.sublevel_entrance_arr_arr_helper.the_array
 //	//	[the_door.the_sprite_ipg->extra_param_0];
 //	//NEXT_DEBUG_F24P8.data = the_door.the_sprite_ipg->extra_param_0;
-//	
+//
 //	//return ActiveLevel::the_current_sublevel_ptr_ptr
 //	//	->sublevel_entrance_arr_arr_helper.the_array
 //	//	[the_door.the_sprite_ipg->extra_param_0];
@@ -86,7 +86,7 @@ void DoorSprite::shared_constructor_code_part_2(bool facing_left)
 //	//	[ActiveLevel::the_current_active_sublevel_index]
 //	//	->sublevel_entrance_arr_arr_helper.the_array
 //	//	[the_door.the_sprite_ipg->extra_param_0];
-//	
+//
 //	return ActiveLevel::get_current_sublevel_ptr()
 //		.sublevel_entrance_arr_arr_helper.the_array
 //		[the_door.the_sprite_ipg->extra_param_0];

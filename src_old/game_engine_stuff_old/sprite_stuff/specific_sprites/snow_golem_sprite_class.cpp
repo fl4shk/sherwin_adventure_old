@@ -30,7 +30,7 @@ const SnowGolemSprite::frame SnowGolemSprite::frame_slot_to_frame_arr
 = {
 	// Standing
 	frm_stand,
-	
+
 	// Throwing a snowball
 	frm_throw_0, frm_throw_1, frm_throw_2
 };
@@ -39,27 +39,27 @@ const SpriteConstParams SnowGolemSprite::the_const_params
 = {
 	// the_const_sprite_type
 	StSnowGolem, 
-	
+
 	// the_palette_slot
 	sps_enemy_0, 
-	
+
 	// the_relative_metatile_slot (not used by this class)
 	0,
-	
+
 	// num_active_gfx_tiles
 	GfxManager::num_tiles_in_ss_16x32,
-	
+
 	// tile_arr 
 	const_cast<Tile*>(reinterpret_cast<const Tile*>
 		(the_golem_enemy_gfxTiles)),
-	
+
 	// the_initial_shape_size
 	OamEntry::ss_16x32,
-	
+
 	// This needs To be better fit To snow golem enemies.
 	// the_initial_coll_box_size
 	{ {12 << Fixed24p8::get_shift() }, {29 << Fixed24p8::get_shift() } },
-	
+
 	// the_initial_cb_pos_offset
 	{ {2 << Fixed24p8::get_shift() }, {3 << Fixed24p8::get_shift() } },
 };
@@ -69,36 +69,36 @@ const SpriteConstParams SnowGolemSprite::the_const_params
 void SnowGolemSprite::update_part_2()
 {
 	// Eventually, interesting stuff should happen in this function.
-	
+
 	u32& frame_stuff_initialized = misc_data_u[udi_frame_stuff_initalized];
 	u32& curr_frame_slot = misc_data_u[udi_curr_frame_slot];
-	
+
 	s32& frame_change_timer = misc_data_s[sdi_frame_change_timer];
-	
+
 	// This could just as easily be done in the init() function, but That'd
 	// require re-implementing it for this class.
 	if (!frame_stuff_initialized)
 	{
 		frame_stuff_initialized = 1;
-		
+
 		curr_frame_slot = frm_slot_stand;
 		frame_change_timer = frame_change_timer_start;
 		return;
 	}
-	
+
 	--frame_change_timer;
-	
+
 	if (frame_change_timer < 0)
 	{
 		frame_change_timer = frame_change_timer_start;
 		++curr_frame_slot;
-		
+
 		if (curr_frame_slot >= lim_frm_slot)
 		{
 			curr_frame_slot = 0;
 		}
 	}
-	
+
 	update_f24p8_positions();
 }
 
@@ -109,7 +109,7 @@ const u32 SnowGolemSprite::get_curr_relative_tile_slot()
 	//// Temporary!
 	//return frame_slot_to_frame_arr[frm_slot_throw_2] 
 	//	* num_active_gfx_tiles;
-	
+
 	// Temporary!
 	u32& curr_frame_slot = misc_data_u[udi_curr_frame_slot];
 	return frame_slot_to_frame_arr[curr_frame_slot] 

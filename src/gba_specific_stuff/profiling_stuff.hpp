@@ -20,6 +20,7 @@
 #define profiling_stuff_hpp
 
 
+#include "../namespace_using.hpp"
 #include "../general_utility_stuff/misc_types.hpp"
 #include "memory_map.hpp"
 #include "asm_funcs.hpp"
@@ -27,18 +28,24 @@
 #include "../general_utility_stuff/debug_vars.hpp"
 
 
+namespace sherwin_adventure
+{
+
+namespace gba
+{
+
 inline void profile_start()
 {
 	ASM_COMMENT("Start of profile_start()");
-	
-	
+
+
 	REG_TM2CNT_FULL = REG_TM3CNT_FULL = 0;
-	
+
 	// Cascade Timer 3 with Timer 2
 	REG_TM2CNT = TIMER_OPERATE;
 	REG_TM3CNT = TIMER_OPERATE | TIMER_CASCADE_ENABLE;
-	
-	
+
+
 	ASM_COMMENT("End of profile_start()");
 }
 
@@ -47,22 +54,22 @@ inline u32 profile_stop()
 	// I guess stopping Timer 2 will stop Timer 3 since Timer 3 Is cascaded
 	// with Timer 2.
 	REG_TM2CNT = 0;
-	
+
 	const u32 ret = ((static_cast<u32>(REG_TM3DATA) << 16) 
 		| static_cast<u32>(REG_TM2DATA));
-	
-	
+
+
 	return ret;
 }
 
 inline void show_profile_stop()
 {
 	ASM_COMMENT("Start of show_profile_stop()");
-	
-	
+
+
 	DebugArrGroup::write_u32_and_inc(profile_stop());
-	
-	
+
+
 	ASM_COMMENT("End of show_profile_stop()");
 }
 
@@ -71,5 +78,8 @@ inline void show_profile_stop()
 void profile_dynamic_allocations(size_t num_elems)
 	__attribute__((_iwram_code,_target_arm));
 
+}
+
+}
 
 #endif		// profiling_stuff_hpp

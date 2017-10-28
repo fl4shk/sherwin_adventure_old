@@ -30,8 +30,8 @@ public:		// variables
 public:		// enums
 	enum subclass_persistent_data_state { is_wood, is_bt_dud } 
 		_alignas_regular;
-	
-	
+
+
 public:		// functions
 	inline virtual const BlockStuffConstParams& get_const_params() const
 	{
@@ -39,7 +39,7 @@ public:		// functions
 	}
 	virtual void strongly_hit_response(Block& the_block, 
 		const Vec2s32& coord);
-	
+
 } __attribute__((_align4));
 
 
@@ -48,10 +48,10 @@ class WoodBlockWithBtDudStuff : public WoodBlockStuff
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
 		const Vec2s32& coord);
-	
+
 	virtual void finish_initializing_using_persistent_data
 		(Block& the_block);
-	
+
 } __attribute__((_align4));
 
 class WoodBlockWithStWaffleStuff : public WoodBlockStuff
@@ -59,50 +59,50 @@ class WoodBlockWithStWaffleStuff : public WoodBlockStuff
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
 		const Vec2s32& coord);
-	
+
 	virtual void finish_initializing_using_persistent_data
 		(Block& the_block);
-	
+
 } __attribute__((_align4));
 class WoodBlockWithStMuffinStuff : public WoodBlockStuff
 {
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
 		const Vec2s32& coord);
-	
+
 	virtual void finish_initializing_using_persistent_data
 		(Block& the_block);
-	
+
 } __attribute__((_align4));
 class WoodBlockWithStFireMuffinStuff : public WoodBlockStuff
 {
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
 		const Vec2s32& coord);
-	
+
 	virtual void finish_initializing_using_persistent_data
 		(Block& the_block);
-	
+
 } __attribute__((_align4));
 class WoodBlockWithStIceMuffinStuff : public WoodBlockStuff
 {
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
 		const Vec2s32& coord);
-	
+
 	virtual void finish_initializing_using_persistent_data
 		(Block& the_block);
-	
+
 } __attribute__((_align4));
 class WoodBlockWithStChocolateMuffinStuff : public WoodBlockStuff
 {
 public:		// functions
 	virtual void strongly_hit_response(Block& the_block, 
 		const Vec2s32& coord);
-	
+
 	virtual void finish_initializing_using_persistent_data
 		(Block& the_block);
-	
+
 } __attribute__((_align4));
 
 

@@ -34,33 +34,33 @@ const SpriteConstParams PlayerSprite::the_const_params
 = {
 	// the_const_sprite_type
 	StPlayer, 
-	
+
 	// the_palette_slot
 	sps_player, 
-	
+
 	// the_relative_metatile_slot (not used by the PlayerSprite class)
 	0,
-	
+
 	// num_active_gfx_tiles
 	GfxManager::num_tiles_in_ss_16x32,
-	
+
 	// tile_arr 
 	const_cast<Tile*>(reinterpret_cast<const Tile*>(sherwin_gfxTiles)),
-	
+
 	// the_initial_shape_size
 	OamEntry::ss_16x32,
 	//OamEntry::ss_16x16,
 	//OamEntry::ss_8x8,
-	
+
 	// the_initial_coll_box_size
 	{ {11 << Fixed24p8::get_shift() }, {28 << Fixed24p8::get_shift() } },
 	//{ {11 << Fixed24p8::get_shift() }, {14 << Fixed24p8::get_shift() } },
 	//{ {8 << Fixed24p8::get_shift() }, {8 << Fixed24p8::get_shift() } },
-	
+
 	// the_initial_cb_pos_offset
 	{ {2 << Fixed24p8::get_shift() }, {4 << Fixed24p8::get_shift() } },
 	//{ {0}, {0} },
-	
+
 	// the_initial_in_level_pos_offset
 	{ {0 << Fixed24p8::get_shift()}, {0 << Fixed24p8::get_shift()} }
 };
@@ -117,25 +117,25 @@ const PlayerSprite::frame PlayerSprite::frame_slot_to_frame_arr
 = { 
 	// Invisible
 	frm_invisible, 
-	
+
 	// Standing
 	frm_stand,
-	
+
 	// Walking/running
 	frm_stand, frm_walk_0, frm_walk_1, frm_walk_0,
-	
+
 	// Swinging a weapon, on the ground, while not moving
 	frm_weapon_swing_ground_still_0, frm_weapon_swing_ground_still_1,
 	frm_weapon_swing_ground_still_2, frm_weapon_swing_ground_still_3,
 	frm_weapon_swing_ground_still_4, frm_weapon_swing_ground_still_5,
-	
+
 	// Two taller weapon swinging frames, which could be used as part
 	// of item throwing animations instead of
 	// frm_weapon_swing_ground_still_4 and
 	// frm_weapon_swing_ground_still_5.
 	frm_weapon_swing_ground_still_4_tall,
 	frm_weapon_swing_ground_still_5_tall,
-	
+
 	// Swinging a weapon, on the ground, but also moving, row 0
 	frm_weapon_swing_ground_moving_0_row_0, 
 	frm_weapon_swing_ground_moving_1_row_0,
@@ -143,7 +143,7 @@ const PlayerSprite::frame PlayerSprite::frame_slot_to_frame_arr
 	frm_weapon_swing_ground_moving_3_row_0,
 	frm_weapon_swing_ground_moving_4_row_0,
 	frm_weapon_swing_ground_moving_5_row_0,
-	
+
 	// Swinging a weapon, on the ground, but also moving, row 1
 	frm_weapon_swing_ground_moving_0_row_1,
 	frm_weapon_swing_ground_moving_1_row_1,
@@ -151,7 +151,7 @@ const PlayerSprite::frame PlayerSprite::frame_slot_to_frame_arr
 	frm_weapon_swing_ground_moving_3_row_1,
 	frm_weapon_swing_ground_moving_4_row_1,
 	frm_weapon_swing_ground_moving_5_row_1,
-	
+
 	// Swinging a weapon, on the ground, but also moving, row 2
 	frm_weapon_swing_ground_moving_0_row_2,
 	frm_weapon_swing_ground_moving_1_row_2,
@@ -159,7 +159,7 @@ const PlayerSprite::frame PlayerSprite::frame_slot_to_frame_arr
 	frm_weapon_swing_ground_moving_3_row_2,
 	frm_weapon_swing_ground_moving_4_row_2,
 	frm_weapon_swing_ground_moving_5_row_2,
-	
+
 	// Swinging a weapon, in the air (uses the same graphics as the
 	// ones for weapon swing, on the ground, but also moving, row 2).
 	frm_weapon_swing_ground_moving_0_row_2,
@@ -221,21 +221,21 @@ void PlayerSprite::shared_constructor_code_part_2
 	PrevCurrPair<BgPoint>& camera_pos_pc_pair, bool facing_left)
 {
 	Sprite::shared_constructor_code_part_2(facing_left);
-	
+
 	//in_level_pos = s_in_level_pos - get_initial_in_level_pos_offset();
 	set_curr_in_level_pos(s_in_level_pos 
 		- get_initial_in_level_pos_offset());
-	
-	
+
+
 	update_f24p8_positions();
 	update_on_screen_pos(camera_pos_pc_pair);
-	
+
 	center_camera_almost(camera_pos_pc_pair.curr);
 	ActiveLevelManager::correct_bg0_scroll_mirror(the_level_size_2d);
 	update_on_screen_pos(camera_pos_pc_pair);
 	copy_the_oam_entry_to_oam_mirror
 		(SpriteManager::the_player_oam_index);
-	
+
 	clear_and_set_bits(the_oam_entry.attr2, OBJ_ATTR2_PRIO_MASK, 
 		OBJ_ATTR2_PRIO_1);
 }
@@ -243,9 +243,9 @@ void PlayerSprite::shared_constructor_code_part_2
 void PlayerSprite::shared_constructor_code_part_3()
 {
 	//Sprite::shared_constructor_code_part_1();
-	
+
 	//the_sprite_type = get_const_sprite_type();
-	
+
 	// This Is for slope testing stuffs
 	//set_shape_size(OamEntry::ss_16x16);
 	////the_coll_box.size = { 12 << Fixed24p8::get_shift(),
@@ -256,10 +256,10 @@ void PlayerSprite::shared_constructor_code_part_3()
 	//	16 << Fixed24p8::get_shift() };
 	//cb_pos_offset = { 0 << Fixed24p8::get_shift(),
 	//	0 << Fixed24p8::get_shift() };
-	
+
 	swinging_pickaxe = false;
 	pickaxe_sprite_slot = -1;
-	
+
 	max_vel_x_abs_val = max_run_speed;
 }
 
@@ -272,7 +272,7 @@ void PlayerSprite::shared_constructor_code_part_3()
 //	//	* GfxManager::num_tiles_in_ss_32x32);
 //	the_oam_entry.set_tile_number
 //		(get_curr_tile_slot());
-//	
+//
 //	the_oam_entry.set_pal_number 
 //		(get_palette_slot());
 //}
@@ -288,7 +288,7 @@ void PlayerSprite::update_part_1()
 void PlayerSprite::update_part_2() 
 {
 	gfx_update();
-	
+
 	if (!swinging_pickaxe)
 	{
 		if (key_hit(KEY_R))
@@ -298,24 +298,24 @@ void PlayerSprite::update_part_2()
 				(StPlayerPickaxe, get_curr_in_level_pos(),
 				GfxManager::bgofs_mirror[0],
 				the_oam_entry.get_hflip_status());
-			
+
 			if (pickaxe_sprite_slot != -1)
 			{
 				swinging_pickaxe = true;
 			}
-			
+
 		}
-		
+
 		//else //if (!key_hit(KEY_R))
 		//{
 		//	// Despawn the pickaxe if the_player Is no longer swinging it.
 		//	SpriteManager::the_player_secondary_sprites
 		//		[pickaxe_sprite_slot].the_sprite_type = StDefault;
-		//	
+		//
 		//	pickaxe_sprite_slot = -1;
 		//}
 	}
-	
+
 	if (key_hit(KEY_B) && get_curr_on_ground())
 	{
 		if (!run_toggle)
@@ -327,10 +327,10 @@ void PlayerSprite::update_part_2()
 			run_toggle = false;
 		}
 	}
-	
+
 	s32 key_dir = 0;
 	s32 vel_x_dir = 0;
-	
+
 	if (vel.x < (Fixed24p8){0})
 	{
 		vel_x_dir = -1;
@@ -339,9 +339,9 @@ void PlayerSprite::update_part_2()
 	{
 		vel_x_dir = 1;
 	}
-	
+
 	Fixed24p8 vel_x_abs = custom_abs(vel.x);
-	
+
 	if (key_hit_or_held(KEY_LEFT) && !key_hit_or_held(KEY_RIGHT))
 	{
 		key_dir = -1;
@@ -357,7 +357,7 @@ void PlayerSprite::update_part_2()
 			vel.x = {0};
 			accel_x = {0};
 		}
-		
+
 		// Don't allow speed changing when in the air
 		else if (get_curr_on_ground())
 		{
@@ -366,9 +366,9 @@ void PlayerSprite::update_part_2()
 				accel_x.data = -vel_x_dir * run_accel_x_abs_val.data * 4;
 			}
 		}
-		
+
 	}
-	
+
 	if (key_dir != 0)
 	{
 		// Allow almost instantly turning around (not something That Can be
@@ -378,11 +378,11 @@ void PlayerSprite::update_part_2()
 		{
 			vel.x = {0};
 		}
-		
+
 		if (run_toggle)
 		{
 			max_vel_x_abs_val = max_run_speed;
-			
+
 			if (vel_x_abs < walk_speed)
 			{
 				//accel_x.data = vel_x_dir * walk_speed.data;
@@ -393,20 +393,20 @@ void PlayerSprite::update_part_2()
 				//accel_x.data = vel_x_dir * run_accel_x_abs_val.data;
 				accel_x.data = key_dir * run_accel_x_abs_val.data;
 			}
-			
+
 		}
 		else //if (!run_toggle)
 		{
 			//vel.x = -walk_speed;
-			
+
 			max_vel_x_abs_val = walk_speed;
-			
+
 			//accel_x = -walk_speed;
 			//accel_x.data = vel_x_dir * walk_speed.data;
 			accel_x.data = key_dir * walk_speed.data;
 		}
-		
-		
+
+
 		//if (get_curr_on_ground() && !swinging_pickaxe)
 		if (!swinging_pickaxe)
 		{
@@ -420,17 +420,17 @@ void PlayerSprite::update_part_2()
 			}
 		}
 	}
-	
+
 	handle_jumping_stuff(key_hit(KEY_A), key_held(KEY_A));
-	
-	
+
+
 	update_f24p8_positions();
-	
+
 	block_collision_stuff();
-	
+
 	update_the_pickaxe();
-	
-	
+
+
 }
 
 
@@ -440,71 +440,71 @@ void PlayerSprite::update_part_3
 	const Vec2u32& the_sublevel_size_2d)
 {
 	// These should totally should be replaced by getter functions
-	
+
 	// Walk frame stuff
 	s32& walk_frame_timer = misc_data_s[sdi_walk_frame_timer];
 	u32& active_walk_frame_slot = misc_data_u
 		[udi_active_walk_frame_slot];
-	
+
 	// Pickaxe swing frame stuff
 	s32& pickaxe_swing_frame_timer = misc_data_s
 		[sdi_pickaxe_swing_frame_timer];
 	u32& active_pickaxe_swing_frame_slot = misc_data_u
 		[udi_active_pickaxe_swing_frame_slot];
-	
+
 	update_frames_and_frame_timers();
-	
-	
+
+
 	//for (Sprite* spr : SpriteManager::the_sprites)
 	for (Sprite* spr : SpriteManager::the_active_sprites)
 	{
 		sprite_interaction_reponse(*spr, camera_pos_pc_pair,
 			the_sublevel_size_2d);
-		
+
 		if (warped_to_other_sublevel_this_frame)
 		{
 			break;
 		}
 	}
-	
+
 	for (Sprite* spr : SpriteManager::the_active_pseudo_bg_sprites)
 	{
 		sprite_interaction_reponse(*spr, camera_pos_pc_pair,
 			the_sublevel_size_2d);
-		
+
 		if (warped_to_other_sublevel_this_frame)
 		{
 			break;
 		}
 	}
-	
+
 	update_on_screen_pos(camera_pos_pc_pair);
-	
+
 	if (warped_this_frame && !warped_to_other_sublevel_this_frame)
 	{
-		
+
 	}
 	else
 	{
 		camera_follow_basic(camera_pos_pc_pair);
 		//center_camera_almost(camera_pos_pc_pair.curr);
 	}
-	
+
 	ActiveLevelManager::correct_bg0_scroll_mirror(the_sublevel_size_2d);
-	
+
 	update_on_screen_pos(camera_pos_pc_pair);
-	
+
 	// Despawn sprites if the_player warped from one part of the current
 	// Sublevel To another part of the current Sublevel, if they are
 	// offscreen.  Also, spawn sprites That are in the new area.
 	if (warped_this_frame && !warped_to_other_sublevel_this_frame)
 	{
 		SpriteManager::despawn_sprites_if_needed(camera_pos_pc_pair.curr);
-		
+
 		SpriteManager::initial_sprite_spawning_shared_code
 			(camera_pos_pc_pair);
 	}
-	
+
 	if (PlayerSprite::remaining_hp < 0)
 	{
 		PlayerSprite::remaining_hp = 0;
@@ -515,12 +515,12 @@ void PlayerSprite::update_part_3
 		PlayerSprite::remaining_hp 
 			= PlayerSprite::max_hp;
 	}
-	
+
 	copy_the_oam_entry_to_oam_mirror
 		(SpriteManager::the_player_oam_index);
-	
+
 	update_the_pickaxe();
-	
+
 	if (invin_frame_timer > 0)
 	{
 		--invin_frame_timer;
@@ -530,42 +530,42 @@ void PlayerSprite::update_part_3
 void PlayerSprite::update_frames_and_frame_timers()
 {
 	// These should totally should be replaced by getter functions
-	
+
 	// Walk frame stuff
 	s32& walk_frame_timer = misc_data_s[sdi_walk_frame_timer];
 	u32& active_walk_frame_slot = misc_data_u[udi_active_walk_frame_slot];
-	
+
 	// Hammer swing frame stuff
 	s32& pickaxe_swing_frame_timer = misc_data_s
 		[sdi_pickaxe_swing_frame_timer];
 	u32& active_pickaxe_swing_frame_slot = misc_data_u
 		[udi_active_pickaxe_swing_frame_slot];
-	
-	
+
+
 	if (active_walk_frame_slot < frm_slot_walk_0 
 		|| active_walk_frame_slot > frm_slot_walk_3)
 	{
 		active_walk_frame_slot = frm_slot_walk_0;
 	}
-	
+
 	if (!swinging_pickaxe)
 	{
 		pickaxe_swing_frame_timer = 0;
 		active_pickaxe_swing_frame_slot 
 			= frm_slot_weapon_swing_ground_still_0;
 	}
-	
+
 	if (get_curr_on_ground())
 	{
 		auto lambda_func_for_else_if = [&](const u32 frame_timer_end)
 			-> void
 		{
 			++walk_frame_timer;
-			
+
 			if (walk_frame_timer >= frame_timer_end)
 			{
 				walk_frame_timer = 0;
-				
+
 				if (active_walk_frame_slot == frm_slot_walk_0)
 				{
 					active_walk_frame_slot = frm_slot_walk_1;
@@ -582,13 +582,13 @@ void PlayerSprite::update_frames_and_frame_timers()
 				{
 					active_walk_frame_slot = frm_slot_walk_0;
 				}
-				
+
 			}
-			
+
 		};
-		
+
 		Fixed24p8 vel_x_abs = custom_abs(vel.x);
-		
+
 		// Standing still
 		//if (speed == (Fixed24p8){0})
 		if (vel.x == (Fixed24p8){0})
@@ -597,11 +597,11 @@ void PlayerSprite::update_frames_and_frame_timers()
 			//active_walk_frame_slot = frm_slot_walk_1;
 			active_walk_frame_slot = frm_slot_walk_0;
 		}
-		
-		
+
+
 		// Walking speed or not-max running speed
 		//else if (speed >= walk_speed && speed < max_run_speed)
-		
+
 		//else if ((vel.x >= walk_speed && vel.x < max_run_speed)
 		//	|| ((-vel.x) >= walk_speed) && (-vel.x) < max_run_speed)
 		//else if ((vel.x >= walk_speed && vel.x < max_run_speed)
@@ -610,7 +610,7 @@ void PlayerSprite::update_frames_and_frame_timers()
 		{
 			lambda_func_for_else_if(walk_frame_timer_end);
 		}
-		
+
 		// Max running speed
 		//else if (speed == max_run_speed)
 		//else if (vel.x == max_run_speed || (-vel.x) == max_run_speed)
@@ -618,7 +618,7 @@ void PlayerSprite::update_frames_and_frame_timers()
 		{
 			lambda_func_for_else_if(run_frame_timer_end);
 		}
-		
+
 		else
 		{
 			// This should NEVER happen, So show a walking frame as a
@@ -631,11 +631,11 @@ void PlayerSprite::update_frames_and_frame_timers()
 	{
 		active_walk_frame_slot = frm_slot_walk_2;
 	}
-	
+
 	if (swinging_pickaxe)
 	{
 		++pickaxe_swing_frame_timer;
-		
+
 		if (pickaxe_swing_frame_timer >= pickaxe_swing_frame_timer_end)
 		{
 			if (active_pickaxe_swing_frame_slot
@@ -645,7 +645,7 @@ void PlayerSprite::update_frames_and_frame_timers()
 			{
 				pickaxe_swing_frame_timer = 0;
 			}
-			
+
 			switch (active_pickaxe_swing_frame_slot)
 			{
 				case frm_slot_weapon_swing_ground_still_0:
@@ -656,31 +656,31 @@ void PlayerSprite::update_frames_and_frame_timers()
 							= frm_slot_weapon_swing_ground_still_1;
 					}
 					break;
-				
+
 				case frm_slot_weapon_swing_ground_still_1:
 					active_pickaxe_swing_frame_slot 
 						= frm_slot_weapon_swing_ground_still_2;
 					break;
-				
+
 				case frm_slot_weapon_swing_ground_still_2:
 					active_pickaxe_swing_frame_slot 
 						= frm_slot_weapon_swing_ground_still_3;
 					break;
-				
+
 				case frm_slot_weapon_swing_ground_still_3:
 					active_pickaxe_swing_frame_slot 
 						= frm_slot_weapon_swing_ground_still_4;
 					break;
-				
+
 				case frm_slot_weapon_swing_ground_still_4:
 					active_pickaxe_swing_frame_slot 
 						= frm_slot_weapon_swing_ground_still_5;
 					break;
-				
+
 				case frm_slot_weapon_swing_ground_still_5:
 					//active_pickaxe_swing_frame_slot 
 					//	= frm_slot_weapon_swing_ground_still_0;
-					
+
 					//if (speed == (Fixed24p8){0} && get_curr_on_ground() 
 					//	&& pickaxe_swing_frame_timer 
 					//	>= pickaxe_swing_still_final_frame_timer_end)
@@ -700,17 +700,17 @@ void PlayerSprite::update_frames_and_frame_timers()
 						pickaxe_swing_frame_timer = 0;
 						swinging_pickaxe = false;
 					}
-					
+
 					break;
-				
+
 				default:
 					swinging_pickaxe = false;
 					break;
-				
+
 			}
-			
+
 		}
-		
+
 		//if (swinging_pickaxe)
 		//{
 		//	return frame_slot_to_frame_arr
@@ -723,7 +723,7 @@ void PlayerSprite::update_frames_and_frame_timers()
 		//		* get_num_active_gfx_tiles();
 		//}
 	}
-	
+
 }
 
 // This Is very ugly
@@ -733,26 +733,26 @@ void PlayerSprite::update_the_pickaxe()
 	{
 		return;
 	}
-	
+
 	// These should totally should be replaced by getter functions
-	
+
 	//Sprite*& the_pickaxe_ptr = SpriteManager::the_player_secondary_sprites
 	//	[pickaxe_sprite_slot];
-	
+
 	Sprite* the_pickaxe_ptr = &(SpriteManager
 		::the_player_secondary_sprites[pickaxe_sprite_slot]);
 	//Sprite& the_pickaxe = *the_pickaxe_ptr;
 	u32& the_pickaxe_frame_slot = the_pickaxe_ptr->misc_data_u
 		[PlayerPickaxeSprite::udi_curr_frame_slot];
-	
+
 	if (!swinging_pickaxe)
 	{
 		//// Despawn the pickaxe if the_player Is no longer swinging it.
 		//the_pickaxe.the_sprite_type = StDefault;
-		
+
 		//SpriteManager::the_player_secondary_sprites_allocator
 		//	.deallocate_sprite(the_pickaxe_ptr);
-		
+
 		if (the_pickaxe_ptr)
 		{
 			//SpriteManager::the_player_secondary_sprites_allocator
@@ -761,14 +761,14 @@ void PlayerSprite::update_the_pickaxe()
 				.deallocate_sprite(*the_pickaxe_ptr);
 			the_pickaxe_ptr = NULL;
 		}
-		
+
 		pickaxe_sprite_slot = -1;
 	}
 	else if (/* swinging_pickaxe && */ the_pickaxe_ptr)
 	{
 		u32 active_pickaxe_swing_frame_slot = misc_data_u
 			[udi_active_pickaxe_swing_frame_slot];
-		
+
 		if (active_pickaxe_swing_frame_slot 
 			>= frm_slot_weapon_swing_ground_still_0 
 			&& active_pickaxe_swing_frame_slot 
@@ -798,7 +798,7 @@ void PlayerSprite::update_the_pickaxe()
 				the_pickaxe_ptr->the_oam_entry.disable_hflip();
 			}
 		}
-		
+
 		// There should really be arrays To load from for these!
 		switch (active_pickaxe_swing_frame_slot)
 		{
@@ -821,11 +821,11 @@ void PlayerSprite::update_the_pickaxe()
 						(get_curr_in_level_pos()
 						+ (Vec2F24p8){ make_f24p8(14), make_f24p8(0) });
 				}
-				
+
 				the_pickaxe_ptr->update_f24p8_positions();
-				
+
 				break;
-			
+
 			case frm_slot_weapon_swing_ground_still_1:
 				the_pickaxe_frame_slot 
 					= PlayerPickaxeSprite::frm_slot_angle_23;
@@ -856,11 +856,11 @@ void PlayerSprite::update_the_pickaxe()
 						(the_pickaxe_ptr->get_curr_in_level_pos().y 
 						- make_f24p8(1));
 				}
-				
+
 				the_pickaxe_ptr->update_f24p8_positions();
-				
+
 				break;
-			
+
 			case frm_slot_weapon_swing_ground_still_2:
 				the_pickaxe_frame_slot 
 					= PlayerPickaxeSprite::frm_slot_angle_0;
@@ -890,11 +890,11 @@ void PlayerSprite::update_the_pickaxe()
 						(the_pickaxe_ptr->get_curr_in_level_pos().y 
 						- make_f24p8(1));
 				}
-				
+
 				the_pickaxe_ptr->update_f24p8_positions();
-				
+
 				break;
-			
+
 			case frm_slot_weapon_swing_ground_still_3:
 				the_pickaxe_frame_slot = 
 					PlayerPickaxeSprite::frm_slot_angle_23;
@@ -924,11 +924,11 @@ void PlayerSprite::update_the_pickaxe()
 						(the_pickaxe_ptr->get_curr_in_level_pos().y 
 						- make_f24p8(1));
 				}
-				
+
 				the_pickaxe_ptr->update_f24p8_positions();
-				
+
 				break;
-			
+
 			case frm_slot_weapon_swing_ground_still_4:
 				the_pickaxe_frame_slot 
 					= PlayerPickaxeSprite::frm_slot_angle_45;
@@ -958,12 +958,12 @@ void PlayerSprite::update_the_pickaxe()
 						(the_pickaxe_ptr->get_curr_in_level_pos().y 
 						- make_f24p8(2));
 				}
-				
+
 				the_pickaxe_ptr->update_f24p8_positions();
-				
+
 				break;
-			
-			
+
+
 			case frm_slot_weapon_swing_ground_still_5:
 				the_pickaxe_frame_slot 
 					= PlayerPickaxeSprite::frm_slot_angle_90;
@@ -994,11 +994,11 @@ void PlayerSprite::update_the_pickaxe()
 						(the_pickaxe_ptr->get_curr_in_level_pos().y 
 						- make_f24p8(3));
 				}
-				
+
 				the_pickaxe_ptr->update_f24p8_positions();
-				
+
 				break;
-			
+
 			default:
 				break;
 		}
@@ -1015,18 +1015,18 @@ void PlayerSprite::update_the_pickaxe()
 const u32 PlayerSprite::get_curr_relative_tile_slot()
 {
 	// These should totally should be replaced by getter functions
-	
+
 	// Walk frame stuff
 	s32& walk_frame_timer = misc_data_s[sdi_walk_frame_timer];
 	u32& active_walk_frame_slot = misc_data_u[udi_active_walk_frame_slot];
-	
+
 	// Hammer swing frame stuff
 	s32& pickaxe_swing_frame_timer = misc_data_s
 		[sdi_pickaxe_swing_frame_timer];
 	u32& active_pickaxe_swing_frame_slot = misc_data_u
 		[udi_active_pickaxe_swing_frame_slot];
-	
-	
+
+
 	// Invincibility frames!
 	if (invin_frame_timer > 0)
 	{
@@ -1040,7 +1040,7 @@ const u32 PlayerSprite::get_curr_relative_tile_slot()
 				return frame_slot_to_frame_arr[frm_slot_invisible]
 					* get_num_active_gfx_tiles();
 				break;
-			
+
 			case 4:
 			case 5:
 			case 6:
@@ -1049,13 +1049,13 @@ const u32 PlayerSprite::get_curr_relative_tile_slot()
 				break;
 		}
 	}
-	
+
 	if (!swinging_pickaxe)
 	{
 		if (get_curr_on_ground())
 		{
 			Fixed24p8 vel_x_abs = custom_abs(vel.x);
-			
+
 			// Standing still
 			//if (speed == (Fixed24p8){0})
 			if (vel.x == (Fixed24p8){0})
@@ -1063,7 +1063,7 @@ const u32 PlayerSprite::get_curr_relative_tile_slot()
 				return frame_slot_to_frame_arr[frm_slot_walk_0]
 					* get_num_active_gfx_tiles();
 			}
-			
+
 			// Walking speed or not-max running speed
 			//else if (speed >= walk_speed && speed < max_run_speed)
 			//else if ((vel.x >= walk_speed && vel.x < max_run_speed)
@@ -1074,7 +1074,7 @@ const u32 PlayerSprite::get_curr_relative_tile_slot()
 				return frame_slot_to_frame_arr[active_walk_frame_slot] 
 					* get_num_active_gfx_tiles();
 			}
-			
+
 			// Max running speed
 			//else if (speed == max_run_speed)
 			//else if (vel.x == max_run_speed 
@@ -1084,7 +1084,7 @@ const u32 PlayerSprite::get_curr_relative_tile_slot()
 				return frame_slot_to_frame_arr[active_walk_frame_slot] 
 					* get_num_active_gfx_tiles();
 			}
-			
+
 			else
 			{
 				// This should NEVER happen, So show a walking frame as a
@@ -1109,7 +1109,7 @@ const u32 PlayerSprite::get_curr_relative_tile_slot()
 			// Yay, another use for X-macros!
 			#define LIST_OF_WEAPON_SWING_FRAME_SLOT_NUMBERS(macro) \
 				macro(0) macro(1) macro(2) macro(3) macro(4) macro(5)
-			
+
 			#define X(number) \
 			\
 			case frm_slot_weapon_swing_ground_still_##number: \
@@ -1156,20 +1156,20 @@ const u32 PlayerSprite::get_curr_relative_tile_slot()
 				} \
 				\
 				break;
-			
+
 			LIST_OF_WEAPON_SWING_FRAME_SLOT_NUMBERS(X)
 			#undef X
-			
-			
-			
+
+
+
 			default:
 				return frame_slot_to_frame_arr[frm_slot_walk_0];
 				break;
-			
+
 		}
-		
+
 	}
-	
+
 	return 9001;
 }
 
@@ -1232,7 +1232,7 @@ void PlayerSprite::block_collision_stuff()
 //	//		->strongly_hit_response(ActiveLevel::the_block_at_coord
 //	//		(tr_coll_result.coord), tr_coll_result.coord);
 //	//}
-//	
+//
 //}
 //void PlayerSprite::block_coll_response_top_16x32_old
 //	(const BlockCollResult& tl_coll_result, 
@@ -1267,18 +1267,18 @@ void PlayerSprite::handle_jumping_stuff(u32 is_jump_key_hit,
 			else
 			{
 				is_jumping = false;
-				
+
 				apply_gravity();
 			}
 		}
 		else
 		{
 			is_jumping = false;
-			
+
 			apply_gravity();
 		}
 	}
-	
+
 }
 
 
@@ -1297,7 +1297,7 @@ void PlayerSprite::sprite_interaction_reponse(Sprite& the_other_sprite,
 		case StFireMuffin:
 		case StIceMuffin:
 		case StChocolateMuffin:
-			
+
 			// This Is not proper despawning!
 			//if (coll_box_intersects_now(the_coll_box,
 			//	the_other_sprite.the_coll_box))
@@ -1309,11 +1309,11 @@ void PlayerSprite::sprite_interaction_reponse(Sprite& the_other_sprite,
 			//		the_other_sprite.the_sprite_ipg->spawn_state 
 			//			= sss_dead;
 			//	}
-			//	
+			//
 			//	++remaining_hp;
 			//}
 			break;
-		
+
 		// This should 
 		case StDoor:
 			if (coll_box_intersects_now(the_coll_box,
@@ -1322,19 +1322,19 @@ void PlayerSprite::sprite_interaction_reponse(Sprite& the_other_sprite,
 				//&& get_curr_on_ground())
 			{
 				warped_this_frame = true;
-				
+
 				//const SublevelEntrance& the_dest_sle 
 				//	= warp_block_sprite_stuff::get_dest_sle
 				//	(the_other_sprite);
-				
+
 				const SublevelEntrance* the_dest_sle_ptr
 					= &(ActiveLevel::the_current_level_ptr
 					->get_sublevels()[the_other_sprite.the_sprite_ipg
 					->extra_param_1]
 					.sublevel_entrance_arr_arr_helper.the_array
 					[the_other_sprite.the_sprite_ipg->extra_param_0]);
-				
-				
+
+
 				if (the_other_sprite.the_sprite_ipg->extra_param_1 
 					!= ActiveLevel::the_current_active_sublevel_index)
 				{
@@ -1342,10 +1342,10 @@ void PlayerSprite::sprite_interaction_reponse(Sprite& the_other_sprite,
 						::load_sublevel_at_intra_sublevel_warp
 						(the_other_sprite.the_sprite_ipg->extra_param_1, 
 						the_other_sprite.the_sprite_ipg->extra_param_0);
-					
+
 					warped_to_other_sublevel_this_frame = true;
 				}
-				
+
 				//in_level_pos.x = the_dest_sle_ptr->in_level_pos.x 
 				//	- get_initial_in_level_pos_offset().x;
 				//in_level_pos.y = the_dest_sle_ptr->in_level_pos.y
@@ -1354,18 +1354,18 @@ void PlayerSprite::sprite_interaction_reponse(Sprite& the_other_sprite,
 					- get_initial_in_level_pos_offset().x);
 				set_curr_in_level_pos_y(the_dest_sle_ptr->in_level_pos.y
 					- get_initial_in_level_pos_offset().y);
-				
+
 				update_f24p8_positions();
 				update_on_screen_pos(camera_pos_pc_pair);
-				
+
 				center_camera_almost(camera_pos_pc_pair.curr);
 				ActiveLevelManager::correct_bg0_scroll_mirror
 					(the_level_size_2d);
 				update_on_screen_pos(camera_pos_pc_pair);
-				
+
 			}
 			break;
-			
+
 		case StSnowGolem:
 			//if (coll_box_intersects_now(the_coll_box,
 			//	the_other_sprite.the_coll_box) 
@@ -1374,11 +1374,11 @@ void PlayerSprite::sprite_interaction_reponse(Sprite& the_other_sprite,
 			//	--remaining_hp;
 			//	invin_frame_timer = initial_invin_frame_timer;
 			//}
-			
+
 		default:
 			break;
 	}
-	
+
 }
 
 

@@ -25,26 +25,26 @@
 //{
 //	const Vec2F24p8& p = end_points[0];
 //	const Vec2F24p8& r = end_points[1];
-//	
+//
 //	const Vec2F24p8& q = to_check.end_points[0];
 //	const Vec2F24p8& s = to_check.end_points[1];
-//	
+//
 //	Fixed24p8 t, u;
-//	
+//
 //	const Fixed24p8 r_zcross_s = r.zcross(s);
-//	
+//
 //	const Vec2F24p8 q_minus_p = q - p;
-//	
+//
 //	const Fixed24p8 u_num = q_minus_p.zcross(s);
-//	
+//
 //	if (r_zcross_s != (Fixed24p8){0})
 //	{
 //		const Fixed24p8 t_num = q_minus_p.zcross(r);
-//		
-//		
+//
+//
 //		if (ret != NULL)
 //		{
-//			
+//
 //		}
 //	}
 //	else if (u_num == (Fixed24p8){0})
@@ -53,25 +53,25 @@
 //		const Fixed24p8 s_dot_r = s.dot(r);
 //		const Fixed24p8 t_0 = q_minus_p.dot(r) / r_dot_r;
 //		const Fixed24p8 t_1 = t_0 + (s_dot_r / r_dot_r);
-//		
+//
 //		const bool t01_in_range_0_to_1 
 //			= in_range_inclusive(t_0, make_f24p8(0), make_f24p8(1))
 //			|| in_range_inclusive(t_1, make_f24p8(0), make_f24p8(1));
-//		
+//
 //		if (!t01_in_range_0_to_1)
 //		{
 //			if (s_dot_r < make_f24p8(0))
 //			{
-//				
+//
 //			}
 //			else
 //			{
-//				
+//
 //			}
 //		}
 //		return true;
 //	}
-//	
+//
 //	return false;
 //}
 

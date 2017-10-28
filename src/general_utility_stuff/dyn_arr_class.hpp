@@ -25,6 +25,11 @@
 
 #include "misc_types.hpp"
 
+namespace sherwin_adventure
+{
+
+namespace containers
+{
 
 
 // This Is a class for dynamic arrays That Can be resized but only by
@@ -35,7 +40,7 @@ class DynArr
 protected:		// variables
 	size_t size = 0;
 	Type* arr = NULL;
-	
+
 public:		// classes
 	//class Iterator
 	//{
@@ -46,17 +51,17 @@ public:		// classes
 	//	typedef Type* pointer;
 	//	typedef std::random_access_iterator_tag iterator_category;
 	//	typedef s32 difference_type;
-	//	
+
 	//protected:		// variables
 	//	DynArr<Type> *const dyn_arr_ptr;
 	//	size_t pos;
-	//	
+
 	//public:		// functions
 	//	inline Iterator(DynArr<Type>* s_dyn_arr_ptr, size_t s_pos)
 	//		: dyn_arr_ptr(s_dyn_arr_ptr), pos(s_pos)
 	//	{
 	//	}
-	//	
+
 	//	inline DynArr<Type> *const get_dyn_arr_ptr() const
 	//	{
 	//		return dyn_arr_ptr;
@@ -65,33 +70,33 @@ public:		// classes
 	//	{
 	//		return pos;
 	//	}
-	//	
+
 	//	inline Iterator& operator += (s32 value)
 	//	{
 	//		s32 temp = pos;
 	//		temp += value;
 	//		pos = temp;
 	//	}
-	//	
+
 	//	//inline 
-	//	
+
 	//} __attribute__((_align4));
-	
+
 	//class Iterator
 	//{
 	//public:		// typedefs
-	//	
-	//	
+
+
 	//protected:		// variables
 	//	DynArr<Type> *const dyn_arr_ptr;
 	//	s32 pos;
-	//	
+
 	//public:		// functions
 	//	inline Iterator(DynArr<Type>* s_dyn_arr_ptr, s32 s_pos)
 	//		: dyn_arr_ptr(s_dyn_arr_ptr), pos(s_pos)
 	//	{
 	//	}
-	//	
+
 	//	inline DynArr<Type> *const get_dyn_arr_ptr() const
 	//	{
 	//		return dyn_arr_ptr;
@@ -100,7 +105,7 @@ public:		// classes
 	//	{
 	//		return pos;
 	//	}
-	//	
+
 	//	inline bool operator != (const Iterator& other) const
 	//	{
 	//		if (get_pos() != other.get_pos())
@@ -116,7 +121,7 @@ public:		// classes
 	//			return false;
 	//		}
 	//	}
-	//	
+
 	//	inline Iterator& operator ++ ()
 	//	{
 	//		++pos;
@@ -132,12 +137,12 @@ public:		// classes
 	//		pos += value;
 	//		return *this;
 	//	}
-	//	
+
 	//	//inline 
-	//	
+
 	//} __attribute__((_align4));
-	
-	
+
+
 public:		// functions
 	inline DynArr(size_t s_size=1) : size(s_size)
 	{
@@ -155,26 +160,26 @@ public:		// functions
 	{
 		dealloc_arr();
 	}
-	
-	
+
+
 	inline DynArr& operator = (const DynArr<Type>& to_copy)
 	{
 		dealloc_arr();
-		
+
 		size = to_copy.get_size();
 		alloc_arr();
-		
+
 		copy_to_arr(to_copy.get_arr(), get_size());
 	}
 	inline DynArr& operator = (DynArr<Type>&& to_copy)
 	{
 		size = to_copy.get_size();
 		arr = to_copy.get_arr();
-		
+
 		to_copy.size = 0;
 		to_copy.arr = NULL;
 	}
-	
+
 	inline Type* get_arr()
 	{
 		return arr;
@@ -187,7 +192,7 @@ public:		// functions
 	{
 		return size;
 	}
-	
+
 	inline Type& operator [] (size_t index)
 	{
 		return get_arr()[index];
@@ -196,19 +201,19 @@ public:		// functions
 	{
 		return get_arr()[index];
 	}
-	
+
 	inline void resize(size_t n_size)
 	{
 		DynArr<Type> temp_arr(std::move(*this));
-		
+
 		size = n_size;
 		alloc_arr();
-		
+
 		copy_to_arr(temp_arr.get_arr(), temp_arr.get_size());
-		
+
 		*this = std::move(temp_arr);
 	}
-	
+
 protected:		// functions
 	inline void copy_to_arr(Type* to_copy, size_t the_size)
 	{
@@ -235,11 +240,12 @@ protected:		// functions
 	{
 		delete [] arr;
 	}
-	
-	
+
+
 } __attribute__((_align4));
 
+}
 
-
+}
 
 #endif		// dyn_arr_class_hpp

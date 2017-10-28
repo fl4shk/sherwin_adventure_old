@@ -36,13 +36,13 @@ public:		// variables
 	ExternallyAllocatedList<Type> the_externally_allocated_list;
 	Node<Type> node_array[total_num_nodes];
 	SaFreeList<total_num_nodes> the_free_list;
-	
+
 	s32& front_index;
 	s32& back_index;
-	
+
 public:		// functions
-	
-	
+
+
 protected:		// functions
 	// This may be the first time I've ever made a constructor protected.
 	inline RegularListBase() : the_externally_allocated_list
@@ -52,7 +52,7 @@ protected:		// functions
 		.get_back_index())
 	{
 	}
-	
+
 	inline s32& get_front_index()
 	{
 		//return the_externally_allocated_list.get_front_index();
@@ -73,7 +73,7 @@ protected:		// functions
 		//return the_externally_allocated_list.get_back_index();r
 		return back_index;
 	}
-	
+
 	inline Node<Type>* get_node_array()
 	{
 		return node_array;
@@ -82,7 +82,7 @@ protected:		// functions
 	{
 		return node_array;
 	}
-	
+
 	inline SaFreeList<total_num_nodes>& get_free_list()
 	{
 		return the_free_list;
@@ -99,7 +99,7 @@ protected:		// functions
 	{
 		return total_num_nodes;
 	}
-	
+
 	inline Node<Type>& get_node_at(s32 index)
 	{
 		return get_node_array()[index];
@@ -109,7 +109,7 @@ protected:		// functions
 		//return get_node_at(get_front_index());
 		return the_externally_allocated_list.front();
 	}
-	
+
 	inline void fully_deallocate()
 	{
 		the_externally_allocated_list.fully_deallocate();
@@ -118,8 +118,8 @@ protected:		// functions
 	{
 		the_externally_allocated_list.fully_deallocate_via_unlink();
 	}
-	
-	
+
+
 	inline s32 push_front(const Type& to_push)
 	{
 		return the_externally_allocated_list.push_front(to_push);
@@ -138,7 +138,7 @@ protected:		// functions
 		return the_externally_allocated_list.push_back
 			(std::move(to_push));
 	}
-	
+
 	inline s32 pop_front_basic()
 	{
 		return the_externally_allocated_list.pop_front_basic();
@@ -147,8 +147,8 @@ protected:		// functions
 	{
 		return the_externally_allocated_list.pop_back_basic();
 	}
-	
-	
+
+
 	inline s32 insert_before(s32 index, const Type& to_insert)
 	{
 		return the_externally_allocated_list.insert_before(index,
@@ -159,8 +159,8 @@ protected:		// functions
 		return the_externally_allocated_list.insert_before(index,
 			std::move(to_insert));
 	}
-	
-	
+
+
 	inline s32 insert_after(s32 index, const Type& to_insert)
 	{
 		return the_externally_allocated_list.insert_after(index,
@@ -171,8 +171,8 @@ protected:		// functions
 		return the_externally_allocated_list.insert_after(index,
 			std::move(to_insert));
 	}
-	
-	
+
+
 	inline void erase_at(s32 index)
 	{
 		the_externally_allocated_list.erase_at(index);
@@ -197,7 +197,7 @@ protected:		// functions
 	{
 		return the_externally_allocated_list.merge_sort_via_array_2();
 	}
-	
+
 } __attribute__((_align4));
 
 
@@ -206,12 +206,12 @@ class RegularList : public RegularListBase<Type, total_num_nodes>
 {
 public:		// typedefs
 	typedef RegularListBase<Type, total_num_nodes> Base;
-	
+
 public:		// functions
 	inline RegularList() : Base()
 	{
 	}
-	
+
 	inline s32& get_front_index()
 	{
 		return Base::get_front_index();
@@ -228,7 +228,7 @@ public:		// functions
 	{
 		return Base::get_back_index();
 	}
-	
+
 	inline Node<Type>* get_node_array()
 	{
 		return Base::get_node_array();
@@ -237,7 +237,7 @@ public:		// functions
 	{
 		return Base::get_node_array();
 	}
-	
+
 	inline SaFreeList<total_num_nodes>& get_free_list()
 	{
 		return Base::get_free_list();
@@ -254,7 +254,7 @@ public:		// functions
 	{
 		return total_num_nodes;
 	}
-	
+
 	inline Node<Type>& get_node_at(s32 index)
 	{
 		return Base::get_node_at(index);
@@ -264,7 +264,7 @@ public:		// functions
 		//return get_node_at(get_front_index());
 		return Base::front();
 	}
-	
+
 	inline void fully_deallocate()
 	{
 		Base::fully_deallocate();
@@ -273,8 +273,8 @@ public:		// functions
 	{
 		Base::fully_deallocate_via_unlink();
 	}
-	
-	
+
+
 	inline s32 push_front(const Type& to_push)
 	{
 		return Base::push_front(to_push);
@@ -291,7 +291,7 @@ public:		// functions
 	{
 		return Base::push_back(std::move(to_push));
 	}
-	
+
 	inline s32 pop_front_basic()
 	{
 		return Base::pop_front_basic();
@@ -300,8 +300,8 @@ public:		// functions
 	{
 		return Base::pop_back_basic();
 	}
-	
-	
+
+
 	inline s32 insert_before(s32 index, const Type& to_insert)
 	{
 		return Base::insert_before(index,
@@ -312,8 +312,8 @@ public:		// functions
 		return Base::insert_before(index,
 			std::move(to_insert));
 	}
-	
-	
+
+
 	inline s32 insert_after(s32 index, const Type& to_insert)
 	{
 		return Base::insert_after(index,
@@ -324,8 +324,8 @@ public:		// functions
 		return Base::insert_after(index,
 			std::move(to_insert));
 	}
-	
-	
+
+
 	inline void erase_at(s32 index)
 	{
 		Base::erase_at(index);
@@ -350,7 +350,7 @@ public:		// functions
 	{
 		return Base::merge_sort_via_array_2();
 	}
-	
+
 } __attribute__((_align4));
 
 
@@ -362,12 +362,12 @@ class SortedAlwaysList
 {
 public:		// typedefs
 	typedef RegularListBase<Type, total_num_nodes> Base;
-	
+
 public:		// functions
 	inline SortedAlwaysList() : Base()
 	{
 	}
-	
+
 	inline s32& get_front_index()
 	{
 		return Base::get_front_index();
@@ -384,7 +384,7 @@ public:		// functions
 	{
 		return Base::get_back_index();
 	}
-	
+
 	inline Node<Type>* get_node_array()
 	{
 		return Base::get_node_array();
@@ -393,7 +393,7 @@ public:		// functions
 	{
 		return Base::get_node_array();
 	}
-	
+
 	inline SaFreeList<total_num_nodes>& get_free_list()
 	{
 		return Base::get_free_list();
@@ -410,7 +410,7 @@ public:		// functions
 	{
 		return total_num_nodes;
 	}
-	
+
 	inline void fully_deallocate()
 	{
 		Base::fully_deallocate();
@@ -419,8 +419,8 @@ public:		// functions
 	{
 		Base::fully_deallocate_via_unlink();
 	}
-	
-	
+
+
 	inline Node<Type>& get_node_at(s32 index)
 	{
 		return Base::get_node_at(index);
@@ -430,7 +430,7 @@ public:		// functions
 		//return get_node_at(get_front_index());
 		return Base::front();
 	}
-	
+
 	inline s32 push_front(const Type& to_push)
 	{
 		return Base::push_front(to_push);
@@ -447,7 +447,7 @@ public:		// functions
 	{
 		return Base::push_back(std::move(to_push));
 	}
-	
+
 	inline s32 pop_front_basic()
 	{
 		return Base::pop_front_basic();
@@ -456,23 +456,23 @@ public:		// functions
 	{
 		return Base::pop_back_basic();
 	}
-	
+
 	inline s32 insert_and_sort(const Type& to_insert)
 	{
 		push_front(to_insert);
-		
+
 		//return Base::insertion_sort();
 		return merge_sort_via_array_2();
 	}
 	inline s32 insert_and_sort(Type&& to_insert)
 	{
 		push_front(std::move(to_insert));
-		
+
 		//return Base::insertion_sort();
 		return merge_sort_via_array_2();
 	}
-	
-	
+
+
 	// There Is no need To sort the list after erasing a single Node.  This
 	// Is because the list was already sorted To begin with.
 	inline void erase_at(s32 index)
@@ -499,7 +499,7 @@ public:		// functions
 	{
 		return Base::merge_sort_via_array_2();
 	}
-	
+
 } __attribute__((_align4));
 
 } // end of namespace SaListStuff

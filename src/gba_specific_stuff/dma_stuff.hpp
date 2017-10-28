@@ -22,6 +22,8 @@
 #include "../general_utility_stuff/misc_types.hpp"
 #include "memory_map.hpp"
 
+#include "../namespace_using.hpp"
+
 
 /* ---- DMA Registers ---- */
 // -- DMA Source Addresses --
@@ -133,8 +135,18 @@
 /* ---- End of #defines for DMACNT Registers ---- */
 
 
+namespace sherwin_adventure
+{
+
+namespace gba
+{
+
 // Mirrors for the DMACNT registers
 extern vu32 dma0cnt_mirror, dma1cnt_mirror, dma2cnt_mirror, dma3cnt_mirror;
+
+}
+
+}
 
 
 /* ---- Wrapper Functions for DMA Copies ---- */

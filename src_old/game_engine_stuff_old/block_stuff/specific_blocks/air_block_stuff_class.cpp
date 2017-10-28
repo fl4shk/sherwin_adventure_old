@@ -24,13 +24,13 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	0,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	0,
-	
+
 	// behavior_type 
 	bbvt_air,
 };

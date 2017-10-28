@@ -253,15 +253,15 @@ void SprBlkCollGroup16x16::init(const CollBox& s_coll_box,
 	u32 s_on_ground)
 {
 	//init_arr_helpers();
-	
+
 	init_static_vars(s_coll_box, s_on_ground);
-	
+
 	horiz_ctups[hi_left_top].blk_crd_pos = get_left_top_hs_blk_crd_pos();
 	horiz_ctups[hi_left_mid].blk_crd_pos = get_left_mid_hs_blk_crd_pos();
-	
+
 	horiz_ctups[hi_right_top].blk_crd_pos = get_right_top_hs_blk_crd_pos();
 	horiz_ctups[hi_right_mid].blk_crd_pos = get_right_mid_hs_blk_crd_pos();
-	
+
 	if (!get_size_is_tiny().x || get_on_ground())
 	{
 		horiz_ctups[hi_left_bot].blk_crd_pos 
@@ -269,14 +269,14 @@ void SprBlkCollGroup16x16::init(const CollBox& s_coll_box,
 		horiz_ctups[hi_right_bot].blk_crd_pos 
 			= get_right_bot_hs_blk_crd_pos();
 	}
-	
+
 	vert_top_ctups[vi_top_left].blk_crd_pos 
 		= get_top_left_vs_blk_crd_pos();
 	//vert_top_ctups[vi_top_mid].blk_crd_pos 
 	//	= get_top_mid_vs_blk_crd_pos();
 	vert_top_ctups[vi_top_right].blk_crd_pos 
 		= get_top_right_vs_blk_crd_pos();
-	
+
 	if (s_on_ground)
 	{
 		vert_bot_ctups[vi_bot_left].clseg = get_bot_left_vs_og();
@@ -289,7 +289,7 @@ void SprBlkCollGroup16x16::init(const CollBox& s_coll_box,
 		vert_bot_ctups[vi_bot_mid].clseg = get_bot_mid_vs_ia();
 		vert_bot_ctups[vi_bot_right].clseg = get_bot_right_vs_ia();
 	}
-	
+
 	for (size_t i=0; i<get_num_horiz_ctups(); ++i)
 	{
 		get_horiz_ctup(i).bcr.init(get_horiz_ctup(i).blk_crd_pos);
@@ -302,8 +302,8 @@ void SprBlkCollGroup16x16::init(const CollBox& s_coll_box,
 	{
 		get_vert_bot_ctup(i).bcrlg.init(get_vert_bot_ctup(i).clseg);
 	}
-	
-	
+
+
 }
 
 //void SprBlkCollGroup16x16::init_arr_helpers()
@@ -372,7 +372,7 @@ void SprBlkCollGroup16x16::init_static_vars
 	(const CollBox& s_coll_box, bool s_on_ground)
 {
 	internal_on_ground = s_on_ground;
-	
+
 	if (s_coll_box.size.x.floor_to_int() <= 8)
 	{
 		size_is_tiny.x = true;
@@ -389,13 +389,13 @@ void SprBlkCollGroup16x16::init_static_vars
 	{
 		size_is_tiny.y = false;
 	}
-	
+
 	blk_crd_pos_x_for_left_hs = conv_pix_crd_to_blk_crd(s_coll_box.left()
 		.floor_to_int());
 	//pos_x_for_right_hs = s_coll_box.get_x_center();
 	blk_crd_pos_x_for_right_hs = conv_pix_crd_to_blk_crd(s_coll_box.right()
 		.floor_to_int());
-	
+
 	//static const Fixed24p8 offset_y_for_bot_hs 
 	//	= (Fixed24p8){ (s_coll_box.size.y.data / 4) };
 	static const Fixed24p8 offset_y_for_bot_hs 
@@ -413,7 +413,7 @@ void SprBlkCollGroup16x16::init_static_vars
 	//	+ (s_coll_box.size.y.data / 16) };
 	static const Fixed24p8 offset_y_for_top_hs 
 		= (Fixed24p8){-offset_y_for_bot_hs.data};
-	
+
 	blk_crd_pos_y_for_top_hs = conv_pix_crd_to_blk_crd
 		((s_coll_box.get_y_center() + offset_y_for_top_hs)
 		.floor_to_int());
@@ -422,9 +422,9 @@ void SprBlkCollGroup16x16::init_static_vars
 	blk_crd_pos_y_for_bot_hs = conv_pix_crd_to_blk_crd
 		((s_coll_box.get_y_center() + offset_y_for_bot_hs)
 		.floor_to_int());
-	
+
 	Fixed24p8 offset_x_for_left_vs;
-	
+
 	if (get_size_is_tiny().x)
 	{
 		offset_x_for_left_vs = (Fixed24p8){ s_coll_box.half_width().data
@@ -451,30 +451,30 @@ void SprBlkCollGroup16x16::init_static_vars
 	}
 	static const Fixed24p8 offset_x_for_right_vs
 		= (Fixed24p8){-offset_x_for_left_vs.data};
-	
+
 	pos_x_for_left_vs = s_coll_box.left() + offset_x_for_left_vs;
 	pos_x_for_mid_vs = s_coll_box.get_x_center();
 	pos_x_for_right_vs = s_coll_box.right() + offset_x_for_right_vs;
-	
+
 	blk_crd_pos_x_for_left_vs = conv_pix_crd_to_blk_crd(pos_x_for_left_vs
 		.floor_to_int());
 	blk_crd_pos_x_for_mid_vs = conv_pix_crd_to_blk_crd(pos_x_for_mid_vs
 		.floor_to_int());
 	blk_crd_pos_x_for_right_vs = conv_pix_crd_to_blk_crd(pos_x_for_right_vs
 		.floor_to_int());
-	
+
 	//blk_crd_pos_y_for_top_vs = conv_pix_crd_to_blk_crd(s_coll_box.top()
 	//	.floor_to_int() + 1);
 	blk_crd_pos_y_for_top_vs = conv_pix_crd_to_blk_crd(s_coll_box.top()
 		.floor_to_int() - 1);
 	//pos_y_for_bot_vs = s_coll_box.bot() + offset_y_for_bot_vs;
-	
+
 	//offset_y_for_bot_vs = (Fixed24p8){ -s_coll_box.size.y.data / 4 };
 	//offset_y_for_bot_vs = (Fixed24p8){ -s_coll_box.size.y.data / 8 };
 	offset_y_for_bot_vs = make_f24p8(-4);
 	pos_y_for_bot_vs = s_coll_box.bot() + offset_y_for_bot_vs;
-	
-	
+
+
 	//vs_height_bot_ia = custom_abs(offset_y_for_bot_vs) + make_f24p8(1);
 	//vs_height_bot_ia = custom_abs(offset_y_for_bot_vs);
 	//vs_height_bot_ia = custom_abs(offset
@@ -492,15 +492,15 @@ void SprBlkCollGroup16x32::init(const CollBox& s_coll_box,
 	u32 s_on_ground)
 {
 	//init_arr_helpers();
-	
+
 	init_static_vars(s_coll_box, s_on_ground);
-	
+
 	horiz_ctups[hi_left_top].blk_crd_pos = get_left_top_hs_blk_crd_pos();
 	horiz_ctups[hi_left_mid].blk_crd_pos = get_left_mid_hs_blk_crd_pos();
-	
+
 	horiz_ctups[hi_right_top].blk_crd_pos = get_right_top_hs_blk_crd_pos();
 	horiz_ctups[hi_right_mid].blk_crd_pos = get_right_mid_hs_blk_crd_pos();
-	
+
 	if (!get_size_is_tiny().x || get_on_ground())
 	{
 		horiz_ctups[hi_left_bot].blk_crd_pos 
@@ -508,14 +508,14 @@ void SprBlkCollGroup16x32::init(const CollBox& s_coll_box,
 		horiz_ctups[hi_right_bot].blk_crd_pos 
 			= get_right_bot_hs_blk_crd_pos();
 	}
-	
+
 	vert_top_ctups[vi_top_left].blk_crd_pos 
 		= get_top_left_vs_blk_crd_pos();
 	//vert_top_ctups[vi_top_mid].blk_crd_pos 
 	//	= get_top_mid_vs_blk_crd_pos();
 	vert_top_ctups[vi_top_right].blk_crd_pos 
 		= get_top_right_vs_blk_crd_pos();
-	
+
 	if (s_on_ground)
 	{
 		vert_bot_ctups[vi_bot_left].clseg = get_bot_left_vs_og();
@@ -528,7 +528,7 @@ void SprBlkCollGroup16x32::init(const CollBox& s_coll_box,
 		vert_bot_ctups[vi_bot_mid].clseg = get_bot_mid_vs_ia();
 		vert_bot_ctups[vi_bot_right].clseg = get_bot_right_vs_ia();
 	}
-	
+
 	for (size_t i=0; i<get_num_horiz_ctups(); ++i)
 	{
 		//horiz_ctups[i].bcrlg.init(horiz_ctups[i].clseg);
@@ -544,8 +544,8 @@ void SprBlkCollGroup16x32::init(const CollBox& s_coll_box,
 		//vert_bot_ctups[i].bcrlg.init(vert_bot_ctups[i].clseg);
 		get_vert_bot_ctup(i).bcrlg.init(get_vert_bot_ctup(i).clseg);
 	}
-	
-	
+
+
 }
 
 //void SprBlkCollGroup16x32::init_arr_helpers()
@@ -615,7 +615,7 @@ void SprBlkCollGroup16x32::init_static_vars
 	(const CollBox& s_coll_box, bool s_on_ground)
 {
 	internal_on_ground = s_on_ground;
-	
+
 	if (s_coll_box.size.x.floor_to_int() <= 8)
 	{
 		size_is_tiny.x = true;
@@ -632,13 +632,13 @@ void SprBlkCollGroup16x32::init_static_vars
 	//{
 	//	size_is_tiny.y = false;
 	//}
-	
+
 	blk_crd_pos_x_for_left_hs = conv_pix_crd_to_blk_crd(s_coll_box.left()
 		.floor_to_int());
 	//pos_x_for_right_hs = s_coll_box.get_x_center();
 	blk_crd_pos_x_for_right_hs = conv_pix_crd_to_blk_crd(s_coll_box.right()
 		.floor_to_int());
-	
+
 	//static const Fixed24p8 offset_y_for_bot_hs 
 	//	= (Fixed24p8){ (s_coll_box.size.y.data / 4) };
 	static const Fixed24p8 offset_y_for_bot_hs 
@@ -656,7 +656,7 @@ void SprBlkCollGroup16x32::init_static_vars
 	//	+ (s_coll_box.size.y.data / 16) };
 	static const Fixed24p8 offset_y_for_top_hs 
 		= (Fixed24p8){-offset_y_for_bot_hs.data};
-	
+
 	blk_crd_pos_y_for_top_hs = conv_pix_crd_to_blk_crd
 		((s_coll_box.get_y_center() + offset_y_for_top_hs)
 		.floor_to_int());
@@ -665,7 +665,7 @@ void SprBlkCollGroup16x32::init_static_vars
 	blk_crd_pos_y_for_bot_hs = conv_pix_crd_to_blk_crd
 		((s_coll_box.get_y_center() + offset_y_for_bot_hs)
 		.floor_to_int());
-	
+
 	static const Fixed24p8 offset_x_for_left_vs
 		= (Fixed24p8){ s_coll_box.size.x.data / 4 };
 	//static const Fixed24p8 offset_x_for_left_vs
@@ -685,30 +685,30 @@ void SprBlkCollGroup16x32::init_static_vars
 	//	+ (s_coll_box.size.x.data / 16) };
 	static const Fixed24p8 offset_x_for_right_vs
 		= (Fixed24p8){-offset_x_for_left_vs.data};
-	
+
 	pos_x_for_left_vs = s_coll_box.left() + offset_x_for_left_vs;
 	pos_x_for_mid_vs = s_coll_box.get_x_center();
 	pos_x_for_right_vs = s_coll_box.right() + offset_x_for_right_vs;
-	
+
 	blk_crd_pos_x_for_left_vs = conv_pix_crd_to_blk_crd(pos_x_for_left_vs
 		.floor_to_int());
 	blk_crd_pos_x_for_mid_vs = conv_pix_crd_to_blk_crd(pos_x_for_mid_vs
 		.floor_to_int());
 	blk_crd_pos_x_for_right_vs = conv_pix_crd_to_blk_crd(pos_x_for_right_vs
 		.floor_to_int());
-	
+
 	//blk_crd_pos_y_for_top_vs = conv_pix_crd_to_blk_crd(s_coll_box.top()
 	//	.floor_to_int() + 1);
 	blk_crd_pos_y_for_top_vs = conv_pix_crd_to_blk_crd(s_coll_box.top()
 		.floor_to_int() - 1);
 	//pos_y_for_bot_vs = s_coll_box.bot() + offset_y_for_bot_vs;
-	
+
 	//offset_y_for_bot_vs = (Fixed24p8){ -s_coll_box.size.y.data / 4 };
 	//offset_y_for_bot_vs = (Fixed24p8){ -s_coll_box.size.y.data / 8 };
 	offset_y_for_bot_vs = make_f24p8(-4);
 	pos_y_for_bot_vs = s_coll_box.bot() + offset_y_for_bot_vs;
-	
-	
+
+
 	//vs_height_bot_ia = custom_abs(offset_y_for_bot_vs) + make_f24p8(1);
 	//vs_height_bot_ia = custom_abs(offset_y_for_bot_vs);
 	vs_height_bot_ia = (Fixed24p8){custom_abs(offset_y_for_bot_vs.data)};

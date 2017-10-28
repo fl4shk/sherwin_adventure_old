@@ -22,10 +22,10 @@ const BlockStuffConstParams GrassSingleBlockStuff::the_const_params
 = {
 	// metatile_number
 	6,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	6,
 };
@@ -34,10 +34,10 @@ const BlockStuffConstParams GrassTopLeftBlockStuff::the_const_params
 = {
 	// metatile_number
 	7,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	7,
 };
@@ -49,10 +49,10 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	8,
-	
+
 	// palette_number 
 	0,
-	
+
 	// metatile_graphics_slot 
 	8,
 };
@@ -62,10 +62,10 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	9,
-	
+
 	// palette_number 
 	0,
-	
+
 	// metatile_graphics_slot 
 	9,
 };
@@ -75,10 +75,10 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	10,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	10,
 };
@@ -88,10 +88,10 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	11,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	11,
 };
@@ -101,10 +101,10 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	12,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	12,
 };
@@ -114,10 +114,10 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	13,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	13,
 };
@@ -127,10 +127,10 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	14,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	14,
 };
@@ -140,10 +140,10 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	15,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	15,
 };
@@ -153,13 +153,13 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	16,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	16,
-	
+
 	// behavior_type 
 	bbvt_slope_p16_p16,
 };
@@ -169,13 +169,13 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	17,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	17,
-	
+
 	// behavior_type 
 	bbvt_slope_n16_p16,
 };
@@ -185,13 +185,13 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	18,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	18,
-	
+
 	// behavior_type 
 	bbvt_slope_p32_p16_short,
 };
@@ -201,13 +201,13 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	19,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	19,
-	
+
 	// behavior_type 
 	bbvt_slope_p32_p16_tall,
 };
@@ -217,13 +217,13 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	20,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	20,
-	
+
 	// behavior_type 
 	bbvt_slope_n32_p16_tall,
 };
@@ -233,13 +233,13 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	21,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	21,
-	
+
 	// behavior_type 
 	bbvt_slope_n32_p16_short,
 };
@@ -249,10 +249,10 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	22,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	22,
 };
@@ -262,10 +262,10 @@ const BlockStuffConstParams
 = {
 	// metatile_number
 	23,
-	
+
 	// palette_number
 	0,
-	
+
 	// metatile_graphics_slot
 	23,
 };

@@ -33,7 +33,7 @@ public:		// enums
 		frm_angle_45 = 2,
 		frm_angle_90 = 3,
 	} alignas(4);
-	
+
 	// This enum allows multiple frame_slot's To be represented by the same
 	// frame.
 	enum frame_slot
@@ -42,32 +42,32 @@ public:		// enums
 		frm_slot_angle_23, 
 		frm_slot_angle_45,
 		frm_slot_angle_90,
-		
+
 		// lim_frm_slot Is the amount of frame_slot's.  It Is
 		// automatically updated by the compiler.
 		lim_frm_slot,
 	} alignas(4);
-	
-	
+
+
 	// These are used To access misc_data_u and misc_data_s
 	enum udata_index
 	{
 		udi_curr_frame_slot
 	} alignas(4);
-	
-	
+
+
 public:		// variables
 	// Graphics constants
-	
+
 	// A constant array That Is Intended To be indexed with a frame_slot,
 	// such That a frame_slot Can be mapped To a frame.
 	static constexpr u32 frame_slot_to_frame_arr_size = lim_frm_slot;
 	static const frame frame_slot_to_frame_arr
 		[frame_slot_to_frame_arr_size];
-	
+
 	static const SpriteConstParams the_const_params;
-	
-	
+
+
 public:		// functions
 	inline PlayerPickaxeSprite(bool facing_left)
 	{
@@ -75,29 +75,29 @@ public:		// functions
 		shared_constructor_code_part_2(facing_left);
 		shared_constructor_code_part_3();
 	}
-	
+
 	virtual void update_part_1();
-	
+
 	//virtual void update_part_2(BgPoint& camera_pos,
 	//	const Vec2u32& the_level_size_2d) __attribute__((_iwram_code));
-	
+
 	inline virtual const SpriteConstParams& get_const_params() const
 	{
 		return the_const_params;
 	}
-	
+
 	// Graphics stuff
 	//virtual const u32 get_curr_tile_slot();
-	
+
 	virtual const u32 get_curr_relative_tile_slot();
-	
-	
+
+
 	// Physics and collision stuff
 	virtual void block_collision_stuff() __attribute__((_iwram_code));
-	
-	
+
+
 protected:		// functions
-	
+
 	virtual void block_coll_response_left_16x16_old
 		(const BlockCollResult& lt_coll_result, 
 		const BlockCollResult& lb_coll_result);
@@ -112,8 +112,8 @@ protected:		// functions
 		(const BlockCollResult& bl_coll_result,
 		const BlockCollResult& bm_coll_result, 
 		const BlockCollResult& br_coll_result);
-	
-	
+
+
 } __attribute__((_align4));
 
 

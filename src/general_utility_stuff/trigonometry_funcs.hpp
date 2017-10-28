@@ -30,6 +30,12 @@ extern const s16 sin_table[sin_table_size];
 };
 
 
+namespace sherwin_adventure
+{
+
+namespace trig
+{
+
 static const u32 trig_lut_fixed_shift = 12;
 
 // NOTE:  theta's range Is [0, 0xffff] for [0,2π), just like the BIOS
@@ -79,6 +85,11 @@ inline Fixed8p8 lut_cos_f8p8(u32 theta)
 		>> (trig_lut_fixed_shift - Fixed8p8::shift)) };
 }
 
+
+
+}
+
+}
 
 
 #endif		// trigonometry_funcs_hpp

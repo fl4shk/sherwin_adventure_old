@@ -64,35 +64,35 @@ memcpy32:
 .Type memfill32, %function
 memfill32:
 	@mov r11, r11				@ This Is a no$gba soft breakpoint
-	
+
 	mov r3, r1
 	and r1, r2, #0x07			@ r1 = residual word count
 	movs r2, r2, lsr #0x03		@ r2 = Block count
 	beq .Lres_fill32
-	
+
 	push {r4-r10}
-	
+
 	@ A bunch of moves
 	mov r4, r3 ; mov r5, r3 ; mov r6, r3 ; mov r7, r3 ; 
 	mov r8, r3 ; mov r9, r3 ; mov r10, r3
-	
-	
+
+
 	@ Fill 32-byte chunks wth 8-fold stmia
 	@ r2 in [1, inf>
 .Lmain_fill32:
 		stmia r0!, {r3-r10}
 		subs r2, #0x01
 		bne .Lmain_fill32
-	
+
 	pop {r4-r10}
 	@ And the residual 0-7 words. r1 in [0,7]
 .Lres_fill32:
 		subs r1, #0x01
 		strcs r3, [r0], #4
 		bcs .Lres_fill32
-	
+
 	bx lr
-	
+
 
 
 

@@ -21,112 +21,112 @@
 
 // Getters
 
-#ifndef GEN_GENERIC_GETTER_BY_VAL
+#ifndef gen_generic_getter_by_val
 // By value
-#define GEN_GENERIC_GETTER_BY_VAL(prefix, suffix) \
+#define gen_generic_getter_by_val(prefix, suffix) \
 inline decltype(prefix##_##suffix) suffix() const \
 { \
 	return prefix##_##suffix; \
 }
 #endif
 
-#ifndef GEN_GETTER_BY_VAL
+#ifndef gen_getter_by_val
 // By value
-#define GEN_GETTER_BY_VAL(suffix) \
-GEN_GENERIC_GETTER_BY_VAL(internal, suffix)
+#define gen_getter_by_val(suffix) \
+gen_generic_getter_by_val(_, suffix)
 #endif
 
 
 
-#ifndef GEN_GENERIC_GETTER_BY_CON_REF
+#ifndef gen_generic_getter_by_con_ref
 // By constant reference
-#define GEN_GENERIC_GETTER_BY_CON_REF(prefix, suffix) \
+#define gen_generic_getter_by_con_ref(prefix, suffix) \
 inline const decltype(prefix##_##suffix)& suffix() const \
 { \
 	return prefix##_##suffix; \
 }
 #endif
 
-#ifndef GEN_GETTER_BY_CON_REF
+#ifndef gen_getter_by_con_ref
 // By constant reference
-#define GEN_GETTER_BY_CON_REF(suffix) \
-GEN_GENERIC_GETTER_BY_CON_REF(internal, suffix)
+#define gen_getter_by_con_ref(suffix) \
+gen_generic_getter_by_con_ref(_, suffix)
 #endif
 
 
 
-#ifndef GEN_GENERIC_GETTER_BY_REF
+#ifndef gen_generic_getter_by_ref
 // By reference
-#define GEN_GENERIC_GETTER_BY_REF(prefix, suffix) \
+#define gen_generic_getter_by_ref(prefix, suffix) \
 inline decltype(prefix##_##suffix)& suffix() \
 { \
 	return prefix##_##suffix; \
 }
 #endif
 
-#ifndef GEN_GETTER_BY_REF
+#ifndef gen_getter_by_ref
 // By reference
-#define GEN_GETTER_BY_REF(suffix) \
-GEN_GENERIC_GETTER_BY_REF(internal, suffix)
+#define gen_getter_by_ref(suffix) \
+gen_generic_getter_by_ref(_, suffix)
 #endif
 
 
 
-#ifndef GEN_STATIC_GENERIC_GETTER_BY_VAL
+#ifndef gen_static_generic_getter_by_val
 // By value
-#define GEN_STATIC_GENERIC_GETTER_BY_VAL(prefix, suffix) \
+#define gen_static_generic_getter_by_val(prefix, suffix) \
 static inline decltype(prefix##_##suffix) suffix() const \
 { \
 	return prefix##_##suffix; \
 }
 #endif
 
-#ifndef GEN_STATIC_GETTER_BY_VAL
+#ifndef gen_static_getter_by_val
 // By value
-#define GEN_STATIC_GETTER_BY_VAL(suffix) \
-GEN_STATIC_GENERIC_GETTER_BY_VAL(internal, suffix)
+#define gen_static_getter_by_val(suffix) \
+gen_static_generic_getter_by_val(_, suffix)
 #endif
 
 
 
-#ifndef GEN_STATIC_GENERIC_GETTER_BY_CON_REF
+#ifndef gen_static_generic_getter_by_con_ref
 // By constant reference
-#define GEN_STATIC_GENERIC_GETTER_BY_CON_REF(prefix, suffix) \
+#define gen_static_generic_getter_by_con_ref(prefix, suffix) \
 static inline const decltype(prefix##_##suffix)& suffix() const \
 { \
 	return prefix##_##suffix; \
 }
 #endif
 
-#ifndef GEN_STATIC_GETTER_BY_CON_REF
+#ifndef gen_static_getter_by_con_ref
 // By constant reference
-#define GEN_STATIC_GETTER_BY_CON_REF(suffix) \
-GEN_STATIC_GENERIC_GETTER_BY_CON_REF(internal, suffix)
+#define gen_static_getter_by_con_ref(suffix) \
+gen_static_generic_getter_by_con_ref(_, suffix)
 #endif
 
 
 
-#ifndef GEN_STATIC_GENERIC_GETTER_BY_REF
+#ifndef gen_static_generic_getter_by_ref
 // By reference
-#define GEN_STATIC_GENERIC_GETTER_BY_REF(prefix, suffix) \
+#define gen_static_generic_getter_by_ref(prefix, suffix) \
 static inline decltype(prefix##_##suffix)& suffix() \
 { \
 	return prefix##_##suffix; \
 }
 #endif
 
-#ifndef GEN_STATIC_GETTER_BY_REF
+#ifndef gen_static_getter_by_ref
 // By reference
-#define GEN_STATIC_GETTER_BY_REF(suffix) \
-GEN_STATIC_GENERIC_GETTER_BY_REF(internal, suffix)
+#define gen_static_getter_by_ref(suffix) \
+gen_static_generic_getter_by_ref(_, suffix)
 #endif
 
 
 // Setters
 
-#ifndef GEN_GENERIC_SETTER_BY_VAL
+#ifndef gen_generic_setter_by_val
 // By value
-#define GEN_GENERIC_SETTER_BY_VAL(prefix, suffix) \
+#define gen_generic_setter_by_val(prefix, suffix) \
 inline decltype(prefix##_##suffix) set_##suffix(decltype(prefix##_##suffix) to_copy) \
 { \
 	prefix##_##suffix = to_copy; \
@@ -134,17 +134,17 @@ inline decltype(prefix##_##suffix) set_##suffix(decltype(prefix##_##suffix) to_c
 }
 #endif
 
-#ifndef GEN_SETTER_BY_VAL
+#ifndef gen_setter_by_val
 // By value
-#define GEN_SETTER_BY_VAL(suffix) \
-GEN_GENERIC_SETTER_BY_VAL(internal, suffix)
+#define gen_setter_by_val(suffix) \
+gen_generic_setter_by_val(_, suffix)
 #endif
 
 
 
-#ifndef GEN_GENERIC_SETTER_BY_CON_REF
+#ifndef gen_generic_setter_by_con_ref
 // By const reference
-#define GEN_GENERIC_SETTER_BY_CON_REF(prefix, suffix) \
+#define gen_generic_setter_by_con_ref(prefix, suffix) \
 inline const decltype(prefix##_##suffix)& set_##suffix \
 	(const decltype(prefix##_##suffix)& to_copy) \
 { \
@@ -153,17 +153,17 @@ inline const decltype(prefix##_##suffix)& set_##suffix \
 }
 #endif
 
-#ifndef GEN_SETTER_BY_CON_REF
+#ifndef gen_setter_by_con_ref
 // By const reference
-#define GEN_SETTER_BY_CON_REF(suffix) \
-GEN_GENERIC_SETTER_BY_CON_REF(internal, suffix)
+#define gen_setter_by_con_ref(suffix) \
+gen_generic_setter_by_con_ref(_, suffix)
 #endif
 
 
 
-#ifndef GEN_GENERIC_SETTER_BY_RVAL_REF
+#ifndef gen_generic_setter_by_rval_ref
 // By rvalue reference
-#define GEN_GENERIC_SETTER_BY_RVAL_REF(prefix, suffix) \
+#define gen_generic_setter_by_rval_ref(prefix, suffix) \
 inline const decltype(prefix##_##suffix)& set_##suffix \
 	(decltype(prefix##_##suffix)&& to_move) \
 { \
@@ -172,17 +172,17 @@ inline const decltype(prefix##_##suffix)& set_##suffix \
 }
 #endif
 
-#ifndef GEN_SETTER_BY_RVAL_REF
+#ifndef gen_setter_by_rval_ref
 // By rvalue reference
-#define GEN_SETTER_BY_RVAL_REF(suffix) \
-GEN_GENERIC_SETTER_BY_RVAL_REF(internal, suffix)
+#define gen_setter_by_rval_ref(suffix) \
+gen_generic_setter_by_rval_ref(_, suffix)
 #endif
 
 
 
-#ifndef GEN_STATIC_GENERIC_SETTER_BY_VAL
+#ifndef gen_static_generic_setter_by_val
 // By value
-#define GEN_STATIC_GENERIC_SETTER_BY_VAL(prefix, suffix) \
+#define gen_static_generic_setter_by_val(prefix, suffix) \
 static inline decltype(prefix##_##suffix) set_##suffix(decltype(prefix##_##suffix) to_copy) \
 { \
 	prefix##_##suffix = to_copy; \
@@ -190,17 +190,17 @@ static inline decltype(prefix##_##suffix) set_##suffix(decltype(prefix##_##suffi
 }
 #endif
 
-#ifndef GEN_STATIC_SETTER_BY_VAL
+#ifndef gen_static_setter_by_val
 // By value
-#define GEN_STATIC_SETTER_BY_VAL(suffix) \
-GEN_STATIC_GENERIC_SETTER_BY_VAL(internal, suffix)
+#define gen_static_setter_by_val(suffix) \
+gen_static_generic_setter_by_val(_, suffix)
 #endif
 
 
 
-#ifndef GEN_STATIC_GENERIC_SETTER_BY_CON_REF
+#ifndef gen_static_generic_setter_by_con_ref
 // By const reference
-#define GEN_STATIC_GENERIC_SETTER_BY_CON_REF(prefix, suffix) \
+#define gen_static_generic_setter_by_con_ref(prefix, suffix) \
 static inline const decltype(prefix##_##suffix)& set_##suffix \
 	(const decltype(prefix##_##suffix)& to_copy) \
 { \
@@ -209,17 +209,17 @@ static inline const decltype(prefix##_##suffix)& set_##suffix \
 }
 #endif
 
-#ifndef GEN_STATIC_SETTER_BY_CON_REF
+#ifndef gen_static_setter_by_con_ref
 // By const reference
-#define GEN_STATIC_SETTER_BY_CON_REF(suffix) \
-GEN_STATIC_GENERIC_SETTER_BY_CON_REF(internal, suffix)
+#define gen_static_setter_by_con_ref(suffix) \
+gen_static_generic_setter_by_con_ref(_, suffix)
 #endif
 
 
 
-#ifndef GEN_STATIC_GENERIC_SETTER_BY_RVAL_REF
+#ifndef gen_static_generic_setter_by_rval_ref
 // By rvalue reference
-#define GEN_STATIC_GENERIC_SETTER_BY_RVAL_REF(prefix, suffix) \
+#define gen_static_generic_setter_by_rval_ref(prefix, suffix) \
 static inline const decltype(prefix##_##suffix)& set_##suffix \
 	(decltype(prefix##_##suffix)&& to_move) \
 { \
@@ -228,10 +228,21 @@ static inline const decltype(prefix##_##suffix)& set_##suffix \
 }
 #endif
 
-#ifndef GEN_STATIC_SETTER_BY_RVAL_REF
+#ifndef gen_static_setter_by_rval_ref
 // By rvalue reference
-#define GEN_STATIC_SETTER_BY_RVAL_REF(suffix) \
-GEN_STATIC_GENERIC_SETTER_BY_RVAL_REF(internal, suffix)
+#define gen_static_setter_by_rval_ref(suffix) \
+gen_static_generic_setter_by_rval_ref(_, suffix)
 #endif
+
+
+
+#define gen_getter_and_setter_by_con_ref(stuff) \
+	gen_getter_by_con_ref(stuff) \
+	gen_setter_by_con_ref(stuff)
+
+
+#define gen_getter_and_setter_by_val(stuff) \
+	gen_getter_by_val(stuff) \
+	gen_setter_by_val(stuff)
 
 #endif		// gen_getter_setter_defines_hpp

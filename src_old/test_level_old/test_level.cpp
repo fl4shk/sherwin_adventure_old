@@ -490,11 +490,11 @@ const Sublevel<1939, 64, 32, 1, 2> test_level_sublevel_0
 		0xf001f001, 0x1f0ff01, 0x1f001f0, 0x1f001f0,
 		0x1f001f0, 0xf0c001f0, 0xffb701, 
 	},
-	
+
 	{
 		{ StDoor, 1, 29, false, 2, 1, 0, 0 },
 	},
-	
+
 	{
 		{ sle_from_door, Vec2F24p8({0x1000}, {0x1d000}) },
 		{ sle_start_of_level, Vec2F24p8({0x3000}, {0x1d000}) },
@@ -996,14 +996,14 @@ const Sublevel<1960, 64, 32, 4, 3> test_level_sublevel_1
 		0x1f001f0, 0x1f001f0, 0x1f001f0, 0x1f001f0,
 		0xf001f0fe, 0xf001f001, 0xf001f001, 0xffb701,
 	},
-	
+
 	{
 		{ StDoor, 13, 18, false, 0, 2, 1, 0 },
 		{ StDoor, 4, 29, false, 0, 2, 2, 0 },
 		{ StDoor, 6, 29, false, 1, 2, 0, 0 },
 		{ StFireMuffin, 9, 30, false, 0, 0, 0, 0 },
 	},
-	
+
 	{
 		{ sle_from_door, Vec2F24p8({0x6000}, {0x1d000}) },
 		{ sle_from_door, Vec2F24p8({0xd000}, {0x12000}) },
@@ -1504,14 +1504,14 @@ const Sublevel<1951, 64, 32, 4, 4> test_level_sublevel_2
 		0x1f001f0, 0xf0ff01f0, 0xf001f001, 0xf001f001,
 		0xf001f001, 0xc001f001, 0x37f01f0, 
 	},
-	
+
 	{
 		{ StDoor, 1, 13, false, 2, 2, 0, 0 },
 		{ StDoor, 62, 13, false, 0, 0, 1, 0 },
 		{ StDoor, 1, 29, false, 0, 2, 2, 0 },
 		{ StDoor, 51, 29, false, 1, 2, 3, 0 },
 	},
-	
+
 	{
 		{ sle_from_door, Vec2F24p8({0x1000}, {0xd000}) },
 		{ sle_from_door, Vec2F24p8({0x3e000}, {0xd000}) },

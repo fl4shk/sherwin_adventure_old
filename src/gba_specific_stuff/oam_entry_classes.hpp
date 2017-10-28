@@ -27,6 +27,12 @@
 #include "../general_utility_stuff/fixed_classes.hpp"
 
 
+namespace sherwin_adventure
+{
+
+namespace gba
+{
+
 class OamEntry;
 class OamEntryAffine;
 
@@ -46,31 +52,31 @@ public:		// enums
 	enum shape_size { ss_8x8, ss_16x16, ss_32x32, ss_64x64, ss_16x8, 
 		ss_32x8, ss_32x16, ss_64x32, ss_8x16, ss_8x32, ss_16x32, 
 		ss_32x64, lim_ss } alignas(4);
-	
+
 public:		// constants
 	static constexpr u32 num_attr0_shapes = 3, num_attr1_sizes = 4;
-	
-	static const Vec2u32 ss_to_vec2_arr[lim_ss];
-	
-	//static const Vec2u32 attrs_to_ss_arr_2d[4][3];
-	static const Vec2u32 ss_enum_to_ss_attrs_arr[lim_ss];
+
+	static const Vec2U32 ss_to_vec2_arr[lim_ss];
+
+	//static const Vec2U32 attrs_to_ss_arr_2d[4][3];
+	static const Vec2U32 ss_enum_to_ss_attrs_arr[lim_ss];
 	//static const shape_size ss_attrs_no_shift_to_ss_enum_arr_2d
 	//	[num_attr0_shapes][num_attr1_sizes];
-	
+
 public:		// variables
 	u16 attr0;
 	u16 attr1;
 	u16 attr2;
 	s16 fill;
-	
+
 public:		// wrapper functions
-	
+
 	s32 get_y_coord() const
 	{
 		return get_bits(attr0, OBJ_ATTR0_Y_COORD_MASK, 
 			OBJ_ATTR0_Y_COORD_SHIFT);
 	}
-	
+
 	void set_y_coord(s32 n_y_coord)
 	{
 		//clear_and_set_bits(attr0, OBJ_ATTR0_Y_COORD_MASK,
@@ -78,13 +84,13 @@ public:		// wrapper functions
 		clear_bits(attr0, OBJ_ATTR0_Y_COORD_MASK);
 		set_bits(attr0, OBJ_ATTR0_Y_COORD(n_y_coord));
 	}
-	
+
 	s32 get_x_coord() const
 	{
 		return get_bits(attr1, OBJ_ATTR1_X_COORD_MASK,
 			OBJ_ATTR1_X_COORD_SHIFT);
 	}
-	
+
 	void set_x_coord(s32 n_x_coord)
 	{
 		//clear_and_set_bits(attr1, OBJ_ATTR1_X_COORD_MASK,
@@ -92,7 +98,7 @@ public:		// wrapper functions
 		clear_bits(attr1, OBJ_ATTR1_X_COORD_MASK);
 		set_bits(attr1, OBJ_ATTR1_X_COORD(n_x_coord));
 	}
-	
+
 	void enable_hflip()
 	{
 		set_bits(attr1, OBJ_ATTR1_HFLIP_ON);
@@ -106,8 +112,8 @@ public:		// wrapper functions
 		return get_bits(attr1, OBJ_ATTR1_HFLIP_MASK, 
 			OBJ_ATTR1_HFLIP_SHIFT);
 	}
-	
-	
+
+
 	void enable_vflip()
 	{
 		set_bits(attr1, OBJ_ATTR1_VFLIP_ON);
@@ -121,58 +127,58 @@ public:		// wrapper functions
 		return get_bits(attr1, OBJ_ATTR1_VFLIP_MASK, 
 			OBJ_ATTR1_VFLIP_SHIFT);
 	}
-	
-	
-	
+
+
+
 	void show_non_affine()
 	{
 		clear_bits(attr0, 
 			(OBJ_ATTR0_AFFINE_MASK | OBJ_ATTR0_DISABLE_MASK));
 	}
-	
+
 	void hide_non_affine()
 	{
 		clear_bits(attr0, 
 			(OBJ_ATTR0_AFFINE_MASK | OBJ_ATTR0_DISABLE_MASK));
-		
+
 		set_bits(attr0, OBJ_ATTR0_DISABLE_ON);
 	}
-	
+
 	void set_tile_number(u32 n_tile_num)
 	{
 		clear_and_set_bits(attr2, OBJ_ATTR2_TILE_NUMBER_MASK,
 			OBJ_ATTR2_TILE_NUMBER(n_tile_num));
 	}
-	
+
 	u32 get_tile_number() const
 	{
 		return get_bits(attr2, OBJ_ATTR2_TILE_NUMBER_MASK,
 			OBJ_ATTR2_TILE_NUMBER_SHIFT);
 	}
-	
+
 	void set_pal_number(u32 n_pal_num)
 	{
 		clear_and_set_bits(attr2, OBJ_ATTR2_PAL_NUM_MASK,
 			OBJ_ATTR2_PAL_NUM(n_pal_num));
 	}
-	
+
 	u32 get_pal_number() const
 	{
 		return get_bits(attr2, OBJ_ATTR2_PAL_NUM_MASK,
 			OBJ_ATTR2_PAL_NUM_SHIFT);
 	}
-	
-	
-	
-	
+
+
+
+
 	void set_shape_size(shape_size n_shape_size);
 	shape_size get_shape_size() const;
-	
-	void set_shape_size_with_vec2(const Vec2u32& n_shape_size);
-	Vec2u32 get_shape_size_as_vec2() const;
-	
-	
-	
+
+	void set_shape_size_with_vec2(const Vec2U32& n_shape_size);
+	Vec2U32 get_shape_size_as_vec2() const;
+
+
+
 } __attribute__((_align4));
 
 
@@ -184,23 +190,23 @@ class OamEntryAffine
 {
 public:		// variables
 	static const u32 fill_size = 3;
-	
-	
+
+
 	u16 fill0[fill_size];
 	Fixed8p8 pa;
-	
+
 	u16 fill1[fill_size];
 	Fixed8p8 pb;
-	
+
 	u16 fill2[fill_size];
 	Fixed8p8 pc;
-	
+
 	u16 fill3[fill_size];
 	Fixed8p8 pd;
-	
+
 public:		// functions
-	
-	
+
+
 } __attribute__((_align4));
 
 
@@ -219,5 +225,10 @@ inline void clear_oam_mirror()
 }
 
 
+
+
+}
+
+}
 
 #endif		// oam_entry_classes_hpp

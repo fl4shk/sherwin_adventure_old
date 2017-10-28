@@ -19,37 +19,44 @@
 #include "attribute_defines.hpp"
 #include "oam_entry_classes.hpp"
 
+
+namespace sherwin_adventure
+{
+
+namespace gba
+{
+
 // I'm tempted To put these two arrays in _iwram.
 OamEntry oam_mirror[oam_mirror_size];
 //OamEntryAffine* const OAM_MIRROR_AFF = (OamEntryAffine*)oam_mirror ;
 
 
-const Vec2u32 OamEntry::ss_to_vec2_arr[lim_ss]
+const Vec2U32 OamEntry::ss_to_vec2_arr[lim_ss]
 = {
 	// Square shapes
 	{ 8, 8 }, { 16, 16 }, { 32, 32 }, { 64, 64 },
-	
+
 	// Horizontal shapes
 	{ 16, 8 }, { 32, 8 }, { 32, 16 }, { 64, 32 },
-	
+
 	// Vertical shapes
 	{ 8, 16 }, { 8, 32 }, { 16, 32 }, { 32, 64 },
 };
 
-const Vec2u32 OamEntry::ss_enum_to_ss_attrs_arr[lim_ss]
+const Vec2U32 OamEntry::ss_enum_to_ss_attrs_arr[lim_ss]
 = {
 	// Square shapes
 	{ OBJ_ATTR0_SHAPE_SQUARE, OBJ_ATTR1_SIZE_0 }, 
 	{ OBJ_ATTR0_SHAPE_SQUARE, OBJ_ATTR1_SIZE_1 }, 
 	{ OBJ_ATTR0_SHAPE_SQUARE, OBJ_ATTR1_SIZE_2 }, 
 	{ OBJ_ATTR0_SHAPE_SQUARE, OBJ_ATTR1_SIZE_3 },
-	
+
 	// Horizontal shapes
 	{ OBJ_ATTR0_SHAPE_HORIZONTAL, OBJ_ATTR1_SIZE_0 }, 
 	{ OBJ_ATTR0_SHAPE_HORIZONTAL, OBJ_ATTR1_SIZE_1 }, 
 	{ OBJ_ATTR0_SHAPE_HORIZONTAL, OBJ_ATTR1_SIZE_2 }, 
 	{ OBJ_ATTR0_SHAPE_HORIZONTAL, OBJ_ATTR1_SIZE_3 },
-	
+
 	// Vertical shapes
 	{ OBJ_ATTR0_SHAPE_VERTICAL, OBJ_ATTR1_SIZE_0 }, 
 	{ OBJ_ATTR0_SHAPE_VERTICAL, OBJ_ATTR1_SIZE_1 }, 
@@ -62,10 +69,10 @@ const Vec2u32 OamEntry::ss_enum_to_ss_attrs_arr[lim_ss]
 //= {
 //	// Square shapes
 //	{ ss_8x8, ss_16x16, ss_32x32, ss_64x64 },
-//	
+//
 //	// Horizontal shapes
 //	{ ss_16x8, ss_32x8, ss_32x16, ss_64x32 },
-//	
+//
 //	// Vertical shapes
 //	{ ss_8x16, ss_8x32, ss_16x32, ss_32x64 },
 //};
@@ -74,11 +81,11 @@ const Vec2u32 OamEntry::ss_enum_to_ss_attrs_arr[lim_ss]
 void OamEntry::set_shape_size(OamEntry::shape_size n_shape_size)
 {
 	u32 temp_attr0 = attr0, temp_attr1 = attr1;
-	
+
 	if (n_shape_size < 0 || n_shape_size >= lim_ss)
 	{
-		const Vec2u32& ss_attrs_vec2 = ss_enum_to_ss_attrs_arr[0];
-		
+		const Vec2U32& ss_attrs_vec2 = ss_enum_to_ss_attrs_arr[0];
+
 		clear_and_set_bits(temp_attr0, OBJ_ATTR0_SHAPE_MASK,
 			ss_attrs_vec2.x);
 		clear_and_set_bits(temp_attr1, OBJ_ATTR1_SIZE_MASK,
@@ -86,19 +93,19 @@ void OamEntry::set_shape_size(OamEntry::shape_size n_shape_size)
 	}
 	else
 	{
-		const Vec2u32& ss_attrs_vec2 = ss_enum_to_ss_attrs_arr
+		const Vec2U32& ss_attrs_vec2 = ss_enum_to_ss_attrs_arr
 			[n_shape_size];
-		
+
 		clear_and_set_bits(temp_attr0, OBJ_ATTR0_SHAPE_MASK,
 			ss_attrs_vec2.x);
 		clear_and_set_bits(temp_attr1, OBJ_ATTR1_SIZE_MASK,
 			ss_attrs_vec2.y);
 	}
-	
-	
+
+
 	attr0 = (u16)(temp_attr0 & 0xffff);
 	attr1 = (u16)(temp_attr1 & 0xffff);
-	
+
 }
 
 
@@ -109,7 +116,7 @@ OamEntry::shape_size OamEntry::get_shape_size() const
 		OBJ_ATTR0_SHAPE_SHIFT);
 	u32 attr1_size_no_shift = get_bits(attr1, OBJ_ATTR1_SIZE_MASK,
 		OBJ_ATTR1_SIZE_SHIFT);
-	
+
 	// Error checking
 	if (attr0_shape_no_shift >= num_attr0_shapes 
 		|| attr1_size_no_shift >= num_attr1_sizes)
@@ -121,7 +128,7 @@ OamEntry::shape_size OamEntry::get_shape_size() const
 	{
 		//return ss_attrs_no_shift_to_ss_enum_arr_2d[attr0_shape_no_shift]
 		//	[attr1_size_no_shift];
-		
+
 		// Multiply by num_attr1_sizes because the expression becomes a
 		// single shift and an add instead of a shift and two adds.
 		return shape_size(attr0_shape_no_shift * num_attr1_sizes 
@@ -129,7 +136,7 @@ OamEntry::shape_size OamEntry::get_shape_size() const
 	}
 }
 
-void OamEntry::set_shape_size_with_vec2(const Vec2u32& n_shape_size)
+void OamEntry::set_shape_size_with_vec2(const Vec2U32& n_shape_size)
 {
 	switch (n_shape_size.x)
 	{
@@ -148,7 +155,7 @@ void OamEntry::set_shape_size_with_vec2(const Vec2u32& n_shape_size)
 					set_shape_size(ss_8x32);
 					break;
 			}
-		
+
 		case 16:
 			switch (n_shape_size.y)
 			{
@@ -163,7 +170,7 @@ void OamEntry::set_shape_size_with_vec2(const Vec2u32& n_shape_size)
 					set_shape_size(ss_16x32);
 					break;
 			}
-		
+
 		case 32:
 			switch (n_shape_size.y)
 			{
@@ -181,7 +188,7 @@ void OamEntry::set_shape_size_with_vec2(const Vec2u32& n_shape_size)
 					set_shape_size(ss_32x64);
 					break;
 			}
-		
+
 		case 64:
 			switch (n_shape_size.y)
 			{
@@ -193,14 +200,16 @@ void OamEntry::set_shape_size_with_vec2(const Vec2u32& n_shape_size)
 					set_shape_size(ss_64x32);
 					break;
 			}
-		
+
 	}
 }
 
 
-Vec2u32 OamEntry::get_shape_size_as_vec2() const
+Vec2U32 OamEntry::get_shape_size_as_vec2() const
 {
 	return ss_to_vec2_arr[get_shape_size()];
 }
 
+}
 
+}

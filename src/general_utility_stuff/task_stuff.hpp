@@ -24,6 +24,12 @@
 #include "misc_utility_funcs.hpp"
 #include "range_funcs.hpp"
 
+namespace sherwin_adventure
+{
+
+namespace misc_util
+{
+
 enum class TaskPriority : s32
 {
 	tp_0,
@@ -34,7 +40,7 @@ enum class TaskPriority : s32
 	tp_5,
 	tp_6,
 	tp_7,
-	
+
 	lim_tp,
 } _ALIGNAS_REGULAR;
 
@@ -60,11 +66,11 @@ class Task
 {
 public:		// typedefs
 	typedef void (*task_funcptr)();
-	
+
 protected:		// variables
 	TaskPriority the_task_prio = TaskPriority::tp_0;
 	task_funcptr func = NULL;
-	
+
 public:		// functions
 	inline Task()
 	{
@@ -74,7 +80,7 @@ public:		// functions
 		func(s_func)
 	{
 	}
-	
+
 	inline TaskPriority get_task_prio() const
 	{
 		return the_task_prio;
@@ -83,8 +89,8 @@ public:		// functions
 	{
 		the_task_prio = clamp_task_prio(n_the_task_prio);
 	}
-	
-	
+
+
 	// func stuff
 	inline bool has_func() const
 	{
@@ -102,15 +108,19 @@ public:		// functions
 	{
 		func = NULL;
 	}
-	
-	
-	
+
+
+
 	inline void operator () ()
 	{
 		(*func)();
 	}
-	
-	
+
+
 } __attribute__((_align4));
+
+}
+
+}
 
 #endif		// task_stuff_hpp

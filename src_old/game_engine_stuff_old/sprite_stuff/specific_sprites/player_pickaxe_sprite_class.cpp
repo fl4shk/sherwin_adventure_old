@@ -36,26 +36,26 @@ const SpriteConstParams PlayerPickaxeSprite::the_const_params
 = {
 	// the_const_sprite_type
 	StPlayerPickaxe, 
-	
+
 	// the_palette_slot
 	sps_secondary_0, 
-	
+
 	// the_relative_metatile_slot (not used by this class)
 	0,
-	
+
 	// num_active_gfx_tiles
 	GfxManager::num_tiles_in_ss_16x16,
-	
+
 	// tile_arr 
 	const_cast<Tile*>(reinterpret_cast<const Tile*>
 		(the_16x16_secondary_sprites_gfxTiles)),
-	
+
 	// the_initial_shape_size
 	OamEntry::ss_16x16,
-	
+
 	// the_initial_coll_box_size
 	{ {15 << Fixed24p8::get_shift()}, {15 << Fixed24p8::get_shift()} },
-	
+
 	// the_initial_cb_pos_offset
 	{ {0 << Fixed24p8::get_shift()}, {0 << Fixed24p8::get_shift()} },
 };

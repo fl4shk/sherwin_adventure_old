@@ -35,22 +35,22 @@
 class SpriteManager
 {
 public:		// variables
-	
+
 	static constexpr u32 max_num_player_secondary_sprites = 4;
 	//static constexpr u32 max_num_player_secondary_sprites = 10;
-	
+
 	static constexpr u32 max_num_secondary_sprites = 10;
-	
+
 	static constexpr u32 max_num_player_sprites = 1;
-	
+
 	//static constexpr u32 max_num_regular_sprites = 40;
 	//static constexpr u32 max_num_regular_sprites = 30;
 	static constexpr u32 max_num_regular_sprites = 20;
-	
+
 	static constexpr u32 max_num_pseudo_bg_sprites = 10;
-	
-	
-	
+
+
+
 	//// The array of pointers To secondary active sprites That are "claimed"
 	//// by the_player.
 	//static std::array<Sprite*, max_num_player_secondary_sprites>
@@ -60,16 +60,16 @@ public:		// variables
 	//// those "claimed" by the_player.
 	//static std::array<Sprite*, max_num_secondary_sprites> 
 	//	the_secondary_sprites;
-	
+
 	// -- Switch To linear_memory_allocator --
 	static Sprite* the_player;
-	
+
 	//// The array of pointers To REGULAR active sprites, not counting
 	//// the_player.
 	//static std::array<Sprite*, max_num_regular_sprites> the_sprites;
-	
-	
-	
+
+
+
 	//// An array of Player secondary sprites To allocate from
 	//static std::array<Sprite, max_num_player_secondary_sprites> 
 	//	the_player_secondary_sprites;
@@ -82,9 +82,9 @@ public:		// variables
 	//// The array of REGULAR active sprites, not counting the_player.
 	//static std::array<Sprite, max_num_regular_sprites> 
 	//	the_sprites;
-	
-	
-	
+
+
+
 	// This Is for speeding up allocation and deallocation
 	// -- Switch To linear_memory_allocator --
 	static s16 the_player_secondary_sprites_free_list_arr
@@ -101,42 +101,42 @@ public:		// variables
 	// -- Switch To linear_memory_allocator --
 	static s16 the_pseudo_bg_sprites_free_list_arr
 		[max_num_pseudo_bg_sprites];
-	
-	
+
+
 	// Temporarily use regular arrays To make debugging easier.
 	// An array of Player secondary sprites To allocate from
 	// -- Switch To linear_memory_allocator --
 	static Sprite the_player_secondary_sprites
 		[max_num_player_secondary_sprites];
-	
+
 	// An array of secondary sprites To allocate from, other than the ones
 	// used by the_player 
 	// -- Switch To linear_memory_allocator --
 	static Sprite the_secondary_sprites[max_num_secondary_sprites];
-	
+
 	// An array of a single Player To allocate from
 	// -- Switch To linear_memory_allocator --
 	static Sprite the_allocatable_player[max_num_player_sprites];
-	
+
 	// The array of REGULAR active sprites, not counting the_player.
 	// -- Switch To linear_memory_allocator --
 	static Sprite the_sprites[max_num_regular_sprites]
 		__attribute__((_iwram));
-	
+
 	// The array of pseudo-background sprites, which are ONLY checked for
 	// intersection with the_player (and possibly Player secondary sprites)
 	// -- Switch To linear_memory_allocator --
 	static Sprite the_pseudo_bg_sprites[max_num_pseudo_bg_sprites];
-	
-	
-	
-	
+
+
+
+
 	// The sprite_allocators
 	// -- Switch To linear_memory_allocator --
 	static SpriteAllocator the_player_secondary_sprites_allocator,
 		the_secondary_sprites_allocator, the_player_sprite_allocator, 
 		the_sprites_allocator, the_pseudo_bg_sprites_allocator;
-	
+
 	// Active sprites
 	// -- Switch To linear_memory_allocator --
 	static u32 num_active_player_secondary_sprites, num_active_sprites, 
@@ -149,8 +149,8 @@ public:		// variables
 		the_active_sprites __attribute__((_iwram));
 	static std::array<Sprite*, max_num_pseudo_bg_sprites> 
 		the_active_pseudo_bg_sprites __attribute__((_ewram));
-	
-	
+
+
 	//static constexpr u32 the_player_vram_chunk_index = 1;
 	//static constexpr u32 
 	//	the_player_secondary_sprites_starting_vram_chunk_index = 2;
@@ -160,68 +160,68 @@ public:		// variables
 	//static constexpr u32 the_secondary_sprites_starting_vram_chunk_index
 	//	= the_active_sprites_starting_vram_chunk_index 
 	//	+ max_num_regular_sprites;
-	
-	
+
+
 	static constexpr u32
 		the_player_secondary_sprites_starting_vram_chunk_index = 1;
-	
+
 	static constexpr u32 the_secondary_sprites_starting_vram_chunk_index
 		= the_player_secondary_sprites_starting_vram_chunk_index
 		+ max_num_player_secondary_sprites;
-	
+
 	static constexpr u32 the_player_vram_chunk_index 
 		= the_secondary_sprites_starting_vram_chunk_index 
 		+ max_num_secondary_sprites;
-	
+
 	static constexpr u32 the_active_sprites_starting_vram_chunk_index
 		= the_player_vram_chunk_index + 1;
-	
+
 	static constexpr u32 
 		the_pseudo_bg_sprites_starting_vram_chunk_index
 		= the_active_sprites_starting_vram_chunk_index 
 		+ max_num_regular_sprites;
-	
-	
-	
-	
+
+
+
+
 	// OAM indices and VRAM chunk indices are shared.
 	static constexpr u32 the_player_secondary_sprites_starting_oam_index 
 		= the_player_secondary_sprites_starting_vram_chunk_index;
-	
+
 	static constexpr u32 the_secondary_sprites_starting_oam_index 
 		= the_secondary_sprites_starting_vram_chunk_index;
-	
+
 	static constexpr u32 the_player_oam_index 
 		= the_player_vram_chunk_index;
-	
+
 	static constexpr u32 the_active_sprites_starting_oam_index
 		= the_active_sprites_starting_vram_chunk_index;
-	
+
 	static constexpr u32 the_pseudo_bg_sprites_starting_oam_index
 		= the_pseudo_bg_sprites_starting_vram_chunk_index;
-	
-	
+
+
 	static int next_oam_index;
-	
+
 public:		// functions
-	
+
 	static Sprite* allocate_sprite(SpriteAllocator& the_sprite_allocator, 
 		sprite_type the_sprite_type, bool facing_left);
 	static Sprite* allocate_sprite(SpriteAllocator& the_sprite_allocator, 
 		sprite_type the_sprite_type, const Vec2F24p8& s_in_level_pos,
 		const PrevCurrPair<BgPoint>& camera_pos, bool facing_left);
-	
+
 	//static void reinit_sprite_with_sprite_ipg(Sprite*& the_sprite, 
 	//	SpriteAllocator& the_sprite_allocator, 
 	//	SpriteInitParamGroup* s_the_sprite_ipg);
 	////static void reinit_sprite_with_sprite_ipg(Sprite*& the_sprite, 
 	////	SpriteAllocator& the_sprite_allocator, u32 s_vram_chunk_index, 
 	////	SpriteInitParamGroup* s_the_sprite_ipg);
-	
+
 	static Sprite* reinit_sprite_with_sprite_ipg(Sprite& the_sprite, 
 		SpriteAllocator& the_sprite_allocator, 
 		SpriteInitParamGroup* s_the_sprite_ipg);
-	
+
 	//static void reinit_sprite_by_spawning(Sprite*& the_sprite, 
 	//	SpriteAllocator& the_sprite_allocator,
 	//	sprite_type s_the_sprite_type, const Vec2F24p8& s_in_level_pos, 
@@ -232,13 +232,13 @@ public:		// functions
 		sprite_type s_the_sprite_type, const Vec2F24p8& s_in_level_pos, 
 		const PrevCurrPair<BgPoint>& camera_pos, 
 		bool facing_left=true);
-	
-	
+
+
 	static s32 spawn_a_player_secondary_sprite_basic
 		(sprite_type the_sprite_type, const Vec2F24p8& s_in_level_pos, 
 		const PrevCurrPair<BgPoint>& camera_pos_pc_pair, 
 		bool facing_left=false);
-	
+
 	// This Is a temporary function.  It should be replaced by a function
 	// That inserts Sprite spawning parameters into a list.  The sprites
 	// from said list would be spawned from within the function called
@@ -248,21 +248,21 @@ public:		// functions
 		const Vec2F24p8& s_in_level_pos, 
 		const PrevCurrPair<BgPoint>& camera_pos_pc_pair, 
 		bool facing_left=false);
-	
+
 	static s32 spawn_a_secondary_sprite_basic(sprite_type the_sprite_type,
 		const Vec2F24p8& s_in_level_pos, 
 		const PrevCurrPair<BgPoint>& camera_pos_pc_pair, 
 		bool facing_left=false);
-	
-	
-	
-	
+
+
+
+
 	static void init_the_player (const Vec2F24p8& s_in_level_pos, 
 		const Vec2u32& the_sublevel_size_2d, 
 		PrevCurrPair<BgPoint>& camera_pos);
-	
+
 	static void clear_the_sprite_arrays();
-	
+
 	// This function initializes the vram_chunk_index of each Sprite in
 	// the_sprites.
 	static inline void init_the_sprite_arrays()
@@ -273,7 +273,7 @@ public:		// functions
 		//{
 		//	spr.set_vram_chunk_index(vram_chunk_index++);
 		//}
-		
+
 		// Secondary sprites "claimed" by the_player.
 		for (u32 i=0; i<max_num_player_secondary_sprites; ++i)
 		{
@@ -281,78 +281,78 @@ public:		// functions
 				.set_vram_chunk_index(i 
 				+ the_player_secondary_sprites_starting_vram_chunk_index);
 		}
-		
+
 		// Other secondary sprites
 		for (u32 i=0; i<max_num_secondary_sprites; ++i)
 		{
 			the_secondary_sprites[i].set_vram_chunk_index(i
 				+ the_secondary_sprites_starting_vram_chunk_index);
 		}
-		
+
 		// Regular sprites
 		for (u32 i=0; i<max_num_regular_sprites; ++i)
 		{
 			the_sprites[i].set_vram_chunk_index(i 
 				+ the_active_sprites_starting_vram_chunk_index);
 		}
-		
+
 		// Regular sprites
 		for (u32 i=0; i<max_num_pseudo_bg_sprites; ++i)
 		{
 			the_pseudo_bg_sprites[i].set_vram_chunk_index(i 
 				+ the_pseudo_bg_sprites_starting_vram_chunk_index);
 		}
-		
+
 	}
-	
-	
+
+
 	static void init_horiz_sublevel_sprite_ipg_lists
 		(const SpriteInitParamGroup* the_ext_sprite_ipg_arr, 
 		u32 the_ext_sprite_ipg_arr_size);
-	
+
 	//static void some_sprite_init_thing();
-	
+
 	//static void initial_sprite_spawning_from_sublevel_data
 	//	(const Vec2u32& the_sublevel_size_2d, BgPoint& camera_pos);
-	
+
 	// The 
 	static void initial_sprite_spawning_at_start_of_level
 		(PrevCurrPair<BgPoint>& camera_pos_pc_pair);
-	
+
 	static void initial_sprite_spawning_at_intra_sublevel_warp
 		(PrevCurrPair<BgPoint>& camera_pos, 
 		u32 sublevel_entrance_index);
-	
-	
-	
+
+
+
 	// This function Is put in IWRAM because when the_player warps around a
 	// particular Sublevel without CHANGING sublevels, sprites need To be
 	// spawned, which Can be an intensive operation.
 	static void initial_sprite_spawning_shared_code
 		(PrevCurrPair<BgPoint>& camera_pos);
 		//__attribute__((_iwram_code));
-	
-	
+
+
 	static void initial_sprite_spawning_from_sublevel_data_old
 		(const BgPoint& camera_pos);
-	
+
 	static void find_all_active_sprites() __attribute__((_iwram_code));
-	
+
 	static void spawn_sprites_if_needed
 		(const PrevCurrPair<BgPoint>& camera_pos_pc_pair) 
 		__attribute__((_iwram_code));
 	static void despawn_sprites_if_needed(const BgPoint& camera_pos) 
 		__attribute__((_iwram_code));
-	
+
 	static void upload_tiles_of_active_sprites_to_vram();
 		//__attribute__((_iwram_code));
-	
+
 	// This function Is one of the most intensive, So it Is an ARM function
 	// That goes in IWRAM.
 	static void update_all_sprites(const Vec2u32& the_sublevel_size_2d,
 		PrevCurrPair<BgPoint>& camera_pos_pc_pair) 
 		__attribute__((_iwram_code));
-	
+
 } __attribute__((_align4));
 
 

@@ -22,6 +22,13 @@
 
 #include <stdlib.h>
 
+
+namespace sherwin_adventure
+{
+
+namespace gba
+{
+
 //template<typename Type>
 //void allocate_arr_with_malloc(Type*& ret, size_t num_elems) 
 //	__attribute__((noinline));
@@ -68,59 +75,62 @@ void profile_dynamic_allocations(size_t num_elems)
 	//for (u32 i=0; i<temp_debug_arr_size; ++i)
 	//{
 	//	profile_start();
-	//	
+
 	//	temp_debug_arr_of_pointers[i] = new int[num_elems];
-	//	
+
 	//	temp_debug_arr_for_new[i] = profile_stop();
 	//}
-	//
+
 	//for (u32 i=0; i<temp_debug_arr_size; ++i)
 	//{
 	//	profile_start();
-	//	
+
 	//	delete[] temp_debug_arr_of_pointers[i];
-	//	
+
 	//	temp_debug_arr_for_delete[i] = profile_stop();
 	//}
-	//
-	//
+
+
 	//for (u32 i=0; i<temp_debug_arr_size; ++i)
 	//{
 	//	profile_start();
-	//	
+
 	//	allocate_arr_with_malloc(temp_debug_arr_of_pointers[i], 
 	//		num_elems);
-	//	
+
 	//	temp_debug_arr_for_malloc[i] = profile_stop();
 	//}
-	//
+
 	//for (u32 i=0; i<temp_debug_arr_size; ++i)
 	//{
 	//	profile_start();
-	//	
+
 	//	deallocate_arr_with_free(temp_debug_arr_of_pointers[i]);
-	//	
+
 	//	temp_debug_arr_for_free[i] = profile_stop();
 	//}
-	//
+
 	////for (u32 i=0; i<temp_debug_arr_size; ++i)
 	////{
 	////	profile_start();
-	////	
+	////
 	////	allocate_arr_with_nano_malloc(temp_debug_arr_of_pointers[i], 
 	////		num_elems);
-	////	
+	////
 	////	temp_debug_arr_for_nano_malloc[i] = profile_stop();
 	////}
 	////
 	////for (u32 i=0; i<temp_debug_arr_size; ++i)
 	////{
 	////	profile_start();
-	////	
+	////
 	////	deallocate_arr_with_nano_free(temp_debug_arr_of_pointers[i]);
-	////	
+	////
 	////	temp_debug_arr_for_nano_free[i] = profile_stop();
 	////}
 }
 
+}
+
+}
 
