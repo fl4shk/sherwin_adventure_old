@@ -72,14 +72,14 @@
 #define STRINGIZE(a) STRINGIZE_NX(a)
 
 // EWRAM data linker overlay
-#define _EWRAM_OVERLAY(num) section(STRINGIZE(PPCAT(.ewram_data, \
+#define _EWRAM_OVERLAY(num) section(STRINGIZE(PPCAT(.data, \
 	num)))
-#define _EWRAM_OVERLAY_PREFIX(num) PPCAT(__ewram_data,num)
+#define _EWRAM_OVERLAY_PREFIX(num) PPCAT(__data,num)
 
 #define _EWRAM_OVERLAY_SECTION_ROM_START(num) \
-	PPCAT(_EWRAM_OVERLAY_PREFIX(num),_rom_start)
+	PPCAT(_EWRAM_OVERLAY_PREFIX(num),_load)
 #define _EWRAM_OVERLAY_SECTION_EWRAM_START(num) \
-	PPCAT(_EWRAM_OVERLAY_PREFIX(num),_ewram_start)
+	PPCAT(_EWRAM_OVERLAY_PREFIX(num),_start)
 #define _EWRAM_OVERLAY_SECTION_SIZE(num) \
 	PPCAT(_EWRAM_OVERLAY_PREFIX(num),_section_size)
 
@@ -95,9 +95,9 @@ extern "C" const size_t _EWRAM_OVERLAY_SECTION_SIZE(num);
 #define _IWRAM_OVERLAY_PREFIX(num) PPCAT(__iwram_data,num)
 
 #define _IWRAM_OVERLAY_SECTION_ROM_START(num) \
-	PPCAT(_IWRAM_OVERLAY_PREFIX(num),_rom_start)
+	PPCAT(_IWRAM_OVERLAY_PREFIX(num),_load)
 #define _IWRAM_OVERLAY_SECTION_IWRAM_START(num) \
-	PPCAT(_IWRAM_OVERLAY_PREFIX(num),_iwram_start)
+	PPCAT(_IWRAM_OVERLAY_PREFIX(num),_start)
 #define _IWRAM_OVERLAY_SECTION_SIZE(num) \
 	PPCAT(_IWRAM_OVERLAY_PREFIX(num),_section_size)
 

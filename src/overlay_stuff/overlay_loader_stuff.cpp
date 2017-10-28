@@ -17,32 +17,9 @@
 
 
 #include "overlay_loader_stuff.hpp"
+#include "../gba_specific_stuff/asm_funcs.hpp"
 
 
-//_IN_LEVEL_EWRAM_SECTION_ROM_START
-//_IN_LEVEL_EWRAM_SECTION_EWRAM_START
-//_IN_LEVEL_EWRAM_SECTION_SIZE
-//
-//_IN_LEVEL_IWRAM_SECTION_ROM_START
-//_IN_LEVEL_IWRAM_SECTION_IWRAM_START
-//_IN_LEVEL_IWRAM_SECTION_SIZE
-//
-//_IN_LEVEL_BSS_SECTION_START
-//_IN_LEVEL_BSS_SECTION_SIZE
-//
-//_IN_LEVEL_IWRAM_BSS_SECTION_START
-//_IN_LEVEL_IWRAM_BSS_SECTION_SIZE
-//
-//_IN_LEVEL_SRAM_SECTION_START
-//_IN_LEVEL_SRAM_SECTION_SIZE
-//
-//_IN_LEVEL_EWRAM_CODE_ROM_START
-//_IN_LEVEL_EWRAM_CODE_EWRAM_START
-//_IN_LEVEL_EWRAM_CODE_SECTION_SIZE
-//
-//_IN_LEVEL_IWRAM_CODE_ROM_START
-//_IN_LEVEL_IWRAM_CODE_IWRAM_START
-//_IN_LEVEL_IWRAM_CODE_SECTION_SIZE
 
 
 namespace sherwin_adventure
@@ -57,22 +34,42 @@ void OverlayLoader::load(OverlayNum n_overlay_num)
 	switch (overlay_num())
 	{
 		case OverlayNum::TitleScreen:
-			//memcpy(__iwram_data0_load, __iwram_data)
 			break;
 
 		case OverlayNum::OverworldLoad:
-			
 			break;
 
 		case OverlayNum::InOverworld:
-			
 			break;
 
 		case OverlayNum::LevelLoad:
-			
 			break;
 
 		case OverlayNum::InLevel:
+			memcpy(_IN_LEVEL_EWRAM_SECTION_EWRAM_START,
+				_IN_LEVEL_EWRAM_SECTION_ROM_START,
+				_IN_LEVEL_EWRAM_SECTION_SIZE);
+
+			memcpy(_IN_LEVEL_IWRAM_SECTION_IWRAM_START,
+				_IN_LEVEL_IWRAM_SECTION_ROM_START,
+				_IN_LEVEL_IWRAM_SECTION_SIZE);
+
+			memset(_IN_LEVEL_BSS_SECTION_START, 0,
+				_IN_LEVEL_BSS_SECTION_SIZE);
+
+			memset(_IN_LEVEL_IWRAM_BSS_SECTION_START, 0,
+				_IN_LEVEL_IWRAM_BSS_SECTION_SIZE);
+
+			gba::memfill8(_IN_LEVEL_SRAM_SECTION_START, 0,
+				_IN_LEVEL_SRAM_SECTION_SIZE);
+
+			memcpy(_IN_LEVEL_EWRAM_CODE_EWRAM_START,
+				_IN_LEVEL_EWRAM_CODE_ROM_START,
+				_IN_LEVEL_EWRAM_CODE_SECTION_SIZE);
+
+			memcpy(_IN_LEVEL_IWRAM_CODE_IWRAM_START,
+				_IN_LEVEL_IWRAM_CODE_ROM_START,
+				_IN_LEVEL_IWRAM_CODE_SECTION_SIZE);
 			
 			break;
 
