@@ -68,19 +68,19 @@ volatile size_t very_temp;
 static constexpr size_t test_buf_size = 20;
 char test_buf[test_buf_size];
 
-extern "C"
-{
+//extern "C"
+//{
 
 //int real_main() __attribute__((_iwram_code));
 int real_main();
 
-}
+//}
 
 
 extern "C"
 {
 
-char address_buff[20] __attribute__((_sram));
+volatile char address_buff[20] __attribute__((_sram));
 
 vu32 some_title_screen_arr[8] __attribute__((_title_screen_bss));
 vu32 some_title_screen_var __attribute__((_title_screen_bss));
@@ -94,14 +94,14 @@ vu32 some_title_screen_buf[8] __attribute__((_title_screen_iwram_bss));
 vu32 some_in_level_buf[8] __attribute__((_in_level_iwram_bss));
 
 
-char asdf[8] __attribute__((_title_screen_sram));
-char asdf_2[8] __attribute__((_in_level_sram));
+volatile char asdf[8] __attribute__((_title_screen_sram));
+volatile char asdf_2[8] __attribute__((_in_level_sram));
 
-char asdf_ewram[8] __attribute__((_title_screen_ewram));
-char asdf_2_ewram[8] __attribute__((_in_level_ewram));
+volatile char asdf_ewram[8] __attribute__((_title_screen_ewram));
+volatile char asdf_2_ewram[8] __attribute__((_in_level_ewram));
 
 
-int egg_title_screen __attribute__((_title_screen_iwram));
+volatile int egg_title_screen __attribute__((_title_screen_iwram));
 
 }
 
@@ -121,20 +121,24 @@ int main()
 
 	//snprintf(test_buf, test_buf_size, "%X",
 	//	(unsigned)(__iwram_data0_section_size));
-	//snprintf(test_buf, test_buf_size, "%X",
-	//	(unsigned)(*__iwram_data0_start));
+	snprintf(test_buf, test_buf_size, "%X",
+		(unsigned)(&__iwram_data0_rom_start__));
 
-	gba::memcpy8(address_buff, test_buf, 9);
-	//memcpy(some_in_level_arr, test_buf, 8);
-	//memcpy(some_title_screen_arr, test_buf, 8);
-	return real_main();
+	memcpy8(address_buff, test_buf, 9);
+	////memcpy(some_in_level_arr, test_buf, 8);
+	////memcpy(some_title_screen_arr, test_buf, 8);
+	memcpy32(some_title_screen_arr, test_buf, 8);
+	//return real_main();
 	//snprintf(test_buf, test_buf_size, "%s", "asdf");
+	//return real_main();
 
+	ewram_test_func();
+	real_main();
 }
 
 
-extern "C"
-{
+//extern "C"
+//{
 
 int real_main()
 {
@@ -143,10 +147,15 @@ int real_main()
 	for (;;)
 	{
 		gba::bios_wait_for_vblank();
+
+		//memcpy32(some_title_screen_arr, test_buf, 8);
+		ewram_test_func();
 	}
+
+	return 9000;
 }
 
 
-}
+//}
 
 

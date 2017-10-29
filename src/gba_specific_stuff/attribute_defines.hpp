@@ -84,9 +84,9 @@
 	PPCAT(_EWRAM_OVERLAY_PREFIX(num),_ewram_end__)
 
 #define _EXPOSE_EWRAM_OVERLAY(num) \
-extern "C" u8 * const _EWRAM_OVERLAY_SECTION_ROM_START(num); \
-extern "C" u8* _EWRAM_OVERLAY_SECTION_EWRAM_START(num); \
-extern "C" u8* _EWRAM_OVERLAY_SECTION_END(num);
+extern "C" int _EWRAM_OVERLAY_SECTION_ROM_START(num); \
+extern "C" int _EWRAM_OVERLAY_SECTION_EWRAM_START(num); \
+extern "C" int _EWRAM_OVERLAY_SECTION_END(num);
 
 
 // IWRAM data linker overlay
@@ -102,9 +102,9 @@ extern "C" u8* _EWRAM_OVERLAY_SECTION_END(num);
 	PPCAT(_IWRAM_OVERLAY_PREFIX(num),_iwram_end__)
 
 #define _EXPOSE_IWRAM_OVERLAY(num) \
-extern "C" u8 * const _IWRAM_OVERLAY_SECTION_ROM_START(num); \
-extern "C" u8* _IWRAM_OVERLAY_SECTION_IWRAM_START(num); \
-extern "C" u8* _IWRAM_OVERLAY_SECTION_END(num);
+extern "C" int _IWRAM_OVERLAY_SECTION_ROM_START(num); \
+extern "C" int _IWRAM_OVERLAY_SECTION_IWRAM_START(num); \
+extern "C" int _IWRAM_OVERLAY_SECTION_END(num);
 
 
 
@@ -125,8 +125,8 @@ extern "C" u8* _IWRAM_OVERLAY_SECTION_END(num);
 	PPCAT(_BSS_OVERLAY_PREFIX(num),_end__)
 
 #define _EXPOSE_BSS_OVERLAY(num) \
-extern "C" u8* _BSS_OVERLAY_SECTION_START(num); \
-extern "C" u8* _BSS_OVERLAY_SECTION_END(num);
+extern "C" int _BSS_OVERLAY_SECTION_START(num); \
+extern "C" int _BSS_OVERLAY_SECTION_END(num);
 
 
 
@@ -144,8 +144,8 @@ extern "C" u8* _BSS_OVERLAY_SECTION_END(num);
 	PPCAT(_IWRAM_BSS_OVERLAY_PREFIX(num),_end__)
 
 #define _EXPOSE_IWRAM_BSS_OVERLAY(num) \
-extern "C" u8* _IWRAM_BSS_OVERLAY_SECTION_START(num); \
-extern "C" u8* _IWRAM_BSS_OVERLAY_SECTION_END(num);
+extern "C" int _IWRAM_BSS_OVERLAY_SECTION_START(num); \
+extern "C" int _IWRAM_BSS_OVERLAY_SECTION_END(num);
 
 
 
@@ -163,8 +163,8 @@ extern "C" u8* _IWRAM_BSS_OVERLAY_SECTION_END(num);
 	PPCAT(_SRAM_OVERLAY_PREFIX(num),_end__)
 
 #define _EXPOSE_SRAM_OVERLAY(num) \
-extern "C" u8* _SRAM_OVERLAY_SECTION_START(num); \
-extern "C" u8* _SRAM_OVERLAY_SECTION_END(num);
+extern "C" int _SRAM_OVERLAY_SECTION_START(num); \
+extern "C" int _SRAM_OVERLAY_SECTION_END(num);
 
 
 
@@ -189,9 +189,9 @@ extern "C" u8* _SRAM_OVERLAY_SECTION_END(num);
 	PPCAT(_EWRAM_CODE_OVERLAY_PREFIX(num),_ewram_end__)
 
 #define _EXPOSE_EWRAM_CODE_OVERLAY(num) \
-extern "C" u8 * const _EWRAM_CODE_OVERLAY_SECTION_ROM_START(num); \
-extern "C" u8* _EWRAM_CODE_OVERLAY_SECTION_EWRAM_START(num); \
-extern "C" u8* _EWRAM_CODE_OVERLAY_SECTION_END(num);
+extern "C" int _EWRAM_CODE_OVERLAY_SECTION_ROM_START(num); \
+extern "C" int _EWRAM_CODE_OVERLAY_SECTION_EWRAM_START(num); \
+extern "C" int _EWRAM_CODE_OVERLAY_SECTION_END(num);
 
 
 
@@ -210,9 +210,9 @@ extern "C" u8* _EWRAM_CODE_OVERLAY_SECTION_END(num);
 	PPCAT(_IWRAM_CODE_OVERLAY_PREFIX(num),_iwram_end__)
 
 #define _EXPOSE_IWRAM_CODE_OVERLAY(num) \
-extern "C" u8 * const _IWRAM_CODE_OVERLAY_SECTION_ROM_START(num); \
-extern "C" u8* _IWRAM_CODE_OVERLAY_SECTION_IWRAM_START(num); \
-extern "C" u8* _IWRAM_CODE_OVERLAY_SECTION_END(num);
+extern "C" int _IWRAM_CODE_OVERLAY_SECTION_ROM_START(num); \
+extern "C" int _IWRAM_CODE_OVERLAY_SECTION_IWRAM_START(num); \
+extern "C" int _IWRAM_CODE_OVERLAY_SECTION_END(num);
 
 
 

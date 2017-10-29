@@ -23,6 +23,8 @@
 #include "../general_utility_stuff/misc_types.hpp"
 #include "attribute_defines.hpp"
 
+#include <string.h>
+
 #define ASM_COMMENT(stuff) \
 	asm volatile("@ ---" stuff " ---")
 
@@ -62,11 +64,6 @@ extern void memfill8(void* dst, u32 src, u32 bytecount);
 
 }
 
-namespace sherwin_adventure
-{
-
-namespace gba
-{
 
 // A bunch of wrappers
 inline void memcpy32(volatile void* dst, const void* src, 
@@ -248,10 +245,6 @@ template<typename Type>
 inline void* struct_memcpy(Type& dst, const Type& src)
 {
 	return memcpy(&dst, &src, sizeof(Type));
-}
-
-}
-
 }
 
 #endif		// asm_funcs_hpp
