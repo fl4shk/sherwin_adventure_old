@@ -6,8 +6,7 @@ SHARED_SRC_DIRS:=src src/general_utility_stuff \
 	src/game_engine_stuff/block_stuff/specific_blocks \
 	src/game_engine_stuff/level_stuff src/game_engine_stuff/sprite_stuff \
 	src/game_engine_stuff/sprite_stuff/specific_sprites \
-	src/gba_specific_stuff src/test_level src/audio src/gfx \
-	src/overlay_stuff
+	src/gba_specific_stuff src/test_level src/audio src/gfx
 BINARY_DIRS:=src/audio
 CXX_DIRS:=$(SHARED_SRC_DIRS)
 S_DIRS:=$(SHARED_SRC_DIRS)

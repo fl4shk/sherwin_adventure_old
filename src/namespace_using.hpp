@@ -53,10 +53,6 @@ namespace sherwin_adventure
 //using namespace sherwin_adventure::gba;
 
 namespace sherwin_adventure 
-	{ namespace overlay {} }
-//using namespace sherwin_adventure::overlay;
-
-namespace sherwin_adventure 
 	{ namespace game_engine {} }
 //using namespace sherwin_adventure::game_engine;
 

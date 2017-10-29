@@ -281,7 +281,7 @@ _EXPOSE_IWRAM_CODE_OVERLAY(_OVERLAY_NUM_IN_LEVEL)
 
 namespace sherwin_adventure
 {
-namespace overlay
+namespace game_engine
 {
 
 void OverlayLoader::load(OverlayNum n_overlay_num)

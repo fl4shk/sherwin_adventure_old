@@ -228,7 +228,7 @@ extern "C" size_t _IWRAM_CODE_OVERLAY_SECTION_END(num);
 
 namespace sherwin_adventure
 {
-namespace overlay
+namespace game_engine
 {
 
 enum class OverlayNum : u32
