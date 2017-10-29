@@ -44,7 +44,8 @@ public:		// functions
 
 	// This function doesn't need a lot of speed, and thus it will be run
 	// from ROM.
-	void load(OverlayNum n_overlay_num) __attribute__((_target_arm));
+	void load(OverlayNum n_overlay_num);
+	//void load(OverlayNum n_overlay_num) __attribute__((_target_arm));
 
 	gen_getter_by_val(overlay_num);
 
