@@ -158,19 +158,14 @@ void OverlayLoader::load(OverlayNum n_overlay_num)
 		halt();
 	}
 
-	thing_0();
-	thing_1();
-	thing_2();
-	thing_3();
-	thing_4();
-	thing_5();
-	thing_6();
+	//thing_0();
+	//thing_1();
+	//thing_2();
+	//thing_3();
+	//thing_4();
+	//thing_5();
+	//thing_6();
 
-}
-
-
-void OverlayLoader::thing_0()
-{
 	asm_comment("First thing");
 	memcpy(__ewram_overlay_section_ewram_start
 			[(size_t)overlay_num()],
@@ -180,9 +175,7 @@ void OverlayLoader::thing_0()
 			[(size_t)overlay_num()]
 		- (size_t)__ewram_overlay_section_ewram_start
 			[(size_t)overlay_num()]));
-}
-void OverlayLoader::thing_1()
-{
+
 	asm_comment("Second thing");
 	memcpy(__iwram_overlay_section_iwram_start
 			[(size_t)overlay_num()],
@@ -192,9 +185,7 @@ void OverlayLoader::thing_1()
 			[(size_t)overlay_num()]
 		- (size_t)__iwram_overlay_section_iwram_start
 			[(size_t)overlay_num()]));
-}
-void OverlayLoader::thing_2()
-{
+
 	asm_comment("Third thing");
 	memset(__bss_overlay_section_start
 			[(size_t)overlay_num()], 
@@ -203,9 +194,7 @@ void OverlayLoader::thing_2()
 			[(size_t)overlay_num()]
 		- (size_t)__bss_overlay_section_start
 			[(size_t)overlay_num()]));
-}
-void OverlayLoader::thing_3()
-{
+
 	asm_comment("Fourth thing");
 	memset(__iwram_bss_overlay_section_start
 			[(size_t)overlay_num()], 
@@ -214,9 +203,7 @@ void OverlayLoader::thing_3()
 			[(size_t)overlay_num()]
 		- (size_t)__iwram_bss_overlay_section_start
 			[(size_t)overlay_num()]));
-}
-void OverlayLoader::thing_4()
-{
+
 	asm_comment("Fifth thing");
 	memfill8(__sram_overlay_section_start
 			[(size_t)overlay_num()], 
@@ -225,9 +212,7 @@ void OverlayLoader::thing_4()
 			[(size_t)overlay_num()]
 		- (size_t)__sram_overlay_section_start
 			[(size_t)overlay_num()]));
-}
-void OverlayLoader::thing_5()
-{
+
 	asm_comment("Sixth thing");
 	memcpy(__ewram_code_overlay_section_ewram_start
 			[(size_t)overlay_num()],
@@ -237,9 +222,7 @@ void OverlayLoader::thing_5()
 			[(size_t)overlay_num()]
 		- (size_t)__ewram_code_overlay_section_ewram_start
 			[(size_t)overlay_num()]));
-}
-void OverlayLoader::thing_6()
-{
+
 	asm_comment("Seventh thing");
 	memcpy(__iwram_code_overlay_section_iwram_start
 			[(size_t)overlay_num()],
@@ -249,7 +232,91 @@ void OverlayLoader::thing_6()
 			[(size_t)overlay_num()]
 		- (size_t)__iwram_code_overlay_section_iwram_start
 			[(size_t)overlay_num()]));
+
 }
+
+
+//void OverlayLoader::thing_0()
+//{
+//	asm_comment("First thing");
+//	memcpy(__ewram_overlay_section_ewram_start
+//			[(size_t)overlay_num()],
+//		__ewram_overlay_section_rom_start
+//			[(size_t)overlay_num()],
+//		((size_t)__ewram_overlay_section_end
+//			[(size_t)overlay_num()]
+//		- (size_t)__ewram_overlay_section_ewram_start
+//			[(size_t)overlay_num()]));
+//}
+//void OverlayLoader::thing_1()
+//{
+//	asm_comment("Second thing");
+//	memcpy(__iwram_overlay_section_iwram_start
+//			[(size_t)overlay_num()],
+//		__iwram_overlay_section_rom_start
+//			[(size_t)overlay_num()],
+//		((size_t)__iwram_overlay_section_end
+//			[(size_t)overlay_num()]
+//		- (size_t)__iwram_overlay_section_iwram_start
+//			[(size_t)overlay_num()]));
+//}
+//void OverlayLoader::thing_2()
+//{
+//	asm_comment("Third thing");
+//	memset(__bss_overlay_section_start
+//			[(size_t)overlay_num()], 
+//		0,
+//		((size_t)__bss_overlay_section_end
+//			[(size_t)overlay_num()]
+//		- (size_t)__bss_overlay_section_start
+//			[(size_t)overlay_num()]));
+//}
+//void OverlayLoader::thing_3()
+//{
+//	asm_comment("Fourth thing");
+//	memset(__iwram_bss_overlay_section_start
+//			[(size_t)overlay_num()], 
+//		0,
+//		((size_t)__iwram_bss_overlay_section_end
+//			[(size_t)overlay_num()]
+//		- (size_t)__iwram_bss_overlay_section_start
+//			[(size_t)overlay_num()]));
+//}
+//void OverlayLoader::thing_4()
+//{
+//	asm_comment("Fifth thing");
+//	memfill8(__sram_overlay_section_start
+//			[(size_t)overlay_num()], 
+//		0,
+//		((size_t)__sram_overlay_section_end
+//			[(size_t)overlay_num()]
+//		- (size_t)__sram_overlay_section_start
+//			[(size_t)overlay_num()]));
+//}
+//void OverlayLoader::thing_5()
+//{
+//	asm_comment("Sixth thing");
+//	memcpy(__ewram_code_overlay_section_ewram_start
+//			[(size_t)overlay_num()],
+//		__ewram_code_overlay_section_rom_start
+//			[(size_t)overlay_num()],
+//		((size_t)__ewram_code_overlay_section_end
+//			[(size_t)overlay_num()]
+//		- (size_t)__ewram_code_overlay_section_ewram_start
+//			[(size_t)overlay_num()]));
+//}
+//void OverlayLoader::thing_6()
+//{
+//	asm_comment("Seventh thing");
+//	memcpy(__iwram_code_overlay_section_iwram_start
+//			[(size_t)overlay_num()],
+//		__iwram_code_overlay_section_rom_start
+//			[(size_t)overlay_num()],
+//		((size_t)__iwram_code_overlay_section_end
+//			[(size_t)overlay_num()]
+//		- (size_t)__iwram_code_overlay_section_iwram_start
+//			[(size_t)overlay_num()]));
+//}
 
 }
 }

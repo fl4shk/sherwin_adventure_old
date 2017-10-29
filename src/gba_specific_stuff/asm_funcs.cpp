@@ -24,6 +24,11 @@ extern "C"
 // Note That this won't work for copying To or from SRAM.
 void* memcpy(void* dst, const void* src, size_t n)
 {
+	if (n == 0)
+	{
+		return dst;
+	}
+
 	//memcpy8(dst, src, n);
 
 	const u32 dst_unaligned = ((u32)dst) & 0x3;
@@ -144,6 +149,11 @@ void* memcpy(void* dst, const void* src, size_t n)
 // memset() Can easily be SUPER optimized because of the constant byte
 void* memset(void* dst, int c, size_t n)
 {
+	if (n == 0)
+	{
+		return dst;
+	}
+
 	const u32 dst_unaligned = ((u32)dst) & 0x3;
 
 	const u32 to_write = (((u8)c) << 24) | (((u8)c) << 16) 
@@ -233,6 +243,11 @@ void* memset(void* dst, int c, size_t n)
 // Note That this won't work for copying To or from SRAM.
 void* slower_memcpy(void* dst, const void* src, size_t n)
 {
+	if (n == 0)
+	{
+		return dst;
+	}
+
 	//memcpy8(dst, src, n);
 
 	const u32 dst_unaligned = ((u32)dst) & 0x3;

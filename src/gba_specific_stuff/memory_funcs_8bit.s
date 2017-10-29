@@ -34,12 +34,16 @@
 
 memcpy8:
 	.fnstart
+	cmp r2, #0
+	beq end_memcpy8
 
+loop_memcpy8:
 	ldrb r3, [r1], #1
 	strb r3, [r0], #1
 	subs r2, r2, #1
-	bne memcpy8
+	bne loop_memcpy8
 
+end_memcpy8:
 	bx lr
 
 	.fnend
@@ -63,11 +67,15 @@ memcpy8:
 
 memfill8:
 	.fnstart
+	cmp r2, #0
+	beq end_memfill8
 
+loop_memfill8:
 	strb r1, [r0], #1
 	subs r2, r2, #1
-	bne memfill8
+	bne loop_memfill8
 
+end_memfill8:
 	bx lr
 	.fnend
 
