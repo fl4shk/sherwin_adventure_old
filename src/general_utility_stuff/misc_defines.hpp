@@ -26,5 +26,7 @@
 #define bprange_to_shifted_mask(bit_pos_hi, bit_pos_lo) \
 	(((1 << (bit_pos_hi - bit_pos_lo + 1)) - 1) << bit_pos_lo)
 
+#define asm_comment(stuff) \
+	asm volatile("//@ ---" stuff " ---")
 
 #endif		// misc_defines_hpp
