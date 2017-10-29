@@ -149,6 +149,15 @@ void test_overworld_load()
 
 int main()
 {
+	return real_main();
+}
+
+
+extern "C"
+{
+
+int real_main()
+{
 	//very_temp = clseg_grp_16x32_size;
 	//return main_2();
 	//snprintf(address_buf, 20, "%X", 
@@ -168,21 +177,13 @@ int main()
 	//memcpy(some_in_level_arr, test_buf, 8);
 	//memcpy(some_title_screen_arr, test_buf, 8);
 	//memcpy32(some_title_screen_arr, test_buf, 8);
-	return real_main();
-}
 
-
-extern "C"
-{
-
-int real_main()
-{
 	gba::irq_init();
 
 	game_engine::OverlayLoader overlay_loader;
 
-	//overlay_loader.load(game_engine::OverlayNum::TitleScreen);
-	//test_title_screen();
+	overlay_loader.load(game_engine::OverlayNum::TitleScreen);
+	test_title_screen();
 
 	overlay_loader.load(game_engine::OverlayNum::OverworldLoad);
 	test_overworld_load();
