@@ -16,10 +16,11 @@ automated by use of the level editor.
 A block/sprite will specify which tileset(s) it uses, as well as what
 palette(s).
 
-Block palettes/tiles can only change when (A) something happens to that
-block (such as when it gets strongly hit, for example), (B) all blocks of
-that type change their graphic (essentially changing the metatile used in
-VRAM at **one** location).  
+Block palettes/tiles can only change when all blocks of that type change
+their graphic (essentially changing the metatile used in VRAM at **one**
+location).  
+To simulate blocks of the same type having different graphics at the same
+time, it will be **necessary** to implement
 
 Getting strongly hit may cause a block to change what type of block it is,
 however.
