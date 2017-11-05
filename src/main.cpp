@@ -33,6 +33,7 @@
 #include "general_utility_stuff/trigonometry_funcs.hpp"
 #include "general_utility_stuff/array_2d_helper_classes.hpp"
 #include "general_utility_stuff/debug_vars.hpp"
+#include "general_utility_stuff/sa_array_of_lists_class.hpp"
 
 //#include "game_engine_stuff/level_stuff/active_level_class.hpp"
 //#include "game_engine_stuff/level_stuff/active_level_manager_class.hpp"
@@ -48,7 +49,7 @@
 
 #include "gba_specific_stuff/interrupt_stuff.hpp"
 
-#include "namespace_using.hpp"
+#include "misc_includes.hpp"
 
 #include "game_engine_stuff/overlay_loader_stuff.hpp"
 
