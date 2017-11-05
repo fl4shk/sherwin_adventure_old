@@ -45,15 +45,15 @@ public:			// functions
 	{
 	}
 
-	ArrayCszHelper(Type* s_the_array) : __arr(s_the_array)
+	ArrayCszHelper(Type* s_arr) : __arr(s_arr)
 	{
 	}
 
 	ArrayCszHelper(const ArrayCszHelper& to_copy) = default;
 
-	void init(Type* s_the_array)
+	void init(Type* s_arr)
 	{
-		__arr = s_the_array;
+		__arr = s_arr;
 	}
 
 
@@ -102,16 +102,16 @@ public:			// functions
 	{
 	}
 
-	inline ArrayHelper(Type* s_the_array, size_t s_size)
-		: __arr(s_the_array), __size(s_size)
+	inline ArrayHelper(Type* s_arr, size_t s_size)
+		: __arr(s_arr), __size(s_size)
 	{
 	}
 
 	inline ArrayHelper(const ArrayHelper& to_copy) = default;
 
-	void init(Type* s_the_array, size_t s_size)
+	void init(Type* s_arr, size_t s_size)
 	{
-		__arr = s_the_array;
+		__arr = s_arr;
 		__size = s_size;
 	}
 

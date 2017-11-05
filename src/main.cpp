@@ -32,24 +32,13 @@
 #include "general_utility_stuff/fixed_classes.hpp"
 #include "general_utility_stuff/trigonometry_funcs.hpp"
 #include "general_utility_stuff/array_2d_helper_classes.hpp"
+
+#include "general_utility_stuff/free_list_allocator_class.hpp"
 #include "general_utility_stuff/debug_vars.hpp"
 #include "general_utility_stuff/sa_array_of_lists_class.hpp"
 
-//#include "game_engine_stuff/level_stuff/active_level_class.hpp"
-//#include "game_engine_stuff/level_stuff/active_level_manager_class.hpp"
-//#include "game_engine_stuff/sprite_stuff/sprite_manager_class.hpp"
-//
-//
-//#include "game_engine_stuff/game_manager_class.hpp"
-//#include "game_engine_stuff/gfx_manager_class.hpp"
-//
-//#include "game_engine_stuff/halt_stuff.hpp"
-//#include "game_engine_stuff/coll_lseg_classes.hpp"
-//#include "game_engine_stuff/hud_manager_class.hpp"
-
 #include "gba_specific_stuff/interrupt_stuff.hpp"
 
-#include "misc_includes.hpp"
 
 #include "game_engine_stuff/overlay_loader_stuff.hpp"
 
@@ -181,13 +170,16 @@ int real_main()
 
 	gba::irq_init();
 
-	game_engine::OverlayLoader overlay_loader;
 
-	overlay_loader.load(game_engine::OverlayNum::TitleScreen);
-	test_title_screen();
+	//game_engine::OverlayLoader overlay_loader;
 
-	overlay_loader.load(game_engine::OverlayNum::OverworldLoad);
-	test_overworld_load();
+	//overlay_loader.load(game_engine::OverlayNum::TitleScreen);
+	//test_title_screen();
+
+	//overlay_loader.load(game_engine::OverlayNum::OverworldLoad);
+	//test_overworld_load();
+
+
 
 	//snprintf(test_buf, test_buf_size, "%X",
 	//	(unsigned)&__sram0_start__);

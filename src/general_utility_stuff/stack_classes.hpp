@@ -16,10 +16,11 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef sa_stack_classes_hpp
-#define sa_stack_classes_hpp
+#ifndef stack_classes_hpp
+#define stack_classes_hpp
 
 #include "../misc_includes.hpp"
+#include "array_helper_classes.hpp"
 
 #include <array>
 
@@ -34,7 +35,7 @@ class SaStack
 {
 protected:		// variables
 	std::array<Type, __size> __arr;
-	size_t __next_index;
+	size_t __next_index = 0;
 
 public:		// functions
 	inline SaStack() : __next_index(0)
@@ -85,6 +86,69 @@ protected:		// functions
 } __attribute__((_align4));
 
 
+template<typename Type>
+class ExtAllocStack : public ArrayHelper<Type>
+{
+public:		// typedefs
+	typedef ArrayHelper<Type> Base;
+
+protected:		// variables
+	size_t __next_index = 0;
+
+public:		// functions
+	inline ExtAllocStack() : __next_index(0)
+	{
+	}
+
+	inline ExtAllocStack(Type* s_arr, size_t s_size)
+		: Base(s_arr, s_size), __next_index(0)
+	{
+	}
+
+	inline ExtAllocStack(const ExtAllocStack& to_copy) = default;
+
+	inline void init(Type* s_arr, size_t s_size)
+	{
+		Base::init(s_arr, s_size);
+		__next_index = 0;
+	}
+
+	inline ExtAllocStack& operator = (const ExtAllocStack& to_copy)
+		 = default;
+
+
+	void push(const Type& to_push)
+	{
+		Base::at(__next_index++) = to_push;
+	}
+
+	void pop()
+	{
+		--__next_index;
+	}
+
+	//inline Type peek_top()
+	//{
+	//	return Base::at(__next_index - 1);
+	//}
+	inline const Type& peek_top() const
+	{
+		return Base::at(__next_index - 1);
+	}
+
+	inline const Type& peek_top_and_pop()
+	{
+		const Type& ret = peek_top();
+
+		// pop() doesn't actually destroy the instance, so this is safe?
+		pop();
+
+		return ret;
+	}
+
+} __attribute__((_align4));
+
+
 
 template<size_t __size>
 class SaFreeList : public SaStack<s16, __size>
@@ -95,11 +159,24 @@ public:		// typedefs
 public:		// functions
 	SaFreeList() __attribute__((noinline))
 	{
-		//for (s16 i=Base::size()-1; i>=0; --i)
-		//{
-		//	Base::arr().at(i) = i;
-		//}
+		for (size_t i=0; i<Base::size(); ++i)
+		{
+			Base::push(i);
+		}
+	}
 
+} __attribute__((_align4));
+
+
+
+class ExtAllocFreeList : public ExtAllocStack<s16>
+{
+public:		// typedefs
+	typedef ExtAllocStack<s16> Base;
+
+public:		// functions
+	ExtAllocFreeList() __attribute__((noinline))
+	{
 		for (size_t i=0; i<Base::size(); ++i)
 		{
 			Base::push(i);
@@ -111,4 +188,5 @@ public:		// functions
 }
 }
 
-#endif		// sa_stack_classes_hpp
+
+#endif		// stack_classes_hpp

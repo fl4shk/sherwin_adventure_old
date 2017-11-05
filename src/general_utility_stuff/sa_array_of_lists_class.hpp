@@ -19,7 +19,7 @@
 #ifndef sa_array_of_lists_class_hpp
 #define sa_array_of_lists_class_hpp
 
-#include "sa_stack_classes.hpp"
+#include "stack_classes.hpp"
 
 
 namespace sherwin_adventure

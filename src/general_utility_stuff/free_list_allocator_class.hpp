@@ -16,3 +16,30 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
+#ifndef free_list_allocator_class_hpp
+#define free_list_allocator_class_hpp
+
+#include "../misc_includes.hpp"
+#include "stack_classes.hpp"
+
+namespace sherwin_adventure
+{
+namespace containers
+{
+
+template<typename Type, size_t __max_num_nodes>
+class FreeListAllocator
+{
+protected:		// variables
+	
+
+public:		// functions
+	
+
+} __attribute__((_align4));
+
+}
+}
+
+
+#endif		// free_list_allocator_class_hpp
