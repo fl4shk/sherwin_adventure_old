@@ -29,6 +29,30 @@ namespace sherwin_adventure
 namespace containers
 {
 
+class FreeListAllocContainedBase
+{
+protected:		// variables
+	s16 __arr_index = -1;
+
+public:		// functions
+	inline FreeListAllocContainedBase()
+		: __arr_index(-1)
+	{
+	}
+	inline FreeListAllocContainedBase(s16 s_arr_index)
+		: __arr_index(s_arr_index)
+	{
+	}
+
+	virtual ~FreeListAllocContainedBase()
+	{
+	}
+
+	//void* operator new (size_t size, Allocator& allocator);
+
+	gen_getter_and_setter_by_val(arr_index);
+};
+
 
 // Base class for an allocator using a ExtFreeList
 template<typename Type>
@@ -85,7 +109,7 @@ public:		// functions
 		}
 
 		//DebugArrGroup::write_str_and_inc("NoFreeSprite");
-		DebugArrGroup::write_str_and_inc(__no_free_str());
+		DebugArrGroup::write_str_and_inc(__none_free_str());
 		game_engine::halt();
 
 		//return NULL;
@@ -122,27 +146,17 @@ public:		// functions
 protected:		// functions
 	gen_getter_by_ref(free_list);
 
+	inline void __set_instance_arr_index(Type& instance, int some_arr_index)
+	{
+		//instance.arr_index = some_arr_index;
+		instance.set_arr_index(some_arr_index);
+	}
+	inline int __get_instance_arr_index(Type& instance)
+	{
+		return instance.arr_index();
+	}
+
 	// Things for derived classes to implement
-	virtual void __set_instance_arr_index(Type& instance, 
-		int some_arr_index) = 0;
-	virtual int __get_instance_arr_index(Type& instance) = 0;
-	//virtual bool __alloc_test_bad(Type& ret) = 0;
-	//virtual bool __dealloc_test_bad(Type& to_dealloc) = 0;
-	virtual void __dealloc_middle_part(Type& to_dealloc) = 0;
-	virtual const char* __bad_alloc_str() const = 0;
-	virtual const char* __no_free_str() const = 0;
-	virtual const char* __cant_push_str() const = 0;
-
-	//virtual void __set_instance_arr_index(Type& instance, 
-	//	int some_arr_index) = 0;
-	//{
-	//	instance.arr_index = some_arr_index;
-	//}
-	//virtual int __get_instance_arr_index(Type& instance) = 0;
-	//{
-	//	return instance.arr_index();
-	//}
-
 	virtual bool __alloc_test_bad(Type& ret)
 	{
 		//return (the_sprite.the_sprite_type != StDefault);
@@ -153,7 +167,9 @@ protected:		// functions
 		//return (the_sprite.the_sprite_type == StDefault);
 		return false;
 	}
-	//virtual void __dealloc_middle_part(Type& to_dealloc) = 0;
+	virtual void __dealloc_middle_part(Type& to_dealloc)
+	{
+	}
 	//{
 	//	the_sprite.the_sprite_type = StDefault;
 
@@ -176,23 +192,23 @@ protected:		// functions
 	//	//*the_sprite = Sprite(the_sprite.get_vram_chunk_index());
 	//}
 
-	//virtual const char* __bad_alloc_str() const = 0;
-	//{
-	//	static const char ret[] = "BadSprite";
-	//	return ret;
-	//}
+	virtual const char* __bad_alloc_str() const
+	{
+		static const char ret[] = "BadAlloc";
+		return ret;
+	}
 
-	//virtual const char* __no_free_str() const = 0;
-	//{
-	//	static const char ret[] = "NoFreeSprite";
-	//	return ret;
-	//}
+	virtual const char* __none_free_str() const
+	{
+		static const char ret[] = "NoneFree";
+		return ret;
+	}
 
-	//virtual const char* __cant_push_str() const = 0;
-	//{
-	//	static const char ret[] = "SadsCan'tPush";
-	//	return ret;
-	//}
+	virtual const char* __cant_push_str() const
+	{
+		static const char ret[] = "Can'tPush";
+		return ret;
+	}
 
 } __attribute__((_align4));
 

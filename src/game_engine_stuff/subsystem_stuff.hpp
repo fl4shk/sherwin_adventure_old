@@ -36,23 +36,17 @@ class SubsystemAllocator;
 // Abstract base class for a so-called "subsystem" which is an
 // organizational tool to allow connecting together pieces of the game
 // engine.
-class Subsystem
+class Subsystem : public FreeListAllocContainedBase
 {
-protected:		// variables
-	s16 __index = -1;
-
 public:		// functions
 	inline Subsystem()
 	{
 	}
 
-	inline Subsystem(s16 s_index) 
-		: __index(s_index)
+	inline Subsystem(s16 s_arr_index) 
+		: FreeListAllocContainedBase(s_arr_index)
 	{
 	}
-
-
-	gen_getter_and_setter_by_val(index);
 
 	inline void* operator new (size_t size, 
 		SubsystemAllocator& subsystem_allocator);
@@ -70,6 +64,21 @@ public:		// functions
 
 
 protected:		// functions
+	const char* __bad_alloc_str() const
+	{
+		static const char ret[] = "BadAllocSubsys";
+		return ret;
+	}
+	const char* __none_free_str() const
+	{
+		static const char ret[] = "SubsysNoneFree";
+		return ret;
+	}
+	const char* __cant_push_str() const
+	{
+		static const char ret[] = "Can'tPushSubsys";
+		return ret;
+	}
 
 } __attribute__((_align4));
 
