@@ -126,8 +126,8 @@ protected:		// functions
 	virtual void __set_instance_arr_index(Type& instance, 
 		int some_arr_index) = 0;
 	virtual int __get_instance_arr_index(Type& instance) = 0;
-	virtual bool __alloc_test_bad(Type& ret) = 0;
-	virtual bool __dealloc_test_bad(Type& to_dealloc) = 0;
+	//virtual bool __alloc_test_bad(Type& ret) = 0;
+	//virtual bool __dealloc_test_bad(Type& to_dealloc) = 0;
 	virtual void __dealloc_middle_part(Type& to_dealloc) = 0;
 	virtual const char* __bad_alloc_str() const = 0;
 	virtual const char* __no_free_str() const = 0;
@@ -143,14 +143,16 @@ protected:		// functions
 	//	return instance.arr_index();
 	//}
 
-	//virtual bool __alloc_test_bad(Type& ret) = 0;
-	//{
-	//	return (the_sprite.the_sprite_type != StDefault);
-	//}
-	//virtual bool __dealloc_test_bad(Type& to_dealloc) = 0;
-	//{
-	//	return (the_sprite.the_sprite_type == StDefault);
-	//}
+	virtual bool __alloc_test_bad(Type& ret)
+	{
+		//return (the_sprite.the_sprite_type != StDefault);
+		return false;
+	}
+	virtual bool __dealloc_test_bad(Type& to_dealloc)
+	{
+		//return (the_sprite.the_sprite_type == StDefault);
+		return false;
+	}
 	//virtual void __dealloc_middle_part(Type& to_dealloc) = 0;
 	//{
 	//	the_sprite.the_sprite_type = StDefault;
