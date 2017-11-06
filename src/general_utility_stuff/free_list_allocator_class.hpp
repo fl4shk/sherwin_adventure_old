@@ -89,21 +89,40 @@ public:		// functions
 		{
 		}
 	}
-	virtual void deallocate(Type& to_dealloc)
+	void deallocate(Type& to_dealloc)
 	{
+		//if (the_sprite.the_sprite_type == StDefault)
+		if (__dealloc_test_bad(to_dealloc))
+		{
+			//DebugArrGroup::write_str_and_inc("SadsSprStDefault");
+			//game_engine::halt();
+			return;
+		}
+
+		//if (!can_push_index())
+		if (!free_list().can_push())
+		{
+			//DebugArrGroup::write_str_and_inc("SadsCan'tPush");
+			DebugArrGroup::write_str_and_inc(__cant_push_str());
+			game_engine::halt();
+		}
+
+
+		//the_sa_free_list_backend.push(the_sprite.the_arr_index);
+		//the_sprite.the_arr_index = -1;
+
+		free_list().push(__get_instance_arr_index(to_dealloc));
+		__set_instance_arr_index(to_dealloc, -1);
 	}
 
 protected:		// functions
 	gen_getter_by_ref(free_list);
 
-	//virtual void __alloc_use_top_index(Type& ret, int n_arr_index)
-	//{
-	//}
 	virtual void __set_instance_arr_index(Type& instance, 
-		int some_arr_index)
-	{
-		//instance.arr_index = some_arr_index
-	}
+		int some_arr_index) = 0;
+	//{
+	//	instance.arr_index = some_arr_index;
+	//}
 	virtual int __get_instance_arr_index(Type& instance) = 0;
 	//{
 	//	return instance.arr_index();
@@ -111,6 +130,7 @@ protected:		// functions
 
 	virtual bool __alloc_test_bad(Type& ret)
 	{
+		//return (the_sprite.the_sprite_type != StDefault);
 		return false;
 	}
 	virtual bool __dealloc_test_bad(Type& to_dealloc)
