@@ -25,6 +25,7 @@
 #include "../misc_includes.hpp"
 #include "overlay_loader_stuff.hpp"
 #include "../general_utility_stuff/free_list_allocator_base_class.hpp"
+#include <experimental/propagate_const>
 
 namespace sherwin_adventure
 {
@@ -36,32 +37,115 @@ class SubsystemAllocator;
 // Abstract base class for a so-called "subsystem" which is an
 // organizational tool to allow connecting together pieces of the game
 // engine.
-class Subsystem : public FreeListAllocContainedBase
+class SubsystemBase : public FreeListAllocContainedBase
 {
+protected:		// variables
+	// Pointer to implementation
+	void* __pimpl;
+
+	//std::experimental::propagate_const<std::unique_ptr<ImplName>> __pimpl;
+
 public:		// functions
-	inline Subsystem()
+	SubsystemBase()
 	{
+		//init_pimpl();
 	}
 
-	inline Subsystem(s16 s_arr_index) 
+	SubsystemBase(s32 s_arr_index)
 		: FreeListAllocContainedBase(s_arr_index)
 	{
+		//init_pimpl();
+	}
+
+	virtual ~SubsystemBase()
+	{
+		//erase_pimpl();
 	}
 
 	inline void* operator new (size_t size, 
 		SubsystemAllocator& subsystem_allocator);
 
-	virtual void iterate() = 0;
+
+	// Derived classes should create their own implementation of the
+	// iterate() virtual member function
+	virtual void iterate()
+	{
+	}
+
+protected:		// functions
+	//template<typename Type>
+	//inline std::unique_ptr<Type>* impl_uptr()
+	//{
+	//	return reinterpret_cast<std::unique_ptr<Type>*>(__pimpl);
+	//}
+	template<typename Type>
+	inline Type* get_pimpl_as()
+	{
+		return reinterpret_cast<Type*>(__pimpl);
+	}
+
+	template<typename Type>
+	void init_pimpl()
+	{
+		//__pimpl = new Type();
+		//__pimpl = new std::unique_ptr<Type>();
+		__pimpl = new Type();
+	}
+
+	template<typename Type>
+	void erase_pimpl()
+	{
+		delete get_pimpl_as<Type>();
+	}
+	
+
+} __attribute__((_align4));
+
+template<typename ImplType>
+class Subsystem : public SubsystemBase
+{
+public:		// classes
+	//class ImplType
+	//{
+	//public:		// variables
+	//	static constexpr size_t arr_size = 8;
+	//	u32 arr[arr_size];
+	//} __attribute__((_align4));
+
+
+public:		// functions
+	inline Subsystem()
+	{
+	}
+	inline Subsystem(s32 s_arr_index)
+		: SubsystemBase(s_arr_index)
+	{
+		init_pimpl<ImplType>();
+	}
+	virtual inline ~Subsystem()
+	{
+		erase_pimpl<ImplType>();
+	}
+
+	inline void iterate()
+	{
+	}
+
+protected:		// functions
+	inline auto& pimpl()
+	{
+		return *get_pimpl_as<ImplType>();
+	}
 
 } __attribute__((_align4));
 
 
-class SubsystemAllocator : public FreeListAllocatorBase<Subsystem>
+
+class SubsystemAllocator : public FreeListAllocatorBase<SubsystemBase>
 {
 public:		// functions
-	SubsystemAllocator(Subsystem* s_arr, s16* s_free_list_arr, 
+	SubsystemAllocator(SubsystemBase* s_arr, s16* s_free_list_arr, 
 		size_t s_size);
-
 
 protected:		// functions
 	const char* __bad_alloc_str() const
@@ -83,7 +167,7 @@ protected:		// functions
 } __attribute__((_align4));
 
 
-void* Subsystem::operator new (size_t size, 
+void* SubsystemBase::operator new (size_t size, 
 	SubsystemAllocator& subsystem_allocator)
 {
 	return subsystem_allocator.allocate();
@@ -92,5 +176,23 @@ void* Subsystem::operator new (size_t size,
 
 }
 }
+
+ 
+//class HasPimpl
+//{
+//public:		// classes
+//	class Impl;
+//
+//protected:		// variables
+//	std::experimental::propagate_const<std::unique_ptr<Impl>> __pimpl;
+//
+//public:		// functions
+//	HasPimpl();
+//	virtual ~HasPimpl();
+//
+//	gen_getter_by_ref(pimpl);
+//
+//
+//} __attribute__((_align4));
 
 #endif		// subsystem_stuff_hpp

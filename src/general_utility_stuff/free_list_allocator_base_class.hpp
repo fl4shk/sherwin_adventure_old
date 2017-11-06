@@ -31,15 +31,19 @@ namespace containers
 
 class FreeListAllocContainedBase
 {
+public:		// variables
+	static constexpr s32 blank_index = -1;
+
 protected:		// variables
-	s16 __arr_index = -1;
+
+	s32 __arr_index = blank_index;
 
 public:		// functions
 	inline FreeListAllocContainedBase()
 		: __arr_index(-1)
 	{
 	}
-	inline FreeListAllocContainedBase(s16 s_arr_index)
+	inline FreeListAllocContainedBase(s32 s_arr_index)
 		: __arr_index(s_arr_index)
 	{
 	}
@@ -140,21 +144,30 @@ public:		// functions
 		//the_sprite.the_arr_index = -1;
 
 		free_list().push(__get_instance_arr_index(to_dealloc));
-		__set_instance_arr_index(to_dealloc, -1);
+		__set_instance_arr_index(to_dealloc, 
+			__get_instance_blank_arr_index(to_dealloc));
 	}
 
 protected:		// functions
 	gen_getter_by_ref(free_list);
 
-	inline void __set_instance_arr_index(Type& instance, int some_arr_index)
+	virtual inline void __set_instance_arr_index(Type& instance, 
+		int some_arr_index)
 	{
 		//instance.arr_index = some_arr_index;
 		instance.set_arr_index(some_arr_index);
 	}
-	inline int __get_instance_arr_index(Type& instance)
+	virtual inline int __get_instance_arr_index(const Type& instance) const
 	{
 		return instance.arr_index();
 	}
+	virtual inline s32 __get_instance_blank_arr_index(const Type& instance)
+		const
+	{
+		return instance.blank_index;
+	}
+
+
 
 	// Things for derived classes to implement
 	virtual bool __alloc_test_bad(Type& ret)

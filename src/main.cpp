@@ -41,6 +41,7 @@
 
 
 #include "game_engine_stuff/overlay_loader_stuff.hpp"
+#include "game_engine_stuff/subsystem_stuff.hpp"
 
 // This Is an assembly function.  It doesn't do very much.
 extern "C" int ewram_test_func();
@@ -143,11 +144,18 @@ int main()
 }
 
 
+void test_subsystem_allocator();
+
 extern "C"
 {
 
+
 int real_main()
 {
+	test_subsystem_allocator();
+
+
+
 	//very_temp = clseg_grp_16x32_size;
 	//return main_2();
 	//snprintf(address_buf, 20, "%X", 
@@ -199,4 +207,21 @@ int real_main()
 
 }
 
+
+
+
+
+void test_subsystem_allocator()
+{
+	static constexpr size_t test_size = 20;
+	std::unique_ptr<game_engine::SubsystemBase[]> subsystem_arr;
+	std::unique_ptr<s16[]> free_list_arr;
+
+	subsystem_arr.reset(new game_engine::SubsystemBase[test_size]);
+	free_list_arr.reset(new s16[test_size]);
+
+	//game_engine::SubsystemAllocator
+
+
+}
 

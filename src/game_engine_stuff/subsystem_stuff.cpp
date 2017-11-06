@@ -23,11 +23,25 @@ namespace sherwin_adventure
 namespace game_engine
 {
 
-SubsystemAllocator::SubsystemAllocator(Subsystem* s_arr, 
+SubsystemAllocator::SubsystemAllocator(SubsystemBase* s_arr, 
 	s16* s_free_list_arr, size_t s_size)
-	: FreeListAllocatorBase<Subsystem>(s_arr, s_free_list_arr, s_size)
+	: FreeListAllocatorBase<SubsystemBase>(s_arr, s_free_list_arr, s_size)
 {
 }
 
 }
 }
+
+//HasPimpl::HasPimpl()
+//{
+//}
+//
+//HasPimpl::~HasPimpl()
+//{
+//}
+//
+//class HasPimpl::Impl
+//{
+//public:		// variables
+//	int x;
+//} __attribute__((_align4));
