@@ -122,6 +122,7 @@ public:		// functions
 protected:		// functions
 	gen_getter_by_ref(free_list);
 
+	// Things for derived classes to implement
 	virtual void __set_instance_arr_index(Type& instance, 
 		int some_arr_index) = 0;
 	virtual int __get_instance_arr_index(Type& instance) = 0;
@@ -134,62 +135,62 @@ protected:		// functions
 
 	//virtual void __set_instance_arr_index(Type& instance, 
 	//	int some_arr_index) = 0;
-	////{
-	////	instance.arr_index = some_arr_index;
-	////}
+	//{
+	//	instance.arr_index = some_arr_index;
+	//}
 	//virtual int __get_instance_arr_index(Type& instance) = 0;
-	////{
-	////	return instance.arr_index();
-	////}
+	//{
+	//	return instance.arr_index();
+	//}
 
 	//virtual bool __alloc_test_bad(Type& ret) = 0;
-	////{
-	////	return (the_sprite.the_sprite_type != StDefault);
-	////}
+	//{
+	//	return (the_sprite.the_sprite_type != StDefault);
+	//}
 	//virtual bool __dealloc_test_bad(Type& to_dealloc) = 0;
-	////{
-	////	return (the_sprite.the_sprite_type == StDefault);
-	////}
+	//{
+	//	return (the_sprite.the_sprite_type == StDefault);
+	//}
 	//virtual void __dealloc_middle_part(Type& to_dealloc) = 0;
-	////{
-	////	the_sprite.the_sprite_type = StDefault;
+	//{
+	//	the_sprite.the_sprite_type = StDefault;
 
 
-	////	// Some sprites are spawned in from something other than the Level
-	////	// data and DON'T HAVE a the_sprite_ipg
-	////	if (the_sprite.the_sprite_ipg)
-	////	{
-	////		if (the_sprite.the_sprite_ipg->spawn_state == sss_active)
-	////		{
-	////			the_sprite.the_sprite_ipg->spawn_state = sss_not_active;
-	////		}
-	////		the_sprite.the_sprite_ipg = NULL;
-	////	}
+	//	// Some sprites are spawned in from something other than the Level
+	//	// data and DON'T HAVE a the_sprite_ipg
+	//	if (the_sprite.the_sprite_ipg)
+	//	{
+	//		if (the_sprite.the_sprite_ipg->spawn_state == sss_active)
+	//		{
+	//			the_sprite.the_sprite_ipg->spawn_state = sss_not_active;
+	//		}
+	//		the_sprite.the_sprite_ipg = NULL;
+	//	}
 
-	////	//u32 old_vram_chunk_index = the_sprite.get_vram_chunk_index();
-	////	//
-	////	//*the_sprite = Sprite();
-	////	//the_sprite.shared_constructor_code();
-	////	//*the_sprite = Sprite(the_sprite.get_vram_chunk_index());
-	////}
+	//	//u32 old_vram_chunk_index = the_sprite.get_vram_chunk_index();
+	//	//
+	//	//*the_sprite = Sprite();
+	//	//the_sprite.shared_constructor_code();
+	//	//*the_sprite = Sprite(the_sprite.get_vram_chunk_index());
+	//}
 
 	//virtual const char* __bad_alloc_str() const = 0;
-	////{
-	////	static const char ret[] = "BadSprite";
-	////	return ret;
-	////}
+	//{
+	//	static const char ret[] = "BadSprite";
+	//	return ret;
+	//}
 
 	//virtual const char* __no_free_str() const = 0;
-	////{
-	////	static const char ret[] = "NoFreeSprite";
-	////	return ret;
-	////}
+	//{
+	//	static const char ret[] = "NoFreeSprite";
+	//	return ret;
+	//}
 
 	//virtual const char* __cant_push_str() const = 0;
-	////{
-	////	static const char ret[] = "SadsCan'tPush";
-	////	return ret;
-	////}
+	//{
+	//	static const char ret[] = "SadsCan'tPush";
+	//	return ret;
+	//}
 
 } __attribute__((_align4));
 
