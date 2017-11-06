@@ -33,7 +33,7 @@
 #include "general_utility_stuff/trigonometry_funcs.hpp"
 #include "general_utility_stuff/array_2d_helper_classes.hpp"
 
-#include "general_utility_stuff/free_list_allocator_class.hpp"
+#include "general_utility_stuff/free_list_allocator_base_class.hpp"
 #include "general_utility_stuff/debug_vars.hpp"
 #include "general_utility_stuff/sa_array_of_lists_class.hpp"
 

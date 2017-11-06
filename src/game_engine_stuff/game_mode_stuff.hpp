@@ -24,7 +24,7 @@
 
 #include "../misc_includes.hpp"
 #include "overlay_loader_stuff.hpp"
-#include "../general_utility_stuff/free_list_allocator_class.hpp"
+#include "../general_utility_stuff/free_list_allocator_base_class.hpp"
 
 namespace sherwin_adventure
 {
