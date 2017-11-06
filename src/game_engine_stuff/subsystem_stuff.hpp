@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef game_mode_stuff_hpp
-#define game_mode_stuff_hpp
+#ifndef subsystem_stuff_hpp
+#define subsystem_stuff_hpp
 
 #include <array>
 #include <memory>
@@ -26,61 +26,62 @@
 #include "overlay_loader_stuff.hpp"
 #include "../general_utility_stuff/free_list_allocator_base_class.hpp"
 
-#include "subsystem_stuff.hpp"
-
 namespace sherwin_adventure
 {
 namespace game_engine
 {
 
+class SubsystemAllocator;
 
-
-// Base class for a handler of a particular game mode (title screen, 
-// in the overworld, loading a level, etc.)
-class GameModeHandler
+// Abstract base class for a so-called "subsystem" which is an
+// organizational tool to allow connecting together pieces of the game
+// engine.
+class Subsystem
 {
-public:		// constants
-	// I don't think there will be more than 20 possible subsystems active
-	// at once.  I'll change this later if deemed necessary.
-	static constexpr size_t max_num_subsystems = 20;
-
 protected:		// variables
-	size_t __num_subsystems = 0;
-
-	// It's okay to use std::unique_ptr here.
-	std::array<std::unique_ptr<Subsystem>, max_num_subsystems>
-		__subsystems;
-
+	s16 __index = -1;
 
 public:		// functions
-	GameModeHandler();
-	virtual ~GameModeHandler();
+	inline Subsystem()
+	{
+	}
+
+	inline Subsystem(s16 s_index) 
+		: __index(s_index)
+	{
+	}
+
+
+	gen_getter_and_setter_by_val(index);
+
+	inline void* operator new (size_t size, 
+		SubsystemAllocator& subsystem_allocator);
+
+	virtual void iterate() = 0;
 
 } __attribute__((_align4));
 
 
-
-
-
-// Class that loads game modes
-class GameModeLoader
+class SubsystemAllocator : public FreeListAllocatorBase<Subsystem>
 {
-private:		// variables
-	OverlayLoader __overlay_loader;
-
 public:		// functions
-	GameModeLoader();
-	// I don't need a destructor for this class
+	SubsystemAllocator(Subsystem* s_arr, s16* s_free_list_arr, 
+		size_t s_size);
 
 
-
-private:		// functions
-	gen_getter_by_ref(overlay_loader);
+protected:		// functions
 
 } __attribute__((_align4));
 
-}
+
+void* Subsystem::operator new (size_t size, 
+	SubsystemAllocator& subsystem_allocator)
+{
+	return subsystem_allocator.allocate();
 }
 
 
-#endif		// game_mode_stuff_hpp
+}
+}
+
+#endif		// subsystem_stuff_hpp
