@@ -127,7 +127,7 @@ public:		// functions
 		erase_pimpl<ImplType>();
 	}
 
-	inline void iterate()
+	virtual void iterate()
 	{
 	}
 
