@@ -80,6 +80,16 @@ public:		// functions
 		return ret;
 	}
 
+	inline bool can_push() const
+	{
+		return (next_index() <= size());
+	}
+
+	inline bool can_pop() const
+	{
+		return (next_index() > 0);
+	}
+
 protected:		// functions
 	gen_getter_by_ref(arr);
 
@@ -105,7 +115,8 @@ public:		// functions
 	{
 	}
 
-	inline ExtAllocStack(const ExtAllocStack& to_copy) = default;
+	// No copying allowed
+	inline ExtAllocStack(const ExtAllocStack& to_copy) = delete;
 
 	inline void init(Type* s_arr, size_t s_size)
 	{
@@ -113,9 +124,11 @@ public:		// functions
 		__next_index = 0;
 	}
 
+	// No copying allowed
 	inline ExtAllocStack& operator = (const ExtAllocStack& to_copy)
-		 = default;
+		 = delete;
 
+	gen_getter_by_val(next_index);
 
 	void push(const Type& to_push)
 	{
@@ -144,6 +157,16 @@ public:		// functions
 		pop();
 
 		return ret;
+	}
+
+	inline bool can_push() const
+	{
+		return (next_index() <= Base::size());
+	}
+
+	inline bool can_pop() const
+	{
+		return (next_index() > 0);
 	}
 
 } __attribute__((_align4));
@@ -175,13 +198,32 @@ public:		// typedefs
 	typedef ExtAllocStack<s16> Base;
 
 public:		// functions
-	ExtAllocFreeList() __attribute__((noinline))
+	inline ExtAllocFreeList()
 	{
+	}
+
+	inline ExtAllocFreeList(s16* s_arr, size_t s_size)
+		: Base(s_arr, s_size)
+	{
+		init();
+	}
+
+	// No copying allowed
+	inline ExtAllocFreeList(const ExtAllocFreeList& to_copy) = delete;
+
+	void init() __attribute__((noinline))
+	{
+		__next_index = 0;
 		for (size_t i=0; i<Base::size(); ++i)
 		{
 			Base::push(i);
 		}
 	}
+
+	// No copying allowed
+	inline ExtAllocFreeList operator = (const ExtAllocFreeList& to_copy) 
+		= delete;
+
 
 } __attribute__((_align4));
 
