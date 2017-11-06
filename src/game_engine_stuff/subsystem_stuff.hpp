@@ -32,133 +32,14 @@ namespace sherwin_adventure
 namespace game_engine
 {
 
-class SubsystemAllocator;
-
 // Abstract base class for a so-called "subsystem" which is an
 // organizational tool to allow connecting together pieces of the game
-// engine.
-class SubsystemBase : public FreeListAllocContainedBase
-{
-protected:		// variables
-	// Pointer to implementation
-	void* __pimpl;
-
-	//std::experimental::propagate_const<std::unique_ptr<ImplName>> __pimpl;
-
-public:		// functions
-	inline SubsystemBase()
-	{
-	}
-
-	inline SubsystemBase(s32 s_arr_index)
-		: FreeListAllocContainedBase(s_arr_index)
-	{
-	}
-
-	virtual inline ~SubsystemBase()
-	{
-	}
-
-
-
-	// Derived classes should create their own implementation of the
-	// iterate() virtual member function
-	virtual void iterate()
-	{
-	}
-
-protected:		// functions
-	//template<typename Type>
-	//inline std::unique_ptr<Type>* impl_uptr()
-	//{
-	//	return reinterpret_cast<std::unique_ptr<Type>*>(__pimpl);
-	//}
-	template<typename Type>
-	inline Type* get_pimpl_as()
-	{
-		return reinterpret_cast<Type*>(__pimpl);
-	}
-
-	template<typename Type>
-	void init_pimpl()
-	{
-		//__pimpl = new Type();
-		//__pimpl = new std::unique_ptr<Type>();
-		__pimpl = new Type();
-	}
-
-	template<typename Type>
-	void erase_pimpl()
-	{
-		delete get_pimpl_as<Type>();
-	}
-	
-
-} __attribute__((_align4));
-
-template<typename ImplType>
-class Subsystem : public SubsystemBase
+// engine.  These take the form as part of the main game loop.
+class Subsystem
 {
 public:		// functions
-	inline Subsystem()
-	{
-	}
-	inline Subsystem(s32 s_arr_index)
-		: SubsystemBase(s_arr_index)
-	{
-		init_pimpl<ImplType>();
-	}
-	virtual inline ~Subsystem()
-	{
-		erase_pimpl<ImplType>();
-	}
-
-	virtual void iterate()
-	{
-	}
-
-protected:		// functions
-	inline auto& pimpl()
-	{
-		return *get_pimpl_as<ImplType>();
-	}
-
-} __attribute__((_align4));
-
-
-
-//class SubsystemAllocator : public FreeListAllocatorBase<SubsystemBase>
-//{
-//public:		// functions
-//	SubsystemAllocator(SubsystemBase* s_arr, s16* s_free_list_arr, 
-//		size_t s_size);
-//
-//protected:		// functions
-//	const char* __bad_alloc_str() const
-//	{
-//		static const char ret[] = "BadAllocSubsys";
-//		return ret;
-//	}
-//	const char* __none_free_str() const
-//	{
-//		static const char ret[] = "SubsysNoneFree";
-//		return ret;
-//	}
-//	const char* __cant_push_str() const
-//	{
-//		static const char ret[] = "Can'tPushSubsys";
-//		return ret;
-//	}
-//
-//} __attribute__((_align4));
-//
-//
-//void* SubsystemBase::operator new (size_t size, 
-//	SubsystemAllocator& subsystem_allocator)
-//{
-//	return subsystem_allocator.allocate();
-//}
-
+	virtual void iterate() = 0;
+};
 
 }
 }

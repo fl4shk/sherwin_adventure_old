@@ -144,7 +144,7 @@ int main()
 }
 
 
-void test_subsystem_allocator();
+void test_game_mode_handler();
 
 extern "C"
 {
@@ -152,7 +152,7 @@ extern "C"
 
 int real_main()
 {
-	test_subsystem_allocator();
+	test_game_mode_handler();
 
 
 
@@ -211,19 +211,7 @@ int real_main()
 
 
 
-void test_subsystem_allocator()
+void test_game_mode_handler()
 {
-	static constexpr size_t test_size = 20;
-	std::unique_ptr<game_engine::SubsystemBase[]> subsystem_arr;
-	std::unique_ptr<s16[]> free_list_arr;
-
-	subsystem_arr.reset(new game_engine::SubsystemBase[test_size]);
-	free_list_arr.reset(new s16[test_size]);
-
-	//game_engine::SubsystemAllocator
-
-	//game_engine::SubsystemAllocator
-
-
 }
 

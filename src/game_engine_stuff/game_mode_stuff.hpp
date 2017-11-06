@@ -47,12 +47,9 @@ public:		// constants
 protected:		// variables
 	size_t __num_subsystems = 0;
 
-	//// It's okay to use std::unique_ptr here.
-	//std::array<std::unique_ptr<SubsystemBase>, max_num_subsystems>
-	//	__subsystems;
-	//std::unique_ptr<SubsystemBase[]> __subsystems;
-	//std::array<SubsystemBase, max_num_subsystems> __subsystems;
-	std::unique_ptr<SubsystemBase[]> __subsystems;
+	// It's okay to use std::unique_ptr here.
+	std::array<std::unique_ptr<Subsystem>, max_num_subsystems>
+		__subsystems;
 
 
 public:		// functions
