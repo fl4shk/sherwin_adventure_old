@@ -46,24 +46,19 @@ protected:		// variables
 	//std::experimental::propagate_const<std::unique_ptr<ImplName>> __pimpl;
 
 public:		// functions
-	SubsystemBase()
+	inline SubsystemBase()
 	{
-		//init_pimpl();
 	}
 
-	SubsystemBase(s32 s_arr_index)
+	inline SubsystemBase(s32 s_arr_index)
 		: FreeListAllocContainedBase(s_arr_index)
 	{
-		//init_pimpl();
 	}
 
-	virtual ~SubsystemBase()
+	virtual inline ~SubsystemBase()
 	{
-		//erase_pimpl();
 	}
 
-	inline void* operator new (size_t size, 
-		SubsystemAllocator& subsystem_allocator);
 
 
 	// Derived classes should create their own implementation of the
@@ -104,15 +99,6 @@ protected:		// functions
 template<typename ImplType>
 class Subsystem : public SubsystemBase
 {
-public:		// classes
-	//class ImplType
-	//{
-	//public:		// variables
-	//	static constexpr size_t arr_size = 8;
-	//	u32 arr[arr_size];
-	//} __attribute__((_align4));
-
-
 public:		// functions
 	inline Subsystem()
 	{
@@ -141,58 +127,41 @@ protected:		// functions
 
 
 
-class SubsystemAllocator : public FreeListAllocatorBase<SubsystemBase>
-{
-public:		// functions
-	SubsystemAllocator(SubsystemBase* s_arr, s16* s_free_list_arr, 
-		size_t s_size);
-
-protected:		// functions
-	const char* __bad_alloc_str() const
-	{
-		static const char ret[] = "BadAllocSubsys";
-		return ret;
-	}
-	const char* __none_free_str() const
-	{
-		static const char ret[] = "SubsysNoneFree";
-		return ret;
-	}
-	const char* __cant_push_str() const
-	{
-		static const char ret[] = "Can'tPushSubsys";
-		return ret;
-	}
-
-} __attribute__((_align4));
-
-
-void* SubsystemBase::operator new (size_t size, 
-	SubsystemAllocator& subsystem_allocator)
-{
-	return subsystem_allocator.allocate();
-}
+//class SubsystemAllocator : public FreeListAllocatorBase<SubsystemBase>
+//{
+//public:		// functions
+//	SubsystemAllocator(SubsystemBase* s_arr, s16* s_free_list_arr, 
+//		size_t s_size);
+//
+//protected:		// functions
+//	const char* __bad_alloc_str() const
+//	{
+//		static const char ret[] = "BadAllocSubsys";
+//		return ret;
+//	}
+//	const char* __none_free_str() const
+//	{
+//		static const char ret[] = "SubsysNoneFree";
+//		return ret;
+//	}
+//	const char* __cant_push_str() const
+//	{
+//		static const char ret[] = "Can'tPushSubsys";
+//		return ret;
+//	}
+//
+//} __attribute__((_align4));
+//
+//
+//void* SubsystemBase::operator new (size_t size, 
+//	SubsystemAllocator& subsystem_allocator)
+//{
+//	return subsystem_allocator.allocate();
+//}
 
 
 }
 }
 
  
-//class HasPimpl
-//{
-//public:		// classes
-//	class Impl;
-//
-//protected:		// variables
-//	std::experimental::propagate_const<std::unique_ptr<Impl>> __pimpl;
-//
-//public:		// functions
-//	HasPimpl();
-//	virtual ~HasPimpl();
-//
-//	gen_getter_by_ref(pimpl);
-//
-//
-//} __attribute__((_align4));
-
 #endif		// subsystem_stuff_hpp
