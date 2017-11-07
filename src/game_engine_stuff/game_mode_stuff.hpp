@@ -45,12 +45,11 @@ public:		// constants
 	static constexpr size_t max_num_subsystems = 20;
 
 protected:		// variables
+	// Current number of allocated subsystems
 	size_t __num_subsystems = 0;
 
-	// It's okay to use std::unique_ptr here.
-	std::array<std::unique_ptr<Subsystem>, max_num_subsystems>
-		__subsystems;
-
+	std::array<Subsystem*, max_num_subsystems> __subsystems,
+		__next_subsystems;
 
 public:		// functions
 	GameModeHandler();

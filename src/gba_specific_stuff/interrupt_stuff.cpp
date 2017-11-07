@@ -27,104 +27,106 @@ using namespace gba;
 
 extern "C"
 {
-	volatile IrsFuncptr isr_table[intr_amount] __attribute__((_bss));
+
+volatile IrsFuncptr isr_table[intr_amount] __attribute__((_bss));
 
 
-	// This Is for maxmod compatibility
-	void irqEnable(int mask)
+// This Is for maxmod compatibility
+void irqEnable(int mask)
+{
+	//REG_IME = 0;
+	ime_disable();
+
+	if (mask & IRQ_VBLANK)
 	{
-		//REG_IME = 0;
-		ime_disable();
-
-		if (mask & IRQ_VBLANK)
-		{
-			REG_DISPSTAT |= DSTAT_VBL_IRQ;
-		}
-		if (mask & IRQ_HBLANK)
-		{
-			REG_DISPSTAT |= DSTAT_HBL_IRQ;
-		}
-		if (mask & IRQ_VCOUNT)
-		{
-			REG_DISPSTAT |= DSTAT_VCT_IRQ;
-		}
-
-		REG_IE |= mask;
-
-		//REG_IME = 1;
-		ime_enable();
+		REG_DISPSTAT |= DSTAT_VBL_IRQ;
+	}
+	if (mask & IRQ_HBLANK)
+	{
+		REG_DISPSTAT |= DSTAT_HBL_IRQ;
+	}
+	if (mask & IRQ_VCOUNT)
+	{
+		REG_DISPSTAT |= DSTAT_VCT_IRQ;
 	}
 
-	// This Is also for maxmod compatibility, written somewhat differently
-	// from That used in libgba.
-	//void irqSet(int mask, IrsFuncptr func)
-	void irqSet(int mask, u32 func_addr)
+	REG_IE |= mask;
+
+	//REG_IME = 1;
+	ime_enable();
+}
+
+// This Is also for maxmod compatibility, written somewhat differently
+// from That used in libgba.
+//void irqSet(int mask, IrsFuncptr func)
+void irqSet(int mask, u32 func_addr)
+{
+
+	switch (mask)
 	{
+		case IRQ_VBLANK:
+			isr_table[intr_vblank] = (void (*)())func_addr;
+			break;
 
-		switch (mask)
-		{
-			case IRQ_VBLANK:
-				isr_table[intr_vblank] = (void (*)())func_addr;
-				break;
+		case IRQ_HBLANK:
+			isr_table[intr_hblank] = (void (*)())func_addr;
+			break;
 
-			case IRQ_HBLANK:
-				isr_table[intr_hblank] = (void (*)())func_addr;
-				break;
+		case IRQ_VCOUNT:
+			isr_table[intr_vcount] = (void (*)())func_addr;
+			break;
 
-			case IRQ_VCOUNT:
-				isr_table[intr_vcount] = (void (*)())func_addr;
-				break;
+		case IRQ_TIMER0:
+			isr_table[intr_timer0] = (void (*)())func_addr;
+			break;
 
-			case IRQ_TIMER0:
-				isr_table[intr_timer0] = (void (*)())func_addr;
-				break;
+		case IRQ_TIMER1:
+			isr_table[intr_timer1] = (void (*)())func_addr;
+			break;
 
-			case IRQ_TIMER1:
-				isr_table[intr_timer1] = (void (*)())func_addr;
-				break;
+		case IRQ_TIMER2:
+			isr_table[intr_timer2] = (void (*)())func_addr;
+			break;
 
-			case IRQ_TIMER2:
-				isr_table[intr_timer2] = (void (*)())func_addr;
-				break;
+		case IRQ_TIMER3:
+			isr_table[intr_timer3] = (void (*)())func_addr;
+			break;
 
-			case IRQ_TIMER3:
-				isr_table[intr_timer3] = (void (*)())func_addr;
-				break;
+		case IRQ_COM:
+			isr_table[intr_com] = (void (*)())func_addr;
+			break;
 
-			case IRQ_COM:
-				isr_table[intr_com] = (void (*)())func_addr;
-				break;
+		case IRQ_DMA0:
+			isr_table[intr_dma0] = (void (*)())func_addr;
+			break;
 
-			case IRQ_DMA0:
-				isr_table[intr_dma0] = (void (*)())func_addr;
-				break;
+		case IRQ_DMA1:
+			isr_table[intr_dma1] = (void (*)())func_addr;
+			break;
 
-			case IRQ_DMA1:
-				isr_table[intr_dma1] = (void (*)())func_addr;
-				break;
+		case IRQ_DMA2:
+			isr_table[intr_dma2] = (void (*)())func_addr;
+			break;
 
-			case IRQ_DMA2:
-				isr_table[intr_dma2] = (void (*)())func_addr;
-				break;
+		case IRQ_DMA3:
+			isr_table[intr_dma3] = (void (*)())func_addr;
+			break;
 
-			case IRQ_DMA3:
-				isr_table[intr_dma3] = (void (*)())func_addr;
-				break;
+		case IRQ_KEYPAD:
+			isr_table[intr_keypad] = (void (*)())func_addr;
+			break;
 
-			case IRQ_KEYPAD:
-				isr_table[intr_keypad] = (void (*)())func_addr;
-				break;
+		case IRQ_GAMEPAK:
+			isr_table[intr_gamepak] = (void (*)())func_addr;
+			break;
 
-			case IRQ_GAMEPAK:
-				isr_table[intr_gamepak] = (void (*)())func_addr;
-				break;
-
-			default:
-				break;
-		}
-
-
+		default:
+			break;
 	}
+
+
+}
+
 }
 
 namespace sherwin_adventure

@@ -40,7 +40,7 @@ protected:		// variables
 
 public:		// functions
 	inline FreeListAllocContainedBase()
-		: __arr_index(-1)
+		: __arr_index(blank_index)
 	{
 	}
 	inline FreeListAllocContainedBase(s32 s_arr_index)

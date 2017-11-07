@@ -43,158 +43,35 @@
 #include "game_engine_stuff/overlay_loader_stuff.hpp"
 #include "game_engine_stuff/subsystem_stuff.hpp"
 
-// This Is an assembly function.  It doesn't do very much.
-extern "C" int ewram_test_func();
 
+#include "testing/overlay_testing_stuff.hpp"
+#include "testing/game_mode_handler_testing_stuff.hpp"
+#include "testing/free_list_allocator_testing_stuff.hpp"
 
-static const u32 ewram_test_arr_size = 10;
-u8 ewram_test_arr[ewram_test_arr_size] __attribute__((_ewram));
-
-static const char test_str[] = "Birds2";
-static const u32 test_str_size = (sizeof(test_str) / sizeof(char)) - 1;
-
-//static const size_t sram_test_arr_size = 2000;
-//u8 sram_test_arr[sram_test_arr_size] __attribute__((_sram));
-
-//extern const size_t clseg_grp_16x32_size;
-//volatile size_t very_temp;
-
-
-//static constexpr size_t test_buf_size = 1024;
-static constexpr size_t test_buf_size = 64;
-char test_buf[test_buf_size];
-
-extern "C"
-{
 
 //int real_main() __attribute__((_iwram_code));
 int real_main();
 
-}
 
 
-extern "C"
-{
-
-//char address_buf[20] __attribute__((_sram));
-
-//vu32 some_title_screen_arr[8] __attribute__((_title_screen_bss));
-//vu32 some_title_screen_var __attribute__((_title_screen_bss));
-//
-//
-//vu32 some_in_level_var __attribute__((_in_level_bss));
-//vu32 some_in_level_arr[8] __attribute__((_in_level_bss));
-//
-//
-//vu32 some_title_screen_buf[8] __attribute__((_title_screen_iwram_bss));
-//vu32 some_in_level_buf[8] __attribute__((_in_level_iwram_bss));
-//
-//
-//char asdf[8] __attribute__((_title_screen_sram));
-//char asdf_2[8] __attribute__((_in_level_sram));
-//
-//char asdf_ewram[8] __attribute__((_title_screen_ewram));
-//char asdf_2_ewram[8] __attribute__((_in_level_ewram));
-
-
-//char extra_address_test_buf_0[32] __attribute__((_sram));
-//char extra_address_test_buf_1[32] __attribute__((_sram));
-//char extra_address_test_buf_2[32] __attribute__((_sram));
-//char extra_address_test_buf_3[32] __attribute__((_sram));
-char overlay_loader_test_buf[test_buf_size] __attribute__((_sram));
-char title_screen_test_buf[test_buf_size] __attribute__((_sram));
-char overworld_load_test_buf[test_buf_size] __attribute__((_sram));
-
-}
-
-extern "C"
-{
-
-void test_title_screen() __attribute__((_title_screen_iwram_code));
-void test_title_screen()
-{
-	//snprintf(test_buf, test_buf_size, "%X",
-	//	(unsigned)(&test_title_screen));
-	//memcpy8(extra_address_test_buf_0, test_buf, 9);
-
-	snprintf(test_buf, test_buf_size, "test_title_screen()");
-	memcpy8(title_screen_test_buf, test_buf, test_buf_size);
-	memcpy8(overlay_loader_test_buf, test_buf, test_buf_size);
-}
-
-void test_overworld_load() __attribute__((_overworld_load_iwram_code));
-void test_overworld_load()
-{
-	//snprintf(test_buf, test_buf_size, "%X",
-	//	(unsigned)(&test_overworld_load));
-	//memcpy8(extra_address_test_buf_1, test_buf, 9);
-
-	snprintf(test_buf, test_buf_size, "test_overworld_load()");
-	memcpy8(overworld_load_test_buf, test_buf, test_buf_size);
-	memcpy8(overlay_loader_test_buf, test_buf, test_buf_size);
-}
-
-}
 
 
 
 int main()
 {
-	return real_main();
+	//test_game_mode_handler();
+	//return real_main();
+
+	test_free_list_allocator();
 }
 
-
-void test_game_mode_handler();
-
-extern "C"
-{
 
 
 int real_main()
 {
-	test_game_mode_handler();
-
-
-
-	//very_temp = clseg_grp_16x32_size;
-	//return main_2();
-	//snprintf(address_buf, 20, "%X", 
-	//	(unsigned)(&some_title_screen_other_var));
-
-	//snprintf(test_buf, test_buf_size, "%X",
-	//	(unsigned)(&some_title_screen_arr));
-	//snprintf(test_buf, test_buf_size, "%X",
-	//	(unsigned)(&__iwram_data0_section_size));
-
-	//snprintf(test_buf, test_buf_size, "%X",
-	//	(unsigned)(__iwram_data0_section_size));
-	//snprintf(test_buf, test_buf_size, "%X",
-	//	(unsigned)(&__iwram_data0_rom_start__));
-
-	//memcpy8(address_buf, test_buf, 9);
-	//memcpy(some_in_level_arr, test_buf, 8);
-	//memcpy(some_title_screen_arr, test_buf, 8);
-	//memcpy32(some_title_screen_arr, test_buf, 8);
-
 	gba::irq_init();
 
 
-	//game_engine::OverlayLoader overlay_loader;
-
-	//overlay_loader.load(game_engine::OverlayNum::TitleScreen);
-	//test_title_screen();
-
-	//overlay_loader.load(game_engine::OverlayNum::OverworldLoad);
-	//test_overworld_load();
-
-
-
-	//snprintf(test_buf, test_buf_size, "%X",
-	//	(unsigned)&__sram0_start__);
-	//memcpy8(extra_address_test_buf_2, test_buf, 9);
-	//snprintf(test_buf, test_buf_size, "%X",
-	//	(unsigned)&__sram0_end__);
-	//memcpy8(extra_address_test_buf_3, test_buf, 9);
 
 	for (;;)
 	{
@@ -203,15 +80,3 @@ int real_main()
 
 	return 9000;
 }
-
-
-}
-
-
-
-
-
-void test_game_mode_handler()
-{
-}
-

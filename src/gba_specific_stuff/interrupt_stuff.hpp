@@ -128,14 +128,16 @@ typedef void (*IrsFuncptr)(void);
 // "libgba" code instead.
 extern "C"
 {
-	// Also
-	extern volatile sherwin_adventure::gba::IrsFuncptr 
-		isr_table[sherwin_adventure::gba::intr_amount];
 
-	void irqEnable(int mask);
+// Also
+extern volatile sherwin_adventure::gba::IrsFuncptr 
+	isr_table[sherwin_adventure::gba::intr_amount];
 
-	//void irqSet(int mask, IrsFuncptr func);
-	void irqSet(int mask, u32 func_addr);
+void irqEnable(int mask);
+
+//void irqSet(int mask, IrsFuncptr func);
+void irqSet(int mask, u32 func_addr);
+
 }
 
 namespace sherwin_adventure
