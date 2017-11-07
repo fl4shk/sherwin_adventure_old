@@ -60,9 +60,10 @@ int real_main();
 int main()
 {
 	//test_game_mode_handler();
-	//return real_main();
 
 	test_free_list_allocator();
+
+	return real_main();
 }
 
 
@@ -75,6 +76,8 @@ int real_main()
 
 	for (;;)
 	{
+		//DebugArrGroup::clear_debug_vars();
+
 		gba::bios_wait_for_vblank();
 	}
 
