@@ -29,5 +29,9 @@ namespace game_engine
 //{
 //}
 
+Subsystem::~Subsystem()
+{
+}
+
 }
 }

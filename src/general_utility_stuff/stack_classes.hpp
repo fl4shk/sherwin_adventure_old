@@ -203,15 +203,27 @@ public:		// functions
 	}
 
 	inline ExtAllocFreeList(s16* s_arr, size_t s_size)
-		: Base(s_arr, s_size)
 	{
-		init();
+		init(s_arr, s_size);
 	}
 
 	// No copying allowed
 	inline ExtAllocFreeList(const ExtAllocFreeList& to_copy) = delete;
 
-	void init() __attribute__((noinline))
+	inline void init(s16* s_arr, size_t s_size)
+	{
+		Base::init(s_arr, s_size);
+		__inner_init();
+	}
+
+
+
+	// No copying allowed
+	inline ExtAllocFreeList operator = (const ExtAllocFreeList& to_copy) 
+		= delete;
+
+protected:		// functions
+	void __inner_init() __attribute__((noinline))
 	{
 		__next_index = 0;
 		for (size_t i=0; i<Base::size(); ++i)
@@ -219,11 +231,6 @@ public:		// functions
 			Base::push(i);
 		}
 	}
-
-	// No copying allowed
-	inline ExtAllocFreeList operator = (const ExtAllocFreeList& to_copy) 
-		= delete;
-
 
 } __attribute__((_align4));
 

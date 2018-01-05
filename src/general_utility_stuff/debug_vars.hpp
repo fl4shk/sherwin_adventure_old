@@ -25,6 +25,7 @@
 //#include "coll_box_class.hpp"
 #include "fixed_classes.hpp"
 #include "array_helper_classes.hpp"
+#include "gen_getter_setter_defines.hpp"
 
 
 namespace sherwin_adventure
@@ -79,7 +80,7 @@ void clear_debug_vars() __attribute__((_iwram_code));
 #define MACRO_FOR_DEBUG_FIXED8P8_TYPE_AND_SUFFIX(macro) \
 	macro(Fixed8p8, f8p8)
 #define MACRO_FOR_DEBUG_STR_TYPE_AND_SUFFIX(macro) \
-	macro(DebugStr, str)
+	macro(DebugStr<DebugArrGroup::RawArrayGroup::debug_str_len>, str)
 
 
 #define LIST_OF_DEBUG_TYPES_AND_SUFFIXES(macro) \
@@ -113,6 +114,7 @@ static constexpr u32 debug_f8p8_arr_size = 32;
 // Please make sure That debug_str_arr_size Is a multiple of 4.
 // debug_str_arr_size Is the number of DebugStr elements in
 // DebugArrGroup::debug_str_arr.
+//static constexpr u32 debug_str_arr_size = 32;
 static constexpr u32 debug_str_arr_size = 32;
 
 //// (16 + 4) * 32 = 640 bytes eaten up by debug_str_arr.
@@ -122,10 +124,11 @@ static constexpr u32 debug_str_arr_size = 32;
 // by debug vars (INCLUDING the array indices).  This Is certainly
 // wasteful....
 
+template<size_t __max_size> 
 class DebugStr
 {
 protected:		// variables
-	u32 real_size;
+	u32 __real_size;
 
 public:		// and constants
 	//// Please make sure That max_size Is a multiple of 4.  max_size Is the
@@ -135,12 +138,14 @@ public:		// and constants
 	// It Is a very good idea for max_size To be a multiple of 4.  It makes
 	// copying and clearing faster.
 	///static constexpr u32 max_size = 16;
-	static constexpr u32 max_size = 20;
+	//static constexpr u32 max_size = 20;
+	//static constexpr u32 max_size = 256;
+	static constexpr size_t max_size = __max_size;
 	//char arr[max_size];
 	std::array<char, max_size> arr;
 
 public:		// functions
-	inline DebugStr() : real_size(0)
+	inline DebugStr() : __real_size(0)
 	{
 		clear_arr();
 	}
@@ -160,23 +165,56 @@ public:		// functions
 		operator = (to_copy);
 	}
 
-	DebugStr& operator = (const DebugStr& to_copy);
-	DebugStr& operator = (const char* to_copy);
+	//DebugStr& operator = (const DebugStr& to_copy);
+	//DebugStr& operator = (const char* to_copy);
 
-	inline u32 get_real_size() const
+	auto& operator = (const DebugStr& to_copy)
+		__attribute__((noinline))
 	{
-		return real_size;
+		set_real_size(to_copy.real_size());
+		//memcpy32(arr, to_copy.arr, max_size / sizeof(u32));
+		//arr_memcpy32(arr, to_copy.arr, max_size);
+		//arr_memcpy(arr, to_copy.arr, max_size);
+
+		arr_memcpy(arr.data(), to_copy.arr.data(), real_size());
+
+		clear_unused_portion();
+
+		return *this;
 	}
+	auto& operator = (const char* to_copy) 
+		__attribute__((noinline))
+	{
+		//memfill32(arr, 0, max_size / sizeof(u32));
+		//arr_memfill32(arr, 0, max_size);
+		//clear();
+
+		for (__real_size=0; __real_size<max_size; ++__real_size)
+		{
+			if (to_copy[__real_size] == '\0')
+			{
+				break;
+			}
+			arr[__real_size] = to_copy[__real_size];
+		}
+
+		// Clear any leftover bytes
+		clear_unused_portion();
+
+		return *this;
+	}
+
+	gen_getter_by_val(real_size);
 
 	inline void set_real_size(u32 n_real_size)
 	{
 		if (n_real_size > max_size)
 		{
-			real_size = max_size;
+			__real_size = max_size;
 		}
 		else
 		{
-			real_size = n_real_size;
+			__real_size = n_real_size;
 		}
 	}
 
@@ -188,13 +226,13 @@ public:		// functions
 	}
 	inline void total_clear()
 	{
-		real_size = 0;
+		__real_size = 0;
 		clear_arr();
 	}
 
 	inline void clear_unused_portion()
 	{
-		for (u32 i=get_real_size(); i<max_size; ++i)
+		for (u32 i=real_size(); i<max_size; ++i)
 		{
 			arr[i] = 0;
 		}
@@ -203,12 +241,6 @@ public:		// functions
 } __attribute__((_align4));
 
 
-extern u32 (& curr_index_arr)[curr_index_arr_size];
-extern u32 (& debug_u32_arr)[debug_u32_arr_size];
-extern s32 (& debug_s32_arr)[debug_s32_arr_size];
-extern Fixed24p8 (& debug_f24p8_arr)[debug_f24p8_arr_size];
-extern Fixed8p8 (& debug_f8p8_arr)[debug_f8p8_arr_size];
-extern DebugStr (& debug_str_arr)[debug_str_arr_size];
 
 class DebugArrGroup
 {
@@ -216,6 +248,8 @@ class DebugArrGroup
 public:		// static variables (raw debug arrays)
 	struct RawArrayGroup
 	{
+		static constexpr size_t debug_str_len = 20;
+
 		u32 curr_index_arr[curr_index_arr_size];
 
 		u32 debug_u32_arr[debug_u32_arr_size];
@@ -223,9 +257,9 @@ public:		// static variables (raw debug arrays)
 		Fixed24p8 debug_f24p8_arr[debug_f24p8_arr_size];
 		Fixed8p8 debug_f8p8_arr[debug_f8p8_arr_size];
 
-		DebugStr debug_str_arr[debug_str_arr_size];
+		DebugStr<debug_str_len> debug_str_arr[debug_str_arr_size];
 	} __attribute__((_align4));
-	static RawArrayGroup the_raw_array_group;
+	static RawArrayGroup raw_array_group;
 
 
 	// The main reason this Exists Is To give something To write To So That
@@ -242,35 +276,36 @@ public:		// static variables (array_helpers)
 	static ArrayHelper<Fixed24p8> debug_f24p8_arr_helper;
 	static ArrayHelper<Fixed8p8> debug_f8p8_arr_helper;
 
-	static ArrayHelper<DebugStr> debug_str_arr_helper;
+	static ArrayHelper<DebugStr<RawArrayGroup::debug_str_len>> 
+		debug_str_arr_helper;
 
 //protected:		// functions
 public:		// functions
 
-	static inline u32* curr_index_arr()
+	static inline auto curr_index_arr()
 	{
-		return the_raw_array_group.curr_index_arr;
+		return raw_array_group.curr_index_arr;
 	}
 
-	static inline u32* debug_u32_arr() 
+	static inline auto debug_u32_arr() 
 	{
-		return the_raw_array_group.debug_u32_arr;
+		return raw_array_group.debug_u32_arr;
 	}
-	static inline s32* debug_s32_arr()
+	static inline auto debug_s32_arr()
 	{
-		return the_raw_array_group.debug_s32_arr;
+		return raw_array_group.debug_s32_arr;
 	}
-	static inline Fixed24p8* debug_f24p8_arr()
+	static inline auto debug_f24p8_arr()
 	{
-		return the_raw_array_group.debug_f24p8_arr;
+		return raw_array_group.debug_f24p8_arr;
 	}
-	static inline Fixed8p8* debug_f8p8_arr()
+	static inline auto debug_f8p8_arr()
 	{
-		return the_raw_array_group.debug_f8p8_arr;
+		return raw_array_group.debug_f8p8_arr;
 	}
-	static inline DebugStr* debug_str_arr()
+	static inline auto debug_str_arr()
 	{
-		return the_raw_array_group.debug_str_arr;
+		return raw_array_group.debug_str_arr;
 	}
 public:		// functions
 
@@ -318,7 +353,9 @@ public:		// functions
 		RAW_WRITE_DEBUG_F8P8_AND_INC(to_write);
 	}
 
-	static inline void write_str_and_inc(const DebugStr& to_write)
+	//static inline void write_str_and_inc(const DebugStr& to_write)
+	static inline void write_str_and_inc
+		(const DebugStr<RawArrayGroup::debug_str_len>& to_write)
 	{
 		RAW_WRITE_DEBUG_STR_AND_INC(to_write);
 	}
@@ -331,6 +368,14 @@ public:		// functions
 
 
 } __attribute__((_align4));
+
+extern u32 (& curr_index_arr)[curr_index_arr_size];
+extern u32 (& debug_u32_arr)[debug_u32_arr_size];
+extern s32 (& debug_s32_arr)[debug_s32_arr_size];
+extern Fixed24p8 (& debug_f24p8_arr)[debug_f24p8_arr_size];
+extern Fixed8p8 (& debug_f8p8_arr)[debug_f8p8_arr_size];
+extern DebugStr<DebugArrGroup::RawArrayGroup::debug_str_len> 
+	(& debug_str_arr)[debug_str_arr_size];
 
 
 

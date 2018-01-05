@@ -38,6 +38,7 @@ namespace game_engine
 class Subsystem
 {
 public:		// functions
+	virtual ~Subsystem();
 	virtual void iterate() = 0;
 };
 

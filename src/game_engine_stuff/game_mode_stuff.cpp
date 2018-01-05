@@ -18,19 +18,36 @@
 
 #include "game_mode_stuff.hpp"
 
+#include "../general_utility_stuff/debug_vars.hpp"
+
 namespace sherwin_adventure
 {
 namespace game_engine
 {
 
-GameModeHandler::GameModeHandler()
+GameModeLoader* GameModeHandlerBase::loader;
+
+
+
+GameModeHandlerBase::GameModeHandlerBase()
 {
 }
 
-GameModeHandler::~GameModeHandler()
+GameModeHandlerBase::~GameModeHandlerBase()
 {
+	for (size_t i=0; i<__curr_num_subsystems; ++i)
+	{
+		delete __subsystems.at(i);
+	}
 }
 
+void GameModeHandlerBase::append(Subsystem* to_append)
+{
+	if (__curr_num_subsystems >= __subsystems.size())
+	{
+		//DebugArrGroup::write_str_and_inc("GameModeHandlerBase::");
+	}
+}
 }
 }
 

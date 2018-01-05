@@ -69,7 +69,7 @@ public:		// typedefs
 
 protected:		// variables
 	TaskPriority the_task_prio = TaskPriority::tp_0;
-	task_funcptr func = NULL;
+	task_funcptr func = nullptr;
 
 public:		// functions
 	inline Task()
@@ -94,7 +94,7 @@ public:		// functions
 	// func stuff
 	inline bool has_func() const
 	{
-		return (func != NULL);
+		return (func != nullptr);
 	}
 	inline task_funcptr get_func() const
 	{
@@ -106,7 +106,7 @@ public:		// functions
 	}
 	inline void erase_func()
 	{
-		func = NULL;
+		func = nullptr;
 	}
 
 

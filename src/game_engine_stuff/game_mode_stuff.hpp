@@ -33,12 +33,16 @@ namespace sherwin_adventure
 namespace game_engine
 {
 
+class GameModeLoader;
 
 
 // Base class for a handler of a particular game mode (title screen, 
 // in the overworld, loading a level, etc.)
-class GameModeHandler
+class GameModeHandlerBase
 {
+public:		// static variables
+	static GameModeLoader* loader;
+
 public:		// constants
 	// I don't think there will be more than 20 possible subsystems active
 	// at once.  I'll change this later if deemed necessary.
@@ -46,14 +50,19 @@ public:		// constants
 
 protected:		// variables
 	// Current number of allocated subsystems
-	size_t __num_subsystems = 0;
+	size_t __curr_num_subsystems = 0;
 
-	std::array<Subsystem*, max_num_subsystems> __subsystems,
-		__next_subsystems;
+	//std::array<Subsystem*, max_num_subsystems> __subsystems,
+	//	__next_subsystems;
+	std::array<Subsystem*, max_num_subsystems> __subsystems;
 
 public:		// functions
-	GameModeHandler();
-	virtual ~GameModeHandler();
+	GameModeHandlerBase();
+	virtual ~GameModeHandlerBase();
+
+	virtual void run() = 0;
+
+	void append(Subsystem* to_append);
 
 } __attribute__((_align4));
 
