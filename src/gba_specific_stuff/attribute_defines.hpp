@@ -66,107 +66,11 @@
 #define _iwram section(".iwram_data")
 
 
-#define PPCAT_NX(a, b) a ## b
-#define PPCAT(a, b) PPCAT_NX(a, b)
-#define STRINGIZE_NX(a) #a
-#define STRINGIZE(a) STRINGIZE_NX(a)
-
-// EWRAM data linker overlay
-#define _EWRAM_OVERLAY(num) section(STRINGIZE(PPCAT(.data, \
-	num)))
-#define _EWRAM_OVERLAY_PREFIX(num) PPCAT(__data,num)
-
-#define _EWRAM_OVERLAY_SECTION_ROM_START(num) \
-	PPCAT(_EWRAM_OVERLAY_PREFIX(num),_rom_start__)
-#define _EWRAM_OVERLAY_SECTION_EWRAM_START(num) \
-	PPCAT(_EWRAM_OVERLAY_PREFIX(num),_ewram_start__)
-#define _EWRAM_OVERLAY_SECTION_END(num) \
-	PPCAT(_EWRAM_OVERLAY_PREFIX(num),_ewram_end__)
-
-#define _EXPOSE_EWRAM_OVERLAY(num) \
-extern "C" size_t _EWRAM_OVERLAY_SECTION_ROM_START(num); \
-extern "C" size_t _EWRAM_OVERLAY_SECTION_EWRAM_START(num); \
-extern "C" size_t _EWRAM_OVERLAY_SECTION_END(num);
-
-
-// IWRAM data linker overlay
-#define _IWRAM_OVERLAY(num) section(STRINGIZE(PPCAT(.iwram_data, \
-	num)))
-#define _IWRAM_OVERLAY_PREFIX(num) PPCAT(__iwram_data,num)
-
-#define _IWRAM_OVERLAY_SECTION_ROM_START(num) \
-	PPCAT(_IWRAM_OVERLAY_PREFIX(num),_rom_start__)
-#define _IWRAM_OVERLAY_SECTION_IWRAM_START(num) \
-	PPCAT(_IWRAM_OVERLAY_PREFIX(num),_iwram_start__)
-#define _IWRAM_OVERLAY_SECTION_END(num) \
-	PPCAT(_IWRAM_OVERLAY_PREFIX(num),_iwram_end__)
-
-#define _EXPOSE_IWRAM_OVERLAY(num) \
-extern "C" size_t _IWRAM_OVERLAY_SECTION_ROM_START(num); \
-extern "C" size_t _IWRAM_OVERLAY_SECTION_IWRAM_START(num); \
-extern "C" size_t _IWRAM_OVERLAY_SECTION_END(num);
-
-
-
 // #defines for UNITIALIZED global variables That go into EWRAM, IWRAM,
 // and SRAM
 #define _bss section(".bss")
 
-
-// BSS linker overlay
-//#define _BSS_OVERLAY(num) section(".bss" #num)
-#define _BSS_OVERLAY(num) section(STRINGIZE(PPCAT(.bss,num)))
-
-#define _BSS_OVERLAY_PREFIX(num) PPCAT(__bss,num)
-
-#define _BSS_OVERLAY_SECTION_START(num) \
-	PPCAT(_BSS_OVERLAY_PREFIX(num),_start__)
-#define _BSS_OVERLAY_SECTION_END(num) \
-	PPCAT(_BSS_OVERLAY_PREFIX(num),_end__)
-
-#define _EXPOSE_BSS_OVERLAY(num) \
-extern "C" size_t _BSS_OVERLAY_SECTION_START(num); \
-extern "C" size_t _BSS_OVERLAY_SECTION_END(num);
-
-
-
 #define _iwram_bss section(".iwram_bss")
-
-
-// IWRAM BSS linker overlay
-#define _IWRAM_BSS_OVERLAY(num) section(STRINGIZE(PPCAT(.iwram_bss,num)))
-
-#define _IWRAM_BSS_OVERLAY_PREFIX(num) PPCAT(__iwram_bss,num)
-
-#define _IWRAM_BSS_OVERLAY_SECTION_START(num) \
-	PPCAT(_IWRAM_BSS_OVERLAY_PREFIX(num),_start__)
-#define _IWRAM_BSS_OVERLAY_SECTION_END(num) \
-	PPCAT(_IWRAM_BSS_OVERLAY_PREFIX(num),_end__)
-
-#define _EXPOSE_IWRAM_BSS_OVERLAY(num) \
-extern "C" size_t _IWRAM_BSS_OVERLAY_SECTION_START(num); \
-extern "C" size_t _IWRAM_BSS_OVERLAY_SECTION_END(num);
-
-
-
-
-// Cart RAM
-#define _sram section(".sram")
-
-// SRAM linker overlay (potentially not necessary at all)
-#define _SRAM_OVERLAY(num) section(STRINGIZE(PPCAT(.sram, num)))
-#define _SRAM_OVERLAY_PREFIX(num) PPCAT(__sram,num)
-
-#define _SRAM_OVERLAY_SECTION_START(num) \
-	PPCAT(_SRAM_OVERLAY_PREFIX(num),_start__)
-#define _SRAM_OVERLAY_SECTION_END(num) \
-	PPCAT(_SRAM_OVERLAY_PREFIX(num),_end__)
-
-#define _EXPOSE_SRAM_OVERLAY(num) \
-extern "C" size_t _SRAM_OVERLAY_SECTION_START(num); \
-extern "C" size_t _SRAM_OVERLAY_SECTION_END(num);
-
-
 
 
 // #defines for putting stuff in the code (sections for EWRAM and IWRAM)
@@ -174,47 +78,7 @@ extern "C" size_t _SRAM_OVERLAY_SECTION_END(num);
 #define _iwram_code section(".iwram_code")
 
 
-
-
-// EWRAM CODE linker overlay (potentially not necessary at all)
-#define _EWRAM_CODE_OVERLAY(num) section(STRINGIZE(PPCAT(.ewram_code, \
-	num)))
-#define _EWRAM_CODE_OVERLAY_PREFIX(num) PPCAT(__ewram_code,num)
-
-#define _EWRAM_CODE_OVERLAY_SECTION_ROM_START(num) \
-	PPCAT(_EWRAM_CODE_OVERLAY_PREFIX(num),_rom_start__)
-#define _EWRAM_CODE_OVERLAY_SECTION_EWRAM_START(num) \
-	PPCAT(_EWRAM_CODE_OVERLAY_PREFIX(num),_ewram_start__)
-#define _EWRAM_CODE_OVERLAY_SECTION_END(num) \
-	PPCAT(_EWRAM_CODE_OVERLAY_PREFIX(num),_ewram_end__)
-
-#define _EXPOSE_EWRAM_CODE_OVERLAY(num) \
-extern "C" size_t _EWRAM_CODE_OVERLAY_SECTION_ROM_START(num); \
-extern "C" size_t _EWRAM_CODE_OVERLAY_SECTION_EWRAM_START(num); \
-extern "C" size_t _EWRAM_CODE_OVERLAY_SECTION_END(num);
-
-
-
-
-
-// IWRAM CODE linker overlay
-#define _IWRAM_CODE_OVERLAY(num) section(STRINGIZE(PPCAT(.iwram_code, \
-	num)))
-#define _IWRAM_CODE_OVERLAY_PREFIX(num) PPCAT(__iwram_code,num)
-
-#define _IWRAM_CODE_OVERLAY_SECTION_ROM_START(num) \
-	PPCAT(_IWRAM_CODE_OVERLAY_PREFIX(num),_rom_start__)
-#define _IWRAM_CODE_OVERLAY_SECTION_IWRAM_START(num) \
-	PPCAT(_IWRAM_CODE_OVERLAY_PREFIX(num),_iwram_start__)
-#define _IWRAM_CODE_OVERLAY_SECTION_END(num) \
-	PPCAT(_IWRAM_CODE_OVERLAY_PREFIX(num),_iwram_end__)
-
-#define _EXPOSE_IWRAM_CODE_OVERLAY(num) \
-extern "C" size_t _IWRAM_CODE_OVERLAY_SECTION_ROM_START(num); \
-extern "C" size_t _IWRAM_CODE_OVERLAY_SECTION_IWRAM_START(num); \
-extern "C" size_t _IWRAM_CODE_OVERLAY_SECTION_END(num);
-
-
+#include "overlay_boilerplate_defines.hpp"
 
 
 // Linker overlay stuffs
@@ -223,8 +87,8 @@ extern "C" size_t _IWRAM_CODE_OVERLAY_SECTION_END(num);
 #define _OVERLAY_NUM_IN_OVERWORLD 2
 #define _OVERLAY_NUM_LEVEL_LOAD 3
 #define _OVERLAY_NUM_IN_LEVEL 4
-//#define _CREDITS_LOAD_OVERLAY_NUM 5
-//#define _CREDITS_OVERLAY_NUM 6
+//#define _CREDITS_LOAD_OVERLAY_NUM 6
+//#define _CREDITS_OVERLAY_NUM 7
 
 namespace sherwin_adventure
 {
@@ -364,7 +228,6 @@ _EXPOSE_IWRAM_BSS_OVERLAY(_OVERLAY_NUM_IN_LEVEL)
 _EXPOSE_SRAM_OVERLAY(_OVERLAY_NUM_IN_LEVEL)
 _EXPOSE_EWRAM_CODE_OVERLAY(_OVERLAY_NUM_IN_LEVEL)
 _EXPOSE_IWRAM_CODE_OVERLAY(_OVERLAY_NUM_IN_LEVEL)
-
 
 
 #endif		// gba_specific_stuff__slash__attribute_defines_hpp

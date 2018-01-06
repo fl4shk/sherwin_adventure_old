@@ -23,7 +23,7 @@
 #include "../namespace_using.hpp"
 #include "../gba_specific_stuff/attribute_defines.hpp"
 #include "../general_utility_stuff/gen_getter_setter_defines.hpp"
-#include "halt_stuff.hpp"
+#include "error_handler_stuff.hpp"
 
 namespace sherwin_adventure
 {

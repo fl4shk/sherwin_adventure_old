@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef sound_reg_stuff_hpp
-#define sound_reg_stuff_hpp
+#ifndef gba_specific_stuff__slash__sound_reg_stuff_hpp
+#define gba_specific_stuff__slash__sound_reg_stuff_hpp
 
 
 #include "../game_engine_stuff/misc_types.hpp"
@@ -146,4 +146,4 @@
 
 
 
-#endif		// sound_reg_stuff_hpp
+#endif		// gba_specific_stuff__slash__sound_reg_stuff_hpp

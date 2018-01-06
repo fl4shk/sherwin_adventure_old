@@ -16,7 +16,7 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include "halt_stuff.hpp"
+#include "error_handler_stuff.hpp"
 
 //#include "game_manager_class.hpp"
 #include "../gba_specific_stuff/bios_function_wrappers.hpp"
@@ -26,15 +26,28 @@ namespace sherwin_adventure
 namespace game_engine
 {
 
-void halt()
+//void halt()
+//{
+//	//GameManager::curr_game_mode = gm_do_halt;
+//
+//	for (;;)
+//	{
+//		gba::bios_wait_for_vblank();
+//	}
+//}
+
+void err(const char* msg)
 {
-	//GameManager::curr_game_mode = gm_do_halt;
+	DebugArrGroup::raw_array_group.err_str = msg;
+
+	//halt();
 
 	for (;;)
 	{
 		gba::bios_wait_for_vblank();
 	}
 }
+
 
 }
 }

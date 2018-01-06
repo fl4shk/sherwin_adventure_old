@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef oam_entry_defines_hpp
-#define oam_entry_defines_hpp
+#ifndef gba_specific_stuff__slash__oam_entry_defines_hpp
+#define gba_specific_stuff__slash__oam_entry_defines_hpp
 
 
 
@@ -179,4 +179,4 @@
 // -- End of Object Attribute 2 Stuff --
 
 
-#endif		// oam_entry_defines_hpp
+#endif		// gba_specific_stuff__slash__oam_entry_defines_hpp

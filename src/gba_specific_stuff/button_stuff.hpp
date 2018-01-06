@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef button_stuff_hpp
-#define button_stuff_hpp
+#ifndef gba_specific_stuff__slash__button_stuff_hpp
+#define gba_specific_stuff__slash__button_stuff_hpp
 
 #include "../general_utility_stuff/misc_types.hpp"
 #include "memory_map.hpp"
@@ -141,4 +141,4 @@ bool soft_reset_keys_down(); //__attribute__((_iwram_code));
 
 }
 
-#endif		// button_stuff_hpp
+#endif		// gba_specific_stuff__slash__button_stuff_hpp

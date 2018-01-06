@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef lut_division_funcs_hpp
-#define lut_division_funcs_hpp
+#ifndef gba_specific_stuff__slash__lut_division_funcs_hpp
+#define gba_specific_stuff__slash__lut_division_funcs_hpp
 
 #include "../general_utility_stuff/misc_types.hpp"
 #include "attribute_defines.hpp"
@@ -52,4 +52,4 @@ extern const s32 sdiv_table[];
 
 }
 
-#endif		// lut_division_funcs_hpp
+#endif		// gba_specific_stuff__slash__lut_division_funcs_hpp

@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef interrupt_stuff_hpp
-#define interrupt_stuff_hpp
+#ifndef gba_specific_stuff__slash__interrupt_stuff_hpp
+#define gba_specific_stuff__slash__interrupt_stuff_hpp
 
 #include "../general_utility_stuff/misc_types.hpp"
 #include "memory_map.hpp"
@@ -171,4 +171,4 @@ inline void nocash_soft_break()
 
 }
 
-#endif		// interrupt_stuff_hpp
+#endif		// gba_specific_stuff__slash__interrupt_stuff_hpp

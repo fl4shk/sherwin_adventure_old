@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef memory_map_hpp
-#define memory_map_hpp
+#ifndef gba_specific_stuff__slash__memory_map_hpp
+#define gba_specific_stuff__slash__memory_map_hpp
 
 #include "../general_utility_stuff/misc_types.hpp"
 
@@ -47,4 +47,4 @@
 
 
 
-#endif		// memory_map_hpp
+#endif		// gba_specific_stuff__slash__memory_map_hpp

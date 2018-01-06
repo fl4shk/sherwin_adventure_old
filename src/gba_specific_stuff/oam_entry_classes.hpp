@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef oam_entry_classes_hpp
-#define oam_entry_classes_hpp
+#ifndef gba_specific_stuff__slash__oam_entry_classes_hpp
+#define gba_specific_stuff__slash__oam_entry_classes_hpp
 
 #include "gfx_reg_stuff.hpp"
 #include "oam_entry_defines.hpp"
@@ -231,4 +231,4 @@ inline void clear_oam_mirror()
 
 }
 
-#endif		// oam_entry_classes_hpp
+#endif		// gba_specific_stuff__slash__oam_entry_classes_hpp

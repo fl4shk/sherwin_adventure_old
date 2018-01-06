@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef bios_function_wrappers_hpp
-#define bios_function_wrappers_hpp
+#ifndef gba_specific_stuff__slash__bios_function_wrappers_hpp
+#define gba_specific_stuff__slash__bios_function_wrappers_hpp
 
 #include "attribute_defines.hpp"
 #include "../general_utility_stuff/misc_types.hpp"
@@ -311,4 +311,4 @@ inline void bios_do_hard_reset()
 
 }
 
-#endif		// bios_function_wrappers_hpp
+#endif		// gba_specific_stuff__slash__bios_function_wrappers_hpp

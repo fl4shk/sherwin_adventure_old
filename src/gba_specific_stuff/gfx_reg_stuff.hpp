@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef gfx_reg_stuff_hpp
-#define gfx_reg_stuff_hpp
+#ifndef gba_specific_stuff__slash__gfx_reg_stuff_hpp
+#define gba_specific_stuff__slash__gfx_reg_stuff_hpp
 
 #include "../general_utility_stuff/misc_types.hpp"
 #include "memory_map.hpp"
@@ -602,4 +602,4 @@ inline void m4_plot(s32 x, s32 y, u32 color_id, u32 page)
 
 }
 
-#endif		// gfx_reg_stuff_hpp
+#endif		// gba_specific_stuff__slash__gfx_reg_stuff_hpp

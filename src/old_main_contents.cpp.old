@@ -42,7 +42,7 @@
 //#include "game_engine_stuff/game_manager_class.hpp"
 //#include "game_engine_stuff/gfx_manager_class.hpp"
 //
-//#include "game_engine_stuff/halt_stuff.hpp"
+//#include "game_engine_stuff/error_handler_stuff.hpp"
 //#include "game_engine_stuff/coll_lseg_classes.hpp"
 //#include "game_engine_stuff/hud_manager_class.hpp"
 

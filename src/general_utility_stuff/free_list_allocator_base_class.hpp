@@ -21,7 +21,7 @@
 
 #include "../misc_includes.hpp"
 #include "stack_classes.hpp"
-#include "../game_engine_stuff/halt_stuff.hpp"
+#include "../game_engine_stuff/error_handler_stuff.hpp"
 #include "debug_vars.hpp"
 
 namespace sherwin_adventure
@@ -145,16 +145,19 @@ public:		// functions
 			{
 				//ASM_COMMENT("BadSprite");
 				//DebugArrGroup::write_str_and_inc("BadSprite");
-				DebugArrGroup::write_str_and_inc(__bad_alloc_str());
-				game_engine::halt();
+
+				//DebugArrGroup::write_str_and_inc(__bad_alloc_str());
+				//game_engine::halt();
+				game_engine::err(__bad_alloc_str());
 			}
 
 			return (void*)(&ret);
 		}
 
 		//DebugArrGroup::write_str_and_inc("NoFreeSprite");
-		DebugArrGroup::write_str_and_inc(__none_free_str());
-		game_engine::halt();
+		//DebugArrGroup::write_str_and_inc(__none_free_str());
+		//game_engine::halt();
+		game_engine::err(__none_free_str());
 
 		//return nullptr;
 		for (;;)
@@ -175,8 +178,9 @@ public:		// functions
 		if (!free_list().can_push())
 		{
 			//DebugArrGroup::write_str_and_inc("SadsCan'tPush");
-			DebugArrGroup::write_str_and_inc(__cant_push_str());
-			game_engine::halt();
+			//DebugArrGroup::write_str_and_inc(__cant_push_str());
+			//game_engine::halt();
+			game_engine::err(__cant_push_str());
 		}
 
 		__dealloc_middle_part(to_dealloc);

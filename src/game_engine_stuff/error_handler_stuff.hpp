@@ -16,18 +16,21 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef game_engine_stuff__slash__halt_stuff_hpp
-#define game_engine_stuff__slash__halt_stuff_hpp
+#ifndef game_engine_stuff__slash__error_handler_stuff_hpp
+#define game_engine_stuff__slash__error_handler_stuff_hpp
 
+#include "../general_utility_stuff/debug_vars.hpp"
 
 namespace sherwin_adventure
 {
 namespace game_engine
 {
 
-void halt();
+void err(const char* msg);
+
+//void halt();
 }
 }
 
 
-#endif		// game_engine_stuff__slash__halt_stuff_hpp
+#endif		// game_engine_stuff__slash__error_handler_stuff_hpp

@@ -155,7 +155,8 @@ void OverlayLoader::load(OverlayNum n_overlay_num)
 	if ((overlay_num() >= OverlayNum::Lim)
 		|| ((size_t)overlay_num() >= max_num_overlays))
 	{
-		halt();
+		//halt();
+		err("OverlayLoader::load():  Eek!");
 	}
 
 	//thing_0();

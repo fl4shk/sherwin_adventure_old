@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef asm_funcs_hpp
-#define asm_funcs_hpp
+#ifndef gba_specific_stuff__slash__asm_funcs_hpp
+#define gba_specific_stuff__slash__asm_funcs_hpp
 
 #include "../namespace_using.hpp"
 #include "../general_utility_stuff/misc_types.hpp"
@@ -247,4 +247,4 @@ inline void* struct_memcpy(Type& dst, const Type& src)
 	return memcpy(&dst, &src, sizeof(Type));
 }
 
-#endif		// asm_funcs_hpp
+#endif		// gba_specific_stuff__slash__asm_funcs_hpp

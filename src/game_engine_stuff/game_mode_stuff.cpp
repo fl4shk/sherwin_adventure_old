@@ -25,27 +25,30 @@ namespace sherwin_adventure
 namespace game_engine
 {
 
-GameModeLoader* GameModeHandlerBase::loader;
 
 
-
-GameModeHandlerBase::GameModeHandlerBase()
+GameModeHandlerBase::GameModeHandlerBase(GameModeLoader* s_loader)
+	: __loader(s_loader)
 {
 }
 
 GameModeHandlerBase::~GameModeHandlerBase()
 {
-	for (size_t i=0; i<__curr_num_subsystems; ++i)
-	{
-		delete __subsystems.at(i);
-	}
+	//for (size_t i=0; i<__curr_num_subsystems; ++i)
+	//{
+	//	delete __subsystems.at(i);
+	//}
 }
 
 void GameModeHandlerBase::append(Subsystem* to_append)
 {
 	if (__curr_num_subsystems >= __subsystems.size())
 	{
-		//DebugArrGroup::write_str_and_inc("GameModeHandlerBase::");
+		////DebugArrGroup::write_str_and_inc("GameModeHandlerBase::");
+		//show_debug_str_group("TooManySys");
+		//halt();
+
+		err("GameModeHandlerBase::append():  Too many subsystems Eek!");
 	}
 }
 }

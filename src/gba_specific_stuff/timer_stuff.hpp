@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef timer_stuff_hpp
-#define timer_stuff_hpp
+#ifndef gba_specific_stuff__slash__timer_stuff_hpp
+#define gba_specific_stuff__slash__timer_stuff_hpp
 
 #include "../general_utility_stuff/misc_types.hpp"
 #include "memory_map.hpp"
@@ -108,4 +108,4 @@ constexpr inline u16 calc_timer_freq(float freq)
 
 }
 
-#endif		// timer_stuff_hpp
+#endif		// gba_specific_stuff__slash__timer_stuff_hpp

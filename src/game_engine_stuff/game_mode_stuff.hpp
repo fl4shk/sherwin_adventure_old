@@ -36,13 +36,24 @@ namespace game_engine
 class GameModeLoader;
 
 
+//enum class GameMode : size_t
+//{
+//	TitleScreen,
+//	OverworldLoad,
+//	InOverworld,
+//	LevelLoad,
+//	InLevel,
+//
+//	ErrorHandler,
+//
+//	Lim,
+//} __attribute__((_align4));
+
+
 // Base class for a handler of a particular game mode (title screen, 
 // in the overworld, loading a level, etc.)
 class GameModeHandlerBase
 {
-public:		// static variables
-	static GameModeLoader* loader;
-
 public:		// constants
 	// I don't think there will be more than 20 possible subsystems active
 	// at once.  I'll change this later if deemed necessary.
@@ -54,20 +65,27 @@ protected:		// variables
 
 	//std::array<Subsystem*, max_num_subsystems> __subsystems,
 	//	__next_subsystems;
-	std::array<Subsystem*, max_num_subsystems> __subsystems;
+	std::array<std::unique_ptr<Subsystem>, max_num_subsystems> 
+		__subsystems;
+
+	GameModeLoader* __loader;
 
 public:		// functions
-	GameModeHandlerBase();
+	inline GameModeHandlerBase()
+		: GameModeHandlerBase(nullptr)
+	{
+	}
+	GameModeHandlerBase(GameModeLoader* s_loader);
 	virtual ~GameModeHandlerBase();
 
 	virtual void run() = 0;
 
+	gen_getter_and_setter_by_val(loader);
+
+protected:		// functions
 	void append(Subsystem* to_append);
 
 } __attribute__((_align4));
-
-
-
 
 
 // Class that loads game modes
@@ -75,6 +93,7 @@ class GameModeLoader
 {
 private:		// variables
 	OverlayLoader __overlay_loader;
+	std::unique_ptr<GameModeHandlerBase> __curr_handler;
 
 public:		// functions
 	GameModeLoader();

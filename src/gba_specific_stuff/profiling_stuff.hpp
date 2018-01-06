@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef profiling_stuff_hpp
-#define profiling_stuff_hpp
+#ifndef gba_specific_stuff__slash__profiling_stuff_hpp
+#define gba_specific_stuff__slash__profiling_stuff_hpp
 
 
 #include "../namespace_using.hpp"
@@ -82,4 +82,4 @@ void profile_dynamic_allocations(size_t num_elems)
 
 }
 
-#endif		// profiling_stuff_hpp
+#endif		// gba_specific_stuff__slash__profiling_stuff_hpp
