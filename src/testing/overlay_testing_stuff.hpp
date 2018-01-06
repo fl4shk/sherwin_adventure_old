@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 by Andrew Clark (FL4SHK).
+// Copyright 2015-2018 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef overlay_testing_stuff_hpp
-#define overlay_testing_stuff_hpp
+#ifndef testing__slash__overlay_testing_stuff_hpp
+#define testing__slash__overlay_testing_stuff_hpp
 
 #include "../misc_includes.hpp"
 #include "../game_engine_stuff/overlay_loader_stuff.hpp"
@@ -34,4 +34,4 @@ void test_overworld_load() __attribute__((_overworld_load_iwram_code));
 
 void test_some_linker_overlay_stuff();
 
-#endif		//overlay_testing_stuff_hpp
+#endif		// testing__slash__overlay_testing_stuff_hpp

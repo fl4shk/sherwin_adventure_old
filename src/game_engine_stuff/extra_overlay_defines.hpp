@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 by Andrew Clark (FL4SHK).
+// Copyright 2015-2018 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef extra_overlay_defines_hpp
-#define extra_overlay_defines_hpp
+#ifndef game_engine_stuff__slash__extra_overlay_defines_hpp
+#define game_engine_stuff__slash__extra_overlay_defines_hpp
 
 
 // For OverlayLoader::load()
@@ -281,4 +281,4 @@ _EXPOSE_IWRAM_CODE_OVERLAY(_OVERLAY_NUM_IN_LEVEL)
 
 
 
-#endif		// extra_overlay_defines_hpp
+#endif		// game_engine_stuff__slash__extra_overlay_defines_hpp

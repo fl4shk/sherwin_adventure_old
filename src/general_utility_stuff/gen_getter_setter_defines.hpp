@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 by Andrew Clark (FL4SHK).
+// Copyright 2015-2018 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU General Public License along
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef gen_getter_setter_defines_hpp
-#define gen_getter_setter_defines_hpp
+#ifndef general_utility_stuff__slash__gen_getter_setter_defines_hpp
+#define general_utility_stuff__slash__gen_getter_setter_defines_hpp
 
 
 // Getters
@@ -245,4 +245,4 @@ gen_static_generic_setter_by_rval_ref(_, suffix)
 	gen_getter_by_val(stuff) \
 	gen_setter_by_val(stuff)
 
-#endif		// gen_getter_setter_defines_hpp
+#endif		// general_utility_stuff__slash__gen_getter_setter_defines_hpp

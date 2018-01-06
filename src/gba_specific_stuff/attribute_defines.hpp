@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 by Andrew Clark (FL4SHK).
+// Copyright 2015-2018 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef attribute_defines_hpp
-#define attribute_defines_hpp
+#ifndef gba_specific_stuff__slash__attribute_defines_hpp
+#define gba_specific_stuff__slash__attribute_defines_hpp
 
 #include "../general_utility_stuff/misc_types.hpp"
 #include "../namespace_using.hpp"
@@ -231,7 +231,7 @@ namespace sherwin_adventure
 namespace game_engine
 {
 
-enum class OverlayNum : u32
+enum class OverlayNum : size_t
 {
 	TitleScreen = _OVERLAY_NUM_TITLE_SCREEN,
 	OverworldLoad = _OVERLAY_NUM_OVERWORLD_LOAD,
@@ -367,4 +367,4 @@ _EXPOSE_IWRAM_CODE_OVERLAY(_OVERLAY_NUM_IN_LEVEL)
 
 
 
-#endif		// attribute_defines_hpp
+#endif		// gba_specific_stuff__slash__attribute_defines_hpp

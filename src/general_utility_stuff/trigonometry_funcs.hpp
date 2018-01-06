@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 by Andrew Clark (FL4SHK).
+// Copyright 2015-2018 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef trigonometry_funcs_hpp
-#define trigonometry_funcs_hpp
+#ifndef general_utility_stuff__slash__trigonometry_funcs_hpp
+#define general_utility_stuff__slash__trigonometry_funcs_hpp
 
 #include "fixed_classes.hpp"
 
@@ -92,4 +92,4 @@ inline Fixed8p8 lut_cos_f8p8(u32 theta)
 }
 
 
-#endif		// trigonometry_funcs_hpp
+#endif		// general_utility_stuff__slash__trigonometry_funcs_hpp

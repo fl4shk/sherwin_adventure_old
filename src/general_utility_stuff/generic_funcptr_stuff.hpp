@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 by Andrew Clark (FL4SHK).
+// Copyright 2015-2018 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef generic_funcptr_stuff_hpp
-#define generic_funcptr_stuff_hpp
+#ifndef general_utility_stuff__slash__generic_funcptr_stuff_hpp
+#define general_utility_stuff__slash__generic_funcptr_stuff_hpp
 
 
 #include "vec2_class.hpp"
@@ -277,4 +277,4 @@ inline u32 generic_less(const Type& a, const Type& b)
 
 
 
-#endif		// generic_funcptr_stuff_hpp
+#endif		// general_utility_stuff__slash__generic_funcptr_stuff_hpp

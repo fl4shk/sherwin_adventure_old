@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 by Andrew Clark (FL4SHK).
+// Copyright 2015-2018 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef sa_array_of_lists_class_hpp
-#define sa_array_of_lists_class_hpp
+#ifndef general_utility_stuff__slash__sa_array_of_lists_class_hpp
+#define general_utility_stuff__slash__sa_array_of_lists_class_hpp
 
 #include "stack_classes.hpp"
 
@@ -230,4 +230,4 @@ protected:		// functions
 }
 
 
-#endif		// sa_array_of_lists_class_hpp
+#endif		// general_utility_stuff__slash__sa_array_of_lists_class_hpp

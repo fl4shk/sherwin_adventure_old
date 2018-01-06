@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 by Andrew Clark (FL4SHK).
+// Copyright 2015-2018 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef debug_vars_hpp
-#define debug_vars_hpp
+#ifndef general_utility_stuff__slash__debug_vars_hpp
+#define general_utility_stuff__slash__debug_vars_hpp
 
 #include "misc_types.hpp"
 #include "../gba_specific_stuff/attribute_defines.hpp"
@@ -386,33 +386,33 @@ show_debug_values_group_backend \
 	[static_cast<size_t>(CurrDebugIndexType::enum_val)], \
 	total_num_args, all_values_arr);
 
-template<typename... all_the_types>
-inline void show_debug_u32_group(const all_the_types&... all_the_values)
+template<typename... AllTheTypes>
+inline void show_debug_u32_group(const AllTheTypes&... all_the_values)
 {
 	MACRO_FOR_DEBUG_U32_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);
 }
 
 
-template<typename... all_the_types>
-inline void show_debug_s32_group(const all_the_types&... all_the_values)
+template<typename... AllTheTypes>
+inline void show_debug_s32_group(const AllTheTypes&... all_the_values)
 {
 	MACRO_FOR_DEBUG_S32_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);
 }
 
-template<typename... all_the_types>
-inline void show_debug_f24p8_group(const all_the_types&... all_the_values)
+template<typename... AllTheTypes>
+inline void show_debug_f24p8_group(const AllTheTypes&... all_the_values)
 {
 	MACRO_FOR_DEBUG_FIXED24P8_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);
 }
 
-template<typename... all_the_types>
-inline void show_debug_f8p8_group(const all_the_types&... all_the_values)
+template<typename... AllTheTypes>
+inline void show_debug_f8p8_group(const AllTheTypes&... all_the_values)
 {
 	MACRO_FOR_DEBUG_FIXED8P8_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);
 }
 
-template<typename... all_the_types>
-inline void show_debug_str_group(const all_the_types&... all_the_values)
+template<typename... AllTheTypes>
+inline void show_debug_str_group(const AllTheTypes&... all_the_values)
 {
 	MACRO_FOR_DEBUG_STR_TYPE_AND_SUFFIX(GENERATE_FUNC_CONTENTS);
 }
@@ -425,4 +425,4 @@ inline void show_debug_str_group(const all_the_types&... all_the_values)
 }
 
 
-#endif		// debug_vars_hpp
+#endif		// general_utility_stuff__slash__debug_vars_hpp

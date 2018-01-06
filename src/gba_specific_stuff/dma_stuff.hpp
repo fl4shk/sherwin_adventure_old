@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2017 by Andrew Clark (FL4SHK).
+// Copyright 2015-2018 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -16,8 +16,8 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef dma_stuff_hpp
-#define dma_stuff_hpp
+#ifndef gba_specific_stuff__slash__dma_stuff_hpp
+#define gba_specific_stuff__slash__dma_stuff_hpp
 
 #include "../general_utility_stuff/misc_types.hpp"
 #include "memory_map.hpp"
@@ -173,4 +173,4 @@ void dma3_fill(volatile void* dst, vu32 src, u32 count);
 
 
 
-#endif		// dma_stuff_hpp
+#endif		// gba_specific_stuff__slash__dma_stuff_hpp
