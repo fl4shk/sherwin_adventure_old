@@ -96,7 +96,7 @@ void clear_debug_vars()
 //	return *this;
 //}
 
-u32 (& curr_index_arr)[curr_index_arr_size]
+size_t (& curr_index_arr)[curr_index_arr_size]
 	= DebugArrGroup::raw_array_group.curr_index_arr;
 u32 (& debug_u32_arr)[debug_u32_arr_size]
 	= DebugArrGroup::raw_array_group.debug_u32_arr;
@@ -116,7 +116,7 @@ DebugArrGroup::RawArrayGroup DebugArrGroup::raw_array_group;
 u32 DebugArrGroup::gdb_breakpoint_helper;
 
 // static variables (array_helpers)
-ArrayHelper<u32> DebugArrGroup::curr_index_arr_helper
+ArrayHelper<size_t> DebugArrGroup::curr_index_arr_helper
 	(raw_array_group.curr_index_arr, curr_index_arr_size);
 
 ArrayHelper<u32> DebugArrGroup::debug_u32_arr_helper
