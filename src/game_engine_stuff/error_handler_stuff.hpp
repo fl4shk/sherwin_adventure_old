@@ -26,9 +26,10 @@ namespace sherwin_adventure
 namespace game_engine
 {
 
-void err(const char* msg);
-
 //void halt();
+void err(const char* msg);
+void warn(const char* msg);
+
 }
 }
 

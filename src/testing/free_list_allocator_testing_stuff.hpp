@@ -22,6 +22,6 @@
 #include "../general_utility_stuff/free_list_allocator_base_class.hpp"
 
 
-//void test_free_list_allocator();
+void test_free_list_allocator();
 
 #endif		// testing__slash__free_list_allocator_testing_stuff_hpp

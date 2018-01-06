@@ -39,6 +39,7 @@ namespace game_engine
 void err(const char* msg)
 {
 	DebugArrGroup::raw_array_group.err_str = msg;
+	//display(msg);
 
 	//halt();
 

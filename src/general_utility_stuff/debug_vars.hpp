@@ -216,7 +216,7 @@ public:		// static variables (raw debug arrays)
 	struct RawArrayGroup
 	{
 		static constexpr size_t debug_str_len = 20;
-		static constexpr size_t err_str_len = 256;
+		//static constexpr size_t err_str_len = 256;
 
 		size_t curr_index_arr[curr_index_arr_size];
 
@@ -227,7 +227,10 @@ public:		// static variables (raw debug arrays)
 
 		DebugStr<debug_str_len> debug_str_arr[debug_str_arr_size];
 
-		DebugStr<err_str_len> err_str;
+		//DebugStr<err_str_len> err_str;
+		const char* err_str;
+
+		//const char* warn_str[debug_str_arr_size];
 	} __attribute__((_align4));
 	static RawArrayGroup raw_array_group;
 

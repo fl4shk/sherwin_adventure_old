@@ -59,10 +59,10 @@ public:		// functions
 	{
 	}
 
-	inline void* operator new (size_t size, Allocator& allocator)
-	{
-		return allocator.allocate();
-	}
+	//inline void* operator new (size_t size, Allocator& allocator)
+	//{
+	//	return allocator.allocate();
+	//}
 
 	gen_getter_and_setter_by_val(arr_index);
 };
@@ -120,28 +120,26 @@ public:		// functions
 	}
 
 
-	// Derived classes can override these in case there's special stuff to
-	// be done (like for sprite allocation/deallocation)
-	void* allocate() __attribute__((noinline))
+	Type* attempt_allocate() __attribute__((noinline))
 	{
-		ASM_COMMENT("if (can_pop_index()");
+		//ASM_COMMENT("if (can_pop_index()");
 		//if (can_pop_index())
 		if (free_list().can_pop())
 		{
 			//int n_arr_index = the_sa_free_list_backend.peek_top();
 			const int n_arr_index = free_list().peek_top();
 			//Sprite& ret = at(n_arr_index);
-			auto& ret = Base::at(n_arr_index);
+			auto* ret = &Base::at(n_arr_index);
 
 
 			//ret.the_arr_index = n_arr_index;
-			__set_instance_arr_index(&ret, n_arr_index);
+			__set_instance_arr_index(ret, n_arr_index);
 
 			//the_sa_free_list_backend.pop();
 			free_list().pop();
 
 			//if (ret.the_sprite_type != StDefault)
-			if (__alloc_test_bad(&ret))
+			if (__alloc_test_bad(ret))
 			{
 				//ASM_COMMENT("BadSprite");
 				//DebugArrGroup::write_str_and_inc("BadSprite");
@@ -151,19 +149,59 @@ public:		// functions
 				game_engine::err(__bad_alloc_str());
 			}
 
-			return (void*)(&ret);
+			//return (void*)(ret);
+			return ret;
 		}
 
-		//DebugArrGroup::write_str_and_inc("NoFreeSprite");
-		//DebugArrGroup::write_str_and_inc(__none_free_str());
-		//game_engine::halt();
-		game_engine::err(__none_free_str());
+		////DebugArrGroup::write_str_and_inc("NoFreeSprite");
+		////DebugArrGroup::write_str_and_inc(__none_free_str());
+		////game_engine::halt();
+		//game_engine::err(__none_free_str());
 
-		//return nullptr;
-		for (;;)
-		{
-		}
+		////return nullptr;
+		//for (;;)
+		//{
+		//}
+		//game_engine::warn(__none_free_str());
+		return nullptr;
 	}
+
+	Type* allocate_or_err()
+	{
+		auto ret = attempt_allocate();
+
+		if (ret == nullptr)
+		{
+			game_engine::err(__none_free_str());
+		}
+
+		return ret;
+	}
+
+
+	// Useful for Sprite's, sometimes
+	Type* allocate_forcefully(void* condition) __attribute__((noinline))
+	{
+		auto ret = attempt_allocate();
+
+		if (ret == nullptr)
+		{
+			auto other = find_lesser(condition);
+
+			if (other == nullptr)
+			{
+				game_engine::err("FreeListAllocatorBase"
+					"::allocate_forcefully():  Eek!");
+			}
+
+			deallocate(other);
+
+			return attempt_allocate();
+		}
+
+		return ret;
+	}
+
 	void deallocate(Type* to_dealloc) __attribute__((noinline))
 	{
 		//if (the_sprite.the_sprite_type == StDefault)
@@ -230,6 +268,13 @@ protected:		// functions
 	{
 	}
 
+	// Derived classes that use allocate_forcefully() **should** override
+	// this function!
+	virtual Type* find_lesser(void* condition)
+	{
+		return nullptr;
+	}
+
 	//virtual void __dealloc_middle_part(Type& to_dealloc)
 	//{
 	//	the_sprite.the_sprite_type = StDefault;
@@ -254,19 +299,19 @@ protected:		// functions
 
 	virtual const char* __bad_alloc_str() const
 	{
-		static const char ret[] = "BadAlloc";
+		static const char ret[] = "FreeListAllocatorBase:  BadAlloc Eek!";
 		return ret;
 	}
 
 	virtual const char* __none_free_str() const
 	{
-		static const char ret[] = "NoneFree";
+		static const char ret[] = "FreeListAllocatorBase:  NoneFree Eek!";
 		return ret;
 	}
 
 	virtual const char* __cant_push_str() const
 	{
-		static const char ret[] = "Can'tPush";
+		static const char ret[] = "FreeListAllocatorBase:  Can'tPush Eek!";
 		return ret;
 	}
 
