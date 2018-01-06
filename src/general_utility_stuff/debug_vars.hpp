@@ -283,62 +283,46 @@ public:		// functions
 
 	static void clear_debug_vars();
 
-	#define RAW_WRITE_DEBUG_U32_AND_INC(to_write) \
-	DebugArrGroup::debug_u32_arr() \
-		[DebugArrGroup::curr_index_arr() \
-		[static_cast<size_t>(CurrDebugIndexType::U32)]++] \
-		= static_cast<u32>(to_write);
 
-	#define RAW_WRITE_DEBUG_S32_AND_INC(to_write) \
-	DebugArrGroup::debug_s32_arr() \
-		[DebugArrGroup::curr_index_arr() \
-		[static_cast<size_t>(CurrDebugIndexType::S32)]++] \
-		= static_cast<s32>(to_write);
 
-	#define RAW_WRITE_DEBUG_F24P8_AND_INC(to_write) \
-	DebugArrGroup::debug_f24p8_arr() \
-		[DebugArrGroup::curr_index_arr() \
-		[static_cast<size_t>(CurrDebugIndexType::F24p8)]++] \
-		= static_cast<Fixed24p8>(to_write);
-
-	#define RAW_WRITE_DEBUG_F8P8_AND_INC(to_write) \
-	DebugArrGroup::debug_f8p8_arr() \
-		[DebugArrGroup::curr_index_arr() \
-		[static_cast<size_t>(CurrDebugIndexType::F8p8)]++] \
-		= static_cast<Fixed8p8>(to_write);
-
-	#define RAW_WRITE_DEBUG_STR_AND_INC(to_write) \
-	DebugArrGroup::debug_str_arr() \
-		[DebugArrGroup::curr_index_arr() \
-		[static_cast<size_t>(CurrDebugIndexType::Str)]++] = to_write;
 
 	static inline void write_u32_and_inc(u32 to_write)
 	{
-		RAW_WRITE_DEBUG_U32_AND_INC(to_write);
+		debug_u32_arr()[curr_index_arr()
+			[static_cast<size_t>(CurrDebugIndexType::U32)]++]
+			= static_cast<u32>(to_write);
 	}
 	static inline void write_s32_and_inc(s32 to_write)
 	{
-		RAW_WRITE_DEBUG_S32_AND_INC(to_write);
+		debug_s32_arr()[curr_index_arr()
+			[static_cast<size_t>(CurrDebugIndexType::S32)]++]
+			= static_cast<s32>(to_write);
 	}
 	static inline void write_f24p8_and_inc(const Fixed24p8& to_write)
 	{
-		RAW_WRITE_DEBUG_F24P8_AND_INC(to_write);
+		debug_f24p8_arr()[curr_index_arr()
+			[static_cast<size_t>(CurrDebugIndexType::F24p8)]++]
+			= static_cast<Fixed24p8>(to_write);
 	}
 	static inline void write_f8p8_and_inc(const Fixed8p8& to_write)
 	{
-		RAW_WRITE_DEBUG_F8P8_AND_INC(to_write);
+		debug_f8p8_arr()[curr_index_arr()
+			[static_cast<size_t>(CurrDebugIndexType::F8p8)]++]
+			= static_cast<Fixed8p8>(to_write);
 	}
 
 	////static inline void write_str_and_inc(const DebugStr& to_write)
 	//static inline void write_str_and_inc
 	//	(const DebugStr<RawArrayGroup::debug_str_len>& to_write)
 	//{
-	//	RAW_WRITE_DEBUG_STR_AND_INC(to_write);
+	//	debug_str_arr()[curr_index_arr()
+	//		[static_cast<size_t>(CurrDebugIndexType::Str)]++] = to_write;
 	//}
 
 	static inline void write_str_and_inc(const char* to_write)
 	{
-		RAW_WRITE_DEBUG_STR_AND_INC(to_write);
+		debug_str_arr()[curr_index_arr()
+			[static_cast<size_t>(CurrDebugIndexType::Str)]++] = to_write;
 	}
 
 
