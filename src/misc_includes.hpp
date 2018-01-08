@@ -27,6 +27,7 @@
 #include "general_utility_stuff/gen_getter_setter_defines.hpp"
 #include "general_utility_stuff/vec2_class.hpp"
 #include "gba_specific_stuff/asm_funcs.hpp"
+#include "game_engine_stuff/error_handler_stuff.hpp"
 
 #include "namespace_using.hpp"
 

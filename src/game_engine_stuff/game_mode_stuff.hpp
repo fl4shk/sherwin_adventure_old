@@ -65,16 +65,11 @@ protected:		// variables
 
 	//std::array<Subsystem*, max_num_subsystems> __subsystems,
 	//	__next_subsystems;
-	std::array<std::unique_ptr<Subsystem>, max_num_subsystems> 
-		__subsystems;
+	std::array<Subsystem*, max_num_subsystems> __subsystems;
 
 	GameModeLoader* __loader;
 
 public:		// functions
-	inline GameModeHandlerBase()
-		: GameModeHandlerBase(nullptr)
-	{
-	}
 	GameModeHandlerBase(GameModeLoader* s_loader);
 	virtual ~GameModeHandlerBase();
 
@@ -88,12 +83,14 @@ protected:		// functions
 } __attribute__((_align4));
 
 
+
+
 // Class that loads game modes
 class GameModeLoader
 {
 private:		// variables
 	OverlayLoader __overlay_loader;
-	std::unique_ptr<GameModeHandlerBase> __curr_handler;
+	GameModeHandlerBase* __curr_handler;
 
 public:		// functions
 	GameModeLoader();

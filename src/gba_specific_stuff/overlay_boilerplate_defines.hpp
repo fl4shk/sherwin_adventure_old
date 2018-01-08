@@ -93,8 +93,6 @@ extern "C" size_t _IWRAM_BSS_OVERLAY_SECTION_END(num);
 
 
 
-// Cart RAM
-#define _sram section(".sram")
 
 // SRAM linker overlay (potentially not necessary at all)
 #define _SRAM_OVERLAY(num) section(STRINGIZE(PPCAT(.sram, num)))

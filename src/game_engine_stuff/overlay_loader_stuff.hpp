@@ -39,7 +39,7 @@ private:		// variables
 public:		// functions
 	inline OverlayLoader()
 	{
-		load(OverlayNum::TitleScreen);
+		load(OverlayNum::Startup);
 	}
 
 	// This function doesn't need a lot of speed, and thus it will be run

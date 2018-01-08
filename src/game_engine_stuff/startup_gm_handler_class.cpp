@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2018 by Andrew Clark (FL4SHK).
+// Copyright 2015-2016 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -16,14 +16,24 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include "game_mode_handler_testing_stuff.hpp"
+#include "startup_gm_handler_class.hpp"
 
-//class GraphicsSubsystem : public Subsystem
-//{
-//protected:		// variables
-//} __attribute__((_align4));
-
-void test_game_mode_handler()
+namespace sherwin_adventure
 {
-	//GameModeLoader gm_loader;
+namespace game_engine
+{
+
+StartupGmHandler::StartupGmHandler(GameModeLoader* s_loader)
+	: GameModeHandlerBase(s_loader)
+{
+}
+StartupGmHandler::~StartupGmHandler()
+{
+}
+
+void StartupGmHandler::run()
+{
+}
+
+}
 }

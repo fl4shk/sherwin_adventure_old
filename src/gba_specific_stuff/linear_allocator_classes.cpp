@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2018 by Andrew Clark (FL4SHK).
+// Copyright 2015-2016 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -16,14 +16,17 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include "game_mode_handler_testing_stuff.hpp"
+#include "linear_allocator_classes.hpp"
 
-//class GraphicsSubsystem : public Subsystem
-//{
-//protected:		// variables
-//} __attribute__((_align4));
-
-void test_game_mode_handler()
+namespace sherwin_adventure
 {
-	//GameModeLoader gm_loader;
+namespace gba
+{
+
+u8 LinearAllocatorBase::__allocatable_ewram
+	[LinearAllocatorBase::ewram_alloc_space];
+u8 LinearAllocatorBase::__allocatable_iwram
+	[LinearAllocatorBase::iwram_alloc_space];
+
+}
 }

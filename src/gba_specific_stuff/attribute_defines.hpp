@@ -73,6 +73,10 @@
 #define _iwram_bss section(".iwram_bss")
 
 
+// Cart RAM
+#define _sram section(".sram")
+
+
 // #defines for putting stuff in the code (sections for EWRAM and IWRAM)
 #define _ewram_code section(".ewram_code")
 #define _iwram_code section(".iwram_code")
@@ -82,13 +86,14 @@
 
 
 // Linker overlay stuffs
-#define _OVERLAY_NUM_TITLE_SCREEN 0
-#define _OVERLAY_NUM_OVERWORLD_LOAD 1
-#define _OVERLAY_NUM_IN_OVERWORLD 2
-#define _OVERLAY_NUM_LEVEL_LOAD 3
-#define _OVERLAY_NUM_IN_LEVEL 4
-//#define _CREDITS_LOAD_OVERLAY_NUM 6
-//#define _CREDITS_OVERLAY_NUM 7
+#define _OVERLAY_NUM_STARTUP 0
+#define _OVERLAY_NUM_TITLE_SCREEN 1
+#define _OVERLAY_NUM_OVERWORLD_LOAD 2
+#define _OVERLAY_NUM_IN_OVERWORLD 3
+#define _OVERLAY_NUM_LEVEL_LOAD 4
+#define _OVERLAY_NUM_IN_LEVEL 5
+//#define _CREDITS_LOAD_OVERLAY_NUM 7
+//#define _CREDITS_OVERLAY_NUM 8
 
 namespace sherwin_adventure
 {
@@ -97,6 +102,7 @@ namespace game_engine
 
 enum class OverlayNum : size_t
 {
+	Startup = _OVERLAY_NUM_STARTUP,
 	TitleScreen = _OVERLAY_NUM_TITLE_SCREEN,
 	OverworldLoad = _OVERLAY_NUM_OVERWORLD_LOAD,
 	InOverworld = _OVERLAY_NUM_IN_OVERWORLD,
@@ -110,6 +116,30 @@ enum class OverlayNum : size_t
 
 }
 }
+
+
+
+// These are what will actually be used
+#define _startup_ewram _EWRAM_OVERLAY(_OVERLAY_NUM_STARTUP)
+#define _startup_iwram _IWRAM_OVERLAY(_OVERLAY_NUM_STARTUP)
+#define _startup_bss _BSS_OVERLAY(_OVERLAY_NUM_STARTUP)
+#define _startup_iwram_bss \
+	_IWRAM_BSS_OVERLAY(_OVERLAY_NUM_STARTUP)
+#define _startup_sram _SRAM_OVERLAY(_OVERLAY_NUM_STARTUP)
+#define _startup_ewram_code \
+	_EWRAM_CODE_OVERLAY(_OVERLAY_NUM_STARTUP)
+#define _startup_iwram_code \
+	_IWRAM_CODE_OVERLAY(_OVERLAY_NUM_STARTUP)
+
+_EXPOSE_EWRAM_OVERLAY(_OVERLAY_NUM_STARTUP)
+_EXPOSE_IWRAM_OVERLAY(_OVERLAY_NUM_STARTUP)
+_EXPOSE_BSS_OVERLAY(_OVERLAY_NUM_STARTUP)
+_EXPOSE_IWRAM_BSS_OVERLAY(_OVERLAY_NUM_STARTUP)
+_EXPOSE_SRAM_OVERLAY(_OVERLAY_NUM_STARTUP)
+_EXPOSE_EWRAM_CODE_OVERLAY(_OVERLAY_NUM_STARTUP)
+_EXPOSE_IWRAM_CODE_OVERLAY(_OVERLAY_NUM_STARTUP)
+
+
 
 
 

@@ -59,9 +59,9 @@ int real_main();
 
 int main()
 {
-	//test_game_mode_handler();
+	test_game_mode_handler();
 
-	test_free_list_allocator();
+	//test_free_list_allocator();
 
 	return real_main();
 }

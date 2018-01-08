@@ -17,6 +17,7 @@
 
 
 #include "game_mode_stuff.hpp"
+#include "startup_gm_handler_class.hpp"
 
 #include "../general_utility_stuff/debug_vars.hpp"
 
@@ -40,6 +41,7 @@ GameModeHandlerBase::~GameModeHandlerBase()
 	//}
 }
 
+//void GameModeHandlerBase::append(std::unique_ptr<Subsystem>&& to_append)
 void GameModeHandlerBase::append(Subsystem* to_append)
 {
 	if (__curr_num_subsystems >= __subsystems.size())
@@ -50,7 +52,16 @@ void GameModeHandlerBase::append(Subsystem* to_append)
 
 		err("GameModeHandlerBase::append():  Too many subsystems Eek!");
 	}
+
+	__subsystems.at(__curr_num_subsystems++) = to_append;
 }
+
+GameModeLoader::GameModeLoader()
+{
+	//__curr_handler.reset(new StartupGmHandler());
+}
+
+
 }
 }
 
