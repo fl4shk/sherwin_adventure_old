@@ -35,7 +35,7 @@ namespace containers
 // CONSTANT dimensions (as is usually the case in my GBA code), is stored
 // within a 1D array.
 template<typename Type, size_t _width, size_t _height>
-class ArrayCsz2dHelper
+class _alignas_regular ArrayCsz2dHelper
 {
 protected:		// variables
 	static constexpr Vec2<size_t> __size_2d = {_width, _height};
@@ -115,12 +115,12 @@ public:			// functions
 
 
 
-} __attribute__((_align4));
+};
 
 // This utility class is intended to be used when inherently 2D data is
 // stored within a 1D array.
 template<typename Type>
-class Array2dHelper
+class _alignas_regular Array2dHelper
 {
 protected:		// variables
 	Vec2<size_t> __size_2d;
@@ -206,7 +206,7 @@ public:			// functions
 
 
 
-} __attribute__((_align4));
+};
 
 
 }

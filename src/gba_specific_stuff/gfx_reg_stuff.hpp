@@ -82,7 +82,7 @@ typedef u16 ScrEntry;
 //{
 //	//s16 x, y;
 //	u16 x, y;
-//} __attribute__((aligned(4)));
+//} [[aligned(4)]];
 //typedef Vec2S16 BgPoint;
 typedef Vec2F24p8 BgPoint;
 

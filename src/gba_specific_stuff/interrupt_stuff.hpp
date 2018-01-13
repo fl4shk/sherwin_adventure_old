@@ -147,10 +147,11 @@ namespace gba
 {
 void irq_init();
 
-void irq_dummy() __attribute__((_iwram_code));
+[[_iwram_code]]
+void irq_dummy();
 
-
-void isr_main() __attribute__((_iwram_code,_target_arm));
+[[_iwram_code,_target_arm]]
+void isr_main();
 
 //#define ISR_MAIN_COUNTER *((vu16*)(MEM_EWRAM + 0x8000))
 //#define ISR_MAIN_ARR0 ((vu16*)(MEM_EWRAM + 0x8002))

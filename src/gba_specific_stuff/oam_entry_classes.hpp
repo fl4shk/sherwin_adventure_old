@@ -46,7 +46,7 @@ extern OamEntry oam_mirror[oam_mirror_size];
 
 
 // Regular OAM Entries, no affine transformations
-class OamEntry
+class _alignas_regular OamEntry
 {
 public:		// enums
 	enum shape_size { ss_8x8, ss_16x16, ss_32x32, ss_64x64, ss_16x8, 
@@ -179,14 +179,14 @@ public:		// wrapper functions
 
 
 
-} __attribute__((_align4));
+};
 
 
 
 // A class for OAM Affine stuffs
 // I could probably change every s16 member variable in this class To a
 // Fixed8p8, since That's basically what it's supposed To be.
-class OamEntryAffine
+class _alignas_regular OamEntryAffine
 {
 public:		// variables
 	static const u32 fill_size = 3;
@@ -207,7 +207,7 @@ public:		// variables
 public:		// functions
 
 
-} __attribute__((_align4));
+};
 
 
 

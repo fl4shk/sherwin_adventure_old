@@ -21,7 +21,7 @@
 //class GraphicsSubsystem : public Subsystem
 //{
 //protected:		// variables
-//} __attribute__((_align4));
+//} [[_align4]];
 
 void test_game_mode_handler()
 {

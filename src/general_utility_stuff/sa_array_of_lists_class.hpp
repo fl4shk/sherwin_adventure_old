@@ -28,7 +28,7 @@ namespace containers
 {
 
 template<typename Type>
-class SaListNode
+class _alignas_regular SaListNode
 {
 public:		// variables and constants
 	static constexpr s16 link_null = -1;
@@ -42,12 +42,12 @@ public:		// functions
 	{
 	}
 
-} __attribute__((_align4));
+};
 
 
 template<typename Type, size_t __num_lists, 
 	size_t __max_num_non_head_nodes>
-class SaArrayOfLists
+class _alignas_regular SaArrayOfLists
 {
 public:		// classes
 	class ListIterator
@@ -115,7 +115,8 @@ protected:		// variables
 
 
 public:		// functions
-	SaArrayOfLists() __attribute__((noinline))
+	[[gnu::noinline]]
+	SaArrayOfLists()
 	{
 		for (auto& iter : nodes_arr())
 		{
@@ -223,7 +224,7 @@ protected:		// functions
 	gen_getter_by_ref(nodes_arr);
 	gen_getter_by_ref(free_list);
 
-} __attribute__((_align4));
+};
 
 
 }

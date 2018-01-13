@@ -25,7 +25,7 @@ namespace sherwin_adventure
 {
 namespace gba
 {
-class LinearAllocatorBase
+class _alignas_regular LinearAllocatorBase
 {
 public:		// constants
 	// 64 kiB
@@ -37,10 +37,8 @@ public:		// constants
 
 
 protected:		// static variables
-	static u8 __allocatable_ewram[ewram_alloc_space]
-		__attribute__((_bss));
-	static u8 __allocatable_iwram[iwram_alloc_space]
-		__attribute__((_iwram_bss));
+	[[_bss] ]static u8 __allocatable_ewram[ewram_alloc_space];
+	[[_iwram_bss]] static u8 __allocatable_iwram[iwram_alloc_space];
 
 protected:		// variables
 	size_t __index = 0;
@@ -56,7 +54,7 @@ public:		// functions
 		__index = 0;
 	}
 
-} __attribute__((_align4));
+};
 
 #define GEN_LINEAR_ALLOCATOR_ALLOCATE_CONTENTS(typename_prefix, \
 	var_prefix) \
@@ -90,7 +88,7 @@ public:		// functions
 \
 	return reinterpret_cast<Type*>(ret);
 
-class EwramLinearAllocator : public LinearAllocatorBase
+class _alignas_regular EwramLinearAllocator : public LinearAllocatorBase
 {
 public:		// functions
 	inline EwramLinearAllocator()
@@ -107,9 +105,9 @@ public:		// functions
 		GEN_LINEAR_ALLOCATOR_ALLOCATE_ARR_CONTENTS(Ewram, ewram)
 	}
 
-} __attribute__((_align4));
+};
 
-class IwramLinearAllocator : public LinearAllocatorBase
+class _alignas_regular IwramLinearAllocator : public LinearAllocatorBase
 {
 public:		// functions
 	inline IwramLinearAllocator()
@@ -126,7 +124,7 @@ public:		// functions
 		GEN_LINEAR_ALLOCATOR_ALLOCATE_ARR_CONTENTS(Iwram, iwram)
 	}
 
-} __attribute__((_align4));
+};
 
 #undef GEN_LINEAR_ALLOCATOR_ALLOCATE_CONTENTS
 #undef GEN_LINEAR_ALLOCATOR_ALLOCATE_ARR_CONTENTS

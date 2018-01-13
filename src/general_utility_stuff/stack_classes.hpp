@@ -31,7 +31,7 @@ namespace containers
 {
 
 template<typename Type, size_t __size>
-class SaStack
+class _alignas_regular SaStack
 {
 protected:		// variables
 	std::array<Type, __size> __arr;
@@ -93,11 +93,11 @@ public:		// functions
 protected:		// functions
 	gen_getter_by_ref(arr);
 
-} __attribute__((_align4));
+};
 
 
 template<typename Type>
-class ExtAllocStack : public ArrayHelper<Type>
+class _alignas_regular ExtAllocStack : public ArrayHelper<Type>
 {
 public:		// typedefs
 	typedef ArrayHelper<Type> Base;
@@ -169,18 +169,19 @@ public:		// functions
 		return (next_index() > 0);
 	}
 
-} __attribute__((_align4));
+};
 
 
 
 template<size_t __size>
-class SaFreeList : public SaStack<s16, __size>
+class _alignas_regular SaFreeList : public SaStack<s16, __size>
 {
 public:		// typedefs
 	typedef SaStack<s16, __size> Base;
 
 public:		// functions
-	SaFreeList() __attribute__((noinline))
+	[[gnu::noinline]]
+	SaFreeList()
 	{
 		for (size_t i=0; i<Base::size(); ++i)
 		{
@@ -188,11 +189,11 @@ public:		// functions
 		}
 	}
 
-} __attribute__((_align4));
+};
 
 
 
-class ExtAllocFreeList : public ExtAllocStack<s16>
+class _alignas_regular ExtAllocFreeList : public ExtAllocStack<s16>
 {
 public:		// typedefs
 	typedef ExtAllocStack<s16> Base;
@@ -223,7 +224,8 @@ public:		// functions
 		= delete;
 
 protected:		// functions
-	void __inner_init() __attribute__((noinline))
+	[[gnu::noinline]]
+	void __inner_init()
 	{
 		__next_index = 0;
 		for (size_t i=0; i<Base::size(); ++i)
@@ -232,7 +234,7 @@ protected:		// functions
 		}
 	}
 
-} __attribute__((_align4));
+};
 
 }
 }

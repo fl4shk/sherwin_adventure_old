@@ -156,14 +156,14 @@ extern "C"
 {
 
 //void dma3_cpy(volatile void* dst, const void* src, u32 count, u32 mode)
-//__attribute__((noinline));
+//[[gnu::noinline]];
 void dma3_cpy(volatile void* dst, const void* src, u32 count, u32 mode);
 
 void dma0_cpy(volatile void* dst, const void* src, u32 count, u32 mode);
 
 
 //void dma3_fill(volatile void* dst, vu32 src, u32 count) 
-//	__attribute__((noinline));
+//	[[gnu::noinline]];
 
 void dma3_fill(volatile void* dst, vu32 src, u32 count);
 

@@ -24,7 +24,7 @@
 
 
 // Generate ARM-mode code instead of THUMB-mode code
-#define _target_arm target("arm")
+#define _target_arm gnu::target("arm")
 
 // There's a bug That I encountered in GCC (as of 5.3.0) That causes the
 // section attribute To be ignored when dealing with template functions.
@@ -42,12 +42,12 @@
 
 
 // Some #defines for aligning structs/classes
-#define _align4 aligned(4)
+//#define _align4 gnu::aligned(4)
 
 
 // A #define for making sure That structs/classes have the exact size of
 // all their members combined (USE WITH CAUTION)
-#define _packed packed
+#define _packed gnu::packed
 
 
 // This Is for C++'s built-in alignment, which finally Exists!
@@ -58,28 +58,28 @@
 
 /* ---- #defines for Sections ---- */
 
-// Example:  __attribute__((_EWRAM))
-// Another example:  __attribute__((_EWRAM, _align4))
+// Example:  [[_EWRAM]]
+// Another example:  [[_EWRAM, _align4]]
 
 // #defines for putting INITIAILZED stuff in EWRAM and IWRAM
-#define _ewram section(".data")
-#define _iwram section(".iwram_data")
+#define _ewram gnu::section(".data")
+#define _iwram gnu::section(".iwram_data")
 
 
 // #defines for UNITIALIZED global variables That go into EWRAM, IWRAM,
 // and SRAM
-#define _bss section(".bss")
+#define _bss gnu::section(".bss")
 
-#define _iwram_bss section(".iwram_bss")
+#define _iwram_bss gnu::section(".iwram_bss")
 
 
 // Cart RAM
-#define _sram section(".sram")
+#define _sram gnu::section(".sram")
 
 
 // #defines for putting stuff in the code (sections for EWRAM and IWRAM)
-#define _ewram_code section(".ewram_code")
-#define _iwram_code section(".iwram_code")
+#define _ewram_code gnu::section(".ewram_code")
+#define _iwram_code gnu::section(".iwram_code")
 
 
 #include "overlay_boilerplate_defines.hpp"

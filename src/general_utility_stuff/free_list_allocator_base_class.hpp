@@ -95,7 +95,7 @@ public:		// functions
 // for those arrays.  This is not a huge deal for Sprite's in particular
 // because the array(s) to allocate Sprite's from is (are) not very large.
 template<typename Type>
-class FreeListAllocatorBase : public ArrayHelper<Type>
+class _alignas_regular FreeListAllocatorBase : public ArrayHelper<Type>
 {
 public:		// typedefs
 	typedef ArrayHelper<Type> Base;
@@ -119,8 +119,8 @@ public:		// functions
 		__free_list.init(s_free_list_arr, s_size);
 	}
 
-
-	Type* attempt_allocate() __attribute__((noinline))
+	[[gnu::noinline]]
+	Type* attempt_allocate()
 	{
 		//ASM_COMMENT("if (can_pop_index()");
 		//if (can_pop_index())
@@ -180,7 +180,8 @@ public:		// functions
 
 
 	// Useful for Sprite's, sometimes
-	Type* allocate_forcefully(void* condition) __attribute__((noinline))
+	[[gnu::noinline]]
+	Type* allocate_forcefully(void* condition)
 	{
 		auto ret = attempt_allocate();
 
@@ -202,7 +203,8 @@ public:		// functions
 		return ret;
 	}
 
-	void deallocate(Type* to_dealloc) __attribute__((noinline))
+	[[gnu::noinline]]
+	void deallocate(Type* to_dealloc)
 	{
 		//if (the_sprite.the_sprite_type == StDefault)
 		if (__dealloc_test_bad(to_dealloc))
@@ -315,7 +317,7 @@ protected:		// functions
 		return ret;
 	}
 
-} __attribute__((_align4));
+};
 
 }
 }

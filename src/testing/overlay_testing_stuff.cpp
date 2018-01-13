@@ -30,34 +30,34 @@ char test_buf[test_buf_size];
 extern "C"
 {
 
-//char address_buf[20] __attribute__((_sram));
+//char address_buf[20] [[_sram]];
 
-//vu32 some_title_screen_arr[8] __attribute__((_title_screen_bss));
-//vu32 some_title_screen_var __attribute__((_title_screen_bss));
+//vu32 some_title_screen_arr[8] [[_title_screen_bss]];
+//vu32 some_title_screen_var [[_title_screen_bss]];
 //
 //
-//vu32 some_in_level_var __attribute__((_in_level_bss));
-//vu32 some_in_level_arr[8] __attribute__((_in_level_bss));
+//vu32 some_in_level_var [[_in_level_bss]];
+//vu32 some_in_level_arr[8] [[_in_level_bss]];
 //
 //
-//vu32 some_title_screen_buf[8] __attribute__((_title_screen_iwram_bss));
-//vu32 some_in_level_buf[8] __attribute__((_in_level_iwram_bss));
+//vu32 some_title_screen_buf[8] [[_title_screen_iwram_bss]];
+//vu32 some_in_level_buf[8] [[_in_level_iwram_bss]];
 //
 //
-//char asdf[8] __attribute__((_title_screen_sram));
-//char asdf_2[8] __attribute__((_in_level_sram));
+//char asdf[8] [[_title_screen_sram]];
+//char asdf_2[8] [[_in_level_sram]];
 //
-//char asdf_ewram[8] __attribute__((_title_screen_ewram));
-//char asdf_2_ewram[8] __attribute__((_in_level_ewram));
+//char asdf_ewram[8] [[_title_screen_ewram]];
+//char asdf_2_ewram[8] [[_in_level_ewram]];
 
 
-//char extra_address_test_buf_0[32] __attribute__((_sram));
-//char extra_address_test_buf_1[32] __attribute__((_sram));
-//char extra_address_test_buf_2[32] __attribute__((_sram));
-//char extra_address_test_buf_3[32] __attribute__((_sram));
-char overlay_loader_test_buf[test_buf_size] __attribute__((_sram));
-char title_screen_test_buf[test_buf_size] __attribute__((_sram));
-char overworld_load_test_buf[test_buf_size] __attribute__((_sram));
+//char extra_address_test_buf_0[32] [[_sram]];
+//char extra_address_test_buf_1[32] [[_sram]];
+//char extra_address_test_buf_2[32] [[_sram]];
+//char extra_address_test_buf_3[32] [[_sram]];
+char overlay_loader_test_buf[test_buf_size] [[_sram]];
+char title_screen_test_buf[test_buf_size] [[_sram]];
+char overworld_load_test_buf[test_buf_size] [[_sram]];
 
 }
 

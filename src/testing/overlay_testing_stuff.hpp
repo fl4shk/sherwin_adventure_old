@@ -26,9 +26,9 @@
 extern "C"
 {
 
-void test_title_screen() __attribute__((_title_screen_iwram_code));
+[[_title_screen_iwram_code]] void test_title_screen();
 
-void test_overworld_load() __attribute__((_overworld_load_iwram_code));
+[[_overworld_load_iwram_code]] void test_overworld_load();
 
 }
 

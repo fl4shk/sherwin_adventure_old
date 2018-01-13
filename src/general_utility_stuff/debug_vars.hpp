@@ -92,7 +92,7 @@ static constexpr size_t debug_str_arr_size = 32;
 // wasteful....
 
 template<size_t __max_size> 
-class DebugStr
+class _alignas_regular DebugStr
 {
 protected:		// variables
 	u32 __real_size;
@@ -135,8 +135,8 @@ public:		// functions
 	//DebugStr& operator = (const DebugStr& to_copy);
 	//DebugStr& operator = (const char* to_copy);
 
+	[[gnu::noinline]]
 	auto& operator = (const DebugStr& to_copy)
-		__attribute__((noinline))
 	{
 		set_real_size(to_copy.real_size());
 		//memcpy32(arr, to_copy.arr, max_size / sizeof(u32));
@@ -149,8 +149,9 @@ public:		// functions
 
 		return *this;
 	}
+
+	[[gnu::noinline]]
 	auto& operator = (const char* to_copy) 
-		__attribute__((noinline))
 	{
 		//memfill32(arr, 0, max_size / sizeof(u32));
 		//arr_memfill32(arr, 0, max_size);
@@ -205,15 +206,15 @@ public:		// functions
 		}
 	}
 
-} __attribute__((_align4));
+};
 
 
 
-class DebugArrGroup
+class _alignas_regular DebugArrGroup
 {
 //protected:		// static variables (raw debug arrays)
 public:		// static variables (raw debug arrays)
-	struct RawArrayGroup
+	struct _alignas_regular RawArrayGroup
 	{
 		static constexpr size_t debug_str_len = 20;
 		//static constexpr size_t err_str_len = 256;
@@ -231,7 +232,7 @@ public:		// static variables (raw debug arrays)
 		const char* err_str;
 
 		//const char* warn_str[debug_str_arr_size];
-	} __attribute__((_align4));
+	};
 	static RawArrayGroup raw_array_group;
 
 
@@ -330,7 +331,7 @@ public:		// functions
 
 
 
-} __attribute__((_align4));
+};
 
 extern size_t (& curr_index_arr)[curr_index_arr_size];
 extern u32 (& debug_u32_arr)[debug_u32_arr_size];
@@ -345,9 +346,9 @@ extern DebugStr<DebugArrGroup::RawArrayGroup::debug_str_len>
 
 
 //template<typename debug_arr_type, typename Type>
+//[[gnu::noinline]]
 //void show_debug_values_group_backend(debug_arr_type* debug_values_arr, 
-//	u32& curr_index, const u32 total_num_args, Type* all_values_arr) 
-//	__attribute__((noinline));
+//	u32& curr_index, const u32 total_num_args, Type* all_values_arr);
 template<typename debug_arr_type, typename Type>
 void show_debug_values_group_backend(debug_arr_type* debug_values_arr, 
 	u32& curr_index, const u32 total_num_args, const Type* all_values_arr)

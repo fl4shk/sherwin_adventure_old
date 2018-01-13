@@ -140,14 +140,14 @@ namespace sherwin_adventure
 namespace gba
 {
 
-class BiosDivResult
+class _alignas_regular BiosDivResult
 {
 public:		// variables
 	s32 quotient;
 	s32 remainder;
 	u32 quotient_abs;
 
-} __attribute__((_align4));
+};
 
 
 

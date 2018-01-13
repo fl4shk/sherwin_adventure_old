@@ -28,7 +28,7 @@ using namespace gba;
 extern "C"
 {
 
-volatile IrsFuncptr isr_table[intr_amount] __attribute__((_bss));
+volatile IrsFuncptr isr_table[intr_amount] [[_bss]];
 
 
 // This Is for maxmod compatibility

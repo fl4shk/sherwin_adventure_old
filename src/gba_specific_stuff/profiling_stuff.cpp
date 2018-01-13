@@ -31,7 +31,7 @@ namespace gba
 
 //template<typename Type>
 //void allocate_arr_with_malloc(Type*& ret, size_t num_elems) 
-//	__attribute__((noinline));
+//	[[gnu::noinline]];
 
 
 template<typename Type>

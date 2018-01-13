@@ -132,7 +132,7 @@ inline bool key_hit_or_held(u32 key)
 	return (((bool)key_hit(key)) || ((bool)key_held(key)));
 }
 
-bool soft_reset_keys_down(); //__attribute__((_iwram_code));
+bool soft_reset_keys_down(); //[[_iwram_code]];
 
 
 

@@ -32,7 +32,7 @@ namespace containers
 {
 
 template<typename Type, size_t _size>
-class ArrayCszHelper
+class _alignas_regular ArrayCszHelper
 {
 public:			// variables
 	Type* __arr = nullptr;
@@ -81,14 +81,14 @@ public:			// functions
 	}
 
 
-} __attribute__((_align4));
+};
 
 
 
 // This is a VERY thin wrapper class for working with 1D arrays of
 // arbitrary sizes
 template<typename Type>
-class ArrayHelper
+class _alignas_regular ArrayHelper
 {
 //public:			// variables
 protected:		// variables
@@ -139,7 +139,7 @@ public:			// functions
 	}
 
 
-} __attribute__((_align4));
+};
 
 }
 

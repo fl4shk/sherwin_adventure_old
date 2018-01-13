@@ -53,7 +53,7 @@
 //		DebugArrGroup::write_u32_and_inc(x);
 //	}
 //
-//} __attribute__((_align4));
+//} [[_align4]];
 //
 //class AllocatorA : public FreeListAllocatorBase<A>
 //{
@@ -74,7 +74,7 @@
 //		Base::init(s_arr, s_free_list_arr, s_size);
 //	}
 //
-//} __attribute__((_align4));
+//} [[_align4]];
 //
 //static constexpr size_t num_a = 50;
 //A arr_a[num_a];

@@ -38,7 +38,7 @@ class Vec2;
 // "previous" and "current" pairs.  It Is primarily Intended for use with
 // SMALL types, such as Vec2's, built-in types, and So on and So forth.
 template<typename Type>
-class PrevCurrPair
+class _alignas_regular PrevCurrPair
 {
 public:		// variables
 	Type prev, curr;
@@ -72,7 +72,7 @@ public:		// functions
 	}
 
 
-} __attribute__((_align4));
+};
 
 }
 }

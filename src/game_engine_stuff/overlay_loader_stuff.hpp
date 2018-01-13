@@ -31,7 +31,7 @@ namespace game_engine
 {
 
 
-class OverlayLoader
+class _alignas_regular OverlayLoader
 {
 private:		// variables
 	OverlayNum __overlay_num;
@@ -45,20 +45,27 @@ public:		// functions
 	// This function doesn't need a lot of speed, and thus it will be run
 	// from ROM.
 	void load(OverlayNum n_overlay_num);
-	//void load(OverlayNum n_overlay_num) __attribute__((_target_arm));
+	//[[_target_arm]] void load(OverlayNum n_overlay_num);
 
 	gen_getter_by_val(overlay_num);
 
 private:		// functions
-	//void thing_0(); //__attribute__((noinline,_target_arm));
-	//void thing_1(); //__attribute__((noinline,_target_arm));
-	//void thing_2(); //__attribute__((noinline,_target_arm));
-	//void thing_3(); //__attribute__((noinline,_target_arm));
-	//void thing_4(); //__attribute__((noinline,_target_arm));
-	//void thing_5(); //__attribute__((noinline,_target_arm));
-	//void thing_6(); //__attribute__((noinline,_target_arm));
+	////[[noinline,_target_arm]]
+	//void thing_0();
+	////[[noinline,_target_arm]]
+	//void thing_1();
+	////[[noinline,_target_arm]]
+	//void thing_2();
+	////[[noinline,_target_arm]]
+	//void thing_3();
+	////[[noinline,_target_arm]]
+	//void thing_4();
+	////[[noinline,_target_arm]]
+	//void thing_5();
+	////[[noinline,_target_arm]]
+	//void thing_6();
 
-} __attribute__((_align4));
+};
 
 
 }

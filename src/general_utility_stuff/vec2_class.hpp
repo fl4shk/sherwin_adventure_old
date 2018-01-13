@@ -37,7 +37,7 @@ namespace containers
 {
 
 template<typename Type>
-class Vec2
+class _alignas_regular Vec2
 {
 //public:		// constants
 //	static constexpr size_t the_index_for_x = 0, the_index_for_y = 1;
@@ -193,7 +193,7 @@ public:		// functions
 		}
 	}
 
-} __attribute__((_align4));
+};
 
 
 
@@ -351,16 +351,16 @@ public:		/* functions */ \
 
 
 template<>
-class Vec2<Fixed24p8>
+class _alignas_regular Vec2<Fixed24p8>
 {
 GENERATE_SPECIFIC_VEC2_CLASS_CONTENTS(Fixed24p8)
-} __attribute__((_align4));
+};
 
 template<>
-class Vec2<Fixed8p8>
+class _alignas_regular Vec2<Fixed8p8>
 {
 GENERATE_SPECIFIC_VEC2_CLASS_CONTENTS(Fixed8p8)
-} __attribute__((_align4));
+};
 
 typedef Vec2<Fixed24p8> Vec2F24p8;
 typedef Vec2<Fixed8p8> Vec2F8p8;

@@ -26,7 +26,7 @@
 #define STRINGIZE(a) STRINGIZE_NX(a)
 
 // EWRAM data linker overlay
-#define _EWRAM_OVERLAY(num) section(STRINGIZE(PPCAT(.data, \
+#define _EWRAM_OVERLAY(num) gnu::section(STRINGIZE(PPCAT(.data, \
 	num)))
 #define _EWRAM_OVERLAY_PREFIX(num) PPCAT(__data,num)
 
@@ -44,7 +44,7 @@ extern "C" size_t _EWRAM_OVERLAY_SECTION_END(num);
 
 
 // IWRAM data linker overlay
-#define _IWRAM_OVERLAY(num) section(STRINGIZE(PPCAT(.iwram_data, \
+#define _IWRAM_OVERLAY(num) gnu::section(STRINGIZE(PPCAT(.iwram_data, \
 	num)))
 #define _IWRAM_OVERLAY_PREFIX(num) PPCAT(__iwram_data,num)
 
@@ -62,8 +62,8 @@ extern "C" size_t _IWRAM_OVERLAY_SECTION_END(num);
 
 
 // BSS linker overlay
-//#define _BSS_OVERLAY(num) section(".bss" #num)
-#define _BSS_OVERLAY(num) section(STRINGIZE(PPCAT(.bss,num)))
+//#define _BSS_OVERLAY(num) gnu::section(".bss" #num)
+#define _BSS_OVERLAY(num) gnu::section(STRINGIZE(PPCAT(.bss,num)))
 
 #define _BSS_OVERLAY_PREFIX(num) PPCAT(__bss,num)
 
@@ -78,7 +78,7 @@ extern "C" size_t _BSS_OVERLAY_SECTION_END(num);
 
 
 // IWRAM BSS linker overlay
-#define _IWRAM_BSS_OVERLAY(num) section(STRINGIZE(PPCAT(.iwram_bss,num)))
+#define _IWRAM_BSS_OVERLAY(num) gnu::section(STRINGIZE(PPCAT(.iwram_bss,num)))
 
 #define _IWRAM_BSS_OVERLAY_PREFIX(num) PPCAT(__iwram_bss,num)
 
@@ -95,7 +95,7 @@ extern "C" size_t _IWRAM_BSS_OVERLAY_SECTION_END(num);
 
 
 // SRAM linker overlay (potentially not necessary at all)
-#define _SRAM_OVERLAY(num) section(STRINGIZE(PPCAT(.sram, num)))
+#define _SRAM_OVERLAY(num) gnu::section(STRINGIZE(PPCAT(.sram, num)))
 #define _SRAM_OVERLAY_PREFIX(num) PPCAT(__sram,num)
 
 #define _SRAM_OVERLAY_SECTION_START(num) \
@@ -110,7 +110,7 @@ extern "C" size_t _SRAM_OVERLAY_SECTION_END(num);
 
 
 // EWRAM CODE linker overlay (potentially not necessary at all)
-#define _EWRAM_CODE_OVERLAY(num) section(STRINGIZE(PPCAT(.ewram_code, \
+#define _EWRAM_CODE_OVERLAY(num) gnu::section(STRINGIZE(PPCAT(.ewram_code, \
 	num)))
 #define _EWRAM_CODE_OVERLAY_PREFIX(num) PPCAT(__ewram_code,num)
 
@@ -131,8 +131,8 @@ extern "C" size_t _EWRAM_CODE_OVERLAY_SECTION_END(num);
 
 
 // IWRAM CODE linker overlay
-#define _IWRAM_CODE_OVERLAY(num) section(STRINGIZE(PPCAT(.iwram_code, \
-	num)))
+#define _IWRAM_CODE_OVERLAY(num) gnu::section(STRINGIZE(PPCAT \
+	(.iwram_code, num)))
 #define _IWRAM_CODE_OVERLAY_PREFIX(num) PPCAT(__iwram_code,num)
 
 #define _IWRAM_CODE_OVERLAY_SECTION_ROM_START(num) \

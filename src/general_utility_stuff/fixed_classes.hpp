@@ -36,14 +36,16 @@ class Fixed24p8;
 class Fixed8p8;
 
 
-//extern Fixed24p8 f24p8_div_by_f8p8(const Fixed24p8& num, 
-//	const Fixed8p8& den) __attribute__((_iwram_code));
-Fixed24p8 f24p8_div_by_f8p8(const Fixed24p8& num, const Fixed8p8& den) 
-	__attribute__((_iwram_code,_target_arm));
-Fixed24p8 f24p8_div_by_f24p8(const Fixed24p8& num, const Fixed24p8& den) 
-	__attribute__((_iwram_code,_target_arm));
-Fixed24p8 f24p8_div_by_u16(const Fixed24p8& num, u16 den)
-	__attribute__((_iwram_code,_target_arm));
+//extern [[_iwram_code]]Fixed24p8 f24p8_div_by_f8p8(const Fixed24p8& num, 
+//	const Fixed8p8& den);
+[[_iwram_code,_target_arm]]
+Fixed24p8 f24p8_div_by_f8p8(const Fixed24p8& num, const Fixed8p8& den);
+
+[[_iwram_code,_target_arm]]
+Fixed24p8 f24p8_div_by_f24p8(const Fixed24p8& num, const Fixed24p8& den);
+
+[[_iwram_code,_target_arm]]
+Fixed24p8 f24p8_div_by_u16(const Fixed24p8& num, u16 den);
 
 
 static constexpr u32 f24p8_shift = 8;
@@ -51,7 +53,7 @@ static constexpr u32 f24p8_frac_mask = (1 << f24p8_shift) - 1;
 
 // Underlying Type Is s32, with 8 fraction bits
 // This will be the most often used fixed-point Type in my GBA stuff
-class Fixed24p8
+class _alignas_regular Fixed24p8
 {
 public:		// variables
 
@@ -96,8 +98,8 @@ public:		// functions
 	inline Fixed24p8 operator - (const Fixed24p8& to_sub) const;
 
 	//inline Fixed24p8 operator * (const Fixed24p8& to_mul) const;
-	Fixed24p8 operator * (const Fixed24p8& to_mul) const
-		__attribute__((_iwram_code,_target_arm));
+	[[_iwram_code,_target_arm]]
+	Fixed24p8 operator * (const Fixed24p8& to_mul) const;
 	inline Fixed24p8 guaranteed_f24p8_by_f8p8_multiplication
 		(const Fixed8p8& to_mul) const;
 	inline Fixed24p8 operator / (const Fixed8p8& den) const
@@ -157,7 +159,7 @@ public:		// functions
 	inline bool operator >= (const Fixed24p8& to_cmp) const;
 
 
-} __attribute__((_align4));
+};
 
 
 template<>
@@ -314,7 +316,7 @@ inline bool Fixed24p8::operator >= (const Fixed24p8& to_cmp) const
 
 
 // Underlying Type Is s16, with 8 fraction bits
-class Fixed8p8
+class _alignas_regular Fixed8p8
 {
 public:		// variables
 	static constexpr u32 shift = 8;
@@ -357,7 +359,7 @@ public:		// functions
 	inline bool operator >= (const Fixed8p8& to_cmp) const;
 
 
-} __attribute__((_align4));
+};
 
 
 inline s16 Fixed8p8::round_to_int() const
@@ -555,18 +557,17 @@ inline Fixed8p8 operator - (const Fixed8p8& a)
 	return (Fixed8p8){ret_data};
 }
 
-//Fixed24p8 make_f24p8(s32 whole_part, u8 frac_part=0) 
-//	__attribute__((_iwram_code));
+//[[_iwram_code]]
+//Fixed24p8 make_f24p8(s32 whole_part, u8 frac_part=0);
 //
-//
-//Fixed8p8 make_f8p8(s8 whole_part, u8 frac_part=0) 
-//	__attribute__((_iwram_code));
+//[[_iwram_code]]
+//Fixed8p8 make_f8p8(s8 whole_part, u8 frac_part=0);
 
 
 
 
 template<typename underlying_type, u32 shift>
-class FixedptNumPacked
+class [[_packed]] FixedptNumPacked
 {
 public:		// typedefs
 	typedef FixedptNumPacked<underlying_type, shift> 
@@ -662,7 +663,7 @@ public:		// functions
 
 
 
-} __attribute__((_packed));
+};
 
 typedef FixedptNumPacked<u16, 4> Fixedu12p4Packed;
 typedef FixedptNumPacked<s16, 4> Fixeds12p4Packed;

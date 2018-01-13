@@ -36,7 +36,7 @@ namespace game_engine
 class GameModeLoader;
 
 
-//enum class GameMode : size_t
+//enum class _alignas_regular GameMode : size_t
 //{
 //	TitleScreen,
 //	OverworldLoad,
@@ -47,12 +47,12 @@ class GameModeLoader;
 //	ErrorHandler,
 //
 //	Lim,
-//} __attribute__((_align4));
+//};
 
 
 // Base class for a handler of a particular game mode (title screen, 
 // in the overworld, loading a level, etc.)
-class GameModeHandlerBase
+class _alignas_regular GameModeHandlerBase
 {
 public:		// constants
 	// I don't think there will be more than 20 possible subsystems active
@@ -81,13 +81,13 @@ public:		// functions
 protected:		// functions
 	void append(Subsystem* to_append);
 
-} __attribute__((_align4));
+};
 
 
 
 
 // Class that loads game modes
-class GameModeLoader
+class _alignas_regular GameModeLoader
 {
 private:		// variables
 	OverlayLoader __overlay_loader;
@@ -102,7 +102,7 @@ public:		// functions
 private:		// functions
 	gen_getter_by_ref(overlay_loader);
 
-} __attribute__((_align4));
+};
 
 }
 }

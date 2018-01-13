@@ -26,17 +26,17 @@ namespace sherwin_adventure
 namespace game_engine
 {
 
-class StartupGmHandler : public GameModeHandlerBase
+class _alignas_regular StartupGmHandler : public GameModeHandlerBase
 {
 public:		// classes
-	class StartupSubsystem : public Subsystem
+	class _alignas_regular StartupSubsystem : public Subsystem
 	{
 	public:		// variables
 	public:		// functions
 		inline void iterate()
 		{
 		}
-	} __attribute__((_align4));
+	};
 
 private:		// variables
 	StartupSubsystem* startup_subsystem = nullptr;
@@ -52,7 +52,7 @@ private:		// functions
 	//{
 	//}
 
-} __attribute__((_align4));
+};
 
 }
 }

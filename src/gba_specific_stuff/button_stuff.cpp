@@ -27,10 +27,10 @@ namespace gba
 {
 
 // Global variables To hold the key state
-//vu16 __key_curr __attribute__((_EWRAM)) = 0,
-//	__key_prev __attribute__((_EWRAM)) = 0;
+//vu16 __key_curr [[_EWRAM]] = 0,
+//	__key_prev [[_EWRAM]] = 0;
 
-volatile PrevCurrPair<vu16> __key_state __attribute__((_iwram)) 
+volatile PrevCurrPair<vu16> __key_state [[_iwram]] 
 	= { 0, 0 };
 
 

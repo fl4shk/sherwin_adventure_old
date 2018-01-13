@@ -29,14 +29,17 @@ namespace sherwin_adventure
 
 namespace gba
 {
-u64 unsafe_lut_udiv(u32 numerator, u16 divisor)
-	__attribute__((_iwram_code,_target_arm));
-s64 unsafe_lut_sdiv(s32 numerator, s16 divisor)
-	__attribute__((_iwram_code,_target_arm));
-u64 safe_lut_udiv(u32 numerator, u16 divisor, int& valid) 
-	__attribute__((_iwram_code,_target_arm));
-s64 safe_lut_sdiv(s32 numerator, s16 divisor, int& valid) 
-	__attribute__((_iwram_code,_target_arm));
+[[_iwram_code,_target_arm]]
+u64 unsafe_lut_udiv(u32 numerator, u16 divisor);
+
+[[_iwram_code,_target_arm]]
+s64 unsafe_lut_sdiv(s32 numerator, s16 divisor);
+
+[[_iwram_code,_target_arm]]
+u64 safe_lut_udiv(u32 numerator, u16 divisor, int& valid);
+
+[[_iwram_code,_target_arm]]
+s64 safe_lut_sdiv(s32 numerator, s16 divisor, int& valid);
 
 
 

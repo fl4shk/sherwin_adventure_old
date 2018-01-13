@@ -117,7 +117,7 @@ public:		// functions
 	}
 
 
-} __attribute__((_align4));
+} [[_align4]];
 
 }
 
