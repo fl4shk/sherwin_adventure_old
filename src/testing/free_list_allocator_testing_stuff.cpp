@@ -28,7 +28,7 @@
 //
 //class AllocatorA;
 //
-//class A : public FreeListAllocContainedBase<AllocatorA>
+//class _alignas_regular A : public FreeListAllocContainedBase<AllocatorA>
 //{
 //public:		// variables
 //	u32 x = 0;
@@ -53,9 +53,9 @@
 //		DebugArrGroup::write_u32_and_inc(x);
 //	}
 //
-//} [[_align4]];
+//};
 //
-//class AllocatorA : public FreeListAllocatorBase<A>
+//class _alignas_regular AllocatorA : public FreeListAllocatorBase<A>
 //{
 //public:		// typedefs
 //	typedef FreeListAllocatorBase<A> Base;
@@ -74,7 +74,7 @@
 //		Base::init(s_arr, s_free_list_arr, s_size);
 //	}
 //
-//} [[_align4]];
+//};
 //
 //static constexpr size_t num_a = 50;
 //A arr_a[num_a];

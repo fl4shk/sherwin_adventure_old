@@ -58,8 +58,7 @@
 
 /* ---- #defines for Sections ---- */
 
-// Example:  [[_EWRAM]]
-// Another example:  [[_EWRAM, _align4]]
+// Example:  [[_ewram]]
 
 // #defines for putting INITIAILZED stuff in EWRAM and IWRAM
 #define _ewram gnu::section(".data")

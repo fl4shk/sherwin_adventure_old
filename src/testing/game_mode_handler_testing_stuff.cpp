@@ -18,10 +18,10 @@
 
 #include "game_mode_handler_testing_stuff.hpp"
 
-//class GraphicsSubsystem : public Subsystem
+//class _alignas_regular GraphicsSubsystem : public Subsystem
 //{
 //protected:		// variables
-//} [[_align4]];
+//};
 
 void test_game_mode_handler()
 {

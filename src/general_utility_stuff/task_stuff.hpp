@@ -62,7 +62,7 @@ inline TaskPriority clamp_task_prio(TaskPriority to_clamp)
 		TaskPriority::lim_tp, to_clamp);
 }
 
-class Task
+class _alignas_regular Task
 {
 public:		// typedefs
 	typedef void (*task_funcptr)();
@@ -117,7 +117,7 @@ public:		// functions
 	}
 
 
-} [[_align4]];
+};
 
 }
 

@@ -37,7 +37,7 @@ public:		// constants
 
 
 protected:		// static variables
-	[[_bss] ]static u8 __allocatable_ewram[ewram_alloc_space];
+	[[_bss]] static u8 __allocatable_ewram[ewram_alloc_space];
 	[[_iwram_bss]] static u8 __allocatable_iwram[iwram_alloc_space];
 
 protected:		// variables
