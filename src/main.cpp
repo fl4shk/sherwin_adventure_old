@@ -50,7 +50,8 @@
 #include "testing/linear_allocator_testing_stuff.hpp"
 
 
-//int real_main() [[_iwram_code]];
+//[[_iwram_code]] 
+//int real_main();
 int real_main();
 
 
