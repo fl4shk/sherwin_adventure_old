@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2016 by Andrew Clark (FL4SHK).
+// Copyright 2015-2018 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -58,6 +58,38 @@ public:		// functions
 
 } __attribute__((_align4));
 
+#define GEN_LINEAR_ALLOCATOR_ALLOCATE_CONTENTS(typename_prefix, \
+	var_prefix) \
+	static constexpr size_t alloc_size = sizeof(Type); \
+\
+	if ((__index + alloc_size) >= var_prefix ## _alloc_space) \
+	{ \
+		game_engine::err(#typename_prefix "LinearAllocator" \
+			"::allocate():  Eek!"); \
+		return nullptr; \
+	} \
+\
+	auto ret = &(__allocatable_ ## var_prefix[__index]); \
+	__index += alloc_size; \
+\
+	return reinterpret_cast<Type*>(ret);
+
+#define GEN_LINEAR_ALLOCATOR_ALLOCATE_ARR_CONTENTS(typename_prefix, \
+	var_prefix) \
+	const size_t alloc_size = sizeof(Type) * num_arr_elems; \
+\
+	if ((__index + alloc_size) >= var_prefix ## _alloc_space) \
+	{ \
+		game_engine::err(#typename_prefix "LinearAllocator" \
+			"::allocate_arr():  Eek!"); \
+		return nullptr; \
+	} \
+\
+	auto ret = &(__allocatable_ ## var_prefix[__index]); \
+	__index += alloc_size; \
+\
+	return reinterpret_cast<Type*>(ret);
+
 class EwramLinearAllocator : public LinearAllocatorBase
 {
 public:		// functions
@@ -67,37 +99,12 @@ public:		// functions
 	template<typename Type>
 	inline Type* allocate()
 	{
-		static constexpr size_t alloc_size = sizeof(Type);
-
-		if ((__index + alloc_size) >= ewram_alloc_space)
-		{
-			game_engine::err("EwramLinearAllocator::allocate():  Eek!");
-			return nullptr;
-		}
-
-		__index += alloc_size;
-
-		auto ret = &(__allocatable_ewram[__index]);
-
-		return static_cast<Type*>(ret);
+		GEN_LINEAR_ALLOCATOR_ALLOCATE_CONTENTS(Ewram, ewram)
 	}
 	template<typename Type>
 	inline Type* allocate_arr(size_t num_arr_elems)
 	{
-		const size_t alloc_size = sizeof(Type) * num_arr_elems;
-
-		if ((__index + alloc_size) >= ewram_alloc_space)
-		{
-			game_engine::err("EwramLinearAllocator::allocate_arr():  "
-				"Eek!");
-			return nullptr;
-		}
-
-		__index += alloc_size;
-
-		auto ret = &(__allocatable_ewram[__index]);
-
-		return static_cast<Type*>(ret);
+		GEN_LINEAR_ALLOCATOR_ALLOCATE_ARR_CONTENTS(Ewram, ewram)
 	}
 
 } __attribute__((_align4));
@@ -111,40 +118,21 @@ public:		// functions
 	template<typename Type>
 	inline Type* allocate()
 	{
-		static constexpr size_t alloc_size = sizeof(Type);
-
-		if ((__index + alloc_size) >= iwram_alloc_space)
-		{
-			game_engine::err("IwramLinearAllocator::allocate():  Eek!");
-			return nullptr;
-		}
-
-		__index += alloc_size;
-
-		auto ret = &(__allocatable_iwram[__index]);
-
-		return static_cast<Type*>(ret);
+		GEN_LINEAR_ALLOCATOR_ALLOCATE_CONTENTS(Iwram, iwram)
 	}
 	template<typename Type>
 	inline Type* allocate_arr(size_t num_arr_elems)
 	{
-		const size_t alloc_size = sizeof(Type) * num_arr_elems;
-
-		if ((__index + alloc_size) >= iwram_alloc_space)
-		{
-			game_engine::err("IwramLinearAllocator::allocate_arr():  "
-				"Eek!");
-			return nullptr;
-		}
-
-		__index += alloc_size;
-
-		auto ret = &(__allocatable_iwram[__index]);
-
-		return static_cast<Type*>(ret);
+		GEN_LINEAR_ALLOCATOR_ALLOCATE_ARR_CONTENTS(Iwram, iwram)
 	}
 
 } __attribute__((_align4));
+
+#undef GEN_LINEAR_ALLOCATOR_ALLOCATE_CONTENTS
+#undef GEN_LINEAR_ALLOCATOR_ALLOCATE_ARR_CONTENTS
+
+extern EwramLinearAllocator ewram_linear_allocator;
+extern IwramLinearAllocator iwram_linear_allocator;
 
 }
 }

@@ -16,24 +16,10 @@
 // with Sherwin's Adventure.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include "startup_gm_handler_class.hpp"
+#ifndef testing__slash__linear_allocator_testing_stuff_hpp
+#define testing__slash__linear_allocator_testing_stuff_hpp
 
-namespace sherwin_adventure
-{
-namespace game_engine
-{
+#include "../gba_specific_stuff/linear_allocator_classes.hpp"
+void test_linear_allocators();
 
-StartupGmHandler::StartupGmHandler(GameModeLoader* s_loader)
-	: GameModeHandlerBase(s_loader)
-{
-}
-StartupGmHandler::~StartupGmHandler()
-{
-}
-
-void StartupGmHandler::run()
-{
-}
-
-}
-}
+#endif		// testing__slash__linear_allocator_testing_stuff_hpp

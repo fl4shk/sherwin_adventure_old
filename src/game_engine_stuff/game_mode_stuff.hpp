@@ -63,6 +63,7 @@ protected:		// variables
 	// Current number of allocated subsystems
 	size_t __curr_num_subsystems = 0;
 
+	// Don't need __next_subsystems
 	//std::array<Subsystem*, max_num_subsystems> __subsystems,
 	//	__next_subsystems;
 	std::array<Subsystem*, max_num_subsystems> __subsystems;

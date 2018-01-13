@@ -47,6 +47,7 @@
 #include "testing/overlay_testing_stuff.hpp"
 #include "testing/game_mode_handler_testing_stuff.hpp"
 #include "testing/free_list_allocator_testing_stuff.hpp"
+#include "testing/linear_allocator_testing_stuff.hpp"
 
 
 //int real_main() __attribute__((_iwram_code));
@@ -59,9 +60,12 @@ int real_main();
 
 int main()
 {
-	test_game_mode_handler();
+	//test_game_mode_handler();
 
 	//test_free_list_allocator();
+
+	test_linear_allocators();
+
 
 	return real_main();
 }

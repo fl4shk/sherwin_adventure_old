@@ -1,6 +1,6 @@
 // This file is part of Sherwin's Adventure.
 // 
-// Copyright 2015-2016 by Andrew Clark (FL4SHK).
+// Copyright 2015-2018 by Andrew Clark (FL4SHK).
 // 
 // Sherwin's Adventure is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License as published
@@ -27,6 +27,9 @@ u8 LinearAllocatorBase::__allocatable_ewram
 	[LinearAllocatorBase::ewram_alloc_space];
 u8 LinearAllocatorBase::__allocatable_iwram
 	[LinearAllocatorBase::iwram_alloc_space];
+
+EwramLinearAllocator ewram_linear_allocator;
+IwramLinearAllocator iwram_linear_allocator;
 
 }
 }
